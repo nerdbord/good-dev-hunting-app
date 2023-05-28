@@ -8,8 +8,8 @@ Build platform for listing software engineers using Next.js, Typescript, Prisma,
 
 ### How to start 🚀
 
-1. Install dependencies with ``npm install``
-2. Run ``npm run dev`` to start developing
+1. Install dependencies with `npm install`
+2. Run `npm run dev` to start developing
 
 ### 📝 Project requirements
 
