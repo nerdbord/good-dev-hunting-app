@@ -1,10 +1,8 @@
-import Image from 'next/image'
+import React from 'react'
 import styles from './page.module.css'
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-         Good Dev Hunting
-    </main>
-  )
+const Home: React.FC = () => {
+  return <main className={styles.main}>Good Dev Hunting</main>
 }
+
+export default Home
