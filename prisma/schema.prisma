@@ -54,7 +54,7 @@ model Country {
 model City {
   id                String    @id @default(uuid())
   name              String
-  openForRelocation Boolean
+  openForRelocation Boolean   @default(false)
   profile           Profile[]
 }
 
