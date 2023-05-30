@@ -18,9 +18,9 @@
     "@types/react-dom": "18.2.4",
     "eslint-config-next": "13.4.4",
     "next": "13.4.4",
+    "prisma": "^4.14.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "uuid": "^9.0.0"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
@@ -35,7 +35,6 @@
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
-    "prisma": "^4.14.1",
     "typescript": "^5.0.4"
   }
 }
