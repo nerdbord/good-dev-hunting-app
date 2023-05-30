@@ -9,3 +9,57 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  profile       Profile? //user have profile //relations  
+  githubDetails GitHubDetails? //user have gitHub //relations
+}
+
+model Profile {
+  id             String         @id @default(uuid())
+  user           User           @relation(fields: [userId], references: [id])
+  userId         String         @unique
+  fullName       String
+  email          String
+  linkedIn       String
+  bio            String
+  country        Country        @relation(fields: [countryId], references: [id])
+  countryId      String
+  city           City           @relation(fields: [cityId], references: [id])
+  cityId         String
+  remoteOnly     Boolean
+  position       String
+  seniority      String
+  techStack      String[]
+  employmentType EmploymentType
+  isPublished    Boolean
+}
+
+model GitHubDetails {
+  id       String @id @default(uuid())
+  username String
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @unique
+}
+
+model Country {
+  id                String    @id @unique @default(uuid())
+  name              String
+  openForRelocation Boolean
+  profile           Profile[]
+}
+
+model City {
+  id                String    @id @default(uuid())
+  name              String
+  openForRelocation Boolean   @default(false)
+  profile           Profile[]
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+}
