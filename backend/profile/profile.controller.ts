@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { allPublishedProfiles } from './profilesRouteMethods.services'
+import { allPublishedProfilesPayload } from './profile.service'
 
-export default async function requestHandler(
+export async function requestHandler(
   method: string,
-  callbackFn: () => void,
+  callbackFn: () => Promise<void>,
 ) {
   switch (method) {
     case 'GET':
@@ -20,7 +20,7 @@ export async function handleGetRequest(
   res: NextApiResponse,
 ) {
   try {
-    const publishedProfiles = await allPublishedProfiles()
+    const publishedProfiles = await allPublishedProfilesPayload()
 
     res.status(200).json({
       message: 'Success',

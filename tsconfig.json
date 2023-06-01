@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "services/profilesRouteMethods.services.ts"
+    "backend/profile/profile.serializer.ts"
   ],
   "exclude": ["node_modules"]
 }
