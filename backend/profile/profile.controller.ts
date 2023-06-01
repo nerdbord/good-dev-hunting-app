@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { allPublishedProfilesPayload } from './profile.service'
 
 export async function requestHandler(
-  method: string,
+  method: string | undefined,
   callbackFn: () => Promise<void>,
 ) {
   switch (method) {

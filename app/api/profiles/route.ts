@@ -8,5 +8,14 @@ export default async function routeHandler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  requestHandler('GET', () => handleGetRequest(req, res))
+  await requestHandler(req.method, async () => {
+    switch (req.method) {
+      case 'GET':
+        await handleGetRequest(req, res)
+        break
+      // handle other method
+      default:
+        throw new Error('Unsupported HTTP method')
+    }
+  })
 }
