@@ -8,7 +8,7 @@ export default async function routeHandler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  await allRequestController(req, res, async () => {
+  await allRequestController(req, async () => {
     switch (req.method) {
       case 'GET':
         await getRequestController(req, res)

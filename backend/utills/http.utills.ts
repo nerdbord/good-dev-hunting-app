@@ -3,7 +3,6 @@ import { allPublishedProfilesPayload } from '../profile/profile.service'
 
 export async function allRequestController(
   req: NextApiRequest,
-  res: NextApiResponse,
   callbackFn: () => Promise<void>,
 ) {
   switch (req.method) {
