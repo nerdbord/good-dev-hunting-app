@@ -1,17 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
-  handleGetRequest,
-  requestHandler,
-} from '../../../backend/profile/profile.controller'
+  allRequestController,
+  getRequestController,
+} from '../../../backend/utills/http.utills'
 
 export default async function routeHandler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  await requestHandler(req.method, async () => {
+  await allRequestController(req, res, async () => {
     switch (req.method) {
       case 'GET':
-        await handleGetRequest(req, res)
+        await getRequestController(req, res)
         break
       // handle other method
       default:
