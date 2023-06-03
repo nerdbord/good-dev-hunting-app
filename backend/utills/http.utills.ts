@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { allPublishedProfilesPayload } from './profile.service'
+import { allPublishedProfilesPayload } from '../profile/profile.service'
 
-export async function requestHandler(
-  method: string | undefined,
+export async function allRequestController(
+  req: NextApiRequest,
+  res: NextApiResponse,
   callbackFn: () => Promise<void>,
 ) {
-  switch (method) {
+  switch (req.method) {
     case 'GET':
       return callbackFn()
     case 'POST':
@@ -15,7 +16,7 @@ export async function requestHandler(
   }
 }
 
-export async function handleGetRequest(
+export async function getRequestController(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
