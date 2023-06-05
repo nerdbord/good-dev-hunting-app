@@ -1,8 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getPublishedProfilesPayload } from '../../../backend/profile/profile.service'
 
-export async function GET(request: NextApiRequest, response: NextApiResponse) {
+export async function GET(
+  request: NextApiRequest,
+  response: NextApiResponse,
+  data: string,
+) {
   try {
     const profiles = await getPublishedProfilesPayload()
 
@@ -16,7 +20,5 @@ export async function GET(request: NextApiRequest, response: NextApiResponse) {
 }
 
 export async function POST(request: NextApiRequest) {
-  console.log('Post router ok')
-
   return NextResponse.json({ message: 'ok' })
 }
