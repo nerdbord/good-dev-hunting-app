@@ -15,3 +15,18 @@ export async function getPublishedProfilesPayload() {
 
   return serializeProfilesToProfilePayload(publishedProfiles)
 }
+
+export async function getProfilesById(id: string) {
+  const profilesById = await prisma.profile.findMany({
+    where: {
+      id: id,
+    },
+    include: {
+      user: true,
+      country: true,
+      city: true,
+    },
+  })
+
+  return serializeProfilesToProfilePayload(profilesById)
+}
