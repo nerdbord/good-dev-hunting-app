@@ -1,18 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getPublishedProfilesPayload } from '../../../backend/profile/profile.service'
 
-export async function GET(
-  request: NextApiRequest,
-  response: NextApiResponse,
-  data: string,
-) {
+export async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
-    const profiles = await getPublishedProfilesPayload()
+    const serializedProdiles = await getPublishedProfilesPayload()
 
     return NextResponse.json({
-      message: 'succes',
-      profile: profiles,
+      message: 'Succes',
+      profile: serializedProdiles,
     })
   } catch (error) {
     return new Response('Something went wrong')
