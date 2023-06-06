@@ -4,11 +4,11 @@ import { getPublishedProfilesPayload } from '../../../backend/profile/profile.se
 
 export async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
-    const serializedProdiles = await getPublishedProfilesPayload()
+    const serializedProfiles = await getPublishedProfilesPayload()
 
     return NextResponse.json({
       message: 'Succes',
-      profile: serializedProdiles,
+      profile: serializedProfiles,
     })
   } catch (error) {
     return new Response('Something went wrong')

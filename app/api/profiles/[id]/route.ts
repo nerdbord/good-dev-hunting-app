@@ -3,11 +3,11 @@ import { getProfileById } from '../../../../backend/profile/profile.service'
 
 export async function GET(request: Request, id: string) {
   try {
-    const serializedProfilesById = await getProfileById(id)
+    const serializedProfile = await getProfileById(id)
 
     return NextResponse.json({
       message: 'Succes',
-      profile: serializedProfilesById,
+      profile: serializedProfile,
     })
   } catch (error) {
     return new NextResponse('Something went wrong', { status: 500 })
