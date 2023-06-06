@@ -13,13 +13,16 @@ export async function getPublishedProfilesPayload() {
     },
   })
 
-  return serializeProfilesToProfilePayload(publishedProfiles)
+  const serializedProfile = publishedProfiles.map((profile) => {
+    return serializeProfilesToProfilePayload(profile)
+  })
+  return serializedProfile
 }
 
-export async function getProfilesById(id: string) {
-  const profilesById = await prisma.profile.findMany({
+export async function getProfileById(id: string) {
+  const profileById = await prisma.profile.findFirst({
     where: {
-      id: id,
+      id,
     },
     include: {
       user: true,
@@ -28,5 +31,11 @@ export async function getProfilesById(id: string) {
     },
   })
 
-  return serializeProfilesToProfilePayload(profilesById)
+  if (profileById !== null) {
+    //serialize profile properties to profilePayload
+    return serializeProfilesToProfilePayload(profileById)
+  } else {
+    // if pfofile not exist
+    return null
+  }
 }
