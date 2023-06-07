@@ -21,9 +21,6 @@ export async function getPublishedProfilesPayload() {
 
 export async function getProfileById(id: string) {
   const profileById = await prisma.profile.findFirst({
-    where: {
-      id,
-    },
     include: {
       user: true,
       country: true,
@@ -31,11 +28,5 @@ export async function getProfileById(id: string) {
     },
   })
 
-  if (profileById !== null) {
-    //serialize profile properties to profilePayload
-    return serializeProfilesToProfilePayload(profileById)
-  } else {
-    // if pfofile not exist
-    return null
-  }
+  return serializeProfilesToProfilePayload(profileById)
 }

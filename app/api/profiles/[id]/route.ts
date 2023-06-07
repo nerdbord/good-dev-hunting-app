@@ -10,6 +10,6 @@ export async function GET(request: Request, id: string) {
       profile: serializedProfile,
     })
   } catch (error) {
-    return new NextResponse('Something went wrong', { status: 500 })
+    return new NextResponse('Something Went Wrong', { status: 500 })
   }
 }
