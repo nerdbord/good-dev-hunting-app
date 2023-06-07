@@ -4,11 +4,11 @@ import { getPublishedProfilesPayload } from '../../../backend/profile/profile.se
 
 export async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
-    const profiles = await getPublishedProfilesPayload()
+    const serializedProfiles = await getPublishedProfilesPayload()
 
     return NextResponse.json({
-      message: 'succes',
-      profile: profiles,
+      message: 'Succes',
+      profile: serializedProfiles,
     })
   } catch (error) {
     return new Response('Something went wrong')
@@ -16,7 +16,5 @@ export async function GET(request: NextApiRequest, response: NextApiResponse) {
 }
 
 export async function POST(request: NextApiRequest) {
-  console.log('Post router ok')
-
   return NextResponse.json({ message: 'ok' })
 }
