@@ -1,4 +1,6 @@
-interface ProfilePayload {
+import { City, Country, Profile, User } from '@prisma/client'
+
+export interface ProfilePayload {
   id: string
   fullName: string
   email: string
@@ -20,3 +22,13 @@ interface ProfilePayload {
   employmentType: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
   isPublished: boolean
 }
+
+export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
+
+export type ProfileDataFromPrisma =
+  | (Profile & {
+      user: User
+      country: Country
+      city: City
+    })
+  | null

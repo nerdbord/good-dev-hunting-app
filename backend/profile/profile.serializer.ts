@@ -1,13 +1,7 @@
-import { City, Country, Profile, User } from '@prisma/client'
+import { ProfileDataFromPrisma, ProfilePayload } from './profile.types'
 
 export const serializeProfilesToProfilePayload = (
-  data:
-    | (Profile & {
-        user: User
-        country: Country
-        city: City
-      })
-    | null,
+  data: ProfileDataFromPrisma,
 ) => {
   if (data === null || data === undefined) {
     return []
