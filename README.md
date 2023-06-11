@@ -57,9 +57,9 @@ For example: 'feat/branch-name', 'fix: commit name'
 
 For dynamic CSS classes, we recommend using the classnames/bind library. You can install it by running: 'npm install classnames'.
 Once installed, you can use the library as follows:
-(The first person needing dynamic classes should install it)
 
- `import classNames from 'classnames/bind';
+
+```import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 const [active, setActive] = useState(false);
 
@@ -70,9 +70,8 @@ const getDynamicHeaderClasses = cx({
 });
 
 return (
-
   <div className={getDynamicHeaderClasses}>Header</div>
-)` 
+)```
 
 <a href="https://www.youtube.com/watch?v=69ggHNjlFMk">[link1]</a>, <a href="https://stackoverflow.com/questions/61617393/classnames-bind-and-global-classes">[link2].</a>
 
