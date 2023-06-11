@@ -25,10 +25,12 @@ Build platform for listing software engineers using Next.js, Typescript, Prisma,
 -Each task should have its own branch in the Git repository. The branch name should be descriptive and reflect the task's topic.<br>
 -Before merging into the main branch (main), at least three (3) approvals from other team members are required.
 
+
 <strong>Branch and Commit Naming:</strong>
 
 We follow the convention specified in: <a href="https://www.conventionalcommits.org/en/v1.0.0/">[Link]</a>
 For example: 'feat/branch-name', 'fix: commit name'
+
 
 <strong>Communication and Code Review:</strong>
 
@@ -36,22 +38,26 @@ For example: 'feat/branch-name', 'fix: commit name'
 -We perform code reviews on GitHub. You can refer to the following tutorials: <a href="https://www.youtube.com/watch?v=lSnbOtw4izI">[link1]</a>, <a href="https://www.youtube.com/watch?v=vSsUO_OP-f8">[link2].</a>
 -We include helpful comments in the code for the rest of the team.
 
+
 <strong>Folder Structure:</strong>
 
 -Each component should reside in its own folder within the main "components" folder.<br>
 -The folder name should correspond to the component's name. For example: /components/Header.<br>
 -Place component-related files inside the component folder, such as Header.tsx, Header.module.scss.
 
+
 <strong>Styling:</strong>
 
 -We use SASS.
 -For each component, create a CSS file named ComponentName.module.scss.
+
 
 <strong>Class Naming:</strong>
 
 -All classes and component names should be written in camelCase. For example: headerButton<br>
 -Avoid using underscores, hyphens, or other special characters in class and component names.<br>
 -Use names that clearly describe the functionality and purpose of the element.
+
 
 <strong>Dynamic CSS Classes:</strong>
 
@@ -79,5 +85,14 @@ return (
 You can also explore the usage of classnames/bind in our native Nerdux project:
 
 <a href="https://github.com/nerdbord/nerdux-ui-system">[Nerdux ui]</a>
+
+
+<strong>Backend Structure:</strong>
+
+We structure the backend logic as follows:
+
+`backend/[domainName]/[domainName.service.ts] - for storing business logic
+backend/[domainName]/[domainName.serializer.ts] - for serializers that map data from database to DTOs
+backend/[domainName]/[domainName.types.ts] - for storing DTOs`
 
 <strong>Note:</strong> Feel free to adapt the provided information to fit the specific conventions and tools used in your project.
