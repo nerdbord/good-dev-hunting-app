@@ -56,23 +56,25 @@ For example: 'feat/branch-name', 'fix: commit name'
 <strong>Dynamic CSS Classes:</strong>
 
 For dynamic CSS classes, we recommend using the classnames/bind library. You can install it by running: 'npm install classnames'.
-Once installed, you can use the library as follows:
-`<i>
+Once installed, you can use the library as follows:<br><br>
+
+/*
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 const [active, setActive] = useState(false);
 
 const getDynamicHeaderClasses = cx({
-[styles.headerWrapper]: true,
-[styles.headerisActive]: active === true,
-[styles.headerNotActive]: !active,
-}); 
+[styles.headerWrapper]: true, 
+[styles.headerisActive]: active === true, 
+[styles.headerNotActive]: !active, 
+});
 
 return (
+
   <div className={getDynamicHeaderClasses}>Header</div>
 )
-</i>
-`
+*/
+
 
 <a href="https://www.youtube.com/watch?v=69ggHNjlFMk">[link1]</a>, <a href="https://stackoverflow.com/questions/61617393/classnames-bind-and-global-classes">[link2].</a>
 
@@ -89,4 +91,7 @@ backend/[domainName]/[domainName.serializer.ts] - for serializers that map data 
 backend/[domainName]/[domainName.types.ts] - for storing DTOs`
 
 <strong>Note:</strong> Feel free to adapt the provided information to fit the specific conventions and tools used in your project.
-````
+
+```
+
+```
