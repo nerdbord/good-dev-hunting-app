@@ -54,15 +54,13 @@ export async function isUserProfileExist(userData: CreateProfilePayload) {
 }
 
 export async function createUserProfile(profieData: CreateProfilePayload) {
-
-
   const userCityInfo = {
-    name:profieData.city.name,
-    openForRelocation:profieData.city.openForRelocation
+    name: profieData.city.name,
+    openForRelocation: profieData.city.openForRelocation,
   }
   const userCountryInfo = {
-    name:profieData.country.name,
-    openForRelocation:profieData.country.openForRelocation
+    name: profieData.country.name,
+    openForRelocation: profieData.country.openForRelocation,
   }
 
   const result = await prisma.profile.create({
@@ -73,14 +71,14 @@ export async function createUserProfile(profieData: CreateProfilePayload) {
       linkedIn: 'linkedin.com/in/johndoe',
       bio: 'Lorem ipsum dolor sit amet.',
       country: {
-        create:{
-          ...userCountryInfo
-        }
+        create: {
+          ...userCountryInfo,
+        },
       },
       city: {
         create: {
-          ...userCityInfo
-        }
+          ...userCityInfo,
+        },
       },
       remoteOnly: false,
       position: 'Software Engineer',
@@ -89,10 +87,8 @@ export async function createUserProfile(profieData: CreateProfilePayload) {
       employmentType: 'FULL_TIME',
       isPublished: true,
     },
-  });
-  
+  })
+
   //fix it
   // const newUser = await prisma.profile.create({ select: { ...userData } })
 }
-
-
