@@ -28,5 +28,6 @@ export const serializeProfilesToProfilePayload = (
       employmentType: data.employmentType,
       isPublished: data.isPublished,
     }
+    return serializedProfile
   }
 }

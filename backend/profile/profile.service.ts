@@ -53,42 +53,42 @@ export async function isUserProfileExist(userData: CreateProfilePayload) {
   return foundUser ? true : false
 }
 
-export async function createUserProfile(profieData: CreateProfilePayload) {
-  const userCityInfo = {
-    name: profieData.city.name,
-    openForRelocation: profieData.city.openForRelocation,
-  }
-  const userCountryInfo = {
-    name: profieData.country.name,
-    openForRelocation: profieData.country.openForRelocation,
-  }
-
+export async function createUserProfile(profileData: CreateProfilePayload) {
   const result = await prisma.profile.create({
     data: {
-      userId: '123',
-      fullName: 'John Doe',
-      email: 'john.doe@example.com',
-      linkedIn: 'linkedin.com/in/johndoe',
-      bio: 'Lorem ipsum dolor sit amet.',
+      user: {
+        create: {
+          email: profileData.email,
+        },
+      },
+      fullName: profileData.fullName,
+      email: profileData.email,
+      linkedIn: profileData.linkedIn,
+      bio: profileData.bio,
       country: {
         create: {
-          ...userCountryInfo,
+          name: profileData.country.name,
+          openForRelocation: profileData.country.openForRelocation,
         },
       },
       city: {
         create: {
-          ...userCityInfo,
+          name: profileData.city.name,
+          openForRelocation: profileData.city.openForRelocation,
         },
       },
-      remoteOnly: false,
-      position: 'Software Engineer',
-      seniority: 'Senior',
-      techStack: ['JavaScript', 'React', 'Node.js'],
-      employmentType: 'FULL_TIME',
-      isPublished: true,
+      remoteOnly: profileData.remoteOnly,
+      position: profileData.position,
+      seniority: profileData.seniority,
+      techStack: profileData.techStack,
+      employmentType: profileData.employmentType,
+      isPublished: profileData.isPublished,
+    },
+    include: {
+      user: true,
+      country: true,
+      city: true,
     },
   })
-
-  //fix it
-  // const newUser = await prisma.profile.create({ select: { ...userData } })
+  return result
 }
