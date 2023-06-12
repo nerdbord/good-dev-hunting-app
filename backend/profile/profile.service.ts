@@ -22,6 +22,9 @@ export async function getPublishedProfilesPayload() {
 
 export async function getProfileById(id: string) {
   const profileById = await prisma.profile.findFirst({
+    where: {
+      id,
+    },
     include: {
       user: true,
       country: true,
@@ -50,11 +53,11 @@ export async function isUserProfileExist(userData: CreateProfilePayload) {
     },
   })
 
-  return foundUser ? true : false
+  return foundUser
 }
 
 export async function createUserProfile(profileData: CreateProfilePayload) {
-  const result = await prisma.profile.create({
+  const createdUser = await prisma.profile.create({
     data: {
       user: {
         create: {
@@ -90,5 +93,5 @@ export async function createUserProfile(profileData: CreateProfilePayload) {
       city: true,
     },
   })
-  return result
+  return createdUser
 }
