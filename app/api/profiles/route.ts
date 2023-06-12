@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import {
   createUserProfile,
   getPublishedProfilesPayload,
@@ -8,7 +6,7 @@ import {
 } from '../../../backend/profile/profile.service'
 import { CreateProfilePayload } from '../../../backend/profile/profile.types'
 
-export async function GET(request: NextApiRequest, response: NextApiResponse) {
+export async function GET() {
   try {
     const serializedProfiles = await getPublishedProfilesPayload()
 
@@ -17,18 +15,17 @@ export async function GET(request: NextApiRequest, response: NextApiResponse) {
       profile: serializedProfiles,
     })
   } catch (error) {
-    return new Response('Something went wrong')
+    return new Response(`${error}`, { status: 500 })
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const userData: CreateProfilePayload = await request.json()
 
     const foundUser = await isUserProfileExist(userData)
 
     if (!foundUser) {
-      //create user
       const newUser = await createUserProfile(userData)
 
       return new NextResponse(JSON.stringify(newUser), { status: 201 })
@@ -36,6 +33,6 @@ export async function POST(request: Request) {
       return new NextResponse('Such user arleady exist', { status: 409 })
     }
   } catch (error) {
-    return new NextResponse('Something Went Wrong', { status: 500 })
+    return new NextResponse(`${error}`, { status: 500 })
   }
 }
