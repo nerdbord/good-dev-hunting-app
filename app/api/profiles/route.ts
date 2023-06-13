@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextResponse } from 'next/server'
-import { getPublishedProfilesPayload } from '../../../backend/profile/profile.service'
+import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
 
 export async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
