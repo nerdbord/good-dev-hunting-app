@@ -1,11 +1,10 @@
 'use client'
 import React, { useState } from 'react'
-import { ButtonPrimary } from '../ButtonPrimary/buttonPrimary'
-import { ButtonSecondary } from '../ButtonSecondary/buttonSecondary'
-import styles from './header.module.scss'
+import { Button } from '../Buttons/Button'
+import styles from './Header.module.scss'
 import logo from '../../assets/images/logo.png'
-import GithubIcon from '@/assets/icons/githubIcon'
-import AddIcon from '@/assets/icons/addIcon'
+import GithubIcon from '@/assets/icons/GithubIcon'
+import AddIcon from '@/assets/icons/AddIcon'
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -26,25 +25,25 @@ const Header = () => {
       <div className={styles.actions}>
         {loggedIn ? (
           <div className={styles.frameLogin}>
-            <ButtonPrimary onClick={handleLogOut}> My profile </ButtonPrimary>
+            <Button onClick={handleLogOut} variant={'primary'}> My profile </Button>
           </div>
         ) : (
           <div className={styles.frameButtons}>
             <div className={styles.buttons}>
-              <ButtonPrimary onClick={handleLogin}>
+              <Button onClick={handleLogin} variant={'primary'}>
                 Create profile
                 <span>
                   <AddIcon />
                 </span>
-              </ButtonPrimary>
+              </Button>
             </div>
             <div className={styles.buttons}>
-              <ButtonSecondary onClick={handleLogin}>
+              <Button onClick={handleLogin} variant={'secondary'}>
                 Login
                 <span>
                   <GithubIcon />
                 </span>
-              </ButtonSecondary>
+              </Button>
             </div>
           </div>
         )}

@@ -1,12 +1,10 @@
 import React from 'react'
 import styles from './page.module.scss'
-import Header from '@/components/Header/header'
+import Header from '@/components/Header/Header'
 
 const Home: React.FC = () => {
   return (
-      <div>
         <Header />
-      </div>
   )
 }
 
