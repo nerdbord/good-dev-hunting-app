@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-.buttonPrimary {
+.buttonPrimary,
+.buttonSecondary {
   font-family: 'IBM Plex Sans';
   color: #ffffff;
   font-style: normal;
@@ -10,13 +11,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 166px;
-  height: 44px;
-  padding-right: 14px;
   gap: 10px;
-  background: #7d54f1;
   border-radius: 2px;
   flex: none;
   order: 1;
   flex-grow: 0;
+  border: none;
+  padding-right: 14px;
+}
+
+.buttonPrimary {
+  width: 166px;
+  height: 44px;
+  background: #7d54f1;
+
+}
+
+.buttonSecondary {
+  width: 105px;
+  height: 44px;
+  background: #0f1217;
 }
