@@ -1,6 +1,6 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
-import { prisma } from '../../prisma/prismaClient'
 import { CreateProfilePayload, ProfileDataFromPrisma } from './profile.types'
+import { prisma } from '../../../prisma/prismaClient'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({

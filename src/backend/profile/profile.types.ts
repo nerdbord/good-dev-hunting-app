@@ -1,4 +1,4 @@
-import { City, Country, Profile, User } from '@prisma/client'
+import Prisma, { City, Country, Profile, User } from '@prisma/client'
 
 export interface ProfilePayload {
   id: string
@@ -25,10 +25,10 @@ export interface ProfilePayload {
 
 export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
 
-export type ProfileDataFromPrisma =
-  | (Profile & {
-      user: User
-      country: Country
-      city: City
-    })
-  | null
+export type ProfileWithRelations = Prisma.ProfileGetPayload<{
+  include: {
+    user: true
+    country: true
+    city: true
+  }
+}>

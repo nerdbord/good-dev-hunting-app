@@ -3,15 +3,15 @@ import {
   createUserProfile,
   getPublishedProfilesPayload,
   isUserProfileExist,
-} from '../../../backend/profile/profile.service'
-import { CreateProfilePayload } from '../../../backend/profile/profile.types'
+} from '@/backend/profile/profile.service'
+import { CreateProfilePayload } from '@/backend/profile/profile.types'
 
 export async function GET() {
   try {
     const serializedProfiles = await getPublishedProfilesPayload()
 
     return NextResponse.json({
-      message: 'Succes',
+      message: 'Success',
       profile: serializedProfiles,
     })
   } catch (error) {
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
       return new NextResponse(JSON.stringify(newUser), { status: 201 })
     } else {
-      return new NextResponse('Such user arleady exist', { status: 409 })
+      return new NextResponse('Such user already exist', { status: 409 })
     }
   } catch (error) {
     return new NextResponse(`${error}`, { status: 500 })
