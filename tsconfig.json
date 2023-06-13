@@ -21,14 +21,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "backend"
-  ],
+  "include": ["next-env.d.ts", "src", "app", "backend"],
   "exclude": ["node_modules"]
 }
