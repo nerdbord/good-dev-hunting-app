@@ -25,7 +25,10 @@ const Header = () => {
       <div className={styles.actions}>
         {loggedIn ? (
           <div className={styles.frameLogin}>
-            <Button onClick={handleLogOut} variant={'primary'}> My profile </Button>
+            <Button onClick={handleLogOut} variant={'primary'}>
+              {' '}
+              My profile{' '}
+            </Button>
           </div>
         ) : (
           <div className={styles.frameButtons}>

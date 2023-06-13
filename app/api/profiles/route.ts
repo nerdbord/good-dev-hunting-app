@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextResponse } from 'next/server'
-import { NextRequest} from "next/server";
+import { NextRequest } from 'next/server'
 import { getPublishedProfilesPayload } from '../../../backend/profile/profile.service'
 
-export async function GET(request: Request | NextRequest, response: NextApiResponse) {
+export async function GET(
+  request: Request | NextRequest,
+  response: NextApiResponse,
+) {
   try {
     const serializedProfiles = await getPublishedProfilesPayload()
 
