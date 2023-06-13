@@ -1,5 +1,5 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
-import { CreateProfilePayload, ProfileDataFromPrisma } from './profile.types'
+import { CreateProfilePayload } from './profile.types'
 import { prisma } from '../../../prisma/prismaClient'
 
 export async function getPublishedProfilesPayload() {
@@ -36,7 +36,7 @@ export async function getProfileById(id: string) {
 }
 
 export async function isUserProfileExist(userData: CreateProfilePayload) {
-  const foundUser: ProfileDataFromPrisma = await prisma.profile.findFirst({
+  const foundUser = await prisma.profile.findFirst({
     where: {
       OR: [
         { email: userData.email },
