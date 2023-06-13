@@ -28,8 +28,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "backend/profile/profile.serializer.ts"
+    "backend"
   ],
   "exclude": ["node_modules"]
 }
