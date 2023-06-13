@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.buttonSecondary {
+  font-family: 'IBM Plex Sans';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 105px;
+  height: 44px;
+  padding-right: 8px;
+  gap: 10px;
+  background: #0f1217;
+  color: #ffffff;
+  border-radius: 2px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  border: none;
+}

@@ -7,7 +7,7 @@ export async function GET(request: NextApiRequest, response: NextApiResponse) {
     const serializedProfiles = await getPublishedProfilesPayload()
 
     return NextResponse.json({
-      message: 'Succes',
+      message: 'Success',
       profile: serializedProfiles,
     })
   } catch (error) {
