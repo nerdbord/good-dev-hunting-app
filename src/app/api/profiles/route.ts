@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server'
 import {
   createUserProfile,
@@ -6,7 +5,6 @@ import {
   isUserProfileExist,
 } from '@/backend/profile/profile.service'
 import { CreateProfilePayload } from '@/backend/profile/profile.types'
-
 
 export async function GET() {
   try {

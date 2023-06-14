@@ -5,8 +5,15 @@ import 'material-icons/iconfont/material-icons.css'
 import { FilterButton } from '@/components/FilterButton/FilterButton'
 
 const Filters = () => {
-
-  const technologyList = ['Javascript', 'Python', 'Node.js', 'React.js', 'Vue.js', 'Angular', 'MongoDB']
+  const technologyList = [
+    'Javascript',
+    'Python',
+    'Node.js',
+    'React.js',
+    'Vue.js',
+    'Angular',
+    'MongoDB',
+  ]
   const seniorityList = ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert']
   const availabilityList = ['Full-time', 'Part-time', 'Contract']
   const locationsList = ['Poland', 'Europe', 'Other']
