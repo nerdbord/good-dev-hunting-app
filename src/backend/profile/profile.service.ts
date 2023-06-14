@@ -1,5 +1,5 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
-import { CreateProfilePayload} from './profile.types'
+import { CreateProfilePayload } from './profile.types'
 import { prisma } from '../../../prisma/prismaClient'
 
 export async function getPublishedProfilesPayload() {
@@ -21,7 +21,6 @@ export async function getPublishedProfilesPayload() {
 }
 
 export async function getProfileById(id: string) {
-
   const profileById = await prisma.profile.findFirst({
     where: {
       id,
@@ -33,7 +32,7 @@ export async function getProfileById(id: string) {
     },
   })
 
-  if(profileById){
+  if (profileById) {
     return serializeProfilesToProfilePayload(profileById)
   } else return null
 }
