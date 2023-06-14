@@ -1,7 +1,12 @@
 import React from 'react'
+import Page from '../src/app/page'
 
-const Home = () => {
-  return <main>Good Dev Hunting</main>
+const IndexPage: React.FC = () => {
+  return (
+    <>
+      <Page />
+    </>
+  )
 }
 
-export default Home
+export default IndexPage
