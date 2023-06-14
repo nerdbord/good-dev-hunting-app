@@ -1,10 +1,16 @@
 'use client'
-import styles from './Filters.module.css'
+import styles from './Filters.module.scss'
 import React, { useState } from 'react'
 import 'material-icons/iconfont/material-icons.css'
-import { FilterButton } from 'app/FilterButton/FilterButton'
+import { FilterButton } from '@/components/FilterButton/FilterButton'
 
 const Filters = () => {
+
+  const technologyList = ['Javascript', 'Python', 'Node.js', 'React.js', 'Vue.js', 'Angular', 'MongoDB']
+  const seniorityList = ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert']
+  const availabilityList = ['Full-time', 'Part-time', 'Contract']
+  const locationsList = ['Poland', 'Europe', 'Other']
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.features}>
