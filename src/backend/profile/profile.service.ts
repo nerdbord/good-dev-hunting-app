@@ -33,11 +33,11 @@ export async function getProfileById(id: string) {
   })
 
   if (profileById !== null) {
-    return serializeProfilesToProfilePayload(profileById);
+    return serializeProfilesToProfilePayload(profileById)
   }
 
   // Handle the case when profileById is null
-  return null;
+  return null
 }
 
 export async function isUserProfileExist(userData: CreateProfilePayload) {

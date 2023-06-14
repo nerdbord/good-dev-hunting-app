@@ -3,9 +3,9 @@ import Page from '../src/app/page'
 
 const IndexPage: React.FC = () => {
   return (
-      <>
-        <Page />
-      </>
+    <>
+      <Page />
+    </>
   )
 }
 
