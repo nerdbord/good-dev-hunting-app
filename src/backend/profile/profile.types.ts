@@ -1,4 +1,6 @@
-interface ProfilePayload {
+import { Prisma } from '@prisma/client'
+
+export interface ProfilePayload {
   id: string
   fullName: string
   email: string
@@ -20,3 +22,13 @@ interface ProfilePayload {
   employmentType: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
   isPublished: boolean
 }
+
+export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
+
+export type ProfileWithRelations = Prisma.ProfileGetPayload<{
+  include: {
+    user: true
+    country: true
+    city: true
+  }
+}>
