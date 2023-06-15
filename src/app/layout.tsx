@@ -1,9 +1,9 @@
 import React from 'react'
 import './globals.scss'
-import { Inter } from 'next/font/google'
+import { IBM_Plex_Sans } from 'next/font/google'
 import Header from '@/components/Header/Header'
 
-const inter = Inter({ subsets: ['latin'] })
+const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400'] })
 
 export const metadata = {
   title: 'Good Dev Hunting',
@@ -17,9 +17,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>
+      <body className={ibm.className}>
         <Header />
-        {children}
+        <div className="container">{children}</div>
       </body>
     </html>
   )

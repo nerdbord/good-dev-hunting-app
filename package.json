@@ -16,12 +16,14 @@
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
-    "eslint-config-next": "^13.4.4",
+    "eslint-config-next": "13.4.4",
+    "material-icons": "^1.13.8",
     "next": "13.4.4",
     "prisma": "^4.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sass": "^1.63.3"
+    "react-icons": "^4.9.0",
+    "sass": "^1.63.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
