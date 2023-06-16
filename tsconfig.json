@@ -22,7 +22,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/app": ["./app/*"]
     }
   },
   "include": ["next-env.d.ts", "src", "app", "backend", ".next/types/**/*.ts"],
