@@ -18,7 +18,7 @@ export const FilterButton = ({
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let handler = (event: any) => {
+    const handler = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownActive(false)
         setArrow('IoIosArrowDown')
