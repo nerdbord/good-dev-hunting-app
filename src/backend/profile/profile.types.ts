@@ -25,6 +25,8 @@ export interface ProfilePayload {
 
 export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
 
+export type UpdateProfilePayload = Partial<ProfilePayload>
+
 export type ProfileWithRelations = Prisma.ProfileGetPayload<{
   include: {
     user: true
