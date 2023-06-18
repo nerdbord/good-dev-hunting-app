@@ -1,4 +1,4 @@
-import { City, Country, Profile, User } from '@prisma/client'
+import { Profile } from '@prisma/client'
 
 export const mockProfiles: (Profile & {
   user: { id: string; email: string; profile: string; githubDetails: string }
