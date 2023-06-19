@@ -104,28 +104,38 @@ export async function createUserProfile(profileData: CreateProfilePayload) {
 
 async function updateUserCity(
   userId: string,
-  newCity: City | null,
+  newCity: Omit<City, 'id'> | null,
 ): Promise<void> {
+  //check sity, if its true:
   if (newCity) {
+    const foundCity = await prisma.city.findFirst({
+      where: {
+        name: newCity.name,
+      },
+    })
+
+    const cityData: City | Omit<City, 'id'> = foundCity ? foundCity : newCity
+
     await prisma.profile.update({
       where: {
         userId,
       },
       data: {
         city: {
-          upsert: {
-            update: {
-              ...newCity,
-            },
-            create: {
-              name: newCity.name,
-              openForRelocation: newCity.openForRelocation,
-            },
+          update: {
+            id: cityData.id,
+            name: cityData.name,
+            openForRelocation: cityData.openForRelocation,
+          },
+          create: {
+            name: cityData.name,
+            openForRelocation: cityData.openForRelocation,
           },
         },
       },
     })
   }
+  //else nothing
 }
 
 async function updateUserCountry(
@@ -158,14 +168,8 @@ export async function updateUserData(
   id: string,
   userDataToUpdate: UpdateProfilePayload,
 ) {
-  const newCity = userDataToUpdate
+  const newCity = userDataToUpdate.city
   const newCountry = userDataToUpdate
-
-  const foundCity = await prisma.city.findFirst({
-    where: {
-      name: newCity.city?.name,
-    },
-  })
 
   const foundCountry = await prisma.country.findFirst({
     where: {
@@ -173,7 +177,7 @@ export async function updateUserData(
     },
   })
 
-  await updateUserCity(id, foundCity)
+  await updateUserCity(id, newCity)
   await updateUserCountry(id, foundCountry)
 
   //update profile
@@ -200,5 +204,5 @@ export async function updateUserData(
     },
   })
 
-  return updatedUser
+  return upda
 }
