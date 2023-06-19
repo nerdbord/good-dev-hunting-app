@@ -102,90 +102,82 @@ export async function createUserProfile(profileData: CreateProfilePayload) {
   return createdUser
 }
 
-async function updateUserCity(userId: string, newCity: City): Promise<void> {
-  if (!newCity) return
-
-  await prisma.profile.update({
-    where: {
-      userId,
-    },
-    data: {
-      city: {
-        connectOrCreate: {
-          where: {
-            id: newCity?.id,
-          },
-          create: {
-            name: newCity.name,
-            openForRelocation: true,
+async function updateUserCity(
+  userId: string,
+  newCity: City | null,
+): Promise<void> {
+  if (newCity) {
+    await prisma.profile.update({
+      where: {
+        userId,
+      },
+      data: {
+        city: {
+          upsert: {
+            update: {
+              ...newCity,
+            },
+            create: {
+              name: newCity.name,
+              openForRelocation: newCity.openForRelocation,
+            },
           },
         },
       },
-    },
-  })
+    })
+  }
 }
+
 async function updateUserCountry(
   userId: string,
-  newCountry: Country,
+  newCountry: Country | null,
 ): Promise<void> {
-  if (!newCountry) return
-
-  await prisma.profile.update({
-    where: {
-      userId,
-    },
-    data: {
-      country: {
-        connectOrCreate: {
-          where: {
-            id: newCountry?.id,
-          },
-          create: {
-            name: newCountry.name,
-            openForRelocation: true,
+  if (newCountry) {
+    await prisma.profile.update({
+      where: {
+        userId,
+      },
+      data: {
+        city: {
+          upsert: {
+            update: {
+              ...newCountry,
+            },
+            create: {
+              name: newCountry.name,
+              openForRelocation: newCountry.openForRelocation,
+            },
           },
         },
       },
-    },
-  })
+    })
+  }
 }
+
 export async function updateUserData(
   id: string,
   userDataToUpdate: UpdateProfilePayload,
 ) {
-  // take oldUserData for comparision
-  const user = await getProfileById(id)
+  const newCity = userDataToUpdate
+  const newCountry = userDataToUpdate
 
-  // take city&country and update when is new
-  const oldCity = user?.city.name
-  const newCity = userDataToUpdate.city?.name
-  const oldCountry = user?.country.name
-  const newCountry = userDataToUpdate.country?.name
+  const foundCity = await prisma.city.findFirst({
+    where: {
+      name: newCity.city?.name,
+    },
+  })
 
-  if (newCity !== oldCity) {
-    const foundCity = await prisma.city.findFirst({
-      where: {
-        name: newCity,
-      },
-    })
+  const foundCountry = await prisma.country.findFirst({
+    where: {
+      name: newCountry.country?.name,
+    },
+  })
 
-    if (!foundCity) return
-    await updateUserCity(id, foundCity)
-  }
-
-  if (newCountry !== oldCountry) {
-    const foundCountry = await prisma.country.findFirst({
-      where: {
-        name: newCountry,
-      },
-    })
-
-    if (!foundCountry) return
-    await updateUserCountry(id, foundCountry)
-  }
+  await updateUserCity(id, foundCity)
+  await updateUserCountry(id, foundCountry)
 
   //update profile
-  await prisma.profile.update({
+  const updatedUser = await prisma.profile.update({
     where: {
       id,
     },
@@ -208,5 +200,5 @@ export async function updateUserData(
     },
   })
 
-  return getProfileById(id)
+  return updatedUser
 }
