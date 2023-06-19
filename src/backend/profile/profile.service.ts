@@ -204,5 +204,5 @@ export async function updateUserData(
     },
   })
 
-  return upda
+  return updatedUser
 }
