@@ -1,7 +1,7 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
 import { CreateProfilePayload, UpdateProfilePayload } from './profile.types'
 import { prisma } from '../../../prisma/prismaClient'
-import { City, Country } from '@prisma/client'
+import { Country } from '@prisma/client'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
@@ -104,9 +104,14 @@ export async function createUserProfile(profileData: CreateProfilePayload) {
 
 async function updateUserCity(
   userId: string,
-  newCity: Omit<City, 'id'> | null,
+  newCity:
+    | {
+        name: string
+        openForRelocation: boolean
+      }
+    | undefined,
 ): Promise<void> {
-  //check sity, if its true:
+  //check city, if its true:
   if (newCity) {
     const foundCity = await prisma.city.findFirst({
       where: {
@@ -114,28 +119,37 @@ async function updateUserCity(
       },
     })
 
-    const cityData: City | Omit<City, 'id'> = foundCity ? foundCity : newCity
-
-    await prisma.profile.update({
-      where: {
-        userId,
-      },
-      data: {
-        city: {
-          update: {
-            id: cityData.id,
-            name: cityData.name,
-            openForRelocation: cityData.openForRelocation,
-          },
-          create: {
-            name: cityData.name,
-            openForRelocation: cityData.openForRelocation,
+    if (foundCity) {
+      await prisma.profile.update({
+        where: {
+          userId,
+        },
+        data: {
+          city: {
+            update: {
+              id: foundCity.id,
+              name: foundCity.name,
+              openForRelocation: foundCity.openForRelocation,
+            },
           },
         },
-      },
-    })
+      })
+    } else {
+      await prisma.profile.update({
+        where: {
+          userId,
+        },
+        data: {
+          city: {
+            create: {
+              name: newCity.name,
+              openForRelocation: newCity.openForRelocation,
+            },
+          },
+        },
+      })
+    }
   }
-  //else nothing
 }
 
 async function updateUserCountry(
