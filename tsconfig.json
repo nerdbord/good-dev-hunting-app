@@ -24,10 +24,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "src",
-    "app"
-  ],
+  "include": ["next-env.d.ts", "src", "app"],
   "exclude": ["node_modules"]
 }
