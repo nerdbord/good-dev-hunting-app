@@ -1,6 +1,7 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
-import { CreateProfilePayload, UpdateProfilePayload } from './profile.types'
-import { prisma } from '../../../prisma/prismaClient'
+import { CreateProfilePayload } from './profile.types'
+import { prisma } from '@/lib/prismaClient'
+import { Prisma } from '@prisma/client'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
@@ -40,16 +41,10 @@ export async function getProfileById(id: string) {
   return null
 }
 
-export async function isUserProfileExist(userData: CreateProfilePayload) {
-  const foundUser = await prisma.profile.findFirst({
+export async function doesUserProfileExist(userId: string) {
+  const foundProfile = await prisma.profile.findFirst({
     where: {
-      OR: [
-        { email: userData.email },
-        //check full name?
-        { fullName: userData.fullName },
-        //check linkenIn validation?
-        { linkedIn: userData.linkedIn },
-      ],
+      userId,
     },
     include: {
       user: true,
@@ -58,19 +53,19 @@ export async function isUserProfileExist(userData: CreateProfilePayload) {
     },
   })
 
-  return foundUser
+  return foundProfile
 }
 
-export async function createUserProfile(profileData: CreateProfilePayload) {
+export async function createUserProfile(
+  userId: string,
+  profileData: CreateProfilePayload,
+) {
   const createdUser = await prisma.profile.create({
     data: {
       user: {
-        create: {
-          email: profileData.email,
-        },
+        connect: { id: userId },
       },
       fullName: profileData.fullName,
-      email: profileData.email,
       linkedIn: profileData.linkedIn,
       bio: profileData.bio,
       country: {
@@ -101,88 +96,16 @@ export async function createUserProfile(profileData: CreateProfilePayload) {
   return createdUser
 }
 
-async function updateUserCity(
-  userId: string,
-  newCity: { name: string; openForRelocation: boolean } | undefined,
-): Promise<void> {
-  if (newCity) {
-    await prisma.profile.update({
-      where: {
-        userId,
-      },
-      data: {
-        city: {
-          upsert: {
-            update: {
-              ...newCity,
-            },
-            create: {
-              ...newCity,
-            },
-          },
-        },
-      },
-    })
-  }
-}
-
-async function updateUserCountry(
-  userId: string,
-  newCountry: { name: string; openForRelocation: boolean } | undefined,
-): Promise<void> {
-  if (newCountry) {
-    await prisma.profile.update({
-      where: {
-        userId,
-      },
-      data: {
-        country: {
-          upsert: {
-            update: {
-              ...newCountry,
-            },
-            create: {
-              ...newCountry,
-            },
-          },
-        },
-      },
-    })
-  }
-}
-
 export async function updateUserData(
   id: string,
-  userDataToUpdate: UpdateProfilePayload,
+  userDataToUpdate: Prisma.ProfileUpdateInput,
 ) {
-  const newCity = userDataToUpdate.city
-  const newCountry = userDataToUpdate.country
-
-  await updateUserCity(id, newCity)
-  await updateUserCountry(id, newCountry)
-
   //update profile
   const updatedUser = await prisma.profile.update({
     where: {
       id,
     },
-    data: {
-      fullName: userDataToUpdate.fullName,
-      bio: userDataToUpdate.bio,
-      linkedIn: userDataToUpdate.linkedIn,
-      email: userDataToUpdate.email,
-      employmentType: userDataToUpdate.employmentType,
-      position: userDataToUpdate.position,
-      isPublished: userDataToUpdate.isPublished,
-      remoteOnly: userDataToUpdate.remoteOnly,
-      seniority: userDataToUpdate.seniority,
-      techStack: userDataToUpdate.techStack,
-      user: {
-        update: {
-          email: userDataToUpdate.email,
-        },
-      },
-    },
+    data: userDataToUpdate,
   })
 
   return updatedUser

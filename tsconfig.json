@@ -27,10 +27,7 @@
   "include": [
     "next-env.d.ts",
     "src",
-    "app",
-    "backend",
-    "utills",
-    ".next/types/**/*.ts"
+    "app"
   ],
   "exclude": ["node_modules"]
 }

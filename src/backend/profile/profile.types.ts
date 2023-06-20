@@ -4,7 +4,7 @@ export interface ProfilePayload {
   id: string
   fullName: string
   email: string
-  linkedIn: string
+  linkedIn: string | null
   userId: string
   bio: string
   country: {
@@ -24,8 +24,6 @@ export interface ProfilePayload {
 }
 
 export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
-
-export type UpdateProfilePayload = Partial<ProfilePayload>
 
 export type ProfileWithRelations = Prisma.ProfileGetPayload<{
   include: {
