@@ -1,7 +1,6 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
 import { CreateProfilePayload, UpdateProfilePayload } from './profile.types'
 import { prisma } from '../../../prisma/prismaClient'
-import { Country } from '@prisma/client'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
@@ -104,59 +103,9 @@ export async function createUserProfile(profileData: CreateProfilePayload) {
 
 async function updateUserCity(
   userId: string,
-  newCity:
-    | {
-        name: string
-        openForRelocation: boolean
-      }
-    | undefined,
+  newCity: { name: string; openForRelocation: boolean } | undefined,
 ): Promise<void> {
-  //check city, if its true:
   if (newCity) {
-    const foundCity = await prisma.city.findFirst({
-      where: {
-        name: newCity.name,
-      },
-    })
-
-    if (foundCity) {
-      await prisma.profile.update({
-        where: {
-          userId,
-        },
-        data: {
-          city: {
-            update: {
-              id: foundCity.id,
-              name: foundCity.name,
-              openForRelocation: foundCity.openForRelocation,
-            },
-          },
-        },
-      })
-    } else {
-      await prisma.profile.update({
-        where: {
-          userId,
-        },
-        data: {
-          city: {
-            create: {
-              name: newCity.name,
-              openForRelocation: newCity.openForRelocation,
-            },
-          },
-        },
-      })
-    }
-  }
-}
-
-async function updateUserCountry(
-  userId: string,
-  newCountry: Country | null,
-): Promise<void> {
-  if (newCountry) {
     await prisma.profile.update({
       where: {
         userId,
@@ -165,11 +114,35 @@ async function updateUserCountry(
         city: {
           upsert: {
             update: {
+              ...newCity,
+            },
+            create: {
+              ...newCity,
+            },
+          },
+        },
+      },
+    })
+  }
+}
+
+async function updateUserCountry(
+  userId: string,
+  newCountry: { name: string; openForRelocation: boolean } | undefined,
+): Promise<void> {
+  if (newCountry) {
+    await prisma.profile.update({
+      where: {
+        userId,
+      },
+      data: {
+        country: {
+          upsert: {
+            update: {
               ...newCountry,
             },
             create: {
-              name: newCountry.name,
-              openForRelocation: newCountry.openForRelocation,
+              ...newCountry,
             },
           },
         },
@@ -183,16 +156,10 @@ export async function updateUserData(
   userDataToUpdate: UpdateProfilePayload,
 ) {
   const newCity = userDataToUpdate.city
-  const newCountry = userDataToUpdate
-
-  const foundCountry = await prisma.country.findFirst({
-    where: {
-      name: newCountry.country?.name,
-    },
-  })
+  const newCountry = userDataToUpdate.country
 
   await updateUserCity(id, newCity)
-  await updateUserCountry(id, foundCountry)
+  await updateUserCountry(id, newCountry)
 
   //update profile
   const updatedUser = await prisma.profile.update({
