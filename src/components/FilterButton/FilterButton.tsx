@@ -7,9 +7,13 @@ import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 export const FilterButton = ({
   text,
   options,
+  onSelect,
+  selectedValue,
 }: {
   text: string
   options: string[]
+  onSelect: void
+  selectedValue: string[]
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
@@ -18,8 +22,11 @@ export const FilterButton = ({
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handler = (event: any) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handler = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setDropdownActive(false)
         setArrow('IoIosArrowDown')
       }
@@ -49,6 +56,8 @@ export const FilterButton = ({
     }
 
     setSelectedOptions(updatedOptions)
+    console.log(`updated options - > ${updatedOptions}`)
+    console.log(`selected options -> ${selectedOptions}`)
   }
 
   return (
@@ -67,7 +76,7 @@ export const FilterButton = ({
         </button>
         {isDropdownActive && (
           <div className={styles.dropdown}>
-            <form className={styles.dropdownForm}>
+            <div className={styles.dropdownForm}>
               {options.map((option, index) => (
                 <label key={index} className={styles.dropdownInput}>
                   <div className={styles.checkbox}>
@@ -84,7 +93,7 @@ export const FilterButton = ({
                   {option}
                 </label>
               ))}
-            </form>
+            </div>
           </div>
         )}
       </div>
