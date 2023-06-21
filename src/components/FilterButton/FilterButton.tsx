@@ -8,16 +8,15 @@ export const FilterButton = ({
   text,
   options,
   onSelect,
-  selectedValue,
+  selectedValue
 }: {
   text: string
   options: string[]
-  onSelect: void
-  selectedValue: string[]
+  onSelect: (option: string) => void 
+  selectedValue: string[] 
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -43,57 +42,44 @@ export const FilterButton = ({
     setDropdownActive(!isDropdownActive)
   }
 
-  const handleOptionChange = (option: string) => {
-    const isSelected = selectedOptions.includes(option)
-    let updatedOptions: string[]
-
-    if (isSelected) {
-      updatedOptions = selectedOptions.filter(
-        (selectedOption) => selectedOption !== option,
-      )
-    } else {
-      updatedOptions = [...selectedOptions, option]
-    }
-
-    setSelectedOptions(updatedOptions)
-    console.log(`updated options - > ${updatedOptions}`)
-    console.log(`selected options -> ${selectedOptions}`)
+  const handleSelect = (option: string) => {
+    onSelect(option)
   }
 
   return (
     <div className={styles.buttonBox}>
       <div ref={dropdownRef}>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
-          {selectedOptions.length === 0 ? (
+          {selectedValue.length === 0 ? (
             <div className={styles.buttonText}>{text}</div>
           ) : (
             <div className={styles.buttonTextChecked}>{text}</div>
           )}
-          {selectedOptions.length != 0 && (
-            <div className={styles.selectedCount}>{selectedOptions.length}</div>
+          {selectedValue.length !== 0 && (
+            <div className={styles.selectedCount}>{selectedValue.length}</div>
           )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
         {isDropdownActive && (
           <div className={styles.dropdown}>
-            <div className={styles.dropdownForm}>
+
               {options.map((option, index) => (
                 <label key={index} className={styles.dropdownInput}>
-                  <div className={styles.checkbox}>
+                      <div className={`${styles.checkbox} ${selectedValue.includes(option) ? styles.checked : ''}`}>
                     <input
                       type="checkbox"
                       className={styles.hidden}
-                      checked={selectedOptions.includes(option)}
-                      onChange={() => handleOptionChange(option)}
+                      checked={selectedValue.includes(option)}
+                      onChange={() => handleSelect(option)}
                     />
-                    {selectedOptions.includes(option) && (
+                    {selectedValue.includes(option) && (
                       <IoIosCheckmark className={styles.checkmark} />
                     )}
                   </div>{' '}
                   {option}
                 </label>
               ))}
-            </div>
+
           </div>
         )}
       </div>

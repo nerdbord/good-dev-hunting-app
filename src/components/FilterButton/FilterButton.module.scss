@@ -40,13 +40,12 @@
   margin-top: 10px;
   z-index: 999;
   background-color: #0f1217;
-}
-
-.dropdownForm {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
+
 
 .dropdownInput {
   display: flex;
@@ -82,6 +81,10 @@
 }
 
 .checkbox:hover {
+  border: 1px solid #a687ff;
+}
+
+.checked {
   border: 1px solid #a687ff;
 }
 
