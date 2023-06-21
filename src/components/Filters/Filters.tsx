@@ -11,53 +11,36 @@ const Filters = () => {
   const [selectedLocation, setSelectedLocation] = useState<string[]>([])
 
   const handleSelect = (option: string, buttonType: string) => {
-    let updatedOptions: string[]
-
+    let updatedOptions: string[];
+  
+    const updateSelectedOptions = (selectedOptions: string[], setter: Function) => {
+      updatedOptions = selectedOptions.includes(option)
+        ? selectedOptions.filter((selectedOption) => selectedOption !== option)
+        : [...selectedOptions, option];
+      setter(updatedOptions);
+    };
+  
     switch (buttonType) {
       case 'Technology':
-        updatedOptions = selectedTechnology.includes(option)
-          ? selectedTechnology.filter(
-              (selectedOption) => selectedOption !== option,
-            )
-          : [...selectedTechnology, option]
-        setSelectedTechnology(updatedOptions)
-        console.log(selectedTechnology)
-        break
-
+        updateSelectedOptions(selectedTechnology, setSelectedTechnology);
+        break;
+  
       case 'Seniority':
-        updatedOptions = selectedSeniority.includes(option)
-          ? selectedSeniority.filter(
-              (selectedOption) => selectedOption !== option,
-            )
-          : [...selectedSeniority, option]
-        setSelectedSeniority(updatedOptions)
-        console.log(selectedSeniority)
-        break
-
+        updateSelectedOptions(selectedSeniority, setSelectedSeniority);
+        break;
+  
       case 'Availability':
-        updatedOptions = selectedAvailability.includes(option)
-          ? selectedAvailability.filter(
-              (selectedOption) => selectedOption !== option,
-            )
-          : [...selectedAvailability, option]
-        setSelectedAvailability(updatedOptions)
-        console.log(selectedAvailability)
-        break
-
+        updateSelectedOptions(selectedAvailability, setSelectedAvailability);
+        break;
+  
       case 'Location':
-        updatedOptions = selectedLocation.includes(option)
-          ? selectedLocation.filter(
-              (selectedOption) => selectedOption !== option,
-            )
-          : [...selectedLocation, option]
-        setSelectedLocation(updatedOptions)
-        console.log(selectedLocation)
-        break
-
+        updateSelectedOptions(selectedLocation, setSelectedLocation);
+        break;
+  
       default:
-        break
+        break;
     }
-  }
+  };
 
   const technologyList = [
     'Javascript',
