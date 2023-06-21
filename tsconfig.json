@@ -24,6 +24,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "src", "app"],
+  "include": ["next-env.d.ts", "src", "app", "prisma"],
   "exclude": ["node_modules"]
 }
