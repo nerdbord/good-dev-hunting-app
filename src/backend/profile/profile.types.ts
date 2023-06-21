@@ -4,7 +4,7 @@ export interface ProfilePayload {
   id: string
   fullName: string
   email: string
-  linkedIn: string
+  linkedIn: string | null
   userId: string
   bio: string
   country: {
