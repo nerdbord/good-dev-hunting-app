@@ -11,36 +11,39 @@ const Filters = () => {
   const [selectedLocation, setSelectedLocation] = useState<string[]>([])
 
   const handleSelect = (option: string, buttonType: string) => {
-    let updatedOptions: string[];
-  
-    const updateSelectedOptions = (selectedOptions: string[], setter: Function) => {
+    let updatedOptions: string[]
+
+    const updateSelectedOptions = (
+      selectedOptions: string[],
+      setter: (value: string[]) => void,
+    ) => {
       updatedOptions = selectedOptions.includes(option)
         ? selectedOptions.filter((selectedOption) => selectedOption !== option)
-        : [...selectedOptions, option];
-      setter(updatedOptions);
-    };
-  
+        : [...selectedOptions, option]
+      setter(updatedOptions)
+    }
+
     switch (buttonType) {
       case 'Technology':
-        updateSelectedOptions(selectedTechnology, setSelectedTechnology);
-        break;
-  
+        updateSelectedOptions(selectedTechnology, setSelectedTechnology)
+        break
+
       case 'Seniority':
-        updateSelectedOptions(selectedSeniority, setSelectedSeniority);
-        break;
-  
+        updateSelectedOptions(selectedSeniority, setSelectedSeniority)
+        break
+
       case 'Availability':
-        updateSelectedOptions(selectedAvailability, setSelectedAvailability);
-        break;
-  
+        updateSelectedOptions(selectedAvailability, setSelectedAvailability)
+        break
+
       case 'Location':
-        updateSelectedOptions(selectedLocation, setSelectedLocation);
-        break;
-  
+        updateSelectedOptions(selectedLocation, setSelectedLocation)
+        break
+
       default:
-        break;
+        break
     }
-  };
+  }
 
   const technologyList = [
     'Javascript',
