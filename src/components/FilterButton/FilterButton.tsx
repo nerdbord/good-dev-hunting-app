@@ -8,12 +8,12 @@ export const FilterButton = ({
   text,
   options,
   onSelect,
-  selectedValue
+  selectedValue,
 }: {
   text: string
   options: string[]
-  onSelect: (option: string) => void 
-  selectedValue: string[] 
+  onSelect: (option: string) => void
+  selectedValue: string[]
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
@@ -62,24 +62,26 @@ export const FilterButton = ({
         </button>
         {isDropdownActive && (
           <div className={styles.dropdown}>
-
-              {options.map((option, index) => (
-                <label key={index} className={styles.dropdownInput}>
-                      <div className={`${styles.checkbox} ${selectedValue.includes(option) ? styles.checked : ''}`}>
-                    <input
-                      type="checkbox"
-                      className={styles.hidden}
-                      checked={selectedValue.includes(option)}
-                      onChange={() => handleSelect(option)}
-                    />
-                    {selectedValue.includes(option) && (
-                      <IoIosCheckmark className={styles.checkmark} />
-                    )}
-                  </div>{' '}
-                  {option}
-                </label>
-              ))}
-
+            {options.map((option, index) => (
+              <label key={index} className={styles.dropdownInput}>
+                <div
+                  className={`${styles.checkbox} ${
+                    selectedValue.includes(option) ? styles.checked : ''
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    className={styles.hidden}
+                    checked={selectedValue.includes(option)}
+                    onChange={() => handleSelect(option)}
+                  />
+                  {selectedValue.includes(option) && (
+                    <IoIosCheckmark className={styles.checkmark} />
+                  )}
+                </div>{' '}
+                {option}
+              </label>
+            ))}
           </div>
         )}
       </div>
