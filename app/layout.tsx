@@ -2,6 +2,7 @@ import React from 'react'
 import './globals.scss'
 import { IBM_Plex_Sans } from 'next/font/google'
 import Header from '@/components/Header/Header'
+import AuthProvider from "@/components/AuthProvider/AuthProvider"
 
 const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400'] })
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ibm.className}>
-        <Header />
-        <div className="container">{children}</div>
+        <AuthProvider>
+          <Header />
+          <div className="container">{children}</div>
+        </AuthProvider>
       </body>
     </html>
   )
