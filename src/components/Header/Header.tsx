@@ -5,18 +5,36 @@ import styles from './Header.module.scss'
 import logo from '../../assets/images/logo.png'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import AddIcon from '@/assets/icons/AddIcon'
-import {useSession, signIn, signOut} from "next-auth/react"
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 const Header = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const {data: session, status} = useSession()
-  console.log(session);
+
+  const { data: session, status } = useSession()
+  console.log(session)
 
   const handleLogin = () => {
     setLoggedIn(true)
   }
 
-  if (status === "authenticated") {
+  if (status === 'authenticated') {
+    return (
+      <header className={styles.wrapper}>
+        <div className={styles.logo}>
+          <img src={logo.src} alt="Logo" />
+          <div className={styles.title}>Good Dev Hunting</div>
+        </div>
+        <div className={styles.actions}>
+          <div className={styles.frameLogin}>
+            <Button onClick={() => signOut} variant={'primary'}>
+              {' '}
+              My profile{' '}
+            </Button>
+          </div>
+        </div>
+      </header>
+    )
+  }
+
   return (
     <header className={styles.wrapper}>
       <div className={styles.logo}>
@@ -24,41 +42,24 @@ const Header = () => {
         <div className={styles.title}>Good Dev Hunting</div>
       </div>
       <div className={styles.actions}>
-          <div className={styles.frameLogin}>    
-            <Button onClick={() => signOut} variant={'primary'}>
-              {' '}
-              My profile{' '}
+        <div className={styles.frameButtons}>
+          <div className={styles.buttons}>
+            <Button onClick={() => signIn()} variant={'primary'}>
+              Create profile
+              <span>
+                <AddIcon />
+              </span>
             </Button>
           </div>
-      </div>
-    </header>
-  )}
-
-  return (
-        <header className={styles.wrapper}>
-      <div className={styles.logo}>
-        <img src={logo.src} alt="Logo" />
-        <div className={styles.title}>Good Dev Hunting</div>
-      </div>
-      <div className={styles.actions}>
-          <div className={styles.frameButtons}>
-            <div className={styles.buttons}>
-              <Button onClick={handleLogin} variant={'primary'}>
-                Create profile
-                <span>
-                  <AddIcon />
-                </span>
-              </Button>
-            </div>
-            <div className={styles.buttons}>
-              <Button onClick={() => signIn('github')} variant={'secondary'}>
-                Login
-                <span>
-                  <GithubIcon />
-                </span>
-              </Button>
-            </div>
+          <div className={styles.buttons}>
+            <Button onClick={() => signIn('github')} variant={'secondary'}>
+              Login
+              <span>
+                <GithubIcon />
+              </span>
+            </Button>
           </div>
+        </div>
       </div>
     </header>
   )
