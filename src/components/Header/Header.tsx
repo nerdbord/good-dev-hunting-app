@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '../Buttons/Button'
 import styles from './Header.module.scss'
 import logo from '../../assets/images/logo.png'
@@ -10,10 +10,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 const Header = () => {
   const { data: session, status } = useSession()
   console.log(session)
-
-  const handleLogin = () => {
-    setLoggedIn(true)
-  }
+  console.log(status)
 
   if (status === 'authenticated') {
     return (
