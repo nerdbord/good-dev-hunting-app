@@ -10,26 +10,7 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
-  /*  adapter: PrismaAdapter(prisma),
-  callbacks: {
-    async signIn(user, account, profile) {
-      const email = profile.email;
-      let existingUser = await prisma.user.findUnique({
-        where: { email },
-        include: { profile: true, githubDetails: true },
-      });
 
-      if (!existingUser) {
-        await prisma.user.create({
-          data: {
-            email,
-            githubDetails: { create: {} }
-          }
-        });
-      } 
-      return true;
-    } 
-  }  */
 })
 
 export { handler as GET, handler as POST }
