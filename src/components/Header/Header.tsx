@@ -8,7 +8,6 @@ import AddIcon from '@/assets/icons/AddIcon'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 const Header = () => {
-
   const { data: session, status } = useSession()
   console.log(session)
 
