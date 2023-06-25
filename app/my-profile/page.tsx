@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 
-const CreateProfilePage = () => {
+const MyProfilePage = () => {
   const session = useSession()
   console.log(session)
 
@@ -23,10 +23,10 @@ const CreateProfilePage = () => {
   if (session.status === 'authenticated') {
     return (
       <div>
-        <p>Create Profile Page</p>
+        <p>My Profile Page</p>
       </div>
     )
   }
 }
 
-export default CreateProfilePage
+export default MyProfilePage
