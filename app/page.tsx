@@ -7,6 +7,7 @@ const Home: React.FC = () => {
   return (
     <main className={styles.container}>
       <Filters />
+      <div>body</div>
     </main>
   )
 }
