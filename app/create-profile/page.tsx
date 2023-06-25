@@ -8,17 +8,21 @@ const CreateProfilePage = () => {
 
   if (session.status === 'loading') {
     return (
-      <div><p>Loading...</p></div>
+      <div>
+        <p>Loading...</p>
+      </div>
     )
   }
 
   if (session.status === 'unauthenticated') {
-    router?.push("/")
+    router?.push('/')
   }
 
   if (session.status === 'authenticated') {
     return (
-      <div><p>Create Profile Page</p></div>
+      <div>
+        <p>Create Profile Page</p>
+      </div>
     )
   }
 }
