@@ -1,30 +1,24 @@
-'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 const MyProfilePage = () => {
   const session = useSession()
-  console.log(session)
-
-  useEffect(() => {
-    if (session.status === 'unauthenticated') {
-      window.location.href = '/'
-    }
-  }, [session])
+  const router = useRouter()
 
   if (session.status === 'loading') {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <div><p>Loading...</p></div>
     )
+  }
+
+  if (session.status === 'unauthenticated') {
+    router?.push("/")
   }
 
   if (session.status === 'authenticated') {
     return (
-      <div>
-        <p>My Profile Page</p>
-      </div>
+      <div><p>Create Profile Page</p></div>
     )
   }
 }
