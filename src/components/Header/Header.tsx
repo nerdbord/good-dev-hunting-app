@@ -1,19 +1,34 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '../Buttons/Button'
 import styles from './Header.module.scss'
 import logo from '../../assets/images/logo.png'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import AddIcon from '@/assets/icons/AddIcon'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 const Header = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const handleLogin = () => {
-    setLoggedIn(true)
-  }
+  const { data: session, status } = useSession()
+  console.log(session)
+  console.log(status)
 
-  const handleLogOut = () => {
-    setLoggedIn(false)
+  if (status === 'authenticated') {
+    return (
+      <header className={styles.wrapper}>
+        <div className={styles.logo}>
+          <img src={logo.src} alt="Logo" />
+          <div className={styles.title}>Good Dev Hunting</div>
+        </div>
+        <div className={styles.actions}>
+          <div className={styles.frameLogin}>
+            <Button onClick={() => signOut()} variant={'primary'}>
+              {' '}
+              My profile{' '}
+            </Button>
+          </div>
+        </div>
+      </header>
+    )
   }
 
   return (
@@ -23,33 +38,24 @@ const Header = () => {
         <div className={styles.title}>Good Dev Hunting</div>
       </div>
       <div className={styles.actions}>
-        {loggedIn ? (
-          <div className={styles.frameLogin}>
-            <Button onClick={handleLogOut} variant={'primary'}>
-              {' '}
-              My profile{' '}
+        <div className={styles.frameButtons}>
+          <div className={styles.buttons}>
+            <Button onClick={() => signIn()} variant={'primary'}>
+              Create profile
+              <span>
+                <AddIcon />
+              </span>
             </Button>
           </div>
-        ) : (
-          <div className={styles.frameButtons}>
-            <div className={styles.buttons}>
-              <Button onClick={handleLogin} variant={'primary'}>
-                Create profile
-                <span>
-                  <AddIcon />
-                </span>
-              </Button>
-            </div>
-            <div className={styles.buttons}>
-              <Button onClick={handleLogin} variant={'secondary'}>
-                Login
-                <span>
-                  <GithubIcon />
-                </span>
-              </Button>
-            </div>
+          <div className={styles.buttons}>
+            <Button onClick={() => signIn('github')} variant={'secondary'}>
+              Login
+              <span>
+                <GithubIcon />
+              </span>
+            </Button>
           </div>
-        )}
+        </div>
       </div>
     </header>
   )
