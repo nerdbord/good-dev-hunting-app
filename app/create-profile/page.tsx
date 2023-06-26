@@ -1,30 +1,18 @@
-import React from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import React from 'react';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-const CreateProfilePage = () => {
-  const session = useSession()
-  const router = useRouter()
+const CreateProfilePage = async () => {
+  const session = await getServerSession(authOptions);
 
-  if (session.status === 'loading') {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    )
+  if (!!session) {
+  return (
+    <div>Create profile page</div>
+  )} else {
+    redirect("/");
   }
 
-  if (session.status === 'unauthenticated') {
-    router?.push('/')
-  }
+};
 
-  if (session.status === 'authenticated') {
-    return (
-      <div>
-        <p>Create Profile Page</p>
-      </div>
-    )
-  }
-}
-
-export default CreateProfilePage
+export default CreateProfilePage;
