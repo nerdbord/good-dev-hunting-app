@@ -8,7 +8,7 @@ const CreateProfilePage = async () => {
 
   if (!!session) {
     return <div>Create profile page</div>
-  } 
+  }
   if (!session) {
     redirect('/')
   }
