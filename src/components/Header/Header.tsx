@@ -18,20 +18,25 @@ const Header = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-   if (status === 'authenticated' && pathname === ("/my-profile" || "/create-profile")) {
+  if (
+    status === 'authenticated' &&
+    pathname === ('/my-profile' || '/create-profile')
+  ) {
     return (
       <header className={styles.wrapper}>
-       <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <img src={logo.src} alt="Logo" />
           <div className={styles.title}>Good Dev Hunting</div>
         </Link>
         <div className={styles.actions}>
           <div className={styles.github}>
             <div>
-              <p className={styles.githubAccConnected}>Connected Github account</p>
+              <p className={styles.githubAccConnected}>
+                Connected Github account
+              </p>
             </div>
             <div className={styles.githubAcc}>
-            {avatar && (
+              {avatar && (
                 <Image
                   className={styles.githubAccImg}
                   src={avatar}
@@ -40,24 +45,27 @@ const Header = () => {
                   alt="github avatar"
                 />
               )}
-             <p className={styles.githubAccName}>{name}</p>
+              <p className={styles.githubAccName}>{name}</p>
             </div>
           </div>
         </div>
       </header>
     )
-  } 
+  }
 
-   if (status === 'authenticated') {
+  if (status === 'authenticated') {
     return (
       <header className={styles.wrapper}>
-         <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <img src={logo.src} alt="Logo" />
           <div className={styles.title}>Good Dev Hunting</div>
         </Link>
         <div className={styles.actions}>
           <div className={styles.frameLogin}>
-            <Button onClick={() => router.push('/my-profile')} variant={'primary'}>
+            <Button
+              onClick={() => router.push('/my-profile')}
+              variant={'primary'}
+            >
               {' '}
               My profile{' '}
             </Button>
@@ -65,14 +73,14 @@ const Header = () => {
         </div>
       </header>
     )
-  }   
+  }
 
   return (
     <header className={styles.wrapper}>
-       <Link href="/" className={styles.logo}>
+      <Link href="/" className={styles.logo}>
         <img src={logo.src} alt="Logo" />
         <div className={styles.title}>Good Dev Hunting</div>
-        </Link>
+      </Link>
       <div className={styles.actions}>
         <div className={styles.frameButtons}>
           <div className={styles.buttons}>
