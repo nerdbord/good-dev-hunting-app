@@ -1,15 +1,21 @@
 .wrapper {
-  width: 100%;
+  max-width: 100%;
   height: 125px;
   background: #04080d;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding-left: 127px;
+  padding-right: 127px;
+}
+
+.header {
+  max-width: 1180px;
 }
 
 .logo {
   width: 187px;
   height: 26px;
-  margin: 50px 8px 49px 130px;
   display: flex;
   gap: 8px;
 }
@@ -34,8 +40,7 @@
   align-items: center;
   padding: 0;
   gap: 12px;
-  margin-right: 129px;
-  margin-top: 41.45px;
+
 }
 
 .buttons {
@@ -50,6 +55,30 @@
   align-items: center;
   padding: 0;
   gap: 12px;
-  margin: 41.45px 127px 40px 0px;
   float: right;
+}
+
+.githubAccConnected {
+  color: #89939E;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.github {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.githubAcc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.githubAccImg {
+  border-radius: 50%;
 }
