@@ -6,12 +6,11 @@ import { redirect } from 'next/navigation'
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!!session) {
-    return <div>Create profile page</div>
-  }
   if (!session) {
     redirect('/')
   }
+
+  return <div>Create profile page</div>
 }
 
 export default CreateProfilePage

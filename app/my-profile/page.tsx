@@ -6,12 +6,11 @@ import { redirect } from 'next/navigation'
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!!session) {
-    return <div>My profile page</div>
-  }
   if (!session) {
     redirect('/')
   }
+
+  return <div>My profile page</div>
 }
 
 export default MyProfilePage
