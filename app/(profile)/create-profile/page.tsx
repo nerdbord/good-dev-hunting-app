@@ -16,8 +16,8 @@ const CreateProfilePage = async () => {
       Create profile page
       <br />
       <LogOutBtn />
-      </div>
-    )
+    </div>
+  )
 }
 
 export default CreateProfilePage
