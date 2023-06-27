@@ -52,7 +52,10 @@ const ProfileMain = () => {
             <div className={styles.name}>{name}</div>
           </div>
           <div className={styles.locationBox}>
-            <div className={styles.country}><PolandFlag/>Poland, Warsaw </div>
+            <div className={styles.country}>
+              <PolandFlag />
+              Poland, Warsaw{' '}
+            </div>
             <div className={styles.location}>Open to relocation</div>
             <div className={styles.location}>Remote only</div>
           </div>
