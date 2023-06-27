@@ -7,4 +7,9 @@ module.exports = {
     GIHUB_ID: process.env.GIHUB_ID,
     GIHUB_SECRET: process.env.GIHUB_SECRET,
   },
+  images: {
+    domains: [
+        "avatars.githubusercontent.com",
+    ]
+  }
 }
