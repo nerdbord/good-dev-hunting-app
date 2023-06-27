@@ -1,26 +1,31 @@
 'use client'
 import React from 'react'
 import { Button } from '../Buttons/Button'
-import styles from './Header.module.scss'
+import styles from './DefaultHeader.module.scss'
 import logo from '../../assets/images/logo.png'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import AddIcon from '@/assets/icons/AddIcon'
 import Link from 'next/link'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
-const Header = () => {
+const DefaultHeader = () => {
   const { data: session, status } = useSession()
+  const router = useRouter()
 
   if (status === 'authenticated') {
     return (
       <header className={styles.wrapper}>
-        <div className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <img src={logo.src} alt="Logo" />
           <div className={styles.title}>Good Dev Hunting</div>
-        </div>
+        </Link>
         <div className={styles.actions}>
           <div className={styles.frameLogin}>
-            <Button onClick={() => signOut()} variant={'primary'}>
+            <Button
+              onClick={() => router.push('/my-profile')}
+              variant={'primary'}
+            >
               {' '}
               My profile{' '}
             </Button>
@@ -38,12 +43,10 @@ const Header = () => {
       </Link>
       <div className={styles.actions}>
         <div className={styles.frameButtons}>
-          <div className={styles.buttons}>
-            <Button onClick={() => signIn()} variant={'primary'}>
-              Create profile
-              <AddIcon />
-            </Button>
-          </div>
+          <Button onClick={() => signIn()} variant={'primary'}>
+            Create profile
+            <AddIcon />
+          </Button>
           <div className={styles.buttons}>
             <Button onClick={() => signIn('github')} variant={'secondary'}>
               Login
@@ -55,4 +58,4 @@ const Header = () => {
     </header>
   )
 }
-export default Header
+export default DefaultHeader

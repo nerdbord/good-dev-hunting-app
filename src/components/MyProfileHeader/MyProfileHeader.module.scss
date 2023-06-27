@@ -4,12 +4,12 @@
   background: #04080d;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   width: 187px;
   height: 26px;
-  margin: 50px 8px 49px 130px;
   display: flex;
   gap: 8px;
 }
@@ -34,22 +34,39 @@
   align-items: center;
   padding: 0;
   gap: 12px;
-  margin-right: 129px;
-  margin-top: 41.45px;
-}
-
-.buttons {
-  float: right;
 }
 
 .frameLogin {
-  width: 112px;
   height: 44px;
+  display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   padding: 0;
   gap: 12px;
-  margin: 41.45px 127px 40px 0px;
-  float: right;
+}
+
+.githubAccConnected {
+  color: #89939e;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.github {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.githubAcc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.githubAccImg {
+  border-radius: 50%;
 }
