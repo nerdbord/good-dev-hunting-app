@@ -1,16 +1,10 @@
 .wrapper {
-  max-width: 100%;
+  width: 100%;
   height: 125px;
   background: #04080d;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 127px;
-  padding-right: 127px;
-}
-
-.header {
-  max-width: 1180px;
 }
 
 .logo {
@@ -33,8 +27,8 @@
 }
 
 .frameButtons {
-  width: 283px;
   height: 44px;
+  display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
@@ -42,19 +36,15 @@
   gap: 12px;
 }
 
-.buttons {
-  float: right;
-}
 
 .frameLogin {
-  width: 112px;
   height: 44px;
+  display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   padding: 0;
   gap: 12px;
-  float: right;
 }
 
 .githubAccConnected {
