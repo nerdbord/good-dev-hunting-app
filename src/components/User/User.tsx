@@ -6,8 +6,7 @@ export const User = () => {
 
   return (
     <>
-      <h1>Client Session</h1>
-      <pre>{JSON.stringify(session)}</pre>
+      {JSON.stringify(session)}
     </>
   )
 }
