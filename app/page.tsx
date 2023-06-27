@@ -10,7 +10,7 @@ const Home: React.FC = () => {
       <div className={styles.container}>
         <Filters />
         body
-        </div>
+      </div>
     </div>
   )
 }

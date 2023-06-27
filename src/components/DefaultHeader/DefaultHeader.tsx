@@ -36,17 +36,17 @@ const DefaultHeader = () => {
   }
 
   return (
-      <header className={styles.wrapper}>
+    <header className={styles.wrapper}>
       <Link href="/" className={styles.logo}>
         <img src={logo.src} alt="Logo" />
         <div className={styles.title}>Good Dev Hunting</div>
       </Link>
       <div className={styles.actions}>
         <div className={styles.frameButtons}>
-            <Button onClick={() => signIn()} variant={'primary'}>
-              Create profile
-              <AddIcon />
-            </Button>
+          <Button onClick={() => signIn()} variant={'primary'}>
+            Create profile
+            <AddIcon />
+          </Button>
           <div className={styles.buttons}>
             <Button onClick={() => signIn('github')} variant={'secondary'}>
               Login
@@ -55,8 +55,7 @@ const DefaultHeader = () => {
           </div>
         </div>
       </div>
-      </header>
-
+    </header>
   )
 }
-export default DefaultHeader;
+export default DefaultHeader

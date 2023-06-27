@@ -11,11 +11,13 @@ const MyProfilePage = async () => {
     redirect('/')
   }
 
-  return <div>
-    My profile page
-    <br/>
-    <LogOutBtn/>
+  return (
+    <div>
+      My profile page
+      <br />
+      <LogOutBtn />
     </div>
+  )
 }
 
 export default MyProfilePage

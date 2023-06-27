@@ -1,5 +1,5 @@
-'use client';
-import React from 'react';
+'use client'
+import React from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
@@ -7,9 +7,9 @@ import logo from '@/assets/images/logo.png'
 import Image from 'next/image'
 
 const MyProfileHeader = () => {
-  const { data: session } = useSession();
-  const name = session?.user?.name;
-  const avatar = session?.user?.image;
+  const { data: session } = useSession()
+  const name = session?.user?.name
+  const avatar = session?.user?.image
 
   return (
     <div>
@@ -41,7 +41,7 @@ const MyProfileHeader = () => {
         </div>
       </header>
     </div>
-  );
-};
+  )
+}
 
-export default MyProfileHeader;
+export default MyProfileHeader
