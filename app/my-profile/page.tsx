@@ -15,10 +15,10 @@ const MyProfilePage = async () => {
 
   return (
     <>
-      <ProfileMain/>
+      <ProfileMain />
       <LogOutBtn />
     </>
-)}
+  )
+}
 
 export default MyProfilePage
-
