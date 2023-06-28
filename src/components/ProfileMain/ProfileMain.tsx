@@ -2,7 +2,6 @@
 import React from 'react'
 import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
-import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
 import DefaultUserImg from '/public/default-avatar.png'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
