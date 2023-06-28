@@ -1,7 +1,12 @@
+'use client'
 import React from 'react'
 import styles from './ProfileDetails.module.scss'
+import { useSession } from 'next-auth/react'
 
 const ProfileDetails = () => {
+    const { data: session } = useSession()
+    const name = session?.user?.name || null
+
   const techStackItems = [
     'Javascript',
     'React.js',
@@ -42,7 +47,7 @@ const ProfileDetails = () => {
         <div className={styles.right}>
           <div className={styles.title}>Bio</div>
           <div className={styles.desc}>
-            Hello, my name is [Name], and I am an aspiring software developer.
+            Hello, my name is {name}, and I am an aspiring software developer.
             <br />
             <br />
             I have always been fascinated by the power of technology and how it
