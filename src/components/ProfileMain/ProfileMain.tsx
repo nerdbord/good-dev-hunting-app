@@ -11,7 +11,6 @@ import CopyEmail from '@/assets/icons/CopyEmail'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/🇵🇱.jpg'
 
-
 const ProfileMain = () => {
   const { data: session } = useSession()
   const avatar = session?.user?.image || DefaultUserImg
@@ -54,7 +53,7 @@ const ProfileMain = () => {
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
-            <Image
+              <Image
                 src={PolandFlag}
                 alt="Poland Flag"
                 width={20}
