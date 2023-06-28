@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 
 const DefaultHeader = () => {
   const { data: session, status } = useSession()
-  console.log(session);
+  console.log(session)
   const router = useRouter()
 
   if (status === 'authenticated') {
