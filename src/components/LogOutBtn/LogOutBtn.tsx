@@ -1,12 +1,14 @@
 'use client'
 import React from 'react'
 import { signOut } from 'next-auth/react'
-import styles from "./LogOutBtn.module.scss"
+import styles from './LogOutBtn.module.scss'
 
 const LogOutBtn = () => {
   return (
     <div>
-      <button className={styles.logout} onClick={() => signOut()}>Log out</button>
+      <button className={styles.logout} onClick={() => signOut()}>
+        Log out
+      </button>
     </div>
   )
 }
