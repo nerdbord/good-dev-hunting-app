@@ -4,8 +4,8 @@ import styles from './ProfileDetails.module.scss'
 import { useSession } from 'next-auth/react'
 
 const ProfileDetails = () => {
-    const { data: session } = useSession()
-    const name = session?.user?.name || null
+  const { data: session } = useSession()
+  const name = session?.user?.name || null
 
   const techStackItems = [
     'Javascript',
