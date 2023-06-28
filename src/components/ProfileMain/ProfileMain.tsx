@@ -9,7 +9,8 @@ import { useRouter } from 'next/navigation'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import CopyEmail from '@/assets/icons/CopyEmail'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/icons/PolandFlag'
+import PolandFlag from '@/assets/images/🇵🇱.jpg'
+
 
 const ProfileMain = () => {
   const { data: session } = useSession()
@@ -53,7 +54,13 @@ const ProfileMain = () => {
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
-              <PolandFlag />
+            <Image
+                src={PolandFlag}
+                alt="Poland Flag"
+                width={20}
+                height={20}
+                className={styles.flag}
+              />
               Poland, Warsaw{' '}
             </div>
             <div className={styles.location}>Open to relocation</div>
