@@ -15,7 +15,6 @@ const CreateProfilePage = async () => {
     <div>
       Create profile page
       <br />
-      <LogOutBtn />
     </div>
   )
 }

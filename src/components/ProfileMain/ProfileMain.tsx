@@ -78,7 +78,6 @@ const ProfileMain = () => {
           </div>
         </div>
       </div>
-      <LogOutBtn />
     </>
   )
 }
