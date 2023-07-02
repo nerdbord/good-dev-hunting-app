@@ -14,12 +14,14 @@ const CreateProfilePage = async () => {
 
   return (
     <div className={styles.main}>
-      <div  className={styles.titleBox}>
+      <div className={styles.titleBox}>
         <span>Create profile page</span>
-        <button className={styles.saveProfileBtn}>Save and preview profile </button>
+        <button className={styles.saveProfileBtn}>
+          Save and preview profile{' '}
+        </button>
       </div>
       <div className={styles.formBox}>
-        <PersonalInfo/>
+        <PersonalInfo />
       </div>
     </div>
   )

@@ -1,94 +1,95 @@
 .container {
-    margin-top: 20px;
-    background: #04080d;
-    padding: 100px;
-    display: flex;
-    gap: 100px;
+  margin-top: 20px;
+  background: #04080d;
+  padding: 100px;
+  display: flex;
+  gap: 100px;
 }
-  
+
 .left {
-    flex: 0 0 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .personalInfo {
-    background-color: #0F1217;
-    border: 1px solid #2A2F35;
-    color: #69717B;
-    border-radius: 2px;
-    padding: 20px;
-    display: flex;
-    width: 280px;
-    align-items: flex-start;
-    gap: 20px;
-    font-size: 14px;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  padding: 20px;
+  display: flex;
+  width: 280px;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 14px;
 }
-  
+
 .right {
-    flex: 0 0 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 24px;
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
 }
 
 .formTitle {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #89939E;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #89939e;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .formInput {
-    background-color: #0F1217;
-    border: 1px solid #2A2F35;
-    color: #69717B;
-    border-radius: 2px;
-    padding: 16px 24px 16px 20px;
-    width: 380px;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  padding: 16px 24px 16px 20px;
+  width: 380px;
 }
 
 .formTextarea {
-    display: flex;
-    width: 380px;
-    height: 414px;
-    align-items: flex-start;
-    background-color: #0F1217;
-    border: 1px solid #2A2F35;
-    color: #69717B;
-    border-radius: 2px;
-    resize: none;
-    padding: 16px 24px 16px 20px;
+  display: flex;
+  width: 380px;
+  height: 414px;
+  align-items: flex-start;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  resize: none;
+  padding: 16px 24px 16px 20px;
 }
 
-.formInput::placeholder, .formTextarea::placeholder {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    color: #69717B;
+.formInput::placeholder,
+.formTextarea::placeholder {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: #69717b;
 }
 
 .formItem {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .lettersCount {
-    text-align: right;
+  text-align: right;
 }
 
 .lettersCount {
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 16px;
-    color: #89939E;
-    padding-right: 110px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #89939e;
+  padding-right: 110px;
 }
