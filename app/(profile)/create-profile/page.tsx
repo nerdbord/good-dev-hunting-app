@@ -3,7 +3,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
-import PersonalInfo from '@/components/PersonalInfo/PersonalInfo'
+import PersonalInfo from '@/components/CreateProfile/PersonalInfo/PersonalInfo'
+import CreateProfileButton from '@/components/CreateProfile/CreateProfileButton/CreateProfileButton'
 
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
@@ -16,9 +17,7 @@ const CreateProfilePage = async () => {
     <div className={styles.main}>
       <div className={styles.titleBox}>
         <span>Create profile page</span>
-        <button className={styles.saveProfileBtn}>
-          Save and preview profile{' '}
-        </button>
+        <CreateProfileButton />
       </div>
       <div className={styles.formBox}>
         <PersonalInfo />
