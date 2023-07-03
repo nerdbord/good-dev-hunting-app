@@ -1,0 +1,20 @@
+.formTextarea {
+  display: flex;
+  width: 380px;
+  height: 414px;
+  align-items: flex-start;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  resize: none;
+  padding: 16px 24px 16px 20px;
+}
+
+.formTextarea::placeholder {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: #69717b;
+}

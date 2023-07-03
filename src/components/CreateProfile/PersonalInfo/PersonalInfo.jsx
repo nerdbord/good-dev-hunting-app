@@ -2,6 +2,8 @@
 import React from 'react'
 import styles from './PersonalInfo.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
+import CreateProfileInput from '../CreateProfileInput/CreateProfileInput'
+import CreateProfileTextArea from '../CreateProfileTextArea/CreateProfileTextArea'
 
 const PersonalInfo = () => {
   return (
@@ -15,41 +17,25 @@ const PersonalInfo = () => {
       <div className={styles.right}>
         <div className={styles.formItem}>
           <div className={styles.formTitle}>Full name</div>
-          <input
-            className={styles.formInput}
-            type="text"
-            placeholder="eg. Anna Oxford"
-          />
+          <CreateProfileInput placeholder="eg. Anna Oxford" />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formTitle}>
             Contact email
             <ImportantIcon />
           </div>
-          <input
-            className={styles.formInput}
-            type="text"
-            placeholder="eg. karolina@gmail.com"
-          />
+          <CreateProfileInput placeholder="eg. karolina@gmail.com" />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formTitle}>LinkedIn</div>
-          <input
-            className={styles.formInput}
-            type="text"
-            placeholder="Paste link to you linkedin profile"
-          />
+          <CreateProfileInput placeholder="Paste link to you linkedin profile" />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formTitle}>
             Bio
             <ImportantIcon />
           </div>
-          <textarea
-            className={styles.formTextarea}
-            type="text"
-            placeholder="Introduce yourself with few senteses"
-          />
+          <CreateProfileTextArea placeholder="Introduce yourself with few senteses" />
           <div className={styles.lettersCount}>0 / 1500 characters</div>
         </div>
       </div>
