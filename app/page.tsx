@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './page.module.scss'
 import Filters from '@/components/Filters/Filters'
-import DefaultHeader from '@/components/DefaultHeader/DefaultHeader'
+import DefaultHeader from '@/components/Headers/DefaultHeader/DefaultHeader'
 
 const Home: React.FC = () => {
   return (
