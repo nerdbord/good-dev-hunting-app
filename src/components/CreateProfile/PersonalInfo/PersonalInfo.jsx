@@ -2,8 +2,8 @@
 import React from 'react'
 import styles from './PersonalInfo.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
-import CreateProfileInput from '../CreateProfileInput/CreateProfileInput'
-import CreateProfileTextArea from '../CreateProfileTextArea/CreateProfileTextArea'
+import TextInput from '@/inputs/TextInput/TextInput'
+import TextArea from '@/inputs/TextArea/TextArea'
 
 const PersonalInfo = () => {
   return (
@@ -15,29 +15,26 @@ const PersonalInfo = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <div className={styles.formItem}>
-          <div className={styles.formTitle}>Full name</div>
-          <CreateProfileInput placeholder="eg. Anna Oxford" />
-        </div>
-        <div className={styles.formItem}>
-          <div className={styles.formTitle}>
-            Contact email
-            <ImportantIcon />
-          </div>
-          <CreateProfileInput placeholder="eg. karolina@gmail.com" />
-        </div>
-        <div className={styles.formItem}>
-          <div className={styles.formTitle}>LinkedIn</div>
-          <CreateProfileInput placeholder="Paste link to you linkedin profile" />
-        </div>
-        <div className={styles.formItem}>
-          <div className={styles.formTitle}>
-            Bio
-            <ImportantIcon />
-          </div>
-          <CreateProfileTextArea placeholder="Introduce yourself with few senteses" />
-          <div className={styles.lettersCount}>0 / 1500 characters</div>
-        </div>
+        <TextInput label="Full name" placeholder="eg. Anna Oxford" />
+
+        <TextInput
+          label=" Contact email"
+          placeholder=" Contact email"
+          addImportantIcon="true"
+        />
+
+        <TextInput
+          label="LinkedIn"
+          placeholder="Paste link to you linkedin profile"
+        />
+
+        <TextArea
+          label="Bio"
+          placeholder="Introduce yourself with few senteses"
+          addImportantIcon="true"
+        />
+
+        <div className={styles.lettersCount}>0 / 1500 characters</div>
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
+import LogOutBtn from '@/inputs/LogOutBtn/LogOutBtn'
 import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
 import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
 

@@ -2,7 +2,7 @@
 import styles from './Filters.module.scss'
 import React, { useState } from 'react'
 import 'material-icons/iconfont/material-icons.css'
-import { FilterButton } from '@/components/FilterButton/FilterButton'
+import { FilterButton } from './FilterButton/FilterButton'
 
 const Filters = () => {
   const [selectedTechnology, setSelectedTechnology] = useState<string[]>([])
