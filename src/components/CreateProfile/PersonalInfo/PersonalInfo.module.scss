@@ -1,0 +1,47 @@
+.container {
+  margin-top: 20px;
+  background: #04080d;
+  padding: 100px;
+  display: flex;
+  gap: 100px;
+}
+
+.left {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.personalInfo {
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  padding: 20px;
+  display: flex;
+  width: 280px;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.right {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.lettersCount {
+  text-align: right;
+}
+
+.lettersCount {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #89939e;
+  padding-right: 110px;
+}

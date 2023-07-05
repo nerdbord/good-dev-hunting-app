@@ -1,5 +1,5 @@
 import React from 'react'
-import MyProfileHeader from '@/components/MyProfileHeader/MyProfileHeader'
+import MyProfileHeader from '@/components/Headers/MyProfileHeader/MyProfileHeader'
 
 const ProfileLayout = ({
   children,
