@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Button } from '../../Buttons/Button'
+import { Button } from '@/inputs/Button/Button'
 import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import GithubIcon from '@/assets/icons/GithubIcon'

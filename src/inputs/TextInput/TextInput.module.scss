@@ -14,3 +14,20 @@
   line-height: 20px;
   color: #69717b;
 }
+
+.formLabel {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #89939e;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.formItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}
