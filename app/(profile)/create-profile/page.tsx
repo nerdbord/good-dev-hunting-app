@@ -5,7 +5,6 @@ import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
 import PersonalInfo from '@/components/CreateProfile/PersonalInfo/PersonalInfo'
 import LocationPreferences from '@/components/CreateProfile/LocationPreferences/LocationPreferences'
-import { Button } from '@/inputs/Button/Button'
 import CreateProfileHeader from '@/components/CreateProfile/CreateProfileHeader/CreateProfileHeader'
 
 const CreateProfilePage = async () => {
@@ -16,7 +15,7 @@ const CreateProfilePage = async () => {
   }
 
   return (
-    <div className={styles.main}>
+    <div className={styles.container}>
       <CreateProfileHeader />
       <div className={styles.formBox}>
         <PersonalInfo />

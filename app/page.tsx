@@ -1,17 +1,14 @@
 import React from 'react'
-import styles from './page.module.scss'
 import Filters from '@/components/Filters/Filters'
 import DefaultHeader from '@/components/Headers/DefaultHeader/DefaultHeader'
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <>
       <DefaultHeader />
-      <div className={styles.container}>
-        <Filters />
-        body
-      </div>
-    </div>
+      <Filters />
+      body
+    </>
   )
 }
 

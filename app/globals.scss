@@ -23,11 +23,7 @@ body {
 }
 
 .container {
-  max-width: 1180px;
-  min-height: 100vh;
+  // max-width: 1128px;
   margin: 0 auto;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  min-height: 100vh;
 }
