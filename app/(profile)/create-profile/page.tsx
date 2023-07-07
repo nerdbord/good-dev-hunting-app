@@ -16,7 +16,7 @@ const CreateProfilePage = async () => {
   }
 
   return (
-    <div className={styles.main}>
+    <div className={styles.wrapper}>
       <CreateProfileHeader />
       <div className={styles.formBox}>
         <PersonalInfo />
