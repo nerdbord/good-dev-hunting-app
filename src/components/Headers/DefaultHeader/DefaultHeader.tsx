@@ -42,19 +42,16 @@ const DefaultHeader = () => {
         <img src={logo.src} alt="Logo" />
         <div className={styles.title}>Good Dev Hunting</div>
       </Link>
-      <div className={styles.actions}>
-        <div className={styles.frameButtons}>
-          <Button onClick={() => signIn()} variant={'primary'}>
-            Create profile
-            <AddIcon />
-          </Button>
-          <div className={styles.buttons}>
-            <Button onClick={() => signIn('github')} variant={'secondary'}>
-              Login
-              <GithubIcon />
-            </Button>
-          </div>
-        </div>
+
+      <div className={styles.frameButtons}>
+        <Button onClick={() => signIn('github')} variant={'secondary'}>
+          Login
+          <GithubIcon />
+        </Button>
+        <Button onClick={() => signIn()} variant={'primary'}>
+          Create profile
+          <AddIcon />
+        </Button>
       </div>
     </header>
   )

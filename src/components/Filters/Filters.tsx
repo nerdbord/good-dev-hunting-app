@@ -88,15 +88,9 @@ const Filters = () => {
         />
       </div>
       <div className={styles.devType}>
-        <button className={styles.devTypeBtn + ' ' + styles.frontend}>
-          Frontend
-        </button>
-        <button className={styles.devTypeBtn + ' ' + styles.backend}>
-          Backend
-        </button>
-        <button className={styles.devTypeBtn + ' ' + styles.fullstack}>
-          Fullstack
-        </button>
+        <button className={styles.frontend}>Frontend</button>
+        <button className={styles.backend}>Backend</button>
+        <button className={styles.fullstack}>Fullstack</button>
       </div>
     </div>
   )
