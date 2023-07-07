@@ -2,7 +2,8 @@
 import styles from './Filters.module.scss'
 import React, { useState } from 'react'
 import 'material-icons/iconfont/material-icons.css'
-import { FilterButton } from './FilterButton/FilterButton'
+import { FilterButton } from './Buttons/FilterButton/FilterButton'
+import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 
 const Filters = () => {
   const [selectedTechnology, setSelectedTechnology] = useState<string[]>([])
@@ -88,9 +89,21 @@ const Filters = () => {
         />
       </div>
       <div className={styles.devType}>
-        <button className={styles.frontend}>Frontend</button>
-        <button className={styles.backend}>Backend</button>
-        <button className={styles.fullstack}>Fullstack</button>
+        <DevTypeButton
+          variant="frontend"
+          onClick={() => console.log('frontend')}
+        >
+          Frontend
+        </DevTypeButton>
+        <DevTypeButton variant="backend" onClick={() => console.log('backend')}>
+          Frontend
+        </DevTypeButton>
+        <DevTypeButton
+          variant="fullstack"
+          onClick={() => console.log('fullstack')}
+        >
+          Frontend
+        </DevTypeButton>
       </div>
     </div>
   )
