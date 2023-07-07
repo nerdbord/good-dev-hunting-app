@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import TextArea from '@/inputs/TextArea/TextArea'
 import styles from './WorkInformations.module.scss'
 
 const WorkInformation = () => {
