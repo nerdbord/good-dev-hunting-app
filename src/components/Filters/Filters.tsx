@@ -96,13 +96,13 @@ const Filters = () => {
           Frontend
         </DevTypeButton>
         <DevTypeButton variant="backend" onClick={() => console.log('backend')}>
-          Frontend
+          Backend
         </DevTypeButton>
         <DevTypeButton
           variant="fullstack"
           onClick={() => console.log('fullstack')}
         >
-          Frontend
+          Fullstack
         </DevTypeButton>
       </div>
     </div>
