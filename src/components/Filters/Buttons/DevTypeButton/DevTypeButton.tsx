@@ -1,9 +1,9 @@
 'use client'
 import React, { PropsWithChildren } from 'react'
 import styles from './DevTypeButton.module.scss'
-import classNames from 'classnames/bind';
+import classNames from 'classnames/bind'
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind(styles)
 
 interface DevTypeButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -15,12 +15,10 @@ export const DevTypeButton = ({
   children,
   variant,
 }: PropsWithChildren<DevTypeButtonProps>) => {
-
-    const getDevTypeButtonClasses = cx({
-        [styles.default]: true,
-        [variant]: true,
-     });
-
+  const getDevTypeButtonClasses = cx({
+    [styles.default]: true,
+    [variant]: true,
+  })
 
   return (
     <button className={getDevTypeButtonClasses} onClick={onClick}>
