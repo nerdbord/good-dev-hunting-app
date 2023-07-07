@@ -1,10 +1,10 @@
 'use client'
-import styles from './FilterButton.module.scss'
+import styles from './Dropdown.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 
-export const FilterButton = ({
+export const Dropdown = ({
   text,
   options,
   onSelect,

@@ -2,7 +2,7 @@
 import styles from './Filters.module.scss'
 import React, { useState } from 'react'
 import 'material-icons/iconfont/material-icons.css'
-import { FilterButton } from './FilterButton/FilterButton'
+import { Dropdown } from '../../inputs/Dropdown/Dropdown'
 
 const Filters = () => {
   const [selectedTechnology, setSelectedTechnology] = useState<string[]>([])
@@ -62,25 +62,25 @@ const Filters = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.features}>
-        <FilterButton
+        <Dropdown
           text="Technology"
           options={technologyList}
           onSelect={(option) => handleSelect(option, 'Technology')}
           selectedValue={selectedTechnology}
         />
-        <FilterButton
+        <Dropdown
           text="Seniority"
           options={seniorityList}
           onSelect={(option) => handleSelect(option, 'Seniority')}
           selectedValue={selectedSeniority}
         />
-        <FilterButton
+        <Dropdown
           text="Availability"
           options={availabilityList}
           onSelect={(option) => handleSelect(option, 'Availability')}
           selectedValue={selectedAvailability}
         />
-        <FilterButton
+        <Dropdown
           text="Location"
           options={locationsList}
           onSelect={(option) => handleSelect(option, 'Location')}
