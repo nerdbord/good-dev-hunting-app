@@ -23,7 +23,9 @@ const PersonalInfo = () => {
   }
 
   const handleBioChange = (value: string) => {
-    setBio(value)
+    if (value.length <= 1500) {
+      setBio(value)
+    }
   }
 
   return (
@@ -65,7 +67,9 @@ const PersonalInfo = () => {
           onChange={handleBioChange}
         />
 
-        <div className={styles.lettersCount}>0 / 1500 characters</div>
+        <div className={styles.lettersCount}>
+          {bio.length} / 1500 characters
+        </div>
       </div>
     </div>
   )
