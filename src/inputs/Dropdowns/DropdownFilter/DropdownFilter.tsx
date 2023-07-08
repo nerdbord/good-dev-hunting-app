@@ -1,15 +1,17 @@
 'use client'
-import styles from './Dropdown.module.scss'
+import styles from './DropdownFilter.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 
-export const Dropdown = ({
+export const DropdownFilter = ({
+  label,
   text,
   options,
   onSelect,
   selectedValue,
 }: {
+  label: string
   text: string
   options: string[]
   onSelect: (option: string) => void
@@ -48,6 +50,7 @@ export const Dropdown = ({
 
   return (
     <div className={styles.buttonBox}>
+      <div className={styles.label}>{label}</div>
       <div ref={dropdownRef}>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
           {selectedValue.length === 0 ? (
