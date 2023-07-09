@@ -30,7 +30,6 @@ const WorkInformation = () => {
           )
         : [...prevFilters[buttonType], option],
     }))
-    console.log(filters)
   }
 
   const handleEmploymentType = (option: string): void => {

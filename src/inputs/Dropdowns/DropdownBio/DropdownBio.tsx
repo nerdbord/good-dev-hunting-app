@@ -3,6 +3,9 @@ import styles from './DropdownBio.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 export const DropdownBio = ({
   label,
@@ -70,9 +73,9 @@ export const DropdownBio = ({
             {options.map((option, index) => (
               <label key={index} className={styles.dropdownInput}>
                 <div
-                  className={`${styles.checkbox} ${
-                    selectedValue.includes(option) ? styles.checked : ''
-                  }`}
+                  className={cx(styles.checkbox, {
+                    [styles.checked]: selectedValue.includes(option),
+                  })}
                 >
                   <input
                     type="checkbox"
