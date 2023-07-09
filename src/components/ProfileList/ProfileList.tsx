@@ -1,26 +1,17 @@
-import React from 'react'
+'use client'
+import React, { useState, useEffect } from 'react'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
-import { ProfileData } from '@/components/ProfileList/ProfileData'
-interface ProfileListItem {
-  id: number
-  name: string
-  seniority: string
-  location: string
-  technology: string
-  technology2: string
-  technology3: string
-  others: string
-}
-
-interface ProfileListProps {
-  data: ProfileListItem
-}
+import {
+  ProfileData,
+  ProfileListItems,
+} from '@/components/ProfileList/ProfileData'
 
 enum JobSpecialization {
   Frontend = 'Frontend',
   Backend = 'Backend',
   Fullstack = 'Fullstack',
+  None = 'None',
 }
 
 interface TechnologyChipProps {
@@ -29,7 +20,10 @@ interface TechnologyChipProps {
   seniority: string
 }
 
-const getTechnologyClass = (theme: JobSpecialization, seniority: string) => {
+const getTechnologyClassByTheme = (
+  theme: JobSpecialization,
+  seniority: string,
+) => {
   if (seniority.includes('Frontend')) {
     return styles.frontend
   } else if (seniority.includes('Backend')) {
@@ -37,7 +31,6 @@ const getTechnologyClass = (theme: JobSpecialization, seniority: string) => {
   } else if (seniority.includes('Fullstack')) {
     return styles.fullstack
   }
-
   switch (theme) {
     case JobSpecialization.Frontend:
       return styles.frontend
@@ -49,25 +42,38 @@ const getTechnologyClass = (theme: JobSpecialization, seniority: string) => {
       return ''
   }
 }
+const getTechnologyClassBySeniority = (seniority: string) => {
+  if (seniority.includes('Frontend')) {
+    return styles.frontend
+  } else if (seniority.includes('Backend')) {
+    return styles.backend
+  } else if (seniority.includes('Fullstack')) {
+    return styles.fullstack
+  }
+  return ''
+}
 
 const TechnologyChip: React.FC<TechnologyChipProps> = (props) => {
-  const themeClass = getTechnologyClass(props.theme, props.seniority)
+  const themeClass = getTechnologyClassByTheme(props.theme, props.seniority)
   return <p className={`${styles.badge} ${themeClass}`}>{props.name}</p>
 }
 
-const ProfileListItem: React.FC<ProfileListProps> = ({ data }) => {
-  let theme: JobSpecialization
-  if (data.seniority.includes('Frontend')) {
-    theme = JobSpecialization.Frontend
-  } else if (data.seniority.includes('Backend')) {
-    theme = JobSpecialization.Backend
-  } else if (data.seniority.includes('Fullstack')) {
-    theme = JobSpecialization.Fullstack
-  } else {
-    theme = JobSpecialization.Frontend
-  }
-  const seniorityClass = getTechnologyClass(theme, data.seniority)
+const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
+  const [theme, setTheme] = useState<JobSpecialization>(JobSpecialization.None)
 
+  useEffect(() => {
+    if (data.seniority.includes('Frontend')) {
+      setTheme(JobSpecialization.Frontend)
+    } else if (data.seniority.includes('Backend')) {
+      setTheme(JobSpecialization.Backend)
+    } else if (data.seniority.includes('Fullstack')) {
+      setTheme(JobSpecialization.Fullstack)
+    } else {
+      setTheme(JobSpecialization.Frontend)
+    }
+  }, [])
+
+  const seniorityClass = getTechnologyClassBySeniority(data.seniority)
   return (
     <div className={styles.frame}>
       <div className={styles.container}>
@@ -108,9 +114,9 @@ const ProfileListItem: React.FC<ProfileListProps> = ({ data }) => {
 
 const ProfileList: React.FC = () => {
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div className={styles.title}>Profiles found</div>
-      <div className={styles.ProfileListCont}>
+      <div className={styles.profileListCont}>
         {ProfileData.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
         ))}

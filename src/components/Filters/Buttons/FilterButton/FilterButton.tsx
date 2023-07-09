@@ -1,4 +1,3 @@
-'use client'
 import styles from './FilterButton.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
