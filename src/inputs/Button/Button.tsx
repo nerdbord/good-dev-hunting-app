@@ -1,4 +1,3 @@
-'use client'
 import React, { PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 

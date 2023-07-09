@@ -1,6 +1,15 @@
-import React from 'react'
+export interface ProfileListItems {
+  id: number
+  name: string
+  seniority: string
+  location: string
+  technology: string
+  technology2: string
+  technology3: string
+  others: string
+}
 
-export const ProfileData = [
+export const ProfileData: ProfileListItems[] = [
   {
     id: 1,
     name: 'Karolina Morwińska',
