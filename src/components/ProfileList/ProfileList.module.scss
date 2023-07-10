@@ -86,17 +86,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
 .badge {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  justify-self: stretch;
   padding: 8px 14px;
-  gap: 10px;
   background: #161a1f;
   border-radius: 4px;
   font-weight: 500;
