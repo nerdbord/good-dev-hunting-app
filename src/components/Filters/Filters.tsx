@@ -1,52 +1,25 @@
 'use client'
-import styles from './Filters.module.scss'
 import React, { useState } from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import { FilterButton } from './Buttons/FilterButton/FilterButton'
+import styles from './Filters.module.scss'
+import { DropdownFilter } from '../../inputs/Dropdowns/DropdownFilter/DropdownFilter'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 
-const Filters = () => {
-  const [selectedTechnology, setSelectedTechnology] = useState<string[]>([])
-  const [selectedSeniority, setSelectedSeniority] = useState<string[]>([])
-  const [selectedAvailability, setSelectedAvailability] = useState<string[]>([])
-  const [selectedLocation, setSelectedLocation] = useState<string[]>([])
+interface State {
+  technology: string[]
+  seniority: string[]
+  availability: string[]
+  location: string[]
+}
 
-  const handleSelect = (option: string, buttonType: string) => {
-    let updatedOptions: string[]
+const JobOfferFilters: State = {
+  technology: [],
+  seniority: [],
+  availability: [],
+  location: [],
+}
 
-    const updateSelectedOptions = (
-      selectedOptions: string[],
-      setter: (value: string[]) => void,
-    ) => {
-      updatedOptions = selectedOptions.includes(option)
-        ? selectedOptions.filter((selectedOption) => selectedOption !== option)
-        : [...selectedOptions, option]
-      setter(updatedOptions)
-    }
-
-    switch (buttonType) {
-      case 'Technology':
-        updateSelectedOptions(selectedTechnology, setSelectedTechnology)
-        break
-
-      case 'Seniority':
-        updateSelectedOptions(selectedSeniority, setSelectedSeniority)
-        break
-
-      case 'Availability':
-        updateSelectedOptions(selectedAvailability, setSelectedAvailability)
-        break
-
-      case 'Location':
-        updateSelectedOptions(selectedLocation, setSelectedLocation)
-        break
-
-      default:
-        break
-    }
-  }
-
-  const technologyList = [
+const filterLists = {
+  technology: [
     'Javascript',
     'Python',
     'Node.js',
@@ -54,38 +27,60 @@ const Filters = () => {
     'Vue.js',
     'Angular',
     'MongoDB',
-  ]
+  ],
+  seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
+  availability: ['Full-time', 'Part-time', 'Contract'],
+  location: ['Poland', 'Europe', 'Other'],
+}
 
-  const seniorityList = ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert']
-  const availabilityList = ['Full-time', 'Part-time', 'Contract']
-  const locationsList = ['Poland', 'Europe', 'Other']
+const Filters: React.FC = () => {
+  const [filters, setFilters] = useState(JobOfferFilters)
+
+  const handleSelect = (
+    option: string,
+    buttonType: keyof typeof JobOfferFilters,
+  ): void => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [buttonType]: prevFilters[buttonType].includes(option)
+        ? prevFilters[buttonType].filter(
+            (selectedOption) => selectedOption !== option,
+          )
+        : [...prevFilters[buttonType], option],
+    }))
+  }
 
   return (
     <div className={styles.mainContainer}>
       <div className={styles.features}>
-        <FilterButton
+        <DropdownFilter
+          label={''}
           text="Technology"
-          options={technologyList}
-          onSelect={(option) => handleSelect(option, 'Technology')}
-          selectedValue={selectedTechnology}
+          options={filterLists.technology}
+          onSelect={(option) => handleSelect(option, 'technology')}
+          selectedValue={filters.technology}
         />
-        <FilterButton
+        <DropdownFilter
+          label={''}
           text="Seniority"
-          options={seniorityList}
-          onSelect={(option) => handleSelect(option, 'Seniority')}
-          selectedValue={selectedSeniority}
+          options={filterLists.seniority}
+          onSelect={(option) => handleSelect(option, 'seniority')}
+          selectedValue={filters.seniority}
         />
-        <FilterButton
+        <DropdownFilter
+          label={''}
           text="Availability"
-          options={availabilityList}
-          onSelect={(option) => handleSelect(option, 'Availability')}
-          selectedValue={selectedAvailability}
+          options={filterLists.availability}
+          onSelect={(option) => handleSelect(option, 'availability')}
+          selectedValue={filters.availability}
         />
-        <FilterButton
+
+        <DropdownFilter
+          label={''}
           text="Location"
-          options={locationsList}
-          onSelect={(option) => handleSelect(option, 'Location')}
-          selectedValue={selectedLocation}
+          options={filterLists.location}
+          onSelect={(option) => handleSelect(option, 'location')}
+          selectedValue={filters.location}
         />
       </div>
       <div className={styles.devType}>
