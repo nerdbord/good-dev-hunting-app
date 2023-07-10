@@ -1,14 +1,20 @@
-import styles from './FilterButton.module.scss'
+'use client'
+import styles from './DropdownBio.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
+import classNames from 'classnames/bind'
 
-export const FilterButton = ({
+const cx = classNames.bind(styles)
+
+export const DropdownBio = ({
+  label,
   text,
   options,
   onSelect,
   selectedValue,
 }: {
+  label: string
   text: string
   options: string[]
   onSelect: (option: string) => void
@@ -47,6 +53,7 @@ export const FilterButton = ({
 
   return (
     <div className={styles.buttonBox}>
+      <div className={styles.label}>{label}</div>
       <div ref={dropdownRef}>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
           {selectedValue.length === 0 ? (
@@ -54,19 +61,21 @@ export const FilterButton = ({
           ) : (
             <div className={styles.buttonTextChecked}>{text}</div>
           )}
-          {selectedValue.length !== 0 && (
-            <div className={styles.selectedCount}>{selectedValue.length}</div>
-          )}
-          {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          <div className={styles.selected}>
+            {selectedValue.length !== 0 && (
+              <div className={styles.selectedCount}>{selectedValue.length}</div>
+            )}
+            {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          </div>
         </button>
         {isDropdownActive && (
           <div className={styles.dropdown}>
             {options.map((option, index) => (
               <label key={index} className={styles.dropdownInput}>
                 <div
-                  className={`${styles.checkbox} ${
-                    selectedValue.includes(option) ? styles.checked : ''
-                  }`}
+                  className={cx(styles.checkbox, {
+                    [styles.checked]: selectedValue.includes(option),
+                  })}
                 >
                   <input
                     type="checkbox"
