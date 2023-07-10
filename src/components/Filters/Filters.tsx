@@ -4,19 +4,41 @@ import styles from './Filters.module.scss'
 import { DropdownFilter } from '../../inputs/Dropdowns/DropdownFilter/DropdownFilter'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 
-const Filters: React.FC = () => {
-  const initialState = {
-    technology: [] as string[],
-    seniority: [] as string[],
-    availability: [] as string[],
-    location: [] as string[],
-  }
+interface State {
+  technology: string[]
+  seniority: string[]
+  availability: string[]
+  location: string[]
+}
 
-  const [filters, setFilters] = useState(initialState)
+const JobOfferFilters: State = {
+  technology: [],
+  seniority: [],
+  availability: [],
+  location: [],
+}
+
+const filterLists = {
+  technology: [
+    'Javascript',
+    'Python',
+    'Node.js',
+    'React.js',
+    'Vue.js',
+    'Angular',
+    'MongoDB',
+  ],
+  seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
+  availability: ['Full-time', 'Part-time', 'Contract'],
+  location: ['Poland', 'Europe', 'Other'],
+}
+
+const Filters: React.FC = () => {
+  const [filters, setFilters] = useState(JobOfferFilters)
 
   const handleSelect = (
     option: string,
-    buttonType: keyof typeof initialState,
+    buttonType: keyof typeof JobOfferFilters,
   ): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -26,21 +48,6 @@ const Filters: React.FC = () => {
           )
         : [...prevFilters[buttonType], option],
     }))
-  }
-
-  const filterLists = {
-    technology: [
-      'Javascript',
-      'Python',
-      'Node.js',
-      'React.js',
-      'Vue.js',
-      'Angular',
-      'MongoDB',
-    ],
-    seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
-    availability: ['Full-time', 'Part-time', 'Contract'],
-    location: ['Poland', 'Europe', 'Other'],
   }
 
   return (

@@ -5,13 +5,31 @@ import { DropdownBio } from '@/inputs/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/inputs/TextArea/TextArea'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 
+interface State {
+  position: string[]
+  seniority: string[]
+  employment: string[]
+}
+
+const WorkInfoFilters: State = {
+  position: [],
+  seniority: [],
+  employment: [],
+}
+
+const filterLists = {
+  seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
+  position: [
+    'Position 1',
+    'Position 2',
+    'Position 3',
+    'Position 4',
+    'Position 5',
+  ],
+}
+
 const WorkInformation = () => {
-  const initialState = {
-    position: [] as string[],
-    seniority: [] as string[],
-    employment: [] as string[],
-  }
-  const [filters, setFilters] = useState(initialState)
+  const [filters, setFilters] = useState(WorkInfoFilters)
   const [techStack, setTechStack] = useState('')
 
   const handleTechStack = (value: string) => {
@@ -20,7 +38,7 @@ const WorkInformation = () => {
 
   const handleSelect = (
     option: string,
-    buttonType: keyof typeof initialState,
+    buttonType: keyof typeof WorkInfoFilters,
   ): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -41,18 +59,6 @@ const WorkInformation = () => {
           )
         : [...prevFilters.employment, option],
     }))
-    console.log(filters)
-  }
-
-  const filterLists = {
-    seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
-    position: [
-      'Position 1',
-      'Position 2',
-      'Position 3',
-      'Position 4',
-      'Position 5',
-    ],
   }
 
   return (
