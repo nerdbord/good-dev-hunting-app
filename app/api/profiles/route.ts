@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import {
-  createUserProfile,
+  createInitialPartOfUserProfile,
   doesUserProfileExist,
   getPublishedProfilesPayload,
 } from '@/backend/profile/profile.service'
-import { CreateProfilePayload } from '@/backend/profile/profile.types'
+import { CreateInitialPartOfUserProfile } from '@/backend/profile/profile.types'
 
 export async function GET() {
   try {
@@ -21,18 +21,19 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const userData: CreateProfilePayload = await request.json()
+    const userData: CreateInitialPartOfUserProfile = await request.json()
 
     // We will need to validate this using authorized user token, instead of sent payload
-    const USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER = 'non existing yet'
+    // const USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER = 'non existing yet'
 
     const foundUser = await doesUserProfileExist(
-      USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
+      userData.email,
+      // USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
     )
 
     if (!foundUser) {
-      const newUser = await createUserProfile(
-        USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
+      const newUser = await createInitialPartOfUserProfile(
+        // USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
         userData,
       )
 

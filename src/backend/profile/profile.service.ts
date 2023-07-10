@@ -1,5 +1,8 @@
 import { serializeProfilesToProfilePayload } from './profile.serializer'
-import { CreateProfilePayload } from './profile.types'
+import {
+  CreateInitialPartOfUserProfile,
+  CreateProfilePayload,
+} from './profile.types'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma } from '@prisma/client'
 
@@ -41,19 +44,37 @@ export async function getProfileById(id: string) {
   return null
 }
 
-export async function doesUserProfileExist(userId: string) {
-  const foundProfile = await prisma.profile.findFirst({
+export async function doesUserProfileExist(email: string) {
+  const foundProfile = await prisma.user.findFirst({
     where: {
-      userId,
+      email,
     },
     include: {
-      user: true,
-      country: true,
-      city: true,
+      githubDetails: true,
     },
   })
 
   return foundProfile
+}
+
+export async function createInitialPartOfUserProfile(
+  data: CreateInitialPartOfUserProfile,
+) {
+  const createdUser = await prisma.user.create({
+    data: {
+      email: data.email,
+      githubDetails: {
+        create: {
+          username: data.name,
+          picture: data.picture,
+        },
+      },
+    },
+    include: {
+      githubDetails: true,
+    },
+  })
+  return createdUser
 }
 
 export async function createUserProfile(

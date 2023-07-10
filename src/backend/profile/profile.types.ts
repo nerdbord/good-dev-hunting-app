@@ -23,6 +23,12 @@ export interface ProfilePayload {
   isPublished: boolean
 }
 
+export interface CreateInitialPartOfUserProfile {
+  email: string
+  name: string
+  picture: string
+}
+
 export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
 
 export type ProfileWithRelations = Prisma.ProfileGetPayload<{
