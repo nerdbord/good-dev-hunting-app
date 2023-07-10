@@ -8,13 +8,20 @@ import AddIcon from '@/assets/icons/AddIcon'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { createInitialPartOfUser } from '@/lib/createInitialPartOfUser'
 
 const DefaultHeader = () => {
   const { data: session, status } = useSession()
-  console.log(session)
   const router = useRouter()
 
   if (status === 'authenticated') {
+    const user = {
+      email: session.user.email || '',
+      image: session.user.image || '',
+      name: session.user.name || '',
+    }
+    createInitialPartOfUser(user, status)
+
     return (
       <header className={styles.wrapper}>
         <Link href="/" className={styles.logo}>

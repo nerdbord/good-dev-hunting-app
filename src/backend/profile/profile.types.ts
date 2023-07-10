@@ -26,7 +26,7 @@ export interface ProfilePayload {
 export interface CreateInitialPartOfUserProfile {
   email: string
   name: string
-  picture: string
+  image: string
 }
 
 export type CreateProfilePayload = Omit<ProfilePayload, 'id'>

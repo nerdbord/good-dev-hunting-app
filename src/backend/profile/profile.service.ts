@@ -45,12 +45,9 @@ export async function getProfileById(id: string) {
 }
 
 export async function doesUserProfileExist(email: string) {
-  const foundProfile = await prisma.user.findFirst({
+  const foundProfile = await prisma.user.findUnique({
     where: {
       email,
-    },
-    include: {
-      githubDetails: true,
     },
   })
 
@@ -60,13 +57,13 @@ export async function doesUserProfileExist(email: string) {
 export async function createInitialPartOfUserProfile(
   data: CreateInitialPartOfUserProfile,
 ) {
-  const createdUser = await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       email: data.email,
       githubDetails: {
         create: {
           username: data.name,
-          picture: data.picture,
+          image: data.image,
         },
       },
     },
@@ -74,7 +71,8 @@ export async function createInitialPartOfUserProfile(
       githubDetails: true,
     },
   })
-  return createdUser
+
+  return user
 }
 
 export async function createUserProfile(
