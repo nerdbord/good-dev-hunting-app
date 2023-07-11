@@ -9,12 +9,14 @@ const cx = classNames.bind(styles)
 
 export const DropdownBio = ({
   label,
+  name,
   text,
   options,
   onSelect,
   selectedValue,
 }: {
   label: string
+  name: string
   text: string
   options: string[]
   onSelect: (option: string) => void
@@ -82,6 +84,7 @@ export const DropdownBio = ({
                     className={styles.hidden}
                     checked={selectedValue.includes(option)}
                     onChange={() => handleSelect(option)}
+                    name={name}
                   />
                   {selectedValue.includes(option) && (
                     <IoIosCheckmark className={styles.checkmark} />

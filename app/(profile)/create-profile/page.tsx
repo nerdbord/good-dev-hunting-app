@@ -7,6 +7,7 @@ import PersonalInfo from '@/components/CreateProfile/PersonalInfo/PersonalInfo'
 import LocationPreferences from '@/components/CreateProfile/LocationPreferences/LocationPreferences'
 import CreateProfileHeader from '@/components/CreateProfile/CreateProfileHeader/CreateProfileHeader'
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
+import { FormProvider } from '@/contexts/FormContext'
 
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
@@ -16,14 +17,16 @@ const CreateProfilePage = async () => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <CreateProfileHeader />
-      <div className={styles.formBox}>
-        <PersonalInfo />
-        <LocationPreferences />
-        <WorkInformation />
+    <FormProvider>
+      <div className={styles.wrapper}>
+        <CreateProfileHeader />
+        <div className={styles.formBox}>
+          <PersonalInfo />
+          <LocationPreferences />
+          <WorkInformation />
+        </div>
       </div>
-    </div>
+    </FormProvider>
   )
 }
 
