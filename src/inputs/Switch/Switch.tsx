@@ -13,11 +13,11 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   label,
   checked,
   onChange,
-  name
+  name,
 }) => {
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event);
-  };
+    onChange(event)
+  }
 
   return (
     <div className={styles.switchLabel}>

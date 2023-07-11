@@ -45,21 +45,23 @@ const WorkInformation = () => {
   const handleEmploymentType = (option: string): void => {
     setFilters((prevFilters) => {
       const newEmployment = prevFilters.employment.includes(option)
-        ? prevFilters.employment.filter((selectedOption) => selectedOption !== option)
-        : [...prevFilters.employment, option];
+        ? prevFilters.employment.filter(
+            (selectedOption) => selectedOption !== option,
+          )
+        : [...prevFilters.employment, option]
 
       handleChange({
         target: {
           name: 'employment',
           value: newEmployment,
         },
-      });
+      })
 
       return {
         ...prevFilters,
         employment: newEmployment,
-      };
-    });
+      }
+    })
   }
 
   return (
@@ -70,7 +72,7 @@ const WorkInformation = () => {
           Share personal information to let the recruiters get to know you.
         </div>
       </div>
-      
+
       <div className={styles.right}>
         <div className={errors.position ? styles.errorMsg : ''}>
           <DropdownBio
