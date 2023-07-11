@@ -6,7 +6,7 @@ interface TextAreaProps {
   label: string
   value: string
   placeholder: string
-  onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void;
+  onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void
   addImportantIcon?: boolean
   name: string
 }
@@ -17,11 +17,11 @@ const TextArea: React.FC<TextAreaProps> = ({
   value,
   onChange,
   addImportantIcon,
-  name
+  name,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(event);
-  };
+    onChange(event)
+  }
 
   return (
     <div className={styles.formItem}>

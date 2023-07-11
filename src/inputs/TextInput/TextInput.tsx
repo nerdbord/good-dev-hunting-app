@@ -6,7 +6,7 @@ interface TextInputProps {
   label: string
   value: string
   placeholder: string
-  onChange(event: React.ChangeEvent<HTMLInputElement>): void;
+  onChange(event: React.ChangeEvent<HTMLInputElement>): void
   addImportantIcon?: boolean
   name: string
   error?: string
@@ -21,8 +21,8 @@ const TextInput: React.FC<TextInputProps> = ({
   name,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event);
-  };
+    onChange(event)
+  }
 
   return (
     <div className={styles.formItem}>
