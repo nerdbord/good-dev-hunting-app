@@ -1,35 +1,13 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './LocationPreferences.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
+import { useFormContext } from '@/contexts/FormContext'
 const LocationPreferences = () => {
-  const [country, setCountry] = useState('')
-  const [city, setCity] = useState('')
-  const [openToRelocationCountry, setOpenToRelocationCountry] = useState(false)
-  const [openToRelocationCity, setOpenToRelocationCity] = useState(false)
-  const [remoteOnly, setRemoteOnly] = useState(false)
+  const { values, handleChange, errors } = useFormContext()
 
-  const handleCountryChange = (value: string) => {
-    setCountry(value)
-  }
-
-  const handleCityChange = (value: string) => {
-    setCity(value)
-  }
-
-  const handleCheckboxChangeCountry = (checked: boolean) => {
-    setOpenToRelocationCountry(checked)
-  }
-
-  const handleCheckboxChangeCity = (checked: boolean) => {
-    setOpenToRelocationCity(checked)
-  }
-
-  const handleSwitchChangeRemote = (checked: boolean) => {
-    setRemoteOnly(checked)
-  }
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -41,37 +19,52 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <TextInput
-            label="Country of residency"
-            placeholder="Start typing location"
-            value={country}
-            onChange={handleCountryChange}
-          />
+          <div className={errors.country ? styles.errorMsg : ''}>
+            <TextInput
+              label="Country of residency"
+              placeholder="Start typing location"
+              value={values.country}
+              onChange={handleChange}
+              name="country"
+            />
+            <p>{errors.country as string}</p>
+          </div>
+
           <CheckboxInput
             label="I’m open to residency relocation"
-            checked={openToRelocationCountry}
-            onChange={handleCheckboxChangeCountry}
+            checked={values.openToRelocationCountry}
+            onChange={handleChange}
+            name="openToRelocationCountry"
           />
         </div>
         <div>
-          <TextInput
-            label="City residency"
-            placeholder="Start typing location"
-            value={city}
-            onChange={handleCityChange}
-            addImportantIcon={true}
-          />
+          <div className={errors.city ? styles.errorMsg : ''}>
+            <TextInput
+              label="City residency"
+              placeholder="Start typing location"
+              value={values.city}
+              onChange={handleChange}
+              addImportantIcon={true}
+              name="city"
+            />
+            <p>{errors.city as string}</p>
+          </div>
           <CheckboxInput
             label="I’m open to city relocation"
-            checked={openToRelocationCity}
-            onChange={handleCheckboxChangeCity}
+            checked={values.openToRelocationCity}
+            onChange={handleChange}
+            name="openToRelocationCity"
           />
         </div>
-        <SwitchInput
-          checked={remoteOnly}
-          label="I’m looking for remote jobs only"
-          onChange={handleSwitchChangeRemote}
-        />
+        <div className={errors.remoteOnly ? styles.errorMsg : ''}>
+          <SwitchInput
+            checked={values.remoteOnly}
+            label="I’m looking for remote jobs only"
+            onChange={handleChange}
+            name="remoteOnly"
+          />
+          <p>{errors.remoteOnly as string}</p>
+        </div>
       </div>
     </div>
   )

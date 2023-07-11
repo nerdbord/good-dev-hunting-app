@@ -6,18 +6,20 @@ import { IoIosCheckmark } from 'react-icons/io'
 interface CheckboxInputProps {
   label: string
   checked: boolean
-  onChange: (checked: boolean) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  name: string
 }
 
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
   label,
   checked,
   onChange,
+  name,
 }) => {
-  const handleCheckboxChange = () => {
-    onChange(!checked)
-  }
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event);
+  };
   return (
     <label className={styles.checkboxLabel}>
       <div className={`${styles.checkbox} ${checked ? styles.checked : ''}`}>
@@ -26,6 +28,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
           className={styles.hidden}
           checked={checked}
           onChange={handleCheckboxChange}
+          name={name}
         />
         {checked && <IoIosCheckmark className={styles.checkmark} />}
       </div>
