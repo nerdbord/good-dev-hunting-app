@@ -9,7 +9,11 @@ export interface UserPayload {
   }
 }
 
-export type CreateUserPayload = Omit<UserPayload, 'id'>
+export interface CreateUserPayload {
+  username: string
+  email: string
+  image: string
+}
 
 export type UserWithRelations = Prisma.UserGetPayload<{
   include: {

@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prismaClient'
-import { Prisma } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
+import { CreateUserPayload } from './user.types'
+import { Prisma } from '@prisma/client'
 
 export async function getUsersPayload() {
   const users = await prisma.user.findMany({
@@ -52,42 +53,23 @@ export async function doesUserExist(email: string) {
 export async function createUser(userDataFromGh: CreateUserPayload) {
   const createdUser = await prisma.user.create({
     data: {
-      user: {
-        connect: { id: userId },
-      },
-      fullName: profileData.fullName,
-      linkedIn: profileData.linkedIn,
-      bio: profileData.bio,
-      country: {
+      email: userDataFromGh.email,
+      githubDetails: {
         create: {
-          name: profileData.country.name,
-          openForRelocation: profileData.country.openForRelocation,
+          username: userDataFromGh.username,
+          image: userDataFromGh.image,
         },
       },
-      city: {
-        create: {
-          name: profileData.city.name,
-          openForRelocation: profileData.city.openForRelocation,
-        },
-      },
-      remoteOnly: profileData.remoteOnly,
-      position: profileData.position,
-      seniority: profileData.seniority,
-      techStack: profileData.techStack,
-      employmentType: profileData.employmentType,
-      isPublished: profileData.isPublished,
     },
     include: {
-      user: true,
-      country: true,
-      city: true,
+      githubDetails: true,
     },
   })
   return createdUser
 }
-
+////updateuser
 export async function updateUserData(
-  id: string,
+  email: string,
   userDataToUpdate: Prisma.ProfileUpdateInput,
 ) {
   //update profile
