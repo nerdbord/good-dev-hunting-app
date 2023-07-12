@@ -6,7 +6,7 @@ import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
 import { useFormContext } from '@/contexts/FormContext'
 const LocationPreferences = () => {
-  const { values, handleChange, errors } = useFormContext()
+  const { values, handleChange, errors, touched, setFieldValue, handleBlur } = useFormContext()
 
   return (
     <div className={styles.container}>
@@ -31,10 +31,12 @@ const LocationPreferences = () => {
           </div>
 
           <CheckboxInput
-            label="I’m open to residency relocation"
-            checked={values.openToRelocationCountry}
-            onChange={handleChange}
-            name="openToRelocationCountry"
+             label="I’m open to residency relocation"
+             checked={values.openToRelocationCountry}
+             onChange={(e) => {
+               setFieldValue("openToRelocationCountry", e.target.checked);
+             }}
+             name="openToRelocationCountry"
           />
         </div>
         <div>
@@ -62,8 +64,9 @@ const LocationPreferences = () => {
             label="I’m looking for remote jobs only"
             onChange={handleChange}
             name="remoteOnly"
+            onBlur={handleBlur}
           />
-          <p>{errors.remoteOnly as string}</p>
+          {(touched?.remoteOnly && errors?.remoteOnly) && <p>{errors.remoteOnly as string}</p>}
         </div>
       </div>
     </div>

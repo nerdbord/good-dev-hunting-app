@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import styles from './Checkbox.module.scss'
 import { IoIosCheckmark } from 'react-icons/io'
@@ -16,9 +17,10 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
   onChange,
   name,
 }) => {
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event)
-  }
+    onChange(event);
+  };
   return (
     <label className={styles.checkboxLabel}>
       <div className={`${styles.checkbox} ${checked ? styles.checked : ''}`}>

@@ -13,40 +13,43 @@ export type Values = {
   employment: string[]
 }
 
+const validateEmail = (email: string) => {
+  const EMAIL_REGEX = /\S+@\S+\.\S+/;
+  if (!email) {
+    return 'Email is required'
+  } else if (!EMAIL_REGEX.test(email)) {
+    return 'Invalid email address'
+  }
+}
+
+const validateNotEmptyArray = (arr: unknown[], fieldName: string) => {
+  if (!arr || arr.length === 0) {
+    return `${fieldName} is required`;
+  }
+}
+
+const validateNotEmpty = (str: string, fieldName: string) => {
+  if (!str) {
+    return `${fieldName} is required`;
+  }
+}
+
 export function validate(values: Values): FormikErrors<Values> {
   const errors: FormikErrors<Values> = {}
 
-  if (!values.fullName) {
-    errors.fullName = 'Name is required'
-  }
-  if (!values.contactEmail) {
-    errors.contactEmail = 'Email is required'
-  } else if (!/\S+@\S+\.\S+/.test(values.contactEmail)) {
-    errors.contactEmail = 'Invalid email address'
-  }
-  if (!values.bio) {
-    errors.bio = 'Bio is required'
-  }
-  if (!values.country) {
-    errors.country = 'Country is required'
-  }
-  if (!values.city) {
-    errors.city = 'City is required'
-  }
+  errors.contactEmail = validateEmail(values.contactEmail);
+  errors.fullName = validateNotEmpty(values.fullName, 'Name');
+  errors.bio = validateNotEmpty(values.bio, 'Bio');
+  errors.country = validateNotEmpty(values.country, 'Country');
+  errors.city = validateNotEmpty(values.city, 'City');
+  errors.position = validateNotEmptyArray(values.position, 'Position');
+  errors.seniority = validateNotEmptyArray(values.seniority, 'Seniority');
+  errors.techStack = validateNotEmpty(values.techStack, 'Tech stack');
+  errors.employment = validateNotEmptyArray(values.employment, 'Employment');
+
   if (!values.remoteOnly) {
-    errors.remoteOnly = 'This field must be checked'
+    errors.remoteOnly = 'This field must be checked';
   }
-  if (!values.position.length) {
-    errors.position = 'Position is required'
-  }
-  if (!values.seniority.length) {
-    errors.seniority = 'Seniority is required'
-  }
-  if (!values.techStack) {
-    errors.techStack = 'Tech stack is required'
-  }
-  if (!values.employment || values.employment.length === 0) {
-    errors.employment = 'At least one employment type is required'
-  }
-  return errors
+
+  return errors;
 }
