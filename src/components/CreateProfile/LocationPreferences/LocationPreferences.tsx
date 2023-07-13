@@ -4,9 +4,12 @@ import styles from './LocationPreferences.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
-import { useFormContext } from '@/contexts/FormContext'
+import { useFormikContext } from 'formik'
+import { FormValues } from '@/services/formService'
+
 const LocationPreferences = () => {
-  const { values, handleChange, errors, touched, setFieldValue, handleBlur } = useFormContext()
+  const { values, handleChange, errors, touched, setFieldValue, handleBlur } =
+    useFormikContext<FormValues>()
 
   return (
     <div className={styles.container}>
@@ -31,12 +34,12 @@ const LocationPreferences = () => {
           </div>
 
           <CheckboxInput
-             label="I’m open to residency relocation"
-             checked={values.openToRelocationCountry}
-             onChange={(e) => {
-               setFieldValue("openToRelocationCountry", e.target.checked);
-             }}
-             name="openToRelocationCountry"
+            label="I’m open to residency relocation"
+            checked={values.openToRelocationCountry}
+            onChange={(e) => {
+              setFieldValue('openToRelocationCountry', e.target.checked)
+            }}
+            name="openToRelocationCountry"
           />
         </div>
         <div>
@@ -66,7 +69,9 @@ const LocationPreferences = () => {
             name="remoteOnly"
             onBlur={handleBlur}
           />
-          {(touched?.remoteOnly && errors?.remoteOnly) && <p>{errors.remoteOnly as string}</p>}
+          {touched?.remoteOnly && errors?.remoteOnly && (
+            <p>{errors.remoteOnly as string}</p>
+          )}
         </div>
       </div>
     </div>

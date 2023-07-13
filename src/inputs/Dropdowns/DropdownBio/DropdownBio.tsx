@@ -14,12 +14,14 @@ export const DropdownBio = ({
   options,
   onSelect,
   selectedValue,
+  onChange
 }: {
   label: string
   name: string
   text: string
   options: string[]
   onSelect: (option: string) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   selectedValue: string[]
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
@@ -52,7 +54,9 @@ export const DropdownBio = ({
   const handleSelect = (option: string) => {
     onSelect(option)
   }
-
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event)
+  }
   return (
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>
@@ -83,7 +87,7 @@ export const DropdownBio = ({
                     type="checkbox"
                     className={styles.hidden}
                     checked={selectedValue.includes(option)}
-                    onChange={() => handleSelect(option)}
+                    onChange={handleCheckboxChange}
                     name={name}
                   />
                   {selectedValue.includes(option) && (

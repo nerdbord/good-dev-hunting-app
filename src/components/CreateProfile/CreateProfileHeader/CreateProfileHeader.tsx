@@ -1,16 +1,16 @@
 'use client'
 import styles from './CreateProfileHeader.module.scss'
 import { Button } from '@/inputs/Button/Button'
-import { useFormContext } from '@/contexts/FormContext'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
+import { useFormikContext } from 'formik'
 
 const CreateProfileHeader = () => {
+  const { handleSubmit, errors } = useFormikContext()
+
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     handleSubmit()
   }
-
-  const { handleSubmit, errors } = useFormContext()
 
   return (
     <div className={styles.titleBox}>
