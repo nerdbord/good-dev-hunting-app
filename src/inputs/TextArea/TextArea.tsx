@@ -1,3 +1,4 @@
+'use client'
 import React, { ChangeEvent } from 'react'
 import styles from './TextArea.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'

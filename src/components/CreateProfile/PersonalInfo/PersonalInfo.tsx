@@ -26,7 +26,7 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="fullName"
           />
-          <p>{errors.fullName as string}</p>
+          <p>{errors.fullName}</p>
         </div>
         <div className={errors.contactEmail ? styles.errorMsg : ''}>
           <TextInput
@@ -37,7 +37,7 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             name="contactEmail"
           />
-          <p>{errors.contactEmail as string}</p>
+          <p>{errors.contactEmail}</p>
         </div>
         <TextInput
           label="LinkedIn"
@@ -55,7 +55,7 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="bio"
           />
-          <p>{errors.bio as string}</p>
+          <p>{errors.bio}</p>
         </div>
         <div className={styles.lettersCount}>
           {values.bio.length} / 1500 characters

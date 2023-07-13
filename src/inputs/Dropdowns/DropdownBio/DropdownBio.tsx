@@ -1,3 +1,4 @@
+'use client'
 import styles from './DropdownBio.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
@@ -13,7 +14,7 @@ export const DropdownBio = ({
   options,
   onSelect,
   selectedValue,
-  onChange
+  onChange,
 }: {
   label: string
   name: string
@@ -53,9 +54,7 @@ export const DropdownBio = ({
   const handleSelect = (option: string) => {
     onSelect(option)
   }
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event)
-  }
+
   return (
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>
@@ -86,7 +85,7 @@ export const DropdownBio = ({
                     type="checkbox"
                     className={styles.hidden}
                     checked={selectedValue.includes(option)}
-                    onChange={handleCheckboxChange}
+                    onChange={handleSelect}
                     name={name}
                   />
                   {selectedValue.includes(option) && (
