@@ -3,10 +3,11 @@ import React from 'react'
 import styles from './PersonalInfo.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import TextArea from '@/inputs/TextArea/TextArea'
-import { useFormContext } from '@/contexts/FormContext'
+import { useFormikContext } from 'formik'
+import { FormValues } from '@/services/formService'
 
 const PersonalInfo = () => {
-  const { values, handleChange, errors } = useFormContext()
+  const { values, handleChange, errors } = useFormikContext<FormValues>()
 
   return (
     <div className={styles.container}>

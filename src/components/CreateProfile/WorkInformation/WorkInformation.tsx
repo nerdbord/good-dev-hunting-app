@@ -4,7 +4,8 @@ import styles from './WorkInformations.module.scss'
 import { DropdownBio } from '@/inputs/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/inputs/TextArea/TextArea'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
-import { useFormContext } from '@/contexts/FormContext'
+import { useFormikContext } from 'formik'
+import { FormValues } from '@/services/formService'
 
 interface State {
   position: string[]
@@ -30,7 +31,7 @@ const filterLists = {
 }
 
 const WorkInformation = () => {
-  const { values, handleChange, errors } = useFormContext()
+  const { values, handleChange, errors } = useFormikContext<FormValues>()
   const [filters, setFilters] = useState(WorkInfoFilters)
 
   const handleSelectDropdownBio = (option: string) => {
@@ -79,7 +80,7 @@ const WorkInformation = () => {
             label="Position"
             text="Choose position"
             options={filterLists.position}
-            onSelect={handleSelectDropdownBio}
+            onChange={handleSelectDropdownBio}
             selectedValue={filters.position}
             name="position"
           />
@@ -90,7 +91,7 @@ const WorkInformation = () => {
             label="Seniority"
             text="Choose seniority"
             options={filterLists.seniority}
-            onSelect={handleSelectDropdownBio}
+            onSelect={handleChange}
             selectedValue={filters.seniority}
             name="seniority"
           />
