@@ -2,17 +2,22 @@ import { NextRequest, NextResponse } from 'next/server'
 import {
   createUserProfile,
   doesUserProfileExist,
-  getPublishedProfilesPayload,
 } from '@/backend/profile/profile.service'
 import { CreateProfilePayload } from '@/backend/profile/profile.types'
+import {
+  createUser,
+  doesUserExist,
+  getUsersPayload,
+} from '@/backend/user/user.service'
+import { CreateUserPayload } from '@/backend/user/user.types'
 
 export async function GET() {
   try {
-    const serializedProfiles = await getPublishedProfilesPayload()
+    const serializedUsers = await getUsersPayload()
 
     return NextResponse.json({
       message: 'Success',
-      profile: serializedProfiles,
+      profile: serializedUsers,
     })
   } catch (error) {
     return new Response(`${error}`, { status: 500 })
@@ -21,18 +26,19 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const userData: CreateProfilePayload = await request.json()
+    const userData: CreateUserPayload = await request.json()
 
     // We will need to validate this using authorized user token, instead of sent payload
-    const USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER = 'non existing yet'
+    // const USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER = 'non existing yet'
 
-    const foundUser = await doesUserProfileExist(
-      USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
+    const foundUser = await doesUserExist(
+      userData.email,
+      // USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
     )
 
     if (!foundUser) {
-      const newUser = await createUserProfile(
-        USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
+      const newUser = await createUser(
+        // USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
         userData,
       )
 
