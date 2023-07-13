@@ -37,7 +37,7 @@ export async function getUserById(id: string) {
 }
 
 export async function doesUserExist(email: string) {
-  const foundUser = await prisma.user.findFirst({
+  const foundUser = await prisma.user.findUnique({
     where: {
       email,
     },
@@ -67,15 +67,15 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
   })
   return createdUser
 }
+
 ////updateuser
 export async function updateUserData(
   email: string,
   userDataToUpdate: Prisma.ProfileUpdateInput,
 ) {
-  //update profile
-  const updatedUser = await prisma.profile.update({
+  const updatedUser = await prisma.user.update({
     where: {
-      id,
+      email,
     },
     data: userDataToUpdate,
   })
