@@ -12,10 +12,11 @@ export interface FormValues {
   openToRelocationCountry: boolean
   openToRelocationCity: boolean
   remoteOnly: boolean
-  position: string[]
-  seniority: string[]
+  position: string
+  seniority: string
   employment: string[]
   techStack: string
+  
 }
 
 export const initialValues: FormValues = {
@@ -28,8 +29,8 @@ export const initialValues: FormValues = {
   openToRelocationCountry: false,
   openToRelocationCity: false,
   remoteOnly: false,
-  position: [],
-  seniority: [],
+  position: '',
+  seniority: '',
   employment: [],
   techStack: '',
 }
@@ -42,11 +43,11 @@ export const validationSchema = Yup.object().shape({
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
+  openToRelocationCountry: Yup.boolean().oneOf([true, false]),
   remoteOnly: Yup.boolean().oneOf([true], 'This field must be checked'),
   techStack: Yup.string().required('Tech stack is required'),
   employment: Yup.array().of(Yup.string()).min(1, 'Employment is required'),
 })
-
 
 export const useFormikInitialization = () => {
   return useFormik<FormValues>({

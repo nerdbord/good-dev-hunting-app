@@ -14,7 +14,7 @@ interface CheckboxInputProps {
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
   label,
   checked,
-  onChange,
+  onChange, 
   name,
 }) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {

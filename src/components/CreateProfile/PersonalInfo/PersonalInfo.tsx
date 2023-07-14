@@ -4,7 +4,7 @@ import styles from './PersonalInfo.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import TextArea from '@/inputs/TextArea/TextArea'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/formService'
+import { FormValues } from '@/services/CreateProfileFormService'
 
 const PersonalInfo = () => {
   const { values, handleChange, errors } = useFormikContext<FormValues>()

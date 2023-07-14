@@ -5,11 +5,10 @@ import TextInput from '@/inputs/TextInput/TextInput'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/formService'
+import { FormValues } from '@/services/CreateProfileFormService'
 
 const LocationPreferences = () => {
-  const { values, handleChange, errors, touched, setFieldValue, handleBlur } =
-    useFormikContext<FormValues>()
+  const { values, handleChange, errors } = useFormikContext<FormValues>()
 
   return (
     <div className={styles.container}>
@@ -30,15 +29,13 @@ const LocationPreferences = () => {
               onChange={handleChange}
               name="country"
             />
-            <p>{errors.country as string}</p>
+            <p>{errors.country}</p>
           </div>
 
           <CheckboxInput
             label="I’m open to residency relocation"
             checked={values.openToRelocationCountry}
-            onChange={(e) => {
-              setFieldValue('openToRelocationCountry', e.target.checked)
-            }}
+            onChange={handleChange}
             name="openToRelocationCountry"
           />
         </div>
@@ -52,7 +49,7 @@ const LocationPreferences = () => {
               addImportantIcon={true}
               name="city"
             />
-            <p>{errors.city as string}</p>
+            <p>{errors.city}</p>
           </div>
           <CheckboxInput
             label="I’m open to city relocation"
@@ -67,11 +64,8 @@ const LocationPreferences = () => {
             label="I’m looking for remote jobs only"
             onChange={handleChange}
             name="remoteOnly"
-            onBlur={handleBlur}
           />
-          {touched?.remoteOnly && errors?.remoteOnly && (
-            <p>{errors.remoteOnly as string}</p>
-          )}
+          <p>{errors.remoteOnly}</p>
         </div>
       </div>
     </div>

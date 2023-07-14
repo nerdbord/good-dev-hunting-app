@@ -1,76 +1,38 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './WorkInformations.module.scss'
 import { DropdownBio } from '@/inputs/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/inputs/TextArea/TextArea'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/formService'
-
-interface State {
-  position: string[]
-  seniority: string[]
-  employment: string[]
-}
-
-const WorkInfoFilters: State = {
-  position: [],
-  seniority: [],
-  employment: [],
-}
+import { FormValues } from '@/services/CreateProfileFormService'
 
 const filterLists = {
-  seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
+  seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
   position: [
-    'Position 1',
-    'Position 2',
-    'Position 3',
-    'Position 4',
-    'Position 5',
+    'Frontend',
+    'Backend',
+    'Fullstack',
   ],
 }
 
 const WorkInformation = () => {
-  const { values, handleChange, errors } = useFormikContext<FormValues>()
-  const [filters, setFilters] = useState(WorkInfoFilters)
-
-  const handleSelectDropdownBio = (option: string) => {
-    handleChange({
-      target: {
-        name: 'position',
-        value: option,
-      },
-    })
-  }
+  const { values, handleChange, errors, setFieldValue } = useFormikContext<FormValues>()
 
   const handleEmploymentType = (option: string): void => {
-    setFilters((prevFilters) => {
-      const newEmployment = prevFilters.employment.includes(option)
-        ? prevFilters.employment.filter(
-            (selectedOption) => selectedOption !== option,
-          )
-        : [...prevFilters.employment, option]
+    const newEmployment = values.employment.includes(option)
+      ? values.employment.filter((selectedOption) => selectedOption !== option)
+      : [...values.employment, option]
 
-      handleChange({
-        target: {
-          name: 'employment',
-          value: newEmployment,
-        },
-      })
-
-      return {
-        ...prevFilters,
-        employment: newEmployment,
-      }
-    })
+    setFieldValue('employment', newEmployment)
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Personal Information</div>
+        <div>Work information</div>
         <div className={styles.personalInfo}>
-          Share personal information to let the recruiters get to know you.
+        Share your current qualifications information. You’ll be able to change it at any moment.
         </div>
       </div>
 
@@ -80,22 +42,20 @@ const WorkInformation = () => {
             label="Position"
             text="Choose position"
             options={filterLists.position}
-            onChange={handleSelectDropdownBio}
-            selectedValue={filters.position}
+            selectedValue={values.position}
             name="position"
           />
-          <p>{errors.position as string}</p>
+          <p>{errors.position}</p>
         </div>
         <div className={errors.seniority ? styles.errorMsg : ''}>
           <DropdownBio
             label="Seniority"
             text="Choose seniority"
             options={filterLists.seniority}
-            onSelect={handleChange}
-            selectedValue={filters.seniority}
+            selectedValue={values.seniority}
             name="seniority"
           />
-          <p>{errors.seniority as string}</p>
+          <p>{errors.seniority}</p>
         </div>
         <div>
           <div className={errors.techStack ? styles.errorMsg : ''}>
@@ -107,7 +67,7 @@ const WorkInformation = () => {
               onChange={handleChange}
               name="techStack"
             />
-            <p>{errors.techStack as string}</p>
+            <p>{errors.techStack}</p>
           </div>
           <div className={styles.addInfo}>
             Start typing and separate technologies with commas.
@@ -119,23 +79,23 @@ const WorkInformation = () => {
           Employment type
           <CheckboxInput
             label="Full-time"
-            checked={filters.employment.includes('Full-time')}
+            checked={values.employment.includes('Full-time')}
             onChange={() => handleEmploymentType('Full-time')}
             name="fulltime"
           />
           <CheckboxInput
             label="Part-time"
-            checked={filters.employment.includes('Part-time')}
+            checked={values.employment.includes('Part-time')}
             onChange={() => handleEmploymentType('Part-time')}
             name="parttime"
           />
           <CheckboxInput
             label="Contract"
-            checked={filters.employment.includes('Contract')}
+            checked={values.employment.includes('Contract')}
             onChange={() => handleEmploymentType('Contract')}
             name="contract"
           />
-          <p>{errors.employment as string}</p>
+          <p>{errors.employment}</p>
         </div>
       </div>
     </div>
