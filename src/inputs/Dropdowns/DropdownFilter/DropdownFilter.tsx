@@ -1,3 +1,4 @@
+'use client'
 import styles from './DropdownFilter.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'

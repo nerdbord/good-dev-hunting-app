@@ -1,3 +1,4 @@
+'use client'
 import React, { ChangeEvent } from 'react'
 import styles from './TextArea.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
@@ -6,8 +7,9 @@ interface TextAreaProps {
   label: string
   value: string
   placeholder: string
-  onChange: (value: string) => void
+  onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void
   addImportantIcon?: boolean
+  name: string
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -16,9 +18,10 @@ const TextArea: React.FC<TextAreaProps> = ({
   value,
   onChange,
   addImportantIcon,
+  name,
 }) => {
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(event.target.value)
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(event)
   }
 
   return (
@@ -32,6 +35,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        name={name}
       />
     </div>
   )
