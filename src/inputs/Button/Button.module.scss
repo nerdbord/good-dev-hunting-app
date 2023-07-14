@@ -14,14 +14,16 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
-  color: #ffffff;
 }
 
 .buttonPrimary {
   height: 44px;
+  color: #ffffff;
   background: #7d54f1;
 }
+
 .buttonSecondary {
   height: 44px;
-  background: #04080d;
+  color: #7d54f1;
+  background: transparent;
 }
