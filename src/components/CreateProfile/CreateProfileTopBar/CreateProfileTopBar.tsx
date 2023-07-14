@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
-import styles from './CreateProfileHeader.module.scss'
+import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/inputs/Button/Button'
 
-const CreateProfileHeader = () => {
+const ProfileTopBar = () => {
   const handleButtonClick = () => {
     console.log('clicked')
   }
@@ -18,4 +18,4 @@ const CreateProfileHeader = () => {
   )
 }
 
-export default CreateProfileHeader
+export default ProfileTopBar

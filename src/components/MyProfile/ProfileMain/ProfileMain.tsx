@@ -72,7 +72,6 @@ const ProfileMain = () => {
               <div className={styles.addInfoItem}>Part-time</div>
               <span className={styles.slash}>/</span>
               <div className={styles.addInfoItem}>Contact</div>
-              <span className={styles.slash}>/</span>
             </div>
           </div>
         </div>
