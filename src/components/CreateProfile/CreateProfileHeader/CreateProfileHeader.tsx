@@ -23,7 +23,7 @@ const CreateProfileHeader = () => {
           </div>
         )}
       </div>
-      <Button variant="primary" onClick={handleButtonClick}>
+      <Button variant="primary" onClick={handleButtonClick} type="submit">
         Save and preview profile
       </Button>
     </div>

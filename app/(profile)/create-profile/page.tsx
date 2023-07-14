@@ -7,7 +7,7 @@ import PersonalInfo from '@/components/CreateProfile/PersonalInfo/PersonalInfo'
 import LocationPreferences from '@/components/CreateProfile/LocationPreferences/LocationPreferences'
 import CreateProfileHeader from '@/components/CreateProfile/CreateProfileHeader/CreateProfileHeader'
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
-import CreateProfileFormWrapper from '@/components/CreateProfileFormWrapper/CreateProfileFormWrapper'
+import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
