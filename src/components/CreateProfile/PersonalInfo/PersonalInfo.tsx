@@ -4,7 +4,8 @@ import styles from './PersonalInfo.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import TextArea from '@/inputs/TextArea/TextArea'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/CreateProfileFormService'
+import { FormValues } from '@/services/createProfileFormService'
+import CreateProfileFormError from '@/components/CreateProfileForm/CreateProfileFormErrorWrapper'
 
 const PersonalInfo = () => {
   const { values, handleChange, errors } = useFormikContext<FormValues>()
@@ -18,7 +19,7 @@ const PersonalInfo = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <div className={errors.fullName ? styles.errorMsg : ''}>
+        <CreateProfileFormError error={errors.fullName}>
           <TextInput
             label="Full name"
             placeholder="eg. Anna Oxford"
@@ -26,9 +27,8 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="fullName"
           />
-          <p>{errors.fullName}</p>
-        </div>
-        <div className={errors.contactEmail ? styles.errorMsg : ''}>
+        </CreateProfileFormError>
+        <CreateProfileFormError error={errors.contactEmail}>
           <TextInput
             label=" Contact email"
             placeholder=" Contact email"
@@ -37,8 +37,7 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             name="contactEmail"
           />
-          <p>{errors.contactEmail}</p>
-        </div>
+        </CreateProfileFormError>
         <TextInput
           label="LinkedIn"
           placeholder="Paste link to you linkedin profile"
@@ -46,7 +45,7 @@ const PersonalInfo = () => {
           onChange={handleChange}
           name="linkedin"
         />
-        <div className={errors.bio ? styles.errorMsg : ''}>
+        <CreateProfileFormError error={errors.bio}>
           <TextArea
             label="Bio"
             placeholder="Introduce yourself with few sentences"
@@ -55,8 +54,7 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="bio"
           />
-          <p>{errors.bio}</p>
-        </div>
+        </CreateProfileFormError>
         <div className={styles.lettersCount}>
           {values.bio.length} / 1500 characters
         </div>

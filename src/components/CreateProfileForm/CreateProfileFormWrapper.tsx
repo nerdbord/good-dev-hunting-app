@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import {
   initialValues,
   validationSchema,
-} from '@/services/CreateProfileFormService'
+} from '@/services/createProfileFormService'
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
   return (

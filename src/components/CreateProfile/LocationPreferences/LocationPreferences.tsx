@@ -5,7 +5,8 @@ import TextInput from '@/inputs/TextInput/TextInput'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/CreateProfileFormService'
+import { FormValues } from '@/services/createProfileFormService'
+import CreateProfileFormError from '@/components/CreateProfileForm/CreateProfileFormErrorWrapper'
 
 const LocationPreferences = () => {
   const { values, handleChange, errors } = useFormikContext<FormValues>()
@@ -21,7 +22,7 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <div className={errors.country ? styles.errorMsg : ''}>
+          <CreateProfileFormError error={errors.country}>
             <TextInput
               label="Country of residency"
               placeholder="Start typing location"
@@ -29,10 +30,9 @@ const LocationPreferences = () => {
               onChange={handleChange}
               name="country"
             />
-            <p>{errors.country}</p>
-          </div>
-
+          </CreateProfileFormError>
           <CheckboxInput
+            id="openToRelocationCountry"
             label="I’m open to residency relocation"
             checked={values.openToRelocationCountry}
             onChange={handleChange}
@@ -40,7 +40,7 @@ const LocationPreferences = () => {
           />
         </div>
         <div>
-          <div className={errors.city ? styles.errorMsg : ''}>
+          <CreateProfileFormError error={errors.city}>
             <TextInput
               label="City residency"
               placeholder="Start typing location"
@@ -49,24 +49,24 @@ const LocationPreferences = () => {
               addImportantIcon={true}
               name="city"
             />
-            <p>{errors.city}</p>
-          </div>
+          </CreateProfileFormError>
           <CheckboxInput
+            id="openToRelocationCity"
             label="I’m open to city relocation"
             checked={values.openToRelocationCity}
             onChange={handleChange}
             name="openToRelocationCity"
           />
         </div>
-        <div className={errors.remoteOnly ? styles.errorMsg : ''}>
+        <CreateProfileFormError error={errors.remoteOnly}>
           <SwitchInput
+            id="remoteOnly"
             checked={values.remoteOnly}
             label="I’m looking for remote jobs only"
             onChange={handleChange}
             name="remoteOnly"
           />
-          <p>{errors.remoteOnly}</p>
-        </div>
+        </CreateProfileFormError>
       </div>
     </div>
   )
