@@ -1,13 +1,7 @@
 import { createUser, doesUserExist } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { PrismaClient } from '@prisma/client'
 import GithubProvider from 'next-auth/providers/github'
 import { CreateUserPayload } from '@/backend/user/user.types'
-// import { CreateContextOptions } from 'vm'
-// import { CreateUserPayload } from '@/backend/user/user.types'
-
-const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -19,33 +13,36 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET || '',
     }),
   ],
-
   // adapter: PrismaAdapter(prisma),
-
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if (user) {
-        console.log('User:', user)
-        console.log('Account:', account)
-        console.log('Profile:', profile)
+    async jwt({ token, account }) {
+      if (account) {
+        token.accessToken = account.access_token
+        token.id = account.providerAccountId
 
-        const email = user.email
-        const id = user.id
-        const image = user.image
-        const name = user.name
+        if (token && token.email) {
+          const email = token.email
+          const id = token.sub
+          const image = token.picture
+          const name = token.name
 
-        if (email && id && image && name) {
-          const newUser: CreateUserPayload = {
-            email,
-            id,
-            image,
-            name,
+          const existingUser = await doesUserExist(email)
+
+          if (!existingUser) {
+            if (email && id && image && name) {
+              const newUser: CreateUserPayload = {
+                email,
+                id,
+                image,
+                name,
+              }
+
+              await createUser(newUser)
+            }
           }
-
-          await createUser(newUser)
         }
       }
-      return true
+      return token
     },
   },
 }
