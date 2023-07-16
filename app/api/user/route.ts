@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import {
-  createUserProfile,
-  doesUserProfileExist,
-} from '@/backend/profile/profile.service'
-import { CreateProfilePayload } from '@/backend/profile/profile.types'
-import {
   createUser,
   doesUserExist,
   getUsersPayload,

@@ -37,7 +37,7 @@ export async function getUserById(id: string) {
 }
 
 export async function doesUserExist(email: string) {
-  const foundUser = await prisma.user.findUnique({
+  const foundUser = await prisma.user.findFirst({
     where: {
       email,
     },
@@ -56,7 +56,8 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
       email: userDataFromGh.email,
       githubDetails: {
         create: {
-          username: userDataFromGh.username,
+          id: userDataFromGh.id,
+          username: userDataFromGh.name,
           image: userDataFromGh.image,
         },
       },
