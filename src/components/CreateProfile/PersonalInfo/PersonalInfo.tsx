@@ -5,7 +5,7 @@ import TextInput from '@/inputs/TextInput/TextInput'
 import TextArea from '@/inputs/TextArea/TextArea'
 import { useFormikContext } from 'formik'
 import { FormValues } from '@/services/createProfileFormService'
-import CreateProfileFormError from '@/components/CreateProfileForm/CreateProfileFormErrorWrapper'
+import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 
 const PersonalInfo = () => {
   const { values, handleChange, errors } = useFormikContext<FormValues>()
@@ -19,7 +19,7 @@ const PersonalInfo = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <CreateProfileFormError error={errors.fullName}>
+        <InputFormError error={errors.fullName}>
           <TextInput
             label="Full name"
             placeholder="eg. Anna Oxford"
@@ -27,8 +27,8 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="fullName"
           />
-        </CreateProfileFormError>
-        <CreateProfileFormError error={errors.contactEmail}>
+        </InputFormError>
+        <InputFormError error={errors.contactEmail}>
           <TextInput
             label=" Contact email"
             placeholder=" Contact email"
@@ -37,7 +37,7 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             name="contactEmail"
           />
-        </CreateProfileFormError>
+        </InputFormError>
         <TextInput
           label="LinkedIn"
           placeholder="Paste link to you linkedin profile"
@@ -45,7 +45,7 @@ const PersonalInfo = () => {
           onChange={handleChange}
           name="linkedin"
         />
-        <CreateProfileFormError error={errors.bio}>
+        <InputFormError error={errors.bio}>
           <TextArea
             label="Bio"
             placeholder="Introduce yourself with few sentences"
@@ -54,7 +54,7 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="bio"
           />
-        </CreateProfileFormError>
+        </InputFormError>
         <div className={styles.lettersCount}>
           {values.bio.length} / 1500 characters
         </div>

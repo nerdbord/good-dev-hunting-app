@@ -5,7 +5,7 @@ interface InputWrapperProps {
   children: ReactNode
 }
 
-const CreateProfileFormError = ({ error, children }: InputWrapperProps) => {
+const InputFormError = ({ error, children }: InputWrapperProps) => {
   return (
     <div className={error ? styles.errorMsg : ''}>
       {children}
@@ -14,4 +14,4 @@ const CreateProfileFormError = ({ error, children }: InputWrapperProps) => {
   )
 }
 
-export default CreateProfileFormError
+export default InputFormError
