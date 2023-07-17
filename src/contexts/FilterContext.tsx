@@ -23,7 +23,8 @@ export const FiltersProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [jobSpecializationFilter, setJobSpecializationFilter] = useState<string>('')
+  const [jobSpecializationFilter, setJobSpecializationFilter] =
+    useState<string>('')
   const [technologyFilter, setTechnologyFilter] = useState<string[]>([])
   const [seniorityFilter, setSeniorityFilter] = useState<string>('')
   const [locationFilter, setLocationFilter] = useState<string>('')

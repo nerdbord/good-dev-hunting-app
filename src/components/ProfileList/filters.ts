@@ -2,7 +2,10 @@ import { ProfileListItems } from './profile-data'
 
 export const filterByJobSpecialization =
   (jobSpecializationFilter: string | null) => (profile: ProfileListItems) => {
-    return !jobSpecializationFilter || profile.jobSpecialization === jobSpecializationFilter
+    return (
+      !jobSpecializationFilter ||
+      profile.jobSpecialization === jobSpecializationFilter
+    )
   }
 
 export const filterBySeniority =
