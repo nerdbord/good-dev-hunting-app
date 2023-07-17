@@ -2,20 +2,22 @@
 import React, { useState } from 'react'
 import styles from './Filters.module.scss'
 import { DropdownFilter } from '../../inputs/Dropdowns/DropdownFilter/DropdownFilter'
+import { DropdownFilterMulti } from '@/inputs/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
+import { useFilters } from '@/contexts/FilterContext'
 
 interface State {
-  technology: string[]
-  seniority: string[]
-  availability: string[]
-  location: string[]
+  technology: string
+  seniority: string
+  availability: string
+  location: string
 }
 
 const JobOfferFilters: State = {
-  technology: [],
-  seniority: [],
-  availability: [],
-  location: [],
+  technology: '',
+  seniority: '',
+  availability: '',
+  location: '',
 }
 
 const filterLists = {
@@ -35,6 +37,8 @@ const filterLists = {
 
 const Filters: React.FC = () => {
   const [filters, setFilters] = useState(JobOfferFilters)
+  const [selectedButton, setSelectedButton] = useState<string | null>(null)
+  const { setStackFilter, technologyFilter, setTechnologyFilter, seniorityFilter, setSeniorityFilter, availabilityFilter, setAvailabilityFilter, locationFilter, setLocationFilter } = useFilters()
 
   const handleSelect = (
     option: string,
@@ -42,42 +46,66 @@ const Filters: React.FC = () => {
   ): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [buttonType]: prevFilters[buttonType].includes(option)
-        ? prevFilters[buttonType].filter(
-            (selectedOption) => selectedOption !== option,
-          )
-        : [...prevFilters[buttonType], option],
-    }))
+      [buttonType]: option,
+    }));
+    if (buttonType === 'seniority') {
+      setSeniorityFilter(option)
+    }
+    if (buttonType === 'availability') {
+      setAvailabilityFilter(option)
+    }
+    if (buttonType === 'location') {
+      setLocationFilter(option)
+    }
   }
 
+  const handleButtonClick = (newStack: string) => {
+    if (newStack === selectedButton) {
+      setSelectedButton(null)
+      setStackFilter('')
+    } else {
+      setSelectedButton(newStack)
+      setStackFilter(newStack)
+    }
+  }
+
+  const handleSelectMulti = (option: string): void => {
+    let newFilters: string[];
+    if (technologyFilter.includes(option)) {
+      newFilters = technologyFilter.filter(selectedOption => selectedOption !== option);
+    } else {
+      newFilters = [...technologyFilter, option];
+    }
+    setTechnologyFilter(newFilters);
+  }
+  
   return (
     <div className={styles.mainContainer}>
       <div className={styles.features}>
-        <DropdownFilter
+        <DropdownFilterMulti
           label={''}
-          text="Technology"
+          text={"Technology"}
           options={filterLists.technology}
-          onSelect={(option) => handleSelect(option, 'technology')}
-          selectedValue={filters.technology}
+          onSelect={handleSelectMulti}
+          selectedValue={technologyFilter}
         />
         <DropdownFilter
           label={''}
-          text="Seniority"
+          text={seniorityFilter || "Seniority"}
           options={filterLists.seniority}
           onSelect={(option) => handleSelect(option, 'seniority')}
           selectedValue={filters.seniority}
         />
         <DropdownFilter
           label={''}
-          text="Availability"
+          text={availabilityFilter || "Availability"}
           options={filterLists.availability}
           onSelect={(option) => handleSelect(option, 'availability')}
           selectedValue={filters.availability}
         />
-
         <DropdownFilter
           label={''}
-          text="Location"
+          text={locationFilter || "Location"}
           options={filterLists.location}
           onSelect={(option) => handleSelect(option, 'location')}
           selectedValue={filters.location}
@@ -86,16 +114,22 @@ const Filters: React.FC = () => {
       <div className={styles.devType}>
         <DevTypeButton
           variant="frontend"
-          onClick={() => console.log('frontend')}
+          onClick={() => handleButtonClick('Frontend')}
+          isPressed={selectedButton === 'Frontend'}
         >
           Frontend
         </DevTypeButton>
-        <DevTypeButton variant="backend" onClick={() => console.log('backend')}>
+        <DevTypeButton
+          variant="backend"
+          onClick={() => handleButtonClick('Backend')}
+          isPressed={selectedButton === 'Backend'}
+        >
           Backend
         </DevTypeButton>
         <DevTypeButton
           variant="fullstack"
-          onClick={() => console.log('fullstack')}
+          onClick={() => handleButtonClick('Fullstack')}
+          isPressed={selectedButton === 'Fullstack'}
         >
           Fullstack
         </DevTypeButton>

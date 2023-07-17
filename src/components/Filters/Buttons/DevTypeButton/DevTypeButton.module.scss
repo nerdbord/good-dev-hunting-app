@@ -23,3 +23,9 @@
   border: 1px solid rgba(85, 181, 235, 0.2);
   color: #55b5eb;
 }
+
+.pressed {
+  box-shadow: 0 0 10px rgba(155, 155, 155, 0.2);
+  border-width: 1.5px;
+  background-color: #11141b
+}
