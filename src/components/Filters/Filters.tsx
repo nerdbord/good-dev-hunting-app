@@ -5,7 +5,7 @@ import { DropdownFilter } from '../../inputs/Dropdowns/DropdownFilter/DropdownFi
 import { DropdownFilterMulti } from '@/inputs/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import { useFilters } from '@/contexts/FilterContext'
-
+import { JobSpecialization } from '../ProfileList/profile-data'
 interface State {
   technology: string
   seniority: string
@@ -125,23 +125,23 @@ const Filters: React.FC = () => {
       </div>
       <div className={styles.devType}>
         <DevTypeButton
-          variant="frontend"
-          onClick={() => handleButtonClick('Frontend')}
-          isPressed={selectedButton === 'Frontend'}
+          variant={JobSpecialization.Frontend}
+          onClick={() => handleButtonClick(JobSpecialization.Frontend)}
+          isPressed={selectedButton === JobSpecialization.Frontend}
         >
           Frontend
         </DevTypeButton>
         <DevTypeButton
-          variant="backend"
-          onClick={() => handleButtonClick('Backend')}
-          isPressed={selectedButton === 'Backend'}
+          variant={JobSpecialization.Backend}
+          onClick={() => handleButtonClick(JobSpecialization.Backend)}
+          isPressed={selectedButton === JobSpecialization.Backend}
         >
           Backend
         </DevTypeButton>
         <DevTypeButton
-          variant="fullstack"
-          onClick={() => handleButtonClick('Fullstack')}
-          isPressed={selectedButton === 'Fullstack'}
+          variant={JobSpecialization.Fullstack}
+          onClick={() => handleButtonClick(JobSpecialization.Fullstack)}
+          isPressed={selectedButton === JobSpecialization.Fullstack}
         >
           Fullstack
         </DevTypeButton>
