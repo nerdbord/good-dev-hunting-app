@@ -38,7 +38,7 @@ model Profile {
 }
 
 model GitHubDetails {
-  id       String? 
+  id       String @id @default(uuid())
   image    String?
   username String @unique
   user     User   @relation(fields: [userId], references: [id])
