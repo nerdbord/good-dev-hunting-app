@@ -1,3 +1,4 @@
+'use client'
 import React, { ChangeEvent } from 'react'
 import styles from './TextInput.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
@@ -6,8 +7,10 @@ interface TextInputProps {
   label: string
   value: string
   placeholder: string
-  onChange: (value: string) => void
+  onChange(event: React.ChangeEvent<HTMLInputElement>): void
   addImportantIcon?: boolean
+  name: string
+  error?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -16,9 +19,10 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   onChange,
   addImportantIcon,
+  name,
 }) => {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event)
   }
 
   return (
@@ -33,6 +37,7 @@ const TextInput: React.FC<TextInputProps> = ({
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        name={name}
       />
     </div>
   )
