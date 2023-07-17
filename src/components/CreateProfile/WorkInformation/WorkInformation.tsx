@@ -5,7 +5,7 @@ import { DropdownBio } from '@/inputs/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/inputs/TextArea/TextArea'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/createProfileFormService'
+import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 
 const filterLists = {
