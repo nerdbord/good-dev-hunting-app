@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET || '',
     }),
   ],
-  // adapter: PrismaAdapter(prisma),
+
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
@@ -42,6 +42,7 @@ export const authOptions: NextAuthOptions = {
           }
         }
       }
+
       return token
     },
   },
