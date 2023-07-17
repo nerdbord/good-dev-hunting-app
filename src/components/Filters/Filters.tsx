@@ -38,7 +38,17 @@ const filterLists = {
 const Filters: React.FC = () => {
   const [filters, setFilters] = useState(JobOfferFilters)
   const [selectedButton, setSelectedButton] = useState<string | null>(null)
-  const { setStackFilter, technologyFilter, setTechnologyFilter, seniorityFilter, setSeniorityFilter, availabilityFilter, setAvailabilityFilter, locationFilter, setLocationFilter } = useFilters()
+  const {
+    setStackFilter,
+    technologyFilter,
+    setTechnologyFilter,
+    seniorityFilter,
+    setSeniorityFilter,
+    availabilityFilter,
+    setAvailabilityFilter,
+    locationFilter,
+    setLocationFilter,
+  } = useFilters()
 
   const handleSelect = (
     option: string,
@@ -47,7 +57,7 @@ const Filters: React.FC = () => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [buttonType]: option,
-    }));
+    }))
     if (buttonType === 'seniority') {
       setSeniorityFilter(option)
     }
@@ -70,42 +80,44 @@ const Filters: React.FC = () => {
   }
 
   const handleSelectMulti = (option: string): void => {
-    let newFilters: string[];
+    let newFilters: string[]
     if (technologyFilter.includes(option)) {
-      newFilters = technologyFilter.filter(selectedOption => selectedOption !== option);
+      newFilters = technologyFilter.filter(
+        (selectedOption) => selectedOption !== option,
+      )
     } else {
-      newFilters = [...technologyFilter, option];
+      newFilters = [...technologyFilter, option]
     }
-    setTechnologyFilter(newFilters);
+    setTechnologyFilter(newFilters)
   }
-  
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.features}>
         <DropdownFilterMulti
           label={''}
-          text={"Technology"}
+          text={'Technology'}
           options={filterLists.technology}
           onSelect={handleSelectMulti}
           selectedValue={technologyFilter}
         />
         <DropdownFilter
           label={''}
-          text={seniorityFilter || "Seniority"}
+          text={seniorityFilter || 'Seniority'}
           options={filterLists.seniority}
           onSelect={(option) => handleSelect(option, 'seniority')}
           selectedValue={filters.seniority}
         />
         <DropdownFilter
           label={''}
-          text={availabilityFilter || "Availability"}
+          text={availabilityFilter || 'Availability'}
           options={filterLists.availability}
           onSelect={(option) => handleSelect(option, 'availability')}
           selectedValue={filters.availability}
         />
         <DropdownFilter
           label={''}
-          text={locationFilter || "Location"}
+          text={locationFilter || 'Location'}
           options={filterLists.location}
           onSelect={(option) => handleSelect(option, 'location')}
           selectedValue={filters.location}
