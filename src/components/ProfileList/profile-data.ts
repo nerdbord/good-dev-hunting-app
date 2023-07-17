@@ -2,7 +2,7 @@ export interface ProfileListItems {
   id: number
   name: string
   seniority: string
-  stack: string
+  jobSpecialization: JobSpecialization
   others: string
   country: string
   city: string
@@ -11,7 +11,7 @@ export interface ProfileListItems {
   employmentType: string
 }
 
-const filterLists = {
+export const filterLists = {
   technology: [
     'Javascript',
     'Python',
@@ -23,6 +23,12 @@ const filterLists = {
   ],
 }
 
+export enum JobSpecialization {
+  Frontend = 'Frontend',
+  Backend = 'Backend',
+  Fullstack = 'Fullstack',
+}
+
 function getRandomTechnologies(): string[] {
   const count = Math.floor(Math.random() * 7) + 1
   const technologies = filterLists.technology
@@ -30,12 +36,12 @@ function getRandomTechnologies(): string[] {
   return shuffledTechnologies.slice(0, count)
 }
 
-export const ProfileData: ProfileListItems[] = [
+export const profileData: ProfileListItems[] = [
   {
     id: 1,
     name: 'Ania Piwerko',
     seniority: 'Junior',
-    stack: 'Frontend',
+    jobSpecialization: JobSpecialization.Frontend,
     others: '+5 more',
     country: 'Poland',
     city: 'Warsaw',
@@ -47,7 +53,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 2,
     name: 'Jakub Sumiński',
     seniority: 'Senior',
-    stack: 'Backend',
+    jobSpecialization: JobSpecialization.Backend,
     others: '+5 more',
     country: 'Italy',
     city: 'Rome',
@@ -59,7 +65,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 3,
     name: 'Daniel Sztuczka',
     seniority: 'Junior',
-    stack: 'Frontend',
+    jobSpecialization: JobSpecialization.Frontend,
     others: '+5 more',
     country: 'Poland',
     city: 'Warsaw',
@@ -71,7 +77,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 4,
     name: 'Hubert Kwiatkowsky',
     seniority: 'Intern',
-    stack: 'Fullstack',
+    jobSpecialization: JobSpecialization.Fullstack,
     others: '+5 more',
     country: 'Poland',
     city: 'Warsaw',
@@ -83,7 +89,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 5,
     name: 'Hania Mostowiak',
     seniority: 'Mid',
-    stack: 'Backend',
+    jobSpecialization: JobSpecialization.Backend,
     others: '+5 more',
     country: 'Poland',
     city: 'Warsaw',
@@ -95,7 +101,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 6,
     name: 'Michał Rem',
     seniority: 'Mid',
-    stack: 'Frontend',
+    jobSpecialization: JobSpecialization.Frontend,
     others: '+5 more',
     country: 'Italy',
     city: 'Rome',
@@ -107,7 +113,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 7,
     name: 'Wiktor Traktor',
     seniority: 'Junior',
-    stack: 'Backend',
+    jobSpecialization: JobSpecialization.Fullstack,
     others: '+5 more',
     country: 'United States',
     city: 'New York',
@@ -119,7 +125,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 8,
     name: 'Pies Richard',
     seniority: 'Senior',
-    stack: 'Fullstack',
+    jobSpecialization: JobSpecialization.Fullstack,
     others: '+5 more',
     country: 'Spain',
     city: 'Barcelona',
@@ -131,7 +137,7 @@ export const ProfileData: ProfileListItems[] = [
     id: 9,
     name: 'Krzysztof Misiorny',
     seniority: 'Mid',
-    stack: 'Frontend',
+    jobSpecialization: JobSpecialization.Frontend,
     others: '+5 more',
     country: 'United Arab Emirates',
     city: 'Dubai',

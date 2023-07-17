@@ -16,7 +16,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
   id,
   label,
   checked,
-  onChange, 
+  onChange,
   name,
 }) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
     <label className={styles.checkboxLabel} htmlFor={id}>
       <div className={`${styles.checkbox} ${checked ? styles.checked : ''}`}>
         <input
-        id={id}
+          id={id}
           type="checkbox"
           className={styles.hidden}
           checked={checked}

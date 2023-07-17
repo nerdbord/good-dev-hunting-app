@@ -3,32 +3,40 @@ import React from 'react'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import {
-  ProfileData,
+  profileData,
   ProfileListItems,
-} from '@/components/ProfileList/ProfileData'
+  JobSpecialization,
+} from '@/components/ProfileList/profile-data'
 import { useFilters } from '@/contexts/FilterContext'
+import {
+  filterByStack,
+  filterBySeniority,
+  filterByLocation,
+  filterByTechnology,
+  filterByAvailability,
+} from './filters'
 import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
-const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
-  const getStackClasses = cx({
-    [styles.frontend]: data.stack === 'Frontend',
-    [styles.backend]: data.stack === 'Backend',
-    [styles.fullstack]: data.stack === 'Fullstack',
-  })
+export const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({
+  data,
+}) => {
+  const commonClasses = {
+    [styles.frontend]: data.jobSpecialization === JobSpecialization.Frontend,
+    [styles.backend]: data.jobSpecialization === JobSpecialization.Backend,
+    [styles.fullstack]: data.jobSpecialization === JobSpecialization.Fullstack,
+  }
+
+  const getStackClasses = cx(commonClasses)
   const getTechnologyClasses = cx({
     [styles.technology]: true,
-    [styles.frontend]: data.stack === 'Frontend',
-    [styles.backend]: data.stack === 'Backend',
-    [styles.fullstack]: data.stack === 'Fullstack',
+    ...commonClasses,
   })
 
   const renderTechnologies = () => {
     if (data.technology.length <= 4) {
       return data.technology.map((tech, index) => (
-        <span key={index}>
-          {tech}
-        </span>
+        <span key={index}>{tech}</span>
       ))
     } else {
       const displayedTechnologies = data.technology.slice(0, 3)
@@ -37,9 +45,7 @@ const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
       return (
         <>
           {displayedTechnologies.map((tech, index) => (
-            <span key={index}>
-              {tech}
-            </span>
+            <span key={index}>{tech}</span>
           ))}
           <span>{`+ ${othersCount} Others`}</span>
         </>
@@ -56,7 +62,7 @@ const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
         <div className={styles.data}>
           <p className={styles.name}>{data.name}</p>
           <p className={getStackClasses}>
-            {data.seniority} {data.stack} Developer
+            {data.seniority} {data.jobSpecialization} Developer
           </p>
           <p className={styles.location}>
             {data.country}, {data.city} / {data.remote}
@@ -76,16 +82,14 @@ const ProfileList: React.FC = () => {
     availabilityFilter,
     locationFilter,
   } = useFilters()
-  const filteredProfileData = ProfileData.filter((profile) => {
-    return (
-      (!stackFilter || profile.stack === stackFilter) &&
-      (!seniorityFilter || profile.seniority === seniorityFilter) &&
-      (!locationFilter || profile.country === locationFilter) &&
-      (technologyFilter.length === 0 ||
-        technologyFilter.every((tech) => profile.technology.includes(tech))) &&
-      (!availabilityFilter || profile.employmentType === availabilityFilter)
-    )
-  })
+
+  const filteredProfileData = profileData
+    .filter(filterByStack(stackFilter))
+    .filter(filterBySeniority(seniorityFilter))
+    .filter(filterByLocation(locationFilter))
+    .filter(filterByTechnology(technologyFilter))
+    .filter(filterByAvailability(availabilityFilter))
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.title}>Profiles found</div>
