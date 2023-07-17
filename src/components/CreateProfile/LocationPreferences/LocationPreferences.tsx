@@ -1,35 +1,16 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './LocationPreferences.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
+import { useFormikContext } from 'formik'
+import { FormValues } from '@/services/createProfileFormService'
+import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+
 const LocationPreferences = () => {
-  const [country, setCountry] = useState('')
-  const [city, setCity] = useState('')
-  const [openToRelocationCountry, setOpenToRelocationCountry] = useState(false)
-  const [openToRelocationCity, setOpenToRelocationCity] = useState(false)
-  const [remoteOnly, setRemoteOnly] = useState(false)
+  const { values, handleChange, errors } = useFormikContext<FormValues>()
 
-  const handleCountryChange = (value: string) => {
-    setCountry(value)
-  }
-
-  const handleCityChange = (value: string) => {
-    setCity(value)
-  }
-
-  const handleCheckboxChangeCountry = (checked: boolean) => {
-    setOpenToRelocationCountry(checked)
-  }
-
-  const handleCheckboxChangeCity = (checked: boolean) => {
-    setOpenToRelocationCity(checked)
-  }
-
-  const handleSwitchChangeRemote = (checked: boolean) => {
-    setRemoteOnly(checked)
-  }
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -41,37 +22,51 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <TextInput
-            label="Country of residency"
-            placeholder="Start typing location"
-            value={country}
-            onChange={handleCountryChange}
-          />
+          <InputFormError error={errors.country}>
+            <TextInput
+              label="Country of residency"
+              placeholder="Start typing location"
+              value={values.country}
+              onChange={handleChange}
+              name="country"
+            />
+          </InputFormError>
           <CheckboxInput
+            id="openToRelocationCountry"
             label="I’m open to residency relocation"
-            checked={openToRelocationCountry}
-            onChange={handleCheckboxChangeCountry}
+            checked={values.openToRelocationCountry}
+            onChange={handleChange}
+            name="openToRelocationCountry"
           />
         </div>
         <div>
-          <TextInput
-            label="City residency"
-            placeholder="Start typing location"
-            value={city}
-            onChange={handleCityChange}
-            addImportantIcon={true}
-          />
+          <InputFormError error={errors.city}>
+            <TextInput
+              label="City residency"
+              placeholder="Start typing location"
+              value={values.city}
+              onChange={handleChange}
+              addImportantIcon={true}
+              name="city"
+            />
+          </InputFormError>
           <CheckboxInput
+            id="openToRelocationCity"
             label="I’m open to city relocation"
-            checked={openToRelocationCity}
-            onChange={handleCheckboxChangeCity}
+            checked={values.openToRelocationCity}
+            onChange={handleChange}
+            name="openToRelocationCity"
           />
         </div>
-        <SwitchInput
-          checked={remoteOnly}
-          label="I’m looking for remote jobs only"
-          onChange={handleSwitchChangeRemote}
-        />
+        <InputFormError error={errors.remoteOnly}>
+          <SwitchInput
+            id="remoteOnly"
+            checked={values.remoteOnly}
+            label="I’m looking for remote jobs only"
+            onChange={handleChange}
+            name="remoteOnly"
+          />
+        </InputFormError>
       </div>
     </div>
   )

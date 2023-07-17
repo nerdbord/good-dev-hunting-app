@@ -3,29 +3,35 @@ import React from 'react'
 import styles from './Switch.module.scss'
 
 interface SwitchInputProps {
+  id: string
   label: string
   checked: boolean
-  onChange: (checked: boolean) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  name: string
 }
 
 const SwitchInput: React.FC<SwitchInputProps> = ({
+  id,
   label,
   checked,
   onChange,
+  name,
 }) => {
-  const handleSwitchChange = () => {
-    onChange(!checked)
+  const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event)
   }
 
   return (
     <div className={styles.switchLabel}>
       <span className={styles.label}>{label}</span>
-      <label className={styles.switch}>
+      <label className={styles.switch} htmlFor={id}>
         <input
+          id={id}
           className={styles.checkbox}
           type="checkbox"
           checked={checked}
           onChange={handleSwitchChange}
+          name={name}
         />
         <span className={styles.slider}></span>
       </label>
