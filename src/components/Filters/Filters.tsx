@@ -39,7 +39,7 @@ const Filters: React.FC = () => {
   const [filters, setFilters] = useState(JobOfferFilters)
   const [selectedButton, setSelectedButton] = useState<string | null>(null)
   const {
-    setStackFilter,
+    setJobSpecializationFilter,
     technologyFilter,
     setTechnologyFilter,
     seniorityFilter,
@@ -72,10 +72,10 @@ const Filters: React.FC = () => {
   const handleButtonClick = (newStack: string) => {
     if (newStack === selectedButton) {
       setSelectedButton(null)
-      setStackFilter('')
+      setJobSpecializationFilter('')
     } else {
       setSelectedButton(newStack)
-      setStackFilter(newStack)
+      setJobSpecializationFilter(newStack)
     }
   }
 

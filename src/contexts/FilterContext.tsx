@@ -2,8 +2,8 @@
 import React, { createContext, useState, useContext } from 'react'
 
 export type FiltersContextType = {
-  stackFilter: string
-  setStackFilter: (value: string) => void
+  jobSpecializationFilter: string
+  setJobSpecializationFilter: (value: string) => void
   technologyFilter: string[]
   setTechnologyFilter: (value: string[]) => void
   seniorityFilter: string
@@ -23,7 +23,7 @@ export const FiltersProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [stackFilter, setStackFilter] = useState<string>('')
+  const [jobSpecializationFilter, setJobSpecializationFilter] = useState<string>('')
   const [technologyFilter, setTechnologyFilter] = useState<string[]>([])
   const [seniorityFilter, setSeniorityFilter] = useState<string>('')
   const [locationFilter, setLocationFilter] = useState<string>('')
@@ -32,8 +32,8 @@ export const FiltersProvider = ({
   return (
     <FiltersContext.Provider
       value={{
-        stackFilter,
-        setStackFilter,
+        jobSpecializationFilter,
+        setJobSpecializationFilter,
         technologyFilter,
         setTechnologyFilter,
         seniorityFilter,
