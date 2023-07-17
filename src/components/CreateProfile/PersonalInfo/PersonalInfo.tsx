@@ -4,7 +4,7 @@ import styles from './PersonalInfo.module.scss'
 import TextInput from '@/inputs/TextInput/TextInput'
 import TextArea from '@/inputs/TextArea/TextArea'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/createProfileFormService'
+import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 
 const PersonalInfo = () => {
