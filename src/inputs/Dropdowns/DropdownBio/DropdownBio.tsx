@@ -1,31 +1,36 @@
+'use client'
 import styles from './DropdownBio.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 import classNames from 'classnames/bind'
+import { useFormikContext } from 'formik'
 
 const cx = classNames.bind(styles)
 
 export const DropdownBio = ({
   label,
+  name,
   text,
   options,
-  onSelect,
   selectedValue,
+  id,
 }: {
   label: string
+  name: string
   text: string
   options: string[]
-  onSelect: (option: string) => void
-  selectedValue: string[]
+  selectedValue: string
+  id: string
 }) => {
+  const { setFieldValue } = useFormikContext()
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handler = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -34,10 +39,9 @@ export const DropdownBio = ({
         setArrow('IoIosArrowDown')
       }
     }
-    document.addEventListener('mousedown', handler)
-
+    document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
 
@@ -46,8 +50,8 @@ export const DropdownBio = ({
     setDropdownActive(!isDropdownActive)
   }
 
-  const handleSelect = (option: string) => {
-    onSelect(option)
+  const handleCheckboxChange = (option: string) => {
+    setFieldValue(name, option)
   }
 
   return (
@@ -55,34 +59,29 @@ export const DropdownBio = ({
       <div className={styles.label}>{label}</div>
       <div ref={dropdownRef}>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
-          {selectedValue.length === 0 ? (
-            <div className={styles.buttonText}>{text}</div>
-          ) : (
-            <div className={styles.buttonTextChecked}>{text}</div>
-          )}
+          <div className={styles.buttonText}>{selectedValue || text}</div>
           <div className={styles.selected}>
-            {selectedValue.length !== 0 && (
-              <div className={styles.selectedCount}>{selectedValue.length}</div>
-            )}
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
         </button>
         {isDropdownActive && (
           <div className={styles.dropdown}>
             {options.map((option, index) => (
-              <label key={index} className={styles.dropdownInput}>
+              <label key={index} className={styles.dropdownInput} htmlFor={id}>
                 <div
                   className={cx(styles.checkbox, {
-                    [styles.checked]: selectedValue.includes(option),
+                    [styles.checked]: selectedValue === option,
                   })}
                 >
                   <input
+                    id={id}
                     type="checkbox"
                     className={styles.hidden}
-                    checked={selectedValue.includes(option)}
-                    onChange={() => handleSelect(option)}
+                    checked={selectedValue === option}
+                    onChange={() => handleCheckboxChange(option)}
+                    name={name}
                   />
-                  {selectedValue.includes(option) && (
+                  {selectedValue === option && (
                     <IoIosCheckmark className={styles.checkmark} />
                   )}
                 </div>{' '}

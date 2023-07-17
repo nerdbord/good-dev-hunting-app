@@ -10,7 +10,7 @@ import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 const DefaultHeader = () => {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
 
   const router = useRouter()
 
