@@ -6,7 +6,7 @@ import TextArea from '@/inputs/TextArea/TextArea'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
 import { FormValues } from '@/services/createProfileFormService'
-import CreateProfileFormError from '@/components/CreateProfileForm/CreateProfileFormErrorWrapper'
+import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -36,7 +36,7 @@ const WorkInformation = () => {
       </div>
 
       <div className={styles.right}>
-        <CreateProfileFormError error={errors.position}>
+        <InputFormError error={errors.position}>
           <DropdownBio
             id="position"
             label="Position"
@@ -45,8 +45,8 @@ const WorkInformation = () => {
             selectedValue={values.position}
             name="position"
           />
-        </CreateProfileFormError>
-        <CreateProfileFormError error={errors.seniority}>
+        </InputFormError>
+        <InputFormError error={errors.seniority}>
           <DropdownBio
             id="seniority"
             label="Seniority"
@@ -55,9 +55,9 @@ const WorkInformation = () => {
             selectedValue={values.seniority}
             name="seniority"
           />
-        </CreateProfileFormError>
+        </InputFormError>
         <div>
-          <CreateProfileFormError error={errors.techStack}>
+          <InputFormError error={errors.techStack}>
             <TextArea
               label="Tech stack"
               placeholder="Start typing"
@@ -66,14 +66,14 @@ const WorkInformation = () => {
               onChange={handleChange}
               name="techStack"
             />
-          </CreateProfileFormError>
+          </InputFormError>
           <div className={styles.addInfo}>
             Start typing and separate technologies with commas.
             <br />
             Choose max. 8
           </div>
         </div>
-        <CreateProfileFormError error={errors.employment}>
+        <InputFormError error={errors.employment}>
           Employment type
           <CheckboxInput
             id="fulltime"
@@ -96,13 +96,10 @@ const WorkInformation = () => {
             onChange={() => handleEmploymentType('Contract')}
             name="contract"
           />
-        </CreateProfileFormError>
+        </InputFormError>
       </div>
     </div>
   )
 }
 
 export default WorkInformation
-
-
-

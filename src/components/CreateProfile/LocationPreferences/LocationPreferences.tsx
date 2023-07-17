@@ -6,7 +6,7 @@ import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import SwitchInput from '@/inputs/Switch/Switch'
 import { useFormikContext } from 'formik'
 import { FormValues } from '@/services/createProfileFormService'
-import CreateProfileFormError from '@/components/CreateProfileForm/CreateProfileFormErrorWrapper'
+import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 
 const LocationPreferences = () => {
   const { values, handleChange, errors } = useFormikContext<FormValues>()
@@ -22,7 +22,7 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <CreateProfileFormError error={errors.country}>
+          <InputFormError error={errors.country}>
             <TextInput
               label="Country of residency"
               placeholder="Start typing location"
@@ -30,7 +30,7 @@ const LocationPreferences = () => {
               onChange={handleChange}
               name="country"
             />
-          </CreateProfileFormError>
+          </InputFormError>
           <CheckboxInput
             id="openToRelocationCountry"
             label="I’m open to residency relocation"
@@ -40,7 +40,7 @@ const LocationPreferences = () => {
           />
         </div>
         <div>
-          <CreateProfileFormError error={errors.city}>
+          <InputFormError error={errors.city}>
             <TextInput
               label="City residency"
               placeholder="Start typing location"
@@ -49,7 +49,7 @@ const LocationPreferences = () => {
               addImportantIcon={true}
               name="city"
             />
-          </CreateProfileFormError>
+          </InputFormError>
           <CheckboxInput
             id="openToRelocationCity"
             label="I’m open to city relocation"
@@ -58,7 +58,7 @@ const LocationPreferences = () => {
             name="openToRelocationCity"
           />
         </div>
-        <CreateProfileFormError error={errors.remoteOnly}>
+        <InputFormError error={errors.remoteOnly}>
           <SwitchInput
             id="remoteOnly"
             checked={values.remoteOnly}
@@ -66,7 +66,7 @@ const LocationPreferences = () => {
             onChange={handleChange}
             name="remoteOnly"
           />
-        </CreateProfileFormError>
+        </InputFormError>
       </div>
     </div>
   )
