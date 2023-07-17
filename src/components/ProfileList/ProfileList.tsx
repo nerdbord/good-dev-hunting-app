@@ -26,22 +26,22 @@ const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
   const renderTechnologies = () => {
     if (data.technology.length <= 4) {
       return data.technology.map((tech, index) => (
-        <span key={index} className={styles.badge}>
+        <span key={index}>
           {tech}
         </span>
       ))
     } else {
       const displayedTechnologies = data.technology.slice(0, 3)
       const othersCount = data.technology.length - 3
-  
+
       return (
         <>
           {displayedTechnologies.map((tech, index) => (
-            <span key={index} className={styles.badge}>
+            <span key={index}>
               {tech}
             </span>
           ))}
-          <span className={styles.badge}>{`+ ${othersCount} Others`}</span>
+          <span>{`+ ${othersCount} Others`}</span>
         </>
       )
     }
@@ -61,10 +61,9 @@ const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
           <p className={styles.location}>
             {data.country}, {data.city} / {data.remote}
           </p>
-          {/* <p>{data.employmentType}</p> */}
         </div>
       </div>
-          <div className={getTechnologyClasses}>{renderTechnologies()}</div>
+      <div className={getTechnologyClasses}>{renderTechnologies()}</div>
     </div>
   )
 }

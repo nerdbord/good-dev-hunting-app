@@ -47,7 +47,7 @@ export const DropdownFilter = ({
     if (selectedValue === option) {
       onSelect('')
     } else {
-      onSelect(option);
+      onSelect(option)
     }
   }
 

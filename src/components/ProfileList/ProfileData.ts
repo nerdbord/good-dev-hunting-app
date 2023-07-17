@@ -1,14 +1,14 @@
 export interface ProfileListItems {
-  id: number;
-  name: string;
-  seniority: string;
-  stack: string; 
-  others: string;
-  country: string;
-  city: string;
-  remote: string;
-  technology: string[];
-  employmentType: string;
+  id: number
+  name: string
+  seniority: string
+  stack: string
+  others: string
+  country: string
+  city: string
+  remote: string
+  technology: string[]
+  employmentType: string
 }
 
 const filterLists = {
@@ -20,14 +20,14 @@ const filterLists = {
     'Vue.js',
     'Angular',
     'MongoDB',
-  ], 
-};
+  ],
+}
 
 function getRandomTechnologies(): string[] {
-  const count = Math.floor(Math.random() * 7) + 1; 
-  const technologies = filterLists.technology;
-  const shuffledTechnologies = technologies.sort(() => 0.5 - Math.random());
-  return shuffledTechnologies.slice(0, count);
+  const count = Math.floor(Math.random() * 7) + 1
+  const technologies = filterLists.technology
+  const shuffledTechnologies = technologies.sort(() => 0.5 - Math.random())
+  return shuffledTechnologies.slice(0, count)
 }
 
 export const ProfileData: ProfileListItems[] = [
@@ -41,7 +41,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Warsaw',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Full-time'
+    employmentType: 'Full-time',
   },
   {
     id: 2,
@@ -53,7 +53,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Rome',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Part-time'
+    employmentType: 'Part-time',
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Warsaw',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Contract'
+    employmentType: 'Contract',
   },
   {
     id: 4,
@@ -77,7 +77,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Warsaw',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Full-time'
+    employmentType: 'Full-time',
   },
   {
     id: 5,
@@ -89,7 +89,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Warsaw',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Part-time'
+    employmentType: 'Part-time',
   },
   {
     id: 6,
@@ -101,7 +101,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Rome',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Contract'
+    employmentType: 'Contract',
   },
   {
     id: 7,
@@ -113,7 +113,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'New York',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Full-time'
+    employmentType: 'Full-time',
   },
   {
     id: 8,
@@ -125,7 +125,7 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Barcelona',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Part-time'
+    employmentType: 'Part-time',
   },
   {
     id: 9,
@@ -137,6 +137,6 @@ export const ProfileData: ProfileListItems[] = [
     city: 'Dubai',
     remote: 'Remote',
     technology: getRandomTechnologies(),
-    employmentType: 'Contract'
+    employmentType: 'Contract',
   },
-];
+]

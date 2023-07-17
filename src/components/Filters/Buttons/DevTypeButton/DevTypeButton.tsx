@@ -14,9 +14,8 @@ export const DevTypeButton = ({
   onClick,
   children,
   variant,
-  isPressed
+  isPressed,
 }: PropsWithChildren<DevTypeButtonProps>) => {
-
   const getDevTypeButtonClasses = cx({
     [styles.default]: true,
     [variant]: true,
