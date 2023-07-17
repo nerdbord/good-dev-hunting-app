@@ -9,7 +9,7 @@ import {
 } from '@/components/ProfileList/profile-data'
 import { useFilters } from '@/contexts/FilterContext'
 import {
-  filterByStack,
+  filterByJobSpecialization,
   filterBySeniority,
   filterByLocation,
   filterByTechnology,
@@ -76,7 +76,7 @@ export const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({
 
 const ProfileList: React.FC = () => {
   const {
-    stackFilter,
+    jobSpecializationFilter,
     technologyFilter,
     seniorityFilter,
     availabilityFilter,
@@ -84,7 +84,7 @@ const ProfileList: React.FC = () => {
   } = useFilters()
 
   const filteredProfileData = profileData
-    .filter(filterByStack(stackFilter))
+    .filter(filterByJobSpecialization(jobSpecializationFilter))
     .filter(filterBySeniority(seniorityFilter))
     .filter(filterByLocation(locationFilter))
     .filter(filterByTechnology(technologyFilter))
