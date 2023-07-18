@@ -9,7 +9,7 @@ const ProfileTopBar = () => {
   }
   return (
     <div className={styles.titleBox}>
-      <span>Profile preview</span>
+      <span className={styles.title}>Profile preview</span>
       <div className={styles.buttonBox}>
         <Button variant={'secondary'} onClick={handleButtonClick}>
           {' '}
