@@ -1,79 +1,58 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import {
-  ProfileData,
+  profileData,
   ProfileListItems,
-} from '@/components/ProfileList/ProfileData'
+  JobSpecialization,
+} from '@/components/ProfileList/profile-data'
+import { useFilters } from '@/contexts/FilterContext'
+import {
+  filterByJobSpecialization,
+  filterBySeniority,
+  filterByLocation,
+  filterByTechnology,
+  filterByAvailability,
+} from './filters'
+import classNames from 'classnames/bind'
+const cx = classNames.bind(styles)
 
-enum JobSpecialization {
-  Frontend = 'Frontend',
-  Backend = 'Backend',
-  Fullstack = 'Fullstack',
-  None = 'None',
-}
-
-interface TechnologyChipProps {
-  name: string
-  theme: JobSpecialization
-  seniority: string
-}
-
-const getTechnologyClassByTheme = (
-  theme: JobSpecialization,
-  seniority: string,
-) => {
-  if (seniority.includes('Frontend')) {
-    return styles.frontend
-  } else if (seniority.includes('Backend')) {
-    return styles.backend
-  } else if (seniority.includes('Fullstack')) {
-    return styles.fullstack
+export const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({
+  data,
+}) => {
+  const commonClasses = {
+    [styles.frontend]: data.jobSpecialization === JobSpecialization.Frontend,
+    [styles.backend]: data.jobSpecialization === JobSpecialization.Backend,
+    [styles.fullstack]: data.jobSpecialization === JobSpecialization.Fullstack,
   }
-  switch (theme) {
-    case JobSpecialization.Frontend:
-      return styles.frontend
-    case JobSpecialization.Backend:
-      return styles.backend
-    case JobSpecialization.Fullstack:
-      return styles.fullstack
-    default:
-      return ''
-  }
-}
-const getTechnologyClassBySeniority = (seniority: string) => {
-  if (seniority.includes('Frontend')) {
-    return styles.frontend
-  } else if (seniority.includes('Backend')) {
-    return styles.backend
-  } else if (seniority.includes('Fullstack')) {
-    return styles.fullstack
-  }
-  return ''
-}
 
-const TechnologyChip: React.FC<TechnologyChipProps> = (props) => {
-  const themeClass = getTechnologyClassByTheme(props.theme, props.seniority)
-  return <p className={`${styles.badge} ${themeClass}`}>{props.name}</p>
-}
+  const getStackClasses = cx(commonClasses)
+  const getTechnologyClasses = cx({
+    [styles.technology]: true,
+    ...commonClasses,
+  })
 
-const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
-  const [theme, setTheme] = useState<JobSpecialization>(JobSpecialization.None)
-
-  useEffect(() => {
-    if (data.seniority.includes('Frontend')) {
-      setTheme(JobSpecialization.Frontend)
-    } else if (data.seniority.includes('Backend')) {
-      setTheme(JobSpecialization.Backend)
-    } else if (data.seniority.includes('Fullstack')) {
-      setTheme(JobSpecialization.Fullstack)
+  const renderTechnologies = () => {
+    if (data.technology.length <= 4) {
+      return data.technology.map((tech, index) => (
+        <span key={index}>{tech}</span>
+      ))
     } else {
-      setTheme(JobSpecialization.Frontend)
-    }
-  }, [])
+      const displayedTechnologies = data.technology.slice(0, 3)
+      const othersCount = data.technology.length - 3
 
-  const seniorityClass = getTechnologyClassBySeniority(data.seniority)
+      return (
+        <>
+          {displayedTechnologies.map((tech, index) => (
+            <span key={index}>{tech}</span>
+          ))}
+          <span>{`+ ${othersCount} Others`}</span>
+        </>
+      )
+    }
+  }
+
   return (
     <div className={styles.frame}>
       <div className={styles.container}>
@@ -82,42 +61,40 @@ const ProfileListItem: React.FC<{ data: ProfileListItems }> = ({ data }) => {
         </div>
         <div className={styles.data}>
           <p className={styles.name}>{data.name}</p>
-          <p className={seniorityClass}>{data.seniority}</p>
-          <p className={styles.location}>{data.location}</p>
+          <p className={getStackClasses}>
+            {data.seniority} {data.jobSpecialization} Developer
+          </p>
+          <p className={styles.location}>
+            {data.country}, {data.city} / {data.remote}
+          </p>
         </div>
       </div>
-      <div className={styles.technology}>
-        <TechnologyChip
-          name={data.technology}
-          theme={theme}
-          seniority={data.seniority}
-        />
-        <TechnologyChip
-          name={data.technology2}
-          theme={theme}
-          seniority={data.seniority}
-        />
-        <TechnologyChip
-          name={data.technology3}
-          theme={theme}
-          seniority={data.seniority}
-        />
-        <TechnologyChip
-          name={data.others}
-          theme={theme}
-          seniority={data.seniority}
-        />
-      </div>
+      <div className={getTechnologyClasses}>{renderTechnologies()}</div>
     </div>
   )
 }
 
 const ProfileList: React.FC = () => {
+  const {
+    jobSpecializationFilter,
+    technologyFilter,
+    seniorityFilter,
+    availabilityFilter,
+    locationFilter,
+  } = useFilters()
+
+  const filteredProfileData = profileData
+    .filter(filterByJobSpecialization(jobSpecializationFilter))
+    .filter(filterBySeniority(seniorityFilter))
+    .filter(filterByLocation(locationFilter))
+    .filter(filterByTechnology(technologyFilter))
+    .filter(filterByAvailability(availabilityFilter))
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.title}>Profiles found</div>
       <div className={styles.profileListCont}>
-        {ProfileData.map((profile) => (
+        {filteredProfileData.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
         ))}
       </div>

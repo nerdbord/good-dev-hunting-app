@@ -1,3 +1,4 @@
+'use client'
 import styles from './DropdownFilter.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
@@ -14,7 +15,7 @@ export const DropdownFilter = ({
   text: string
   options: string[]
   onSelect: (option: string) => void
-  selectedValue: string[]
+  selectedValue: string
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
@@ -44,7 +45,11 @@ export const DropdownFilter = ({
   }
 
   const handleSelect = (option: string) => {
-    onSelect(option)
+    if (selectedValue === option) {
+      onSelect('')
+    } else {
+      onSelect(option)
+    }
   }
 
   return (
@@ -57,9 +62,6 @@ export const DropdownFilter = ({
           ) : (
             <div className={styles.buttonTextChecked}>{text}</div>
           )}
-          {selectedValue.length !== 0 && (
-            <div className={styles.selectedCount}>{selectedValue.length}</div>
-          )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
         {isDropdownActive && (
@@ -68,13 +70,13 @@ export const DropdownFilter = ({
               <label key={index} className={styles.dropdownInput}>
                 <div
                   className={`${styles.checkbox} ${
-                    selectedValue.includes(option) ? styles.checked : ''
+                    selectedValue === option ? styles.checked : ''
                   }`}
                 >
                   <input
                     type="checkbox"
                     className={styles.hidden}
-                    checked={selectedValue.includes(option)}
+                    checked={selectedValue === option}
                     onChange={() => handleSelect(option)}
                   />
                   {selectedValue.includes(option) && (

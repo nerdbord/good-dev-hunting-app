@@ -1,9 +1,11 @@
+'use client'
 import React, { PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
   variant: 'primary' | 'secondary'
+  type?: 'button' | 'submit'
 }
 
 export const Button = ({

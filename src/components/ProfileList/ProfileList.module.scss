@@ -80,22 +80,24 @@
 }
 
 .technology {
-  width: 350px;
-  height: 31px;
+  margin-top: 17px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
+  margin-left: 23px;
 }
 
-.badge {
-  padding: 8px 14px;
+.technology span {
+  min-width: 75px;
   background: #161a1f;
+  text-align: center;
+  padding: 8px 12px;
   border-radius: 4px;
-  font-weight: 500;
   font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
   line-height: 15px;
-  letter-spacing: -0.02em;
-  margin-top: 17px;
+  letter-spacing: -0.24px;
 }

@@ -1,122 +1,102 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './WorkInformations.module.scss'
 import { DropdownBio } from '@/inputs/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/inputs/TextArea/TextArea'
 import CheckboxInput from '@/inputs/Checkbox/Checkbox'
-
-interface State {
-  position: string[]
-  seniority: string[]
-  employment: string[]
-}
-
-const WorkInfoFilters: State = {
-  position: [],
-  seniority: [],
-  employment: [],
-}
+import { useFormikContext } from 'formik'
+import { FormValues } from '@/services/create-profile-form-service'
+import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 
 const filterLists = {
-  seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
-  position: [
-    'Position 1',
-    'Position 2',
-    'Position 3',
-    'Position 4',
-    'Position 5',
-  ],
+  seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
+  position: ['Frontend', 'Backend', 'Fullstack'],
 }
 
 const WorkInformation = () => {
-  const [filters, setFilters] = useState(WorkInfoFilters)
-  const [techStack, setTechStack] = useState('')
-
-  const handleTechStack = (value: string) => {
-    setTechStack(value)
-  }
-
-  const handleSelect = (
-    option: string,
-    buttonType: keyof typeof WorkInfoFilters,
-  ): void => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [buttonType]: prevFilters[buttonType].includes(option)
-        ? prevFilters[buttonType].filter(
-            (selectedOption) => selectedOption !== option,
-          )
-        : [...prevFilters[buttonType], option],
-    }))
-  }
+  const { values, handleChange, errors, setFieldValue } =
+    useFormikContext<FormValues>()
 
   const handleEmploymentType = (option: string): void => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      employment: prevFilters.employment.includes(option)
-        ? prevFilters.employment.filter(
-            (selectedOption) => selectedOption !== option,
-          )
-        : [...prevFilters.employment, option],
-    }))
+    const newEmployment = values.employment.includes(option)
+      ? values.employment.filter((selectedOption) => selectedOption !== option)
+      : [...values.employment, option]
+
+    setFieldValue('employment', newEmployment)
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Personal Information</div>
+        <div>Work information</div>
         <div className={styles.personalInfo}>
-          Share personal information to let the recruiters get to know you.{' '}
+          Share your current qualifications information. You’ll be able to
+          change it at any moment.
         </div>
       </div>
 
       <div className={styles.right}>
-        <DropdownBio
-          label="Position"
-          text="Choose position"
-          options={filterLists.position}
-          onSelect={(option) => handleSelect(option, 'position')}
-          selectedValue={filters.position}
-        />
-        <DropdownBio
-          label="Seniority"
-          text="Choose seniority"
-          options={filterLists.seniority}
-          onSelect={(option) => handleSelect(option, 'seniority')}
-          selectedValue={filters.seniority}
-        />
-        <div>
-          <TextArea
-            label="Tech stack"
-            placeholder="Start typing"
-            value={techStack}
-            addImportantIcon={true}
-            onChange={handleTechStack}
+        <InputFormError error={errors.position}>
+          <DropdownBio
+            id="position"
+            label="Position"
+            text="Choose position"
+            options={filterLists.position}
+            selectedValue={values.position}
+            name="position"
           />
+        </InputFormError>
+        <InputFormError error={errors.seniority}>
+          <DropdownBio
+            id="seniority"
+            label="Seniority"
+            text="Choose seniority"
+            options={filterLists.seniority}
+            selectedValue={values.seniority}
+            name="seniority"
+          />
+        </InputFormError>
+        <div>
+          <InputFormError error={errors.techStack}>
+            <TextArea
+              label="Tech stack"
+              placeholder="Start typing"
+              value={values.techStack}
+              addImportantIcon={true}
+              onChange={handleChange}
+              name="techStack"
+            />
+          </InputFormError>
           <div className={styles.addInfo}>
-            Start typing and separate technologies with comas.
+            Start typing and separate technologies with commas.
             <br />
             Choose max. 8
           </div>
         </div>
-        <div className={styles.employmentType}>
+        <InputFormError error={errors.employment}>
           Employment type
           <CheckboxInput
+            id="fulltime"
             label="Full-time"
-            checked={filters.employment.includes('Full-time')}
+            checked={values.employment.includes('Full-time')}
             onChange={() => handleEmploymentType('Full-time')}
+            name="fulltime"
           />
           <CheckboxInput
+            id="parttime"
             label="Part-time"
-            checked={filters.employment.includes('Part-time')}
+            checked={values.employment.includes('Part-time')}
             onChange={() => handleEmploymentType('Part-time')}
+            name="parttime"
           />
           <CheckboxInput
+            id="contract"
             label="Contract"
-            checked={filters.employment.includes('Contract')}
+            checked={values.employment.includes('Contract')}
             onChange={() => handleEmploymentType('Contract')}
+            name="contract"
           />
-        </div>
+        </InputFormError>
       </div>
     </div>
   )
