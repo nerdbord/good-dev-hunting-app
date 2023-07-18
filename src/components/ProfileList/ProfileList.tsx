@@ -90,9 +90,11 @@ const ProfileList: React.FC = () => {
     .filter(filterByTechnology(technologyFilter))
     .filter(filterByAvailability(availabilityFilter))
 
+  const filteredCount = filteredProfileData.length
+
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.title}>Profiles found</div>
+      <div className={styles.title}>Profiles found ({filteredCount})</div>
       <div className={styles.profileListCont}>
         {filteredProfileData.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
