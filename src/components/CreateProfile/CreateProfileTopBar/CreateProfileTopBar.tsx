@@ -1,5 +1,5 @@
 'use client'
-import styles from './ProfileTopBar.module.scss'
+import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/inputs/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
