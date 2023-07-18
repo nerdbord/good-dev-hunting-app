@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
 import PersonalInfo from '@/components/CreateProfile/PersonalInfo/PersonalInfo'
 import LocationPreferences from '@/components/CreateProfile/LocationPreferences/LocationPreferences'
-import CreateProfileHeader from '@/components/CreateProfile/CreateProfileHeader/CreateProfileHeader'
+import CreateProfileTopBar from '@/components/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
 import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 const CreateProfilePage = async () => {
@@ -18,7 +18,7 @@ const CreateProfilePage = async () => {
   return (
     <CreateProfileFormWrapper>
       <div className={styles.wrapper}>
-        <CreateProfileHeader />
+        <CreateProfileTopBar />
         <div className={styles.formBox}>
           <PersonalInfo />
           <LocationPreferences />

@@ -1,10 +1,10 @@
 'use client'
-import styles from './CreateProfileHeader.module.scss'
+import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/inputs/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
 
-const CreateProfileHeader = () => {
+const ProfileTopBar = () => {
   const { handleSubmit, errors } = useFormikContext()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,4 +30,4 @@ const CreateProfileHeader = () => {
   )
 }
 
-export default CreateProfileHeader
+export default ProfileTopBar
