@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import { UserPayload } from './types'
 import type { DefaultSession } from 'next-auth'
+import { UserPayload } from '@/backend/user/user.types'
 
 declare module 'next-auth' {
   interface Session {

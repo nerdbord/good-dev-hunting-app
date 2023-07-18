@@ -1,18 +1,30 @@
 'use client'
-import React from 'react'
-import styles from './CreateProfileTopBar.module.scss'
+import styles from './ProfileTopBar.module.scss'
 import { Button } from '@/inputs/Button/Button'
+import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
+import { useFormikContext } from 'formik'
 
 const ProfileTopBar = () => {
-  const handleButtonClick = () => {
-    console.log('clicked')
+  const { handleSubmit, errors } = useFormikContext()
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    handleSubmit()
   }
+
   return (
     <div className={styles.titleBox}>
-      <span className={styles.title}>Create profile page</span>
-      <Button variant={'primary'} onClick={handleButtonClick}>
-        {' '}
-        Save and preview profile{' '}
+      <div className={styles.errorWrapper}>
+        <span>Create profile page</span>
+        {Object.keys(errors).length > 0 && (
+          <div className={styles.errorMsg}>
+            <ErrorIcon />
+            <span>Fill out the form to complete the profile</span>
+          </div>
+        )}
+      </div>
+      <Button variant="primary" onClick={handleButtonClick} type="submit">
+        Save and preview profile
       </Button>
     </div>
   )
