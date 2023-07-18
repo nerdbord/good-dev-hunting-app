@@ -9,7 +9,7 @@ const ProfileTopBar = () => {
   }
   return (
     <div className={styles.titleBox}>
-      <span>Create profile page</span>
+      <span className={styles.title}>Create profile page</span>
       <Button variant={'primary'} onClick={handleButtonClick}>
         {' '}
         Save and preview profile{' '}
