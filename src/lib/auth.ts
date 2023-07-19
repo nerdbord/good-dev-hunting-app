@@ -15,7 +15,20 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
+    session: ({ session, token }) => {
+      console.log('Session Callback', { session, token })
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+        },
+      }
+    },
+
     async jwt({ token, account }) {
+      console.log('JWT callback:', { token, account })
+
       if (account) {
         token.accessToken = account.access_token
         token.id = account.providerAccountId
@@ -37,7 +50,8 @@ export const authOptions: NextAuthOptions = {
                 name,
               }
 
-              await createUser(newUser)
+              const createdUser = await createUser(newUser)
+              return createdUser
             }
           }
         }
