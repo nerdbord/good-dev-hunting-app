@@ -2,20 +2,15 @@
 import React from 'react'
 import styles from './UserProfileMain.module.scss'
 import Image from 'next/image'
-import DefaultUserImg from '/public/default-avatar.png'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import CopyEmail from '@/assets/icons/CopyEmail'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import { profileData } from '@/components/ProfileList/profile-data'
+import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 
 const UserProfileMain = () => {
-  const { data: session } = useSession()
-  const avatar = session?.user?.image || DefaultUserImg
-  const name = session?.user?.name || null
-
   const router = useRouter()
 
   const selectedUser = profileData.find((user) => user.id === 9)
@@ -45,7 +40,7 @@ const UserProfileMain = () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={avatar}
+              src={ProfilePicture}
               width={100}
               height={100}
               alt="user's avatar"
@@ -68,12 +63,14 @@ const UserProfileMain = () => {
             <div className={styles.location}>Remote only</div>
           </div>
           <div className={styles.addInfoBox}>
-            <div className={styles.seniority}>{selectedUser?.seniority}</div>
+            <div className={styles.seniority}>
+              {selectedUser?.seniority} {selectedUser?.jobSpecialization}{' '}
+              Developer
+            </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
                 {selectedUser?.employmentType}
               </div>
-              <div className={styles.addInfoItem}>Contact</div>
             </div>
           </div>
         </div>

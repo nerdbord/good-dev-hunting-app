@@ -1,12 +1,9 @@
 'use client'
 import React from 'react'
 import styles from './UserProfileDetails.module.scss'
-import { useSession } from 'next-auth/react'
 import { profileData } from '@/components/ProfileList/profile-data'
 
 const UserProfileDetails = () => {
-  const { data: session } = useSession()
-
   const selectedUser = profileData.find((user) => user.id === 9)
 
   return (
