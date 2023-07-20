@@ -69,7 +69,6 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
   return createdUser
 }
 
-////updateuser
 export async function updateUserData(
   email: string,
   userDataToUpdate: Prisma.ProfileUpdateInput,
