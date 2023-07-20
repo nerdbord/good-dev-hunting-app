@@ -29,8 +29,7 @@
     "src",
     "app",
     "prisma",
-    ".next/types/**/*.ts",
-    "middleware.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
