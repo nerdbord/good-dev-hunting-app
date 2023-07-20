@@ -9,18 +9,21 @@ export async function middleware(request: NextRequest) {
     cookieName: 'next-auth.session-token',
   })
 
-  console.log('Token middleware:', token)
+  // console.log('Token middleware:', token)
 
-  // redirect user without access to login
-  if (token?.token) {
-    return NextResponse.redirect('/login')
+  if (!token) {
+    // redirect user without access to login
+    // return NextResponse.redirect('http://localhost:3000')
+    return new NextResponse(
+      JSON.stringify({ success: false, message: 'authentication failed' }),
+      { status: 401 },
+    )
   }
 
-  //role auth
-
-  // if (!token?.isAdmin) {
-  //   return NextResponse.json('unauth')
-  // }
-
   return NextResponse.next()
+}
+
+export const config = {
+  //  matcher: ['/((?!auth|login).*)'], //excludes from auth
+  matcher: ['/api', '/api/profiles'],
 }
