@@ -4,9 +4,12 @@ import {
   updateUserData,
 } from '@/backend/profile/profile.service'
 import { ProfilePayload } from '@/backend/profile/profile.types'
+import { authorizeUser } from '@/lib/auth'
 
 export async function GET(request: Request, id: string) {
   try {
+    await authorizeUser()
+
     const serializedProfile = await getProfileById(id)
 
     return NextResponse.json({

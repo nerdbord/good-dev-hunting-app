@@ -5,6 +5,7 @@ import {
   getPublishedProfilesPayload,
 } from '@/backend/profile/profile.service'
 import { CreateProfilePayload } from '@/backend/profile/profile.types'
+import { authorizeUser } from '@/lib/auth'
 
 export async function GET() {
   try {
@@ -23,18 +24,12 @@ export async function POST(request: NextRequest) {
   try {
     const userData: CreateProfilePayload = await request.json()
 
-    // We will need to validate this using authorized user token, instead of sent payload
-    const USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER = 'non existing yet'
+    const user = await authorizeUser()
 
-    const foundUser = await doesUserProfileExist(
-      USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
-    )
+    const foundUser = await doesUserProfileExist(user.id)
 
     if (!foundUser) {
-      const newUser = await createUserProfile(
-        USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
-        userData,
-      )
+      const newUser = await createUserProfile(user.id, userData)
 
       return new NextResponse(JSON.stringify(newUser), { status: 201 })
     } else {
