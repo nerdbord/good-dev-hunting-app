@@ -5,9 +5,12 @@ import {
   getUsersPayload,
 } from '@/backend/user/user.service'
 import { CreateUserPayload } from '@/backend/user/user.types'
+import { authorizeUser } from '@/lib/auth'
 
 export async function GET() {
   try {
+    await authorizeUser()
+
     const serializedUsers = await getUsersPayload()
 
     return NextResponse.json({
@@ -21,21 +24,13 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    await authorizeUser()
     const userData: CreateUserPayload = await request.json()
 
-    // We will need to validate this using authorized user token, instead of sent payload
-    // const USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER = 'non existing yet'
-
-    const foundUser = await doesUserExist(
-      userData.email,
-      // USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
-    )
+    const foundUser = await doesUserExist(userData.email)
 
     if (!foundUser) {
-      const newUser = await createUser(
-        // USER_TOKEN_FROM_COOKIE_OR_REQUEST_HEADER,
-        userData,
-      )
+      const newUser = await createUser(userData)
 
       return new NextResponse(JSON.stringify(newUser), { status: 201 })
     } else {

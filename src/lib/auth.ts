@@ -2,6 +2,8 @@ import { createUser, doesUserExist } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { CreateUserPayload } from '@/backend/user/user.types'
+import { getServerSession } from 'next-auth'
+import { NextResponse } from 'next/server'
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -15,6 +17,16 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
+    session: ({ session, token }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+        },
+      }
+    },
+
     async jwt({ token, account }) {
       if (account) {
         token.accessToken = account.access_token
@@ -37,7 +49,8 @@ export const authOptions: NextAuthOptions = {
                 name,
               }
 
-              await createUser(newUser)
+              const createdUser = await createUser(newUser)
+              return createdUser
             }
           }
         }
@@ -46,4 +59,14 @@ export const authOptions: NextAuthOptions = {
       return token
     },
   },
+}
+
+export const authorizeUser = async () => {
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    throw Error('Unauthorized')
+  }
+
+  return session.user
 }
