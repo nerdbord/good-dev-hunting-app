@@ -5,16 +5,20 @@ import {
 } from '@/backend/profile/profile.service'
 import { ProfilePayload } from '@/backend/profile/profile.types'
 import { authorizeUser } from '@/lib/auth'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
-export async function GET(request: Request, id: string) {
+export async function GET(request: Request, params: Params) {
   try {
     await authorizeUser()
+    const {
+      params: { id },
+    } = params
 
     const serializedProfile = await getProfileById(id)
 
     return NextResponse.json({
       message: 'Success',
-      profile: serializedProfile,
+      data: serializedProfile,
     })
   } catch (error) {
     return new NextResponse('Something Went Wrong')
@@ -49,7 +53,7 @@ export async function PATCH(request: NextRequest, id: string) {
 
     return NextResponse.json({
       message: 'Success',
-      profile: updatedUser,
+      data: updatedUser,
     })
   } catch (error) {
     return new NextResponse(`${error}`)
