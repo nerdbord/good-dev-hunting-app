@@ -15,7 +15,7 @@ export async function GET() {
 
     return NextResponse.json({
       message: 'Success',
-      profile: serializedUsers,
+      data: serializedUsers,
     })
   } catch (error) {
     return new Response(`${error}`, { status: 500 })
