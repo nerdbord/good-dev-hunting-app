@@ -14,7 +14,7 @@ async function getRoutePayload(routeUrl: string, id?: string) {
     cache: 'no-store',
     method: 'GET',
     headers: {
-      'Content-Type': 'aplication/json',
+      'Content-Type': 'application/json',
     },
   })
 
