@@ -3,7 +3,7 @@ import type { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { CreateUserPayload } from '@/backend/user/user.types'
 import { getServerSession } from 'next-auth'
-import { NextResponse } from 'next/server'
+
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -40,6 +40,8 @@ export const authOptions: NextAuthOptions = {
 
           const existingUser = await doesUserExist(email)
 
+          console.log('Existing user:', existingUser) // console log
+
           if (!existingUser) {
             if (email && id && image && name) {
               const newUser: CreateUserPayload = {
@@ -50,6 +52,9 @@ export const authOptions: NextAuthOptions = {
               }
 
               const createdUser = await createUser(newUser)
+
+              console.log('Created user:', createdUser) // console log
+
               return createdUser
             }
           }

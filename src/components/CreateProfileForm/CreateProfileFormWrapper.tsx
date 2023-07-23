@@ -4,14 +4,16 @@ import { Formik } from 'formik'
 import {
   initialValues,
   validationSchema,
+  useFormikInitialization,
 } from '@/services/create-profile-form-service'
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
+  const { onSubmit } = useFormikInitialization()
   return (
     <Formik
       validationSchema={validationSchema}
       initialValues={initialValues}
-      onSubmit={() => console.log('a')}
+      onSubmit={onSubmit}
     >
       {children}
     </Formik>
