@@ -33,8 +33,8 @@ model Profile {
   position       String
   seniority      String
   techStack      String[]
-  employmentType EmploymentType
-  isPublished    Boolean
+  employmentType String[]
+  isPublished Boolean @default(false)
 }
 
 model GitHubDetails {
@@ -57,10 +57,4 @@ model City {
   name              String
   openForRelocation Boolean   @default(false)
   profile           Profile[]
-}
-
-enum EmploymentType {
-  FULL_TIME
-  PART_TIME
-  CONTRACT
 }
