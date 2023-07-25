@@ -16,7 +16,7 @@ export interface FormValues {
   remoteOnly: boolean
   position: string
   seniority: string
-  employment: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
+  employment: string
   techStack: string
   isPublished: boolean
 }
@@ -33,7 +33,7 @@ export const initialValues: FormValues = {
   remoteOnly: false,
   position: '',
   seniority: '',
-  employment: 'FULL_TIME',
+  employment: '',
   techStack: '',
   isPublished: false,
 }
@@ -51,9 +51,7 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  employment: Yup.array()
-    .of(Yup.string())
-    .min(1, 'Employment type is required'),
+  // employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
 })
 
 export const useFormikInitialization = () => {
@@ -79,7 +77,7 @@ export const useFormikInitialization = () => {
       position: values.position,
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
-      employmentType: values.employment,
+      employmentType: values.employment as 'FULL_TIME' | 'PART_TIME' | 'CONTRACT',
       isPublished: values.isPublished,
     }
 
@@ -95,8 +93,8 @@ export const useFormikInitialization = () => {
       console.log('Profile created successfully')
     } else {
       console.log('Failed to create profile.')
-      const errorData = await response.json() // parse the error message
-      console.log('Error details:', errorData) // log the error details
+      const errorData = await response.json() 
+      console.log('Error details:', errorData) 
     }
   }
 
