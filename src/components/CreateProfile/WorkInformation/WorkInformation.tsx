@@ -17,13 +17,9 @@ const WorkInformation = () => {
   const { values, handleChange, errors, setFieldValue } =
     useFormikContext<FormValues>()
 
-  const handleEmploymentType = (option: string): void => {
-    const newEmployment = values.employment.includes(option)
-      ? values.employment.filter((selectedOption) => selectedOption !== option)
-      : [...values.employment, option]
-
-    setFieldValue('employment', newEmployment)
-  }
+    const handleEmploymentType = (option: string): void => {
+      setFieldValue('employment', option)
+    }
 
   return (
     <div className={styles.container}>
@@ -77,23 +73,23 @@ const WorkInformation = () => {
           Employment type
           <CheckboxInput
             id="fulltime"
-            label="Full-time"
-            checked={values.employment.includes('Full-time')}
-            onChange={() => handleEmploymentType('Full-time')}
+            label="FULL_TIME"
+            checked={values.employment === 'FULL_TIME'}
+            onChange={() => handleEmploymentType('FULL_TIME')}
             name="fulltime"
           />
           <CheckboxInput
             id="parttime"
-            label="Part-time"
-            checked={values.employment.includes('Part-time')}
-            onChange={() => handleEmploymentType('Part-time')}
+            label="PART_TIME"
+            checked={values.employment === 'PART_TIME'}
+            onChange={() => handleEmploymentType('PART_TIME')}
             name="parttime"
           />
           <CheckboxInput
             id="contract"
-            label="Contract"
-            checked={values.employment.includes('Contract')}
-            onChange={() => handleEmploymentType('Contract')}
+            label="CONTRACT"
+            checked={values.employment === 'CONTRACT'}
+            onChange={() => handleEmploymentType('CONTRACT')}
             name="contract"
           />
         </InputFormError>

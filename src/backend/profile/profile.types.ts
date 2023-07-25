@@ -19,7 +19,7 @@ export interface ProfilePayload {
   position: string
   seniority: string
   techStack: string[]
-  employmentType: string
+  employmentType: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
   isPublished: boolean
 }
 
