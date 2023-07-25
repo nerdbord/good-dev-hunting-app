@@ -7,11 +7,15 @@ import LogOutBtn from '@/inputs/LogOutBtn/LogOutBtn'
 import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
 import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
 import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
+import { getProfilePayload } from '@/lib/client/apiClient'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session) {
+  if (session) {
+    const userId = session?.user.id
+    const profilePayload = await getProfilePayload(userId)
+  } else {
     redirect('/')
   }
 
