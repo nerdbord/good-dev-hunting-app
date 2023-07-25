@@ -56,7 +56,6 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
       email: userDataFromGh.email,
       githubDetails: {
         create: {
-          id: userDataFromGh.id,
           username: userDataFromGh.name,
           image: userDataFromGh.image,
         },

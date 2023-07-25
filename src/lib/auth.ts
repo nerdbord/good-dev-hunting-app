@@ -1,9 +1,8 @@
-import { createUser, doesUserExist } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
-import { CreateUserPayload } from '@/backend/user/user.types'
 import { getServerSession } from 'next-auth'
-import { NextResponse } from 'next/server'
+
+import { prisma } from './prismaClient'
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -17,46 +16,51 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    session: ({ session, token }) => {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-        },
-      }
-    },
+    session: async ({ session, token }) => {
+      let user
+      console.log('session in session', session)
 
-    async jwt({ token, account }) {
-      if (account) {
-        token.accessToken = account.access_token
-        token.id = account.providerAccountId
+      if (session) {
+        const email = session.user.email
+        const name = session.user.name
+        const image = session.user.image
 
-        if (token && token.email) {
-          const email = token.email
-          const id = token.sub
-          const image = token.picture
-          const name = token.name
+        if (email) {
+          const foundUser = await prisma.user.findFirst({
+            where: { email: email },
+          })
 
-          const existingUser = await doesUserExist(email)
+          user = foundUser
 
-          if (!existingUser) {
-            if (email && id && image && name) {
-              const newUser: CreateUserPayload = {
-                email,
-                id,
-                image,
-                name,
-              }
+          if (!foundUser && name) {
+            const createdUser = await prisma.user.create({
+              data: {
+                email: email,
+                githubDetails: {
+                  create: {
+                    username: name,
+                    image: image,
+                  },
+                },
+              },
+              include: {
+                githubDetails: true,
+              },
+            })
 
-              const createdUser = await createUser(newUser)
-              return createdUser
-            }
+            user = createdUser
           }
         }
       }
 
-      return token
+      return {
+        ...session,
+        ...token,
+        user: {
+          id: user?.id,
+          ...user,
+        },
+      }
     },
   },
 }
