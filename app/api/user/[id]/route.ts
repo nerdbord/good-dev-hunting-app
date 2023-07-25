@@ -6,12 +6,12 @@ import { getUserById } from '@/backend/user/user.service'
 export async function GET(request: Request, params: Params) {
   try {
     await authorizeUser()
+
     const {
       params: { id },
     } = params
 
     const serializedUser = await getUserById(id)
-    console.log('Serialized User:', serializedUser)
 
     return NextResponse.json({
       message: 'Success',
