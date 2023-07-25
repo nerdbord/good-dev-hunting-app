@@ -11,13 +11,14 @@ import { getProfilePayload } from '@/lib/client/apiClient'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
+  const userId = session?.user.id
 
-  if (session) {
-    const userId = session?.user.id
-    const profilePayload = await getProfilePayload(userId)
-  } else {
+  if (!userId) {
     redirect('/')
+    return null
   }
+
+  const profilePayload = await getProfilePayload(userId)
 
   return (
     <div className={styles.wrapper}>
