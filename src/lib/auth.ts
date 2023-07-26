@@ -73,4 +73,3 @@ export const authorizeUser = async () => {
 
   return session.user
 }
-

@@ -17,9 +17,9 @@ const WorkInformation = () => {
   const { values, handleChange, errors, setFieldValue } =
     useFormikContext<FormValues>()
 
-    const handleEmploymentType = (option: string): void => {
-      setFieldValue('employment', option)
-    }
+  const handleEmploymentType = (option: string): void => {
+    setFieldValue('employment', option)
+  }
 
   return (
     <div className={styles.container}>

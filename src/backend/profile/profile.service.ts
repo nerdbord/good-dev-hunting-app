@@ -110,3 +110,20 @@ export async function updateUserData(
 
   return updatedUser
 }
+
+export async function getProfileByUserId(userId: string) {
+  const profile = await prisma.profile.findFirst({
+    where: { userId },
+    include: {
+      user: true,
+      country: true,
+      city: true,
+    },
+  })
+
+  if (profile) {
+    return serializeProfilesToProfilePayload(profile)
+  }
+
+  return null
+}

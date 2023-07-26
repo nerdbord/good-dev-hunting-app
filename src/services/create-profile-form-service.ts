@@ -16,7 +16,7 @@ export interface FormValues {
   remoteOnly: boolean
   position: string
   seniority: string
-  employment: string
+  employment: "FULL_TIME" | "PART_TIME" | "CONTRACT"
   techStack: string
   isPublished: boolean
 }
@@ -33,7 +33,7 @@ export const initialValues: FormValues = {
   remoteOnly: false,
   position: '',
   seniority: '',
-  employment: '',
+  employment: "FULL_TIME",
   techStack: '',
   isPublished: false,
 }
@@ -77,7 +77,7 @@ export const useFormikInitialization = () => {
       position: values.position,
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
-      employmentType: values.employment as 'FULL_TIME' | 'PART_TIME' | 'CONTRACT',
+      employmentType: values.employment,
       isPublished: values.isPublished,
     }
 
@@ -93,8 +93,8 @@ export const useFormikInitialization = () => {
       console.log('Profile created successfully')
     } else {
       console.log('Failed to create profile.')
-      const errorData = await response.json() 
-      console.log('Error details:', errorData) 
+      const errorData = await response.json()
+      console.log('Error details:', errorData)
     }
   }
 
