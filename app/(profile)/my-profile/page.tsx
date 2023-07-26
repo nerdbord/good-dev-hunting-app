@@ -15,31 +15,36 @@ const MyProfilePage = async () => {
     redirect('/')
   }
 
-  try {
-    const response = await fetch('http://localhost:3000/api/profiles/me')
+  const response = await fetch('http://localhost:3000/api/profiles/me', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 
-    if (!response.ok) {
-      console.error('Error status:', response.status)
-      const errorText = await response.text()
-      console.error('Error text:', errorText)
-    }
-
-    const profileData = await response.json()
-
-    return (
-      <div className={styles.wrapper}>
-        <ProfileTopBar />
-        <ProfileMain />
-        <ProfileDetails />
-        <div>
-          <span>siemka {profileData.fullName}</span>
-        </div>
-        <LogOutBtn />
-      </div>
-    )
-  } catch (error) {
-    console.error('Error fetching profile:', error)
+  if (!response.ok) {
+    console.log('RESPONSE NIE JEST OK')
   }
+
+  const textResponse = await response.text()
+  console.log('RESPONSE TEKST: ', textResponse)
+
+  let profile
+  try {
+    profile = JSON.parse(textResponse)
+    console.log('TEST FULL NAME TO', profile.fullName)
+  } catch (error) {
+    console.error('STĄD BŁĘDY WYSZLI', error)
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <ProfileTopBar />
+      <ProfileMain />
+      <ProfileDetails />
+      <LogOutBtn />
+    </div>
+  )
 }
 
 export default MyProfilePage

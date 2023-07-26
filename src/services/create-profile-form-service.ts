@@ -16,7 +16,7 @@ export interface FormValues {
   remoteOnly: boolean
   position: string
   seniority: string
-  employment: "FULL_TIME" | "PART_TIME" | "CONTRACT"
+  employment: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
   techStack: string
   isPublished: boolean
 }
@@ -33,7 +33,7 @@ export const initialValues: FormValues = {
   remoteOnly: false,
   position: '',
   seniority: '',
-  employment: "FULL_TIME",
+  employment: 'FULL_TIME',
   techStack: '',
   isPublished: false,
 }
