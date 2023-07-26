@@ -15,14 +15,31 @@ const MyProfilePage = async () => {
     redirect('/')
   }
 
-  return (
-    <div className={styles.wrapper}>
-      <ProfileTopBar />
-      <ProfileMain />
-      <ProfileDetails />
-      <LogOutBtn />
-    </div>
-  )
+  try {
+    const response = await fetch('http://localhost:3000/api/profiles/me')
+
+    if (!response.ok) {
+      console.error('Error status:', response.status)
+      const errorText = await response.text()
+      console.error('Error text:', errorText)
+    }
+
+    const profileData = await response.json()
+
+    return (
+      <div className={styles.wrapper}>
+        <ProfileTopBar />
+        <ProfileMain />
+        <ProfileDetails />
+        <div>
+          <span>siemka {profileData.fullName}</span>
+        </div>
+        <LogOutBtn />
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching profile:', error)
+  }
 }
 
 export default MyProfilePage
