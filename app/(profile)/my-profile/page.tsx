@@ -15,9 +15,13 @@ const MyProfilePage = async () => {
     redirect('/')
   }
 
+  // 1. Wyciągnąć z sesji token z requesta w tym widoku
+
   const response = await fetch('http://localhost:3000/api/profiles/me', {
     method: 'GET',
     headers: {
+      // 2. Dodać do nagłówka requesta token z sesji
+      Cookie: 'token do autoryzacji',
       'Content-Type': 'application/json',
     },
   })
