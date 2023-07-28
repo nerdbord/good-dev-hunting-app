@@ -16,6 +16,7 @@ const MyProfilePage = async () => {
   }
 
   // 1. Wyciągnąć z sesji token z requesta w tym widoku
+  // https://stackoverflow.com/questions/69057271/why-are-cookies-not-sent-to-the-server-via-getserversideprops-in-next-js/69058105#69058105
 
   const response = await fetch('http://localhost:3000/api/profiles/me', {
     method: 'GET',
