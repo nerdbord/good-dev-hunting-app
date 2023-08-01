@@ -6,11 +6,11 @@ import {
 import { ProfilePayload } from '@/backend/profile/profile.types'
 import { authorizeUser } from '@/lib/auth'
 
-export async function GET(request: Request, id: string) {
+export async function GET(request: Request, profileId: string) {
   try {
     await authorizeUser()
 
-    const serializedProfile = await getProfileById(id)
+    const serializedProfile = await getProfileById(profileId)
 
     return NextResponse.json({
       message: 'Success',

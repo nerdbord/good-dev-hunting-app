@@ -24,10 +24,10 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    await authorizeUser()
+    const { email } = await authorizeUser()
     const userData: CreateUserPayload = await request.json()
 
-    const foundUser = await doesUserExist(userData.email)
+    const foundUser = await doesUserExist(email)
 
     if (!foundUser) {
       const newUser = await createUser(userData)
