@@ -5,7 +5,6 @@ import { authorizeUser } from '@/lib/auth'
 export async function GET() {
   try {
     const { email } = await authorizeUser()
-
     const userProfile = await getProfileByUserId(email)
 
     return NextResponse.json({
