@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CopyEmail = () => {
+const EmailIcon = () => {
   return (
     <svg
       width="20"
@@ -28,4 +28,4 @@ const CopyEmail = () => {
   )
 }
 
-export default CopyEmail
+export default EmailIcon

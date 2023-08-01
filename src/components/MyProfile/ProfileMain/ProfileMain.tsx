@@ -1,54 +1,61 @@
-'use client'
 import React from 'react'
 import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
-import DefaultUserImg from '/public/default-avatar.png'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
-import CopyEmail from '@/assets/icons/CopyEmail'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/🇵🇱.jpg'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { redirect } from 'next/navigation'
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { CopyEmail } from '@/components/CopyEmail/Copyemail'
+import { GoBackButton } from '@/components/GoBackButton/GoBackButton'
+const ProfileMain = async () => {
+  const session = await getServerSession(authOptions)
 
-const ProfileMain = () => {
-  const { data: session } = useSession()
-  const avatar = session?.user.image || DefaultUserImg
-  const name = session?.user.name || null
+  if (!session) {
+    redirect('/')
+  }
 
-  const router = useRouter()
+  const profile = await getProfileByUserEmail(session.user.email)
 
   return (
     <>
-      <div className={styles.container}>
+      <section className={styles.container}>
         <div className={styles.nav}>
-          <div className={styles.back} onClick={() => router.back()}>
-            Go back
-          </div>
-          <div className={styles.social}>
-            <div className={styles.socialItem}>
+          <GoBackButton>Go Back</GoBackButton>
+          <ul className={styles.social}>
+            <li className={styles.socialItem}>
               Github
               <GithubIcon2 />
-            </div>
-            <div className={styles.socialItem}>
-              LinkedIn
-              <LinkedIn />
-            </div>
-            <div className={styles.socialItem}>
-              Copy email
-              <CopyEmail />
-            </div>
-          </div>
+            </li>
+            {profile?.linkedIn && (
+              <li className={styles.socialItem}>
+                <a
+                  href={profile.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                  <LinkedIn />
+                </a>
+              </li>
+            )}
+            <li className={styles.socialItem}>
+              <CopyEmail email={session.user.email} />
+            </li>
+          </ul>
         </div>
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={avatar}
+              src={session.user.image}
               width={100}
               height={100}
               alt="user's avatar"
               className={styles.avatar}
             />
-            <div className={styles.name}>{name}</div>
+            <div className={styles.name}>{session?.user.name}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
@@ -59,23 +66,30 @@ const ProfileMain = () => {
                 height={20}
                 className={styles.flag}
               />
-              Poland, Warsaw{' '}
+              <p>
+                {profile?.country.name} {profile?.city.name}
+              </p>
             </div>
-            <div className={styles.location}>Open to relocation</div>
-            <div className={styles.location}>Remote only</div>
+
+            {profile?.country.openForRelocation && (
+              <div className={styles.location}>Open to relocation</div>
+            )}
+            {profile?.remoteOnly && (
+              <div className={styles.location}>Remote only</div>
+            )}
           </div>
           <div className={styles.addInfoBox}>
-            <div className={styles.seniority}>Senior Fullstack Developer</div>
+            <span className={styles.seniority}>
+              {profile?.seniority} {profile?.position} Developer
+            </span>
             <div className={styles.addInfo}>
-              <div className={styles.addInfoItem}>Full-time</div>
-              <span className={styles.slash}>/</span>
-              <div className={styles.addInfoItem}>Part-time</div>
-              <span className={styles.slash}>/</span>
-              <div className={styles.addInfoItem}>Contact</div>
+              <div className={styles.addInfoItem}>
+                {profile?.employmentType}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   )
 }
