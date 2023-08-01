@@ -12,7 +12,7 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session?.user?.email) {
+  if (!session) {
     redirect('/')
   }
 
