@@ -12,8 +12,8 @@ import PolandFlag from '@/assets/images/🇵🇱.jpg'
 
 const ProfileMain = () => {
   const { data: session } = useSession()
-  const avatar = session?.user?.image || DefaultUserImg
-  const name = session?.user?.name || null
+  const avatar = session?.user.image || DefaultUserImg
+  const name = session?.user.name || null
 
   const router = useRouter()
 
