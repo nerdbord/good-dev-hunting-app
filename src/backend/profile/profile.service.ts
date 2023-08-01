@@ -41,10 +41,12 @@ export async function getProfileById(id: string) {
   return null
 }
 
-export async function doesUserProfileExist(userId: string) {
+export async function doesUserProfileExist(email: string) {
   const foundProfile = await prisma.profile.findFirst({
     where: {
-      userId,
+      user: {
+        email,
+      },
     },
     include: {
       user: true,
@@ -57,13 +59,13 @@ export async function doesUserProfileExist(userId: string) {
 }
 
 export async function createUserProfile(
-  userId: string,
+  email: string,
   profileData: CreateProfilePayload,
 ) {
   const createdUser = await prisma.profile.create({
     data: {
       user: {
-        connect: { id: userId },
+        connect: { email },
       },
       fullName: profileData.fullName,
       linkedIn: profileData.linkedIn,
@@ -114,6 +116,23 @@ export async function updateUserData(
 export async function getProfileByUserId(userId: string) {
   const profile = await prisma.profile.findFirst({
     where: { userId },
+    include: {
+      user: true,
+      country: true,
+      city: true,
+    },
+  })
+
+  if (profile) {
+    return serializeProfilesToProfilePayload(profile)
+  }
+
+  return null
+}
+
+export async function getProfileByUserEmail(email: string) {
+  const profile = await prisma.profile.findFirst({
+    where: { user: { email } },
     include: {
       user: true,
       country: true,

@@ -1,7 +1,19 @@
 import type { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { getServerSession } from 'next-auth'
-import { prisma } from './prismaClient'
+import { findOrCreateUser, findUserByEmail } from '@/backend/user/user.service'
+
+interface UserAuthed {
+  id: string
+  name: string
+  email: string
+  image: string
+}
+
+interface GitHubProfileAuthed {
+  login: string
+  avatar_url: string
+}
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -13,53 +25,37 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET || '',
     }),
   ],
-
   callbacks: {
-    session: async ({ session, token }) => {
-      let user
-      console.log('session in session', session)
+    async jwt({ token, user }) {
+      const foundUser = token.email ? await findUserByEmail(token.email) : null
 
-      if (session) {
-        const email = session.user.email
-        const name = session.user.name
-        const image = session.user.image
-
-        if (email) {
-          const foundUser = await prisma.user.findFirst({
-            where: { email: email },
-          })
-
-          user = foundUser
-
-          if (!foundUser && name) {
-            const createdUser = await prisma.user.create({
-              data: {
-                email: email,
-                githubDetails: {
-                  create: {
-                    username: name,
-                    image: image,
-                  },
-                },
-              },
-              include: {
-                githubDetails: true,
-              },
-            })
-
-            user = createdUser
-          }
-        }
+      if (!foundUser) {
+        return {}
       }
 
-      return {
-        ...session,
-        ...token,
-        user: {
-          id: user?.id,
-          ...user,
-        },
+      token.id = foundUser.id
+
+      return { ...token, ...user }
+    },
+    async signIn({ user, profile }): Promise<boolean> {
+      const castedUser = user as UserAuthed
+      const castedProfile = profile as GitHubProfileAuthed
+
+      if (user && profile) {
+        const foundOrCreatedUser = await findOrCreateUser({
+          email: castedUser.email,
+          username: castedProfile.login,
+          imageSrc: castedProfile.avatar_url,
+        })
+
+        return !!foundOrCreatedUser
       }
+
+      return false
+    },
+    async session({ session, token }) {
+      session.user = token
+      return session
     },
   },
 }
@@ -67,9 +63,9 @@ export const authOptions: NextAuthOptions = {
 export const authorizeUser = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session?.user) {
+  if (!session?.user?.email) {
     throw Error('Unauthorized')
   }
 
-  return session.user
+  return { email: session.user.email }
 }

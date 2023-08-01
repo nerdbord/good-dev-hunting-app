@@ -7,40 +7,16 @@ import LogOutBtn from '@/inputs/LogOutBtn/LogOutBtn'
 import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
 import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
 import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session) {
+  if (!session?.user?.email) {
     redirect('/')
   }
 
-  // 1. Wyciągnąć z sesji token z requesta w tym widoku
-  // https://stackoverflow.com/questions/69057271/why-are-cookies-not-sent-to-the-server-via-getserversideprops-in-next-js/69058105#69058105
-
-  const response = await fetch('http://localhost:3000/api/profiles/me', {
-    method: 'GET',
-    headers: {
-      // 2. Dodać do nagłówka requesta token z sesji
-      Cookie: 'token do autoryzacji',
-      'Content-Type': 'application/json',
-    },
-  })
-
-  if (!response.ok) {
-    console.log('RESPONSE NIE JEST OK')
-  }
-
-  const textResponse = await response.text()
-  console.log('RESPONSE TEKST: ', textResponse)
-
-  let profile
-  try {
-    profile = JSON.parse(textResponse)
-    console.log('TEST FULL NAME TO', profile.fullName)
-  } catch (error) {
-    console.error('STĄD BŁĘDY WYSZLI', error)
-  }
+  const profile = await getProfileByUserEmail(session.user.email)
 
   return (
     <div className={styles.wrapper}>

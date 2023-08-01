@@ -26,14 +26,12 @@ export async function POST(request: NextRequest) {
 
     console.log('User data from request:', userData) // console log
 
-    const user = await authorizeUser()
+    const { email } = await authorizeUser()
 
-    console.log('User authorized:', user) // console log
-
-    const foundUser = await doesUserProfileExist(user.id)
+    const foundUser = await doesUserProfileExist(email)
 
     if (!foundUser) {
-      const newUser = await createUserProfile(user.id, userData)
+      const newUser = await createUserProfile(email, userData)
 
       console.log('New user created:', newUser) // console log
 
