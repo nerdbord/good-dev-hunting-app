@@ -13,9 +13,6 @@ const ProfileDetails = async () => {
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
-  console.log('profilek', profile)
-  const dupa = session.user
-  console.log(dupa)
 
   return (
     <>
