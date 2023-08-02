@@ -4,7 +4,7 @@ import { Button } from '@/inputs/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
 import { useRouter } from 'next/navigation'
-
+import { AppRoutes } from '@/utils/routes'
 const ProfileTopBar = () => {
   const router = useRouter()
   const { handleSubmit, errors } = useFormikContext()
@@ -12,7 +12,7 @@ const ProfileTopBar = () => {
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     handleSubmit()
-    router.push('/my-profile')
+    router.push(AppRoutes.myProfile)
   }
 
   return (

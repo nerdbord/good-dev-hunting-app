@@ -12,16 +12,18 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session) {
+  if (!session || !session.user) {
     redirect('/')
   }
-
+  
   const profile = await getProfileByUserEmail(session.user.email)
 
   return (
     <div className={styles.wrapper}>
       <ProfileTopBar />
+       {/* @ts-expect-error Server Component */}
       <ProfileMain />
+       {/* @ts-expect-error Server Component */}
       <ProfileDetails />
       <LogOutBtn />
     </div>
