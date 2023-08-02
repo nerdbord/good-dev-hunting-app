@@ -15,15 +15,15 @@ const MyProfilePage = async () => {
   if (!session || !session.user) {
     redirect('/')
   }
-  
+
   const profile = await getProfileByUserEmail(session.user.email)
 
   return (
     <div className={styles.wrapper}>
       <ProfileTopBar />
-       {/* @ts-expect-error Server Component */}
+      {/* @ts-expect-error Server Component */}
       <ProfileMain />
-       {/* @ts-expect-error Server Component */}
+      {/* @ts-expect-error Server Component */}
       <ProfileDetails />
       <LogOutBtn />
     </div>
