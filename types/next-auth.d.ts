@@ -1,5 +1,4 @@
-import NextAuth, { DefaultSession } from 'next-auth'
-import { DefaultJWT } from 'next-auth/src/jwt/types'
+import NextAuth from 'next-auth'
 
 declare module 'next-auth' {
   /**
@@ -13,8 +12,10 @@ declare module 'next-auth' {
       name: string
     }
   }
+}
 
-  interface JWT extends Record<string, unknown>, DefaultJWT {
-    id: string
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string | null
   }
 }

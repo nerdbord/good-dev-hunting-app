@@ -30,7 +30,9 @@ export const authOptions: NextAuthOptions = {
       const foundUser = token.email ? await findUserByEmail(token.email) : null
 
       if (!foundUser) {
-        return {}
+        return {
+          id: null,
+        }
       }
 
       token.id = foundUser.id
