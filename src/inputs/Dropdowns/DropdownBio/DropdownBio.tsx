@@ -67,14 +67,18 @@ export const DropdownBio = ({
         {isDropdownActive && (
           <div className={styles.dropdown}>
             {options.map((option, index) => (
-              <label key={index} className={styles.dropdownInput} htmlFor={id}>
+              <label
+                key={index}
+                className={styles.dropdownInput}
+                htmlFor={`${id}-${index}`}
+              >
                 <div
                   className={cx(styles.checkbox, {
                     [styles.checked]: selectedValue === option,
                   })}
                 >
                   <input
-                    id={id}
+                    id={`${id}-${index}`}
                     type="checkbox"
                     className={styles.hidden}
                     checked={selectedValue === option}
