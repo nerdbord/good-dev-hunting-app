@@ -7,6 +7,7 @@ import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
 import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import { EmploymentType } from '@/utils/constants'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -73,23 +74,23 @@ const WorkInformation = () => {
           Employment type
           <CheckboxInput
             id="fulltime"
-            label="FULL_TIME"
-            checked={values.employment === 'FULL_TIME'}
-            onChange={() => handleEmploymentType('FULL_TIME')}
+            label={EmploymentType.FULL_TIME}
+            checked={values.employment === EmploymentType.FULL_TIME}
+            onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name="fulltime"
           />
           <CheckboxInput
             id="parttime"
-            label="PART_TIME"
-            checked={values.employment === 'PART_TIME'}
-            onChange={() => handleEmploymentType('PART_TIME')}
+            label={EmploymentType.PART_TIME}
+            checked={values.employment === EmploymentType.PART_TIME}
+            onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name="parttime"
           />
           <CheckboxInput
             id="contract"
-            label="CONTRACT"
-            checked={values.employment === 'CONTRACT'}
-            onChange={() => handleEmploymentType('CONTRACT')}
+            label={EmploymentType.CONTRACT}
+            checked={values.employment === EmploymentType.CONTRACT}
+            onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name="contract"
           />
         </InputFormError>

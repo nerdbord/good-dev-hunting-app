@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
 import { ProfilePayload } from '@/backend/profile/profile.types'
-
+import { EmploymentType } from '@/utils/constants'
 export interface FormValues {
   fullName: string
   contactEmail: string
@@ -16,7 +16,7 @@ export interface FormValues {
   remoteOnly: boolean
   position: string
   seniority: string
-  employment: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
+  employment: EmploymentType
   techStack: string
   isPublished: boolean
 }
@@ -33,7 +33,7 @@ export const initialValues: FormValues = {
   remoteOnly: false,
   position: '',
   seniority: '',
-  employment: 'FULL_TIME',
+  employment: EmploymentType.FULL_TIME,
   techStack: '',
   isPublished: false,
 }
@@ -62,7 +62,7 @@ export const useFormikInitialization = () => {
     const payload: ProfilePayload = {
       id: session?.user.id,
       fullName: values.fullName,
-      email: session?.user.email,
+      email: session?.user.email || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: {

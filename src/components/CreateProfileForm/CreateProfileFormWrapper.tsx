@@ -9,10 +9,11 @@ import {
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
   const { onSubmit } = useFormikInitialization()
+
   return (
     <Formik
-      validationSchema={validationSchema}
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
       {children}

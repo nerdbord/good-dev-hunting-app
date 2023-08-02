@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client'
 export interface ProfilePayload {
   id?: string
   fullName: string
-  email?: string | null
+  email: string | null
   linkedIn: string | null
   userId?: string
   bio: string

@@ -24,8 +24,6 @@ export async function POST(request: NextRequest) {
   try {
     const userData: CreateProfilePayload = await request.json()
 
-    console.log('User data from request:', userData) // console log
-
     const { email } = await authorizeUser()
 
     const foundUser = await doesUserProfileExist(email)
@@ -33,14 +31,12 @@ export async function POST(request: NextRequest) {
     if (!foundUser) {
       const newUser = await createUserProfile(email, userData)
 
-      console.log('New user created:', newUser) // console log
-
       return new NextResponse(JSON.stringify(newUser), { status: 201 })
     } else {
       return new NextResponse('Such user already exist', { status: 409 })
     }
   } catch (error) {
-    console.log('Error:', error) // console log
+    console.log('Error:', error)
     return new NextResponse(`${error}`, { status: 500 })
   }
 }
