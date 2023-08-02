@@ -58,7 +58,6 @@ export const useFormikInitialization = () => {
   const { data: session } = useSession()
 
   const onSubmit = async (values: FormValues) => {
-    console.log('Form values:', values)
     const payload: ProfilePayload = {
       id: session?.user.id,
       fullName: values.fullName,

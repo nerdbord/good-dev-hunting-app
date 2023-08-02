@@ -8,8 +8,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-import CopyEmail from '@/components/CopyEmail/CopyEmail'
 import { GoBackButton } from '@/components/GoBackButton/GoBackButton'
+import CopyEmail from '@/components/CopyEmail/Copyemail'
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
 
