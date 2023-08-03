@@ -4,11 +4,11 @@ import styles from './GoBackButton.module.scss'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 
-interface GoBackButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
-}
 
-export const GoBackButton = ({ children }: PropsWithChildren<GoBackButtonProps>) => {
+
+export const GoBackButton = ({
+  children,
+}: PropsWithChildren<object>) => {
   const router = useRouter()
 
   const handleClick = () => {
