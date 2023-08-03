@@ -8,7 +8,7 @@ interface CopyEmailProps {
 }
 export const CopyEmail = ({ email }: CopyEmailProps) => {
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email)
+    navigator.clipboard.writeText(email).catch(console.error)
   }
 
   return (
