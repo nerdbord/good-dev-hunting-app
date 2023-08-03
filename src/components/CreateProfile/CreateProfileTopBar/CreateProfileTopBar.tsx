@@ -3,13 +3,16 @@ import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/inputs/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
-
+import { useRouter } from 'next/navigation'
+import { AppRoutes } from '@/utils/routes'
 const ProfileTopBar = () => {
+  const router = useRouter()
   const { handleSubmit, errors } = useFormikContext()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     handleSubmit()
+    router.push(AppRoutes.myProfile)
   }
 
   return (
