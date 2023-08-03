@@ -7,6 +7,7 @@ import CheckboxInput from '@/inputs/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
 import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import { EmploymentType } from '@/utils/constants'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -18,11 +19,7 @@ const WorkInformation = () => {
     useFormikContext<FormValues>()
 
   const handleEmploymentType = (option: string): void => {
-    const newEmployment = values.employment.includes(option)
-      ? values.employment.filter((selectedOption) => selectedOption !== option)
-      : [...values.employment, option]
-
-    setFieldValue('employment', newEmployment)
+    setFieldValue('employment', option)
   }
 
   return (
@@ -77,23 +74,23 @@ const WorkInformation = () => {
           Employment type
           <CheckboxInput
             id="fulltime"
-            label="Full-time"
-            checked={values.employment.includes('Full-time')}
-            onChange={() => handleEmploymentType('Full-time')}
+            label={EmploymentType.FULL_TIME}
+            checked={values.employment === EmploymentType.FULL_TIME}
+            onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name="fulltime"
           />
           <CheckboxInput
             id="parttime"
-            label="Part-time"
-            checked={values.employment.includes('Part-time')}
-            onChange={() => handleEmploymentType('Part-time')}
+            label={EmploymentType.PART_TIME}
+            checked={values.employment === EmploymentType.PART_TIME}
+            onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name="parttime"
           />
           <CheckboxInput
             id="contract"
-            label="Contract"
-            checked={values.employment.includes('Contract')}
-            onChange={() => handleEmploymentType('Contract')}
+            label={EmploymentType.CONTRACT}
+            checked={values.employment === EmploymentType.CONTRACT}
+            onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name="contract"
           />
         </InputFormError>

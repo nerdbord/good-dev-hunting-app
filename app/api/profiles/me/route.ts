@@ -1,19 +1,15 @@
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { NextResponse } from 'next/server'
-import { getProfileById } from '@/backend/profile/profile.service'
 import { authorizeUser } from '@/lib/auth'
 
 export async function GET() {
   try {
-    const user = await authorizeUser()
-    const profile = await getProfileById(user.id)
-
-    if (!profile) {
-      return new Response('Profile does not exist', { status: 404 })
-    }
+    const { email } = await authorizeUser()
+    const userProfile = await getProfileByUserEmail(email)
 
     return NextResponse.json({
       message: 'Success',
-      profile: profile,
+      profile: userProfile,
     })
   } catch (error) {
     return new Response(`${error}`, { status: 500 })

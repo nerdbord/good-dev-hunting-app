@@ -1,11 +1,11 @@
 import { Prisma } from '@prisma/client'
 
 export interface ProfilePayload {
-  id: string
+  id?: string
   fullName: string
-  email: string
+  email: string | null
   linkedIn: string | null
-  userId: string
+  userId?: string
   bio: string
   country: {
     name: string

@@ -8,11 +8,13 @@ import LocationPreferences from '@/components/CreateProfile/LocationPreferences/
 import CreateProfileTopBar from '@/components/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
 import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import { AppRoutes } from '@/utils/routes'
+
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session) {
-    redirect('/')
+    redirect(AppRoutes.home)
   }
 
   return (

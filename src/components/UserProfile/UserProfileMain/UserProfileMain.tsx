@@ -4,7 +4,7 @@ import styles from './UserProfileMain.module.scss'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
-import CopyEmail from '@/assets/icons/CopyEmail'
+import EmailIcon from '@/assets/icons/EmailIcon'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import { profileData } from '@/components/ProfileList/profile-data'
@@ -33,7 +33,7 @@ const UserProfileMain = () => {
             </div>
             <div className={styles.socialItem}>
               Copy email
-              <CopyEmail />
+              <EmailIcon />
             </div>
           </div>
         </div>
