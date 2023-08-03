@@ -4,11 +4,7 @@ import styles from './GoBackButton.module.scss'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 
-
-
-export const GoBackButton = ({
-  children,
-}: PropsWithChildren<object>) => {
+export const GoBackButton = ({ children }: PropsWithChildren<object>) => {
   const router = useRouter()
 
   const handleClick = () => {
