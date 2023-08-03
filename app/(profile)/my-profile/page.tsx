@@ -7,16 +7,14 @@ import LogOutBtn from '@/inputs/LogOutBtn/LogOutBtn'
 import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
 import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
 import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { AppRoutes } from '@/utils/routes'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user) {
-    redirect('/')
+    redirect(AppRoutes.home)
   }
-
-  const profile = await getProfileByUserEmail(session.user.email)
 
   return (
     <div className={styles.wrapper}>
