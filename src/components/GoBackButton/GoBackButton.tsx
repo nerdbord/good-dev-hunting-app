@@ -2,11 +2,17 @@
 import React, { PropsWithChildren } from 'react'
 import styles from './GoBackButton.module.scss'
 import { useRouter } from 'next/navigation'
-export const GoBackButton = ({ children }: PropsWithChildren<object>) => {
+import { AppRoutes } from '@/utils/routes'
+
+interface GoBackButtonProps {
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+export const GoBackButton = ({ children }: PropsWithChildren<GoBackButtonProps>) => {
   const router = useRouter()
 
   const handleClick = () => {
-    router.push('/')
+    router.push(AppRoutes.home)
   }
 
   return (
