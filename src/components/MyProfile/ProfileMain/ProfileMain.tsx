@@ -10,14 +10,18 @@ import { redirect } from 'next/navigation'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { GoBackButton } from '@/components/GoBackButton/GoBackButton'
+import { AppRoutes } from '@/utils/routes'
+
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user) {
-    redirect('/')
+    redirect(AppRoutes.home)
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
+  console.log('profilek', profile);
+  console.log(session);
 
   return (
     <>
