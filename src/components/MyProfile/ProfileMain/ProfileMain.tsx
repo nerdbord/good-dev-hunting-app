@@ -20,8 +20,8 @@ const ProfileMain = async () => {
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
-  console.log('profilek', profile);
-  console.log(session);
+  console.log('profilek', profile)
+  console.log(session)
 
   return (
     <>
