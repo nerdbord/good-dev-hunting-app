@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './ProfileTopBar.module.scss'
 import { Button } from '@/inputs/Button/Button'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { AppRoutes } from '@/utils/routes'
 
 const ProfileTopBar = () => {
@@ -25,9 +25,6 @@ const ProfileTopBar = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          isPublished: true,
-        }),
       },
     )
     if (response.ok) {
