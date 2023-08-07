@@ -8,6 +8,7 @@ interface UserAuthed {
   name: string
   email: string
   image: string
+  profileId?: string
 }
 
 interface GitHubProfileAuthed {
@@ -28,15 +29,16 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       const foundUser = token.email ? await findUserByEmail(token.email) : null
-
-      if (!foundUser) {
+  
+      if (!foundUser || !foundUser.profile) {
         return {
           id: null,
         }
       }
-
+  
       token.id = foundUser.id
-
+      token.profileId = foundUser.profile ? foundUser.profile.id : null  
+  
       return { ...token, ...user }
     },
     async signIn({ user, profile }): Promise<boolean> {
@@ -59,8 +61,9 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string
         session.user.email = token.email as string
+        session.user.profileId = token.profileId ? token.profileId as string : null  // dodatkowe sprawdzenie na null
       }
-
+  
       return session
     },
   },
