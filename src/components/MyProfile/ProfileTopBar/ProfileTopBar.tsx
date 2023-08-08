@@ -15,16 +15,18 @@ const ProfileTopBar = () => {
 
   const handlePublishClick = async () => {
     if (!profileId) {
-        throw new Error('Missing profile ID, please check if the authorization was successful.');
+      throw new Error(
+        'Missing profile ID, please check if the authorization was successful.',
+      )
     }
 
     try {
-        await apiClient.publishMyProfile(profileId);
-        console.log('Profile published successfully');
+      await apiClient.publishMyProfile(profileId)
+      console.log('Profile published successfully')
     } catch (error) {
-        console.error('Failed to publish profile', error);
+      console.error('Failed to publish profile', error)
     }
-}
+  }
 
   const handleEditClick = () => {
     router.push(AppRoutes.createProfile)
