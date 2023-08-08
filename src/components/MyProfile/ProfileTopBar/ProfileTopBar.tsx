@@ -9,20 +9,22 @@ import { apiClient } from '@/lib/apiClient'
 
 const ProfileTopBar = () => {
   const router = useRouter()
-  
+
   const { data: session } = useSession()
   const profileId = session?.user?.profileId
-  console.log(profileId);
+
   const handlePublishClick = async () => {
-    if (profileId) {
-      try {
-        await apiClient.publishMyProfile(profileId)
-        console.log('Profile published successfully')
-      } catch (error) {
-        console.error('Failed to publish profile', error)
-      }
+    if (!profileId) {
+        throw new Error('Missing profile ID, please check if the authorization was successful.');
     }
-  }
+
+    try {
+        await apiClient.publishMyProfile(profileId);
+        console.log('Profile published successfully');
+    } catch (error) {
+        console.error('Failed to publish profile', error);
+    }
+}
 
   const handleEditClick = () => {
     router.push(AppRoutes.createProfile)
