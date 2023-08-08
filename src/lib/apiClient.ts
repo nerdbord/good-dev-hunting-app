@@ -1,11 +1,7 @@
-
-import { Session } from 'next-auth'
 const API_URL = 'http://localhost:3000/api';
 
 export const apiClient = {
-  publishProfile: async (session: Session | null) => {
-    const profileId = session?.user?.profileId;
-
+  publishMyProfile: async (profileId: string) => {
     if (!profileId) {
       throw new Error('No profile ID found');
     }
@@ -24,5 +20,4 @@ export const apiClient = {
       throw new Error('Failed to publish profile');
     }
   },
-
 }

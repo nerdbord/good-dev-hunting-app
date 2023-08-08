@@ -6,7 +6,9 @@ export async function POST(request: NextRequest, id: string) {
   try {
     await authorizeUser()
 
-    const updateUserProfileById = await updateUserData(id, { isPublished: true })
+    const updateUserProfileById = await updateUserData(id, {
+      isPublished: true,
+    })
 
     return NextResponse.json({
       message: 'Success',
