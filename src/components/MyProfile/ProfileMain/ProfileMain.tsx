@@ -14,7 +14,7 @@ import { AppRoutes } from '@/utils/routes'
 
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
-  console.log('sesyjka', session)
+
   if (!session || !session.user) {
     redirect(AppRoutes.home)
   }
