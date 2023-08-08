@@ -8,17 +8,19 @@ import { AppRoutes } from '@/utils/routes'
 import { apiClient } from '@/lib/apiClient'
 
 const ProfileTopBar = () => {
-  const { data: session } = useSession()
-  console.log(session);
-
   const router = useRouter()
-
+  
+  const { data: session } = useSession()
+  const profileId = session?.user?.profileId
+  console.log(profileId);
   const handlePublishClick = async () => {
-    try {
-      await apiClient.publishProfile(session)
-      console.log('Profile published successfully')
-    } catch (error) {
-      console.error('Failed to publish profile', error)
+    if (profileId) {
+      try {
+        await apiClient.publishMyProfile(profileId)
+        console.log('Profile published successfully')
+      } catch (error) {
+        console.error('Failed to publish profile', error)
+      }
     }
   }
 

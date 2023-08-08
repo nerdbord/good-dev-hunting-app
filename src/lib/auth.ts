@@ -29,16 +29,16 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       const foundUser = token.email ? await findUserByEmail(token.email) : null
-  
-      if (!foundUser || !foundUser.profile) {
+
+      if (!foundUser) {
         return {
           id: null,
         }
       }
-  
+
       token.id = foundUser.id
-      token.profileId = foundUser.profile ? foundUser.profile.id : null  
-  
+      token.profileId = foundUser.profile?.id 
+
       return { ...token, ...user }
     },
     async signIn({ user, profile }): Promise<boolean> {
@@ -61,9 +61,11 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string
         session.user.email = token.email as string
-        session.user.profileId = token.profileId ? token.profileId as string : null  // dodatkowe sprawdzenie na null
+        session.user.profileId = token.profileId
+          ? (token.profileId as string)
+          : null 
       }
-  
+
       return session
     },
   },
