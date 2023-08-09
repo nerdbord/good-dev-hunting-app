@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client'
 
 export interface UserPayload {
   id: string
-  profileId: string | null
+  profileId: string
   githubCredentials: {
     username: string
     email: string
