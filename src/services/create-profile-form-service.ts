@@ -2,7 +2,10 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
-import { ProfilePayload } from '@/backend/profile/profile.types'
+import {
+  CreateProfilePayload,
+  ProfilePayload,
+} from '@/backend/profile/profile.types'
 import { EmploymentType } from '@/utils/constants'
 export interface FormValues {
   fullName: string
@@ -57,10 +60,15 @@ export const validationSchema = Yup.object().shape({
 export const useFormikInitialization = () => {
   const { data: session } = useSession()
 
+  if (!session) {
+    throw new Error('User is not authenticated')
+  }
+
   const onSubmit = async (values: FormValues) => {
-    const payload: ProfilePayload = {
-      id: session?.user.id,
+    const payload: CreateProfilePayload = {
+      userId: session.user.id,
       fullName: values.fullName,
+      avatarUrl: session?.user.image || null,
       email: session?.user.email || null,
       linkedIn: values.linkedin,
       bio: values.bio,
