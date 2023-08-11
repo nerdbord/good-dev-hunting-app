@@ -4,6 +4,9 @@ import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
 import { ProfilePayload } from '@/backend/profile/profile.types'
 import { EmploymentType } from '@/utils/constants'
+/* import { getUserProfile } from '@/lib/apiClient' */
+
+/* const profile = getUserProfile() */
 
 export interface FormValues {
   fullName: string
@@ -52,7 +55,6 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  // employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
 })
 
 export const useFormikInitialization = () => {
@@ -81,8 +83,8 @@ export const useFormikInitialization = () => {
       isPublished: values.isPublished,
     }
 
-    const response = await fetch('/api/profiles', {
-      method: 'POST',
+    const response = await fetch('/api/profiles/me', {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -48,7 +48,10 @@ const DefaultHeader = () => {
           Login
           <GithubIcon />
         </Button>
-        <Button onClick={() => signIn()} variant={'primary'}>
+        <Button
+          onClick={() => router.push('/create-profile')}
+          variant={'primary'}
+        >
           Create profile
           <AddIcon />
         </Button>

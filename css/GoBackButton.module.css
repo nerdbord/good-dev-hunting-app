@@ -1,0 +1,10 @@
+.back {
+  padding: 12px 24px;
+  color: #a687ff;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}

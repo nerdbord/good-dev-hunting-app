@@ -1,0 +1,34 @@
+.formTextarea {
+  display: flex;
+  width: 100%;
+  height: 414px;
+  align-items: flex-start;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  resize: none;
+  padding: 16px 24px 16px 20px;
+}
+.formTextarea::placeholder {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: #69717b;
+}
+.formLabel {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #89939e;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.formItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}

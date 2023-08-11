@@ -1,0 +1,14 @@
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.buttonBox {
+  display: flex;
+  gap: 8px;
+}
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+}

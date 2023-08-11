@@ -29,7 +29,7 @@ const ProfileTopBar = () => {
   }
 
   const handleEditClick = () => {
-    router.push(AppRoutes.createProfile)
+    router.push(AppRoutes.editProfile)
   }
 
   return (

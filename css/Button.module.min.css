@@ -1,0 +1,27 @@
+.buttonPrimary,
+.buttonSecondary {
+  display: flex;
+  height: 42px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #7d54f1;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+.buttonPrimary {
+  height: 44px;
+  color: #fff;
+  background: #7d54f1;
+}
+.buttonSecondary {
+  height: 44px;
+  color: #7d54f1;
+  background: rgba(0, 0, 0, 0);
+}
