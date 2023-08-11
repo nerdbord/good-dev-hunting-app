@@ -13,6 +13,7 @@ datasource db {
 
 model User {
   id            String         @id @default(uuid())
+  avatarUrl     String?
   email         String         @unique
   profile       Profile? //user have profile //relations  
   githubDetails GitHubDetails? //user have gitHub //relations
@@ -39,7 +40,6 @@ model Profile {
 
 model GitHubDetails {
   id       String @id @default(uuid())
-  image    String?
   username String @unique
   user     User   @relation(fields: [userId], references: [id])
   userId   String @unique
