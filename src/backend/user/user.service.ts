@@ -72,10 +72,10 @@ export const findOrCreateUser = async (data: {
   const createdUser = await prisma.user.create({
     data: {
       email: data.email,
+      avatarUrl: data.imageSrc,
       githubDetails: {
         create: {
           username: data.username,
-          image: data.imageSrc,
         },
       },
     },
@@ -91,10 +91,10 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
   const createdUser = await prisma.user.create({
     data: {
       email: userDataFromGh.email,
+      avatarUrl: userDataFromGh.image,
       githubDetails: {
         create: {
           username: userDataFromGh.name,
-          image: userDataFromGh.image,
         },
       },
     },
