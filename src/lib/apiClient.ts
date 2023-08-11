@@ -14,3 +14,23 @@ export const apiClient = {
     }
   },
 }
+
+export const getUserProfile = async () => {
+  try {
+    const response = await fetch('/api/profiles/me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    if (response.ok) {
+      const data = await response.json()
+      return data.profile
+    } else {
+      console.error('Failed to fetch profile.')
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return null
+}

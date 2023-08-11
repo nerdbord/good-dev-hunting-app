@@ -1,0 +1,27 @@
+.default {
+  background: #0f1217;
+  border-radius: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+.Frontend {
+  border: 1px solid rgba(19, 203, 170, 0.2);
+  color: #13cbaa;
+}
+.Backend {
+  border: 1px solid rgba(255, 177, 104, 0.2);
+  color: #ffb168;
+}
+.Fullstack {
+  border: 1px solid rgba(85, 181, 235, 0.2);
+  color: #55b5eb;
+}
+.pressed {
+  box-shadow: 0 0 10px rgba(155, 155, 155, 0.2);
+  border-width: 1.5px;
+  background-color: #11141b;
+}

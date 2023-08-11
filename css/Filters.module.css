@@ -1,0 +1,18 @@
+.mainContainer {
+  background: #0f1217;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8%;
+  margin-top: 30px;
+}
+
+.features {
+  display: flex;
+  gap: 11px;
+}
+
+.devType {
+  display: flex;
+  gap: 16px;
+}

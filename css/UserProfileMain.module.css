@@ -1,0 +1,116 @@
+.container {
+  background: #04080d;
+  padding: 24px;
+  margin: 20px 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+}
+
+.back {
+  padding: 12px 24px;
+  color: #a687ff;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.socialItem {
+  padding: 12px 24px;
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.profile {
+  padding-top: 32px;
+  padding-left: 76px;
+  padding-right: 76px;
+  padding-bottom: 76px;
+}
+
+.user {
+  display: flex;
+  margin-bottom: 24px;
+  align-items: center;
+  gap: 35px;
+}
+
+.name {
+  color: #e2eaf1;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.56px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.locationBox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.country {
+  color: #89939e;
+  font-size: 16px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.location {
+  border-radius: 52px;
+  display: flex;
+  padding: 10px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 12px;
+  color: #89939e;
+  background-color: #0f1217;
+}
+
+.addInfoBox {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.addInfo {
+  display: flex;
+  gap: 24px;
+  font-size: 16px;
+  line-height: 28px;
+  color: #89939e;
+}
+
+.seniority {
+  color: #13cbaa;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.flag {
+  background-color: #0f1217;
+}
