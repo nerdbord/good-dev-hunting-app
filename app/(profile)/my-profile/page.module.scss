@@ -1,3 +1,8 @@
+@import '../../../src/utils/styleVariables.scss';
+
 .wrapper {
   padding: 35px 8%;
+  @include mobile {
+    padding: 0;
+  }
 }

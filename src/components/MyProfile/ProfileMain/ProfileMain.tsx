@@ -26,32 +26,12 @@ const ProfileMain = async () => {
       <section className={styles.container}>
         <div className={styles.nav}>
           <GoBackButton>Go Back</GoBackButton>
-          <ul className={styles.social}>
-            <li className={styles.socialItem}>
-              Github
-              <GithubIcon2 />
-            </li>
-            {profile?.linkedIn && (
-              <li className={styles.socialItem}>
-                <a
-                  href={profile.linkedIn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LinkedIn
-                  <LinkedIn />
-                </a>
-              </li>
-            )}
-            <li className={styles.socialItem}>
-              <CopyEmail email={session.user.email} />
-            </li>
-          </ul>
+          {/* //tutaj była ul z socialami */}
         </div>
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={session.user.image}
+              src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
               width={100}
               height={100}
               alt="user's avatar"
@@ -68,28 +48,44 @@ const ProfileMain = async () => {
                 height={20}
                 className={styles.flag}
               />
-              <p>
-                {profile?.country.name} {profile?.city.name}
-              </p>
+              <p>Niderlands, Nistelrode</p>
             </div>
-
-            {profile?.country.openForRelocation && (
-              <div className={styles.location}>Open to relocation</div>
-            )}
-            {profile?.remoteOnly && (
-              <div className={styles.location}>Remote only</div>
-            )}
+            <div className={styles.location}>Open to relocation</div>
+            <div className={styles.location}>Remote only</div>
           </div>
           <div className={styles.addInfoBox}>
-            <span className={styles.seniority}>
-              {profile?.seniority} {profile?.position} Developer
-            </span>
+            <span className={styles.seniority}>Senior Frontend Developer</span>
             <div className={styles.addInfo}>
-              <div className={styles.addInfoItem}>
-                {profile?.employmentType}
-              </div>
+              <div className={styles.addInfoItem}>Part-time</div>
             </div>
           </div>
+          <ul className={styles.social}>
+            <li className={styles.socialItem}>
+              <a
+                href={'http://localhost:3000/'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Github
+                <GithubIcon2 />
+              </a>
+            </li>
+
+            <li className={styles.socialItem}>
+              <a
+                href={'http://localhost:3000/'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+                <LinkedIn />
+              </a>
+            </li>
+
+            <li className={styles.socialItem}>
+              <CopyEmail email="test@nerdbord.io" />
+            </li>
+          </ul>
         </div>
       </section>
     </>
