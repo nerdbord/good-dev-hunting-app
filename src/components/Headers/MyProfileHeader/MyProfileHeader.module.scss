@@ -1,3 +1,4 @@
+@import '../../../utils/styleVariables.scss';
 .wrapper {
   width: 100%;
   height: 125px;
@@ -6,6 +7,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 8%;
+  @include mobile {
+    height: 75px;
+  }
 }
 
 .logo {
@@ -46,7 +50,11 @@
   padding: 0;
   gap: 12px;
 }
-
+.actions {
+  @include mobile {
+    display: none;
+  }
+}
 .githubAccConnected {
   color: #89939e;
   font-weight: 500;
