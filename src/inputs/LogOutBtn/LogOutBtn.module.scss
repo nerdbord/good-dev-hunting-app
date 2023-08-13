@@ -1,7 +1,11 @@
+@import '../../utils/styleVariables.scss';
 .logout {
   padding: 12px 24px;
   color: #a687ff;
   background-color: #0f1217;
   border: none;
   outline: none;
+  @include mobile {
+    margin-bottom: 150px;
+  }
 }
