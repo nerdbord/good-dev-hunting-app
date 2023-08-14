@@ -5,10 +5,7 @@ export const serializeUserToUserPayload = (data: UserWithRelations) => {
     id: data.id,
     profileId: data.profile,
     githubDetails: {
-      id: data.githubDetails?.id,
-      username: data.githubDetails?.username,
-      userId: data.githubDetails?.userId,
-      image: data.githubDetails?.image,
+      username: data.githubDetails?.username || null,
     },
   }
 }
