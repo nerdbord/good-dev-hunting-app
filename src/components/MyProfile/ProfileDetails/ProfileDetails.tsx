@@ -21,13 +21,11 @@ const ProfileDetails = async () => {
           <div className={styles.techStack}>
             <p className={styles.title}>Tech stack</p>
             <div className={styles.techStackList}>
-              <p className={styles.techStackItem}>JavaScript</p>
-              <p className={styles.techStackItem}>React</p>
-              <p className={styles.techStackItem}>Phyton</p>
-              <p className={styles.techStackItem}>Node</p>
-              <p className={styles.techStackItem}>Słodkie kotki</p>
-              <p className={styles.techStackItem}>Husky</p>
-              <p className={styles.techStackItem}>MUI</p>
+              {profile?.techStack.map((item, index) => (
+                <p key={index} className={styles.techStackItem}>
+                  {item}
+                </p>
+              ))}
             </div>
           </div>
           <div className={styles.gitActivities}>
