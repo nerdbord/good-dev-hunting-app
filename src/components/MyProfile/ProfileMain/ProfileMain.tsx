@@ -31,7 +31,7 @@ const ProfileMain = async () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
+              src={session.user.image}
               width={100}
               height={100}
               alt="user's avatar"
@@ -48,16 +48,24 @@ const ProfileMain = async () => {
                 height={20}
                 className={styles.flag}
               />
-              <p>Niderlands, Nistelrode</p>
+              <p>
+                {profile?.country.name} {profile?.city.name}
+              </p>
             </div>
-            <div className={styles.location}>Open to relocation</div>
-            <div className={styles.location}>Remote only</div>
+            {profile?.country.openForRelocation && (
+              <div className={styles.location}>Open to relocation</div>
+            )}
+            {profile?.remoteOnly && (
+              <div className={styles.location}>Remote only</div>
+            )}
           </div>
-          <div className={styles.addInfoBox}>
-            <span className={styles.seniority}>Senior Frontend Developer</span>
-            <div className={styles.addInfo}>
-              <div className={styles.addInfoItem}>Part-time</div>
-            </div>
+        </div>
+        <div className={styles.addInfoBox}>
+          <span className={styles.seniority}>
+            {profile?.seniority} {profile?.position} Developer
+          </span>
+          <div className={styles.addInfo}>
+            <div className={styles.addInfoItem}> {profile?.employmentType}</div>
           </div>
           <ul className={styles.social}>
             <li className={styles.socialItem}>
@@ -70,18 +78,18 @@ const ProfileMain = async () => {
                 <GithubIcon2 />
               </a>
             </li>
-
-            <li className={styles.socialItem}>
-              <a
-                href={'http://localhost:3000/'}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-                <LinkedIn />
-              </a>
-            </li>
-
+            {profile?.linkedIn && (
+              <li className={styles.socialItem}>
+                <a
+                  href={'http://localhost:3000/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                  <LinkedIn />
+                </a>
+              </li>
+            )}
             <li className={styles.socialItem}>
               <CopyEmail email="test@nerdbord.io" />
             </li>
