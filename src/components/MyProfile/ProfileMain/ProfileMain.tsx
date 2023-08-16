@@ -34,6 +34,7 @@ const ProfileMain = async () => {
             {profile?.linkedIn && (
               <li className={styles.socialItem}>
                 <a
+                  className={styles.socialItem}
                   href={profile.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
