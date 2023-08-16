@@ -8,7 +8,11 @@
   align-items: center;
   padding: 0 8%;
   @include mobile {
-    height: 75px;
+    flex-direction: column;
+    align-items: start;
+    padding: 24px 16px;
+    padding-bottom: 20px;
+    height: auto;
   }
 }
 
@@ -17,6 +21,9 @@
   height: 26px;
   display: flex;
   gap: 8px;
+  @include mobile {
+    margin-bottom: 31px;
+  }
 }
 
 .title {
@@ -51,9 +58,6 @@
   gap: 12px;
 }
 .actions {
-  @include mobile {
-    display: none;
-  }
 }
 .githubAccConnected {
   color: #89939e;
@@ -67,6 +71,14 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  @include mobile {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    flex-direction: column;
+    align-items: start;
+    gap: 4px;
+  }
 }
 
 .githubAcc {
@@ -74,8 +86,23 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  @include mobile {
+    justify-content: start;
+    background-color: #0f1217;
+    padding: 12px 24px;
+    padding-left: 0;
+    border-radius: 2px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
 .githubAccImg {
   border-radius: 50%;
+  @include mobile {
+    width: 24px;
+    height: 24px;
+  }
 }

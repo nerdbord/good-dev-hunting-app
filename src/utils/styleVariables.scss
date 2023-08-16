@@ -5,12 +5,6 @@
   }
 }
 
-@mixin tablet {
-  @media (max-width: 768px) {
-    @content;
-  }
-}
-
 @mixin desktop {
   @media (min-width: 1280px) {
     @content;

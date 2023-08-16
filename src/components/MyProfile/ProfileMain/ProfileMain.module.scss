@@ -8,6 +8,8 @@
   @include mobile {
     padding: 0;
     position: static;
+
+    padding: 40px 16px;
   }
 }
 
@@ -30,6 +32,8 @@
   @include mobile {
     position: static;
     gap: 0;
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -53,7 +57,8 @@
   gap: 10px;
   cursor: pointer;
   @include mobile {
-    padding: 12px 16px;
+    padding: 12px 0;
+    width: 100%;
     a {
       display: flex;
       flex-direction: row;
@@ -68,7 +73,7 @@
   padding-right: 76px;
   padding-bottom: 76px;
   @include mobile {
-    padding: 40px 16px;
+    padding: 0;
   }
 }
 
@@ -96,12 +101,26 @@
   align-items: center;
   gap: 15px;
   margin-bottom: 16px;
-  @include mobile {
-    margin-bottom: 24px;
-    overflow-x: auto;
 
+  @include mobile {
+    margin-bottom: 12px;
+    overflow-x: scroll;
     width: 100%;
     gap: 16px;
+    scrollbar-color: #f16d4f #cccccc;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 0.2rem;
+    }
     p {
       white-space: nowrap;
     }
