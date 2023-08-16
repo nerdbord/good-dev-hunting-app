@@ -1,6 +1,13 @@
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-import { NextResponse } from 'next/server'
 import { authorizeUser } from '@/lib/auth'
+import { NextRequest, NextResponse } from 'next/server'
+import {
+  updateUserData,
+  doesUserProfileExist,
+} from '@/backend/profile/profile.service'
+import { CreateProfilePayload } from '@/backend/profile/profile.types'
+
+import { Prisma } from '@prisma/client'
 
 export async function GET() {
   try {
@@ -13,5 +20,50 @@ export async function GET() {
     })
   } catch (error) {
     return new Response(`${error}`, { status: 500 })
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const updatedDataPayload: CreateProfilePayload = await request.json()
+    const { email } = await authorizeUser()
+
+    const foundUser = await doesUserProfileExist(email)
+
+    if (foundUser) {
+      // Convert CreateProfilePayload to Prisma.ProfileUpdateInput
+      const updatedData: Prisma.ProfileUpdateInput = {
+        fullName: updatedDataPayload.fullName,
+        linkedIn: updatedDataPayload.linkedIn,
+        bio: updatedDataPayload.bio,
+        country: {
+          update: {
+            name: updatedDataPayload.country.name,
+            openForRelocation: updatedDataPayload.country.openForRelocation,
+          },
+        },
+        city: {
+          update: {
+            name: updatedDataPayload.city.name,
+            openForRelocation: updatedDataPayload.city.openForRelocation,
+          },
+        },
+        remoteOnly: updatedDataPayload.remoteOnly,
+        position: updatedDataPayload.position,
+        seniority: updatedDataPayload.seniority,
+        techStack: updatedDataPayload.techStack,
+        employmentType: updatedDataPayload.employmentType,
+        isPublished: updatedDataPayload.isPublished ?? false,
+      }
+
+      const updatedUser = await updateUserData(foundUser.id, updatedData)
+
+      return new NextResponse(JSON.stringify(updatedUser), { status: 200 })
+    } else {
+      return new NextResponse('User does not exist', { status: 404 })
+    }
+  } catch (error) {
+    console.log('Error:', error)
+    return new NextResponse(`${error}`, { status: 500 })
   }
 }
