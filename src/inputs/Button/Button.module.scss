@@ -1,3 +1,4 @@
+@import"../../utils/styleVariables.scss";
 .buttonPrimary,
 .buttonSecondary {
   display: flex;
@@ -14,6 +15,9 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  @include mobile {
+
+  }
 }
 
 .buttonPrimary {
