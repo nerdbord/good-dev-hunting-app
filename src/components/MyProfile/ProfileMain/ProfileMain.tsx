@@ -24,10 +24,6 @@ const ProfileMain = async () => {
   return (
     <>
       <section className={styles.container}>
-        <div className={styles.nav}>
-          <GoBackButton>Go Back</GoBackButton>
-          {/* //tutaj była ul z socialami */}
-        </div>
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
