@@ -86,7 +86,7 @@ export const useFormikInitialization = () => {
       isPublished: values.isPublished,
     }
 
-    const response = await fetch('/api/profiles', {
+    const response = await fetch('/api/profiles/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -96,6 +96,7 @@ export const useFormikInitialization = () => {
 
     if (response.ok) {
       console.log('Profile edited successfully')
+      window.location.reload()
     } else {
       console.log('Failed to edit profile.')
       const errorData = await response.json()
