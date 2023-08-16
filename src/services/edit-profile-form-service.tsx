@@ -2,11 +2,8 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
-import { ProfilePayload } from '@/backend/profile/profile.types'
+import { CreateProfilePayload } from '@/backend/profile/profile.types'
 import { EmploymentType } from '@/utils/constants'
-/* import { getUserProfile } from '@/lib/apiClient' */
-
-/* const profile = getUserProfile() */
 
 export interface FormValues {
   fullName: string
@@ -55,15 +52,21 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
+  // employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
 })
 
 export const useFormikInitialization = () => {
   const { data: session } = useSession()
 
+  if (!session) {
+    throw new Error('User is not authenticated')
+  }
+
   const onSubmit = async (values: FormValues) => {
-    const payload: ProfilePayload = {
-      id: session?.user.id,
+    const payload: CreateProfilePayload = {
+      userId: session.user.id,
       fullName: values.fullName,
+      avatarUrl: session?.user.image || null,
       email: session?.user.email || null,
       linkedIn: values.linkedin,
       bio: values.bio,
@@ -83,8 +86,8 @@ export const useFormikInitialization = () => {
       isPublished: values.isPublished,
     }
 
-    const response = await fetch('/api/profiles/me', {
-      method: 'PATCH',
+    const response = await fetch('/api/profiles', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -92,9 +95,9 @@ export const useFormikInitialization = () => {
     })
 
     if (response.ok) {
-      console.log('Profile created successfully')
+      console.log('Profile edited successfully')
     } else {
-      console.log('Failed to create profile.')
+      console.log('Failed to edit profile.')
       const errorData = await response.json()
       console.log('Error details:', errorData)
     }
