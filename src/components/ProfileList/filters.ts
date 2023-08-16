@@ -1,25 +1,22 @@
-import { ProfileListItems } from './profile-data'
+import { ProfileWithRelations } from '@/backend/profile/profile.types'
 
-export const filterByJobSpecialization =
-  (jobSpecializationFilter: string | null) => (profile: ProfileListItems) => {
-    return (
-      !jobSpecializationFilter ||
-      profile.jobSpecialization === jobSpecializationFilter
-    )
+export const filterByPosition =
+  (positionFilter: string | null) => (profile: ProfileWithRelations) => {
+    return !positionFilter || profile.position === positionFilter
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string | null) => (profile: ProfileListItems) => {
+  (seniorityFilter: string | null) => (profile: ProfileWithRelations) => {
     return !seniorityFilter || profile.seniority === seniorityFilter
   }
 
 export const filterByLocation =
-  (locationFilter: string | null) => (profile: ProfileListItems) => {
+  (locationFilter: string | null) => (profile: ProfileWithRelations) => {
     return !locationFilter || profile.country === locationFilter
   }
 
 export const filterByTechnology =
-  (technologyFilter: string[] | null) => (profile: ProfileListItems) => {
+  (technologyFilter: string[] | null) => (profile: ProfileWithRelations) => {
     return (
       !technologyFilter ||
       technologyFilter.length === 0 ||
@@ -28,6 +25,6 @@ export const filterByTechnology =
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string | null) => (profile: ProfileListItems) => {
+  (availabilityFilter: string | null) => (profile: ProfileWithRelations) => {
     return !availabilityFilter || profile.employmentType === availabilityFilter
   }
