@@ -1,12 +1,26 @@
+@import '../../../utils/styleVariables.scss';
 .titleBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include mobile {
+    padding: 16px;
+    padding-top: 32px;
+  }
 }
 
 .buttonBox {
   display: flex;
   gap: 8px;
+  @include mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 43px;
+    justify-content: center;
+    background-color: #04080d;
+  }
 }
 
 .title {
