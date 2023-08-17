@@ -1,7 +1,4 @@
-import {
-  ProfilePayload,
-  ProfileWithRelations,
-} from '@/backend/profile/profile.types'
+import { ProfilePayload } from '@/backend/profile/profile.types'
 
 export const filterByPosition =
   (positionFilter: string | null) => (profile: ProfilePayload) => {
