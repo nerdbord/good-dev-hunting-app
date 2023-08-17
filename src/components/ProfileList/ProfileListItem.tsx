@@ -55,7 +55,8 @@ export const ProfileListItem: React.FC<{ data: ProfilePayload }> = ({
             {data.seniority} {data.position} Developer
           </p>
           <p className={styles.location}>
-            {data.country.name}, {data.city.name} / {''}
+            {data.country.name}, {data.city.name} /{' '}
+            {data.remoteOnly && 'Remote'}
           </p>
         </div>
       </div>
