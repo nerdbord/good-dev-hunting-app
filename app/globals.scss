@@ -21,15 +21,3 @@ body {
   font-family: 'IBM plex sans', sans-serif;
   color: #e2eaf1;
 }
-/* ------MIXIN------ */
-@mixin tele {
-  @media (max-width: 420px) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media (min-width: 1280px) {
-    @content;
-  }
-}

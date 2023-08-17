@@ -1,4 +1,4 @@
-@import"../../utils/styleVariables.scss";
+@import '../../styles/mixins.scss';
 .buttonPrimary,
 .buttonSecondary {
   display: flex;
@@ -16,7 +16,6 @@
   font-weight: 500;
   line-height: 20px;
   @include mobile {
-
   }
 }
 
