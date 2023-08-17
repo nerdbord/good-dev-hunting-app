@@ -2,10 +2,7 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
-import {
-  CreateProfilePayload,
-  ProfilePayload,
-} from '@/backend/profile/profile.types'
+import { CreateProfilePayload } from '@/backend/profile/profile.types'
 import { EmploymentType } from '@/utils/constants'
 
 export interface FormValues {
