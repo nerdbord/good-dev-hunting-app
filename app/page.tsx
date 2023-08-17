@@ -9,7 +9,7 @@ const Home: React.FC = () => {
     <FiltersProvider>
       <DefaultHeader />
       <Filters />
-      {/*@ts-ignore*/}
+      {/* @ts-expect-error Server Component */}
       <ProfileList />
     </FiltersProvider>
   )
