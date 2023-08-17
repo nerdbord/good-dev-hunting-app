@@ -1,8 +1,8 @@
-import { ProfileWithRelations } from './profile.types'
+import { ProfilePayload, ProfileWithRelations } from './profile.types'
 
 export const serializeProfilesToProfilePayload = (
   data: ProfileWithRelations,
-) => {
+): ProfilePayload => {
   return {
     id: data.id,
     fullName: data.fullName,

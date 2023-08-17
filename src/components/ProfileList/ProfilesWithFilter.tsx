@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { useFilters } from '@/contexts/FilterContext'
 import {
   filterByPosition,
@@ -7,23 +8,22 @@ import {
   filterByTechnology,
   filterByAvailability,
 } from './filters'
-import { ProfileWithRelations } from '@/backend/profile/profile.types'
-import React from 'react'
-import { ProfileListItem } from '@/components/ProfileList/ProfileList'
+import { ProfilePayload } from '@/backend/profile/profile.types'
+import { ProfileListItem } from '@/components/ProfileList/ProfileListItem'
 
-export const ProfilesWithFilter: React.FC<{ data: ProfileWithRelations[] }> = ({
+export const ProfilesWithFilter: React.FC<{ data: ProfilePayload[] }> = ({
   data = [],
 }) => {
   const {
-    positionFilter,
     technologyFilter,
     seniorityFilter,
     availabilityFilter,
     locationFilter,
+    jobSpecializationFilter,
   } = useFilters()
 
   const filteredProfileData = (data || [])
-    .filter(filterByPosition(positionFilter))
+    .filter(filterByPosition(jobSpecializationFilter))
     .filter(filterBySeniority(seniorityFilter))
     .filter(filterByLocation(locationFilter))
     .filter(filterByTechnology(technologyFilter))
