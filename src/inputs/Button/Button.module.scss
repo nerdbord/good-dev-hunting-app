@@ -16,6 +16,8 @@
   font-weight: 500;
   line-height: 20px;
   @include mobile {
+    width: 100%;
+    padding: 12px 0;
   }
 }
 
