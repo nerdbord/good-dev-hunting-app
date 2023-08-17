@@ -1,30 +1,33 @@
-import { ProfileWithRelations } from '@/backend/profile/profile.types'
+import {
+  ProfilePayload,
+  ProfileWithRelations,
+} from '@/backend/profile/profile.types'
 
 export const filterByPosition =
-  (positionFilter: string | null) => (profile: ProfileWithRelations) => {
+  (positionFilter: string | null) => (profile: ProfilePayload) => {
     return !positionFilter || profile.position === positionFilter
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string | null) => (profile: ProfileWithRelations) => {
+  (seniorityFilter: string | null) => (profile: ProfilePayload) => {
     return !seniorityFilter || profile.seniority === seniorityFilter
   }
 
 export const filterByLocation =
-  (locationFilter: string | null) => (profile: ProfileWithRelations) => {
-    return !locationFilter || profile.country === locationFilter
+  (locationFilter: string | null) => (profile: ProfilePayload) => {
+    return !locationFilter || profile.country.name === locationFilter
   }
 
 export const filterByTechnology =
-  (technologyFilter: string[] | null) => (profile: ProfileWithRelations) => {
+  (technologyFilter: string[] | null) => (profile: ProfilePayload) => {
     return (
       !technologyFilter ||
       technologyFilter.length === 0 ||
-      technologyFilter.every((tech) => profile.technology.includes(tech))
+      technologyFilter.every((tech) => profile.techStack.includes(tech))
     )
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string | null) => (profile: ProfileWithRelations) => {
+  (availabilityFilter: string | null) => (profile: ProfilePayload) => {
     return !availabilityFilter || profile.employmentType === availabilityFilter
   }

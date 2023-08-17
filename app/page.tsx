@@ -9,6 +9,7 @@ const Home: React.FC = () => {
     <FiltersProvider>
       <DefaultHeader />
       <Filters />
+      {/*@ts-ignore*/}
       <ProfileList />
     </FiltersProvider>
   )
