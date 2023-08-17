@@ -14,8 +14,7 @@ import styles from '@/components/ProfileList/ProfileList.module.scss'
 
 export const ProfilesWithFilter: React.FC<{
   data: ProfilePayload[]
-  onFilterUpdate?: (filteredCount: number) => void
-}> = ({ data = [], onFilterUpdate }) => {
+}> = ({ data = [] }) => {
   const {
     technologyFilter,
     seniorityFilter,
