@@ -8,6 +8,6 @@ module.exports = {
     GITHUB_SECRET: process.env.GITHUB_SECRET,
   },
   images: {
-    domains: ['avatars.githubusercontent.com', 'sm.ign.com'],
+    domains: ['avatars.githubusercontent.com'],
   },
 }
