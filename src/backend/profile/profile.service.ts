@@ -102,7 +102,6 @@ export async function updateUserData(
   id: string,
   userDataToUpdate: Prisma.ProfileUpdateInput,
 ) {
-  //update profile
   const updatedUser = await prisma.profile.update({
     where: {
       id,

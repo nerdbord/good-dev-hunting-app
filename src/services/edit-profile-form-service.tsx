@@ -4,6 +4,43 @@ import * as Yup from 'yup'
 import { useSession } from 'next-auth/react'
 import { CreateProfilePayload } from '@/backend/profile/profile.types'
 import { EmploymentType } from '@/utils/constants'
+import { AppRoutes } from '@/utils/routes'
+import { redirect } from 'next/navigation'
+import { updateMyProfile } from '@/lib/apiClient'
+import { useState, useEffect } from 'react'
+import { getUserProfile } from '@/lib/apiClient'
+
+export const useProfile = () => {
+  const { data: session } = useSession()
+  const [fetchedProfile, setFetchedProfile] = useState(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  console.log(fetchedProfile)
+  if (!session) {
+    redirect(AppRoutes.home)
+  }
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      setIsLoading(true)
+      try {
+        const profile = await getUserProfile()
+        if (profile) {
+          setFetchedProfile(profile)
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchProfile()
+  }, [])
+
+  return {
+    fetchedProfile,
+    isLoading,
+  }
+}
 
 export interface FormValues {
   fullName: string
@@ -52,15 +89,18 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  // employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
+  //employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
 })
 
-export const useFormikInitialization = () => {
+export const useEditFormInitialization = (
+  initialState: FormValues = initialValues,
+) => {
   const { data: session } = useSession()
 
   if (!session) {
-    throw new Error('User is not authenticated')
+    redirect(AppRoutes.home)
   }
+  useProfile()
 
   const onSubmit = async (values: FormValues) => {
     const payload: CreateProfilePayload = {
@@ -85,31 +125,20 @@ export const useFormikInitialization = () => {
       employmentType: values.employment,
       isPublished: values.isPublished,
     }
-
-    const response = await fetch('/api/profiles/me', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-
-    if (response.ok) {
+    try {
+      await updateMyProfile(payload)
       console.log('Profile edited successfully')
-      window.location.reload()
-    } else {
-      console.log('Failed to edit profile.')
-      const errorData = await response.json()
-      console.log('Error details:', errorData)
+    } catch (error) {
+      console.log(error)
     }
   }
-
+  const formik = useFormik<FormValues>({
+    initialValues: initialState,
+    validationSchema,
+    onSubmit,
+  })
   return {
-    formik: useFormik<FormValues>({
-      initialValues,
-      validationSchema,
-      onSubmit,
-    }),
+    formik,
     onSubmit,
   }
 }

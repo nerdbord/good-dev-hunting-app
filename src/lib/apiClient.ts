@@ -1,3 +1,4 @@
+import { CreateProfilePayload } from '@/backend/profile/profile.types'
 const API_URL = 'http://localhost:3000/api'
 
 export const apiClient = {
@@ -33,4 +34,25 @@ export const getUserProfile = async () => {
     console.error(error)
   }
   return null
+}
+
+export const updateMyProfile = async (payload: CreateProfilePayload) => {
+  const response = await fetch('/api/profiles/me', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (response.ok) {
+    window.location.reload()
+  } else {
+    const errorData = await response.json()
+    throw new Error(
+      `Failed to edit profile. Error details: ${JSON.stringify(errorData)}`,
+    )
+  }
+
+  return response.json()
 }
