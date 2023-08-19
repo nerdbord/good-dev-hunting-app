@@ -1,3 +1,5 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/tokens.scss';
 .container {
   background: #04080d;
   padding: $spacing-5;
