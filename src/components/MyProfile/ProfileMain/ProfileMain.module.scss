@@ -1,16 +1,13 @@
-@import '../../../styles/mixins.scss';
-
 .container {
   background: #04080d;
-  padding: 24px;
+  padding: $spacing-5;
   margin: 20px 0;
   position: relative;
   @include mobile {
     padding: 0;
     margin: 0;
     position: static;
-
-    padding: 40px 16px;
+    padding: 40px $spacing-4;
   }
 }
 
@@ -39,7 +36,7 @@
 }
 
 .back {
-  padding: 12px 24px;
+  padding: 12px $spacing-5;
   color: #a687ff;
   font-weight: 500;
   line-height: 20px;
@@ -48,7 +45,7 @@
 }
 
 .socialItem {
-  padding: 12px 24px;
+  padding: 12px $spacing-5;
   color: #ffffff;
   font-weight: 500;
   line-height: 20px;
@@ -58,7 +55,7 @@
   gap: 10px;
   cursor: pointer;
   @include mobile {
-    padding: 12px 0;
+    padding: $spacing-3 0;
     width: 100%;
     a {
       display: flex;
@@ -69,7 +66,7 @@
 }
 
 .profile {
-  padding-top: 32px;
+  padding-top: $spacing-6;
   padding-left: 76px;
   padding-right: 76px;
   padding-bottom: 76px;
@@ -80,7 +77,7 @@
 
 .user {
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: $spacing-5;
   align-items: center;
   gap: 35px;
 }
@@ -101,13 +98,13 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 16px;
+  margin-bottom: $spacing-4;
 
   @include mobile {
-    margin-bottom: 12px;
+    margin-bottom: $spacing-3;
     overflow-x: scroll;
     width: 100%;
-    gap: 16px;
+    gap: $spacing-4;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -143,7 +140,7 @@
   padding: 10px 18px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: $spacing-2;
   font-weight: 500;
   line-height: 16px;
   font-size: 12px;
@@ -156,19 +153,19 @@
 
 .addInfoBox {
   display: flex;
-  gap: 24px;
+  gap: $spacing-5;
   align-items: center;
   @include mobile {
     flex-direction: column;
     align-items: start;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: $spacing-4;
+    margin-bottom: $spacing-5;
   }
 }
 
 .addInfo {
   display: flex;
-  gap: 24px;
+  gap: $spacing-5;
   font-size: 16px;
   line-height: 28px;
   color: #89939e;

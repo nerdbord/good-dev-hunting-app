@@ -1,24 +1,22 @@
-@import '../../../styles/mixins.scss';
-
 .titleBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
   @include mobile {
-    padding: 16px;
-    padding-top: 32px;
+    padding: $spacing-4;
+    padding-top: $spacing-6;
   }
 }
 
 .buttonBox {
   display: flex;
-  gap: 8px;
+  gap: $spacing-2;
   @include mobile {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 15px 12%;
+    padding: $spacing-4 12%;
     justify-content: center;
     background-color: #04080d;
   }
