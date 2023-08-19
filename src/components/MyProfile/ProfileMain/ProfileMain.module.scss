@@ -1,21 +1,44 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/tokens.scss';
 .container {
   background: #04080d;
-  padding: 24px;
+  padding: $spacing-5;
   margin: 20px 0;
+  position: relative;
+  @include mobile {
+    padding: 0;
+    margin: 0;
+    position: static;
+    padding: 40px $spacing-4;
+  }
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
+  @include mobile {
+    position: absolute;
+    top: 17px;
+    right: 0;
+  }
 }
 
 .social {
   display: flex;
   gap: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  @include mobile {
+    position: static;
+    gap: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 .back {
-  padding: 12px 24px;
+  padding: 12px $spacing-5;
   color: #a687ff;
   font-weight: 500;
   line-height: 20px;
@@ -24,7 +47,7 @@
 }
 
 .socialItem {
-  padding: 12px 24px;
+  padding: 12px $spacing-5;
   color: #ffffff;
   font-weight: 500;
   line-height: 20px;
@@ -33,18 +56,30 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  @include mobile {
+    padding: $spacing-3 0;
+    width: 100%;
+    a {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
 }
 
 .profile {
-  padding-top: 32px;
+  padding-top: $spacing-6;
   padding-left: 76px;
   padding-right: 76px;
   padding-bottom: 76px;
+  @include mobile {
+    padding: 0;
+  }
 }
 
 .user {
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: $spacing-5;
   align-items: center;
   gap: 35px;
 }
@@ -65,7 +100,31 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 16px;
+  margin-bottom: $spacing-4;
+
+  @include mobile {
+    margin-bottom: $spacing-3;
+    overflow-x: scroll;
+    width: 100%;
+    gap: $spacing-4;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 0.2rem;
+    }
+    p {
+      white-space: nowrap;
+    }
+  }
 }
 
 .country {
@@ -83,23 +142,32 @@
   padding: 10px 18px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: $spacing-2;
   font-weight: 500;
   line-height: 16px;
   font-size: 12px;
   color: #89939e;
   background-color: #0f1217;
+  @include mobile {
+    white-space: nowrap;
+  }
 }
 
 .addInfoBox {
   display: flex;
-  gap: 24px;
+  gap: $spacing-5;
   align-items: center;
+  @include mobile {
+    flex-direction: column;
+    align-items: start;
+    gap: $spacing-4;
+    margin-bottom: $spacing-5;
+  }
 }
 
 .addInfo {
   display: flex;
-  gap: 24px;
+  gap: $spacing-5;
   font-size: 16px;
   line-height: 28px;
   color: #89939e;

@@ -1,5 +1,8 @@
+@import '../../styles/tokens.scss';
+@import '../../styles/mixins.scss';
+
 .wrapper {
-  padding: 12px 24px;
+  padding: $spacing-3 $spacing-5;
   color: #ffffff;
   font-weight: 500;
   line-height: 20px;
@@ -8,4 +11,8 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  white-space: nowrap;
+  @include mobile {
+    padding: 0;
+  }
 }

@@ -1,3 +1,6 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/tokens.scss';
+
 .wrapper {
   width: 100%;
   height: 125px;
@@ -6,13 +9,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 8%;
+  @include mobile {
+    flex-direction: column;
+    align-items: start;
+    padding: $spacing-5 $spacing-4;
+    padding-bottom: 20px;
+    height: auto;
+  }
 }
 
 .logo {
   width: 187px;
   height: 26px;
   display: flex;
-  gap: 8px;
+  gap: $spacing-2;
+  @include mobile {
+    margin-bottom: $spacing-6;
+  }
 }
 
 .title {
@@ -34,7 +47,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 0;
-  gap: 12px;
+  gap: $spacing-3;
 }
 
 .frameLogin {
@@ -59,6 +72,14 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  @include mobile {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    flex-direction: column;
+    align-items: start;
+    gap: $spacing-1;
+  }
 }
 
 .githubAcc {
@@ -66,8 +87,23 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  @include mobile {
+    justify-content: start;
+    background-color: #0f1217;
+    padding: $spacing-3 $spacing-5;
+    padding-left: 0;
+    border-radius: 2px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
 .githubAccImg {
   border-radius: 50%;
+  @include mobile {
+    width: 24px;
+    height: 24px;
+  }
 }
