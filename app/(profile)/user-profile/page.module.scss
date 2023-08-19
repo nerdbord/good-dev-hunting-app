@@ -1,3 +1,8 @@
+@import '../../../src/styles/mixins.scss';
+
 .wrapper {
   padding: 35px 8%;
+  @include mobile {
+    padding: 0;
+  }
 }

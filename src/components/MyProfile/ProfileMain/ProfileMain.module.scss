@@ -6,7 +6,6 @@
   margin: 20px 0;
   position: relative;
   @include mobile {
-    padding: 0;
     margin: 0;
     position: static;
     padding: 40px $spacing-4;
@@ -35,15 +34,6 @@
     width: 100%;
     justify-content: space-between;
   }
-}
-
-.back {
-  padding: 12px $spacing-5;
-  color: #a687ff;
-  font-weight: 500;
-  line-height: 20px;
-  font-size: 14px;
-  cursor: pointer;
 }
 
 .socialItem {
