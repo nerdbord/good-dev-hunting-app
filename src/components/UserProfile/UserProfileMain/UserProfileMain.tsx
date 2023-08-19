@@ -18,24 +18,8 @@ const UserProfileMain = () => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.nav}>
-          <div className={styles.back} onClick={() => router.back()}>
-            Go back
-          </div>
-          <div className={styles.social}>
-            <div className={styles.socialItem}>
-              Github
-              <GithubIcon2 />
-            </div>
-            <div className={styles.socialItem}>
-              LinkedIn
-              <LinkedIn />
-            </div>
-            <div className={styles.socialItem}>
-              Copy email
-              <EmailIcon />
-            </div>
-          </div>
+        <div className={styles.back} onClick={() => router.back()}>
+          Go back
         </div>
         <div className={styles.profile}>
           <div className={styles.user}>
@@ -72,6 +56,20 @@ const UserProfileMain = () => {
                 {selectedUser?.employmentType}
               </div>
             </div>
+          </div>
+        </div>{' '}
+        <div className={styles.social}>
+          <div className={styles.socialItem}>
+            Github
+            <GithubIcon2 />
+          </div>
+          <div className={styles.socialItem}>
+            LinkedIn
+            <LinkedIn />
+          </div>
+          <div className={styles.socialItem}>
+            Copy email
+            <EmailIcon />
           </div>
         </div>
       </div>

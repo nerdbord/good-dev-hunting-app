@@ -9,7 +9,6 @@ import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
-import { GoBackButton } from '@/components/GoBackButton/GoBackButton'
 import { AppRoutes } from '@/utils/routes'
 
 const ProfileMain = async () => {
