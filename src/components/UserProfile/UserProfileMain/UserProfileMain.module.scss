@@ -1,7 +1,14 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/tokens.scss';
+
 .container {
   background: #04080d;
   padding: 24px;
   margin: 20px 0;
+  position: relative;
+  @include mobile {
+    position: static;
+  }
 }
 
 .nav {
@@ -12,6 +19,12 @@
 .social {
   display: flex;
   gap: 10px;
+  position: absolute;
+  top: $spacing-5;
+  right: 0;
+  @include mobile {
+    position: static;
+  }
 }
 
 .back {
@@ -21,6 +34,11 @@
   line-height: 20px;
   font-size: 14px;
   cursor: pointer;
+  @include mobile {
+    position: absolute;
+    top: 16px;
+    right: 0;
+  }
 }
 
 .socialItem {
