@@ -8,6 +8,8 @@
   position: relative;
   @include mobile {
     position: static;
+    margin: 0;
+    padding: 40px $spacing-4;
   }
 }
 
@@ -24,6 +26,9 @@
   right: 0;
   @include mobile {
     position: static;
+    gap: 0;
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -51,6 +56,16 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  @include mobile {
+    padding: $spacing-3 0;
+    width: 100%;
+    white-space: nowrap;
+    a {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
 }
 
 .profile {
@@ -58,6 +73,9 @@
   padding-left: 76px;
   padding-right: 76px;
   padding-bottom: 76px;
+  @include mobile {
+    padding: 0;
+  }
 }
 
 .user {
@@ -65,6 +83,9 @@
   margin-bottom: 24px;
   align-items: center;
   gap: 35px;
+  @include mobile {
+    gap: $spacing-5;
+  }
 }
 
 .name {
@@ -73,6 +94,10 @@
   font-weight: 600;
   line-height: 28px;
   letter-spacing: -0.56px;
+  @include mobile {
+    line-height: 30px;
+    letter-spacing: -0.02em;
+  }
 }
 
 .avatar {
@@ -84,6 +109,29 @@
   align-items: center;
   gap: 15px;
   margin-bottom: 16px;
+  @include mobile {
+    margin-bottom: $spacing-3;
+    overflow-x: scroll;
+    width: 100%;
+    gap: $spacing-4;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 0.2rem;
+    }
+    p {
+      white-space: nowrap;
+    }
+  }
 }
 
 .country {
@@ -93,6 +141,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
 }
 
 .location {
@@ -101,23 +150,32 @@
   padding: 10px 18px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: $spacing-2;
   font-weight: 500;
   line-height: 16px;
   font-size: 12px;
   color: #89939e;
   background-color: #0f1217;
+  @include mobile {
+    white-space: nowrap;
+  }
 }
 
 .addInfoBox {
   display: flex;
-  gap: 24px;
+  gap: $spacing-5;
   align-items: center;
+  @include mobile {
+    flex-direction: column;
+    align-items: start;
+    gap: $spacing-4;
+    margin-bottom: $spacing-5;
+  }
 }
 
 .addInfo {
   display: flex;
-  gap: 24px;
+  gap: $spacing-5;
   font-size: 16px;
   line-height: 28px;
   color: #89939e;
