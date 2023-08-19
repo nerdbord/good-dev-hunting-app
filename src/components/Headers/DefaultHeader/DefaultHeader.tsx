@@ -4,11 +4,11 @@ import { Button } from '@/inputs/Button/Button'
 import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import GithubIcon from '@/assets/icons/GithubIcon'
-/* import AddIcon from '@/assets/icons/AddIcon' */
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/dist/client/image'
+import { AppRoutes } from '@/utils/routes'
 
 const DefaultHeader = () => {
   const { status, data: session } = useSession()
@@ -45,14 +45,14 @@ const DefaultHeader = () => {
             </div>
             {profileId === null ? (
               <Button
-                onClick={() => router.push('/create-profile')}
+                onClick={() => router.push(AppRoutes.createProfile)}
                 variant={'primary'}
               >
                 Create profile
               </Button>
             ) : (
               <Button
-                onClick={() => router.push('/my-profile')}
+                onClick={() => router.push(AppRoutes.myProfile)}
                 variant={'primary'}
               >
                 My profile

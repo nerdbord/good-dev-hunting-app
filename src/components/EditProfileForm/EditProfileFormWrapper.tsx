@@ -4,11 +4,11 @@ import { Formik } from 'formik'
 import {
   initialValues,
   validationSchema,
-  useFormikInitialization,
+  useEditFormInitialization,
 } from '@/services/edit-profile-form-service'
 
 const EditProfileFormWrapper = ({ children }: PropsWithChildren) => {
-  const { onSubmit } = useFormikInitialization()
+  const { onSubmit } = useEditFormInitialization()
 
   return (
     <Formik

@@ -28,9 +28,9 @@ export async function PUT(request: NextRequest) {
     const updatedDataPayload: CreateProfilePayload = await request.json()
     const { email } = await authorizeUser()
 
-    const foundUser = await doesUserProfileExist(email)
+    const foundProfile = await doesUserProfileExist(email)
 
-    if (foundUser) {
+    if (foundProfile) {
       // Convert CreateProfilePayload to Prisma.ProfileUpdateInput
       const updatedData: Prisma.ProfileUpdateInput = {
         fullName: updatedDataPayload.fullName,
@@ -56,7 +56,7 @@ export async function PUT(request: NextRequest) {
         isPublished: updatedDataPayload.isPublished ?? false,
       }
 
-      const updatedUser = await updateUserData(foundUser.id, updatedData)
+      const updatedUser = await updateUserData(foundProfile.id, updatedData)
 
       return new NextResponse(JSON.stringify(updatedUser), { status: 200 })
     } else {
