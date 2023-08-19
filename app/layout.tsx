@@ -1,5 +1,7 @@
 import React from 'react'
 import './globals.scss'
+import '../src/styles/mixins.scss'
+import '../src/styles/tokens.scss'
 import { IBM_Plex_Sans } from 'next/font/google'
 import AuthProvider from '@/components/AuthProvider/AuthProvider'
 import { Container } from '@/components/Container/Container'
