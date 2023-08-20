@@ -8,6 +8,7 @@ import AddIcon from '@/assets/icons/AddIcon'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { AppRoutes } from '@/utils/routes'
 
 const DefaultHeader = () => {
   const { status } = useSession()
@@ -23,7 +24,7 @@ const DefaultHeader = () => {
       {status === 'authenticated' ? (
         <div className={styles.frameButtons}>
           <Button
-            onClick={() => router.push('/my-profile')}
+            onClick={() => router.push(AppRoutes.myProfile)}
             variant={'primary'}
           >
             My profile
