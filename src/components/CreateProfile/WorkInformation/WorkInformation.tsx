@@ -1,13 +1,13 @@
 'use client'
 import React from 'react'
 import styles from './WorkInformations.module.scss'
-import { DropdownBio } from '@/inputs/Dropdowns/DropdownBio/DropdownBio'
-import TextArea from '@/inputs/TextArea/TextArea'
-import CheckboxInput from '@/inputs/Checkbox/Checkbox'
+import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
+import TextArea from '@/components/TextArea/TextArea'
+import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
-import { EmploymentType } from '@/utils/constants'
+import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import { EmploymentType } from '@prisma/client'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -16,7 +16,7 @@ const filterLists = {
 
 const WorkInformation = () => {
   const { values, handleChange, errors, setFieldValue } =
-    useFormikContext<FormValues>()
+    useFormikContext<CreateProfileFormValues>()
 
   const handleEmploymentType = (option: string): void => {
     setFieldValue('employment', option)
