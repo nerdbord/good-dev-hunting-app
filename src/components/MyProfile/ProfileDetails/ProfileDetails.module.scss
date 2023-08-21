@@ -1,9 +1,18 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/tokens.scss';
 .container {
   margin: 20px 0;
   background: #04080d;
   padding: 100px;
   display: flex;
   gap: 100px;
+  @include mobile {
+    padding: $spacing-6 $spacing-4;
+    padding-bottom: 40px;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .left {
@@ -11,6 +20,10 @@
   display: flex;
   flex-direction: column;
   gap: 60px;
+  @include mobile {
+    margin-bottom: $spacing-6;
+    gap: $spacing-6;
+  }
 }
 
 .right {
@@ -21,7 +34,10 @@
   color: #69717b;
   font-size: 16px;
   line-height: 28px;
-  margin-bottom: 16px;
+  margin-bottom: $spacing-4;
+  @include mobile {
+    margin-bottom: $spacing-2;
+  }
 }
 
 .desc {
@@ -30,6 +46,10 @@
   line-height: 28px;
   padding: 40px;
   background-color: #0f1217;
+  @include mobile {
+    padding: $spacing-5 $spacing-4;
+    padding-right: $spacing-6;
+  }
 }
 
 .techStack {
@@ -42,12 +62,15 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 7px;
+  @include mobile {
+    margin-right: 75px;
+  }
 }
 
 .techStackItem {
   color: #13cbaa;
   background-color: #161a1f;
-  padding: 8px 14px;
+  padding: $spacing-2 14px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
@@ -58,12 +81,12 @@
 .gitActivities {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: $spacing-2;
 }
 
 .gitActivityBox {
   display: flex;
-  gap: 8px;
+  gap: $spacing-2;
 }
 
 .gitActivity {
@@ -72,7 +95,7 @@
   justify-content: flex-start;
   width: 130px;
   border-radius: 4px;
-  padding: 8px 14px;
+  padding: $spacing-2 14px;
   background-color: #161a1f;
 }
 
@@ -81,7 +104,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  padding: 8px 14px;
+  padding: $spacing-2 14px;
   background-color: #161a1f;
   color: #13cbaa;
 }

@@ -1,3 +1,4 @@
+@import '../../styles/mixins.scss';
 .buttonPrimary,
 .buttonSecondary {
   display: flex;
@@ -14,12 +15,18 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  @include mobile {
+    width: 100%;
+    padding: 12px 0;
+    white-space: nowrap;
+  }
 }
 
 .buttonPrimary {
   height: 44px;
   color: #ffffff;
   background: #7d54f1;
+  min-width: 120px;
 }
 
 .buttonSecondary {
