@@ -89,7 +89,6 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  //employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
 })
 
 export const useEditFormInitialization = (
