@@ -7,15 +7,13 @@ import GithubIcon from '@/assets/icons/GithubIcon'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/dist/client/image'
-import { AppRoutes } from '@/utils/routes'
 import { AppRoutes } from '@/utils/routes'
 
 const DefaultHeader = () => {
   const { status, data: session } = useSession()
-  const name = session?.user?.name
+  /*   const name = session?.user?.name
   const avatar = session?.user?.image
-  const profileId = session?.user?.profileId
+  const profileId = session?.user?.profileId */
   const router = useRouter()
 
   return (
@@ -41,7 +39,7 @@ const DefaultHeader = () => {
           </Button>
           <Button onClick={() => signIn()} variant={'primary'}>
             Create profile
-            <AddIcon />
+            {/*             <AddIcon /> */}
           </Button>
         </div>
       )}
