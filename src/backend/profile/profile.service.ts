@@ -1,4 +1,4 @@
-import { serializeProfilesToProfileModel } from './profile.serializer'
+import { serializeProfileToProfileModel } from './profile.serializer'
 import { CreateProfilePayload } from './profile.types'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma } from '@prisma/client'
@@ -16,7 +16,7 @@ export async function getPublishedProfilesPayload() {
   })
 
   const serializedProfile = publishedProfiles.map(
-    serializeProfilesToProfileModel,
+    serializeProfileToProfileModel,
   )
   return serializedProfile
 }
@@ -34,7 +34,7 @@ export async function getProfileById(id: string) {
   })
 
   if (profileById !== null) {
-    return serializeProfilesToProfileModel(profileById)
+    return serializeProfileToProfileModel(profileById)
   }
 
   // Handle the case when profileById is null
@@ -123,7 +123,7 @@ export async function getProfileByUserId(userId: string) {
   })
 
   if (profile) {
-    return serializeProfilesToProfileModel(profile)
+    return serializeProfileToProfileModel(profile)
   }
 
   return null
@@ -140,7 +140,7 @@ export async function getProfileByUserEmail(email: string) {
   })
 
   if (profile) {
-    return serializeProfilesToProfileModel(profile)
+    return serializeProfileToProfileModel(profile)
   }
 
   return null

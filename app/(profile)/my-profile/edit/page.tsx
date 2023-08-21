@@ -9,16 +9,23 @@ import CreateProfileTopBar from '@/components/CreateProfile/CreateProfileTopBar/
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
 import EditProfileFormWrapper from '@/components/EditProfileForm/EditProfileFormWrapper'
 import { AppRoutes } from '@/utils/routes'
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
 const EditProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session) {
+  if (!session || !session.user) {
     redirect(AppRoutes.home)
   }
 
+  const profile = await getProfileByUserEmail(session.user.email)
+
+  if (!profile) {
+    redirect(AppRoutes.createProfile)
+  }
+
   return (
-    <EditProfileFormWrapper>
+    <EditProfileFormWrapper profile={profile}>
       <div className={styles.wrapper}>
         <CreateProfileTopBar />
         <div className={styles.formBox}>

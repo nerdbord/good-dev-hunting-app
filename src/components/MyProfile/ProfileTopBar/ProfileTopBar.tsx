@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import styles from './ProfileTopBar.module.scss'
-import { Button } from '@/inputs/Button/Button'
+import { Button } from '@/components/Button/Button'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'

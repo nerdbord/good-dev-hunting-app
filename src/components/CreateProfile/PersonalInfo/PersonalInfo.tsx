@@ -1,14 +1,15 @@
 'use client'
 import React from 'react'
 import styles from './PersonalInfo.module.scss'
-import TextInput from '@/inputs/TextInput/TextInput'
-import TextArea from '@/inputs/TextArea/TextArea'
+import TextInput from '@/components/TextInput/TextInput'
+import TextArea from '@/components/TextArea/TextArea'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 
 const PersonalInfo = () => {
-  const { values, handleChange, errors } = useFormikContext<FormValues>()
+  const { values, handleChange, errors } =
+    useFormikContext<CreateProfileFormValues>()
 
   return (
     <div className={styles.container}>
