@@ -6,10 +6,13 @@ import TextArea from '@/components/TextArea/TextArea'
 import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import { useSession } from 'next-auth/react'
 
 const PersonalInfo = () => {
   const { values, handleChange, errors } =
     useFormikContext<CreateProfileFormValues>()
+
+  const { data: session } = useSession()
 
   return (
     <div className={styles.container}>
@@ -31,12 +34,13 @@ const PersonalInfo = () => {
         </InputFormError>
         <InputFormError error={errors.contactEmail}>
           <TextInput
-            label=" Contact email"
-            placeholder=" Contact email"
+            label="Contact email"
+            placeholder={session?.user?.email || ''}
             value={values.contactEmail}
             onChange={handleChange}
             addImportantIcon={true}
             name="contactEmail"
+            disabled={true}
           />
         </InputFormError>
         <TextInput
