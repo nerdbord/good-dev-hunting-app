@@ -44,7 +44,7 @@ const ProfileMain = async () => {
                 className={styles.flag}
               />
               <p>
-                {profile?.country.name} {profile?.city.name}
+                {profile?.country.name}, {profile?.city.name}
               </p>
             </div>
             {profile?.country.openForRelocation && (
@@ -65,6 +65,7 @@ const ProfileMain = async () => {
           <ul className={styles.social}>
             <li className={styles.socialItem}>
               <a
+                className={styles.socialLink}
                 href={'http://localhost:3000/'}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -76,6 +77,7 @@ const ProfileMain = async () => {
             {profile?.linkedIn && (
               <li className={styles.socialItem}>
                 <a
+                  className={styles.socialLink}
                   href={'http://localhost:3000/'}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -85,7 +87,7 @@ const ProfileMain = async () => {
                 </a>
               </li>
             )}
-            <li className={styles.socialItem}>
+            <li className={styles.copyEmail}>
               <CopyEmail email="test@nerdbord.io" />
             </li>
           </ul>
