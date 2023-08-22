@@ -1,7 +1,6 @@
 'use client'
 import React, { PropsWithChildren } from 'react'
 import { Formik } from 'formik'
-
 import * as Yup from 'yup'
 import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
 import { apiClient } from '@/lib/apiClient'
@@ -43,9 +42,6 @@ export const initialValues: EditProfileFormValues = {
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
-  contactEmail: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
