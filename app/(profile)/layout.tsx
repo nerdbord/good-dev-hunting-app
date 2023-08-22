@@ -1,5 +1,5 @@
 import React from 'react'
-import DefaultHeader from '@/components/Headers/DefaultHeader/DefaultHeader'
+import MyProfileHeader from '@/components/Headers/MyProfileHeader/MyProfileHeader'
 
 const ProfileLayout = ({
   children,
@@ -8,7 +8,7 @@ const ProfileLayout = ({
 }): JSX.Element => {
   return (
     <div>
-      <DefaultHeader />
+      <MyProfileHeader />
       {children}
     </div>
   )
