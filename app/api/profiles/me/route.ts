@@ -5,9 +5,9 @@ import {
   updateUserData,
   doesUserProfileExist,
 } from '@/backend/profile/profile.service'
-import { CreateProfilePayload } from '@/backend/profile/profile.types'
 
 import { Prisma } from '@prisma/client'
+import { CreateProfilePayload } from '@/data/frontend/profile/types'
 
 export async function GET() {
   try {
