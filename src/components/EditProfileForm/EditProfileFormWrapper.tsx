@@ -1,16 +1,16 @@
 'use client'
-import { useFormik } from 'formik'
+import React, { PropsWithChildren } from 'react'
+import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
+import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
-import {
-  CreateProfilePayload,
-  ProfilePayload,
-} from '@/backend/profile/profile.types'
-import { EmploymentType } from '@/utils/constants'
-export interface FormValues {
+import { EmploymentType } from '@prisma/client'
+import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
+
+export interface EditProfileFormValues {
   fullName: string
-  contactEmail: string
-  linkedin: string
+  linkedin: string | null
   bio: string
   country: string
   city: string
@@ -24,9 +24,8 @@ export interface FormValues {
   isPublished: boolean
 }
 
-export const initialValues: FormValues = {
+export const initialValues: EditProfileFormValues = {
   fullName: '',
-  contactEmail: '',
   linkedin: '',
   bio: '',
   country: '',
@@ -43,33 +42,35 @@ export const initialValues: FormValues = {
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
-  contactEmail: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
   openToRelocationCountry: Yup.boolean().oneOf([true, false]),
-  remoteOnly: Yup.boolean().oneOf([true], 'This field must be checked'),
+  remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  // employment: Yup.array().of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT'])).min(1, 'Employment type is required'),
 })
 
-export const useFormikInitialization = () => {
+interface EditProfileFormWrapperProps {
+  profile: ProfileModel
+}
+
+const EditProfileFormWrapper = ({
+  children,
+  profile,
+}: PropsWithChildren<EditProfileFormWrapperProps>) => {
   const { data: session } = useSession()
 
   if (!session) {
-    throw new Error('User is not authenticated')
+    return null
   }
 
-  const onSubmit = async (values: FormValues) => {
-    const payload: CreateProfilePayload = {
+  const handleEditProfile = async (values: EditProfileFormValues) => {
+    const payload: EditProfilePayload = {
       userId: session.user.id,
       fullName: values.fullName,
-      avatarUrl: session?.user.image || null,
-      email: session?.user.email || null,
+      avatarUrl: session.user.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: {
@@ -87,30 +88,27 @@ export const useFormikInitialization = () => {
       employmentType: values.employment,
       isPublished: values.isPublished,
     }
-
-    const response = await fetch('/api/profiles', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-
-    if (response.ok) {
-      console.log('Profile created successfully')
-    } else {
-      console.log('Failed to create profile.')
-      const errorData = await response.json()
-      console.log('Error details:', errorData)
+    try {
+      await apiClient.updateMyProfile(payload)
+      console.log('Profile edited successfully')
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  return {
-    formik: useFormik<FormValues>({
-      initialValues,
-      validationSchema,
-      onSubmit,
-    }),
-    onSubmit,
-  }
+  const mappedInitialValues: EditProfileFormValues =
+    mapProfileModelToEditProfileFormValues(profile)
+
+  return (
+    <Formik
+      initialValues={mappedInitialValues}
+      enableReinitialize
+      validationSchema={validationSchema}
+      onSubmit={handleEditProfile}
+    >
+      {children}
+    </Formik>
+  )
 }
+
+export default EditProfileFormWrapper
