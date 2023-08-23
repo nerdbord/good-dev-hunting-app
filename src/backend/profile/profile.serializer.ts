@@ -1,8 +1,9 @@
-import { ProfilePayload, ProfileWithRelations } from './profile.types'
+import { ProfileWithRelations } from '@/data/backend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-export const serializeProfilesToProfileModel = (
+export const serializeProfileToProfileModel = (
   data: ProfileWithRelations,
-): ProfilePayload => {
+): ProfileModel => {
   return {
     id: data.id,
     bio: data.bio,
@@ -14,7 +15,6 @@ export const serializeProfilesToProfileModel = (
       name: data.country.name,
       openForRelocation: data.country.openForRelocation,
     },
-    email: data.user.email,
     employmentType: data.employmentType,
     fullName: data.fullName,
     isPublished: data.isPublished,

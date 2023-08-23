@@ -87,6 +87,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  border-radius: 2px;
+  background: #0f1217;
+  padding: 8px 16px;
   @include mobile {
     justify-content: start;
     background-color: #0f1217;

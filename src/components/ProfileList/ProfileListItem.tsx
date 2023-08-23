@@ -2,15 +2,13 @@
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import React from 'react'
-import { ProfilePayload } from '@/backend/profile/profile.types'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 const cx = classNames.bind(styles)
 
-export const ProfileListItem: React.FC<{ data: ProfilePayload }> = ({
-  data,
-}) => {
+export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
   const commonClasses = {
     [styles.frontend]: data.position === JobSpecialization.Frontend,
     [styles.backend]: data.position === JobSpecialization.Backend,
