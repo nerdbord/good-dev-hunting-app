@@ -8,12 +8,12 @@ import {
   filterByTechnology,
   filterByAvailability,
 } from './filters'
-import { ProfilePayload } from '@/backend/profile/profile.types'
 import { ProfileListItem } from '@/components/ProfileList/ProfileListItem'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const ProfilesWithFilter: React.FC<{
-  data: ProfilePayload[]
+  data: ProfileModel[]
 }> = ({ data = [] }) => {
   const {
     technologyFilter,

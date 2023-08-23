@@ -5,11 +5,12 @@ import TextInput from '@/components/TextInput/TextInput'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import SwitchInput from '@/components/Switch/Switch'
 import { useFormikContext } from 'formik'
-import { FormValues } from '@/services/create-profile-form-service'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 
 const LocationPreferences = () => {
-  const { values, handleChange, errors } = useFormikContext<FormValues>()
+  const { values, handleChange, errors } =
+    useFormikContext<CreateProfileFormValues>()
 
   return (
     <div className={styles.container}>
