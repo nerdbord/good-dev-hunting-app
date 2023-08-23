@@ -43,9 +43,6 @@ export const initialValues: CreateProfileFormValues = {
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
-  contactEmail: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
@@ -54,9 +51,9 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  employment: Yup.array()
-    .of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT']))
-    .min(1, 'Employment type is required'),
+  // employment: Yup.array()
+  //   .of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT']))
+  //   .min(1, 'Employment type is required'),
 })
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
