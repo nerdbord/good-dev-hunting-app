@@ -2,11 +2,13 @@
   background: #04080d;
   padding: $spacing-5;
   margin: 20px 0;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   @include mobile {
     margin: 0;
     position: static;
     padding: 40px $spacing-4;
+    flex-direction: column-reverse;
   }
 }
 
@@ -22,14 +24,12 @@
 
 .social {
   display: flex;
-  gap: 10px;
-  position: absolute;
-  top: 24px;
-  right: 24px;
+  justify-content: flex-end;
   @include mobile {
     position: static;
     gap: 0;
     width: 100%;
+    align-items: center;
     justify-content: space-between;
   }
 }
@@ -42,6 +42,7 @@
   font-size: 14px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   cursor: pointer;
   @include mobile {
@@ -66,6 +67,7 @@
   cursor: pointer;
   @include mobile {
     padding: $spacing-3 0;
+    margin-left: 14px;
     width: 100%;
     a {
       display: flex;
