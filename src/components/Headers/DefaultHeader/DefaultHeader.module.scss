@@ -79,3 +79,11 @@
 .githubAccImg {
   border-radius: 50%;
 }
+
+.frameLogin {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}

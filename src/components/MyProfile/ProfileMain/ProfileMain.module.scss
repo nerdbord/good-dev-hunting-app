@@ -24,8 +24,8 @@
   display: flex;
   gap: 10px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 24px;
+  right: 24px;
   @include mobile {
     position: static;
     gap: 0;
@@ -53,6 +53,32 @@
       gap: 10px;
     }
   }
+}
+
+.copyEmail {
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  @include mobile {
+    padding: $spacing-3 0;
+    width: 100%;
+    a {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .profile {

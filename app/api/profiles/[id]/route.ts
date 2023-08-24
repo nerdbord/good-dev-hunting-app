@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import {
-  getProfileById,
   updateUserData,
+  getProfileById,
 } from '@/backend/profile/profile.service'
-import { ProfilePayload } from '@/backend/profile/profile.types'
 import { authorizeUser } from '@/lib/auth'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 export async function GET(request: Request, profileId: string) {
   try {
@@ -23,7 +23,7 @@ export async function GET(request: Request, profileId: string) {
 
 export async function PATCH(request: NextRequest, id: string) {
   try {
-    const userDataToUpdate: ProfilePayload = await request.json()
+    const userDataToUpdate: ProfileModel = await request.json()
     const updatedUser = await updateUserData(id, {
       fullName: userDataToUpdate.fullName,
       remoteOnly: userDataToUpdate.remoteOnly,

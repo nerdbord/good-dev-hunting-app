@@ -4,12 +4,13 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { AppRoutes } from '@/utils/routes'
 
 const ProfileDetails = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session) {
-    redirect('/')
+  if (!session || !session.user) {
+    redirect(AppRoutes.home)
   }
 
   const profile = await getProfileByUserEmail(session.user.email)

@@ -1,9 +1,8 @@
-import { Prisma } from '@prisma/client'
+import { EmploymentType } from '@prisma/client'
 
-export interface ProfilePayload {
+export interface ProfileModel {
   id: string
   fullName: string
-  email: string | null
   avatarUrl: string | null
   linkedIn: string | null
   userId: string
@@ -20,16 +19,9 @@ export interface ProfilePayload {
   position: string
   seniority: string
   techStack: string[]
-  employmentType: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT'
+  employmentType: EmploymentType
   isPublished: boolean
 }
 
-export type CreateProfilePayload = Omit<ProfilePayload, 'id'>
-
-export type ProfileWithRelations = Prisma.ProfileGetPayload<{
-  include: {
-    user: true
-    country: true
-    city: true
-  }
-}>
+export type CreateProfilePayload = Omit<ProfileModel, 'id'>
+export type EditProfilePayload = CreateProfilePayload
