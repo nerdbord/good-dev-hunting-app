@@ -54,27 +54,17 @@ const ProfileMain = async () => {
               <div className={styles.location}>Remote only</div>
             )}
           </div>
-        </div>
-        <div className={styles.addInfoBox}>
-          <span className={styles.seniority}>
-            {profile?.seniority} {profile?.position} Developer
-          </span>
-          <div className={styles.addInfo}>
-            <div className={styles.addInfoItem}> {profile?.employmentType}</div>
-          </div>
-          <ul className={styles.social}>
-            <li className={styles.socialItem}>
-              <a
-                className={styles.socialLink}
-                href={'http://localhost:3000/'}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Github
-                <GithubIcon2 />
-              </a>
-            </li>
-            {profile?.linkedIn && (
+          <div className={styles.addInfoBox}>
+            <span className={styles.seniority}>
+              {profile?.seniority} {profile?.position} Developer
+            </span>
+            <div className={styles.addInfo}>
+              <div className={styles.addInfoItem}>
+                {' '}
+                {profile?.employmentType}
+              </div>
+            </div>
+            <ul className={styles.social}>
               <li className={styles.socialItem}>
                 <a
                   className={styles.socialLink}
@@ -82,15 +72,28 @@ const ProfileMain = async () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  LinkedIn
-                  <LinkedIn />
+                  Github
+                  <GithubIcon2 />
                 </a>
               </li>
-            )}
-            <li className={styles.copyEmail}>
-              <CopyEmail email="test@nerdbord.io" />
-            </li>
-          </ul>
+              {profile?.linkedIn && (
+                <li className={styles.socialItem}>
+                  <a
+                    className={styles.socialLink}
+                    href={'http://localhost:3000/'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                    <LinkedIn />
+                  </a>
+                </li>
+              )}
+              <li className={styles.copyEmail}>
+                <CopyEmail email="test@nerdbord.io" />
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </>

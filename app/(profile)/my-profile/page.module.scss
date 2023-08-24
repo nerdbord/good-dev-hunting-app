@@ -1,5 +1,6 @@
 @import '../../../src/styles/mixins.scss';
 .wrapper {
+  background-color: blueviolet;
   padding: 35px 8%;
   @include mobile {
     padding: 0;
