@@ -11,6 +11,7 @@ interface TextInputProps {
   addImportantIcon?: boolean
   name: string
   error?: string
+  disabled?: boolean
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -20,6 +21,7 @@ const TextInput: React.FC<TextInputProps> = ({
   onChange,
   addImportantIcon,
   name,
+  disabled,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event)
@@ -38,6 +40,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder}
         onChange={handleChange}
         name={name}
+        disabled={disabled}
       />
     </div>
   )

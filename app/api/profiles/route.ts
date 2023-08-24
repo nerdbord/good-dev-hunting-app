@@ -4,8 +4,9 @@ import {
   doesUserProfileExist,
   getPublishedProfilesPayload,
 } from '@/backend/profile/profile.service'
-import { CreateProfilePayload } from '@/backend/profile/profile.types'
 import { authorizeUser } from '@/lib/auth'
+import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
+import { CreateProfilePayload } from '@/data/frontend/profile/types'
 
 export async function GET() {
   try {
@@ -29,9 +30,13 @@ export async function POST(request: NextRequest) {
     const foundUser = await doesUserProfileExist(email)
 
     if (!foundUser) {
-      const newUser = await createUserProfile(email, userData)
+      const createdProfile = await createUserProfile(email, userData)
 
-      return new NextResponse(JSON.stringify(newUser), { status: 201 })
+      const serializedProfile = serializeProfileToProfileModel(createdProfile)
+
+      return new NextResponse(JSON.stringify(serializedProfile), {
+        status: 201,
+      })
     } else {
       return new NextResponse('Such user already exist', { status: 409 })
     }
