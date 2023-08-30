@@ -13,6 +13,7 @@ const ProfileTopBar = () => {
     event.preventDefault()
     handleSubmit()
     router.push(AppRoutes.myProfile)
+    router.refresh()
   }
 
   return (
