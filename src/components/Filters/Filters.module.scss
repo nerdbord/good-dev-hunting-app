@@ -5,6 +5,11 @@
   justify-content: space-between;
   padding: 0 8%;
   margin-top: 30px;
+  @include mobile {
+    overflow: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .features {
@@ -15,4 +20,7 @@
 .devType {
   display: flex;
   gap: 16px;
+  @include mobile {
+    margin-left: 16px;
+  }
 }

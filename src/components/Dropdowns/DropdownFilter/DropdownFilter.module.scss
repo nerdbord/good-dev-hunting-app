@@ -38,11 +38,16 @@
   font-weight: 400;
   font-size: 14px;
   margin-top: 10px;
-  z-index: 999;
+  z-index: 1000;
   background-color: #0f1217;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  @include mobile {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 }
 
 .dropdownInput {

@@ -45,20 +45,24 @@ const DefaultHeader = () => {
               <p className={styles.githubAccName}>{name}</p>
             </div>
             {profileId === null ? (
-              <Button
-                onClick={() => router.push(AppRoutes.createProfile)}
-                variant={'primary'}
-              >
-                Create profile
-                <AddIcon />
-              </Button>
+              <div className={styles.mobileButton}>
+                <Button
+                  onClick={() => router.push(AppRoutes.createProfile)}
+                  variant={'primary'}
+                >
+                  Create profile
+                  <AddIcon />
+                </Button>
+              </div>
             ) : (
-              <Button
-                onClick={() => router.push(AppRoutes.myProfile)}
-                variant={'primary'}
-              >
-                My profile
-              </Button>
+              <div className={styles.mobileButton}>
+                <Button
+                  onClick={() => router.push(AppRoutes.myProfile)}
+                  variant={'primary'}
+                >
+                  My profile
+                </Button>
+              </div>
             )}
           </div>
         </div>
