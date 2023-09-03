@@ -87,3 +87,23 @@
   align-items: center;
   gap: 20px;
 }
+
+.mobileButton {
+  display: flex;
+  gap: $spacing-2;
+  @include mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    padding: $spacing-4 12%;
+    background-color: #04080d;
+    button {
+      width: auto;
+    }
+  }
+}
+
+

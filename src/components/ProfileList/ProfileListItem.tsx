@@ -1,7 +1,7 @@
 'use client'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
@@ -9,6 +9,20 @@ import { ProfileModel } from '@/data/frontend/profile/types'
 const cx = classNames.bind(styles)
 
 export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1000,
+  )
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleResize = () => setWindowWidth(window.innerWidth)
+      window.addEventListener('resize', handleResize)
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
+    }
+  }, [])
+
   const commonClasses = {
     [styles.frontend]: data.position === JobSpecialization.Frontend,
     [styles.backend]: data.position === JobSpecialization.Backend,
@@ -22,13 +36,15 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
   })
 
   const renderTechnologies = () => {
-    if (data.techStack.length <= 4) {
+    const sliceCount = windowWidth <= 768 ? 2 : 3
+
+    if (data.techStack.length <= sliceCount) {
       return data.techStack.map((tech, index) => (
         <span key={index}>{tech}</span>
       ))
     } else {
-      const displayedTechnologies = data.techStack.slice(0, 3)
-      const othersCount = data.techStack.length - 3
+      const displayedTechnologies = data.techStack.slice(0, sliceCount)
+      const othersCount = data.techStack.length - sliceCount
 
       return (
         <>
