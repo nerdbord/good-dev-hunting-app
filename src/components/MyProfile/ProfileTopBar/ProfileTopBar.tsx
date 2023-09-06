@@ -1,19 +1,36 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './ProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { apiClient } from '@/lib/apiClient'
 
-const ProfileTopBar = () => {
+interface ProfileTopBarProps {
+  profileId: string
+}
+const ProfileTopBar = ({ profileId }: ProfileTopBarProps) => {
+  const [isPublished, setIsPublished] = useState<boolean>(false)
+
   const router = useRouter()
 
-  const { data: session } = useSession()
-  const profileId = session?.user?.profileId
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const userProfileData = await apiClient.getUserProfile()
 
-  const handlePublishClick = async () => {
+        if (userProfileData) {
+          setIsPublished(userProfileData.isPublished)
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error)
+      }
+    }
+
+    fetchProfileData()
+  }, [])
+
+  const handleTogglePublish = async () => {
     if (!profileId) {
       throw new Error(
         'Missing profile ID, please check if the authorization was successful.',
@@ -21,10 +38,17 @@ const ProfileTopBar = () => {
     }
 
     try {
-      await apiClient.publishMyProfile(profileId)
-      console.log('Profile published successfully')
+      const toggledProfile = await apiClient.togglePublishMyProfile(profileId)
+
+      if (!toggledProfile) {
+        throw new Error('Failed to retrieve the updated profile data.')
+      }
+
+      setIsPublished(toggledProfile.isPublished)
+
+      console.log('Profile publication toggled successfully')
     } catch (error) {
-      console.error('Failed to publish profile', error)
+      console.error('Failed to toggle profile publication', error)
     }
   }
 
@@ -40,9 +64,8 @@ const ProfileTopBar = () => {
           {' '}
           Edit{' '}
         </Button>
-        <Button variant={'primary'} onClick={handlePublishClick}>
-          {' '}
-          Publish profile{' '}
+        <Button variant={'primary'} onClick={handleTogglePublish}>
+          {isPublished ? 'Unpublish profile' : 'Publish profile'}
         </Button>
       </div>
     </div>

@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { updateUserData } from '@/backend/profile/profile.service'
+import { getProfileById, updateUserData } from '@/backend/profile/profile.service'
 import { authorizeUser } from '@/lib/auth'
 
 export async function POST(request: NextRequest, id: string) {
   try {
     await authorizeUser()
 
+    const existingProfile = await getProfileById(id)
+    
+    if (!existingProfile) {
+      return new NextResponse('Profile not found')
+    }
+    
     const updateUserProfileById = await updateUserData(id, {
-      isPublished: true,
+      isPublished: !existingProfile.isPublished
     })
 
     return NextResponse.json({
@@ -18,3 +24,4 @@ export async function POST(request: NextRequest, id: string) {
     return new NextResponse('Something Went Wrong')
   }
 }
+ 
