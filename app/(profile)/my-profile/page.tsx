@@ -21,6 +21,7 @@ const MyProfilePage = async () => {
   if (!profile) {
     redirect(AppRoutes.createProfile)
   }
+  console.log('profilek', profile)
   return (
     <div className={styles.wrapper}>
       <ProfileTopBar profileId={profile.id} />
