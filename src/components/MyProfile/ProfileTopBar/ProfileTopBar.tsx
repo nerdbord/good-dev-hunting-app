@@ -11,17 +11,17 @@ const ProfileTopBar = () => {
   const router = useRouter()
 
   const { data: session } = useSession()
-  const profileId = session?.user?.profileId
+  const profile = session?.user?.profile
 
   const handlePublishClick = async () => {
-    if (!profileId) {
+    if (!profile) {
       throw new Error(
         'Missing profile ID, please check if the authorization was successful.',
       )
     }
 
     try {
-      await apiClient.publishMyProfile(profileId)
+      await apiClient.publishMyProfile(profile)
       console.log('Profile published successfully')
     } catch (error) {
       console.error('Failed to publish profile', error)
