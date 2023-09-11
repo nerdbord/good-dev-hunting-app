@@ -1,25 +1,22 @@
-'use client'
 import React from 'react'
-import { Button } from '@/components/Button/Button'
 import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
-import GithubIcon from '@/assets/icons/GithubIcon'
 import Link from 'next/link'
-import { useSession, signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import Image from 'next/dist/client/image'
-import { AppRoutes } from '@/utils/routes'
-import AddIcon from '@/assets/icons/AddIcon'
+import { authOptions } from '@/lib/auth'
+import { getServerSession } from 'next-auth'
+import SignInWithGithubBtn from '@/components/SignInWithGithubBtn/SignInWithGithubBtn'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 
-const DefaultHeader = () => {
-  const { status, data: session } = useSession()
+const DefaultHeader = async () => {
+  const session = await getServerSession(authOptions)
+  console.log(session)
   const name = session?.user?.name
   const avatar = session?.user?.image
   const profileId = session?.user?.profileId
-  const router = useRouter()
-  console.log(profileId)
 
-  if (status === 'authenticated') {
+  if (session) {
     return (
       <header className={styles.wrapper}>
         <Link href="/" className={styles.logo}>
@@ -44,22 +41,7 @@ const DefaultHeader = () => {
               )}
               <p className={styles.githubAccName}>{name}</p>
             </div>
-            {profileId === null ? (
-              <Button
-                onClick={() => router.push(AppRoutes.createProfile)}
-                variant={'primary'}
-              >
-                Create profile
-                <AddIcon />
-              </Button>
-            ) : (
-              <Button
-                onClick={() => router.push(AppRoutes.myProfile)}
-                variant={'primary'}
-              >
-                My profile
-              </Button>
-            )}
+            {profileId === null ? <CreateProfileBtn /> : <MyProfileBtn />}
           </div>
         </div>
       </header>
@@ -74,10 +56,7 @@ const DefaultHeader = () => {
       </Link>
 
       <div className={styles.frameButtons}>
-        <Button onClick={() => signIn('github')} variant={'secondary'}>
-          Login
-          <GithubIcon />
-        </Button>
+        <SignInWithGithubBtn />
       </div>
     </header>
   )
