@@ -24,8 +24,6 @@ const DefaultHeader = ({ session }: DefaultHeaderProps) => {
   const avatar = session?.user?.image
   const profileId = session?.user?.profileId
 
-  console.log('SESSION => ', session)
-
   if (session) {
     return (
       <header className={styles.wrapper}>
