@@ -3,20 +3,11 @@ import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import Image from 'next/image'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-type SessionType = {
-  user: {
-    name: string
-    image: string
-    profileId: string | null
-  }
-}
-
-interface DefaultHeaderProps {
-  session: SessionType | null
-}
-
-const MyProfileHeader = ({ session }: DefaultHeaderProps) => {
+const MyProfileHeader = async () => {
+  const session = await getServerSession(authOptions)
   const name = session?.user?.name
   const avatar = session?.user?.image
 
