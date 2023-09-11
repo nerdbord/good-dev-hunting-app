@@ -1,13 +1,14 @@
-'use client'
 import React from 'react'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import Image from 'next/image'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-const MyProfileHeader = () => {
-  const { data: session } = useSession()
+const MyProfileHeader = async () => {
+  const session = await getServerSession(authOptions)
+  console.log(session)
   const name = session?.user?.name
   const avatar = session?.user?.image
 
