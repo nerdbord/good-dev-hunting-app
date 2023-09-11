@@ -6,23 +6,15 @@ import Image from 'next/dist/client/image'
 import SignInWithGithubBtn from '@/components/SignInWithGithubBtn/SignInWithGithubBtn'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-type SessionType = {
-  user: {
-    name: string
-    image: string
-    profileId: string | null
-  }
-}
+const DefaultHeader = async () => {
+  const session = await getServerSession(authOptions)
 
-interface DefaultHeaderProps {
-  session: SessionType | null
-}
-
-const DefaultHeader = ({ session }: DefaultHeaderProps) => {
   const name = session?.user?.name
   const avatar = session?.user?.image
-  const profileId = session?.user?.profileId
+  const profile = session?.user?.profile
 
   if (session) {
     return (
@@ -49,7 +41,7 @@ const DefaultHeader = ({ session }: DefaultHeaderProps) => {
               )}
               <p className={styles.githubAccName}>{name}</p>
             </div>
-            {profileId === null ? <CreateProfileBtn /> : <MyProfileBtn />}
+            {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </div>
       </header>
