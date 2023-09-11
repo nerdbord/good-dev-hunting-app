@@ -3,18 +3,28 @@ import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import Image from 'next/dist/client/image'
-import { authOptions } from '@/lib/auth'
-import { getServerSession } from 'next-auth'
 import SignInWithGithubBtn from '@/components/SignInWithGithubBtn/SignInWithGithubBtn'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 
-const DefaultHeader = async () => {
-  const session = await getServerSession(authOptions)
-  console.log(session)
+type SessionType = {
+  user: {
+    name: string
+    image: string
+    profileId: string | null
+  }
+}
+
+interface DefaultHeaderProps {
+  session: SessionType | null
+}
+
+const DefaultHeader = ({ session }: DefaultHeaderProps) => {
   const name = session?.user?.name
   const avatar = session?.user?.image
   const profileId = session?.user?.profileId
+
+  console.log('SESSION => ', session)
 
   if (session) {
     return (

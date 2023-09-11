@@ -1,14 +1,17 @@
 import React from 'react'
 import MyProfileHeader from '@/components/Headers/MyProfileHeader/MyProfileHeader'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-const ProfileLayout = ({
+const ProfileLayout = async ({
   children,
 }: {
   children: React.ReactNode
-}): JSX.Element => {
+}): Promise<JSX.Element> => {
+  const session = await getServerSession(authOptions)
   return (
     <div>
-      <MyProfileHeader />
+      <MyProfileHeader session={session} />
       {children}
     </div>
   )
