@@ -10,9 +10,6 @@ const PublishProfileBtn = () => {
   const profile = session?.user.profile
 
   const handlePublishClick = async () => {
-    console.log(id)
-    console.log(profile)
-
     if (!id) {
       throw new Error(
         'Missing profile ID, please check if the authorization was successful.',
