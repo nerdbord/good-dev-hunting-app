@@ -1,3 +1,4 @@
+'use client'
 import styles from '../DropdownFilter/DropdownFilter.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
@@ -40,6 +41,14 @@ export const DropdownFilterMulti = ({
   const handleSelect = (option: string) => {
     onSelect(option)
   }
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches
+
+  const dropdownClass = isMobile
+    ? isDropdownActive
+      ? 'dropdown visible'
+      : 'dropdown'
+    : ''
   return (
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>
@@ -56,7 +65,7 @@ export const DropdownFilterMulti = ({
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
         {isDropdownActive && (
-          <div className={styles.dropdown}>
+          <div className={`${styles.dropdown} ${dropdownClass}`}>
             {options.map((option, index) => (
               <label key={index} className={styles.dropdownInput}>
                 <div
