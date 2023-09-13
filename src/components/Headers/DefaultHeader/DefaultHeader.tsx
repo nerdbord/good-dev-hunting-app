@@ -8,13 +8,21 @@ import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { getProfileByUserId } from '@/backend/profile/profile.service'
 
 const DefaultHeader = async () => {
   const session = await getServerSession(authOptions)
 
+  const id = session?.user?.id
   const name = session?.user?.name
   const avatar = session?.user?.image
-  const profile = session?.user?.profile
+
+  if (!id) {
+    console.log('there is something wrong with id => ', id)
+    return null
+  }
+
+  const profile = await getProfileByUserId(id)
 
   if (session) {
     return (
@@ -28,7 +36,6 @@ const DefaultHeader = async () => {
             <p className={styles.githubAccConnected}>
               Connected Github account
             </p>
-
             <div className={styles.githubAcc}>
               {avatar && (
                 <Image
@@ -41,7 +48,7 @@ const DefaultHeader = async () => {
               )}
               <p className={styles.githubAccName}>{name}</p>
             </div>
-            {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
+            {profile?.id ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </div>
       </header>

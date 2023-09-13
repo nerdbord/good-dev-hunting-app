@@ -5,18 +5,16 @@ import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
 
 const PublishProfileBtn = () => {
-  const { data: session } = useSession()
-  const id = session?.user.id
-  const profile = session?.user.profile
+  const session = useSession()
+  const id = session?.data?.user?.id
+
+  if (!id) {
+    console.log('there is something wrong with id => ', id)
+    return null
+  }
 
   const handlePublishClick = async () => {
-    if (!id) {
-      throw new Error(
-        'Missing profile ID, please check if the authorization was successful.',
-      )
-    }
-
-    if (id && profile) {
+    if (id) {
       try {
         await apiClient.publishMyProfile(id)
         console.log('Profile published successfully')
@@ -29,7 +27,7 @@ const PublishProfileBtn = () => {
   return (
     <Button variant={'primary'} onClick={handlePublishClick}>
       {' '}
-      Publish profile{' '}
+      Publish profile button{' '}
     </Button>
   )
 }
