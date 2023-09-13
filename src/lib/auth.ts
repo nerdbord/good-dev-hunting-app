@@ -38,7 +38,6 @@ export const authOptions: NextAuthOptions = {
 
       token.id = foundUser.id
       token.profileId = foundUser.profile?.id
-      token.profile = !!foundUser.profile
 
       return { ...token, ...user }
     },
@@ -62,7 +61,6 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string
         session.user.email = token.email as string
-        session.user.profile = token.profile as boolean
       }
 
       return session

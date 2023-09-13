@@ -9,8 +9,7 @@ declare module 'next-auth' {
       id: string
       email: string
       image: string
-      name: string
-      profile: Profile | null
+      name: stringl
     }
   }
 }
