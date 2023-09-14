@@ -1,13 +1,14 @@
 import React from 'react'
 import MyProfileHeader from '@/components/Headers/MyProfileHeader/MyProfileHeader'
 
-const ProfileLayout = ({
+const ProfileLayout = async ({
   children,
 }: {
   children: React.ReactNode
-}): JSX.Element => {
+}): Promise<JSX.Element> => {
   return (
     <div>
+      {/* @ts-expect-error Server Component */}
       <MyProfileHeader />
       {children}
     </div>
