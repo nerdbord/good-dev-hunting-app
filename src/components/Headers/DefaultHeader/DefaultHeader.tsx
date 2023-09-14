@@ -13,13 +13,12 @@ import { getProfileByUserId } from '@/backend/profile/profile.service'
 const DefaultHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const id = session?.user?.id
+  const id = session?.user?.id as string
   const name = session?.user?.name
   const avatar = session?.user?.image
 
   if (!id) {
     console.log('there is something wrong with id => ', id)
-    return null
   }
 
   const profile = await getProfileByUserId(id)
