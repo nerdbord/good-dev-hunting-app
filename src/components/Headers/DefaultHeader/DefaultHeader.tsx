@@ -17,12 +17,7 @@ const DefaultHeader = async () => {
   const name = session?.user?.name
   const avatar = session?.user?.image
 
-  if (!id) {
-    console.log('there is something wrong with id => ', id)
-    return null
-  }
-
-  const profile = await getProfileByUserId(id)
+  const profile = id ? await getProfileByUserId(id) : null
 
   if (session) {
     return (
