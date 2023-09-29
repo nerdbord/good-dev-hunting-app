@@ -1,25 +1,25 @@
-'use client'
 import React from 'react'
-import { Button } from '@/components/Button/Button'
 import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
-import GithubIcon from '@/assets/icons/GithubIcon'
 import Link from 'next/link'
-import { useSession, signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import Image from 'next/dist/client/image'
-import { AppRoutes } from '@/utils/routes'
-import AddIcon from '@/assets/icons/AddIcon'
+import SignInWithGithubBtn from '@/components/SignInWithGithubBtn/SignInWithGithubBtn'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { getProfileByUserId } from '@/backend/profile/profile.service'
 
-const DefaultHeader = () => {
-  const { status, data: session } = useSession()
+const DefaultHeader = async () => {
+  const session = await getServerSession(authOptions)
+
+  const id = session?.user?.id
   const name = session?.user?.name
   const avatar = session?.user?.image
-  const profileId = session?.user?.profileId
-  const router = useRouter()
-  console.log(profileId)
 
-  if (status === 'authenticated') {
+  const profile = id ? await getProfileByUserId(id) : null
+
+  if (session) {
     return (
       <header className={styles.wrapper}>
         <Link href="/" className={styles.logo}>
@@ -31,7 +31,6 @@ const DefaultHeader = () => {
             <p className={styles.githubAccConnected}>
               Connected Github account
             </p>
-
             <div className={styles.githubAcc}>
               {avatar && (
                 <Image
@@ -44,26 +43,6 @@ const DefaultHeader = () => {
               )}
               <p className={styles.githubAccName}>{name}</p>
             </div>
-            {profileId === null ? (
-              <div className={styles.mobileButton}>
-                <Button
-                  onClick={() => router.push(AppRoutes.createProfile)}
-                  variant={'primary'}
-                >
-                  Create profile
-                  <AddIcon />
-                </Button>
-              </div>
-            ) : (
-              <div className={styles.mobileButton}>
-                <Button
-                  onClick={() => router.push(AppRoutes.myProfile)}
-                  variant={'primary'}
-                >
-                  My profile
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </header>
@@ -78,10 +57,7 @@ const DefaultHeader = () => {
       </Link>
 
       <div className={styles.frameButtons}>
-        <Button onClick={() => signIn('github')} variant={'secondary'}>
-          Login
-          <GithubIcon />
-        </Button>
+        <SignInWithGithubBtn />
       </div>
     </header>
   )

@@ -61,9 +61,6 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token.id as string
         session.user.email = token.email as string
-        session.user.profileId = token.profileId
-          ? (token.profileId as string)
-          : null
       }
 
       return session
