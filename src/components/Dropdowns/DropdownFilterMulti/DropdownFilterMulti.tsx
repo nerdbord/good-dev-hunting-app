@@ -44,13 +44,6 @@ export const DropdownFilterMulti = ({
     onSelect(option)
   }
 
-  const isMobile = window.matchMedia('(max-width: 420px)').matches
-
-  const dropdownClass = isMobile
-    ? isDropdownActive
-      ? 'dropdown visible'
-      : 'dropdown'
-    : ''
   return (
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>
@@ -67,7 +60,7 @@ export const DropdownFilterMulti = ({
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
         {isDropdownActive && (
-          <div className={`${styles.dropdown} ${dropdownClass}`}>
+            <div className={styles.dropdown}>
               <div className={styles.titleContainer}>
               <div className={styles.dropdownTitle}>
               {text}
