@@ -37,7 +37,6 @@
   padding: 25px;
   font-weight: 400;
   font-size: 14px;
-  margin-top: 10px;
   z-index: 1000;
   background-color: #0f1217;
   display: flex;
@@ -45,20 +44,36 @@
   gap: 16px;
   @include mobile {
     position: fixed;
-    bottom: 0;
+    flex-direction: column;
+    bottom: 10px;
     left: 0;
     width: 100%;
     height: auto;
-    justify-content: center;
     background-color: #04080d;
     transition: transform 0.3s ease-in-out;
   }
 }
 
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdownTitle {
+  display: none;
+  @include mobile {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+
 .dropdownInput {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 8px;
   cursor: pointer;
 
