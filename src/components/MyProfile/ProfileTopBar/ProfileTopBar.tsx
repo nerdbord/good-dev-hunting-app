@@ -14,43 +14,21 @@ const ProfileTopBar = ({ profileId }: ProfileTopBarProps) => {
 
   const router = useRouter()
 
-  // useEffect(() => {
-  //   const fetchProfileData = async () => {
-  //     try {
-  //       const userProfileData = await apiClient.getUserProfile()
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const userProfileData = await apiClient.getUserProfile()
 
-  //       if (userProfileData) {
-  //         setIsPublished(userProfileData.isPublished)
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching user profile:', error)
-  //     }
-  //   }
+        if (userProfileData) {
+          setIsPublished(userProfileData.isPublished)
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error)
+      }
+    }
 
-  //   fetchProfileData()
-  // }, [])
-
-  // const handleTogglePublish = async () => {
-  //   if (!profileId) {
-  //     throw new Error(
-  //       'Missing profile ID, please check if the authorization was successful.',
-  //     )
-  //   }
-
-  //   try {
-  //     const toggledProfile = await apiClient.togglePublishMyProfile(profileId)
-
-  //     if (!toggledProfile) {
-  //       throw new Error('Failed to retrieve the updated profile data.')
-  //     }
-
-  //     setIsPublished(toggledProfile.isPublished)
-
-  //     console.log('Profile publication toggled successfully')
-  //   } catch (error) {
-  //     console.error('Failed to toggle profile publication', error)
-  //   }
-  // }
+    fetchProfileData()
+  }, [])
 
   const handleTogglePublish = async () => {
     if (!profileId) {
@@ -60,13 +38,17 @@ const ProfileTopBar = ({ profileId }: ProfileTopBarProps) => {
     }
 
     try {
-      await apiClient.togglePublishMyProfile(profileId)
+      const toggledProfile = await apiClient.togglePublishMyProfile(profileId)
 
-      setIsPublished(true)
+      if (!toggledProfile) {
+        throw new Error('Failed to retrieve the updated profile data.')
+      }
 
-      console.log('Profile publication set to true')
+      setIsPublished(toggledProfile.isPublished)
+
+      console.log('Profile publication toggled successfully')
     } catch (error) {
-      console.error('Failed to set profile publication to true', error)
+      console.error('Failed to toggle profile publication', error)
     }
   }
 
