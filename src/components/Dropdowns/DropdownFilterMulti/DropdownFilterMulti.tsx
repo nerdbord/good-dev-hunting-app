@@ -35,7 +35,23 @@ export const DropdownFilterMulti = ({
     return () => {
       document.removeEventListener('mousedown', handler)
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    switch (isDropdownActive) {
+      case true:
+        setOverlayActive(true);
+        document.body.classList.add("blurBackground");
+        break;
+      case false:
+        setOverlayActive(false);
+        document.body.classList.remove("blurBackground");
+        break;
+      default:
+        break;
+    }
+  }, [isDropdownActive]);
+
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
@@ -43,6 +59,9 @@ export const DropdownFilterMulti = ({
   const handleSelect = (option: string) => {
     onSelect(option)
   }
+
+  const [isOverlayActive, setOverlayActive] = useState(false);
+
 
   return (
     <div className={styles.buttonBox}>
@@ -59,19 +78,22 @@ export const DropdownFilterMulti = ({
           )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
+        {isOverlayActive && <div className={styles.overlay}></div>}
         {isDropdownActive && (
-            <div className={styles.dropdown}>
-              <div className={styles.titleContainer}>
-              <div className={styles.dropdownTitle}>
-              {text}
-              </div>  
-              <Button variant="tertiary" type="submit" onClick={() => {
-              setDropdownActive(false);
-              setArrow('IoIosArrowDown');
-            }} >
-        Apply
-      </Button>
-             </div>
+          <div className={styles.dropdown}>
+            <div className={styles.titleContainer}>
+              <div className={styles.dropdownTitle}>{text}</div>
+              <Button
+                variant="tertiary"
+                type="submit"
+                onClick={() => {
+                  setDropdownActive(false)
+                  setArrow('IoIosArrowDown')
+                }}
+              >
+                Apply
+              </Button>
+            </div>
             {options.map((option, index) => (
               <label key={index} className={styles.dropdownInput}>
                 <div
