@@ -70,6 +70,7 @@ const WorkInformation = () => {
             Choose max. 8
           </div>
         </div>
+        <div className={styles.employmentType}>
         <InputFormError error={errors.employment}>
           Employment type
           <CheckboxInput
@@ -94,6 +95,7 @@ const WorkInformation = () => {
             name="contract"
           />
         </InputFormError>
+        </div>
       </div>
     </div>
   )

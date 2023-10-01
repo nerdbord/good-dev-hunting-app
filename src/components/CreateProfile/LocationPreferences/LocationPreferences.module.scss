@@ -9,8 +9,10 @@
   width: 100%;
   @media (max-width: 420px) {
     max-width: 100%;
+    margin-top: 20px;
     flex-direction: column;
     padding: 0px;
+    gap: 20px;
   }
 }
 
