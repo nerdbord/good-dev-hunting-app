@@ -43,7 +43,6 @@ const DefaultHeader = async () => {
               )}
               <p className={styles.githubAccName}>{name}</p>
             </div>
-            {profile?.id ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </div>
       </header>
