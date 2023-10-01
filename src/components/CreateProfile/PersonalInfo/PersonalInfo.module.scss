@@ -9,8 +9,10 @@
   width: 100%;
   @media (max-width: 420px) {
     max-width: 100%;
+    margin-top: 20px;
     flex-direction: column;
     padding: 0px;
+    gap: 20px;
   }
 }
 
@@ -22,6 +24,7 @@
   @include mobile {
     max-width: 100%;
     flex-direction: column;
+    gap: 10px;
   }
 }
 
@@ -39,6 +42,7 @@
   @include mobile {
     position: static;
     width: auto;
+
   }
 }
 
@@ -51,6 +55,7 @@
   @include mobile {
     max-width: 100%;
     flex-direction: column;
+    gap: 24px;
   }
 }
 

@@ -10,6 +10,7 @@
   @media (max-width: 420px) {
     flex-direction: column;
     padding: 0px;
+    gap: 20px;
   }
 }
 
@@ -75,4 +76,7 @@
   color: #e2eaf1;
   font-weight: 500;
   line-height: 20px;
+  @include mobile {
+    margin-bottom: 60px;
+  }
 }
