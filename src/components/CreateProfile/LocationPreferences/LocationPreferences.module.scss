@@ -6,6 +6,12 @@
   padding: 100px;
   display: flex;
   gap: 100px;
+  width: 100%;
+  @media (max-width: 420px) {
+    max-width: 100%;
+    flex-direction: column;
+    padding: 0px;
+  }
 }
 
 .left {
@@ -13,6 +19,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @include mobile {
+    max-width: 100%;
+    flex-direction: column;
+  }
 }
 
 .personalInfo {
@@ -26,6 +36,10 @@
   align-items: flex-start;
   gap: 20px;
   font-size: 14px;
+  @include mobile {
+    position: static;
+    width: auto;
+  }
 }
 
 .right {
@@ -34,4 +48,9 @@
   flex-direction: column;
   justify-content: center;
   gap: 24px;
+  @include mobile {
+    max-width: 100%;
+    flex-direction: column;
+  }
+
 }
