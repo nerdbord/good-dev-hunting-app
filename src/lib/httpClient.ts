@@ -7,12 +7,12 @@ export const httpClient = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-      });
+      })
 
-      return handleResponse<ResponseData>(response);
+      return handleResponse<ResponseData>(response)
     } catch (error) {
-      console.error(error);
-      return Promise.reject(error);
+      console.error(error)
+      return Promise.reject(error)
     }
   },
 
@@ -20,15 +20,16 @@ export const httpClient = {
     try {
       const response = await fetch(url, {
         method: 'GET',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      })
 
-      return handleResponse<ResponseData>(response);
+      return handleResponse<ResponseData>(response)
     } catch (error) {
-      console.error(error);
-      return Promise.reject(error);
+      console.error(error)
+      return Promise.reject(error)
     }
   },
 
@@ -40,29 +41,29 @@ export const httpClient = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-      });
+      })
 
-      return handleResponse<ResponseData>(response);
+      return handleResponse<ResponseData>(response)
     } catch (error) {
-      console.error(error);
-      return Promise.reject(error);
+      console.error(error)
+      return Promise.reject(error)
     }
   },
-};
+}
 
 async function handleResponse<ResponseData>(response: Response) {
   if (response.ok) {
-    if (response.headers.get("Content-Type")?.includes("application/json")) {
-      return (await response.json()) as Promise<ResponseData>;
+    if (response.headers.get('Content-Type')?.includes('application/json')) {
+      return (await response.json()) as Promise<ResponseData>
     } else {
-      return Promise.reject(await response.text());
+      return Promise.reject(await response.text())
     }
   } else {
-    if (response.headers.get("Content-Type")?.includes("application/json")) {
-      const errorData = await response.json();
-      return Promise.reject(errorData);
+    if (response.headers.get('Content-Type')?.includes('application/json')) {
+      const errorData = await response.json()
+      return Promise.reject(errorData)
     } else {
-      return Promise.reject(await response.text());
+      return Promise.reject(await response.text())
     }
   }
 }

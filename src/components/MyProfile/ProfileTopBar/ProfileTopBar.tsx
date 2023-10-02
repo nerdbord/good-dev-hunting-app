@@ -1,72 +1,40 @@
-'use client'
 import React, { useState, useEffect } from 'react'
 import styles from './ProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { apiClient } from '@/lib/apiClient'
+import { TogglePublishButton } from '@/components/TogglePublishButton'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { EditProfileButton } from '@/components/EditProfileButton'
 
 interface ProfileTopBarProps {
   profileId: string
 }
-const ProfileTopBar = ({ profileId }: ProfileTopBarProps) => {
-  const [isPublished, setIsPublished] = useState<boolean>(false)
+const ProfileTopBar = async ({ profileId }: ProfileTopBarProps) => {
+  const session = await getServerSession(authOptions)
 
-  const router = useRouter()
-
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const userProfileData = await apiClient.getUserProfile()
-
-        if (userProfileData) {
-          setIsPublished(userProfileData.isPublished)
-        }
-      } catch (error) {
-        console.error('Error fetching user profile:', error)
-      }
-    }
-
-    fetchProfileData()
-  }, [])
-
-  const handleTogglePublish = async () => {
-    if (!profileId) {
-      throw new Error(
-        'Missing profile ID, please check if the authorization was successful.',
-      )
-    }
-
-    try {
-      const toggledProfile = await apiClient.togglePublishMyProfile(profileId)
-
-      if (!toggledProfile) {
-        throw new Error('Failed to retrieve the updated profile data.')
-      }
-
-      setIsPublished(toggledProfile.isPublished)
-
-      console.log('Profile publication toggled successfully')
-    } catch (error) {
-      console.error('Failed to toggle profile publication', error)
-    }
+  if (!session || !session.user) {
+    redirect(AppRoutes.home)
   }
 
-  const handleEditClick = () => {
-    router.push(AppRoutes.editProfile)
+  const profile = await getProfileByUserEmail(session.user.email)
+
+  if (!profile) {
+    redirect(AppRoutes.createProfile)
   }
 
   return (
     <div className={styles.titleBox}>
       <span className={styles.title}>Profile preview</span>
       <div className={styles.buttonBox}>
-        <Button variant={'secondary'} onClick={handleEditClick}>
-          {' '}
-          Edit{' '}
-        </Button>
-        <Button variant={'primary'} onClick={handleTogglePublish}>
-          {isPublished ? 'Unpublish profile' : 'Publish profile'}
-        </Button>
+        <EditProfileButton />
+        <TogglePublishButton
+          isPublished={profile.isPublished}
+          profileId={profile.id}
+        />
       </div>
     </div>
   )
