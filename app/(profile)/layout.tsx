@@ -8,6 +8,7 @@ const ProfileLayout = ({
 }): JSX.Element => {
   return (
     <div>
+      {/* @ts-expect-error Server Component */}
       <MyProfileHeader />
       {children}
     </div>

@@ -1,25 +1,24 @@
-'use client'
 import React from 'react'
-import { Button } from '@/components/Button/Button'
-import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
-import GithubIcon from '@/assets/icons/GithubIcon'
 import Link from 'next/link'
-import { useSession, signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import Image from 'next/dist/client/image'
-import { AppRoutes } from '@/utils/routes'
-import AddIcon from '@/assets/icons/AddIcon'
+import Image from 'next/image'
+import { MyProfileButton } from '@/components/MyProfileButton/MyProfileButton'
+import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
 
-const DefaultHeader = () => {
-  const { status, data: session } = useSession()
-  const name = session?.user?.name
-  const avatar = session?.user?.image
-  const profileId = session?.user?.profileId
-  const router = useRouter()
-  console.log(profileId)
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
-  if (status === 'authenticated') {
+import styles from './DefaultHeader.module.scss'
+
+const DefaultHeader = async () => {
+  const session = await getServerSession(authOptions)
+
+  const profile = session
+    ? await getProfileByUserEmail(session.user.email)
+    : null
+
+  if (session) {
     return (
       <header className={styles.wrapper}>
         <Link href="/" className={styles.logo}>
@@ -33,33 +32,18 @@ const DefaultHeader = () => {
             </p>
 
             <div className={styles.githubAcc}>
-              {avatar && (
+              {session.user.image && (
                 <Image
                   className={styles.githubAccImg}
-                  src={avatar}
+                  src={session.user.image}
                   width={38}
                   height={38}
                   alt="github avatar"
                 />
               )}
-              <p className={styles.githubAccName}>{name}</p>
+              <p className={styles.githubAccName}>{session?.user.name}</p>
             </div>
-            {profileId === null ? (
-              <Button
-                onClick={() => router.push(AppRoutes.createProfile)}
-                variant={'primary'}
-              >
-                Create profile
-                <AddIcon />
-              </Button>
-            ) : (
-              <Button
-                onClick={() => router.push(AppRoutes.myProfile)}
-                variant={'primary'}
-              >
-                My profile
-              </Button>
-            )}
+            <MyProfileButton profileId={profile?.id || null} />
           </div>
         </div>
       </header>
@@ -74,10 +58,7 @@ const DefaultHeader = () => {
       </Link>
 
       <div className={styles.frameButtons}>
-        <Button onClick={() => signIn('github')} variant={'secondary'}>
-          Login
-          <GithubIcon />
-        </Button>
+        <GithubLoginButton />
       </div>
     </header>
   )

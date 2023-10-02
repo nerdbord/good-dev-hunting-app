@@ -7,6 +7,7 @@ import { FiltersProvider } from '@/contexts/FilterContext'
 const Home = () => {
   return (
     <FiltersProvider>
+      {/* @ts-expect-error Server Component */}
       <DefaultHeader />
       <Filters />
       {/* @ts-expect-error Server Component */}

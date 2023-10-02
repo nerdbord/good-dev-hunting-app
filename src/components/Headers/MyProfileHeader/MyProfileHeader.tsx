@@ -1,15 +1,14 @@
-'use client'
 import React from 'react'
-import { useSession } from 'next-auth/react'
+
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import Image from 'next/image'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-const MyProfileHeader = () => {
-  const { data: session } = useSession()
-  const name = session?.user?.name
-  const avatar = session?.user?.image
+const MyProfileHeader = async () => {
+  const session = await getServerSession(authOptions)
 
   return (
     <div>
@@ -26,16 +25,16 @@ const MyProfileHeader = () => {
               </p>
             </div>
             <div className={styles.githubAcc}>
-              {avatar && (
+              {session?.user?.image && (
                 <Image
                   className={styles.githubAccImg}
-                  src={avatar}
+                  src={session.user.image}
                   width={38}
                   height={38}
                   alt="github avatar"
                 />
               )}
-              <p className={styles.githubAccName}>{name}</p>
+              <p className={styles.githubAccName}>{session?.user.name}</p>
             </div>
           </div>
         </div>
