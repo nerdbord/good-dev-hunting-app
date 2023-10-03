@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { AppRoutes } from '@/utils/routes'
-import { findUserByEmail } from '@/backend/user/user.service';
+import { findUserByEmail } from '@/backend/user/user.service'
 
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
@@ -20,7 +20,7 @@ const ProfileMain = async () => {
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
-  const user = await findUserByEmail(session.user.email);
+  const user = await findUserByEmail(session.user.email)
   const githubUsername = user?.githubDetails?.username
   return (
     <>
@@ -56,7 +56,6 @@ const ProfileMain = async () => {
         </ul>
         <div className={styles.profile}>
           <div className={styles.user}>
-          <span>{user?.githubDetails?.username}</span>
             <Image
               src={session.user.image}
               width={100}
