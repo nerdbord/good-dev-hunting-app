@@ -38,23 +38,22 @@ export const DropdownFilter = ({
     return () => {
       document.removeEventListener('mousedown', handler)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     switch (isDropdownActive) {
       case true:
-        setOverlayActive(true);
-        document.body.classList.add("blurBackground");
-        break;
+        setOverlayActive(true)
+        document.body.classList.add('blurBackground')
+        break
       case false:
-        setOverlayActive(false);
-        document.body.classList.remove("blurBackground");
-        break;
+        setOverlayActive(false)
+        document.body.classList.remove('blurBackground')
+        break
       default:
-        break;
+        break
     }
-  }, [isDropdownActive]);
-
+  }, [isDropdownActive])
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
@@ -69,7 +68,7 @@ export const DropdownFilter = ({
     }
   }
 
-  const [isOverlayActive, setOverlayActive] = useState(false);
+  const [isOverlayActive, setOverlayActive] = useState(false)
 
   return (
     <div className={styles.buttonBox}>
@@ -87,7 +86,7 @@ export const DropdownFilter = ({
         {isDropdownActive && (
           <div className={styles.dropdown}>
             <div className={styles.titleContainer}>
-            <div className={styles.dropdownTitle}>{label || text}</div>
+              <div className={styles.dropdownTitle}>{label || text}</div>
 
               <Button
                 variant="tertiary"
