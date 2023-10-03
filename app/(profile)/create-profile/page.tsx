@@ -9,19 +9,12 @@ import CreateProfileTopBar from '@/components/CreateProfile/CreateProfileTopBar/
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
 import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { AppRoutes } from '@/utils/routes'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session) {
     redirect(AppRoutes.home)
-  }
-
-  const myProfile = await getProfileByUserEmail(session.user.email)
-
-  if (myProfile) {
-    redirect(AppRoutes.myProfile)
   }
 
   return (

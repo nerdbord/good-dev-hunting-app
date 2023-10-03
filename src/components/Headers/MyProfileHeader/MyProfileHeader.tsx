@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
 import logo from '@/assets/images/logo.png'
@@ -9,6 +8,8 @@ import { authOptions } from '@/lib/auth'
 
 const MyProfileHeader = async () => {
   const session = await getServerSession(authOptions)
+  const name = session?.user?.name
+  const avatar = session?.user?.image
 
   return (
     <div>
@@ -25,16 +26,16 @@ const MyProfileHeader = async () => {
               </p>
             </div>
             <div className={styles.githubAcc}>
-              {session?.user?.image && (
+              {avatar && (
                 <Image
                   className={styles.githubAccImg}
-                  src={session.user.image}
+                  src={avatar}
                   width={38}
                   height={38}
                   alt="github avatar"
                 />
               )}
-              <p className={styles.githubAccName}>{session?.user.name}</p>
+              <p className={styles.githubAccName}>{name}</p>
             </div>
           </div>
         </div>
