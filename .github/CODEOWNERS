@@ -1,0 +1,4 @@
+# This is an example CODEOWNERS file
+
+# These owners will be the default owners for everything in the repo.
+*       @wawrzonnn @hansac91 @sumick

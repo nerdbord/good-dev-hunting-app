@@ -3,6 +3,7 @@ import styles from './DropdownFilter.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
+import { Button } from '@/components/Button/Button'
 
 export const DropdownFilter = ({
   label,
@@ -39,6 +40,21 @@ export const DropdownFilter = ({
     }
   }, [])
 
+  useEffect(() => {
+    switch (isDropdownActive) {
+      case true:
+        setOverlayActive(true)
+        document.body.classList.add('blurBackground')
+        break
+      case false:
+        setOverlayActive(false)
+        document.body.classList.remove('blurBackground')
+        break
+      default:
+        break
+    }
+  }, [isDropdownActive])
+
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
@@ -52,6 +68,8 @@ export const DropdownFilter = ({
     }
   }
 
+  const [isOverlayActive, setOverlayActive] = useState(false)
+
   return (
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>
@@ -64,8 +82,24 @@ export const DropdownFilter = ({
           )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
+        {isOverlayActive && <div className={styles.overlay}></div>}
         {isDropdownActive && (
           <div className={styles.dropdown}>
+            <div className={styles.titleContainer}>
+              <div className={styles.dropdownTitle}>{label || text}</div>
+
+              <Button
+                variant="tertiary"
+                type="submit"
+                onClick={() => {
+                  setDropdownActive(false)
+                  setArrow('IoIosArrowDown')
+                }}
+              >
+                Apply
+              </Button>
+            </div>
+
             {options.map((option, index) => (
               <label key={index} className={styles.dropdownInput}>
                 <div
@@ -79,6 +113,7 @@ export const DropdownFilter = ({
                     checked={selectedValue === option}
                     onChange={() => handleSelect(option)}
                   />
+
                   {selectedValue.includes(option) && (
                     <IoIosCheckmark className={styles.checkmark} />
                   )}

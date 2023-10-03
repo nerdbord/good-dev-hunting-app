@@ -4,7 +4,7 @@ import DefaultHeader from '@/components/Headers/DefaultHeader/DefaultHeader'
 import ProfileList from '@/components/ProfileList/ProfileList'
 import { FiltersProvider } from '@/contexts/FilterContext'
 
-const Home = () => {
+export default function Home() {
   return (
     <FiltersProvider>
       {/* @ts-expect-error Server Component */}
@@ -15,5 +15,3 @@ const Home = () => {
     </FiltersProvider>
   )
 }
-
-export default Home
