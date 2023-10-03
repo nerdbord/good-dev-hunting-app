@@ -8,7 +8,6 @@ import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
 import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
 import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
 import { AppRoutes } from '@/utils/routes'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
@@ -17,15 +16,9 @@ const MyProfilePage = async () => {
     redirect(AppRoutes.home)
   }
 
-  const profile = await getProfileByUserEmail(session.user.email)
-  if (!profile) {
-    redirect(AppRoutes.createProfile)
-  }
-
   return (
     <div className={styles.wrapper}>
-      {/* @ts-expect-error Server Component */}
-      <ProfileTopBar profileId={profile.id} />
+      <ProfileTopBar />
       {/* @ts-expect-error Server Component */}
       <ProfileMain />
       {/* @ts-expect-error Server Component */}
