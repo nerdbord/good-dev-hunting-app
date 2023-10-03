@@ -6,39 +6,29 @@ interface ButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
   variant: 'primary' | 'secondary' | 'tertiary'
   type?: 'button' | 'submit'
-  disabled?: boolean
-  loading?: boolean
 }
 
 export const Button = ({
   onClick,
   children,
   variant,
-  disabled,
-  loading,
 }: PropsWithChildren<ButtonProps>) => {
   const buttonClassName = useMemo(() => {
     switch (variant) {
       case 'primary':
-        return styles.buttonPrimary
+        return styles.buttonPrimary;
       case 'secondary':
-        return styles.buttonSecondary
+        return styles.buttonSecondary;
       case 'tertiary':
-        return styles.buttonTertiary
+        return styles.buttonTertiary;
       default:
-        return styles.buttonPrimary
+        return styles.buttonPrimary;
     }
-  }, [variant])
-
-  const disabledClass = disabled || loading ? styles.disabled : ''
+  }, [variant]);
 
   return (
-    <button
-      className={[buttonClassName, disabledClass].join(' ')}
-      disabled={disabled || loading}
-      onClick={onClick}
-    >
-      {loading ? 'Loading...' : children}
+    <button className={buttonClassName} onClick={onClick}>
+      {children}
     </button>
   )
 }

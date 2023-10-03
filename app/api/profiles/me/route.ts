@@ -55,7 +55,7 @@ export async function PUT(request: NextRequest) {
         employmentType: updatedDataPayload.employmentType,
         isPublished: updatedDataPayload.isPublished ?? false,
       }
-      console.log('foundProfile ID:', foundProfile.id)
+
       const updatedUser = await updateUserData(foundProfile.id, updatedData)
 
       return new NextResponse(JSON.stringify(updatedUser), { status: 200 })
