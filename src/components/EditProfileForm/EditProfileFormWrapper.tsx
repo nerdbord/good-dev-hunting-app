@@ -89,6 +89,7 @@ const EditProfileFormWrapper = ({
       isPublished: values.isPublished,
     }
     try {
+      console.log(payload)
       await apiClient.updateMyProfile(payload)
       console.log('Profile edited successfully')
     } catch (error) {
