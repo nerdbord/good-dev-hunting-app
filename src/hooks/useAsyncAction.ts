@@ -10,6 +10,7 @@ export const useAsyncAction = () => {
   const [isCalledOnce, setIsCalledOnce] = useState(false)
 
   const router = useRouter()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const runAsync = async <T>(asyncFunction: (...args: any) => Promise<T>) => {
     try {
       setIsCalledOnce(true)
