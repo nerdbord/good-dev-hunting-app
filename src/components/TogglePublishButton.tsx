@@ -20,7 +20,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
       loading={loading}
       onClick={() =>
         runAsync(async () => {
-          await apiClient.togglePublishMyProfile(profileId)
+          await apiClient.publishMyProfile(profileId)
         })
       }
     >

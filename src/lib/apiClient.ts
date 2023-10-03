@@ -7,12 +7,12 @@ import { httpClient } from '@/lib/httpClient'
 const API_URL = 'http://localhost:3000/api'
 
 export const apiClient = {
-  togglePublishMyProfile: async (profileId: string) => {
-    const toggledProfile = await httpClient.post<undefined, ProfileModel>(
+  publishMyProfile: async (profileId: string) => {
+    const publishedProfile = await httpClient.post<undefined, ProfileModel>(
       `${API_URL}/profiles/${profileId}/publish`,
     )
 
-    return toggledProfile
+    return publishedProfile
   },
   createMyProfile: async (payload: CreateProfilePayload) => {
     const createdProfile = await httpClient.post<
