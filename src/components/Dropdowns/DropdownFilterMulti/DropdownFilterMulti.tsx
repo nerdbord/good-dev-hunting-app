@@ -35,22 +35,22 @@ export const DropdownFilterMulti = ({
     return () => {
       document.removeEventListener('mousedown', handler)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     switch (isDropdownActive) {
       case true:
-        setOverlayActive(true);
-        document.body.classList.add("blurBackground");
-        break;
+        setOverlayActive(true)
+        document.body.classList.add('blurBackground')
+        break
       case false:
-        setOverlayActive(false);
-        document.body.classList.remove("blurBackground");
-        break;
+        setOverlayActive(false)
+        document.body.classList.remove('blurBackground')
+        break
       default:
-        break;
+        break
     }
-  }, [isDropdownActive]);
+  }, [isDropdownActive])
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
@@ -60,8 +60,7 @@ export const DropdownFilterMulti = ({
     onSelect(option)
   }
 
-  const [isOverlayActive, setOverlayActive] = useState(false);
-
+  const [isOverlayActive, setOverlayActive] = useState(false)
 
   return (
     <div className={styles.buttonBox}>
