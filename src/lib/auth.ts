@@ -8,6 +8,7 @@ interface UserAuthed {
   name: string
   email: string
   image: string
+  profileId?: string
 }
 
 interface GitHubProfileAuthed {
@@ -36,6 +37,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       token.id = foundUser.id
+      token.profileId = foundUser.profile?.id
 
       return { ...token, ...user }
     },

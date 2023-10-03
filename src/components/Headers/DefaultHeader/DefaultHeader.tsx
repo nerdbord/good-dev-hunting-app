@@ -1,22 +1,23 @@
 import React from 'react'
+import styles from './DefaultHeader.module.scss'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
-import Image from 'next/image'
-import { MyProfileButton } from '@/components/MyProfileButton/MyProfileButton'
-import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
-
+import Image from 'next/dist/client/image'
+import SignInWithGithubBtn from '@/components/SignInWithGithubBtn/SignInWithGithubBtn'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-
-import styles from './DefaultHeader.module.scss'
+import { getProfileByUserId } from '@/backend/profile/profile.service'
 
 const DefaultHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const profile = session
-    ? await getProfileByUserEmail(session.user.email)
-    : null
+  const id = session?.user?.id
+  const name = session?.user?.name
+  const avatar = session?.user?.image
+
+  const profile = id ? await getProfileByUserId(id) : null
 
   if (session) {
     return (
@@ -30,20 +31,18 @@ const DefaultHeader = async () => {
             <p className={styles.githubAccConnected}>
               Connected Github account
             </p>
-
             <div className={styles.githubAcc}>
-              {session.user.image && (
+              {avatar && (
                 <Image
                   className={styles.githubAccImg}
-                  src={session.user.image}
+                  src={avatar}
                   width={38}
                   height={38}
                   alt="github avatar"
                 />
               )}
-              <p className={styles.githubAccName}>{session?.user.name}</p>
+              <p className={styles.githubAccName}>{name}</p>
             </div>
-            <MyProfileButton profileId={profile?.id || null} />
           </div>
         </div>
       </header>
@@ -58,7 +57,7 @@ const DefaultHeader = async () => {
       </Link>
 
       <div className={styles.frameButtons}>
-        <GithubLoginButton />
+        <SignInWithGithubBtn />
       </div>
     </header>
   )
