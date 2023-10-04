@@ -4,16 +4,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.9;
-  background: var(--dark-03, #161a1f);
-  z-index: 998;
+  background: rgba(22, 26, 31, 0.9);
+  z-index: 400;
+
 }
 
 .container {
   position: fixed;
   width: 30%;
   max-height: 100%;
-  overflow-y: auto;
   border-radius: 10px;
   background: var(--dark-02, #0f1217);
   box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
@@ -21,7 +20,6 @@
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 5px;
   padding: 125px 90px;
   display: flex;
   flex-direction: column;
