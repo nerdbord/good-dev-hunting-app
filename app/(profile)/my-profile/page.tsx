@@ -24,8 +24,8 @@ const MyProfilePage = async () => {
 
   return (
     <div className={styles.wrapper}>
-      {/* @ts-expect-error Server Component */}
-      <ProfileTopBar profileId={profile.id} />
+    {/* @ts-expect-error Server Component */}
+    <ProfileTopBar profileId={profile.id} />
       {/* @ts-expect-error Server Component */}
       <ProfileMain />
       {/* @ts-expect-error Server Component */}
