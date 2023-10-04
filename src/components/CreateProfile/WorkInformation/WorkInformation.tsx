@@ -74,21 +74,21 @@ const WorkInformation = () => {
           Employment type
           <CheckboxInput
             id="fulltime"
-            label={EmploymentType.FULL_TIME}
+            label="Full-time"
             checked={values.employment === EmploymentType.FULL_TIME}
             onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name="fulltime"
           />
           <CheckboxInput
             id="parttime"
-            label={EmploymentType.PART_TIME}
+            label="Part-time"
             checked={values.employment === EmploymentType.PART_TIME}
             onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name="parttime"
           />
           <CheckboxInput
             id="contract"
-            label={EmploymentType.CONTRACT}
+            label="Contract"
             checked={values.employment === EmploymentType.CONTRACT}
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name="contract"
