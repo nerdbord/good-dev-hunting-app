@@ -10,6 +10,8 @@ import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails
 import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
+export const revalidate = 0
+
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
@@ -24,8 +26,8 @@ const MyProfilePage = async () => {
 
   return (
     <div className={styles.wrapper}>
-    {/* @ts-expect-error Server Component */}
-    <ProfileTopBar profileId={profile.id} />
+      {/* @ts-expect-error Server Component */}
+      <ProfileTopBar profileId={profile.id} />
       {/* @ts-expect-error Server Component */}
       <ProfileMain />
       {/* @ts-expect-error Server Component */}

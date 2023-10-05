@@ -1,7 +1,7 @@
 'use client'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
@@ -11,16 +11,7 @@ import { useRouter } from 'next/navigation'
 const cx = classNames.bind(styles)
 
 export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const router = useRouter()
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
 
   const commonClasses = {
     [styles.frontend]: data.position === JobSpecialization.Frontend,
@@ -35,7 +26,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
   })
 
   const renderTechnologies = () => {
-    const sliceCount = windowWidth <= 768 ? 2 : 3
+    const sliceCount = 3
 
     if (data.techStack.length <= sliceCount) {
       return data.techStack.map((tech, index) => (

@@ -3,7 +3,7 @@ import React, { PropsWithChildren, useMemo } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   variant: 'primary' | 'secondary' | 'tertiary'
   type?: 'button' | 'submit'
   disabled?: boolean
