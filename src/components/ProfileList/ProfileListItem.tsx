@@ -26,7 +26,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
   })
 
   const renderTechnologies = () => {
-    const sliceCount = 3
+    const sliceCount = window.innerWidth <= 768 ? 2 : 3
 
     if (data.techStack.length <= sliceCount) {
       return data.techStack.map((tech, index) => (

@@ -76,16 +76,15 @@ For dynamic CSS classes, we recommend using the classnames/bind library. You can
 Once installed, you can use the library as follows:
 
 ```javascript
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
-const [active, setActive] = useState(false);
+import classNames from 'classnames/bind'
+const cx = classNames.bind(styles)
+const [active, setActive] = useState(false)
 
 const getDynamicHeaderClasses = cx({
   [styles.headerWrapper]: true,
   [styles.headerisActive]: active === true,
   [styles.headerNotActive]: !active,
-});
+})
 
-return (
-  <div className={getDynamicHeaderClasses}>Header</div>
-)
+return <div className={getDynamicHeaderClasses}>Header</div>
+```
