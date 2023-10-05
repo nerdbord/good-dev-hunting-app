@@ -5,16 +5,19 @@ import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
 
 const ProfileTopBar = () => {
   const router = useRouter()
-  const { handleSubmit, errors } = useFormikContext()
+  const { handleSubmit, errors, isSubmitting } = useFormikContext()
+  const { runAsync, loading } = useAsyncAction()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    handleSubmit()
-    router.push(AppRoutes.myProfile)
-    router.refresh()
+    runAsync(async () => {
+      event.preventDefault()
+      handleSubmit()
+      router.push(AppRoutes.myProfile)
+    })
   }
 
   return (
@@ -28,7 +31,7 @@ const ProfileTopBar = () => {
           </div>
         )}
       </div>
-      <Button variant="primary" onClick={handleButtonClick} type="submit">
+      <Button loading={loading} variant="primary" onClick={handleButtonClick}>
         Save and preview profile
       </Button>
     </div>

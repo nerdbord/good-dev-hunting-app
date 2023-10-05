@@ -7,6 +7,9 @@ import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
 import { EmploymentType } from '@prisma/client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { AppRoutes } from '@/utils/routes'
+import { useRouter } from 'next/navigation'
 
 export interface EditProfileFormValues {
   fullName: string
@@ -88,13 +91,7 @@ const EditProfileFormWrapper = ({
       employmentType: values.employment,
       isPublished: values.isPublished,
     }
-    try {
-      console.log(payload)
-      await apiClient.updateMyProfile(payload)
-      console.log('Profile edited successfully')
-    } catch (error) {
-      console.log(error)
-    }
+    await apiClient.updateMyProfile(payload)
   }
 
   const mappedInitialValues: EditProfileFormValues =
