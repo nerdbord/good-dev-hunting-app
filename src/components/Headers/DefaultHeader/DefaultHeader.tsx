@@ -9,6 +9,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
+import { Container } from '@/components/Container/Container'
+
 import styles from './DefaultHeader.module.scss'
 
 const DefaultHeader = async () => {
@@ -21,45 +23,53 @@ const DefaultHeader = async () => {
   if (session) {
     return (
       <header className={styles.wrapper}>
-        <Link href="/" className={styles.logo}>
-          <img src={logo.src} alt="Logo" />
-          <div className={styles.title}>Good Dev Hunting</div>
-        </Link>
-        <div className={styles.actions}>
-          <div className={styles.frameLogin}>
-            <p className={styles.githubAccConnected}>
-              Connected Github account
-            </p>
+        <Container>
+          <div className={styles.headerContent}>
+            <Link href="/" className={styles.logo}>
+              <img src={logo.src} alt="Logo" />
+              <div className={styles.title}>Good Dev Hunting</div>
+            </Link>
+            <div className={styles.actions}>
+              <div className={styles.frameLogin}>
+                <p className={styles.githubAccConnected}>
+                  Connected Github account
+                </p>
 
-            <div className={styles.githubAcc}>
-              {session.user.image && (
-                <Image
-                  className={styles.githubAccImg}
-                  src={session.user.image}
-                  width={38}
-                  height={38}
-                  alt="github avatar"
-                />
-              )}
-              <p className={styles.githubAccName}>{session?.user.name}</p>
+                <div className={styles.githubAcc}>
+                  {session.user.image && (
+                    <Image
+                      className={styles.githubAccImg}
+                      src={session.user.image}
+                      width={38}
+                      height={38}
+                      alt="github avatar"
+                    />
+                  )}
+                  <p className={styles.githubAccName}>{session?.user.name}</p>
+                </div>
+                <MyProfileButton profileId={profile?.id || null} />
+              </div>
             </div>
-            <MyProfileButton profileId={profile?.id || null} />
           </div>
-        </div>
+        </Container>
       </header>
     )
   }
 
   return (
     <header className={styles.wrapper}>
-      <Link href="/" className={styles.logo}>
-        <img src={logo.src} alt="Logo" />
-        <div className={styles.title}>Good Dev Hunting</div>
-      </Link>
+      <Container>
+        <div className={styles.headerContent}>
+          <Link href="/" className={styles.logo}>
+            <img src={logo.src} alt="Logo" />
+            <div className={styles.title}>Good Dev Hunting</div>
+          </Link>
 
-      <div className={styles.frameButtons}>
-        <GithubLoginButton />
-      </div>
+          <div className={styles.frameButtons}>
+            <GithubLoginButton />
+          </div>
+        </div>
+      </Container>
     </header>
   )
 }

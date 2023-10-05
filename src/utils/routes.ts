@@ -1,7 +1,7 @@
 export enum AppRoutes {
   home = '/',
   myProfile = '/my-profile',
-  createProfile = '/create-profile',
+  createProfile = '/my-profile/create',
   editProfile = '/my-profile/edit',
-  userProfile = '/user-profile',
+  userProfile = '/profile',
 }
