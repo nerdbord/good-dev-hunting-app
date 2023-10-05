@@ -11,18 +11,14 @@ import { useRouter } from 'next/navigation'
 const cx = classNames.bind(styles)
 
 export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1000,
-  )
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const router = useRouter()
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleResize = () => setWindowWidth(window.innerWidth)
-      window.addEventListener('resize', handleResize)
-      return () => {
-        window.removeEventListener('resize', handleResize)
-      }
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -48,7 +44,6 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     } else {
       const displayedTechnologies = data.techStack.slice(0, sliceCount)
       const othersCount = data.techStack.length - sliceCount
-
       return (
         <>
           {displayedTechnologies.map((tech, index) => (
