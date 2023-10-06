@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styles from './ProfileTopBar.module.scss'
-import { Button } from '@/components/Button/Button'
-import { redirect, useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
 import { getServerSession } from 'next-auth'
@@ -9,10 +8,7 @@ import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { EditProfileButton } from '@/components/EditProfileButton'
 
-interface ProfileTopBarProps {
-  profileId: string
-}
-const ProfileTopBar = async ({ profileId }: ProfileTopBarProps) => {
+const ProfileTopBar = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session || !session.user) {

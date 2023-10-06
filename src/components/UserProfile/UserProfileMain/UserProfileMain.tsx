@@ -8,8 +8,16 @@ import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { UserModel } from '@/data/frontend/user/types'
 
-const UserProfileMain = ({ user }: { user: ProfileModel }) => {
+const UserProfileMain = ({
+  userProfile,
+  user,
+}: {
+  userProfile: ProfileModel
+  user: UserModel
+}) => {
+
   return (
     <>
       <div className={styles.container}>
@@ -23,7 +31,7 @@ const UserProfileMain = ({ user }: { user: ProfileModel }) => {
               alt="user's avatar"
               className={styles.avatar}
             />
-            <div className={styles.name}>{user?.fullName}</div>
+            <div className={styles.name}>{userProfile?.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
@@ -34,28 +42,36 @@ const UserProfileMain = ({ user }: { user: ProfileModel }) => {
                 height={20}
                 className={styles.flag}
               />
-              {user?.country.name}, {user?.city.name}
+              {userProfile?.country.name}, {userProfile?.city.name}
             </div>
-            {user?.city.openForRelocation && (
+            {userProfile?.city.openForRelocation && (
               <div className={styles.location}>Open to relocation</div>
             )}
-            {user?.remoteOnly && (
+            {userProfile?.remoteOnly && (
               <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
-              {user?.seniority} {user?.position} Developer
+              {userProfile?.seniority} {userProfile?.position} Developer
             </div>
             <div className={styles.addInfo}>
-              <div className={styles.addInfoItem}>{user?.employmentType}</div>
+              <div className={styles.addInfoItem}>
+                {userProfile?.employmentType}
+              </div>
             </div>
           </div>
         </div>{' '}
         <div className={styles.social}>
           <div className={styles.socialItem}>
-            Github
-            <GithubIcon2 />
+            <a
+              href={`https://github.com/${user?.githubDetails?.username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+              <GithubIcon2 />
+            </a>
           </div>
           <div className={styles.socialItem}>
             LinkedIn
