@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './UserProfileDetails.module.scss'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
-const UserProfileDetails = ({ user }: { user: ProfileModel }) => {
+const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
   return (
     <>
       <div className={styles.container}>
@@ -10,7 +10,7 @@ const UserProfileDetails = ({ user }: { user: ProfileModel }) => {
           <div className={styles.techStack}>
             <div className={styles.title}>Tech stack</div>
             <div className={styles.techStackList}>
-              {user?.techStack.map((item, index) => (
+              {userProfile?.techStack.map((item, index) => (
                 <div key={index} className={styles.techStackItem}>
                   {item}
                 </div>
@@ -31,7 +31,7 @@ const UserProfileDetails = ({ user }: { user: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <div className={styles.title}>Bio</div>
-          <div className={styles.desc}>{user?.bio}</div>
+          <div className={styles.desc}>{userProfile?.bio}</div>
         </div>
       </div>
     </>
