@@ -1,4 +1,4 @@
-import { PrismaClient, EmploymentType } from '@prisma/client'
+import { PrismaClient, EmploymentType, Role } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -16,6 +16,7 @@ async function main() {
           position: 'Front-end developer',
           seniority: 'Junior',
           isPublished: true,
+          role: Role.USER,
           employmentType: EmploymentType.CONTRACT,
           country: {
             create: {

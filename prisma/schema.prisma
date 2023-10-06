@@ -7,8 +7,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
@@ -37,6 +37,7 @@ model Profile {
   techStack      String[]
   employmentType EmploymentType
   isPublished    Boolean
+  role           Role           @default(USER)
 }
 
 model GitHubDetails {
@@ -64,4 +65,9 @@ enum EmploymentType {
   FULL_TIME
   PART_TIME
   CONTRACT
+}
+
+enum Role {
+  USER
+  MODERATOR
 }
