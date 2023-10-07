@@ -18,6 +18,7 @@ model User {
   email         String         @unique
   profile       Profile? //user have profile //relations  
   githubDetails GitHubDetails? //user have gitHub //relations
+  role           Role           @default(USER)
 }
 
 model Profile {
@@ -37,7 +38,6 @@ model Profile {
   techStack      String[]
   employmentType EmploymentType
   isPublished    Boolean
-  role           Role           @default(USER)
 }
 
 model GitHubDetails {

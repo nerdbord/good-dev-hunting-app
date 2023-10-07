@@ -16,7 +16,6 @@ async function main() {
           position: 'Front-end developer',
           seniority: 'Junior',
           isPublished: true,
-          role: Role.USER,
           employmentType: EmploymentType.CONTRACT,
           country: {
             create: {
