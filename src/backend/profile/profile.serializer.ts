@@ -25,5 +25,6 @@ export const serializeProfileToProfileModel = (
     techStack: data.techStack,
     userId: data.userId,
     avatarUrl: data.user.avatarUrl,
+    githubUsername: data.user.githubDetails?.username || null,
   }
 }
