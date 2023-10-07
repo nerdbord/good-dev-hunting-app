@@ -8,16 +8,8 @@ import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { ProfileModel } from '@/data/frontend/profile/types'
-import { UserModel } from '@/data/frontend/user/types'
 
-const UserProfileMain = ({
-  userProfile,
-  user,
-}: {
-  userProfile: ProfileModel
-  user: UserModel
-}) => {
-
+const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
   return (
     <>
       <div className={styles.container}>
@@ -65,7 +57,7 @@ const UserProfileMain = ({
         <div className={styles.social}>
           <div className={styles.socialItem}>
             <a
-              href={`https://github.com/${user?.githubDetails?.username}`}
+              href={`https://github.com/${userProfile?.githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
             >

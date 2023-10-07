@@ -21,6 +21,7 @@ export interface ProfileModel {
   techStack: string[]
   employmentType: EmploymentType
   isPublished: boolean
+  githubUsername: string | null
 }
 
 export type CreateProfilePayload = Omit<ProfileModel, 'id'>

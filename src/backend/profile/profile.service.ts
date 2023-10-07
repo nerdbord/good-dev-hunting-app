@@ -9,7 +9,11 @@ export async function getPublishedProfilesPayload() {
       isPublished: true,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -27,7 +31,11 @@ export async function getProfileById(id: string) {
       id,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -90,7 +98,11 @@ export async function createUserProfile(
       isPublished: profileData.isPublished ?? false,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -116,7 +128,11 @@ export async function getProfileByUserId(userId: string) {
   const profile = await prisma.profile.findFirst({
     where: { userId },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -133,7 +149,11 @@ export async function getProfileByUserEmail(email: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { email } },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },

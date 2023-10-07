@@ -22,6 +22,7 @@ export interface CreateProfileFormValues {
   employment: EmploymentType
   techStack: string
   isPublished: boolean
+  githubUsername: string | null
 }
 
 export const initialValues: CreateProfileFormValues = {
@@ -39,6 +40,7 @@ export const initialValues: CreateProfileFormValues = {
   employment: EmploymentType.FULL_TIME,
   techStack: '',
   isPublished: false,
+  githubUsername: '',
 }
 
 export const validationSchema = Yup.object().shape({
@@ -84,6 +86,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
       isPublished: values.isPublished,
+      githubUsername: null,
     }
 
     try {
