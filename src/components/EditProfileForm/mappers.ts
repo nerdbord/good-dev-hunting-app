@@ -16,5 +16,5 @@ export const mapProfileModelToEditProfileFormValues = (
   seniority: profile.seniority,
   techStack: profile.techStack.join(','),
   employment: profile.employmentType,
-  isPublished: profile.isPublished,
+  state: profile.state,
 })
