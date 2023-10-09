@@ -1,7 +1,12 @@
 .titleBox {
+  position: sticky;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 24px 0;
+  background-color: #0F1217;
   @include mobile {
     padding: $spacing-4;
     padding-top: $spacing-6;
