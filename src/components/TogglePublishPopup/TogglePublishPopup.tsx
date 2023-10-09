@@ -1,14 +1,15 @@
+import { PublishingState } from '@prisma/client'
 import { Button } from '../Button/Button'
 import styles from './TogglePublishPopup.module.scss'
 import React from 'react'
 
 interface PublishProfilePopupProps {
-  isPublished: boolean
+  state: PublishingState
   onClose: () => void
 }
 
 export const PublishProfilePopup = ({
-  isPublished,
+  state,
   onClose,
 }: PublishProfilePopupProps) => {
   const publishedText = `Your profile is now up and running. Potential
@@ -22,10 +23,10 @@ You can republish it at anytime.`
     <div className={styles.overlay}>
       <div className={styles.container}>
         <h2 className={styles.header}>
-          {isPublished ? 'Congratulations' : 'Your profile’s unpublished'}
+          {state === PublishingState.APPROVED ? 'Congratulations' : 'Your profile’s unpublished'}
         </h2>
         <span className={styles.text}>
-          {isPublished ? publishedText : unpublishedText}
+          {state === PublishingState.APPROVED ? publishedText : unpublishedText}
         </span>
         <Button onClick={onClose} variant="primary">
           Confirm

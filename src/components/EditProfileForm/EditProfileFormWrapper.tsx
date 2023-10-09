@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
 import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
-import { EmploymentType } from '@prisma/client'
+import { EmploymentType, PublishingState } from '@prisma/client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
@@ -24,7 +24,7 @@ export interface EditProfileFormValues {
   seniority: string
   employment: EmploymentType
   techStack: string
-  isPublished: boolean
+  state: PublishingState
 }
 
 export const initialValues: EditProfileFormValues = {
@@ -40,7 +40,7 @@ export const initialValues: EditProfileFormValues = {
   seniority: '',
   employment: EmploymentType.FULL_TIME,
   techStack: '',
-  isPublished: false,
+  state: PublishingState.PENDING
 }
 
 export const validationSchema = Yup.object().shape({
@@ -89,7 +89,7 @@ const EditProfileFormWrapper = ({
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
-      isPublished: values.isPublished,
+      state: PublishingState.PENDING
     }
     await apiClient.updateMyProfile(payload)
   }
