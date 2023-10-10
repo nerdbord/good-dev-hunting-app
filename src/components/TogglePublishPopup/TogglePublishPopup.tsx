@@ -23,7 +23,9 @@ You can republish it at anytime.`
     <div className={styles.overlay}>
       <div className={styles.container}>
         <h2 className={styles.header}>
-          {state === PublishingState.APPROVED ? 'Congratulations' : 'Your profile’s unpublished'}
+          {state === PublishingState.APPROVED
+            ? 'Congratulations'
+            : 'Your profile’s unpublished'}
         </h2>
         <span className={styles.text}>
           {state === PublishingState.APPROVED ? publishedText : unpublishedText}
