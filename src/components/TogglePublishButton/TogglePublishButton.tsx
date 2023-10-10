@@ -37,7 +37,9 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
           })
         }
       >
-        {state === PublishingState.APPROVED ? 'Unpublish profile' : 'Publish profile'}
+        {state === PublishingState.APPROVED
+          ? 'Unpublish profile'
+          : 'Publish profile'}
       </Button>
     </div>
   )

@@ -40,7 +40,7 @@ export const initialValues: EditProfileFormValues = {
   seniority: '',
   employment: EmploymentType.FULL_TIME,
   techStack: '',
-  state: PublishingState.PENDING
+  state: PublishingState.PENDING,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -89,7 +89,7 @@ const EditProfileFormWrapper = ({
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
-      state: PublishingState.PENDING
+      state: PublishingState.PENDING,
     }
     await apiClient.updateMyProfile(payload)
   }

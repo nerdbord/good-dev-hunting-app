@@ -6,7 +6,7 @@ import { CreateProfilePayload } from '@/data/frontend/profile/types'
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
     where: {
-      state: PublishingState.APPROVED
+      state: PublishingState.APPROVED,
     },
     include: {
       user: true,
@@ -87,7 +87,7 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       techStack: profileData.techStack,
       employmentType: profileData.employmentType,
-      state: PublishingState.PENDING
+      state: PublishingState.PENDING,
     },
     include: {
       user: true,

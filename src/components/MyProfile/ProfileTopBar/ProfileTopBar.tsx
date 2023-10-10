@@ -31,10 +31,7 @@ const ProfileTopBar = async ({ profileId }: ProfileTopBarProps) => {
       <span className={styles.title}>Profile preview</span>
       <div className={styles.buttonBox}>
         <EditProfileButton />
-        <TogglePublishButton
-          state={profile.state}
-          profileId={profile.id}
-        />
+        <TogglePublishButton state={profile.state} profileId={profile.id} />
       </div>
     </div>
   )

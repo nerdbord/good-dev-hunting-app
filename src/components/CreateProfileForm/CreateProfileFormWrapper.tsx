@@ -83,7 +83,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
-      state: PublishingState.DRAFT
+      state: PublishingState.DRAFT,
     }
 
     try {
