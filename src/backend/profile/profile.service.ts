@@ -87,7 +87,7 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       techStack: profileData.techStack,
       employmentType: profileData.employmentType,
-      state: PublishingState.PENDING,
+      state: PublishingState.DRAFT,
     },
     include: {
       user: true,
