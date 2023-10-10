@@ -6,7 +6,7 @@ import {
   doesUserProfileExist,
 } from '@/backend/profile/profile.service'
 
-import { Prisma } from '@prisma/client'
+import { Prisma, PublishingState } from '@prisma/client'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 
 export async function GET() {
@@ -53,7 +53,7 @@ export async function PUT(request: NextRequest) {
         seniority: updatedDataPayload.seniority,
         techStack: updatedDataPayload.techStack,
         employmentType: updatedDataPayload.employmentType,
-        isPublished: updatedDataPayload.isPublished ?? false,
+        state: PublishingState.PENDING,
       }
 
       const updatedUser = await updateUserData(foundProfile.id, updatedData)

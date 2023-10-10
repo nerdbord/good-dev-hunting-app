@@ -4,6 +4,7 @@ import {
   updateUserData,
 } from '@/backend/profile/profile.service'
 import { authorizeUser } from '@/lib/auth'
+import { PublishingState } from '@prisma/client'
 
 export async function POST(
   request: NextRequest,
@@ -20,7 +21,7 @@ export async function POST(
     }
 
     const updateUserProfileById = await updateUserData(id, {
-      isPublished: !existingProfile.isPublished,
+      state: PublishingState.PENDING,
     })
 
     const serializedProfile = JSON.stringify(updateUserProfileById)

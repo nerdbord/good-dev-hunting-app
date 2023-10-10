@@ -1,12 +1,12 @@
 import { serializeProfileToProfileModel } from './profile.serializer'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma } from '@prisma/client'
+import { Prisma, PublishingState } from '@prisma/client'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
     where: {
-      isPublished: true,
+      state: PublishingState.APPROVED,
     },
     include: {
       user: true,
@@ -87,7 +87,7 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       techStack: profileData.techStack,
       employmentType: profileData.employmentType,
-      isPublished: profileData.isPublished ?? false,
+      state: PublishingState.DRAFT,
     },
     include: {
       user: true,

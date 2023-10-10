@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
-import { EmploymentType } from '@prisma/client'
+import { EmploymentType, PublishingState } from '@prisma/client'
 
 export interface CreateProfileFormValues {
   fullName: string
@@ -21,7 +21,7 @@ export interface CreateProfileFormValues {
   seniority: string
   employment: EmploymentType
   techStack: string
-  isPublished: boolean
+  state: PublishingState
 }
 
 export const initialValues: CreateProfileFormValues = {
@@ -38,7 +38,7 @@ export const initialValues: CreateProfileFormValues = {
   seniority: '',
   employment: EmploymentType.FULL_TIME,
   techStack: '',
-  isPublished: false,
+  state: PublishingState.DRAFT,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -83,7 +83,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
-      isPublished: values.isPublished,
+      state: PublishingState.DRAFT,
     }
 
     try {
