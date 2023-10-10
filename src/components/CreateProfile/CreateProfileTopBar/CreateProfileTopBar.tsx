@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 
-const ProfileTopBar = () => {
+const CreateProfileTopBar = () => {
   const router = useRouter()
   const { handleSubmit, errors, isSubmitting } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
@@ -23,7 +23,7 @@ const ProfileTopBar = () => {
   return (
     <div className={styles.titleBox}>
       <div className={styles.errorWrapper}>
-        <span>Create profile page</span>
+        <span className={styles.title}>Create profile page</span>
         {Object.keys(errors).length > 0 && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
@@ -38,4 +38,4 @@ const ProfileTopBar = () => {
   )
 }
 
-export default ProfileTopBar
+export default CreateProfileTopBar
