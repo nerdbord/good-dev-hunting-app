@@ -7,6 +7,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { EditProfileButton } from '@/components/EditProfileButton'
+import { PublishingState } from '@prisma/client'
 
 const ProfileTopBar = async () => {
   const session = await getServerSession(authOptions)
@@ -26,10 +27,7 @@ const ProfileTopBar = async () => {
       <span className={styles.title}>Profile preview</span>
       <div className={styles.buttonBox}>
         <EditProfileButton />
-        <TogglePublishButton
-          isPublished={profile.isPublished}
-          profileId={profile.id}
-        />
+        <TogglePublishButton state={profile.state} profileId={profile.id} />
       </div>
     </div>
   )

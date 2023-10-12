@@ -1,4 +1,4 @@
-import { EmploymentType } from '@prisma/client'
+import { EmploymentType, PublishingState } from '@prisma/client'
 
 export interface ProfileModel {
   id: string
@@ -20,8 +20,8 @@ export interface ProfileModel {
   seniority: string
   techStack: string[]
   employmentType: EmploymentType
-  isPublished: boolean
   githubUsername: string | null
+  state: PublishingState
 }
 
 export type CreateProfilePayload = Omit<ProfileModel, 'id'>

@@ -5,6 +5,7 @@ import {
 } from '@/backend/profile/profile.service'
 import { authorizeUser } from '@/lib/auth'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { PublishingState } from '@prisma/client'
 
 export async function GET(request: Request, profileId: string) {
   try {
@@ -30,7 +31,7 @@ export async function PATCH(request: NextRequest, id: string) {
       bio: userDataToUpdate.bio,
       position: userDataToUpdate.position,
       seniority: userDataToUpdate.seniority,
-      isPublished: userDataToUpdate.isPublished,
+      state: PublishingState.PENDING,
       employmentType: userDataToUpdate.employmentType,
       techStack: userDataToUpdate.techStack,
       country: {
