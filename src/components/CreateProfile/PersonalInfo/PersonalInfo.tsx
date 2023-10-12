@@ -7,6 +7,7 @@ import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { useSession } from 'next-auth/react'
+import UserPhotoUploader from '@/components/UserPhotoUploader/UserPhotoUploader'
 
 const PersonalInfo = () => {
   const { values, handleChange, errors } =
@@ -33,6 +34,7 @@ const PersonalInfo = () => {
           />
         </InputFormError>
         <InputFormError error={errors.contactEmail}>
+          <UserPhotoUploader />
           <TextInput
             label="Contact email"
             placeholder={session?.user?.email || ''}

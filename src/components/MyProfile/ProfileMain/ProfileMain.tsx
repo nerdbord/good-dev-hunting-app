@@ -20,6 +20,8 @@ const ProfileMain = async () => {
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
+  console.log('sesjaaaaaa', session);
+  console.log('profileeeeee', profile);
   const user = await findUserByEmail(session.user.email)
   const githubUsername = user?.githubDetails?.username
   return (
@@ -57,7 +59,7 @@ const ProfileMain = async () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={session.user.image}
+              src={'https://www.glamour.pl/media/cache/default_view/uploads/media/default/0006/71/avatar-istota-wody_2.jpg'}
               width={100}
               height={100}
               alt="user's avatar"
