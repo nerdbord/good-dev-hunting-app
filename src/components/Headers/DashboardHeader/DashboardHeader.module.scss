@@ -1,0 +1,42 @@
+.wrapper {
+  height: 125px;
+  background: #04080d;
+  padding: 0 8%;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  width: 187px;
+  height: 26px;
+  display: flex;
+  gap: 8px;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  color: #ffffff;
+  letter-spacing: -0.06em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frameButtons {
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  gap: 12px;
+}
+
