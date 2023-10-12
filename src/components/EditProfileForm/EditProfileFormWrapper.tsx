@@ -7,9 +7,6 @@ import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
 import { EmploymentType, PublishingState } from '@prisma/client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
-import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { AppRoutes } from '@/utils/routes'
-import { useRouter } from 'next/navigation'
 
 export interface EditProfileFormValues {
   fullName: string
@@ -24,6 +21,7 @@ export interface EditProfileFormValues {
   seniority: string
   employment: EmploymentType
   techStack: string
+  githubUsername: string | null
   state: PublishingState
 }
 
@@ -40,6 +38,7 @@ export const initialValues: EditProfileFormValues = {
   seniority: '',
   employment: EmploymentType.FULL_TIME,
   techStack: '',
+  githubUsername: '',
   state: PublishingState.PENDING,
 }
 
@@ -89,6 +88,7 @@ const EditProfileFormWrapper = ({
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
+      githubUsername: null,
       state: PublishingState.PENDING,
     }
     await apiClient.updateMyProfile(payload)
