@@ -17,7 +17,7 @@ export const serializeProfileToProfileModel = (
     },
     employmentType: data.employmentType,
     fullName: data.fullName,
-    isPublished: data.isPublished,
+    state: data.state,
     linkedIn: data.linkedIn,
     position: data.position,
     remoteOnly: data.remoteOnly,
@@ -25,5 +25,6 @@ export const serializeProfileToProfileModel = (
     techStack: data.techStack,
     userId: data.userId,
     avatarUrl: data.user.avatarUrl,
+    githubUsername: data.user.githubDetails?.username || null,
   }
 }

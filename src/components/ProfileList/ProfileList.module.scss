@@ -1,11 +1,9 @@
 .mainContainer {
   background: #0f1217;
   display: flex;
-  width: 100vw;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8%;
   @include mobile {
     width: auto;
   }
@@ -39,6 +37,7 @@
   background: #0f1217;
   border-radius: 4px;
   border: 1px solid #2a2f35;
+  cursor: pointer;
   @include mobile {
     width: 343px;
   }

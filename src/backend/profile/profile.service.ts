@@ -1,15 +1,19 @@
 import { serializeProfileToProfileModel } from './profile.serializer'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma } from '@prisma/client'
+import { Prisma, PublishingState } from '@prisma/client'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
     where: {
-      isPublished: true,
+      state: PublishingState.APPROVED,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -27,7 +31,11 @@ export async function getProfileById(id: string) {
       id,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -87,10 +95,14 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       techStack: profileData.techStack,
       employmentType: profileData.employmentType,
-      isPublished: profileData.isPublished ?? false,
+      state: PublishingState.DRAFT,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -116,7 +128,11 @@ export async function getProfileByUserId(userId: string) {
   const profile = await prisma.profile.findFirst({
     where: { userId },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },
@@ -133,7 +149,11 @@ export async function getProfileByUserEmail(email: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { email } },
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
       country: true,
       city: true,
     },

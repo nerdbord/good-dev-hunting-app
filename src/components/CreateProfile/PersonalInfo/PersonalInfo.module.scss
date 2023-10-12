@@ -1,7 +1,6 @@
-@import '../../../../app/(profile)/create-profile/page.module.scss';
+@import '../../../../app/my-profile/create/page.module.scss';
 
 .container {
-  margin-top: 20px;
   background: #04080d;
   padding: 100px;
   display: flex;
@@ -42,7 +41,6 @@
   @include mobile {
     position: static;
     width: auto;
-
   }
 }
 

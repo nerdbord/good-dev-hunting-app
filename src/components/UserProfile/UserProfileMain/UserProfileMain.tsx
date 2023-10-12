@@ -1,26 +1,19 @@
-'use client'
 import React from 'react'
 import styles from './UserProfileMain.module.scss'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import EmailIcon from '@/assets/icons/EmailIcon'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/🇵🇱.jpg'
-import { profileData } from '@/components/ProfileList/profile-data'
 import ProfilePicture from '../../../assets/images/ProfilePicture.png'
+import GoBackButton from '@/components/GoBackButton/GoBackButton'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-const UserProfileMain = () => {
-  const router = useRouter()
-
-  const selectedUser = profileData.find((user) => user.id === 9)
-
+const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.back} onClick={() => router.back()}>
-          Go back
-        </div>
+        <GoBackButton>Go back</GoBackButton>
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
@@ -30,7 +23,7 @@ const UserProfileMain = () => {
               alt="user's avatar"
               className={styles.avatar}
             />
-            <div className={styles.name}>{selectedUser?.name}</div>
+            <div className={styles.name}>{userProfile?.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
@@ -41,27 +34,36 @@ const UserProfileMain = () => {
                 height={20}
                 className={styles.flag}
               />
-              {selectedUser?.country}, {selectedUser?.city}
+              {userProfile?.country.name}, {userProfile?.city.name}
             </div>
-            <div className={styles.location}>Open to relocation</div>
-            <div className={styles.location}>Remote only</div>
+            {userProfile?.city.openForRelocation && (
+              <div className={styles.location}>Open to relocation</div>
+            )}
+            {userProfile?.remoteOnly && (
+              <div className={styles.location}>Remote only</div>
+            )}
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
-              {selectedUser?.seniority} {selectedUser?.jobSpecialization}{' '}
-              Developer
+              {userProfile?.seniority} {userProfile?.position} Developer
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {selectedUser?.employmentType}
+                {userProfile?.employmentType}
               </div>
             </div>
           </div>
         </div>{' '}
         <div className={styles.social}>
           <div className={styles.socialItem}>
-            Github
-            <GithubIcon2 />
+            <a
+              href={`https://github.com/${userProfile?.githubUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+              <GithubIcon2 />
+            </a>
           </div>
           <div className={styles.socialItem}>
             LinkedIn
