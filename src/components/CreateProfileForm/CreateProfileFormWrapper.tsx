@@ -21,6 +21,7 @@ export interface CreateProfileFormValues {
   seniority: string
   employment: EmploymentType
   techStack: string
+  githubUsername: string | null
   state: PublishingState
 }
 
@@ -38,6 +39,7 @@ export const initialValues: CreateProfileFormValues = {
   seniority: '',
   employment: EmploymentType.FULL_TIME,
   techStack: '',
+  githubUsername: '',
   state: PublishingState.DRAFT,
 }
 
@@ -83,6 +85,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
+      githubUsername: null,
       state: PublishingState.DRAFT,
     }
 
