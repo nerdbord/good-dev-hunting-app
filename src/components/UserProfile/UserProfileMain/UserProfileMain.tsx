@@ -17,7 +17,7 @@ const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={ProfilePicture}
+              src={userProfile?.avatarUrl || ''}
               width={100}
               height={100}
               alt="user's avatar"

@@ -3,14 +3,13 @@ import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import React from 'react'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
-import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
 
 const cx = classNames.bind(styles)
 
-export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
+export const ProfileListItem = ({ data }: { data: ProfileModel }) => {
   const router = useRouter()
 
   const commonClasses = {
@@ -53,7 +52,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     >
       <div className={styles.container}>
         <div className={styles.profile}>
-          <img src={ProfilePicture.src} alt="Profile Picture" />
+          <img src={data.avatarUrl || ''} alt="Profile Picture" />
         </div>
         <div className={styles.data}>
           <p className={styles.name}>{data.fullName}</p>

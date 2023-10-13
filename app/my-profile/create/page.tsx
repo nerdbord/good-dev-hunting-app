@@ -20,9 +20,9 @@ const CreateProfilePage = async () => {
 
   const myProfile = await getProfileByUserEmail(session.user.email)
 
-  if (myProfile) {
-    redirect(AppRoutes.myProfile)
-  }
+  // if (myProfile) {
+  //   redirect(AppRoutes.myProfile)
+  // }
 
   return (
     <CreateProfileFormWrapper>

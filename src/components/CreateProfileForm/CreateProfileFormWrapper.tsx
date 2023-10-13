@@ -9,6 +9,7 @@ import { EmploymentType, PublishingState } from '@prisma/client'
 
 export interface CreateProfileFormValues {
   fullName: string
+  avatarUrl: string
   contactEmail: string
   linkedin: string
   bio: string
@@ -27,6 +28,7 @@ export interface CreateProfileFormValues {
 
 export const initialValues: CreateProfileFormValues = {
   fullName: '',
+  avatarUrl: '',
   contactEmail: '',
   linkedin: '',
   bio: '',
@@ -53,9 +55,6 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
-  // employment: Yup.array()
-  //   .of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT']))
-  //   .min(1, 'Employment type is required'),
 })
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
@@ -69,7 +68,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
     const payload: CreateProfilePayload = {
       userId: session.user.id,
       fullName: values.fullName,
-      avatarUrl: session.user.image || null,
+      avatarUrl: values.avatarUrl,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: {
@@ -98,7 +97,10 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{
+        ...initialValues,
+        avatarUrl: session?.user?.image || '',
+      }}
       validationSchema={validationSchema}
       onSubmit={handleCreateProfile}
     >

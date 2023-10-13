@@ -10,6 +10,7 @@ import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfile
 
 export interface EditProfileFormValues {
   fullName: string
+  avatarUrl: string | null
   linkedin: string | null
   bio: string
   country: string
@@ -27,6 +28,7 @@ export interface EditProfileFormValues {
 
 export const initialValues: EditProfileFormValues = {
   fullName: '',
+  avatarUrl: '',
   linkedin: '',
   bio: '',
   country: '',
@@ -72,7 +74,7 @@ const EditProfileFormWrapper = ({
     const payload: EditProfilePayload = {
       userId: session.user.id,
       fullName: values.fullName,
-      avatarUrl: session.user.image || null,
+      avatarUrl: values.avatarUrl,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: {
@@ -94,8 +96,10 @@ const EditProfileFormWrapper = ({
     await apiClient.updateMyProfile(payload)
   }
 
-  const mappedInitialValues: EditProfileFormValues =
-    mapProfileModelToEditProfileFormValues(profile)
+  const mappedInitialValues: EditProfileFormValues = {
+    ...mapProfileModelToEditProfileFormValues(profile),
+    avatarUrl: session?.user?.image || profile.avatarUrl || '',
+  }
 
   return (
     <Formik

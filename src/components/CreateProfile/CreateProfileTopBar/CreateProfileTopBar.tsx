@@ -12,12 +12,12 @@ const CreateProfileTopBar = () => {
   const { handleSubmit, errors, isSubmitting } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
 
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    runAsync(async () => {
-      event.preventDefault()
-      handleSubmit()
-      router.push(AppRoutes.myProfile)
-    })
+  const handleButtonClick = async (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault()
+    handleSubmit()
+    router.push(AppRoutes.myProfile)
   }
 
   return (
