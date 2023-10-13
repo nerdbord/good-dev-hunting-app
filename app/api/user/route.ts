@@ -3,6 +3,7 @@ import {
   createUser,
   doesUserExist,
   getUsersPayload,
+  updateUserAvatar,
 } from '@/backend/user/user.service'
 import { CreateUserPayload } from '@/backend/user/user.types'
 import { authorizeUser } from '@/lib/auth'
@@ -36,6 +37,19 @@ export async function POST(request: NextRequest) {
     } else {
       return new NextResponse('Such user already exist', { status: 409 })
     }
+  } catch (error) {
+    return new NextResponse(`${error}`, { status: 500 })
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  try {
+    const { email } = await authorizeUser()
+    const { avatarUrl } = await request.json()
+
+    const updatedUser = await updateUserAvatar(email, avatarUrl)
+
+    return NextResponse.json(updatedUser)
   } catch (error) {
     return new NextResponse(`${error}`, { status: 500 })
   }

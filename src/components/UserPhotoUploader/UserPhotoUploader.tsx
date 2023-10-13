@@ -29,6 +29,27 @@ export const UserPhotoUploader = () => {
     setUserImage(session?.user?.image || '')
   }
 
+  const updateUserAvatar = async (avatarUrl: string) => {
+    try {
+      const response = await fetch('/api/user', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ avatarUrl }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to update avatar')
+      }
+
+      const data = await response.json()
+      console.log('Updated user:', data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const handleUpload = async () => {
     if (selectedFile) {
       fetch('/api/user/photo', {
@@ -42,13 +63,15 @@ export const UserPhotoUploader = () => {
           const { url } = (await res.json()) as PutBlobResult
           setUserImage(url)
           setFieldValue('avatarUrl', url)
+
+          // tutej
+          await updateUserAvatar(url)
         } else {
           console.error('Error uploading the file.')
         }
       })
     }
   }
-
   return (
     <div>
       <div className={styles.wrapper}>
