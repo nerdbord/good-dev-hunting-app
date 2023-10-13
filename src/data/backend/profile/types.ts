@@ -2,7 +2,11 @@ import { Prisma } from '@prisma/client'
 
 export type ProfileWithRelations = Prisma.ProfileGetPayload<{
   include: {
-    user: true
+    user: {
+      include: {
+        githubDetails: true
+      }
+    }
     country: true
     city: true
   }

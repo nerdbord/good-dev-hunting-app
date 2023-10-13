@@ -6,15 +6,16 @@ import React, { useState } from 'react'
 import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishProfilePopup } from '../TogglePublishPopup/TogglePublishPopup'
+import { PublishingState } from '@prisma/client'
 
 interface TogglePublishButtonProps {
   profileId: string
-  isPublished: boolean
+  state: PublishingState
 }
 
 export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   const [showPopup, setShowPopup] = useState(false)
-  const { profileId, isPublished } = props
+  const { profileId, state } = props
 
   const { loading, runAsync } = useAsyncAction()
 
@@ -22,7 +23,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
     <div>
       {showPopup && !loading && (
         <PublishProfilePopup
-          isPublished={isPublished}
+          state={state}
           onClose={() => setShowPopup(false)}
         />
       )}
@@ -36,7 +37,9 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
           })
         }
       >
-        {isPublished ? 'Unpublish profile' : 'Publish profile'}
+        {state === PublishingState.APPROVED
+          ? 'Unpublish profile'
+          : 'Publish profile'}
       </Button>
     </div>
   )
