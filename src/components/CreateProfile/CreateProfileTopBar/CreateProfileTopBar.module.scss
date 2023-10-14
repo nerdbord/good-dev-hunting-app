@@ -5,7 +5,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
   background-color: #0f1217;
 }
 
@@ -47,7 +46,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    padding: $spacing-4 12%;
+    // padding: $spacing-4 12%;
     justify-content: center;
     background-color: #04080d;
   }
