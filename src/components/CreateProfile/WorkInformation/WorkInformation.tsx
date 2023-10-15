@@ -70,30 +70,32 @@ const WorkInformation = () => {
             Choose max. 8
           </div>
         </div>
-        <InputFormError error={errors.employment}>
-          Employment type
-          <CheckboxInput
-            id="fulltime"
-            label="Full-time"
-            checked={values.employment === EmploymentType.FULL_TIME}
-            onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
-            name="fulltime"
-          />
-          <CheckboxInput
-            id="parttime"
-            label="Part-time"
-            checked={values.employment === EmploymentType.PART_TIME}
-            onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
-            name="parttime"
-          />
-          <CheckboxInput
-            id="contract"
-            label="Contract"
-            checked={values.employment === EmploymentType.CONTRACT}
-            onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
-            name="contract"
-          />
-        </InputFormError>
+        <div className={styles.employmentType}>
+          <InputFormError error={errors.employment}>
+            Employment type
+            <CheckboxInput
+              id="fulltime"
+              label="Full-time"
+              checked={values.employment === EmploymentType.FULL_TIME}
+              onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
+              name="fulltime"
+            />
+            <CheckboxInput
+              id="parttime"
+              label="Part-time"
+              checked={values.employment === EmploymentType.PART_TIME}
+              onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
+              name="parttime"
+            />
+            <CheckboxInput
+              id="contract"
+              label="Contract"
+              checked={values.employment === EmploymentType.CONTRACT}
+              onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
+              name="contract"
+            />
+          </InputFormError>
+        </div>
       </div>
     </div>
   )
