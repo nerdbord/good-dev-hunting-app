@@ -31,9 +31,11 @@ const CreateProfileTopBar = () => {
           </div>
         )}
       </div>
+      <div className={styles.buttonBox}>
       <Button loading={loading} variant="primary" onClick={handleButtonClick}>
         Save and preview profile
       </Button>
+    </div>
     </div>
   )
 }
