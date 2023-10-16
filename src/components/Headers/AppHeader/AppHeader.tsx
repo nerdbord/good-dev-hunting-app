@@ -11,9 +11,9 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
 import { Container } from '@/components/Container/Container'
 
-import styles from './DefaultHeader.module.scss'
+import styles from './AppHeader.module.scss'
 
-const DefaultHeader = async () => {
+const AppHeader = async () => {
   const session = await getServerSession(authOptions)
 
   const profile = session
@@ -29,26 +29,25 @@ const DefaultHeader = async () => {
               <img src={logo.src} alt="Logo" />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
-            <div className={styles.actions}>
-              <div className={styles.frameLogin}>
-                <p className={styles.githubAccConnected}>
-                  Connected Github account
-                </p>
 
-                <div className={styles.githubAcc}>
-                  {session.user.image && (
-                    <Image
-                      className={styles.githubAccImg}
-                      src={session.user.image}
-                      width={38}
-                      height={38}
-                      alt="github avatar"
-                    />
-                  )}
-                  <p className={styles.githubAccName}>{session?.user.name}</p>
-                </div>
-                <MyProfileButton profileId={profile?.id || null} />
+            <div className={styles.frameLogin}>
+              <p className={styles.githubAccConnected}>
+                Connected Github account
+              </p>
+
+              <div className={styles.githubAcc}>
+                {session.user.image && (
+                  <Image
+                    className={styles.githubAccImg}
+                    src={session.user.image}
+                    width={38}
+                    height={38}
+                    alt="github avatar"
+                  />
+                )}
+                <p className={styles.githubAccName}>{session?.user.name}</p>
               </div>
+              <MyProfileButton profileId={profile?.id || null} />
             </div>
           </div>
         </Container>
@@ -73,4 +72,4 @@ const DefaultHeader = async () => {
     </header>
   )
 }
-export default DefaultHeader
+export default AppHeader

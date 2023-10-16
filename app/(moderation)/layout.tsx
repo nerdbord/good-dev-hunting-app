@@ -1,12 +1,16 @@
 ﻿import React from 'react'
 import { Container } from '@/components/Container/Container'
-import AppHeader from '@/components/Headers/AppHeader/AppHeader'
+import DashboardHeader from '@/components/Headers/DashboardHeader/DashboardHeader'
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <>
       {/* @ts-expect-error Server Component */}
-      <AppHeader />
+      <DashboardHeader />
       <Container>{children}</Container>
     </>
   )
