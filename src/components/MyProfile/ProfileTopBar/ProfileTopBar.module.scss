@@ -7,6 +7,7 @@
   align-items: center;
   padding: 24px 0;
   background-color: #0f1217;
+  z-index: 10;
   @include mobile {
     padding: $spacing-4;
     padding-top: $spacing-6;

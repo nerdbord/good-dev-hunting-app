@@ -11,6 +11,8 @@ import EditProfileFormWrapper from '@/components/EditProfileForm/EditProfileForm
 import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 
+export const revalidate = 0
+
 const EditProfilePage = async () => {
   const session = await getServerSession(authOptions)
 

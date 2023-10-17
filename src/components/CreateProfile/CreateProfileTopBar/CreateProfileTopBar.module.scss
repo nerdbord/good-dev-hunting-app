@@ -5,7 +5,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 24px 0;
   background-color: #0f1217;
+  z-index: 10;
 }
 
 .title {
