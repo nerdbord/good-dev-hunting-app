@@ -18,13 +18,11 @@ import styles from './DashboardHeader.module.scss'
 const DashboardHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const profile = session
-    ? await findUserByEmail(session.user.email)
-    : redirect(AppRoutes.home)
+  const profile = session && (await findUserByEmail(session.user.email))
 
-  if (!profile?.roles.includes(Role.MODERATOR)) {
-    return redirect(AppRoutes.home)
-  }
+  if (!profile?.roles.includes(Role.MODERATOR) || !profile)
+    redirect(AppRoutes.home)
+  
 
   return (
     <header className={styles.wrapper}>
