@@ -3,7 +3,7 @@ import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import AddIcon from '@/assets/icons/AddIcon'
 import React from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 interface MyProfileButtonProps {
   profileId: string | null
@@ -12,6 +12,12 @@ interface MyProfileButtonProps {
 export const MyProfileButton = (props: MyProfileButtonProps) => {
   const { profileId } = props
   const router = useRouter()
+  const path = usePathname()
+
+  if (path.includes(AppRoutes.myProfile)) {
+    return null
+  }
+
   return profileId === null ? (
     <Button
       onClick={() => router.push(AppRoutes.createProfile)}
