@@ -19,9 +19,9 @@ const WorkInformation = () => {
   const { values, handleChange, errors, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
 
-    const handleEmploymentType = (option: EmploymentType): void => {
-      const formattedOption = mapEmploymentType(option);
-      setFieldValue('employment', formattedOption);
+  const handleEmploymentType = (option: EmploymentType): void => {
+    const formattedOption = mapEmploymentType(option)
+    setFieldValue('employment', formattedOption)
   }
 
   return (
