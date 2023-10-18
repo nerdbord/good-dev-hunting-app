@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MyProfileButton } from '@/components/MyProfileButton/MyProfileButton'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -12,7 +13,6 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { Container } from '@/components/Container/Container'
 
 import styles from './AppHeader.module.scss'
-import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
