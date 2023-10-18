@@ -118,3 +118,10 @@ export async function updateUserData(
 
   return updatedUser
 }
+
+export async function updateUserAvatar(email: string, avatarUrl: string) {
+  return await prisma.user.update({
+    where: { email },
+    data: { avatarUrl },
+  })
+}
