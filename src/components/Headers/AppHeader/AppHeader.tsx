@@ -12,6 +12,7 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { Container } from '@/components/Container/Container'
 
 import styles from './AppHeader.module.scss'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -66,6 +67,7 @@ const AppHeader = async () => {
 
           <div className={styles.frameButtons}>
             <GithubLoginButton />
+            <CreateProfileBtn />
           </div>
         </div>
       </Container>
