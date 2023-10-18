@@ -8,6 +8,7 @@ import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
+import { mapEmploymentType } from '@/utils/mapEmploymentType'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -18,8 +19,9 @@ const WorkInformation = () => {
   const { values, handleChange, errors, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
 
-  const handleEmploymentType = (option: string): void => {
-    setFieldValue('employment', option)
+    const handleEmploymentType = (option: EmploymentType): void => {
+      const formattedOption = mapEmploymentType(option);
+      setFieldValue('employment', formattedOption);
   }
 
   return (
