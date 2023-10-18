@@ -3,6 +3,7 @@ import {
   ProfileModel,
 } from '@/data/frontend/profile/types'
 import { httpClient } from '@/lib/httpClient'
+import { PutBlobResult } from '@vercel/blob'
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -41,4 +42,23 @@ export const apiClient = {
 
     return updatedProfile
   },
+  uploadUserPhoto: async (selectedFile: File) => {
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+
+    const userPhoto = await httpClient.post<FormData, PutBlobResult>(
+      '/api/files',
+      formData,
+    )
+    return userPhoto
+  },
+
+  updateUserAvatar: async (avatarUrl: string) => {
+    const userAvatar = await httpClient.put<{ avatarUrl: string }, any>(
+      '/api/user/avatar',
+      { avatarUrl },
+    )
+    return userAvatar
+  },
 }
+
