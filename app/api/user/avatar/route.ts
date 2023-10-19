@@ -1,24 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { updateUserAvatar } from '@/backend/user/user.service';
-import { authorizeUser } from '@/lib/auth';
+import { NextRequest, NextResponse } from 'next/server'
+import { updateUserAvatar } from '@/backend/user/user.service'
+import { authorizeUser } from '@/lib/auth'
 
 export async function PUT(request: NextRequest): Promise<NextResponse> {
   try {
-    const { email } = await authorizeUser();
-    const requestData = await request.json();
-    const { avatarUrl } = requestData;
+    const { email } = await authorizeUser()
+    const requestData = await request.json()
+    const { avatarUrl } = requestData
 
     if (!avatarUrl) {
-      return new NextResponse('Error: Invalid avatarUrl', { status: 400 });
+      return new NextResponse('Error: Invalid avatarUrl', { status: 400 })
     }
 
-    const updatedUser = await updateUserAvatar(email, avatarUrl);
+    const updatedUser = await updateUserAvatar(email, avatarUrl)
 
     return NextResponse.json({
       message: 'Success',
       updatedUser,
-    });
+    })
   } catch (error) {
-    return new NextResponse(`${error}`, { status: 500 });
+    return new NextResponse(`${error}`, { status: 500 })
   }
 }
