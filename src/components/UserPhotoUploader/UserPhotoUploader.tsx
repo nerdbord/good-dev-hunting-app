@@ -23,20 +23,21 @@ export const UserPhotoUploader = () => {
   }
 
   const importFromGithub = async () => {
-    setUserImage(session?.user?.image || '')
+    await apiClient.updateUserAvatar(session?.user.image || '')
   }
 
   const handleUpload = async () => {
     if (selectedFile) {
       try {
-        const { url } = await apiClient.uploadUserPhoto(selectedFile)
-        setUserImage(url)
-        await apiClient.updateUserAvatar(url)
+        const url = await apiClient.userPhotoUpload(selectedFile);
+        setUserImage(url);
+        await apiClient.updateUserAvatar(url);
       } catch (error) {
-        console.error('Error uploading the file:', error)
+        console.log('error', error);
       }
     }
-  }
+  };
+
   return (
     <div>
       <div className={styles.wrapper}>
@@ -71,4 +72,4 @@ export const UserPhotoUploader = () => {
   )
 }
 
-export default UserPhotoUploader
+export default UserPhotoUploader;

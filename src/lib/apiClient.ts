@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CreateProfilePayload,
   ProfileModel,
@@ -42,17 +43,13 @@ export const apiClient = {
 
     return updatedProfile
   },
-  uploadUserPhoto: async (selectedFile: File) => {
-    const formData = new FormData()
-    formData.append('file', selectedFile)
-
-    const userPhoto = await httpClient.post<FormData, PutBlobResult>(
+  userPhotoUpload: async (file: File) => {
+    const { url } = await httpClient.postPhoto<PutBlobResult>(
       '/api/files',
-      formData,
+      file,
     )
-    return userPhoto
+    return url
   },
-
   updateUserAvatar: async (avatarUrl: string) => {
     const userAvatar = await httpClient.put<{ avatarUrl: string }, any>(
       '/api/user/avatar',
@@ -61,4 +58,3 @@ export const apiClient = {
     return userAvatar
   },
 }
-
