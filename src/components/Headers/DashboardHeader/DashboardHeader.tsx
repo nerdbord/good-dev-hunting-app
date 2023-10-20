@@ -22,7 +22,6 @@ const DashboardHeader = async () => {
 
   if (!profile?.roles.includes(Role.MODERATOR) || !profile)
     redirect(AppRoutes.home)
-  
 
   return (
     <header className={styles.wrapper}>
