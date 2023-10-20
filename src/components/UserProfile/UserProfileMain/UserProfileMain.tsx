@@ -8,7 +8,7 @@ import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { ProfileModel } from '@/data/frontend/profile/types'
-import { mapEmploymentType } from '@/utils/mapEmploymentType'
+import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 
 const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
   return (
