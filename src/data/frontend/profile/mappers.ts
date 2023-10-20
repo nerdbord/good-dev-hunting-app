@@ -1,6 +1,6 @@
 import { EmploymentType } from '@prisma/client'
 
-export const mapEmploymentType = (employmentType?: EmploymentType) => {
+export const mapEmploymentType = (employmentType: EmploymentType) => {
   if (!employmentType) return ''
 
   switch (employmentType) {

@@ -24,7 +24,7 @@ const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
               alt="user's avatar"
               className={styles.avatar}
             />
-            <div className={styles.name}>{userProfile?.fullName}</div>
+            <div className={styles.name}>{userProfile.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
@@ -35,22 +35,22 @@ const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
                 height={20}
                 className={styles.flag}
               />
-              {userProfile?.country.name}, {userProfile?.city.name}
+              {userProfile.country.name}, {userProfile.city.name}
             </div>
-            {userProfile?.city.openForRelocation && (
+            {userProfile.city.openForRelocation && (
               <div className={styles.location}>Open to relocation</div>
             )}
-            {userProfile?.remoteOnly && (
+            {userProfile.remoteOnly && (
               <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
-              {userProfile?.seniority} {userProfile?.position} Developer
+              {userProfile.seniority} {userProfile.position} Developer
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {mapEmploymentType(userProfile?.employmentType)}
+                {mapEmploymentType(userProfile.employmentType)}
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@ const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
         <div className={styles.social}>
           <div className={styles.socialItem}>
             <a
-              href={`https://github.com/${userProfile?.githubUsername}`}
+              href={`https://github.com/${userProfile.githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
             >
