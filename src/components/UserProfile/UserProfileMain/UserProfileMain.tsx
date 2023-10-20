@@ -8,6 +8,7 @@ import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { mapEmploymentType } from '@/utils/mapEmploymentType'
 
 const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
   return (
@@ -49,7 +50,7 @@ const UserProfileMain = ({ userProfile }: { userProfile: ProfileModel }) => {
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {userProfile?.employmentType}
+                {mapEmploymentType(userProfile?.employmentType)}
               </div>
             </div>
           </div>
