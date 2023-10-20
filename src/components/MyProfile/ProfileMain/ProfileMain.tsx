@@ -11,7 +11,7 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { AppRoutes } from '@/utils/routes'
 import { findUserByEmail } from '@/backend/user/user.service'
-
+import { mapEmploymentType } from '@/utils/mapEmploymentType'
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
 
@@ -22,6 +22,8 @@ const ProfileMain = async () => {
   const profile = await getProfileByUserEmail(session.user.email)
   const user = await findUserByEmail(session.user.email)
   const githubUsername = user?.githubDetails?.username
+
+
   return (
     <>
       <section className={styles.container}>
@@ -90,10 +92,7 @@ const ProfileMain = async () => {
               {profile?.seniority} {profile?.position} Developer
             </span>
             <div className={styles.addInfo}>
-              <div className={styles.addInfoItem}>
-                {' '}
-                {profile?.employmentType}
-              </div>
+            <div className={styles.addInfoItem}>{mapEmploymentType(profile?.employmentType)}</div>
             </div>
           </div>
         </div>
