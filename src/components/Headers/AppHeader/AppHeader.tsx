@@ -2,8 +2,9 @@ import React from 'react'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import Image from 'next/image'
-import { MyProfileButton } from '@/components/MyProfileButton/MyProfileButton'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -12,6 +13,7 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { Container } from '@/components/Container/Container'
 
 import styles from './AppHeader.module.scss'
+import { AppRoutes } from '@/utils/routes'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -47,7 +49,7 @@ const AppHeader = async () => {
                 )}
                 <p className={styles.githubAccName}>{session?.user.name}</p>
               </div>
-              <MyProfileButton profileId={profile?.id || null} />
+              {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
             </div>
           </div>
         </Container>
@@ -59,13 +61,14 @@ const AppHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href="/" className={styles.logo}>
+          <Link href={AppRoutes.home} className={styles.logo}>
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
 
           <div className={styles.frameButtons}>
             <GithubLoginButton />
+            <CreateProfileBtn />
           </div>
         </div>
       </Container>
