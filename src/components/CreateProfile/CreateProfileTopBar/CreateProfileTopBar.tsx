@@ -6,16 +6,19 @@ import { useFormikContext } from 'formik'
 import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useUploadContext } from '@/contexts/UploadContext'
 
 const CreateProfileTopBar = () => {
   const router = useRouter()
   const { handleSubmit, errors, isSubmitting } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
+  const { setTriggerUpload} = useUploadContext()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     runAsync(async () => {
       event.preventDefault()
       handleSubmit()
+      setTriggerUpload(true)
       router.push(AppRoutes.myProfile)
     })
   }

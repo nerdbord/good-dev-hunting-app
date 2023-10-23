@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { updateUserAvatar } from '@/backend/user/user.service'
+import { findUserByEmail, updateUserAvatar } from '@/backend/user/user.service'
 import { authorizeUser } from '@/lib/auth'
 
 export async function PUT(request: NextRequest): Promise<NextResponse> {
@@ -18,6 +18,23 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
       message: 'Success',
       updatedUser,
     })
+  } catch (error) {
+    return new NextResponse(`${error}`, { status: 500 })
+  }
+}
+
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  try {
+    const { email } = await authorizeUser()
+    const user = await findUserByEmail(email)
+
+    if (!user) {
+      return new NextResponse('User not found', { status: 404 })
+    }
+
+    return new NextResponse(JSON.stringify({
+      avatarUrl: user.avatarUrl,
+    }), { status: 200 })
   } catch (error) {
     return new NextResponse(`${error}`, { status: 500 })
   }

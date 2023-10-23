@@ -8,8 +8,13 @@ import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { useSession } from 'next-auth/react'
 import UserPhotoUploader from '@/components/UserPhotoUploader/UserPhotoUploader'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-const PersonalInfo = () => {
+
+interface PersonalInfoProps {
+  profile: ProfileModel
+}
+const PersonalInfo = ({profile}: PersonalInfoProps) => {
   const { values, handleChange, errors } =
     useFormikContext<CreateProfileFormValues>()
 
@@ -44,7 +49,7 @@ const PersonalInfo = () => {
             disabled={true}
           />
         </InputFormError>
-        <UserPhotoUploader />
+        <UserPhotoUploader profile={profile} />
         <TextInput
           label="LinkedIn"
           placeholder="Paste link to you linkedin profile"

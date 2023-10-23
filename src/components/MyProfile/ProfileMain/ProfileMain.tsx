@@ -21,7 +21,14 @@ const ProfileMain = async () => {
 
   const profile = await getProfileByUserEmail(session.user.email)
   const user = await findUserByEmail(session.user.email)
-  const githubUsername = user?.githubDetails?.username
+
+  if (!user) {
+    redirect(AppRoutes.home)
+  }
+
+  const githubUsername = user.githubDetails?.username;
+  const avatarUrl = await user.avatarUrl || ''
+
   return (
     <>
       <section className={styles.container}>
@@ -57,7 +64,7 @@ const ProfileMain = async () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={session.user.image}
+              src={avatarUrl}
               width={100}
               height={100}
               alt="user's avatar"

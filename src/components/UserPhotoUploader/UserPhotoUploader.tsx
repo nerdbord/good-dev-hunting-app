@@ -1,14 +1,43 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './UserPhotoUploader.module.scss'
 import { Button } from '../Button/Button'
 import { useSession } from 'next-auth/react'
 import { apiClient } from '@/lib/apiClient'
+import { ProfileModel } from '@/data/frontend/profile/types'
+import { useUploadContext } from '@/contexts/UploadContext'
 
-export const UserPhotoUploader = () => {
+interface UserPhotoUploaderProps {
+  profile: ProfileModel
+}
+
+export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const { data: session } = useSession()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [userImage, setUserImage] = useState(session?.user.image)
+  const [userImage, setUserImage] = useState(
+    profile.avatarUrl || session?.user.image,
+  )
+  const { triggerUpload, setTriggerUpload } = useUploadContext()
+
+  useEffect(() => {
+    if (triggerUpload) {
+      handleUpload()
+      setTriggerUpload(false)
+    }
+  }, [triggerUpload])
+
+  const fetchUserAvatar = async () => {
+    try {
+      const avatarUrl = await apiClient.getUserAvatar()
+      setUserImage(avatarUrl)
+    } catch (error) {
+      console.error('Failed to fetch user avatar:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchUserAvatar()
+  }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -23,27 +52,34 @@ export const UserPhotoUploader = () => {
   }
 
   const importFromGithub = async () => {
-    await apiClient.updateUserAvatar(session?.user.image || '')
+    await apiClient.updateUserAvatar(
+      `http://github.com/${profile.githubUsername}.png`,
+    )
+    fetchUserAvatar()
   }
 
   const handleUpload = async () => {
     if (selectedFile) {
       try {
-        const url = await apiClient.userPhotoUpload(selectedFile);
-        setUserImage(url);
-        await apiClient.updateUserAvatar(url);
+        const url = await apiClient.userPhotoUpload(selectedFile)
+        setUserImage(url)
+        await apiClient.updateUserAvatar(url)
+        fetchUserAvatar()
       } catch (error) {
-        console.log('error', error);
+        console.log('error', error)
       }
     }
-  };
+  }
 
   return (
     <div>
       <div className={styles.wrapper}>
         <p className={styles.containerLabel}>Picture</p>
-        <img className={styles.picture} src={userImage} alt="User uploaded" />
-        <p>po uploadzie url się zmienia na ten z vercela{userImage}</p>
+        <img
+          className={styles.picture}
+          src={userImage || profile.avatarUrl || session?.user.image}
+          alt="User uploaded"
+        />
         <div className={styles.buttonsWrapper}>
           <Button variant="secondary">
             <label htmlFor="file-input">
@@ -62,14 +98,8 @@ export const UserPhotoUploader = () => {
           </Button>
         </div>
       </div>
-      <Button variant="primary" onClick={handleUpload}>
-        Upload a file
-      </Button>
-      {userImage && (
-        <img className={styles.picture} src={userImage} alt="Uploaded" />
-      )}
     </div>
   )
 }
 
-export default UserPhotoUploader;
+export default UserPhotoUploader

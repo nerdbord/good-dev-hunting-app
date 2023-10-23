@@ -57,4 +57,14 @@ export const apiClient = {
     )
     return userAvatar
   },
+  getUserAvatar: async () => {
+    try {
+      const { avatarUrl } = await httpClient.get<{ avatarUrl: string }>(
+        '/api/user/avatar',
+      )
+      return avatarUrl
+    } catch (error) {
+      console.error(error)
+    }
+  },
 }
