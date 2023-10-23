@@ -2,7 +2,6 @@
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import React from 'react'
-import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
@@ -10,6 +9,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '../Button/Button'
 import { PublishingState } from '@prisma/client'
 import { formatStateName } from '../FilterTabs/Tab'
+import { JobSpecialization } from '@/components/ProfileList/profile-data'
+import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 
 const cx = classNames.bind(styles)
 
@@ -55,27 +56,6 @@ export const ModerationProfileListItem: React.FC<{ data: ProfileModel }> = ({
     ...commonClasses,
   })
 
-  const renderTechnologies = () => {
-    const sliceCount = window.innerWidth <= 768 ? 2 : 3
-
-    if (data.techStack.length <= sliceCount) {
-      return data.techStack.map((tech, index) => (
-        <span key={index}>{tech}</span>
-      ))
-    } else {
-      const displayedTechnologies = data.techStack.slice(0, sliceCount)
-      const othersCount = data.techStack.length - sliceCount
-      return (
-        <>
-          {displayedTechnologies.map((tech, index) => (
-            <span key={index}>{tech}</span>
-          ))}
-          <span>{`+ ${othersCount} Others`}</span>
-        </>
-      )
-    }
-  }
-
   return (
     <div className={`${styles.frame} ${styles.moderationFrame}`}>
       <div
@@ -96,7 +76,7 @@ export const ModerationProfileListItem: React.FC<{ data: ProfileModel }> = ({
           </p>
         </div>
       </div>
-      <div className={getTechnologyClasses}>{renderTechnologies()}</div>
+      <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
       <div className={styles.detailsWrapper}>
         <div className={styles.detailsContent}>{stateStatus(data.state)}</div>
       </div>

@@ -7,6 +7,7 @@ import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
+import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 
 const cx = classNames.bind(styles)
 
@@ -24,27 +25,6 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     [styles.technology]: true,
     ...commonClasses,
   })
-
-  const renderTechnologies = () => {
-    const sliceCount = window.innerWidth <= 768 ? 2 : 3
-
-    if (data.techStack.length <= sliceCount) {
-      return data.techStack.map((tech, index) => (
-        <span key={index}>{tech}</span>
-      ))
-    } else {
-      const displayedTechnologies = data.techStack.slice(0, sliceCount)
-      const othersCount = data.techStack.length - sliceCount
-      return (
-        <>
-          {displayedTechnologies.map((tech, index) => (
-            <span key={index}>{tech}</span>
-          ))}
-          <span>{`+ ${othersCount} Others`}</span>
-        </>
-      )
-    }
-  }
 
   return (
     <div
@@ -66,7 +46,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
           </p>
         </div>
       </div>
-      <div className={getTechnologyClasses}>{renderTechnologies()}</div>
+      <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
     </div>
   )
 }
