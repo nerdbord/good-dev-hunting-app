@@ -1,3 +1,4 @@
+'use client'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
 type Props = {
