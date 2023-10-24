@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { findUserByEmail, updateUserAvatar } from '@/backend/user/user.service'
 import { authorizeUser } from '@/lib/auth'
-
+import { revalidatePath } from 'next/cache'
 export async function PUT(request: NextRequest): Promise<NextResponse> {
   try {
     const { email } = await authorizeUser()
@@ -31,10 +31,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     if (!user) {
       return new NextResponse('User not found', { status: 404 })
     }
-
-    return new NextResponse(JSON.stringify({
-      avatarUrl: user.avatarUrl,
-    }), { status: 200 })
+    const path = request.nextUrl.pathname
+    revalidatePath(path)
+    return new NextResponse(
+      JSON.stringify({
+        avatarUrl: user.avatarUrl,
+      }),
+      { status: 200 },
+    )
   } catch (error) {
     return new NextResponse(`${error}`, { status: 500 })
   }

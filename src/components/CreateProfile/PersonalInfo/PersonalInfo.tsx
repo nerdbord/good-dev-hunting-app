@@ -12,7 +12,7 @@ import { ProfileModel } from '@/data/frontend/profile/types'
 
 
 interface PersonalInfoProps {
-  profile: ProfileModel
+  profile: ProfileModel | null
 }
 const PersonalInfo = ({profile}: PersonalInfoProps) => {
   const { values, handleChange, errors } =

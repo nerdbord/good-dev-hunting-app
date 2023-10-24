@@ -10,14 +10,14 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 
 interface UserPhotoUploaderProps {
-  profile: ProfileModel
+  profile: ProfileModel | null
 }
 
 export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const { data: session } = useSession()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [userImage, setUserImage] = useState(
-    profile.avatarUrl || session?.user.image,
+    profile?.avatarUrl || session?.user.image,
   )
   const { triggerUpload, setTriggerUpload } = useUploadContext()
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
@@ -56,10 +56,10 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
 
   const importFromGithub = async () => {
     await apiClient.updateUserAvatar(
-      `http://github.com/${profile.githubUsername}.png`,
+      `http://github.com/${profile?.githubUsername}.png`,
     )
-    setUserImage(`http://github.com/${profile.githubUsername}.png`)
-    // fetchUserAvatar()
+    setUserImage(`http://github.com/${profile?.githubUsername}.png`)
+    fetchUserAvatar()
   }
 
   const handleUpload = async () => {
@@ -68,7 +68,7 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
         const url = await apiClient.userPhotoUpload(selectedFile)
         setUserImage(url)
         await apiClient.updateUserAvatar(url)
-        // fetchUserAvatar()
+        fetchUserAvatar()
         setShowErrorMessage(false)
       } catch (error) {
         console.log('error', error)
@@ -88,7 +88,7 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
         <div className={styles.contentWrapper}>
           <Image
             className={styles.picture}
-            src={userImage || profile.avatarUrl || session?.user.image || ''}
+            src={userImage || profile?.avatarUrl || session?.user.image || ''}
             alt="User uploaded"
             width={100}
             height={100}
