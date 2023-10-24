@@ -65,6 +65,7 @@ const ProfileMain = async () => {
           <div className={styles.user}>
             <Image
               src={avatarUrl}
+              key={avatarUrl}
               width={100}
               height={100}
               alt="user's avatar"
