@@ -18,9 +18,9 @@ const CreateProfilePage = async () => {
     redirect(AppRoutes.home)
   }
 
-  const myProfile = await getProfileByUserEmail(session.user.email)
+  const profile = await getProfileByUserEmail(session.user.email)
 
-  if (myProfile) {
+  if (profile) {
     redirect(AppRoutes.myProfile)
   }
 
@@ -29,7 +29,7 @@ const CreateProfilePage = async () => {
       <div className={styles.wrapper}>
         <CreateProfileTopBar />
         <div className={styles.formBox}>
-          <PersonalInfo />
+          <PersonalInfo profile={profile} />
           <LocationPreferences />
           <WorkInformation />
         </div>
