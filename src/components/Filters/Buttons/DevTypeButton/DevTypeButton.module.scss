@@ -25,7 +25,9 @@
 }
 
 .pressed {
+  transition: background-color 300ms; 
   box-shadow: 0 0 10px rgba(155, 155, 155, 0.2);
-  border-width: 1.5px;
+  border: 1px solid rgba(61, 67, 75, 1);
   background-color: #11141b;
+  color: rgba(61, 67, 75, 1);
 }
