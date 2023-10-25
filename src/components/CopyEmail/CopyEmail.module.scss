@@ -9,7 +9,12 @@
   gap: 10px;
   cursor: pointer;
   white-space: nowrap;
+  transition: background-color 300ms; 
   @include mobile {
     padding: 0;
   }
+}
+
+.wrapper:hover {
+  background-color: rgba(23, 27, 33, 1);
 }
