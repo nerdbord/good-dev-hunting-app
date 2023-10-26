@@ -11,6 +11,8 @@ import { PublishingState } from '@prisma/client'
 import { formatStateName } from '../FilterTabs/Tab'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
+import AcceptIcon from '@/assets/icons/AcceptIcon'
+import RejectIcon from '@/assets/icons/RejectIcon'
 
 const cx = classNames.bind(styles)
 
@@ -19,8 +21,14 @@ const stateStatus = (state: string): React.ReactNode => {
   if (state === PublishingState.PENDING) {
     return (
       <>
-        <Button variant="action">Accept</Button>
-        <Button variant="action">Reject</Button>
+        <Button variant="action">
+          Accept
+          <AcceptIcon />
+        </Button>
+        <Button variant="action">
+          Reject
+          <RejectIcon />
+        </Button>
       </>
     )
   }

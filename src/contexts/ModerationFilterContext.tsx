@@ -5,10 +5,13 @@ import { PropsWithChildren, createContext, useState, useContext } from 'react'
 export type ModerationFilterType = PropsWithChildren & {
   publishingStateFilter: PublishingState
   setPublishingStateFilter?: (filter: PublishingState) => void
+  pendingStateCounter: number
+  setPendingStateCounter?: (counter: number) => void
 }
 
 const initialState: ModerationFilterType = {
   publishingStateFilter: PublishingState.PENDING,
+  pendingStateCounter: 0,
 }
 
 const ModerationFilterContext =
@@ -22,9 +25,14 @@ function ModerationFilterContextProvider({
   const [publishingState, setPublishingState] = useState<PublishingState>(
     initialState.publishingStateFilter,
   )
+  const [stateCounter, setStateCounter] = useState(0)
 
   const setPublishingStateFilter = (filter: PublishingState) => {
     setPublishingState(filter)
+  }
+
+  const setPendingStateCounter = (counter: number) => {
+    setStateCounter(counter)
   }
 
   return (
@@ -32,6 +40,8 @@ function ModerationFilterContextProvider({
       value={{
         publishingStateFilter: publishingState,
         setPublishingStateFilter,
+        pendingStateCounter: stateCounter,
+        setPendingStateCounter,
       }}
     >
       {children}

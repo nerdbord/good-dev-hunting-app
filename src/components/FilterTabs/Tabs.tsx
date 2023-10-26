@@ -10,7 +10,8 @@ export const availableTabs: PublishingState[] = Object.values(PublishingState)
   .map((key) => PublishingState[key] as PublishingState)
 
 export default function Tabs() {
-  const { setPublishingStateFilter } = useModerationFilter()
+  const { pendingStateCounter, setPublishingStateFilter } =
+    useModerationFilter()
   const [activeTab, setActiveTab] = useState<PublishingState>(
     PublishingState.PENDING,
   )
@@ -20,6 +21,9 @@ export default function Tabs() {
     setPublishingStateFilter && setPublishingStateFilter(tab)
   }
 
+  const nameWithCounter = (counter: number, name: string) =>
+    counter > 0 ? `${name} (${counter})` : name
+
   return (
     <div className={styles.tabsWrapper}>
       {availableTabs.map((tab, index) => {
@@ -27,7 +31,11 @@ export default function Tabs() {
           <Tab
             key={index}
             active={tab === activeTab}
-            name={tab}
+            name={
+              tab === PublishingState.PENDING
+                ? nameWithCounter(pendingStateCounter, tab)
+                : tab
+            }
             action={() => setModerationFilter(PublishingState[tab])}
             counter={0}
           />
