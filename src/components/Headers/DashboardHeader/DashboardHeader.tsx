@@ -10,7 +10,8 @@ import { AppRoutes } from '@/utils/routes'
 
 import { Container } from '@/components/Container/Container'
 import { Button } from '@/components/Button/Button'
-import { MyProfileButton } from '@/components/MyProfileButton/MyProfileButton'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
 
 import styles from './DashboardHeader.module.scss'
@@ -18,23 +19,21 @@ import styles from './DashboardHeader.module.scss'
 const DashboardHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const profile = session && (await findUserByEmail(session.user.email))
-
-  if (!profile?.roles.includes(Role.MODERATOR) || !profile)
-    redirect(AppRoutes.home)
+  const user = session && (await findUserByEmail(session.user.email))
+  
+  if (!user?.roles.includes(Role.MODERATOR) || !user) redirect(AppRoutes.home)
 
   return (
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href="/" className={styles.logo}>
+          <Link href={AppRoutes.home} className={styles.logo}>
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
-
           <div className={styles.frameButtons}>
             <Button variant="secondary">Moderation</Button>
-            <MyProfileButton profileId={profile?.profile?.id || null} />
+            {user.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </div>
       </Container>
