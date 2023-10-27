@@ -11,6 +11,11 @@
   }
 }
 
+.tabsWrapper {
+  display: inline-flex;
+  gap: 54px;
+}
+
 .features {
   display: flex;
   gap: 11px;
@@ -22,4 +27,12 @@
   @include mobile {
     margin-left: 16px;
   }
+}
+
+.title {
+  color: var(--light-03, #69717b);
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 40px;
 }
