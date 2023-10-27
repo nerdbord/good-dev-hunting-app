@@ -20,7 +20,7 @@ const DashboardHeader = async () => {
   const session = await getServerSession(authOptions)
 
   const user = session && (await findUserByEmail(session.user.email))
-
+  
   if (!user?.roles.includes(Role.MODERATOR) || !user) redirect(AppRoutes.home)
 
   return (
