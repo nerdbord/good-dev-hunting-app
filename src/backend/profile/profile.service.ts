@@ -25,6 +25,30 @@ export async function getPublishedProfilesPayload() {
   return serializedProfile
 }
 
+export async function getAllPublishedProfilesPayload() {
+  const publishedProfiles = await prisma.profile.findMany({
+    where: {
+      NOT: {
+        state: PublishingState.DRAFT,
+      },
+    },
+    include: {
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+      country: true,
+      city: true,
+    },
+  })
+
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
+  return serializedProfile
+}
+
 export async function getProfileById(id: string) {
   const profileById = await prisma.profile.findFirst({
     where: {

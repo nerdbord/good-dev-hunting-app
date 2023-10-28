@@ -11,15 +11,17 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { AppRoutes } from '@/utils/routes'
 import { findUserByEmail } from '@/backend/user/user.service'
-
+import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
-
   if (!session || !session.user) {
     redirect(AppRoutes.home)
   }
-
   const profile = await getProfileByUserEmail(session.user.email)
+  if (!profile) {
+    redirect(AppRoutes.home)
+  }
+
   const user = await findUserByEmail(session.user.email)
 
   if (!user) {
@@ -44,7 +46,7 @@ const ProfileMain = async () => {
               <GithubIcon2 />
             </a>
           </li>
-          {profile?.linkedIn && (
+          {profile.linkedIn && (
             <li className={styles.socialItem}>
               <a
                 className={styles.socialLink}
@@ -71,7 +73,7 @@ const ProfileMain = async () => {
               alt="user's avatar"
               className={styles.avatar}
             />
-            <div className={styles.name}>{session?.user.name}</div>
+            <div className={styles.name}>{session.user.name}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
@@ -83,24 +85,23 @@ const ProfileMain = async () => {
                 className={styles.flag}
               />
               <p>
-                {profile?.country.name}, {profile?.city.name}
+                {profile.country.name}, {profile.city.name}
               </p>
             </div>
-            {profile?.country.openForRelocation && (
+            {profile.country.openForRelocation && (
               <div className={styles.location}>Open to relocation</div>
             )}
-            {profile?.remoteOnly && (
+            {profile.remoteOnly && (
               <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
-              {profile?.seniority} {profile?.position} Developer
+              {profile.seniority} {profile.position} Developer
             </span>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {' '}
-                {profile?.employmentType}
+                {mapEmploymentType(profile.employmentType)}
               </div>
             </div>
           </div>
