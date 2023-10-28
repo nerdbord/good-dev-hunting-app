@@ -58,6 +58,7 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             onChange={handleChange}
             name="bio"
+            maxLength={1500}
           />
         </InputFormError>
         <div className={styles.lettersCount}>

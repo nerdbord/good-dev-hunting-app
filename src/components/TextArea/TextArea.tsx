@@ -10,6 +10,7 @@ interface TextAreaProps {
   onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void
   addImportantIcon?: boolean
   name: string
+  maxLength?: number;
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -19,6 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   onChange,
   addImportantIcon,
   name,
+  maxLength,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(event)
@@ -36,6 +38,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         placeholder={placeholder}
         onChange={handleChange}
         name={name}
+        maxLength={maxLength}
       />
     </div>
   )
