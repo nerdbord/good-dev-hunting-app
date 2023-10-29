@@ -10,6 +10,7 @@ import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInfo
 import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { UploadProvider } from '@/contexts/UploadContext'
 
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
@@ -25,6 +26,7 @@ const CreateProfilePage = async () => {
   }
 
   return (
+    <UploadProvider>
     <CreateProfileFormWrapper>
       <div className={styles.wrapper}>
         <CreateProfileTopBar />
@@ -35,6 +37,7 @@ const CreateProfilePage = async () => {
         </div>
       </div>
     </CreateProfileFormWrapper>
+    </UploadProvider>
   )
 }
 

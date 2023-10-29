@@ -59,7 +59,6 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
       `http://github.com/${profile?.githubUsername}.png`,
     )
     setUserImage(`http://github.com/${profile?.githubUsername}.png`)
-    fetchUserAvatar()
   }
 
   const handleUpload = async () => {
