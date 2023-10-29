@@ -22,6 +22,9 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
   } = useModerationFilter()
 
   const filteredData = data.filter((user: ProfileModel) => {
+    if (searchEmailValue !== '') {
+      return user.userEmail.includes(searchEmailValue)
+    }
     return user?.state === publishingStateFilter
   })
 
@@ -32,24 +35,17 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
     setEmailSearchValue && setEmailSearchValue('')
   }
 
-  if (searchEmailValue !== '') {
+  if (searchEmailValue !== '' && filteredData.length > 0) {
     return (
       <div className={styles.moderationProfiles}>
         <div className={styles.searchInfoCont}>
           <p className={styles.searchInfo}>
             Search results for{' '}
-            <span className={styles.searchValue}>"{searchEmailValue}" (0)</span>
+            <span className={styles.searchValue}>
+              "{searchEmailValue}" ({filteredData.length})
+            </span>
           </p>
           <Button variant="action" onClick={clearHandler}>
-            Clear search
-          </Button>
-        </div>
-        <div className={styles.searchEmptyInfoCont}>
-          <p className={styles.searchInfo}>
-            No search results for{' '}
-            <span className={styles.searchValue}>"{searchEmailValue}" (0)</span>
-          </p>
-          <Button variant="primary" onClick={clearHandler}>
             Clear search
           </Button>
         </div>
@@ -61,6 +57,24 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
               )
             }
           })}
+        </div>
+      </div>
+    )
+  }
+
+  if (searchEmailValue !== '' && filteredData.length === 0) {
+    return (
+      <div className={styles.moderationProfiles}>
+        <div className={styles.searchEmptyInfoCont}>
+          <p className={styles.searchInfo}>
+            No search results for{' '}
+            <span className={styles.searchValue}>
+              "{searchEmailValue}" ({filteredData.length})
+            </span>
+          </p>
+          <Button variant="primary" onClick={clearHandler}>
+            Clear search
+          </Button>
         </div>
       </div>
     )
