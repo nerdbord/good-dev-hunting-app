@@ -14,8 +14,12 @@ type Props = {
 }
 
 export default function ModerationProfilesWithFilters({ data = [] }: Props) {
-  const { publishingStateFilter, setPendingStateCounter, searchEmailValue } =
-    useModerationFilter()
+  const {
+    publishingStateFilter,
+    setPendingStateCounter,
+    searchEmailValue,
+    setEmailSearchValue,
+  } = useModerationFilter()
 
   const filteredData = data.filter((user: ProfileModel) => {
     return user?.state === publishingStateFilter
@@ -23,6 +27,10 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
 
   setPendingStateCounter &&
     useTabCounter(data, PublishingState.PENDING, setPendingStateCounter)
+
+  const clearHandler = () => {
+    setEmailSearchValue && setEmailSearchValue('')
+  }
 
   if (searchEmailValue !== '') {
     return (
@@ -32,14 +40,18 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
             Search results for{' '}
             <span className={styles.searchValue}>"{searchEmailValue}" (0)</span>
           </p>
-          <Button variant="action">Clear search</Button>
+          <Button variant="action" onClick={clearHandler}>
+            Clear search
+          </Button>
         </div>
         <div className={styles.searchEmptyInfoCont}>
           <p className={styles.searchInfo}>
             No search results for{' '}
             <span className={styles.searchValue}>"{searchEmailValue}" (0)</span>
           </p>
-          <Button variant="primary">Clear search</Button>
+          <Button variant="primary" onClick={clearHandler}>
+            Clear search
+          </Button>
         </div>
         <div className={styles.profileListCont}>
           {filteredData.map((profile) => {
@@ -66,3 +78,4 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
     </div>
   )
 }
+
