@@ -13,19 +13,51 @@ import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
+import { ToastStatus, useToast } from '@/contexts/ToastContext'
 
 const cx = classNames.bind(styles)
 
-const stateStatus = (state: string): React.ReactNode => {
+const setNewState = (profileId: string, state: PublishingState): void => {
+  console.log('set new state')
+}
+
+type StateStatusProps = {
+  profileId: string
+  state: string
+}
+
+const StateStatus: React.FC<StateStatusProps> = ({
+  profileId,
+  state,
+}: StateStatusProps) => {
+  const { setToast } = useToast()
   if (!(state in PublishingState)) return <></>
   if (state === PublishingState.PENDING) {
     return (
       <>
-        <Button variant="action">
+        <Button
+          variant="action"
+          onClick={() => {
+            setNewState(profileId, PublishingState.APPROVED)
+            setToast(
+              ToastStatus.SUCCESS,
+              'Profile accepted and will be visible on the main page within 24h',
+            )
+          }}
+        >
           Accept
           <AcceptIcon />
         </Button>
-        <Button variant="action">
+        <Button
+          variant="action"
+          onClick={() => {
+            setNewState(profileId, PublishingState.REJECTED)
+            setToast(
+              ToastStatus.INVALID,
+              'Profile rejected and will not be visible on the main page',
+            )
+          }}
+        >
           Reject
           <RejectIcon />
         </Button>
@@ -86,7 +118,9 @@ export const ModerationProfileListItem: React.FC<{ data: ProfileModel }> = ({
       </div>
       <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
       <div className={styles.detailsWrapper}>
-        <div className={styles.detailsContent}>{stateStatus(data.state)}</div>
+        <div className={styles.detailsContent}>
+          <StateStatus profileId={data.id} state={data.state} />
+        </div>
       </div>
     </div>
   )
