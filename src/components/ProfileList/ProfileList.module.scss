@@ -37,26 +37,34 @@
   background: #0f1217;
   border-radius: 4px;
   border: 1px solid #2a2f35;
+  transition: background-color 300ms; 
   cursor: pointer;
   @include mobile {
-    width: 343px;
+    width: 100%;
   }
 }
+
+.frame:hover {
+  box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
+}
+
+
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 36px;
+  margin-top: 5%;
 }
 
 .profile {
   width: 78px;
   height: 78px;
+  justify-content: flex-start;
   filter: drop-shadow(0px 4px 50px rgba(125, 84, 241, 0.2));
 }
 
 .data {
-  margin-left: 16px;
+  margin-left: 5%;
 }
 .data p {
   padding-top: 3px;
@@ -89,13 +97,12 @@
 }
 
 .technology {
-  margin-top: 17px;
+  margin-top: 7%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 10px;
-  margin-left: 23px;
 }
 
 .technology span {
@@ -103,6 +110,7 @@
   background: #161a1f;
   text-align: center;
   align-items: center;
+  justify-content: center;
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 12px;

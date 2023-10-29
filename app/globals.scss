@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
 button {
   cursor: pointer;
 }
@@ -17,6 +23,5 @@ html,
 body {
   max-width: 100%;
   background: #0f1217;
-  font-family: 'IBM plex sans', sans-serif;
   color: #e2eaf1;
 }
