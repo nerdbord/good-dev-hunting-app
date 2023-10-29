@@ -1,17 +1,20 @@
 'use client'
-import { PublishingState } from '@prisma/client'
 import { PropsWithChildren, createContext, useState, useContext } from 'react'
+import { PublishingState } from '@prisma/client'
 
 export type ModerationFilterType = PropsWithChildren & {
   publishingStateFilter: PublishingState
   setPublishingStateFilter?: (filter: PublishingState) => void
   pendingStateCounter: number
   setPendingStateCounter?: (counter: number) => void
+  searchEmailValue: string
+  setEmailSearchValue?: (text: string) => void
 }
 
 const initialState: ModerationFilterType = {
   publishingStateFilter: PublishingState.PENDING,
   pendingStateCounter: 0,
+  searchEmailValue: '',
 }
 
 const ModerationFilterContext =
@@ -26,6 +29,7 @@ function ModerationFilterContextProvider({
     initialState.publishingStateFilter,
   )
   const [stateCounter, setStateCounter] = useState(0)
+  const [searchValue, setSearchValue] = useState('')
 
   const setPublishingStateFilter = (filter: PublishingState) => {
     setPublishingState(filter)
@@ -35,6 +39,10 @@ function ModerationFilterContextProvider({
     setStateCounter(counter)
   }
 
+  const setEmailSearchValue = (text: string) => {
+    setSearchValue(text)
+  }
+
   return (
     <ModerationFilterContext.Provider
       value={{
@@ -42,6 +50,8 @@ function ModerationFilterContextProvider({
         setPublishingStateFilter,
         pendingStateCounter: stateCounter,
         setPendingStateCounter,
+        searchEmailValue: searchValue,
+        setEmailSearchValue,
       }}
     >
       {children}
