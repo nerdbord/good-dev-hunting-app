@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Button } from '../Button/Button'
+import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'
 import { ModerationProfileListItem } from './ModerationProfileListItem'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
@@ -37,59 +37,21 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
     setActiveTab && setActiveTab(PublishingState.PENDING)
   }
 
-  if (searchEmailValue !== '' && filteredData.length > 0) {
-    return (
-      <div className={styles.moderationProfiles}>
-        <div className={styles.searchInfoCont}>
-          <p className={styles.searchInfo}>
-            Search results for{' '}
-            <span className={styles.searchValue}>
-              "{searchEmailValue}" ({filteredData.length})
-            </span>
-          </p>
-          <Button variant="action" onClick={clearHandler}>
-            Clear search
-          </Button>
-        </div>
-        <div className={styles.profileListCont}>
-          {filteredData.map((profile) => {
-            if (profile) {
-              return (
-                <ModerationProfileListItem key={profile.id} data={profile} />
-              )
-            }
-          })}
-        </div>
-      </div>
-    )
-  }
-
-  if (searchEmailValue !== '' && filteredData.length === 0) {
-    return (
-      <div className={styles.moderationProfiles}>
-        <div className={styles.searchEmptyInfoCont}>
-          <p className={styles.searchInfo}>
-            No search results for{' '}
-            <span className={styles.searchValue}>
-              "{searchEmailValue}" ({filteredData.length})
-            </span>
-          </p>
-          <Button variant="primary" onClick={clearHandler}>
-            Clear search
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className={styles.moderationProfiles}>
+      <SearchResultsInfo
+        searchEmailValue={searchEmailValue}
+        filteredData={filteredData}
+        clearHandler={clearHandler}
+      />
+
       <div className={styles.profileListCont}>
-        {filteredData.map((profile) => {
-          if (profile) {
-            return <ModerationProfileListItem key={profile.id} data={profile} />
-          }
-        })}
+        {filteredData.map(
+          (profile) =>
+            profile && (
+              <ModerationProfileListItem key={profile.id} data={profile} />
+            ),
+        )}
       </div>
     </div>
   )
