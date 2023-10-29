@@ -19,6 +19,7 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
     setPendingStateCounter,
     searchEmailValue,
     setEmailSearchValue,
+    setActiveTab,
   } = useModerationFilter()
 
   const filteredData = data.filter((user: ProfileModel) => {
@@ -33,6 +34,7 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
 
   const clearHandler = () => {
     setEmailSearchValue && setEmailSearchValue('')
+    setActiveTab && setActiveTab(PublishingState.PENDING)
   }
 
   if (searchEmailValue !== '' && filteredData.length > 0) {

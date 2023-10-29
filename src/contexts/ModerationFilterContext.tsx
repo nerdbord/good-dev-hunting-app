@@ -9,12 +9,15 @@ export type ModerationFilterType = PropsWithChildren & {
   setPendingStateCounter?: (counter: number) => void
   searchEmailValue: string
   setEmailSearchValue?: (text: string) => void
+  activeTab: PublishingState | null
+  setActiveTab?: (value: PublishingState | null) => void
 }
 
 const initialState: ModerationFilterType = {
   publishingStateFilter: PublishingState.PENDING,
   pendingStateCounter: 0,
   searchEmailValue: '',
+  activeTab: PublishingState.PENDING,
 }
 
 const ModerationFilterContext =
@@ -30,6 +33,9 @@ function ModerationFilterContextProvider({
   )
   const [stateCounter, setStateCounter] = useState(0)
   const [searchValue, setSearchValue] = useState('')
+  const [activeTab, setActiveTab] = useState<PublishingState | null>(
+    initialState.activeTab,
+  )
 
   const setPublishingStateFilter = (filter: PublishingState) => {
     setPublishingState(filter)
@@ -52,6 +58,8 @@ function ModerationFilterContextProvider({
         setPendingStateCounter,
         searchEmailValue: searchValue,
         setEmailSearchValue,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}

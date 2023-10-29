@@ -13,7 +13,7 @@ type Props = {
 
 export default function SearchWrapper({ data = [] }: Props) {
   const [searchValue, setSearchValue] = useState('')
-  const { setEmailSearchValue } = useModerationFilter()
+  const { setEmailSearchValue, setActiveTab } = useModerationFilter()
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
@@ -22,6 +22,7 @@ export default function SearchWrapper({ data = [] }: Props) {
   const searchHandler = () => {
     if (searchValue === '') return
     setEmailSearchValue && setEmailSearchValue(searchValue)
+    setActiveTab && setActiveTab(null)
     setSearchValue('')
   }
 
