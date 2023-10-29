@@ -4,24 +4,18 @@ import { PublishingState } from '@prisma/client'
 
 export type ModerationFilterType = PropsWithChildren & {
   publishingStateFilter: PublishingState
-  setPublishingStateFilter?: (filter: PublishingState) => void
+  setPublishingStateFilter: (filter: PublishingState) => void
   pendingStateCounter: number
-  setPendingStateCounter?: (counter: number) => void
+  setPendingStateCounter: (counter: number) => void
   searchEmailValue: string
-  setEmailSearchValue?: (text: string) => void
+  setEmailSearchValue: (text: string) => void
   activeTab: PublishingState | null
-  setActiveTab?: (value: PublishingState | null) => void
+  setActiveTab: (value: PublishingState | null) => void
 }
 
-const initialState: ModerationFilterType = {
-  publishingStateFilter: PublishingState.PENDING,
-  pendingStateCounter: 0,
-  searchEmailValue: '',
-  activeTab: PublishingState.PENDING,
-}
-
-const ModerationFilterContext =
-  createContext<ModerationFilterType>(initialState)
+const ModerationFilterContext = createContext<ModerationFilterType | undefined>(
+  undefined,
+)
 
 function ModerationFilterContextProvider({
   children,
@@ -29,12 +23,12 @@ function ModerationFilterContextProvider({
   children: React.ReactNode
 }) {
   const [publishingState, setPublishingState] = useState<PublishingState>(
-    initialState.publishingStateFilter,
+    PublishingState.PENDING,
   )
   const [stateCounter, setStateCounter] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [activeTab, setActiveTab] = useState<PublishingState | null>(
-    initialState.activeTab,
+    PublishingState.PENDING,
   )
 
   const setPublishingStateFilter = (filter: PublishingState) => {
