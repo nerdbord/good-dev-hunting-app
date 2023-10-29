@@ -19,9 +19,9 @@ export default function Tabs() {
   } = useModerationFilter()
 
   const setModerationFilter = (tab: PublishingState) => {
-    setActiveTab && setActiveTab(PublishingState[tab])
-    setPublishingStateFilter && setPublishingStateFilter(tab)
-    setEmailSearchValue && setEmailSearchValue('')
+    setActiveTab(PublishingState[tab])
+    setPublishingStateFilter(tab)
+    setEmailSearchValue('')
   }
 
   const nameWithCounter = (counter: number, name: string) =>

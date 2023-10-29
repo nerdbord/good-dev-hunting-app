@@ -8,10 +8,10 @@ import { useModerationFilter } from '@/contexts/ModerationFilterContext'
 import styles from './SearchWrapper.module.scss'
 
 type Props = {
-  data: ProfileModel[]
+  profiles: ProfileModel[]
 }
 
-export default function SearchWrapper({ data = [] }: Props) {
+export default function SearchWrapper({ profiles = [] }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const { setEmailSearchValue, setActiveTab } = useModerationFilter()
 
@@ -21,13 +21,13 @@ export default function SearchWrapper({ data = [] }: Props) {
 
   const searchHandler = () => {
     if (searchValue === '') return
-    setEmailSearchValue && setEmailSearchValue(searchValue)
-    setActiveTab && setActiveTab(null)
+    setEmailSearchValue(searchValue)
+    setActiveTab(null)
     setSearchValue('')
   }
 
-  const filteredUsers = data.filter((user) => {
-    return searchValue !== '' && user.userEmail.includes(searchValue)
+  const filteredProfiles = profiles.filter((profile) => {
+    return searchValue !== '' && profile.userEmail.includes(searchValue)
   })
 
   return (
@@ -42,14 +42,14 @@ export default function SearchWrapper({ data = [] }: Props) {
       <Button variant={'action'} onClick={searchHandler}>
         Search
       </Button>
-      {filteredUsers.length > 0 && (
+      {filteredProfiles.length > 0 && (
         <ul className={styles.suggestionsBox}>
-          {filteredUsers.map((user) => (
+          {filteredProfiles.map((profile) => (
             <SearchSuggestionItem
-              key={user.id}
+              key={profile.id}
               searchValue={searchValue}
               onClick={setSearchValue}
-              user={user}
+              profile={profile}
             />
           ))}
         </ul>

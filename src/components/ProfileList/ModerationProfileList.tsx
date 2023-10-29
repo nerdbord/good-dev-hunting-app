@@ -8,7 +8,7 @@ export default async function ModerationProfileList() {
 
   return (
     <div className={styles.mainContainer}>
-      <ModerationProfilesWithFilter data={profiles} />
+      <ModerationProfilesWithFilter profiles={profiles} />
     </div>
   )
 }

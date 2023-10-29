@@ -13,7 +13,7 @@ export default async function ModerationFilters() {
         <h2 className={styles.title}>Moderation</h2>
         <Tabs />
       </div>
-      <SearchWrapper data={profiles} />
+      <SearchWrapper profiles={profiles} />
     </div>
   )
 }

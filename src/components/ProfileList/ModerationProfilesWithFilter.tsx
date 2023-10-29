@@ -10,10 +10,12 @@ import { PublishingState } from '@prisma/client'
 import styles from './ProfileList.module.scss'
 
 type Props = {
-  data: ProfileModel[]
+  profiles: ProfileModel[]
 }
 
-export default function ModerationProfilesWithFilters({ data = [] }: Props) {
+export default function ModerationProfilesWithFilters({
+  profiles = [],
+}: Props) {
   const {
     publishingStateFilter,
     setPendingStateCounter,
@@ -22,36 +24,32 @@ export default function ModerationProfilesWithFilters({ data = [] }: Props) {
     setActiveTab,
   } = useModerationFilter()
 
-  const filteredData = data.filter((user: ProfileModel) => {
+  const filteredProfiles = profiles.filter((profile: ProfileModel) => {
     if (searchEmailValue !== '') {
-      return user.userEmail.includes(searchEmailValue)
+      return profile.userEmail.includes(searchEmailValue)
     }
-    return user?.state === publishingStateFilter
+    return profile.state === publishingStateFilter
   })
 
-  setPendingStateCounter &&
-    useTabCounter(data, PublishingState.PENDING, setPendingStateCounter)
+  useTabCounter(profiles, PublishingState.PENDING, setPendingStateCounter)
 
   const clearHandler = () => {
-    setEmailSearchValue && setEmailSearchValue('')
-    setActiveTab && setActiveTab(PublishingState.PENDING)
+    setEmailSearchValue('')
+    setActiveTab(PublishingState.PENDING)
   }
 
   return (
     <div className={styles.moderationProfiles}>
       <SearchResultsInfo
         searchEmailValue={searchEmailValue}
-        filteredData={filteredData}
+        profiles={filteredProfiles}
         clearHandler={clearHandler}
       />
 
       <div className={styles.profileListCont}>
-        {filteredData.map(
-          (profile) =>
-            profile && (
-              <ModerationProfileListItem key={profile.id} data={profile} />
-            ),
-        )}
+        {filteredProfiles.map((profile) => (
+          <ModerationProfileListItem key={profile.id} profile={profile} />
+        ))}
       </div>
     </div>
   )
