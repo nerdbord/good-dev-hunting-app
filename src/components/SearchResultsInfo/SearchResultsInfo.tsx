@@ -1,49 +1,48 @@
 ﻿import { Button } from '../Button/Button'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+import { PublishingState } from '@prisma/client'
 
 import styles from './SearchResultsInfo.module.scss'
 
 interface SearchResultsInfoProps {
-  searchEmailValue: string
-  profiles: ProfileModel[]
-  clearHandler: () => void
+  text: string
+  resultsQty?: number
+  hasResults?: boolean
 }
 
 export const SearchResultsInfo = ({
-  searchEmailValue,
-  profiles,
-  clearHandler,
+  text,
+  resultsQty = 0,
+  hasResults,
 }: SearchResultsInfoProps) => {
-  const isSearchActive = searchEmailValue !== ''
+  const { searchEmailValue, setEmailSearchValue, setActiveTab } =
+    useModerationFilter()
+
+  const clearHandler = () => {
+    setEmailSearchValue(null)
+    setActiveTab(PublishingState.PENDING)
+  }
 
   return (
     <>
-      {isSearchActive &&
-        (profiles.length > 0 ? (
-          <div className={styles.searchInfoCont}>
-            <p className={styles.searchInfo}>
-              Search results for{' '}
-              <span className={styles.searchValue}>
-                "{searchEmailValue}" ({profiles.length})
-              </span>
-            </p>
-            <Button variant="action" onClick={clearHandler}>
-              Clear search
-            </Button>
-          </div>
-        ) : (
-          <div className={styles.searchEmptyInfoCont}>
-            <p className={styles.searchInfo}>
-              No search results for{' '}
-              <span className={styles.searchValue}>
-                "{searchEmailValue}" ({profiles.length})
-              </span>
-            </p>
-            <Button variant="primary" onClick={clearHandler}>
-              Clear search
-            </Button>
-          </div>
-        ))}
+      <div
+        className={
+          hasResults ? styles.searchInfoCont : styles.searchEmptyInfoCont
+        }
+      >
+        <p className={styles.searchInfo}>
+          {text}{' '}
+          <span className={styles.searchValue}>
+            "{searchEmailValue}" ({resultsQty})
+          </span>
+        </p>
+        <Button
+          variant={hasResults ? 'action' : 'primary'}
+          onClick={clearHandler}
+        >
+          Clear search
+        </Button>
+      </div>
     </>
   )
 }
