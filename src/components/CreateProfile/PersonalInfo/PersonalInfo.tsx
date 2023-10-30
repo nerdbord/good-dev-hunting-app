@@ -7,7 +7,7 @@ import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { useSession } from 'next-auth/react'
-import UserPhotoUploader from '@/components/UserPhotoUploader/UserPhotoUploader'
+import { UserPhotoUploader } from '@/components/UserPhotoUploader/UserPhotoUploader'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
 
