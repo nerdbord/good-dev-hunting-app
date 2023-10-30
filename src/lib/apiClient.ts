@@ -44,27 +44,25 @@ export const apiClient = {
     return updatedProfile
   },
   userPhotoUpload: async (file: File) => {
-    const { url } = await httpClient.postPhoto<PutBlobResult>(
-      '/api/files',
-      file,
-    )
-    return url
+    console.log('API call to upload user photo...');
+    const { url } = await httpClient.postPhoto<PutBlobResult>('/api/files', file);
+    console.log('API response for photo upload:', url);
+    return url;
   },
   updateUserAvatar: async (avatarUrl: string) => {
-    const userAvatar = await httpClient.put<{ avatarUrl: string }, any>(
-      '/api/user/avatar',
-      { avatarUrl },
-    )
-    return userAvatar
+    console.log('API call to update user avatar...');
+    const userAvatar = await httpClient.put<{ avatarUrl: string }, any>('/api/user/avatar', { avatarUrl });
+    console.log('API response for updating avatar:', userAvatar);
+    return userAvatar;
   },
   getUserAvatar: async () => {
     try {
-      const { avatarUrl } = await httpClient.get<{ avatarUrl: string }>(
-        '/api/user/avatar',
-      )
-      return avatarUrl
+      console.log('API call to get user avatar...');
+      const { avatarUrl } = await httpClient.get<{ avatarUrl: string }>('/api/user/avatar');
+      console.log('API response for user avatar:', avatarUrl);
+      return avatarUrl;
     } catch (error) {
-      console.error(error)
+      console.error('API error while getting user avatar:', error);
     }
   },
 }

@@ -8,7 +8,8 @@ import { apiClient } from '@/lib/apiClient'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
-
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { revalidatePath } from 'next/cache'
 interface UserPhotoUploaderProps {
   profile: ProfileModel | null
 }
@@ -19,8 +20,11 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const [userImage, setUserImage] = useState(
     profile?.avatarUrl || session?.user.image,
   )
-  const { triggerUpload, setTriggerUpload } = useUploadContext()
+  const { triggerUpload, setTriggerUpload, setUploadSuccess } =
+    useUploadContext()
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
+  const fileInputRef = React.useRef<HTMLInputElement>(null)
+  const { runAsync, loading } = useAsyncAction()
 
   useEffect(() => {
     if (triggerUpload) {
@@ -31,10 +35,12 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
 
   const fetchUserAvatar = async () => {
     try {
-      const avatarUrl = await apiClient.getUserAvatar()
-      setUserImage(avatarUrl)
+      console.log('Fetching user avatar...');
+      const avatarUrl = await apiClient.getUserAvatar();
+      console.log('Fetched user avatar:', avatarUrl);
+      setUserImage(avatarUrl);
     } catch (error) {
-      console.error('Failed to fetch user avatar:', error)
+      console.error('Failed to fetch user avatar:', error);
     }
   }
 
@@ -52,38 +58,52 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
       }
       reader.readAsDataURL(file)
     }
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
   }
 
   const importFromGithub = async () => {
-    await apiClient.updateUserAvatar(
-      `http://github.com/${profile?.githubUsername}.png`,
-    )
-    setUserImage(`http://github.com/${profile?.githubUsername}.png`)
+    await runAsync(async () => {
+      await apiClient.updateUserAvatar(
+        `http://github.com/${profile?.githubUsername}.png`,
+      )
+      setUserImage(`http://github.com/${profile?.githubUsername}.png`)
+      setUploadSuccess(true)
+    }).catch(() => {
+      setShowErrorMessage(true)
+      setUploadSuccess(false)
+    })
   }
 
   const handleUpload = async () => {
     if (selectedFile) {
+      console.log('Uploading selected file...');
       try {
-        const url = await apiClient.userPhotoUpload(selectedFile)
-        setUserImage(url)
-        await apiClient.updateUserAvatar(url)
+        const url = await apiClient.userPhotoUpload(selectedFile);
+        console.log('Uploaded file URL:', url);
+        setUserImage(url);
+        await apiClient.updateUserAvatar(url);
         fetchUserAvatar()
-        setShowErrorMessage(false)
+        setUploadSuccess(true);
       } catch (error) {
-        console.log('error', error)
-        setShowErrorMessage(true)
+        console.log('Error during file upload:', error);
+        setShowErrorMessage(true);
+        setUploadSuccess(false);
       }
     }
-  }
+}
 
   return (
     <div className={styles.container}>
       <p className={styles.containerLabel}>Picture</p>
       <div className={styles.errorMessageWrapper}>
-        <div className={showErrorMessage ? styles.errorMessage : styles.hidden}>
-          <ErrorIcon />
-          Picture failed to upload. Try again
-        </div>
+        {showErrorMessage && (
+          <div className={styles.errorMessage}>
+            <ErrorIcon />
+            Picture failed to upload. Try again
+          </div>
+        )}
         <div className={styles.contentWrapper}>
           <Image
             className={styles.picture}
@@ -96,17 +116,23 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
             <Button variant="secondary">
               <label htmlFor="file-input">
                 <input
+                  ref={fileInputRef}
                   id="file-input"
                   type="file"
                   className={styles.hidden}
                   onChange={handleFileChange}
                   multiple={false}
+                  accept="image/*"
                 />
                 Change picture
               </label>
             </Button>
-            <Button variant="secondary" onClick={importFromGithub}>
-              Import from Github
+            <Button
+              variant="secondary"
+              onClick={importFromGithub}
+              disabled={loading}
+            >
+              {loading ? 'Importing...' : 'Import from Github'}
             </Button>
           </div>
         </div>
@@ -114,5 +140,3 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
     </div>
   )
 }
-
-export default UserPhotoUploader

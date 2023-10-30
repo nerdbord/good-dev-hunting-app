@@ -10,16 +10,18 @@ import { useUploadContext } from '@/contexts/UploadContext'
 
 const CreateProfileTopBar = () => {
   const router = useRouter()
-  const { handleSubmit, errors, isSubmitting } = useFormikContext()
+  const { handleSubmit, errors } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
-  const { setTriggerUpload} = useUploadContext()
+  const { setTriggerUpload, uploadSuccess } = useUploadContext()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     runAsync(async () => {
       event.preventDefault()
       handleSubmit()
       setTriggerUpload(true)
-      router.push(AppRoutes.myProfile)
+      // if (uploadSuccess) {
+        router.push(AppRoutes.myProfile)
+      // }
     })
   }
 
