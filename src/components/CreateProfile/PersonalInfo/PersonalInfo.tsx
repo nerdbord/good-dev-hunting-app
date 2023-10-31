@@ -14,6 +14,8 @@ const PersonalInfo = () => {
 
   const { data: session } = useSession()
 
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -32,6 +34,7 @@ const PersonalInfo = () => {
             name="fullName"
           />
         </InputFormError>
+        <div className={styles.emailContainer}>
         <InputFormError error={errors.contactEmail}>
           <TextInput
             label="Contact email"
@@ -41,8 +44,16 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             name="contactEmail"
             disabled={true}
+            onMouseOver={() => setShowTooltip(true)}
+            onMouseOut={() => setShowTooltip(false)}
           />
         </InputFormError>
+        {showTooltip && (
+          <div className={styles.tooltip}>
+           Email is connected to your Github profile and cannot be changed
+                </div>
+              )}
+        </div>
         <TextInput
           label="LinkedIn"
           placeholder="Paste link to you linkedin profile"
@@ -51,6 +62,7 @@ const PersonalInfo = () => {
           name="linkedin"
         />
         <InputFormError error={errors.bio}>
+        <div className={styles.lettersCountParent}>
           <TextArea
             label="Bio"
             placeholder="Introduce yourself with few sentences"
@@ -59,11 +71,12 @@ const PersonalInfo = () => {
             onChange={handleChange}
             name="bio"
             maxLength={1500}
-          />
-        </InputFormError>
-        <div className={styles.lettersCount}>
-          {values.bio.length} / 1500 characters
+          />{' '}
+          <div className={styles.lettersCount}>
+            {values.bio.length} / 1500 characters
+          </div>
         </div>
+        </InputFormError>
       </div>
     </div>
   )
