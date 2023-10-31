@@ -26,3 +26,11 @@ export interface ProfileModel {
 
 export type CreateProfilePayload = Omit<ProfileModel, 'id'>
 export type EditProfilePayload = CreateProfilePayload
+
+export type PublishingStateData = {
+  state: PublishingState
+}
+
+export type RejectionReason = {
+  reason: string
+}

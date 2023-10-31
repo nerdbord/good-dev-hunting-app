@@ -1,6 +1,4 @@
 'use client'
-import classNames from 'classnames/bind'
-import styles from '@/components/ProfileList/ProfileList.module.scss'
 import React from 'react'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
@@ -14,23 +12,24 @@ import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
+import { apiClient } from '@/lib/apiClient'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+
+import classNames from 'classnames/bind'
+import styles from '@/components/ProfileList/ProfileList.module.scss'
+import { useModal } from '@/contexts/ModalContext'
 
 const cx = classNames.bind(styles)
-
-const setNewState = (profileId: string, state: PublishingState): void => {
-  console.log('set new state')
-}
 
 type StateStatusProps = {
   profileId: string
   state: string
 }
 
-const StateStatus: React.FC<StateStatusProps> = ({
-  profileId,
-  state,
-}: StateStatusProps) => {
+function StateStatus({ profileId, state }: StateStatusProps) {
   const { setToast } = useToast()
+  const { setProfileId, setShowRejectModal } = useModal()
+  const { runAsync } = useAsyncAction()
   if (!(state in PublishingState)) return <></>
   if (state === PublishingState.PENDING) {
     return (
@@ -38,11 +37,15 @@ const StateStatus: React.FC<StateStatusProps> = ({
         <Button
           variant="action"
           onClick={() => {
-            setNewState(profileId, PublishingState.APPROVED)
-            setToast(
-              ToastStatus.SUCCESS,
-              'Profile accepted and will be visible on the main page within 24h',
-            )
+            runAsync(async () => {
+              await apiClient.updateProfileState(profileId, {
+                state: PublishingState.APPROVED,
+              })
+              setToast(
+                ToastStatus.SUCCESS,
+                'Profile accepted and will be visible on the main page within 24h',
+              )
+            })
           }}
         >
           Accept
@@ -51,11 +54,8 @@ const StateStatus: React.FC<StateStatusProps> = ({
         <Button
           variant="action"
           onClick={() => {
-            setNewState(profileId, PublishingState.REJECTED)
-            setToast(
-              ToastStatus.INVALID,
-              'Profile rejected and will not be visible on the main page',
-            )
+            setProfileId(profileId)
+            setShowRejectModal(true)
           }}
         >
           Reject
