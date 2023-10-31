@@ -13,6 +13,8 @@ interface TextInputProps {
   error?: string
   disabled?: boolean
   excludeDigits?: boolean;
+  onMouseOver?: () => void;
+  onMouseOut?: () => void;
 }
 
 
@@ -25,6 +27,8 @@ const TextInput: React.FC<TextInputProps> = ({
   name,
   disabled,
   excludeDigits,
+  onMouseOver,
+  onMouseOut,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +53,8 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange={handleChange}
         name={name}
         disabled={disabled}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
       />
     </div>
   )
