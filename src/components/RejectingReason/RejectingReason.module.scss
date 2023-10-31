@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+  width: 389px;
+  height: 212px;
+  > h4 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+  }
+}
+
+.reasonText {
+  width: 100%;
+  border: none;
+  border-radius: 2px;
+  padding: 30px;
+  background-color: #171b21;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: #e2eaf1;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+
+.reasonText::placeholder {
+  color: #ffffff;
+}
+
+.reasonText:focus::placeholder {
+  color: transparent;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: inherit;
+  height: 44px;
+  font-size: 14px;
+  > * {
+    flex-shrink: 0;
+    flex-grow: 1;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

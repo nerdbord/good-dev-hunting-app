@@ -1,6 +1,8 @@
 import {
   CreateProfilePayload,
   ProfileModel,
+  PublishingStateData,
+  RejectionReason,
 } from '@/data/frontend/profile/types'
 import { httpClient } from '@/lib/httpClient'
 
@@ -40,5 +42,34 @@ export const apiClient = {
     >('/api/profiles/me', payload)
 
     return updatedProfile
+  },
+  updateProfileState: async (
+    profileId: string,
+    payload: PublishingStateData,
+  ) => {
+    try {
+      const updatedProfileState = await httpClient.patch<
+        PublishingStateData,
+        ProfileModel
+      >(`${API_URL}/profiles/${profileId}/state`, payload)
+
+      return updatedProfileState
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  createRejectionReason: async (
+    profileId: string,
+    payload: RejectionReason,
+  ) => {
+    try {
+      const savedRejectingReason = await httpClient.post<
+        RejectionReason,
+        RejectionReason
+      >(`${API_URL}/profiles/${profileId}/reject`, payload)
+      return savedRejectingReason
+    } catch (error) {
+      console.log(error)
+    }
   },
 }
