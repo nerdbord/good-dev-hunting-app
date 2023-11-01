@@ -13,9 +13,7 @@ const PersonalInfo = () => {
     useFormikContext<CreateProfileFormValues>()
 
   const { data: session } = useSession()
-
-  const [showTooltip, setShowTooltip] = React.useState(false);
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -44,15 +42,11 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             name="contactEmail"
             disabled={true}
-            onMouseOver={() => setShowTooltip(true)}
-            onMouseOut={() => setShowTooltip(false)}
           />
         </InputFormError>
-        {showTooltip && (
           <div className={styles.tooltip}>
            Email is connected to your Github profile and cannot be changed
-                </div>
-              )}
+           </div>
         </div>
         <TextInput
           label="LinkedIn"
