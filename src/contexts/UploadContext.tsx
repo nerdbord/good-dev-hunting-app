@@ -13,7 +13,14 @@ export const UploadProvider = ({ children }: PropsWithChildren) => {
   const [uploadSuccess, setUploadSuccess] = useState(false)
 
   return (
-    <UploadContext.Provider value={{ triggerUpload, setTriggerUpload, uploadSuccess, setUploadSuccess }}>
+    <UploadContext.Provider
+      value={{
+        triggerUpload,
+        setTriggerUpload,
+        uploadSuccess,
+        setUploadSuccess,
+      }}
+    >
       {children}
     </UploadContext.Provider>
   )

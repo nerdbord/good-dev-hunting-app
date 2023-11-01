@@ -28,8 +28,8 @@ const ProfileMain = async () => {
     redirect(AppRoutes.home)
   }
 
-  const githubUsername = user.githubDetails?.username;
-  const avatarUrl = await user.avatarUrl || ''
+  const githubUsername = user.githubDetails?.username
+  const avatarUrl = (await user.avatarUrl) || ''
 
   return (
     <>

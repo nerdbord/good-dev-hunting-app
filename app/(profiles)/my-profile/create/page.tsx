@@ -27,16 +27,16 @@ const CreateProfilePage = async () => {
 
   return (
     <UploadProvider>
-    <CreateProfileFormWrapper>
-      <div className={styles.wrapper}>
-        <CreateProfileTopBar />
-        <div className={styles.formBox}>
-          <PersonalInfo profile={profile} />
-          <LocationPreferences />
-          <WorkInformation />
+      <CreateProfileFormWrapper>
+        <div className={styles.wrapper}>
+          <CreateProfileTopBar />
+          <div className={styles.formBox}>
+            <PersonalInfo profile={profile} />
+            <LocationPreferences />
+            <WorkInformation />
+          </div>
         </div>
-      </div>
-    </CreateProfileFormWrapper>
+      </CreateProfileFormWrapper>
     </UploadProvider>
   )
 }

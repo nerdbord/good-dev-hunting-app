@@ -57,12 +57,12 @@ export const httpClient = {
           'Content-Type': file.type || 'application/octet-stream',
         },
         body: file,
-      });
-  
-      return handleResponse<ResponseData>(response);
+      })
+
+      return handleResponse<ResponseData>(response)
     } catch (error) {
-      console.error(error);
-      return Promise.reject(error);
+      console.error(error)
+      return Promise.reject(error)
     }
   },
 }
