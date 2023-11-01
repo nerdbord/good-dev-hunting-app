@@ -10,11 +10,10 @@ import { useSession } from 'next-auth/react'
 import { UserPhotoUploader } from '@/components/UserPhotoUploader/UserPhotoUploader'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
-
 interface PersonalInfoProps {
   profile: ProfileModel | null
 }
-const PersonalInfo = ({profile}: PersonalInfoProps) => {
+const PersonalInfo = ({ profile }: PersonalInfoProps) => {
   const { values, handleChange, errors } =
     useFormikContext<CreateProfileFormValues>()
 

@@ -10,6 +10,9 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { revalidatePath } from 'next/cache'
+import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
+
+import { importAvatarFromGithub } from '@/actions/user/importAvatarFromGithub'
 interface UserPhotoUploaderProps {
   profile: ProfileModel | null
 }
@@ -33,19 +36,19 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
     }
   }, [triggerUpload])
 
-  const fetchUserAvatar = async () => {
+  const initializeAvatar = async () => {
     try {
-      console.log('Fetching user avatar...');
-      const avatarUrl = await apiClient.getUserAvatar();
-      console.log('Fetched user avatar:', avatarUrl);
-      setUserImage(avatarUrl);
+      console.log('Fetching user avatar...')
+      const avatarUrl = await fetchUserAvatar()
+      console.log('Fetched user avatar:', avatarUrl)
+      setUserImage(avatarUrl || session?.user.image)
     } catch (error) {
-      console.error('Failed to fetch user avatar:', error);
+      console.error('Failed to fetch user avatar:', error)
     }
   }
 
   useEffect(() => {
-    fetchUserAvatar()
+    initializeAvatar()
   }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,10 +68,17 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
 
   const importFromGithub = async () => {
     await runAsync(async () => {
-      await apiClient.updateUserAvatar(
-        `http://github.com/${profile?.githubUsername}.png`,
-      )
-      setUserImage(`http://github.com/${profile?.githubUsername}.png`)
+      const avatarUrl = await importAvatarFromGithub()
+
+      console.log('Imported avatar from Github:', avatarUrl)
+
+      if (!avatarUrl) {
+        setShowErrorMessage(true)
+        setUploadSuccess(false)
+        return
+      }
+
+      setUserImage(avatarUrl)
       setUploadSuccess(true)
     }).catch(() => {
       setShowErrorMessage(true)
@@ -78,21 +88,21 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
 
   const handleUpload = async () => {
     if (selectedFile) {
-      console.log('Uploading selected file...');
+      console.log('Uploading selected file...')
       try {
-        const url = await apiClient.userPhotoUpload(selectedFile);
-        console.log('Uploaded file URL:', url);
-        setUserImage(url);
-        await apiClient.updateUserAvatar(url);
-        fetchUserAvatar()
-        setUploadSuccess(true);
+        const url = await apiClient.userPhotoUpload(selectedFile)
+        console.log('Uploaded file URL:', url)
+        setUserImage(url)
+        await apiClient.updateUserAvatar(url)
+        await fetchUserAvatar()
+        setUploadSuccess(true)
       } catch (error) {
-        console.log('Error during file upload:', error);
-        setShowErrorMessage(true);
-        setUploadSuccess(false);
+        console.log('Error during file upload:', error)
+        setShowErrorMessage(true)
+        setUploadSuccess(false)
       }
     }
-}
+  }
 
   return (
     <div className={styles.container}>

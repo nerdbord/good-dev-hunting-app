@@ -20,7 +20,7 @@ const CreateProfileTopBar = () => {
       handleSubmit()
       setTriggerUpload(true)
       // if (uploadSuccess) {
-        router.push(AppRoutes.myProfile)
+      router.push(AppRoutes.myProfile)
       // }
     })
   }
