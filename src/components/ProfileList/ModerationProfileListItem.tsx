@@ -47,15 +47,15 @@ const stateStatus = (state: string): React.ReactNode => {
   )
 }
 
-export const ModerationProfileListItem: React.FC<{ data: ProfileModel }> = ({
-  data,
+export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
+  profile,
 }) => {
   const router = useRouter()
 
   const commonClasses = {
-    [styles.frontend]: data.position === JobSpecialization.Frontend,
-    [styles.backend]: data.position === JobSpecialization.Backend,
-    [styles.fullstack]: data.position === JobSpecialization.Fullstack,
+    [styles.frontend]: profile.position === JobSpecialization.Frontend,
+    [styles.backend]: profile.position === JobSpecialization.Backend,
+    [styles.fullstack]: profile.position === JobSpecialization.Fullstack,
   }
 
   const getStackClasses = cx(commonClasses)
@@ -68,25 +68,29 @@ export const ModerationProfileListItem: React.FC<{ data: ProfileModel }> = ({
     <div className={`${styles.frame} ${styles.moderationFrame}`}>
       <div
         className={styles.container}
-        onClick={() => router.push(`${AppRoutes.userProfile}/${data.userId}`)}
+        onClick={() =>
+          router.push(`${AppRoutes.userProfile}/${profile.userId}`)
+        }
       >
         <div className={styles.profile}>
           <img src={ProfilePicture.src} alt="Profile Picture" />
         </div>
         <div className={styles.data}>
-          <p className={styles.name}>{data.fullName}</p>
+          <p className={styles.name}>{profile.fullName}</p>
           <p className={getStackClasses}>
-            {data.seniority} {data.position} Developer
+            {profile.seniority} {profile.position} Developer
           </p>
           <p className={styles.location}>
-            {data.country.name}, {data.city.name} /{' '}
-            {data.remoteOnly && 'Remote'}
+            {profile.country.name}, {profile.city.name} /{' '}
+            {profile.remoteOnly && 'Remote'}
           </p>
         </div>
       </div>
-      <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
+      <TechnologiesRenderer data={profile} classes={getTechnologyClasses} />
       <div className={styles.detailsWrapper}>
-        <div className={styles.detailsContent}>{stateStatus(data.state)}</div>
+        <div className={styles.detailsContent}>
+          {stateStatus(profile.state)}
+        </div>
       </div>
     </div>
   )
