@@ -18,7 +18,7 @@ const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400'] })
 export default function RejectingReason() {
   const { profileId, showRejectModal, setShowRejectModal } = useModal()
   const [reasonText, setReasonText] = useState('')
-  const { setToast } = useToast()
+  const { addToast } = useToast()
   const { runAsync } = useAsyncAction()
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -34,9 +34,9 @@ export default function RejectingReason() {
       await apiClient.createRejectionReason(profileId, {
         reason: reasonText,
       })
-      setToast(
-        ToastStatus.INVALID,
+      addToast(
         'Profile rejected and will not be visible on the main page',
+        ToastStatus.INVALID,
       )
     })
     setShowRejectModal(false)
