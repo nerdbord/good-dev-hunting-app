@@ -14,7 +14,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
-  transition: background-color 300ms; 
+  transition: background-color 300ms;
   @include mobile {
     width: 100%;
     padding: 12px 0;
@@ -50,7 +50,7 @@
 
 .buttonTertiary {
   display: none;
-  transition: background-color 300ms; 
+  transition: background-color 300ms;
   @include mobile {
     display: block;
     position: static;
@@ -71,7 +71,7 @@
 
 .buttonAction {
   display: flex;
-  width: 129px;
+  min-width: 129px;
   height: 44px;
   padding: 12px 24px;
   justify-content: center;
@@ -88,4 +88,3 @@
   font-weight: 500;
   line-height: 20px;
 }
-

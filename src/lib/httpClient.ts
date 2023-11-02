@@ -49,6 +49,23 @@ export const httpClient = {
       return Promise.reject(error)
     }
   },
+
+  patch: async <Payload, ResponseData>(url: string, payload?: Payload) => {
+    try {
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      return handleResponse<ResponseData>(response)
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(error)
+    }
+  },
 }
 
 async function handleResponse<ResponseData>(response: Response) {
