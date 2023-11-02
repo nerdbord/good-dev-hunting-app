@@ -8,7 +8,7 @@ export default function Portal({
   children,
   selector,
 }: PropsWithChildren<PortalProps>) {
-  const ref = useRef<Element | null>(null)
+  const ref = useRef<HTMLElement | null>(null)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
