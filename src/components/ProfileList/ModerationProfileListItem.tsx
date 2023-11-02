@@ -18,6 +18,7 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { useModal } from '@/contexts/ModalContext'
+import RejectingReason from '../RejectingReason/RejectingReason'
 
 const cx = classNames.bind(styles)
 
@@ -28,7 +29,7 @@ type StateStatusProps = {
 function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
   const { addToast } = useToast()
-  const { setProfileId, setShowRejectModal } = useModal()
+  const { showModal } = useModal()
   const { runAsync } = useAsyncAction()
   if (!(state in PublishingState)) return <></>
   if (state === PublishingState.PENDING) {
@@ -54,8 +55,7 @@ function StateStatus({ profile }: StateStatusProps) {
         <Button
           variant="action"
           onClick={() => {
-            setProfileId(id)
-            setShowRejectModal(true)
+            showModal(true)
           }}
         >
           Reject
@@ -124,6 +124,7 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
           <StateStatus profile={profile} />
         </div>
       </div>
+      <RejectingReason profileId={profile.id} />
     </div>
   )
 }

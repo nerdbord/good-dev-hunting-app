@@ -15,8 +15,8 @@ import { ToastStatus, useToast } from '@/contexts/ToastContext'
 const inter = Inter({ subsets: ['latin'], weight: '500' })
 const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400'] })
 
-export default function RejectingReason() {
-  const { profileId, showRejectModal, setShowRejectModal } = useModal()
+export default function RejectingReason({ profileId }: { profileId: string }) {
+  const { isModalVisible, showModal } = useModal()
   const [reasonText, setReasonText] = useState('')
   const { addToast } = useToast()
   const { runAsync } = useAsyncAction()
@@ -39,10 +39,10 @@ export default function RejectingReason() {
         ToastStatus.INVALID,
       )
     })
-    setShowRejectModal(false)
+    showModal(false)
   }
 
-  if (!showRejectModal) return <></>
+  if (!isModalVisible) return null
   return (
     <Modal>
       <div className={styles.container}>
@@ -56,7 +56,7 @@ export default function RejectingReason() {
           <Button variant={'primary'} onClick={handleReject}>
             Send and reject
           </Button>
-          <Button variant={'action'} onClick={() => setShowRejectModal(false)}>
+          <Button variant={'action'} onClick={() => showModal(false)}>
             Don't send and cancel
           </Button>
         </div>

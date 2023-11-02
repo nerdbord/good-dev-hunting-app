@@ -3,25 +3,20 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react'
 
 export type ModalContextType = {
-  profileId: string
-  setProfileId: (id: string) => void
-  showRejectModal: boolean
-  setShowRejectModal: (state: boolean) => void
+  isModalVisible: boolean
+  showModal: (state: boolean) => void
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined)
 
 export function ModalProvider({ children }: PropsWithChildren) {
-  const [showRejectModal, setShowRejectModal] = useState(false)
-  const [profileId, setProfileId] = useState('')
+  const [isModalVisible, showModal] = useState(false)
 
   return (
     <ModalContext.Provider
       value={{
-        profileId,
-        setProfileId,
-        showRejectModal,
-        setShowRejectModal,
+        isModalVisible,
+        showModal,
       }}
     >
       {children}
