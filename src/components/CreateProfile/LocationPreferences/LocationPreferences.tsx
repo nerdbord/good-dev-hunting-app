@@ -30,6 +30,7 @@ const LocationPreferences = () => {
               value={values.country}
               onChange={handleChange}
               name="country"
+              excludeDigits
             />
           </InputFormError>
           <CheckboxInput
@@ -49,6 +50,7 @@ const LocationPreferences = () => {
               onChange={handleChange}
               addImportantIcon={true}
               name="city"
+              excludeDigits
             />
           </InputFormError>
           <CheckboxInput

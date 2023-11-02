@@ -11,3 +11,8 @@
   line-height: 16px;
   color: #d62626;
 }
+
+.errorMsg input::placeholder,
+.errorMsg textarea::placeholder {
+  color: rgba(226, 234, 241, 1);
+}

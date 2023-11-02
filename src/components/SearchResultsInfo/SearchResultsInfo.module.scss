@@ -1,0 +1,27 @@
+﻿.searchInfoCont {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.searchEmptyInfoCont {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.searchInfo {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  color: #69717b;
+}
+
+.searchValue {
+  color: #fff;
+}
