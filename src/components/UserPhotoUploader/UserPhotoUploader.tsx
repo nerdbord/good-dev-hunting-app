@@ -9,10 +9,10 @@ import { ProfileModel } from '@/data/frontend/profile/types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { revalidatePath } from 'next/cache'
 import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
-
 import { importAvatarFromGithub } from '@/actions/user/importAvatarFromGithub'
+import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
+
 interface UserPhotoUploaderProps {
   profile: ProfileModel | null
 }
@@ -77,7 +77,6 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
         setUploadSuccess(false)
         return
       }
-
       setUserImage(avatarUrl)
       setUploadSuccess(true)
     }).catch(() => {
@@ -93,7 +92,7 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
         const url = await apiClient.userPhotoUpload(selectedFile)
         console.log('Uploaded file URL:', url)
         setUserImage(url)
-        await apiClient.updateUserAvatar(url)
+        await serverUpdateUserAvatar(url)
         await fetchUserAvatar()
         setUploadSuccess(true)
       } catch (error) {
