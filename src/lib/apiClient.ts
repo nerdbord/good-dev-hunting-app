@@ -52,25 +52,4 @@ export const apiClient = {
     console.log('API response for photo upload:', url)
     return url
   },
-  updateUserAvatar: async (avatarUrl: string) => {
-    console.log('API call to update user avatar...')
-    const userAvatar = await httpClient.put<{ avatarUrl: string }, any>(
-      '/api/user/avatar',
-      { avatarUrl },
-    )
-    console.log('API response for updating avatar:', userAvatar)
-    return userAvatar
-  },
-  getUserAvatar: async () => {
-    try {
-      console.log('API call to get user avatar...')
-      const data = await httpClient.get<{ avatarUrl: string }>(
-        '/api/user/avatar',
-      )
-      console.log('API response for user avatar:', data)
-      return data
-    } catch (error) {
-      console.error('API error while getting user avatar:', error)
-    }
-  },
 }
