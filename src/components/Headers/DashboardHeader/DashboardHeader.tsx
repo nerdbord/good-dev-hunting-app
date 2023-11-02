@@ -15,7 +15,6 @@ import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
 
 import styles from './DashboardHeader.module.scss'
-import Toast from '@/components/Toast/Toast'
 
 const DashboardHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -32,7 +31,6 @@ const DashboardHeader = async () => {
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
-          <Toast />
           <div className={styles.frameButtons}>
             <Button variant="secondary">Moderation</Button>
             {user.profile ? <MyProfileBtn /> : <CreateProfileBtn />}

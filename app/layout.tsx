@@ -20,6 +20,7 @@ export default function RootLayout({
       <body className={ibm.className}>
         <AuthProvider>{children}</AuthProvider>
         <div id="portal" />
+        <div id="toasts" />
       </body>
     </html>
   )
