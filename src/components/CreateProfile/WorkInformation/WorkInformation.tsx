@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import styles from './WorkInformations.module.scss'
 import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/components/TextArea/TextArea'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -8,6 +7,12 @@ import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
+
+import styles from './WorkInformations.module.scss'
+import { Inter } from 'next/font/google'
+import combineClasses from '@/utils/combineClasses'
+
+const inter = Inter({ subsets: ['latin'], weight: '500' })
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -65,7 +70,7 @@ const WorkInformation = () => {
               excludeDigits
             />
           </InputFormError>
-          <div className={styles.addInfo}>
+          <div className={combineClasses([styles.addInfo, inter.className])}>
             Start typing and separate technologies with commas.
             <br />
             Choose max. 8

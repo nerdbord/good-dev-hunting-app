@@ -12,9 +12,8 @@ interface TextInputProps {
   name: string
   error?: string
   disabled?: boolean
-  excludeDigits?: boolean;
+  excludeDigits?: boolean
 }
-
 
 const TextInput: React.FC<TextInputProps> = ({
   placeholder,
@@ -26,13 +25,13 @@ const TextInput: React.FC<TextInputProps> = ({
   disabled,
   excludeDigits,
 }) => {
-  const [isTyped, setIsTyped] = React.useState(false);
+  const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (excludeDigits) {
-      event.target.value = event.target.value.replace(/[0-9]/g, '');
+      event.target.value = event.target.value.replace(/[0-9]/g, '')
     }
-    setIsTyped(event.target.value.length > 0);
-    onChange(event);
+    setIsTyped(event.target.value.length > 0)
+    onChange(event)
   }
 
   return (
