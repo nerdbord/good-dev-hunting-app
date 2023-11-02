@@ -27,7 +27,7 @@ type StateStatusProps = {
 }
 
 function StateStatus({ profileId, state }: StateStatusProps) {
-  const { setToast } = useToast()
+  const { addToast } = useToast()
   const { setProfileId, setShowRejectModal } = useModal()
   const { runAsync } = useAsyncAction()
   if (!(state in PublishingState)) return <></>
@@ -41,9 +41,9 @@ function StateStatus({ profileId, state }: StateStatusProps) {
               await apiClient.updateProfileState(profileId, {
                 state: PublishingState.APPROVED,
               })
-              setToast(
-                ToastStatus.SUCCESS,
+              addToast(
                 'Profile accepted and will be visible on the main page within 24h',
+                ToastStatus.SUCCESS,
               )
             })
           }}
