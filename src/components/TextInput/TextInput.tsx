@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import styles from './TextInput.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 
@@ -12,6 +12,7 @@ interface TextInputProps {
   name: string
   error?: string
   disabled?: boolean
+  excludeDigits?: boolean
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -22,8 +23,14 @@ const TextInput: React.FC<TextInputProps> = ({
   addImportantIcon,
   name,
   disabled,
+  excludeDigits,
 }) => {
+  const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (excludeDigits) {
+      event.target.value = event.target.value.replace(/[0-9]/g, '')
+    }
+    setIsTyped(event.target.value.length > 0)
     onChange(event)
   }
 
@@ -34,7 +41,7 @@ const TextInput: React.FC<TextInputProps> = ({
         {addImportantIcon && <ImportantIcon />}
       </label>
       <input
-        className={styles.formInput}
+        className={`${styles.formInput} ${isTyped ? styles.typed : ''}`}
         type="text"
         value={value}
         placeholder={placeholder}

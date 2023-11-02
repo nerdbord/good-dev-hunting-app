@@ -67,6 +67,7 @@ const WorkInformation = () => {
               addImportantIcon={true}
               onChange={handleChange}
               name="techStack"
+              excludeDigits
             />
           </InputFormError>
           <div className={combineClasses([styles.addInfo, inter.className])}>

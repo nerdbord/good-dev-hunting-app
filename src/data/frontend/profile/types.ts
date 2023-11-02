@@ -22,9 +22,10 @@ export interface ProfileModel {
   employmentType: EmploymentType
   githubUsername: string | null
   state: PublishingState
+  userEmail: string
 }
 
-export type CreateProfilePayload = Omit<ProfileModel, 'id'>
+export type CreateProfilePayload = Omit<ProfileModel, 'id' | 'userEmail'>
 export type EditProfilePayload = CreateProfilePayload
 
 export type PublishingStateData = {
