@@ -16,5 +16,9 @@ export default function Portal({
     setMounted(true)
   }, [selector])
 
-  return mounted && ref.current ? createPortal(children, ref.current) : null
+  return mounted && ref.current ? (
+    createPortal(<>{children}</>, ref.current)
+  ) : (
+    <></>
+  )
 }
