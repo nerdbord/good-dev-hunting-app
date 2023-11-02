@@ -11,13 +11,11 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <ToastContextProvider>
-      <ModalProvider>
-        <RejectingReason />
-        {/* @ts-expect-error Server Component */}
-        <DashboardHeader />
-        <Container>{children}</Container>
-      </ModalProvider>
-    </ToastContextProvider>
+    <>
+      <RejectingReason />
+      {/* @ts-expect-error Server Component */}
+      <DashboardHeader />
+      <Container>{children}</Container>
+    </>
   )
 }
