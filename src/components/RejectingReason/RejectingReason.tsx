@@ -10,12 +10,19 @@ import { PublishingState } from '@prisma/client'
 
 import { Inter, IBM_Plex_Sans } from 'next/font/google'
 import styles from './RejectingReason.module.scss'
+import modalStyles from '@/components/Modal/Modal.module.scss'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 
 const inter = Inter({ subsets: ['latin'], weight: '500' })
 const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ['400'] })
 
-export default function RejectingReason({ profileId }: { profileId: string }) {
+export default function RejectingReason({
+  profileId,
+  showRejectModal,
+}: {
+  profileId: string
+  showRejectModal?: (state: boolean) => void
+}) {
   const { isModalVisible, showModal } = useModal()
   const [reasonText, setReasonText] = useState('')
   const { addToast } = useToast()
@@ -45,18 +52,24 @@ export default function RejectingReason({ profileId }: { profileId: string }) {
   if (!isModalVisible) return null
   return (
     <Modal>
-      <div className={styles.container}>
+      <div className={modalStyles.container}>
         <h4 className={inter.className}>Why are you rejecting the profile?</h4>
         <input
           className={combineClasses([styles.reasonText, ibm.className])}
           placeholder="eg. Spelling mistakes in the form"
           onChange={handleTextChange}
         />
-        <div className={styles.actionButtons}>
+        <div className={modalStyles.actionButtons}>
           <Button variant={'primary'} onClick={handleReject}>
             Send and reject
           </Button>
-          <Button variant={'action'} onClick={() => showModal(false)}>
+          <Button
+            variant={'action'}
+            onClick={() => {
+              showModal(false)
+              showRejectModal && showRejectModal(false)
+            }}
+          >
             Don't send and cancel
           </Button>
         </div>

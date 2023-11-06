@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
@@ -26,7 +26,8 @@ type StateStatusProps = {
   profile: ProfileModel
 }
 
-function StateStatus({ profile }: StateStatusProps) {
+export function StateStatus({ profile }: StateStatusProps) {
+  const [isRejectModal, showRejectModal] = useState(false)
   const { id, state } = profile
   const { addToast } = useToast()
   const { showModal } = useModal()
@@ -34,7 +35,7 @@ function StateStatus({ profile }: StateStatusProps) {
   if (!(state in PublishingState)) return <></>
   if (state === PublishingState.PENDING) {
     return (
-      <>
+      <div className={styles.actions}>
         <Button
           variant="action"
           onClick={() => {
@@ -55,13 +56,20 @@ function StateStatus({ profile }: StateStatusProps) {
         <Button
           variant="action"
           onClick={() => {
+            showRejectModal(true)
             showModal(true)
           }}
         >
           Reject
           <RejectIcon />
         </Button>
-      </>
+        {isRejectModal && (
+          <RejectingReason
+            profileId={profile.id}
+            showRejectModal={showRejectModal}
+          />
+        )}
+      </div>
     )
   }
 
@@ -101,7 +109,7 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
       <div
         className={styles.container}
         onClick={() =>
-          router.push(`${AppRoutes.userProfile}/${profile.userId}`)
+          router.push(`${AppRoutes.dashboardProfile}/${profile.userId}`)
         }
       >
         <div className={styles.profile}>
@@ -124,7 +132,6 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
           <StateStatus profile={profile} />
         </div>
       </div>
-      <RejectingReason profileId={profile.id} />
     </div>
   )
 }

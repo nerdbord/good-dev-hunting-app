@@ -1,0 +1,19 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.actionsWrapper {
+  display: inline-flex;
+  flex-direction: row;
+  gap: $spacing-5;
+  width: fit-content;
+}
+
+.vl {
+  border-left: 1px solid #3d434b;
+  height: 44px;
+}
