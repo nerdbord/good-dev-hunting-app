@@ -9,7 +9,7 @@
   gap: 10px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background-color 300ms; 
+  transition: background-color 300ms;
   @include mobile {
     padding: 0;
   }

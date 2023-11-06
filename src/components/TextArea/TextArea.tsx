@@ -10,7 +10,7 @@ interface TextAreaProps {
   onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void
   addImportantIcon?: boolean
   name: string
-  excludeDigits?: boolean;
+  excludeDigits?: boolean
   maxLength?: number;
 }
 
@@ -24,12 +24,12 @@ const TextArea: React.FC<TextAreaProps> = ({
   excludeDigits,
   maxLength,
 }) => {
-  const [isTyped, setIsTyped] = React.useState(false);
+  const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (excludeDigits) {
-      event.target.value = event.target.value.replace(/[0-9]/g, '');
+      event.target.value = event.target.value.replace(/[0-9]/g, '')
     }
-    setIsTyped(event.target.value.length > 0);
+    setIsTyped(event.target.value.length > 0)
     onChange(event)
   }
 
