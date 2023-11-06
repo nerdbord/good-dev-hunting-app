@@ -17,8 +17,7 @@ export default async function ModerationUserProfile({
 }) {
   const profile = await getProfileByUserId(params.id)
 
-  if (!profile || !requireUserRoles([Role.MODERATOR]))
-    redirect(AppRoutes.dashboard)
+  if (!profile || !requireUserRoles([Role.MODERATOR])) redirect(AppRoutes.home)
 
   return (
     <div className={styles.wrapper}>
