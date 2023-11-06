@@ -38,7 +38,7 @@
   padding: 25px;
   font-weight: 400;
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 7px;
   z-index: 999;
   background-color: #0f1217;
   display: flex;
@@ -73,15 +73,6 @@
 
 .hidden {
   display: none;
-}
-
-.checkbox {
-  position: relative;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #e2eaf1;
-  border-radius: 2px;
-  cursor: pointer;
 }
 
 .checkbox:hover {
