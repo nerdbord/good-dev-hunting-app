@@ -38,6 +38,7 @@ model Profile {
   techStack      String[]
   employmentType EmploymentType
   state          PublishingState @default(DRAFT)
+  rejectionReasons  RejectionReason[]
 }
 
 model GitHubDetails {
@@ -59,6 +60,14 @@ model City {
   name              String
   openForRelocation Boolean   @default(false)
   profile           Profile[]
+}
+
+model RejectionReason {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  profileId String  
+  reason    String  
+  createdAt DateTime @default(now())
 }
 
 enum EmploymentType {
