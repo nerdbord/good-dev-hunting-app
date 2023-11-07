@@ -1,5 +1,6 @@
 'use client'
 
+import Modal from '@/components/Modal/Modal'
 import { PropsWithChildren, createContext, useContext, useState } from 'react'
 
 export type ModalContextType = {
@@ -29,6 +30,7 @@ export function ModalProvider({ children }: PropsWithChildren) {
         closeModal,
       }}
     >
+      <Modal />
       {children}
     </ModalContext.Provider>
   )

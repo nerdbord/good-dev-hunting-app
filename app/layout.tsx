@@ -5,7 +5,6 @@ import AuthProvider from '@/components/AuthProvider/AuthProvider'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import { ModalProvider } from '@/contexts/ModalContext'
 import combineClasses from '@/utils/combineClasses'
-import Modal from '@/components/Modal/Modal'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -36,10 +35,7 @@ export default function RootLayout({
       <body className={commonClasses}>
         <AuthProvider>
           <ToastContextProvider>
-            <ModalProvider>
-              <Modal />
-              {children}
-            </ModalProvider>
+            <ModalProvider>{children}</ModalProvider>
           </ToastContextProvider>
         </AuthProvider>
         <div id="portal" />
