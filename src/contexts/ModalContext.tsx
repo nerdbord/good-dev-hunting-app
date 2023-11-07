@@ -3,7 +3,6 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react'
 
 export type ModalContextType = {
-  isModalVisible: boolean
   showModal: (element: React.ReactNode) => void
   modalContent: React.ReactNode | null
   closeModal: () => void
@@ -12,22 +11,19 @@ export type ModalContextType = {
 const ModalContext = createContext<ModalContextType | undefined>(undefined)
 
 export function ModalProvider({ children }: PropsWithChildren) {
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null)
 
   const showModal = (element: React.ReactNode) => {
     setModalContent(element)
-    setIsModalVisible(true)
   }
 
   const closeModal = () => {
-    setIsModalVisible(false)
+    setModalContent(null)
   }
 
   return (
     <ModalContext.Provider
       value={{
-        isModalVisible,
         modalContent,
         showModal,
         closeModal,

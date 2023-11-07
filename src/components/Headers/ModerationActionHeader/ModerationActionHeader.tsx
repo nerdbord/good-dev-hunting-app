@@ -6,12 +6,12 @@ import { UserProfileHeaderType } from '../types'
 import { useModal } from '@/contexts/ModalContext'
 
 import styles from './ModerationActionHeader.module.scss'
-import AssignRole from '@/components/AssignRole/AssignRole'
+import AssignRoleModal from '@/components/AssignRoleModal/AssignRoleModal'
 
 export default function ModerationActionHeader({
   userProfile,
 }: UserProfileHeaderType) {
-  const { showModal } = useModal()
+  const { showModal, closeModal } = useModal()
 
   return (
     <div className={styles.wrapper}>
@@ -20,7 +20,12 @@ export default function ModerationActionHeader({
         <Button
           variant="action"
           onClick={() => {
-            showModal(<AssignRole profileId={userProfile.id} />)
+            showModal(
+              <AssignRoleModal
+                profileId={userProfile.id}
+                onClose={closeModal}
+              />,
+            )
           }}
         >
           Assign admin role

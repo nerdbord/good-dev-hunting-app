@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { Button } from '../Button/Button'
-import { useModal } from '@/contexts/ModalContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
 import { PublishingState } from '@prisma/client'
@@ -10,8 +9,13 @@ import styles from './RejectingReason.module.scss'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 
-export default function RejectingReason({ profileId }: { profileId: string }) {
-  const { isModalVisible, closeModal } = useModal()
+export default function RejectingReasonModal({
+  profileId,
+  onClose,
+}: {
+  profileId: string
+  onClose: () => void
+}) {
   const [reasonText, setReasonText] = useState('')
   const { addToast } = useToast()
   const { runAsync } = useAsyncAction()
@@ -34,10 +38,9 @@ export default function RejectingReason({ profileId }: { profileId: string }) {
         ToastStatus.INVALID,
       )
     })
-    closeModal()
+    onClose()
   }
 
-  if (!isModalVisible) return null
   return (
     <div className={modalStyles.container}>
       <h4>Why are you rejecting the profile?</h4>
@@ -50,7 +53,7 @@ export default function RejectingReason({ profileId }: { profileId: string }) {
         <Button variant={'primary'} onClick={handleReject}>
           Send and reject
         </Button>
-        <Button variant={'action'} onClick={() => closeModal()}>
+        <Button variant={'action'} onClick={() => onClose()}>
           Don't send and cancel
         </Button>
       </div>

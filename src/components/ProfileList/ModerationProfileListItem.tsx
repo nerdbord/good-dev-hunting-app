@@ -18,7 +18,7 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { useModal } from '@/contexts/ModalContext'
-import RejectingReason from '../RejectingReason/RejectingReason'
+import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
 
 const cx = classNames.bind(styles)
 
@@ -29,8 +29,13 @@ type StateStatusProps = {
 export function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
   const { addToast } = useToast()
-  const { showModal } = useModal()
+  const { showModal, closeModal } = useModal()
   const { runAsync } = useAsyncAction()
+
+  const handleClose = () => {
+    closeModal()
+  }
+
   if (!(state in PublishingState)) return <></>
   if (state === PublishingState.PENDING) {
     return (
@@ -55,7 +60,12 @@ export function StateStatus({ profile }: StateStatusProps) {
         <Button
           variant="action"
           onClick={() => {
-            showModal(<RejectingReason profileId={profile.id} />)
+            showModal(
+              <RejectingReasonModal
+                profileId={profile.id}
+                onClose={handleClose}
+              />,
+            )
           }}
         >
           Reject

@@ -1,14 +1,15 @@
-import Modal from '@/components/Modal/Modal'
-import { useModal } from '@/contexts/ModalContext'
 import { Button } from '@/components/Button/Button'
 
 import styles from './AssignRole.module.scss'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 
-export default function AssignRole({ profileId }: { profileId: string }) {
-  const { isModalVisible, closeModal } = useModal()
-
-  if (!isModalVisible) return null
+export default function AssignRoleModal({
+  profileId,
+  onClose,
+}: {
+  profileId: string
+  onClose: () => void
+}) {
   return (
     <div className={modalStyles.container}>
       <h4>Assign admin role</h4>
@@ -19,7 +20,7 @@ export default function AssignRole({ profileId }: { profileId: string }) {
       </p>
       <div className={modalStyles.actionButtons}>
         <Button variant="primary">Yes, assign</Button>
-        <Button variant={'action'} onClick={() => closeModal()}>
+        <Button variant={'action'} onClick={() => onClose()}>
           No, don't assign
         </Button>
       </div>
