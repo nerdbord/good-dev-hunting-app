@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
@@ -27,7 +27,6 @@ type StateStatusProps = {
 }
 
 export function StateStatus({ profile }: StateStatusProps) {
-  const [isRejectModal, showRejectModal] = useState(false)
   const { id, state } = profile
   const { addToast } = useToast()
   const { showModal } = useModal()
@@ -56,19 +55,12 @@ export function StateStatus({ profile }: StateStatusProps) {
         <Button
           variant="action"
           onClick={() => {
-            showRejectModal(true)
-            showModal(true)
+            showModal(<RejectingReason profileId={profile.id} />)
           }}
         >
           Reject
           <RejectIcon />
         </Button>
-        {isRejectModal && (
-          <RejectingReason
-            profileId={profile.id}
-            showRejectModal={showRejectModal}
-          />
-        )}
       </div>
     )
   }

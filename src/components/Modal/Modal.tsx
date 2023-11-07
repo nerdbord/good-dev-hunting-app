@@ -1,18 +1,21 @@
 'use client'
 import React, { PropsWithChildren } from 'react'
-import combineClasses from '@/utils/combineClasses'
+import { useModal } from '@/contexts/ModalContext'
 
 import styles from './Modal.module.scss'
-import { IBM_Plex_Sans } from 'next/font/google'
 import Portal from '../Portal/Portal'
 
-const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: '500' })
-
 export default function Modal({ children }: PropsWithChildren) {
+  const { isModalVisible, modalContent } = useModal()
+
+  if (!isModalVisible) return null
   return (
     <Portal selector="#portal">
-      <div className={combineClasses([styles.overlay, ibm.className])}>
-        <div className={styles.modalWrapper}>{children}</div>
+      <div className={styles.overlay}>
+        <div className={styles.modalWrapper}>
+          {!!modalContent && modalContent}
+          {children}
+        </div>
       </div>
     </Portal>
   )

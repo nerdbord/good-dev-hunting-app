@@ -1,5 +1,4 @@
 'use client'
-import { useState } from 'react'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { StateStatus } from '@/components/ProfileList/ModerationProfileListItem'
 import { Button } from '@/components/Button/Button'
@@ -12,8 +11,7 @@ import AssignRole from '@/components/AssignRole/AssignRole'
 export default function ModerationActionHeader({
   userProfile,
 }: UserProfileHeaderType) {
-  const { isModalVisible, showModal } = useModal()
-  const [isAssignModal, showAssignModal] = useState(false)
+  const { showModal } = useModal()
 
   return (
     <div className={styles.wrapper}>
@@ -22,8 +20,7 @@ export default function ModerationActionHeader({
         <Button
           variant="action"
           onClick={() => {
-            showAssignModal(true)
-            showModal(true)
+            showModal(<AssignRole profileId={userProfile.id} />)
           }}
         >
           Assign admin role
@@ -31,12 +28,6 @@ export default function ModerationActionHeader({
         <div className={styles.vl}></div>
         <StateStatus profile={userProfile} />
       </div>
-      {isModalVisible && isAssignModal && (
-        <AssignRole
-          profileId={userProfile.id}
-          showAssignModal={showAssignModal}
-        />
-      )}
     </div>
   )
 }
