@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation'
 import { Role } from '@prisma/client'
 import { requireUserRoles } from '@/utils/auths'
 import { getProfileByUserId } from '@/backend/profile/profile.service'
+import Modal from '@/components/Modal/Modal'
 
 import styles from './page.module.scss'
 
@@ -21,6 +22,7 @@ export default async function ModerationUserProfile({
 
   return (
     <div className={styles.wrapper}>
+      <Modal />
       <ModerationActionHeader userProfile={profile} />
       <UserProfileMain userProfile={profile}>
         <UserProfileHeader userProfile={profile} />

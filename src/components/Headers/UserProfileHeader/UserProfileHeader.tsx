@@ -11,12 +11,11 @@ export default function UserProfileHeader({
   userProfile,
   withBackButton,
 }: UserProfileHeaderType) {
+  const commonClasses = cx('wrapper', {
+    [styles.withBackBackButton]: !!withBackButton,
+  })
   return (
-    <div
-      className={cx('wrapper', {
-        [styles.withBackBackButton]: !!withBackButton,
-      })}
-    >
+    <div className={commonClasses}>
       {!!withBackButton && <GoBackButton>Go back</GoBackButton>}
       <SocialItems userProfile={userProfile} />
     </div>
