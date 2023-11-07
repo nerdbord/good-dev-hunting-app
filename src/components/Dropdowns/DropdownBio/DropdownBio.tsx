@@ -50,9 +50,10 @@ export const DropdownBio = ({
     setDropdownActive(!isDropdownActive)
   }
 
-  const handleCheckboxChange = (option: string) => {
-    setFieldValue(name, option)
-  }
+  const handleSelection = (option: string) => {
+    setFieldValue(name, option);
+    setDropdownActive(false);
+}
 
   return (
     <div className={styles.buttonBox}>
@@ -72,24 +73,12 @@ export const DropdownBio = ({
                 className={styles.dropdownInput}
                 htmlFor={`${id}-${index}`}
               >
-                <div
-                  className={cx(styles.checkbox, {
-                    [styles.checked]: selectedValue === option,
-                  })}
-                >
-                  <input
-                    id={`${id}-${index}`}
-                    type="checkbox"
-                    className={styles.hidden}
-                    checked={selectedValue === option}
-                    onChange={() => handleCheckboxChange(option)}
-                    name={name}
-                  />
-                  {selectedValue === option && (
-                    <IoIosCheckmark className={styles.checkmark} />
-                  )}
-                </div>{' '}
+            <div
+                className={selectedValue === option ? styles.selectedOption : ''}
+                onClick={() => handleSelection(option)}
+            >
                 {option}
+            </div>
               </label>
             ))}
           </div>
