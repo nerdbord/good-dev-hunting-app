@@ -27,8 +27,7 @@
 }
 
 .personalInfo {
-  background-color: #0f1217;
-  border: 1px solid #2a2f35;
+  background-color: rgba(15, 18, 23, 1);
   color: #69717b;
   border-radius: 2px;
   padding: 20px;
@@ -56,16 +55,39 @@
   }
 }
 
-.lettersCount {
-  text-align: right;
+.emailContainer {
+  position: relative;
+}
+
+.emailContainer:hover .tooltip {
+  display: block;
+}
+
+.tooltip {
+  background-color: rgba(15, 18, 23, 1);
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0; 
+  gap: 5px;
+  color: #d62626;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+
+.lettersCountParent {
+  position: relative;
 }
 
 .lettersCount {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
   color: #89939e;
-  padding-right: 110px;
 }
 
 .errorMsg p {
