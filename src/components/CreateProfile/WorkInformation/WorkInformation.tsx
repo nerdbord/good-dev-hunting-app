@@ -9,10 +9,6 @@ import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreatePr
 import { EmploymentType } from '@prisma/client'
 
 import styles from './WorkInformations.module.scss'
-import { Inter } from 'next/font/google'
-import combineClasses from '@/utils/combineClasses'
-
-const inter = Inter({ subsets: ['latin'], weight: '500' })
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -70,7 +66,7 @@ const WorkInformation = () => {
               excludeDigits
             />
           </InputFormError>
-          <div className={combineClasses([styles.addInfo, inter.className])}>
+          <div className={styles.addInfo}>
             Start typing and separate technologies with commas.
             <br />
             Choose max. 8
