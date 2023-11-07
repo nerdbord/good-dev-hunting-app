@@ -5,6 +5,7 @@ import UserProfileDetails from '@//components/UserProfile/UserProfileDetails/Use
 import { getProfileByUserId } from '@/backend/profile/profile.service'
 import { redirect } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
+import UserProfileHeader from '@/components/Headers/UserProfileHeader/UserProfileHeader'
 
 const UserProfilePage = async ({ params }: { params: { id: string } }) => {
   const selectedProfile = await getProfileByUserId(params.id)
@@ -15,7 +16,9 @@ const UserProfilePage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className={styles.wrapper}>
-      <UserProfileMain userProfile={selectedProfile} />
+      <UserProfileMain userProfile={selectedProfile}>
+        <UserProfileHeader withBackButton userProfile={selectedProfile} />
+      </UserProfileMain>
       <UserProfileDetails userProfile={selectedProfile} />
     </div>
   )

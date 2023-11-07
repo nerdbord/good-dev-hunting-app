@@ -1,4 +1,5 @@
 .back {
+  position: relative;
   padding: 12px 24px;
   color: #a687ff;
   font-weight: 500;
@@ -7,4 +8,13 @@
   cursor: pointer;
   border: none;
   background: none;
+  @include mobile {
+    position: absolute;
+    top: 15px;
+    right: 0;
+  }
+}
+
+.back:hover {
+  background-color: rgba(23, 27, 33, 1);
 }
