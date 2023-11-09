@@ -23,12 +23,17 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const [userImage, setUserImage] = useState(
     profile?.avatarUrl || session?.user.image,
   )
-  const { triggerUpload, setTriggerUpload, setUploadSuccess, setFileSelected, setIsUploading } =
-    useUploadContext()
+  const {
+    triggerUpload,
+    setTriggerUpload,
+    setUploadSuccess,
+    setFileSelected,
+    setIsUploading,
+  } = useUploadContext()
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const { runAsync, loading } = useAsyncAction()
- 
+
   useEffect(() => {
     if (triggerUpload) {
       handleUpload()
@@ -50,22 +55,22 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
     if (file) {
-      setFileSelected(true);
-      setSelectedFile(file);
-      const reader = new FileReader();
+      setFileSelected(true)
+      setSelectedFile(file)
+      const reader = new FileReader()
       reader.onloadend = () => {
-        setUserImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+        setUserImage(reader.result as string)
+      }
+      reader.readAsDataURL(file)
     } else {
-      setFileSelected(false);
+      setFileSelected(false)
     }
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = ''
     }
-  };
+  }
 
   const importFromGithub = async () => {
     await runAsync(async () => {
@@ -81,28 +86,29 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   }
 
   const uploadFile = async (file: File) => {
-    const url = await apiClient.userPhotoUpload(file);
-    await serverUpdateUserAvatar(url);
-    await fetchUserAvatar();
-    return url;
+    const url = await apiClient.userPhotoUpload(file)
+    await serverUpdateUserAvatar(url)
+    await fetchUserAvatar()
+    return url
   }
   const handleUpload = async () => {
     if (selectedFile) {
-      setIsUploading(true);
-      setShowErrorMessage(false);
+      setIsUploading(true)
+      setShowErrorMessage(false)
       try {
-        const url = await uploadFile(selectedFile);
-        setUserImage(url);
+        const url = await uploadFile(selectedFile)
+        setUserImage(url)
+        setUploadSuccess(true)
       } catch (error) {
-        console.error('Error during file upload:', error);
-        setShowErrorMessage(true);
-        setUploadSuccess(false);
+        console.error('Error during file upload:', error)
+        setShowErrorMessage(true)
+        setUploadSuccess(false)
       } finally {
-        setUploadSuccess(true);
-        setIsUploading(false);
+        setIsUploading(false)
       }
     }
-  };
+  }
+
   return (
     <div className={styles.container}>
       <p className={styles.containerLabel}>Picture</p>
