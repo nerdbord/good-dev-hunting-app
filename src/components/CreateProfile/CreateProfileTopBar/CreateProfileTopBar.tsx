@@ -7,23 +7,28 @@ import { useRouter } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
+import { useEffect } from 'react'
 
 const CreateProfileTopBar = () => {
   const router = useRouter()
-  const { handleSubmit, errors } = useFormikContext()
+  const { handleSubmit, errors, isSubmitting } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
-  const { setTriggerUpload, uploadSuccess } = useUploadContext()
+  const { setTriggerUpload, uploadSuccess, fileSelected, isUploading } = useUploadContext()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     runAsync(async () => {
-      event.preventDefault()
-      handleSubmit()
-      setTriggerUpload(true)
-      if (uploadSuccess) {
-      router.push(AppRoutes.myProfile)
+      if (Object.keys(errors).length === 0) {
+        await handleSubmit();
+        setTriggerUpload(true);
       }
-    })
-  }
+    });
+  };
+  useEffect(() => {
+    if (uploadSuccess || (!fileSelected && isSubmitting)){
+      router.push(AppRoutes.myProfile);
+    }
+  }, [uploadSuccess, isSubmitting]);
 
   return (
     <div className={styles.titleBox}>
@@ -37,7 +42,7 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
-        <Button loading={loading} variant="primary" onClick={handleButtonClick}>
+        <Button loading={isUploading || loading} variant="primary" onClick={handleButtonClick}>
           Save and preview profile
         </Button>
       </div>

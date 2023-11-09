@@ -6,11 +6,17 @@ interface UploadContextProps {
   setTriggerUpload: React.Dispatch<React.SetStateAction<boolean>>
   uploadSuccess: boolean
   setUploadSuccess: React.Dispatch<React.SetStateAction<boolean>>
+  fileSelected: boolean;
+  setFileSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  isUploading: boolean;
+  setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const UploadProvider = ({ children }: PropsWithChildren) => {
   const [triggerUpload, setTriggerUpload] = useState(false)
   const [uploadSuccess, setUploadSuccess] = useState(false)
+  const [fileSelected, setFileSelected] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   return (
     <UploadContext.Provider
@@ -19,6 +25,10 @@ export const UploadProvider = ({ children }: PropsWithChildren) => {
         setTriggerUpload,
         uploadSuccess,
         setUploadSuccess,
+        fileSelected,
+    setFileSelected,
+    isUploading,
+    setIsUploading
       }}
     >
       {children}

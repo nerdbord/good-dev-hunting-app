@@ -23,12 +23,12 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const [userImage, setUserImage] = useState(
     profile?.avatarUrl || session?.user.image,
   )
-  const { triggerUpload, setTriggerUpload, setUploadSuccess } =
+  const { triggerUpload, setTriggerUpload, setUploadSuccess, setFileSelected, setIsUploading } =
     useUploadContext()
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const { runAsync, loading } = useAsyncAction()
-
+ 
   useEffect(() => {
     if (triggerUpload) {
       handleUpload()
@@ -38,9 +38,7 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
 
   const initializeAvatar = async () => {
     try {
-      console.log('Fetching user avatar...')
       const avatarUrl = await fetchUserAvatar()
-      console.log('Fetched user avatar:', avatarUrl)
       setUserImage(avatarUrl || session?.user.image)
     } catch (error) {
       console.error('Failed to fetch user avatar:', error)
@@ -52,57 +50,59 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file)
-      const reader = new FileReader()
+      setFileSelected(true);
+      setSelectedFile(file);
+      const reader = new FileReader();
       reader.onloadend = () => {
-        setUserImage(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+        setUserImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFileSelected(false);
     }
     if (fileInputRef.current) {
-      fileInputRef.current.value = ''
+      fileInputRef.current.value = '';
     }
-  }
+  };
 
   const importFromGithub = async () => {
     await runAsync(async () => {
       const avatarUrl = await importAvatarFromGithub()
-
-      console.log('Imported avatar from Github:', avatarUrl)
-
       if (!avatarUrl) {
         setShowErrorMessage(true)
-        setUploadSuccess(false)
         return
       }
       setUserImage(avatarUrl)
-      setUploadSuccess(true)
     }).catch(() => {
       setShowErrorMessage(true)
-      setUploadSuccess(false)
     })
   }
 
+  const uploadFile = async (file: File) => {
+    const url = await apiClient.userPhotoUpload(file);
+    await serverUpdateUserAvatar(url);
+    await fetchUserAvatar();
+    return url;
+  }
   const handleUpload = async () => {
     if (selectedFile) {
-      console.log('Uploading selected file...')
+      setIsUploading(true);
+      setShowErrorMessage(false);
       try {
-        const url = await apiClient.userPhotoUpload(selectedFile)
-        console.log('Uploaded file URL:', url)
-        setUserImage(url)
-        await serverUpdateUserAvatar(url)
-        await fetchUserAvatar()
-        setUploadSuccess(true)
+        const url = await uploadFile(selectedFile);
+        setUserImage(url);
       } catch (error) {
-        console.log('Error during file upload:', error)
-        setShowErrorMessage(true)
-        setUploadSuccess(false)
+        console.error('Error during file upload:', error);
+        setShowErrorMessage(true);
+        setUploadSuccess(false);
+      } finally {
+        setUploadSuccess(true);
+        setIsUploading(false);
       }
     }
-  }
-
+  };
   return (
     <div className={styles.container}>
       <p className={styles.containerLabel}>Picture</p>
