@@ -19,16 +19,25 @@ accepting all external messages!`
   const unpublishedText = `Your profile is now not visible to the public.
 You can republish it at anytime.`
 
+  const pendingText = `Your profile is currently under review by our administration team. 
+We will notify you once the review is complete. Thank you for your patience.`
+
   return (
     <div className={styles.overlay}>
       <div className={styles.container}>
         <h2 className={styles.header}>
           {state === PublishingState.APPROVED
             ? 'Congratulations'
-            : 'Your profile’s unpublished'}
+            : state === PublishingState.PENDING
+            ? 'Your profile is under review'
+            : 'Your profile is unpublished'}
         </h2>
         <span className={styles.text}>
-          {state === PublishingState.APPROVED ? publishedText : unpublishedText}
+          {state === PublishingState.APPROVED
+            ? publishedText
+            : state === PublishingState.PENDING
+            ? pendingText
+            : unpublishedText}
         </span>
         <Button onClick={onClose} variant="primary">
           Confirm
