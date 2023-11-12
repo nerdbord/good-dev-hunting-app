@@ -1,32 +1,53 @@
 'use client'
 import React from 'react'
-import styles from './ProfileList.module.scss'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'
 import { ModerationProfileListItem } from './ModerationProfileListItem'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 
+import styles from './ProfileList.module.scss'
+
 type Props = {
-  data: ProfileModel[]
+  profiles: ProfileModel[]
 }
 
-export default function ({ data = [] }: Props) {
-  const { publishingStateFilter, setPendingStateCounter } =
+export default function ModerationProfilesWithFilters({
+  profiles = [],
+}: Props) {
+  const { publishingStateFilter, setPendingStateCounter, searchEmailValue } =
     useModerationFilter()
 
-  const filteredData = data.filter((profile: ProfileModel) => {
+  const filteredProfiles = profiles.filter((profile: ProfileModel) => {
+    if (searchEmailValue) {
+      return profile.userEmail.includes(searchEmailValue)
+    }
     return profile.state === publishingStateFilter
   })
 
-  setPendingStateCounter &&
-    useTabCounter(data, PublishingState.PENDING, setPendingStateCounter)
+  const hasResults = filteredProfiles.length > 0
+
+  useTabCounter(profiles, PublishingState.PENDING, setPendingStateCounter)
 
   return (
-    <div className={styles.profileListCont}>
-      {filteredData.map((profile) => (
-        <ModerationProfileListItem key={profile.id} data={profile} />
-      ))}
+    <div className={styles.moderationProfiles}>
+      {searchEmailValue &&
+        (hasResults ? (
+          <SearchResultsInfo
+            resultsQty={filteredProfiles.length}
+            text="Search results for"
+            hasResults
+          />
+        ) : (
+          <SearchResultsInfo text="No search results for" />
+        ))}
+
+      <div className={styles.profileListCont}>
+        {filteredProfiles.map((profile) => (
+          <ModerationProfileListItem key={profile.id} profile={profile} />
+        ))}
+      </div>
     </div>
   )
 }

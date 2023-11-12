@@ -15,20 +15,6 @@
   justify-content: space-between;
 }
 
-.social {
-  display: flex;
-  gap: 10px;
-  position: absolute;
-  top: $spacing-5;
-  right: 0;
-  @include mobile {
-    position: static;
-    gap: 0;
-    width: 100%;
-    justify-content: space-between;
-  }
-}
-
 .back {
   padding: 12px 24px;
   color: #a687ff;
@@ -43,35 +29,8 @@
   }
 }
 
-.socialItem {
-  padding: 12px 24px;
-  color: #ffffff;
-  font-weight: 500;
-  line-height: 20px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: background-color 300ms; 
-  @include mobile {
-    padding: $spacing-3 0;
-    width: 100%;
-    white-space: nowrap;
-    a {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-    }
-  }
-}
-
-.socialItem:hover {
-  background-color: rgba(23, 27, 33, 1);
-}
-
 .profile {
-  padding-top: 32px;
+  padding-top: 100px;
   padding-left: 76px;
   padding-right: 76px;
   padding-bottom: 76px;

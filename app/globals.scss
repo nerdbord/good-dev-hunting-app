@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
-
-body, button, input, textarea, select {
-    font-family: 'IBM Plex Sans', sans-serif;
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-ibm), sans-serif;
 }
 
 button {
@@ -24,4 +26,8 @@ body {
   max-width: 100%;
   background: #0f1217;
   color: #e2eaf1;
+}
+
+ul {
+  list-style-type: none;
 }
