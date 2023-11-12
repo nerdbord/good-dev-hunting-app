@@ -1,0 +1,38 @@
+.social {
+  display: flex;
+  position: relative;
+  gap: 10px;
+  right: 0;
+  @include mobile {
+    bottom: 0;
+    gap: 0;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+.socialItem {
+  padding: 12px 24px;
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 300ms;
+  a {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  @include mobile {
+    width: 100%;
+    white-space: nowrap;
+  }
+}
+
+.socialItem:hover {
+  background-color: rgba(23, 27, 33, 1);
+}

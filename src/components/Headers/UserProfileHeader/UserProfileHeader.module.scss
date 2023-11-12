@@ -1,0 +1,16 @@
+.wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  top: $spacing-5;
+  width: 100%;
+  margin: 0;
+  padding: 0 $spacing-5 0 0;
+  @include mobile {
+    position: static;
+  }
+}
+
+.withBackBackButton {
+  justify-content: space-between;
+}
