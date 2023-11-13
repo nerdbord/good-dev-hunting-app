@@ -12,12 +12,13 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 import { importAvatarFromGithub } from '@/actions/user/importAvatarFromGithub'
 import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
-
+import { useRouter } from 'next/navigation'
 interface UserPhotoUploaderProps {
   profile: ProfileModel | null
 }
 
 export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
+  const router = useRouter()
   const { data: session } = useSession()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [userImage, setUserImage] = useState(
@@ -35,24 +36,15 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const { runAsync, loading } = useAsyncAction()
 
   useEffect(() => {
+    router.refresh()
+  })
+
+  useEffect(() => {
     if (triggerUpload) {
       handleUpload()
       setTriggerUpload(false)
     }
   }, [triggerUpload])
-
-  const initializeAvatar = async () => {
-    try {
-      const avatarUrl = await fetchUserAvatar()
-      setUserImage(avatarUrl || session?.user.image)
-    } catch (error) {
-      console.error('Failed to fetch user avatar:', error)
-    }
-  }
-
-  useEffect(() => {
-    initializeAvatar()
-  }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
