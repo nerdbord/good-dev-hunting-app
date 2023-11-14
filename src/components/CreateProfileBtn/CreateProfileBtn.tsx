@@ -26,7 +26,11 @@ const CreateProfileBtn = () => {
   }
 
   return (
-    <Button onClick={onClickHandler} variant={'primary'}>
+    <Button
+      onClick={onClickHandler}
+      variant={'primary'}
+      dataTestId="createProfileButton"
+    >
       Create profile
       <AddIcon />
     </Button>

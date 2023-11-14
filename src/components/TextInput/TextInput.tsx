@@ -13,6 +13,7 @@ interface TextInputProps {
   error?: string
   disabled?: boolean
   excludeDigits?: boolean
+  dataTestId?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -24,6 +25,7 @@ const TextInput: React.FC<TextInputProps> = ({
   name,
   disabled,
   excludeDigits,
+  dataTestId,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +50,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange={handleChange}
         name={name}
         disabled={disabled}
+        data-testid={dataTestId}
       />
     </div>
   )

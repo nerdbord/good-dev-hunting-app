@@ -31,6 +31,7 @@ const LocationPreferences = () => {
               onChange={handleChange}
               name="country"
               excludeDigits
+              dataTestId="country"
             />
           </InputFormError>
           <CheckboxInput
@@ -39,6 +40,7 @@ const LocationPreferences = () => {
             checked={values.openToRelocationCountry}
             onChange={handleChange}
             name="openToRelocationCountry"
+            dataTestId="openToRelocationCountry"
           />
         </div>
         <div>
@@ -51,6 +53,7 @@ const LocationPreferences = () => {
               addImportantIcon={true}
               name="city"
               excludeDigits
+              dataTestId="city"
             />
           </InputFormError>
           <CheckboxInput
@@ -59,6 +62,7 @@ const LocationPreferences = () => {
             checked={values.openToRelocationCity}
             onChange={handleChange}
             name="openToRelocationCity"
+            dataTestId="openToRelocationCity"
           />
         </div>
         <InputFormError error={errors.remoteOnly}>
@@ -68,6 +72,7 @@ const LocationPreferences = () => {
             label="I’m looking for remote jobs only"
             onChange={handleChange}
             name="remoteOnly"
+            dataTestId="remoteOnly"
           />
         </InputFormError>
       </div>

@@ -9,7 +9,7 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 
 const CreateProfileTopBar = () => {
   const router = useRouter()
-  const { handleSubmit, errors, isSubmitting } = useFormikContext()
+  const { handleSubmit, errors } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,7 +32,12 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
-        <Button loading={loading} variant="primary" onClick={handleButtonClick}>
+        <Button
+          loading={loading}
+          variant="primary"
+          onClick={handleButtonClick}
+          dataTestId="saveAndPreviewProfile"
+        >
           Save and preview profile
         </Button>
       </div>
