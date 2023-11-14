@@ -8,6 +8,7 @@ interface ButtonProps {
   type?: 'button' | 'submit'
   disabled?: boolean
   loading?: boolean
+  dataTestId?: string
 }
 
 export const Button = ({
@@ -16,6 +17,7 @@ export const Button = ({
   variant,
   disabled,
   loading,
+  dataTestId,
 }: PropsWithChildren<ButtonProps>) => {
   const buttonClassName = useMemo(() => {
     switch (variant) {
@@ -36,6 +38,7 @@ export const Button = ({
 
   return (
     <button
+      data-testid={dataTestId}
       className={[buttonClassName, disabledClass].join(' ')}
       disabled={disabled || loading}
       onClick={onClick}

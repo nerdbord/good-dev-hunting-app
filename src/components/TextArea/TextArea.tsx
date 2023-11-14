@@ -11,7 +11,8 @@ interface TextAreaProps {
   addImportantIcon?: boolean
   name: string
   excludeDigits?: boolean
-  maxLength?: number;
+  maxLength?: number
+  dataTestId?: string
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -23,6 +24,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   name,
   excludeDigits,
   maxLength,
+  dataTestId,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,6 +48,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         onChange={handleChange}
         name={name}
         maxLength={maxLength}
+        data-testid={dataTestId}
       />
     </div>
   )

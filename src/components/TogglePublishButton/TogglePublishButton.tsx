@@ -36,6 +36,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
             setShowPopup(true)
           })
         }
+        dataTestId="publishProfileButton"
       >
         {state === PublishingState.APPROVED
           ? 'Unpublish profile'

@@ -8,6 +8,7 @@ interface SwitchInputProps {
   checked: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   name: string
+  dataTestId?: string
 }
 
 const SwitchInput: React.FC<SwitchInputProps> = ({
@@ -16,13 +17,14 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   checked,
   onChange,
   name,
+  dataTestId,
 }) => {
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event)
   }
 
   return (
-    <div className={styles.switchLabel}>
+    <div className={styles.switchLabel} data-testid={dataTestId}>
       <span className={styles.label}>{label}</span>
       <label className={styles.switch} htmlFor={id}>
         <input

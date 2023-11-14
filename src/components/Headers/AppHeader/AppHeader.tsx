@@ -49,7 +49,11 @@ const AppHeader = async () => {
                 )}
                 <p className={styles.githubAccName}>{session?.user.name}</p>
               </div>
-              {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
+              {profile ? (
+                <MyProfileBtn />
+              ) : (
+                <CreateProfileBtn data-testid="create-profile-button" />
+              )}
             </div>
           </div>
         </Container>
