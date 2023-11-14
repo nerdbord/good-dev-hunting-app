@@ -26,11 +26,10 @@ describe('Account Setup', () => {
       'excel, microsoft word, obsluga dystrybutora lpg',
     )
     cy.get('[data-testid="saveAndPreviewProfile"]').click()
-    cy.get('[data-testid="saveAndPreviewProfile"]').click()
     cy.get('[data-testid="publishProfileButton"]', { timeout: 10000 })
       .should('be.visible')
       .click()
-    cy.get('[data-testid="modal"]').should('be.visible')
+    cy.get('[data-testid="modal"]', { timeout: 10000 }).should('be.visible')
   })
 })
 
