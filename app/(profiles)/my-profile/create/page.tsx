@@ -15,7 +15,7 @@ const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session) {
-    redirect(AppRoutes.createProfile)
+    redirect(AppRoutes.home)
   }
 
   const myProfile = await getProfileByUserEmail(session.user.email)
