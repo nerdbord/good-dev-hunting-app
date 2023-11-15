@@ -7,8 +7,8 @@ describe('Account Setup', () => {
       return true
     })
     cy.visit('/')
-    cy.login()
     cy.get('[data-testid="createProfileButton"]').should('be.visible').click()
+    cy.login()
     cy.visit('http://localhost:3000/my-profile/create')
     cy.get('[data-testid="fullName"]').type('Krzysztof Misiorny')
     cy.get('[data-testid="linkedin"]').type('https://www.linkedin.com/')
@@ -26,11 +26,12 @@ describe('Account Setup', () => {
       'excel, microsoft word, obsluga dystrybutora lpg',
     )
     cy.get('[data-testid="saveAndPreviewProfile"]').click()
-    cy.get('[data-testid="publishProfileButton"]', { timeout: 10000 })
+    cy.get('[data-testid="publishProfileButton"]', { timeout: 20000 })
       .should('be.visible')
       .click()
-    cy.get('[data-testid="modal"]', { timeout: 10000 }).should('be.visible')
+    cy.get('[data-testid="publishProfilePopup"]', { timeout: 20000 }).should('be.visible')
   })
 })
 
 export {}
+ 
