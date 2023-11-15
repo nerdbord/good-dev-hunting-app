@@ -21,7 +21,7 @@ You can republish it at anytime.`
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="publishProfilePopup">
         <h2 className={styles.header}>
           {state === PublishingState.APPROVED
             ? 'Congratulations'

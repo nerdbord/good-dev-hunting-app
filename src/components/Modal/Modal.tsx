@@ -12,7 +12,7 @@ export default function Modal({ children }: PropsWithChildren) {
   return (
     <Portal selector="#portal">
       <div className={styles.overlay}>
-        <div className={styles.modalWrapper} data-testid="modal">
+        <div className={styles.modalWrapper}>
           {modalContent}
           {children}
         </div>
