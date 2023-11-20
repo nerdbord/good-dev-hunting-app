@@ -14,6 +14,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  transition: background-color 300ms;
   @include mobile {
     width: 100%;
     padding: 12px 0;
@@ -29,8 +30,12 @@
 .buttonPrimary {
   height: 44px;
   color: #ffffff;
-  background: #7d54f1;
+  background-color: #7d54f1;
   min-width: 120px;
+}
+
+.buttonPrimary:hover {
+  background-color: rgba(94, 40, 246, 1);
 }
 
 .buttonSecondary {
@@ -39,8 +44,13 @@
   background: transparent;
 }
 
+.buttonSecondary:hover {
+  background-color: rgba(23, 27, 33, 1);
+}
+
 .buttonTertiary {
   display: none;
+  transition: background-color 300ms;
   @include mobile {
     display: block;
     position: static;
@@ -61,7 +71,7 @@
 
 .buttonAction {
   display: flex;
-  width: 129px;
+  min-width: 129px;
   height: 44px;
   padding: 12px 24px;
   justify-content: center;
