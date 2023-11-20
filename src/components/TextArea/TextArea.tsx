@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import styles from './TextArea.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 
@@ -10,6 +10,8 @@ interface TextAreaProps {
   onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void
   addImportantIcon?: boolean
   name: string
+  excludeDigits?: boolean
+  maxLength?: number;
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -19,8 +21,15 @@ const TextArea: React.FC<TextAreaProps> = ({
   onChange,
   addImportantIcon,
   name,
+  excludeDigits,
+  maxLength,
 }) => {
+  const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (excludeDigits) {
+      event.target.value = event.target.value.replace(/[0-9]/g, '')
+    }
+    setIsTyped(event.target.value.length > 0)
     onChange(event)
   }
 
@@ -31,11 +40,12 @@ const TextArea: React.FC<TextAreaProps> = ({
         {addImportantIcon && <ImportantIcon />}
       </label>
       <textarea
-        className={styles.formTextarea} // Updated class name
+        className={`${styles.formTextarea} ${isTyped ? styles.typed : ''}`}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
         name={name}
+        maxLength={maxLength}
       />
     </div>
   )

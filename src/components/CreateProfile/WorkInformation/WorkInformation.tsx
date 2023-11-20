@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import styles from './WorkInformations.module.scss'
 import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/components/TextArea/TextArea'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -8,6 +7,8 @@ import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
+
+import styles from './WorkInformations.module.scss'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -62,6 +63,7 @@ const WorkInformation = () => {
               addImportantIcon={true}
               onChange={handleChange}
               name="techStack"
+              excludeDigits
             />
           </InputFormError>
           <div className={styles.addInfo}>

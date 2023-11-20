@@ -1,0 +1,25 @@
+.reasonText {
+  width: 100%;
+  border: none;
+  border-radius: 2px;
+  padding: 30px;
+  background-color: #171b21;
+  font-family: var(--font-ibm);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: #e2eaf1;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+
+.reasonText::placeholder {
+  color: #ffffff;
+}
+
+.reasonText:focus::placeholder {
+  color: transparent;
+}
