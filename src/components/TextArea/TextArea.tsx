@@ -11,7 +11,7 @@ interface TextAreaProps {
   addImportantIcon?: boolean
   name: string
   excludeDigits?: boolean
-  maxLength?: number;
+  maxLength?: number
 }
 
 const TextArea: React.FC<TextAreaProps> = ({

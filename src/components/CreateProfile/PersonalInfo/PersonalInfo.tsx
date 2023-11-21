@@ -38,44 +38,45 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
           />
         </InputFormError>
         <div className={styles.emailContainer}>
-        <InputFormError error={errors.contactEmail}>
-          <TextInput
-            label="Contact email"
-            placeholder={session?.user?.email || ''}
-            value={values.contactEmail}
-            onChange={handleChange}
-            addImportantIcon={true}
-            name="contactEmail"
-            disabled={true}
-          />
-        </InputFormError>
-            <div className={styles.tooltip}>
-                Email is connected to your Github profile and cannot be changed
-            </div>
-        <UserPhotoUploader profile={profile} />
-        <TextInput
-          label="LinkedIn"
-          placeholder="Paste link to you linkedin profile"
-          value={values.linkedin}
-          onChange={handleChange}
-          name="linkedin"
-        />
-        <InputFormError error={errors.bio}>
-        <div className={styles.lettersCountParent}>
-          <TextArea
-            label="Bio"
-            placeholder="Introduce yourself with few sentences"
-            value={values.bio}
-            addImportantIcon={true}
-            onChange={handleChange}
-            name="bio"
-            maxLength={1500}
-          />{' '}
-          <div className={styles.lettersCount}>
-            {values.bio.length} / 1500 characters
+          <InputFormError error={errors.contactEmail}>
+            <TextInput
+              label="Contact email"
+              placeholder={session?.user?.email || ''}
+              value={values.contactEmail}
+              onChange={handleChange}
+              addImportantIcon={true}
+              name="contactEmail"
+              disabled={true}
+            />
+          </InputFormError>
+          <div className={styles.tooltip}>
+            Email is connected to your Github profile and cannot be changed
           </div>
+          <UserPhotoUploader profile={profile} />
+          <TextInput
+            label="LinkedIn"
+            placeholder="Paste link to you linkedin profile"
+            value={values.linkedin}
+            onChange={handleChange}
+            name="linkedin"
+          />
+          <InputFormError error={errors.bio}>
+            <div className={styles.lettersCountParent}>
+              <TextArea
+                label="Bio"
+                placeholder="Introduce yourself with few sentences"
+                value={values.bio}
+                addImportantIcon={true}
+                onChange={handleChange}
+                name="bio"
+                maxLength={1500}
+              />{' '}
+              <div className={styles.lettersCount}>
+                {values.bio.length} / 1500 characters
+              </div>
+            </div>
+          </InputFormError>
         </div>
-        </InputFormError>
       </div>
     </div>
   )
