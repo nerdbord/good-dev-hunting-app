@@ -51,9 +51,9 @@ export const DropdownBio = ({
   }
 
   const handleSelection = (option: string) => {
-    setFieldValue(name, option);
-    setDropdownActive(false);
-}
+    setFieldValue(name, option)
+    setDropdownActive(false)
+  }
 
   return (
     <div className={styles.buttonBox}>
@@ -73,12 +73,14 @@ export const DropdownBio = ({
                 className={styles.dropdownInput}
                 htmlFor={`${id}-${index}`}
               >
-            <div
-                className={selectedValue === option ? styles.selectedOption : ''}
-                onClick={() => handleSelection(option)}
-            >
-                {option}
-            </div>
+                <div
+                  className={
+                    selectedValue === option ? styles.selectedOption : ''
+                  }
+                  onClick={() => handleSelection(option)}
+                >
+                  {option}
+                </div>
               </label>
             ))}
           </div>
