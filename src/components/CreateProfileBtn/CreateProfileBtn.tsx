@@ -5,7 +5,6 @@ import AddIcon from '@/assets/icons/AddIcon'
 import { signIn, useSession } from 'next-auth/react'
 import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
-import styles from './CreateProfileBtn.module.scss'
 
 const CreateProfileBtn = () => {
   const router = useRouter()
