@@ -11,7 +11,8 @@ interface TextAreaProps {
   addImportantIcon?: boolean
   name: string
   excludeDigits?: boolean
-  maxLength?: number;
+  maxLength?: number
+  height?: number
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -23,9 +24,10 @@ const TextArea: React.FC<TextAreaProps> = ({
   name,
   excludeDigits,
   maxLength,
+  height,
 }) => {
-  const [isTyped, setIsTyped] = React.useState(false)
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const [isTyped, setIsTyped] = useState(false)
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (excludeDigits) {
       event.target.value = event.target.value.replace(/[0-9]/g, '')
     }
@@ -41,6 +43,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       </label>
       <textarea
         className={`${styles.formTextarea} ${isTyped ? styles.typed : ''}`}
+        style={height ? { height: `${height}px` } : {}}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
