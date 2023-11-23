@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CreateProfilePayload,
   ProfileModel,
@@ -5,6 +6,7 @@ import {
   RejectionReason,
 } from '@/data/frontend/profile/types'
 import { httpClient } from '@/lib/httpClient'
+import { PutBlobResult } from '@vercel/blob'
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -71,5 +73,14 @@ export const apiClient = {
     } catch (error) {
       console.log(error)
     }
+  },
+  userPhotoUpload: async (file: File) => {
+    console.log('API call to upload user photo...')
+    const { url } = await httpClient.postPhoto<PutBlobResult>(
+      '/api/files',
+      file,
+    )
+    console.log('API response for photo upload:', url)
+    return url
   },
 }
