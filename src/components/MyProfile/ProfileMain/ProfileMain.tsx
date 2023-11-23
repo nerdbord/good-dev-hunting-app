@@ -12,6 +12,7 @@ import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { AppRoutes } from '@/utils/routes'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
+import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
   if (!session || !session.user) {
@@ -23,7 +24,13 @@ const ProfileMain = async () => {
   }
 
   const user = await findUserByEmail(session.user.email)
-  const githubUsername = user?.githubDetails?.username
+
+  if (!user) {
+    redirect(AppRoutes.home)
+  }
+
+  const githubUsername = user.githubDetails?.username
+  const avatarUrl = await fetchUserAvatar()
 
   return (
     <>
@@ -60,7 +67,8 @@ const ProfileMain = async () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={session.user.image}
+              src={avatarUrl || ''}
+              key={avatarUrl}
               width={100}
               height={100}
               alt="user's avatar"
