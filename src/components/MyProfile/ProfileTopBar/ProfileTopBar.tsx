@@ -7,7 +7,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { EditProfileButton } from '@/components/EditProfileButton'
-import { PublishingState } from '@prisma/client'
 
 const ProfileTopBar = async () => {
   const session = await getServerSession(authOptions)
