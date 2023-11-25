@@ -69,6 +69,8 @@ export const authOptions: NextAuthOptions = {
 export const authorizeUser = async () => {
   const session = await getServerSession(authOptions)
 
+  console.log('Session:', session)
+
   if (!session?.user?.email) {
     throw Error('Unauthorized')
   }
