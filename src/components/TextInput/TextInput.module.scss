@@ -19,12 +19,11 @@
 .formInput:-webkit-autofill:hover,
 .formInput:-webkit-autofill:focus,
 .formInput:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #0f1217 inset !important;
-    box-shadow: 0 0 0 30px #0f1217 inset !important;
-    -webkit-text-fill-color: rgba(226, 234, 241, 1) !important;
-    color: rgba(226, 234, 241, 1) !important;
+  -webkit-box-shadow: 0 0 0 30px #0f1217 inset !important;
+  box-shadow: 0 0 0 30px #0f1217 inset !important;
+  -webkit-text-fill-color: rgba(226, 234, 241, 1) !important;
+  color: rgba(226, 234, 241, 1) !important;
 }
-
 
 .formLabel {
   font-size: 12px;

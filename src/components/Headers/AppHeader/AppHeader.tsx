@@ -5,13 +5,10 @@ import Image from 'next/image'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
-
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-
 import { Container } from '@/components/Container/Container'
-
 import styles from './AppHeader.module.scss'
 import { AppRoutes } from '@/utils/routes'
 
@@ -67,8 +64,10 @@ const AppHeader = async () => {
           </Link>
 
           <div className={styles.frameButtons}>
-            <GithubLoginButton />
-            <CreateProfileBtn />
+            <div className={styles.buttonBox}>
+              <GithubLoginButton />
+              <CreateProfileBtn />
+            </div>
           </div>
         </div>
       </Container>
