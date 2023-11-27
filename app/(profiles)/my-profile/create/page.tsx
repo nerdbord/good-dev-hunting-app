@@ -10,6 +10,7 @@ import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInfo
 import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { UploadProvider } from '@/contexts/UploadContext'
 
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
@@ -18,23 +19,25 @@ const CreateProfilePage = async () => {
     redirect(AppRoutes.home)
   }
 
-  const myProfile = await getProfileByUserEmail(session.user.email)
+  const profile = await getProfileByUserEmail(session.user.email)
 
-  if (myProfile) {
+  if (profile) {
     redirect(AppRoutes.myProfile)
   }
 
   return (
-    <CreateProfileFormWrapper>
-      <div className={styles.wrapper}>
-        <CreateProfileTopBar />
-        <div className={styles.formBox}>
-          <PersonalInfo />
-          <LocationPreferences />
-          <WorkInformation />
+    <UploadProvider>
+      <CreateProfileFormWrapper>
+        <div className={styles.wrapper}>
+          <CreateProfileTopBar />
+          <div className={styles.formBox}>
+            <PersonalInfo profile={profile} />
+            <LocationPreferences />
+            <WorkInformation />
+          </div>
         </div>
-      </div>
-    </CreateProfileFormWrapper>
+      </CreateProfileFormWrapper>
+    </UploadProvider>
   )
 }
 

@@ -33,16 +33,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include mobile {
+    letter-spacing: -1.08px;
+  }
 }
 
 .frameButtons {
   height: 44px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0;
-  gap: 12px;
+  justify-content: center;
+
   @include mobile {
     position: fixed;
     bottom: 0;
@@ -52,10 +52,17 @@
     justify-content: center;
     padding: $spacing-4 12%;
     background-color: #04080d;
-    button {
-      width: 100%;
-    }
+    z-index: 1000;
   }
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
 }
 
 .githubAccConnected {

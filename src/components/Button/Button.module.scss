@@ -16,8 +16,7 @@
   line-height: 20px;
   transition: background-color 300ms;
   @include mobile {
-    width: 100%;
-    padding: 12px 0;
+    width: 166px;
     white-space: nowrap;
   }
 }

@@ -10,6 +10,7 @@ import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInfo
 import EditProfileFormWrapper from '@/components/EditProfileForm/EditProfileFormWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { UploadProvider } from '@/contexts/UploadContext'
 
 export const revalidate = 0
 
@@ -27,16 +28,18 @@ const EditProfilePage = async () => {
   }
 
   return (
-    <EditProfileFormWrapper profile={profile}>
-      <div className={styles.wrapper}>
-        <CreateProfileTopBar />
-        <div className={styles.formBox}>
-          <PersonalInfo />
-          <LocationPreferences />
-          <WorkInformation />
+    <UploadProvider>
+      <EditProfileFormWrapper profile={profile}>
+        <div className={styles.wrapper}>
+          <CreateProfileTopBar />
+          <div className={styles.formBox}>
+            <PersonalInfo profile={profile} />
+            <LocationPreferences />
+            <WorkInformation />
+          </div>
         </div>
-      </div>
-    </EditProfileFormWrapper>
+      </EditProfileFormWrapper>
+    </UploadProvider>
   )
 }
 

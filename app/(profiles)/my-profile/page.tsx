@@ -10,6 +10,7 @@ import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails
 import { AppRoutes } from '@/utils/routes'
 
 export const revalidate = 0
+
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
