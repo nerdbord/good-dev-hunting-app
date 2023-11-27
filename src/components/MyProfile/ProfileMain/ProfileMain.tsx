@@ -3,7 +3,7 @@ import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/images/🇵🇱.jpg'
+import PolandFlag from '@/assets/images/flagPL.jpg'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
@@ -89,14 +89,14 @@ const ProfileMain = async () => {
                 {profile.country.name}, {profile.city.name}
               </p>
             </div>
-             {profile.country.openForRelocation && (
-               <div className={styles.location}>Open to country relocation</div>
-             )}
-             {profile.city.openForRelocation && (
-               <div className={styles.location}>Open to city relocation</div>
-             )}
-             {profile.remoteOnly && (
-               <div className={styles.location}>Remote only</div>
+            {profile.country.openForRelocation && (
+              <div className={styles.location}>Open to country relocation</div>
+            )}
+            {profile.city.openForRelocation && (
+              <div className={styles.location}>Open to city relocation</div>
+            )}
+            {profile.remoteOnly && (
+              <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
