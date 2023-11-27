@@ -22,7 +22,8 @@ export default function ContactForm({
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
       try {
-        console.log('Handle submit', values)
+        // Handle submit actions
+        // console.log('Handle submit', values)
         showSuccessMsg()
       } catch (error) {
         console.error('Error sending email', error)
