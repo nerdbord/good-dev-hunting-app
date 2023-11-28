@@ -2,12 +2,15 @@
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 1000;
+    z-index: 1001;
     background: rgba(22, 26, 31, 0.9);
     width: 100vw;
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    @include mobile {
+        min-height: 100%;
+    }
 }
 
 .container {
@@ -31,6 +34,6 @@
         border-radius: 0;
         box-shadow: none;
         margin-bottom: 0;
-        min-height: 100vh;
+        min-height: 100%;
     }
 }
