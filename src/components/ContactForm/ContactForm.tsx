@@ -25,6 +25,7 @@ export default function ContactForm({
         // Handle submit actions
         // console.log('Handle submit', values)
         showSuccessMsg()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)
       }
