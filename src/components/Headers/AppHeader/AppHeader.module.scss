@@ -14,6 +14,11 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  /*   @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  } */
 }
 
 .logo {
@@ -73,10 +78,13 @@
 }
 
 .github {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  display: none;
+  /*   @include mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  } */
 }
 
 .githubAcc {
@@ -88,14 +96,6 @@
 
 .githubAccImg {
   border-radius: 50%;
-}
-
-.frameLogin {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
 }
 
 .mobileButton {

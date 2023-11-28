@@ -19,6 +19,9 @@ const AppHeader = async () => {
     ? await getProfileByUserEmail(session.user.email)
     : null
 
+  console.log(session)
+  console.log(profile)
+
   if (session) {
     return (
       <header className={styles.wrapper}>
@@ -29,7 +32,7 @@ const AppHeader = async () => {
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
 
-            <div className={styles.frameLogin}>
+            <div className={styles.github}>
               <p className={styles.githubAccConnected}>
                 Connected Github account
               </p>
@@ -46,8 +49,8 @@ const AppHeader = async () => {
                 )}
                 <p className={styles.githubAccName}>{session?.user.name}</p>
               </div>
-              {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
             </div>
+            {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </Container>
       </header>
