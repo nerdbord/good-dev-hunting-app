@@ -89,14 +89,14 @@ const ProfileMain = async () => {
                 {profile.country.name}, {profile.city.name}
               </p>
             </div>
-             {profile.country.openForRelocation && (
-               <div className={styles.location}>Open to country relocation</div>
-             )}
-             {profile.city.openForRelocation && (
-               <div className={styles.location}>Open to city relocation</div>
-             )}
-             {profile.remoteOnly && (
-               <div className={styles.location}>Remote only</div>
+            {profile.country.openForRelocation && (
+              <div className={styles.location}>Open to country relocation</div>
+            )}
+            {profile.city.openForRelocation && (
+              <div className={styles.location}>Open to city relocation</div>
+            )}
+            {profile.remoteOnly && (
+              <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
