@@ -35,10 +35,10 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const { runAsync, loading } = useAsyncAction()
 
-  useEffect(() => {
+  /*   useEffect(() => {
     router.refresh()
   })
-
+ */
   useEffect(() => {
     if (triggerUpload) {
       handleUpload()

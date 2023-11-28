@@ -5,7 +5,6 @@ import AppHeader from '@/components/Headers/AppHeader/AppHeader'
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <AppHeader />
       <Container>{children}</Container>
     </>
