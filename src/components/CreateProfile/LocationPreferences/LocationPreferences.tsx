@@ -5,7 +5,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import SwitchInput from '@/components/Switch/Switch'
 import { useFormikContext } from 'formik'
-import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 
 const LocationPreferences = () => {

@@ -4,7 +4,7 @@ import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/components/TextArea/TextArea'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
-import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
 
