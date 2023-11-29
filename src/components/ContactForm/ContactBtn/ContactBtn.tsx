@@ -10,7 +10,7 @@ const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
   const { showModal, closeModal } = useModal()
 
   return (
-    <div>
+    <div data-test-id="contactBtn">
       <Button
         onClick={() => {
           showModal(

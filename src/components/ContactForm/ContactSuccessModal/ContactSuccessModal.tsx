@@ -21,7 +21,7 @@ export default function ContactSuccessModal({
         {getName(userProfile.fullName)}.
       </p>
 
-      <div>
+      <div data-test-id="closeBtn">
         <Button variant={'primary'} onClick={() => onClose()}>
           Close
         </Button>

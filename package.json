@@ -18,7 +18,10 @@
     "cypress:open": "cypress open"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["npm run lint", "npm run format:staged"]
+    "*.{ts,tsx}": [
+      "npm run lint",
+      "npm run format:staged"
+    ]
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
