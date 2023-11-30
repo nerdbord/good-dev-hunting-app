@@ -1,15 +1,10 @@
 describe('Account Setup', () => {
   it('covers the user golden path', () => {
-    Cypress.on('uncaught:exception', (err) => {
-      if (err.message.includes('NEXT_REDIRECT')) {
-        return false
-      }
-      return true
-    })
     cy.visit('/')
     cy.get('[data-testid="createProfileButton"]').should('be.visible').click()
     cy.login()
-    cy.visit('http://localhost:3000/my-profile/create')
+    cy.visit('/my-profile/create')
+    cy.url().should('include', '/my-profile/create')
     cy.get('[data-testid="fullName"]').type('Krzysztof Misiorny')
     cy.get('[data-testid="linkedin"]').type('https://www.linkedin.com/')
     cy.get('[data-testid="bio"]').type('dzień dobry :)')
@@ -29,7 +24,9 @@ describe('Account Setup', () => {
     cy.get('[data-testid="publishProfileButton"]', { timeout: 20000 })
       .should('be.visible')
       .click()
-    cy.get('[data-testid="publishProfilePopup"]', { timeout: 20000 }).should('be.visible')
+    cy.get('[data-testid="publishProfilePopup"]', { timeout: 20000 }).should(
+      'be.visible',
+    )
   })
 })
 
