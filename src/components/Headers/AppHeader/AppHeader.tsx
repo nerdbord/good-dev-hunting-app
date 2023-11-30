@@ -21,7 +21,6 @@ const AppHeader = async () => {
 
   console.log(session)
   console.log(profile)
-
   if (session) {
     return (
       <header className={styles.wrapper}>
@@ -31,26 +30,31 @@ const AppHeader = async () => {
               <img src={logo.src} alt="Logo" />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
+            {profile ? (
+              <div className={styles.github}>
+                <p className={styles.githubAccConnected}>
+                  Connected Github account
+                </p>
+                <div className={styles.githubAcc}>
+                  {session.user.image && (
+                    <Image
+                      className={styles.githubAccImg}
+                      src={session.user.image}
+                      width={38}
+                      height={38}
+                      alt="github avatar"
+                    />
+                  )}
+                  <p className={styles.githubAccName}>{session?.user.name}</p>
+                </div>
+              </div>
+            ) : null}
 
-            <div className={styles.github}>
-              <p className={styles.githubAccConnected}>
-                Connected Github account
-              </p>
-
-              <div className={styles.githubAcc}>
-                {session.user.image && (
-                  <Image
-                    className={styles.githubAccImg}
-                    src={session.user.image}
-                    width={38}
-                    height={38}
-                    alt="github avatar"
-                  />
-                )}
-                <p className={styles.githubAccName}>{session?.user.name}</p>
+            <div className={styles.frameButtons}>
+              <div className={styles.buttonBox}>
+                {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
               </div>
             </div>
-            {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </Container>
       </header>
