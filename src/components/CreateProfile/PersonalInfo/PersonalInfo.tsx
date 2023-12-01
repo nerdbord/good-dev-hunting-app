@@ -47,11 +47,9 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               addImportantIcon={true}
               name="contactEmail"
               disabled={true}
+              tooltipText=" Email is connected to your Github profile and cannot be changed!"
             />
           </InputFormError>
-          <div className={styles.tooltip}>
-            Email is connected to your Github profile and cannot be changed
-          </div>
         </div>
         <UserPhotoUploader profile={profile} />
         <TextInput
@@ -71,6 +69,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               onChange={handleChange}
               name="bio"
               maxLength={1500}
+              tooltipText="Let others know you - write a few sentences about yourself."
             />{' '}
             <div className={styles.lettersCount}>
               {values.bio.length} / 1500 characters
