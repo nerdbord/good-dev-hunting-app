@@ -19,6 +19,9 @@ const AppHeader = async () => {
     ? await getProfileByUserEmail(session.user.email)
     : null
 
+  console.log(session)
+  console.log(profile)
+
   if (session) {
     return (
       <header className={styles.wrapper}>
