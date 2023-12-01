@@ -91,7 +91,7 @@ export default function ContactForm({
           </InputFormError>
         </div>
         <div className={styles.btnContainer}>
-          <div className={styles.primaryBtn}>
+          <div className={styles.primaryBtn} data-test-id="submitBtn">
             <Button
               type="submit"
               variant="primary"
