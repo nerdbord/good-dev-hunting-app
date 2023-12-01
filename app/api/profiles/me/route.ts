@@ -58,7 +58,7 @@ export async function PUT(request: NextRequest) {
 
       const updatedUser = await updateUserData(foundProfile.id, updatedData)
 
-      return new NextResponse(JSON.stringify(updatedUser), { status: 200 })
+      return NextResponse.json(updatedUser, { status: 200 })
     } else {
       return new NextResponse('User does not exist', { status: 404 })
     }

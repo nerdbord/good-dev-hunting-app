@@ -3,14 +3,24 @@
   display: flex;
   justify-content: flex-end;
   top: $spacing-5;
-  width: 100%;
+  width: calc(100% - 48px);
   margin: 0;
   padding: 0 $spacing-5 0 0;
   @include mobile {
     position: static;
+    width: 100%;
   }
 }
 
 .withBackBackButton {
   justify-content: space-between;
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  column-gap: 10px;
 }
