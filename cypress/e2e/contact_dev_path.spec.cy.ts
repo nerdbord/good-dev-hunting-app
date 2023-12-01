@@ -1,7 +1,7 @@
 describe('The Home Page', () => {
   it('Good Dev Local', () => {
     cy.viewport(1920, 1080)
-    cy.visit('http://localhost:3000/', { failOnStatusCode: false })
+    cy.visit('/', { failOnStatusCode: false })
     cy.get('[data-test-id="profileContainer"]').first().click()
     cy.intercept('/profile/*').as('profileLoaded')
     cy.wait('@profileLoaded')
@@ -13,6 +13,7 @@ describe('The Home Page', () => {
       'We have a very interesting job offer for you.',
     )
     cy.get('[data-test-id="submitBtn"]').click()
+    cy.get('[data-test-id="confirmMessageSent"]').should('be.visible')
     cy.get('[data-test-id="closeBtn"]').click()
   })
 })

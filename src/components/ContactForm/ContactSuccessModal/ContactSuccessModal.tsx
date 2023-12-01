@@ -14,7 +14,7 @@ export default function ContactSuccessModal({
     return name.trim().split(' ')[0]
   }
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-test-id="confirmMessageSent">
       <h4>Message sent!</h4>
       <p>
         Your message was sent, you can now relax and wait for the response from{' '}
