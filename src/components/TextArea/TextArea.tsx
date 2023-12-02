@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import styles from './TextArea.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
+import Tooltip from '@/components/Tooltip/Tooltip'
 
 interface TextAreaProps {
   label: string
@@ -13,6 +14,7 @@ interface TextAreaProps {
   excludeDigits?: boolean
   maxLength?: number
   height?: number
+  tooltipText?: string | null
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -25,6 +27,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   excludeDigits,
   maxLength,
   height,
+  tooltipText,
 }) => {
   const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -39,7 +42,11 @@ const TextArea: React.FC<TextAreaProps> = ({
     <div className={styles.formItem}>
       <label className={styles.formLabel}>
         {label}
-        {addImportantIcon && <ImportantIcon />}
+        {addImportantIcon && (
+          <Tooltip text={tooltipText || null}>
+            <ImportantIcon />
+          </Tooltip>
+        )}
       </label>
       <textarea
         className={`${styles.formTextarea} ${isTyped ? styles.typed : ''}`}

@@ -1,11 +1,9 @@
 .wrapper {
-  height: 125px;
+  height: min-content;
   background: #04080d;
-  padding: 0 8%;
+  padding: 25px 8%;
   @include mobile {
-    height: 75px;
     padding-left: $spacing-4;
-    margin-bottom: 22px;
   }
 }
 
@@ -14,6 +12,12 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+  }
 }
 
 .logo {
@@ -52,7 +56,7 @@
     justify-content: center;
     padding: $spacing-4 12%;
     background-color: #04080d;
-    z-index: 1000;
+    z-index: 10;
   }
 }
 
@@ -63,39 +67,6 @@
   align-items: center;
   gap: 12px;
   max-width: 420px;
-}
-
-.githubAccConnected {
-  color: #89939e;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.github {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.githubAcc {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.githubAccImg {
-  border-radius: 50%;
-}
-
-.frameLogin {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
 }
 
 .mobileButton {
