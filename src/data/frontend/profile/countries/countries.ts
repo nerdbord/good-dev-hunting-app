@@ -1,809 +1,806 @@
-interface ICountries {
+export interface ICountries {
   name: string
   flag: string
 }
 
 export const countries: ICountries[] = [
   {
-    name: 'Christmas Island',
-    flag: '🇨🇽',
-  },
-  {
-    name: 'Eritrea',
-    flag: '🇪🇷',
-  },
-  {
-    name: 'Samoa',
-    flag: '🇼🇸',
-  },
-  {
-    name: 'North Macedonia',
-    flag: '🇲🇰',
-  },
-  {
-    name: 'Djibouti',
-    flag: '🇩🇯',
-  },
-  {
-    name: 'Jordan',
-    flag: '🇯🇴',
-  },
-  {
-    name: 'Pakistan',
-    flag: '🇵🇰',
-  },
-  {
-    name: 'French Polynesia',
-    flag: '🇵🇫',
-  },
-  {
-    name: 'Ireland',
-    flag: '🇮🇪',
-  },
-  {
-    name: 'Mauritania',
-    flag: '🇲🇷',
-  },
-  {
-    name: 'Denmark',
-    flag: '🇩🇰',
-  },
-  {
-    name: 'Namibia',
-    flag: '🇳🇦',
-  },
-  {
-    name: 'Ghana',
-    flag: '🇬🇭',
-  },
-  {
-    name: 'South Sudan',
-    flag: '🇸🇸',
-  },
-  {
-    name: 'Slovakia',
-    flag: '🇸🇰',
-  },
-  {
-    name: 'American Samoa',
-    flag: '🇦🇸',
-  },
-  {
-    name: 'Moldova',
-    flag: '🇲🇩',
-  },
-  {
-    name: 'North Korea',
-    flag: '🇰🇵',
-  },
-  {
-    name: 'Macau',
-    flag: '🇲🇴',
-  },
-  {
-    name: 'Turks and Caicos Islands',
-    flag: '🇹🇨',
-  },
-  {
-    name: 'Seychelles',
-    flag: '🇸🇨',
-  },
-  {
-    name: 'Armenia',
-    flag: '🇦🇲',
-  },
-  {
-    name: 'Curaçao',
-    flag: '🇨🇼',
-  },
-  {
-    name: 'Guadeloupe',
-    flag: '🇬🇵',
-  },
-  {
-    name: 'British Indian Ocean Territory',
-    flag: '🇮🇴',
-  },
-  {
-    name: 'Equatorial Guinea',
-    flag: '🇬🇶',
-  },
-  {
-    name: 'Syria',
-    flag: '🇸🇾',
-  },
-  {
-    name: 'Angola',
-    flag: '🇦🇴',
-  },
-  {
-    name: 'Tajikistan',
-    flag: '🇹🇯',
-  },
-  {
-    name: 'Venezuela',
-    flag: '🇻🇪',
-  },
-  {
-    name: 'United States Minor Outlying Islands',
-    flag: '🇺🇲',
-  },
-  {
-    name: 'Åland Islands',
-    flag: '🇦🇽',
-  },
-  {
-    name: 'Poland',
-    flag: '🇵🇱',
-  },
-  {
-    name: 'Saudi Arabia',
-    flag: '🇸🇦',
-  },
-  {
-    name: 'Republic of the Congo',
-    flag: '',
-  },
-  {
-    name: 'Bosnia and Herzegovina',
-    flag: '🇧🇦',
-  },
-  {
-    name: 'United States Virgin Islands',
-    flag: '🇻🇬',
-  },
-  {
-    name: 'New Caledonia',
-    flag: '🇳🇨',
-  },
-  {
-    name: 'San Marino',
-    flag: '🇸🇲',
-  },
-  {
-    name: 'Czechia',
-    flag: '🇨🇿',
-  },
-  {
-    name: 'Guatemala',
-    flag: '🇬🇹',
-  },
-  {
-    name: 'South Korea',
-    flag: '🇰🇷',
-  },
-  {
-    name: 'Estonia',
-    flag: '🇪🇪',
-  },
-  {
-    name: 'Nepal',
-    flag: '🇳🇵',
-  },
-  {
-    name: 'Kosovo',
-    flag: '🇽🇰',
-  },
-  {
-    name: 'Botswana',
-    flag: '🇧🇼',
-  },
-  {
-    name: 'Philippines',
-    flag: '🇵🇭',
-  },
-  {
-    name: 'Saint Pierre and Miquelon',
-    flag: '🇵🇲',
-  },
-  {
-    name: 'Iraq',
-    flag: '🇮🇶',
-  },
-  {
-    name: 'Lebanon',
-    flag: '🇱🇧',
-  },
-  {
-    name: 'Burundi',
-    flag: '🇧🇮',
-  },
-  {
-    name: 'Mongolia',
-    flag: '🇲🇳',
-  },
-  {
-    name: 'Faroe Islands',
-    flag: '',
-  },
-  {
-    name: 'Paraguay',
-    flag: '🇵🇾',
-  },
-  {
-    name: 'Svalbard and Jan Mayen',
-    flag: '🇸🇯',
-  },
-  {
-    name: 'Tokelau',
-    flag: '🇹🇰',
-  },
-  {
-    name: 'Guernsey',
-    flag: '🇬🇬',
-  },
-  {
-    name: 'Caribbean Netherlands',
-    flag: '🇧🇶',
+    name: 'Afghanistan',
+    flag: '🇦🇫',
   },
   {
     name: 'Algeria',
     flag: '🇩🇿',
   },
   {
-    name: 'France',
-    flag: '🇫🇷',
+    name: 'American Samoa',
+    flag: '🇦🇸',
   },
   {
-    name: 'Netherlands',
-    flag: '🇳🇱',
-  },
-  {
-    name: 'Greenland',
-    flag: '🇬🇱',
-  },
-  {
-    name: 'Sint Maarten',
-    flag: '🇸🇽',
-  },
-  {
-    name: 'Chad',
-    flag: '🇹🇩',
-  },
-  {
-    name: 'Finland',
-    flag: '🇫🇮',
-  },
-  {
-    name: 'Panama',
-    flag: '🇵🇦',
-  },
-  {
-    name: 'Palestine',
-    flag: '🇵🇸',
-  },
-  {
-    name: 'Yemen',
-    flag: '🇾🇪',
-  },
-  {
-    name: 'Brazil',
-    flag: '🇧🇷',
-  },
-  {
-    name: 'Nigeria',
-    flag: '🇳🇬',
-  },
-  {
-    name: 'Palau',
-    flag: '🇵🇼',
-  },
-  {
-    name: 'Japan',
-    flag: '🇯🇵',
-  },
-  {
-    name: 'Tanzania',
-    flag: '🇹🇿',
-  },
-  {
-    name: 'Kazakhstan',
-    flag: '🇰🇿',
-  },
-  {
-    name: 'Portugal',
-    flag: '🇵🇹',
-  },
-  {
-    name: 'South Georgia',
-    flag: '🇬🇸',
-  },
-  {
-    name: 'Sri Lanka',
-    flag: '🇱🇰',
-  },
-  {
-    name: 'Germany',
-    flag: '🇩🇪',
-  },
-  {
-    name: 'Western Sahara',
-    flag: '🇪🇭',
-  },
-  {
-    name: 'Myanmar',
-    flag: '🇲🇲',
-  },
-  {
-    name: 'Colombia',
-    flag: '🇨🇴',
-  },
-  {
-    name: 'Peru',
-    flag: '🇵🇪',
-  },
-  {
-    name: 'Senegal',
-    flag: '🇸🇳',
-  },
-  {
-    name: 'Kyrgyzstan',
-    flag: '🇰🇬',
-  },
-  {
-    name: 'China',
-    flag: '🇨🇳',
-  },
-  {
-    name: 'Afghanistan',
-    flag: '🇦🇫',
-  },
-  {
-    name: 'Turkey',
-    flag: '🇹🇷',
-  },
-  {
-    name: 'Liberia',
-    flag: '🇱🇷',
-  },
-  {
-    name: 'South Africa',
-    flag: '🇿🇦',
-  },
-  {
-    name: 'Chile',
-    flag: '🇨🇱',
-  },
-  {
-    name: 'Malta',
-    flag: '🇲🇹',
-  },
-  {
-    name: 'Kiribati',
-    flag: '🇰🇮',
-  },
-  {
-    name: 'Cape Verde',
-    flag: '🇨🇻',
-  },
-  {
-    name: 'Jersey',
-    flag: '🇯🇪',
-  },
-  {
-    name: 'Iceland',
-    flag: '🇮🇸',
-  },
-  {
-    name: 'Gambia',
-    flag: '🇬🇲',
-  },
-  {
-    name: 'Vanuatu',
-    flag: '🇻🇺',
-  },
-  {
-    name: 'Uruguay',
-    flag: '🇺🇾',
-  },
-  {
-    name: 'Oman',
-    flag: '🇴🇲',
-  },
-  {
-    name: 'Sudan',
-    flag: '🇸🇩',
-  },
-  {
-    name: 'India',
-    flag: '🇮🇳',
-  },
-  {
-    name: 'Laos',
-    flag: '🇱🇦',
-  },
-  {
-    name: 'Aruba',
-    flag: '🇦🇼',
-  },
-  {
-    name: 'Martinique',
-    flag: '🇲🇶',
-  },
-  {
-    name: 'Comoros',
-    flag: '🇰🇲',
-  },
-  {
-    name: 'Spain',
-    flag: '🇪🇸',
-  },
-  {
-    name: 'Antigua and Barbuda',
-    flag: '🇦🇬',
-  },
-  {
-    name: 'Uzbekistan',
-    flag: '🇺🇿',
-  },
-  {
-    name: 'Maldives',
-    flag: '🇲🇻',
-  },
-  {
-    name: 'Gibraltar',
-    flag: '🇬🇮',
-  },
-  {
-    name: 'Indonesia',
-    flag: '🇮🇩',
-  },
-  {
-    name: 'Pitcairn Islands',
-    flag: '🇵🇳',
-  },
-  {
-    name: 'Vietnam',
-    flag: '🇻🇳',
-  },
-  {
-    name: 'Malaysia',
-    flag: '🇲🇾',
-  },
-  {
-    name: 'Cook Islands',
-    flag: '🇨🇰',
-  },
-  {
-    name: 'Eswatini',
-    flag: '🇸🇿',
-  },
-  {
-    name: 'Uganda',
-    flag: '🇺🇬',
-  },
-  {
-    name: 'Madagascar',
-    flag: '🇲🇬',
-  },
-  {
-    name: 'Fiji',
-    flag: '🇫🇯',
-  },
-  {
-    name: 'Norway',
-    flag: '🇳🇴',
-  },
-  {
-    name: 'Antarctica',
-    flag: '🇦🇶',
-  },
-  {
-    name: 'Bouvet Island',
-    flag: '🇧🇻',
-  },
-  {
-    name: 'Cyprus',
-    flag: '🇨🇾',
-  },
-  {
-    name: 'Taiwan',
-    flag: '🇹🇼',
-  },
-  {
-    name: 'Papua New Guinea',
-    flag: '🇵🇬',
-  },
-  {
-    name: 'Rwanda',
-    flag: '🇷🇼',
-  },
-  {
-    name: 'Congo',
-    flag: '🇨🇩',
-  },
-  {
-    name: 'Cameroon',
-    flag: '🇨🇲',
-  },
-  {
-    name: 'Serbia',
-    flag: '🇷🇸',
-  },
-  {
-    name: 'Lithuania',
-    flag: '🇱🇹',
-  },
-  {
-    name: 'French Southern and Antarctic Lands',
-    flag: '🇹🇫',
-  },
-  {
-    name: 'Cambodia',
-    flag: '🇰🇭',
-  },
-  {
-    name: 'Saint Helena, Ascension and Tristan da Cunha',
-    flag: '🇦🇨',
-  },
-  {
-    name: 'United Arab Emirates',
-    flag: '🇦🇪',
-  },
-  {
-    name: 'Bermuda',
-    flag: '🇧🇲',
-  },
-  {
-    name: 'Monaco',
-    flag: '🇲🇨',
-  },
-  {
-    name: 'Cuba',
-    flag: '🇨🇺',
-  },
-  {
-    name: 'Hong Kong',
-    flag: '🇭🇰',
-  },
-  {
-    name: 'Northern Mariana Islands',
-    flag: '🇲🇵',
-  },
-  {
-    name: 'Togo',
-    flag: '🇹🇬',
-  },
-  {
-    name: 'Luxembourg',
-    flag: '🇱🇺',
-  },
-  {
-    name: 'Mauritius',
-    flag: '🇲🇺',
-  },
-  {
-    name: 'Argentina',
-    flag: '🇦🇷',
-  },
-  {
-    name: 'Grenada',
-    flag: '🇬🇩',
-  },
-  {
-    name: 'Nicaragua',
-    flag: '🇳🇮',
-  },
-  {
-    name: 'Niue',
-    flag: '🇳🇺',
-  },
-  {
-    name: 'Ukraine',
-    flag: '🇺🇦',
-  },
-  {
-    name: 'Guyana',
-    flag: '🇬🇾',
-  },
-  {
-    name: 'Niger',
-    flag: '🇳🇦',
-  },
-  {
-    name: 'Benin',
-    flag: '🇧🇯',
-  },
-  {
-    name: 'Saint Lucia',
-    flag: '🇱🇨',
-  },
-  {
-    name: 'Tuvalu',
-    flag: '🇹🇻',
-  },
-  {
-    name: 'Norfolk Island',
-    flag: '🇳🇫',
-  },
-  {
-    name: 'Egypt',
-    flag: '🇪🇬',
-  },
-  {
-    name: 'Saint Kitts and Nevis',
-    flag: '🇰🇳',
-  },
-  {
-    name: 'Lesotho',
-    flag: '🇱🇸',
-  },
-  {
-    name: 'Tonga',
-    flag: '🇹🇴',
-  },
-  {
-    name: 'Georgia',
-    flag: '🇬🇪',
-  },
-  {
-    name: 'Ethiopia',
-    flag: '🇪🇹',
-  },
-  {
-    name: 'Dominican Republic',
-    flag: '🇩🇴',
-  },
-  {
-    name: 'Saint Vincent and the Grenadines',
-    flag: '🇻🇨',
-  },
-  {
-    name: 'Belize',
-    flag: '🇧🇿',
-  },
-  {
-    name: 'Isle of Man',
-    flag: '🇮🇲',
-  },
-  {
-    name: 'Morocco',
-    flag: '🇲🇦',
-  },
-  {
-    name: 'Haiti',
-    flag: '🇭🇹',
-  },
-  {
-    name: 'Mayotte',
-    flag: '🇾🇹',
-  },
-  {
-    name: 'Burkina Faso',
-    flag: '🇧🇫',
-  },
-  {
-    name: 'Bangladesh',
-    flag: '🇧🇩',
-  },
-  {
-    name: 'Kuwait',
-    flag: '🇰🇼',
-  },
-  {
-    name: 'Réunion',
-    flag: '🇷🇪',
-  },
-  {
-    name: 'Jamaica',
-    flag: '🇯🇲',
-  },
-  {
-    name: 'Romania',
-    flag: '🇷🇴',
-  },
-  {
-    name: 'São Tomé and Príncipe',
-    flag: '🇸🇹',
-  },
-  {
-    name: 'Bahamas',
-    flag: '🇧🇸',
-  },
-  {
-    name: 'Mexico',
-    flag: '🇲🇽',
-  },
-  {
-    name: 'Saint Martin',
-    flag: '🇲🇫',
-  },
-  {
-    name: 'El Salvador',
-    flag: '🇸🇻',
-  },
-  {
-    name: 'Saint Barthélemy',
-    flag: '🇧🇱',
-  },
-  {
-    name: 'Micronesia',
-    flag: '🇫🇲',
-  },
-  {
-    name: 'Turkmenistan',
-    flag: '🇹🇲',
+    name: 'Angola',
+    flag: '🇦🇴',
   },
   {
     name: 'Anguilla',
     flag: '🇦🇮',
   },
   {
-    name: 'Central African Republic',
-    flag: '🇨🇫',
+    name: 'Albania',
+    flag: '🇦🇱',
   },
   {
-    name: 'Suriname',
-    flag: '🇸🇷',
+    name: 'Antarctica',
+    flag: '🇦🇶',
   },
   {
-    name: 'Belgium',
-    flag: '🇧🇪',
+    name: 'Argentina',
+    flag: '🇦🇷',
   },
   {
-    name: 'Sweden',
-    flag: '🇸🇪',
+    name: 'Armenia',
+    flag: '🇦🇲',
   },
   {
-    name: 'Bolivia',
-    flag: '🇧🇴',
-  },
-  {
-    name: 'Montenegro',
-    flag: '🇲🇪',
-  },
-  {
-    name: 'Mozambique',
-    flag: '🇲🇿',
-  },
-  {
-    name: 'Latvia',
-    flag: '🇱🇻',
-  },
-  {
-    name: 'Malawi',
-    flag: '🇲🇼',
-  },
-  {
-    name: 'Mali',
-    flag: '🇲🇱',
-  },
-  {
-    name: 'Vatican City',
-    flag: '🇻🇦',
-  },
-  {
-    name: 'Montserrat',
-    flag: '🇲🇸',
+    name: 'Aruba',
+    flag: '🇦🇼',
   },
   {
     name: 'Austria',
     flag: '🇦🇹',
   },
   {
-    name: 'Albania',
-    flag: '🇦🇱',
+    name: 'Åland Islands',
+    flag: '🇦🇽',
+  },
+  {
+    name: 'Bahamas',
+    flag: '🇧🇸',
+  },
+  {
+    name: 'Bangladesh',
+    flag: '🇧🇩',
+  },
+  {
+    name: 'Belgium',
+    flag: '🇧🇪',
+  },
+  {
+    name: 'Belize',
+    flag: '🇧🇿',
+  },
+  {
+    name: 'Benin',
+    flag: '🇧🇯',
+  },
+  {
+    name: 'Bermuda',
+    flag: '🇧🇲',
+  },
+  {
+    name: 'Bolivia',
+    flag: '🇧🇴',
+  },
+  {
+    name: 'Bosnia and Herzegovina',
+    flag: '🇧🇦',
+  },
+  {
+    name: 'Botswana',
+    flag: '🇧🇼',
+  },
+  {
+    name: 'Bouvet Island',
+    flag: '🇧🇻',
+  },
+  {
+    name: 'Brazil',
+    flag: '🇧🇷',
+  },
+  {
+    name: 'British Indian Ocean Territory',
+    flag: '🇮🇴',
   },
   {
     name: 'British Virgin Islands',
     flag: '🇻🇬',
   },
   {
-    name: 'Zambia',
-    flag: '🇿🇲',
+    name: 'Burkina Faso',
+    flag: '🇧🇫',
+  },
+  {
+    name: 'Burundi',
+    flag: '🇧🇮',
+  },
+  {
+    name: 'Cambodia',
+    flag: '🇰🇭',
+  },
+  {
+    name: 'Cameroon',
+    flag: '🇨🇲',
+  },
+  {
+    name: 'Cape Verde',
+    flag: '🇨🇻',
+  },
+  {
+    name: 'Caribbean Netherlands',
+    flag: '🇧🇶',
+  },
+  {
+    name: 'Central African Republic',
+    flag: '🇨🇫',
+  },
+  {
+    name: 'Chad',
+    flag: '🇹🇩',
+  },
+  {
+    name: 'Chile',
+    flag: '🇨🇱',
+  },
+  {
+    name: 'China',
+    flag: '🇨🇳',
+  },
+  {
+    name: 'Christmas Island',
+    flag: '🇨🇽',
+  },
+  {
+    name: 'Colombia',
+    flag: '🇨🇴',
+  },
+  {
+    name: 'Comoros',
+    flag: '🇰🇲',
+  },
+  {
+    name: 'Congo',
+    flag: '🇨🇩',
+  },
+  {
+    name: 'Cook Islands',
+    flag: '🇨🇰',
+  },
+  {
+    name: 'Croatia',
+    flag: '🇭🇷',
+  },
+  {
+    name: 'Cuba',
+    flag: '🇨🇺',
+  },
+  {
+    name: 'Curaçao',
+    flag: '🇨🇼',
+  },
+  {
+    name: 'Cyprus',
+    flag: '🇨🇾',
+  },
+  {
+    name: 'Czechia',
+    flag: '🇨🇿',
+  },
+  {
+    name: 'Denmark',
+    flag: '🇩🇰',
+  },
+  {
+    name: 'Djibouti',
+    flag: '🇩🇯',
+  },
+  {
+    name: 'Dominican Republic',
+    flag: '🇩🇴',
+  },
+  {
+    name: 'Egypt',
+    flag: '🇪🇬',
+  },
+  {
+    name: 'El Salvador',
+    flag: '🇸🇻',
+  },
+  {
+    name: 'Eritrea',
+    flag: '🇪🇷',
+  },
+  {
+    name: 'Estonia',
+    flag: '🇪🇪',
+  },
+  {
+    name: 'Eswatini',
+    flag: '🇸🇿',
+  },
+  {
+    name: 'Equatorial Guinea',
+    flag: '🇬🇶',
+  },
+  {
+    name: 'Ethiopia',
+    flag: '🇪🇹',
+  },
+  {
+    name: 'Faroe Islands',
+    flag: '',
+  },
+  {
+    name: 'Fiji',
+    flag: '🇫🇯',
+  },
+  {
+    name: 'Finland',
+    flag: '🇫🇮',
+  },
+  {
+    name: 'France',
+    flag: '🇫🇷',
   },
   {
     name: 'French Guiana',
     flag: '🇬🇫',
   },
   {
+    name: 'French Polynesia',
+    flag: '🇵🇫',
+  },
+  {
+    name: 'French Southern and Antarctic Lands',
+    flag: '🇹🇫',
+  },
+  {
+    name: 'Gambia',
+    flag: '🇬🇲',
+  },
+  {
+    name: 'Georgia',
+    flag: '🇬🇪',
+  },
+  {
+    name: 'Germany',
+    flag: '🇩🇪',
+  },
+  {
+    name: 'Ghana',
+    flag: '🇬🇭',
+  },
+  {
+    name: 'Gibraltar',
+    flag: '🇬🇮',
+  },
+  {
+    name: 'Greenland',
+    flag: '🇬🇱',
+  },
+  {
+    name: 'Grenada',
+    flag: '🇬🇩',
+  },
+  {
+    name: 'Guadeloupe',
+    flag: '🇬🇵',
+  },
+  {
+    name: 'Guatemala',
+    flag: '🇬🇹',
+  },
+  {
+    name: 'Guernsey',
+    flag: '🇬🇬',
+  },
+  {
+    name: 'Guyana',
+    flag: '🇬🇾',
+  },
+  {
+    name: 'Haiti',
+    flag: '🇭🇹',
+  },
+  {
+    name: 'Hong Kong',
+    flag: '🇭🇰',
+  },
+  {
+    name: 'Iceland',
+    flag: '🇮🇸',
+  },
+  {
+    name: 'Indonesia',
+    flag: '🇮🇩',
+  },
+  {
+    name: 'Iraq',
+    flag: '🇮🇶',
+  },
+  {
+    name: 'Ireland',
+    flag: '🇮🇪',
+  },
+  {
+    name: 'Isle of Man',
+    flag: '🇮🇲',
+  },
+  {
+    name: 'Jamaica',
+    flag: '🇯🇲',
+  },
+  {
+    name: 'Japan',
+    flag: '🇯🇵',
+  },
+  {
+    name: 'Jersey',
+    flag: '🇯🇪',
+  },
+  {
+    name: 'Jordan',
+    flag: '🇯🇴',
+  },
+  {
+    name: 'Kazakhstan',
+    flag: '🇰🇿',
+  },
+  {
+    name: 'Kiribati',
+    flag: '🇰🇮',
+  },
+  {
+    name: 'Kosovo',
+    flag: '🇽🇰',
+  },
+  {
+    name: 'Kuwait',
+    flag: '🇰🇼',
+  },
+  {
+    name: 'Kyrgyzstan',
+    flag: '🇰🇬',
+  },
+  {
+    name: 'Laos',
+    flag: '🇱🇦',
+  },
+  {
+    name: 'Latvia',
+    flag: '🇱🇻',
+  },
+  {
+    name: 'Lebanon',
+    flag: '🇱🇧',
+  },
+  {
+    name: 'Lesotho',
+    flag: '🇱🇸',
+  },
+  {
+    name: 'Liberia',
+    flag: '🇱🇷',
+  },
+  {
     name: 'Liechtenstein',
     flag: '🇱🇮',
+  },
+  {
+    name: 'Lithuania',
+    flag: '🇱🇹',
+  },
+  {
+    name: 'Luxembourg',
+    flag: '🇱🇺',
+  },
+  {
+    name: 'Macau',
+    flag: '🇲🇴',
+  },
+  {
+    name: 'Madagascar',
+    flag: '🇲🇬',
+  },
+  {
+    name: 'Malawi',
+    flag: '🇲🇼',
+  },
+  {
+    name: 'Malaysia',
+    flag: '🇲🇾',
+  },
+  {
+    name: 'Maldives',
+    flag: '🇲🇻',
+  },
+  {
+    name: 'Mali',
+    flag: '🇲🇱',
+  },
+  {
+    name: 'Malta',
+    flag: '🇲🇹',
+  },
+  {
+    name: 'Martinique',
+    flag: '🇲🇶',
+  },
+  {
+    name: 'Mauritania',
+    flag: '🇲🇷',
+  },
+  {
+    name: 'Mauritius',
+    flag: '🇲🇺',
+  },
+  {
+    name: 'Mayotte',
+    flag: '🇾🇹',
+  },
+  {
+    name: 'Mexico',
+    flag: '🇲🇽',
+  },
+  {
+    name: 'Micronesia',
+    flag: '🇫🇲',
+  },
+  {
+    name: 'Moldova',
+    flag: '🇲🇩',
+  },
+  {
+    name: 'Monaco',
+    flag: '🇲🇨',
+  },
+  {
+    name: 'Mongolia',
+    flag: '🇲🇳',
+  },
+  {
+    name: 'Montenegro',
+    flag: '🇲🇪',
+  },
+  {
+    name: 'Montserrat',
+    flag: '🇲🇸',
+  },
+  {
+    name: 'Morocco',
+    flag: '🇲🇦',
+  },
+  {
+    name: 'Mozambique',
+    flag: '🇲🇿',
+  },
+  {
+    name: 'Myanmar',
+    flag: '🇲🇲',
+  },
+  {
+    name: 'Namibia',
+    flag: '🇳🇦',
+  },
+  {
+    name: 'Nepal',
+    flag: '🇳🇵',
+  },
+  {
+    name: 'Netherlands',
+    flag: '🇳🇱',
+  },
+  {
+    name: 'New Caledonia',
+    flag: '🇳🇨',
+  },
+  {
+    name: 'Nicaragua',
+    flag: '🇳🇮',
+  },
+  {
+    name: 'Niger',
+    flag: '🇳🇦',
+  },
+  {
+    name: 'Nigeria',
+    flag: '🇳🇬',
+  },
+  {
+    name: 'Niue',
+    flag: '🇳🇺',
+  },
+  {
+    name: 'Norfolk Island',
+    flag: '🇳🇫',
+  },
+  {
+    name: 'North Korea',
+    flag: '🇰🇵',
+  },
+  {
+    name: 'North Macedonia',
+    flag: '🇲🇰',
+  },
+  {
+    name: 'Northern Mariana Islands',
+    flag: '🇲🇵',
+  },
+  {
+    name: 'Norway',
+    flag: '🇳🇴',
+  },
+  {
+    name: 'Oman',
+    flag: '🇴🇲',
+  },
+  {
+    name: 'Pakistan',
+    flag: '🇵🇰',
+  },
+  {
+    name: 'Palau',
+    flag: '🇵🇼',
+  },
+  {
+    name: 'Palestine',
+    flag: '🇵🇸',
+  },
+  {
+    name: 'Panama',
+    flag: '🇵🇦',
+  },
+  {
+    name: 'Papua New Guinea',
+    flag: '🇵🇬',
+  },
+  {
+    name: 'Paraguay',
+    flag: '🇵🇾',
+  },
+  {
+    name: 'Peru',
+    flag: '🇵🇪',
+  },
+  {
+    name: 'Philippines',
+    flag: '🇵🇭',
+  },
+  {
+    name: 'Pitcairn Islands',
+    flag: '🇵🇳',
+  },
+  {
+    name: 'Poland',
+    flag: '🇵🇱',
+  },
+  {
+    name: 'Portugal',
+    flag: '🇵🇹',
   },
   {
     name: 'Qatar',
     flag: '🇶🇦',
   },
+  {
+    name: 'Republic of the Congo',
+    flag: '',
+  },
+  {
+    name: 'Réunion',
+    flag: '🇷🇪',
+  },
+  {
+    name: 'Romania',
+    flag: '🇷🇴',
+  },
+  {
+    name: 'Rwanda',
+    flag: '🇷🇼',
+  },
+  {
+    name: 'Saint Barthélemy',
+    flag: '🇧🇱',
+  },
+  {
+    name: 'Saint Helena, Ascension and Tristan da Cunha',
+    flag: '🇦🇨',
+  },
+  {
+    name: 'Saint Kitts and Nevis',
+    flag: '🇰🇳',
+  },
+  {
+    name: 'Saint Lucia',
+    flag: '🇱🇨',
+  },
+  {
+    name: 'Saint Martin',
+    flag: '🇲🇫',
+  },
+  {
+    name: 'Saint Pierre and Miquelon',
+    flag: '🇵🇲',
+  },
+  {
+    name: 'Saint Vincent and the Grenadines',
+    flag: '🇻🇨',
+  },
+  {
+    name: 'Samoa',
+    flag: '🇼🇸',
+  },
+  {
+    name: 'San Marino',
+    flag: '🇸🇲',
+  },
+  {
+    name: 'São Tomé and Príncipe',
+    flag: '🇸🇹',
+  },
+  {
+    name: 'Saudi Arabia',
+    flag: '🇸🇦',
+  },
+  {
+    name: 'Senegal',
+    flag: '🇸🇳',
+  },
+  {
+    name: 'Serbia',
+    flag: '🇷🇸',
+  },
+  {
+    name: 'Seychelles',
+    flag: '🇸🇨',
+  },
+  {
+    name: 'Sint Maarten',
+    flag: '🇸🇽',
+  },
+  {
+    name: 'Slovakia',
+    flag: '🇸🇰',
+  },
+  {
+    name: 'South Africa',
+    flag: '🇿🇦',
+  },
+  {
+    name: 'South Georgia',
+    flag: '🇬🇸',
+  },
+  {
+    name: 'South Korea',
+    flag: '🇰🇷',
+  },
+  {
+    name: 'South Sudan',
+    flag: '🇸🇸',
+  },
+  {
+    name: 'Spain',
+    flag: '🇪🇸',
+  },
+  {
+    name: 'Sri Lanka',
+    flag: '🇱🇰',
+  },
+  {
+    name: 'Sudan',
+    flag: '🇸🇩',
+  },
+  {
+    name: 'Suriname',
+    flag: '🇸🇷',
+  },
+  {
+    name: 'Svalbard and Jan Mayen',
+    flag: '🇸🇯',
+  },
+  {
+    name: 'Sweden',
+    flag: '🇸🇪',
+  },
+  {
+    name: 'Syria',
+    flag: '🇸🇾',
+  },
+  {
+    name: 'Taiwan',
+    flag: '🇹🇼',
+  },
+  {
+    name: 'Tajikistan',
+    flag: '🇹🇯',
+  },
+  {
+    name: 'Tanzania',
+    flag: '🇹🇿',
+  },
+  {
+    name: 'Togo',
+    flag: '🇹🇬',
+  },
+  {
+    name: 'Tokelau',
+    flag: '🇹🇰',
+  },
+  {
+    name: 'Tonga',
+    flag: '🇹🇴',
+  },
+  {
+    name: 'Turkey',
+    flag: '🇹🇷',
+  },
+  {
+    name: 'Turkmenistan',
+    flag: '🇹🇲',
+  },
+  {
+    name: 'Turks and Caicos Islands',
+    flag: '🇹🇨',
+  },
+  {
+    name: 'Tuvalu',
+    flag: '🇹🇻',
+  },
+  {
+    name: 'Uganda',
+    flag: '🇺🇬',
+  },
+  {
+    name: 'Ukraine',
+    flag: '🇺🇦',
+  },
+  {
+    name: 'United Arab Emirates',
+    flag: '🇦🇪',
+  },
+  {
+    name: 'United States Minor Outlying Islands',
+    flag: '🇺🇲',
+  },
+  {
+    name: 'United States Virgin Islands',
+    flag: '🇻🇬',
+  },
+  {
+    name: 'Uruguay',
+    flag: '🇺🇾',
+  },
+  {
+    name: 'Uzbekistan',
+    flag: '🇺🇿',
+  },
+  {
+    name: 'Western Sahara',
+    flag: '🇪🇭',
+  },
+  {
+    name: 'Vanuatu',
+    flag: '🇻🇺',
+  },
+  {
+    name: 'Vatican City',
+    flag: '🇻🇦',
+  },
+  {
+    name: 'Venezuela',
+    flag: '🇻🇪',
+  },
+  {
+    name: 'Vietnam',
+    flag: '🇻🇳',
+  },
+  {
+    name: 'Yemen',
+    flag: '🇾🇪',
+  },
+  {
+    name: 'Zambia',
+    flag: '🇿🇲',
+  },
+
   {
     name: 'Solomon Islands',
     flag: '🇸🇧',
@@ -991,9 +988,5 @@ export const countries: ICountries[] = [
   {
     name: 'Iran',
     flag: '🇮🇷',
-  },
-  {
-    name: 'Croatia',
-    flag: '🇭🇷',
   },
 ]
