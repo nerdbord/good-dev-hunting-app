@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './LocationPreferences.module.scss'
 import TextInput from '@/components/TextInput/TextInput'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -7,13 +7,11 @@ import SwitchInput from '@/components/Switch/Switch'
 import { useFormikContext } from 'formik'
 import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
-import DropdownCountry from '@/components/Dropdowns/DropdownCountry/DropdownCountry'
+import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 
 const LocationPreferences = () => {
   const { values, handleChange, errors } =
     useFormikContext<CreateProfileFormValues>()
-  const [isDropdownCountryOpen, setDropdownCountry] = useState(false)
-  console.log(isDropdownCountryOpen)
 
   return (
     <div className={styles.container}>
@@ -27,19 +25,7 @@ const LocationPreferences = () => {
       <div className={styles.right}>
         <div>
           <InputFormError error={errors.country}>
-            <>
-              <TextInput
-                label="Country of residency"
-                placeholder="Start typing location"
-                value={values.country}
-                onChange={handleChange}
-                name="country"
-                excludeDigits
-              />
-              {isDropdownCountryOpen && values.country && (
-                <DropdownCountry value={values.country} />
-              )}
-            </>
+            <TextInputWithDropdown />
           </InputFormError>
           <CheckboxInput
             id="openToRelocationCountry"
