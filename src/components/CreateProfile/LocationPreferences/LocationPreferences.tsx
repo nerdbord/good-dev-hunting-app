@@ -51,6 +51,7 @@ const LocationPreferences = () => {
               addImportantIcon={true}
               name="city"
               excludeDigits
+              tooltipText="We use this information to match you with the best job opportunities."
             />
           </InputFormError>
           <CheckboxInput

@@ -64,6 +64,7 @@ const WorkInformation = () => {
               onChange={handleChange}
               name="techStack"
               excludeDigits
+              tooltipText="List the technologies you are comfortable with or interested in."
             />
           </InputFormError>
           <div className={styles.addInfo}>

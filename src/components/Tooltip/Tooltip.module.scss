@@ -1,0 +1,35 @@
+.container {
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltip {
+  position: absolute;
+  top: -80px;
+  background-color: #27272a;
+  width: 150px;
+  padding: 5.5px 8.25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 150%;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+.tooltipTriangle:before {
+  content: '';
+  position: absolute;
+  right: 63px;
+  bottom: -20px;
+  border: 12px solid transparent;
+  border-top-color: #27272a;
+  z-index: 0;
+}

@@ -51,6 +51,9 @@
     height: auto;
     background-color: #04080d;
     transition: transform 0.3s ease-in-out;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
   }
 }
 
@@ -65,7 +68,6 @@
   @include mobile {
     display: block;
     font-size: 16px;
-    font-weight: bold;
     color: white;
   }
 }
