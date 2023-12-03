@@ -13,6 +13,7 @@ interface TextInputProps {
   error?: string
   disabled?: boolean
   excludeDigits?: boolean
+  ref?: React.RefObject<HTMLInputElement>
 }
 
 const TextInput: React.FC<TextInputProps> = ({
