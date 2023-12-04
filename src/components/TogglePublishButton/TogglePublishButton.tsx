@@ -7,6 +7,8 @@ import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishProfilePopup } from '../TogglePublishPopup/TogglePublishPopup'
 import { PublishingState } from '@prisma/client'
+import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
+import { JobSpecialization } from '@/components/ProfileList/profile-data'
 
 interface TogglePublishButtonProps {
   profileId: string
@@ -19,6 +21,13 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
 
   const { loading, runAsync } = useAsyncAction()
 
+  const handleButtonClick = async () => {
+    await runAsync(async () => {
+      await apiClient.publishMyProfile(profileId)
+      setShowPopup(true)
+    })
+  }
+
   return (
     <div>
       {showPopup && !loading && (
@@ -27,21 +36,26 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
           onClose={() => setShowPopup(false)}
         />
       )}
-      <Button
-        variant={'primary'}
-        loading={loading}
-        onClick={() =>
-          runAsync(async () => {
-            await apiClient.publishMyProfile(profileId)
-            setShowPopup(true)
-          })
-        }
-        dataTestId="publishProfileButton"
-      >
-        {state === PublishingState.APPROVED
-          ? 'Unpublish profile'
-          : 'Publish profile'}
-      </Button>
+      {state === PublishingState.PENDING ? (
+        <DevTypeButton
+          onClick={handleButtonClick}
+          variant={JobSpecialization.Backend}
+          isPressed={false}
+        >
+          Pending
+        </DevTypeButton>
+      ) : (
+        <Button
+          variant={'primary'}
+          loading={loading}
+          onClick={handleButtonClick}
+          dataTestId="publishProfileButton"
+        >
+          {state === PublishingState.APPROVED
+            ? 'Unpublish profile'
+            : 'Publish profile'}
+        </Button>
+      )}
     </div>
   )
 }

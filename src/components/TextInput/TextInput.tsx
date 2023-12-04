@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import styles from './TextInput.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
+import Tooltip from '../Tooltip/Tooltip'
 
 interface TextInputProps {
   label: string
@@ -13,6 +14,7 @@ interface TextInputProps {
   error?: string
   disabled?: boolean
   excludeDigits?: boolean
+  tooltipText?: string | null
   dataTestId?: string
 }
 
@@ -25,6 +27,7 @@ const TextInput: React.FC<TextInputProps> = ({
   name,
   disabled,
   excludeDigits,
+  tooltipText,
   dataTestId,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false)
@@ -40,7 +43,11 @@ const TextInput: React.FC<TextInputProps> = ({
     <div className={styles.formItem}>
       <label className={styles.formLabel}>
         {label}
-        {addImportantIcon && <ImportantIcon />}
+        {addImportantIcon && (
+          <Tooltip text={tooltipText || null}>
+            <ImportantIcon />
+          </Tooltip>
+        )}
       </label>
       <input
         className={`${styles.formInput} ${isTyped ? styles.typed : ''}`}

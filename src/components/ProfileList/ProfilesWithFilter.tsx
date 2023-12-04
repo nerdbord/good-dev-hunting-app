@@ -33,7 +33,7 @@ export const ProfilesWithFilter: React.FC<{
   const filteredCount = filteredProfileData.length
 
   return (
-    <div>
+    <div className={styles.profileCards}>
       <div className={styles.title}>Profiles found ({filteredCount})</div>
       <div className={styles.profileListCont}>
         {filteredProfileData.map((profile) => (

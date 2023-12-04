@@ -3,27 +3,45 @@ import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useUploadContext } from '@/contexts/UploadContext'
+import { useEffect } from 'react'
 
 const CreateProfileTopBar = () => {
   const router = useRouter()
-  const { handleSubmit, errors } = useFormikContext()
+  const pathname = usePathname()
+  const { handleSubmit, errors, isSubmitting } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
+  const { setTriggerUpload, uploadSuccess, fileSelected, isUploading } =
+    useUploadContext()
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     runAsync(async () => {
-      event.preventDefault()
-      handleSubmit()
-      router.push(AppRoutes.myProfile)
+      if (Object.keys(errors).length === 0) {
+        await handleSubmit()
+        setTriggerUpload(true)
+      }
     })
   }
+  useEffect(() => {
+    if (uploadSuccess || (!fileSelected && isSubmitting)) {
+      router.push(AppRoutes.myProfile)
+    }
+  }, [uploadSuccess, isSubmitting])
 
   return (
     <div className={styles.titleBox}>
       <div className={styles.errorWrapper}>
-        <span className={styles.title}>Create profile page</span>
+        <span className={styles.title}>
+          {pathname === AppRoutes.createProfile
+            ? 'Create profile'
+            : pathname === AppRoutes.editProfile
+            ? 'Edit profile'
+            : 'My profile'}
+        </span>
         {Object.keys(errors).length > 0 && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
@@ -32,8 +50,11 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
+        <Button loading={isUploading || loading} variant="secondary">
+          Connect with Nerdbord
+        </Button>
         <Button
-          loading={loading}
+          loading={isUploading || loading}
           variant="primary"
           onClick={handleButtonClick}
           dataTestId="saveAndPreviewProfile"

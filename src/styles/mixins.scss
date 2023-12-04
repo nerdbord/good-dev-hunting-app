@@ -1,12 +1,12 @@
 /* ------MIXIN------ */
 @mixin mobile {
-  @media (max-width: 420px) {
+  @media (max-width: 768px) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: 1280px) {
+  @media (min-width: 1140px) {
     @content;
   }
 }
