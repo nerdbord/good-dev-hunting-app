@@ -4,11 +4,16 @@ import styles from './PersonalInfo.module.scss'
 import TextInput from '@/components/TextInput/TextInput'
 import TextArea from '@/components/TextArea/TextArea'
 import { useFormikContext } from 'formik'
-import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { useSession } from 'next-auth/react'
+import { UserPhotoUploader } from '@/components/UserPhotoUploader/UserPhotoUploader'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-const PersonalInfo = () => {
+interface PersonalInfoProps {
+  profile: ProfileModel | null
+}
+const PersonalInfo = ({ profile }: PersonalInfoProps) => {
   const { values, handleChange, errors } =
     useFormikContext<CreateProfileFormValues>()
 
@@ -42,14 +47,13 @@ const PersonalInfo = () => {
               onChange={handleChange}
               addImportantIcon={true}
               name="contactEmail"
-              dataTestId=""
               disabled={true}
+              tooltipText=" Email is connected to your Github profile and cannot be changed!"
+              dataTestId=""
             />
           </InputFormError>
-          <div className={styles.tooltip}>
-            Email is connected to your Github profile and cannot be changed
-          </div>
         </div>
+        <UserPhotoUploader profile={profile} />
         <TextInput
           label="LinkedIn"
           placeholder="Paste link to you linkedin profile"
@@ -68,6 +72,7 @@ const PersonalInfo = () => {
               onChange={handleChange}
               name="bio"
               maxLength={1500}
+              tooltipText="Let others know you - write a few sentences about yourself."
               dataTestId="bio"
             />{' '}
             <div className={styles.lettersCount}>

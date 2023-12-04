@@ -1,11 +1,9 @@
 .wrapper {
-  height: 125px;
+  height: min-content;
   background: #04080d;
-  padding: 0 8%;
+  padding: 25px 8%;
   @include mobile {
-    height: 75px;
     padding-left: $spacing-4;
-    margin-bottom: 22px;
   }
 }
 
@@ -14,6 +12,12 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+  }
 }
 
 .logo {
@@ -33,16 +37,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include mobile {
+    letter-spacing: -1.08px;
+  }
 }
 
 .frameButtons {
   height: 44px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0;
-  gap: 12px;
+  justify-content: center;
+
   @include mobile {
     position: fixed;
     bottom: 0;
@@ -52,43 +56,17 @@
     justify-content: center;
     padding: $spacing-4 12%;
     background-color: #04080d;
-    button {
-      width: 100%;
-    }
+    z-index: 10;
   }
 }
 
-.githubAccConnected {
-  color: #89939e;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-}
-
-.github {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.githubAcc {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.githubAccImg {
-  border-radius: 50%;
-}
-
-.frameLogin {
+.buttonBox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+  max-width: 420px;
 }
 
 .mobileButton {

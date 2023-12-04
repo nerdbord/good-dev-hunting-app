@@ -12,6 +12,7 @@ import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { AppRoutes } from '@/utils/routes'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
+import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
   if (!session || !session.user) {
@@ -23,7 +24,13 @@ const ProfileMain = async () => {
   }
 
   const user = await findUserByEmail(session.user.email)
-  const githubUsername = user?.githubDetails?.username
+
+  if (!user) {
+    redirect(AppRoutes.home)
+  }
+
+  const githubUsername = user.githubDetails?.username
+  const avatarUrl = await fetchUserAvatar()
 
   return (
     <>
@@ -60,7 +67,8 @@ const ProfileMain = async () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Image
-              src={session.user.image}
+              src={avatarUrl || ''}
+              key={avatarUrl}
               width={100}
               height={100}
               alt="user's avatar"
@@ -81,12 +89,19 @@ const ProfileMain = async () => {
                 {profile.country.name}, {profile.city.name}
               </p>
             </div>
-            {profile.country.openForRelocation && (
-              <div className={styles.location}>Open to relocation</div>
-            )}
-            {profile.remoteOnly && (
-              <div className={styles.location}>Remote only</div>
-            )}
+            <div className={styles.optionBox}>
+              {profile.country.openForRelocation && (
+                <div className={styles.location}>
+                  Open to country relocation
+                </div>
+              )}
+              {profile.city.openForRelocation && (
+                <div className={styles.location}>Open to city relocation</div>
+              )}
+              {profile.remoteOnly && (
+                <div className={styles.location}>Remote only</div>
+              )}
+            </div>
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
