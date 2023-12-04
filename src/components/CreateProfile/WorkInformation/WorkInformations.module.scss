@@ -79,3 +79,31 @@
     margin-bottom: 60px;
   }
 }
+
+.textAreaContainer {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  top: 15%; 
+  left: 0;
+  width: 60%; 
+  z-index: 10; 
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: rgba(15, 18, 23, 1);
+}
+
+.suggestionItem {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.suggestionItem strong {
+  color: #89939E;
+}
+
+.suggestionItem:hover, .suggestionItem:focus {
+  background-color: #2A2F35;
+}

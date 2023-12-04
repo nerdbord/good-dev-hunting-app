@@ -18,7 +18,10 @@
     "cypress:open": "cypress open"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["npm run lint", "npm run format:staged"]
+    "*.{ts,tsx}": [
+      "npm run lint",
+      "npm run format:staged"
+    ]
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -58,7 +61,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
+    "lint-staged": "^15.2.0",
     "prettier": "^2.8.8",
     "prisma": "^4.15.0",
     "typescript": "4.9.5"

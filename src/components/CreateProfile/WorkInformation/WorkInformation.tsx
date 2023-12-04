@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
 import TextArea from '@/components/TextArea/TextArea'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -7,7 +7,7 @@ import { useFormikContext } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
-
+import technologies from '@/data/frontend/technologies/data'
 import styles from './WorkInformations.module.scss'
 
 const filterLists = {
@@ -21,6 +21,20 @@ const WorkInformation = () => {
 
   const handleEmploymentType = (option: string): void => {
     setFieldValue('employment', option)
+  }
+
+  const [filteredTech, setFilteredTech] = useState<string[]>([])
+
+  const filterTech = (input: string) => {
+    const filtered = technologies.filter((tech) =>
+      tech.toLowerCase().includes(input.toLowerCase()),
+    )
+    setFilteredTech(filtered)
+  }
+
+  const handleTechStackChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleChange(e)
+    filterTech(e.target.value)
   }
 
   return (
@@ -54,23 +68,27 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        <div>
+        <div className={styles.textAreaContainer}>
           <InputFormError error={errors.techStack}>
             <TextArea
               label="Tech stack"
               placeholder="Start typing"
               value={values.techStack}
               addImportantIcon={true}
-              onChange={handleChange}
+              onChange={handleTechStackChange}
               name="techStack"
               excludeDigits
             />
           </InputFormError>
-          <div className={styles.addInfo}>
-            Start typing and separate technologies with commas.
-            <br />
-            Choose max. 8
-          </div>
+          {filteredTech.length > 0 && (
+            <div className={styles.suggestions}>
+              {filteredTech.map((tech, index) => (
+                <div className={styles.suggestionItem} key={index}>
+                  {tech}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className={styles.employmentType}>
           <InputFormError error={errors.employment}>
