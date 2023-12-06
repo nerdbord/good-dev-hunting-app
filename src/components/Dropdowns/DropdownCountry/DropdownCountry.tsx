@@ -8,14 +8,20 @@ import React from 'react'
 import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 
-const DropdownCountry = ({ value }: { value: string }) => {
-  const { values, handleChange, errors } =
-    useFormikContext<CreateProfileFormValues>()
+const DropdownCountry = ({
+  value,
+  setIsDropdownActive,
+}: {
+  value: string
+  setIsDropdownActive: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
+  const { values, setFieldValue } = useFormikContext<CreateProfileFormValues>()
   const handleCountryClick = (
     e: React.MouseEvent<HTMLLIElement>,
     country: ICountries,
   ) => {
-    console.log(country.name)
+    setFieldValue('country', values.country)
+    setIsDropdownActive(false)
     values.country = country.name
   }
 
