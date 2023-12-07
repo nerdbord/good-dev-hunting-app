@@ -1,12 +1,12 @@
 'use client'
+import React from 'react'
 import {
   ICountries,
   countries,
 } from '@/data/frontend/profile/countries/countries'
-import styles from './DropdownCountry.module.scss'
-import React from 'react'
 import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import styles from './DropdownCountry.module.scss'
 
 const DropdownCountry = ({
   value,
@@ -16,6 +16,7 @@ const DropdownCountry = ({
   setIsDropdownActive: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const { values, setFieldValue } = useFormikContext<CreateProfileFormValues>()
+
   const handleCountryClick = (
     e: React.MouseEvent<HTMLLIElement>,
     country: ICountries,
@@ -23,6 +24,21 @@ const DropdownCountry = ({
     setFieldValue('country', values.country)
     setIsDropdownActive(false)
     values.country = country.name
+  }
+
+  const renderCountryName = (countryName: string) => {
+    const startIndex = countryName.toLowerCase().indexOf(value.toLowerCase())
+    if (startIndex !== -1) {
+      const boldPart = countryName.slice(startIndex, startIndex + value.length)
+      const restPart = countryName.slice(startIndex + value.length)
+      return (
+        <>
+          <span className={styles.bold}>{boldPart}</span>
+          <span>{restPart}</span>
+        </>
+      )
+    }
+    return <span>{countryName}</span>
   }
 
   return (
@@ -36,7 +52,7 @@ const DropdownCountry = ({
             return (
               <li key={index} onClick={(e) => handleCountryClick(e, country)}>
                 <span>{country.flag}</span>
-                <span>{country.name}</span>
+                <span>{renderCountryName(country.name)}</span>
               </li>
             )
           })}

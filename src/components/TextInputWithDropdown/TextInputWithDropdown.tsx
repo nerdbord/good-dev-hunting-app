@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import TextInput from '../TextInput/TextInput'
 import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
+import TextInput from '../TextInput/TextInput'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import styles from './TextInputWithDropdown.module.scss'
 
@@ -15,7 +15,7 @@ const TextInputWithDropdown = () => {
   ): void => {
     const isTargetInput = (e.target as HTMLElement).tagName === 'INPUT'
     if (isTargetInput) {
-      setIsDropdownActive(!isDropdownActive)
+      setIsDropdownActive(values.country.length !== 0);
     }
   }
 
@@ -31,6 +31,7 @@ const TextInputWithDropdown = () => {
         onChange={handleChange}
         name="country"
         excludeDigits
+
       />
       {values.country.length !== 0 && isDropdownActive && (
         <DropdownCountry
