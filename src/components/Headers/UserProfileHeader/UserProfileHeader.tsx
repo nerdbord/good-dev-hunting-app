@@ -4,6 +4,7 @@ import { UserProfileHeaderType } from '../types'
 
 import styles from './UserProfileHeader.module.scss'
 import classNames from 'classnames/bind'
+import ContactBtn from '@/components/ContactForm/ContactBtn/ContactBtn'
 
 const cx = classNames.bind(styles)
 
@@ -17,7 +18,10 @@ export default function UserProfileHeader({
   return (
     <div className={commonClasses}>
       {!!withBackButton && <GoBackButton>Go back</GoBackButton>}
-      <SocialItems userProfile={userProfile} />
+      <div className={styles.actions}>
+        <SocialItems userProfile={userProfile} />
+        <ContactBtn userProfile={userProfile} />
+      </div>
     </div>
   )
 }

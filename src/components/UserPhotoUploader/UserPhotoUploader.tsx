@@ -36,8 +36,8 @@ export const UserPhotoUploader = ({ profile }: UserPhotoUploaderProps) => {
   const { runAsync, loading } = useAsyncAction()
 
   useEffect(() => {
-    router.refresh()
-  })
+    userImage && router.refresh()
+  }, [userImage])
 
   useEffect(() => {
     if (triggerUpload) {

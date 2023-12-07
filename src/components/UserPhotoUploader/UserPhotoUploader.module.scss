@@ -18,6 +18,10 @@
   label[for='file-input'] {
     cursor: pointer;
   }
+  @include mobile {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .errorMessageWrapper {
@@ -40,7 +44,12 @@
 
 .contentWrapper {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  @include mobile {
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .picture {

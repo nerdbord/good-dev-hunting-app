@@ -5,7 +5,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import SwitchInput from '@/components/Switch/Switch'
 import { useFormikContext } from 'formik'
-import InputFormError from '@/components/CreateProfileForm/InputErrorWrapper'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 
@@ -45,6 +45,7 @@ const LocationPreferences = () => {
               addImportantIcon={true}
               name="city"
               excludeDigits
+              tooltipText="We use this information to match you with the best job opportunities."
             />
           </InputFormError>
           <CheckboxInput
