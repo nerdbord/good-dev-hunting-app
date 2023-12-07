@@ -8,7 +8,7 @@ import styles from './TextInputWithDropdown.module.scss'
 const TextInputWithDropdown = () => {
   const { values, handleChange } = useFormikContext<CreateProfileFormValues>()
 
-  const [isDropdownActive, setIsDropdownActive] = useState(true)
+  const [isDropdownActive, setIsDropdownActive] = useState(false)
 
   const handleCountryInputClick = (
     e: React.MouseEvent<HTMLDivElement>,
