@@ -15,7 +15,7 @@ const TextInputWithDropdown = () => {
   ): void => {
     const isTargetInput = (e.target as HTMLElement).tagName === 'INPUT'
     if (isTargetInput) {
-      setIsDropdownActive(values.country.length !== 0);
+      setIsDropdownActive(values.country.length !== 0)
     }
   }
 
@@ -31,7 +31,6 @@ const TextInputWithDropdown = () => {
         onChange={handleChange}
         name="country"
         excludeDigits
-
       />
       {values.country.length !== 0 && isDropdownActive && (
         <DropdownCountry
