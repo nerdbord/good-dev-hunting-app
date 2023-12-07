@@ -1,7 +1,7 @@
 .wrapper {
   position: relative;
   padding: 24px 8% 35px;
-  @include mobile {
+  @media (max-width: 768px) {
     padding: 0;
   }
 }

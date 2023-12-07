@@ -1,7 +1,6 @@
 import React from 'react'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
-import Image from 'next/image'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
@@ -11,6 +10,7 @@ import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { Container } from '@/components/Container/Container'
 import styles from './AppHeader.module.scss'
 import { AppRoutes } from '@/utils/routes'
+import GithubAcc from '@/components/GithubAcc/GithubAcc'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -28,26 +28,12 @@ const AppHeader = async () => {
               <img src={logo.src} alt="Logo" />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
-
-            <div className={styles.frameLogin}>
-              <p className={styles.githubAccConnected}>
-                Connected Github account
-              </p>
-
-              <div className={styles.githubAcc}>
-                {session.user.image && (
-                  <Image
-                    className={styles.githubAccImg}
-                    src={session.user.image}
-                    width={38}
-                    height={38}
-                    alt="github avatar"
-                  />
-                )}
-                <p className={styles.githubAccName}>{session?.user.name}</p>
+            <div className={styles.frameButtons}>
+              <div className={styles.buttonBox}>
+                {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
               </div>
-              {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
             </div>
+            {profile ? <GithubAcc /> : null}
           </div>
         </Container>
       </header>
@@ -62,7 +48,6 @@ const AppHeader = async () => {
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
-
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
               <GithubLoginButton />

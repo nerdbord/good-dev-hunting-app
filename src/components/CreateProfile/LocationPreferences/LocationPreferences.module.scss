@@ -1,17 +1,15 @@
 @import '../../../../app/(profiles)/my-profile/create/page.module.scss';
 
 .container {
-  margin-top: 20px;
   background: #04080d;
   padding: 100px;
   display: flex;
   width: 100%;
-  @media (max-width: 420px) {
+  @include mobile {
     max-width: 100%;
-    margin-top: 20px;
     flex-direction: column;
-    padding: 0px;
-    gap: 20px;
+    padding: 40px 16px 60px 16px;
+    gap: 30px;
   }
 }
 
@@ -51,5 +49,6 @@
   @include mobile {
     max-width: 100%;
     flex-direction: column;
+    gap: 40px;
   }
 }

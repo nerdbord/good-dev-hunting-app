@@ -27,10 +27,9 @@
   justify-content: flex-end;
   @include mobile {
     position: static;
-    gap: 0;
-    width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 32px;
   }
 }
 
@@ -47,7 +46,7 @@
   cursor: pointer;
   @include mobile {
     padding: $spacing-3 0;
-    width: 100%;
+
     a {
       display: flex;
       flex-direction: row;
@@ -71,8 +70,6 @@
   cursor: pointer;
   @include mobile {
     padding: $spacing-3 0;
-    margin-left: 14px;
-    width: 100%;
     a {
       display: flex;
       flex-direction: row;
@@ -123,6 +120,8 @@
   margin-bottom: $spacing-4;
 
   @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: $spacing-3;
     overflow-x: scroll;
     width: 100%;
@@ -145,6 +144,15 @@
       white-space: nowrap;
     }
   }
+}
+
+.optionBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .country {
