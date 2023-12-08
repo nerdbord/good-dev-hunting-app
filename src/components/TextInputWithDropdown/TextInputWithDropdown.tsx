@@ -4,16 +4,42 @@ import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormW
 import TextInput from '../TextInput/TextInput'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import styles from './TextInputWithDropdown.module.scss'
+import { countries } from '@/data/frontend/profile/countries/countries'
 
 const TextInputWithDropdown = () => {
-  const { values, handleChange } = useFormikContext<CreateProfileFormValues>()
-
+  const { values, handleChange, setFieldValue } =
+    useFormikContext<CreateProfileFormValues>()
   const [isDropdownActive, setIsDropdownActive] = useState(false)
-
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
+  const preventInvalidCountry = () => {
+    const inputValue = inputRef.current?.value
+    if (!isValidCountry(inputValue)) {
+      const validCountry = countries.find((country) =>
+        inputValue?.includes(country.name),
+      )
+      setFieldValue('country', `${validCountry?.name ? validCountry.name : ''}`)
+    }
+  }
+
+  const isValidCountry = (countryName: string | undefined) => {
+    if (countryName) {
+      return countries.some((country) =>
+        country.name.toLowerCase().includes(countryName.toLowerCase()),
+      )
+    }
+  }
   const handleCountryInputClick = () => {
     setIsDropdownActive(!isDropdownActive)
+  }
+
+  const handleClickOutside = (e: MouseEvent) => {
+    const dropdownContainer = dropdownRef.current
+    if (dropdownContainer && !dropdownContainer.contains(e.target as Node)) {
+      setIsDropdownActive(false)
+      preventInvalidCountry()
+    }
   }
 
   useEffect(() => {
@@ -22,14 +48,6 @@ const TextInputWithDropdown = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
-
-  const handleClickOutside = (e: MouseEvent) => {
-    const dropdownContainer = dropdownRef.current
-    if (dropdownContainer && !dropdownContainer.contains(e.target as Node)) {
-      setIsDropdownActive(false)
-    }
-  }
-
   return (
     <div className={styles.container} onClick={handleCountryInputClick}>
       <TextInput
@@ -40,6 +58,7 @@ const TextInputWithDropdown = () => {
         name="country"
         excludeDigits
         onClick={handleCountryInputClick}
+        inputRef={inputRef}
       />
       {values.country.length !== 0 && isDropdownActive && (
         <div ref={dropdownRef}>
