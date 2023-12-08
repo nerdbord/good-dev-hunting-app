@@ -10,20 +10,12 @@ const TextInputWithDropdown = () => {
 
   const [isDropdownActive, setIsDropdownActive] = useState(false)
 
-  const handleCountryInputClick = (
-    e: React.MouseEvent<HTMLDivElement>,
-  ): void => {
-    const isTargetInput = (e.target as HTMLElement).tagName === 'INPUT'
-    if (isTargetInput) {
-      setIsDropdownActive(values.country.length !== 0)
-    }
+  const handleCountryInputClick = () => {
+    setIsDropdownActive(!isDropdownActive)
   }
 
   return (
-    <div
-      className={styles.container}
-      onClick={(e) => handleCountryInputClick(e)}
-    >
+    <div className={styles.container} onClick={handleCountryInputClick}>
       <TextInput
         label="Country of residency"
         placeholder="Start typing location"
@@ -31,8 +23,9 @@ const TextInputWithDropdown = () => {
         onChange={handleChange}
         name="country"
         excludeDigits
+        onClick={handleCountryInputClick}
       />
-      {values.country.length !== 0 && (
+      {values.country.length !== 0 && isDropdownActive && (
         <DropdownCountry
           value={values.country}
           setIsDropdownActive={setIsDropdownActive}
