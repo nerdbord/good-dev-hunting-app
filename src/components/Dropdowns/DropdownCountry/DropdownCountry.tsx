@@ -26,6 +26,10 @@ const DropdownCountry = ({
     values.country = country.name
   }
 
+  const handleOnSelect = () => {
+    setIsDropdownActive(false)
+  }
+
   const renderCountryName = (countryName: string) => {
     const startIndex = countryName.toLowerCase().indexOf(value.toLowerCase())
     if (startIndex !== -1) {
@@ -50,7 +54,11 @@ const DropdownCountry = ({
           )
           .map((country, index) => {
             return (
-              <li key={index} onClick={(e) => handleCountryClick(e, country)}>
+              <li
+                key={index}
+                onClick={(e) => handleCountryClick(e, country)}
+                onSelect={handleOnSelect}
+              >
                 <span>{country.flag}</span>
                 <span>{renderCountryName(country.name)}</span>
               </li>
