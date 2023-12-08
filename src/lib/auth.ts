@@ -2,6 +2,7 @@ import type { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { getServerSession } from 'next-auth'
 import { createUser, findUserByEmail } from '@/backend/user/user.service'
+import { mailersendClient } from './mailersendClient'
 
 interface UserAuthed {
   id: string
@@ -56,7 +57,7 @@ export const authOptions: NextAuthOptions = {
           image: castedProfile.avatar_url,
         })
 
-        // TODO(Agnieszka): Send email to user about successful registration
+        mailersendClient.sendMail(createdUser.email, castedProfile.login)
 
         return !!createdUser
       }
