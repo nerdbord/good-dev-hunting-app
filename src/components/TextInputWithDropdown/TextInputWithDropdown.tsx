@@ -32,7 +32,7 @@ const TextInputWithDropdown = () => {
         name="country"
         excludeDigits
       />
-      {values.country.length !== 0 && isDropdownActive && (
+      {values.country.length !== 0 && (
         <DropdownCountry
           value={values.country}
           setIsDropdownActive={setIsDropdownActive}
