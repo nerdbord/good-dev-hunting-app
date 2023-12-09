@@ -57,7 +57,12 @@ export const authOptions: NextAuthOptions = {
           image: castedProfile.avatar_url,
         })
 
-        mailersendClient.sendMail(createdUser.email, castedProfile.login)
+        if (createdUser) {
+          await mailersendClient.sendMail(
+            createdUser.email,
+            castedProfile.login,
+          )
+        }
 
         return !!createdUser
       }
