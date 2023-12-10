@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import { getServerSession } from 'next-auth'
-import { findOrCreateUser, findUserByEmail } from '@/backend/user/user.service'
+import { createUser, findUserByEmail } from '@/backend/user/user.service'
 
 interface UserAuthed {
   id: string
@@ -44,13 +44,21 @@ export const authOptions: NextAuthOptions = {
       const castedProfile = profile as GitHubProfileAuthed
 
       if (user && profile) {
-        const foundOrCreatedUser = await findOrCreateUser({
+        const foundUser = await findUserByEmail(castedUser.email)
+
+        if (foundUser) {
+          return true
+        }
+
+        const createdUser = await createUser({
           email: castedUser.email,
-          username: castedProfile.login,
-          imageSrc: castedProfile.avatar_url,
+          name: castedProfile.login,
+          image: castedProfile.avatar_url,
         })
 
-        return !!foundOrCreatedUser
+        // TODO(Agnieszka): Send email to user about successful registration
+
+        return !!createdUser
       }
 
       return false
