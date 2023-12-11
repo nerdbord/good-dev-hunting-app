@@ -57,6 +57,7 @@ const CreateProfileTopBar = () => {
           loading={isUploading || loading}
           variant="primary"
           onClick={handleButtonClick}
+          dataTestId="saveAndPreviewProfile"
         >
           Save and preview profile
         </Button>

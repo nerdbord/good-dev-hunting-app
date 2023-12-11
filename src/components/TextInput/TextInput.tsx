@@ -15,6 +15,7 @@ interface TextInputProps {
   disabled?: boolean
   excludeDigits?: boolean
   tooltipText?: string | null
+  dataTestId?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -27,6 +28,7 @@ const TextInput: React.FC<TextInputProps> = ({
   disabled,
   excludeDigits,
   tooltipText,
+  dataTestId,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +57,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange={handleChange}
         name={name}
         disabled={disabled}
+        data-testid={dataTestId}
       />
     </div>
   )
