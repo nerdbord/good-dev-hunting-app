@@ -30,7 +30,7 @@ export function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
   const { addToast } = useToast()
   const { showModal, closeModal } = useModal()
-  const { runAsync } = useAsyncAction()
+  const { runAsync, loading } = useAsyncAction()
 
   const handleClose = () => {
     closeModal()
@@ -42,6 +42,7 @@ export function StateStatus({ profile }: StateStatusProps) {
       <div className={styles.actions}>
         <Button
           variant="action"
+          loading={loading}
           onClick={() => {
             runAsync(async () => {
               await apiClient.updateProfileState(id, {
