@@ -37,7 +37,7 @@ We will notify you once the review is complete. Thank you for your patience.`
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="publishProfilePopup">
         <h2 className={styles.header}>{headerText}</h2>
         <span className={styles.text}>{bodyText}</span>
         <Button onClick={onClose} variant="primary">

@@ -49,6 +49,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
           variant={'primary'}
           loading={loading}
           onClick={handleButtonClick}
+          dataTestId="publishProfileButton"
         >
           {state === PublishingState.APPROVED
             ? 'Unpublish profile'

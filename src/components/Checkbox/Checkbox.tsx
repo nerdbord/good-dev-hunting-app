@@ -10,6 +10,7 @@ interface CheckboxInputProps {
   checked: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   name: string
+  dataTestId?: string
 }
 
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
@@ -18,12 +19,17 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
   checked,
   onChange,
   name,
+  dataTestId,
 }) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event)
   }
   return (
-    <label className={styles.checkboxLabel} htmlFor={id}>
+    <label
+      className={styles.checkboxLabel}
+      htmlFor={id}
+      data-testid={dataTestId}
+    >
       <div className={`${styles.checkbox} ${checked ? styles.checked : ''}`}>
         <input
           id={id}
