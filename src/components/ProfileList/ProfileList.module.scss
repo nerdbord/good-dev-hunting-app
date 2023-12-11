@@ -25,6 +25,11 @@
   }
 }
 
+.noProfiles {
+  margin-top: 40px;
+  text-align: center;
+}
+
 .profileCards {
   @include mobile {
     width: 100%;
