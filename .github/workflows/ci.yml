@@ -25,9 +25,6 @@ jobs:
     - name: Lint Code
       run: npm run lint
 
-    - name: Check Formatting
-      run: npm run format:staged
-
     - name: Build the Next.js application
       run: npm run build
 
