@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '@/assets/images/logo.png'
+import logo from '/assets/images/logo.png'
 import Link from 'next/link'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
@@ -11,6 +11,7 @@ import { Container } from '@/components/Container/Container'
 import styles from './AppHeader.module.scss'
 import { AppRoutes } from '@/utils/routes'
 import GithubAcc from '@/components/GithubAcc/GithubAcc'
+import Image from 'next/image'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -25,7 +26,12 @@ const AppHeader = async () => {
         <Container>
           <div className={styles.headerContent}>
             <Link href="/" className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
+              <Image
+                src="/assets/images/logo.png"
+                alt="Logo"
+                width={187}
+                height={26}
+              />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
             <div className={styles.frameButtons}>
