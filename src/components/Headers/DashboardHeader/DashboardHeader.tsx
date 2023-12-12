@@ -4,18 +4,14 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { Role } from '@prisma/client'
-
 import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
-
 import { Container } from '@/components/Container/Container'
 import { Button } from '@/components/Button/Button'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
-import logo from '@/assets/images/logo.png'
-
 import styles from './DashboardHeader.module.scss'
-
+import Image from 'next/image'
 const DashboardHeader = async () => {
   const session = await getServerSession(authOptions)
 
@@ -28,7 +24,12 @@ const DashboardHeader = async () => {
       <Container>
         <div className={styles.headerContent}>
           <Link href={AppRoutes.home} className={styles.logo}>
-            <img src={logo.src} alt="Logo" />
+            <Image
+              src="/assets/images/logo.png"
+              alt="Logo"
+              width={44}
+              height={26}
+            />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
           <div className={styles.frameButtons}>

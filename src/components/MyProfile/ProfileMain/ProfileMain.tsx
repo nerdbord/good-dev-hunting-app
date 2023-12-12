@@ -3,7 +3,6 @@ import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/images/🇵🇱.jpg'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
@@ -79,7 +78,7 @@ const ProfileMain = async () => {
           <div className={styles.locationBox}>
             <div className={styles.country}>
               <Image
-                src={PolandFlag}
+                src="/assets/images/🇵🇱.jpg"
                 alt="Poland Flag"
                 width={20}
                 height={20}

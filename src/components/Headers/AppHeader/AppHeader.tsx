@@ -29,7 +29,7 @@ const AppHeader = async () => {
               <Image
                 src="/assets/images/logo.png"
                 alt="Logo"
-                width={187}
+                width={44}
                 height={26}
               />
               <div className={styles.title}>Good Dev Hunting</div>
@@ -58,7 +58,7 @@ const AppHeader = async () => {
             <Image
               src="/assets/images/logo.png"
               alt="Logo"
-              width={187}
+              width={44}
               height={26}
             />
             <div className={styles.title}>Good Dev Hunting</div>

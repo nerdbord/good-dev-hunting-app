@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
@@ -14,7 +13,6 @@ import RejectIcon from '@/assets/icons/RejectIcon'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { useModal } from '@/contexts/ModalContext'
@@ -116,7 +114,7 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
         }
       >
         <div className={styles.profile}>
-          <img src={ProfilePicture.src} alt="Profile Picture" />
+          <img src="/assets/images/ProfilePicture.png" alt="Profile Picture" />
         </div>
         <div className={styles.data}>
           <p className={styles.name}>{profile.fullName}</p>
