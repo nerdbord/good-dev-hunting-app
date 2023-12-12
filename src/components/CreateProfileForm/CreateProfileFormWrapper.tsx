@@ -6,6 +6,9 @@ import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
 import { EmploymentType, PublishingState } from '@prisma/client'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useRouter } from 'next/navigation'
+import { AppRoutes } from '@/utils/routes'
 
 export interface CreateProfileFormValues {
   fullName: string
@@ -60,6 +63,8 @@ export const validationSchema = Yup.object().shape({
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
   const { data: session } = useSession()
+  const { runAsync } = useAsyncAction()
+  const router = useRouter()
 
   if (!session) {
     return null
@@ -85,12 +90,15 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
-      githubUsername: null,
+      githubUsername: session.user.name,
       state: PublishingState.DRAFT,
     }
 
     try {
-      const createdProfile = await apiClient.createMyProfile(payload)
+      runAsync(async () => {
+        await apiClient.createMyProfile(payload)
+        router.push(AppRoutes.myProfile)
+      })
     } catch (error) {
       console.log(error)
     }

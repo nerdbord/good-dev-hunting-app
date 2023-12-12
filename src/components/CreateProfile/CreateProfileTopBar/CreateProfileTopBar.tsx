@@ -7,7 +7,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const CreateProfileTopBar = () => {
   const router = useRouter()
@@ -19,18 +19,19 @@ const CreateProfileTopBar = () => {
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    runAsync(async () => {
-      if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).length === 0) {
+      runAsync(async () => {
         await handleSubmit()
         setTriggerUpload(true)
-      }
-    })
-  }
-  useEffect(() => {
-    if (uploadSuccess || (!fileSelected && isSubmitting)) {
-      router.push(AppRoutes.myProfile)
+      })
     }
-  }, [uploadSuccess, isSubmitting])
+  }
+
+  // useEffect(() => {
+  //   if (uploadSuccess || (!fileSelected && isSubmitting)) {
+  //     router.push(AppRoutes.myProfile)
+  //   }
+  // }, [uploadSuccess, isSubmitting])
 
   return (
     <div className={styles.titleBox}>
@@ -50,14 +51,13 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
-        <Button loading={isUploading || loading} variant="secondary">
-          Connect with Nerdbord
-        </Button>
+        <Button variant="secondary">Connect with Nerdbord</Button>
         <Button
-          loading={isUploading || loading}
+          loading={loading}
           variant="primary"
           onClick={handleButtonClick}
           dataTestId="saveAndPreviewProfile"
+          type="submit"
         >
           Save and preview profile
         </Button>
