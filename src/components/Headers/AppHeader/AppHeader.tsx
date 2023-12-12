@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '/assets/images/logo.png'
+
 import Link from 'next/link'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
@@ -55,7 +55,12 @@ const AppHeader = async () => {
       <Container>
         <div className={styles.headerContent}>
           <Link href={AppRoutes.home} className={styles.logo}>
-            <img src={logo.src} alt="Logo" />
+            <Image
+              src="/assets/images/logo.png"
+              alt="Logo"
+              width={187}
+              height={26}
+            />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
           <div className={styles.frameButtons}>
