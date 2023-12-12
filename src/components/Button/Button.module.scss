@@ -86,4 +86,9 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: #171B21;
+  }
 }

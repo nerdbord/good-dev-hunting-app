@@ -14,6 +14,7 @@ type Props = {
 export default function SearchWrapper({ profiles = [] }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const { setEmailSearchValue, setActiveTab } = useModerationFilter()
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
@@ -23,6 +24,12 @@ export default function SearchWrapper({ profiles = [] }: Props) {
     if (searchValue === '') return
     setEmailSearchValue(searchValue)
     setActiveTab(null)
+    setSearchValue('')
+  }
+
+  const handleSuggestionClick = (term: string) => {
+    setShowSuggestions(false)
+    setEmailSearchValue(term)
     setSearchValue('')
   }
 
@@ -38,17 +45,18 @@ export default function SearchWrapper({ profiles = [] }: Props) {
         placeholder="eg. richard@gmail.com"
         onChange={changeHandler}
         value={searchValue}
+        onFocus={() => setShowSuggestions(true)}
       />
       <Button variant={'action'} onClick={searchHandler}>
         Search
       </Button>
-      {filteredProfiles.length > 0 && (
+      {showSuggestions && filteredProfiles.length > 0 && (
         <ul className={styles.suggestionsBox}>
           {filteredProfiles.map((profile) => (
             <SearchSuggestionItem
               key={profile.id}
               searchValue={searchValue}
-              onClick={setSearchValue}
+              onClick={handleSuggestionClick}
               profile={profile}
             />
           ))}
