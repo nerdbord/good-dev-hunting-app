@@ -3,7 +3,6 @@ import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import React from 'react'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
-import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
@@ -33,7 +32,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     >
       <div className={styles.container} data-test-id="profileContainer">
         <div className={styles.profile}>
-          <img src={ProfilePicture.src} alt="Profile Picture" />
+          <img src="/assets/images/ProfilePicture.png" alt="Profile Picture" />
         </div>
         <div className={styles.data}>
           <p className={styles.name}>{data.fullName}</p>
