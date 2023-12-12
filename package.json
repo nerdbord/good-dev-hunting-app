@@ -15,7 +15,8 @@
     "prisma:seed": "yarn prisma db seed",
     "postinstall": "prisma generate",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
