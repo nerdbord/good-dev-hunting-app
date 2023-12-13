@@ -54,14 +54,16 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
           </InputFormError>
         </div>
         <UserPhotoUploader profile={profile} />
-        <TextInput
-          label="LinkedIn"
-          placeholder="Paste link to you linkedin profile"
-          value={values.linkedin}
-          onChange={handleChange}
-          name="linkedin"
-          dataTestId="linkedin"
-        />
+        <InputFormError error={errors.linkedin}>
+          <TextInput
+            label="LinkedIn"
+            placeholder="Paste link to you linkedin profile"
+            value={values.linkedin}
+            onChange={handleChange}
+            name="linkedin"
+            dataTestId="linkedin"
+          />
+        </InputFormError>
         <InputFormError error={errors.bio}>
           <div className={styles.lettersCountParent}>
             <TextArea
