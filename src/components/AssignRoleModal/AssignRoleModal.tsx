@@ -4,7 +4,6 @@ import styles from './AssignRole.module.scss'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 
 export default function AssignRoleModal({
-  profileId,
   onClose,
 }: {
   profileId: string

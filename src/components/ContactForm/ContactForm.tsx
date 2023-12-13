@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { initialValues, validationSchema, ContactFormValues } from './schema'
+import { initialValues, validationSchema } from './schema'
 
 export default function ContactForm({
   userProfile,
@@ -19,7 +19,7 @@ export default function ContactForm({
 }) {
   const { runAsync, loading } = useAsyncAction()
 
-  const handleSendEmail = (values: ContactFormValues) => {
+  const handleSendEmail = () => {
     runAsync(async () => {
       try {
         // Handle submit actions

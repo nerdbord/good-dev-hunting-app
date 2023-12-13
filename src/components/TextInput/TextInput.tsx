@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react'
 import styles from './TextInput.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import Tooltip from '../Tooltip/Tooltip'
