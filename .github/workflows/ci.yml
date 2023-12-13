@@ -9,6 +9,10 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+      GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
 
     steps:
     - name: Checkout code
@@ -30,9 +34,6 @@ jobs:
 
     - name: Start the Next.js application
       run: npm run start &
-      env:
-        GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-        GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
 
     - name: Run Cypress tests
       run: npm run cypress:run
