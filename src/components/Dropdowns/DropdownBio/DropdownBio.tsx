@@ -14,6 +14,7 @@ export const DropdownBio = ({
   id,
   dropdownTestId,
   optionTestId,
+  error,
 }: {
   label: string
   name: string
@@ -23,13 +24,15 @@ export const DropdownBio = ({
   id: string
   dropdownTestId?: string
   optionTestId?: string
+  error?: string
+  onBlur?: (event: React.FocusEvent<HTMLDivElement>) => void
 }) => {
   const { setFieldValue } = useFormikContext()
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
-
+  const [hasInteracted, setHasInteracted] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-
+  const [hasError, setHasError] = useState(false)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -38,22 +41,30 @@ export const DropdownBio = ({
       ) {
         setDropdownActive(false)
         setArrow('IoIosArrowDown')
+        if (!selectedValue && hasInteracted && !selectedValue) {
+          setHasError(true)
+        }
+        setHasInteracted(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [selectedValue, hasInteracted, selectedValue])
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
+    setHasInteracted(true)
+    setHasError(false)
   }
 
   const handleSelection = (option: string) => {
     setFieldValue(name, option)
     setDropdownActive(false)
+    setHasInteracted(false)
+    setHasError(false)
   }
 
   return (
@@ -69,7 +80,8 @@ export const DropdownBio = ({
           <div className={styles.selected}>
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
-        </button>
+        </button>{' '}
+        {hasError && error && <span className={styles.errorMsg}>{error}</span>}
         {isDropdownActive && (
           <div className={styles.dropdown}>
             {options.map((option, index) => (

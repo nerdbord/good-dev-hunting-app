@@ -9,7 +9,7 @@ import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 
 const LocationPreferences = () => {
-  const { values, handleChange, errors } =
+  const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 
   return (
@@ -23,8 +23,9 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <InputFormError error={errors.country}>
+          <InputFormError error={errors.country} touched={touched.country}>
             <TextInput
+              onBlur={handleBlur}
               label="Country of residency"
               placeholder="Start typing location"
               value={values.country}
@@ -35,6 +36,7 @@ const LocationPreferences = () => {
             />
           </InputFormError>
           <CheckboxInput
+            onBlur={handleBlur}
             id="openToRelocationCountry"
             label="I’m open to residency relocation"
             checked={values.openToRelocationCountry}
@@ -44,8 +46,9 @@ const LocationPreferences = () => {
           />
         </div>
         <div>
-          <InputFormError error={errors.city}>
+          <InputFormError error={errors.city} touched={touched.city}>
             <TextInput
+              onBlur={handleBlur}
               label="City residency"
               placeholder="Start typing location"
               value={values.city}
@@ -58,6 +61,7 @@ const LocationPreferences = () => {
             />
           </InputFormError>
           <CheckboxInput
+            onBlur={handleBlur}
             id="openToRelocationCity"
             label="I’m open to city relocation"
             checked={values.openToRelocationCity}
@@ -66,8 +70,9 @@ const LocationPreferences = () => {
             dataTestId="openToRelocationCity"
           />
         </div>
-        <InputFormError error={errors.remoteOnly}>
+        <InputFormError error={errors.remoteOnly} touched={touched.remoteOnly}>
           <SwitchInput
+            onBlur={handleBlur}
             id="remoteOnly"
             checked={values.remoteOnly}
             label="I’m looking for remote jobs only"
