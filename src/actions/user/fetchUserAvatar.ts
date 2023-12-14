@@ -1,5 +1,4 @@
 'use server'
-import { apiClient } from '@/lib/apiClient'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
