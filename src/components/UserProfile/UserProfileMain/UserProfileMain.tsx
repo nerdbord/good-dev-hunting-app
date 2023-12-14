@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 import Image from 'next/image'
 import PolandFlag from '@/assets/images/🇵🇱.jpg'
-import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 
@@ -18,7 +17,7 @@ const UserProfileMain = ({
       <div className={styles.profile}>
         <div className={styles.user}>
           <Image
-            src={ProfilePicture}
+            src={userProfile.avatarUrl || ''}
             width={100}
             height={100}
             alt="user's avatar"

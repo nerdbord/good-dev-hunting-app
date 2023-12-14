@@ -16,7 +16,7 @@ const filterLists = {
 }
 
 const WorkInformation = () => {
-  const { values, handleChange, errors, setFieldValue } =
+  const { values, handleChange, errors, setFieldValue, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 
   const handleEmploymentType = (option: string): void => {
@@ -34,33 +34,32 @@ const WorkInformation = () => {
       </div>
 
       <div className={styles.right}>
-        <InputFormError error={errors.position}>
-          <DropdownBio
-            id="position"
-            label="Position"
-            text="Choose position"
-            options={filterLists.position}
-            selectedValue={values.position}
-            name="position"
-            dropdownTestId="position"
-            optionTestId="positionOption"
-          />
-        </InputFormError>
-        <InputFormError error={errors.seniority}>
-          <DropdownBio
-            id="seniority"
-            label="Seniority"
-            text="Choose seniority"
-            options={filterLists.seniority}
-            selectedValue={values.seniority}
-            name="seniority"
-            dropdownTestId="seniority"
-            optionTestId="seniorityOption"
-          />
-        </InputFormError>
+        <DropdownBio
+          id="position"
+          label="Position"
+          text="Choose position"
+          options={filterLists.position}
+          selectedValue={values.position}
+          error={errors.position}
+          name="position"
+          dropdownTestId="position"
+          optionTestId="positionOption"
+        />
+        <DropdownBio
+          id="seniority"
+          label="Seniority"
+          text="Choose seniority"
+          options={filterLists.seniority}
+          selectedValue={values.seniority}
+          error={errors.seniority}
+          name="seniority"
+          dropdownTestId="seniority"
+          optionTestId="seniorityOption"
+        />
         <div>
-          <InputFormError error={errors.techStack}>
+          <InputFormError error={errors.techStack} touched={touched.techStack}>
             <TextArea
+              onBlur={handleBlur}
               label="Tech stack"
               placeholder="Start typing"
               value={values.techStack}

@@ -16,6 +16,7 @@ interface TextInputProps {
   excludeDigits?: boolean
   tooltipText?: string | null
   dataTestId?: string
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -29,8 +30,9 @@ const TextInput: React.FC<TextInputProps> = ({
   excludeDigits,
   tooltipText,
   dataTestId,
+  onBlur,
 }) => {
-  const [isTyped, setIsTyped] = React.useState(false)
+  const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (excludeDigits) {
       event.target.value = event.target.value.replace(/[0-9]/g, '')
@@ -58,6 +60,7 @@ const TextInput: React.FC<TextInputProps> = ({
         name={name}
         disabled={disabled}
         data-testid={dataTestId}
+        onBlur={onBlur}
       />
     </div>
   )

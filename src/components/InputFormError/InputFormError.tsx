@@ -3,13 +3,14 @@ import styles from './InputFormError.module.scss'
 interface InputWrapperProps {
   error: string | string[] | undefined
   children: ReactNode
+  touched?: boolean
 }
 
-const InputFormError = ({ error, children }: InputWrapperProps) => {
+const InputFormError = ({ error, children, touched }: InputWrapperProps) => {
   return (
-    <div className={error ? styles.errorMsg : ''}>
+    <div className={error && touched ? styles.errorMsg : ''}>
       {children}
-      {error && <p>{error}</p>}
+      {error && touched && <p>{error}</p>}
     </div>
   )
 }
