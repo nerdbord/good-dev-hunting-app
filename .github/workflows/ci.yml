@@ -24,6 +24,7 @@ jobs:
           - 5432:5432
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/fastify-graphql
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
