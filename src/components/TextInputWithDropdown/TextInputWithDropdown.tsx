@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
 import TextInput from '../TextInput/TextInput'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import styles from './TextInputWithDropdown.module.scss'
 import { countries } from '@/data/frontend/profile/countries/countries'
+import useOutsideClick from '@/hooks/useOutsideClick'
 
 const TextInputWithDropdown = () => {
   const { values, handleChange, setFieldValue } =
@@ -34,20 +35,12 @@ const TextInputWithDropdown = () => {
     setIsDropdownActive(!isDropdownActive)
   }
 
-  const handleClickOutside = (e: MouseEvent) => {
-    const dropdownContainer = dropdownRef.current
-    if (dropdownContainer && !dropdownContainer.contains(e.target as Node)) {
-      setIsDropdownActive(false)
-      preventInvalidCountry()
-    }
-  }
+  useOutsideClick(
+    dropdownRef,
+    () => setIsDropdownActive(false),
+    preventInvalidCountry,
+  )
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
   return (
     <div className={styles.container} onClick={handleCountryInputClick}>
       <TextInput
