@@ -1,51 +1,36 @@
-name: CI/CD Pipeline
-
-on:
-  pull_request:
-    branches: [ main ]
-  push:
-    branches: [ main ]
-
+# .github/workflows/test.yaml
+name: test
+on: push
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
-    env:
-      GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-      GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
-      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+    # Service containers to run with `container-job`
     services:
+      # Label used to access the service container
       postgres:
-        image: postgres:latest
+        # Docker Hub PostgreSQL image
+        image: postgres
+        # Provide the password for postgres
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: testdb
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
+          # Maps tcp port 5432 on service container to the host
           - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/fastify-graphql
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Lint Code
-        run: npm run lint
-
-      - name: Build the Next.js application
-        run: npm run build
-        env:
-          DATABASE_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
-
-      - name: Start the Next.js application
-        run: npm run start &
-
-      - name: Run Cypress tests
-        run: npm run cypress:run
+          node-version: '14.x'
+      - run: npm ci
+      - run: npm run build
+      # Create the database
+      - run: npx prisma migrate deploy
+      - run: npm run cypress:run
