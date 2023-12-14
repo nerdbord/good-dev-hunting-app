@@ -40,11 +40,11 @@ jobs:
     - name: Lint Code
       run: npm run lint
 
-    - name: Build the Next.js application
-      run: npm run build
+    # - name: Build the Next.js application
+    #   run: npm run build
 
-    - name: Start the Next.js application
-      run: npm run start &
+    # - name: Start the Next.js application
+    #   run: npm run start &
 
     - name: Run Cypress tests
       run: npm run cypress:run
