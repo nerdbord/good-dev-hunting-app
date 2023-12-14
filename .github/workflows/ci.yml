@@ -17,7 +17,6 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: testdb
@@ -26,25 +25,27 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Lint Code
-      run: npm run lint
+      - name: Lint Code
+        run: npm run lint
 
-    # - name: Build the Next.js application
-    #   run: npm run build
+      - name: Build the Next.js application
+        run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
 
-    # - name: Start the Next.js application
-    #   run: npm run start &
+      - name: Start the Next.js application
+        run: npm run start &
 
-    - name: Run Cypress tests
-      run: npm run cypress:run
+      - name: Run Cypress tests
+        run: npm run cypress:run
