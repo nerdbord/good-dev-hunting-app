@@ -35,6 +35,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
             value={values.fullName}
             onChange={handleChange}
             name="fullName"
+            dataTestId="fullName"
           />
         </InputFormError>
         <div className={styles.emailContainer}>
@@ -48,6 +49,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               name="contactEmail"
               disabled={true}
               tooltipText=" Email is connected to your Github profile and cannot be changed!"
+              dataTestId=""
             />
           </InputFormError>
         </div>
@@ -58,6 +60,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
           value={values.linkedin}
           onChange={handleChange}
           name="linkedin"
+          dataTestId="linkedin"
         />
         <InputFormError error={errors.bio}>
           <div className={styles.lettersCountParent}>
@@ -70,6 +73,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               name="bio"
               maxLength={1500}
               tooltipText="Let others know you - write a few sentences about yourself."
+              dataTestId="bio"
             />{' '}
             <div className={styles.lettersCount}>
               {values.bio.length} / 1500 characters

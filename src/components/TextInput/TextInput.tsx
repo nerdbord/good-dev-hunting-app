@@ -17,6 +17,7 @@ interface TextInputProps {
   tooltipText?: string | null
   onClick?(event: React.MouseEvent<HTMLInputElement>): void
   inputRef?: React.Ref<HTMLInputElement>
+  dataTestId?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -31,6 +32,7 @@ const TextInput: React.FC<TextInputProps> = ({
   tooltipText,
   onClick,
   inputRef,
+  dataTestId,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +63,7 @@ const TextInput: React.FC<TextInputProps> = ({
         disabled={disabled}
         onClick={onClick}
         ref={inputRef}
+        data-testid={dataTestId}
       />
     </div>
   )

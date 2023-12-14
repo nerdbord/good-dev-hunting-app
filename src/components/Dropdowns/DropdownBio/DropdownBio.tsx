@@ -2,11 +2,8 @@
 import styles from './DropdownBio.module.scss'
 import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
-import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
-import classNames from 'classnames/bind'
+import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import { useFormikContext } from 'formik'
-
-const cx = classNames.bind(styles)
 
 export const DropdownBio = ({
   label,
@@ -15,6 +12,8 @@ export const DropdownBio = ({
   options,
   selectedValue,
   id,
+  dropdownTestId,
+  optionTestId,
 }: {
   label: string
   name: string
@@ -22,6 +21,8 @@ export const DropdownBio = ({
   options: string[]
   selectedValue: string
   id: string
+  dropdownTestId?: string
+  optionTestId?: string
 }) => {
   const { setFieldValue } = useFormikContext()
   const [arrow, setArrow] = useState('IoIosArrowDown')
@@ -59,7 +60,11 @@ export const DropdownBio = ({
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>
       <div ref={dropdownRef}>
-        <button onClick={handleDropdown} className={styles.featuresBtn}>
+        <button
+          onClick={handleDropdown}
+          className={styles.featuresBtn}
+          data-testid={dropdownTestId}
+        >
           <div className={styles.buttonText}>{selectedValue || text}</div>
           <div className={styles.selected}>
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -78,6 +83,7 @@ export const DropdownBio = ({
                     selectedValue === option ? styles.selectedOption : ''
                   }
                   onClick={() => handleSelection(option)}
+                  data-testid={optionTestId}
                 >
                   {option}
                 </div>
