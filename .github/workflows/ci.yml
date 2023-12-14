@@ -12,12 +12,12 @@ jobs:
     env:
       GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
       GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
-
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
     services:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_PRISMA_URL: "postgres://default:59TfFQZnKCtb@ep-misty-heart-03592629-pooler.eu-central-1.postgres.vercel-storage.com/verceldb?pgbouncer=true&connect_timeout=15"
+          POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: testdb
