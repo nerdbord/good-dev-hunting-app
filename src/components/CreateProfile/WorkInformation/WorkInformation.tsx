@@ -42,6 +42,8 @@ const WorkInformation = () => {
             options={filterLists.position}
             selectedValue={values.position}
             name="position"
+            dropdownTestId="position"
+            optionTestId="positionOption"
           />
         </InputFormError>
         <InputFormError error={errors.seniority}>
@@ -52,6 +54,8 @@ const WorkInformation = () => {
             options={filterLists.seniority}
             selectedValue={values.seniority}
             name="seniority"
+            dropdownTestId="seniority"
+            optionTestId="seniorityOption"
           />
         </InputFormError>
         <div>
@@ -65,6 +69,7 @@ const WorkInformation = () => {
               name="techStack"
               excludeDigits
               tooltipText="List the technologies you are comfortable with or interested in."
+              dataTestId="techStack"
             />
           </InputFormError>
           <div className={styles.addInfo}>

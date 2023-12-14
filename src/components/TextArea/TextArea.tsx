@@ -15,6 +15,7 @@ interface TextAreaProps {
   maxLength?: number
   height?: number
   tooltipText?: string | null
+  dataTestId?: string
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -28,6 +29,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   maxLength,
   height,
   tooltipText,
+  dataTestId,
 }) => {
   const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -56,6 +58,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         onChange={handleChange}
         name={name}
         maxLength={maxLength}
+        data-testid={dataTestId}
       />
     </div>
   )

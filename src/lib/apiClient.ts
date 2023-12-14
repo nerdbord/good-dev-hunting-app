@@ -8,12 +8,10 @@ import {
 import { httpClient } from '@/lib/httpClient'
 import { PutBlobResult } from '@vercel/blob'
 
-const API_URL = 'http://localhost:3000/api'
-
 export const apiClient = {
   publishMyProfile: async (profileId: string) => {
     const publishedProfile = await httpClient.post<undefined, ProfileModel>(
-      `${API_URL}/profiles/${profileId}/publish`,
+      `/api/profiles/${profileId}/publish`,
     )
 
     return publishedProfile
@@ -28,9 +26,7 @@ export const apiClient = {
   },
   getUserProfile: async () => {
     try {
-      const profile = await httpClient.get<ProfileModel>(
-        `${API_URL}/profiles/me`,
-      )
+      const profile = await httpClient.get<ProfileModel>(`/api/profiles/me`)
 
       return profile
     } catch (error) {
@@ -53,7 +49,7 @@ export const apiClient = {
       const updatedProfileState = await httpClient.patch<
         PublishingStateData,
         ProfileModel
-      >(`${API_URL}/profiles/${profileId}/state`, payload)
+      >(`/api/profiles/${profileId}/state`, payload)
 
       return updatedProfileState
     } catch (error) {
@@ -68,7 +64,7 @@ export const apiClient = {
       const savedRejectingReason = await httpClient.post<
         RejectionReason,
         RejectionReason
-      >(`${API_URL}/profiles/${profileId}/reject`, payload)
+      >(`/api/profiles/${profileId}/reject`, payload)
       return savedRejectingReason
     } catch (error) {
       console.log(error)

@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
@@ -14,7 +13,7 @@ import RejectIcon from '@/assets/icons/RejectIcon'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-
+import Image from 'next/image'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { useModal } from '@/contexts/ModalContext'
@@ -30,7 +29,7 @@ export function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
   const { addToast } = useToast()
   const { showModal, closeModal } = useModal()
-  const { runAsync } = useAsyncAction()
+  const { runAsync, loading } = useAsyncAction()
 
   const handleClose = () => {
     closeModal()
@@ -42,6 +41,7 @@ export function StateStatus({ profile }: StateStatusProps) {
       <div className={styles.actions}>
         <Button
           variant="action"
+          loading={loading}
           onClick={() => {
             runAsync(async () => {
               await apiClient.updateProfileState(id, {
@@ -115,7 +115,13 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
         }
       >
         <div className={styles.profile}>
-          <img src={ProfilePicture.src} alt="Profile Picture" />
+          <Image
+            src={profile.avatarUrl || ''}
+            width={78}
+            height={78}
+            alt="user's avatar"
+            className={styles.avatar}
+          />
         </div>
         <div className={styles.data}>
           <p className={styles.name}>{profile.fullName}</p>

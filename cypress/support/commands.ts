@@ -1,4 +1,15 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 export {}
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command to simulate user login.
+       */
+      login(): Chainable<Element>
+    }
+  }
+}
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -36,3 +47,8 @@ export {}
 //     }
 //   }
 // }
+
+Cypress.Commands.add('login', () => {
+  cy.intercept('/api/auth/session', { fixture: 'session.json' }).as('session')
+  cy.setCookie('next-auth.session-token', Cypress.env('SESSION_TOKEN'))
+})

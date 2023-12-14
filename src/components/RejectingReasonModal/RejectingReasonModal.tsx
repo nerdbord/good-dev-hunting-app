@@ -18,7 +18,7 @@ export default function RejectingReasonModal({
 }) {
   const [reasonText, setReasonText] = useState('')
   const { addToast } = useToast()
-  const { runAsync } = useAsyncAction()
+  const { runAsync, loading } = useAsyncAction()
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault()
@@ -37,8 +37,8 @@ export default function RejectingReasonModal({
         'Profile rejected and will not be visible on the main page',
         ToastStatus.INVALID,
       )
+      onClose()
     })
-    onClose()
   }
 
   return (
@@ -50,7 +50,7 @@ export default function RejectingReasonModal({
         onChange={handleTextChange}
       />
       <div className={modalStyles.actionButtons}>
-        <Button variant={'primary'} onClick={handleReject}>
+        <Button loading={loading} variant={'primary'} onClick={handleReject}>
           Send and reject
         </Button>
         <Button variant={'action'} onClick={() => onClose()}>
