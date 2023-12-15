@@ -1,6 +1,5 @@
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import EmailIcon from '@/assets/icons/EmailIcon'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
 import styles from './SocialItems.module.scss'
@@ -22,14 +21,19 @@ export default function SocialItems({
           <GithubIcon2 />
         </a>
       </div>
-      <div className={styles.socialItem}>
-        LinkedIn
-        <LinkedIn />
-      </div>
-      <div className={styles.socialItem}>
-        Copy email
-        <EmailIcon />
-      </div>
+      {userProfile.linkedIn && (
+        <div className={styles.socialItem}>
+          <a
+            className={styles.socialLink}
+            href={userProfile.linkedIn || ''}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+            <LinkedIn />
+          </a>
+        </div>
+      )}
     </div>
   )
 }

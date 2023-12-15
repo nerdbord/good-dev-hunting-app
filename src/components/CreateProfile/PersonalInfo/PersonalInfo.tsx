@@ -42,7 +42,6 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
         </InputFormError>
         <div className={styles.emailContainer}>
           <InputFormError error={errors.contactEmail}>
-            {' '}
             <TextInput
               onBlur={handleBlur}
               label="Contact email"
@@ -80,7 +79,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
                 maxLength={1500}
                 tooltipText="Let others know you - write a few sentences about yourself."
                 dataTestId="bio"
-              />{' '}
+              />
               <div className={styles.lettersCount}>
                 {values.bio.length} / 1500 characters
               </div>
