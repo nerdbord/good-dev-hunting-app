@@ -13,6 +13,7 @@ import RejectIcon from '@/assets/icons/RejectIcon'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import Image from 'next/image'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { useModal } from '@/contexts/ModalContext'
@@ -114,7 +115,13 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
         }
       >
         <div className={styles.profile}>
-          <img src="/assets/images/ProfilePicture.png" alt="Profile Picture" />
+          <Image
+            src={profile.avatarUrl || ''}
+            width={78}
+            height={78}
+            alt="user's avatar"
+            className={styles.avatar}
+          />
         </div>
         <div className={styles.data}>
           <p className={styles.name}>{profile.fullName}</p>

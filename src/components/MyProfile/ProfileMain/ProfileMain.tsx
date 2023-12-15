@@ -3,6 +3,7 @@ import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
+import PolandFlag from '@/assets/images/flagPL.jpg'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
@@ -50,7 +51,7 @@ const ProfileMain = async () => {
             <li className={styles.socialItem}>
               <a
                 className={styles.socialLink}
-                href={'http://localhost:3000/'}
+                href={profile.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -88,6 +89,7 @@ const ProfileMain = async () => {
                 {profile.country.name}, {profile.city.name}
               </p>
             </div>
+
             <div className={styles.optionBox}>
               {profile.country.openForRelocation && (
                 <div className={styles.location}>
@@ -101,6 +103,7 @@ const ProfileMain = async () => {
                 <div className={styles.location}>Remote only</div>
               )}
             </div>
+
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
