@@ -1,0 +1,30 @@
+.dropdownBox {
+  position: absolute;
+  overflow-y: scroll;
+  width: 100%;
+  max-height: 160px;
+  background-color: #171b21;
+  border: 1px solid #2a2f35;
+  border-radius: 2px;
+  scrollbar-width: none;
+  z-index: 1;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  li {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 52px;
+    padding-left: 20px;
+    cursor: pointer;
+    color: #89939e;
+    &:hover {
+      background-color: #2a2f35;
+    }
+  }
+}
+
+.bold {
+  color: #fff;
+}
