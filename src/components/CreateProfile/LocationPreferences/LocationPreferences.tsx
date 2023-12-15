@@ -7,6 +7,7 @@ import SwitchInput from '@/components/Switch/Switch'
 import { useFormikContext } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 
 const LocationPreferences = () => {
   const { values, handleChange, errors, touched, handleBlur } =
@@ -24,15 +25,9 @@ const LocationPreferences = () => {
       <div className={styles.right}>
         <div>
           <InputFormError error={errors.country} touched={touched.country}>
-            <TextInput
-              onBlur={handleBlur}
-              label="Country of residency"
-              placeholder="Start typing location"
-              value={values.country}
+            <TextInputWithDropdown
               onChange={handleChange}
-              name="country"
-              excludeDigits
-              dataTestId="country"
+              onBlur={handleBlur}
             />
           </InputFormError>
           <CheckboxInput
