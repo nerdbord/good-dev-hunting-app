@@ -35,4 +35,5 @@ jobs:
       - run: npm run build
       # Create the database
       - run: npx prisma migrate deploy
+      - run: npm run start &
       - run: npm run cypress:run
