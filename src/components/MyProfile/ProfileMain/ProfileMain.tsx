@@ -51,7 +51,7 @@ const ProfileMain = async () => {
             <li className={styles.socialItem}>
               <a
                 className={styles.socialLink}
-                href={'http://localhost:3000/'}
+                href={profile.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
               >
