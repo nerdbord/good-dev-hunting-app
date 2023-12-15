@@ -24,8 +24,8 @@ jobs:
           - 5432:5432
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/fastify-graphql
-      POSTGRES_PRISMA_URL: postgres://default:59TfFQZnKCtb@ep-misty-heart-03592629-pooler.eu-central-1.postgres.vercel-storage.com/verceldb?pgbouncer=true&connect_timeout=15
-      POSTGRES_URL_NON_POOLING: postgres://default:59TfFQZnKCtb@ep-misty-heart-03592629.eu-central-1.postgres.vercel-storage.com/verceldb
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+      POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
