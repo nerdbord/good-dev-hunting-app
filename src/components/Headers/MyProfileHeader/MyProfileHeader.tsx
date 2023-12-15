@@ -2,7 +2,6 @@ import React from 'react'
 
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
-import logo from '@/assets/images/logo.png'
 import Image from 'next/image'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -14,7 +13,12 @@ const MyProfileHeader = async () => {
     <div>
       <header className={styles.wrapper}>
         <Link href="/" className={styles.logo}>
-          <img src={logo.src} alt="Logo" />
+          <Image
+            src="/assets/images/logo.png"
+            alt="Logo"
+            width={44}
+            height={26}
+          />
           <div className={styles.title}>Good Dev Hunting</div>
         </Link>
         <div className={styles.actions}>

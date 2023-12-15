@@ -29,7 +29,7 @@ const UserProfileMain = ({
         <div className={styles.locationBox}>
           <div className={styles.country}>
             <Image
-              src={PolandFlag}
+              src="/assets/images/🇵🇱.jpg"
               alt="Poland Flag"
               width={20}
               height={20}
