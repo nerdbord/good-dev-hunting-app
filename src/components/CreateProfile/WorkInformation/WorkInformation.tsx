@@ -57,7 +57,7 @@ const WorkInformation = () => {
           optionTestId="seniorityOption"
         />
         <div>
-          <InputFormError error={errors.techStack} touched={touched.techStack}>
+          <InputFormError error={touched.techStack && errors.techStack}>
             <TextArea
               onBlur={handleBlur}
               label="Tech stack"
