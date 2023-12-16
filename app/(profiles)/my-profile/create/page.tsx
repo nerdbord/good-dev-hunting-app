@@ -31,7 +31,7 @@ const CreateProfilePage = async () => {
         <div className={styles.wrapper}>
           <CreateProfileTopBar />
           <div className={styles.formBox}>
-            <PersonalInfo profile={profile} />
+            <PersonalInfo />
             <LocationPreferences />
             <WorkInformation />
           </div>

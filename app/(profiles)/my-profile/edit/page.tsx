@@ -12,8 +12,6 @@ import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { UploadProvider } from '@/contexts/UploadContext'
 
-export const revalidate = 0
-
 const EditProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
@@ -33,7 +31,7 @@ const EditProfilePage = async () => {
         <div className={styles.wrapper}>
           <CreateProfileTopBar />
           <div className={styles.formBox}>
-            <PersonalInfo profile={profile} />
+            <PersonalInfo />
             <LocationPreferences />
             <WorkInformation />
           </div>
