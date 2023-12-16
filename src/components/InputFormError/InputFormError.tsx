@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 import styles from './InputFormError.module.scss'
+
 interface InputWrapperProps {
-  error: string | string[] | undefined
+  error: string | boolean | undefined
   children: ReactNode
 }
 

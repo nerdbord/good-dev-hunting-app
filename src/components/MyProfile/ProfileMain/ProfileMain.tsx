@@ -103,7 +103,6 @@ const ProfileMain = async () => {
                 <div className={styles.location}>Remote only</div>
               )}
             </div>
-
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>

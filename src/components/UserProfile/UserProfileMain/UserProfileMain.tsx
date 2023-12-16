@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 import Image from 'next/image'
 import PolandFlag from '@/assets/images/flagPL.jpg'
-import ProfilePicture from '../../../assets/images/ProfilePicture.png'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 
