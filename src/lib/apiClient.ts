@@ -71,12 +71,14 @@ export const apiClient = {
     }
   },
   userPhotoUpload: async (file: File) => {
-    console.log('API call to upload user photo...')
-    const { url } = await httpClient.postPhoto<PutBlobResult>(
-      '/api/files',
-      file,
-    )
-    console.log('API response for photo upload:', url)
-    return url
+    try {
+      const { url } = await httpClient.postPhoto<PutBlobResult>(
+        '/api/files',
+        file,
+      )
+      return url
+    } catch (error) {
+      throw new Error(error as string)
+    }
   },
 }
