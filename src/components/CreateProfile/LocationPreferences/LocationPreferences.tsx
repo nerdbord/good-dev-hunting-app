@@ -24,7 +24,7 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <InputFormError error={errors.country} touched={touched.country}>
+          <InputFormError error={touched.country && errors.country}>
             <TextInputWithDropdown
               onChange={handleChange}
               onBlur={handleBlur}
@@ -41,7 +41,7 @@ const LocationPreferences = () => {
           />
         </div>
         <div>
-          <InputFormError error={errors.city} touched={touched.city}>
+          <InputFormError error={errors.city && touched.city}>
             <TextInput
               onBlur={handleBlur}
               label="City residency"
@@ -65,7 +65,7 @@ const LocationPreferences = () => {
             dataTestId="openToRelocationCity"
           />
         </div>
-        <InputFormError error={errors.remoteOnly} touched={touched.remoteOnly}>
+        <InputFormError error={touched.remoteOnly && errors.remoteOnly}>
           <SwitchInput
             onBlur={handleBlur}
             id="remoteOnly"

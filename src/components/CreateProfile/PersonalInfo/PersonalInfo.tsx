@@ -28,8 +28,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
         </div>
       </div>
       <div className={styles.right}>
-        <InputFormError error={errors.fullName} touched={touched.fullName}>
-          {touched.fullName && <span>huj</span>}
+        <InputFormError error={touched.fullName && errors.fullName}>
           <TextInput
             onBlur={handleBlur}
             label="Full name"
@@ -65,27 +64,25 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
           name="linkedin"
           dataTestId="linkedin"
         />
-        {touched && (
-          <InputFormError error={errors.bio} touched={touched.bio}>
-            <div className={styles.lettersCountParent}>
-              <TextArea
-                onBlur={handleBlur}
-                label="Bio"
-                placeholder="Introduce yourself with few sentences"
-                value={values.bio}
-                addImportantIcon={true}
-                onChange={handleChange}
-                name="bio"
-                maxLength={1500}
-                tooltipText="Let others know you - write a few sentences about yourself."
-                dataTestId="bio"
-              />
-              <div className={styles.lettersCount}>
-                {values.bio.length} / 1500 characters
-              </div>
+        <InputFormError error={touched.bio && errors.bio}>
+          <div className={styles.lettersCountParent}>
+            <TextArea
+              onBlur={handleBlur}
+              label="Bio"
+              placeholder="Introduce yourself with few sentences"
+              value={values.bio}
+              addImportantIcon={true}
+              onChange={handleChange}
+              name="bio"
+              maxLength={1500}
+              tooltipText="Let others know you - write a few sentences about yourself."
+              dataTestId="bio"
+            />
+            <div className={styles.lettersCount}>
+              {values.bio.length} / 1500 characters
             </div>
-          </InputFormError>
-        )}
+          </div>
+        </InputFormError>
       </div>
     </div>
   )
