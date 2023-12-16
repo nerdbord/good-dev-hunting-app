@@ -41,7 +41,7 @@ const LocationPreferences = () => {
           />
         </div>
         <div>
-          <InputFormError error={errors.city && touched.city}>
+          <InputFormError error={touched.city && errors.city}>
             <TextInput
               onBlur={handleBlur}
               label="City residency"
