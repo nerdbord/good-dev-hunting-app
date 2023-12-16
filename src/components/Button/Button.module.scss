@@ -15,10 +15,7 @@
   font-weight: 500;
   line-height: 20px;
   transition: background-color 300ms;
-  @include mobile {
-    width: 166px;
-    white-space: nowrap;
-  }
+  white-space: nowrap;
 }
 
 .disabled {
