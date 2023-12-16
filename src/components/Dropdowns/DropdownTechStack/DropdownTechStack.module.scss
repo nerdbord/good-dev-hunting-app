@@ -1,13 +1,9 @@
-.textAreaContainer {
-    position: relative;
-  }
-  
-  .suggestions {
+    .suggestions {
     position: absolute;
     top: 15%; 
     left: 0;
     width: 60%; 
-    z-index: 10; 
+    z-index: 100; 
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     background-color: rgba(15, 18, 23, 1);

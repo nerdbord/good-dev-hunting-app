@@ -1,0 +1,58 @@
+.container {
+  border: 1px solid #2a2f35;
+}
+
+.chipsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #0F1217;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #161A1F;
+  color: #A687FF;
+  font-size: 14px;
+}
+
+.chip button {
+  margin-left: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.inputField {
+  text-align: left;
+  height: 200px;
+  flex-grow: 1;
+  border: none;
+  font-size: 14px;
+  padding: 5px;
+  background-color: #0f1217;
+  color: white;
+  }
+  
+  .suggestions {
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: rgba(15, 18, 23, 1);
+  }
+  
+  .suggestionItem {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .suggestionItem strong {
+    color: #89939E;
+  }
+  
+  .suggestionItem:hover, .suggestionItem:focus {
+    background-color: #2A2F35;
+  }
+  

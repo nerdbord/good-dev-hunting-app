@@ -8,6 +8,8 @@ import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
 import styles from './WorkInformations.module.scss'
+import DropdownTechStack from '@/components/Dropdowns/DropdownTechStack/DropdownTechStack'
+import ChipInputTextarea from '@/components/ChipInput/ChipInputTextarea'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -20,6 +22,25 @@ const WorkInformation = () => {
 
   const handleEmploymentType = (option: string): void => {
     setFieldValue('employment', option)
+  }
+
+  const [selectedTechs, setSelectedTechs] = useState<string[]>([])
+
+  const handleTechSelect = (tech: string) => {
+    setSelectedTechs((prevTechs) => {
+      if (!prevTechs.includes(tech)) {
+        return [...prevTechs, tech]
+      }
+      return prevTechs
+    })
+  }
+
+  const removeTech = (tech: string) => {
+    setSelectedTechs((prevTechs) => prevTechs.filter((t) => t !== tech))
+  }
+
+  const handleTechStackChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleChange(e)
   }
 
   return (
@@ -53,24 +74,24 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        <div className={styles.textAreaContainer}>
-          <InputFormError error={errors.techStack}>
-            <TextArea
+        <InputFormError error={errors.techStack}>
+          {/* <TextArea
               label="Tech stack"
               placeholder="Start typing"
               value={values.techStack}
               addImportantIcon={true}
-              onChange={handleChange}
+              onChange={handleTechStackChange}
               name="techStack"
               excludeDigits
               tooltipText="List the technologies you are comfortable with or interested in."
-            />
-          </InputFormError>
-          <div className={styles.addInfo}>
-            Start typing and separate technologies with commas.
-            <br />
-            Choose max. 8
-          </div>
+            /> */}
+          <ChipInputTextarea />
+        </InputFormError>
+
+        <div className={styles.addInfo}>
+          Start typing and separate technologies with commas.
+          <br />
+          Choose max. 8
         </div>
         <div className={styles.employmentType}>
           <InputFormError error={errors.employment}>

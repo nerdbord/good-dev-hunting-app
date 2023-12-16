@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import styles from './TechStackSuggestion.module.scss'
+import styles from './DropdownTechStack.module.scss'
 import technologies from '@/data/frontend/technologies/data'
 
 interface DropdownTechStackProps {
