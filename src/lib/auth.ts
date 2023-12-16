@@ -3,6 +3,8 @@ import GithubProvider from 'next-auth/providers/github'
 import { getServerSession } from 'next-auth'
 import { createUser, findUserByEmail } from '@/backend/user/user.service'
 import { mailersendClient } from './mailersendClient'
+import { template } from 'cypress/types/lodash'
+import { Recipient } from 'mailersend'
 
 interface UserAuthed {
   id: string
@@ -59,8 +61,9 @@ export const authOptions: NextAuthOptions = {
 
         if (createdUser) {
           await mailersendClient.sendMail(
-            createdUser.email,
-            castedProfile.login,
+            [new Recipient(createdUser.email, castedProfile.login)],
+            process.env.MAILERSEND_TEMPLATE_ID!,
+            process.env.MAILER_SEND_SUBJECT!,
           )
         }
 
