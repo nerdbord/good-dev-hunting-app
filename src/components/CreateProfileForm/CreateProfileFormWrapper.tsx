@@ -28,7 +28,7 @@ export interface CreateProfileFormValues {
   state: PublishingState
 }
 
-export const initialValues: CreateProfileFormValues = {
+const initialValues: CreateProfileFormValues = {
   fullName: '',
   contactEmail: '',
   linkedin: '',

@@ -3,35 +3,46 @@ import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
-import { useEffect, useState } from 'react'
+import { apiClient } from '@/lib/apiClient'
+import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
 
 const CreateProfileTopBar = () => {
-  const router = useRouter()
   const pathname = usePathname()
-  const { handleSubmit, errors, isSubmitting } = useFormikContext()
+  const { handleSubmit, errors } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
-  const { setTriggerUpload, uploadSuccess, fileSelected, isUploading } =
-    useUploadContext()
+  const {
+    imageUploadError,
+    setImageUploadError,
+    selectedFile,
+    setSelectedFile,
+  } = useUploadContext()
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     if (Object.keys(errors).length === 0) {
       runAsync(async () => {
-        await handleSubmit()
-        setTriggerUpload(true)
+        if (selectedFile) {
+          try {
+            const url = await apiClient.userPhotoUpload(selectedFile)
+            url && (await serverUpdateUserAvatar(url))
+            await handleSubmit()
+          } catch (error) {
+            console.log(error)
+            setImageUploadError(true)
+            setSelectedFile(null)
+          }
+        } else {
+          !imageUploadError && (await handleSubmit())
+        }
       })
     }
   }
-
-  // useEffect(() => {
-  //   if (uploadSuccess || (!fileSelected && isSubmitting)) {
-  //     router.push(AppRoutes.myProfile)
-  //   }
-  // }, [uploadSuccess, isSubmitting])
 
   return (
     <div className={styles.titleBox}>
@@ -43,7 +54,7 @@ const CreateProfileTopBar = () => {
             ? 'Edit profile'
             : 'My profile'}
         </span>
-        {Object.keys(errors).length > 0 && (
+        {(!!Object.keys(errors).length || imageUploadError) && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
             <span>Fill out the form to complete the profile</span>
@@ -51,7 +62,9 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
-        <Button variant="secondary">Connect with Nerdbord</Button>
+        <Button variant="secondary">
+          {isMobile ? 'Connect to Nerdbord' : 'Connect with Nerdbord'}
+        </Button>
         <Button
           loading={loading}
           variant="primary"
@@ -59,7 +72,7 @@ const CreateProfileTopBar = () => {
           dataTestId="saveAndPreviewProfile"
           type="submit"
         >
-          Save and preview profile
+          {isMobile ? 'Save and preview' : 'Save and preview profile'}
         </Button>
       </div>
     </div>

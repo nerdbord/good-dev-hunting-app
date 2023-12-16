@@ -28,23 +28,6 @@ export interface EditProfileFormValues {
   state: PublishingState
 }
 
-export const initialValues: EditProfileFormValues = {
-  fullName: '',
-  linkedin: '',
-  bio: '',
-  country: '',
-  city: '',
-  openToRelocationCountry: false,
-  openToRelocationCity: false,
-  remoteOnly: false,
-  position: '',
-  seniority: '',
-  employment: EmploymentType.FULL_TIME,
-  techStack: '',
-  githubUsername: '',
-  state: PublishingState.PENDING,
-}
-
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
@@ -96,6 +79,7 @@ const EditProfileFormWrapper = ({
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
     }
+
     try {
       runAsync(async () => {
         await apiClient.updateMyProfile(payload)
