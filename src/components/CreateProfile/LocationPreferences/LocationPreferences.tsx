@@ -48,6 +48,7 @@ const LocationPreferences = () => {
               excludeDigits
               tooltipText="We use this information to match you with the best job opportunities."
               dataTestId="city"
+              maxLength={40}
             />
           </InputFormError>
           <CheckboxInput
