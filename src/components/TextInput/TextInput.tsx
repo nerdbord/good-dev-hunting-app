@@ -18,6 +18,7 @@ interface TextInputProps {
   onClick?(event: React.MouseEvent<HTMLInputElement>): void
   inputRef?: React.Ref<HTMLInputElement>
   dataTestId?: string
+  maxLength?: number
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -33,6 +34,7 @@ const TextInput: React.FC<TextInputProps> = ({
   onClick,
   inputRef,
   dataTestId,
+  maxLength,
 }) => {
   const [isTyped, setIsTyped] = React.useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +66,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onClick={onClick}
         ref={inputRef}
         data-testid={dataTestId}
+        maxLength={maxLength}
       />
     </div>
   )
