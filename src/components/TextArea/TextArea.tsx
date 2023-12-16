@@ -9,6 +9,7 @@ interface TextAreaProps {
   value: string
   placeholder: string
   onChange(event: React.ChangeEvent<HTMLTextAreaElement>): void
+  onKeyDown?(event: React.KeyboardEvent<HTMLTextAreaElement>): void
   addImportantIcon?: boolean
   name: string
   excludeDigits?: boolean
@@ -22,6 +23,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   label,
   value,
   onChange,
+  onKeyDown,
   addImportantIcon,
   name,
   excludeDigits,
@@ -54,6 +56,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        onKeyDown={onKeyDown}
         name={name}
         maxLength={maxLength}
       />

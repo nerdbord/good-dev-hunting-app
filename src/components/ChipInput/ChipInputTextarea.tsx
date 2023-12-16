@@ -1,77 +1,73 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styles from './ChipInputTextarea.module.scss'
-import technologies from '@/data/frontend/technologies/data'
 import CancelIcon from '@/assets/icons/CancelIcon'
+import TextArea from '../TextArea/TextArea'
 
-const ChipInputTextarea = () => {
-  const [chips, setChips] = useState<string[]>([])
-  const [inputValue, setInputValue] = useState<string>('')
-  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
+interface ChipInputTextareaProps {
+  chips: string
+  inputValue: string
+  setInputValue: (value: string) => void
+  filteredSuggestions: string[]
+  onTechSelect: (tech: string) => void
+  onTechRemove: (tech: string) => void
+}
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+const ChipInputTextarea: React.FC<ChipInputTextareaProps> = ({
+  chips,
+  inputValue,
+  setInputValue,
+  filteredSuggestions,
+  onTechSelect,
+  onTechRemove,
+}) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && inputValue) {
-      if (
-        filteredSuggestions.includes(inputValue) &&
-        !chips.includes(inputValue)
-      ) {
-        setChips([...chips, inputValue])
-      }
+      onTechSelect(inputValue)
       setInputValue('')
     }
   }
 
-  const removeChip = (chipToRemove: string) => {
-    setChips(chips.filter((chip) => chip !== chipToRemove))
-  }
-
-  useEffect(() => {
-    const filtered = technologies.filter((tech) =>
-      tech.toLowerCase().startsWith(inputValue.toLowerCase()),
-    )
-    setFilteredSuggestions(filtered.slice(0, 8))
-  }, [inputValue])
-
   return (
-    <div>
-      Tech Stack
-      <div className={styles.container}>
-        <div className={styles.chipsContainer}>
-          {chips.map((chip) => (
-            <div key={chip} className={styles.chip}>
+    <div className={styles.container}>
+      <div className={styles.chipsContainer}>
+        {Array.isArray(chips) &&
+          chips.map((chip, index) => (
+            <div key={index} className={styles.chip}>
               {chip}
-              <button onClick={() => removeChip(chip)}>
+              <button onClick={() => onTechRemove(chip)}>
                 <CancelIcon />
               </button>
             </div>
           ))}
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className={styles.inputField}
-          />
-        </div>
-        {inputValue && (
-          <div className={styles.suggestions}>
-            {filteredSuggestions.map((suggestion) => (
-              <div
-                key={suggestion}
-                className={styles.suggestionItem}
-                onClick={() => {
-                  if (!chips.includes(suggestion)) {
-                    setChips([...chips, suggestion])
-                  }
-                  setInputValue('')
-                }}
-              >
-                {suggestion}
-              </div>
-            ))}
-          </div>
-        )}
+
+        <TextArea
+          label="Tech stack"
+          placeholder="Start typing"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          name="techStack"
+          excludeDigits={true}
+          addImportantIcon={true}
+          tooltipText="List the technologies you are comfortable with or interested in."
+        />
       </div>
+      {inputValue && (
+        <div className={styles.suggestions}>
+          {filteredSuggestions.map((suggestion, index) => (
+            <div
+              key={index}
+              className={styles.suggestionItem}
+              onClick={() => {
+                onTechSelect(suggestion)
+                setInputValue('')
+              }}
+            >
+              {suggestion}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
