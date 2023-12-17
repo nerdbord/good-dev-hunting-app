@@ -1,9 +1,8 @@
 'use client'
-import React from 'react'
-import { Button } from '@/components/Button/Button'
 import AddIcon from '@/assets/icons/AddIcon'
-import { signIn, useSession } from 'next-auth/react'
+import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
+import { signIn, useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
 
 const CreateProfileBtn = () => {
@@ -16,7 +15,7 @@ const CreateProfileBtn = () => {
   }
 
   const onClickHandler = async () => {
-    if (!session) {
+    if (!session?.user?.id) {
       await signIn('github', {
         callbackUrl: AppRoutes.githubOAuth,
       })
