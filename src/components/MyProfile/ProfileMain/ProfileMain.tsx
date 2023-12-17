@@ -1,21 +1,21 @@
-import React from 'react'
-import styles from './ProfileMain.module.scss'
-import Image from 'next/image'
+import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/flagPL.jpg'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
-import { AppRoutes } from '@/utils/routes'
 import { findUserByEmail } from '@/backend/user/user.service'
+import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
-import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
+import { authOptions } from '@/lib/auth'
+import { AppRoutes } from '@/utils/routes'
+import { getServerSession } from 'next-auth'
+import Image from 'next/image'
+import { redirect } from 'next/navigation'
+import styles from './ProfileMain.module.scss'
+
 const ProfileMain = async () => {
   const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect(AppRoutes.home)
   }
   const profile = await getProfileByUserEmail(session.user.email)
@@ -103,7 +103,6 @@ const ProfileMain = async () => {
                 <div className={styles.location}>Remote only</div>
               )}
             </div>
-
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>

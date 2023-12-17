@@ -1,17 +1,16 @@
-import React from 'react'
-import styles from './ProfileTopBar.module.scss'
-import { redirect } from 'next/navigation'
-import { AppRoutes } from '@/utils/routes'
-import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { EditProfileButton } from '@/components/EditProfileButton'
+import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
+import { authOptions } from '@/lib/auth'
+import { AppRoutes } from '@/utils/routes'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import styles from './ProfileTopBar.module.scss'
 
 const ProfileTopBar = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect(AppRoutes.home)
   }
 
