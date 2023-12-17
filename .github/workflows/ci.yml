@@ -37,5 +37,5 @@ jobs:
       # Create the database
       - run: npx prisma migrate reset --force
       - run: npm run start &
-      - run: npm run dev &
+      - run: npx wait-on http://localhost:3000
       - run: npm run cypress:run
