@@ -1,16 +1,11 @@
-# .github/workflows/test.yaml
 name: test
 on: push
 jobs:
   test:
     runs-on: ubuntu-latest
-    # Service containers to run with `container-job`
     services:
-      # Label used to access the service container
       postgres:
-        # Docker Hub PostgreSQL image
         image: postgres
-        # Provide the password for postgres
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -20,7 +15,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         ports:
-          # Maps tcp port 5432 on service container to the host
           - 5432:5432
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/fastify-graphql
@@ -34,8 +28,13 @@ jobs:
           node-version: '18'
       - run: npm install --force
       - run: npm run build
-      # Create the database
       - run: npx prisma migrate reset --force
       - run: npm run start &
       - run: npx wait-on http://localhost:3000
       - run: npm run cypress:run
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/
