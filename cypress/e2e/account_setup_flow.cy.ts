@@ -1,7 +1,6 @@
 describe('Account Setup', () => {
   it('covers the user golden path', () => {
     cy.visit('/')
-    cy.wait(15000)
     cy.get('[data-testid="createProfileButton"]').should('be.visible').click()
     cy.login()
     cy.wait(5000)
