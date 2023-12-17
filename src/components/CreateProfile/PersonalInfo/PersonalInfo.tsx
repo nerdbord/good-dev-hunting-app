@@ -37,6 +37,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
             onChange={handleChange}
             name="fullName"
             dataTestId="fullName"
+            maxLength={40}
           />
         </InputFormError>
         <div className={styles.emailContainer}>
@@ -52,6 +53,7 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               disabled={true}
               tooltipText=" Email is connected to your Github profile and cannot be changed!"
               dataTestId=""
+              maxLength={30}
             />
           </InputFormError>
         </div>

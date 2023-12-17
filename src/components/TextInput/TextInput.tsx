@@ -18,6 +18,7 @@ export interface TextInputProps {
   onClick?(event: React.MouseEvent<HTMLInputElement>): void
   inputRef?: React.Ref<HTMLInputElement>
   dataTestId?: string
+  maxLength?: number
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
 }
 
@@ -34,6 +35,7 @@ const TextInput: React.FC<TextInputProps> = ({
   onClick,
   inputRef,
   dataTestId,
+  maxLength,
   onBlur,
 }) => {
   const [isTyped, setIsTyped] = useState(false)
@@ -66,6 +68,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onClick={onClick}
         ref={inputRef}
         data-testid={dataTestId}
+        maxLength={maxLength}
         onBlur={onBlur}
       />
     </div>
