@@ -16,6 +16,7 @@ interface TextAreaProps {
   height?: number
   tooltipText?: string | null
   dataTestId?: string
+  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -30,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   height,
   tooltipText,
   dataTestId,
+  onBlur,
 }) => {
   const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -59,6 +61,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         name={name}
         maxLength={maxLength}
         data-testid={dataTestId}
+        onBlur={onBlur}
       />
     </div>
   )

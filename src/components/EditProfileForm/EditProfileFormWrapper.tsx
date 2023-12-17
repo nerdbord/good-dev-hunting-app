@@ -110,6 +110,8 @@ const EditProfileFormWrapper = ({
       enableReinitialize
       validationSchema={validationSchema}
       onSubmit={handleEditProfile}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       {children}
     </Formik>

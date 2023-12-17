@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
@@ -12,7 +13,7 @@ import { useEffect } from 'react'
 const CreateProfileTopBar = () => {
   const router = useRouter()
   const pathname = usePathname()
-  const { handleSubmit, errors, isSubmitting } = useFormikContext()
+  const { handleSubmit, errors, isSubmitting, touched } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
   const { setTriggerUpload, uploadSuccess, fileSelected, isUploading } =
     useUploadContext()
@@ -32,6 +33,11 @@ const CreateProfileTopBar = () => {
     }
   }, [uploadSuccess, isSubmitting])
 
+  const hasTouchedErrors = Object.keys(errors).some(
+    // @ts-ignore;
+    (key) => touched[key] && errors[key],
+  )
+
   return (
     <div className={styles.titleBox}>
       <div className={styles.errorWrapper}>
@@ -42,7 +48,7 @@ const CreateProfileTopBar = () => {
             ? 'Edit profile'
             : 'My profile'}
         </span>
-        {Object.keys(errors).length > 0 && (
+        {hasTouchedErrors && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
             <span>Fill out the form to complete the profile</span>
