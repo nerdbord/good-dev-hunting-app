@@ -189,3 +189,16 @@ export async function getProfileByUserEmail(email: string) {
 
   return null
 }
+
+export async function deleteUserProfileByEmail(email: string) {
+  const user = await prisma.user.findUnique({
+    where: { email },
+    include: { profile: true },
+  })
+
+  if (user && user.profile) {
+    await prisma.profile.delete({
+      where: { id: user.profile.id },
+    })
+  }
+}

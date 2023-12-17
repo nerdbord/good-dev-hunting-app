@@ -7,6 +7,7 @@ declare global {
        * Custom command to simulate user login.
        */
       login(): Chainable<Element>
+      mockDeleteUserProfile(): Chainable<Element>
     }
   }
 }
@@ -51,4 +52,11 @@ declare global {
 Cypress.Commands.add('login', () => {
   cy.intercept('/api/auth/session', { fixture: 'session.json' }).as('session')
   cy.setCookie('next-auth.session-token', Cypress.env('SESSION_TOKEN'))
+})
+
+Cypress.Commands.add('mockDeleteUserProfile', () => {
+  cy.intercept('DELETE', '/api/test/profile', {
+    statusCode: 200,
+    body: { message: 'Profil usunięty' },
+  }).as('deleteProfile')
 })

@@ -11,9 +11,11 @@ import styles from './DropdownCountry.module.scss'
 const DropdownCountry = ({
   value,
   setIsDropdownActive,
+  dataTestId,
 }: {
   value: string
   setIsDropdownActive: React.Dispatch<React.SetStateAction<boolean>>
+  dataTestId?: string | undefined
 }) => {
   const { values, setFieldValue } = useFormikContext<CreateProfileFormValues>()
 
@@ -55,6 +57,7 @@ const DropdownCountry = ({
           .map((country, index) => {
             return (
               <li
+                data-testid={dataTestId}
                 key={index}
                 onClick={(e) => handleCountryClick(e, country)}
                 onSelect={handleOnSelect}

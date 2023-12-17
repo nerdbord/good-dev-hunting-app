@@ -24,8 +24,9 @@ jobs:
           - 5432:5432
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/fastify-graphql
-      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
-      POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+      POSTGRES_PRISMA_URL: postgres://default:59TfFQZnKCtb@ep-misty-heart-03592629-pooler.eu-central-1.postgres.vercel-storage.com/verceldb?pgbouncer=true&connect_timeout=15
+      POSTGRES_URL_NON_POOLING: postgres://default:59TfFQZnKCtb@ep-misty-heart-03592629.eu-central-1.postgres.vercel-storage.com/verceldb
+      SESSION_TOKEN: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..jDmIf9G9weIEzGAQ.rXS-wIeDhto_3f7nwSFi3aQ3oKYTm6pt9mnPhDZf4_QQkL4CqfYVKIXamfyncqJXb96y1n4SBcmaMKzP9OlGfg-Eg196LJv3X8tyKv-CU8jHUJn7EBmNn_rRe-0lYHa2dXGPm9VWB4fMIxgpgYq0UCmxjEkLT0XtG0_uTj6aF3Ncltc0roN9Wxgp5NTZneWjRA9oDCYh6roNwVFNW18yGOERaZGdlJ7Kbvrz4dqijTC8ZDNfx1aTCbyWWXoUnw4O508LkIitydydyPIetDSBQmuEnFC-sqSHvtgAcuDoLqT8jUn6kwjYS8I9VeZjh1pP2-DsSFlKZFOUfjh9-cF8P094RTmF-oJlsQargh4dHaPoU9UtzS8mQpJqcU6xLcaKBadBAR4FlN4PV9yFzqcJP63dI6YMKhZ3jrz1_bW3K-t4WPz62qu2_Smx1Qsm7GY.bCzl_T5-xTO2bPemyKjQgA
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -34,6 +35,6 @@ jobs:
       - run: npm install --force
       - run: npm run build
       # Create the database
-      - run: npx prisma migrate deploy
+      - run: npx prisma migrate reset --force
       - run: npm run start &
       - run: npm run cypress:run

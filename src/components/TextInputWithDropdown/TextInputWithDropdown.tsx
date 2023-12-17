@@ -7,7 +7,15 @@ import styles from './TextInputWithDropdown.module.scss'
 import { countries } from '@/data/frontend/profile/countries/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
 
-const TextInputWithDropdown = () => {
+interface TextInputWithDropdownProps {
+  dataTestId?: string
+  dataTestId2?: string
+}
+
+const TextInputWithDropdown = ({
+  dataTestId,
+  dataTestId2,
+}: TextInputWithDropdownProps) => {
   const { values, handleChange, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
   const [isDropdownActive, setIsDropdownActive] = useState(false)
@@ -52,12 +60,14 @@ const TextInputWithDropdown = () => {
         excludeDigits
         onClick={handleCountryInputClick}
         inputRef={inputRef}
+        dataTestId={dataTestId}
       />
       {values.country.length !== 0 && isDropdownActive && (
         <div ref={dropdownRef}>
           <DropdownCountry
             value={values.country}
             setIsDropdownActive={setIsDropdownActive}
+            dataTestId={dataTestId2}
           />
         </div>
       )}

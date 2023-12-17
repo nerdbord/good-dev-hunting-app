@@ -3,12 +3,16 @@ describe('Account Setup', () => {
     cy.visit('/')
     cy.get('[data-testid="createProfileButton"]').should('be.visible').click()
     cy.login()
+    cy.wait(5000)
+    cy.mockDeleteUserProfile()
+    cy.wait(5000)
     cy.visit('/my-profile/create')
     cy.url().should('include', '/my-profile/create')
     cy.get('[data-testid="fullName"]').type('Krzysztof Misiorny')
     cy.get('[data-testid="linkedin"]').type('https://www.linkedin.com/')
     cy.get('[data-testid="bio"]').type('dzień dobry :)')
     cy.get('[data-testid="country"]').type('Zimbabwe')
+    cy.get('[data-testid="country2"]').click()
     cy.get('[data-testid="openToRelocationCountry"]').click()
     cy.get('[data-testid="city"]').type('Warszawa')
     cy.get('[data-testid="openToRelocationCity"]').click()
@@ -31,4 +35,3 @@ describe('Account Setup', () => {
 })
 
 export {}
- 
