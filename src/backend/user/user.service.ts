@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prismaClient'
+import { Prisma } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
-import { Prisma } from '@prisma/client'
 
 export async function getUsersPayload() {
   const users = await prisma.user.findMany({
@@ -18,6 +18,10 @@ export async function getUsersPayload() {
 }
 
 export async function getUserById(id: string) {
+  if (!id) {
+    return null
+  }
+
   const userById = await prisma.user.findFirst({
     where: {
       id,
@@ -37,6 +41,10 @@ export async function getUserById(id: string) {
 }
 
 export async function findUserByEmail(email: string) {
+  if (!email) {
+    return null
+  }
+
   const foundUser = await prisma.user.findFirst({
     where: {
       email,
