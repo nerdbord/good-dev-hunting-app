@@ -4,13 +4,13 @@ import styles from './TextInput.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import Tooltip from '../Tooltip/Tooltip'
 
-interface TextInputProps {
-  label: string
-  value: string
-  placeholder: string
+export interface TextInputProps {
+  label?: string
+  value?: string
+  placeholder?: string
   onChange(event: React.ChangeEvent<HTMLInputElement>): void
   addImportantIcon?: boolean
-  name: string
+  name?: string
   error?: string
   disabled?: boolean
   excludeDigits?: boolean
@@ -18,6 +18,8 @@ interface TextInputProps {
   onClick?(event: React.MouseEvent<HTMLInputElement>): void
   inputRef?: React.Ref<HTMLInputElement>
   dataTestId?: string
+  maxLength?: number
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -33,8 +35,10 @@ const TextInput: React.FC<TextInputProps> = ({
   onClick,
   inputRef,
   dataTestId,
+  maxLength,
+  onBlur,
 }) => {
-  const [isTyped, setIsTyped] = React.useState(false)
+  const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (excludeDigits) {
       event.target.value = event.target.value.replace(/[0-9]/g, '')
@@ -64,6 +68,8 @@ const TextInput: React.FC<TextInputProps> = ({
         onClick={onClick}
         ref={inputRef}
         data-testid={dataTestId}
+        maxLength={maxLength}
+        onBlur={onBlur}
       />
     </div>
   )

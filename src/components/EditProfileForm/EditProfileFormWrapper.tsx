@@ -52,6 +52,13 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
+  linkedin: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(
+      /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
+      'Invalid LinkedIn URL',
+    ),
 })
 
 interface EditProfileFormWrapperProps {
@@ -103,6 +110,8 @@ const EditProfileFormWrapper = ({
       enableReinitialize
       validationSchema={validationSchema}
       onSubmit={handleEditProfile}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       {children}
     </Formik>

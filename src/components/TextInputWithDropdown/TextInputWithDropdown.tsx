@@ -6,8 +6,9 @@ import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import styles from './TextInputWithDropdown.module.scss'
 import { countries } from '@/data/frontend/profile/countries/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
+import { TextInputProps } from '../TextInput/TextInput'
 
-const TextInputWithDropdown = () => {
+const TextInputWithDropdown = ({ onBlur }: TextInputProps) => {
   const { values, handleChange, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
   const [isDropdownActive, setIsDropdownActive] = useState(false)
@@ -44,6 +45,7 @@ const TextInputWithDropdown = () => {
   return (
     <div className={styles.container} onClick={handleCountryInputClick}>
       <TextInput
+        onBlur={onBlur}
         label="Country of residency"
         placeholder="Start typing location"
         value={values.country}
