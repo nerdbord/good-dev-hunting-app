@@ -36,6 +36,6 @@ jobs:
       - run: npm run build
       # Create the database
       - run: npx prisma migrate reset --force
-      - run: npm run start 
-      - run: npm run dev
+      - run: npm run start &
+      - run: npm run dev &
       - run: npm run cypress:run
