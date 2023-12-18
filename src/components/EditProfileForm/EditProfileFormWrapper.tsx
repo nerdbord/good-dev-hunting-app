@@ -1,12 +1,13 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
-import { apiClient } from '@/lib/apiClient'
-import { useSession } from 'next-auth/react'
-import { EmploymentType, PublishingState } from '@prisma/client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
+import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { apiClient } from '@/lib/apiClient'
+import { EmploymentType, PublishingState } from '@prisma/client'
+import { Formik } from 'formik'
+import { useSession } from 'next-auth/react'
+import { PropsWithChildren } from 'react'
+import * as Yup from 'yup'
 
 export interface EditProfileFormValues {
   fullName: string
@@ -70,6 +71,7 @@ const EditProfileFormWrapper = ({
   profile,
 }: PropsWithChildren<EditProfileFormWrapperProps>) => {
   const { data: session } = useSession()
+  const { runAsync } = useAsyncAction()
 
   if (!session) {
     return null
@@ -98,7 +100,9 @@ const EditProfileFormWrapper = ({
       githubUsername: null,
       state: PublishingState.PENDING,
     }
-    await apiClient.updateMyProfile(payload)
+    await runAsync(async () => {
+      await apiClient.updateMyProfile(payload)
+    })
   }
 
   const mappedInitialValues: EditProfileFormValues =

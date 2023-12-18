@@ -1,11 +1,12 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
-import { useSession } from 'next-auth/react'
 import { EmploymentType, PublishingState } from '@prisma/client'
+import { Formik } from 'formik'
+import { useSession } from 'next-auth/react'
+import { PropsWithChildren } from 'react'
+import * as Yup from 'yup'
 
 export interface CreateProfileFormValues {
   fullName: string
@@ -64,7 +65,7 @@ export const validationSchema = Yup.object().shape({
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
   const { data: session } = useSession()
-
+  const { runAsync } = useAsyncAction()
   if (!session) {
     return null
   }
@@ -92,12 +93,9 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       githubUsername: null,
       state: PublishingState.DRAFT,
     }
-
-    try {
-      const createdProfile = await apiClient.createMyProfile(payload)
-    } catch (error) {
-      console.log(error)
-    }
+    await runAsync(async () => {
+      await apiClient.createMyProfile(payload)
+    })
   }
 
   return (
