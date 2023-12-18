@@ -16,7 +16,7 @@ const filterLists = {
 }
 
 const WorkInformation = () => {
-  const { values, errors, setFieldValue, handleBlur, touched } =
+  const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
@@ -79,9 +79,8 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        <InputFormError error={errors.techStack || touched.techStack}>
+        <InputFormError error={touched.techStack && errors.techStack}>
           <TechStackInput
-            onBlur={handleBlur}
             chips={values.techStack}
             inputValue={inputValue}
             setInputValue={setInputValue}

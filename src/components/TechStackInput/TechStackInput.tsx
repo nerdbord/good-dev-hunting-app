@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from './TechStackInput.module.scss'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
@@ -18,7 +18,6 @@ interface TechStackInputProps {
   label: string
   addImportantIcon?: boolean
   tooltipText?: string | null
-  onBlur?: (event: React.FocusEvent<HTMLElement>) => void
 }
 
 const TechStackInput: React.FC<TechStackInputProps> = ({
@@ -33,15 +32,16 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   label,
   addImportantIcon,
   tooltipText,
-  onBlur,
 }) => {
-  const { errors, handleBlur } = useFormikContext<CreateProfileFormValues>()
+  const { values } = useFormikContext<CreateProfileFormValues>()
+  const [inputError, setInputError] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)
   const maxChips = 8
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setInputError('')
     if (e.key === 'Enter' && inputValue && chips.length < maxChips) {
       if (filteredSuggestions.includes(inputValue)) {
         onTechSelect(inputValue)
@@ -49,6 +49,12 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
       }
     }
   }
+
+  useEffect(() => {
+    if (values.techStack) {
+      setInputError('')
+    }
+  }, [values])
 
   const handleSuggestionClick = (suggestion: string) => {
     if (chips.length < maxChips) {
@@ -66,9 +72,14 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
     setIsFocused(true)
   }
 
-  // const handleBlur = () => {
-  //   setIsFocused(false)
-  // }
+  const handleBlur = () => {
+    setIsFocused(false)
+    if (!inputValue.trim() && chips.length === 0) {
+      setInputError('At least one technology is required')
+    } else {
+      setInputError('')
+    }
+  }
 
   const filteredAvailableSuggestions = filteredSuggestions.filter(
     (suggestion) => !chips.includes(suggestion),
@@ -107,12 +118,11 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
         )}
       </label>
       <div
-        className={`${styles.container} ${isFocused ? styles.active : ''} ${
-          errors.techStack ? styles.errorMsg : ''
+        className={`${inputError ? styles.containerError : styles.container} ${
+          isFocused ? styles.active : ''
         }`}
         onClick={focusInput}
         ref={chipsContainerRef}
-        onBlur={onBlur}
       >
         <div className={styles.chipsContainer}>
           {Array.isArray(chips) &&
@@ -134,7 +144,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               onFocus={handleFocus}
-              onBlur={onBlur}
+              onBlur={handleBlur}
               name={name}
             />
 
@@ -154,6 +164,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
           </div>
         </div>
       </div>
+      {inputError && <div className={styles.errMsg}>{inputError}</div>}
     </div>
   )
 }

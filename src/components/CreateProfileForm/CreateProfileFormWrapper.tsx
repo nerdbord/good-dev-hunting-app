@@ -108,8 +108,6 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleCreateProfile}
-      //validateOnChange={true}
-      //validateOnBlur={true}
     >
       {children}
     </Formik>

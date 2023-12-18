@@ -90,6 +90,23 @@
   gap: 4px;
 }
 
-.errorMsg {
+.errMsg {
+  margin-top: 4px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  color: #d62626;
+}
+
+.containerError {
+  width: 100%;
   border: 1px solid red;
+  background-color: #0f1217;
+  margin-top: 10px;
+  input {
+    border: none;
+    outline: none;
+  }
+  min-height: 200px;
 }
