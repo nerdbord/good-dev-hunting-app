@@ -79,21 +79,21 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        {/* <InputFormError error={errors.techStack}> */}
-        <TechStackInput
-          chips={values.techStack}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          filteredSuggestions={filteredSuggestions}
-          label="Tech stack"
-          placeholder="Start typing"
-          name="techStack"
-          onTechSelect={handleTechSelect}
-          onTechRemove={handleTechRemove}
-          addImportantIcon={true}
-          tooltipText="List the technologies you are comfortable with or interested in."
-        />
-        {/* </InputFormError> */}
+        <InputFormError error={errors.techStack}>
+          <TechStackInput
+            chips={values.techStack}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            filteredSuggestions={filteredSuggestions}
+            label="Tech stack"
+            placeholder="Start typing"
+            name="techStack"
+            onTechSelect={handleTechSelect}
+            onTechRemove={handleTechRemove}
+            addImportantIcon={true}
+            tooltipText="List the technologies you are comfortable with or interested in."
+          />
+        </InputFormError>
         <div className={styles.addInfo}>
           Start typing and separate technologies with commas.
           <br />

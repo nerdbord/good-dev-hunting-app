@@ -52,7 +52,10 @@ export const validationSchema = Yup.object().shape({
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
-  techStack: Yup.array().of(Yup.string()).required('Tech stack is required'),
+  techStack: Yup.array()
+    .of(Yup.string())
+    .min(1, 'At least one technology is required')
+    .required('Tech stack is required'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()
@@ -105,6 +108,8 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleCreateProfile}
+      validateOnChange={true}
+      validateOnBlur={true}
     >
       {children}
     </Formik>
