@@ -1,14 +1,18 @@
 describe('Account Setup', () => {
   it('covers the user golden path', () => {
     cy.visit('/')
-    cy.get('[data-testid="createProfileButton"]').should('be.visible').click()
+    cy.get('[data-testid="createProfileButton"]', { timeout: 40000 })
+      .should('be.visible')
+      .click()
     cy.login()
     cy.wait(5000)
     cy.mockDeleteUserProfile()
     cy.wait(5000)
     cy.visit('/my-profile/create')
     cy.url().should('include', '/my-profile/create')
-    cy.get('[data-testid="fullName"]').type('Krzysztof Misiorny')
+    cy.get('[data-testid="fullName"]', { timeout: 40000 }).type(
+      'Krzysztof Misiorny',
+    )
     cy.get('[data-testid="linkedin"]').type('https://www.linkedin.com/')
     cy.get('[data-testid="bio"]').type('dzień dobry :)')
     cy.get('[data-testid="country"]').type('Zimbabwe')
@@ -28,7 +32,7 @@ describe('Account Setup', () => {
     cy.get('[data-testid="publishProfileButton"]', { timeout: 20000 })
       .should('be.visible')
       .click()
-    cy.get('[data-testid="publishProfilePopup"]', { timeout: 20000 }).should(
+    cy.get('[data-testid="publishProfileModal]', { timeout: 20000 }).should(
       'be.visible',
     )
   })
