@@ -81,7 +81,7 @@ export const DropdownBio = ({
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
         </button>{' '}
-        {hasError && error && <span className={styles.errorMsg}>{error}</span>}
+        {/* {hasError && error && <span className={styles.errorMsg}>{error}</span>} */}
         {isDropdownActive && (
           <div className={styles.dropdown}>
             {options.map((option, index) => (

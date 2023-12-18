@@ -3,6 +3,8 @@ import styles from './TechStackInput.module.scss'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import Tooltip from '../Tooltip/Tooltip'
+import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
+import { useFormikContext } from 'formik'
 
 interface TechStackInputProps {
   chips: string[]
@@ -16,6 +18,7 @@ interface TechStackInputProps {
   label: string
   addImportantIcon?: boolean
   tooltipText?: string | null
+  onBlur?: (event: React.FocusEvent<HTMLElement>) => void
 }
 
 const TechStackInput: React.FC<TechStackInputProps> = ({
@@ -30,7 +33,9 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   label,
   addImportantIcon,
   tooltipText,
+  onBlur,
 }) => {
+  const { errors, handleBlur } = useFormikContext<CreateProfileFormValues>()
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)
@@ -61,9 +66,9 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
     setIsFocused(true)
   }
 
-  const handleBlur = () => {
-    setIsFocused(false)
-  }
+  // const handleBlur = () => {
+  //   setIsFocused(false)
+  // }
 
   const filteredAvailableSuggestions = filteredSuggestions.filter(
     (suggestion) => !chips.includes(suggestion),
@@ -102,9 +107,12 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
         )}
       </label>
       <div
-        className={`${styles.container} ${isFocused ? styles.active : ''}`}
+        className={`${styles.container} ${isFocused ? styles.active : ''} ${
+          errors.techStack ? styles.errorMsg : ''
+        }`}
         onClick={focusInput}
         ref={chipsContainerRef}
+        onBlur={onBlur}
       >
         <div className={styles.chipsContainer}>
           {Array.isArray(chips) &&
@@ -126,7 +134,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               onFocus={handleFocus}
-              onBlur={handleBlur}
+              onBlur={onBlur}
               name={name}
             />
 
