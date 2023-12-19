@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
@@ -12,7 +13,7 @@ import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
 
 const CreateProfileTopBar = () => {
   const pathname = usePathname()
-  const { handleSubmit, errors } = useFormikContext()
+  const { handleSubmit, errors, touched } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
   const {
     imageUploadError,
@@ -44,6 +45,11 @@ const CreateProfileTopBar = () => {
     }
   }
 
+  const hasTouchedErrors = Object.keys(errors).some(
+    // @ts-ignore;
+    (key) => touched[key] && errors[key],
+  )
+
   return (
     <div className={styles.titleBox}>
       <div className={styles.errorWrapper}>
@@ -54,7 +60,7 @@ const CreateProfileTopBar = () => {
             ? 'Edit profile'
             : 'My profile'}
         </span>
-        {(!!Object.keys(errors).length || imageUploadError) && (
+        {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
             <span>Fill out the form to complete the profile</span>

@@ -3,7 +3,7 @@ import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/images/🇵🇱.jpg'
+import PolandFlag from '@/assets/images/flagPL.jpg'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
@@ -32,7 +32,7 @@ const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
             <li className={styles.socialItem}>
               <a
                 className={styles.socialLink}
-                href={'http://localhost:3000/'}
+                href={profile.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -70,6 +70,7 @@ const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
                 {profile.country.name}, {profile.city.name}
               </p>
             </div>
+
             <div className={styles.optionBox}>
               {profile.country.openForRelocation && (
                 <div className={styles.location}>
