@@ -24,6 +24,7 @@ jobs:
       GITHUB_ID: eaab0c61bc73d9058e8c
       GITHUB_SECRET: 680323612e33335e885b06037b9b6d9d51446718
       TERM: xterm
+      DEBUG: cypress:*
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
