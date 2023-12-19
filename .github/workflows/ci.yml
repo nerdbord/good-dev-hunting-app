@@ -29,7 +29,7 @@ jobs:
       - run: npm install --force
       - run: npm run build
       - run: npx prisma migrate reset --force
-      - run: npm run start &
+      - run: npm run start
       - run: npx wait-on http://localhost:3000
       # - run: npx wait-on 'http://[::1]:3000
       - run: npm run cypress:run
