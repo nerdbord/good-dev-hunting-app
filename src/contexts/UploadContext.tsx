@@ -2,33 +2,23 @@
 import { createContext, useContext, useState, PropsWithChildren } from 'react'
 
 interface UploadContextProps {
-  triggerUpload: boolean
-  setTriggerUpload: React.Dispatch<React.SetStateAction<boolean>>
-  uploadSuccess: boolean
-  setUploadSuccess: React.Dispatch<React.SetStateAction<boolean>>
-  fileSelected: boolean
-  setFileSelected: React.Dispatch<React.SetStateAction<boolean>>
-  isUploading: boolean
-  setIsUploading: React.Dispatch<React.SetStateAction<boolean>>
+  imageUploadError: boolean
+  setImageUploadError: React.Dispatch<React.SetStateAction<boolean>>
+  selectedFile: File | null
+  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>
 }
 
 export const UploadProvider = ({ children }: PropsWithChildren) => {
-  const [triggerUpload, setTriggerUpload] = useState(false)
-  const [uploadSuccess, setUploadSuccess] = useState(false)
-  const [fileSelected, setFileSelected] = useState(false)
-  const [isUploading, setIsUploading] = useState(false)
+  const [imageUploadError, setImageUploadError] = useState(false)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   return (
     <UploadContext.Provider
       value={{
-        triggerUpload,
-        setTriggerUpload,
-        uploadSuccess,
-        setUploadSuccess,
-        fileSelected,
-        setFileSelected,
-        isUploading,
-        setIsUploading,
+        imageUploadError,
+        setImageUploadError,
+        selectedFile,
+        setSelectedFile,
       }}
     >
       {children}
