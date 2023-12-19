@@ -8,8 +8,8 @@ const nextConfig = {
 module.exports = {
   ...nextConfig,
   env: {
-    GH_CLIENT_ID: process.env.GH_CLIENT_ID,
-    GH_CLIENT_SECRET: process.env.GH_CLIENT_SECRET,
+    GITHUB_CLIENT_ID: process.env.GH_CLIENT_ID,
+    GITHUB_CLIENT_SECRET: process.env.GH_CLIENT_SECRET,
   },
   images: {
     domains: [
