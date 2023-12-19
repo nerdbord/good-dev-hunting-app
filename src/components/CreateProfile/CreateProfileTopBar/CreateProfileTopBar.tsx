@@ -4,34 +4,46 @@ import styles from './CreateProfileTopBar.module.scss'
 import { Button } from '@/components/Button/Button'
 import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
 import { useFormikContext } from 'formik'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { AppRoutes } from '@/utils/routes'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
-import { useEffect } from 'react'
+import { apiClient } from '@/lib/apiClient'
+import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
 
 const CreateProfileTopBar = () => {
-  const router = useRouter()
   const pathname = usePathname()
-  const { handleSubmit, errors, isSubmitting, touched } = useFormikContext()
+  const { handleSubmit, errors, touched } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
-  const { setTriggerUpload, uploadSuccess, fileSelected, isUploading } =
-    useUploadContext()
+  const {
+    imageUploadError,
+    setImageUploadError,
+    selectedFile,
+    setSelectedFile,
+  } = useUploadContext()
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    runAsync(async () => {
-      if (Object.keys(errors).length === 0) {
-        await handleSubmit()
-        setTriggerUpload(true)
-      }
-    })
-  }
-  useEffect(() => {
-    if (uploadSuccess || (!fileSelected && isSubmitting)) {
-      router.push(AppRoutes.myProfile)
+    if (Object.keys(errors).length === 0) {
+      runAsync(async () => {
+        if (selectedFile) {
+          try {
+            const url = await apiClient.userPhotoUpload(selectedFile)
+            url && (await serverUpdateUserAvatar(url))
+            await handleSubmit()
+          } catch (error) {
+            console.log(error)
+            setImageUploadError(true)
+            setSelectedFile(null)
+          }
+        } else {
+          !imageUploadError && (await handleSubmit())
+        }
+      })
     }
-  }, [uploadSuccess, isSubmitting])
+  }
 
   const hasTouchedErrors = Object.keys(errors).some(
     // @ts-ignore;
@@ -48,7 +60,7 @@ const CreateProfileTopBar = () => {
             ? 'Edit profile'
             : 'My profile'}
         </span>
-        {hasTouchedErrors && (
+        {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
             <span>Fill out the form to complete the profile</span>
@@ -56,16 +68,17 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
-        <Button loading={isUploading || loading} variant="secondary">
-          Connect with Nerdbord
+        <Button variant="secondary">
+          {isMobile ? 'Connect to Nerdbord' : 'Connect with Nerdbord'}
         </Button>
         <Button
-          loading={isUploading || loading}
+          loading={loading}
           variant="primary"
           onClick={handleButtonClick}
           dataTestId="saveAndPreviewProfile"
+          type="submit"
         >
-          Save and preview profile
+          {isMobile ? 'Save and preview' : 'Save and preview profile'}
         </Button>
       </div>
     </div>
