@@ -43,7 +43,7 @@ export const Button = ({
       className={[buttonClassName, disabledClass].join(' ')}
       disabled={disabled || loading}
       onClick={onClick}
-      type={type && type}
+      type={type}
     >
       {loading ? 'Loading...' : children}
     </button>
