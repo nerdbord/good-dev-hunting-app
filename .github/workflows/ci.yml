@@ -23,6 +23,7 @@ jobs:
       SESSION_TOKEN: eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..jDmIf9G9weIEzGAQ.rXS-wIeDhto_3f7nwSFi3aQ3oKYTm6pt9mnPhDZf4_QQkL4CqfYVKIXamfyncqJXb96y1n4SBcmaMKzP9OlGfg-Eg196LJv3X8tyKv-CU8jHUJn7EBmNn_rRe-0lYHa2dXGPm9VWB4fMIxgpgYq0UCmxjEkLT0XtG0_uTj6aF3Ncltc0roN9Wxgp5NTZneWjRA9oDCYh6roNwVFNW18yGOERaZGdlJ7Kbvrz4dqijTC8ZDNfx1aTCbyWWXoUnw4O508LkIitydydyPIetDSBQmuEnFC-sqSHvtgAcuDoLqT8jUn6kwjYS8I9VeZjh1pP2-DsSFlKZFOUfjh9-cF8P094RTmF-oJlsQargh4dHaPoU9UtzS8mQpJqcU6xLcaKBadBAR4FlN4PV9yFzqcJP63dI6YMKhZ3jrz1_bW3K-t4WPz62qu2_Smx1Qsm7GY.bCzl_T5-xTO2bPemyKjQgA
       GITHUB_ID: eaab0c61bc73d9058e8c
       GITHUB_SECRET: 680323612e33335e885b06037b9b6d9d51446718
+      TERM: xterm
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
