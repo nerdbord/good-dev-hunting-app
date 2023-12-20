@@ -14,7 +14,7 @@ import styles from './page.module.scss'
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session || !session.user) {
+  if (!session?.user) {
     redirect(AppRoutes.home)
   }
 
