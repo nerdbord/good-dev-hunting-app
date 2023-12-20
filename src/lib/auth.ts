@@ -61,8 +61,6 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token === null) {
-        // return {} as Session
-        // wyżej bez zmian w ifach albo to poniżej ze zmianami widocznymi w pr:
         return { expires: session.expires, user: undefined }
       } else if (token && session?.user) {
         session.user.id = token.id as string
