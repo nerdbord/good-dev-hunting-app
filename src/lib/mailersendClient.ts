@@ -1,8 +1,20 @@
 import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend'
 import { APIResponse } from 'mailersend/lib/services/request.service'
 
+export enum MailTemplateId {
+  welcomeMail = 'x2p03478r1ylzdrn',
+}
+
+export enum MailSubjectId {
+  welcomeSubject = 'Welcome to Good Dev!',
+}
+
 export const mailersendClient = {
-  async sendMail(recipients: Recipient[], templateId: string, subject: string) {
+  async sendMail(
+    recipients: Recipient[],
+    templateId: MailTemplateId,
+    subject: MailSubjectId,
+  ) {
     const mailerSend = new MailerSend({
       apiKey: process.env.MAILERSEND_API_KEY!,
     })
