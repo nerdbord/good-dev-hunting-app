@@ -1,25 +1,24 @@
-import React from 'react'
 import logo from '@/assets/images/logo.png'
-import Link from 'next/link'
-import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
-import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
-import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { Container } from '@/components/Container/Container'
-import styles from './AppHeader.module.scss'
-import { AppRoutes } from '@/utils/routes'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import GithubAcc from '@/components/GithubAcc/GithubAcc'
+import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
+import { authOptions } from '@/lib/auth'
+import { AppRoutes } from '@/utils/routes'
+import { getServerSession } from 'next-auth'
+import Link from 'next/link'
+import styles from './AppHeader.module.scss'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const profile = session
+  const profile = session?.user
     ? await getProfileByUserEmail(session.user.email)
     : null
 
-  if (session) {
+  if (session?.user) {
     return (
       <header className={styles.wrapper}>
         <Container>
