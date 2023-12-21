@@ -1,11 +1,12 @@
 'use client'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { Button } from '../Button/Button'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
 
 import styles from './SearchWrapper.module.scss'
+import useOutsideClick from '@/hooks/useOutsideClick'
 
 type Props = {
   profiles: ProfileModel[]
@@ -15,6 +16,7 @@ export default function SearchWrapper({ profiles = [] }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const { setEmailSearchValue, setActiveTab } = useModerationFilter()
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const suggestionRef = useRef<HTMLUListElement>(null)
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
@@ -37,6 +39,12 @@ export default function SearchWrapper({ profiles = [] }: Props) {
     return searchValue !== '' && profile.userEmail.includes(searchValue)
   })
 
+  useOutsideClick(
+    suggestionRef,
+    () => setShowSuggestions(false),
+    () => setSearchValue(''),
+  )
+
   return (
     <div className={styles.searchWrapper}>
       <input
@@ -51,7 +59,7 @@ export default function SearchWrapper({ profiles = [] }: Props) {
         Search
       </Button>
       {showSuggestions && filteredProfiles.length > 0 && (
-        <ul className={styles.suggestionsBox}>
+        <ul className={styles.suggestionsBox} ref={suggestionRef}>
           {filteredProfiles.map((profile) => (
             <SearchSuggestionItem
               key={profile.id}
