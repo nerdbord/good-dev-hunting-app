@@ -1,8 +1,7 @@
-import type { NextAuthOptions } from 'next-auth'
-import GithubProvider from 'next-auth/providers/github'
-import { getServerSession } from 'next-auth'
 import { createUser, findUserByEmail } from '@/backend/user/user.service'
-
+import type { NextAuthOptions } from 'next-auth'
+import { getServerSession } from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
 interface UserAuthed {
   id: string
   name: string
@@ -27,15 +26,12 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      const foundUser = token.email ? await findUserByEmail(token.email) : null
+      const foundUser =
+        token && token.email ? await findUserByEmail(token.email) : null
 
       if (!foundUser) {
-        return {
-          id: null,
-        }
+        return null
       }
-
-      token.id = foundUser.id
 
       return { ...token, ...user }
     },
@@ -64,7 +60,9 @@ export const authOptions: NextAuthOptions = {
       return false
     },
     async session({ session, token }) {
-      if (session?.user) {
+      if (token === null) {
+        return { expires: session.expires, user: undefined }
+      } else if (token && session?.user) {
         session.user.id = token.id as string
         session.user.email = token.email as string
       }
