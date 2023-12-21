@@ -22,7 +22,8 @@ const commonClasses = combineClasses([ibm.variable, inter.variable])
 
 export const metadata = {
   title: 'Good Dev Hunting',
-  description: 'Catch coding legends!',
+  description:
+    "Catch coding legends! Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs. An advanced search engine enables a focus on key criteria such as programming languages, experience level, and specialization. Regularly updated profiles ensure you always have access to the latest information about candidates.",
 }
 
 export default function RootLayout({
