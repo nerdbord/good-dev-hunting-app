@@ -46,6 +46,7 @@
   height: 44px;
   display: flex;
   justify-content: center;
+  gap: 12px;
 
   @include mobile {
     position: fixed;
