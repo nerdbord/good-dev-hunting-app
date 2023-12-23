@@ -166,7 +166,11 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
           </div>
         </div>
       </div>
-      {inputError && <div className={styles.errMsg}>{inputError}</div>}
+      {inputError && !errors.techStack ? (
+        <div className={styles.errMsg}>{inputError}</div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

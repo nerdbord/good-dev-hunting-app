@@ -109,7 +109,11 @@ export const DropdownBio = ({
           </div>
         )}
       </div>
-      {errMsg && <div className={styles.errorMsg}>{errMsg}</div>}
+      {(errMsg && !errors.position) || !errors.seniority ? (
+        <div className={styles.errorMsg}>{errMsg}</div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
