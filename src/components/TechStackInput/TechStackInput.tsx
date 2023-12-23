@@ -33,7 +33,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   addImportantIcon,
   tooltipText,
 }) => {
-  const { values } = useFormikContext<CreateProfileFormValues>()
+  const { values, errors } = useFormikContext<CreateProfileFormValues>()
   const [inputError, setInputError] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -118,9 +118,11 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
         )}
       </label>
       <div
-        className={`${inputError ? styles.containerError : styles.container} ${
-          isFocused ? styles.active : ''
-        }`}
+        className={`${
+          inputError || errors.techStack
+            ? styles.containerError
+            : styles.container
+        } ${isFocused ? styles.active : ''}`}
         onClick={focusInput}
         ref={chipsContainerRef}
       >
