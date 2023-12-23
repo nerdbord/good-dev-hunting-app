@@ -1,20 +1,8 @@
 import React from 'react'
 import styles from './ProfileDetails.module.scss'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-import { AppRoutes } from '@/utils/routes'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-const ProfileDetails = async () => {
-  const session = await getServerSession(authOptions)
-
-  if (!session || !session.user) {
-    redirect(AppRoutes.home)
-  }
-
-  const profile = await getProfileByUserEmail(session.user.email)
-
+const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
   return (
     <>
       <section className={styles.container}>

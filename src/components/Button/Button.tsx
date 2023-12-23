@@ -18,6 +18,7 @@ export const Button = ({
   disabled,
   loading,
   dataTestId,
+  type,
 }: PropsWithChildren<ButtonProps>) => {
   const buttonClassName = useMemo(() => {
     switch (variant) {
@@ -42,6 +43,7 @@ export const Button = ({
       className={[buttonClassName, disabledClass].join(' ')}
       disabled={disabled || loading}
       onClick={onClick}
+      type={type}
     >
       {loading ? 'Loading...' : children}
     </button>
