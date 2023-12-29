@@ -1,19 +1,18 @@
-import React from 'react'
-import styles from './page.module.scss'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
-import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
-import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
-import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
-import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
-import { AppRoutes } from '@/utils/routes'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
+import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
+import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
+import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
+import { authOptions } from '@/lib/auth'
+import { AppRoutes } from '@/utils/routes'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import styles from './page.module.scss'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session || !session.user) {
+  if (!session?.user) {
     redirect(AppRoutes.home)
   }
 

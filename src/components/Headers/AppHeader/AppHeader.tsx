@@ -17,7 +17,7 @@ import styles from './AppHeader.module.scss'
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const profile = session
+  const profile = session?.user
     ? await getProfileByUserEmail(session.user.email)
     : null
 

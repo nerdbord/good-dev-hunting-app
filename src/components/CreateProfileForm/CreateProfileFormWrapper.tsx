@@ -23,7 +23,7 @@ export interface CreateProfileFormValues {
   position: string
   seniority: string
   employment: EmploymentType
-  techStack: string
+  techStack: string[]
   githubUsername: string | null
   state: PublishingState
 }
@@ -41,7 +41,7 @@ const initialValues: CreateProfileFormValues = {
   position: '',
   seniority: '',
   employment: EmploymentType.FULL_TIME,
-  techStack: '',
+  techStack: [],
   githubUsername: '',
   state: PublishingState.DRAFT,
 }
@@ -55,7 +55,7 @@ export const validationSchema = Yup.object().shape({
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
-  techStack: Yup.string().required('Tech stack is required'),
+  techStack: Yup.array().of(Yup.string()).required('Tech stack is required'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()
@@ -92,7 +92,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
-      techStack: values.techStack.split(',').map((s) => s.trim()),
+      techStack: values.techStack,
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,
