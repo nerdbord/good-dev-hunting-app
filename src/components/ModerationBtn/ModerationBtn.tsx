@@ -1,0 +1,29 @@
+'use client'
+import { Button } from '@/components/Button/Button'
+import { AppRoutes } from '@/utils/routes'
+import { usePathname, useRouter } from 'next/navigation'
+
+const ModerationBtn = () => {
+  const router = useRouter()
+  const path = usePathname()
+
+  if (path.includes(AppRoutes.dashboard)) {
+    return null
+  }
+
+  const onClickHandler = async () => {
+    router.push(AppRoutes.dashboard)
+  }
+
+  return (
+    <Button
+      onClick={onClickHandler}
+      variant="secondary"
+      dataTestId="moderationButton"
+    >
+      Moderation
+    </Button>
+  )
+}
+
+export default ModerationBtn
