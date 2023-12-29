@@ -12,7 +12,7 @@ const GithubAcc = () => {
 
   return pathname !== AppRoutes.home ? (
     <div className={styles.github}>
-      <p className={styles.githubAccConnected}>Connected Github account</p>
+      <p className={styles.githubAccConnected}>Connected Github </p>
       <div className={styles.githubAcc}>
         {session?.user.image && (
           <Image

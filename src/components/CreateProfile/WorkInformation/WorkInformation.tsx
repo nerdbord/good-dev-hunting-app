@@ -59,7 +59,7 @@ const WorkInformation = () => {
       </div>
 
       <div className={styles.right}>
-        <InputFormError error={touched.position && errors.position}>
+        <InputFormError error={errors.position}>
           <DropdownBio
             id="position"
             label="Position"
@@ -69,7 +69,7 @@ const WorkInformation = () => {
             name="position"
           />
         </InputFormError>
-        <InputFormError error={touched.seniority && errors.seniority}>
+        <InputFormError error={errors.seniority}>
           <DropdownBio
             id="seniority"
             label="Seniority"
@@ -79,7 +79,7 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        <InputFormError error={touched.techStack && errors.techStack}>
+        <InputFormError error={errors.techStack}>
           <TechStackInput
             chips={values.techStack}
             inputValue={inputValue}

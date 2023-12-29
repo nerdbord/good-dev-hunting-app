@@ -61,7 +61,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         name={name}
         maxLength={maxLength}
         data-testid={dataTestId}
-        onBlur={onBlur}
+        //onBlur={onBlur}
       />
     </div>
   )
