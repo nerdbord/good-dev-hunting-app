@@ -1,18 +1,16 @@
-import React from 'react'
-import Link from 'next/link'
-import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
 import { Role } from '@prisma/client'
+import { getServerSession } from 'next-auth'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
 
-import { Container } from '@/components/Container/Container'
-import { Button } from '@/components/Button/Button'
-import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
-import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
+import { Container } from '@/components/Container/Container'
+import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 
 import styles from './DashboardHeader.module.scss'
 
@@ -32,7 +30,6 @@ const DashboardHeader = async () => {
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
           <div className={styles.frameButtons}>
-            <Button variant="secondary">Moderation</Button>
             {user.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           </div>
         </div>
