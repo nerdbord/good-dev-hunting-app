@@ -12,7 +12,7 @@ const GithubAcc = () => {
   const { data: session } = useSession()
 
   return pathname !== AppRoutes.home ? (
-    <Link href="/my-profile">
+    <Link href={AppRoutes.myProfile}>
       <div className={styles.github}>
         <p className={styles.githubAccConnected}>Connected Github account</p>
         <div className={styles.githubAcc}>
