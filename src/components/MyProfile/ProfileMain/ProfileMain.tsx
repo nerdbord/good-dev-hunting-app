@@ -59,16 +59,6 @@ const ProfileMain = async ({
               </a>
             </li>
           )}
-          {isConnectedToNerdbord ? (
-            <li className={`${styles.socialItem} ${styles.nerdbord}`}>
-              <CheckMarkIcon />
-              Nerdbord connected
-            </li>
-          ) : (
-            <li>
-              <ConnectToNerdbordButton />
-            </li>
-          )}
         </ul>
         <div className={styles.profile}>
           <div className={styles.user}>
