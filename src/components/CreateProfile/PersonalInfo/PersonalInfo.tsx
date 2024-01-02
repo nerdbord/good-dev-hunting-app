@@ -24,22 +24,20 @@ const PersonalInfo = () => {
         </div>
       </div>
       <div className={styles.right}>
-        {/* <InputFormError error={touched.fullName && errors.fullName}> */}
-        <TextInput
-          //onBlur={handleBlur}
-          label="Full name"
-          placeholder="eg. Anna Oxford"
-          value={values.fullName}
-          onChange={handleChange}
-          name="fullName"
-          dataTestId="fullName"
-          maxLength={40}
-        />
-        {/* </InputFormError> */}
-        <div className={styles.emailContainer}>
-          {/* <InputFormError error={errors.contactEmail}> */}
+        <InputFormError error={touched.fullName && errors.fullName}>
           <TextInput
-            //onBlur={handleBlur}
+            onBlur={handleBlur}
+            label="Full name"
+            placeholder="eg. Anna Oxford"
+            value={values.fullName}
+            onChange={handleChange}
+            name="fullName"
+            dataTestId="fullName"
+            maxLength={40}
+          />
+        </InputFormError>
+        <div className={styles.emailContainer}>
+          <TextInput
             label="Contact email"
             placeholder={session?.user?.email || ''}
             value={values.contactEmail}
@@ -51,36 +49,38 @@ const PersonalInfo = () => {
             dataTestId=""
             maxLength={30}
           />
-          {/* </InputFormError> */}
         </div>
         <UserPhotoUploader />
-        <TextInput
-          label="LinkedIn"
-          placeholder="Paste link to you linkedin profile"
-          value={values.linkedin}
-          onChange={handleChange}
-          name="linkedin"
-          dataTestId="linkedin"
-        />
-        {/* <InputFormError error={touched.bio && errors.bio}> */}
-        <div className={styles.lettersCountParent}>
-          <TextArea
-            //onBlur={handleBlur}
-            label="Bio"
-            placeholder="Introduce yourself with few sentences"
-            value={values.bio}
-            addImportantIcon={true}
+        <InputFormError error={touched.linkedin && errors.linkedin}>
+          <TextInput
+            onBlur={handleBlur}
+            label="LinkedIn"
+            placeholder="Paste link to you linkedin profile"
+            value={values.linkedin}
             onChange={handleChange}
-            name="bio"
-            maxLength={1500}
-            tooltipText="Let others know you - write a few sentences about yourself."
-            dataTestId="bio"
+            name="linkedin"
+            dataTestId="linkedin"
           />
-          <div className={styles.lettersCount}>
-            {values.bio.length} / 1500 characters
+        </InputFormError>
+        <InputFormError error={touched.bio && errors.bio}>
+          <div className={styles.lettersCountParent}>
+            <TextArea
+              onBlur={handleBlur}
+              label="Bio"
+              placeholder="Introduce yourself with few sentences"
+              value={values.bio}
+              addImportantIcon={true}
+              onChange={handleChange}
+              name="bio"
+              maxLength={1500}
+              tooltipText="Let others know you - write a few sentences about yourself."
+              dataTestId="bio"
+            />
+            <div className={styles.lettersCount}>
+              {values.bio.length} / 1500 characters
+            </div>
           </div>
-        </div>
-        {/* </InputFormError> */}
+        </InputFormError>
       </div>
     </div>
   )
