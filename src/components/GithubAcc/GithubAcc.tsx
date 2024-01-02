@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { AppRoutes } from '@/utils/routes'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 const GithubAcc = () => {
   const pathname = usePathname()
@@ -12,7 +13,7 @@ const GithubAcc = () => {
 
   return pathname !== AppRoutes.home ? (
     <div className={styles.github}>
-      <p className={styles.githubAccConnected}>Connected Github </p>
+      <p className={styles.githubAccConnected}>Connected Github account</p>
       <div className={styles.githubAcc}>
         {session?.user.image && (
           <Image
