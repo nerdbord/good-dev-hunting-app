@@ -1,31 +1,23 @@
-'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/flagPL.jpg'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
-import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { ConnectToNerdbordButton } from '@/components/ConnectToNerbordButton/ConnectToNerdbordButton'
 import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
-import { useRouter } from 'next/navigation'
 
-const ProfileMain = ({
+const ProfileMain = async ({
   profile,
   isConnectedToNerdbord,
 }: {
   profile: ProfileModel
   isConnectedToNerdbord: boolean
 }) => {
-  const router = useRouter()
   const githubUsername = profile.githubUsername
   const avatarUrl = profile.avatarUrl
-  console.log(isConnectedToNerdbord)
-  useEffect(() => {
-    router.refresh()
-  }, [isConnectedToNerdbord])
 
   return (
     <>
@@ -68,7 +60,7 @@ const ProfileMain = ({
             </li>
           )}
           {isConnectedToNerdbord ? (
-            <li className={styles.socialItem}>
+            <li className={`${styles.socialItem} ${styles.nerdbord}`}>
               <CheckMarkIcon />
               Nerdbord connected
             </li>

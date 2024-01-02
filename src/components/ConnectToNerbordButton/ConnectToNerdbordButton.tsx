@@ -2,30 +2,20 @@
 import { connectToNerdbord } from '@/actions/user/connectToNerdobord'
 import { Button } from '../Button/Button'
 import RotateIcon from '@/assets/icons/RotateIcon'
-import { useState } from 'react'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
 
 export const ConnectToNerdbordButton = () => {
-  const [NBSynching, setNBSynching] = useState(false)
-  const [NBSynchingError, setNBSynchingError] = useState(false)
+  const { runAsync, loading } = useAsyncAction()
 
-  const handleConnectToNerdbord = async () => {
-    setNBSynching(true)
-    setNBSynchingError(false)
-    console.log('start connecting', NBSynching)
-    try {
+  const handleConnectToNerdbord = () => {
+    runAsync(async () => {
       await connectToNerdbord()
-    } catch (error) {
-      setNBSynchingError(true)
-      console.log(error)
-    } finally {
-      setNBSynching(false)
-      console.log('end connecting', NBSynching)
-    }
+    })
   }
 
   return (
     <Button variant="secondary" onClick={handleConnectToNerdbord}>
-      {NBSynching ? (
+      {loading ? (
         <>
           <RotateIcon /> Synching
         </>
