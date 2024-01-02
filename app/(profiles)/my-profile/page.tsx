@@ -29,7 +29,10 @@ const MyProfilePage = async () => {
   return (
     <div className={styles.wrapper}>
       {/* @ts-expect-error Server Component */}
-      <ProfileTopBar profile={profile} />
+      <ProfileTopBar
+        profile={profile}
+        isConnectedToNerdbord={isConnectedToNerdbord}
+      />
       {/* @ts-expect-error Server Component */}
       <ProfileMain
         profile={profile}
