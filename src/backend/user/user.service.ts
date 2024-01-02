@@ -135,3 +135,14 @@ export async function getGitHubDetails(id: string) {
 
   return userGitHubDetails
 }
+
+export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
+  return await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      nerdbordUserId: nerdbordId,
+    },
+  })
+}
