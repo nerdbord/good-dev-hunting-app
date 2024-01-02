@@ -1,6 +1,7 @@
 ﻿'use server'
 
 import {
+  findUserByEmail,
   getGitHubDetails,
   updateUserNerdbordId,
 } from '@/backend/user/user.service'
@@ -17,14 +18,18 @@ export interface NerdbordDetails {
 
 export const connectToNerdbord = async () => {
   const session = await getServerSession(authOptions)
-
   if (!session?.user.email) {
     console.error('Error: Session not found')
     return null
   }
 
-  const userGitHubDetails = await getGitHubDetails(session.user.id)
+  const user = await findUserByEmail(session.user.email)
+  if (!user) {
+    console.error('Error: User not found')
+    return null
+  }
 
+  const userGitHubDetails = await getGitHubDetails(user?.id)
   if (!userGitHubDetails) {
     console.error('Error: User GitHub details not found')
     return null
@@ -40,7 +45,7 @@ export const connectToNerdbord = async () => {
     }
     const data: NerdbordDetails = await resp.json()
 
-    await updateUserNerdbordId(session.user.id, data.githubUsername)
+    await updateUserNerdbordId(user.id, data.githubUsername)
   } catch (error) {
     console.log(error)
   }
