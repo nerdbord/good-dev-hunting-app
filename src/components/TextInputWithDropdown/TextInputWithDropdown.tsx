@@ -8,7 +8,7 @@ import { countries } from '@/data/frontend/profile/countries/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { TextInputProps } from '../TextInput/TextInput'
 
-const TextInputWithDropdown = ({ onBlur }: TextInputProps) => {
+const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
   const { values, handleChange, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
   const [isDropdownActive, setIsDropdownActive] = useState(false)
@@ -50,7 +50,7 @@ const TextInputWithDropdown = ({ onBlur }: TextInputProps) => {
         placeholder="Start typing location"
         value={values.country}
         onChange={handleChange}
-        name="country"
+        name={name}
         excludeDigits
         onClick={handleCountryInputClick}
         inputRef={inputRef}

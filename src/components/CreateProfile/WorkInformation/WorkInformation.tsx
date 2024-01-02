@@ -16,7 +16,7 @@ const filterLists = {
 }
 
 const WorkInformation = () => {
-  const { values, errors, setFieldValue, touched, handleBlur } =
+  const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
@@ -59,48 +59,47 @@ const WorkInformation = () => {
       </div>
 
       <div className={styles.right}>
-        {/* <InputFormError error={errors.position || touched.position}> */}
-        <DropdownBio
-          id="position"
-          label="Position"
-          text="Choose position"
-          options={filterLists.position}
-          selectedValue={values.position}
-          name="position"
-        />
-        {/* </InputFormError> */}
-        {/* <InputFormError error={errors.seniority}> */}
-        <DropdownBio
-          id="seniority"
-          label="Seniority"
-          text="Choose seniority"
-          options={filterLists.seniority}
-          selectedValue={values.seniority}
-          name="seniority"
-        />
-        {/* </InputFormError> */}
-        {/* <InputFormError error={errors.techStack}> */}
-        <TechStackInput
-          chips={values.techStack}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          filteredSuggestions={filteredSuggestions}
-          label="Tech stack"
-          placeholder="Start typing"
-          name="techStack"
-          onTechSelect={handleTechSelect}
-          onTechRemove={handleTechRemove}
-          addImportantIcon={true}
-          tooltipText="List the technologies you are comfortable with or interested in."
-        />
-        {/* </InputFormError> */}
+        <InputFormError error={touched.position && errors.position}>
+          <DropdownBio
+            id="position"
+            label="Position"
+            text="Choose position"
+            options={filterLists.position}
+            selectedValue={values.position}
+            name="position"
+          />
+        </InputFormError>
+        <InputFormError error={touched.seniority && errors.seniority}>
+          <DropdownBio
+            id="seniority"
+            label="Seniority"
+            text="Choose seniority"
+            options={filterLists.seniority}
+            selectedValue={values.seniority}
+            name="seniority"
+          />
+        </InputFormError>
+        <InputFormError error={touched.techStack && errors.techStack}>
+          <TechStackInput
+            chips={values.techStack}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            filteredSuggestions={filteredSuggestions}
+            label="Tech stack"
+            placeholder="Start typing"
+            name="techStack"
+            onTechSelect={handleTechSelect}
+            onTechRemove={handleTechRemove}
+            addImportantIcon={true}
+            tooltipText="List the technologies you are comfortable with or interested in."
+          />
+        </InputFormError>
         <div className={styles.addInfo}>
           Start typing and separate technologies with commas.
           <br />
           Choose max. 8
         </div>
         <div className={styles.employmentType}>
-          {/* <InputFormError error={errors.employment}> */}
           Employment type
           <CheckboxInput
             id="fulltime"
@@ -123,7 +122,6 @@ const WorkInformation = () => {
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name="contract"
           />
-          {/* </InputFormError> */}
         </div>
       </div>
     </div>

@@ -24,11 +24,15 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          {/* <InputFormError error={touched.country && errors.country}> */}
-          <TextInputWithDropdown onChange={handleChange} />
-          {/* </InputFormError> */}
+          <InputFormError error={touched.country && errors.country}>
+            <TextInputWithDropdown
+              onChange={handleChange}
+              name="country"
+              onBlur={handleBlur}
+            />
+          </InputFormError>
           <CheckboxInput
-            //onBlur={handleBlur}
+            onBlur={handleBlur}
             id="openToRelocationCountry"
             label="I’m open to residency relocation"
             checked={values.openToRelocationCountry}
@@ -38,23 +42,22 @@ const LocationPreferences = () => {
           />
         </div>
         <div>
-          {/* <InputFormError error={touched.city && errors.city}> */}
-          <TextInput
-            //onBlur={handleBlur}
-            label="City residency"
-            placeholder="Start typing location"
-            value={values.city}
-            onChange={handleChange}
-            addImportantIcon={true}
-            name="city"
-            excludeDigits
-            tooltipText="We use this information to match you with the best job opportunities."
-            dataTestId="city"
-            maxLength={40}
-          />
-          {/* </InputFormError> */}
+          <InputFormError error={touched.city && errors.city}>
+            <TextInput
+              onBlur={handleBlur}
+              label="City residency"
+              placeholder="Start typing location"
+              value={values.city}
+              onChange={handleChange}
+              addImportantIcon={true}
+              name="city"
+              excludeDigits
+              tooltipText="We use this information to match you with the best job opportunities."
+              dataTestId="city"
+              maxLength={40}
+            />
+          </InputFormError>
           <CheckboxInput
-            //onBlur={handleBlur}
             id="openToRelocationCity"
             label="I’m open to city relocation"
             checked={values.openToRelocationCity}
@@ -63,9 +66,7 @@ const LocationPreferences = () => {
             dataTestId="openToRelocationCity"
           />
         </div>
-        {/* <InputFormError error={touched.remoteOnly && errors.remoteOnly}> */}
         <SwitchInput
-          //onBlur={handleBlur}
           id="remoteOnly"
           checked={values.remoteOnly}
           label="I’m looking for remote jobs only"
@@ -73,7 +74,6 @@ const LocationPreferences = () => {
           name="remoteOnly"
           dataTestId="remoteOnly"
         />
-        {/* </InputFormError> */}
       </div>
     </div>
   )
