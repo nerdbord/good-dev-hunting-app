@@ -3,6 +3,8 @@ import styles from './TechStackInput.module.scss'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import Tooltip from '../Tooltip/Tooltip'
+import { useFormikContext } from 'formik'
+import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
 
 interface TechStackInputProps {
   chips: string[]
@@ -31,6 +33,8 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   addImportantIcon,
   tooltipText,
 }) => {
+  const { errors } = useFormikContext<CreateProfileFormValues>()
+  const [inputError, setInputError] = useState<boolean>(false)
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)
@@ -63,6 +67,11 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
 
   const handleBlur = () => {
     setIsFocused(false)
+    if (!inputValue.trim() && chips.length === 0) {
+      setInputError(true)
+    } else {
+      setInputError(false)
+    }
   }
 
   const filteredAvailableSuggestions = filteredSuggestions.filter(
@@ -102,7 +111,9 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
         )}
       </label>
       <div
-        className={`${styles.container} ${isFocused ? styles.active : ''}`}
+        className={`${styles.container} ${isFocused ? styles.active : ''} ${
+          errors.techStack || inputError ? styles.errMsg : styles.container
+        }`}
         onClick={focusInput}
         ref={chipsContainerRef}
       >
@@ -146,6 +157,18 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
           </div>
         </div>
       </div>
+      <p>
+        {errors.techStack && (
+          <p className={styles.errMsgText}>{errors.techStack}</p>
+        )}
+      </p>
+      <p>
+        {inputError && !errors.techStack ? (
+          <p className={styles.errMsgText}>Min 1 tech is requier</p>
+        ) : (
+          ''
+        )}
+      </p>
     </div>
   )
 }

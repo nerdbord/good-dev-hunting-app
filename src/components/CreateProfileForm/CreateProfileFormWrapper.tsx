@@ -55,7 +55,10 @@ export const validationSchema = Yup.object().shape({
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
-  techStack: Yup.array().of(Yup.string()).required('Tech stack is required'),
+  techStack: Yup.array()
+    .of(Yup.string())
+    .required('Tech stack is required')
+    .min(1, 'Min 1 tech is requier'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()

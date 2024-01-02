@@ -24,34 +24,34 @@ const PersonalInfo = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <InputFormError error={touched.fullName && errors.fullName}>
-          <TextInput
-            onBlur={handleBlur}
-            label="Full name"
-            placeholder="eg. Anna Oxford"
-            value={values.fullName}
-            onChange={handleChange}
-            name="fullName"
-            dataTestId="fullName"
-            maxLength={40}
-          />
-        </InputFormError>
+        {/* <InputFormError error={touched.fullName && errors.fullName}> */}
+        <TextInput
+          //onBlur={handleBlur}
+          label="Full name"
+          placeholder="eg. Anna Oxford"
+          value={values.fullName}
+          onChange={handleChange}
+          name="fullName"
+          dataTestId="fullName"
+          maxLength={40}
+        />
+        {/* </InputFormError> */}
         <div className={styles.emailContainer}>
-          <InputFormError error={errors.contactEmail}>
-            <TextInput
-              onBlur={handleBlur}
-              label="Contact email"
-              placeholder={session?.user?.email || ''}
-              value={values.contactEmail}
-              onChange={handleChange}
-              addImportantIcon={true}
-              name="contactEmail"
-              disabled={true}
-              tooltipText=" Email is connected to your Github profile and cannot be changed!"
-              dataTestId=""
-              maxLength={30}
-            />
-          </InputFormError>
+          {/* <InputFormError error={errors.contactEmail}> */}
+          <TextInput
+            //onBlur={handleBlur}
+            label="Contact email"
+            placeholder={session?.user?.email || ''}
+            value={values.contactEmail}
+            onChange={handleChange}
+            addImportantIcon={true}
+            name="contactEmail"
+            disabled={true}
+            tooltipText=" Email is connected to your Github profile and cannot be changed!"
+            dataTestId=""
+            maxLength={30}
+          />
+          {/* </InputFormError> */}
         </div>
         <UserPhotoUploader />
         <TextInput
@@ -62,25 +62,25 @@ const PersonalInfo = () => {
           name="linkedin"
           dataTestId="linkedin"
         />
-        <InputFormError error={touched.bio && errors.bio}>
-          <div className={styles.lettersCountParent}>
-            <TextArea
-              onBlur={handleBlur}
-              label="Bio"
-              placeholder="Introduce yourself with few sentences"
-              value={values.bio}
-              addImportantIcon={true}
-              onChange={handleChange}
-              name="bio"
-              maxLength={1500}
-              tooltipText="Let others know you - write a few sentences about yourself."
-              dataTestId="bio"
-            />
-            <div className={styles.lettersCount}>
-              {values.bio.length} / 1500 characters
-            </div>
+        {/* <InputFormError error={touched.bio && errors.bio}> */}
+        <div className={styles.lettersCountParent}>
+          <TextArea
+            //onBlur={handleBlur}
+            label="Bio"
+            placeholder="Introduce yourself with few sentences"
+            value={values.bio}
+            addImportantIcon={true}
+            onChange={handleChange}
+            name="bio"
+            maxLength={1500}
+            tooltipText="Let others know you - write a few sentences about yourself."
+            dataTestId="bio"
+          />
+          <div className={styles.lettersCount}>
+            {values.bio.length} / 1500 characters
           </div>
-        </InputFormError>
+        </div>
+        {/* </InputFormError> */}
       </div>
     </div>
   )

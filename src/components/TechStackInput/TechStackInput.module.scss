@@ -90,3 +90,16 @@
   align-items: center;
   gap: 4px;
 }
+
+.errMsg {
+  border: 1px solid red;
+}
+
+.errMsgText {
+  color: var(--Error-Fill, #d62626);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 2px;
+}
