@@ -1,8 +1,7 @@
 'use server'
 import { authOptions } from '@/lib/auth'
-import { updateUserAvatar } from '@/backend/user/user.service'
+import { getGitHubDetails, updateUserAvatar } from '@/backend/user/user.service'
 import { getServerSession } from 'next-auth'
-import { prisma } from '@/lib/prismaClient'
 
 export const importAvatarFromGithub = async () => {
   const session = await getServerSession(authOptions)
@@ -12,11 +11,7 @@ export const importAvatarFromGithub = async () => {
     return null
   }
 
-  const userGitHubDetails = await prisma.gitHubDetails.findUnique({
-    where: {
-      userId: session.user.id,
-    },
-  })
+  const userGitHubDetails = await getGitHubDetails(session.user.id)
 
   if (!userGitHubDetails) {
     console.error('Error: User GitHub details not found')
