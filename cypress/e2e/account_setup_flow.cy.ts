@@ -11,12 +11,12 @@ describe('Account Setup', () => {
     cy.visit('/my-profile/create')
     cy.url().should('include', '/my-profile/create')
     cy.get('[data-testid="fullName"]', { timeout: 40000 }).type(
-      'Krzysztof Misiorny',
+      'Krzysztof Kowalski',
     )
     cy.get('[data-testid="linkedin"]').type('https://www.linkedin.com/')
     cy.get('[data-testid="bio"]').type('dzień dobry :)')
     cy.get('[data-testid="country"]').type('Zimbabwe')
-    cy.get('[data-testid="country2"]').click()
+    cy.get('[id="countryElement"]').click()
     cy.get('[data-testid="openToRelocationCountry"]').click()
     cy.get('[data-testid="city"]').type('Warszawa')
     cy.get('[data-testid="openToRelocationCity"]').click()

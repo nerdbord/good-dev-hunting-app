@@ -25,10 +25,7 @@ const LocationPreferences = () => {
       <div className={styles.right}>
         <div>
           <InputFormError error={errors.country}>
-            <TextInputWithDropdown
-              dataTestId="country"
-              dataTestId2="country2"
-            />
+            <TextInputWithDropdown dataTestId="country" id="countryElement" />
           </InputFormError>
           <CheckboxInput
             id="openToRelocationCountry"

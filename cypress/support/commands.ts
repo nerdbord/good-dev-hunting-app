@@ -55,7 +55,7 @@ Cypress.Commands.add('login', () => {
 })
 
 Cypress.Commands.add('mockDeleteUserProfile', () => {
-  cy.intercept('DELETE', '/api/test/profile', {
+  cy.intercept('DELETE', '/api/profile', {
     statusCode: 200,
     body: { message: 'Profil usunięty' },
   }).as('deleteProfile')

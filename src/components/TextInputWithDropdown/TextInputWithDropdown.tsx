@@ -9,12 +9,12 @@ import useOutsideClick from '@/hooks/useOutsideClick'
 
 interface TextInputWithDropdownProps {
   dataTestId?: string
-  dataTestId2?: string
+  id?: string
 }
 
 const TextInputWithDropdown = ({
   dataTestId,
-  dataTestId2,
+  id,
 }: TextInputWithDropdownProps) => {
   const { values, handleChange, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
@@ -67,7 +67,7 @@ const TextInputWithDropdown = ({
           <DropdownCountry
             value={values.country}
             setIsDropdownActive={setIsDropdownActive}
-            dataTestId={dataTestId2}
+            id={id}
           />
         </div>
       )}

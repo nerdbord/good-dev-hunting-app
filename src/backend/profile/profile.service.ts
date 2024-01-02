@@ -196,7 +196,11 @@ export async function deleteUserProfileByEmail(email: string) {
     include: { profile: true },
   })
 
-  if (user && user.profile) {
+  if (!user) {
+    throw new Error('User not found')
+  }
+
+  if (user.profile) {
     await prisma.profile.delete({
       where: { id: user.profile.id },
     })
