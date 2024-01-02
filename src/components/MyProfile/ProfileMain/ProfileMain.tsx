@@ -1,17 +1,31 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/flagPL.jpg'
-import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { ConnectToNerdbordButton } from '@/components/ConnectToNerbordButton/ConnectToNerdbordButton'
+import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
+import { useRouter } from 'next/navigation'
 
-const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
+const ProfileMain = ({
+  profile,
+  isConnectedToNerdbord,
+}: {
+  profile: ProfileModel
+  isConnectedToNerdbord: boolean
+}) => {
+  const router = useRouter()
   const githubUsername = profile.githubUsername
-  const avatarUrl = await fetchUserAvatar()
+  const avatarUrl = profile.avatarUrl
+  console.log(isConnectedToNerdbord)
+  useEffect(() => {
+    router.refresh()
+  }, [isConnectedToNerdbord])
 
   return (
     <>
@@ -41,9 +55,28 @@ const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
               </a>
             </li>
           )}
-          <li className={styles.copyEmail}>
-            <CopyEmail email="test@nerdbord.io" />
-          </li>
+          {isConnectedToNerdbord && (
+            <li className={styles.socialItem}>
+              <a
+                className={styles.socialLink}
+                href={'#'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Portfolio ↗︎
+              </a>
+            </li>
+          )}
+          {isConnectedToNerdbord ? (
+            <li className={styles.socialItem}>
+              <CheckMarkIcon />
+              Nerdbord connected
+            </li>
+          ) : (
+            <li>
+              <ConnectToNerdbordButton />
+            </li>
+          )}
         </ul>
         <div className={styles.profile}>
           <div className={styles.user}>
