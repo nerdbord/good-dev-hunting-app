@@ -12,21 +12,23 @@ const GithubAcc = () => {
   const { data: session } = useSession()
 
   return pathname !== AppRoutes.home ? (
-    <div className={styles.github}>
-      <p className={styles.githubAccConnected}>Connected Github account</p>
-      <div className={styles.githubAcc}>
-        {session?.user.image && (
-          <Image
-            className={styles.githubAccImg}
-            src={session.user.image}
-            width={38}
-            height={38}
-            alt="github avatar"
-          />
-        )}
-        <p className={styles.githubAccName}>{session?.user.name}</p>
+    <Link href={AppRoutes.myProfile}>
+      <div className={styles.github}>
+        <p className={styles.githubAccConnected}>Connected Github account</p>
+        <div className={styles.githubAcc}>
+          {session?.user.image && (
+            <Image
+              className={styles.githubAccImg}
+              src={session.user.image}
+              width={38}
+              height={38}
+              alt="github avatar"
+            />
+          )}
+          <p className={styles.githubAccName}>{session?.user.name}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   ) : null
 }
 
