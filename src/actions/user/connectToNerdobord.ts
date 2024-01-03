@@ -8,12 +8,16 @@ import {
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
 
-export interface NerdbordDetails {
+export interface UserData {
   id: string
   username: string
   avatarUrl: string
   githubUsername: string
   bio: string
+}
+
+interface NerdbordUser {
+  user: UserData | null
 }
 
 export const connectToNerdbord = async () => {
@@ -35,18 +39,21 @@ export const connectToNerdbord = async () => {
     return null
   }
 
-  try {
-    const resp = await fetch(
-      `https://core.nerdbord.io/v1/users/${userGitHubDetails.username}`,
+  const resp = await fetch(
+    `https://core.nerdbord.io/v1/users/${userGitHubDetails.username}`,
+  )
+
+  if (!resp.ok) {
+    throw new Error('Something went wrong!')
+  }
+
+  const data: NerdbordUser = await resp.json()
+
+  if (data.user) {
+    await updateUserNerdbordId(user.id, data.user.githubUsername)
+  } else {
+    throw new Error(
+      'User not found. Make sure your Github account is used on Nerdbord',
     )
-
-    if (!resp.ok) {
-      throw new Error('Something went wrong!')
-    }
-    const data: NerdbordDetails = await resp.json()
-
-    await updateUserNerdbordId(user.id, data.githubUsername)
-  } catch (error) {
-    console.log(error)
   }
 }
