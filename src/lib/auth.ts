@@ -1,6 +1,13 @@
-import { createUser, findUserByEmail } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
+import { createUser, findUserByEmail } from '@/backend/user/user.service'
+import {
+  MailSubjectId,
+  MailTemplateId,
+  mailersendClient,
+} from './mailersendClient'
+import { Recipient } from 'mailersend'
+
 import GithubProvider from 'next-auth/providers/github'
 interface UserAuthed {
   id: string
@@ -52,7 +59,13 @@ export const authOptions: NextAuthOptions = {
           image: castedProfile.avatar_url,
         })
 
-        // TODO(Agnieszka): Send email to user about successful registration
+        if (createdUser) {
+          await mailersendClient.sendMail(
+            [new Recipient(createdUser.email, castedProfile.login)],
+            MailTemplateId.welcomeMail,
+            MailSubjectId.welcomeSubject,
+          )
+        }
 
         return !!createdUser
       }
@@ -74,8 +87,6 @@ export const authOptions: NextAuthOptions = {
 
 export const authorizeUser = async () => {
   const session = await getServerSession(authOptions)
-
-  console.log('Session:', session)
 
   if (!session?.user?.email) {
     throw Error('Unauthorized')
