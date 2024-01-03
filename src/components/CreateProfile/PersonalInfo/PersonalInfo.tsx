@@ -8,13 +8,9 @@ import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { useSession } from 'next-auth/react'
 import { UserPhotoUploader } from '@/components/UserPhotoUploader/UserPhotoUploader'
-import { ProfileModel } from '@/data/frontend/profile/types'
 
-interface PersonalInfoProps {
-  profile: ProfileModel | null
-}
-const PersonalInfo = ({ profile }: PersonalInfoProps) => {
-  const { values, handleChange, errors } =
+const PersonalInfo = () => {
+  const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 
   const { data: session } = useSession()
@@ -28,18 +24,22 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
         </div>
       </div>
       <div className={styles.right}>
-        <InputFormError error={errors.fullName}>
+        <InputFormError error={touched.fullName && errors.fullName}>
           <TextInput
+            onBlur={handleBlur}
             label="Full name"
             placeholder="eg. Anna Oxford"
             value={values.fullName}
             onChange={handleChange}
             name="fullName"
+            dataTestId="fullName"
+            maxLength={40}
           />
         </InputFormError>
         <div className={styles.emailContainer}>
           <InputFormError error={errors.contactEmail}>
             <TextInput
+              onBlur={handleBlur}
               label="Contact email"
               placeholder={session?.user?.email || ''}
               value={values.contactEmail}
@@ -48,20 +48,24 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               name="contactEmail"
               disabled={true}
               tooltipText=" Email is connected to your Github profile and cannot be changed!"
+              dataTestId=""
+              maxLength={30}
             />
           </InputFormError>
         </div>
-        <UserPhotoUploader profile={profile} />
+        <UserPhotoUploader />
         <TextInput
           label="LinkedIn"
           placeholder="Paste link to you linkedin profile"
           value={values.linkedin}
           onChange={handleChange}
           name="linkedin"
+          dataTestId="linkedin"
         />
-        <InputFormError error={errors.bio}>
+        <InputFormError error={touched.bio && errors.bio}>
           <div className={styles.lettersCountParent}>
             <TextArea
+              onBlur={handleBlur}
               label="Bio"
               placeholder="Introduce yourself with few sentences"
               value={values.bio}
@@ -70,7 +74,8 @@ const PersonalInfo = ({ profile }: PersonalInfoProps) => {
               name="bio"
               maxLength={1500}
               tooltipText="Let others know you - write a few sentences about yourself."
-            />{' '}
+              dataTestId="bio"
+            />
             <div className={styles.lettersCount}>
               {values.bio.length} / 1500 characters
             </div>

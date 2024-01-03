@@ -30,8 +30,6 @@ export const importAvatarFromGithub = async () => {
     return null
   }
 
-  console.log('userEmail:', session.user.email)
-
   const updatedUser = await updateUserAvatar(session.user.email, avatarUrl)
 
   return updatedUser.avatarUrl

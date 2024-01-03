@@ -45,23 +45,20 @@
 .contentWrapper {
   display: flex;
   align-items: center;
-  @include mobile {
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-  }
+  gap: 20px;
 }
 
 .picture {
   width: 100px;
   height: 100px;
-  border-radius: 100px;
+  border-radius: 50%;
 }
+
 .buttonsWrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 5px;
+  gap: 6px;
 }
 
 .containerLabel {

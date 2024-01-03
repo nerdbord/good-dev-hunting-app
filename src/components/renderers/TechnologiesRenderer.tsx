@@ -8,7 +8,8 @@ type Props = {
 
 export default function TechnologiesRenderer({ data, classes }: Props) {
   const renderTechnologies = () => {
-    const sliceCount = window.innerWidth <= 768 ? 2 : 3
+    const sliceCount =
+      typeof window !== 'undefined' && window.innerWidth <= 768 ? 2 : 3
 
     if (data.techStack.length <= sliceCount) {
       return data.techStack.map((tech, index) => (

@@ -14,7 +14,7 @@ export const ErrorIcon = () => {
           id="Path 5"
           d="M10.0003 6.66675V10.8334"
           stroke="#D62626"
-          stroke-linecap="round"
+          strokeLinecap="round"
         />
         <path
           id="Oval"

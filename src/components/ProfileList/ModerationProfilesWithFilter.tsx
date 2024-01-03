@@ -43,10 +43,14 @@ export default function ModerationProfilesWithFilters({
           <SearchResultsInfo text="No search results for" />
         ))}
 
-      <div className={styles.profileListCont}>
-        {filteredProfiles.map((profile) => (
-          <ModerationProfileListItem key={profile.id} profile={profile} />
-        ))}
+      <div className={hasResults ? styles.profileListCont : styles.noProfiles}>
+        {hasResults ? (
+          filteredProfiles.map((profile) => (
+            <ModerationProfileListItem key={profile.id} profile={profile} />
+          ))
+        ) : (
+          <p>No profiles found</p>
+        )}
       </div>
     </div>
   )

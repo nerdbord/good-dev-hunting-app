@@ -3,33 +3,14 @@ import styles from './ProfileMain.module.scss'
 import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/images/🇵🇱.jpg'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import PolandFlag from '@/assets/images/flagPL.jpg'
 import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
-import { AppRoutes } from '@/utils/routes'
-import { findUserByEmail } from '@/backend/user/user.service'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
-const ProfileMain = async () => {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
-    redirect(AppRoutes.home)
-  }
-  const profile = await getProfileByUserEmail(session.user.email)
-  if (!profile) {
-    redirect(AppRoutes.home)
-  }
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-  const user = await findUserByEmail(session.user.email)
-
-  if (!user) {
-    redirect(AppRoutes.home)
-  }
-
-  const githubUsername = user.githubDetails?.username
+const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
+  const githubUsername = profile.githubUsername
   const avatarUrl = await fetchUserAvatar()
 
   return (
@@ -51,7 +32,7 @@ const ProfileMain = async () => {
             <li className={styles.socialItem}>
               <a
                 className={styles.socialLink}
-                href={'http://localhost:3000/'}
+                href={profile.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -74,7 +55,7 @@ const ProfileMain = async () => {
               alt="user's avatar"
               className={styles.avatar}
             />
-            <div className={styles.name}>{session.user.name}</div>
+            <div className={styles.name}>{profile.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
@@ -89,6 +70,7 @@ const ProfileMain = async () => {
                 {profile.country.name}, {profile.city.name}
               </p>
             </div>
+
             <div className={styles.optionBox}>
               {profile.country.openForRelocation && (
                 <div className={styles.location}>

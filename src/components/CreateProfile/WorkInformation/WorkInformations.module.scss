@@ -68,7 +68,7 @@
   font-size: 12px;
   color: #89939e;
   line-height: 16px;
-  margin-top: 20px;
+  margin-top: -24px;
 }
 
 .employmentType {
@@ -80,3 +80,8 @@
     margin-bottom: 60px;
   }
 }
+
+.textAreaContainer {
+  position: relative;
+}
+
