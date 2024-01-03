@@ -26,16 +26,15 @@ export async function POST(request: NextRequest) {
     const userData: CreateProfilePayload = await request.json()
 
     const { email } = await authorizeUser()
-
     const foundUser = await doesUserProfileExist(email)
 
     if (!foundUser) {
       const createdProfile = await createUserProfile(email, userData)
-
       const serializedProfile = serializeProfileToProfileModel(createdProfile)
 
-      return new NextResponse(JSON.stringify(serializedProfile), {
+      return NextResponse.json({
         status: 201,
+        profile: serializedProfile,
       })
     } else {
       return new NextResponse('Such user already exist', { status: 409 })

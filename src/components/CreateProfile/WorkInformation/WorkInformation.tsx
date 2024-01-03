@@ -1,14 +1,14 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
-import TextArea from '@/components/TextArea/TextArea'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
-
 import styles from './WorkInformations.module.scss'
+import TechStackInput from '@/components/TechStackInput/TechStackInput'
+import technologies from '../../../data/frontend/technologies/data'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -16,11 +16,36 @@ const filterLists = {
 }
 
 const WorkInformation = () => {
-  const { values, handleChange, errors, setFieldValue } =
+  const { values, errors, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
+  const [inputValue, setInputValue] = useState<string>('')
+  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
 
   const handleEmploymentType = (option: string): void => {
     setFieldValue('employment', option)
+  }
+
+  useEffect(() => {
+    const filtered = technologies.filter((tech) =>
+      tech.toLowerCase().startsWith(inputValue.toLowerCase()),
+    )
+    setFilteredSuggestions(filtered.slice(0, 8))
+  }, [inputValue])
+
+  const handleTechSelect = (tech: string) => {
+    if (!values.techStack.includes(tech)) {
+      setFieldValue('techStack', [...values.techStack, tech])
+    }
+    setInputValue('')
+  }
+
+  const handleTechRemove = (techToRemove: string) => {
+    if (Array.isArray(values.techStack)) {
+      setFieldValue(
+        'techStack',
+        values.techStack.filter((tech) => tech !== techToRemove),
+      )
+    }
   }
 
   return (
@@ -54,24 +79,25 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        <div>
-          <InputFormError error={errors.techStack}>
-            <TextArea
-              label="Tech stack"
-              placeholder="Start typing"
-              value={values.techStack}
-              addImportantIcon={true}
-              onChange={handleChange}
-              name="techStack"
-              excludeDigits
-              tooltipText="List the technologies you are comfortable with or interested in."
-            />
-          </InputFormError>
-          <div className={styles.addInfo}>
-            Start typing and separate technologies with commas.
-            <br />
-            Choose max. 8
-          </div>
+        {/* <InputFormError error={errors.techStack}> */}
+        <TechStackInput
+          chips={values.techStack}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          filteredSuggestions={filteredSuggestions}
+          label="Tech stack"
+          placeholder="Start typing"
+          name="techStack"
+          onTechSelect={handleTechSelect}
+          onTechRemove={handleTechRemove}
+          addImportantIcon={true}
+          tooltipText="List the technologies you are comfortable with or interested in."
+        />
+        {/* </InputFormError> */}
+        <div className={styles.addInfo}>
+          Start typing and separate technologies with commas.
+          <br />
+          Choose max. 8
         </div>
         <div className={styles.employmentType}>
           <InputFormError error={errors.employment}>

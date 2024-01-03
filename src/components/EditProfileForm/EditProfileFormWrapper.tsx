@@ -7,6 +7,9 @@ import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
 import { EmploymentType, PublishingState } from '@prisma/client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useRouter } from 'next/navigation'
+import { AppRoutes } from '@/utils/routes'
 
 export interface EditProfileFormValues {
   fullName: string
@@ -25,23 +28,6 @@ export interface EditProfileFormValues {
   state: PublishingState
 }
 
-export const initialValues: EditProfileFormValues = {
-  fullName: '',
-  linkedin: '',
-  bio: '',
-  country: '',
-  city: '',
-  openToRelocationCountry: false,
-  openToRelocationCity: false,
-  remoteOnly: false,
-  position: '',
-  seniority: '',
-  employment: EmploymentType.FULL_TIME,
-  techStack: '',
-  githubUsername: '',
-  state: PublishingState.PENDING,
-}
-
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
@@ -52,6 +38,13 @@ export const validationSchema = Yup.object().shape({
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
   techStack: Yup.string().required('Tech stack is required'),
+  linkedin: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(
+      /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
+      'Invalid LinkedIn URL',
+    ),
 })
 
 interface EditProfileFormWrapperProps {
@@ -63,6 +56,8 @@ const EditProfileFormWrapper = ({
   profile,
 }: PropsWithChildren<EditProfileFormWrapperProps>) => {
   const { data: session } = useSession()
+  const { runAsync } = useAsyncAction()
+  const router = useRouter()
 
   if (!session) {
     return null
@@ -88,10 +83,18 @@ const EditProfileFormWrapper = ({
       seniority: values.seniority,
       techStack: values.techStack.split(',').map((s) => s.trim()),
       employmentType: values.employment,
-      githubUsername: null,
+      githubUsername: session.user.name,
       state: PublishingState.PENDING,
     }
-    await apiClient.updateMyProfile(payload)
+
+    try {
+      runAsync(async () => {
+        await apiClient.updateMyProfile(payload)
+        router.push(AppRoutes.myProfile)
+      })
+    } catch (error) {
+      console.log('error', error)
+    }
   }
 
   const mappedInitialValues: EditProfileFormValues =
@@ -103,6 +106,8 @@ const EditProfileFormWrapper = ({
       enableReinitialize
       validationSchema={validationSchema}
       onSubmit={handleEditProfile}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       {children}
     </Formik>

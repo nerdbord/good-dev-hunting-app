@@ -7,9 +7,10 @@ import SwitchInput from '@/components/Switch/Switch'
 import { useFormikContext } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 
 const LocationPreferences = () => {
-  const { values, handleChange, errors } =
+  const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 
   return (
@@ -23,27 +24,26 @@ const LocationPreferences = () => {
       </div>
       <div className={styles.right}>
         <div>
-          <InputFormError error={errors.country}>
-            <TextInput
-              label="Country of residency"
-              placeholder="Start typing location"
-              value={values.country}
+          <InputFormError error={touched.country && errors.country}>
+            <TextInputWithDropdown
               onChange={handleChange}
-              name="country"
-              excludeDigits
+              onBlur={handleBlur}
             />
           </InputFormError>
           <CheckboxInput
+            onBlur={handleBlur}
             id="openToRelocationCountry"
             label="I’m open to residency relocation"
             checked={values.openToRelocationCountry}
             onChange={handleChange}
             name="openToRelocationCountry"
+            dataTestId="openToRelocationCountry"
           />
         </div>
         <div>
-          <InputFormError error={errors.city}>
+          <InputFormError error={touched.city && errors.city}>
             <TextInput
+              onBlur={handleBlur}
               label="City residency"
               placeholder="Start typing location"
               value={values.city}
@@ -52,23 +52,29 @@ const LocationPreferences = () => {
               name="city"
               excludeDigits
               tooltipText="We use this information to match you with the best job opportunities."
+              dataTestId="city"
+              maxLength={40}
             />
           </InputFormError>
           <CheckboxInput
+            onBlur={handleBlur}
             id="openToRelocationCity"
             label="I’m open to city relocation"
             checked={values.openToRelocationCity}
             onChange={handleChange}
             name="openToRelocationCity"
+            dataTestId="openToRelocationCity"
           />
         </div>
-        <InputFormError error={errors.remoteOnly}>
+        <InputFormError error={touched.remoteOnly && errors.remoteOnly}>
           <SwitchInput
+            onBlur={handleBlur}
             id="remoteOnly"
             checked={values.remoteOnly}
             label="I’m looking for remote jobs only"
             onChange={handleChange}
             name="remoteOnly"
+            dataTestId="remoteOnly"
           />
         </InputFormError>
       </div>

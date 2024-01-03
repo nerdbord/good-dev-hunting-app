@@ -1,31 +1,35 @@
-import React from 'react'
-import styles from './page.module.scss'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
+import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
-import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
-import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
 import ProfileDetails from '@/components/MyProfile/ProfileDetails/ProfileDetails'
+import ProfileMain from '@/components/MyProfile/ProfileMain/ProfileMain'
+import ProfileTopBar from '@/components/MyProfile/ProfileTopBar/ProfileTopBar'
+import { authOptions } from '@/lib/auth'
 import { AppRoutes } from '@/utils/routes'
-
-export const revalidate = 0
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import styles from './page.module.scss'
 
 const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session || !session.user) {
+  if (!session?.user) {
+    redirect(AppRoutes.home)
+  }
+
+  const profile = await getProfileByUserEmail(session.user.email)
+
+  if (!profile) {
     redirect(AppRoutes.home)
   }
 
   return (
     <div className={styles.wrapper}>
       {/* @ts-expect-error Server Component */}
-      <ProfileTopBar />
+      <ProfileTopBar profile={profile} />
       {/* @ts-expect-error Server Component */}
-      <ProfileMain />
+      <ProfileMain profile={profile} />
       {/* @ts-expect-error Server Component */}
-      <ProfileDetails />
+      <ProfileDetails profile={profile} />
       <LogOutBtn />
     </div>
   )

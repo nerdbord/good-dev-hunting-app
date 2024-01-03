@@ -30,7 +30,8 @@
     "types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "cypress/support/commands.ts"
   ],
   "exclude": ["node_modules"]
 }

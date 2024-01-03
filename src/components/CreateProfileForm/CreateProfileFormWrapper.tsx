@@ -6,6 +6,9 @@ import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { apiClient } from '@/lib/apiClient'
 import { useSession } from 'next-auth/react'
 import { EmploymentType, PublishingState } from '@prisma/client'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useRouter } from 'next/navigation'
+import { AppRoutes } from '@/utils/routes'
 
 export interface CreateProfileFormValues {
   fullName: string
@@ -20,12 +23,12 @@ export interface CreateProfileFormValues {
   position: string
   seniority: string
   employment: EmploymentType
-  techStack: string
+  techStack: string[]
   githubUsername: string | null
   state: PublishingState
 }
 
-export const initialValues: CreateProfileFormValues = {
+const initialValues: CreateProfileFormValues = {
   fullName: '',
   contactEmail: '',
   linkedin: '',
@@ -38,7 +41,7 @@ export const initialValues: CreateProfileFormValues = {
   position: '',
   seniority: '',
   employment: EmploymentType.FULL_TIME,
-  techStack: '',
+  techStack: [],
   githubUsername: '',
   state: PublishingState.DRAFT,
 }
@@ -52,14 +55,20 @@ export const validationSchema = Yup.object().shape({
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
-  techStack: Yup.string().required('Tech stack is required'),
-  // employment: Yup.array()
-  //   .of(Yup.string().oneOf(['FULL_TIME', 'PART_TIME', 'CONTRACT']))
-  //   .min(1, 'Employment type is required'),
+  techStack: Yup.array().of(Yup.string()).required('Tech stack is required'),
+  linkedin: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(
+      /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
+      'Invalid LinkedIn URL',
+    ),
 })
 
 const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
   const { data: session } = useSession()
+  const { runAsync } = useAsyncAction()
+  const router = useRouter()
 
   if (!session) {
     return null
@@ -83,14 +92,17 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
-      techStack: values.techStack.split(',').map((s) => s.trim()),
+      techStack: values.techStack,
       employmentType: values.employment,
-      githubUsername: null,
+      githubUsername: session.user.name,
       state: PublishingState.DRAFT,
     }
 
     try {
-      const createdProfile = await apiClient.createMyProfile(payload)
+      runAsync(async () => {
+        await apiClient.createMyProfile(payload)
+        router.push(AppRoutes.myProfile)
+      })
     } catch (error) {
       console.log(error)
     }
