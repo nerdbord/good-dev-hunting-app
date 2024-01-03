@@ -25,10 +25,8 @@ export const DropdownBio = ({
   dropdownTestId?: string
   optionTestId?: string
   error?: string
-  //onBlur?: (event: React.FocusEvent<HTMLDivElement>) => void
 }) => {
-  const { setFieldValue, errors, values } =
-    useFormikContext<CreateProfileFormValues>()
+  const { setFieldValue } = useFormikContext<CreateProfileFormValues>()
   const [inputError, setInputError] = useState<boolean>(false)
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
