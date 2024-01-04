@@ -4,14 +4,20 @@ import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/flagPL.jpg'
-import { CopyEmail } from '@/components/CopyEmail/CopyEmail'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
-import { fetchUserAvatar } from '@/actions/user/fetchUserAvatar'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { ConnectToNerdbordButton } from '@/components/ConnectToNerbordButton/ConnectToNerdbordButton'
+import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
 
-const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
+const ProfileMain = async ({
+  profile,
+  isConnectedToNerdbord,
+}: {
+  profile: ProfileModel
+  isConnectedToNerdbord: boolean
+}) => {
   const githubUsername = profile.githubUsername
-  const avatarUrl = await fetchUserAvatar()
+  const avatarUrl = profile.avatarUrl
 
   return (
     <>
@@ -41,9 +47,18 @@ const ProfileMain = async ({ profile }: { profile: ProfileModel }) => {
               </a>
             </li>
           )}
-          <li className={styles.copyEmail}>
-            <CopyEmail email="test@nerdbord.io" />
-          </li>
+          {isConnectedToNerdbord && (
+            <li className={styles.socialItem}>
+              <a
+                className={styles.socialLink}
+                href={'#'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Portfolio ↗︎
+              </a>
+            </li>
+          )}
         </ul>
         <div className={styles.profile}>
           <div className={styles.user}>

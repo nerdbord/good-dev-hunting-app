@@ -86,6 +86,10 @@
   transition: background-color 300ms;
 
   &:hover {
-    background-color: #171B21;
+    background-color: #171b21;
   }
+}
+
+.disabled:hover {
+  background-color: initial;
 }

@@ -68,9 +68,6 @@ const CreateProfileTopBar = () => {
         )}
       </div>
       <div className={styles.buttonBox}>
-        <Button variant="secondary">
-          {isMobile ? 'Connect to Nerdbord' : 'Connect with Nerdbord'}
-        </Button>
         <Button
           loading={loading}
           variant="primary"

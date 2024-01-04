@@ -125,3 +125,24 @@ export async function updateUserAvatar(email: string, avatarUrl: string) {
     data: { avatarUrl },
   })
 }
+
+export async function getGitHubDetails(id: string) {
+  const userGitHubDetails = await prisma.gitHubDetails.findUnique({
+    where: {
+      userId: id,
+    },
+  })
+
+  return userGitHubDetails
+}
+
+export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
+  return await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      nerdbordUserId: nerdbordId,
+    },
+  })
+}

@@ -10,15 +10,6 @@ export async function withErrorHandlingAsync<T>(
     const result = await asyncFunction()
     return result
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      // Handle the error here
-      console.error('An error occurred:', error)
-
-      return null
-    } else {
-      // Handle non-Error type errors
-      console.error('An unknown error occurred:', error)
-      return null
-    }
+    throw error as Error
   }
 }
