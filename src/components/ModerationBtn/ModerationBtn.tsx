@@ -1,28 +1,29 @@
 'use client'
-import React from 'react'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
-const MyProfileBtn = () => {
+const ModerationBtn = () => {
   const router = useRouter()
   const path = usePathname()
 
-  if (
-    path.includes(AppRoutes.myProfile) ||
-    path.includes(AppRoutes.userProfile)
-  ) {
+  if (path.includes(AppRoutes.dashboard)) {
     return null
+  }
+
+  const onClickHandler = async () => {
+    router.push(AppRoutes.dashboard)
   }
 
   return (
     <Button
-      onClick={() => router.push(AppRoutes.myProfile)}
-      variant={'primary'}
+      onClick={onClickHandler}
+      variant="secondary"
+      dataTestId="moderationButton"
     >
-      My profile
+      Moderation
     </Button>
   )
 }
 
-export default MyProfileBtn
+export default ModerationBtn
