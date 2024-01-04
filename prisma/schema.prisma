@@ -19,6 +19,7 @@ model User {
   profile       Profile? //user have profile //relations  
   githubDetails GitHubDetails? //user have gitHub //relations
   roles         Role[]         @default([USER])
+  nerdbordUserId String?          @unique
 }
 
 model Profile {

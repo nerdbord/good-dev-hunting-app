@@ -44,14 +44,9 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
+
   @include mobile {
     padding: $spacing-3 0;
-
-    a {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-    }
   }
 }
 
