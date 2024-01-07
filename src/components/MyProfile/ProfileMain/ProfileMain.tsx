@@ -6,8 +6,6 @@ import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/flagPL.jpg'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
-import { ConnectToNerdbordButton } from '@/components/ConnectToNerbordButton/ConnectToNerdbordButton'
-import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
 
 const ProfileMain = async ({
   profile,
@@ -51,7 +49,7 @@ const ProfileMain = async ({
             <li className={styles.socialItem}>
               <a
                 className={styles.socialLink}
-                href={'#'}
+                href={`https://nerdbord.io/p/${githubUsername}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
