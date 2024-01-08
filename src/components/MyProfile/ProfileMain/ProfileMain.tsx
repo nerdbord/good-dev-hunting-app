@@ -1,11 +1,10 @@
-import React from 'react'
-import styles from './ProfileMain.module.scss'
-import Image from 'next/image'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import PolandFlag from '@/assets/images/flagPL.jpg'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import Image from 'next/image'
+import styles from './ProfileMain.module.scss'
 
 const ProfileMain = async ({
   profile,
@@ -85,12 +84,12 @@ const ProfileMain = async ({
             </div>
 
             <div className={styles.optionBox}>
-              {profile.country.openForRelocation && (
+              {profile.openForCountryRelocation && (
                 <div className={styles.location}>
                   Open to country relocation
                 </div>
               )}
-              {profile.city.openForRelocation && (
+              {profile.openForCityRelocation && (
                 <div className={styles.location}>Open to city relocation</div>
               )}
               {profile.remoteOnly && (
