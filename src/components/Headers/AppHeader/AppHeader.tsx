@@ -42,7 +42,10 @@ const AppHeader = async () => {
                   <LogOutBtn />
                 </>
               ) : (
-                <CreateProfileBtn data-testid="create-profile-button" />
+                <div className={styles.frameButtons}>
+                  <CreateProfileBtn data-testid="create-profile-button" />
+                  <LogOutBtn />
+                </div>
               )}
             </div>
             {profile ? (
