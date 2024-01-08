@@ -1,9 +1,9 @@
-import React, { PropsWithChildren } from 'react'
-import styles from './UserProfileMain.module.scss'
-import Image from 'next/image'
 import PolandFlag from '@/assets/images/flagPL.jpg'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
+import { ProfileModel } from '@/data/frontend/profile/types'
+import Image from 'next/image'
+import { PropsWithChildren } from 'react'
+import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {
   userProfile: ProfileModel
@@ -36,8 +36,11 @@ const UserProfileMain = ({
             />
             {userProfile.country.name}, {userProfile.city.name}
           </div>
-          {userProfile.city.openForRelocation && (
-            <div className={styles.location}>Open to relocation</div>
+          {userProfile.openForCountryRelocation && (
+            <div className={styles.location}>Open to country relocation</div>
+          )}
+          {userProfile.openForCityRelocation && (
+            <div className={styles.location}>Open to city relocation</div>
           )}
           {userProfile.remoteOnly && (
             <div className={styles.location}>Remote only</div>

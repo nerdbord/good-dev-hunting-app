@@ -9,12 +9,12 @@ export interface ProfileModel {
   bio: string
   country: {
     name: string
-    openForRelocation: boolean
   }
+  openForCountryRelocation: boolean
   city: {
     name: string
-    openForRelocation: boolean
   }
+  openForCityRelocation: boolean
   remoteOnly: boolean
   position: string
   seniority: string
