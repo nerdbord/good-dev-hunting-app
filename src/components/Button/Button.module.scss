@@ -1,5 +1,6 @@
 .buttonPrimary,
-.buttonSecondary {
+.buttonSecondary,
+.buttonLogOut {
   display: flex;
   height: 42px;
   padding: 12px 24px;
@@ -92,4 +93,11 @@
 
 .disabled:hover {
   background-color: initial;
+}
+
+.buttonLogOut {
+  height: 44px;
+  color: #7d54f1;
+  background: transparent;
+  border: 1px solid #7d54f1;
 }
