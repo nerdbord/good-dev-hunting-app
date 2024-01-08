@@ -3,7 +3,6 @@
   border: 1px solid #2a2f35;
   background-color: #0f1217;
   margin-top: 10px;
-  margin-bottom: 10px;
   input {
     border: none;
     outline: none;
@@ -89,4 +88,17 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.errMsgText {
+  color: var(--Error-Fill, #d62626);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 2px;
 }

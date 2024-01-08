@@ -37,31 +37,31 @@ const PersonalInfo = () => {
           />
         </InputFormError>
         <div className={styles.emailContainer}>
-          <InputFormError error={errors.contactEmail}>
-            <TextInput
-              onBlur={handleBlur}
-              label="Contact email"
-              placeholder={session?.user?.email || ''}
-              value={values.contactEmail}
-              onChange={handleChange}
-              addImportantIcon={true}
-              name="contactEmail"
-              disabled={true}
-              tooltipText=" Email is connected to your Github profile and cannot be changed!"
-              dataTestId=""
-              maxLength={30}
-            />
-          </InputFormError>
+          <TextInput
+            label="Contact email"
+            placeholder={session?.user?.email || ''}
+            value={values.contactEmail}
+            onChange={handleChange}
+            addImportantIcon={true}
+            name="contactEmail"
+            disabled={true}
+            tooltipText=" Email is connected to your Github profile and cannot be changed!"
+            dataTestId=""
+            maxLength={30}
+          />
         </div>
         <UserPhotoUploader />
-        <TextInput
-          label="LinkedIn"
-          placeholder="Paste link to you linkedin profile"
-          value={values.linkedin}
-          onChange={handleChange}
-          name="linkedin"
-          dataTestId="linkedin"
-        />
+        <InputFormError error={touched.linkedin && errors.linkedin}>
+          <TextInput
+            onBlur={handleBlur}
+            label="LinkedIn"
+            placeholder="Paste link to you linkedin profile"
+            value={values.linkedin}
+            onChange={handleChange}
+            name="linkedin"
+            dataTestId="linkedin"
+          />
+        </InputFormError>
         <InputFormError error={touched.bio && errors.bio}>
           <div className={styles.lettersCountParent}>
             <TextArea
