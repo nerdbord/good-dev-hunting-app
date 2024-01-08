@@ -16,7 +16,7 @@ const filterLists = {
 }
 
 const WorkInformation = () => {
-  const { values, errors, setFieldValue } =
+  const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
@@ -59,7 +59,7 @@ const WorkInformation = () => {
       </div>
 
       <div className={styles.right}>
-        <InputFormError error={errors.position}>
+        <InputFormError error={touched.position && errors.position}>
           <DropdownBio
             id="position"
             label="Position"
@@ -69,7 +69,7 @@ const WorkInformation = () => {
             name="position"
           />
         </InputFormError>
-        <InputFormError error={errors.seniority}>
+        <InputFormError error={touched.seniority && errors.seniority}>
           <DropdownBio
             id="seniority"
             label="Seniority"
@@ -79,51 +79,49 @@ const WorkInformation = () => {
             name="seniority"
           />
         </InputFormError>
-        {/* <InputFormError error={errors.techStack}> */}
-        <TechStackInput
-          chips={values.techStack}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          filteredSuggestions={filteredSuggestions}
-          label="Tech stack"
-          placeholder="Start typing"
-          name="techStack"
-          onTechSelect={handleTechSelect}
-          onTechRemove={handleTechRemove}
-          addImportantIcon={true}
-          tooltipText="List the technologies you are comfortable with or interested in."
-        />
-        {/* </InputFormError> */}
+        <InputFormError error={touched.techStack && errors.techStack}>
+          <TechStackInput
+            chips={values.techStack}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            filteredSuggestions={filteredSuggestions}
+            label="Tech stack"
+            placeholder="Start typing"
+            name="techStack"
+            onTechSelect={handleTechSelect}
+            onTechRemove={handleTechRemove}
+            addImportantIcon={true}
+            tooltipText="List the technologies you are comfortable with or interested in."
+          />
+        </InputFormError>
         <div className={styles.addInfo}>
           Start typing and separate technologies with commas.
           <br />
           Choose max. 8
         </div>
         <div className={styles.employmentType}>
-          <InputFormError error={errors.employment}>
-            Employment type
-            <CheckboxInput
-              id="fulltime"
-              label="Full-time"
-              checked={values.employment === EmploymentType.FULL_TIME}
-              onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
-              name="fulltime"
-            />
-            <CheckboxInput
-              id="parttime"
-              label="Part-time"
-              checked={values.employment === EmploymentType.PART_TIME}
-              onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
-              name="parttime"
-            />
-            <CheckboxInput
-              id="contract"
-              label="Contract"
-              checked={values.employment === EmploymentType.CONTRACT}
-              onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
-              name="contract"
-            />
-          </InputFormError>
+          Employment type
+          <CheckboxInput
+            id="fulltime"
+            label="Full-time"
+            checked={values.employment === EmploymentType.FULL_TIME}
+            onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
+            name="fulltime"
+          />
+          <CheckboxInput
+            id="parttime"
+            label="Part-time"
+            checked={values.employment === EmploymentType.PART_TIME}
+            onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
+            name="parttime"
+          />
+          <CheckboxInput
+            id="contract"
+            label="Contract"
+            checked={values.employment === EmploymentType.CONTRACT}
+            onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
+            name="contract"
+          />
         </div>
       </div>
     </div>

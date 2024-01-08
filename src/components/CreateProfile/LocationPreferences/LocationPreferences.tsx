@@ -27,6 +27,7 @@ const LocationPreferences = () => {
           <InputFormError error={touched.country && errors.country}>
             <TextInputWithDropdown
               onChange={handleChange}
+              name="country"
               onBlur={handleBlur}
             />
           </InputFormError>
@@ -57,7 +58,6 @@ const LocationPreferences = () => {
             />
           </InputFormError>
           <CheckboxInput
-            onBlur={handleBlur}
             id="openToRelocationCity"
             label="I’m open to city relocation"
             checked={values.openToRelocationCity}
@@ -66,17 +66,14 @@ const LocationPreferences = () => {
             dataTestId="openToRelocationCity"
           />
         </div>
-        <InputFormError error={touched.remoteOnly && errors.remoteOnly}>
-          <SwitchInput
-            onBlur={handleBlur}
-            id="remoteOnly"
-            checked={values.remoteOnly}
-            label="I’m looking for remote jobs only"
-            onChange={handleChange}
-            name="remoteOnly"
-            dataTestId="remoteOnly"
-          />
-        </InputFormError>
+        <SwitchInput
+          id="remoteOnly"
+          checked={values.remoteOnly}
+          label="I’m looking for remote jobs only"
+          onChange={handleChange}
+          name="remoteOnly"
+          dataTestId="remoteOnly"
+        />
       </div>
     </div>
   )

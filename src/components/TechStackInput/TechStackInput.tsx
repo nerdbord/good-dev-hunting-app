@@ -3,6 +3,10 @@ import styles from './TechStackInput.module.scss'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import Tooltip from '../Tooltip/Tooltip'
+import { useFormikContext } from 'formik'
+import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
+import classNames from 'classnames/bind'
+const cx = classNames.bind(styles)
 
 interface TechStackInputProps {
   chips: string[]
@@ -31,6 +35,8 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   addImportantIcon,
   tooltipText,
 }) => {
+  const { errors, handleBlur, touched } =
+    useFormikContext<CreateProfileFormValues>()
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)
@@ -61,7 +67,8 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
     setIsFocused(true)
   }
 
-  const handleBlur = () => {
+  const handleCustomBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    handleBlur(e)
     setIsFocused(false)
   }
 
@@ -91,6 +98,12 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
     )
   }
 
+  const getTechStackClasses = cx({
+    [styles.container]: true,
+    [styles.active]: isFocused,
+    [styles.error]: touched.techStack && errors.techStack,
+  })
+
   return (
     <div>
       <label className={styles.formLabel}>
@@ -102,7 +115,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
         )}
       </label>
       <div
-        className={`${styles.container} ${isFocused ? styles.active : ''}`}
+        className={getTechStackClasses}
         onClick={focusInput}
         ref={chipsContainerRef}
       >
@@ -126,7 +139,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               onFocus={handleFocus}
-              onBlur={handleBlur}
+              onBlur={handleCustomBlur}
               name={name}
             />
 

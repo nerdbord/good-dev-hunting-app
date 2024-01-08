@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import 'material-icons/iconfont/material-icons.css'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import { useFormikContext } from 'formik'
+import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 
 export const DropdownBio = ({
   label,
@@ -14,7 +15,6 @@ export const DropdownBio = ({
   id,
   dropdownTestId,
   optionTestId,
-  error,
 }: {
   label: string
   name: string
@@ -25,9 +25,9 @@ export const DropdownBio = ({
   dropdownTestId?: string
   optionTestId?: string
   error?: string
-  onBlur?: (event: React.FocusEvent<HTMLDivElement>) => void
 }) => {
-  const { setFieldValue } = useFormikContext()
+  const { setFieldValue } = useFormikContext<CreateProfileFormValues>()
+  const [inputError, setInputError] = useState<boolean>(false)
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
@@ -43,6 +43,7 @@ export const DropdownBio = ({
         setArrow('IoIosArrowDown')
         if (!selectedValue && hasInteracted && !selectedValue) {
           setHasError(true)
+          setInputError(true)
         }
         setHasInteracted(false)
       }
@@ -58,6 +59,7 @@ export const DropdownBio = ({
     setDropdownActive(!isDropdownActive)
     setHasInteracted(true)
     setHasError(false)
+    setInputError(false)
   }
 
   const handleSelection = (option: string) => {
@@ -65,6 +67,7 @@ export const DropdownBio = ({
     setDropdownActive(false)
     setHasInteracted(false)
     setHasError(false)
+    setInputError(false)
   }
 
   return (
@@ -73,7 +76,7 @@ export const DropdownBio = ({
       <div ref={dropdownRef}>
         <button
           onClick={handleDropdown}
-          className={styles.featuresBtn}
+          className={inputError ? styles.errMsg : styles.featuresBtn}
           data-testid={dropdownTestId}
         >
           <div className={styles.buttonText}>{selectedValue || text}</div>
@@ -81,7 +84,9 @@ export const DropdownBio = ({
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
         </button>{' '}
-        {hasError && error && <span className={styles.errorMsg}>{error}</span>}
+        {hasError && (
+          <span className={styles.errMsgText}>Field is require</span>
+        )}
         {isDropdownActive && (
           <div className={styles.dropdown}>
             {options.map((option, index) => (
