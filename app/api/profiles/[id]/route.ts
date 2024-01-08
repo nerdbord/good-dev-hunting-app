@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
 import {
-  updateUserData,
   getProfileById,
+  updateUserData,
 } from '@/backend/profile/profile.service'
-import { authorizeUser } from '@/lib/auth'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { authorizeUser } from '@/lib/auth'
 import { PublishingState } from '@prisma/client'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: Request, profileId: string) {
   try {
@@ -35,17 +35,22 @@ export async function PATCH(request: NextRequest, id: string) {
       employmentType: userDataToUpdate.employmentType,
       techStack: userDataToUpdate.techStack,
       country: {
-        update: {
-          name: userDataToUpdate.country.name,
-          openForRelocation: userDataToUpdate.country.openForRelocation,
+        connectOrCreate: {
+          where: {
+            name: userDataToUpdate.country.name,
+          },
+          create: {
+            name: userDataToUpdate.country.name,
+          },
         },
       },
+      openForCountryRelocation: userDataToUpdate.openForCountryRelocation,
       city: {
         update: {
           name: userDataToUpdate.city.name,
-          openForRelocation: userDataToUpdate.city.openForRelocation,
         },
       },
+      openForCityRelocation: userDataToUpdate.openForCityRelocation,
     })
 
     return NextResponse.json({

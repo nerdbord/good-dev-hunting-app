@@ -1,7 +1,7 @@
-import { serializeProfileToProfileModel } from './profile.serializer'
+import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState } from '@prisma/client'
-import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
@@ -103,17 +103,27 @@ export async function createUserProfile(
       linkedIn: profileData.linkedIn,
       bio: profileData.bio,
       country: {
-        create: {
-          name: profileData.country.name,
-          openForRelocation: profileData.country.openForRelocation,
+        connectOrCreate: {
+          create: {
+            name: profileData.country.name,
+          },
+          where: {
+            name: profileData.country.name,
+          },
         },
       },
+      openForCountryRelocation: profileData.openForCountryRelocation,
       city: {
-        create: {
-          name: profileData.city.name,
-          openForRelocation: profileData.city.openForRelocation,
+        connectOrCreate: {
+          create: {
+            name: profileData.city.name,
+          },
+          where: {
+            name: profileData.city.name,
+          },
         },
       },
+      openForCityRelocation: profileData.openForCityRelocation,
       remoteOnly: profileData.remoteOnly,
       position: profileData.position,
       seniority: profileData.seniority,

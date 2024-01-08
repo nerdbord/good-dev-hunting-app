@@ -1,13 +1,13 @@
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import {
+  doesUserProfileExist,
+  getProfileByUserEmail,
+  updateUserData,
+} from '@/backend/profile/profile.service'
 import { authorizeUser } from '@/lib/auth'
 import { NextRequest, NextResponse } from 'next/server'
-import {
-  updateUserData,
-  doesUserProfileExist,
-} from '@/backend/profile/profile.service'
 
-import { Prisma, PublishingState } from '@prisma/client'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { Prisma, PublishingState } from '@prisma/client'
 
 export async function GET() {
   try {
@@ -29,7 +29,6 @@ export async function PUT(request: NextRequest) {
     const { email } = await authorizeUser()
 
     const foundProfile = await doesUserProfileExist(email)
-
     if (foundProfile) {
       // Convert CreateProfilePayload to Prisma.ProfileUpdateInput
       const updatedData: Prisma.ProfileUpdateInput = {
@@ -37,17 +36,23 @@ export async function PUT(request: NextRequest) {
         linkedIn: updatedDataPayload.linkedIn,
         bio: updatedDataPayload.bio,
         country: {
-          update: {
-            name: updatedDataPayload.country.name,
-            openForRelocation: updatedDataPayload.country.openForRelocation,
+          connectOrCreate: {
+            create: {
+              name: updatedDataPayload.country.name,
+            },
+            where: { name: updatedDataPayload.country.name },
           },
         },
+        openForCountryRelocation: updatedDataPayload.openForCountryRelocation,
         city: {
-          update: {
-            name: updatedDataPayload.city.name,
-            openForRelocation: updatedDataPayload.city.openForRelocation,
+          connectOrCreate: {
+            create: {
+              name: updatedDataPayload.city.name,
+            },
+            where: { name: updatedDataPayload.city.name },
           },
         },
+        openForCityRelocation: updatedDataPayload.openForCityRelocation,
         remoteOnly: updatedDataPayload.remoteOnly,
         position: updatedDataPayload.position,
         seniority: updatedDataPayload.seniority,
