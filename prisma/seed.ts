@@ -1,4 +1,4 @@
-import { PrismaClient, EmploymentType, PublishingState } from '@prisma/client'
+import { EmploymentType, PrismaClient, PublishingState } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -20,15 +20,15 @@ async function main() {
           country: {
             create: {
               name: 'Poland',
-              openForRelocation: true,
             },
           },
+          openForCountryRelocation: true,
           city: {
             create: {
               name: 'Warsaw',
-              openForRelocation: true,
             },
           },
+          openForCityRelocation: true,
         },
       },
     },

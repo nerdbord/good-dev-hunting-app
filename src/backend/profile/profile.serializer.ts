@@ -9,12 +9,12 @@ export const serializeProfileToProfileModel = (
     bio: data.bio,
     city: {
       name: data.city.name,
-      openForRelocation: data.city.openForRelocation,
     },
+    openForCityRelocation: data.openForCityRelocation,
     country: {
       name: data.country.name,
-      openForRelocation: data.country.openForRelocation,
     },
+    openForCountryRelocation: data.openForCountryRelocation,
     employmentType: data.employmentType,
     fullName: data.fullName,
     state: data.state,

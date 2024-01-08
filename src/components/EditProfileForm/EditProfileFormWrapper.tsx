@@ -1,15 +1,15 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
-import { apiClient } from '@/lib/apiClient'
-import { useSession } from 'next-auth/react'
-import { EmploymentType, PublishingState } from '@prisma/client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
+import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { useRouter } from 'next/navigation'
+import { apiClient } from '@/lib/apiClient'
 import { AppRoutes } from '@/utils/routes'
+import { EmploymentType, PublishingState } from '@prisma/client'
+import { Formik } from 'formik'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { PropsWithChildren } from 'react'
+import * as Yup from 'yup'
 
 export interface EditProfileFormValues {
   fullName: string
@@ -17,8 +17,8 @@ export interface EditProfileFormValues {
   bio: string
   country: string
   city: string
-  openToRelocationCountry: boolean
-  openToRelocationCity: boolean
+  openForCountryRelocation: boolean
+  openForCityRelocation: boolean
   remoteOnly: boolean
   position: string
   seniority: string
@@ -72,12 +72,12 @@ const EditProfileFormWrapper = ({
       bio: values.bio,
       country: {
         name: values.country,
-        openForRelocation: values.openToRelocationCountry,
       },
+      openForCountryRelocation: values.openForCountryRelocation,
       city: {
         name: values.city,
-        openForRelocation: values.openToRelocationCity,
       },
+      openForCityRelocation: values.openForCityRelocation,
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
