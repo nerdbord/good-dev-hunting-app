@@ -4,7 +4,7 @@ import styles from './Button.module.scss'
 
 interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  variant: 'primary' | 'secondary' | 'tertiary' | 'action'
+  variant: 'primary' | 'secondary' | 'tertiary' | 'action' | 'logout'
   type?: 'button' | 'submit'
   disabled?: boolean
   loading?: boolean
@@ -30,6 +30,8 @@ export const Button = ({
         return styles.buttonTertiary
       case 'action':
         return styles.buttonAction
+      case 'logout':
+        return styles.buttonLogOut
       default:
         return styles.buttonPrimary
     }
