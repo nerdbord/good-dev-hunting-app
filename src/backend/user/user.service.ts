@@ -1,7 +1,8 @@
+import { httpClient } from '@/lib/httpClient'
 import { prisma } from '@/lib/prismaClient'
+import { Prisma } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
-import { Prisma } from '@prisma/client'
 
 export async function getUsersPayload() {
   const users = await prisma.user.findMany({
@@ -101,6 +102,9 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
     include: {
       githubDetails: true,
     },
+  })
+  await httpClient.post('http://localhost:3000/api/discord', {
+    message: `User ${createdUser.email} has created an account`,
   })
   return createdUser
 }
