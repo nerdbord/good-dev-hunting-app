@@ -56,7 +56,11 @@ export const apiClient = {
         PublishingStateData,
         ProfileModel
       >(`/api/profiles/${profileId}/state`, payload)
-
+      // send discord notification
+      await httpClient.post('/api/discord', {
+        message: `User's profile has got ${payload.state}`,
+        link: `http://localhost:3000/dashboard/profile/${profileId}`,
+      })
       return updatedProfileState
     } catch (error) {
       console.log(error)
