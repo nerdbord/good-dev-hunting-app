@@ -4,6 +4,8 @@
   padding: 25px 8%;
   @include mobile {
     padding-left: $spacing-4;
+    position: sticky;
+    top: 0;
   }
 }
 
@@ -49,7 +51,8 @@
   gap: $spacing-3;
 
   @include mobile {
-    position: fixed;
+    //position: fixed;
+    //display: none;
     bottom: 0;
     left: 0;
     width: 100%;
