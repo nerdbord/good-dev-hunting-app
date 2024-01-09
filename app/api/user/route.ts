@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from 'next/server'
 import {
   createUser,
   doesUserExist,
@@ -6,6 +5,7 @@ import {
 } from '@/backend/user/user.service'
 import { CreateUserPayload } from '@/backend/user/user.types'
 import { authorizeUser } from '@/lib/auth'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
   try {
