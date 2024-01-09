@@ -54,6 +54,8 @@
     border-left: none;
     border-right: none;
     border-bottom: none;
+    overflow-y: auto;
+    max-height: 300px;
   }
 }
 
