@@ -31,7 +31,6 @@ export async function POST(request: NextRequest) {
 
     if (!foundUser) {
       const newUser = await createUser(userData)
-
       return new NextResponse(JSON.stringify(newUser), { status: 201 })
     } else {
       return new NextResponse('Such user already exist', { status: 409 })

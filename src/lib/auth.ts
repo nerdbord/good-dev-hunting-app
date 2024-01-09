@@ -1,12 +1,12 @@
+import { createUser, findUserByEmail } from '@/backend/user/user.service'
+import { Recipient } from 'mailersend'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
-import { createUser, findUserByEmail } from '@/backend/user/user.service'
 import {
   MailSubjectId,
   MailTemplateId,
   mailersendClient,
 } from './mailersendClient'
-import { Recipient } from 'mailersend'
 
 import GithubProvider from 'next-auth/providers/github'
 interface UserAuthed {
@@ -66,7 +66,6 @@ export const authOptions: NextAuthOptions = {
             MailSubjectId.welcomeSubject,
           )
         }
-
         return !!createdUser
       }
 
