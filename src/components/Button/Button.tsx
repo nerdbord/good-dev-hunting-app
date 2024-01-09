@@ -1,5 +1,6 @@
 'use client'
-import React, { PropsWithChildren, useMemo } from 'react'
+import React, { PropsWithChildren } from 'react'
+import classNames from 'classnames/bind'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
@@ -20,29 +21,16 @@ export const Button = ({
   dataTestId,
   type,
 }: PropsWithChildren<ButtonProps>) => {
-  const buttonClassName = useMemo(() => {
-    switch (variant) {
-      case 'primary':
-        return styles.buttonPrimary
-      case 'secondary':
-        return styles.buttonSecondary
-      case 'tertiary':
-        return styles.buttonTertiary
-      case 'action':
-        return styles.buttonAction
-      case 'logout':
-        return styles.buttonLogOut
-      default:
-        return styles.buttonPrimary
-    }
-  }, [variant])
-
-  const disabledClass = disabled || loading ? styles.disabled : ''
+  const cx = classNames.bind(styles)
+  const buttonClasses = cx({
+    [variant]: true,
+    [styles.disabled]: disabled || loading,
+  })
 
   return (
     <button
       data-testid={dataTestId}
-      className={[buttonClassName, disabledClass].join(' ')}
+      className={buttonClasses}
       disabled={disabled || loading}
       onClick={onClick}
       type={type}

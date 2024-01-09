@@ -1,6 +1,6 @@
-.buttonPrimary,
-.buttonSecondary,
-.buttonLogOut {
+.primary,
+.secondary,
+.logout {
   display: flex;
   height: 42px;
   padding: 12px 24px;
@@ -24,28 +24,28 @@
   cursor: not-allowed;
 }
 
-.buttonPrimary {
+.primary {
   height: 44px;
   color: #ffffff;
   background-color: #7d54f1;
   min-width: 120px;
 }
 
-.buttonPrimary:hover {
+.primary:hover {
   background-color: rgba(94, 40, 246, 1);
 }
 
-.buttonSecondary {
+.secondary {
   height: 44px;
   color: #7d54f1;
   background: transparent;
 }
 
-.buttonSecondary:hover {
+.secondary:hover {
   background-color: rgba(23, 27, 33, 1);
 }
 
-.buttonTertiary {
+.tertiary {
   display: none;
   transition: background-color 300ms;
   @include mobile {
@@ -66,7 +66,7 @@
   }
 }
 
-.buttonAction {
+.action {
   display: flex;
   min-width: 129px;
   height: 44px;
@@ -95,7 +95,7 @@
   background-color: initial;
 }
 
-.buttonLogOut {
+.logout {
   height: 44px;
   color: #7d54f1;
   background: transparent;
