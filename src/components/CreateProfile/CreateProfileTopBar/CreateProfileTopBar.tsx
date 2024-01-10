@@ -78,14 +78,6 @@ const CreateProfileTopBar = () => {
         >
           {isMobile ? 'Save and preview' : 'Save and preview profile'}
         </Button>
-        <Button
-          variant="logout"
-          onClick={() => signOut()}
-          dataTestId="saveAndPreviewProfile"
-          type="submit"
-        >
-          {isMobile ? 'Log out' : 'Log out'}
-        </Button>
       </div>
     </div>
   )
