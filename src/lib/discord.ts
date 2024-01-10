@@ -13,9 +13,3 @@ export async function discordNotification(message: string, link?: string) {
     console.log(error)
   }
 }
-
-// send discord notification
-// await discordNotification(
-//   `User's profile has got ${payload.state}`,
-//   `http://localhost:3000/dashboard/profile/${profileId}`,
-// )
