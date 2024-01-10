@@ -11,15 +11,9 @@ import { PutBlobResult } from '@vercel/blob'
 
 export const apiClient = {
   publishMyProfile: async (profileId: string) => {
-    // the function didn't receive ProfileModel, it had received Profile instead (from updateUserData);
     const publishedProfile = await httpClient.post<undefined, Profile>(
       `/api/profiles/${profileId}/publish`,
     )
-    await httpClient.post('/api/discord', {
-      message: `User ${publishedProfile.fullName} has published profile`,
-      link: `http://localhost:3000/dashboard/profile/${publishedProfile.userId}`,
-    })
-
     return publishedProfile
   },
   createMyProfile: async (payload: CreateProfilePayload) => {

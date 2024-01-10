@@ -1,4 +1,5 @@
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { discordNotification } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
@@ -154,7 +155,13 @@ export async function updateUserData(
     },
     data: userDataToUpdate,
   })
-
+  if (userDataToUpdate?.state) {
+    // I have no idea how to get current app url for link
+    discordNotification(
+      `User's ${updatedUser.fullName} profile has got new status: ${userDataToUpdate.state}! Profile`,
+      `http://localhost:3000/dashboard/profile/${updatedUser.userId}`,
+    )
+  }
   return updatedUser
 }
 
