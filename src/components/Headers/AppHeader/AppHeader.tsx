@@ -44,12 +44,12 @@ const AppHeader = async () => {
                   <CreateProfileBtn data-testid="create-profile-button" />
                 </div>
               )}
+              {profile ? (
+                <>
+                  <GithubAcc />
+                </>
+              ) : null}
             </div>
-            {profile ? (
-              <>
-                <GithubAcc />
-              </>
-            ) : null}
           </div>
         </Container>
       </header>

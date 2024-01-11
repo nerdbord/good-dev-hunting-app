@@ -14,7 +14,7 @@ import { signOut } from 'next-auth/react'
 
 const CreateProfileTopBar = () => {
   const pathname = usePathname()
-  const { handleSubmit, errors, touched } = useFormikContext()
+  const { handleSubmit, errors, touched, isValid } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
   const {
     imageUploadError,
@@ -72,6 +72,7 @@ const CreateProfileTopBar = () => {
         <Button
           loading={loading}
           variant="primary"
+          disabled={!isValid}
           onClick={handleButtonClick}
           dataTestId="saveAndPreviewProfile"
           type="submit"
