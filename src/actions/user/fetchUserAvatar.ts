@@ -10,9 +10,7 @@ export const fetchUserAvatar = async () => {
       console.error('Error: Session not found')
       return null
     }
-    console.log('Fetching user avatar...')
     const user = await findUserByEmail(session.user.email)
-    console.log('Fetched user avatar:', user?.avatarUrl)
     return user?.avatarUrl || null
   } catch (error) {
     console.error('Failed to fetch user avatar:', error)

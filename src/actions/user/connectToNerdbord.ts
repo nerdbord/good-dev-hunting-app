@@ -29,7 +29,6 @@ export const connectToNerdbord = async () => {
 
   const user = await findUserByEmail(session.user.email)
 
-  console.log('user: ', user)
   if (!user) {
     console.error('Error: User not found')
     return null

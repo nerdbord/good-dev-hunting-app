@@ -15,8 +15,6 @@ const PersonalInfo = () => {
 
   const { data: session } = useSession()
 
-  console.log('touch', touched)
-
   return (
     <div className={styles.container}>
       <div className={styles.left}>
