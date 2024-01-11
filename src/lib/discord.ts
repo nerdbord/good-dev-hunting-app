@@ -1,15 +1,28 @@
 import { httpClient } from '@/lib/httpClient'
 
-export async function discordNotification(message: string, link?: string) {
+export async function sendDiscordNotificationToWebhook(params: {
+  message: string
+  webhookUrl: string
+}) {
   try {
-    if (message) {
-      console.error('message not provided for discord notification')
-    }
     // sending the message through webhook url
-    await httpClient.post(`${process.env.TEST_WEBHOOK}`, {
-      content: `${message}: ${link ? `: ${link}` : ''}`,
+    await httpClient.post(params.webhookUrl, {
+      content: params.message,
     })
   } catch (error) {
-    console.log(error)
+    console.error('Discord notification error', error)
+  }
+}
+
+export async function sendDiscordNotificationToModeratorChannel(
+  message: string,
+) {
+  if (process.env.MODERATION_WEBHOOK) {
+    sendDiscordNotificationToWebhook({
+      message,
+      webhookUrl: process.env.MODERATION_WEBHOOK,
+    })
+  } else {
+    throw new Error('Env variable MODERATION_WEBHOOK is UNDEFINED!')
   }
 }
