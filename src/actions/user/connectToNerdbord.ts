@@ -28,12 +28,15 @@ export const connectToNerdbord = async () => {
   }
 
   const user = await findUserByEmail(session.user.email)
+
+  console.log('user: ', user)
   if (!user) {
     console.error('Error: User not found')
     return null
   }
 
   const userGitHubDetails = await getGitHubDetails(user?.id)
+
   if (!userGitHubDetails) {
     console.error('Error: User GitHub details not found')
     return null
@@ -50,7 +53,7 @@ export const connectToNerdbord = async () => {
   const data: NerdbordUser = await resp.json()
 
   if (data.user) {
-    await updateUserNerdbordId(user.id, data.user.githubUsername)
+    await updateUserNerdbordId(user.id, data.user.id)
   } else {
     throw new Error(
       'User not found. Make sure your Github account is used on Nerdbord',

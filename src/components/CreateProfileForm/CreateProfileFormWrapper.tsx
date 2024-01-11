@@ -110,6 +110,8 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
+      enableReinitialize
+      validateOnMount
       onSubmit={handleCreateProfile}
     >
       {children}
