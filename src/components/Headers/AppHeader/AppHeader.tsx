@@ -13,7 +13,6 @@ import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import styles from './AppHeader.module.scss'
-import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -39,12 +38,10 @@ const AppHeader = async () => {
               {user?.profile ? (
                 <>
                   <MyProfileBtn />
-                  <LogOutBtn />
                 </>
               ) : (
                 <div className={styles.frameButtons}>
                   <CreateProfileBtn data-testid="create-profile-button" />
-                  <LogOutBtn />
                 </div>
               )}
             </div>
