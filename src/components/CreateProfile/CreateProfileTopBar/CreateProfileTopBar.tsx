@@ -10,6 +10,7 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { apiClient } from '@/lib/apiClient'
 import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
+import { signOut } from 'next-auth/react'
 
 const CreateProfileTopBar = () => {
   const pathname = usePathname()
@@ -76,6 +77,14 @@ const CreateProfileTopBar = () => {
           type="submit"
         >
           {isMobile ? 'Save and preview' : 'Save and preview profile'}
+        </Button>
+        <Button
+          variant="logout"
+          onClick={() => signOut()}
+          dataTestId="saveAndPreviewProfile"
+          type="submit"
+        >
+          {isMobile ? 'Log out' : 'Log out'}
         </Button>
       </div>
     </div>

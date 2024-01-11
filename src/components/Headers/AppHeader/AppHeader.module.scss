@@ -4,6 +4,8 @@
   padding: 25px 8%;
   @include mobile {
     padding-left: $spacing-4;
+    position: sticky;
+    top: 0;
   }
 }
 
