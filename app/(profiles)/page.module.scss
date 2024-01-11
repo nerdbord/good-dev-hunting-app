@@ -1,11 +1,14 @@
-
 .wrapper {
-  font-family: IBM Plex Sans; 
+  font-family: IBM Plex Sans;
   color: #FFFFFF;
   display: flex;
-  flex-direction: column; 
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: flex-start;
+
   @include mobile {
     padding: 0;
+    flex-direction: column; 
   }
 }
 
@@ -21,14 +24,14 @@
   font-weight: 500;
   line-height: 74px;
   letter-spacing: 0em;
-  margin-top: 112px;
+  margin-top: 15%;
 }
 
 .subtitle {
   width: 100%;
   min-height: 60px; 
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 30px;
   letter-spacing: -0.02em;
   margin-top: 27px;
@@ -39,26 +42,60 @@
   flex-direction: row; 
   justify-content: flex-start; 
   align-items: center;
-  margin-top: 0.8%;
+  margin-top: 5%;
   gap: 16px;
 }
 
+.right {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: 40%;
+  height: 100%;
+  margin-top: 6%;
+}
 
-.frame {
-  width: 380px;
-  min-height: 180px;
+@mixin frame-margins($top, $left, $z-index) {
+  margin-top: $top;
+  margin-left: $left;
+  z-index: $z-index;
+}
+
+.frame-common {
+  position: absolute;
+  width: 399px;
+  min-height: 189px;
   background: #0f1217;
   border-radius: 4px;
   border: 1px solid #2a2f35;
   transition: background-color 300ms;
   padding: 26px 0 27.5px 14px;
   cursor: pointer;
-  @include mobile {
-  }
+}
+
+.frame1 {
+  @extend .frame-common;
+  z-index: 1;
+  top: 45px;
+  left: 107px;
+}
+
+.frame2 {
+  @extend .frame-common;
+  z-index: 3;
+  top: 170px; 
+  left: 320px;
+}
+
+.frame3 {
+  @extend .frame-common;
+  z-index: 2;
+  top: 250px; 
+  left: -30px;
 }
 
 
-.frame:hover {
+.frame-common:hover {
   box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
 }
 
@@ -67,7 +104,7 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 16px;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .profile {
