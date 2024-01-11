@@ -1,4 +1,4 @@
-import { discordNotification } from '@/lib/discord'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
@@ -103,7 +103,9 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
       githubDetails: true,
     },
   })
-  await discordNotification(`User ${createdUser.email} has created an account`)
+  await sendDiscordNotificationToModeratorChannel(
+    `User ${createdUser.email} has created an account`,
+  )
   return createdUser
 }
 
