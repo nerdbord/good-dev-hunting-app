@@ -15,6 +15,8 @@ const PersonalInfo = () => {
 
   const { data: session } = useSession()
 
+  console.log('touch', touched)
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -39,8 +41,7 @@ const PersonalInfo = () => {
         <div className={styles.emailContainer}>
           <TextInput
             label="Contact email"
-            placeholder={session?.user?.email || ''}
-            value={values.contactEmail}
+            value={session?.user?.email || ''}
             onChange={handleChange}
             addImportantIcon={true}
             name="contactEmail"
@@ -62,7 +63,7 @@ const PersonalInfo = () => {
             dataTestId="linkedin"
           />
         </InputFormError>
-        <InputFormError error={touched.bio && errors.bio}>
+        <InputFormError error={touched.bio && errors.bio && errors.bio}>
           <div className={styles.lettersCountParent}>
             <TextArea
               onBlur={handleBlur}
