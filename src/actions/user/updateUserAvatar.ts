@@ -13,7 +13,6 @@ export const serverUpdateUserAvatar = async (avatarUrl: string) => {
 
   try {
     const updatedUser = await updateUserAvatar(session.user.email, avatarUrl)
-    console.log('Updated user avatar:', updatedUser.avatarUrl)
     return updatedUser.avatarUrl
   } catch (error) {
     console.error('Failed to update user avatar:', error)
