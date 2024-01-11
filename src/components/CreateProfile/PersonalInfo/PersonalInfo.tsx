@@ -61,7 +61,7 @@ const PersonalInfo = () => {
             dataTestId="linkedin"
           />
         </InputFormError>
-        <InputFormError error={touched.bio && errors.bio && errors.bio}>
+        <InputFormError error={touched.bio && errors.bio}>
           <div className={styles.lettersCountParent}>
             <TextArea
               onBlur={handleBlur}
