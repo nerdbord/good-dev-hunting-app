@@ -1,10 +1,12 @@
+'use client'
 import React from 'react'
 import styles from './page.module.scss'
 import classNames from 'classnames/bind'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
-import { Button } from '@/components/Button/Button'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
+import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import AppHeader from '@/components/Headers/AppHeader/AppHeader'
 
 const Page: React.FC = () => {
   const cx = classNames.bind(styles)
@@ -22,7 +24,7 @@ const Page: React.FC = () => {
         </div>
         <div className={styles.buttons}>
           <CreateProfileBtn />
-          <Button variant={'secondary'}>Find talents</Button>
+          <FindTalentsBtn />
         </div>
       </div>
 

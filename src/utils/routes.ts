@@ -7,4 +7,5 @@ export enum AppRoutes {
   githubOAuth = '/github-oauth',
   dashboard = '/dashboard',
   dashboardProfile = '/dashboard/profile',
+  profiles = '/profiles',
 }
