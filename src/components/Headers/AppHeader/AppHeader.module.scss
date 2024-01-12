@@ -4,6 +4,8 @@
   padding: 25px 8%;
   @include mobile {
     padding-left: $spacing-4;
+    position: sticky;
+    top: 0;
   }
 }
 
@@ -43,8 +45,8 @@
 }
 
 .frameButtons {
-  height: 44px;
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: $spacing-3;
 

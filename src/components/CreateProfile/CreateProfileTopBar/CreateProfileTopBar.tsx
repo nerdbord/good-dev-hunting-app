@@ -10,10 +10,11 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { apiClient } from '@/lib/apiClient'
 import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
+import { signOut } from 'next-auth/react'
 
 const CreateProfileTopBar = () => {
   const pathname = usePathname()
-  const { handleSubmit, errors, touched } = useFormikContext()
+  const { handleSubmit, errors, touched, isValid } = useFormikContext()
   const { runAsync, loading } = useAsyncAction()
   const {
     imageUploadError,
@@ -71,6 +72,7 @@ const CreateProfileTopBar = () => {
         <Button
           loading={loading}
           variant="primary"
+          disabled={!isValid}
           onClick={handleButtonClick}
           dataTestId="saveAndPreviewProfile"
           type="submit"

@@ -8,10 +8,8 @@
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    flex-direction: column;
     gap: 8px;
     align-items: flex-start;
-    justify-content: center;
     margin: 16px;
   }
 }
@@ -25,7 +23,7 @@
   display: flex;
   gap: 11px;
   @include mobile {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
   }
 }

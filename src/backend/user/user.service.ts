@@ -141,7 +141,7 @@ export async function getGitHubDetails(id: string) {
 }
 
 export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
-  return await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: {
       id: userId,
     },
@@ -149,4 +149,6 @@ export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
       nerdbordUserId: nerdbordId,
     },
   })
+
+  return updatedUser
 }
