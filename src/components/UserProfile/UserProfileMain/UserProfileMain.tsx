@@ -1,9 +1,9 @@
-import PolandFlag from '@/assets/images/flagPL.jpg'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
+import { countries } from '@/data/frontend/profile/countries/countries'
 
 type UserProfileProps = {
   userProfile: ProfileModel
@@ -12,6 +12,10 @@ const UserProfileMain = ({
   userProfile,
   children,
 }: PropsWithChildren<UserProfileProps>) => {
+  const countryFlag =
+    countries.find((country) => country.name === userProfile.country.name)
+      ?.flag || ''
+
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
@@ -27,13 +31,7 @@ const UserProfileMain = ({
         </div>
         <div className={styles.locationBox}>
           <div className={styles.country}>
-            <Image
-              src={PolandFlag}
-              alt="Poland Flag"
-              width={20}
-              height={20}
-              className={styles.flag}
-            />
+            <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
             {userProfile.country.name}, {userProfile.city.name}
           </div>
           {userProfile.openForCountryRelocation && (
