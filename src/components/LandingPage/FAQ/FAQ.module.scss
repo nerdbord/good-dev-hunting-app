@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  //copied from appheader for development. must be deleted later
+  padding: 25px 8%;
+  @include mobile {
+    padding-left: $spacing-4;
+    top: 0;
+  }
+  //
+}
+
+.heading {
+  max-width: 315px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  text-align: left;
+
+  span,
+  small {
+    display: block;
+  }
+
+  span {
+    margin-bottom: 12px;
+
+    //styleName: Header 1;
+    font-size: 38px;
+    line-height: 40px;
+
+    @include mobile {
+      font-size: 32px;
+      font-weight: 400;
+    }
+  }
+
+  small {
+    color: #69717b;
+
+    //styleName: Header 5;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
