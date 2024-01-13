@@ -1,24 +1,26 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
+  gap: 40px;
+
   width: 100%;
+  margin: 0 auto;
 
   @include mobile {
     flex-direction: column;
-    gap: 40px;
+    max-width: 375px;
   }
 
   //copied from appheader for development. must be deleted later
   padding: 25px 8%;
   @include mobile {
-    padding-left: $spacing-4;
+    padding-inline: $spacing-4;
     top: 0;
   }
   //
 }
 
 .heading {
-  max-width: 315px;
   font-weight: 500;
   letter-spacing: 0em;
   text-align: left;
@@ -47,5 +49,13 @@
     //styleName: Header 5;
     font-size: 18px;
     line-height: 28px;
+  }
+}
+
+.faq {
+  width: 410px;
+
+  @include mobile {
+    width: auto;
   }
 }
