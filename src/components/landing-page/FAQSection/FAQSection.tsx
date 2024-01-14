@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from './FAQ.module.scss'
-import Accordion from './Accordion/Accordion'
+import styles from './FAQSection.module.scss'
+import Accordion from '../../Accordion/Accordion'
 
-const FAQ = () => {
+const FAQSection = () => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.heading}>
@@ -51,4 +51,4 @@ const FAQ = () => {
   )
 }
 
-export default FAQ
+export default FAQSection
