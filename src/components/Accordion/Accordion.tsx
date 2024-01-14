@@ -2,7 +2,11 @@
 import { ReactNode, useState } from 'react'
 import styles from './Accordion.module.scss'
 import AccordionIcon from './icons/AccordionIcon'
-import { AccordionIconType } from '../enums'
+
+export enum AccordionIconType {
+  Add = 'add',
+  Subtract = 'subtract',
+}
 
 interface AccordionProps {
   title: string

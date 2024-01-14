@@ -1,4 +1,4 @@
-import { AccordionIconType } from '../../enums'
+import { AccordionIconType } from '../Accordion'
 
 interface AccordionIconProps {
   type: AccordionIconType
