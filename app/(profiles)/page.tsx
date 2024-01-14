@@ -6,11 +6,9 @@ import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import AppHeader from '@/components/Headers/AppHeader/AppHeader'
+import { Container } from '@/components/Container/Container'
 
 const Page: React.FC = () => {
-  const cx = classNames.bind(styles)
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
