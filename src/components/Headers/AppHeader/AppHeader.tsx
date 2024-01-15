@@ -37,12 +37,20 @@ const AppHeader = async () => {
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
               {user?.profile ? (
-                <MyProfileBtn />
+                <>
+                  <MyProfileBtn />
+                </>
               ) : (
-                <CreateProfileBtn data-testid="create-profile-button" />
+                <div className={styles.frameButtons}>
+                  <CreateProfileBtn data-testid="create-profile-button" />
+                </div>
               )}
+              {profile ? (
+                <>
+                  <GithubAcc />
+                </>
+              ) : null}
             </div>
-            {profile ? <GithubAcc /> : null}
           </div>
         </Container>
       </header>

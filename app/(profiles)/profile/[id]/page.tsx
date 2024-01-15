@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       title: selectedProfile.fullName,
       description: selectedProfile.bio,
       openGraph: {
-        images: selectedProfile.avatarUrl,
+        images: selectedProfile.avatarUrl || '',
       },
     }
   } catch (error) {

@@ -5,6 +5,7 @@ import { mapEmploymentType } from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
+import { countries } from '@/data/frontend/profile/countries/countries'
 
 const ProfileMain = async ({
   profile,
@@ -15,6 +16,9 @@ const ProfileMain = async ({
 }) => {
   const githubUsername = profile.githubUsername
   const avatarUrl = profile.avatarUrl
+  const countryFlag =
+    countries.find((country) => country.name === profile.country.name)?.flag ||
+    ''
 
   return (
     <>
@@ -71,13 +75,8 @@ const ProfileMain = async ({
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
-              <Image
-                src={PolandFlag}
-                alt="Poland Flag"
-                width={20}
-                height={20}
-                className={styles.flag}
-              />
+              <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
+
               <p>
                 {profile.country.name}, {profile.city.name}
               </p>

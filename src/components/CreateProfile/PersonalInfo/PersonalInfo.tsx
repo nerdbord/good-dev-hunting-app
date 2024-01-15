@@ -39,8 +39,7 @@ const PersonalInfo = () => {
         <div className={styles.emailContainer}>
           <TextInput
             label="Contact email"
-            placeholder={session?.user?.email || ''}
-            value={values.contactEmail}
+            value={session?.user?.email || ''}
             onChange={handleChange}
             addImportantIcon={true}
             name="contactEmail"

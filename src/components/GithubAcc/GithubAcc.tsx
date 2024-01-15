@@ -14,7 +14,6 @@ const GithubAcc = () => {
   return pathname !== AppRoutes.home ? (
     <Link href={AppRoutes.myProfile}>
       <div className={styles.github}>
-        <p className={styles.githubAccConnected}>Connected Github account</p>
         <div className={styles.githubAcc}>
           {session?.user.image && (
             <Image
