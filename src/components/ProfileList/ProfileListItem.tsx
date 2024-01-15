@@ -30,7 +30,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     <>
       <div
         className={styles.frame}
-        onClick={() => router.push(`${AppRoutes.userProfile}/${data.userId}`)}
+        onClick={() => router.push(`${AppRoutes.profiles}/${data.userId}`)}
       >
         <div className={styles.container} data-test-id="profileContainer">
           <div className={styles.profile}>
