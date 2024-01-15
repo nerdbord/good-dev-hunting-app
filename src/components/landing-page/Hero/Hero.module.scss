@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+
+.wrapper {
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 800px;
+  @include mobile {
+    padding: 0;
+    flex-direction: column;
+  }
+}
+
+.title,
+.subtitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  width: 100%;
+  min-height: 148px;
+  font-size: 78px;
+  font-weight: 500;
+  line-height: 74px;
+  letter-spacing: 0em;
+  margin-top: 15%;
+}
+
+.subtitle {
+  width: 100%;
+  min-height: 60px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+  margin-top: 27px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5%;
+  gap: 16px;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: 45%;
+  height: 100%;
+  margin-top: 6%;
+}
+
+@mixin frame-margins($top, $left, $z-index) {
+  margin-top: $top;
+  margin-left: $left;
+  z-index: $z-index;
+}
+
+.frame-common {
+  position: absolute;
+  width: 399px;
+  min-height: 189px;
+  background: #0f1217;
+  border-radius: 4px;
+  border: 1px solid #2a2f35;
+  transition: background-color 300ms;
+  padding: 26px 0 27.5px 14px;
+}
+
+.frame1 {
+  @extend .frame-common;
+  z-index: 1;
+  top: 45px;
+  left: 107px;
+}
+
+.frame2 {
+  @extend .frame-common;
+  z-index: 3;
+  top: 170px;
+  left: 300px;
+}
+
+.frame3 {
+  @extend .frame-common;
+  z-index: 2;
+  top: 250px;
+  left: -10px;
+}
+
+.frame-common:hover {
+  box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 16px;
+  margin-top: 3%;
+}
+
+.profile {
+  width: 78px;
+  height: 78px;
+  justify-content: flex-start;
+}
+
+.data {
+  margin-left: 5%;
+}
+.data p {
+  padding-top: 3px;
+}
+
+.name {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  overflow-wrap: break-word;
+  width: 200px;
+}
+
+.frontend {
+  color: #13cbaa;
+}
+
+.backend {
+  color: #ffb168;
+}
+
+.fullstack {
+  color: #55b5eb;
+}
+
+.location {
+  color: #69717b;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.technology {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.technology span {
+  min-width: 75px;
+  background: #161a1f;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.24px;
+}
