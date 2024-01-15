@@ -10,6 +10,7 @@ import { AppRoutes } from '@/utils/routes'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
+import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
 
 const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
@@ -34,6 +35,7 @@ const CreateProfilePage = async () => {
             <LocationPreferences />
             <WorkInformation />
           </div>
+          <LogOutBtn />
         </div>
       </CreateProfileFormWrapper>
     </UploadProvider>

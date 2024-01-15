@@ -59,7 +59,7 @@ const DropdownCountry = ({
                 onClick={(e) => handleCountryClick(e, country)}
                 onSelect={handleOnSelect}
               >
-                <span>{country.flag}</span>
+                <img src={`https://flagsapi.com/${country.flag}/flat/24.png`} />
                 <span>{renderCountryName(country.name)}</span>
               </li>
             )

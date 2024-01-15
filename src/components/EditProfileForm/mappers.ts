@@ -14,7 +14,7 @@ export const mapProfileModelToEditProfileFormValues = (
   remoteOnly: profile.remoteOnly,
   position: profile.position,
   seniority: profile.seniority,
-  techStack: profile.techStack.join(','),
+  techStack: profile.techStack,
   employment: profile.employmentType,
   githubUsername: profile.githubUsername,
   state: profile.state,

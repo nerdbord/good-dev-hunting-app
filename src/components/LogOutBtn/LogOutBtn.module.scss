@@ -1,9 +1,21 @@
 .logout {
-  padding: 12px 24px;
-  color: #a687ff;
-  background-color: #0f1217;
+  display: flex;
+  height: 44px;
+  color: #7d54f1;
+  background: transparent;
   border: none;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 2px;
   outline: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  transition: background-color 300ms;
+  white-space: nowrap;
   @include mobile {
     margin-bottom: 150px;
   }

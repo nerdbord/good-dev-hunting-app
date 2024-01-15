@@ -23,7 +23,7 @@ export interface EditProfileFormValues {
   position: string
   seniority: string
   employment: EmploymentType
-  techStack: string
+  techStack: string[]
   githubUsername: string | null
   state: PublishingState
 }
@@ -37,7 +37,10 @@ export const validationSchema = Yup.object().shape({
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.string().required('Position is required'),
   seniority: Yup.string().required('Seniority is required'),
-  techStack: Yup.string().required('Tech stack is required'),
+  techStack: Yup.array()
+    .of(Yup.string())
+    .min(1, 'At least one technology is required')
+    .max(8, 'Max 8 technologies'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()
@@ -81,7 +84,7 @@ const EditProfileFormWrapper = ({
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
-      techStack: values.techStack.split(',').map((s) => s.trim()),
+      techStack: values.techStack,
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
@@ -106,8 +109,7 @@ const EditProfileFormWrapper = ({
       enableReinitialize
       validationSchema={validationSchema}
       onSubmit={handleEditProfile}
-      validateOnBlur={false}
-      validateOnChange={false}
+      validateOnMount
     >
       {children}
     </Formik>
