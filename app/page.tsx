@@ -7,6 +7,7 @@ import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { Container } from '@/components/Container/Container'
+import UseYourProfile from '@/components/LandingPage/UseYourProfile/UseYourProfile'
 
 const Page: React.FC = () => {
   return (
@@ -84,6 +85,7 @@ const Page: React.FC = () => {
           </div>
         </div>
       </div>
+      <UseYourProfile />
     </Container>
   )
 }
