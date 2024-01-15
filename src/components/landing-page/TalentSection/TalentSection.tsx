@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './TalentSection.module.scss'
+import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 
 const TalentSection = () => {
   return (
@@ -10,6 +11,7 @@ const TalentSection = () => {
           Explore our growing talents community. Contact as many as you want.
         </small>
       </div>
+      <FindTalentsBtn variant="primary">Find all talents</FindTalentsBtn>
     </section>
   )
 }
