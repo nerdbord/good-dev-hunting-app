@@ -10,14 +10,6 @@
     flex-direction: column;
     max-width: 375px;
   }
-
-  //copied from appheader for development. must be deleted later
-  padding: 25px 8%;
-  @include mobile {
-    padding-inline: $spacing-4;
-    top: 0;
-  }
-  //
 }
 
 .heading {
