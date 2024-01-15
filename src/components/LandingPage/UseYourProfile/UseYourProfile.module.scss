@@ -1,0 +1,50 @@
+$isMobile: 765px;
+
+.container {
+  display: flex;
+  gap: 180px;
+  font-family: var(--font-ibm);
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 70px;
+}
+
+.text {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.btn {
+  width: 180px;
+  height: 44px;
+}
+
+.profileImg {
+  position: relative;
+  width: 353px;
+  height: 457px;
+  z-index: 1;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 497px;
+    height: 293px;
+    background-color: transparent;
+    border: 1px solid #a687ff;
+    z-index: -1;
+  }
+  @media screen and (max-width: $isMobile) {
+    img {
+      width: 294px;
+      height: 381px;
+    }
+  }
+}
