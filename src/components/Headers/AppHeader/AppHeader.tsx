@@ -13,6 +13,7 @@ import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import styles from './AppHeader.module.scss'
+import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -66,6 +67,7 @@ const AppHeader = async () => {
           </Link>
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
+              <FindTalentsBtn />
               <GithubLoginButton />
               <CreateProfileBtn />
             </div>

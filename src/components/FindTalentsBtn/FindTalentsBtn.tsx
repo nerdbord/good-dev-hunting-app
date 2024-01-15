@@ -4,22 +4,22 @@ import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
-const MyProfileBtn = () => {
+const FindTalentsBtn = () => {
   const router = useRouter()
-  const path = usePathname()
+  const pathname = usePathname()
 
-  if (path.includes(AppRoutes.myProfile) || path.includes(AppRoutes.profiles)) {
+  if (pathname === AppRoutes.profiles) {
     return null
   }
 
   return (
     <Button
-      onClick={() => router.push(AppRoutes.myProfile)}
-      variant={'primary'}
+      onClick={() => router.push(AppRoutes.profiles)}
+      variant={'secondary'}
     >
-      My profile
+      Find talents
     </Button>
   )
 }
 
-export default MyProfileBtn
+export default FindTalentsBtn

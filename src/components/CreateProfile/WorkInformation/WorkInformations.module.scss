@@ -1,4 +1,4 @@
-@import '../../../../app/(profiles)/my-profile/create/page.module.scss';
+@import '../../../../app/my-profile/create/page.module.scss';
 
 .container {
   background: #04080d;
@@ -49,7 +49,7 @@
   @include mobile {
     position: static;
     max-width: 100%;
-    gap: 30;
+    gap: 30px;
   }
 }
 
