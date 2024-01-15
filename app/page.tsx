@@ -8,6 +8,7 @@ import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { Container } from '@/components/Container/Container'
 import FAQSection from '@/components/landing-page/FAQSection/FAQSection'
+import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 
 const Page: React.FC = () => {
   return (
@@ -86,6 +87,7 @@ const Page: React.FC = () => {
         </div>
       </div>
 
+      <TalentSection />
       <FAQSection />
     </Container>
   )
