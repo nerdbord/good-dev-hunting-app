@@ -9,7 +9,7 @@ import AppHeader from '@/components/Headers/AppHeader/AppHeader'
 const Page: React.FC = () => {
   return (
     <Container>
-      <Hero />
+      {/*    <Hero /> */}
       <HowItWorks />
     </Container>
   )
