@@ -25,7 +25,7 @@ const Page: React.FC = () => {
           </div>
           <div className={styles.buttons}>
             <CreateProfileBtn />
-            <FindTalentsBtn />
+            <FindTalentsBtn variant="secondary">Find talents</FindTalentsBtn>
           </div>
         </div>
 
