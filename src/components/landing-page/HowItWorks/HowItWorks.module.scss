@@ -35,14 +35,9 @@
   font-style: normal;
   font-weight: 500;
   line-height: 40px;
-}
-
-.traits {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  gap: 33px;
-  margin-top: 100px;
+  @include mobile {
+    font-size: 32px;
+  }
 }
 
 .steps {
@@ -55,5 +50,26 @@
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
     width: 100%;
+  }
+}
+
+.traits {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  gap: 33px;
+  margin-top: 100px;
+  overflow-x: auto;
+}
+
+@include mobile {
+  .traitsBox {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .traits > *:last-child {
+    margin-right: 0;
   }
 }
