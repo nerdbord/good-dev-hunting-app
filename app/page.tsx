@@ -7,7 +7,7 @@ import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { Container } from '@/components/Container/Container'
-import UseYourProfile from '@/components/LandingPage/UseYourProfile/UseYourProfile'
+import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProfile'
 
 const Page: React.FC = () => {
   return (
