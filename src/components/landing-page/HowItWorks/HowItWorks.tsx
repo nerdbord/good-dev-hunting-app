@@ -26,27 +26,30 @@ const HowItWorks = () => {
           description2="Update your availability regularly."
         />
       </div>
-      <div className={styles.traits}>
-        <TraitTemplate
-          icon={<GlobeIcon />}
-          title="Open source"
-          description="All of the programs are focused on teaching problem-solving skills and processes."
-        />
-        <TraitTemplate
-          icon={<DollarIcon />}
-          title="Completely free"
-          description="Each program has an assigned mentor who guides mentees and provides feedback on their work."
-        />
-        <TraitTemplate
-          icon={<GithubIcon />}
-          title="Connected to Github"
-          description="Invest as much time as you wish. The amount of work that you put into the program is completely up to you. "
-        />
-        <TraitTemplate
-          icon={<ConnectIcon />}
-          title="Use as portfolio"
-          description="Receive more in-depth and detailed evaluation of your work, as mentors review and provide feedback to your tasks."
-        />
+
+      <div className={styles.traitsBox}>
+        <div className={styles.traits}>
+          <TraitTemplate
+            icon={<GlobeIcon />}
+            title="Open source"
+            description="All of the programs are focused on teaching problem-solving skills and processes."
+          />
+          <TraitTemplate
+            icon={<DollarIcon />}
+            title="Completely free"
+            description="Each program has an assigned mentor who guides mentees and provides feedback on their work."
+          />
+          <TraitTemplate
+            icon={<GithubIcon />}
+            title="Connected to Github"
+            description="Invest as much time as you wish. The amount of work that you put into the program is completely up to you. "
+          />
+          <TraitTemplate
+            icon={<ConnectIcon />}
+            title="Use as portfolio"
+            description="Receive more in-depth and detailed evaluation of your work, as mentors review and provide feedback to your tasks."
+          />
+        </div>
       </div>
     </section>
   )

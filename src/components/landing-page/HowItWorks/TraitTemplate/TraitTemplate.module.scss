@@ -8,6 +8,9 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 24px;
+  @include mobile {
+    width: 286px;
+  }
 }
 
 .icon {
@@ -26,7 +29,6 @@
 
 .descr {
   font-family: IBM Plex Sans;
-  align-self: stretch;
   color: #89939e;
   font-size: 14px;
   font-style: normal;
