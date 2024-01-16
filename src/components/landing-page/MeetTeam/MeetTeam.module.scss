@@ -25,6 +25,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: 40px;
+  @include mobile {
+    font-size: 32px;
+    font-weight: 400;
+  }
 }
 
 .subtitle {
