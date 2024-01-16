@@ -85,7 +85,6 @@ const Page: React.FC = () => {
           </div>
         </div>
       </div>
-      <UseYourProfile />
     </Container>
   )
 }
