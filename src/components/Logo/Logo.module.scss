@@ -1,0 +1,21 @@
+.logo {
+  width: 187px;
+  height: 26px;
+  display: flex;
+  gap: 8px;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  color: #ffffff;
+  letter-spacing: -0.06em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include mobile {
+    letter-spacing: -1.08px;
+  }
+}
