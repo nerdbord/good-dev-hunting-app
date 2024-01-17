@@ -1,4 +1,5 @@
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
@@ -154,7 +155,11 @@ export async function updateUserData(
     },
     data: userDataToUpdate,
   })
-
+  if (userDataToUpdate?.state) {
+    sendDiscordNotificationToModeratorChannel(
+      `User's ${updatedUser.fullName} profile has got new status: ${userDataToUpdate.state}! Profile: ${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/dashboard/profile/${updatedUser.userId}`,
+    )
+  }
   return updatedUser
 }
 
