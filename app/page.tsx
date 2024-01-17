@@ -6,13 +6,15 @@ import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { Container } from '@/components/Container/Container'
-import LandingFooter from '@/components/landing-page/LandingFooter/LandingFooter'
+
+import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
 
 const Page: React.FC = () => {
   return (
-    <>
-      <LandingFooter />
-    </>
+    <Container>
+      <MeetTeam />
+    </Container>
+
   )
 }
 export default Page
