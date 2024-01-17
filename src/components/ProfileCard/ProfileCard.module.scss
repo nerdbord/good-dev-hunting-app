@@ -1,0 +1,96 @@
+.frame {
+  width: 380px;
+  min-height: 180px;
+  height: 100%;
+  background: #0f1217;
+  border-radius: 4px;
+  border: 1px solid #2a2f35;
+  transition: background-color 300ms;
+  padding: 26px 0 27.5px 14px;
+  cursor: pointer;
+  @include mobile {
+  }
+}
+
+.frame:hover {
+  box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 16px;
+  margin-top: 5%;
+}
+
+.profile {
+  width: 78px;
+  height: 78px;
+  justify-content: flex-start;
+}
+
+.avatar {
+  border-radius: 78px;
+  flex-shrink: 0;
+  box-shadow: 0px 4px 50px 0px rgba(125, 84, 241, 0.2);
+}
+
+.data {
+  margin-left: 5%;
+}
+.data p {
+  padding-top: 3px;
+}
+
+.name {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  overflow-wrap: break-word;
+  width: 200px;
+}
+
+.frontend {
+  color: #13cbaa;
+}
+
+.backend {
+  color: #ffb168;
+}
+
+.fullstack {
+  color: #55b5eb;
+}
+
+.location {
+  color: #69717b;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.technology {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.technology span {
+  min-width: 75px;
+  background: #161a1f;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.24px;
+}
