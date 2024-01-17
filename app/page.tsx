@@ -4,12 +4,16 @@ import { Container } from '@/components/Container/Container'
 import Hero from '@/components/landing-page/Hero/Hero'
 import HowItWorks from '@/components/landing-page/HowItWorks/HowItWorks'
 
+import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
+
 const Page: React.FC = () => {
   return (
     <Container>
-      {/*    <Hero /> */}
-      <HowItWorks />
+
+      <MeetTeam />
+
     </Container>
+
   )
 }
 export default Page
