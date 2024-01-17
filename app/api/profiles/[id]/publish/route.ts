@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
 import {
   getProfileById,
   updateUserData,
 } from '@/backend/profile/profile.service'
 import { authorizeUser } from '@/lib/auth'
 import { PublishingState } from '@prisma/client'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(
   request: NextRequest,
@@ -25,7 +25,6 @@ export async function POST(
     })
 
     const serializedProfile = JSON.stringify(updateUserProfileById)
-
     return new NextResponse(serializedProfile, {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
