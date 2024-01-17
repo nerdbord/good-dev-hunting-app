@@ -4,12 +4,13 @@ $isMobile: 765px;
   display: flex;
   gap: 180px;
   font-family: var(--font-ibm);
-
+  margin-top: 140px;
   @media screen and (max-width: $isMobile) {
     flex-direction: column;
     align-items: center;
     gap: 30px;
     padding: 0 16px;
+    margin-top: 80px;
   }
 }
 

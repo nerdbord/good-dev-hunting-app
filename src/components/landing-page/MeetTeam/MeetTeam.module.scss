@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  margin-top: 140px;
+  @include mobile {
+    margin-top: 120px;
+  }
 }
 
 .titleBox {
@@ -47,11 +51,12 @@
 
 .cardsBox {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(287px, 1fr));
+  grid-template-columns: repeat(4, minmax(287px, 1fr));
   gap: 30px;
   width: 100%;
   align-items: flex-start;
-  @include mobile {
-    grid-template-columns: repeat(4, minmax(287px, 1fr));
-  }
+}
+
+.cardsBox > div:last-child {
+  margin-right: 0; /* Remove right margin for the last item */
 }

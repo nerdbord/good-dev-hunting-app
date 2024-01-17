@@ -4,7 +4,7 @@ import VerticalCard from '@/components/VerticalCard/VerticalCard'
 
 const MeetTeam = () => {
   return (
-    <section className={styles.wrapper}>
+    <section id="MeetTeam" className={styles.wrapper}>
       <div className={styles.titleBox}>
         <p className={styles.sectionName}>WORKING AS A TEAM</p>
         <h2 className={styles.title}>Meet our team</h2>
