@@ -1,0 +1,76 @@
+$isMobile: 765px;
+
+.container {
+  display: flex;
+  gap: 180px;
+  font-family: var(--font-ibm);
+
+  @media screen and (max-width: $isMobile) {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 0 16px;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 70px;
+  @media screen and (max-width: $isMobile) {
+    gap: 24px;
+    padding-top: 0;
+  }
+}
+
+.text {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+  @media screen and (max-width: $isMobile) {
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+}
+
+.btn {
+  width: 180px;
+  height: 44px;
+}
+
+.profileImg {
+  position: relative;
+  width: 353px;
+  height: 457px;
+  z-index: 1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 497px;
+    height: 293px;
+    background-color: transparent;
+    border: 1px solid #a687ff;
+    border-radius: 2px;
+    z-index: -1;
+
+    @media screen and (max-width: $isMobile) {
+      width: 346px;
+      height: 285px;
+    }
+  }
+
+  @media screen and (max-width: $isMobile) {
+    width: 294px;
+    height: 381px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
