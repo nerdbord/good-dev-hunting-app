@@ -4,7 +4,7 @@ import Accordion from '../../Accordion/Accordion'
 
 const FAQSection = () => {
   return (
-    <section className={styles.wrapper}>
+    <section id="FAQ" className={styles.wrapper}>
       <div className={styles.heading}>
         <span>FAQ</span>
         <small>Let us know if&nbsp;you&nbsp;have any&nbsp;questions.</small>

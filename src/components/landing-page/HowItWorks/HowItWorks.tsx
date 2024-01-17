@@ -9,7 +9,7 @@ import Step from './Step/Step'
 
 const HowItWorks = () => {
   return (
-    <section className={styles.wrapper}>
+    <section id="HowItWorks" className={styles.wrapper}>
       <div className={styles.titleBox}>
         <span className={styles.sectionName}>How it works</span>
         <span className={styles.title}>Reverted recruitment process</span>

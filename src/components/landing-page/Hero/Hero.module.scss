@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  min-height: 800px;
+
   @include mobile {
     padding: 0;
     flex-direction: column;

@@ -2,22 +2,24 @@
   display: flex;
   justify-content: space-between;
   gap: 40px;
-
   width: 100%;
-  margin: 0 auto;
-
+  margin-top: 130px;
+  padding-bottom: 140px;
+  padding-right: 85px;
   @include mobile {
     flex-direction: column;
-    max-width: 375px;
+    margin-top: 80px;
+    padding-bottom: 80px;
+    padding-right: 0;
   }
 
-  //copied from appheader for development. must be deleted later
+  /*   //copied from appheader for development. must be deleted later
   padding: 25px 8%;
   @include mobile {
     padding-inline: $spacing-4;
     top: 0;
   }
-  //
+  // */
 }
 
 .heading {

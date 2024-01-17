@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 .footer {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
   padding-top: 54px;
   padding-bottom: 67px;
   background-color: #0f1217;
   @include mobile {
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 50px;
     gap: 26px;
   }
+}
+
+.wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
 .topBar,
@@ -27,6 +30,7 @@
 }
 
 .bottomBar {
+  margin-top: 60px;
   @include mobile {
     flex-direction: column-reverse;
   }

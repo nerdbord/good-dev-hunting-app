@@ -5,11 +5,10 @@ import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import { Container } from '@/components/Container/Container'
 
 const Hero = () => {
   return (
-    <div className={styles.wrapper}>
+    <section id="hero" className={styles.wrapper}>
       <div className={styles.left}>
         <div className={styles.title}>
           <span>Let your next</span>
@@ -26,7 +25,7 @@ const Hero = () => {
       </div>
 
       <div className={styles.right}>
-        <div className={styles.frame1}>
+        {/*        <div className={styles.frame1}>
           <div className={styles.container}>
             <div className={styles.profile}>
               <Image src={ProfilePicture} alt="Profile Picture" />
@@ -79,9 +78,9 @@ const Hero = () => {
             <span>Vue.js</span>
             <span>+5 more</span>
           </div>
-        </div>
+        </div> */}
       </div>
-    </div>
+    </section>
   )
 }
 export default Hero
