@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './LandingFooter.module.scss'
-import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
 
 const LandingFooter = () => {
   return (
-    <Container>
-      <div className={styles.footer}>
+    <section id="LandingFooter" className={styles.footer}>
+      <div className={styles.wrapper}>
         <div className={styles.topBar}>
           <Logo />
           <div className={styles.contact}>
@@ -25,7 +24,7 @@ const LandingFooter = () => {
           </div>
         </div>
       </div>
-    </Container>
+    </section>
   )
 }
 

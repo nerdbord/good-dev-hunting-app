@@ -5,7 +5,7 @@ import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 
 const UseYourProfile = () => {
   return (
-    <section className={style.container}>
+    <section id="UseYourProfile" className={style.container}>
       <div className={style.profileImg}>
         <Image src={UseYourProfileImg} alt="Use your profile image" />
       </div>
