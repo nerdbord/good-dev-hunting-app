@@ -1,0 +1,52 @@
+.wrapper {
+  height: min-content;
+  background: black;
+  padding: 25px 8%;
+  @include mobile {
+    padding-left: $spacing-4;
+    position: sticky;
+    top: 0;
+  }
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+  }
+}
+
+.frameButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-3;
+
+  @include mobile {
+    display: none;
+    /*     position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    padding: $spacing-4 12%;
+    background: black;
+    z-index: 10; */
+  }
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+}
