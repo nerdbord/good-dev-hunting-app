@@ -1,3 +1,5 @@
+'use client'
+import logo from '@/assets/images/logo.png'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { Container } from '@/components/Container/Container'
@@ -7,33 +9,23 @@ import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginBut
 import ModerationBtn from '@/components/ModerationBtn/ModerationBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 import { authOptions } from '@/lib/auth'
+import { AppRoutes } from '@/utils/routes'
 import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
+import Link from 'next/link'
 import styles from './LandingHeader.module.scss'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import Logo from '@/components/Logo/Logo'
 
-const fetchData = async () => {
-  const session = await getServerSession(authOptions)
-
-  if (session?.user) {
-    const userProfile = await getProfileByUserEmail(session.user.email)
-    const foundUser = await findUserByEmail(session.user.email)
-    const isModerator = foundUser?.roles.includes(Role.MODERATOR)
-
-    return {
-      session,
-      userIsModerator: isModerator,
-      profile: userProfile,
-      user: foundUser,
-    }
-  }
-
-  return { session }
-}
-
 const LandingHeader = () => {
-  /*  const { session, userIsModerator, profile, user } = await fetchData()
+  /*  const session = await getServerSession(authOptions)
+
+  const profile = session?.user
+    ? await getProfileByUserEmail(session.user.email)
+    : null
+
+  const user = session ? await findUserByEmail(session.user.email) : null
+  const userIsModerator = user?.roles.includes(Role.MODERATOR)
 
   if (session) {
     return (
@@ -62,8 +54,8 @@ const LandingHeader = () => {
         </Container>
       </header>
     )
-  }
- */
+  } */
+
   return (
     <header className={styles.wrapper}>
       <Container>
@@ -74,9 +66,6 @@ const LandingHeader = () => {
               <FindTalentsBtn />
               <GithubLoginButton />
               <CreateProfileBtn />
-            </div>
-            <div className={styles.buttonBoxMobile}>
-              <GithubLoginButton />
             </div>
           </div>
         </div>
