@@ -20,7 +20,7 @@
 }
 
 .title {
-  font-family: IBM Plex Sans;
+  font-family: var(--font-ibm);
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -28,7 +28,7 @@
 }
 
 .descr {
-  font-family: IBM Plex Sans;
+  font-family: var(--font-ibm);
   color: #89939e;
   font-size: 14px;
   font-style: normal;
