@@ -12,6 +12,7 @@ import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader
 const Page: React.FC = () => {
   return (
     <>
+      {/* @ts-expect-error Server Component */}
       <LandingHeader />
       <main className={styles.landing_background}>
         <LandingContainer>

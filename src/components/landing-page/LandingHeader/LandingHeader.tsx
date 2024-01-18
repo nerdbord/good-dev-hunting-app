@@ -1,4 +1,3 @@
-'use client'
 import logo from '@/assets/images/logo.png'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { findUserByEmail } from '@/backend/user/user.service'
@@ -16,13 +15,20 @@ import Link from 'next/link'
 import styles from './LandingHeader.module.scss'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import Logo from '@/components/Logo/Logo'
+import { redirect } from 'next/navigation'
 
-const LandingHeader = () => {
-  /*  const session = await getServerSession(authOptions)
+const LandingHeader = async () => {
+  const session = await getServerSession(authOptions)
 
-  const profile = session?.user
-    ? await getProfileByUserEmail(session.user.email)
-    : null
+  if (!session?.user) {
+    redirect(AppRoutes.home)
+  }
+
+  const profile = await getProfileByUserEmail(session.user.email)
+
+  if (profile) {
+    redirect(AppRoutes.myProfile)
+  }
 
   const user = session ? await findUserByEmail(session.user.email) : null
   const userIsModerator = user?.roles.includes(Role.MODERATOR)
@@ -54,7 +60,7 @@ const LandingHeader = () => {
         </Container>
       </header>
     )
-  } */
+  }
 
   return (
     <header className={styles.wrapper}>
