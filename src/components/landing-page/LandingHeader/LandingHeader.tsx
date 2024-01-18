@@ -13,16 +13,27 @@ import styles from './LandingHeader.module.scss'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import Logo from '@/components/Logo/Logo'
 
-const LandingHeader = () => {
-  /* const LandingHeader = async () => {
+const fetchData = async () => {
   const session = await getServerSession(authOptions)
 
-  const profile = session?.user
-    ? await getProfileByUserEmail(session.user.email)
-    : null
+  if (session?.user) {
+    const userProfile = await getProfileByUserEmail(session.user.email)
+    const foundUser = await findUserByEmail(session.user.email)
+    const isModerator = foundUser?.roles.includes(Role.MODERATOR)
 
-  const user = session ? await findUserByEmail(session.user.email) : null
-  const userIsModerator = user?.roles.includes(Role.MODERATOR)
+    return {
+      session,
+      userIsModerator: isModerator,
+      profile: userProfile,
+      user: foundUser,
+    }
+  }
+
+  return { session }
+}
+
+const LandingHeader = () => {
+  /*  const { session, userIsModerator, profile, user } = await fetchData()
 
   if (session) {
     return (
