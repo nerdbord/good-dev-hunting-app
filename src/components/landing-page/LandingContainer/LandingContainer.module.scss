@@ -2,8 +2,9 @@
   max-width: 1240px; //figma width
   margin: 0 auto;
   height: 100%;
+  padding: 0 20px;
   @include mobile {
     padding: 0 16px;
-    min-width: 420px;
+    width: 100%;
   }
 }

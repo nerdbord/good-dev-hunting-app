@@ -5,6 +5,7 @@ import AuthProvider from '@/components/AuthProvider/AuthProvider'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import { ModalProvider } from '@/contexts/ModalContext'
 import combineClasses from '@/utils/combineClasses'
+import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
