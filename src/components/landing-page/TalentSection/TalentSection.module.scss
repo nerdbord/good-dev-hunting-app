@@ -42,3 +42,16 @@
     line-height: 28px;
   }
 }
+
+.talents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 21px;
+
+  @include mobile {
+    row-gap: 8px;
+  }
+}
