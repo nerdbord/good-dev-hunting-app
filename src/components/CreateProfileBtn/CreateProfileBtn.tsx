@@ -10,7 +10,7 @@ const CreateProfileBtn = () => {
   const router = useRouter()
   const path = usePathname()
   const { data: session } = useSession()
-
+  console.log(session)
   if (path.includes(AppRoutes.myProfile)) {
     return null
   }
@@ -25,14 +25,26 @@ const CreateProfileBtn = () => {
     router.push(AppRoutes.createProfile)
   }
 
+  if (!session) {
+    return (
+      <Button
+        onClick={onClickHandler}
+        variant={'primary'}
+        dataTestId="createProfileButton"
+      >
+        Create profile
+        <AddIcon />
+      </Button>
+    )
+  }
+
   return (
     <Button
       onClick={onClickHandler}
       variant={'primary'}
       dataTestId="createProfileButton"
     >
-      Create profile
-      <AddIcon />
+      My profile
     </Button>
   )
 }
