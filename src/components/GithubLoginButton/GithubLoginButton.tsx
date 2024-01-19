@@ -4,6 +4,7 @@ import { signIn } from 'next-auth/react'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import React from 'react'
 import { AppRoutes } from '@/utils/routes'
+import styles from './GithubLoginButton.module.scss'
 
 export const GithubLoginButton = () => {
   return (
@@ -16,7 +17,9 @@ export const GithubLoginButton = () => {
       variant={'secondary'}
     >
       Login
-      <GithubIcon />
+      <div className={styles.iconBox}>
+        <GithubIcon />
+      </div>
     </Button>
   )
 }

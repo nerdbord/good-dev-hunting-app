@@ -6,14 +6,14 @@ import {
   RejectionReason,
 } from '@/data/frontend/profile/types'
 import { httpClient } from '@/lib/httpClient'
+import { Profile } from '@prisma/client'
 import { PutBlobResult } from '@vercel/blob'
 
 export const apiClient = {
   publishMyProfile: async (profileId: string) => {
-    const publishedProfile = await httpClient.post<undefined, ProfileModel>(
+    const publishedProfile = await httpClient.post<undefined, Profile>(
       `/api/profiles/${profileId}/publish`,
     )
-
     return publishedProfile
   },
   createMyProfile: async (payload: CreateProfilePayload) => {

@@ -1,0 +1,38 @@
+.stepBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding-top: 55px;
+  padding-bottom: 65px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #3d434b;
+  background: #0f1217;
+}
+.title {
+  color: #a687ff;
+  font-family: var(--font-ibm);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  @include mobile {
+    font-size: 12px;
+  }
+}
+.descr {
+  color: #e2eaf1;
+  text-align: center;
+  font-family: var(--font-ibm);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  @include mobile {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
