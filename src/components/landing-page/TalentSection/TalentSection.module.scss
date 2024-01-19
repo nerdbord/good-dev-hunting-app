@@ -4,8 +4,10 @@
   justify-content: space-between;
   align-items: center;
   gap: 40px;
+  margin-top: 130px;
 
   @include mobile {
+    margin-top: 80px;
     max-width: 375px;
     margin-inline: auto;
   }
