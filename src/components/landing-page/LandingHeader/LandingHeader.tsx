@@ -18,16 +18,9 @@ import { redirect } from 'next/navigation'
 const LandingHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  if (!session?.user) {
-    redirect(AppRoutes.home)
-  }
-
-  const profile = await getProfileByUserEmail(session.user.email)
-
-  if (profile) {
-    redirect(AppRoutes.myProfile)
-  }
-
+  const profile = session
+    ? await getProfileByUserEmail(session.user.email)
+    : null
   const user = session ? await findUserByEmail(session.user.email) : null
   const userIsModerator = user?.roles.includes(Role.MODERATOR)
 
