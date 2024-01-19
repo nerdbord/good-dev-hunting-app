@@ -1,13 +1,14 @@
 import React from 'react'
+import styles from './page.module.scss'
 import { LandingContainer } from '@/components/landing-page/LandingContainer/LandingContainer'
+import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader'
 import Hero from '@/components/landing-page/Hero/Hero'
 import HowItWorks from '@/components/landing-page/HowItWorks/HowItWorks'
 import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProfile'
 import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
+import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 import FAQSection from '@/components/landing-page/FAQSection/FAQSection'
 import LandingFooter from '@/components/landing-page/LandingFooter/LandingFooter'
-import styles from './page.module.scss'
-import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader'
 
 const Page: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const Page: React.FC = () => {
           <HowItWorks />
           <UseYourProfile />
           <MeetTeam />
+          <TalentSection />
           <FAQSection />
         </LandingContainer>
       </main>

@@ -1,23 +1,22 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   gap: 40px;
-  width: 100%;
   margin-top: 130px;
-  padding-bottom: 140px;
-  padding-right: 85px;
+
   @include mobile {
-    flex-direction: column;
     margin-top: 80px;
-    padding-bottom: 80px;
-    padding-right: 0;
+    max-width: 375px;
+    margin-inline: auto;
   }
 }
 
 .heading {
   font-weight: 500;
   letter-spacing: 0em;
-  text-align: left;
+  text-align: center;
 
   span,
   small {
@@ -46,10 +45,15 @@
   }
 }
 
-.faq {
-  width: 410px;
+.talents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 21px;
 
   @include mobile {
-    width: auto;
+    row-gap: 8px;
   }
 }

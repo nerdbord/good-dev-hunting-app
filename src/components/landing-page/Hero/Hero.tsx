@@ -20,7 +20,7 @@ const Hero = () => {
         </div>
         <div className={styles.buttons}>
           <CreateProfileBtn />
-          <FindTalentsBtn />
+          <FindTalentsBtn variant={'secondary'}>Find talents</FindTalentsBtn>
         </div>
       </div>
 
