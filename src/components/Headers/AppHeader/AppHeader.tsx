@@ -67,7 +67,7 @@ const AppHeader = async () => {
           </Link>
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
-              <FindTalentsBtn />
+              <FindTalentsBtn variant="secondary">Find talents</FindTalentsBtn>
               <GithubLoginButton />
               <CreateProfileBtn />
             </div>
