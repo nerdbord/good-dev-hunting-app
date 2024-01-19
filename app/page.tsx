@@ -5,6 +5,7 @@ import TalentSection from '@/components/landing-page/TalentSection/TalentSection
 const Page: React.FC = () => {
   return (
     <Container>
+      {/* @ts-expect-error Server Component */}
       <TalentSection />
     </Container>
   )
