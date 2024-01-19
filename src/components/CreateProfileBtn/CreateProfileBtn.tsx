@@ -10,7 +10,7 @@ const CreateProfileBtn = () => {
   const router = useRouter()
   const path = usePathname()
   const { data: session } = useSession()
-  console.log(session)
+
   if (path.includes(AppRoutes.myProfile)) {
     return null
   }
