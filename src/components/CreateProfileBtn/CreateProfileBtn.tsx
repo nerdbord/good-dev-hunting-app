@@ -25,14 +25,26 @@ const CreateProfileBtn = () => {
     router.push(AppRoutes.createProfile)
   }
 
+  if (!session) {
+    return (
+      <Button
+        onClick={onClickHandler}
+        variant={'primary'}
+        dataTestId="createProfileButton"
+      >
+        Create profile
+        <AddIcon />
+      </Button>
+    )
+  }
+
   return (
     <Button
       onClick={onClickHandler}
       variant={'primary'}
       dataTestId="createProfileButton"
     >
-      Create profile
-      <AddIcon />
+      My profile
     </Button>
   )
 }

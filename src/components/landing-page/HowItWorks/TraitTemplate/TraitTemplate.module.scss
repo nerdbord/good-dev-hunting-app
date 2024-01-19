@@ -1,0 +1,37 @@
+.wrapper {
+  min-height: 208px;
+  padding-left: 20px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  border-left: 1px solid #a687ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 24px;
+  @include mobile {
+    width: 286px;
+  }
+}
+
+.icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-ibm);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.descr {
+  font-family: var(--font-ibm);
+  color: #89939e;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
