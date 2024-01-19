@@ -5,9 +5,20 @@ import ProfileCard from '@/components/ProfileCard/ProfileCard'
 import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
 import Link from 'next/link'
 import { AppRoutes } from '@/utils/routes'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 const TalentSection = async () => {
   const profiles = await getPublishedProfilesPayload()
+
+  let randomProfiles: ProfileModel[] = []
+  if (profiles.length >= 6) {
+    const randomIndices = new Set<number>()
+    while (randomIndices.size < 6) {
+      const randomIndex = Math.floor(Math.random() * profiles.length)
+      randomIndices.add(randomIndex)
+    }
+    randomProfiles = Array.from(randomIndices).map((index) => profiles[index])
+  }
 
   return (
     <section className={styles.wrapper}>
@@ -18,7 +29,7 @@ const TalentSection = async () => {
         </small>
       </div>
       <div className={styles.talents}>
-        {profiles.map((cardData) => (
+        {randomProfiles.map((cardData) => (
           <Link
             href={`${AppRoutes.profiles}/${cardData.userId}`}
             key={cardData.id}
