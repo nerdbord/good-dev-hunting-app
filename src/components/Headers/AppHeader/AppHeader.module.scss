@@ -2,6 +2,7 @@
   height: min-content;
   background: #04080d;
   padding: 25px 8%;
+  width: 100%;
   @include mobile {
     padding-left: $spacing-4;
     position: sticky;
