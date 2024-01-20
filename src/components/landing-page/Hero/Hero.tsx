@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './Hero.module.scss'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
+import ProfilePicture1 from '@/assets/images/ProfilePicture1.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 
@@ -15,8 +16,10 @@ const Hero = () => {
           <span>employer find you</span>
         </div>
         <div className={styles.subtitle}>
-          <p>Open sourced, free, hub for software developers to be present</p>
-          <p>and ready for next commission work.</p>
+          <p>
+            Open sourced, free, hub for software developers to be present and
+            ready for next commission work.
+          </p>
         </div>
         <div className={styles.buttons}>
           <CreateProfileBtn />
@@ -25,10 +28,10 @@ const Hero = () => {
       </div>
 
       <div className={styles.right}>
-        {/*        <div className={styles.frame1}>
+        <div className={styles.frame1}>
           <div className={styles.container}>
             <div className={styles.profile}>
-              <Image src={ProfilePicture} alt="Profile Picture" />
+              <Image src={ProfilePicture1} alt="Profile Picture" />
             </div>
             <div className={styles.data}>
               <p className={styles.name}>Karolina Morwinska</p>
@@ -38,7 +41,7 @@ const Hero = () => {
           </div>
           <div className={`${styles.technology} ${styles.fullstack}`}>
             <span>Javascript</span>
-            <span>React</span>
+            <span>React.js</span>
             <span>Vue.js</span>
             <span>+5 more</span>
           </div>
@@ -56,7 +59,7 @@ const Hero = () => {
           </div>
           <div className={`${styles.technology} ${styles.frontend}`}>
             <span>Javascript</span>
-            <span>React</span>
+            <span>React.js</span>
             <span>Vue.js</span>
             <span>+5 more</span>
           </div>
@@ -64,7 +67,7 @@ const Hero = () => {
         <div className={styles.frame3}>
           <div className={styles.container}>
             <div className={styles.profile}>
-              <Image src={ProfilePicture} alt="Profile Picture" />
+              <Image src={ProfilePicture1} alt="Profile Picture" />
             </div>
             <div className={styles.data}>
               <p className={styles.name}>Veres Panna</p>
@@ -74,11 +77,11 @@ const Hero = () => {
           </div>
           <div className={`${styles.technology} ${styles.fullstack}`}>
             <span>Javascript</span>
-            <span>React</span>
+            <span>React.js</span>
             <span>Vue.js</span>
             <span>+5 more</span>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   )

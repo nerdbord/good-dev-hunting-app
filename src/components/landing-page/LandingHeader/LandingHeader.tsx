@@ -13,9 +13,13 @@ const LandingHeader = () => {
           <Logo />
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
-              <FindTalentsBtn />
+              <div className={styles.mobileHide}>
+                <FindTalentsBtn />
+              </div>
               <GithubLoginButton />
-              <CreateProfileBtn />
+              <div className={styles.mobileHide}>
+                <CreateProfileBtn />
+              </div>
             </div>
           </div>
         </div>

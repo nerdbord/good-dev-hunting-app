@@ -49,4 +49,16 @@
   align-items: center;
   gap: 12px;
   max-width: 420px;
+  @include mobile {
+    .FindTalentsBtn, .CreateProfileBtn {
+      display: none;
+    }
+    
+  }
+}
+
+.mobileHide {
+  @media (max-width: 768px) {
+    display: none;
+  }
 }

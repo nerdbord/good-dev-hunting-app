@@ -3,6 +3,9 @@
   height: 26px;
   display: flex;
   gap: 8px;
+  @include mobile {
+    margin-left: -4%;
+}
 }
 
 .title {
