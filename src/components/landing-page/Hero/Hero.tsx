@@ -25,7 +25,7 @@ const Hero = () => {
       </div>
 
       <div className={styles.right}>
-        {/*        <div className={styles.frame1}>
+        <div className={styles.frame1}>
           <div className={styles.container}>
             <div className={styles.profile}>
               <Image src={ProfilePicture} alt="Profile Picture" />
@@ -78,7 +78,7 @@ const Hero = () => {
             <span>Vue.js</span>
             <span>+5 more</span>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   )
