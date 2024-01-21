@@ -4,7 +4,12 @@ import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
-const FindTalentsBtn = () => {
+interface FindTalentsBtnProps {
+  variant: 'primary' | 'secondary'
+  children: string
+}
+
+const FindTalentsBtn = (props: FindTalentsBtnProps) => {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -15,9 +20,9 @@ const FindTalentsBtn = () => {
   return (
     <Button
       onClick={() => router.push(AppRoutes.profiles)}
-      variant={'secondary'}
+      variant={props.variant}
     >
-      Find talents
+      {props.children}
     </Button>
   )
 }
