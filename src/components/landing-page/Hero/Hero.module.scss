@@ -116,7 +116,7 @@
 
 .frame-common {
   position: absolute;
-  width: 399px;
+  min-width: 399px;
   min-height: 189px;
   background: #0f1217;
   border-radius: 4px;
@@ -224,6 +224,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
+  margin-right: 5%;
 }
 
 .technology span {
