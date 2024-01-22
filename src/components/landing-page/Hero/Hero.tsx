@@ -25,7 +25,7 @@ const Hero = () => {
       </div>
 
       <div className={styles.right}>
-        <div className={styles.huj}>
+        <div className={styles.section}>
           <div className={styles.frame1}>
             <div className={styles.container}>
               <div className={styles.profile}>
