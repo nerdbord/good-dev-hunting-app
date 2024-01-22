@@ -152,7 +152,7 @@
   left: 300px;
   @include mobile {
     top: calc(50px + 1%);
-    left: calc(10px + 1%);
+    left: auto;
     transform: scale(0.5) translate(22%, -40%);
   }
 }
@@ -161,7 +161,7 @@
   @extend .frame-common;
   z-index: 2;
   top: 250px;
-  left: -10px;
+  left: 0;
   @include mobile {
     top: calc(50px + 1%);
     left: calc(10px + 1%);

@@ -6,7 +6,10 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
-  margin-top: 205px;
+  margin-top: 70px;
+  @include mobile {
+    margin-top: 205px;
+  }
 }
 
 .titleBox {
