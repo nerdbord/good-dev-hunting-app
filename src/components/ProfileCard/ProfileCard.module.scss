@@ -1,12 +1,18 @@
+.frameWrapper {
+  min-width: 280px; // current lowest width
+  max-width: 399px; // Set a maximum width for larger screens
+  width: 100%; // Take up 100% width of the parent
+}
+
 .frame {
-  width: 380px;
   min-height: 180px;
   height: 100%;
+  width: 100%;
   background: #0f1217;
   border-radius: 4px;
   border: 1px solid #2a2f35;
   transition: background-color 300ms;
-  padding: 36px 0 27.5px 14px;
+  padding: 36px 16px 27.5px 14px;
   cursor: pointer;
 }
 
@@ -19,7 +25,6 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 16px;
-  // margin-top: 5%;
 }
 
 .profile {
@@ -47,7 +52,6 @@
   font-size: 20px;
   line-height: 28px;
   overflow-wrap: break-word;
-  width: 200px;
 }
 
 .frontend {
@@ -106,12 +110,19 @@
 .detailsContent {
   display: inline-flex;
   gap: 11px;
-  width: 346px;
+  // width: 346px;
+  width: 100%;
   padding-top: 18px;
   border-top: 1px solid #2a2f35;
+  overflow-x: hidden;
 }
 
 .moderationFrame {
   // position: relative;
   padding-bottom: 11px;
+}
+
+// utils
+.wordWrap {
+  word-wrap: break-word;
 }
