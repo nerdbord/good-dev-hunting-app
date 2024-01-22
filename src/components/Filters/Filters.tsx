@@ -24,7 +24,8 @@ const filterLists = {
     'MongoDB',
   ],
   seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
-  availability: ['Full-time', 'Part-time', 'Contract'],
+  // z dużych liter działa, bez nie! Trzeba to jakoś przebudować!
+  availability: ['Full-time', 'Part-time', 'CONTRACT'],
   location: ['Poland', 'Europe', 'Other'],
 }
 
