@@ -6,18 +6,16 @@ import { useRouter } from 'next/navigation'
 import { Button } from '../Button/Button'
 import { PublishingState } from '@prisma/client'
 import { formatStateName } from '../FilterTabs/Tab'
-import { JobSpecialization } from '@/components/ProfileList/profile-data'
-import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import Image from 'next/image'
 import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { useModal } from '@/contexts/ModalContext'
 import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
+import ProfileCard from '../ProfileCard/ProfileCard'
 
 const cx = classNames.bind(styles)
 
@@ -25,6 +23,7 @@ type StateStatusProps = {
   profile: ProfileModel
 }
 
+// not sure where to put this
 export function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
   const { addToast } = useToast()
@@ -94,52 +93,45 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
 }) => {
   const router = useRouter()
 
-  const commonClasses = {
-    [styles.frontend]: profile.position === JobSpecialization.Frontend,
-    [styles.backend]: profile.position === JobSpecialization.Backend,
-    [styles.fullstack]: profile.position === JobSpecialization.Fullstack,
-  }
-
-  const getStackClasses = cx(commonClasses)
-  const getTechnologyClasses = cx({
-    [styles.technology]: true,
-    ...commonClasses,
-  })
-
   return (
-    <div className={`${styles.frame} ${styles.moderationFrame}`}>
-      <div
-        className={styles.container}
-        onClick={() =>
-          router.push(`${AppRoutes.dashboardProfile}/${profile.userId}`)
-        }
-      >
-        <div className={styles.profile}>
-          <Image
-            src={profile.avatarUrl || ''}
-            width={78}
-            height={78}
-            alt="user's avatar"
-            className={styles.avatar}
-          />
-        </div>
-        <div className={styles.data}>
-          <p className={styles.name}>{profile.fullName}</p>
-          <p className={getStackClasses}>
-            {profile.seniority} {profile.position} Developer
-          </p>
-          <p className={styles.location}>
-            {profile.country.name}, {profile.city.name} /{' '}
-            {profile.remoteOnly && 'Remote'}
-          </p>
-        </div>
+    <ProfileCard
+      withStateStatus
+      data={profile}
+      onClick={() =>
+        router.push(`${AppRoutes.dashboardProfile}/${profile.userId}`)
+      }
+    />
+  )
+}
+
+{
+  /* <div className={`${styles.frame} ${styles.moderationFrame}`}>
+    <div
+      className={styles.container}
+      onClick={() =>
+        router.push(`${AppRoutes.dashboardProfile}/${profile.userId}`)
+      }
+    >
+      <div className={styles.profile}>
+        <Image
+          src={profile.avatarUrl || ''}
+          width={78}
+          height={78}
+          alt="user's avatar"
+          className={styles.avatar}
+        />
       </div>
-      <TechnologiesRenderer data={profile} classes={getTechnologyClasses} />
-      <div className={styles.detailsWrapper}>
-        <div className={styles.detailsContent}>
-          <StateStatus profile={profile} />
-        </div>
+      <div className={styles.data}>
+        <p className={styles.name}>{profile.fullName}</p>
+        <p className={getStackClasses}>
+          {profile.seniority} {profile.position} Developer
+        </p>
+        <p className={styles.location}>
+          {profile.country.name}, {profile.city.name} /{' '}
+          {profile.remoteOnly && 'Remote'}
+        </p>
       </div>
     </div>
-  )
+    <TechnologiesRenderer data={profile} classes={getTechnologyClasses} />
+  </div> */
 }
