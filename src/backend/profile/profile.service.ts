@@ -204,3 +204,26 @@ export async function getProfileByUserEmail(email: string) {
 
   return null
 }
+
+export async function getRandonProfiles(profilesCount: number) {
+  const randomRecords = await prisma.profile.findMany({
+    take: profilesCount,
+    orderBy: {
+      id: 'asc',
+    },
+    skip: Math.floor(
+      Math.random() * ((await prisma.profile.count()) - profilesCount),
+    ),
+    include: {
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+      country: true,
+      city: true,
+    },
+  })
+
+  return randomRecords.map(serializeProfileToProfileModel)
+}
