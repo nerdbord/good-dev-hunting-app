@@ -7,12 +7,12 @@ const ModerationBtn = () => {
   const router = useRouter()
   const path = usePathname()
 
-  if (path.includes(AppRoutes.dashboard)) {
+  if (path.includes(AppRoutes.moderation)) {
     return null
   }
 
   const onClickHandler = async () => {
-    router.push(AppRoutes.dashboard)
+    router.push(AppRoutes.moderation)
   }
 
   return (

@@ -70,6 +70,7 @@ const ProfileMain = async ({
               height={100}
               alt="user's avatar"
               className={styles.avatar}
+              object-fit="cover"
             />
             <div className={styles.name}>{profile.fullName}</div>
           </div>

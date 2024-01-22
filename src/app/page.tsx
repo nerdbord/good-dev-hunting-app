@@ -21,6 +21,7 @@ const Page: React.FC = () => {
           <HowItWorks />
           <UseYourProfile />
           <MeetTeam />
+          {/* @ts-expect-error Server Component */}
           <TalentSection />
           <FAQSection />
         </LandingContainer>
