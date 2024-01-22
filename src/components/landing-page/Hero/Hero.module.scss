@@ -4,19 +4,23 @@
   color: #ffffff;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding-bottom: 110px;
   @include mobile {
-    padding: 0;
+    overflow: visible;
     flex-direction: column;
+    padding: 0 16px;
+    width: 100%;
   }
 }
 
 .title,
 .subtitle {
-  display: flex; 
+  display: flex;
   flex-direction: column;
 }
 
@@ -36,9 +40,13 @@
   }
 }
 
+.left {
+  width: 50%;
+}
 .subtitle {
   flex-direction: column;
   max-width: 535px;
+  width: 100%;
   min-height: 60px;
   font-size: 20px;
   font-weight: 300;
@@ -50,7 +58,7 @@
     height: 72px;
     font-size: 16px;
     line-height: 24px;
-    margin-top: 5%; 
+    margin-top: 5%;
     font-weight: 400;
   }
 }
@@ -63,29 +71,28 @@
 
 @media (max-width: 768px) {
   .subtitle p::after {
-    display: none; 
+    display: none;
   }
 
   .subtitle p {
     position: relative;
   }
-  
+
   .subtitle p br {
     content: ' ';
     display: none;
   }
-  
+
   .subtitle p::after {
     content: '';
     display: block;
     margin-left: -100%;
   }
-  
+
   .subtitle p {
-    width: 313px; 
+    width: 313px;
   }
 }
-
 
 .buttons {
   display: flex;
@@ -95,15 +102,14 @@
   margin-top: 5%;
   gap: 16px;
   @include mobile {
-  min-width: 321px;
+    min-width: 321px;
   }
 }
 
 .right {
   display: flex;
-  justify-content: flex-end;
   position: relative;
-  width: 45%;
+  width: 50%;
   height: 100%;
   margin-top: 6%;
 }
@@ -116,15 +122,14 @@
 
 .frame-common {
   position: absolute;
-  min-width: 399px;
   min-height: 189px;
   background: #0f1217;
   border-radius: 4px;
   border: 1px solid #2a2f35;
   transition: background-color 300ms;
-  padding: 26px 0 27.5px 14px;
+  padding: 20px 30px;
   @include mobile {
-    transform: scale(0.5); 
+    transform: scale(0.5);
   }
 }
 
@@ -136,7 +141,7 @@
   @include mobile {
     top: calc(50px + 1%);
     left: calc(10px + 1%);
-    transform: scale(0.5) translate(-31%, -100%); 
+    transform: scale(0.5) translate(-31%, -100%);
   }
 }
 
@@ -148,7 +153,7 @@
   @include mobile {
     top: calc(50px + 1%);
     left: calc(10px + 1%);
-    transform: scale(0.5) translate(22%, -40%); 
+    transform: scale(0.5) translate(22%, -40%);
   }
 }
 
@@ -160,7 +165,7 @@
   @include mobile {
     top: calc(50px + 1%);
     left: calc(10px + 1%);
-    transform: scale(0.5) translate(-60%, 10%); 
+    transform: scale(0.5) translate(-60%, 10%);
   }
 }
 
@@ -241,4 +246,3 @@
   line-height: 15px;
   letter-spacing: -0.24px;
 }
-
