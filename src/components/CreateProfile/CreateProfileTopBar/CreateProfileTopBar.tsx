@@ -10,7 +10,6 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { apiClient } from '@/lib/apiClient'
 import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
-import { signOut } from 'next-auth/react'
 
 const CreateProfileTopBar = () => {
   const pathname = usePathname()
