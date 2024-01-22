@@ -111,7 +111,7 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
       <div
         className={styles.container}
         onClick={() =>
-          router.push(`${AppRoutes.dashboardProfile}/${profile.userId}`)
+          router.push(`${AppRoutes.moderationProfile}/${profile.userId}`)
         }
       >
         <div className={styles.profile}>

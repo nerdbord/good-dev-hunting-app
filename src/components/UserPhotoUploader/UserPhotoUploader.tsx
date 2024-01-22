@@ -52,6 +52,7 @@ export const UserPhotoUploader = () => {
             alt="User uploaded"
             width={100}
             height={100}
+            object-fit="cover"
           />
           <div className={styles.buttonsWrapper}>
             <Button variant="secondary">
