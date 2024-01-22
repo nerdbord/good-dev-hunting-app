@@ -37,9 +37,9 @@ const filterLists = {
 
 const Filters: React.FC = () => {
   const [filters, setFilters] = useState(JobOfferFilters)
-  const [selectedButton, setSelectedButton] = useState<string | null>(null)
   const {
     setJobSpecializationFilter,
+    jobSpecializationFilter,
     technologyFilter,
     setTechnologyFilter,
     seniorityFilter,
@@ -68,17 +68,17 @@ const Filters: React.FC = () => {
       setLocationFilter(option)
     }
   }
-
+  //
   const handleButtonClick = (newStack: string) => {
-    if (newStack === selectedButton) {
-      setSelectedButton(null)
-      setJobSpecializationFilter('')
+    let newPos: string[]
+    if (jobSpecializationFilter.includes(newStack)) {
+      newPos = jobSpecializationFilter.filter((x) => x !== newStack)
     } else {
-      setSelectedButton(newStack)
-      setJobSpecializationFilter(newStack)
+      newPos = [...jobSpecializationFilter, newStack]
     }
+    setJobSpecializationFilter(newPos)
   }
-
+  //
   const handleSelectMulti = (option: string): void => {
     let newFilters: string[]
     if (technologyFilter.includes(option)) {
@@ -127,21 +127,27 @@ const Filters: React.FC = () => {
         <DevTypeButton
           variant={JobSpecialization.Frontend}
           onClick={() => handleButtonClick(JobSpecialization.Frontend)}
-          isPressed={selectedButton === JobSpecialization.Frontend}
+          isPressed={jobSpecializationFilter.includes(
+            JobSpecialization.Frontend,
+          )}
         >
           Frontend
         </DevTypeButton>
         <DevTypeButton
           variant={JobSpecialization.Backend}
           onClick={() => handleButtonClick(JobSpecialization.Backend)}
-          isPressed={selectedButton === JobSpecialization.Backend}
+          isPressed={jobSpecializationFilter.includes(
+            JobSpecialization.Backend,
+          )}
         >
           Backend
         </DevTypeButton>
         <DevTypeButton
           variant={JobSpecialization.Fullstack}
           onClick={() => handleButtonClick(JobSpecialization.Fullstack)}
-          isPressed={selectedButton === JobSpecialization.Fullstack}
+          isPressed={jobSpecializationFilter.includes(
+            JobSpecialization.Fullstack,
+          )}
         >
           Fullstack
         </DevTypeButton>
