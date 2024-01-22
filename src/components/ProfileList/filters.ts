@@ -6,13 +6,21 @@ export const filterByPosition =
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string | null) => (profile: ProfileModel) => {
-    return !seniorityFilter || profile.seniority === seniorityFilter
+  (seniorityFilter: string[] | null) => (profile: ProfileModel) => {
+    return (
+      !seniorityFilter ||
+      seniorityFilter.length === 0 ||
+      seniorityFilter.includes(profile.seniority)
+    )
   }
 
 export const filterByLocation =
-  (locationFilter: string | null) => (profile: ProfileModel) => {
-    return !locationFilter || profile.country.name === locationFilter
+  (locationFilter: string[] | null) => (profile: ProfileModel) => {
+    return (
+      !locationFilter ||
+      locationFilter.length === 0 ||
+      locationFilter.includes(profile.country.name)
+    )
   }
 
 export const filterByTechnology =
@@ -25,6 +33,10 @@ export const filterByTechnology =
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string | null) => (profile: ProfileModel) => {
-    return !availabilityFilter || profile.employmentType === availabilityFilter
+  (availabilityFilter: string[] | null) => (profile: ProfileModel) => {
+    return (
+      !availabilityFilter ||
+      availabilityFilter.length === 0 ||
+      availabilityFilter.includes(profile.employmentType)
+    )
   }
