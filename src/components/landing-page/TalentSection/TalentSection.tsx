@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './TalentSection.module.scss'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import ProfileCard from '@/components/ProfileCard/ProfileCard'
-import { getRandonProfiles } from '@/backend/profile/profile.service'
+import { getRandomProfiles } from '@/backend/profile/profile.service'
 import Link from 'next/link'
 import { AppRoutes } from '@/utils/routes'
 
 const TalentSection = async () => {
-  const profiles = await getRandonProfiles(10)
+  const profiles = await getRandomProfiles(6)
 
   return (
     <section className={styles.wrapper}>
