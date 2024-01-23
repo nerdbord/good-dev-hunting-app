@@ -22,8 +22,8 @@ const Page: React.FC = () => {
         <MeetTeam />
         <TalentSection />
         <FAQSection />
-        <LandingFooter />
       </Container>
+      <LandingFooter />
     </main>
   )
 }
