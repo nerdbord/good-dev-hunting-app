@@ -1,7 +1,6 @@
 .wrapper {
-  height: min-content;
   background: black;
-  padding: 25px 8%;
+  padding: 24px 0;
   overflow-x: hidden;
   @include mobile {
     padding-left: $spacing-4;
