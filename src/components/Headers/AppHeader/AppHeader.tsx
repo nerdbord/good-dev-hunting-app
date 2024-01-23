@@ -30,13 +30,13 @@ const AppHeader = async () => {
       <header className={styles.wrapper}>
         <Container>
           <div className={styles.headerContent}>
-            <Link href="/" className={styles.logo}>
+            <Link href={AppRoutes.profiles} className={styles.logo}>
               <img src={logo.src} alt="Logo" />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {user?.profile ? (
+              {profile ? (
                 <>
                   <MyProfileBtn />
                 </>
