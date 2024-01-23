@@ -25,44 +25,36 @@ export async function GET(request: Request, profileId: string) {
 export async function PATCH(request: NextRequest, id: string) {
   try {
     const userDataToUpdate: ProfileModelSimplified = await request.json()
-    const updatedUser = await updateUserData(id, {
-      fullName: userDataToUpdate.fullName,
-      remoteOnly: userDataToUpdate.remoteOnly,
-      bio: userDataToUpdate.bio,
-      position: userDataToUpdate.position,
-      seniority: userDataToUpdate.seniority,
-      state: PublishingState.PENDING,
-      employmentType: userDataToUpdate.employmentType,
-      techStack: {
-        connectOrCreate: userDataToUpdate.techStack.map((tech) => {
-          return {
-            create: {
-              techName: tech,
-            },
+    const updatedUser = await updateUserData(
+      id,
+      {
+        fullName: userDataToUpdate.fullName,
+        remoteOnly: userDataToUpdate.remoteOnly,
+        bio: userDataToUpdate.bio,
+        position: userDataToUpdate.position,
+        seniority: userDataToUpdate.seniority,
+        state: PublishingState.PENDING,
+        employmentType: userDataToUpdate.employmentType,
+        country: {
+          connectOrCreate: {
             where: {
-              techName: tech,
+              name: userDataToUpdate.country.name,
             },
-          }
-        }),
-      },
-      country: {
-        connectOrCreate: {
-          where: {
-            name: userDataToUpdate.country.name,
-          },
-          create: {
-            name: userDataToUpdate.country.name,
+            create: {
+              name: userDataToUpdate.country.name,
+            },
           },
         },
-      },
-      openForCountryRelocation: userDataToUpdate.openForCountryRelocation,
-      city: {
-        update: {
-          name: userDataToUpdate.city.name,
+        openForCountryRelocation: userDataToUpdate.openForCountryRelocation,
+        city: {
+          update: {
+            name: userDataToUpdate.city.name,
+          },
         },
+        openForCityRelocation: userDataToUpdate.openForCityRelocation,
       },
-      openForCityRelocation: userDataToUpdate.openForCityRelocation,
-    })
+      userDataToUpdate.techStack.map((tech) => ({ techName: tech })),
+    )
     return NextResponse.json({
       message: 'Success',
       profile: updatedUser,

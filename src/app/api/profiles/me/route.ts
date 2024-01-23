@@ -27,7 +27,6 @@ export async function PUT(request: NextRequest) {
   try {
     const updatedDataPayload: CreateProfilePayload = await request.json()
     const { email } = await authorizeUser()
-
     const foundProfile = await doesUserProfileExist(email)
     if (foundProfile) {
       const updatedData: Prisma.ProfileUpdateInput = {
@@ -55,23 +54,15 @@ export async function PUT(request: NextRequest) {
         remoteOnly: updatedDataPayload.remoteOnly,
         position: updatedDataPayload.position,
         seniority: updatedDataPayload.seniority,
-        techStack: {
-          connectOrCreate: updatedDataPayload.techStack.map((tech) => {
-            return {
-              create: {
-                techName: tech.techName,
-              },
-              where: {
-                techName: tech.techName,
-              },
-            }
-          }),
-        },
         employmentType: updatedDataPayload.employmentType,
         state: PublishingState.PENDING,
       }
 
-      const updatedUser = await updateUserData(foundProfile.id, updatedData)
+      const updatedUser = await updateUserData(
+        foundProfile.id,
+        updatedData,
+        updatedDataPayload.techStack,
+      )
 
       return NextResponse.json(updatedUser, { status: 200 })
     } else {

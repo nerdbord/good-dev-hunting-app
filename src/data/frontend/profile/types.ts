@@ -29,8 +29,12 @@ export type CreateProfilePayload = Omit<
   ProfileModelSimplified,
   'id' | 'userEmail' | 'techStack'
 > & {
-  techStack: { techName: string }[]
+  techStack: TechStack
 }
+
+export type TechStack = {
+  techName: string
+}[]
 export type EditProfilePayload = CreateProfilePayload
 export type PublishingStateData = {
   state: PublishingState
