@@ -3,8 +3,8 @@
   background: #04080d;
   padding: 24px 0;
   width: 100%;
+  z-index: 99;
   @include mobile {
-    padding-left: $spacing-4;
     position: sticky;
     top: 0;
   }

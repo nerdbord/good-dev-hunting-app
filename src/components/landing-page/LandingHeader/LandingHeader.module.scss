@@ -2,6 +2,7 @@
   background: black;
   padding: 24px 0;
   overflow-x: hidden;
+  z-index: 5;
   @include mobile {
     padding-left: $spacing-4;
     position: sticky;
