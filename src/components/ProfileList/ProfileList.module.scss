@@ -1,7 +1,6 @@
 .mainContainer {
   background: #0f1217;
   display: flex;
-
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -9,6 +8,7 @@
     width: 100%;
     flex-direction: column;
     gap: 8px;
+    margin: 0 16px;
   }
 }
 
