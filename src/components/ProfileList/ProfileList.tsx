@@ -9,11 +9,9 @@ const ProfileList = async () => {
 
   return (
     <div className={styles.mainContainer}>
-      <Container>
-        <div className={styles.profileListCont}>
-          <ProfilesWithFilter data={profiles} />
-        </div>
-      </Container>
+      <div className={styles.profileListCont}>
+        <ProfilesWithFilter data={profiles} />
+      </div>
     </div>
   )
 }
