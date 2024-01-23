@@ -1,5 +1,4 @@
 import logo from '@/assets/images/logo.png'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { Container } from '@/components/Container/Container'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
@@ -47,7 +46,7 @@ const AppHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href={AppRoutes.home} className={styles.logo}>
+          <Link href={AppRoutes.profiles} className={styles.logo}>
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
