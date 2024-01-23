@@ -17,6 +17,7 @@
 }
 
 .profileCards {
+  margin-top: 40px;
   @include mobile {
     width: 100%;
   }
@@ -30,7 +31,6 @@
   font-size: 14px;
   line-height: 20px;
   color: #e2eaf1;
-  margin-top: 20px;
 }
 
 .actions {
