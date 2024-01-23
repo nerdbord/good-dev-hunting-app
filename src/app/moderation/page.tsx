@@ -5,9 +5,7 @@ import { ModerationFilterContextProvider } from '@/contexts/ModerationFilterCont
 const DashboardPage = () => {
   return (
     <ModerationFilterContextProvider>
-      {/* @ts-expect-error Server Component */}
       <ModerationFilters />
-      {/* @ts-expect-error Server Component */}
       <ModerationProfileList />
     </ModerationFilterContextProvider>
   )

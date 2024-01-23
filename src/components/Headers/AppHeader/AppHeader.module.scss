@@ -1,10 +1,10 @@
 .wrapper {
   height: min-content;
   background: #04080d;
-  padding: 25px 8%;
+  padding: 24px 0;
   width: 100%;
+  z-index: 99;
   @include mobile {
-    padding-left: $spacing-4;
     position: sticky;
     top: 0;
   }
