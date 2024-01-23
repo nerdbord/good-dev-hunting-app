@@ -206,14 +206,25 @@ export async function getProfileByUserEmail(email: string) {
 }
 
 export async function getRandonProfiles(profilesCount: number) {
+  const totalProfiles = await prisma.profile.count()
+
+  if (profilesCount >= totalProfiles) {
+    return getPublishedProfilesPayload()
+  }
+
+  const maxSkipValue = totalProfiles - profilesCount
+  const skipValue =
+    maxSkipValue > 0 ? Math.floor(Math.random() * maxSkipValue) : 0
+
   const randomRecords = await prisma.profile.findMany({
     take: profilesCount,
+    where: {
+      state: PublishingState.APPROVED,
+    },
     orderBy: {
       id: 'asc',
     },
-    skip: Math.floor(
-      Math.random() * ((await prisma.profile.count()) - profilesCount),
-    ),
+    skip: skipValue,
     include: {
       user: {
         include: {
