@@ -205,9 +205,9 @@ export async function getProfileByUserEmail(email: string) {
   return null
 }
 
-export async function getOnlySixProfileToLanding() {
+export async function getPublishedProfiles(take: number) {
   const publishedProfiles = await prisma.profile.findMany({
-    take: 6,
+    take,
     where: {
       state: PublishingState.APPROVED,
     },
@@ -227,11 +227,11 @@ export async function getOnlySixProfileToLanding() {
   return serializedProfile
 }
 
-export async function getRandonProfiles(profilesCount: number) {
+export async function getRandomProfiles(profilesCount: number) {
   const totalProfiles = await prisma.profile.count()
 
   if (profilesCount > totalProfiles) {
-    return getOnlySixProfileToLanding()
+    return getPublishedProfiles(6)
   }
 
   const maxSkipValue = totalProfiles - profilesCount
