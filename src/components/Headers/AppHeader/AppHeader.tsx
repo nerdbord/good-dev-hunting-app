@@ -6,7 +6,6 @@ import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import GithubAcc from '@/components/GithubAcc/GithubAcc'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
 import ModerationBtn from '@/components/ModerationBtn/ModerationBtn'
-import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 import { authOptions } from '@/lib/auth'
 import { AppRoutes } from '@/utils/routes'
 import { Role } from '@prisma/client'
@@ -17,10 +16,6 @@ import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 
 const AppHeader = async () => {
   const session = await getServerSession(authOptions)
-
-  const profile = session?.user
-    ? await getProfileByUserEmail(session.user.email)
-    : null
 
   const user = session ? await findUserByEmail(session.user.email) : null
   const userIsModerator = user?.roles.includes(Role.MODERATOR)
@@ -36,20 +31,11 @@ const AppHeader = async () => {
             </Link>
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {profile ? (
-                <>
-                  <MyProfileBtn />
-                </>
+              {user?.profile ? (
+                <GithubAcc />
               ) : (
-                <div className={styles.frameButtons}>
-                  <CreateProfileBtn data-testid="create-profile-button" />
-                </div>
+                <CreateProfileBtn data-testid="create-profile-button" />
               )}
-              {profile ? (
-                <>
-                  <GithubAcc />
-                </>
-              ) : null}
             </div>
           </div>
         </Container>
