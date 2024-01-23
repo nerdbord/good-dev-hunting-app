@@ -90,7 +90,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
-      techStack: values.techStack,
+      techStack: values.techStack.map((tech) => ({ techName: tech })),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,

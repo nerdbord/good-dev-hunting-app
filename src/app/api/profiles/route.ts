@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { serializeProfileToProfileModelSimplified } from '@/backend/profile/profile.serializer'
 import {
   createUserProfile,
   doesUserProfileExist,
   getPublishedProfilesPayload,
 } from '@/backend/profile/profile.service'
-import { authorizeUser } from '@/lib/auth'
-import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { authorizeUser } from '@/lib/auth'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
   try {
@@ -30,7 +30,8 @@ export async function POST(request: NextRequest) {
 
     if (!foundUser) {
       const createdProfile = await createUserProfile(email, userData)
-      const serializedProfile = serializeProfileToProfileModel(createdProfile)
+      const serializedProfile =
+        serializeProfileToProfileModelSimplified(createdProfile)
 
       return NextResponse.json({
         status: 201,

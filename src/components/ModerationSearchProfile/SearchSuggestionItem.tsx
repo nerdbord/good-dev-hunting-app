@@ -1,12 +1,12 @@
-﻿import Image from 'next/image'
-import { ProfileModel } from '@/data/frontend/profile/types'
+﻿import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import Image from 'next/image'
 
 import styles from './SearchSuggestionItem.module.scss'
 
 interface SearchSuggestionsProps {
   searchValue: string
   onClick: (text: string) => void
-  profile: ProfileModel
+  profile: ProfileModelSimplified
 }
 
 const highlightText = (text: string, searchText: string) => {

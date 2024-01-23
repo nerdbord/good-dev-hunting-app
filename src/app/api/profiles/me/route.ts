@@ -30,7 +30,6 @@ export async function PUT(request: NextRequest) {
 
     const foundProfile = await doesUserProfileExist(email)
     if (foundProfile) {
-      // Convert CreateProfilePayload to Prisma.ProfileUpdateInput
       const updatedData: Prisma.ProfileUpdateInput = {
         fullName: updatedDataPayload.fullName,
         linkedIn: updatedDataPayload.linkedIn,
@@ -56,7 +55,18 @@ export async function PUT(request: NextRequest) {
         remoteOnly: updatedDataPayload.remoteOnly,
         position: updatedDataPayload.position,
         seniority: updatedDataPayload.seniority,
-        techStack: updatedDataPayload.techStack,
+        techStack: {
+          connectOrCreate: updatedDataPayload.techStack.map((tech) => {
+            return {
+              create: {
+                techName: tech.techName,
+              },
+              where: {
+                techName: tech.techName,
+              },
+            }
+          }),
+        },
         employmentType: updatedDataPayload.employmentType,
         state: PublishingState.PENDING,
       }

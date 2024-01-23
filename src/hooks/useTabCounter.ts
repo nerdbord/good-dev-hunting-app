@@ -1,9 +1,9 @@
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import { PublishingState } from '@prisma/client'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 export default function (
-  data: ProfileModel[],
+  data: ProfileModelSimplified[],
   state: PublishingState,
   callback: (value: number) => void,
 ) {

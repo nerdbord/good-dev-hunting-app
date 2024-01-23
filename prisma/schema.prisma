@@ -46,14 +46,14 @@ model Profile {
 
 model Technology {
   id          String                 @id @default(uuid())
-  name        String
+  name        String                 @unique
   profiles    TechnologyOnProfile[]
 }
 
 model TechnologyOnProfile {
-  techStackId String        @id @unique
+  techName    String        @id @unique
   profileId   String        @unique
-  technology  Technology    @relation(fields: [techStackId], references: [id])
+  technology  Technology    @relation(fields: [techName], references: [name])
   profile     Profile       @relation(fields: [profileId], references: [id])
 }
 

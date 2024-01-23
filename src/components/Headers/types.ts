@@ -1,8 +1,8 @@
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import { Role } from '@prisma/client'
 
 export type UserProfileHeaderType = {
-  userProfile: ProfileModel
+  userProfile: ProfileModelSimplified
   withBackButton?: boolean
 }
 

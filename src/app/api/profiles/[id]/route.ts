@@ -2,7 +2,7 @@ import {
   getProfileById,
   updateUserData,
 } from '@/backend/profile/profile.service'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import { authorizeUser } from '@/lib/auth'
 import { PublishingState } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
@@ -24,7 +24,7 @@ export async function GET(request: Request, profileId: string) {
 
 export async function PATCH(request: NextRequest, id: string) {
   try {
-    const userDataToUpdate: ProfileModel = await request.json()
+    const userDataToUpdate: ProfileModelSimplified = await request.json()
     const updatedUser = await updateUserData(id, {
       fullName: userDataToUpdate.fullName,
       remoteOnly: userDataToUpdate.remoteOnly,
@@ -33,7 +33,18 @@ export async function PATCH(request: NextRequest, id: string) {
       seniority: userDataToUpdate.seniority,
       state: PublishingState.PENDING,
       employmentType: userDataToUpdate.employmentType,
-      techStack: userDataToUpdate.techStack,
+      techStack: {
+        connectOrCreate: userDataToUpdate.techStack.map((tech) => {
+          return {
+            create: {
+              techName: tech,
+            },
+            where: {
+              techName: tech,
+            },
+          }
+        }),
+      },
       country: {
         connectOrCreate: {
           where: {
@@ -52,7 +63,6 @@ export async function PATCH(request: NextRequest, id: string) {
       },
       openForCityRelocation: userDataToUpdate.openForCityRelocation,
     })
-
     return NextResponse.json({
       message: 'Success',
       profile: updatedUser,

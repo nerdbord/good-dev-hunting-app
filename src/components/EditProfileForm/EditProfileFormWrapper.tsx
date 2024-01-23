@@ -1,6 +1,9 @@
 'use client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
-import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
+import {
+  EditProfilePayload,
+  ProfileModelSimplified,
+} from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
 import { AppRoutes } from '@/utils/routes'
@@ -51,7 +54,7 @@ export const validationSchema = Yup.object().shape({
 })
 
 interface EditProfileFormWrapperProps {
-  profile: ProfileModel
+  profile: ProfileModelSimplified
 }
 
 const EditProfileFormWrapper = ({
@@ -84,7 +87,7 @@ const EditProfileFormWrapper = ({
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
-      techStack: values.techStack,
+      techStack: values.techStack.map((tech) => ({ techName: tech })),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,

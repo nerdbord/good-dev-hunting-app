@@ -1,28 +1,28 @@
 'use client'
-import React from 'react'
-import { ProfileModel } from '@/data/frontend/profile/types'
-import { AppRoutes } from '@/utils/routes'
-import { useRouter } from 'next/navigation'
-import { Button } from '../Button/Button'
-import { PublishingState } from '@prisma/client'
-import { formatStateName } from '../FilterTabs/Tab'
-import { JobSpecialization } from '@/components/ProfileList/profile-data'
-import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
-import { ToastStatus, useToast } from '@/contexts/ToastContext'
-import { apiClient } from '@/lib/apiClient'
-import { useAsyncAction } from '@/hooks/useAsyncAction'
-import Image from 'next/image'
-import classNames from 'classnames/bind'
 import styles from '@/components/ProfileList/ProfileList.module.scss'
+import { JobSpecialization } from '@/components/ProfileList/profile-data'
+import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { useModal } from '@/contexts/ModalContext'
+import { ToastStatus, useToast } from '@/contexts/ToastContext'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { apiClient } from '@/lib/apiClient'
+import { AppRoutes } from '@/utils/routes'
+import { PublishingState } from '@prisma/client'
+import classNames from 'classnames/bind'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { Button } from '../Button/Button'
+import { formatStateName } from '../FilterTabs/Tab'
 import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
 
 const cx = classNames.bind(styles)
 
 type StateStatusProps = {
-  profile: ProfileModel
+  profile: ProfileModelSimplified
 }
 
 export function StateStatus({ profile }: StateStatusProps) {
@@ -89,9 +89,9 @@ export function StateStatus({ profile }: StateStatusProps) {
   )
 }
 
-export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
-  profile,
-}) => {
+export const ModerationProfileListItem: React.FC<{
+  profile: ProfileModelSimplified
+}> = ({ profile }) => {
   const router = useRouter()
 
   const commonClasses = {

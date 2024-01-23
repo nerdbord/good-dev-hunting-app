@@ -1,6 +1,6 @@
 import { EmploymentType, PublishingState } from '@prisma/client'
 
-export interface ProfileModel {
+export interface ProfileModelSimplified {
   id: string
   fullName: string
   avatarUrl: string | null
@@ -25,9 +25,13 @@ export interface ProfileModel {
   userEmail: string
 }
 
-export type CreateProfilePayload = Omit<ProfileModel, 'id' | 'userEmail'>
+export type CreateProfilePayload = Omit<
+  ProfileModelSimplified,
+  'id' | 'userEmail' | 'techStack'
+> & {
+  techStack: { techName: string }[]
+}
 export type EditProfilePayload = CreateProfilePayload
-
 export type PublishingStateData = {
   state: PublishingState
 }

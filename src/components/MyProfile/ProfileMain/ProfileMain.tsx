@@ -1,17 +1,16 @@
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/images/flagPL.jpg'
+import { countries } from '@/data/frontend/profile/countries/countries'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
-import { countries } from '@/data/frontend/profile/countries/countries'
 
 const ProfileMain = async ({
   profile,
   isConnectedToNerdbord,
 }: {
-  profile: ProfileModel
+  profile: ProfileModelSimplified
   isConnectedToNerdbord: boolean
 }) => {
   const githubUsername = profile.githubUsername

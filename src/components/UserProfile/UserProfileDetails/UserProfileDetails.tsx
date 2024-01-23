@@ -1,8 +1,11 @@
-import React from 'react'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import styles from './UserProfileDetails.module.scss'
-import { ProfileModel } from '@/data/frontend/profile/types'
 
-const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
+const UserProfileDetails = ({
+  userProfile,
+}: {
+  userProfile: ProfileModelSimplified
+}) => {
   return (
     <>
       <div className={styles.container}>
