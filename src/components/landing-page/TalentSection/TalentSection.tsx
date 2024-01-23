@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { AppRoutes } from '@/utils/routes'
 
 const TalentSection = async () => {
-  const profiles = await getRandonProfiles(6)
+  const profiles = await getRandonProfiles(10)
 
   return (
     <section className={styles.wrapper}>
