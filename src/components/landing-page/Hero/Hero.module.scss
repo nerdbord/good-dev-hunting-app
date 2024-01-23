@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
-
 .wrapper {
   color: #ffffff;
   display: flex;
@@ -8,7 +6,6 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  overflow: hidden;
   padding-bottom: 110px;
   @include mobile {
     overflow: visible;
