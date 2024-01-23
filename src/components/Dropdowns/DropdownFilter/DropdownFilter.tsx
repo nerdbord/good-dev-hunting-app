@@ -72,7 +72,6 @@ export const DropdownFilter = ({
 
   return (
     <div className={styles.buttonBox}>
-      <div className={styles.label}>{label}</div>
       <div ref={dropdownRef}>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
           {selectedValue.length === 0 ? (
