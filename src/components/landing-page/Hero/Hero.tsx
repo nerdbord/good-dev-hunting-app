@@ -1,12 +1,19 @@
-'use client'
 import React from 'react'
 import styles from './Hero.module.scss'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import Image from 'next/image'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { findUserByEmail } from '@/backend/user/user.service'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 
-const Hero = () => {
+const Hero = async () => {
+  const session = await getServerSession(authOptions)
+
+  const user = session ? await findUserByEmail(session.user.email) : null
+
   return (
     <section id="hero" className={styles.wrapper}>
       <div className={styles.left}>
@@ -19,7 +26,7 @@ const Hero = () => {
           <p>and ready for next commission work.</p>
         </div>
         <div className={styles.buttons}>
-          <CreateProfileBtn />
+          {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           <FindTalentsBtn variant={'secondary'}>Find talents</FindTalentsBtn>
         </div>
       </div>
