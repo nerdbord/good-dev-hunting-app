@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ProfileModel } from '@/data/backend/profile/types'
 import {
   CreateProfilePayload,
-  ProfileModel,
   PublishingStateData,
   RejectionReason,
 } from '@/data/frontend/profile/types'

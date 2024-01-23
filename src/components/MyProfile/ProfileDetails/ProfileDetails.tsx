@@ -1,8 +1,11 @@
-import React from 'react'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import styles from './ProfileDetails.module.scss'
-import { ProfileModel } from '@/data/frontend/profile/types'
 
-const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
+const ProfileDetails = async ({
+  profile,
+}: {
+  profile: ProfileModelSimplified
+}) => {
   return (
     <>
       <section className={styles.container}>

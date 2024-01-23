@@ -1,15 +1,14 @@
-import React from 'react'
 import styles from './TalentSection.module.scss'
 
-import { ProfileModel } from '@/data/frontend/profile/types'
-import { EmploymentType, PublishingState } from '@prisma/client'
 import { JobSpecialization } from '@/components/ProfileList/profile-data'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { EmploymentType, PublishingState } from '@prisma/client'
 
 // components
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import ProfileCard from '@/components/ProfileCard/ProfileCard'
 
-const mockedCards: ProfileModel[] = [
+const mockedCards: ProfileModelSimplified[] = [
   {
     id: '0',
     fullName: 'Karolina Morwińska',

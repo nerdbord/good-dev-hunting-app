@@ -1,8 +1,8 @@
 import { EditProfileFormValues } from '@/components/EditProfileForm/EditProfileFormWrapper'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 
 export const mapProfileModelToEditProfileFormValues = (
-  profile: ProfileModel,
+  profile: ProfileModelSimplified,
 ): EditProfileFormValues => ({
   fullName: profile.fullName,
   linkedin: profile.linkedIn,

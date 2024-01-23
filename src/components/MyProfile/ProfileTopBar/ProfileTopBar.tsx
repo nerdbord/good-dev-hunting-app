@@ -1,16 +1,15 @@
-import React from 'react'
-import styles from './ProfileTopBar.module.scss'
-import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
-import { EditProfileButton } from '@/components/EditProfileButton'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
 import { ConnectToNerdbordButton } from '@/components/ConnectToNerbordButton/ConnectToNerdbordButton'
+import { EditProfileButton } from '@/components/EditProfileButton'
+import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import styles from './ProfileTopBar.module.scss'
 
 const ProfileTopBar = async ({
   profile,
   isConnectedToNerdbord,
 }: {
-  profile: ProfileModel
+  profile: ProfileModelSimplified
   isConnectedToNerdbord: boolean
 }) => {
   return (

@@ -2,7 +2,7 @@
 import styles from '@/components/ProfileList/ProfileList.module.scss'
 import { ProfileListItem } from '@/components/ProfileList/ProfileListItem'
 import { useFilters } from '@/contexts/FilterContext'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import React from 'react'
 import {
   filterByAvailability,
@@ -13,7 +13,7 @@ import {
 } from './filters'
 
 export const ProfilesWithFilter: React.FC<{
-  data: ProfileModel[]
+  data: ProfileModelSimplified[]
 }> = ({ data = [] }) => {
   const {
     technologyFilter,

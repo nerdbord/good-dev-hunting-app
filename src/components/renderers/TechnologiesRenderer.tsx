@@ -1,8 +1,8 @@
 'use client'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 
 type Props = {
-  data: ProfileModel
+  data: ProfileModelSimplified
   classes: string
 }
 

@@ -1,19 +1,19 @@
 import { Button } from '@/components/Button/Button'
-import styles from './ContactForm.module.scss'
-import { ProfileModel } from '@/data/frontend/profile/types'
-import TextInput from '@/components/TextInput/TextInput'
-import { useFormik } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
+import TextInput from '@/components/TextInput/TextInput'
+import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { initialValues, validationSchema, ContactFormValues } from './schema'
+import { useFormik } from 'formik'
+import styles from './ContactForm.module.scss'
+import { ContactFormValues, initialValues, validationSchema } from './schema'
 
 export default function ContactForm({
   userProfile,
   closeModal,
   showSuccessMsg,
 }: {
-  userProfile: ProfileModel
+  userProfile: ProfileModelSimplified
   closeModal: () => void
   showSuccessMsg: () => void
 }) {
