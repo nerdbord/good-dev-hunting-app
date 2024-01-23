@@ -45,16 +45,17 @@ model Profile {
 }
 
 model Technology {
-  id          String                 @id @default(uuid())
   name        String                 @unique
   profiles    TechnologyOnProfile[]
 }
 
 model TechnologyOnProfile {
-  techName    String        @id @unique
-  profileId   String        @unique
+  techName    String        
+  profileId   String        
   technology  Technology    @relation(fields: [techName], references: [name])
   profile     Profile       @relation(fields: [profileId], references: [id])
+  
+  @@id([techName, profileId])
 }
 
 model GitHubDetails {

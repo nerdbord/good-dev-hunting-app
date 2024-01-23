@@ -1,4 +1,4 @@
-import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { CreateProfilePayload, TechStack } from '@/data/frontend/profile/types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState } from '@prisma/client'
@@ -105,29 +105,22 @@ export async function createUserProfile(
       remoteOnly: profileData.remoteOnly,
       position: profileData.position,
       seniority: profileData.seniority,
-      techStack: {
-        connectOrCreate: profileData.techStack.map((tech) => {
-          return {
-            create: {
-              techName: tech.techName,
-            },
-            where: {
-              techName: tech.techName,
-            },
-          }
-        }),
-      },
       employmentType: profileData.employmentType,
       state: PublishingState.DRAFT,
     },
     include: includeObject,
   })
+  for (const tech of profileData.techStack) {
+    await upsertTechnology(tech.techName)
+    await createProfileToTechConnection(createdUser.id, tech.techName)
+  }
   return createdUser
 }
 
 export async function updateUserData(
   id: string,
   userDataToUpdate: Prisma.ProfileUpdateInput,
+  techStack?: TechStack,
 ) {
   const updatedUser = await prisma.profile.update({
     where: {
@@ -135,6 +128,18 @@ export async function updateUserData(
     },
     data: userDataToUpdate,
   })
+  // update user techStack
+  if (techStack) {
+    await prisma.technologyOnProfile.deleteMany({
+      where: {
+        profileId: updatedUser.id,
+      },
+    })
+    for (const tech of techStack) {
+      await upsertTechnology(tech.techName)
+      await createProfileToTechConnection(updatedUser.id, tech.techName)
+    }
+  }
   if (userDataToUpdate?.state) {
     sendDiscordNotificationToModeratorChannel(
       `User's ${updatedUser.fullName} profile has got new status: ${userDataToUpdate.state}! Profile: ${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/dashboard/profile/${updatedUser.userId}`,
@@ -167,6 +172,33 @@ export async function getProfileByUserEmail(email: string) {
   }
 
   return null
+}
+
+// Due to many to many relationship these 2 functions are kinda necessary to properly update user techstack.
+export async function upsertTechnology(techName: string) {
+  const technology = await prisma.technology.upsert({
+    create: {
+      name: techName,
+    },
+    update: {},
+    where: {
+      name: techName,
+    },
+  })
+  return technology
+}
+
+export async function createProfileToTechConnection(
+  profileId: string,
+  techName: string,
+) {
+  const technologyOnProfile = await prisma.technologyOnProfile.create({
+    data: {
+      techName: techName,
+      profileId: profileId,
+    },
+  })
+  return technologyOnProfile
 }
 
 // Hence almost all of those queries had such includeObject, i've decided to simply reuse it.
