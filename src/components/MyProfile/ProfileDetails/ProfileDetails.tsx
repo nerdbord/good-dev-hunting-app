@@ -1,11 +1,7 @@
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import styles from './ProfileDetails.module.scss'
 
-const ProfileDetails = async ({
-  profile,
-}: {
-  profile: ProfileModelSimplified
-}) => {
+const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
   return (
     <>
       <section className={styles.container}>
@@ -15,7 +11,7 @@ const ProfileDetails = async ({
             <div className={styles.techStackList}>
               {profile?.techStack.map((item, index) => (
                 <p key={index} className={styles.techStackItem}>
-                  {item}
+                  {item.name}
                 </p>
               ))}
             </div>

@@ -50,6 +50,14 @@ export async function PUT(request: NextRequest) {
             where: { name: updatedDataPayload.city.name },
           },
         },
+        techStack: {
+          connectOrCreate: updatedDataPayload.techStack.map((tech) => ({
+            where: { name: tech.techName },
+            create: {
+              name: tech.techName,
+            },
+          })),
+        },
         openForCityRelocation: updatedDataPayload.openForCityRelocation,
         remoteOnly: updatedDataPayload.remoteOnly,
         position: updatedDataPayload.position,
@@ -58,11 +66,7 @@ export async function PUT(request: NextRequest) {
         state: PublishingState.PENDING,
       }
 
-      const updatedUser = await updateUserData(
-        foundProfile.id,
-        updatedData,
-        updatedDataPayload.techStack,
-      )
+      const updatedUser = await updateUserData(foundProfile.id, updatedData)
 
       return NextResponse.json(updatedUser, { status: 200 })
     } else {

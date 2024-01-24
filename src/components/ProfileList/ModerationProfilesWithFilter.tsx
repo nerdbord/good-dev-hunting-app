@@ -1,6 +1,6 @@
 'use client'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'
@@ -9,7 +9,7 @@ import { ModerationProfileListItem } from './ModerationProfileListItem'
 import styles from './ProfileList.module.scss'
 
 type Props = {
-  profiles: ProfileModelSimplified[]
+  profiles: ProfileModel[]
 }
 
 export default function ModerationProfilesWithFilters({
@@ -18,14 +18,12 @@ export default function ModerationProfilesWithFilters({
   const { publishingStateFilter, setPendingStateCounter, searchEmailValue } =
     useModerationFilter()
 
-  const filteredProfiles = profiles.filter(
-    (profile: ProfileModelSimplified) => {
-      if (searchEmailValue) {
-        return profile.userEmail.includes(searchEmailValue)
-      }
-      return profile.state === publishingStateFilter
-    },
-  )
+  const filteredProfiles = profiles.filter((profile: ProfileModel) => {
+    if (searchEmailValue) {
+      return profile.userEmail.includes(searchEmailValue)
+    }
+    return profile.state === publishingStateFilter
+  })
 
   const hasResults = filteredProfiles.length > 0
 

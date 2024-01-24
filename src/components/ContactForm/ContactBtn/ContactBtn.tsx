@@ -1,15 +1,11 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
 import ContactSuccessModal from '../ContactSuccessModal/ContactSuccessModal'
 
-const ContactBtn = ({
-  userProfile,
-}: {
-  userProfile: ProfileModelSimplified
-}) => {
+const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
   const { showModal, closeModal } = useModal()
 
   return (

@@ -1,4 +1,4 @@
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactForm from '../ContactForm'
 import styles from './ContactFormModal.module.scss'
 
@@ -7,7 +7,7 @@ export default function ContactFormModal({
   closeModal,
   showSuccessMsg,
 }: {
-  userProfile: ProfileModelSimplified
+  userProfile: ProfileModel
   closeModal: () => void
   showSuccessMsg: () => void
 }) {

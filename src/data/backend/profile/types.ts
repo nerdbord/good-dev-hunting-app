@@ -1,4 +1,3 @@
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 import { Prisma } from '@prisma/client'
 
 export type ProfileWithRelations = Prisma.ProfileGetPayload<{
@@ -10,25 +9,11 @@ export type ProfileWithRelations = Prisma.ProfileGetPayload<{
     }
     country: true
     city: true
-    techStack: {
-      include: {
-        technology: true
-      }
-    }
+    techStack: true
   }
 }>
-
-export interface ProfileModel
-  extends Omit<ProfileModelSimplified, 'techStack'> {
-  techStack: TechnologyOnProfileModel[]
-}
 
 export interface TechnologyModel {
   id: string
   name: string
-}
-
-export interface TechnologyOnProfileModel {
-  techName: string
-  profileId: string
 }
