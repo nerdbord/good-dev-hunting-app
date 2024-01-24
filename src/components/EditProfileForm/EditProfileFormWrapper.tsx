@@ -1,6 +1,5 @@
 'use client'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
-import { TechnologyModel } from '@/data/backend/profile/types'
 import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
@@ -24,7 +23,7 @@ export interface EditProfileFormValues {
   position: string
   seniority: string
   employment: EmploymentType
-  techStack: TechnologyModel[]
+  techStack: string[]
   githubUsername: string | null
   state: PublishingState
 }
@@ -85,7 +84,7 @@ const EditProfileFormWrapper = ({
       remoteOnly: values.remoteOnly,
       position: values.position,
       seniority: values.seniority,
-      techStack: values.techStack.map((tech) => ({ techName: tech.name })),
+      techStack: values.techStack.map((tech) => ({ techName: tech })),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
