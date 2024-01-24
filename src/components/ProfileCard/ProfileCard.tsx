@@ -33,31 +33,35 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
         className={`${styles.frame} ${
           withStateStatus && styles.moderationFrame
         }`}
-        onClick={onClick}
+        onClick={!withStateStatus ? onClick : undefined}
       >
-        <div className={styles.container} data-test-id="profileContainer">
-          <div className={styles.profile}>
-            <Image
-              src={data.avatarUrl || ''}
-              width={78}
-              height={78}
-              alt="user's avatar"
-              className={styles.avatar}
-            />
+        <div
+          className={styles.profileWrapper}
+          onClick={withStateStatus ? onClick : undefined}
+        >
+          <div className={styles.container} data-test-id="profileContainer">
+            <div className={styles.profile}>
+              <Image
+                src={data.avatarUrl || ''}
+                width={78}
+                height={78}
+                alt="user's avatar"
+                className={styles.avatar}
+              />
+            </div>
+            <div className={styles.data}>
+              <p className={styles.name}>{data.fullName}</p>
+              <p className={`${getStackClasses} ${styles.wordWrap}`}>
+                {data.seniority} {data.position}&nbsp;Developer
+              </p>
+              <p className={styles.location}>
+                {data.country.name}, {data.city.name}&nbsp;/&nbsp;
+                {data.remoteOnly && 'Remote'}
+              </p>
+            </div>
           </div>
-          <div className={styles.data}>
-            <p className={styles.name}>{data.fullName}</p>
-            <p className={`${getStackClasses} ${styles.wordWrap}`}>
-              {data.seniority} {data.position}&nbsp;Developer
-            </p>
-            <p className={styles.location}>
-              {data.country.name}, {data.city.name}&nbsp;/&nbsp;
-              {data.remoteOnly && 'Remote'}
-            </p>
-          </div>
+          <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
         </div>
-        <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
-
         {withStateStatus && (
           <div className={styles.detailsWrapper}>
             <div className={styles.detailsContent}>
