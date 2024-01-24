@@ -1,6 +1,5 @@
 .wrapper {
   position: relative;
-  padding: 24px 8% 35px;
   @media (max-width: 768px) {
     padding: 0;
   }
@@ -9,7 +8,6 @@
 .logOutBtn {
   color: var(--Main-03, #a687ff);
   text-align: center;
-  font-family: IBM Plex Sans;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

@@ -1,7 +1,7 @@
 'use client'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { useFilters } from '@/contexts/FilterContext'
-import React, { useState } from 'react'
+import React from 'react'
 import { JobSpecialization } from '../ProfileList/profile-data'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
@@ -30,9 +30,9 @@ const filterLists = {
 }
 
 const Filters: React.FC = () => {
-  const [selectedButton, setSelectedButton] = useState<string | null>(null)
   const {
     setJobSpecializationFilter,
+    jobSpecializationFilter,
     technologyFilter,
     setTechnologyFilter,
     seniorityFilter,
@@ -44,13 +44,13 @@ const Filters: React.FC = () => {
   } = useFilters()
 
   const handleButtonClick = (newStack: string) => {
-    if (newStack === selectedButton) {
-      setSelectedButton(null)
-      setJobSpecializationFilter('')
+    let newPos: string[]
+    if (jobSpecializationFilter.includes(newStack)) {
+      newPos = jobSpecializationFilter.filter((x) => x !== newStack)
     } else {
-      setSelectedButton(newStack)
-      setJobSpecializationFilter(newStack)
+      newPos = [...jobSpecializationFilter, newStack]
     }
+    setJobSpecializationFilter(newPos)
   }
 
   const handleSelectMulti = (
@@ -127,21 +127,27 @@ const Filters: React.FC = () => {
         <DevTypeButton
           variant={JobSpecialization.Frontend}
           onClick={() => handleButtonClick(JobSpecialization.Frontend)}
-          isPressed={selectedButton === JobSpecialization.Frontend}
+          isPressed={jobSpecializationFilter.includes(
+            JobSpecialization.Frontend,
+          )}
         >
           Frontend
         </DevTypeButton>
         <DevTypeButton
           variant={JobSpecialization.Backend}
           onClick={() => handleButtonClick(JobSpecialization.Backend)}
-          isPressed={selectedButton === JobSpecialization.Backend}
+          isPressed={jobSpecializationFilter.includes(
+            JobSpecialization.Backend,
+          )}
         >
           Backend
         </DevTypeButton>
         <DevTypeButton
           variant={JobSpecialization.Fullstack}
           onClick={() => handleButtonClick(JobSpecialization.Fullstack)}
-          isPressed={selectedButton === JobSpecialization.Fullstack}
+          isPressed={jobSpecializationFilter.includes(
+            JobSpecialization.Fullstack,
+          )}
         >
           Fullstack
         </DevTypeButton>

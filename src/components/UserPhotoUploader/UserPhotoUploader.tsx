@@ -14,20 +14,27 @@ export const UserPhotoUploader = () => {
   const { imageUploadError, setImageUploadError, setSelectedFile } =
     useUploadContext()
   const fileInputRef = React.useRef<HTMLInputElement>(null)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setImageUploadError(false)
     const file = event.target.files?.[0]
 
     if (file && file.type.match(/image-*/)) {
-      setSelectedFile(file)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setUserImage(reader.result as string)
+      if (file.size <= 4 * 1024 * 1024) {
+        setSelectedFile(file)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setUserImage(reader.result as string)
+        }
+        reader.readAsDataURL(file)
+      } else {
+        setImageUploadError(true)
+        setErrorMsg('Choose picture smaller than 4MB')
       }
-      reader.readAsDataURL(file)
     } else {
       setImageUploadError(true)
+      setErrorMsg('Picture failed to upload, try again')
     }
 
     if (fileInputRef.current) {
@@ -42,7 +49,7 @@ export const UserPhotoUploader = () => {
         {imageUploadError && (
           <div className={styles.errorMessage}>
             <ErrorIcon />
-            Picture failed to upload. Try again
+            {errorMsg}
           </div>
         )}
         <div className={styles.contentWrapper}>
@@ -52,6 +59,7 @@ export const UserPhotoUploader = () => {
             alt="User uploaded"
             width={100}
             height={100}
+            object-fit="cover"
           />
           <div className={styles.buttonsWrapper}>
             <Button variant="secondary">

@@ -1,9 +1,9 @@
 .container {
-  max-width: 1240px; //figma width
+  max-width: 1240px;
   height: 100%;
   margin: 0 auto;
+  padding: 0 16px;
   @include mobile {
-    padding: 0 16px;
     width: 100%;
   }
 }
