@@ -57,21 +57,26 @@ const Filters: React.FC = () => {
     option: string,
     buttonType: keyof typeof JobOfferFilters,
   ): void => {
-    if (buttonType === JobOfferFilters.seniority) {
-      const newFilters = manageFilter(seniorityFilter)
-      setSeniorityFilter(newFilters)
-    }
-    if (buttonType === JobOfferFilters.availability) {
-      const newFilters = manageFilter(availabilityFilter)
-      setAvailabilityFilter(newFilters)
-    }
-    if (buttonType === JobOfferFilters.location) {
-      const newFilters = manageFilter(locationFilter)
-      setLocationFilter(newFilters)
-    }
-    if (buttonType === JobOfferFilters.technology) {
-      const newFilters = manageFilter(technologyFilter)
-      setTechnologyFilter(newFilters)
+    let newFilters: string[]
+    switch (buttonType) {
+      case JobOfferFilters.seniority:
+        newFilters = manageFilter(seniorityFilter)
+        setSeniorityFilter(newFilters)
+        break
+      case JobOfferFilters.availability:
+        newFilters = manageFilter(availabilityFilter)
+        setAvailabilityFilter(newFilters)
+        break
+      case JobOfferFilters.location:
+        newFilters = manageFilter(locationFilter)
+        setLocationFilter(newFilters)
+        break
+      case JobOfferFilters.technology:
+        newFilters = manageFilter(technologyFilter)
+        setTechnologyFilter(newFilters)
+        break
+      default:
+        break
     }
 
     function manageFilter(filterList: string[]): string[] {
