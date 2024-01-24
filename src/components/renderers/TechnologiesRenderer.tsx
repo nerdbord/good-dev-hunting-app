@@ -1,8 +1,8 @@
 'use client'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 type Props = {
-  data: ProfileModelSimplified
+  data: ProfileModel
   classes: string
 }
 
@@ -13,7 +13,7 @@ export default function TechnologiesRenderer({ data, classes }: Props) {
 
     if (data.techStack.length <= sliceCount) {
       return data.techStack.map((tech, index) => (
-        <span key={index}>{tech}</span>
+        <span key={index}>{tech.name}</span>
       ))
     } else {
       const displayedTechnologies = data.techStack.slice(0, sliceCount)
@@ -21,7 +21,7 @@ export default function TechnologiesRenderer({ data, classes }: Props) {
       return (
         <>
           {displayedTechnologies.map((tech, index) => (
-            <span key={index}>{tech}</span>
+            <span key={index}>{tech.name}</span>
           ))}
           <span>{`+ ${othersCount} Others`}</span>
         </>

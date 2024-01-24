@@ -2,7 +2,7 @@ import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useFormik } from 'formik'
 import styles from './ContactForm.module.scss'
@@ -13,7 +13,7 @@ export default function ContactForm({
   closeModal,
   showSuccessMsg,
 }: {
-  userProfile: ProfileModelSimplified
+  userProfile: ProfileModel
   closeModal: () => void
   showSuccessMsg: () => void
 }) {

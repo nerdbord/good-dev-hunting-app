@@ -1,11 +1,7 @@
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import styles from './UserProfileDetails.module.scss'
 
-const UserProfileDetails = ({
-  userProfile,
-}: {
-  userProfile: ProfileModelSimplified
-}) => {
+const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
   return (
     <>
       <div className={styles.container}>
@@ -15,7 +11,7 @@ const UserProfileDetails = ({
             <div className={styles.techStackList}>
               {userProfile?.techStack.map((item, index) => (
                 <div key={index} className={styles.techStackItem}>
-                  {item}
+                  {item.name}
                 </div>
               ))}
             </div>

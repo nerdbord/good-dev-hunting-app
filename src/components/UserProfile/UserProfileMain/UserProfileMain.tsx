@@ -1,12 +1,12 @@
 import { countries } from '@/data/frontend/profile/countries/countries'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {
-  userProfile: ProfileModelSimplified
+  userProfile: ProfileModel
 }
 const UserProfileMain = ({
   userProfile,

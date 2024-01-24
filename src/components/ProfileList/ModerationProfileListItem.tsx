@@ -6,7 +6,7 @@ import { JobSpecialization } from '@/components/ProfileList/profile-data'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { useModal } from '@/contexts/ModalContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
 import { AppRoutes } from '@/utils/routes'
@@ -22,7 +22,7 @@ import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
 const cx = classNames.bind(styles)
 
 type StateStatusProps = {
-  profile: ProfileModelSimplified
+  profile: ProfileModel
 }
 
 export function StateStatus({ profile }: StateStatusProps) {
@@ -90,7 +90,7 @@ export function StateStatus({ profile }: StateStatusProps) {
 }
 
 export const ModerationProfileListItem: React.FC<{
-  profile: ProfileModelSimplified
+  profile: ProfileModel
 }> = ({ profile }) => {
   const router = useRouter()
 

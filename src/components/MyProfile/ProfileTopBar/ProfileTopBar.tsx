@@ -2,14 +2,14 @@ import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
 import { ConnectToNerdbordButton } from '@/components/ConnectToNerbordButton/ConnectToNerdbordButton'
 import { EditProfileButton } from '@/components/EditProfileButton'
 import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import styles from './ProfileTopBar.module.scss'
 
 const ProfileTopBar = async ({
   profile,
   isConnectedToNerdbord,
 }: {
-  profile: ProfileModelSimplified
+  profile: ProfileModel
   isConnectedToNerdbord: boolean
 }) => {
   return (

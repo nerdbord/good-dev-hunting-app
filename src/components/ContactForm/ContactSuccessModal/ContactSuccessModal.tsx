@@ -1,5 +1,5 @@
 'use client'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import { Button } from '../../Button/Button'
 import styles from './ContactSuccessModal.module.scss'
 
@@ -7,7 +7,7 @@ export default function ContactSuccessModal({
   userProfile,
   onClose,
 }: {
-  userProfile: ProfileModelSimplified
+  userProfile: ProfileModel
   onClose: () => void
 }) {
   const getName = (name: string) => {

@@ -2,7 +2,7 @@ import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import { countries } from '@/data/frontend/profile/countries/countries'
 import { mapEmploymentType } from '@/data/frontend/profile/mappers'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
 
@@ -10,7 +10,7 @@ const ProfileMain = async ({
   profile,
   isConnectedToNerdbord,
 }: {
-  profile: ProfileModelSimplified
+  profile: ProfileModel
   isConnectedToNerdbord: boolean
 }) => {
   const githubUsername = profile.githubUsername

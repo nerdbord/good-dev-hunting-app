@@ -1,7 +1,7 @@
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const filterByPosition =
-  (positionFilter: string[] | null) => (profile: ProfileModelSimplified) => {
+  (positionFilter: string[] | null) => (profile: ProfileModel) => {
     return (
       !positionFilter ||
       positionFilter.length === 0 ||
@@ -10,7 +10,7 @@ export const filterByPosition =
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string[] | null) => (profile: ProfileModelSimplified) => {
+  (seniorityFilter: string[] | null) => (profile: ProfileModel) => {
     return (
       !seniorityFilter ||
       seniorityFilter.length === 0 ||
@@ -19,7 +19,7 @@ export const filterBySeniority =
   }
 
 export const filterByLocation =
-  (locationFilter: string[] | null) => (profile: ProfileModelSimplified) => {
+  (locationFilter: string[] | null) => (profile: ProfileModel) => {
     return (
       !locationFilter ||
       locationFilter.length === 0 ||
@@ -28,17 +28,18 @@ export const filterByLocation =
   }
 
 export const filterByTechnology =
-  (technologyFilter: string[] | null) => (profile: ProfileModelSimplified) => {
+  (technologyFilter: string[] | null) => (profile: ProfileModel) => {
     return (
       !technologyFilter ||
       technologyFilter.length === 0 ||
-      technologyFilter.every((tech) => profile.techStack.includes(tech))
+      technologyFilter.every((tech) =>
+        profile.techStack.map((tech) => tech.name).includes(tech),
+      )
     )
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string[] | null) =>
-  (profile: ProfileModelSimplified) => {
+  (availabilityFilter: string[] | null) => (profile: ProfileModel) => {
     return (
       !availabilityFilter ||
       availabilityFilter.length === 0 ||

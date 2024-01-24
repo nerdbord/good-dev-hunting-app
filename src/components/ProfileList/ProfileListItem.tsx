@@ -1,12 +1,10 @@
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import ProfileCard from '../ProfileCard/ProfileCard'
 
-export const ProfileListItem: React.FC<{ data: ProfileModelSimplified }> = ({
-  data,
-}) => {
+export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
   const router = useRouter()
 
   return (

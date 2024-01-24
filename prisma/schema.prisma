@@ -38,24 +38,16 @@ model Profile {
   remoteOnly                Boolean
   position                  String
   seniority                 String
-  techStack                 TechnologyOnProfile[]
+  techStack                 Technology[]      
   employmentType            EmploymentType
   state                     PublishingState   @default(DRAFT)
   rejectionReasons          RejectionReason[]
 }
 
 model Technology {
+  id          String                 @id @default(uuid())
   name        String                 @unique
-  profiles    TechnologyOnProfile[]
-}
-
-model TechnologyOnProfile {
-  techName    String        
-  profileId   String        
-  technology  Technology    @relation(fields: [techName], references: [name])
-  profile     Profile       @relation(fields: [profileId], references: [id])
-  
-  @@id([techName, profileId])
+  profiles    Profile[]
 }
 
 model GitHubDetails {

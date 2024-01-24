@@ -1,6 +1,6 @@
 'use client'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import { ChangeEvent, useRef, useState } from 'react'
 import { Button } from '../Button/Button'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
@@ -9,7 +9,7 @@ import useOutsideClick from '@/hooks/useOutsideClick'
 import styles from './SearchWrapper.module.scss'
 
 type Props = {
-  profiles: ProfileModelSimplified[]
+  profiles: ProfileModel[]
 }
 
 export default function SearchWrapper({ profiles = [] }: Props) {

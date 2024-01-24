@@ -1,9 +1,9 @@
 import { ProfileWithRelations } from '@/data/backend/profile/types'
-import { ProfileModelSimplified } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
-export const serializeProfileToProfileModelSimplified = (
+export const serializeProfileToProfileModel = (
   data: ProfileWithRelations,
-): ProfileModelSimplified => {
+): ProfileModel => {
   return {
     id: data.id,
     bio: data.bio,
@@ -22,7 +22,10 @@ export const serializeProfileToProfileModelSimplified = (
     position: data.position,
     remoteOnly: data.remoteOnly,
     seniority: data.seniority,
-    techStack: data.techStack.map((tech) => tech.techName),
+    techStack: data.techStack.map((tech) => ({
+      id: tech.id,
+      name: tech.name,
+    })),
     userId: data.userId,
     avatarUrl: data.user.avatarUrl,
     githubUsername: data.user.githubDetails?.username || null,

@@ -1,4 +1,4 @@
-import { serializeProfileToProfileModelSimplified } from '@/backend/profile/profile.serializer'
+import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
 import {
   createUserProfile,
   doesUserProfileExist,
@@ -30,8 +30,7 @@ export async function POST(request: NextRequest) {
 
     if (!foundUser) {
       const createdProfile = await createUserProfile(email, userData)
-      const serializedProfile =
-        serializeProfileToProfileModelSimplified(createdProfile)
+      const serializedProfile = serializeProfileToProfileModel(createdProfile)
 
       return NextResponse.json({
         status: 201,
