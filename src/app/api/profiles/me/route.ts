@@ -28,7 +28,11 @@ export async function PUT(request: NextRequest) {
     const updatedDataPayload: CreateProfilePayload = await request.json()
     const { email } = await authorizeUser()
     const foundProfile = await doesUserProfileExist(email)
+
     if (foundProfile) {
+      const updatedTechStack = updatedDataPayload.techStack.map(
+        (tech) => tech.techName,
+      )
       const updatedData: Prisma.ProfileUpdateInput = {
         fullName: updatedDataPayload.fullName,
         linkedIn: updatedDataPayload.linkedIn,
@@ -51,6 +55,11 @@ export async function PUT(request: NextRequest) {
           },
         },
         techStack: {
+          disconnect: foundProfile.techStack
+            .filter((tech) => !updatedTechStack.includes(tech.name))
+            .map((tech) => ({
+              name: tech.name,
+            })),
           connectOrCreate: updatedDataPayload.techStack.map((tech) => ({
             where: { name: tech.techName },
             create: {
