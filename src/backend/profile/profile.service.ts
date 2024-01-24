@@ -174,6 +174,46 @@ export async function getProfileByUserEmail(email: string) {
   return null
 }
 
+export async function getPublishedProfiles(take: number) {
+  const publishedProfiles = await prisma.profile.findMany({
+    take,
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    include: includeObject,
+  })
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModelSimplified,
+  )
+  return serializedProfile
+}
+
+export async function getRandomProfiles(profilesCount: number) {
+  const totalProfiles = await prisma.profile.count()
+
+  if (profilesCount > totalProfiles) {
+    return getPublishedProfiles(6)
+  }
+
+  const maxSkipValue = totalProfiles - profilesCount
+  const skipValue =
+    maxSkipValue > 0 ? Math.floor(Math.random() * maxSkipValue) : 0
+
+  const randomRecords = await prisma.profile.findMany({
+    take: profilesCount,
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    orderBy: {
+      id: 'asc',
+    },
+    skip: skipValue,
+    include: includeObject,
+  })
+
+  return randomRecords.map(serializeProfileToProfileModelSimplified)
+}
+
 // Due to many to many relationship these 2 functions are kinda necessary to properly update user techstack.
 export async function upsertTechnology(techName: string) {
   const technology = await prisma.technology.upsert({

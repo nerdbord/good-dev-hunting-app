@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <FiltersProvider>
       <Filters />
-      {/* @ts-expect-error Server Component */}
       <ProfileList />
     </FiltersProvider>
   )

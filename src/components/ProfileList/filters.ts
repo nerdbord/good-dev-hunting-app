@@ -1,8 +1,12 @@
 import { ProfileModelSimplified } from '@/data/frontend/profile/types'
 
 export const filterByPosition =
-  (positionFilter: string | null) => (profile: ProfileModelSimplified) => {
-    return !positionFilter || profile.position === positionFilter
+  (positionFilter: string[] | null) => (profile: ProfileModelSimplified) => {
+    return (
+      !positionFilter ||
+      positionFilter.length === 0 ||
+      positionFilter.some((pos) => profile.position.includes(pos))
+    )
   }
 
 export const filterBySeniority =

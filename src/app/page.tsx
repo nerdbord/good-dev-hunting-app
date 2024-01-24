@@ -9,24 +9,22 @@ import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
 import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 import FAQSection from '@/components/landing-page/FAQSection/FAQSection'
 import LandingFooter from '@/components/landing-page/LandingFooter/LandingFooter'
+import { Container } from '@/components/Container/Container'
 
 const Page: React.FC = () => {
   return (
-    <>
-      {/* @ts-expect-error Server Component */}
+    <main className={styles.landing_background}>
       <LandingHeader />
-      <main className={styles.landing_background}>
-        <LandingContainer>
-          <Hero />
-          <HowItWorks />
-          <UseYourProfile />
-          <MeetTeam />
-          <TalentSection />
-          <FAQSection />
-        </LandingContainer>
-      </main>
+      <Container>
+        <Hero />
+        <HowItWorks />
+        <UseYourProfile />
+        <MeetTeam />
+        <TalentSection />
+        <FAQSection />
+      </Container>
       <LandingFooter />
-    </>
+    </main>
   )
 }
 export default Page
