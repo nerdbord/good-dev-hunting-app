@@ -39,12 +39,15 @@ const LandingHeader = async () => {
         <div className={styles.headerContent}>
           <Logo />
           <div className={styles.frameButtons}>
-            <div className={styles.buttonBox}>
+            <div className={styles.buttonBoxDesktop}>
               <FindTalentsBtn variant={'secondary'}>
                 Find talents
               </FindTalentsBtn>
               <GithubLoginButton />
               <CreateProfileBtn />
+            </div>
+            <div className={styles.buttonBoxMobile}>
+              <GithubLoginButton />
             </div>
           </div>
         </div>

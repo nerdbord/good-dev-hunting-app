@@ -205,11 +205,33 @@ export async function getProfileByUserEmail(email: string) {
   return null
 }
 
-export async function getRandonProfiles(profilesCount: number) {
+export async function getPublishedProfiles(take: number) {
+  const publishedProfiles = await prisma.profile.findMany({
+    take,
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    include: {
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+      country: true,
+      city: true,
+    },
+  })
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
+  return serializedProfile
+}
+
+export async function getRandomProfiles(profilesCount: number) {
   const totalProfiles = await prisma.profile.count()
 
-  if (profilesCount >= totalProfiles) {
-    return getPublishedProfilesPayload()
+  if (profilesCount > totalProfiles) {
+    return getPublishedProfiles(6)
   }
 
   const maxSkipValue = totalProfiles - profilesCount
