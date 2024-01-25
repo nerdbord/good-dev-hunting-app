@@ -28,19 +28,21 @@ const WorkInformation = () => {
   }
 
   const handleTechSelect = (tech: DropdownOption) => {
-    if (!values.techStack.includes(tech)) {
+    if (!values[WorkInformationFormKeys.TECH_STACK].includes(tech)) {
       setFieldValue(WorkInformationFormKeys.TECH_STACK, [
-        ...values.techStack,
+        ...values[WorkInformationFormKeys.TECH_STACK],
         tech,
       ])
     }
   }
 
   const handleTechRemove = (techToRemove: DropdownOption) => {
-    if (Array.isArray(values.techStack)) {
+    if (Array.isArray(values[WorkInformationFormKeys.TECH_STACK])) {
       setFieldValue(
         WorkInformationFormKeys.TECH_STACK,
-        values.techStack.filter((tech) => tech.value !== techToRemove.value),
+        values[WorkInformationFormKeys.TECH_STACK].filter(
+          (tech) => tech.value !== techToRemove.value,
+        ),
       )
     }
   }
@@ -90,7 +92,7 @@ const WorkInformation = () => {
           /* TODO: Fix it */
           // error={
           //   touched[WorkInformationFormKeys.TECH_STACK] &&
-          //   errors[WorkInformationFormKeys.TECH_STACK]?.value
+          //   errors[WorkInformationFormKeys.TECH_STACK]
           // }
           error={''}
         >
@@ -113,34 +115,34 @@ const WorkInformation = () => {
         <div className={styles.employmentType}>
           Employment type
           <CheckboxInput
-            id="fulltime"
+            id={WorkInformationFormKeys.EMPLOYMENT}
             label="Full-time"
             checked={
               values[WorkInformationFormKeys.EMPLOYMENT] ===
               EmploymentType.FULL_TIME
             }
             onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
-            name="fulltime"
+            name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
-            id="parttime"
+            id={WorkInformationFormKeys.EMPLOYMENT}
             label="Part-time"
             checked={
               values[WorkInformationFormKeys.EMPLOYMENT] ===
               EmploymentType.PART_TIME
             }
             onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
-            name="parttime"
+            name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
-            id="contract"
+            id={WorkInformationFormKeys.EMPLOYMENT}
             label="Contract"
             checked={
               values[WorkInformationFormKeys.EMPLOYMENT] ===
               EmploymentType.CONTRACT
             }
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
-            name="contract"
+            name={WorkInformationFormKeys.EMPLOYMENT}
           />
         </div>
       </div>
