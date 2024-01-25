@@ -1,11 +1,11 @@
 'use client'
-import styles from './DropdownBio.module.scss'
-import React, { useEffect, useState, useRef } from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
-import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { useFormikContext } from 'formik'
+import 'material-icons/iconfont/material-icons.css'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
+import styles from './DropdownBio.module.scss'
 
 export const DropdownSelect = ({
   label,
@@ -110,7 +110,7 @@ export const DropdownSelect = ({
                   }
                   data-testid={optionTestId}
                 >
-                  {option.value}
+                  {option.name}
                 </div>
               </label>
             ))}

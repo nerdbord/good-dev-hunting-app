@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
-import styles from './TechStackInput.module.scss'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
-import Tooltip from '../Tooltip/Tooltip'
-import { useFormikContext } from 'formik'
-import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
-import classNames from 'classnames/bind'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { initialDropdownOption } from '@/contexts/FilterContext'
 import technologies from '@/data/frontend/technologies/data'
+import classNames from 'classnames/bind'
+import { useFormikContext } from 'formik'
+import React, { useEffect, useRef, useState } from 'react'
+import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
+import Tooltip from '../Tooltip/Tooltip'
+import styles from './TechStackInput.module.scss'
 const cx = classNames.bind(styles)
 
 interface TechStackInputProps {
