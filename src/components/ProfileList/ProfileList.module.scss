@@ -1,17 +1,3 @@
-.mainContainer {
-  background: #0f1217;
-  display: flex;
-
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  @include mobile {
-    width: 100%;
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-
 .profileListCont {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -31,6 +17,7 @@
 }
 
 .profileCards {
+  margin-top: 40px;
   @include mobile {
     width: 100%;
   }
@@ -44,7 +31,6 @@
   font-size: 14px;
   line-height: 20px;
   color: #e2eaf1;
-  margin-top: 20px;
 }
 
 .moderationProfiles {

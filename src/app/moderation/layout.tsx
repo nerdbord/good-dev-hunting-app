@@ -9,7 +9,6 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <DashboardHeader />
       <Container>{children}</Container>
     </>

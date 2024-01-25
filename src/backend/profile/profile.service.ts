@@ -204,3 +204,59 @@ export async function getProfileByUserEmail(email: string) {
 
   return null
 }
+
+export async function getPublishedProfiles(take: number) {
+  const publishedProfiles = await prisma.profile.findMany({
+    take,
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    include: {
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+      country: true,
+      city: true,
+    },
+  })
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
+  return serializedProfile
+}
+
+export async function getRandomProfiles(profilesCount: number) {
+  const totalProfiles = await prisma.profile.count()
+
+  if (profilesCount > totalProfiles) {
+    return getPublishedProfiles(6)
+  }
+
+  const maxSkipValue = totalProfiles - profilesCount
+  const skipValue =
+    maxSkipValue > 0 ? Math.floor(Math.random() * maxSkipValue) : 0
+
+  const randomRecords = await prisma.profile.findMany({
+    take: profilesCount,
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    orderBy: {
+      id: 'asc',
+    },
+    skip: skipValue,
+    include: {
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+      country: true,
+      city: true,
+    },
+  })
+
+  return randomRecords.map(serializeProfileToProfileModel)
+}

@@ -16,7 +16,7 @@ export const ModerationProfileListItem: React.FC<{ profile: ProfileModel }> = ({
       withStateStatus
       data={profile}
       onClick={() =>
-        router.push(`${AppRoutes.dashboardProfile}/${profile.userId}`)
+        router.push(`${AppRoutes.moderationProfile}/${profile.userId}`)
       }
     />
   )

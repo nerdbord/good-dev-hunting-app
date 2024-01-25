@@ -2,8 +2,16 @@ import style from './UseYourProfile.module.scss'
 import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
 import Image from 'next/image'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { findUserByEmail } from '@/backend/user/user.service'
+import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 
-const UseYourProfile = () => {
+const UseYourProfile = async () => {
+  const session = await getServerSession(authOptions)
+
+  const user = session ? await findUserByEmail(session.user.email) : null
+
   return (
     <section id="UseYourProfile" className={style.container}>
       <div className={style.profileImg}>
@@ -16,7 +24,7 @@ const UseYourProfile = () => {
           with people with dev stuff to do.
         </p>
         <div className={style.btn}>
-          <CreateProfileBtn />
+          {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
         </div>
       </div>
     </section>
