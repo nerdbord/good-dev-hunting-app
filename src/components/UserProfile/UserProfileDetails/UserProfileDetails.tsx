@@ -17,7 +17,9 @@ const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
               ))}
             </div>
           </div>
-          <div className={styles.gitActivities}>
+
+          {/* this feature below will be added in the future */}
+          {/*         <div className={styles.gitActivities}>
             <div className={styles.title}>Git activity</div>
             <div className={styles.gitActivityBox}>
               <div className={styles.gitActivity}>Commits</div>
@@ -27,7 +29,7 @@ const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
               <div className={styles.gitActivity}>Pull requests</div>
               <div className={styles.gitActivityValue}>48</div>
             </div>
-          </div>
+          </div>  */}
         </div>
         <div className={styles.right}>
           <div className={styles.title}>Bio</div>

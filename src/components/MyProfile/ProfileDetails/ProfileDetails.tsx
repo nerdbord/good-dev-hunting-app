@@ -17,17 +17,19 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
               ))}
             </div>
           </div>
-          <div className={styles.gitActivities}>
-            <p className={styles.title}>Git activity</p>
+
+          {/* this feature below will be added in the future */}
+          {/*         <div className={styles.gitActivities}>
+            <div className={styles.title}>Git activity</div>
             <div className={styles.gitActivityBox}>
-              <p className={styles.gitActivity}>Commits</p>
-              <p className={styles.gitActivityValue}>23</p>
+              <div className={styles.gitActivity}>Commits</div>
+              <div className={styles.gitActivityValue}>23</div>
             </div>
             <div className={styles.gitActivityBox}>
-              <p className={styles.gitActivity}>Pull requests</p>
-              <p className={styles.gitActivityValue}>48</p>
+              <div className={styles.gitActivity}>Pull requests</div>
+              <div className={styles.gitActivityValue}>48</div>
             </div>
-          </div>
+          </div>  */}
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
