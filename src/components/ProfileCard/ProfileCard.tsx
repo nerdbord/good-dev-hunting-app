@@ -5,7 +5,7 @@ import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import Image from 'next/image'
 import { JobSpecialization } from '../ProfileList/profile-data'
 import classNames from 'classnames/bind'
-import { StateStatus } from '../ProfileList/ModerationProfileListItem'
+import { StateStatus } from '../StateStatus/StateStatus'
 
 interface ProfileCardProps {
   onClick?: () => void
