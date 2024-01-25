@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from './TechStackInput.module.scss'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
@@ -6,15 +6,15 @@ import Tooltip from '../Tooltip/Tooltip'
 import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
 import classNames from 'classnames/bind'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { initialDropdownOption } from '@/contexts/FilterContext'
+import technologies from '@/data/frontend/technologies/data'
 const cx = classNames.bind(styles)
 
 interface TechStackInputProps {
-  chips: string[]
-  inputValue: string
-  setInputValue: (value: string) => void
-  filteredSuggestions: string[]
-  onTechSelect: (tech: string) => void
-  onTechRemove: (tech: string) => void
+  chips: DropdownOption[]
+  onTechSelect: (tech: DropdownOption) => void
+  onTechRemove: (tech: DropdownOption) => void
   placeholder: string
   name: string
   label: string
@@ -22,11 +22,15 @@ interface TechStackInputProps {
   tooltipText?: string | null
 }
 
-const TechStackInput: React.FC<TechStackInputProps> = ({
+export const mapTechnologiesToDropdownOptions = (technologies: string[]) => {
+  return technologies.map((tech) => ({
+    name: tech,
+    value: tech,
+  }))
+}
+
+export const TechStackInput: React.FC<TechStackInputProps> = ({
   chips,
-  inputValue,
-  setInputValue,
-  filteredSuggestions,
   onTechSelect,
   onTechRemove,
   placeholder,
@@ -42,19 +46,38 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   const chipsContainerRef = useRef(null)
   const maxChips = 8
 
+  const [inputValue, setInputValue] = useState<DropdownOption>(
+    initialDropdownOption,
+  )
+  const [filteredSuggestions, setFilteredSuggestions] = useState<
+    DropdownOption[]
+  >([])
+
+  useEffect(() => {
+    const filtered = mapTechnologiesToDropdownOptions(technologies).filter(
+      (tech) =>
+        tech.name.toLowerCase().startsWith(inputValue.name.toLowerCase()),
+    )
+    setFilteredSuggestions(filtered.slice(0, 8))
+  }, [inputValue])
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && inputValue && chips.length < maxChips) {
-      if (filteredSuggestions.includes(inputValue)) {
+    if (e.key === 'Enter' && inputValue.name && chips.length < maxChips) {
+      if (
+        filteredSuggestions.find(
+          (suggestion) => suggestion.name === inputValue.name,
+        )
+      ) {
         onTechSelect(inputValue)
-        setInputValue('')
+        setInputValue(initialDropdownOption)
       }
     }
   }
 
-  const handleSuggestionClick = (suggestion: string) => {
+  const handleSuggestionClick = (suggestion: DropdownOption) => {
     if (chips.length < maxChips) {
       onTechSelect(suggestion)
-      setInputValue('')
+      setInputValue(initialDropdownOption)
       inputRef.current?.focus()
     }
   }
@@ -73,22 +96,24 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
   }
 
   const filteredAvailableSuggestions = filteredSuggestions.filter(
-    (suggestion) => !chips.includes(suggestion),
+    (suggestion) => !chips.find((chip) => chip.name === suggestion.name),
   )
 
-  const renderSuggestionItem = (suggestion: string) => {
-    const indexOfMatch = suggestion
+  const renderSuggestionItem = (suggestion: DropdownOption) => {
+    const indexOfMatch = suggestion.name
       .toLowerCase()
-      .indexOf(inputValue.toLowerCase())
+      .indexOf(inputValue.name.toLowerCase())
     if (indexOfMatch === -1) {
-      return <span>{suggestion}</span>
+      return <span>{suggestion.name}</span>
     }
-    const beforeMatch = suggestion.substring(0, indexOfMatch)
-    const matchText = suggestion.substring(
+    const beforeMatch = suggestion.name.substring(0, indexOfMatch)
+    const matchText = suggestion.name.substring(
       indexOfMatch,
-      indexOfMatch + inputValue.length,
+      indexOfMatch + inputValue.name.length,
     )
-    const afterMatch = suggestion.substring(indexOfMatch + inputValue.length)
+    const afterMatch = suggestion.name.substring(
+      indexOfMatch + inputValue.name.length,
+    )
     return (
       <span>
         {beforeMatch}
@@ -123,7 +148,7 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
           {Array.isArray(chips) &&
             chips.map((chip, index) => (
               <div key={index} className={styles.chip}>
-                {chip}
+                {chip.name}
                 <span onClick={() => onTechRemove(chip)}>
                   <CancelIcon />
                 </span>
@@ -135,15 +160,17 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
               type="text"
               className={styles.inputField}
               placeholder={chips.length === 0 ? placeholder : ''}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue.name}
+              onChange={(e) =>
+                setInputValue({ name: e.target.value, value: e.target.value })
+              }
               onKeyDown={handleKeyDown}
               onFocus={handleFocus}
               onBlur={handleCustomBlur}
               name={name}
             />
 
-            {inputValue && (
+            {inputValue.name && (
               <div className={styles.suggestions}>
                 {filteredAvailableSuggestions.map((suggestion, index) => (
                   <div
@@ -162,5 +189,3 @@ const TechStackInput: React.FC<TechStackInputProps> = ({
     </div>
   )
 }
-
-export default TechStackInput

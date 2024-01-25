@@ -8,7 +8,8 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishProfilePopup } from '../TogglePublishPopup/TogglePublishPopup'
 import { PublishingState } from '@prisma/client'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
-import { JobSpecialization } from '@/components/ProfileList/profile-data'
+
+import { JobSpecialization } from '@/data/frontend/profile/types'
 
 interface TogglePublishButtonProps {
   profileId: string

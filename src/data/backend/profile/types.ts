@@ -11,3 +11,17 @@ export type ProfileWithRelations = Prisma.ProfileGetPayload<{
     city: true
   }
 }>
+
+export enum SeniorityLevel {
+  INTERN = 'INTERN',
+  JUNIOR = 'JUNIOR',
+  MIDDLE = 'MIDDLE',
+  SENIOR = 'SENIOR',
+  LEAD_EXPERT = 'LEAD_EXPERT',
+}
+
+export enum Specialization {
+  FRONTEND = 'FRONTEND',
+  BACKEND = 'BACKEND',
+  FULLSTACK = 'FULLSTACK',
+}

@@ -1,49 +1,46 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
+import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { useFormikContext } from 'formik'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { EmploymentType } from '@prisma/client'
 import styles from './WorkInformations.module.scss'
-import TechStackInput from '@/components/TechStackInput/TechStackInput'
 import technologies from '../../../data/frontend/technologies/data'
+import { mappedSeniorityLevel } from '@/data/frontend/profile/mappers'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 
-const filterLists = {
-  seniority: ['Intern', 'Junior', 'Mid', 'Lead / Expert'],
-  position: ['Frontend', 'Backend', 'Fullstack'],
+export enum WorkInformationFormKeys {
+  POSITION = 'position',
+  SENIORITY = 'seniority',
+  TECH_STACK = 'techStack',
+  EMPLOYMENT = 'employment',
 }
 
 const WorkInformation = () => {
   const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
-  const [inputValue, setInputValue] = useState<string>('')
-  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
 
   const handleEmploymentType = (option: string): void => {
-    setFieldValue('employment', option)
+    setFieldValue(WorkInformationFormKeys.EMPLOYMENT, option)
   }
 
-  useEffect(() => {
-    const filtered = technologies.filter((tech) =>
-      tech.toLowerCase().startsWith(inputValue.toLowerCase()),
-    )
-    setFilteredSuggestions(filtered.slice(0, 8))
-  }, [inputValue])
-
-  const handleTechSelect = (tech: string) => {
+  const handleTechSelect = (tech: DropdownOption) => {
     if (!values.techStack.includes(tech)) {
-      setFieldValue('techStack', [...values.techStack, tech])
+      setFieldValue(WorkInformationFormKeys.TECH_STACK, [
+        ...values.techStack,
+        tech,
+      ])
     }
-    setInputValue('')
   }
 
-  const handleTechRemove = (techToRemove: string) => {
+  const handleTechRemove = (techToRemove: DropdownOption) => {
     if (Array.isArray(values.techStack)) {
       setFieldValue(
-        'techStack',
-        values.techStack.filter((tech) => tech !== techToRemove),
+        WorkInformationFormKeys.TECH_STACK,
+        values.techStack.filter((tech) => tech.value !== techToRemove.value),
       )
     }
   }
@@ -59,35 +56,49 @@ const WorkInformation = () => {
       </div>
 
       <div className={styles.right}>
-        <InputFormError error={touched.position && errors.position}>
-          <DropdownBio
-            id="position"
+        <InputFormError
+          error={
+            touched[WorkInformationFormKeys.POSITION] &&
+            errors[WorkInformationFormKeys.POSITION]?.value
+          }
+        >
+          <DropdownSelect
+            id={WorkInformationFormKeys.POSITION}
             label="Position"
             text="Choose position"
-            options={filterLists.position}
-            selectedValue={values.position}
-            name="position"
+            options={mappedSeniorityLevel}
+            selectedValue={values[WorkInformationFormKeys.POSITION]}
+            name={WorkInformationFormKeys.POSITION}
           />
         </InputFormError>
-        <InputFormError error={touched.seniority && errors.seniority}>
-          <DropdownBio
-            id="seniority"
+        <InputFormError
+          error={
+            touched[WorkInformationFormKeys.SENIORITY] &&
+            errors[WorkInformationFormKeys.SENIORITY]?.value
+          }
+        >
+          <DropdownSelect
+            id={WorkInformationFormKeys.SENIORITY}
             label="Seniority"
             text="Choose seniority"
-            options={filterLists.seniority}
-            selectedValue={values.seniority}
-            name="seniority"
+            options={mappedSeniorityLevel}
+            selectedValue={values[WorkInformationFormKeys.SENIORITY]}
+            name={WorkInformationFormKeys.SENIORITY}
           />
         </InputFormError>
-        <InputFormError error={touched.techStack && errors.techStack}>
+        <InputFormError
+          /* TODO: Fix it */
+          // error={
+          //   touched[WorkInformationFormKeys.TECH_STACK] &&
+          //   errors[WorkInformationFormKeys.TECH_STACK]?.value
+          // }
+          error={''}
+        >
           <TechStackInput
-            chips={values.techStack}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            filteredSuggestions={filteredSuggestions}
+            chips={values[WorkInformationFormKeys.TECH_STACK]}
             label="Tech stack"
             placeholder="Start typing"
-            name="techStack"
+            name={WorkInformationFormKeys.TECH_STACK}
             onTechSelect={handleTechSelect}
             onTechRemove={handleTechRemove}
             addImportantIcon={true}
@@ -104,21 +115,30 @@ const WorkInformation = () => {
           <CheckboxInput
             id="fulltime"
             label="Full-time"
-            checked={values.employment === EmploymentType.FULL_TIME}
+            checked={
+              values[WorkInformationFormKeys.EMPLOYMENT] ===
+              EmploymentType.FULL_TIME
+            }
             onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name="fulltime"
           />
           <CheckboxInput
             id="parttime"
             label="Part-time"
-            checked={values.employment === EmploymentType.PART_TIME}
+            checked={
+              values[WorkInformationFormKeys.EMPLOYMENT] ===
+              EmploymentType.PART_TIME
+            }
             onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name="parttime"
           />
           <CheckboxInput
             id="contract"
             label="Contract"
-            checked={values.employment === EmploymentType.CONTRACT}
+            checked={
+              values[WorkInformationFormKeys.EMPLOYMENT] ===
+              EmploymentType.CONTRACT
+            }
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name="contract"
           />
