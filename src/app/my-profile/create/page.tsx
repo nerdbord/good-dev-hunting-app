@@ -3,30 +3,31 @@ import CreateProfileTopBar from '@/components/CreateProfile/CreateProfileTopBar/
 import LocationPreferences from '@/components/CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '@/components/CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '@/components/CreateProfile/WorkInformation/WorkInformation'
-import EditProfileFormWrapper from '@/components/EditProfileForm/EditProfileFormWrapper'
+import CreateProfileFormWrapper from '@/components/CreateProfileForm/CreateProfileFormWrapper'
 import { UploadProvider } from '@/contexts/UploadContext'
 import { authOptions } from '@/lib/auth'
 import { AppRoutes } from '@/utils/routes'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
+import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
 
-const EditProfilePage = async () => {
+const CreateProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session?.user) {
-    redirect(AppRoutes.home)
+    redirect(AppRoutes.profiles)
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
 
-  if (!profile) {
-    redirect(AppRoutes.createProfile)
+  if (profile) {
+    redirect(AppRoutes.myProfile)
   }
 
   return (
     <UploadProvider>
-      <EditProfileFormWrapper profile={profile}>
+      <CreateProfileFormWrapper>
         <div className={styles.wrapper}>
           <CreateProfileTopBar />
           <div className={styles.formBox}>
@@ -34,10 +35,11 @@ const EditProfilePage = async () => {
             <LocationPreferences />
             <WorkInformation />
           </div>
+          <LogOutBtn />
         </div>
-      </EditProfileFormWrapper>
+      </CreateProfileFormWrapper>
     </UploadProvider>
   )
 }
 
-export default EditProfilePage
+export default CreateProfilePage

@@ -44,7 +44,7 @@ const PersonalInfo = () => {
             addImportantIcon={true}
             name="contactEmail"
             disabled={true}
-            tooltipText=" Email is connected to your Github profile and cannot be changed!"
+            tooltipText=" Email is connected to your Github profile and cannot be changed"
             dataTestId=""
             maxLength={30}
           />
