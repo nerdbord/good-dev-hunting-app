@@ -11,7 +11,7 @@ import TechStackInput from '@/components/TechStackInput/TechStackInput'
 import technologies from '../../../data/frontend/technologies/data'
 
 const filterLists = {
-  seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
+  seniority: ['Intern', 'Junior', 'Mid', 'Lead / Expert'],
   position: ['Frontend', 'Backend', 'Fullstack'],
 }
 
