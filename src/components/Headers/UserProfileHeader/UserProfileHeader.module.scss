@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   top: $spacing-5;
   width: calc(100% - 48px);
   margin: 0;
@@ -13,14 +13,20 @@
 }
 
 .withBackBackButton {
-  justify-content: space-between;
+  justify-content: left;
 }
 
-.actions{
+.actions {
   display: flex;
-  align-items: center;
-  justify-content: left;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
   row-gap: 12px;
   column-gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .withBackBackButton {
+    justify-content: space-between;
+  }
 }
