@@ -1,4 +1,3 @@
-import { ProfileWithRelations } from '@/data/backend/profile/types'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
@@ -6,14 +5,12 @@ import { Prisma, PublishingState } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
-  const publishedProfiles: ProfileWithRelations[] =
-    await prisma.profile.findMany({
-      where: {
-        state: PublishingState.APPROVED,
-      },
-      include: includeObject,
-    })
-
+  const publishedProfiles = await prisma.profile.findMany({
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    include: includeObject.include,
+  })
   const serializedProfile = publishedProfiles.map(
     serializeProfileToProfileModel,
   )
@@ -21,15 +18,14 @@ export async function getPublishedProfilesPayload() {
 }
 
 export async function getAllPublishedProfilesPayload() {
-  const publishedProfiles: ProfileWithRelations[] =
-    await prisma.profile.findMany({
-      where: {
-        NOT: {
-          state: PublishingState.DRAFT,
-        },
+  const publishedProfiles = await prisma.profile.findMany({
+    where: {
+      NOT: {
+        state: PublishingState.DRAFT,
       },
-      include: includeObject,
-    })
+    },
+    include: includeObject.include,
+  })
 
   const serializedProfile = publishedProfiles.map(
     serializeProfileToProfileModel,
@@ -38,13 +34,12 @@ export async function getAllPublishedProfilesPayload() {
 }
 
 export async function getProfileById(id: string) {
-  const profileById: ProfileWithRelations | null =
-    await prisma.profile.findFirst({
-      where: {
-        id,
-      },
-      include: includeObject,
-    })
+  const profileById = await prisma.profile.findFirst({
+    where: {
+      id,
+    },
+    include: includeObject.include,
+  })
 
   if (profileById !== null) {
     return serializeProfileToProfileModel(profileById)
@@ -76,7 +71,7 @@ export async function createUserProfile(
   email: string,
   profileData: CreateProfilePayload,
 ) {
-  const createdUser: ProfileWithRelations = await prisma.profile.create({
+  const createdUser = await prisma.profile.create({
     data: {
       user: {
         connect: { email },
@@ -120,7 +115,7 @@ export async function createUserProfile(
       employmentType: profileData.employmentType,
       state: PublishingState.DRAFT,
     },
-    include: includeObject,
+    include: includeObject.include,
   })
   return createdUser
 }
@@ -144,9 +139,9 @@ export async function updateUserData(
 }
 
 export async function getProfileByUserId(userId: string) {
-  const profile: ProfileWithRelations | null = await prisma.profile.findFirst({
+  const profile = await prisma.profile.findFirst({
     where: { userId },
-    include: includeObject,
+    include: includeObject.include,
   })
 
   if (profile) {
@@ -157,9 +152,9 @@ export async function getProfileByUserId(userId: string) {
 }
 
 export async function getProfileByUserEmail(email: string) {
-  const profile: ProfileWithRelations | null = await prisma.profile.findFirst({
+  const profile = await prisma.profile.findFirst({
     where: { user: { email } },
-    include: includeObject,
+    include: includeObject.include,
   })
 
   if (profile) {
@@ -170,14 +165,13 @@ export async function getProfileByUserEmail(email: string) {
 }
 
 export async function getPublishedProfiles(take: number) {
-  const publishedProfiles: ProfileWithRelations[] =
-    await prisma.profile.findMany({
-      take,
-      where: {
-        state: PublishingState.APPROVED,
-      },
-      include: includeObject,
-    })
+  const publishedProfiles = await prisma.profile.findMany({
+    take,
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    include: includeObject.include,
+  })
   const serializedProfile = publishedProfiles.map(
     serializeProfileToProfileModel,
   )
@@ -204,34 +198,22 @@ export async function getRandomProfiles(profilesCount: number) {
       id: 'asc',
     },
     skip: skipValue,
-    include: includeObject,
+    include: includeObject.include,
   })
 
   return randomRecords.map(serializeProfileToProfileModel)
 }
 
-// Due to many to many relationship these 2 functions are kinda necessary to properly update user techstack.
-export async function upsertTechnology(techName: string) {
-  const technology = await prisma.technology.upsert({
-    create: {
-      name: techName,
+// Reusable include object for retrieving Profile with all of its relationships
+export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
+  include: {
+    user: {
+      include: {
+        githubDetails: true,
+      },
     },
-    update: {},
-    where: {
-      name: techName,
-    },
-  })
-  return technology
-}
-
-// Hence almost all of those queries had such includeObject, i've decided to simply reuse it.
-const includeObject = {
-  user: {
-    include: {
-      githubDetails: true,
-    },
+    country: true,
+    city: true,
+    techStack: true,
   },
-  country: true,
-  city: true,
-  techStack: true,
-}
+})
