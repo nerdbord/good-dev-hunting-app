@@ -1,16 +1,18 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
-import { useFormikContext } from 'formik'
-import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
-import { EmploymentType } from '@prisma/client'
-import styles from './WorkInformations.module.scss'
-import technologies from '../../../data/frontend/technologies/data'
-import { mappedSeniorityLevel } from '@/data/frontend/profile/mappers'
+import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
+import {
+  mappedSeniorityLevel,
+  mappedSpecialization,
+} from '@/data/frontend/profile/mappers'
+import { EmploymentType } from '@prisma/client'
+import { useFormikContext } from 'formik'
+
+import styles from './WorkInformations.module.scss'
 
 export enum WorkInformationFormKeys {
   POSITION = 'position',
@@ -35,6 +37,8 @@ const WorkInformation = () => {
       ])
     }
   }
+
+  console.log('errors', errors)
 
   const handleTechRemove = (techToRemove: DropdownOption) => {
     if (Array.isArray(values[WorkInformationFormKeys.TECH_STACK])) {
@@ -68,7 +72,7 @@ const WorkInformation = () => {
             id={WorkInformationFormKeys.POSITION}
             label="Position"
             text="Choose position"
-            options={mappedSeniorityLevel}
+            options={mappedSpecialization}
             selectedValue={values[WorkInformationFormKeys.POSITION]}
             name={WorkInformationFormKeys.POSITION}
           />
@@ -89,12 +93,10 @@ const WorkInformation = () => {
           />
         </InputFormError>
         <InputFormError
-          /* TODO: Fix it */
-          // error={
-          //   touched[WorkInformationFormKeys.TECH_STACK] &&
-          //   errors[WorkInformationFormKeys.TECH_STACK]
-          // }
-          error={''}
+          error={
+            touched[WorkInformationFormKeys.TECH_STACK] &&
+            ((errors[WorkInformationFormKeys.TECH_STACK] as string) || '')
+          }
         >
           <TechStackInput
             chips={values[WorkInformationFormKeys.TECH_STACK]}
@@ -115,7 +117,7 @@ const WorkInformation = () => {
         <div className={styles.employmentType}>
           Employment type
           <CheckboxInput
-            id={WorkInformationFormKeys.EMPLOYMENT}
+            id={WorkInformationFormKeys.EMPLOYMENT + 1}
             label="Full-time"
             checked={
               values[WorkInformationFormKeys.EMPLOYMENT] ===
@@ -125,7 +127,7 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
-            id={WorkInformationFormKeys.EMPLOYMENT}
+            id={WorkInformationFormKeys.EMPLOYMENT + 2}
             label="Part-time"
             checked={
               values[WorkInformationFormKeys.EMPLOYMENT] ===
@@ -135,7 +137,7 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
-            id={WorkInformationFormKeys.EMPLOYMENT}
+            id={WorkInformationFormKeys.EMPLOYMENT + 3}
             label="Contract"
             checked={
               values[WorkInformationFormKeys.EMPLOYMENT] ===

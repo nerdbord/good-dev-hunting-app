@@ -1,4 +1,6 @@
 'use client'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { initialDropdownOption } from '@/contexts/FilterContext'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
@@ -9,8 +11,6 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 import * as Yup from 'yup'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import { initialDropdownOption } from '@/contexts/FilterContext'
 
 export interface CreateProfileFormValues {
   fullName: string
@@ -53,8 +53,12 @@ export const validationSchema = Yup.object().shape({
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
-  position: Yup.string().required('Position is required'),
-  seniority: Yup.string().required('Seniority is required'),
+  position: Yup.object({
+    value: Yup.string().required('Position is required'),
+  }),
+  seniority: Yup.object({
+    value: Yup.string().required('Seniority is required'),
+  }),
   techStack: Yup.array().of(Yup.string()).min(1, 'Tech stack is required'),
   linkedin: Yup.string()
     .nullable()

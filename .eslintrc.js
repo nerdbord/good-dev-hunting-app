@@ -3,8 +3,6 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'standard-with-typescript'],
-  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -12,5 +10,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/ban-ts-comment': 'warn',
+  },
 }
