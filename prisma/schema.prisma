@@ -39,7 +39,7 @@ model Profile {
   position                 String
   seniority                String
   techStack                String[]
-  employmentType           EmploymentType[]
+  employmentType           EmploymentType
   state                    PublishingState   @default(DRAFT)
   rejectionReasons         RejectionReason[]
 }
