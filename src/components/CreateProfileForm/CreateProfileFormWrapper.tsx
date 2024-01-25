@@ -9,6 +9,8 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 import * as Yup from 'yup'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { initialDropdownOption } from '@/contexts/FilterContext'
 
 export interface CreateProfileFormValues {
   fullName: string
@@ -20,10 +22,10 @@ export interface CreateProfileFormValues {
   openToRelocationCountry: boolean
   openToRelocationCity: boolean
   remoteOnly: boolean
-  position: string
-  seniority: string
+  position: DropdownOption
+  seniority: DropdownOption
   employment: EmploymentType
-  techStack: string[]
+  techStack: DropdownOption[]
   githubUsername: string | null
   state: PublishingState
 }
@@ -38,8 +40,8 @@ const initialValues: CreateProfileFormValues = {
   openToRelocationCountry: false,
   openToRelocationCity: false,
   remoteOnly: false,
-  position: '',
-  seniority: '',
+  position: initialDropdownOption,
+  seniority: initialDropdownOption,
   employment: EmploymentType.FULL_TIME,
   techStack: [],
   githubUsername: '',
@@ -88,9 +90,9 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       },
       openForCityRelocation: values.openToRelocationCity,
       remoteOnly: values.remoteOnly,
-      position: values.position,
-      seniority: values.seniority,
-      techStack: values.techStack,
+      position: values.position.value,
+      seniority: values.seniority.value,
+      techStack: values.techStack.map((tech) => tech.value),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,

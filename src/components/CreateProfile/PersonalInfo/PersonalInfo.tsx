@@ -9,6 +9,13 @@ import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreatePr
 import { useSession } from 'next-auth/react'
 import { UserPhotoUploader } from '@/components/UserPhotoUploader/UserPhotoUploader'
 
+export enum PersonalInfoFormKeys {
+  FULL_NAME = 'fullName',
+  CONTACT_EMAIL = 'contactEmail',
+  LINKEDIN = 'linkedin',
+  BIO = 'bio',
+}
+
 const PersonalInfo = () => {
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
@@ -24,15 +31,20 @@ const PersonalInfo = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <InputFormError error={touched.fullName && errors.fullName}>
+        <InputFormError
+          error={
+            touched[PersonalInfoFormKeys.FULL_NAME] &&
+            errors[PersonalInfoFormKeys.FULL_NAME]
+          }
+        >
           <TextInput
             onBlur={handleBlur}
             label="Full name"
             placeholder="eg. Anna Oxford"
-            value={values.fullName}
+            value={values[PersonalInfoFormKeys.FULL_NAME]}
             onChange={handleChange}
-            name="fullName"
-            dataTestId="fullName"
+            name={PersonalInfoFormKeys.FULL_NAME}
+            dataTestId={PersonalInfoFormKeys.FULL_NAME}
             maxLength={40}
           />
         </InputFormError>
@@ -42,7 +54,7 @@ const PersonalInfo = () => {
             value={session?.user?.email || ''}
             onChange={handleChange}
             addImportantIcon={true}
-            name="contactEmail"
+            name={PersonalInfoFormKeys.CONTACT_EMAIL}
             disabled={true}
             tooltipText=" Email is connected to your Github profile and cannot be changed"
             dataTestId=""
@@ -50,33 +62,43 @@ const PersonalInfo = () => {
           />
         </div>
         <UserPhotoUploader />
-        <InputFormError error={touched.linkedin && errors.linkedin}>
+        <InputFormError
+          error={
+            touched[PersonalInfoFormKeys.LINKEDIN] &&
+            errors[PersonalInfoFormKeys.LINKEDIN]
+          }
+        >
           <TextInput
             onBlur={handleBlur}
             label="LinkedIn"
             placeholder="Paste link to you linkedin profile"
-            value={values.linkedin}
+            value={values[PersonalInfoFormKeys.LINKEDIN]}
             onChange={handleChange}
-            name="linkedin"
-            dataTestId="linkedin"
+            name={PersonalInfoFormKeys.LINKEDIN}
+            dataTestId={PersonalInfoFormKeys.LINKEDIN}
           />
         </InputFormError>
-        <InputFormError error={touched.bio && errors.bio}>
+        <InputFormError
+          error={
+            touched[PersonalInfoFormKeys.BIO] &&
+            errors[PersonalInfoFormKeys.BIO]
+          }
+        >
           <div className={styles.lettersCountParent}>
             <TextArea
               onBlur={handleBlur}
               label="Bio"
               placeholder="Introduce yourself with few sentences"
-              value={values.bio}
+              value={values[PersonalInfoFormKeys.BIO]}
               addImportantIcon={true}
               onChange={handleChange}
-              name="bio"
+              name={PersonalInfoFormKeys.BIO}
               maxLength={1500}
               tooltipText="Let others know you - write a few sentences about yourself."
-              dataTestId="bio"
+              dataTestId={PersonalInfoFormKeys.BIO}
             />
             <div className={styles.lettersCount}>
-              {values.bio.length} / 1500 characters
+              {values[PersonalInfoFormKeys.BIO].length} / 1500 characters
             </div>
           </div>
         </InputFormError>

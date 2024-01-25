@@ -1,34 +1,42 @@
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 
 export const filterByPosition =
-  (positionFilter: string[] | null) => (profile: ProfileModel) => {
-    return (
-      !positionFilter ||
-      positionFilter.length === 0 ||
-      positionFilter.some((pos) => profile.position.includes(pos))
+  (positionFilter: DropdownOption[]) => (profile: ProfileModel) => {
+    if (positionFilter.length === 0) return true
+    return positionFilter.some(
+      (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
     )
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string | null) => (profile: ProfileModel) => {
-    return !seniorityFilter || profile.seniority === seniorityFilter
+  (seniorityFilter: DropdownOption) => (profile: ProfileModel) => {
+    if (!seniorityFilter.value) return true
+    return (
+      profile.seniority.toUpperCase() === seniorityFilter.value.toUpperCase()
+    )
   }
 
 export const filterByLocation =
-  (locationFilter: string | null) => (profile: ProfileModel) => {
-    return !locationFilter || profile.country.name === locationFilter
+  (locationFilter: DropdownOption) => (profile: ProfileModel) => {
+    if (!locationFilter.value) return true
+    return (
+      profile.country.name.toUpperCase() === locationFilter.value.toUpperCase()
+    )
   }
 
 export const filterByTechnology =
-  (technologyFilter: string[] | null) => (profile: ProfileModel) => {
-    return (
-      !technologyFilter ||
-      technologyFilter.length === 0 ||
-      technologyFilter.every((tech) => profile.techStack.includes(tech))
+  (technologyFilter: DropdownOption[]) => (profile: ProfileModel) => {
+    if (technologyFilter.length === 0) return true
+    return technologyFilter.every((tech) =>
+      profile.techStack.includes(tech.value.toUpperCase()),
     )
   }
 
 export const filterByAvailability =
   (availabilityFilter: string | null) => (profile: ProfileModel) => {
-    return !availabilityFilter || profile.employmentType === availabilityFilter
+    if (!availabilityFilter) return true
+    return (
+      profile.employmentType.toUpperCase() === availabilityFilter.toUpperCase()
+    )
   }

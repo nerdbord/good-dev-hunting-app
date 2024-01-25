@@ -1,38 +1,65 @@
 'use client'
 import React, { useState } from 'react'
 import styles from './Filters.module.scss'
-import { DropdownFilter } from '../Dropdowns/DropdownFilter/DropdownFilter'
+import {
+  DropdownFilter,
+  DropdownOption,
+} from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
-import { useFilters } from '@/contexts/FilterContext'
-import { JobSpecialization } from '../ProfileList/profile-data'
+import { initialDropdownOption, useFilters } from '@/contexts/FilterContext'
+import {
+  mappedEmploymentType,
+  mappedLocations,
+  mappedSeniorityLevel,
+  mappedTechnologies,
+} from '@/data/frontend/profile/mappers'
+import { JobSpecialization } from '@/data/frontend/profile/types'
 interface State {
-  technology: string
-  seniority: string
-  availability: string
-  location: string
+  technology: DropdownOption
+  seniority: DropdownOption
+  availability: DropdownOption
+  location: DropdownOption
+}
+
+export enum JobOfferFiltersEnum {
+  technology = 'technology',
+  seniority = 'seniority',
+  availability = 'availability',
+  location = 'location',
 }
 
 const JobOfferFilters: State = {
-  technology: '',
-  seniority: '',
-  availability: '',
-  location: '',
+  technology: initialDropdownOption,
+  seniority: initialDropdownOption,
+  availability: initialDropdownOption,
+  location: initialDropdownOption,
 }
 
-const filterLists = {
-  technology: [
-    'Javascript',
-    'Python',
-    'Node.js',
-    'React.js',
-    'Vue.js',
-    'Angular',
-    'MongoDB',
-  ],
-  seniority: ['Intern', 'Junior', 'Mid', 'Senior', 'Lead / Expert'],
-  availability: ['Full-time', 'Part-time', 'Contract'],
-  location: ['Poland', 'Europe', 'Other'],
+const jobSpecializationOptions: Record<JobSpecialization, DropdownOption> = {
+  [JobSpecialization.Frontend]: {
+    name: 'Frontend',
+    value: JobSpecialization.Frontend,
+  },
+  [JobSpecialization.Backend]: {
+    name: 'Backend',
+    value: JobSpecialization.Backend,
+  },
+  [JobSpecialization.Fullstack]: {
+    name: 'Fullstack',
+    value: JobSpecialization.Fullstack,
+  },
+}
+
+type FiltersLists = {
+  [key in JobOfferFiltersEnum]: DropdownOption[]
+}
+
+const filterLists: FiltersLists = {
+  technology: mappedTechnologies,
+  seniority: mappedSeniorityLevel,
+  availability: mappedEmploymentType,
+  location: mappedLocations,
 }
 
 const Filters: React.FC = () => {
@@ -51,26 +78,31 @@ const Filters: React.FC = () => {
   } = useFilters()
 
   const handleSelect = (
-    option: string,
+    option: DropdownOption,
     buttonType: keyof typeof JobOfferFilters,
   ): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [buttonType]: option,
     }))
-    if (buttonType === 'seniority') {
-      setSeniorityFilter(option)
-    }
-    if (buttonType === 'availability') {
-      setAvailabilityFilter(option)
-    }
-    if (buttonType === 'location') {
-      setLocationFilter(option)
+
+    switch (buttonType) {
+      case JobOfferFiltersEnum.seniority:
+        setSeniorityFilter(option)
+        break
+      case JobOfferFiltersEnum.availability:
+        setAvailabilityFilter(option)
+        break
+      case JobOfferFiltersEnum.location:
+        setLocationFilter(option)
+        break
+      default:
+        break
     }
   }
   //
-  const handleButtonClick = (newStack: string) => {
-    let newPos: string[]
+  const handleButtonClick = (newStack: DropdownOption) => {
+    let newPos: DropdownOption[]
     if (jobSpecializationFilter.includes(newStack)) {
       newPos = jobSpecializationFilter.filter((x) => x !== newStack)
     } else {
@@ -79,8 +111,8 @@ const Filters: React.FC = () => {
     setJobSpecializationFilter(newPos)
   }
   //
-  const handleSelectMulti = (option: string): void => {
-    let newFilters: string[]
+  const handleSelectMulti = (option: DropdownOption): void => {
+    let newFilters: DropdownOption[]
     if (technologyFilter.includes(option)) {
       newFilters = technologyFilter.filter(
         (selectedOption) => selectedOption !== option,
@@ -95,58 +127,72 @@ const Filters: React.FC = () => {
     <div className={styles.mainContainer}>
       <div className={styles.features}>
         <DropdownFilterMulti
-          label={''}
           text={'Technology'}
           options={filterLists.technology}
           onSelect={handleSelectMulti}
           selectedValue={technologyFilter}
         />
         <DropdownFilter
-          label={''}
-          text={seniorityFilter || 'Seniority'}
+          text={seniorityFilter.name || 'Seniority'}
           options={filterLists.seniority}
-          onSelect={(option) => handleSelect(option, 'seniority')}
+          onSelect={(option) =>
+            handleSelect(option, JobOfferFiltersEnum.seniority)
+          }
           selectedValue={filters.seniority}
         />
         <DropdownFilter
-          label={''}
-          text={availabilityFilter || 'Availability'}
+          text={availabilityFilter.name || 'Availability'}
           options={filterLists.availability}
-          onSelect={(option) => handleSelect(option, 'availability')}
+          onSelect={(option) =>
+            handleSelect(option, JobOfferFiltersEnum.availability)
+          }
           selectedValue={filters.availability}
         />
         <DropdownFilter
-          label={''}
-          text={locationFilter || 'Location'}
+          text={locationFilter.name || 'Location'}
           options={filterLists.location}
-          onSelect={(option) => handleSelect(option, 'location')}
+          onSelect={(option) =>
+            handleSelect(option, JobOfferFiltersEnum.location)
+          }
           selectedValue={filters.location}
         />
       </div>
       <div className={styles.devType}>
         <DevTypeButton
           variant={JobSpecialization.Frontend}
-          onClick={() => handleButtonClick(JobSpecialization.Frontend)}
+          onClick={() =>
+            handleButtonClick(
+              jobSpecializationOptions[JobSpecialization.Frontend],
+            )
+          }
           isPressed={jobSpecializationFilter.includes(
-            JobSpecialization.Frontend,
+            jobSpecializationOptions[JobSpecialization.Frontend],
           )}
         >
           Frontend
         </DevTypeButton>
         <DevTypeButton
           variant={JobSpecialization.Backend}
-          onClick={() => handleButtonClick(JobSpecialization.Backend)}
+          onClick={() =>
+            handleButtonClick(
+              jobSpecializationOptions[JobSpecialization.Backend],
+            )
+          }
           isPressed={jobSpecializationFilter.includes(
-            JobSpecialization.Backend,
+            jobSpecializationOptions[JobSpecialization.Backend],
           )}
         >
           Backend
         </DevTypeButton>
         <DevTypeButton
           variant={JobSpecialization.Fullstack}
-          onClick={() => handleButtonClick(JobSpecialization.Fullstack)}
+          onClick={() =>
+            handleButtonClick(
+              jobSpecializationOptions[JobSpecialization.Fullstack],
+            )
+          }
           isPressed={jobSpecializationFilter.includes(
-            JobSpecialization.Fullstack,
+            jobSpecializationOptions[JobSpecialization.Fullstack],
           )}
         >
           Fullstack
