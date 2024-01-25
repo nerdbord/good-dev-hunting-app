@@ -73,9 +73,10 @@ export default function ContactForm({
             <TextInput
               label="Subject"
               placeholder="eg. Job offer - let&rsquo;s talk!"
-              value={formik.values.subject}
+              value={formik.values.subject || "Job offer - let's talk!"}
               onChange={formik.handleChange}
               name="subject"
+              customClass={styles.subject}
             />
           </InputFormError>
 

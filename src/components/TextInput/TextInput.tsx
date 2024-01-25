@@ -20,6 +20,7 @@ export interface TextInputProps {
   dataTestId?: string
   maxLength?: number
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  customClass?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -37,6 +38,7 @@ const TextInput: React.FC<TextInputProps> = ({
   dataTestId,
   maxLength,
   onBlur,
+  customClass = '',
 }) => {
   const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +60,9 @@ const TextInput: React.FC<TextInputProps> = ({
         )}
       </label>
       <input
-        className={`${styles.formInput} ${isTyped ? styles.typed : ''}`}
+        className={`${styles.formInput} ${
+          isTyped ? styles.typed : ''
+        } ${customClass}`}
         type="text"
         value={value}
         placeholder={placeholder}

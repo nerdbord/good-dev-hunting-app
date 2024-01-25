@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 23px;
   @include mobile {
     overflow-x: auto;
     white-space: nowrap;
