@@ -1,6 +1,6 @@
 'use client'
-import React, { createContext, useState, useContext } from 'react'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import React, { createContext, useContext, useState } from 'react'
 
 export type FiltersContextType = {
   jobSpecializationFilter: DropdownOption[]

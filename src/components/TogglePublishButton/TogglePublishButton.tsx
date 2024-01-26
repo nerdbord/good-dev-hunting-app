@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
-import styles from './TogglePublishButton.module.scss'
 import { Button } from '@/components/Button/Button'
-import React, { useState } from 'react'
-import { apiClient } from '@/lib/apiClient'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { PublishProfilePopup } from '../TogglePublishPopup/TogglePublishPopup'
+import { apiClient } from '@/lib/apiClient'
 import { PublishingState } from '@prisma/client'
+import { useState } from 'react'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
+import { PublishProfilePopup } from '../TogglePublishPopup/TogglePublishPopup'
 
 import { JobSpecialization } from '@/data/frontend/profile/types'
 

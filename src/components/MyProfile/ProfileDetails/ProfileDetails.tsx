@@ -1,6 +1,5 @@
-import React from 'react'
-import styles from './ProfileDetails.module.scss'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import styles from './ProfileDetails.module.scss'
 
 const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
   return (
@@ -12,7 +11,7 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
             <div className={styles.techStackList}>
               {profile?.techStack.map((item, index) => (
                 <p key={index} className={styles.techStackItem}>
-                  {item}
+                  {item.name}
                 </p>
               ))}
             </div>

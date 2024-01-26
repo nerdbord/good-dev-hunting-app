@@ -1,13 +1,12 @@
 'use client'
-import React from 'react'
-import styles from './PersonalInfo.module.scss'
-import TextInput from '@/components/TextInput/TextInput'
-import TextArea from '@/components/TextArea/TextArea'
-import { useFormikContext } from 'formik'
-import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
-import { useSession } from 'next-auth/react'
+import InputFormError from '@/components/InputFormError/InputFormError'
+import TextArea from '@/components/TextArea/TextArea'
+import TextInput from '@/components/TextInput/TextInput'
 import { UserPhotoUploader } from '@/components/UserPhotoUploader/UserPhotoUploader'
+import { useFormikContext } from 'formik'
+import { useSession } from 'next-auth/react'
+import styles from './PersonalInfo.module.scss'
 
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',
