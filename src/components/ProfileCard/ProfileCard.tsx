@@ -1,9 +1,8 @@
-import React from 'react'
-import styles from './ProfileCard.module.scss'
-import { JobSpecialization, ProfileModel } from '@/data/frontend/profile/types'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
-import Image from 'next/image'
+import { JobSpecialization, ProfileModel } from '@/data/frontend/profile/types'
 import classNames from 'classnames/bind'
+import Image from 'next/image'
+import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
   onClick?: () => void

@@ -1,16 +1,16 @@
 'use client'
-import React from 'react'
+import styles from '@/components/ProfileList/ProfileList.module.scss'
+import { ProfileListItem } from '@/components/ProfileList/ProfileListItem'
 import { useFilters } from '@/contexts/FilterContext'
+import { ProfileModel } from '@/data/frontend/profile/types'
+import React from 'react'
 import {
+  filterByAvailability,
+  filterByLocation,
   filterByPosition,
   filterBySeniority,
-  filterByLocation,
   filterByTechnology,
-  filterByAvailability,
 } from './filters'
-import { ProfileListItem } from '@/components/ProfileList/ProfileListItem'
-import styles from '@/components/ProfileList/ProfileList.module.scss'
-import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const ProfilesWithFilter: React.FC<{
   data: ProfileModel[]
@@ -22,7 +22,6 @@ export const ProfilesWithFilter: React.FC<{
     locationFilter,
     jobSpecializationFilter,
   } = useFilters()
-
   const filteredProfileData = (data || [])
     .filter(filterByPosition(jobSpecializationFilter))
     .filter(filterBySeniority(seniorityFilter))

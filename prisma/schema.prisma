@@ -16,32 +16,38 @@ model User {
   id             String         @id @default(uuid())
   avatarUrl      String?
   email          String         @unique
-  profile        Profile? //user have profile //relations  
-  githubDetails  GitHubDetails? //user have gitHub //relations
+  profile        Profile?
+  githubDetails  GitHubDetails?
   roles          Role[]         @default([USER])
   nerdbordUserId String?        @unique
 }
 
 model Profile {
-  id                       String            @id @default(uuid())
-  user                     User              @relation(fields: [userId], references: [id])
-  userId                   String            @unique
-  fullName                 String
-  linkedIn                 String?
-  bio                      String
-  country                  Country           @relation(fields: [countryId], references: [id])
-  countryId                String
-  openForCountryRelocation Boolean           @default(false)
-  city                     City              @relation(fields: [cityId], references: [id])
-  cityId                   String
-  openForCityRelocation    Boolean           @default(false)
-  remoteOnly               Boolean
-  position                 String
-  seniority                String
-  techStack                String[]
-  employmentType           EmploymentType
-  state                    PublishingState   @default(DRAFT)
-  rejectionReasons         RejectionReason[]
+  id                        String            @id @default(uuid())
+  user                      User              @relation(fields: [userId], references: [id])
+  userId                    String            @unique
+  fullName                  String
+  linkedIn                  String?
+  bio                       String
+  country                   Country           @relation(fields: [countryId], references: [id])
+  countryId                 String
+  openForCountryRelocation  Boolean           @default(false)
+  city                      City              @relation(fields: [cityId], references: [id])
+  cityId                    String
+  openForCityRelocation     Boolean           @default(false)
+  remoteOnly                Boolean
+  position                  String
+  seniority                 String
+  techStack                 Technology[]
+  employmentType            EmploymentType[]
+  state                     PublishingState   @default(DRAFT)
+  rejectionReasons          RejectionReason[]
+}
+
+model Technology {
+  id          String                 @id @default(uuid())
+  name        String                 @unique
+  profiles    Profile[]
 }
 
 model GitHubDetails {

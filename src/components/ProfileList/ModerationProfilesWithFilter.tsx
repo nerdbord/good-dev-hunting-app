@@ -1,11 +1,10 @@
 'use client'
-import React from 'react'
-import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'
-import { ModerationProfileListItem } from './ModerationProfileListItem'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+import { ProfileModel } from '@/data/frontend/profile/types'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
+import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'
+import { ModerationProfileListItem } from './ModerationProfileListItem'
 
 import styles from './ProfileList.module.scss'
 

@@ -1,5 +1,5 @@
-import { ProfileModel } from '@/data/frontend/profile/types'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const filterByPosition =
   (positionFilter: DropdownOption[]) => (profile: ProfileModel) => {
@@ -28,8 +28,11 @@ export const filterByLocation =
 export const filterByTechnology =
   (technologyFilter: DropdownOption[]) => (profile: ProfileModel) => {
     if (technologyFilter.length === 0) return true
-    return technologyFilter.every((tech) =>
-      profile.techStack.includes(tech.value.toUpperCase()),
+    return technologyFilter.some(
+      (techFilter) =>
+        !!profile.techStack.find(
+          (tech) => tech.name.toUpperCase() === techFilter.value.toUpperCase(),
+        ),
     )
   }
 

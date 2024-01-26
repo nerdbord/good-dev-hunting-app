@@ -23,8 +23,8 @@ export const mapProfileModelToEditProfileFormValues = (
     value: profile.seniority,
   },
   techStack: profile.techStack.map((tech) => ({
-    name: tech,
-    value: tech,
+    name: tech.name,
+    value: tech.name,
   })),
   employment: profile.employmentType,
   githubUsername: profile.githubUsername,

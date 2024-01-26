@@ -1,12 +1,5 @@
 'use client'
-import React, { useState } from 'react'
-import styles from './Filters.module.scss'
-import {
-  DropdownFilter,
-  DropdownOption,
-} from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
-import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import { initialDropdownOption, useFilters } from '@/contexts/FilterContext'
 import {
   mappedEmploymentType,
@@ -15,6 +8,13 @@ import {
   mappedTechnologies,
 } from '@/data/frontend/profile/mappers'
 import { JobSpecialization } from '@/data/frontend/profile/types'
+import React, { useState } from 'react'
+import {
+  DropdownFilter,
+  DropdownOption,
+} from '../Dropdowns/DropdownFilter/DropdownFilter'
+import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
+import styles from './Filters.module.scss'
 interface State {
   technology: DropdownOption
   seniority: DropdownOption

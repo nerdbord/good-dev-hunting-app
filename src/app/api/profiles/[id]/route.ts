@@ -33,7 +33,6 @@ export async function PATCH(request: NextRequest, id: string) {
       seniority: userDataToUpdate.seniority,
       state: PublishingState.PENDING,
       employmentType: userDataToUpdate.employmentType,
-      techStack: userDataToUpdate.techStack,
       country: {
         connectOrCreate: {
           where: {
@@ -50,9 +49,16 @@ export async function PATCH(request: NextRequest, id: string) {
           name: userDataToUpdate.city.name,
         },
       },
+      techStack: {
+        connectOrCreate: userDataToUpdate.techStack.map((tech) => ({
+          where: { name: tech.name },
+          create: {
+            name: tech.name,
+          },
+        })),
+      },
       openForCityRelocation: userDataToUpdate.openForCityRelocation,
     })
-
     return NextResponse.json({
       message: 'Success',
       profile: updatedUser,

@@ -91,7 +91,11 @@ const EditProfileFormWrapper = ({
       remoteOnly: values.remoteOnly,
       position: values.position.value,
       seniority: values.seniority.value,
-      techStack: values.techStack.map((tech) => tech.value),
+      techStack: values.techStack.map((tech) => {
+        return {
+          techName: tech.value,
+        }
+      }),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,

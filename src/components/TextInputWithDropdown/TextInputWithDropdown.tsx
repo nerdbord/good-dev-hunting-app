@@ -1,12 +1,11 @@
 'use client'
-import React, { useRef, useState } from 'react'
-import { useFormikContext } from 'formik'
-import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
-import TextInput from '../TextInput/TextInput'
-import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import { countries } from '@/data/frontend/profile/countries/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import { TextInputProps } from '../TextInput/TextInput'
+import { useFormikContext } from 'formik'
+import { useRef, useState } from 'react'
+import { CreateProfileFormValues } from '../CreateProfileForm/CreateProfileFormWrapper'
+import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
+import TextInput, { TextInputProps } from '../TextInput/TextInput'
 
 import styles from './TextInputWithDropdown.module.scss'
 

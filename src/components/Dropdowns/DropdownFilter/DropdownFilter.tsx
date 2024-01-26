@@ -1,10 +1,10 @@
 'use client'
-import styles from './DropdownFilter.module.scss'
-import React, { useEffect, useState, useRef } from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 import { Button } from '@/components/Button/Button'
 import { initialDropdownOption } from '@/contexts/FilterContext'
+import 'material-icons/iconfont/material-icons.css'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'
+import styles from './DropdownFilter.module.scss'
 
 export interface DropdownOption {
   name: string
