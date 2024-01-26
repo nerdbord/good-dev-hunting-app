@@ -22,7 +22,6 @@ export const ProfilesWithFilter: React.FC<{
     locationFilter,
     jobSpecializationFilter,
   } = useFilters()
-
   const filteredProfileData = (data || [])
     .filter(filterByPosition(jobSpecializationFilter))
     .filter(filterBySeniority(seniorityFilter))

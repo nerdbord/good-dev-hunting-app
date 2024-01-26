@@ -7,12 +7,12 @@ export type FiltersContextType = {
   setJobSpecializationFilter: (value: string[]) => void
   technologyFilter: string[]
   setTechnologyFilter: (value: string[]) => void
-  seniorityFilter: string
-  setSeniorityFilter: (value: string) => void
+  seniorityFilter: string[]
+  setSeniorityFilter: (value: string[]) => void
   availabilityFilter: EmploymentType[]
   setAvailabilityFilter: (value: EmploymentType[]) => void
-  locationFilter: string
-  setLocationFilter: (value: string) => void
+  locationFilter: string[]
+  setLocationFilter: (value: string[]) => void
 }
 
 export const FiltersContext = createContext<FiltersContextType | undefined>(
@@ -28,8 +28,8 @@ export const FiltersProvider = ({
     string[]
   >([])
   const [technologyFilter, setTechnologyFilter] = useState<string[]>([])
-  const [seniorityFilter, setSeniorityFilter] = useState<string>('')
-  const [locationFilter, setLocationFilter] = useState<string>('')
+  const [seniorityFilter, setSeniorityFilter] = useState<string[]>([])
+  const [locationFilter, setLocationFilter] = useState<string[]>([])
   const [availabilityFilter, setAvailabilityFilter] = useState<
     EmploymentType[]
   >([])

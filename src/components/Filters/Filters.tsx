@@ -1,23 +1,17 @@
 'use client'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { useFilters } from '@/contexts/FilterContext'
-import React, { useState } from 'react'
-import { DropdownFilter } from '../Dropdowns/DropdownFilter/DropdownFilter'
+import { EmploymentType } from '@prisma/client'
+import React from 'react'
 import { JobSpecialization } from '../ProfileList/profile-data'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
-interface State {
-  technology: string
-  seniority: string
-  availability: string
-  location: string
-}
 
-const JobOfferFilters: State = {
-  technology: '',
-  seniority: '',
-  availability: '',
-  location: '',
+enum JobOfferFilters {
+  technology = 'technology',
+  seniority = 'seniority',
+  availability = 'availability',
+  location = 'location',
 }
 
 const filterLists = {
@@ -36,7 +30,6 @@ const filterLists = {
 }
 
 const Filters: React.FC = () => {
-  const [filters, setFilters] = useState(JobOfferFilters)
   const {
     setJobSpecializationFilter,
     jobSpecializationFilter,
@@ -44,26 +37,12 @@ const Filters: React.FC = () => {
     setTechnologyFilter,
     seniorityFilter,
     setSeniorityFilter,
+    availabilityFilter,
+    setAvailabilityFilter,
     locationFilter,
     setLocationFilter,
   } = useFilters()
 
-  const handleSelect = (
-    option: string,
-    buttonType: keyof typeof JobOfferFilters,
-  ): void => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [buttonType]: option,
-    }))
-    if (buttonType === 'seniority') {
-      setSeniorityFilter(option)
-    }
-    if (buttonType === 'location') {
-      setLocationFilter(option)
-    }
-  }
-  //
   const handleButtonClick = (newStack: string) => {
     let newPos: string[]
     if (jobSpecializationFilter.includes(newStack)) {
@@ -73,17 +52,43 @@ const Filters: React.FC = () => {
     }
     setJobSpecializationFilter(newPos)
   }
-  //
-  const handleSelectMulti = (option: string): void => {
-    let newFilters: string[]
-    if (technologyFilter.includes(option)) {
-      newFilters = technologyFilter.filter(
-        (selectedOption) => selectedOption !== option,
-      )
-    } else {
-      newFilters = [...technologyFilter, option]
+
+  const handleSelectMulti = (
+    option: string | EmploymentType,
+    buttonType: keyof typeof JobOfferFilters,
+  ): void => {
+    let newFilters
+
+    switch (buttonType) {
+      case JobOfferFilters.seniority:
+        newFilters = manageFilter(seniorityFilter)
+        setSeniorityFilter(newFilters)
+        break
+      case JobOfferFilters.availability:
+        newFilters = manageFilter(availabilityFilter)
+        setAvailabilityFilter(newFilters)
+        break
+      case JobOfferFilters.location:
+        newFilters = manageFilter(locationFilter)
+        setLocationFilter(newFilters)
+        break
+      case JobOfferFilters.technology:
+        newFilters = manageFilter(technologyFilter)
+        setTechnologyFilter(newFilters)
+        break
+      default:
+        break
     }
-    setTechnologyFilter(newFilters)
+
+    function manageFilter<T extends string | EmploymentType>(
+      filterList: T[],
+    ): T[] {
+      if (filterList.includes(option as T)) {
+        return filterList.filter((selectedOption) => selectedOption !== option)
+      } else {
+        return [...filterList, option as T]
+      }
+    }
   }
 
   return (
@@ -93,29 +98,37 @@ const Filters: React.FC = () => {
           label={''}
           text={'Technology'}
           options={filterLists.technology}
-          onSelect={handleSelectMulti}
+          onSelect={(option) =>
+            handleSelectMulti(option, JobOfferFilters.technology)
+          }
           selectedValue={technologyFilter}
         />
-        <DropdownFilter
+        <DropdownFilterMulti
           label={''}
-          text={seniorityFilter || 'Seniority'}
+          text={'Seniority'}
           options={filterLists.seniority}
-          onSelect={(option) => handleSelect(option, 'seniority')}
-          selectedValue={filters.seniority}
+          onSelect={(option) =>
+            handleSelectMulti(option, JobOfferFilters.seniority)
+          }
+          selectedValue={seniorityFilter}
         />
-        <DropdownFilter
+        <DropdownFilterMulti
           label={''}
           text={'Availability'}
           options={filterLists.availability}
-          onSelect={(option) => handleSelect(option, 'availability')}
-          selectedValue={filters.availability}
+          onSelect={(option) =>
+            handleSelectMulti(option, JobOfferFilters.availability)
+          }
+          selectedValue={availabilityFilter}
         />
-        <DropdownFilter
+        <DropdownFilterMulti
           label={''}
-          text={locationFilter || 'Location'}
+          text={'Location'}
           options={filterLists.location}
-          onSelect={(option) => handleSelect(option, 'location')}
-          selectedValue={filters.location}
+          onSelect={(option) =>
+            handleSelectMulti(option, JobOfferFilters.location)
+          }
+          selectedValue={locationFilter}
         />
       </div>
       <div className={styles.devType}>
