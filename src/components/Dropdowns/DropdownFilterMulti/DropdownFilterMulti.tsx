@@ -1,22 +1,21 @@
 'use client'
-import styles from '../DropdownFilter/DropdownFilter.module.scss'
-import React, { useEffect, useState, useRef } from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 import { Button } from '@/components/Button/Button'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import 'material-icons/iconfont/material-icons.css'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'
+import styles from '../DropdownFilter/DropdownFilter.module.scss'
 
 export const DropdownFilterMulti = ({
-  label,
   text,
   options,
   onSelect,
   selectedValue,
 }: {
-  label: string
   text: string
-  options: string[]
-  onSelect: (option: string) => void
-  selectedValue: string[]
+  options: DropdownOption[]
+  onSelect: (option: DropdownOption) => void
+  selectedValue: DropdownOption[]
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
@@ -56,7 +55,7 @@ export const DropdownFilterMulti = ({
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
   }
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: DropdownOption) => {
     onSelect(option)
   }
 
@@ -109,7 +108,7 @@ export const DropdownFilterMulti = ({
                     <IoIosCheckmark className={styles.checkmark} />
                   )}
                 </div>{' '}
-                {option}
+                {option.name}
               </label>
             ))}
           </div>

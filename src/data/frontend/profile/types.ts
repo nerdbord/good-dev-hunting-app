@@ -1,3 +1,4 @@
+import { TechnologyModel } from '@/data/backend/profile/types'
 import { EmploymentType, PublishingState } from '@prisma/client'
 
 export interface ProfileModel {
@@ -18,20 +19,35 @@ export interface ProfileModel {
   remoteOnly: boolean
   position: string
   seniority: string
-  techStack: string[]
+  techStack: TechnologyModel[]
   employmentType: EmploymentType[]
   githubUsername: string | null
   state: PublishingState
   userEmail: string
 }
 
-export type CreateProfilePayload = Omit<ProfileModel, 'id' | 'userEmail'>
-export type EditProfilePayload = CreateProfilePayload
+export type CreateProfilePayload = Omit<
+  ProfileModel,
+  'id' | 'userEmail' | 'techStack'
+> & {
+  techStack: TechStack
+}
 
+export type TechStack = {
+  techName: string
+}[]
+
+export type EditProfilePayload = CreateProfilePayload
 export type PublishingStateData = {
   state: PublishingState
 }
 
 export type RejectionReason = {
   reason: string
+}
+
+export enum JobSpecialization {
+  Frontend = 'Frontend',
+  Backend = 'Backend',
+  Fullstack = 'Fullstack',
 }

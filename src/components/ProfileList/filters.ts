@@ -1,47 +1,43 @@
+import { FilterOption } from '@/contexts/FilterContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
-import { EmploymentType } from '@prisma/client'
 
 export const filterByPosition =
-  (positionFilter: string[] | null) => (profile: ProfileModel) => {
-    return (
-      !positionFilter ||
-      positionFilter.length === 0 ||
-      positionFilter.some((pos) => profile.position.includes(pos))
+  (positionFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (positionFilter.length === 0) return true
+    return positionFilter.some(
+      (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
     )
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string[] | null) => (profile: ProfileModel) => {
+  (seniorityFilter: FilterOption) => (profile: ProfileModel) => {
+    if (!seniorityFilter.value) return true
     return (
-      !seniorityFilter ||
-      seniorityFilter.length === 0 ||
-      seniorityFilter.includes(profile.seniority)
+      profile.seniority.toUpperCase() === seniorityFilter.value.toUpperCase()
     )
   }
 
 export const filterByLocation =
-  (locationFilter: string[] | null) => (profile: ProfileModel) => {
+  (locationFilter: FilterOption) => (profile: ProfileModel) => {
+    if (!locationFilter.value) return true
     return (
-      !locationFilter ||
-      locationFilter.length === 0 ||
-      locationFilter.includes(profile.country.name)
+      profile.country.name.toUpperCase() === locationFilter.value.toUpperCase()
     )
   }
 
 export const filterByTechnology =
-  (technologyFilter: string[] | null) => (profile: ProfileModel) => {
-    return (
-      !technologyFilter ||
-      technologyFilter.length === 0 ||
-      technologyFilter.every((tech) => profile.techStack.includes(tech))
+  (technologyFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (technologyFilter.length === 0) return true
+    return technologyFilter.some(
+      (techFilter) =>
+        !!profile.techStack.find(
+          (tech) => tech.name.toUpperCase() === techFilter.value.toUpperCase(),
+        ),
     )
   }
 
 export const filterByAvailability =
-  (availabilityFilter: EmploymentType[] | null) => (profile: ProfileModel) => {
-    return (
-      !availabilityFilter ||
-      availabilityFilter.length === 0 ||
-      availabilityFilter.some((availability) => availability === availability)
-    )
+  (availabilityFilter: FilterOption[] | null) => (profile: ProfileModel) => {
+    if (!availabilityFilter) return true
+    return availabilityFilter.some((availability) => !!profile.employmentType)
   }
