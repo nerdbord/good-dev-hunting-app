@@ -1,14 +1,14 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
-import { useFormikContext } from 'formik'
-import InputFormError from '@/components/InputFormError/InputFormError'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
-import { EmploymentType } from '@prisma/client'
-import styles from './WorkInformations.module.scss'
+import { DropdownBio } from '@/components/Dropdowns/DropdownBio/DropdownBio'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import TechStackInput from '@/components/TechStackInput/TechStackInput'
+import { EmploymentType } from '@prisma/client'
+import { useFormikContext } from 'formik'
+import { useEffect, useState } from 'react'
 import technologies from '../../../data/frontend/technologies/data'
+import styles from './WorkInformations.module.scss'
 
 const filterLists = {
   seniority: ['Intern', 'Junior', 'Mid', 'Senior'],
@@ -21,8 +21,16 @@ const WorkInformation = () => {
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
 
-  const handleEmploymentType = (option: string): void => {
-    setFieldValue('employment', option)
+  const handleEmploymentType = (option: EmploymentType): void => {
+    let newFilters: string[]
+    if (values.employment.includes(option)) {
+      newFilters = values.employment.filter(
+        (selectedOption) => selectedOption !== option,
+      )
+    } else {
+      newFilters = [...values.employment, option]
+    }
+    setFieldValue('employment', newFilters)
   }
 
   useEffect(() => {
@@ -104,21 +112,21 @@ const WorkInformation = () => {
           <CheckboxInput
             id="fulltime"
             label="Full-time"
-            checked={values.employment === EmploymentType.FULL_TIME}
+            checked={values.employment.includes(EmploymentType.FULL_TIME)}
             onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name="fulltime"
           />
           <CheckboxInput
             id="parttime"
             label="Part-time"
-            checked={values.employment === EmploymentType.PART_TIME}
+            checked={values.employment.includes(EmploymentType.PART_TIME)}
             onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name="parttime"
           />
           <CheckboxInput
             id="contract"
             label="Contract"
-            checked={values.employment === EmploymentType.CONTRACT}
+            checked={values.employment.includes(EmploymentType.CONTRACT)}
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name="contract"
           />

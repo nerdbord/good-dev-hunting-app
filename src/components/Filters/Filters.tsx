@@ -1,11 +1,11 @@
 'use client'
-import React, { useState } from 'react'
-import styles from './Filters.module.scss'
-import { DropdownFilter } from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
-import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import { useFilters } from '@/contexts/FilterContext'
+import React, { useState } from 'react'
+import { DropdownFilter } from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { JobSpecialization } from '../ProfileList/profile-data'
+import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
+import styles from './Filters.module.scss'
 interface State {
   technology: string
   seniority: string
@@ -44,8 +44,6 @@ const Filters: React.FC = () => {
     setTechnologyFilter,
     seniorityFilter,
     setSeniorityFilter,
-    availabilityFilter,
-    setAvailabilityFilter,
     locationFilter,
     setLocationFilter,
   } = useFilters()
@@ -60,9 +58,6 @@ const Filters: React.FC = () => {
     }))
     if (buttonType === 'seniority') {
       setSeniorityFilter(option)
-    }
-    if (buttonType === 'availability') {
-      setAvailabilityFilter(option)
     }
     if (buttonType === 'location') {
       setLocationFilter(option)
@@ -110,7 +105,7 @@ const Filters: React.FC = () => {
         />
         <DropdownFilter
           label={''}
-          text={availabilityFilter || 'Availability'}
+          text={'Availability'}
           options={filterLists.availability}
           onSelect={(option) => handleSelect(option, 'availability')}
           selectedValue={filters.availability}

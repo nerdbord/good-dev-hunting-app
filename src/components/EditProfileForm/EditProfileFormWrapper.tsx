@@ -22,7 +22,7 @@ export interface EditProfileFormValues {
   remoteOnly: boolean
   position: string
   seniority: string
-  employment: EmploymentType
+  employment: EmploymentType[]
   techStack: string[]
   githubUsername: string | null
   state: PublishingState
