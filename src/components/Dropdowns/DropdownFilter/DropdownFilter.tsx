@@ -1,9 +1,15 @@
 'use client'
-import styles from './DropdownFilter.module.scss'
-import React, { useEffect, useState, useRef } from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import { IoIosArrowUp, IoIosArrowDown, IoIosCheckmark } from 'react-icons/io'
 import { Button } from '@/components/Button/Button'
+import { initialDropdownOption } from '@/contexts/FilterContext'
+import 'material-icons/iconfont/material-icons.css'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'
+import styles from './DropdownFilter.module.scss'
+
+export interface DropdownOption {
+  name: string
+  value: string
+}
 
 export const DropdownFilter = ({
   label,
@@ -12,11 +18,11 @@ export const DropdownFilter = ({
   onSelect,
   selectedValue,
 }: {
-  label: string
+  label?: string
   text: string
-  options: string[]
-  onSelect: (option: string) => void
-  selectedValue: string
+  options: DropdownOption[]
+  onSelect: (option: DropdownOption) => void
+  selectedValue: DropdownOption
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
@@ -60,9 +66,9 @@ export const DropdownFilter = ({
     setDropdownActive(!isDropdownActive)
   }
 
-  const handleSelect = (option: string) => {
-    if (selectedValue === option) {
-      onSelect('')
+  const handleSelect = (option: DropdownOption) => {
+    if (selectedValue.value === option.value) {
+      onSelect(initialDropdownOption)
     } else {
       onSelect(option)
     }
@@ -74,7 +80,7 @@ export const DropdownFilter = ({
     <div className={styles.buttonBox}>
       <div ref={dropdownRef}>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
-          {selectedValue.length === 0 ? (
+          {selectedValue.value.length === 0 ? (
             <div className={styles.buttonText}>{text}</div>
           ) : (
             <div className={styles.buttonTextChecked}>{text}</div>
@@ -103,21 +109,21 @@ export const DropdownFilter = ({
               <label key={index} className={styles.dropdownInput}>
                 <div
                   className={`${styles.checkbox} ${
-                    selectedValue === option ? styles.checked : ''
+                    selectedValue.value === option.value ? styles.checked : ''
                   }`}
                 >
                   <input
                     type="checkbox"
                     className={styles.hidden}
-                    checked={selectedValue === option}
+                    checked={selectedValue.value === option.value}
                     onChange={() => handleSelect(option)}
                   />
 
-                  {selectedValue.includes(option) && (
+                  {selectedValue?.value.includes(option.value) && (
                     <IoIosCheckmark className={styles.checkmark} />
                   )}
                 </div>{' '}
-                {option}
+                {option.name}
               </label>
             ))}
           </div>

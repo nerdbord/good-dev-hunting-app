@@ -1,8 +1,7 @@
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { JobSpecialization, ProfileModel } from '@/data/frontend/profile/types'
 import classNames from 'classnames/bind'
 import Image from 'next/image'
-import { JobSpecialization } from '../ProfileList/profile-data'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {

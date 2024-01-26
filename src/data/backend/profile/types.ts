@@ -17,3 +17,11 @@ export interface TechnologyModel {
   id: string
   name: string
 }
+
+export enum SeniorityLevel {
+  INTERN = 'INTERN',
+  JUNIOR = 'JUNIOR',
+  MIDDLE = 'MIDDLE',
+  SENIOR = 'SENIOR',
+  LEAD_EXPERT = 'LEAD_EXPERT',
+}

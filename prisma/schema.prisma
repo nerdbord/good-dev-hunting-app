@@ -13,13 +13,13 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  avatarUrl     String?
-  email         String         @unique
-  profile       Profile? //user have profile //relations  
-  githubDetails GitHubDetails? //user have gitHub //relations
-  roles         Role[]         @default([USER])
-  nerdbordUserId String?          @unique
+  id             String         @id @default(uuid())
+  avatarUrl      String?
+  email          String         @unique
+  profile        Profile?
+  githubDetails  GitHubDetails?
+  roles          Role[]         @default([USER])
+  nerdbordUserId String?        @unique
 }
 
 model Profile {
@@ -38,8 +38,8 @@ model Profile {
   remoteOnly                Boolean
   position                  String
   seniority                 String
-  techStack                 Technology[]      
-  employmentType            EmploymentType
+  techStack                 Technology[]
+  employmentType            EmploymentType[]
   state                     PublishingState   @default(DRAFT)
   rejectionReasons          RejectionReason[]
 }
@@ -58,22 +58,22 @@ model GitHubDetails {
 }
 
 model Country {
-  id                String    @id @unique @default(uuid())
-  name              String    @unique
-  profile           Profile[]
+  id      String    @id @unique @default(uuid())
+  name    String    @unique
+  profile Profile[]
 }
 
 model City {
-  id                String    @id @default(uuid())
-  name              String    @unique
-  profile           Profile[]
+  id      String    @id @default(uuid())
+  name    String    @unique
+  profile Profile[]
 }
 
 model RejectionReason {
   id        String   @id @default(uuid())
   profile   Profile  @relation(fields: [profileId], references: [id])
-  profileId String  
-  reason    String  
+  profileId String
+  reason    String
   createdAt DateTime @default(now())
 }
 

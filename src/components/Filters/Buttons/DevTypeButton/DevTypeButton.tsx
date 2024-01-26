@@ -1,8 +1,9 @@
 'use client'
+import classNames from 'classnames/bind'
 import React, { PropsWithChildren } from 'react'
 import styles from './DevTypeButton.module.scss'
-import classNames from 'classnames/bind'
-import { JobSpecialization } from '@/components/ProfileList/profile-data'
+
+import { JobSpecialization } from '@/data/frontend/profile/types'
 const cx = classNames.bind(styles)
 
 interface DevTypeButtonProps {

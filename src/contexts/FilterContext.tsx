@@ -1,22 +1,28 @@
 'use client'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import React, { createContext, useContext, useState } from 'react'
 
 export type FiltersContextType = {
-  jobSpecializationFilter: string[]
-  setJobSpecializationFilter: (value: string[]) => void
-  technologyFilter: string[]
-  setTechnologyFilter: (value: string[]) => void
-  seniorityFilter: string[]
-  setSeniorityFilter: (value: string[]) => void
-  availabilityFilter: string[]
-  setAvailabilityFilter: (value: string[]) => void
-  locationFilter: string[]
-  setLocationFilter: (value: string[]) => void
+  jobSpecializationFilter: DropdownOption[]
+  setJobSpecializationFilter: (value: DropdownOption[]) => void
+  technologyFilter: DropdownOption[]
+  setTechnologyFilter: (value: DropdownOption[]) => void
+  seniorityFilter: DropdownOption
+  setSeniorityFilter: (value: DropdownOption) => void
+  availabilityFilter: DropdownOption
+  setAvailabilityFilter: (value: DropdownOption) => void
+  locationFilter: DropdownOption
+  setLocationFilter: (value: DropdownOption) => void
 }
 
 export const FiltersContext = createContext<FiltersContextType | undefined>(
   undefined,
 )
+
+export const initialDropdownOption: DropdownOption = {
+  name: '',
+  value: '',
+}
 
 export const FiltersProvider = ({
   children,
@@ -24,12 +30,18 @@ export const FiltersProvider = ({
   children: React.ReactNode
 }) => {
   const [jobSpecializationFilter, setJobSpecializationFilter] = useState<
-    string[]
+    DropdownOption[]
   >([])
-  const [technologyFilter, setTechnologyFilter] = useState<string[]>([])
-  const [seniorityFilter, setSeniorityFilter] = useState<string[]>([])
-  const [locationFilter, setLocationFilter] = useState<string[]>([])
-  const [availabilityFilter, setAvailabilityFilter] = useState<string[]>([])
+  const [technologyFilter, setTechnologyFilter] = useState<DropdownOption[]>([])
+  const [seniorityFilter, setSeniorityFilter] = useState<DropdownOption>(
+    initialDropdownOption,
+  )
+  const [locationFilter, setLocationFilter] = useState<DropdownOption>(
+    initialDropdownOption,
+  )
+  const [availabilityFilter, setAvailabilityFilter] = useState<DropdownOption>(
+    initialDropdownOption,
+  )
 
   return (
     <FiltersContext.Provider
