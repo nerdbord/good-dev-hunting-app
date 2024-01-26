@@ -28,48 +28,40 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
     ...commonClasses,
   })
   return (
-    <div className={styles.frameWrapper}>
-      <div
-        className={`${styles.frame} ${
-          withStateStatus && styles.moderationFrame
-        }`}
-        onClick={!withStateStatus ? onClick : undefined}
-      >
-        <div
-          className={styles.profileWrapper}
-          onClick={withStateStatus ? onClick : undefined}
-        >
-          <div className={styles.container} data-test-id="profileContainer">
-            <div className={styles.profile}>
-              <Image
-                src={data.avatarUrl || ''}
-                width={78}
-                height={78}
-                alt="user's avatar"
-                className={styles.avatar}
-              />
-            </div>
-            <div className={styles.data}>
-              <p className={styles.name}>{data.fullName}</p>
-              <p className={`${getStackClasses} ${styles.wordWrap}`}>
-                {data.seniority} {data.position}&nbsp;Developer
-              </p>
-              <p className={styles.location}>
-                {data.country.name}, {data.city.name}&nbsp;/&nbsp;
-                {data.remoteOnly && 'Remote'}
-              </p>
-            </div>
+    <div
+      className={`${styles.frameWrapper} ${
+        withStateStatus && styles.moderationFrame
+      }`}
+    >
+      <div className={styles.frame} onClick={onClick}>
+        <div className={styles.container} data-test-id="profileContainer">
+          <div className={styles.profile}>
+            <Image
+              src={data.avatarUrl || ''}
+              width={78}
+              height={78}
+              alt="user's avatar"
+              className={styles.avatar}
+            />
           </div>
-          <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
+          <div className={styles.data}>
+            <p className={styles.name}>{data.fullName}</p>
+            <p className={`${getStackClasses} ${styles.wordWrap}`}>
+              {data.seniority} {data.position}&nbsp;Developer
+            </p>
+            <p className={styles.location}>
+              {data.country.name}, {data.city.name}&nbsp;/&nbsp;
+              {data.remoteOnly && 'Remote'}
+            </p>
+          </div>
         </div>
-        {withStateStatus && (
-          <div className={styles.detailsWrapper}>
-            <div className={styles.detailsContent}>
-              <StateStatus profile={data} />
-            </div>
-          </div>
-        )}
+        <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
       </div>
+      {withStateStatus && (
+        <div className={styles.detailsWrapper}>
+          <StateStatus profile={data} />
+        </div>
+      )}
     </div>
   )
 }
