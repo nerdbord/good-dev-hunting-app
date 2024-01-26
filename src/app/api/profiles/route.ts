@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
 import {
   createUserProfile,
   doesUserProfileExist,
   getPublishedProfilesPayload,
 } from '@/backend/profile/profile.service'
-import { authorizeUser } from '@/lib/auth'
-import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
+import { authorizeUser } from '@/lib/auth'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
   try {

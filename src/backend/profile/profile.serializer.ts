@@ -22,7 +22,10 @@ export const serializeProfileToProfileModel = (
     position: data.position,
     remoteOnly: data.remoteOnly,
     seniority: data.seniority,
-    techStack: data.techStack,
+    techStack: data.techStack.map((tech) => ({
+      id: tech.id,
+      name: tech.name,
+    })),
     userId: data.userId,
     avatarUrl: data.user.avatarUrl,
     githubUsername: data.user.githubDetails?.username || null,

@@ -1,4 +1,5 @@
 'use client'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { mapProfileModelToEditProfileFormValues } from '@/components/EditProfileForm/mappers'
 import { EditProfilePayload, ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -20,10 +21,10 @@ export interface EditProfileFormValues {
   openForCountryRelocation: boolean
   openForCityRelocation: boolean
   remoteOnly: boolean
-  position: string
-  seniority: string
+  position: DropdownOption
+  seniority: DropdownOption
   employment: EmploymentType[]
-  techStack: string[]
+  techStack: DropdownOption[]
   githubUsername: string | null
   state: PublishingState
 }
@@ -35,10 +36,16 @@ export const validationSchema = Yup.object().shape({
   city: Yup.string().required('City is required'),
   openToRelocationCountry: Yup.boolean().oneOf([true, false]),
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
-  position: Yup.string().required('Position is required'),
-  seniority: Yup.string().required('Seniority is required'),
+  position: Yup.object({
+    name: Yup.string(),
+    value: Yup.string(),
+  }).required('Position is required'),
+  seniority: Yup.object({
+    name: Yup.string(),
+    value: Yup.string(),
+  }).required('Seniority is required'),
   techStack: Yup.array()
-    .of(Yup.string())
+    .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
     .min(1, 'At least one technology is required')
     .max(8, 'Max 8 technologies'),
   linkedin: Yup.string()
@@ -82,22 +89,22 @@ const EditProfileFormWrapper = ({
       },
       openForCityRelocation: values.openForCityRelocation,
       remoteOnly: values.remoteOnly,
-      position: values.position,
-      seniority: values.seniority,
-      techStack: values.techStack,
+      position: values.position.value,
+      seniority: values.seniority.value,
+      techStack: values.techStack.map((tech) => {
+        return {
+          techName: tech.value,
+        }
+      }),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
     }
 
-    try {
-      runAsync(async () => {
-        await apiClient.updateMyProfile(payload)
-        router.push(AppRoutes.myProfile)
-      })
-    } catch (error) {
-      console.log('error', error)
-    }
+    await runAsync(async () => {
+      await apiClient.updateMyProfile(payload)
+      router.push(AppRoutes.myProfile)
+    })
   }
 
   const mappedInitialValues: EditProfileFormValues =
