@@ -1,4 +1,5 @@
 import { ProfileModel } from '@/data/frontend/profile/types'
+import { EmploymentType } from '@prisma/client'
 
 export const filterByPosition =
   (positionFilter: string[] | null) => (profile: ProfileModel) => {
@@ -29,6 +30,12 @@ export const filterByTechnology =
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string | null) => (profile: ProfileModel) => {
-    return !availabilityFilter || profile.employmentType === availabilityFilter
+  (availabilityFilter: EmploymentType[] | null) => (profile: ProfileModel) => {
+    return (
+      !availabilityFilter ||
+      availabilityFilter.length === 0 ||
+      availabilityFilter.some((availability) =>
+        profile.employmentType.includes(availability),
+      )
+    )
   }

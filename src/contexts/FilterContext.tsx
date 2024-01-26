@@ -1,5 +1,6 @@
 'use client'
-import React, { createContext, useState, useContext } from 'react'
+import { EmploymentType } from '@prisma/client'
+import React, { createContext, useContext, useState } from 'react'
 
 export type FiltersContextType = {
   jobSpecializationFilter: string[]
@@ -8,8 +9,8 @@ export type FiltersContextType = {
   setTechnologyFilter: (value: string[]) => void
   seniorityFilter: string
   setSeniorityFilter: (value: string) => void
-  availabilityFilter: string
-  setAvailabilityFilter: (value: string) => void
+  availabilityFilter: EmploymentType[]
+  setAvailabilityFilter: (value: EmploymentType[]) => void
   locationFilter: string
   setLocationFilter: (value: string) => void
 }
@@ -29,7 +30,9 @@ export const FiltersProvider = ({
   const [technologyFilter, setTechnologyFilter] = useState<string[]>([])
   const [seniorityFilter, setSeniorityFilter] = useState<string>('')
   const [locationFilter, setLocationFilter] = useState<string>('')
-  const [availabilityFilter, setAvailabilityFilter] = useState<string>('')
+  const [availabilityFilter, setAvailabilityFilter] = useState<
+    EmploymentType[]
+  >([])
 
   return (
     <FiltersContext.Provider

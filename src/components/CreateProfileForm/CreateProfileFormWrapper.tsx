@@ -22,7 +22,7 @@ export interface CreateProfileFormValues {
   remoteOnly: boolean
   position: string
   seniority: string
-  employment: EmploymentType
+  employment: EmploymentType[]
   techStack: string[]
   githubUsername: string | null
   state: PublishingState
@@ -40,7 +40,7 @@ const initialValues: CreateProfileFormValues = {
   remoteOnly: false,
   position: '',
   seniority: '',
-  employment: EmploymentType.FULL_TIME,
+  employment: [EmploymentType.FULL_TIME],
   techStack: [],
   githubUsername: '',
   state: PublishingState.DRAFT,
