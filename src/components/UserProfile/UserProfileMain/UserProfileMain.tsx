@@ -1,5 +1,5 @@
 import { countries } from '@/data/frontend/profile/countries/countries'
-import { mapEmploymentType } from '@/data/frontend/profile/mappers'
+import { mapEmploymentTypes } from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
@@ -50,7 +50,7 @@ const UserProfileMain = ({
           </div>
           <div className={styles.addInfo}>
             <div className={styles.addInfoItem}>
-              {mapEmploymentType(userProfile.employmentType)}
+              {mapEmploymentTypes(userProfile.employmentTypes)}
             </div>
           </div>
         </div>

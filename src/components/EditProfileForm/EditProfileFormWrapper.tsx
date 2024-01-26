@@ -96,7 +96,7 @@ const EditProfileFormWrapper = ({
           techName: tech.value,
         }
       }),
-      employmentType: values.employment,
+      employmentTypes: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
     }

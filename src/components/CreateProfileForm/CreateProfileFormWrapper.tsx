@@ -101,7 +101,7 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
           techName: tech.value,
         }
       }),
-      employmentType: values.employment,
+      employmentTypes: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,
     }

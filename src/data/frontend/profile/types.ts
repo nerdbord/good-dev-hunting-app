@@ -20,7 +20,7 @@ export interface ProfileModel {
   position: string
   seniority: string
   techStack: TechnologyModel[]
-  employmentType: EmploymentType[]
+  employmentTypes: EmploymentType[]
   githubUsername: string | null
   state: PublishingState
   userEmail: string

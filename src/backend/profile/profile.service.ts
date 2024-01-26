@@ -112,7 +112,7 @@ export async function createUserProfile(
       remoteOnly: profileData.remoteOnly,
       position: profileData.position,
       seniority: profileData.seniority,
-      employmentType: profileData.employmentType,
+      employmentTypes: profileData.employmentTypes,
       state: PublishingState.DRAFT,
     },
     include: includeObject.include,

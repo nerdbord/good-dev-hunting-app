@@ -2,7 +2,7 @@ import { SeniorityLevel } from '@/data/backend/profile/types'
 import { JobSpecialization } from '@/data/frontend/profile/types'
 import { EmploymentType } from '@prisma/client'
 
-export const mapEmploymentType = (employmentTypes: EmploymentType[]) => {
+export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
   return employmentTypes.map((employmentType) => {
     if (!employmentType) return ''
 
@@ -49,7 +49,7 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
-export const mappedEmploymentType = mapEmploymentType(
+export const mappedEmploymentType = mapEmploymentTypes(
   Object.values(EmploymentType),
 )
 
