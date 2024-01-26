@@ -71,7 +71,7 @@ export async function PUT(request: NextRequest) {
         remoteOnly: updatedDataPayload.remoteOnly,
         position: updatedDataPayload.position,
         seniority: updatedDataPayload.seniority,
-        employmentType: updatedDataPayload.employmentType,
+        employmentTypes: updatedDataPayload.employmentTypes,
         state: PublishingState.PENDING,
       }
 

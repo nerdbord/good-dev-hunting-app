@@ -32,7 +32,7 @@ export async function PATCH(request: NextRequest, id: string) {
       position: userDataToUpdate.position,
       seniority: userDataToUpdate.seniority,
       state: PublishingState.PENDING,
-      employmentType: userDataToUpdate.employmentType,
+      employmentTypes: userDataToUpdate.employmentTypes,
       country: {
         connectOrCreate: {
           where: {

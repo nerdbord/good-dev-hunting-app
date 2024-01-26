@@ -15,7 +15,7 @@ export const serializeProfileToProfileModel = (
       name: data.country.name,
     },
     openForCountryRelocation: data.openForCountryRelocation,
-    employmentType: data.employmentType,
+    employmentTypes: data.employmentTypes,
     fullName: data.fullName,
     state: data.state,
     linkedIn: data.linkedIn,

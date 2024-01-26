@@ -39,5 +39,11 @@ export const filterByTechnology =
 export const filterByAvailability =
   (availabilityFilter: FilterOption[] | null) => (profile: ProfileModel) => {
     if (!availabilityFilter) return true
-    return availabilityFilter.some((availability) => !!profile.employmentType)
+    return availabilityFilter.some(
+      (availability) =>
+        !!profile.employmentTypes.find(
+          (employmentType) =>
+            employmentType.toUpperCase() === availability.value.toUpperCase(),
+        ),
+    )
   }

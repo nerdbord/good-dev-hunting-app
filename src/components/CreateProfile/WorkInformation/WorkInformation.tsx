@@ -12,7 +12,7 @@ import {
 import { EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
-import styles from './WorkInformation.module.scss'
+import styles from './WorkInformations.module.scss'
 
 export enum WorkInformationFormKeys {
   POSITION = 'position',
