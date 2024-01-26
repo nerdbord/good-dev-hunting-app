@@ -13,7 +13,10 @@
 }
 
 .withBackBackButton {
-  justify-content: left;
+  @include mobile{
+    justify-content: left;
+  }
+  justify-content: space-between;
 }
 
 .actions {
@@ -25,8 +28,3 @@
   column-gap: 10px;
 }
 
-@media (min-width: 768px) {
-  .withBackBackButton {
-    justify-content: space-between;
-  }
-}
