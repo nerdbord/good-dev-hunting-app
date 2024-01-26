@@ -38,7 +38,7 @@ const UserProfilePage = async ({ params }: { params: { id: string } }) => {
   const selectedProfile = await getProfileByUserId(params.id)
 
   if (!selectedProfile) {
-    redirect(AppRoutes.home)
+    redirect(AppRoutes.profiles)
   }
 
   return (
