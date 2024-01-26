@@ -130,6 +130,19 @@ export async function updateUserAvatar(email: string, avatarUrl: string) {
   })
 }
 
+export async function updateUserRole(
+  id: string,
+  userRoleToUpdate: Prisma.UserUpdateWithoutProfileInput,
+) {
+  const updatedUserRole = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: userRoleToUpdate,
+  })
+  return updatedUserRole
+}
+
 export async function getGitHubDetails(id: string) {
   const userGitHubDetails = await prisma.gitHubDetails.findUnique({
     where: {
