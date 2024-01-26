@@ -33,6 +33,7 @@ export const DropdownBio = ({
   const [hasInteracted, setHasInteracted] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [hasError, setHasError] = useState(false)
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -79,7 +80,13 @@ export const DropdownBio = ({
           className={inputError ? styles.errMsg : styles.featuresBtn}
           data-testid={dropdownTestId}
         >
-          <div className={styles.buttonText}>{selectedValue || text}</div>
+          <div
+            className={`${styles.buttonText} ${
+              selectedValue && styles.selectedButtonText
+            }`}
+          >
+            {selectedValue || text}
+          </div>
           <div className={styles.selected}>
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
@@ -94,12 +101,12 @@ export const DropdownBio = ({
                 key={index}
                 className={styles.dropdownInput}
                 htmlFor={`${id}-${index}`}
+                onClick={() => handleSelection(option)}
               >
                 <div
                   className={
                     selectedValue === option ? styles.selectedOption : ''
                   }
-                  onClick={() => handleSelection(option)}
                   data-testid={optionTestId}
                 >
                   {option}

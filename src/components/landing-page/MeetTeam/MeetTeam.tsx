@@ -10,15 +10,22 @@ const MeetTeam = () => {
         <h2 className={styles.title}>Meet our team</h2>
         <h5 className={styles.subtitle}>Meet passionates behind the scene</h5>
       </div>
-      <div className={styles.sliderWrapper}>
-        <div className={styles.cardsBox}>
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
+      <div className={styles.cardsWrapper}>
+        <div className={styles.slider}>
+          <div className={styles.cardsBox}>
+            <VerticalCard />
+            <VerticalCard />
+            <VerticalCard />
+            <VerticalCard />
+          </div>
+        </div>
+        <div className={styles.slider}>
+          <div className={styles.cardsBox}>
+            <VerticalCard />
+            <VerticalCard />
+            <VerticalCard />
+            <VerticalCard />
+          </div>
         </div>
       </div>
     </section>

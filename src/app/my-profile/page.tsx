@@ -14,13 +14,13 @@ const MyProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session?.user) {
-    redirect(AppRoutes.home)
+    redirect(AppRoutes.profiles)
   }
 
   const profile = await getProfileByUserEmail(session.user.email)
 
   if (!profile) {
-    redirect(AppRoutes.home)
+    redirect(AppRoutes.profiles)
   }
 
   const user = await findUserByEmail(session.user.email)
