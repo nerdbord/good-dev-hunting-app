@@ -1,26 +1,21 @@
 .profileListCont {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(280px, 380px));
   gap: 20px;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
+  margin: 20px 0 100px;
   @include mobile {
-    grid-template-columns: repeat(1, 1fr);
-    align-items: flex-start;
+    grid-template-columns: repeat(1, minmax(280px, 380px));
   }
 }
 
 .noProfiles {
   margin-top: 40px;
-  text-align: center;
 }
 
 .profileCards {
   margin-top: 40px;
-  @include mobile {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .title {
@@ -33,59 +28,7 @@
   color: #e2eaf1;
 }
 
-.actions {
-  display: inline-flex;
-  justify-content: flex-start;
-  gap: 10px;
-}
-
-.moderationFrame {
-  position: relative;
-  padding: 0 15px;
-}
-
-.detailsWrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding-bottom: 11px;
-  margin-top: 25px;
-}
-
-.detailsContent {
-  display: inline-flex;
-  gap: 11px;
-  width: 346px;
-  padding-top: 18px;
-  border-top: 1px solid #2a2f35;
-}
-
-.stateStatus {
-  display: flex;
-  padding: 12px 20px 12px 24px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 52px;
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-}
-
-.stateAccepted {
-  color: #13cbaa;
-  border: 1px solid rgba(19, 203, 170, 0.2);
-  background: var(--dark-02, #0f1217);
-}
-
-.stateRejected {
-  color: #d62626;
-  border: 1px solid rgba(214, 38, 38, 0.2);
-  background: var(--dark-02, #0f1217);
-}
-
 .moderationProfiles {
   width: 100%;
+  margin-top: 40px;
 }
