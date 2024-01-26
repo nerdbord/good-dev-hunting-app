@@ -1,26 +1,18 @@
 .profileListCont {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
   gap: 20px;
   align-items: center;
-  justify-content: space-between;
   margin-top: 20px;
-  @include mobile {
-    grid-template-columns: repeat(1, 1fr);
-    align-items: flex-start;
-  }
 }
 
 .noProfiles {
   margin-top: 40px;
-  text-align: center;
 }
 
 .profileCards {
   margin-top: 40px;
-  @include mobile {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .title {
@@ -35,4 +27,5 @@
 
 .moderationProfiles {
   width: 100%;
+  margin-top: 40px;
 }
