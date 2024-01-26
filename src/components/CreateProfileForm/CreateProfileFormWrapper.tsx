@@ -1,6 +1,6 @@
 'use client'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import { initialDropdownOption } from '@/contexts/FilterContext'
+import { initialFilterOption } from '@/contexts/FilterContext'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
@@ -24,7 +24,7 @@ export interface CreateProfileFormValues {
   remoteOnly: boolean
   position: DropdownOption
   seniority: DropdownOption
-  employment: EmploymentType
+  employment: EmploymentType[]
   techStack: DropdownOption[]
   githubUsername: string | null
   state: PublishingState
@@ -40,9 +40,9 @@ const initialValues: CreateProfileFormValues = {
   openToRelocationCountry: false,
   openToRelocationCity: false,
   remoteOnly: false,
-  position: initialDropdownOption,
-  seniority: initialDropdownOption,
-  employment: EmploymentType.FULL_TIME,
+  position: initialFilterOption,
+  seniority: initialFilterOption,
+  employment: [],
   techStack: [],
   githubUsername: '',
   state: PublishingState.DRAFT,

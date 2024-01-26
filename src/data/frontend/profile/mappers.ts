@@ -2,19 +2,21 @@ import { SeniorityLevel } from '@/data/backend/profile/types'
 import { JobSpecialization } from '@/data/frontend/profile/types'
 import { EmploymentType } from '@prisma/client'
 
-export const mapEmploymentType = (employmentType: EmploymentType) => {
-  if (!employmentType) return ''
+export const mapEmploymentType = (employmentTypes: EmploymentType[]) => {
+  return employmentTypes.map((employmentType) => {
+    if (!employmentType) return ''
 
-  switch (employmentType) {
-    case EmploymentType.FULL_TIME:
-      return 'Full-time'
-    case EmploymentType.PART_TIME:
-      return 'Part-time'
-    case EmploymentType.CONTRACT:
-      return 'Contract'
-    default:
-      return employmentType
-  }
+    switch (employmentType) {
+      case EmploymentType.FULL_TIME:
+        return 'Full-time'
+      case EmploymentType.PART_TIME:
+        return 'Part-time'
+      case EmploymentType.CONTRACT:
+        return 'Contract'
+      default:
+        return employmentType
+    }
+  })
 }
 
 export const mapSeniorityLevel = (seniorityLevel: SeniorityLevel) => {
@@ -47,11 +49,8 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
-export const mappedEmploymentType = Object.values(EmploymentType).map(
-  (type) => ({
-    name: mapEmploymentType(type),
-    value: type,
-  }),
+export const mappedEmploymentType = mapEmploymentType(
+  Object.values(EmploymentType),
 )
 
 export const mappedSeniorityLevel = Object.values(SeniorityLevel).map(

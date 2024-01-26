@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/Button/Button'
-import { initialDropdownOption } from '@/contexts/FilterContext'
+import { initialFilterOption } from '@/contexts/FilterContext'
 import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'
@@ -68,7 +68,7 @@ export const DropdownFilter = ({
 
   const handleSelect = (option: DropdownOption) => {
     if (selectedValue.value === option.value) {
-      onSelect(initialDropdownOption)
+      onSelect(initialFilterOption)
     } else {
       onSelect(option)
     }

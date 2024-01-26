@@ -1,8 +1,8 @@
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { FilterOption } from '@/contexts/FilterContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const filterByPosition =
-  (positionFilter: DropdownOption[]) => (profile: ProfileModel) => {
+  (positionFilter: FilterOption[]) => (profile: ProfileModel) => {
     if (positionFilter.length === 0) return true
     return positionFilter.some(
       (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
@@ -10,7 +10,7 @@ export const filterByPosition =
   }
 
 export const filterBySeniority =
-  (seniorityFilter: DropdownOption) => (profile: ProfileModel) => {
+  (seniorityFilter: FilterOption) => (profile: ProfileModel) => {
     if (!seniorityFilter.value) return true
     return (
       profile.seniority.toUpperCase() === seniorityFilter.value.toUpperCase()
@@ -18,7 +18,7 @@ export const filterBySeniority =
   }
 
 export const filterByLocation =
-  (locationFilter: DropdownOption) => (profile: ProfileModel) => {
+  (locationFilter: FilterOption) => (profile: ProfileModel) => {
     if (!locationFilter.value) return true
     return (
       profile.country.name.toUpperCase() === locationFilter.value.toUpperCase()
@@ -26,7 +26,7 @@ export const filterByLocation =
   }
 
 export const filterByTechnology =
-  (technologyFilter: DropdownOption[]) => (profile: ProfileModel) => {
+  (technologyFilter: FilterOption[]) => (profile: ProfileModel) => {
     if (technologyFilter.length === 0) return true
     return technologyFilter.some(
       (techFilter) =>
@@ -37,9 +37,7 @@ export const filterByTechnology =
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string | null) => (profile: ProfileModel) => {
+  (availabilityFilter: FilterOption[] | null) => (profile: ProfileModel) => {
     if (!availabilityFilter) return true
-    return (
-      profile.employmentType.toUpperCase() === availabilityFilter.toUpperCase()
-    )
+    return availabilityFilter.some((availability) => !!profile.employmentType)
   }

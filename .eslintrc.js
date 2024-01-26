@@ -12,5 +12,6 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/no-empty-interface': 'warn',
   },
 }
