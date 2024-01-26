@@ -27,7 +27,7 @@ export const ProfilesWithFilter: React.FC<{
     .filter(filterBySeniority(seniorityFilter))
     .filter(filterByLocation(locationFilter))
     .filter(filterByTechnology(technologyFilter))
-    .filter(filterByAvailability(availabilityFilter.value))
+    .filter(filterByAvailability(availabilityFilter))
 
   const filteredCount = filteredProfileData.length
 

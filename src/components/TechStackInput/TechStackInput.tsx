@@ -1,7 +1,7 @@
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import { initialDropdownOption } from '@/contexts/FilterContext'
+import { initialFilterOption } from '@/contexts/FilterContext'
 import technologies from '@/data/frontend/technologies/data'
 import classNames from 'classnames/bind'
 import { useFormikContext } from 'formik'
@@ -46,9 +46,8 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
   const chipsContainerRef = useRef(null)
   const maxChips = 8
 
-  const [inputValue, setInputValue] = useState<DropdownOption>(
-    initialDropdownOption,
-  )
+  const [inputValue, setInputValue] =
+    useState<DropdownOption>(initialFilterOption)
   const [filteredSuggestions, setFilteredSuggestions] = useState<
     DropdownOption[]
   >([])
@@ -69,7 +68,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
         )
       ) {
         onTechSelect(inputValue)
-        setInputValue(initialDropdownOption)
+        setInputValue(initialFilterOption)
       }
     }
   }
@@ -77,7 +76,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
   const handleSuggestionClick = (suggestion: DropdownOption) => {
     if (chips.length < maxChips) {
       onTechSelect(suggestion)
-      setInputValue(initialDropdownOption)
+      setInputValue(initialFilterOption)
       inputRef.current?.focus()
     }
   }

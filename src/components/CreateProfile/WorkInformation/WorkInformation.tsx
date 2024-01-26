@@ -12,7 +12,7 @@ import {
 import { EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
-import styles from './WorkInformations.module.scss'
+import styles from './WorkInformation.module.scss'
 
 export enum WorkInformationFormKeys {
   POSITION = 'position',
@@ -25,8 +25,16 @@ const WorkInformation = () => {
   const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
 
-  const handleEmploymentType = (option: string): void => {
-    setFieldValue(WorkInformationFormKeys.EMPLOYMENT, option)
+  const handleEmploymentType = (option: EmploymentType): void => {
+    let newFilters: string[]
+    if (values.employment.includes(option)) {
+      newFilters = values.employment.filter(
+        (selectedOption) => selectedOption !== option,
+      )
+    } else {
+      newFilters = [...values.employment, option]
+    }
+    setFieldValue(WorkInformationFormKeys.EMPLOYMENT, newFilters)
   }
 
   const handleTechSelect = (tech: DropdownOption) => {
@@ -38,8 +46,6 @@ const WorkInformation = () => {
     }
   }
 
-  console.log('errors', errors)
-
   const handleTechRemove = (techToRemove: DropdownOption) => {
     if (Array.isArray(values[WorkInformationFormKeys.TECH_STACK])) {
       setFieldValue(
@@ -49,6 +55,10 @@ const WorkInformation = () => {
         ),
       )
     }
+  }
+
+  const isEmploymentTypeSelected = (option: EmploymentType): boolean => {
+    return values.employment.includes(option)
   }
 
   return (
@@ -119,30 +129,21 @@ const WorkInformation = () => {
           <CheckboxInput
             id={WorkInformationFormKeys.EMPLOYMENT + 1}
             label="Full-time"
-            checked={
-              values[WorkInformationFormKeys.EMPLOYMENT] ===
-              EmploymentType.FULL_TIME
-            }
+            checked={isEmploymentTypeSelected(EmploymentType.FULL_TIME)}
             onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
             id={WorkInformationFormKeys.EMPLOYMENT + 2}
             label="Part-time"
-            checked={
-              values[WorkInformationFormKeys.EMPLOYMENT] ===
-              EmploymentType.PART_TIME
-            }
+            checked={isEmploymentTypeSelected(EmploymentType.PART_TIME)}
             onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
             id={WorkInformationFormKeys.EMPLOYMENT + 3}
             label="Contract"
-            checked={
-              values[WorkInformationFormKeys.EMPLOYMENT] ===
-              EmploymentType.CONTRACT
-            }
+            checked={isEmploymentTypeSelected(EmploymentType.CONTRACT)}
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
