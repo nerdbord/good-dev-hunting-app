@@ -45,3 +45,9 @@ export type PublishingStateData = {
 export type RejectionReason = {
   reason: string
 }
+
+export enum JobSpecialization {
+  Frontend = 'Frontend',
+  Backend = 'Backend',
+  Fullstack = 'Fullstack',
+}

@@ -1,4 +1,6 @@
 'use client'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { initialDropdownOption } from '@/contexts/FilterContext'
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
@@ -20,10 +22,10 @@ export interface CreateProfileFormValues {
   openToRelocationCountry: boolean
   openToRelocationCity: boolean
   remoteOnly: boolean
-  position: string
-  seniority: string
+  position: DropdownOption
+  seniority: DropdownOption
   employment: EmploymentType
-  techStack: string[]
+  techStack: DropdownOption[]
   githubUsername: string | null
   state: PublishingState
 }
@@ -38,8 +40,8 @@ const initialValues: CreateProfileFormValues = {
   openToRelocationCountry: false,
   openToRelocationCity: false,
   remoteOnly: false,
-  position: '',
-  seniority: '',
+  position: initialDropdownOption,
+  seniority: initialDropdownOption,
   employment: EmploymentType.FULL_TIME,
   techStack: [],
   githubUsername: '',
@@ -51,8 +53,12 @@ export const validationSchema = Yup.object().shape({
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
-  position: Yup.string().required('Position is required'),
-  seniority: Yup.string().required('Seniority is required'),
+  position: Yup.object({
+    value: Yup.string().required('Position is required'),
+  }),
+  seniority: Yup.object({
+    value: Yup.string().required('Seniority is required'),
+  }),
   techStack: Yup.array().of(Yup.string()).min(1, 'Tech stack is required'),
   linkedin: Yup.string()
     .nullable()
@@ -88,9 +94,13 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       },
       openForCityRelocation: values.openToRelocationCity,
       remoteOnly: values.remoteOnly,
-      position: values.position,
-      seniority: values.seniority,
-      techStack: values.techStack.map((tech) => ({ techName: tech })),
+      position: values.position.value,
+      seniority: values.seniority.value,
+      techStack: values.techStack.map((tech) => {
+        return {
+          techName: tech.value,
+        }
+      }),
       employmentType: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,
