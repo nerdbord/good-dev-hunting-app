@@ -1,10 +1,9 @@
-import React from 'react'
-import styles from './TalentSection.module.scss'
+import { getRandomProfiles } from '@/backend/profile/profile.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import ProfileCard from '@/components/ProfileCard/ProfileCard'
-import { getRandomProfiles } from '@/backend/profile/profile.service'
-import Link from 'next/link'
 import { AppRoutes } from '@/utils/routes'
+import Link from 'next/link'
+import styles from './TalentSection.module.scss'
 
 const TalentSection = async () => {
   const profiles = await getRandomProfiles(6)

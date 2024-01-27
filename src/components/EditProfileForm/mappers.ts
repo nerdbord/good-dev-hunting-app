@@ -1,4 +1,6 @@
 import { EditProfileFormValues } from '@/components/EditProfileForm/EditProfileFormWrapper'
+import { SeniorityLevel } from '@/data/backend/profile/types'
+import { mapSeniorityLevel } from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const mapProfileModelToEditProfileFormValues = (
@@ -12,10 +14,19 @@ export const mapProfileModelToEditProfileFormValues = (
   city: profile.city.name,
   openForCityRelocation: profile.openForCityRelocation,
   remoteOnly: profile.remoteOnly,
-  position: profile.position,
-  seniority: profile.seniority,
-  techStack: profile.techStack,
-  employment: profile.employmentType,
+  position: {
+    name: profile.position,
+    value: profile.position,
+  },
+  seniority: {
+    name: mapSeniorityLevel(profile.seniority as SeniorityLevel),
+    value: profile.seniority,
+  },
+  techStack: profile.techStack.map((tech) => ({
+    name: tech.name,
+    value: tech.name,
+  })),
+  employment: profile.employmentTypes,
   githubUsername: profile.githubUsername,
   state: profile.state,
 })

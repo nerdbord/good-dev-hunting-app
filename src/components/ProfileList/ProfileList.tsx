@@ -1,4 +1,3 @@
-import React from 'react'
 import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
 import ProfilesWithFilter from '@/components/ProfileList/ProfilesWithFilter'
 

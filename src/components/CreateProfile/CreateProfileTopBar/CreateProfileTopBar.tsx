@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
-import styles from './CreateProfileTopBar.module.scss'
+import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
+import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { Button } from '@/components/Button/Button'
-import { ErrorIcon } from '../../../assets/icons/ErrorIcon'
+import { useUploadContext } from '@/contexts/UploadContext'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { apiClient } from '@/lib/apiClient'
+import { AppRoutes } from '@/utils/routes'
 import { useFormikContext } from 'formik'
 import { usePathname } from 'next/navigation'
-import { AppRoutes } from '@/utils/routes'
-import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { useUploadContext } from '@/contexts/UploadContext'
-import { apiClient } from '@/lib/apiClient'
-import { serverUpdateUserAvatar } from '@/actions/user/updateUserAvatar'
+import styles from './CreateProfileTopBar.module.scss'
 
 const CreateProfileTopBar = () => {
   const pathname = usePathname()
@@ -32,21 +31,21 @@ const CreateProfileTopBar = () => {
           try {
             const url = await apiClient.userPhotoUpload(selectedFile)
             url && (await serverUpdateUserAvatar(url))
-            await handleSubmit()
+            handleSubmit()
           } catch (error) {
             console.log(error)
             setImageUploadError(true)
             setSelectedFile(null)
           }
         } else {
-          !imageUploadError && (await handleSubmit())
+          !imageUploadError && handleSubmit()
         }
       })
     }
   }
 
   const hasTouchedErrors = Object.keys(errors).some(
-    // @ts-ignore;
+    // @ts-ignore
     (key) => touched[key] && errors[key],
   )
 
@@ -74,7 +73,6 @@ const CreateProfileTopBar = () => {
           disabled={!isValid}
           onClick={handleButtonClick}
           dataTestId="saveAndPreviewProfile"
-          type="submit"
         >
           {isMobile ? 'Save and preview' : 'Save and preview profile'}
         </Button>

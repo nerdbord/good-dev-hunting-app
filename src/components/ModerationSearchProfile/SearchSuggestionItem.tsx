@@ -1,5 +1,5 @@
-﻿import Image from 'next/image'
-import { ProfileModel } from '@/data/frontend/profile/types'
+﻿import { ProfileModel } from '@/data/frontend/profile/types'
+import Image from 'next/image'
 
 import styles from './SearchSuggestionItem.module.scss'
 

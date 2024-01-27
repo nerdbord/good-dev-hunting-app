@@ -1,22 +1,85 @@
 'use client'
-import React, { createContext, useState, useContext } from 'react'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import {
+  mappedEmploymentType,
+  mappedLocations,
+  mappedSeniorityLevel,
+  mappedTechnologies,
+} from '@/data/frontend/profile/mappers'
+import { JobSpecialization } from '@/data/frontend/profile/types'
+import React, { createContext, useContext, useState } from 'react'
 
 export type FiltersContextType = {
-  jobSpecializationFilter: string[]
-  setJobSpecializationFilter: (value: string[]) => void
-  technologyFilter: string[]
-  setTechnologyFilter: (value: string[]) => void
-  seniorityFilter: string
-  setSeniorityFilter: (value: string) => void
-  availabilityFilter: string
-  setAvailabilityFilter: (value: string) => void
-  locationFilter: string
-  setLocationFilter: (value: string) => void
+  jobSpecializationFilter: FilterOption[]
+  setJobSpecializationFilter: (value: FilterOption[]) => void
+  technologyFilter: FilterOption[]
+  setTechnologyFilter: (value: FilterOption[]) => void
+  seniorityFilter: FilterOption[]
+  setSeniorityFilter: (value: FilterOption[]) => void
+  availabilityFilter: FilterOption[]
+  setAvailabilityFilter: (value: FilterOption[]) => void
+  locationFilter: FilterOption[]
+  setLocationFilter: (value: FilterOption[]) => void
 }
+
+export interface FilterOption extends DropdownOption {}
 
 export const FiltersContext = createContext<FiltersContextType | undefined>(
   undefined,
 )
+
+export const initialFilterOption: FilterOption = {
+  name: '',
+  value: '',
+}
+
+export interface State {
+  technology: DropdownOption
+  seniority: DropdownOption
+  availability: DropdownOption
+  location: DropdownOption
+}
+
+export enum JobOfferFiltersEnum {
+  technology = 'technology',
+  seniority = 'seniority',
+  availability = 'availability',
+  location = 'location',
+}
+
+export const JobOfferFilters: State = {
+  technology: initialFilterOption,
+  seniority: initialFilterOption,
+  availability: initialFilterOption,
+  location: initialFilterOption,
+}
+
+export const jobSpecializationOptions: Record<
+  JobSpecialization,
+  DropdownOption
+> = {
+  [JobSpecialization.Frontend]: {
+    name: 'Frontend',
+    value: JobSpecialization.Frontend,
+  },
+  [JobSpecialization.Backend]: {
+    name: 'Backend',
+    value: JobSpecialization.Backend,
+  },
+  [JobSpecialization.Fullstack]: {
+    name: 'Fullstack',
+    value: JobSpecialization.Fullstack,
+  },
+}
+export type FiltersLists = {
+  [key in JobOfferFiltersEnum]: DropdownOption[]
+}
+export const filterLists: FiltersLists = {
+  technology: mappedTechnologies,
+  seniority: mappedSeniorityLevel,
+  availability: mappedEmploymentType,
+  location: mappedLocations,
+}
 
 export const FiltersProvider = ({
   children,
@@ -24,12 +87,14 @@ export const FiltersProvider = ({
   children: React.ReactNode
 }) => {
   const [jobSpecializationFilter, setJobSpecializationFilter] = useState<
-    string[]
+    FilterOption[]
   >([])
-  const [technologyFilter, setTechnologyFilter] = useState<string[]>([])
-  const [seniorityFilter, setSeniorityFilter] = useState<string>('')
-  const [locationFilter, setLocationFilter] = useState<string>('')
-  const [availabilityFilter, setAvailabilityFilter] = useState<string>('')
+  const [technologyFilter, setTechnologyFilter] = useState<FilterOption[]>([])
+  const [seniorityFilter, setSeniorityFilter] = useState<FilterOption[]>([])
+  const [locationFilter, setLocationFilter] = useState<FilterOption[]>([])
+  const [availabilityFilter, setAvailabilityFilter] = useState<FilterOption[]>(
+    [],
+  )
 
   return (
     <FiltersContext.Provider
