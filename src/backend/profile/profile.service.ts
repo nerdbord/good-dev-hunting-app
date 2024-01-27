@@ -132,7 +132,7 @@ export async function updateUserData(
   })
   if (userDataToUpdate?.state) {
     sendDiscordNotificationToModeratorChannel(
-      `User's ${updatedUser.fullName} profile has got new status: ${userDataToUpdate.state}! Profile: ${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/dashboard/profile/${updatedUser.userId}`,
+      `User's **${updatedUser.fullName}** profile has got new status: **${userDataToUpdate.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedUser.userId})`,
     )
   }
   return updatedUser
