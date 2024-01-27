@@ -51,3 +51,9 @@ export enum JobSpecialization {
   Backend = 'Backend',
   Fullstack = 'Fullstack',
 }
+
+export enum AvailabilityEnum {
+  PART_TIME = 'PART_TIME',
+  FULL_TIME = 'FULL_TIME',
+  CONTRACT = 'CONTRACT',
+}

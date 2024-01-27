@@ -9,10 +9,7 @@ import {
 } from '@/contexts/FilterContext'
 import { JobSpecialization } from '@/data/frontend/profile/types'
 import React from 'react'
-import {
-  DropdownFilter,
-  DropdownOption,
-} from '../Dropdowns/DropdownFilter/DropdownFilter'
+import { DropdownOption } from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
 
@@ -30,25 +27,6 @@ const Filters: React.FC = () => {
     setLocationFilter,
   } = useFilters()
 
-  const handleSelect = (
-    option: DropdownOption,
-    buttonType: keyof typeof JobOfferFilters,
-  ): void => {
-    switch (buttonType) {
-      case JobOfferFiltersEnum.seniority:
-        setSeniorityFilter(option)
-        break
-      case JobOfferFiltersEnum.availability:
-        setAvailabilityFilter([option])
-        break
-      case JobOfferFiltersEnum.location:
-        setLocationFilter(option)
-        break
-      default:
-        break
-    }
-  }
-  //
   const handleButtonClick = (newStack: DropdownOption) => {
     let newPos: DropdownOption[]
     if (jobSpecializationFilter.includes(newStack)) {
@@ -59,16 +37,40 @@ const Filters: React.FC = () => {
     setJobSpecializationFilter(newPos)
   }
 
-  const handleSelectMulti = (option: DropdownOption): void => {
-    let newFilters: DropdownOption[]
-    if (technologyFilter.includes(option)) {
-      newFilters = technologyFilter.filter(
-        (selectedOption) => selectedOption !== option,
-      )
-    } else {
-      newFilters = [...technologyFilter, option]
+  const handleSelectMulti = (
+    option: DropdownOption,
+    buttonType: keyof typeof JobOfferFilters,
+  ): void => {
+    let newFilters
+
+    switch (buttonType) {
+      case JobOfferFiltersEnum.seniority:
+        newFilters = manageFilter(seniorityFilter)
+        setSeniorityFilter(newFilters)
+        break
+      case JobOfferFiltersEnum.availability:
+        newFilters = manageFilter(availabilityFilter)
+        setAvailabilityFilter(newFilters)
+        break
+      case JobOfferFiltersEnum.location:
+        newFilters = manageFilter(locationFilter)
+        setLocationFilter(newFilters)
+        break
+      case JobOfferFiltersEnum.technology:
+        newFilters = manageFilter(technologyFilter)
+        setTechnologyFilter(newFilters)
+        break
+      default:
+        return
     }
-    setTechnologyFilter(newFilters)
+
+    function manageFilter(filterList: DropdownOption[]): DropdownOption[] {
+      const filteredList = filterList.filter((filter) => filter !== option)
+      if (filteredList.length === filterList.length) {
+        filteredList.push(option)
+      }
+      return filteredList
+    }
   }
 
   return (
@@ -77,14 +79,16 @@ const Filters: React.FC = () => {
         <DropdownFilterMulti
           text={'Technology'}
           options={filterLists.technology}
-          onSelect={handleSelectMulti}
+          onSelect={(option) =>
+            handleSelectMulti(option, JobOfferFiltersEnum.technology)
+          }
           selectedValue={technologyFilter}
         />
-        <DropdownFilter
-          text={seniorityFilter.name || 'Seniority'}
+        <DropdownFilterMulti
+          text={'Seniority'}
           options={filterLists.seniority}
           onSelect={(option) =>
-            handleSelect(option, JobOfferFiltersEnum.seniority)
+            handleSelectMulti(option, JobOfferFiltersEnum.seniority)
           }
           selectedValue={seniorityFilter}
         />
@@ -92,15 +96,15 @@ const Filters: React.FC = () => {
           text={'Availability'}
           options={filterLists.availability}
           onSelect={(option) =>
-            handleSelect(option, JobOfferFiltersEnum.availability)
+            handleSelectMulti(option, JobOfferFiltersEnum.availability)
           }
           selectedValue={availabilityFilter}
         />
-        <DropdownFilter
-          text={locationFilter.name || 'Location'}
+        <DropdownFilterMulti
+          text={'Location'}
           options={filterLists.location}
           onSelect={(option) =>
-            handleSelect(option, JobOfferFiltersEnum.location)
+            handleSelectMulti(option, JobOfferFiltersEnum.location)
           }
           selectedValue={locationFilter}
         />

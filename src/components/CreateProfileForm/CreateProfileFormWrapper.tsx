@@ -95,12 +95,11 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       country: {
         name: values.country,
       },
-      // Dunno why these values where transformed to string 1 || 0 :=D?! hence !!
-      openForCountryRelocation: !!values.openToRelocationCountry,
+      openForCountryRelocation: values.openToRelocationCountry,
       city: {
         name: values.city,
       },
-      openForCityRelocation: !!values.openToRelocationCity,
+      openForCityRelocation: values.openToRelocationCity,
       remoteOnly: values.remoteOnly,
       position: values.position.value,
       seniority: values.seniority.value,
