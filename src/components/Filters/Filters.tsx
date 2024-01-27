@@ -10,6 +10,7 @@ import {
 import { JobSpecialization } from '@/data/frontend/profile/types'
 import React from 'react'
 import { DropdownOption } from '../Dropdowns/DropdownFilter/DropdownFilter'
+import AsyncDropdownFilterMulti from '../Dropdowns/DropdownFilterMulti/AsyncDropdownFilterMulti'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
 
@@ -76,7 +77,7 @@ const Filters: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.features}>
-        <DropdownFilterMulti
+        <AsyncDropdownFilterMulti
           text={'Technology'}
           options={filterLists.technology}
           onSelect={(option) =>

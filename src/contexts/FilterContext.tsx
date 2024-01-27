@@ -40,11 +40,19 @@ export interface State {
   location: DropdownOption
 }
 
-export enum JobOfferFiltersEnum {
-  technology = 'technology',
+export enum JobOfferStaticFiltersEnum {
   seniority = 'seniority',
   availability = 'availability',
   location = 'location',
+}
+
+export enum JobOfferDynamicFiltersEnum {
+  technology = 'technology',
+}
+
+export const JobOfferFiltersEnum = {
+  ...JobOfferStaticFiltersEnum,
+  ...JobOfferDynamicFiltersEnum,
 }
 
 export const JobOfferFilters: State = {
@@ -72,7 +80,9 @@ export const jobSpecializationOptions: Record<
   },
 }
 export type FiltersLists = {
-  [key in JobOfferFiltersEnum]: DropdownOption[]
+  [key in JobOfferStaticFiltersEnum]: DropdownOption[]
+} & {
+  [key in JobOfferDynamicFiltersEnum]: Promise<DropdownOption[]>
 }
 export const filterLists: FiltersLists = {
   technology: mappedTechnologies,

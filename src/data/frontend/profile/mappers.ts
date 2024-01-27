@@ -1,5 +1,7 @@
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { SeniorityLevel } from '@/data/backend/profile/types'
 import { JobSpecialization } from '@/data/frontend/profile/types'
+import { apiClient } from '@/lib/apiClient'
 import { EmploymentType } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
@@ -82,15 +84,11 @@ export const mappedLocations = ['Poland', 'Europe', 'Other'].map(
 )
 
 // TODO: Szymon tu będzie działał
-export const mappedTechnologies = [
-  'Javascript',
-  'Python',
-  'Node.js',
-  'React.js',
-  'Vue.js',
-  'Angular',
-  'MongoDB',
-].map((technology) => ({
-  name: technology,
-  value: technology,
-}))
+export const mappedTechnologies: Promise<DropdownOption[]> = apiClient
+  .getTechnologies()
+  .then((technologies) =>
+    technologies.map((technology) => ({
+      name: technology.name,
+      value: technology.name,
+    })),
+  )
