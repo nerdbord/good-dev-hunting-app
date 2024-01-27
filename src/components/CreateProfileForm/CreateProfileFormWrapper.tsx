@@ -59,7 +59,14 @@ export const validationSchema = Yup.object().shape({
   seniority: Yup.object({
     value: Yup.string().required('Seniority is required'),
   }),
-  techStack: Yup.array().of(Yup.string()).min(1, 'Tech stack is required'),
+  techStack: Yup.array()
+    .of(
+      Yup.object({
+        name: Yup.string(),
+        value: Yup.string(),
+      }),
+    )
+    .min(1, 'Tech stack is required'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()
@@ -88,11 +95,12 @@ const CreateProfileFormWrapper = ({ children }: PropsWithChildren) => {
       country: {
         name: values.country,
       },
-      openForCountryRelocation: values.openToRelocationCountry,
+      // Dunno why these values where transformed to string 1 || 0 :=D?! hence !!
+      openForCountryRelocation: !!values.openToRelocationCountry,
       city: {
         name: values.city,
       },
-      openForCityRelocation: values.openToRelocationCity,
+      openForCityRelocation: !!values.openToRelocationCity,
       remoteOnly: values.remoteOnly,
       position: values.position.value,
       seniority: values.seniority.value,

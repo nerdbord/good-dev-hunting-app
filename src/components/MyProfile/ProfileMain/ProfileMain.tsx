@@ -102,7 +102,8 @@ const ProfileMain = async ({
             </span>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {mapEmploymentTypes(profile.employmentTypes)}
+                {/* TODO: https://www.figma.com/file/PIj2atelHFirCiOoFoTO64/Good-Dev-Hunting-x-Nerdbord?type=design&node-id=47-11819&mode=design&t=npBqi8TnjgduU999-4 */}
+                {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
               </div>
             </div>
           </div>
