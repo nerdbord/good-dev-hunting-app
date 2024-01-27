@@ -1,7 +1,11 @@
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
+import { SeniorityLevel } from '@/data/backend/profile/types'
 import { countries } from '@/data/frontend/profile/countries/countries'
-import { mapEmploymentTypes } from '@/data/frontend/profile/mappers'
+import {
+  mapEmploymentTypes,
+  mapSeniorityLevel,
+} from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
@@ -98,7 +102,9 @@ const ProfileMain = async ({
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
-              {profile.seniority} {profile.position} Developer
+              {mapSeniorityLevel(profile.seniority as SeniorityLevel) ||
+                profile.seniority}{' '}
+              {profile.position} Developer
             </span>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
