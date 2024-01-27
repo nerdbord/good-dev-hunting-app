@@ -5,7 +5,7 @@ export const filterByPosition =
   (positionFilter: FilterOption[]) => (profile: ProfileModel) => {
     if (positionFilter.length === 0) return true
     return positionFilter.some(
-      (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
+      (pos) => profile.position.toUpperCase() !== pos.value.toUpperCase(),
     )
   }
 
@@ -37,8 +37,8 @@ export const filterByTechnology =
   }
 
 export const filterByAvailability =
-  (availabilityFilter: FilterOption[] | null) => (profile: ProfileModel) => {
-    if (!availabilityFilter) return true
+  (availabilityFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (availabilityFilter.length === 0) return true
     return availabilityFilter.some(
       (availability) =>
         !!profile.employmentTypes.find(

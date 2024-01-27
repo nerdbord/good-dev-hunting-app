@@ -28,9 +28,8 @@ export const ProfilesWithFilter: React.FC<{
     .filter(filterByLocation(locationFilter))
     .filter(filterByTechnology(technologyFilter))
     .filter(filterByAvailability(availabilityFilter))
-
+  console.log(filteredProfileData)
   const filteredCount = filteredProfileData.length
-
   return (
     <div className={styles.profileCards}>
       <div className={styles.title}>Profiles found ({filteredCount})</div>
