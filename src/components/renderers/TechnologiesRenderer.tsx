@@ -23,7 +23,9 @@ export default function TechnologiesRenderer({ data, classes }: Props) {
           {displayedTechnologies.map((tech, index) => (
             <span key={index}>{tech.name}</span>
           ))}
-          <span>{`+ ${othersCount} Others`}</span>
+          <span
+            style={{ whiteSpace: 'nowrap' }}
+          >{`+ ${othersCount} Others`}</span>
         </>
       )
     }
