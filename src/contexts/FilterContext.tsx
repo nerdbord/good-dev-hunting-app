@@ -1,7 +1,7 @@
 'use client'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
-  mappedAvailability,
+  mappedEmploymentType,
   mappedLocations,
   mappedSeniorityLevel,
   mappedTechnologies,
@@ -53,6 +53,7 @@ export const JobOfferFilters: State = {
   availability: initialFilterOption,
   location: initialFilterOption,
 }
+
 export const jobSpecializationOptions: Record<
   JobSpecialization,
   DropdownOption
@@ -76,7 +77,7 @@ export type FiltersLists = {
 export const filterLists: FiltersLists = {
   technology: mappedTechnologies,
   seniority: mappedSeniorityLevel,
-  availability: mappedAvailability,
+  availability: mappedEmploymentType,
   location: mappedLocations,
 }
 

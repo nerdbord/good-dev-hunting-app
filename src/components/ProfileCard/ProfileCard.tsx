@@ -1,4 +1,6 @@
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
+import { SeniorityLevel } from '@/data/backend/profile/types'
+import { mapSeniorityLevel } from '@/data/frontend/profile/mappers'
 import { JobSpecialization, ProfileModel } from '@/data/frontend/profile/types'
 import classNames from 'classnames/bind'
 import Image from 'next/image'
@@ -39,7 +41,9 @@ const ProfileCard = ({ data, onClick }: ProfileCardProps) => {
           <div className={styles.data}>
             <p className={styles.name}>{data.fullName}</p>
             <p className={getStackClasses}>
-              {data.seniority} {data.position} Developer
+              {mapSeniorityLevel(data.seniority as SeniorityLevel) ||
+                data.seniority}{' '}
+              {data.position} Developer
             </p>
             <p className={styles.location}>
               {data.country.name}, {data.city.name} /{' '}

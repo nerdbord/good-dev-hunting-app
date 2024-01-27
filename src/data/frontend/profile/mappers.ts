@@ -1,25 +1,25 @@
 import { SeniorityLevel } from '@/data/backend/profile/types'
-import {
-  AvailabilityEnum,
-  JobSpecialization,
-} from '@/data/frontend/profile/types'
+import { JobSpecialization } from '@/data/frontend/profile/types'
 import { EmploymentType } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
   return employmentTypes.map((employmentType) => {
     if (!employmentType) return ''
-
-    switch (employmentType) {
-      case EmploymentType.FULL_TIME:
-        return 'Full-time'
-      case EmploymentType.PART_TIME:
-        return 'Part-time'
-      case EmploymentType.CONTRACT:
-        return 'Contract'
-      default:
-        return employmentType
-    }
+    return mapEmploymentType(employmentType)
   })
+}
+
+export const mapEmploymentType = (employmentType: EmploymentType) => {
+  switch (employmentType) {
+    case EmploymentType.FULL_TIME:
+      return 'Full-time'
+    case EmploymentType.PART_TIME:
+      return 'Part-time'
+    case EmploymentType.CONTRACT:
+      return 'Contract'
+    default:
+      return employmentType
+  }
 }
 
 export const mapSeniorityLevel = (seniorityLevel: SeniorityLevel) => {
@@ -52,21 +52,11 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
-export const mapAvailability = (availability: AvailabilityEnum) => {
-  switch (availability) {
-    case AvailabilityEnum.PART_TIME:
-      return 'Part time'
-    case AvailabilityEnum.FULL_TIME:
-      return 'Full time'
-    case AvailabilityEnum.CONTRACT:
-      return 'Contract'
-    default:
-      return availability
-  }
-}
-
-export const mappedEmploymentType = mapEmploymentTypes(
-  Object.values(EmploymentType),
+export const mappedEmploymentType = Object.values(EmploymentType).map(
+  (employment) => ({
+    name: mapEmploymentType(employment),
+    value: employment,
+  }),
 )
 
 export const mappedSeniorityLevel = Object.values(SeniorityLevel).map(
@@ -91,13 +81,6 @@ export const mappedLocations = ['Poland', 'Europe', 'Other'].map(
   }),
 )
 
-// TODO: Wziąć z DB (chociaż czy trzeba?)
-export const mappedAvailability = (
-  ['PART_TIME', 'FULL_TIME', 'CONTRACT'] as AvailabilityEnum[]
-).map((availability) => ({
-  name: mapAvailability(availability),
-  value: availability,
-}))
 // TODO: Szymon tu będzie działał
 export const mappedTechnologies = [
   'Javascript',
