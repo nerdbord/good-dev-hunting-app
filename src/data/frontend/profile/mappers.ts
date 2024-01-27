@@ -1,5 +1,8 @@
 import { SeniorityLevel } from '@/data/backend/profile/types'
-import { JobSpecialization } from '@/data/frontend/profile/types'
+import {
+  AvailabilityEnum,
+  JobSpecialization,
+} from '@/data/frontend/profile/types'
 import { EmploymentType } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
@@ -49,6 +52,19 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
+export const mapAvailability = (availability: AvailabilityEnum) => {
+  switch (availability) {
+    case AvailabilityEnum.PART_TIME:
+      return 'Part time'
+    case AvailabilityEnum.FULL_TIME:
+      return 'Full time'
+    case AvailabilityEnum.CONTRACT:
+      return 'Contract'
+    default:
+      return availability
+  }
+}
+
 export const mappedEmploymentType = mapEmploymentTypes(
   Object.values(EmploymentType),
 )
@@ -75,6 +91,13 @@ export const mappedLocations = ['Poland', 'Europe', 'Other'].map(
   }),
 )
 
+// TODO: Wziąć z DB (chociaż czy trzeba?)
+export const mappedAvailability = (
+  ['PART_TIME', 'FULL_TIME', 'CONTRACT'] as AvailabilityEnum[]
+).map((availability) => ({
+  name: mapAvailability(availability),
+  value: availability,
+}))
 // TODO: Szymon tu będzie działał
 export const mappedTechnologies = [
   'Javascript',

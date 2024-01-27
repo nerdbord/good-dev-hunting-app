@@ -22,10 +22,10 @@ const LocationPreferences = () => {
     useFormikContext<CreateProfileFormValues>()
 
   const handleToggleCheckbox = (
-    value: string,
+    value: boolean,
     name: LocationPreferencesFormKeys,
   ) => {
-    setFieldValue(name, values[name] ? '' : value)
+    setFieldValue(name, values[name] ? false : value)
   }
 
   return (
@@ -60,7 +60,7 @@ const LocationPreferences = () => {
             }
             onChange={() => {
               handleToggleCheckbox(
-                '1',
+                true,
                 LocationPreferencesFormKeys.OPEN_TO_RELOCATION_COUNTRY,
               )
             }}
@@ -97,7 +97,7 @@ const LocationPreferences = () => {
             }
             onChange={() => {
               handleToggleCheckbox(
-                '1',
+                true,
                 LocationPreferencesFormKeys.OPEN_TO_RELOCATION_CITY,
               )
             }}

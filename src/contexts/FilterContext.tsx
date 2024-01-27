@@ -1,6 +1,7 @@
 'use client'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
+  mappedAvailability,
   mappedLocations,
   mappedSeniorityLevel,
   mappedTechnologies,
@@ -13,12 +14,12 @@ export type FiltersContextType = {
   setJobSpecializationFilter: (value: FilterOption[]) => void
   technologyFilter: FilterOption[]
   setTechnologyFilter: (value: FilterOption[]) => void
-  seniorityFilter: FilterOption
-  setSeniorityFilter: (value: FilterOption) => void
+  seniorityFilter: FilterOption[]
+  setSeniorityFilter: (value: FilterOption[]) => void
   availabilityFilter: FilterOption[]
   setAvailabilityFilter: (value: FilterOption[]) => void
-  locationFilter: FilterOption
-  setLocationFilter: (value: FilterOption) => void
+  locationFilter: FilterOption[]
+  setLocationFilter: (value: FilterOption[]) => void
 }
 
 export interface FilterOption extends DropdownOption {}
@@ -75,7 +76,7 @@ export type FiltersLists = {
 export const filterLists: FiltersLists = {
   technology: mappedTechnologies,
   seniority: mappedSeniorityLevel,
-  availability: [],
+  availability: mappedAvailability,
   location: mappedLocations,
 }
 
@@ -88,10 +89,8 @@ export const FiltersProvider = ({
     FilterOption[]
   >([])
   const [technologyFilter, setTechnologyFilter] = useState<FilterOption[]>([])
-  const [seniorityFilter, setSeniorityFilter] =
-    useState<FilterOption>(initialFilterOption)
-  const [locationFilter, setLocationFilter] =
-    useState<FilterOption>(initialFilterOption)
+  const [seniorityFilter, setSeniorityFilter] = useState<FilterOption[]>([])
+  const [locationFilter, setLocationFilter] = useState<FilterOption[]>([])
   const [availabilityFilter, setAvailabilityFilter] = useState<FilterOption[]>(
     [],
   )

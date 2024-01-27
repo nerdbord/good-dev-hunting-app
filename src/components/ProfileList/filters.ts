@@ -10,19 +10,19 @@ export const filterByPosition =
   }
 
 export const filterBySeniority =
-  (seniorityFilter: FilterOption) => (profile: ProfileModel) => {
-    if (!seniorityFilter.value) return true
-    return (
-      profile.seniority.toUpperCase() === seniorityFilter.value.toUpperCase()
+  (seniorityFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (seniorityFilter.length === 0) return true
+    return seniorityFilter.some(
+      (filter) =>
+        filter.value.toUpperCase() === profile.seniority.toUpperCase(),
     )
   }
 
+// TODO: implement filter by location (cities and countreis should be implemented )
 export const filterByLocation =
-  (locationFilter: FilterOption) => (profile: ProfileModel) => {
-    if (!locationFilter.value) return true
-    return (
-      profile.country.name.toUpperCase() === locationFilter.value.toUpperCase()
-    )
+  (locationFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (locationFilter.length === 0) return true
+    return true
   }
 
 export const filterByTechnology =
