@@ -36,7 +36,7 @@ model Profile {
   cityId                    String
   openForCityRelocation     Boolean           @default(false)
   remoteOnly                Boolean
-  position                  String
+  position                  String           
   seniority                 String
   techStack                 Technology[]
   employmentTypes           EmploymentType[]

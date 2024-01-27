@@ -19,7 +19,7 @@ export interface ProfileModel {
   remoteOnly: boolean
   position: string
   seniority: string
-  techStack: TechnologyModel[]
+  techStack: Omit<TechnologyModel, 'id'>[]
   employmentTypes: EmploymentType[]
   githubUsername: string | null
   state: PublishingState
