@@ -5,7 +5,7 @@ export const filterByPosition =
   (positionFilter: FilterOption[]) => (profile: ProfileModel) => {
     if (positionFilter.length === 0) return true
     return positionFilter.some(
-      (pos) => profile.position.toUpperCase() !== pos.value.toUpperCase(),
+      (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
     )
   }
 
