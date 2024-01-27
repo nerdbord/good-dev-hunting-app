@@ -9,17 +9,8 @@ export async function getPublishedProfilesPayload() {
     where: {
       state: PublishingState.APPROVED,
     },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
-
   const serializedProfile = publishedProfiles.map(
     serializeProfileToProfileModel,
   )
@@ -33,15 +24,7 @@ export async function getAllPublishedProfilesPayload() {
         state: PublishingState.DRAFT,
       },
     },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   const serializedProfile = publishedProfiles.map(
@@ -55,15 +38,7 @@ export async function getProfileById(id: string) {
     where: {
       id,
     },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   if (profileById !== null) {
@@ -85,6 +60,7 @@ export async function doesUserProfileExist(email: string) {
       user: true,
       country: true,
       city: true,
+      techStack: true,
     },
   })
 
@@ -124,23 +100,22 @@ export async function createUserProfile(
           },
         },
       },
+      techStack: {
+        connectOrCreate: profileData.techStack.map((tech) => ({
+          where: { name: tech.techName },
+          create: {
+            name: tech.techName,
+          },
+        })),
+      },
       openForCityRelocation: profileData.openForCityRelocation,
       remoteOnly: profileData.remoteOnly,
       position: profileData.position,
       seniority: profileData.seniority,
-      techStack: profileData.techStack,
-      employmentType: profileData.employmentType,
+      employmentTypes: profileData.employmentTypes,
       state: PublishingState.DRAFT,
     },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
   return createdUser
 }
@@ -157,7 +132,7 @@ export async function updateUserData(
   })
   if (userDataToUpdate?.state) {
     sendDiscordNotificationToModeratorChannel(
-      `User's ${updatedUser.fullName} profile has got new status: ${userDataToUpdate.state}! Profile: ${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/dashboard/profile/${updatedUser.userId}`,
+      `User's **${updatedUser.fullName}** profile has got new status: **${userDataToUpdate.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedUser.userId})`,
     )
   }
   return updatedUser
@@ -166,15 +141,7 @@ export async function updateUserData(
 export async function getProfileByUserId(userId: string) {
   const profile = await prisma.profile.findFirst({
     where: { userId },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   if (profile) {
@@ -187,15 +154,7 @@ export async function getProfileByUserId(userId: string) {
 export async function getProfileByUserEmail(email: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { email } },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   if (profile) {
@@ -211,15 +170,7 @@ export async function getPublishedProfiles(take: number) {
     where: {
       state: PublishingState.APPROVED,
     },
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
   const serializedProfile = publishedProfiles.map(
     serializeProfileToProfileModel,
@@ -247,16 +198,22 @@ export async function getRandomProfiles(profilesCount: number) {
       id: 'asc',
     },
     skip: skipValue,
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   return randomRecords.map(serializeProfileToProfileModel)
 }
+
+// Reusable include object for retrieving Profile with all of its relationships
+export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
+  include: {
+    user: {
+      include: {
+        githubDetails: true,
+      },
+    },
+    country: true,
+    city: true,
+    techStack: true,
+  },
+})

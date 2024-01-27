@@ -1,11 +1,14 @@
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import PolandFlag from '@/assets/images/flagPL.jpg'
-import { mapEmploymentType } from '@/data/frontend/profile/mappers'
+import { SeniorityLevel } from '@/data/backend/profile/types'
+import { countries } from '@/data/frontend/profile/countries/countries'
+import {
+  mapEmploymentTypes,
+  mapSeniorityLevel,
+} from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
-import { countries } from '@/data/frontend/profile/countries/countries'
 
 const ProfileMain = async ({
   profile,
@@ -99,11 +102,14 @@ const ProfileMain = async ({
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
-              {profile.seniority} {profile.position} Developer
+              {mapSeniorityLevel(profile.seniority as SeniorityLevel) ||
+                profile.seniority}{' '}
+              {profile.position} Developer
             </span>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {mapEmploymentType(profile.employmentType)}
+                {/* TODO: https://www.figma.com/file/PIj2atelHFirCiOoFoTO64/Good-Dev-Hunting-x-Nerdbord?type=design&node-id=47-11819&mode=design&t=npBqi8TnjgduU999-4 */}
+                {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
               </div>
             </div>
           </div>

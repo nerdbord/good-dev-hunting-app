@@ -1,12 +1,13 @@
 'use client'
-import styles from './DropdownBio.module.scss'
-import React, { useEffect, useState, useRef } from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
-import { useFormikContext } from 'formik'
 import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { useFormikContext } from 'formik'
+import 'material-icons/iconfont/material-icons.css'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
+import styles from './DropdownBio.module.scss'
 
-export const DropdownBio = ({
+export const DropdownSelect = ({
   label,
   name,
   text,
@@ -19,8 +20,8 @@ export const DropdownBio = ({
   label: string
   name: string
   text: string
-  options: string[]
-  selectedValue: string
+  options: DropdownOption[]
+  selectedValue: DropdownOption
   id: string
   dropdownTestId?: string
   optionTestId?: string
@@ -63,7 +64,7 @@ export const DropdownBio = ({
     setInputError(false)
   }
 
-  const handleSelection = (option: string) => {
+  const handleSelection = (option: DropdownOption) => {
     setFieldValue(name, option)
     setDropdownActive(false)
     setHasInteracted(false)
@@ -85,14 +86,14 @@ export const DropdownBio = ({
               selectedValue && styles.selectedButtonText
             }`}
           >
-            {selectedValue || text}
+            {selectedValue.name || text}
           </div>
           <div className={styles.selected}>
             {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
         </button>{' '}
         {hasError && (
-          <span className={styles.errMsgText}>Field is require</span>
+          <span className={styles.errMsgText}>Field is required</span>
         )}
         {isDropdownActive && (
           <div className={styles.dropdown}>
@@ -109,7 +110,7 @@ export const DropdownBio = ({
                   }
                   data-testid={optionTestId}
                 >
-                  {option}
+                  {option.name}
                 </div>
               </label>
             ))}
