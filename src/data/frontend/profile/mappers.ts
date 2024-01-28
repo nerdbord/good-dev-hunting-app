@@ -1,6 +1,7 @@
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { SeniorityLevel } from '@/data/backend/profile/types'
 import { JobSpecialization } from '@/data/frontend/profile/types'
-import { EmploymentType } from '@prisma/client'
+import { EmploymentType, Technology } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
   return employmentTypes.map((employmentType) => {
@@ -52,6 +53,12 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
+export const mapTechnologies = (technologies: Technology[]): DropdownOption[] =>
+  technologies.map((technology) => ({
+    name: technology.name,
+    value: technology.name,
+  }))
+
 export const mappedEmploymentType = Object.values(EmploymentType).map(
   (employment) => ({
     name: mapEmploymentType(employment),
@@ -80,17 +87,3 @@ export const mappedLocations = ['Poland', 'Europe', 'Other'].map(
     value: location,
   }),
 )
-
-// TODO: Szymon tu będzie działał
-export const mappedTechnologies = [
-  'Javascript',
-  'Python',
-  'Node.js',
-  'React.js',
-  'Vue.js',
-  'Angular',
-  'MongoDB',
-].map((technology) => ({
-  name: technology,
-  value: technology,
-}))

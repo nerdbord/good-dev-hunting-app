@@ -4,7 +4,6 @@ import {
   mappedEmploymentType,
   mappedLocations,
   mappedSeniorityLevel,
-  mappedTechnologies,
 } from '@/data/frontend/profile/mappers'
 import { JobSpecialization } from '@/data/frontend/profile/types'
 import React, { createContext, useContext, useState } from 'react'
@@ -40,6 +39,12 @@ export interface State {
   location: DropdownOption
 }
 
+export enum JobOfferStaticFiltersEnum {
+  seniority = 'seniority',
+  availability = 'availability',
+  location = 'location',
+}
+
 export enum JobOfferFiltersEnum {
   technology = 'technology',
   seniority = 'seniority',
@@ -71,11 +76,11 @@ export const jobSpecializationOptions: Record<
     value: JobSpecialization.Fullstack,
   },
 }
-export type FiltersLists = {
-  [key in JobOfferFiltersEnum]: DropdownOption[]
+
+export type FilterLists = {
+  [key in JobOfferStaticFiltersEnum]: DropdownOption[]
 }
-export const filterLists: FiltersLists = {
-  technology: mappedTechnologies,
+export const filterLists: FilterLists = {
   seniority: mappedSeniorityLevel,
   availability: mappedEmploymentType,
   location: mappedLocations,
