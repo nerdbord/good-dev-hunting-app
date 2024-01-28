@@ -42,9 +42,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  // 298 = 8 rows + 16px gap
-  max-height: 314px;
-  overflow: scroll;
+  max-height: 308px;
+  overflow-y: scroll;
   @include mobile {
     position: fixed;
     flex-direction: column;
@@ -63,9 +62,12 @@
 }
 
 .titleContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: none;
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .dropdownTitle {
