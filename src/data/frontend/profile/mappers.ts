@@ -22,7 +22,7 @@ export const mapEmploymentType = (employmentType: EmploymentType) => {
   }
 }
 
-export const mapSeniorityLevel = (seniorityLevel: SeniorityLevel) => {
+export const mapSeniorityLevel = (seniorityLevel: SeniorityLevel | string) => {
   switch (seniorityLevel) {
     case SeniorityLevel.INTERN:
       return 'Intern'
