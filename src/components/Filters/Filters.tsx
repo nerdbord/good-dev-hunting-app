@@ -3,6 +3,7 @@ import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/
 import {
   JobOfferFilters,
   JobOfferFiltersEnum,
+  filterLists,
   jobSpecializationOptions,
   useFilters,
 } from '@/contexts/FilterContext'
@@ -12,7 +13,12 @@ import { DropdownOption } from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
 
-const Filters: React.FC = () => {
+interface FiltersProps {
+  // changed interface to DropdownOption instead of Technology[] so it would be mapped once
+  technologies: DropdownOption[]
+}
+
+const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
   const {
     setJobSpecializationFilter,
     jobSpecializationFilter,
@@ -24,7 +30,6 @@ const Filters: React.FC = () => {
     setAvailabilityFilter,
     locationFilter,
     setLocationFilter,
-    filterLists,
   } = useFilters()
 
   const handleButtonClick = (newStack: DropdownOption) => {
@@ -78,7 +83,7 @@ const Filters: React.FC = () => {
       <div className={styles.features}>
         <DropdownFilterMulti
           text={'Technology'}
-          options={filterLists.technology}
+          options={props.technologies}
           onSelect={(option) =>
             handleSelectMulti(option, JobOfferFiltersEnum.technology)
           }

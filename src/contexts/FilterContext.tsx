@@ -4,10 +4,9 @@ import {
   mappedEmploymentType,
   mappedLocations,
   mappedSeniorityLevel,
-  mappedTechnologies,
 } from '@/data/frontend/profile/mappers'
 import { JobSpecialization } from '@/data/frontend/profile/types'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 
 export type FiltersContextType = {
   jobSpecializationFilter: FilterOption[]
@@ -20,7 +19,6 @@ export type FiltersContextType = {
   setAvailabilityFilter: (value: FilterOption[]) => void
   locationFilter: FilterOption[]
   setLocationFilter: (value: FilterOption[]) => void
-  filterLists: FilterLists
 }
 
 export interface FilterOption extends DropdownOption {}
@@ -41,27 +39,18 @@ export interface State {
   location: DropdownOption
 }
 
+export enum JobOfferStaticFiltersEnum {
+  seniority = 'seniority',
+  availability = 'availability',
+  location = 'location',
+}
+
 export enum JobOfferFiltersEnum {
   technology = 'technology',
   seniority = 'seniority',
   availability = 'availability',
   location = 'location',
 }
-
-// export enum JobOfferStaticFiltersEnum {
-//   seniority = 'seniority',
-//   availability = 'availability',
-//   location = 'location',
-// }
-
-// export enum JobOfferDynamicFiltersEnum {
-//   technology = 'technology',
-// }
-
-// export const JobOfferFiltersEnum = {
-//   ...JobOfferStaticFiltersEnum,
-//   ...JobOfferDynamicFiltersEnum,
-// }
 
 export const JobOfferFilters: State = {
   technology: initialFilterOption,
@@ -87,20 +76,15 @@ export const jobSpecializationOptions: Record<
     value: JobSpecialization.Fullstack,
   },
 }
-// export type FilterLists = {
-//   [key in JobOfferStaticFiltersEnum]: DropdownOption[]
-// } & {
-//   [key in JobOfferDynamicFiltersEnum]: Promise<DropdownOption[]>
-// }
+
 export type FilterLists = {
-  [key in JobOfferFiltersEnum]: DropdownOption[]
+  [key in JobOfferStaticFiltersEnum]: DropdownOption[]
 }
-// export const filterLists: FilterLists = {
-//   technology: mappedTechnologies,
-//   seniority: mappedSeniorityLevel,
-//   availability: mappedEmploymentType,
-//   location: mappedLocations,
-// }
+export const filterLists: FilterLists = {
+  seniority: mappedSeniorityLevel,
+  availability: mappedEmploymentType,
+  location: mappedLocations,
+}
 
 export const FiltersProvider = ({
   children,
@@ -116,20 +100,7 @@ export const FiltersProvider = ({
   const [availabilityFilter, setAvailabilityFilter] = useState<FilterOption[]>(
     [],
   )
-  const [filterLists, setFilterLists] = useState<FilterLists>({
-    technology: [],
-    seniority: mappedSeniorityLevel,
-    availability: mappedEmploymentType,
-    location: mappedLocations,
-  })
-  useEffect(() => {
-    mappedTechnologies.then((technologies) =>
-      setFilterLists((prev: FilterLists) => ({
-        ...prev,
-        technology: technologies,
-      })),
-    )
-  }, [])
+
   return (
     <FiltersContext.Provider
       value={{
@@ -143,7 +114,6 @@ export const FiltersProvider = ({
         setAvailabilityFilter,
         locationFilter,
         setLocationFilter,
-        filterLists,
       }}
     >
       {children}
