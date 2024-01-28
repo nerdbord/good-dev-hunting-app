@@ -53,12 +53,14 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
-export const mapOptions = <T extends { name: string }>(
+export const mapOptions = <T extends Record<string, string>>(
   items: T[],
+  valueKey: keyof T = 'name',
+  formatNameFn: (name: string) => string = (name) => name,
 ): DropdownOption[] =>
   items.map((item) => ({
-    name: item.name,
-    value: item.name,
+    name: formatNameFn(item.name),
+    value: item[valueKey] as unknown as string,
   }))
 
 export const mappedEmploymentType = Object.values(EmploymentType).map(
