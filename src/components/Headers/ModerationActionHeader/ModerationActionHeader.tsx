@@ -24,7 +24,7 @@ export default function ModerationActionHeader({
           onClick={() => {
             showModal(
               <AssignRoleModal
-                profileId={userProfile.id}
+                userId={userProfile.id}
                 userRoles={userRoles}
                 onClose={closeModal}
               />,
