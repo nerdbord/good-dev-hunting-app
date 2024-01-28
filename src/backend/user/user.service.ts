@@ -1,6 +1,6 @@
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma } from '@prisma/client'
+import { Prisma, Role } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
 
@@ -121,6 +121,17 @@ export async function updateUserData(
   })
 
   return updatedUser
+}
+
+export async function updateUserRole(id: string, roles: Role[]) {
+  return await prisma.user.update({
+    where: { id },
+    data: {
+      roles: {
+        set: roles,
+      },
+    },
+  })
 }
 
 export async function updateUserAvatar(email: string, avatarUrl: string) {
