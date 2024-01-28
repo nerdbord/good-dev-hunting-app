@@ -1,7 +1,7 @@
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { SeniorityLevel } from '@/data/backend/profile/types'
 import { JobSpecialization } from '@/data/frontend/profile/types'
-import { EmploymentType, Technology } from '@prisma/client'
+import { EmploymentType } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
   return employmentTypes.map((employmentType) => {
@@ -53,10 +53,12 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
   }
 }
 
-export const mapTechnologies = (technologies: Technology[]): DropdownOption[] =>
-  technologies.map((technology) => ({
-    name: technology.name,
-    value: technology.name,
+export const mapOptions = <T extends { name: string }>(
+  items: T[],
+): DropdownOption[] =>
+  items.map((item) => ({
+    name: item.name,
+    value: item.name,
   }))
 
 export const mappedEmploymentType = Object.values(EmploymentType).map(
@@ -81,9 +83,9 @@ export const mappedSpecialization = Object.values(JobSpecialization).map(
 )
 
 // TODO: Wypluć dynamiczmnie
-export const mappedLocations = ['Poland', 'Europe', 'Other'].map(
-  (location) => ({
-    name: location,
-    value: location,
-  }),
-)
+// export const mappedLocations = ['Poland', 'Europe', 'Other'].map(
+//   (location) => ({
+//     name: location,
+//     value: location,
+//   }),
+// )

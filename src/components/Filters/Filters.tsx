@@ -14,8 +14,8 @@ import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
 
 interface FiltersProps {
-  // changed interface to DropdownOption instead of Technology[] so it would be mapped once
   technologies: DropdownOption[]
+  countries: DropdownOption[]
 }
 
 const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
@@ -107,7 +107,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
         />
         <DropdownFilterMulti
           text={'Location'}
-          options={filterLists.location}
+          options={props.countries}
           onSelect={(option) =>
             handleSelectMulti(option, JobOfferFiltersEnum.location)
           }
