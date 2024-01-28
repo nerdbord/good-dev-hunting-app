@@ -123,12 +123,45 @@ export async function updateUserData(
   return updatedUser
 }
 
-export async function updateUserRole(id: string, roles: Role[]) {
+export async function addUserRole(id: string, role: Role) {
+  const foundUser = await getUserById(id)
+
+  if (!foundUser) {
+    return null
+  }
+
+  const isRoleAlreadyAssigned = foundUser.roles.includes(role)
+
+  if (isRoleAlreadyAssigned) {
+    return foundUser
+  }
+
+  const updatedRoles = [...foundUser.roles, role]
+
   return await prisma.user.update({
     where: { id },
     data: {
       roles: {
-        set: roles,
+        set: updatedRoles,
+      },
+    },
+  })
+}
+
+export async function removeUserRole(id: string, role: Role) {
+  const foundUser = await getUserById(id)
+
+  if (!foundUser) {
+    return null
+  }
+
+  const updatedRoles = foundUser.roles.filter((userRole) => userRole !== role)
+
+  return await prisma.user.update({
+    where: { id },
+    data: {
+      roles: {
+        set: updatedRoles,
       },
     },
   })

@@ -1,7 +1,5 @@
-import {
-  useAssignAdminRole,
-  useUnassignAdminRole,
-} from '@/actions/user/AssignAdminRole'
+import { assignRole } from '@/actions/user/assignRole'
+import { unassignRole } from '@/actions/user/unassignRole'
 import { Button } from '@/components/Button/Button'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -17,18 +15,20 @@ export default function AssignRoleModal({
   userRoles: Role[]
   onClose: () => void
 }) {
-  const assignAdmin = useAssignAdminRole()
-  const unassignAdmin = useUnassignAdminRole()
   const { runAsync, loading } = useAsyncAction()
 
   const handleAssign = async () => {
-    await runAsync(() => assignAdmin(userId, userRoles))
-    onClose()
+    runAsync(async () => {
+      await assignRole(userId, Role.MODERATOR)
+      onClose()
+    })
   }
 
   const handleUnassign = async () => {
-    await runAsync(() => unassignAdmin(userId, userRoles))
-    onClose()
+    runAsync(async () => {
+      await unassignRole(userId, Role.MODERATOR)
+      onClose()
+    })
   }
 
   return !userRoles.includes(Role.MODERATOR) ? (
