@@ -6,7 +6,7 @@ import {
   RejectionReason,
 } from '@/data/frontend/profile/types'
 import { httpClient } from '@/lib/httpClient'
-import { Profile, Technology } from '@prisma/client'
+import { Profile } from '@prisma/client'
 import { PutBlobResult } from '@vercel/blob'
 
 export const apiClient = {
@@ -77,17 +77,6 @@ export const apiClient = {
         file,
       )
       return url
-    } catch (error) {
-      throw new Error(error as string)
-    }
-  },
-
-  getTechnologies: async () => {
-    try {
-      const { technologies } = await httpClient.get<{
-        technologies: Technology[]
-      }>('/api/filters/technologies')
-      return technologies
     } catch (error) {
       throw new Error(error as string)
     }
