@@ -87,6 +87,14 @@ model ContactRequest {
   profile        Profile @relation(fields: [profileId], references: [id])
   profileId      String
 }
+// TODO: figure out a way to delete profileId if profile/user is deleted.
+// used to prevent spamming contact requests to profiles
+model IpTrack {
+  id          String    @id @default(uuid())
+  ip          String    @unique// Store the IP address
+  profileIds  String[]  // Associated profile ids
+  createdAt   DateTime  @default(now())
+}
 
 enum EmploymentType {
   FULL_TIME

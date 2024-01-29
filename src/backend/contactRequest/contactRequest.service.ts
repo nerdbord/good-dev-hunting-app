@@ -1,5 +1,6 @@
 import { ContactFormRequest } from '@/components/ContactForm/schema'
 import { prisma } from '@/lib/prismaClient'
+
 export async function saveContactRequest(contactRequest: ContactFormRequest) {
   return prisma.contactRequest.create({
     data: {

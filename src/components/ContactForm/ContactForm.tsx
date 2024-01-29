@@ -24,10 +24,12 @@ export default function ContactForm({
     runAsync(async () => {
       try {
         // Handle submit actions
-        apiClient.saveContactRequest({
-          ...values,
-          profileId: userProfile.id,
-        }),
+        console.log(
+          apiClient.saveContactRequest({
+            ...values,
+            profileId: userProfile.id,
+          }),
+        ),
           // console.log('Handle submit', values)
           showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
