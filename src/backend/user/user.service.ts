@@ -1,6 +1,6 @@
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma } from '@prisma/client'
+import { Prisma, Role } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
 
@@ -121,6 +121,50 @@ export async function updateUserData(
   })
 
   return updatedUser
+}
+
+export async function addUserRole(id: string, role: Role) {
+  const foundUser = await getUserById(id)
+
+  if (!foundUser) {
+    return null
+  }
+
+  const isRoleAlreadyAssigned = foundUser.roles.includes(role)
+
+  if (isRoleAlreadyAssigned) {
+    return foundUser
+  }
+
+  const updatedRoles = [...foundUser.roles, role]
+
+  return await prisma.user.update({
+    where: { id },
+    data: {
+      roles: {
+        set: updatedRoles,
+      },
+    },
+  })
+}
+
+export async function removeUserRole(id: string, role: Role) {
+  const foundUser = await getUserById(id)
+
+  if (!foundUser) {
+    return null
+  }
+
+  const updatedRoles = foundUser.roles.filter((userRole) => userRole !== role)
+
+  return await prisma.user.update({
+    where: { id },
+    data: {
+      roles: {
+        set: updatedRoles,
+      },
+    },
+  })
 }
 
 export async function updateUserAvatar(email: string, avatarUrl: string) {
