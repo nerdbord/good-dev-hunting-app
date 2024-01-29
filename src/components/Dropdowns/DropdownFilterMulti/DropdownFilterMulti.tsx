@@ -60,7 +60,6 @@ export const DropdownFilterMulti = ({
   }
 
   const [isOverlayActive, setOverlayActive] = useState(false)
-  console.log(options)
   return (
     <div className={styles.buttonBox}>
       <div ref={dropdownRef}>

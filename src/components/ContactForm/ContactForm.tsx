@@ -4,6 +4,7 @@ import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { apiClient } from '@/lib/apiClient'
 import { useFormik } from 'formik'
 import styles from './ContactForm.module.scss'
 import { ContactFormValues, initialValues, validationSchema } from './schema'
@@ -23,8 +24,12 @@ export default function ContactForm({
     runAsync(async () => {
       try {
         // Handle submit actions
-        // console.log('Handle submit', values)
-        showSuccessMsg()
+        apiClient.saveContactRequest({
+          ...values,
+          profileId: userProfile.id,
+        }),
+          // console.log('Handle submit', values)
+          showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)
