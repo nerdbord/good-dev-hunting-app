@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ContactFormRequest } from '@/components/ContactForm/schema'
 import {
   CreateProfilePayload,
   ProfileModel,
@@ -7,7 +6,7 @@ import {
   RejectionReason,
 } from '@/data/frontend/profile/types'
 import { httpClient } from '@/lib/httpClient'
-import { ContactRequest, Profile } from '@prisma/client'
+import { Profile } from '@prisma/client'
 import { PutBlobResult } from '@vercel/blob'
 
 export const apiClient = {
@@ -80,18 +79,6 @@ export const apiClient = {
       return url
     } catch (error) {
       throw new Error(error as string)
-    }
-  },
-  saveContactRequest: async (contactRequest: ContactFormRequest) => {
-    try {
-      const savedContactRequest = await httpClient.post<
-        ContactFormRequest,
-        ContactRequest
-      >('/api/contactRequest', contactRequest)
-
-      return savedContactRequest
-    } catch (error) {
-      console.log(error)
     }
   },
 }
