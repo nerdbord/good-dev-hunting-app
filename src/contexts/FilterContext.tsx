@@ -2,7 +2,6 @@
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
   mappedEmploymentType,
-  mappedLocations,
   mappedSeniorityLevel,
 } from '@/data/frontend/profile/mappers'
 import { JobSpecialization } from '@/data/frontend/profile/types'
@@ -42,7 +41,6 @@ export interface State {
 export enum JobOfferStaticFiltersEnum {
   seniority = 'seniority',
   availability = 'availability',
-  location = 'location',
 }
 
 export enum JobOfferFiltersEnum {
@@ -83,7 +81,6 @@ export type FilterLists = {
 export const filterLists: FilterLists = {
   seniority: mappedSeniorityLevel,
   availability: mappedEmploymentType,
-  location: mappedLocations,
 }
 
 export const FiltersProvider = ({
