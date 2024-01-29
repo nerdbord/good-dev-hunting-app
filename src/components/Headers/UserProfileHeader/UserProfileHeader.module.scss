@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   top: $spacing-5;
   width: calc(100% - 48px);
   margin: 0;
@@ -13,7 +13,7 @@
 }
 
 .withBackBackButton {
-  @include mobile{
+  @include mobile {
     justify-content: left;
   }
   justify-content: space-between;
@@ -27,4 +27,3 @@
   row-gap: 12px;
   column-gap: 10px;
 }
-

@@ -16,7 +16,9 @@ async function main() {
           position: 'Front-end developer',
           seniority: 'Junior',
           state: PublishingState.APPROVED,
-          employmentType: EmploymentType.CONTRACT,
+          employmentTypes: {
+            set: [EmploymentType.FULL_TIME],
+          },
           country: {
             create: {
               name: 'Poland',

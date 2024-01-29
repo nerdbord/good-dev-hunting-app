@@ -17,10 +17,10 @@ export async function sendDiscordNotificationToWebhook(params: {
 export async function sendDiscordNotificationToModeratorChannel(
   message: string,
 ) {
-  if (process.env.MODERATION_WEBHOOK) {
-    sendDiscordNotificationToWebhook({
+  if (process.env.NEXT_PUBLIC_MODERATION_WEBHOOK) {
+    await sendDiscordNotificationToWebhook({
       message,
-      webhookUrl: process.env.MODERATION_WEBHOOK,
+      webhookUrl: process.env.NEXT_PUBLIC_MODERATION_WEBHOOK,
     })
   } else {
     throw new Error('Env variable MODERATION_WEBHOOK is UNDEFINED!')

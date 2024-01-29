@@ -1,19 +1,24 @@
-.frame {
-  width: 380px;
+.frameWrapper {
+  min-width: 280px;
+  max-width: 380px;
+  width: 100%;
   min-height: 180px;
   height: 100%;
   background: #0f1217;
   border-radius: 4px;
   border: 1px solid #2a2f35;
-  transition: background-color 300ms;
-  padding: 26px 0 27.5px 14px;
-  cursor: pointer;
-  @include mobile {
-  }
+  transition: box-shadow 300ms;
 }
 
-.frame:hover {
+.frameWrapper:hover {
   box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
+}
+
+.frame {
+  height: 100%;
+  width: 100%;
+  padding: 36px 16px 27.5px 14px;
+  cursor: pointer;
 }
 
 .container {
@@ -21,7 +26,6 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 16px;
-  margin-top: 5%;
 }
 
 .profile {
@@ -49,7 +53,6 @@
   font-size: 20px;
   line-height: 28px;
   overflow-wrap: break-word;
-  width: 200px;
 }
 
 .frontend {
@@ -93,4 +96,22 @@
   font-weight: 500;
   line-height: 15px;
   letter-spacing: -0.24px;
+}
+
+// state status
+.detailsWrapper {
+  display: flex;
+  margin: 0 16px 0 14px;
+  padding-top: 18px;
+  border-top: 1px solid #2a2f35;
+  overflow-x: hidden;
+}
+
+.moderationFrame {
+  padding-bottom: 11px;
+}
+
+// utils
+.wordWrap {
+  word-wrap: break-word;
 }
