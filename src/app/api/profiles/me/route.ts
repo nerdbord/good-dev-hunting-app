@@ -27,10 +27,12 @@ export async function PUT(request: NextRequest) {
   try {
     const updatedDataPayload: CreateProfilePayload = await request.json()
     const { email } = await authorizeUser()
-
     const foundProfile = await doesUserProfileExist(email)
+
     if (foundProfile) {
-      // Convert CreateProfilePayload to Prisma.ProfileUpdateInput
+      const updatedTechStack = updatedDataPayload.techStack.map(
+        (tech) => tech.techName,
+      )
       const updatedData: Prisma.ProfileUpdateInput = {
         fullName: updatedDataPayload.fullName,
         linkedIn: updatedDataPayload.linkedIn,
@@ -52,12 +54,24 @@ export async function PUT(request: NextRequest) {
             where: { name: updatedDataPayload.city.name },
           },
         },
+        techStack: {
+          disconnect: foundProfile.techStack
+            .filter((tech) => !updatedTechStack.includes(tech.name))
+            .map((tech) => ({
+              name: tech.name,
+            })),
+          connectOrCreate: updatedDataPayload.techStack.map((tech) => ({
+            where: { name: tech.techName },
+            create: {
+              name: tech.techName,
+            },
+          })),
+        },
         openForCityRelocation: updatedDataPayload.openForCityRelocation,
         remoteOnly: updatedDataPayload.remoteOnly,
         position: updatedDataPayload.position,
         seniority: updatedDataPayload.seniority,
-        techStack: updatedDataPayload.techStack,
-        employmentType: updatedDataPayload.employmentType,
+        employmentTypes: updatedDataPayload.employmentTypes,
         state: PublishingState.PENDING,
       }
 

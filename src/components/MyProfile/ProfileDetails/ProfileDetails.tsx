@@ -1,6 +1,5 @@
-import React from 'react'
-import styles from './ProfileDetails.module.scss'
 import { ProfileModel } from '@/data/frontend/profile/types'
+import styles from './ProfileDetails.module.scss'
 
 const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
   return (
@@ -12,22 +11,24 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
             <div className={styles.techStackList}>
               {profile?.techStack.map((item, index) => (
                 <p key={index} className={styles.techStackItem}>
-                  {item}
+                  {item.name}
                 </p>
               ))}
             </div>
           </div>
-          <div className={styles.gitActivities}>
-            <p className={styles.title}>Git activity</p>
+
+          {/* this feature below will be added in the future */}
+          {/*         <div className={styles.gitActivities}>
+            <div className={styles.title}>Git activity</div>
             <div className={styles.gitActivityBox}>
-              <p className={styles.gitActivity}>Commits</p>
-              <p className={styles.gitActivityValue}>23</p>
+              <div className={styles.gitActivity}>Commits</div>
+              <div className={styles.gitActivityValue}>23</div>
             </div>
             <div className={styles.gitActivityBox}>
-              <p className={styles.gitActivity}>Pull requests</p>
-              <p className={styles.gitActivityValue}>48</p>
+              <div className={styles.gitActivity}>Pull requests</div>
+              <div className={styles.gitActivityValue}>48</div>
             </div>
-          </div>
+          </div>  */}
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>

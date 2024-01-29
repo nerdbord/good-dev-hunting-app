@@ -1,34 +1,49 @@
+import { FilterOption } from '@/contexts/FilterContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 
 export const filterByPosition =
-  (positionFilter: string[] | null) => (profile: ProfileModel) => {
-    return (
-      !positionFilter ||
-      positionFilter.length === 0 ||
-      positionFilter.some((pos) => profile.position.includes(pos))
+  (positionFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (positionFilter.length === 0) return true
+    return positionFilter.some(
+      (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
     )
   }
 
 export const filterBySeniority =
-  (seniorityFilter: string | null) => (profile: ProfileModel) => {
-    return !seniorityFilter || profile.seniority === seniorityFilter
+  (seniorityFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (seniorityFilter.length === 0) return true
+    return seniorityFilter.some(
+      (filter) =>
+        filter.value.toUpperCase() === profile.seniority.toUpperCase(),
+    )
   }
 
+// TODO: implement filter by location (cities and countreis should be implemented )
 export const filterByLocation =
-  (locationFilter: string | null) => (profile: ProfileModel) => {
-    return !locationFilter || profile.country.name === locationFilter
+  (locationFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (locationFilter.length === 0) return true
+    return true
   }
 
 export const filterByTechnology =
-  (technologyFilter: string[] | null) => (profile: ProfileModel) => {
-    return (
-      !technologyFilter ||
-      technologyFilter.length === 0 ||
-      technologyFilter.every((tech) => profile.techStack.includes(tech))
+  (technologyFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (technologyFilter.length === 0) return true
+    return technologyFilter.some(
+      (techFilter) =>
+        !!profile.techStack.find(
+          (tech) => tech.name.toUpperCase() === techFilter.value.toUpperCase(),
+        ),
     )
   }
 
 export const filterByAvailability =
-  (availabilityFilter: string | null) => (profile: ProfileModel) => {
-    return !availabilityFilter || profile.employmentType === availabilityFilter
+  (availabilityFilter: FilterOption[]) => (profile: ProfileModel) => {
+    if (availabilityFilter.length === 0) return true
+    return availabilityFilter.some(
+      (availability) =>
+        !!profile.employmentTypes.find(
+          (employmentType) =>
+            employmentType.toUpperCase() === availability.value.toUpperCase(),
+        ),
+    )
   }

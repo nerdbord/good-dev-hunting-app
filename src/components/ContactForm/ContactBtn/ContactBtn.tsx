@@ -1,9 +1,8 @@
 'use client'
-import React from 'react'
 import { Button } from '@/components/Button/Button'
-import ContactFormModal from '../ContactFormModal/ContactFormModal'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import { useModal } from '@/contexts/ModalContext'
+import { ProfileModel } from '@/data/frontend/profile/types'
+import ContactFormModal from '../ContactFormModal/ContactFormModal'
 import ContactSuccessModal from '../ContactSuccessModal/ContactSuccessModal'
 
 const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {

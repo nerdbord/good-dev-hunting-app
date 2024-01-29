@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import styles from './Checkbox.module.scss'
 import { IoIosCheckmark } from 'react-icons/io'
+import styles from './Checkbox.module.scss'
 
 interface CheckboxInputProps {
   id: string

@@ -1,0 +1,31 @@
+.actions {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.stateStatus {
+  display: flex;
+  padding: 12px 20px 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 52px;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.stateAccepted {
+  color: #13cbaa;
+  border: 1px solid rgba(19, 203, 170, 0.2);
+  background: var(--dark-02, #0f1217);
+}
+
+.stateRejected {
+  color: #d62626;
+  border: 1px solid rgba(214, 38, 38, 0.2);
+  background: var(--dark-02, #0f1217);
+}

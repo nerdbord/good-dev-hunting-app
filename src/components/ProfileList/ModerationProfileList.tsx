@@ -1,14 +1,8 @@
-import ModerationProfilesWithFilter from '@/components/ProfileList/ModerationProfilesWithFilter'
 import { getAllPublishedProfilesPayload } from '@/backend/profile/profile.service'
-
-import styles from './ProfileList.module.scss'
+import ModerationProfilesWithFilter from '@/components/ProfileList/ModerationProfilesWithFilter'
 
 export default async function ModerationProfileList() {
   const profiles = await getAllPublishedProfilesPayload()
 
-  return (
-    <div className={styles.mainContainer}>
-      <ModerationProfilesWithFilter profiles={profiles} />
-    </div>
-  )
+  return <ModerationProfilesWithFilter profiles={profiles} />
 }

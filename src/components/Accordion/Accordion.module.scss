@@ -1,7 +1,6 @@
 .wrapper {
   width: 100%;
   margin-bottom: 32px;
-  color: var(--color-gray-dark);
 
   &:last-child {
     margin-bottom: 0;
@@ -29,5 +28,4 @@
 
 .accordionContent {
   margin-top: 16px;
-  color: var(--color-dark-green);
 }
