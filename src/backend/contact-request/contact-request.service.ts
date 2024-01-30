@@ -12,3 +12,18 @@ export async function createContactRequest(contactRequest: ContactFormRequest) {
     },
   })
 }
+
+export async function findRedundantContactRequest({
+  senderEmail,
+  profileId,
+}: {
+  senderEmail: string
+  profileId: string
+}) {
+  return prisma.contactRequest.findFirst({
+    where: {
+      senderEmail,
+      profileId,
+    },
+  })
+}
