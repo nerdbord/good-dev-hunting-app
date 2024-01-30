@@ -5,6 +5,7 @@ import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { contactGroup } from '@/lib/mailerliteClient'
 import { useFormik } from 'formik'
 import styles from './ContactForm.module.scss'
 import { ContactFormValues, initialValues, validationSchema } from './schema'
@@ -24,11 +25,8 @@ export default function ContactForm({
       try {
         // Handle submit actions
         // console.log('Handle submit', values)
-        console.log(
-          addSubscriberToMailerLite(values.senderEmail, '111547722557818681'),
-        )
-        // fetchSubscribersFromMailerLite('111547722557818681')
-        showSuccessMsg()
+        addSubscriberToMailerLite(values.senderEmail, contactGroup),
+          showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)
