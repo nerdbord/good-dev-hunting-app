@@ -3,6 +3,7 @@ import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
+import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useFormik } from 'formik'
@@ -12,13 +13,14 @@ import { ContactFormValues, initialValues, validationSchema } from './schema'
 export default function ContactForm({
   userProfile,
   closeModal,
-  showResultMsg,
+  showSuccessMsg,
 }: {
   userProfile: ProfileModel
   closeModal: () => void
-  showResultMsg: (success: boolean) => void
+  showSuccessMsg: () => void
 }) {
   const { runAsync, loading } = useAsyncAction()
+  const { addToast } = useToast()
 
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
@@ -28,13 +30,24 @@ export default function ContactForm({
           ...values,
           profileId: userProfile.id,
         })
-        // console.log('Handle submit', values)
-        if (saveResult) {
-          showResultMsg(true)
-        } else {
-          showResultMsg(false)
+        switch (saveResult) {
+          case true:
+            showSuccessMsg()
+            break
+          case false:
+            addToast(
+              `Your message was not sent, because you've already contacted this
+        developer`,
+              ToastStatus.INVALID,
+            )
+            break
+          default:
+            addToast(
+              `Your message was not sent. W've encountered an error whilst processing your request, please try again.`,
+              ToastStatus.INVALID,
+            )
         }
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        // console.log('Handle submit', values)
       } catch (error) {
         console.error('Error sending email', error)
       }

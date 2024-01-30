@@ -1,7 +1,7 @@
 'use server'
 import {
   createContactRequest,
-  findRedundantContactRequest,
+  findExistingContactRequest,
 } from '@/backend/contact-request/contact-request.service'
 import { ContactFormRequest } from '@/components/ContactForm/schema'
 
@@ -9,22 +9,17 @@ export const saveContactRequest = async (
   contactFormRequestData: ContactFormRequest,
 ) => {
   try {
-    const redundantContactRequest = await findRedundantContactRequest({
+    const existingContactRequest = await findExistingContactRequest({
       senderEmail: contactFormRequestData.senderEmail,
       profileId: contactFormRequestData.profileId,
     })
-    if (!redundantContactRequest) {
-      const createdContactRequest = await createContactRequest(
-        contactFormRequestData,
-      )
-      if (createdContactRequest) {
-        return createdContactRequest
-      }
+    if (existingContactRequest) {
+      return false
     }
-    console.log('User has already contacted this profile')
-    return false
+    await createContactRequest(contactFormRequestData)
+    return true
   } catch (error) {
     console.error('Failed to save contact request:', error)
-    return false
+    return
   }
 }

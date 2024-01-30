@@ -1,29 +1,25 @@
 'use client'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { Button } from '../../Button/Button'
-import ContactFailureModalMessage from './ContactFailureModalMessage/ContactFailureModalMessage'
 import styles from './ContactResultModal.module.scss'
-import ContactSuccessModalMessage from './ContactSuccessModalMessage/ContactSuccessModalMessage'
 
-export default function ContactResultModal({
+export default function ContactSuccessModal({
   userProfile,
   onClose,
-  success,
 }: {
   userProfile: ProfileModel
   onClose: () => void
-  success: boolean
 }) {
   const getName = (name: string) => {
     return name.trim().split(' ')[0]
   }
   return (
     <div className={styles.container} data-test-id="confirmMessageSent">
-      {success ? (
-        <ContactSuccessModalMessage name={getName(userProfile.fullName)} />
-      ) : (
-        <ContactFailureModalMessage />
-      )}
+      <h4>Message sent!</h4>
+      <p>
+        Your message was sent, you can now relax and wait for the response from{' '}
+        {getName(userProfile.fullName)}.
+      </p>
       <div data-test-id="closeBtn">
         <Button variant={'primary'} onClick={() => onClose()}>
           Close
