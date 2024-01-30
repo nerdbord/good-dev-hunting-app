@@ -1,18 +1,36 @@
+import { assignRole } from '@/actions/user/assignRole'
+import { unassignRole } from '@/actions/user/unassignRole'
 import { Button } from '@/components/Button/Button'
-
 import modalStyles from '@/components/Modal/Modal.module.scss'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Role } from '@prisma/client'
 import styles from './AssignRole.module.scss'
 
 export default function AssignRoleModal({
-  profileId,
+  userId,
   userRoles,
   onClose,
 }: {
-  profileId: string
+  userId: string
   userRoles: Role[]
   onClose: () => void
 }) {
+  const { runAsync, loading } = useAsyncAction()
+
+  const handleAssign = async () => {
+    runAsync(async () => {
+      await assignRole(userId, Role.MODERATOR)
+      onClose()
+    })
+  }
+
+  const handleUnassign = async () => {
+    runAsync(async () => {
+      await unassignRole(userId, Role.MODERATOR)
+      onClose()
+    })
+  }
+
   return !userRoles.includes(Role.MODERATOR) ? (
     <div className={modalStyles.container}>
       <h4>Assign admin role</h4>
@@ -22,7 +40,9 @@ export default function AssignRoleModal({
         Are you sure you want to assign this role?
       </p>
       <div className={modalStyles.actionButtons}>
-        <Button variant="primary">Yes, assign</Button>
+        <Button variant="primary" onClick={handleAssign} disabled={loading}>
+          Yes, assign
+        </Button>
         <Button variant={'action'} onClick={() => onClose()}>
           No, don't assign
         </Button>
@@ -37,7 +57,9 @@ export default function AssignRoleModal({
         Are you sure you want to unassign this role?
       </p>
       <div className={modalStyles.actionButtons}>
-        <Button variant="primary">Yes, unassign</Button>
+        <Button variant="primary" onClick={handleUnassign} disabled={loading}>
+          Yes, unassign
+        </Button>
         <Button variant={'action'} onClick={() => onClose()}>
           No, don't unassign
         </Button>
