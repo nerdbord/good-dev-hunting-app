@@ -13,7 +13,7 @@ export async function createContactRequest(contactRequest: ContactFormRequest) {
   })
 }
 
-export async function findRedundantContactRequest({
+export async function findExistingContactRequest({
   senderEmail,
   profileId,
 }: {

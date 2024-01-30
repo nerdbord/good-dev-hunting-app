@@ -3,7 +3,7 @@ import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
-import ContactResultModal from '../ContactResultModal/ContactResultModal'
+import ContactSuccessModal from '../ContactSuccessModal.tsx/ContactSuccessModal'
 
 const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
   const { showModal, closeModal } = useModal()
@@ -15,12 +15,11 @@ const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
           showModal(
             <ContactFormModal
               userProfile={userProfile}
-              showResultMsg={(success: boolean) => {
+              showSuccessMsg={() => {
                 showModal(
-                  <ContactResultModal
+                  <ContactSuccessModal
                     userProfile={userProfile}
                     onClose={closeModal}
-                    success={success}
                   />,
                 )
               }}
