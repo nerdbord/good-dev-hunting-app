@@ -1,5 +1,5 @@
 import MailerLite from '@mailerlite/mailerlite-nodejs'
 
-const mailerlite = new MailerLite({
-  api_key: 'API_KEY',
+export const mailerLiteClient = new MailerLite({
+  api_key: process.env.MAILER_LITE_KEY || '',
 })

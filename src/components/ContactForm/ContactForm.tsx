@@ -1,3 +1,4 @@
+import { addSubscriberToMailerLite } from '@/backend/contactRequest/contactRequest.service'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -18,12 +19,15 @@ export default function ContactForm({
   showSuccessMsg: () => void
 }) {
   const { runAsync, loading } = useAsyncAction()
-
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
       try {
         // Handle submit actions
         // console.log('Handle submit', values)
+        console.log(
+          addSubscriberToMailerLite(values.senderEmail, '111547722557818681'),
+        )
+        // fetchSubscribersFromMailerLite('111547722557818681')
         showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
