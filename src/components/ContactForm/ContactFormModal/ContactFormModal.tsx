@@ -5,11 +5,11 @@ import styles from './ContactFormModal.module.scss'
 export default function ContactFormModal({
   userProfile,
   closeModal,
-  showSuccessMsg,
+  showResultMsg,
 }: {
   userProfile: ProfileModel
   closeModal: () => void
-  showSuccessMsg: () => void
+  showResultMsg: (success: boolean) => void
 }) {
   return (
     <div className={styles.wrapper}>
@@ -17,7 +17,7 @@ export default function ContactFormModal({
         <ContactForm
           userProfile={userProfile}
           closeModal={closeModal}
-          showSuccessMsg={showSuccessMsg}
+          showResultMsg={showResultMsg}
         />
       </div>
     </div>

@@ -12,11 +12,11 @@ import { ContactFormValues, initialValues, validationSchema } from './schema'
 export default function ContactForm({
   userProfile,
   closeModal,
-  showSuccessMsg,
+  showResultMsg,
 }: {
   userProfile: ProfileModel
   closeModal: () => void
-  showSuccessMsg: () => void
+  showResultMsg: (success: boolean) => void
 }) {
   const { runAsync, loading } = useAsyncAction()
 
@@ -24,12 +24,16 @@ export default function ContactForm({
     runAsync(async () => {
       try {
         // Handle submit actions
-        saveContactRequest({
+        const saveResult = await saveContactRequest({
           ...values,
           profileId: userProfile.id,
-        }),
-          // console.log('Handle submit', values)
-          showSuccessMsg()
+        })
+        // console.log('Handle submit', values)
+        if (saveResult) {
+          showResultMsg(true)
+        } else {
+          showResultMsg(false)
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)
