@@ -1,5 +1,5 @@
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
-import { mailerliteClient } from '@/lib/mailerliteClient'
+import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, Role } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
@@ -87,7 +87,7 @@ export const findOrCreateUser = async (data: {
   })
   await mailerliteClient.addSubscriberToMailerLite(
     data.email,
-    mailerliteClient.devGroup,
+    mailerliteGroups.devGroup,
   )
   await sendDiscordNotificationToModeratorChannel(
     `User ${createdUser.email} has created an account`,
@@ -115,7 +115,7 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
   )
   await mailerliteClient.addSubscriberToMailerLite(
     userDataFromGh.email,
-    mailerliteClient.devGroup,
+    mailerliteGroups.devGroup,
   )
   return createdUser
 }
