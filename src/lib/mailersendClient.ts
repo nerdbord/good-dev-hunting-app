@@ -1,8 +1,9 @@
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend'
+import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 import { APIResponse } from 'mailersend/lib/services/request.service'
 
 export enum MailTemplateId {
   welcomeMail = 'x2p03478r1ylzdrn',
+  contactRequest = 'vywj2lpj1pjl7oqz',
 }
 
 export enum MailSubjectId {
@@ -13,16 +14,19 @@ export const mailersendClient = {
   async sendMail(
     recipients: Recipient[],
     templateId: MailTemplateId,
-    subject: MailSubjectId,
+    subject: MailSubjectId | string,
+    sender?: Sender,
   ) {
     const mailerSend = new MailerSend({
       apiKey: process.env.MAILERSEND_API_KEY!,
     })
 
-    const sentFrom = new Sender(
-      process.env.MAILERSEND_FROM!,
-      process.env.MAILERSEND_FROM_NAME!,
-    )
+    const sentFrom =
+      sender ||
+      new Sender(
+        process.env.MAILERSEND_FROM!,
+        process.env.MAILERSEND_FROM_NAME!,
+      )
 
     interface Substitution {
       var: string

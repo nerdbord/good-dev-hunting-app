@@ -1,3 +1,4 @@
+import { sendContactRequest } from '@/actions/contact-request/contactRequest'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -24,6 +25,12 @@ export default function ContactForm({
       try {
         // Handle submit actions
         // console.log('Handle submit', values)
+        await sendContactRequest({
+          senderEmail: values.senderEmail,
+          senderFullName: values.senderFullName,
+          recipientEmail: userProfile.userEmail,
+          subject: values.subject,
+        })
         showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
