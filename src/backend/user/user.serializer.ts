@@ -8,5 +8,6 @@ export const serializeUserToUserPayload = (data: UserWithRelations) => {
     githubDetails: {
       username: data.githubDetails?.username || null,
     },
+    email: data.email,
   }
 }
