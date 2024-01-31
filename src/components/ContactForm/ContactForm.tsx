@@ -1,11 +1,9 @@
-import { addSubscriberToMailerLite } from '@/backend/contactRequest/contactRequest.service'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { contactGroup } from '@/lib/mailerliteClient'
 import { useFormik } from 'formik'
 import styles from './ContactForm.module.scss'
 import { ContactFormValues, initialValues, validationSchema } from './schema'
@@ -25,8 +23,8 @@ export default function ContactForm({
       try {
         // Handle submit actions
         // console.log('Handle submit', values)
-        addSubscriberToMailerLite(values.senderEmail, contactGroup),
-          showSuccessMsg()
+        // addSubscriberToMailerLite(values.senderEmail, contactGroup),
+        showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)
