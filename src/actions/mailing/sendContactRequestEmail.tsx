@@ -19,12 +19,13 @@ export const sendContactRequestEmail = async (
       subject: cREParams.subject,
     }
     const recipients = [new Recipient(cREParams.recipientEmail)]
-    await mailersendClient.sendMail({
+    return await mailersendClient.sendMail({
       recipients,
       templateId: MailTemplateId.contactRequest,
       config,
     })
   } catch (error) {
     console.error('Error occured whilst sending contact request.', error)
+    throw Error('Error occured whilst sending contact request.')
   }
 }
