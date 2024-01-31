@@ -1,5 +1,8 @@
-import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
-import { sendContactRequestEmail } from '@/actions/mailing/contactRequestEmail'
+import {
+  deleteSavedContactRequest,
+  saveContactRequest,
+} from '@/actions/contact-request/saveContactRequest'
+import { sendContactRequestEmail } from '@/actions/mailing/sendContactRequestEmail'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -34,13 +37,28 @@ export default function ContactForm({
         })
         // Handle submit actions
         // console.log('Handle submit', values)
-        await sendContactRequestEmail({
-          senderEmail: values.senderEmail,
-          senderFullName: values.senderFullName,
-          recipientEmail: userProfile.userEmail,
-          subject: values.subject,
-        })
-        showSuccessMsg()
+        try {
+          await sendContactRequestEmail({
+            senderEmail: values.senderEmail,
+            senderFullName: values.senderFullName,
+            recipientEmail: userProfile.userEmail,
+            subject: values.subject,
+          })
+          showSuccessMsg()
+        } catch (error) {
+          try {
+            await deleteSavedContactRequest(values.senderEmail, userProfile.id)
+          } catch (error) {
+            addToast(
+              `We've failed to process your request, please try again later`,
+              ToastStatus.INVALID,
+            )
+          }
+          addToast(
+            `We've failed to deliver your message, please try again.`,
+            ToastStatus.INVALID,
+          )
+        }
       } catch (error) {
         addToast(
           `Your message was not sent, because you've already contacted this
@@ -99,6 +117,7 @@ export default function ContactForm({
               value={formik.values.subject}
               onChange={formik.handleChange}
               name="subject"
+              customClass={styles.subject}
             />
           </InputFormError>
 

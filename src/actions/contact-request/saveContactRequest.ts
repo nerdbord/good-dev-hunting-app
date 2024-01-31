@@ -1,6 +1,7 @@
 'use server'
 import {
   createContactRequest,
+  deleteContactRequest,
   findExistingContactRequest,
 } from '@/backend/contact-request/contact-request.service'
 import { ContactFormRequest } from '@/components/ContactForm/schema'
@@ -26,6 +27,17 @@ export const saveContactRequest = async (
     }
   } catch (error) {
     console.error('Failed to save contact request:', error)
-    return
+    throw Error('Failed to save contact request.')
+  }
+}
+
+export const deleteSavedContactRequest = async (
+  senderEmail: string,
+  profileId: string,
+) => {
+  try {
+    await deleteContactRequest({ senderEmail, profileId })
+  } catch (error) {
+    console.error('Failed to delete contact request:', error)
   }
 }
