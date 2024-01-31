@@ -16,8 +16,14 @@ export const saveContactRequest = async (
     if (existingContactRequest) {
       throw Error('You already contacted this dev')
     }
-    await createContactRequest(contactFormRequestData)
-    return true
+    const createdContactRequest = await createContactRequest(
+      contactFormRequestData,
+    )
+    if (createdContactRequest) {
+      return createdContactRequest
+    } else {
+      throw Error('Failed to save contact request.')
+    }
   } catch (error) {
     console.error('Failed to save contact request:', error)
     return
