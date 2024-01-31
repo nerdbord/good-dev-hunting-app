@@ -5,9 +5,12 @@ const mailerliteInstance = new MailerLite({
   api_key: process.env.NEXT_PUBLIC_MAILERLITE_KEY || '',
 })
 
+export enum mailerliteGroups {
+  devGroup = '111547703431792014',
+  contactGroup = '111547722557818681',
+}
+
 export const mailerliteClient = {
-  devGroup: '111547703431792014',
-  contactGroup: '111547722557818681',
   addSubscriberToMailerLite: async (
     email: string,
     groupId: string,
