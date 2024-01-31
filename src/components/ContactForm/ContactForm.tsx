@@ -81,6 +81,7 @@ export default function ContactForm({
               value={formik.values.subject}
               onChange={formik.handleChange}
               name="subject"
+              customClass={styles.subject}
             />
           </InputFormError>
 

@@ -1,8 +1,8 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
-import styles from './TextInput.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
+import React, { useState } from 'react'
 import Tooltip from '../Tooltip/Tooltip'
+import styles from './TextInput.module.scss'
 
 export interface TextInputProps {
   label?: string
@@ -20,6 +20,7 @@ export interface TextInputProps {
   dataTestId?: string
   maxLength?: number
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  customClass?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -37,6 +38,7 @@ const TextInput: React.FC<TextInputProps> = ({
   dataTestId,
   maxLength,
   onBlur,
+  customClass = '',
 }) => {
   const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +60,9 @@ const TextInput: React.FC<TextInputProps> = ({
         )}
       </label>
       <input
-        className={`${styles.formInput} ${isTyped ? styles.typed : ''}`}
+        className={`${styles.formInput} ${
+          isTyped ? styles.typed : ''
+        } ${customClass}`}
         type="text"
         value={value}
         placeholder={placeholder}

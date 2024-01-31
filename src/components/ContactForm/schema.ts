@@ -14,7 +14,7 @@ export interface ContactFormRequest extends ContactFormValues {
 export const initialValues: ContactFormValues = {
   senderFullName: '',
   senderEmail: '',
-  subject: '',
+  subject: `Job offer - let's talk!`,
   message: '',
 }
 
