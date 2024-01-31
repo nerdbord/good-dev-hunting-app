@@ -1,4 +1,5 @@
 import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
+import { sendContactRequestEmail } from '@/actions/mailing/contactRequestEmail'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -30,6 +31,14 @@ export default function ContactForm({
         const saveResult = await saveContactRequest({
           ...values,
           profileId: userProfile.id,
+        })
+        // Handle submit actions
+        // console.log('Handle submit', values)
+        await sendContactRequestEmail({
+          senderEmail: values.senderEmail,
+          senderFullName: values.senderFullName,
+          recipientEmail: userProfile.userEmail,
+          subject: values.subject,
         })
         showSuccessMsg()
       } catch (error) {
