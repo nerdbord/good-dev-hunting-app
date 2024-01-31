@@ -24,33 +24,25 @@ export default function ContactForm({
 
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
+      // try {
+      // Handle submit actions
       try {
-        // Handle submit actions
         const saveResult = await saveContactRequest({
           ...values,
           profileId: userProfile.id,
         })
-        switch (saveResult) {
-          case true:
-            showSuccessMsg()
-            break
-          case false:
-            addToast(
-              `Your message was not sent, because you've already contacted this
-        developer`,
-              ToastStatus.INVALID,
-            )
-            break
-          default:
-            addToast(
-              `Your message was not sent. W've encountered an error whilst processing your request, please try again.`,
-              ToastStatus.INVALID,
-            )
-        }
-        // console.log('Handle submit', values)
+        showSuccessMsg()
       } catch (error) {
-        console.error('Error sending email', error)
+        addToast(
+          `Your message was not sent, because you've already contacted this
+        developer`,
+          ToastStatus.INVALID,
+        )
       }
+      // console.log('Handle submit', values)
+      // } catch (error) {
+      //   console.error('Error sending email', error)
+      // }
     })
   }
 
