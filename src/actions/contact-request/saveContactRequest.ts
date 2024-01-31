@@ -5,22 +5,46 @@ import {
   findExistingContactRequest,
 } from '@/backend/contact-request/contact-request.service'
 import { ContactFormRequest } from '@/components/ContactForm/schema'
+import {
+  ContactRequestEmailParams,
+  sendContactRequestEmail,
+} from '../mailing/sendContactRequestEmail'
 
-export const saveContactRequest = async (
-  contactFormRequestData: ContactFormRequest,
-) => {
+export const saveContactRequest = async ({
+  message,
+  senderEmail,
+  senderFullName,
+  recipientEmail,
+  subject,
+  profileId,
+}: ContactFormRequest & ContactRequestEmailParams) => {
   try {
     const existingContactRequest = await findExistingContactRequest({
-      senderEmail: contactFormRequestData.senderEmail,
-      profileId: contactFormRequestData.profileId,
+      senderEmail: senderEmail,
+      profileId: profileId,
     })
     if (existingContactRequest) {
       throw Error('You already contacted this dev')
     }
-    const createdContactRequest = await createContactRequest(
-      contactFormRequestData,
-    )
+    const createdContactRequest = await createContactRequest({
+      senderEmail,
+      senderFullName,
+      subject,
+      profileId,
+      message,
+    })
     if (createdContactRequest) {
+      try {
+        await sendContactRequestEmail({
+          senderEmail: senderEmail,
+          senderFullName: senderFullName,
+          recipientEmail: recipientEmail,
+          subject: subject,
+        })
+      } catch (error) {
+        await deleteSavedContactRequest(senderEmail, profileId)
+        throw Error('Failed to send contact request')
+      }
       return createdContactRequest
     } else {
       throw Error('Failed to save contact request.')
