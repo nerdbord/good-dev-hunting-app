@@ -80,3 +80,17 @@
     }
   }
 }
+
+.starsMobile {
+  display: flex;
+
+  @include mobile {
+    display: flex;
+  }
+}
+
+.logoAndGhStarsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
