@@ -1,3 +1,4 @@
+import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -23,8 +24,12 @@ export default function ContactForm({
     runAsync(async () => {
       try {
         // Handle submit actions
-        // console.log('Handle submit', values)
-        showSuccessMsg()
+        saveContactRequest({
+          ...values,
+          profileId: userProfile.id,
+        }),
+          // console.log('Handle submit', values)
+          showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)

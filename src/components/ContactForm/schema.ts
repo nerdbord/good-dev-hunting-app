@@ -7,6 +7,10 @@ export interface ContactFormValues {
   message: string
 }
 
+export interface ContactFormRequest extends ContactFormValues {
+  profileId: string
+}
+
 export const initialValues: ContactFormValues = {
   senderFullName: '',
   senderEmail: '',
