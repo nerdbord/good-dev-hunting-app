@@ -6,63 +6,49 @@ export enum MailTemplateId {
   contactRequest = 'vywj2lpj1pjl7oqz',
 }
 
-export enum MailSubjectId {
-  welcomeSubject = 'Welcome to Good Dev!',
+interface MailConfig {
+  subject: string
+  fromEmail: string
+  fromName: string
+}
+
+interface Substitution {
+  var: string
+  value: string
+}
+
+interface Variable {
+  email: string
+  substitutions: Substitution[]
+}
+
+interface SendMailParams {
+  recipients: Recipient[]
+  templateId: MailTemplateId
+  config: MailConfig
+  variables?: Variable[]
 }
 
 export const mailersendClient = {
-  async sendMail(
-    recipients: Recipient[],
-    templateId: MailTemplateId,
-    subject: MailSubjectId | string,
-    sender?: Sender,
-  ) {
+  async sendMail(params: SendMailParams) {
+    if (!process.env.MAILERSEND_API_KEY) {
+      console.log('No MAILERSEND_API_KEY found in env vars. Skipping email.')
+      return
+    }
+
     const mailerSend = new MailerSend({
-      apiKey: process.env.MAILERSEND_API_KEY!,
+      apiKey: process.env.MAILERSEND_API_KEY,
     })
 
-    const sentFrom =
-      sender ||
-      new Sender(
-        process.env.MAILERSEND_FROM!,
-        process.env.MAILERSEND_FROM_NAME!,
-      )
-
-    interface Substitution {
-      var: string
-      value: string
-    }
-
-    interface Variable {
-      email: string
-      substitutions: Substitution[]
-    }
-
-    const variables: Variable[] = recipients.map((recipient) => ({
-      email: recipient.email,
-      substitutions: [
-        {
-          var: 'name',
-          value: recipient.name || '',
-        },
-        {
-          var: 'account.name',
-          value: process.env.MAILERSEND_FROM_NAME!,
-        },
-        {
-          var: 'support_email',
-          value: process.env.MAILERSEND_FROM!,
-        },
-      ],
-    }))
+    const sentFrom = new Sender(params.config.fromEmail, params.config.fromName)
 
     const emailParams = new EmailParams()
       .setFrom(sentFrom)
-      .setTo(recipients)
+      .setTo(params.recipients)
       .setReplyTo(sentFrom)
-      .setSubject(subject)
-      .setTemplateId(templateId)
-      .setVariables(variables)
+      .setSubject(params.config.subject)
+      .setTemplateId(params.templateId)
+      .setVariables(params?.variables || [])
 
     const response: APIResponse = await mailerSend.email.send(emailParams)
     if (response.statusCode < 300) {
