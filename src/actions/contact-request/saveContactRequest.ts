@@ -10,7 +10,7 @@ export const saveContactRequest = async (
       contactFormRequestData,
     )
     if (createdContactRequest) {
-      createdContactRequest
+      return createdContactRequest
     } else {
       return false
     }
