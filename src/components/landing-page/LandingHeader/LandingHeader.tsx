@@ -1,15 +1,16 @@
 import { findUserByEmail } from '@/backend/user/user.service'
+import GitHubButtonClient from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { GithubLoginButton } from '@/components/GithubLoginButton/GithubLoginButton'
+import Logo from '@/components/Logo/Logo'
 import ModerationBtn from '@/components/ModerationBtn/ModerationBtn'
 import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
 import { authOptions } from '@/lib/auth'
 import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 import styles from './LandingHeader.module.scss'
-import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import Logo from '@/components/Logo/Logo'
 
 const LandingHeader = async () => {
   const session = await getServerSession(authOptions)
@@ -25,7 +26,17 @@ const LandingHeader = async () => {
             <Logo />
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
+              {user?.profile ? (
+                <>
+                  <GitHubButtonClient />
+                  <MyProfileBtn />
+                </>
+              ) : (
+                <>
+                  <MyProfileBtn />
+                  <CreateProfileBtn />
+                </>
+              )}
             </div>
           </div>
         </Container>
