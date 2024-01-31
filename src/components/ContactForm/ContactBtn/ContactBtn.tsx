@@ -3,7 +3,7 @@ import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
-import ContactSuccessModal from '../ContactSuccessModal/ContactSuccessModal'
+import ContactSuccessModal from '../ContactSuccessModal.tsx/ContactSuccessModal'
 
 const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
   const { showModal, closeModal } = useModal()

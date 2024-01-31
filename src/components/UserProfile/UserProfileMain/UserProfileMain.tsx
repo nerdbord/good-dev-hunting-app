@@ -1,5 +1,8 @@
 import { countries } from '@/data/frontend/profile/countries/countries'
-import { mapEmploymentTypes } from '@/data/frontend/profile/mappers'
+import {
+  mapEmploymentTypes,
+  mapSeniorityLevel,
+} from '@/data/frontend/profile/mappers'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
@@ -46,7 +49,8 @@ const UserProfileMain = ({
         </div>
         <div className={styles.addInfoBox}>
           <div className={styles.seniority}>
-            {userProfile.seniority} {userProfile.position} Developer
+            {mapSeniorityLevel(userProfile.seniority)} {userProfile.position}{' '}
+            Developer
           </div>
           <div className={styles.addInfo}>
             <div className={styles.addInfoItem}>

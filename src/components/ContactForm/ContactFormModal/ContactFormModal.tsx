@@ -1,3 +1,4 @@
+import { ToastContextProvider } from '@/contexts/ToastContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactForm from '../ContactForm'
 import styles from './ContactFormModal.module.scss'
@@ -14,11 +15,13 @@ export default function ContactFormModal({
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <ContactForm
-          userProfile={userProfile}
-          closeModal={closeModal}
-          showSuccessMsg={showSuccessMsg}
-        />
+        <ToastContextProvider>
+          <ContactForm
+            userProfile={userProfile}
+            closeModal={closeModal}
+            showSuccessMsg={showSuccessMsg}
+          />
+        </ToastContextProvider>
       </div>
     </div>
   )

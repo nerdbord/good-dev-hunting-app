@@ -1,7 +1,9 @@
+import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
+import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useFormik } from 'formik'
@@ -18,17 +20,32 @@ export default function ContactForm({
   showSuccessMsg: () => void
 }) {
   const { runAsync, loading } = useAsyncAction()
+  const { addToast } = useToast()
+
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
+      // try {
+      // Handle submit actions
       try {
+        const saveResult = await saveContactRequest({
+          ...values,
+          recipientEmail: userProfile.userEmail,
+          profileId: userProfile.id,
+        })
         // Handle submit actions
         // console.log('Handle submit', values)
-        // addSubscriberToMailerLite(values.senderEmail, contactGroup),
         showSuccessMsg()
-        window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
-        console.error('Error sending email', error)
+        addToast(
+          `Your message was not sent, because you've already contacted this
+        developer`,
+          ToastStatus.INVALID,
+        )
       }
+      // console.log('Handle submit', values)
+      // } catch (error) {
+      //   console.error('Error sending email', error)
+      // }
     })
   }
 
@@ -76,6 +93,7 @@ export default function ContactForm({
               value={formik.values.subject}
               onChange={formik.handleChange}
               name="subject"
+              customClass={styles.subject}
             />
           </InputFormError>
 
