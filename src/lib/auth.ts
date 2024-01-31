@@ -1,13 +1,8 @@
 import { createUser, findUserByEmail } from '@/backend/user/user.service'
-import { Recipient } from 'mailersend'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
-import {
-  MailSubjectId,
-  MailTemplateId,
-  mailersendClient,
-} from './mailersendClient'
 
+import { sendWelcomeEmail } from '@/actions/mailing/sendWelcomeEmail'
 import GithubProvider from 'next-auth/providers/github'
 interface UserAuthed {
   id: string
@@ -60,11 +55,7 @@ export const authOptions: NextAuthOptions = {
         })
 
         if (createdUser) {
-          await mailersendClient.sendMail(
-            [new Recipient(createdUser.email, castedProfile.login)],
-            MailTemplateId.welcomeMail,
-            MailSubjectId.welcomeSubject,
-          )
+          await sendWelcomeEmail(createdUser.email)
         }
         return !!createdUser
       }
