@@ -18,6 +18,13 @@
   align-items: center;
   height: 100%;
   max-width: 100%;
+
+  @include mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .frameButtons {
@@ -82,7 +89,7 @@
 }
 
 .starsMobile {
-  display: flex;
+  display: none;
 
   @include mobile {
     display: flex;
@@ -90,7 +97,8 @@
 }
 
 .logoAndGhStarsWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
+  @include mobile {
+    display: flex;
+    align-items: center;
+  }
 }
