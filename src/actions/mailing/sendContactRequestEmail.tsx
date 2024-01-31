@@ -2,23 +2,26 @@
 import { MailTemplateId, mailersendClient } from '@/lib/mailersendClient'
 import { Recipient } from 'mailersend'
 
-type ContactRequestEmailParams = {
+export type ContactRequestEmailParams = {
   senderEmail: string
   senderFullName: string
   recipientEmail: string
   subject: string
 }
 
-export const sendContactRequestEmail = async (
-  cREParams: ContactRequestEmailParams,
-) => {
+export const sendContactRequestEmail = async ({
+  senderEmail,
+  senderFullName,
+  recipientEmail,
+  subject,
+}: ContactRequestEmailParams) => {
   try {
     const config = {
-      fromEmail: cREParams.senderEmail,
-      fromName: cREParams.senderFullName,
-      subject: cREParams.subject,
+      fromEmail: senderEmail,
+      fromName: senderFullName,
+      subject: subject,
     }
-    const recipients = [new Recipient(cREParams.recipientEmail)]
+    const recipients = [new Recipient(recipientEmail)]
     return await mailersendClient.sendMail({
       recipients,
       templateId: MailTemplateId.contactRequest,

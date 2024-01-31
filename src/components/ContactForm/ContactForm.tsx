@@ -1,8 +1,4 @@
-import {
-  deleteSavedContactRequest,
-  saveContactRequest,
-} from '@/actions/contact-request/saveContactRequest'
-import { sendContactRequestEmail } from '@/actions/mailing/sendContactRequestEmail'
+import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -33,32 +29,12 @@ export default function ContactForm({
       try {
         const saveResult = await saveContactRequest({
           ...values,
+          recipientEmail: userProfile.userEmail,
           profileId: userProfile.id,
         })
         // Handle submit actions
         // console.log('Handle submit', values)
-        try {
-          await sendContactRequestEmail({
-            senderEmail: values.senderEmail,
-            senderFullName: values.senderFullName,
-            recipientEmail: userProfile.userEmail,
-            subject: values.subject,
-          })
-          showSuccessMsg()
-        } catch (error) {
-          try {
-            await deleteSavedContactRequest(values.senderEmail, userProfile.id)
-          } catch (error) {
-            addToast(
-              `We've failed to process your request, please try again later`,
-              ToastStatus.INVALID,
-            )
-          }
-          addToast(
-            `We've failed to deliver your message, please try again.`,
-            ToastStatus.INVALID,
-          )
-        }
+        showSuccessMsg()
       } catch (error) {
         addToast(
           `Your message was not sent, because you've already contacted this
