@@ -57,6 +57,7 @@ const AppHeader = async () => {
           <Link href={AppRoutes.profiles} className={styles.logo}>
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
+            <GitHubButtonClient />
           </Link>
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>

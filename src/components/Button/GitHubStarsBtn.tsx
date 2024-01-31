@@ -5,7 +5,7 @@ const GitHubButtonClient = () => {
   return (
     <GitHubButton
       href="https://github.com/nerdbord/good-dev-hunting-app"
-      data-color-scheme="no-preference: light; light: light; dark: dark;"
+      data-color-scheme="no-preference: dark; light: dark; dark: dark;"
       data-icon="octicon-star"
       data-size="large"
       data-show-count="true"
