@@ -14,7 +14,7 @@ export const saveContactRequest = async (
       profileId: contactFormRequestData.profileId,
     })
     if (existingContactRequest) {
-      return false
+      throw Error('You already contacted this dev')
     }
     await createContactRequest(contactFormRequestData)
     return true
