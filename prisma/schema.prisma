@@ -97,6 +97,7 @@ enum EmploymentType {
 enum Role {
   USER
   MODERATOR
+  TEAM
 }
 
 enum PublishingState {
