@@ -9,3 +9,11 @@ export async function saveRejectingReason(profileId: string, reason: string) {
   })
   return createdReason
 }
+
+export async function deleteRejectingReason(id: string) {
+  await prisma.rejectionReason.delete({
+    where: {
+      id,
+    },
+  })
+}

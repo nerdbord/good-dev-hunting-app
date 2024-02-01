@@ -56,6 +56,7 @@ export function StateStatus({ profile }: StateStatusProps) {
             showModal(
               <RejectingReasonModal
                 profileId={profile.id}
+                userEmail={profile.userEmail}
                 onClose={handleClose}
               />,
             )

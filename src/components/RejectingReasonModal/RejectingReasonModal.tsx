@@ -1,19 +1,21 @@
 'use client'
-import { useState } from 'react'
-import { Button } from '../Button/Button'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { apiClient } from '@/lib/apiClient'
 import { PublishingState } from '@prisma/client'
+import { useState } from 'react'
+import { Button } from '../Button/Button'
 
-import styles from './RejectingReason.module.scss'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
+import styles from './RejectingReason.module.scss'
 
 export default function RejectingReasonModal({
   profileId,
+  userEmail,
   onClose,
 }: {
   profileId: string
+  userEmail: string
   onClose: () => void
 }) {
   const [reasonText, setReasonText] = useState('')
