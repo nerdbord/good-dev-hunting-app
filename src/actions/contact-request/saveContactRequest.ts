@@ -36,13 +36,13 @@ export const saveContactRequest = async ({
     if (createdContactRequest) {
       try {
         await sendContactRequestEmail({
-          senderEmail: senderEmail,
-          senderFullName: senderFullName,
-          recipientEmail: recipientEmail,
-          subject: subject,
+          senderEmail,
+          senderFullName,
+          recipientEmail,
+          subject,
         })
       } catch (error) {
-        await deleteSavedContactRequest(senderEmail, profileId)
+        await deleteContactRequest(createdContactRequest.id)
         throw Error('Failed to send contact request')
       }
       return createdContactRequest
@@ -52,16 +52,5 @@ export const saveContactRequest = async ({
   } catch (error) {
     console.error('Failed to save contact request:', error)
     throw Error('Failed to save contact request.')
-  }
-}
-
-export const deleteSavedContactRequest = async (
-  senderEmail: string,
-  profileId: string,
-) => {
-  try {
-    await deleteContactRequest({ senderEmail, profileId })
-  } catch (error) {
-    console.error('Failed to delete contact request:', error)
   }
 }

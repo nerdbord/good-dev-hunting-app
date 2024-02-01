@@ -28,17 +28,10 @@ export async function findExistingContactRequest({
   })
 }
 
-export async function deleteContactRequest({
-  senderEmail,
-  profileId,
-}: {
-  senderEmail: string
-  profileId: string
-}) {
-  return prisma.contactRequest.deleteMany({
+export async function deleteContactRequest(id: string) {
+  return prisma.contactRequest.delete({
     where: {
-      profileId,
-      senderEmail,
+      id,
     },
   })
 }
