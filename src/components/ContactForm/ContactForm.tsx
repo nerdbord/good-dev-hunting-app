@@ -24,8 +24,6 @@ export default function ContactForm({
 
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
-      // try {
-      // Handle submit actions
       try {
         const saveResult = await saveContactRequest({
           ...values,
@@ -33,7 +31,6 @@ export default function ContactForm({
           profileId: userProfile.id,
         })
         // Handle submit actions
-        // console.log('Handle submit', values)
         showSuccessMsg()
       } catch (error) {
         addToast(
@@ -42,10 +39,6 @@ export default function ContactForm({
           ToastStatus.INVALID,
         )
       }
-      // console.log('Handle submit', values)
-      // } catch (error) {
-      //   console.error('Error sending email', error)
-      // }
     })
   }
 
