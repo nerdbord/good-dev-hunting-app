@@ -1,4 +1,5 @@
-import { sendProfileRejectedEmail } from '@/actions/mailing/sendProfileStatusEmail'
+import { sendProfileRejectedEmail } from '@/backend/mailing/mailing.service'
+import { getProfileById } from '@/backend/profile/profile.service'
 import {
   deleteRejectingReason,
   saveRejectingReason,
@@ -17,13 +18,15 @@ export async function POST({
   if (!requireUserRoles([Role.MODERATOR])) {
     return new NextResponse(null, { status: 401 })
   }
-
   try {
-    const { email, reason } = await request.json()
+    const { reason } = await request.json()
+    const profile = await getProfileById(profileId)
+    if (!profile) {
+      throw new Error('Rejection failed, profile not found.')
+    }
     const createdReason = await saveRejectingReason(profileId, reason)
-
     try {
-      await sendProfileRejectedEmail(email, reason)
+      await sendProfileRejectedEmail(profile?.userEmail, reason)
     } catch (error) {
       await deleteRejectingReason(createdReason.id)
 

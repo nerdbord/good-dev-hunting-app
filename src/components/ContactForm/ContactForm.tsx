@@ -1,4 +1,4 @@
-import { sendContactRequest } from '@/actions/mailing/contactRequestEmail'
+import { sendContactRequest } from '@/actions/mailing/sendContactRequest'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'

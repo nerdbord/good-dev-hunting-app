@@ -1,4 +1,4 @@
-import { sendProfileApprovedEmail } from '@/actions/mailing/sendProfileStatusEmail'
+import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import { updateUserData } from '@/backend/profile/profile.service'
 import { PublishingStateData } from '@/data/frontend/profile/types'
 import { requireUserRoles } from '@/utils/auths'
