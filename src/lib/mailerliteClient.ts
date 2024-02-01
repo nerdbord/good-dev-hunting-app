@@ -1,5 +1,4 @@
 import MailerLite from '@mailerlite/mailerlite-nodejs'
-import { httpClient } from './httpClient'
 
 const mailerliteInstance = new MailerLite({
   api_key: process.env.NEXT_PUBLIC_MAILERLITE_KEY || '',
@@ -24,16 +23,6 @@ export const mailerliteClient = {
       })
     } catch (error) {
       console.error('Error adding subscriber to MailerLite:', error)
-      return error
-    }
-  },
-  fetchSubscribersFromMailerLite: async (groupId: string) => {
-    try {
-      return await httpClient.get(
-        `https://connect.mailerlite.com/api/groups/${groupId}/subscribers`,
-      )
-    } catch (error) {
-      console.error('Error fetching subscribers', error)
       return error
     }
   },

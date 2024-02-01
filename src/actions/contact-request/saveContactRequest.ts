@@ -42,18 +42,15 @@ export const saveContactRequest = async ({
           recipientEmail: recipientEmail,
           subject: subject,
         })
-      } catch (error) {
-        await deleteSavedContactRequest(senderEmail, profileId)
-        throw Error('Failed to send contact request')
-      }
-      try {
         await mailerliteClient.addSubscriberToMailerLite(
           senderEmail,
           mailerliteGroups.contactGroup,
         )
       } catch (error) {
-        throw Error('Failed to add contactor to subscription list')
+        await deleteSavedContactRequest(senderEmail, profileId)
+        throw Error('Failed to send contact request')
       }
+
       return createdContactRequest
     } else {
       throw Error('Failed to save contact request.')
