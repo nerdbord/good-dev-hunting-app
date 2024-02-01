@@ -1,7 +1,7 @@
 import { CreateProfilePayload } from '@/data/frontend/profile/types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, PublishingState } from '@prisma/client'
+import { Prisma, PublishingState, Role } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
@@ -202,6 +202,20 @@ export async function getRandomProfiles(profilesCount: number) {
   })
 
   return randomRecords.map(serializeProfileToProfileModel)
+}
+
+export async function getTeamProfiles() {
+  const teamProfiles = await prisma.profile.findMany({
+    where: {
+      user: {
+        roles: {
+          has: Role.TEAM,
+        },
+      },
+    },
+    include: includeObject.include,
+  })
+  return teamProfiles.map(serializeProfileToProfileModel)
 }
 
 // Reusable include object for retrieving Profile with all of its relationships
