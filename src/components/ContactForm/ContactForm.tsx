@@ -1,4 +1,4 @@
-import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
+import { contactRequestEmail } from '@/actions/mailing/contactRequestEmail'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -25,8 +25,9 @@ export default function ContactForm({
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
       try {
-        const saveResult = await saveContactRequest({
-          ...values,
+        await contactRequestEmail({
+          senderEmail: values.senderEmail,
+          senderFullName: values.senderFullName,
           recipientEmail: userProfile.userEmail,
           profileId: userProfile.id,
         })
