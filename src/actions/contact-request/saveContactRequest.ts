@@ -5,6 +5,7 @@ import {
   findExistingContactRequest,
 } from '@/backend/contact-request/contact-request.service'
 import { ContactFormRequest } from '@/components/ContactForm/schema'
+import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import {
   ContactRequestEmailParams,
   sendContactRequestEmail,
@@ -41,10 +42,15 @@ export const saveContactRequest = async ({
           recipientEmail,
           subject,
         })
+        await mailerliteClient.addSubscriberToMailerLite(
+          senderEmail,
+          mailerliteGroups.contactGroup,
+        )
       } catch (error) {
         await deleteContactRequest(createdContactRequest.id)
         throw Error('Failed to send contact request')
       }
+
       return createdContactRequest
     } else {
       throw Error('Failed to save contact request.')
