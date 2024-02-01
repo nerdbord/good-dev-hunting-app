@@ -1,48 +1,23 @@
-'use client'
-import { fetchTeam } from '@/actions/team/fetchTeam'
+import { getTeamProfiles } from '@/backend/profile/profile.service'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
-import { ProfileModel } from '@/data/frontend/profile/types'
-import { useEffect, useMemo, useState } from 'react'
 import styles from './MeetTeam.module.scss'
 
-const MeetTeam = () => {
-  const [teamData, setTeamData] = useState<ProfileModel[]>([])
-  const content = useMemo(() => {
-    console.log(teamData.length)
-    if (teamData.length > 0) {
-      return teamData
-        .reduce((teamCards, profile, index) => {
-          const profileCard = <VerticalCard profile={profile} />
-          if (index % 4 === 0) {
-            const cardsBox = [] as JSX.Element[]
-            teamCards.push(cardsBox)
-          }
-          teamCards[teamCards.length - 1].push(profileCard)
-          return teamCards
-        }, [] as JSX.Element[][])
-        .map((cardsBox) => {
-          return <div className={styles.cardsBox}>{...cardsBox}</div>
-        })
-    } else {
-      const cardsBox = (
-        <div className={styles.cardsBox}>
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
-          <VerticalCard />
-        </div>
-      )
-      return [cardsBox, cardsBox]
-    }
-  }, [teamData])
-  useEffect(() => {
-    fetchTeam().then((data) => {
-      console.log(data)
-      if (data) {
-        setTeamData(data)
-      }
-    })
-  }, [])
+const MeetTeam = async () => {
+  const teamProfiles = await getTeamProfiles()
+
+  // Calculate midpoint differently to ensure one half has at least 4 items
+  let midpoint
+  if (teamProfiles.length < 8) {
+    // Ensure the first half has at least 4 items, if total less than 8
+    midpoint = 4
+  } else {
+    // Standard calculation if enough items for both halves to have at least 4
+    midpoint = Math.ceil(teamProfiles.length / 2)
+  }
+
+  const firstHalfProfiles = teamProfiles.slice(0, midpoint)
+  const secondHalfProfiles = teamProfiles.slice(midpoint)
+
   return (
     <section id="MeetTeam" className={styles.wrapper}>
       <div className={styles.titleBox}>
@@ -50,7 +25,24 @@ const MeetTeam = () => {
         <h2 className={styles.title}>Meet our team</h2>
         <h5 className={styles.subtitle}>Meet passionates behind the scene</h5>
       </div>
-      <div className={styles.cardsWrapper}>{...content}</div>
+      <div className={styles.cardsWrapper}>
+        <div className={styles.slider}>
+          <div className={styles.cardsBox}>
+            {firstHalfProfiles.map((profile) => (
+              <VerticalCard {...profile} />
+            ))}
+          </div>
+        </div>
+        {!!secondHalfProfiles.length && (
+          <div className={styles.slider}>
+            <div className={styles.cardsBox}>
+              {secondHalfProfiles.map((profile) => (
+                <VerticalCard {...profile} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </section>
   )
 }
