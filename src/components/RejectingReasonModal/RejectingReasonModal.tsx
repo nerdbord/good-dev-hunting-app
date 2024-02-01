@@ -34,7 +34,6 @@ export default function RejectingReasonModal({
       })
       await apiClient.createRejectionReason(profileId, {
         reason: reasonText,
-        userEmail: userEmail,
       })
       addToast(
         'Profile rejected and will not be visible on the main page',
