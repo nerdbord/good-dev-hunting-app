@@ -7,27 +7,27 @@ import { requireUserRoles } from '@/utils/auths'
 import { Role } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { id: string } },
-) {
-  const profileId = params.id
-
+export async function POST({
+  request,
+  params: { id: profileId },
+}: {
+  request: NextRequest
+  params: { id: string }
+}) {
   if (!requireUserRoles([Role.MODERATOR])) {
     return new NextResponse(null, { status: 401 })
   }
 
   try {
-    const rejectData = await request.json()
-    const createdReason = await saveRejectingReason(
-      profileId,
-      rejectData.reason,
-    )
+    const { email, reason } = await request.json()
+    const createdReason = await saveRejectingReason(profileId, reason)
+
     try {
-      await sendProfileRejectedEmail(rejectData.email, rejectData.reason)
+      await sendProfileRejectedEmail(email, reason)
     } catch (error) {
       await deleteRejectingReason(createdReason.id)
-      return new NextResponse(JSON.stringify(error))
+
+      return responseWithErrorMessage(error)
     }
 
     return NextResponse.json({
@@ -35,6 +35,10 @@ export async function POST(
       createdReason,
     })
   } catch (error) {
-    return new NextResponse(JSON.stringify(error))
+    return responseWithErrorMessage(error)
   }
+}
+
+function responseWithErrorMessage(error: unknown) {
+  return new NextResponse(JSON.stringify(error))
 }
