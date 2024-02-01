@@ -43,7 +43,7 @@ export const mailersendClient = {
     const sentFrom = new Sender(params.config.fromEmail, params.config.fromName)
 
     const emailParams = new EmailParams()
-      .setFrom(sentFrom)
+      .setFrom(new Sender('gooddev@nerdbord.io', 'Good DevHunting'))
       .setTo(params.recipients)
       .setReplyTo(sentFrom)
       .setSubject(params.config.subject)
