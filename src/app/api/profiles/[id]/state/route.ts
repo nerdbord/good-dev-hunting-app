@@ -1,9 +1,8 @@
-import { sendProfileStatusEmail } from '@/actions/mailing/sendProfileStatusEmail'
+import { sendProfileApprovedEmail } from '@/actions/mailing/sendProfileStatusEmail'
 import { updateUserData } from '@/backend/profile/profile.service'
-import { getUserById } from '@/backend/user/user.service'
 import { PublishingStateData } from '@/data/frontend/profile/types'
 import { requireUserRoles } from '@/utils/auths'
-import { Role } from '@prisma/client'
+import { PublishingState, Role } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function PATCH(
@@ -18,22 +17,13 @@ export async function PATCH(
 
   try {
     const userDataToUpdate: PublishingStateData = await request.json()
-    const updatedProfileState = await updateUserData(id, userDataToUpdate)
-    const userData = await getUserById(id)
-    if (userData) {
-      const updatedProfileStateMail = await sendProfileStatusEmail(
-        userData.email,
-        userDataToUpdate.state,
-      )
-    } else {
-      throw new Error(
-        `Couldn't send notification email, userData is: ${userData}`,
-      )
+    const updatedProfile = await updateUserData(id, userDataToUpdate)
+    if (updatedProfile.state === PublishingState.APPROVED) {
+      await sendProfileApprovedEmail(updatedProfile.user.email)
     }
-
     return NextResponse.json({
       message: 'Success',
-      profile: updatedProfileState,
+      profile: updatedProfile,
     })
   } catch (error) {
     return new NextResponse(JSON.stringify(error))

@@ -58,7 +58,7 @@ export const apiClient = {
   },
   createRejectionReason: async (
     profileId: string,
-    payload: RejectionReason,
+    payload: RejectionReason & { userEmail: string },
   ) => {
     try {
       const savedRejectingReason = await httpClient.post<
