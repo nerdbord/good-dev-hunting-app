@@ -33,19 +33,19 @@ interface SendMailParams {
 
 export const mailersendClient = {
   async sendMail(params: SendMailParams) {
-    if (!process.env.MAILERSEND_API_KEY) {
+    if (!process.env.NEXT_PUBLIC_MAILERSEND_API_KEY) {
       console.log('No MAILERSEND_API_KEY found in env vars. Skipping email.')
       return
     }
 
     const mailerSend = new MailerSend({
-      apiKey: process.env.MAILERSEND_API_KEY,
+      apiKey: process.env.NEXT_PUBLIC_MAILERSEND_API_KEY,
     })
 
     const sentFrom = new Sender(params.config.fromEmail, params.config.fromName)
 
     const emailParams = new EmailParams()
-      .setFrom(sentFrom)
+      .setFrom(new Sender('gooddev@nerdbord.io', 'Good DevHunting'))
       .setTo(params.recipients)
       .setReplyTo(sentFrom)
       .setSubject(params.config.subject)
