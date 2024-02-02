@@ -13,13 +13,16 @@
 }
 
 .withBackBackButton {
+  @include mobile {
+    justify-content: left;
+  }
   justify-content: space-between;
 }
 
-.actions{
+.actions {
   display: flex;
-  align-items: center;
-  justify-content: left;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
   row-gap: 12px;
   column-gap: 10px;
