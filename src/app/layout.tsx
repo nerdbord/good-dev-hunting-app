@@ -1,11 +1,12 @@
+import AuthProvider from '@/components/AuthProvider/AuthProvider'
+import { ModalProvider } from '@/contexts/ModalContext'
+import { ToastContextProvider } from '@/contexts/ToastContext'
+import combineClasses from '@/utils/combineClasses'
+import PlausibleProvider from 'next-plausible'
+import { IBM_Plex_Sans, Inter } from 'next/font/google'
+import * as process from 'process'
 import React from 'react'
 import './globals.scss'
-import { IBM_Plex_Sans, Inter } from 'next/font/google'
-import AuthProvider from '@/components/AuthProvider/AuthProvider'
-import { ToastContextProvider } from '@/contexts/ToastContext'
-import { ModalProvider } from '@/contexts/ModalContext'
-import combineClasses from '@/utils/combineClasses'
-import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -22,9 +23,9 @@ const inter = Inter({
 const commonClasses = combineClasses([ibm.variable, inter.variable])
 
 export const metadata = {
-  title: 'Good Dev Hunting',
+  title: 'Good Dev Hunting - find the best developers for your team',
   description:
-    "Catch coding legends! Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs. An advanced search engine enables a focus on key criteria such as programming languages, experience level, and specialization. Regularly updated profiles ensure you always have access to the latest information about candidates.",
+    "Catch coding legends! Good Dev Hunting is reverse recruitment platform that allows you to find the best developers for your team. Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs.",
 }
 
 export default function RootLayout({
@@ -35,11 +36,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={commonClasses}>
-        <AuthProvider>
-          <ToastContextProvider>
-            <ModalProvider>{children}</ModalProvider>
-          </ToastContextProvider>
-        </AuthProvider>
+        <PlausibleProvider
+          domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
+        >
+          <AuthProvider>
+            <ToastContextProvider>
+              <ModalProvider>{children}</ModalProvider>
+            </ToastContextProvider>
+          </AuthProvider>
+        </PlausibleProvider>
         <div id="portal" />
         <div id="toasts" />
       </body>
