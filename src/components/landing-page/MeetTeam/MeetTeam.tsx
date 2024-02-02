@@ -1,8 +1,23 @@
-import React from 'react'
-import styles from './MeetTeam.module.scss'
+import { getTeamProfiles } from '@/backend/profile/profile.service'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
+import styles from './MeetTeam.module.scss'
 
-const MeetTeam = () => {
+const MeetTeam = async () => {
+  const teamProfiles = await getTeamProfiles()
+
+  // Calculate midpoint differently to ensure one half has at least 4 items
+  let midpoint
+  if (teamProfiles.length < 8) {
+    // Ensure the first half has at least 4 items, if total less than 8
+    midpoint = 4
+  } else {
+    // Standard calculation if enough items for both halves to have at least 4
+    midpoint = Math.ceil(teamProfiles.length / 2)
+  }
+
+  const firstHalfProfiles = teamProfiles.slice(0, midpoint)
+  const secondHalfProfiles = teamProfiles.slice(midpoint)
+
   return (
     <section id="MeetTeam" className={styles.wrapper}>
       <div className={styles.titleBox}>
@@ -13,20 +28,20 @@ const MeetTeam = () => {
       <div className={styles.cardsWrapper}>
         <div className={styles.slider}>
           <div className={styles.cardsBox}>
-            <VerticalCard />
-            <VerticalCard />
-            <VerticalCard />
-            <VerticalCard />
+            {firstHalfProfiles.map((profile) => (
+              <VerticalCard {...profile} />
+            ))}
           </div>
         </div>
-        <div className={styles.slider}>
-          <div className={styles.cardsBox}>
-            <VerticalCard />
-            <VerticalCard />
-            <VerticalCard />
-            <VerticalCard />
+        {!!secondHalfProfiles.length && (
+          <div className={styles.slider}>
+            <div className={styles.cardsBox}>
+              {secondHalfProfiles.map((profile) => (
+                <VerticalCard {...profile} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )
