@@ -6,7 +6,9 @@ import TextInput from '@/components/TextInput/TextInput'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { PlausibleEvents } from '@/lib/plausible'
 import { useFormik } from 'formik'
+import { usePlausible } from 'next-plausible'
 import styles from './ContactForm.module.scss'
 import { ContactFormValues, initialValues, validationSchema } from './schema'
 
@@ -21,6 +23,7 @@ export default function ContactForm({
 }) {
   const { runAsync, loading } = useAsyncAction()
   const { addToast } = useToast()
+  const plausible = usePlausible()
 
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
@@ -31,8 +34,14 @@ export default function ContactForm({
           recipientEmail: userProfile.userEmail,
           subject: values.subject,
         })
-        // Handle submit actions
+        plausible(PlausibleEvents.ContactDeveloper, {
+          props: {
+            username: userProfile.githubUsername,
+            senderEmail: values.senderEmail,
+          },
+        })
         showSuccessMsg()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         addToast(
           `Your message was not sent, because you've already contacted this

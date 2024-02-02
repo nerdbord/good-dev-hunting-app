@@ -1,6 +1,5 @@
-import React from 'react'
-import styles from './FAQSection.module.scss'
 import Accordion from '../../Accordion/Accordion'
+import styles from './FAQSection.module.scss'
 
 const FAQSection = () => {
   return (
@@ -10,42 +9,32 @@ const FAQSection = () => {
         <small>Let us know if&nbsp;you&nbsp;have any&nbsp;questions.</small>
       </div>
       <div className={styles.faq}>
-        <Accordion title="Do I have to bla bala bla?">
+        <Accordion title="What is reverted recruitment process?">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
-            explicabo labore. Temporibus repellat neque recusandae accusamus
-            cupiditate hic. Nisi labore ducimus corrupti! Dolore inventore sed
-            facilis fuga ea voluptatem laboriosam? Impedit reprehenderit
-            similique cum quis culpa saepe, ipsa perferendis. Architecto
-            praesentium debitis odio fugiat, reiciendis quaerat voluptate eum
-            illo repellendus ducimus officiis aperiam rem harum quam libero
-            tempore nesciunt soluta. Consequatur nam ex corrupti, debitis odit
-            nobis vitae cum itaque facilis, reprehenderit at! Provident,
-            assumenda libero repellat accusamus perferendis ullam esse
-            consectetur neque? Eos, excepturi libero. Praesentium quisquam
-            labore expedita.
+            Reverse recruiting (also known as "reverse job hunting") is an
+            approach in which the roles of job seekers and employers are
+            reversed. Instead of candidates applying for positions, employers or
+            recruiters actively seek out potential candidates.
           </p>
         </Accordion>
-        <Accordion title="Do I have to bla bala bla?">
+        <Accordion title="How does GDH work exactly?">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-            quo, adipisci natus illum vitae eos architecto labore a magnam vero
-            nesciunt, voluptates, dignissimos beatae ut odio! Laborum maiores
-            sunt quos? Adipisci suscipit ad dolores est consequatur vitae,
-            consectetur dolorem blanditiis maiores molestias dolore nam
-            voluptatibus nobis dicta dignissimos odio tenetur corporis voluptas
-            laudantium magni cumque delectus. Reiciendis minus voluptatem quis.
+            It's really simple - all you need to do is create an account by
+            logging in with your GitHub profile. Then, you'll create a profile
+            by providing information about yourself. Once your profile is
+            approved by our moderators, you're ready to be hunted by employers
           </p>
         </Accordion>
-        <Accordion title="Do I have to bla bala bla?">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id
-            expedita laboriosam dicta voluptas magnam, ducimus perferendis optio
-            esse at aperiam iusto consectetur, velit totam facilis aspernatur!
-            Nobis sunt necessitatibus odio!
-          </p>
+        <Accordion title="Is it really free?">
+          <p>Yes! Creating a profile comes with no charges, no hidden fees!</p>
         </Accordion>
-        <Accordion title="Do I have to bla bala bla?">test</Accordion>
+        <Accordion title="Do I need to have an account on GitHub and Nerdbord?">
+          To create a profile, having a GitHub account is necessary. Connecting
+          with Nerdbord is optional, but we strongly encourage you to consider
+          enhancing your profile with this option. This allows employers to get
+          to know your work better through an attractive and user-friendly
+          Nerdbord portfolio."
+        </Accordion>
       </div>
     </section>
   )
