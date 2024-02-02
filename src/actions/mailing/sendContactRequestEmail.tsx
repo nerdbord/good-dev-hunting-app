@@ -1,5 +1,6 @@
 'use server'
 import { MailTemplateId, mailersendClient } from '@/lib/mailersendClient'
+import { withSentry } from '@/utils/errHandling'
 import { Recipient } from 'mailersend'
 
 export type ContactRequestEmailParams = {
@@ -9,13 +10,13 @@ export type ContactRequestEmailParams = {
   subject: string
 }
 
-export const sendContactRequestEmail = async ({
-  senderEmail,
-  senderFullName,
-  recipientEmail,
-  subject,
-}: ContactRequestEmailParams) => {
-  try {
+export const sendContactRequestEmail = withSentry(
+  async ({
+    senderEmail,
+    senderFullName,
+    recipientEmail,
+    subject,
+  }: ContactRequestEmailParams) => {
     const config = {
       fromEmail: senderEmail,
       fromName: senderFullName,
@@ -27,8 +28,5 @@ export const sendContactRequestEmail = async ({
       templateId: MailTemplateId.contactRequest,
       config,
     })
-  } catch (error) {
-    console.error('Error occured whilst sending contact request.', error)
-    throw Error('Error occured whilst sending contact request.')
-  }
-}
+  },
+)

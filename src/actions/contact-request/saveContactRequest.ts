@@ -6,57 +6,65 @@ import {
 } from '@/backend/contact-request/contact-request.service'
 import { ContactFormRequest } from '@/components/ContactForm/schema'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
+import { withSentry } from '@/utils/errHandling'
+import { ContactRequest } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import {
   ContactRequestEmailParams,
   sendContactRequestEmail,
 } from '../mailing/sendContactRequestEmail'
 
-export const saveContactRequest = async ({
-  message,
-  senderEmail,
-  senderFullName,
-  recipientEmail,
-  subject,
-  profileId,
-}: ContactFormRequest & ContactRequestEmailParams) => {
-  try {
-    const existingContactRequest = await findExistingContactRequest({
-      senderEmail: senderEmail,
-      profileId: profileId,
-    })
-    if (existingContactRequest) {
-      throw Error('You already contacted this dev')
-    }
-    const createdContactRequest = await createContactRequest({
-      senderEmail,
-      senderFullName,
-      subject,
-      profileId,
-      message,
-    })
-    if (createdContactRequest) {
-      try {
-        await sendContactRequestEmail({
-          senderEmail,
-          senderFullName,
-          recipientEmail,
-          subject,
-        })
-        await mailerliteClient.addSubscriberToMailerLite(
-          senderEmail,
-          mailerliteGroups.contactGroup,
-        )
-      } catch (error) {
-        await deleteContactRequest(createdContactRequest.id)
-        throw Error('Failed to send contact request')
+export const saveContactRequest = withSentry(
+  async ({
+    message,
+    senderEmail,
+    senderFullName,
+    recipientEmail,
+    subject,
+    profileId,
+  }: ContactFormRequest & ContactRequestEmailParams) => {
+    let contactRequest: ContactRequest | null = null
+    try {
+      const existingContactRequest = await findExistingContactRequest({
+        senderEmail: senderEmail,
+        profileId: profileId,
+      })
+
+      if (existingContactRequest) {
+        throw Error('You already contacted this dev')
       }
 
+      const createdContactRequest = await createContactRequest({
+        senderEmail,
+        senderFullName,
+        subject,
+        profileId,
+        message,
+      })
+
+      contactRequest = createdContactRequest
+
+      if (!createdContactRequest) {
+        throw Error('Failed to save contact request')
+      }
+
+      await sendContactRequestEmail({
+        senderEmail,
+        senderFullName,
+        recipientEmail,
+        subject,
+      })
+
+      await mailerliteClient.addSubscriberToMailerLite(
+        senderEmail,
+        mailerliteGroups.contactGroup,
+      )
+
       return createdContactRequest
-    } else {
-      throw Error('Failed to save contact request.')
+    } catch (error) {
+      Sentry.captureException(error)
+      contactRequest && (await deleteContactRequest(contactRequest.id))
+      throw error
     }
-  } catch (error) {
-    console.error('Failed to save contact request:', error)
-    throw Error('Failed to save contact request.')
-  }
-}
+  },
+)
