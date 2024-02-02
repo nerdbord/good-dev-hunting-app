@@ -29,7 +29,7 @@ export default function ContactForm({
           senderEmail: values.senderEmail,
           senderFullName: values.senderFullName,
           recipientEmail: userProfile.userEmail,
-          profileId: userProfile.id,
+          subject: values.subject,
         })
         // Handle submit actions
         showSuccessMsg()
