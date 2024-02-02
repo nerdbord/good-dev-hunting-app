@@ -5,7 +5,9 @@ import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { PlausibleEvents } from '@/lib/plausible'
 import { useFormik } from 'formik'
+import { usePlausible } from 'next-plausible'
 import styles from './ContactForm.module.scss'
 import { ContactFormValues, initialValues, validationSchema } from './schema'
 
@@ -19,17 +21,23 @@ export default function ContactForm({
   showSuccessMsg: () => void
 }) {
   const { runAsync, loading } = useAsyncAction()
+  const plausible = usePlausible()
 
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
       try {
         // Handle submit actions
-        saveContactRequest({
+        await saveContactRequest({
           ...values,
           profileId: userProfile.id,
-        }),
-          // console.log('Handle submit', values)
-          showSuccessMsg()
+        })
+        plausible(PlausibleEvents.ContactDeveloper, {
+          props: {
+            username: userProfile.githubUsername,
+            senderEmail: values.senderEmail,
+          },
+        })
+        showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         console.error('Error sending email', error)
