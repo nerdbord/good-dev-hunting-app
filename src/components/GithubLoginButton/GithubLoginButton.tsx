@@ -1,9 +1,8 @@
 'use client'
-import { Button } from '@/components/Button/Button'
-import { signIn } from 'next-auth/react'
 import GithubIcon from '@/assets/icons/GithubIcon'
-import React from 'react'
+import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
+import { signIn } from 'next-auth/react'
 import styles from './GithubLoginButton.module.scss'
 
 export const GithubLoginButton = () => {
