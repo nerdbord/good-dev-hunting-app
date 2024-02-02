@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={commonClasses}>
         <PlausibleProvider
-          domain={process.env.NEXT_PUBLIC_APP_ORIGIN_URL || ''}
+          domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
         >
           <AuthProvider>
             <ToastContextProvider>
