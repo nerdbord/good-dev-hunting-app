@@ -1,10 +1,8 @@
+import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import { updateUserData } from '@/backend/profile/profile.service'
-import { findUserByEmail } from '@/backend/user/user.service'
 import { PublishingStateData } from '@/data/frontend/profile/types'
-import { authOptions } from '@/lib/auth'
 import { requireUserRoles } from '@/utils/auths'
-import { Role } from '@prisma/client'
-import { getServerSession } from 'next-auth'
+import { PublishingState, Role } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function PATCH(
@@ -19,11 +17,13 @@ export async function PATCH(
 
   try {
     const userDataToUpdate: PublishingStateData = await request.json()
-    const updatedProfileState = await updateUserData(id, userDataToUpdate)
-
+    const updatedProfile = await updateUserData(id, userDataToUpdate)
+    if (updatedProfile.state === PublishingState.APPROVED) {
+      await sendProfileApprovedEmail(updatedProfile.user.email)
+    }
     return NextResponse.json({
       message: 'Success',
-      profile: updatedProfileState,
+      profile: updatedProfile,
     })
   } catch (error) {
     return new NextResponse(JSON.stringify(error))

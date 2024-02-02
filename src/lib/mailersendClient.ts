@@ -3,6 +3,9 @@ import { APIResponse } from 'mailersend/lib/services/request.service'
 
 export enum MailTemplateId {
   welcomeMail = 'x2p03478r1ylzdrn',
+  contactRequest = 'vywj2lpj1pjl7oqz',
+  profileApprovedNotification = '0r83ql3nq6x4zw1j',
+  profileRejectedNotification = 'vywj2lpj1pjl7oqz',
 }
 
 interface MailConfig {
@@ -19,12 +22,6 @@ interface Substitution {
 interface Variable {
   email: string
   substitutions: Substitution[]
-}
-
-interface SendMailParams {
-  recipients: Recipient[]
-  templateId: MailTemplateId
-  config: MailConfig
 }
 
 interface SendMailParams {
@@ -48,7 +45,7 @@ export const mailersendClient = {
     const sentFrom = new Sender(params.config.fromEmail, params.config.fromName)
 
     const emailParams = new EmailParams()
-      .setFrom(sentFrom)
+      .setFrom(new Sender('info@devhunting.co', 'Good DevHunting'))
       .setTo(params.recipients)
       .setReplyTo(sentFrom)
       .setSubject(params.config.subject)

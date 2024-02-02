@@ -129,6 +129,9 @@ export async function updateUserData(
       id,
     },
     data: userDataToUpdate,
+    include: {
+      user: true,
+    },
   })
   if (userDataToUpdate?.state) {
     sendDiscordNotificationToModeratorChannel(

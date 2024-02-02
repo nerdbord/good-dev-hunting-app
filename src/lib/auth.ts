@@ -1,8 +1,7 @@
+import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
 import { createUser, findUserByEmail } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
-
-import { sendWelcomeEmail } from '@/actions/mailing/sendWelcomeEmail'
 import GithubProvider from 'next-auth/providers/github'
 interface UserAuthed {
   id: string
