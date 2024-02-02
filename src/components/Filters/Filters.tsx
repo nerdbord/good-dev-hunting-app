@@ -8,6 +8,8 @@ import {
   useFilters,
 } from '@/contexts/FilterContext'
 import { JobSpecialization } from '@/data/frontend/profile/types'
+import { PlausibleEvents } from '@/lib/plausible'
+import { usePlausible } from 'next-plausible'
 import React from 'react'
 import { DropdownOption } from '../Dropdowns/DropdownFilter/DropdownFilter'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
@@ -19,6 +21,7 @@ interface FiltersProps {
 }
 
 const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
+  const plausible = usePlausible()
   const {
     setJobSpecializationFilter,
     jobSpecializationFilter,
@@ -38,6 +41,9 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       newPos = jobSpecializationFilter.filter((x) => x !== newStack)
     } else {
       newPos = [...jobSpecializationFilter, newStack]
+      plausible(PlausibleEvents.SelectSpecializationFilter, {
+        props: { specialization: newStack.value },
+      })
     }
     setJobSpecializationFilter(newPos)
   }
@@ -52,18 +58,30 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       case JobOfferFiltersEnum.seniority:
         newFilters = manageFilter(seniorityFilter)
         setSeniorityFilter(newFilters)
+        plausible(PlausibleEvents.SelectSeniorityFilter, {
+          props: { seniority: option.value },
+        })
         break
       case JobOfferFiltersEnum.availability:
         newFilters = manageFilter(availabilityFilter)
         setAvailabilityFilter(newFilters)
+        plausible(PlausibleEvents.SelectAvailabilityFilter, {
+          props: { availability: option.value },
+        })
         break
       case JobOfferFiltersEnum.location:
         newFilters = manageFilter(locationFilter)
         setLocationFilter(newFilters)
+        plausible(PlausibleEvents.SelectLocationFilter, {
+          props: { location: option.value },
+        })
         break
       case JobOfferFiltersEnum.technology:
         newFilters = manageFilter(technologyFilter)
         setTechnologyFilter(newFilters)
+        plausible(PlausibleEvents.SelectTechnologyFilter, {
+          props: { technology: option.value },
+        })
         break
       default:
         return
