@@ -6,6 +6,7 @@ import {
   updateUserNerdbordId,
 } from '@/backend/user/user.service'
 import { authOptions } from '@/lib/auth'
+import * as Sentry from '@sentry/nextjs'
 import { getServerSession } from 'next-auth'
 
 export interface UserData {
@@ -21,41 +22,41 @@ interface NerdbordUser {
 }
 
 export const connectToNerdbord = async () => {
-  const session = await getServerSession(authOptions)
-  if (!session?.user.email) {
-    console.error('Error: Session not found')
-    return null
-  }
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user.email) {
+      throw new Error('User not found')
+    }
 
-  const user = await findUserByEmail(session.user.email)
+    const user = await findUserByEmail(session.user.email)
 
-  if (!user) {
-    console.error('Error: User not found')
-    return null
-  }
+    if (!user) {
+      throw new Error('User not found')
+    }
 
-  const userGitHubDetails = await getGitHubDetails(user?.id)
+    const userGitHubDetails = await getGitHubDetails(user?.id)
 
-  if (!userGitHubDetails) {
-    console.error('Error: User GitHub details not found')
-    return null
-  }
+    if (!userGitHubDetails) {
+      throw new Error('User not found')
+    }
 
-  const resp = await fetch(
-    `https://core.nerdbord.io/v1/users/${userGitHubDetails.username}`,
-  )
-
-  if (!resp.ok) {
-    throw new Error('Something went wrong!')
-  }
-
-  const data: NerdbordUser = await resp.json()
-
-  if (data.user) {
-    await updateUserNerdbordId(user.id, data.user.id)
-  } else {
-    throw new Error(
-      'User not found. Make sure your Github account is used on Nerdbord',
+    const resp = await fetch(
+      `https://core.nerdbord.io/v1/users/${userGitHubDetails.username}`,
     )
+
+    if (!resp.ok) {
+      throw new Error('Something went wrong!')
+    }
+
+    const data: NerdbordUser = await resp.json()
+
+    if (!data.user) {
+      throw new Error('Nerdbord user not found')
+    }
+
+    await updateUserNerdbordId(user.id, data.user.id)
+  } catch (err) {
+    Sentry.captureException(err)
+    throw err
   }
 }
