@@ -1,7 +1,7 @@
 'use client'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { Button } from '../../Button/Button'
-import styles from './ContactSuccessModal.module.scss'
+import styles from './ContactResultModal.module.scss'
 
 export default function ContactSuccessModal({
   userProfile,
@@ -20,7 +20,6 @@ export default function ContactSuccessModal({
         Your message was sent, you can now relax and wait for the response from{' '}
         {getName(userProfile.fullName)}.
       </p>
-
       <div data-test-id="closeBtn">
         <Button variant={'primary'} onClick={() => onClose()}>
           Close

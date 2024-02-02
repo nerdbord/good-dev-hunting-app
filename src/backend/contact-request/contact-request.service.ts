@@ -12,3 +12,26 @@ export async function createContactRequest(contactRequest: ContactFormRequest) {
     },
   })
 }
+
+export async function findExistingContactRequest({
+  senderEmail,
+  profileId,
+}: {
+  senderEmail: string
+  profileId: string
+}) {
+  return prisma.contactRequest.findFirst({
+    where: {
+      senderEmail,
+      profileId,
+    },
+  })
+}
+
+export async function deleteContactRequest(id: string) {
+  return prisma.contactRequest.delete({
+    where: {
+      id,
+    },
+  })
+}

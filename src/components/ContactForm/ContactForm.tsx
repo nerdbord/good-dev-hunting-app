@@ -1,8 +1,9 @@
-import { saveContactRequest } from '@/actions/contact-request/saveContactRequest'
+import { contactRequestEmail } from '@/actions/mailing/contactRequestEmail'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
+import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
@@ -21,15 +22,17 @@ export default function ContactForm({
   showSuccessMsg: () => void
 }) {
   const { runAsync, loading } = useAsyncAction()
+  const { addToast } = useToast()
   const plausible = usePlausible()
 
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
       try {
-        // Handle submit actions
-        await saveContactRequest({
-          ...values,
-          profileId: userProfile.id,
+        await contactRequestEmail({
+          senderEmail: values.senderEmail,
+          senderFullName: values.senderFullName,
+          recipientEmail: userProfile.userEmail,
+          subject: values.subject,
         })
         plausible(PlausibleEvents.ContactDeveloper, {
           props: {
@@ -40,7 +43,11 @@ export default function ContactForm({
         showSuccessMsg()
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
-        console.error('Error sending email', error)
+        addToast(
+          `Your message was not sent, because you've already contacted this
+        developer`,
+          ToastStatus.INVALID,
+        )
       }
     })
   }
