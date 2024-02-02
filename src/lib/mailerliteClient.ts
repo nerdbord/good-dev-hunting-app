@@ -1,7 +1,7 @@
 import MailerLite from '@mailerlite/mailerlite-nodejs'
 
 const mailerliteInstance = new MailerLite({
-  api_key: process.env.NEXT_PUBLIC_MAILERLITE_KEY || '',
+  api_key: process.env.MAILERLITE_KEY || '',
 })
 
 export enum mailerliteGroups {
