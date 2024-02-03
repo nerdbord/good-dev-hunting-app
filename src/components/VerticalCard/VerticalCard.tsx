@@ -1,6 +1,6 @@
+import { mapSeniorityLevel } from '@/app/(profile)/mappers'
+import { ProfileModel } from '@/app/(profile)/types'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
-import { mapSeniorityLevel } from '@/data/frontend/profile/mappers'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import { EmploymentType } from '@prisma/client'
 import Image from 'next/image'
 import styles from './VerticalCard.module.scss'

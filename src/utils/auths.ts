@@ -1,5 +1,5 @@
+import { authOptions } from '@/app/(auth)/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
-import { authOptions } from '@/lib/auth'
 import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 

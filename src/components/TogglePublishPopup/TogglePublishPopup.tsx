@@ -1,8 +1,7 @@
+import { ProfileVerification } from '@/app/(profile)/helpers'
 import { PublishingState } from '@prisma/client'
 import { Button } from '../Button/Button'
 import styles from './TogglePublishPopup.module.scss'
-import React from 'react'
-import { ProfileVerification } from '@/data/frontend/profile/helpers'
 
 interface PublishProfilePopupProps {
   state: PublishingState

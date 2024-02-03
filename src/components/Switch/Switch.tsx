@@ -21,7 +21,13 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   dataTestId,
   onBlur,
 }) => {
+  const [isChecked, setIsChecked] = React.useState(checked)
+
+  React.useEffect(() => {
+    setIsChecked(checked)
+  }, [checked])
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(!isChecked)
     onChange(event)
   }
 
@@ -33,7 +39,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
           id={id}
           className={styles.checkbox}
           type="checkbox"
-          checked={checked}
+          checked={isChecked}
           onChange={handleSwitchChange}
           name={name}
           onBlur={onBlur}

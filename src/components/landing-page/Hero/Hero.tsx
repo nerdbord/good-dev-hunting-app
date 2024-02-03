@@ -1,13 +1,12 @@
-import React from 'react'
-import styles from './Hero.module.scss'
-import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
+import { authOptions } from '@/app/(auth)/auth'
+import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
+import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
-import Image from 'next/image'
+import { findUserByEmail } from '@/backend/user/user.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { findUserByEmail } from '@/backend/user/user.service'
-import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
+import Image from 'next/image'
+import styles from './Hero.module.scss'
 
 const Hero = async () => {
   const session = await getServerSession(authOptions)

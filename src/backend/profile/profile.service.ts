@@ -1,5 +1,4 @@
-import { CreateProfilePayload } from '@/data/frontend/profile/types'
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { CreateProfilePayload } from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState, Role } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
@@ -120,25 +119,34 @@ export async function createUserProfile(
   return createdUser
 }
 
-export async function updateUserData(
+export async function updateProfileById(
   id: string,
-  userDataToUpdate: Prisma.ProfileUpdateInput,
+  data: Prisma.ProfileUpdateInput,
 ) {
-  const updatedUser = await prisma.profile.update({
+  const updatedProfile = await prisma.profile.update({
     where: {
       id,
     },
-    data: userDataToUpdate,
+    data,
     include: {
       user: true,
     },
   })
-  if (userDataToUpdate?.state) {
-    sendDiscordNotificationToModeratorChannel(
-      `User's **${updatedUser.fullName}** profile has got new status: **${userDataToUpdate.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedUser.userId})`,
-    )
+
+  return updatedProfile
+}
+
+export async function findProfileById(id: string) {
+  const profile = await prisma.profile.findFirst({
+    where: { id },
+    include: includeObject.include,
+  })
+
+  if (profile) {
+    return serializeProfileToProfileModel(profile)
   }
-  return updatedUser
+
+  return null
 }
 
 export async function getProfileByUserId(userId: string) {
