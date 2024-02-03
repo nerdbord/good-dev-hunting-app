@@ -1,6 +1,6 @@
 'use client'
 import { ProfileModel } from '@/app/(profile)/types'
-import { Button } from '../../Button/Button'
+import { Button } from '../../../../../components/Button/Button'
 import styles from './ContactResultModal.module.scss'
 
 export default function ContactSuccessModal({

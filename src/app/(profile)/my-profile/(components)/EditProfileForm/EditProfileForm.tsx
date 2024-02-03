@@ -97,6 +97,7 @@ const EditProfileForm = ({
         name: values.city,
       },
       openForCityRelocation: values.openForCityRelocation,
+      isOpenForWork: true,
       remoteOnly: values.remoteOnly,
       position: values.position.value,
       seniority: values.seniority.value,

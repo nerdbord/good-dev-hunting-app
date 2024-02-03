@@ -17,6 +17,7 @@ export interface ProfileModel {
     name: string
   }
   openForCityRelocation: boolean
+  isOpenForWork: boolean
   remoteOnly: boolean
   position: string
   seniority: string

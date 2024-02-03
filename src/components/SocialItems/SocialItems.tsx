@@ -6,8 +6,10 @@ import styles from './SocialItems.module.scss'
 
 export default function SocialItems({
   userProfile,
+  isNerdbordConnected,
 }: {
   userProfile: ProfileModel
+  isNerdbordConnected?: boolean
 }) {
   return (
     <div className={styles.social}>
@@ -33,6 +35,18 @@ export default function SocialItems({
             <LinkedIn />
           </a>
         </div>
+      )}
+      {userProfile.githubUsername && isNerdbordConnected && (
+        <li className={styles.socialItem}>
+          <a
+            className={styles.socialLink}
+            href={`https://nerdbord.io/p/${userProfile.githubUsername}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Portfolio ↗︎
+          </a>
+        </li>
       )}
     </div>
   )

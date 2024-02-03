@@ -1,5 +1,5 @@
-﻿import ModerationFilters from '@/components/Filters/ModerationFilters'
-import ModerationProfileList from '@/components/ProfileList/ModerationProfileList'
+﻿import ModerationFilters from '@/app/(profile)/(components)/Filters/ModerationFilters'
+import ModerationProfileList from '@/app/(profile)/(components)/ProfileList/ModerationProfileList'
 import { ModerationFilterContextProvider } from '@/contexts/ModerationFilterContext'
 
 const DashboardPage = () => {
