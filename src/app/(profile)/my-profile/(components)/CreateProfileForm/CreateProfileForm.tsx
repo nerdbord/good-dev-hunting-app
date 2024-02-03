@@ -1,5 +1,7 @@
 'use client'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
+import { serverUpdateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
+import { uploadImage } from '@/app/(auth)/_actions/uploadImage'
 import { createProfile } from '@/app/(profile)/_actions/createProfile'
 import CreateProfileTopBar from '@/app/(profile)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
@@ -11,13 +13,13 @@ import {
   CreateProfilePayload,
 } from '@/app/(profile)/types'
 import { initialFilterOption } from '@/contexts/FilterContext'
+import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
 import { PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { PropsWithChildren } from 'react'
 import * as Yup from 'yup'
 
 const initialValues: CreateProfileFormValues = {
@@ -66,16 +68,11 @@ export const validationSchema = Yup.object().shape({
     ),
 })
 
-interface CreateProfileFormWrapperProps {
-  // onCreateProfile: (payload: CreateProfilePayload) => void
-}
-
-const CreateProfileForm = ({
-  children,
-}: PropsWithChildren<CreateProfileFormWrapperProps>) => {
+const CreateProfileForm = () => {
   const { data: session } = useSession()
   const { runAsync } = useAsyncAction()
   const router = useRouter()
+  const { formDataWithFile } = useUploadContext()
 
   if (!session) {
     return null
@@ -100,11 +97,9 @@ const CreateProfileForm = ({
       remoteOnly: values.remoteOnly,
       position: values.position.value,
       seniority: values.seniority.value,
-      techStack: values.techStack.map((tech) => {
-        return {
-          techName: tech.value,
-        }
-      }),
+      techStack: values.techStack.map((tech) => ({
+        techName: tech.value,
+      })),
       employmentTypes: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,
@@ -112,6 +107,12 @@ const CreateProfileForm = ({
 
     try {
       runAsync(async () => {
+        const uploadedFileUrl = formDataWithFile
+          ? await uploadImage(formDataWithFile)
+          : null
+
+        uploadedFileUrl && (await serverUpdateUserAvatar(uploadedFileUrl))
+
         await createProfile(payload)
         router.push(AppRoutes.myProfile)
       })
