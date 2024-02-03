@@ -49,23 +49,6 @@ export const httpClient = {
       return Promise.reject(error)
     }
   },
-  postPhoto: async <ResponseData>(url: string, file: File) => {
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': file.type || 'application/octet-stream',
-        },
-        body: file,
-      })
-
-      return handleResponse<ResponseData>(response)
-    } catch (error) {
-      console.error(error)
-      return Promise.reject(error)
-    }
-  },
-
   patch: async <Payload, ResponseData>(url: string, payload?: Payload) => {
     try {
       const response = await fetch(url, {

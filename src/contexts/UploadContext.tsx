@@ -1,24 +1,26 @@
 'use client'
-import { createContext, useContext, useState, PropsWithChildren } from 'react'
+import { PropsWithChildren, createContext, useContext, useState } from 'react'
 
 interface UploadContextProps {
   imageUploadError: boolean
   setImageUploadError: React.Dispatch<React.SetStateAction<boolean>>
-  selectedFile: File | null
-  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>
+  formDataWithFile: FormData | null
+  setFormDataWithFile: React.Dispatch<React.SetStateAction<FormData | null>>
 }
 
 export const UploadProvider = ({ children }: PropsWithChildren) => {
   const [imageUploadError, setImageUploadError] = useState(false)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [formDataWithFile, setFormDataWithFile] = useState<FormData | null>(
+    null,
+  )
 
   return (
     <UploadContext.Provider
       value={{
         imageUploadError,
         setImageUploadError,
-        selectedFile,
-        setSelectedFile,
+        formDataWithFile,
+        setFormDataWithFile,
       }}
     >
       {children}
