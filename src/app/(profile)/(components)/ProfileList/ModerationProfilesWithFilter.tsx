@@ -3,7 +3,7 @@ import { ProfileModel } from '@/app/(profile)/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
-import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'
+import { SearchResultsInfo } from '../../../../components/SearchResultsInfo/SearchResultsInfo'
 import { ModerationProfileListItem } from './ModerationProfileListItem'
 
 import styles from './ProfileList.module.scss'

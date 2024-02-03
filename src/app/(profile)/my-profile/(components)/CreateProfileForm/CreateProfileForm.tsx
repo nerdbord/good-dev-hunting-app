@@ -1,4 +1,5 @@
 'use client'
+import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { createProfile } from '@/app/(profile)/_actions/createProfile'
 import CreateProfileTopBar from '@/app/(profile)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
@@ -9,7 +10,6 @@ import {
   CreateProfileFormValues,
   CreateProfilePayload,
 } from '@/app/(profile)/types'
-import LogOutBtn from '@/components/LogOutBtn/LogOutBtn'
 import { initialFilterOption } from '@/contexts/FilterContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
@@ -95,6 +95,7 @@ const CreateProfileForm = ({
       city: {
         name: values.city,
       },
+      isOpenForWork: true,
       openForCityRelocation: values.openToRelocationCity,
       remoteOnly: values.remoteOnly,
       position: values.position.value,

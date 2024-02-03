@@ -1,9 +1,9 @@
 'use client'
 import { ProfileModel } from '@/app/(profile)/types'
-import styles from '@/components/ProfileList/ProfileList.module.scss'
-import { ProfileListItem } from '@/components/ProfileList/ProfileListItem'
 import { useFilters } from '@/contexts/FilterContext'
 import React from 'react'
+import { ProfileListItem } from '../ProfileList/ProfileListItem'
+
 import {
   filterByAvailability,
   filterByLocation,
@@ -11,6 +11,8 @@ import {
   filterBySeniority,
   filterByTechnology,
 } from './filters'
+
+import styles from './ProfileList.module.scss'
 
 export const ProfilesWithFilter: React.FC<{
   data: ProfileModel[]

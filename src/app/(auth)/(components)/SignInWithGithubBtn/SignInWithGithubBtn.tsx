@@ -1,9 +1,8 @@
 'use client'
-import React from 'react'
-import { Button } from '@/components/Button/Button'
 import GithubIcon from '@/assets/icons/GithubIcon'
-import { signIn } from 'next-auth/react'
+import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
+import { signIn } from 'next-auth/react'
 
 const SignInWithGithubBtn = () => {
   return (

@@ -1,4 +1,5 @@
 'use server'
+import { ContactFormRequest } from '@/app/(profile)/(components)/ContactForm/schema'
 import {
   createContactRequest,
   deleteContactRequest,
@@ -6,7 +7,6 @@ import {
 } from '@/backend/contact-request/contact-request.service'
 import { sendContactRequest } from '@/backend/mailing/mailing.service'
 import { getProfileById } from '@/backend/profile/profile.service'
-import { ContactFormRequest } from '@/components/ContactForm/schema'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
 import { ContactRequest } from '@prisma/client'
@@ -26,6 +26,10 @@ export const sendProfileContactRequest = withSentry(
 
       if (!foundProfile) {
         throw Error('Profile not found')
+      }
+
+      if (!foundProfile.isOpenForWork) {
+        throw Error('This dev is not open for work')
       }
 
       const existingContactRequest = await findExistingContactRequest({

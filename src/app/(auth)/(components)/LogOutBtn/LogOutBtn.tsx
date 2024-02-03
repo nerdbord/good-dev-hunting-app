@@ -1,8 +1,7 @@
 'use client'
-import React from 'react'
+import { AppRoutes } from '@/utils/routes'
 import { signOut } from 'next-auth/react'
 import styles from './LogOutBtn.module.scss'
-import { AppRoutes } from '@/utils/routes'
 
 const LogOutBtn = () => {
   return (

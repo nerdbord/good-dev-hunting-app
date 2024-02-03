@@ -46,8 +46,7 @@ export default function ContactForm({
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         addToast(
-          `Your message was not sent, because you've already contacted this
-        developer`,
+          `${error || 'An error occurred while sending the email'} `,
           ToastStatus.INVALID,
         )
       }

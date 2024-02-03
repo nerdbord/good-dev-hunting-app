@@ -2,6 +2,7 @@ import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserPro
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { getProfileByUserId } from '@/backend/profile/profile.service'
+import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
@@ -40,10 +41,17 @@ const UserProfilePage = async ({ params }: { params: { id: string } }) => {
     redirect(AppRoutes.profiles)
   }
 
+  const user = await findUserByEmail(selectedProfile.userEmail)
+  const isConnectedToNerdbord = !!user?.nerdbordUserId
+
   return (
     <div className={styles.wrapper}>
       <UserProfileMain userProfile={selectedProfile}>
-        <UserProfileHeader withBackButton userProfile={selectedProfile} />
+        <UserProfileHeader
+          isNerdbordConnected={isConnectedToNerdbord}
+          withBackButton
+          userProfile={selectedProfile}
+        />
       </UserProfileMain>
       <UserProfileDetails userProfile={selectedProfile} />
     </div>

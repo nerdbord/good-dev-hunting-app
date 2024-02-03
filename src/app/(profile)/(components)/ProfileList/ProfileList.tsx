@@ -1,5 +1,5 @@
+import ProfilesWithFilter from '@/app/(profile)/(components)/ProfileList/ProfilesWithFilter'
 import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
-import ProfilesWithFilter from '@/components/ProfileList/ProfilesWithFilter'
 
 const ProfileList = async () => {
   const profiles = await getPublishedProfilesPayload()

@@ -1,12 +1,11 @@
 'use client'
-import styles from './GithubAcc.module.scss'
-import React from 'react'
-import Image from 'next/image'
 import { AppRoutes } from '@/utils/routes'
-import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
-import defaultUserImg from '../../../public/default-avatar.png'
+import { usePathname } from 'next/navigation'
+import defaultUserImg from '../../../../../public/default-avatar.png'
+import styles from './GithubAcc.module.scss'
 
 const GithubAcc = () => {
   const pathname = usePathname()

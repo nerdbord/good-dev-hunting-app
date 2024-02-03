@@ -11,7 +11,7 @@ import {
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import React from 'react'
-import { DropdownOption } from '../Dropdowns/DropdownFilter/DropdownFilter'
+import { DropdownOption } from '../../../../components/Dropdowns/DropdownFilter/DropdownFilter'
 import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
 import styles from './Filters.module.scss'
 

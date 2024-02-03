@@ -1,5 +1,5 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 import styles from './tabs.module.scss'
 
 type TabProps = {

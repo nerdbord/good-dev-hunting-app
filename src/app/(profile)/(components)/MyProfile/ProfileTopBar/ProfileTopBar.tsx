@@ -1,7 +1,8 @@
+import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButton'
+import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
+import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
 import { ProfileModel } from '@/app/(profile)/types'
 import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
-import { EditProfileButton } from '@/components/EditProfileButton'
-import { TogglePublishButton } from '@/components/TogglePublishButton/TogglePublishButton'
 import { ConnectToNerdbordButton } from '../../ConnectToNerbordButton/ConnectToNerdbordButton'
 import styles from './ProfileTopBar.module.scss'
 
@@ -16,6 +17,10 @@ const ProfileTopBar = async ({
     <div className={styles.titleBox}>
       <span className={styles.title}>Profile preview</span>
       <div className={styles.buttonBox}>
+        <ToggleOpenToWork
+          profileId={profile.id}
+          isOpenForWork={profile.isOpenForWork}
+        />
         {isConnectedToNerdbord ? (
           <p className={styles.nerdbord}>
             <CheckMarkIcon />
