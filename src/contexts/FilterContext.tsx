@@ -1,10 +1,10 @@
 'use client'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
   mappedEmploymentType,
   mappedSeniorityLevel,
-} from '@/data/frontend/profile/mappers'
-import { JobSpecialization } from '@/data/frontend/profile/types'
+} from '@/app/(profile)/mappers'
+import { JobSpecialization } from '@/app/(profile)/types'
+import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import React, { createContext, useContext, useState } from 'react'
 
 export type FiltersContextType = {

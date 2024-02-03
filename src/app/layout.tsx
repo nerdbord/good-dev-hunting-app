@@ -1,4 +1,4 @@
-import AuthProvider from '@/components/AuthProvider/AuthProvider'
+import AuthProvider from '@/app/(auth)/(components)/AuthProvider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'

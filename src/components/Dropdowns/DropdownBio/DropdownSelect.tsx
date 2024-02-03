@@ -1,5 +1,5 @@
 'use client'
-import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import { CreateProfileFormValues } from '@/app/(profile)/types'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { useFormikContext } from 'formik'
 import 'material-icons/iconfont/material-icons.css'

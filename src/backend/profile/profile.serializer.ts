@@ -1,5 +1,5 @@
-import { ProfileWithRelations } from '@/data/backend/profile/types'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/app/(profile)/types'
+import { ProfileWithRelations } from '@/backend/profile/profile.types'
 
 export const serializeProfileToProfileModel = (
   data: ProfileWithRelations,
@@ -17,6 +17,7 @@ export const serializeProfileToProfileModel = (
     openForCountryRelocation: data.openForCountryRelocation,
     employmentTypes: data.employmentTypes,
     fullName: data.fullName,
+    isOpenForWork: data.isOpenForWork,
     state: data.state,
     linkedIn: data.linkedIn,
     position: data.position,

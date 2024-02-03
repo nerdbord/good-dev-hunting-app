@@ -1,11 +1,8 @@
 'use client'
-import React from 'react'
-import {
-  ICountries,
-  countries,
-} from '@/data/frontend/profile/countries/countries'
+import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ICountries, countries } from '@/data/countries'
 import { useFormikContext } from 'formik'
-import { CreateProfileFormValues } from '@/components/CreateProfileForm/CreateProfileFormWrapper'
+import React from 'react'
 import styles from './DropdownCountry.module.scss'
 
 const DropdownCountry = ({
