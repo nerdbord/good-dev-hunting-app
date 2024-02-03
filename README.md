@@ -1,8 +1,19 @@
 <h1 align="center">
-  Good Dev Hunting
+
+<p align="center">
+<img src="/src/assets/images/logo.png" alt="Logo">
+    Good Dev Hunting
+</p>
+
 </h1>
 
-This project aims to create a platform for listing software engineers using Next.js, Typescript, Prisma, and PostgreSQL. Our goal is to make it easy for recruiters and companies to find potential candidates while providing a platform for developers to showcase their profiles and projects.
+<p align="center">
+  <a >
+    <img src="/src/assets/images/Screenshot.png" alt="Screenshot">
+  </a>
+</p>
+
+    This project aims to create a platform for listing software engineers using Next.js, Typescript, Prisma, and PostgreSQL. Our goal is to make it easy for recruiters and companies to find potential candidates while providing a platform for developers to showcase their profiles and projects.
 
 ---
 
