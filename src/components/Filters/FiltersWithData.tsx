@@ -1,6 +1,6 @@
+import { mapOptions } from '@/app/(profile)/mappers'
 import { getCountries } from '@/backend/country/country.service'
 import { getTechnologies } from '@/backend/technology/technology.service'
-import { mapOptions } from '@/data/frontend/profile/mappers'
 import Filters from './Filters'
 
 export default async function FiltersWithData() {

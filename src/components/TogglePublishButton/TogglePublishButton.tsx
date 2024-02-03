@@ -2,13 +2,13 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { apiClient } from '@/lib/apiClient'
 import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
 import { PublishProfilePopup } from '../TogglePublishPopup/TogglePublishPopup'
 
-import { JobSpecialization } from '@/data/frontend/profile/types'
+import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
+import { JobSpecialization } from '@/app/(profile)/types'
 
 interface TogglePublishButtonProps {
   profileId: string
@@ -23,7 +23,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
 
   const handleButtonClick = async () => {
     await runAsync(async () => {
-      await apiClient.publishMyProfile(profileId)
+      await publishProfile(profileId)
       setShowPopup(true)
     })
   }

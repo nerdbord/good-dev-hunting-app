@@ -1,9 +1,9 @@
+import { mapSeniorityLevel } from '@/app/(profile)/mappers'
+import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
+import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
-import { mapSeniorityLevel } from '@/data/frontend/profile/mappers'
-import { JobSpecialization, ProfileModel } from '@/data/frontend/profile/types'
 import classNames from 'classnames/bind'
 import Image from 'next/image'
-import { StateStatus } from '../StateStatus/StateStatus'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {

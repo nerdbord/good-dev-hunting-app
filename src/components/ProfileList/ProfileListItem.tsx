@@ -1,4 +1,4 @@
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/app/(profile)/types'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { usePlausible } from 'next-plausible'

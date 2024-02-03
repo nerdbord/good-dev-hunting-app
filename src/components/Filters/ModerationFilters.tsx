@@ -1,6 +1,6 @@
-import SearchWrapper from '@/components/ModerationSearchProfile/SearchWrapper'
-import Tabs from '@/components/FilterTabs/Tabs'
+import SearchWrapper from '@/app/(profile)/moderation/(components)/ModerationSearchProfile/SearchWrapper'
 import { getAllPublishedProfilesPayload } from '@/backend/profile/profile.service'
+import Tabs from '@/components/FilterTabs/Tabs'
 
 import styles from './Filters.module.scss'
 

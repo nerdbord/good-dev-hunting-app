@@ -1,6 +1,6 @@
+import { ProfileModel } from '@/app/(profile)/types'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import { ProfileModel } from '@/data/frontend/profile/types'
 
 import styles from './SocialItems.module.scss'
 

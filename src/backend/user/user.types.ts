@@ -13,6 +13,7 @@ export interface CreateUserPayload {
   name: string
   email: string
   image: string
+  githubUsername: string
 }
 
 export type UserWithRelations = Prisma.UserGetPayload<{

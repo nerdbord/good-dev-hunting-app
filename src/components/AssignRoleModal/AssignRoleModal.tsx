@@ -1,5 +1,5 @@
-import { assignRole } from '@/actions/user/assignRole'
-import { unassignRole } from '@/actions/user/unassignRole'
+import { assignRole } from '@/app/(auth)/_actions/assignRole'
+import { unassignRole } from '@/app/(auth)/_actions/unassignRole'
 import { Button } from '@/components/Button/Button'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import { useAsyncAction } from '@/hooks/useAsyncAction'

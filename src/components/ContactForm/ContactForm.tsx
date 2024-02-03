@@ -1,10 +1,10 @@
-import { contactRequestEmail } from '@/actions/mailing/contactRequestEmail'
+import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
+import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
 import { useFormik } from 'formik'
@@ -28,12 +28,14 @@ export default function ContactForm({
   const handleSendEmail = (values: ContactFormValues) => {
     runAsync(async () => {
       try {
-        await contactRequestEmail({
+        await sendProfileContactRequest({
           senderEmail: values.senderEmail,
           senderFullName: values.senderFullName,
-          recipientEmail: userProfile.userEmail,
+          profileId: userProfile.id,
+          message: values.message,
           subject: values.subject,
         })
+
         plausible(PlausibleEvents.ContactDeveloper, {
           props: {
             username: userProfile.githubUsername,
@@ -59,6 +61,7 @@ export default function ContactForm({
     validateOnChange: false,
     validateOnBlur: false,
   })
+
   return (
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit}>
