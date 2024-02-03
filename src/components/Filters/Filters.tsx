@@ -1,4 +1,5 @@
 'use client'
+import { JobSpecialization } from '@/app/(profile)/types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import {
   JobOfferFilters,
@@ -7,7 +8,6 @@ import {
   jobSpecializationOptions,
   useFilters,
 } from '@/contexts/FilterContext'
-import { JobSpecialization } from '@/data/frontend/profile/types'
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import React from 'react'

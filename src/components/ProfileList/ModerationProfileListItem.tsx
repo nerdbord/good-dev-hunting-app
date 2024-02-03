@@ -1,5 +1,5 @@
 'use client'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/app/(profile)/types'
 import { AppRoutes } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
 import React from 'react'

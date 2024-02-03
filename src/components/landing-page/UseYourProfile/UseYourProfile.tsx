@@ -1,11 +1,11 @@
-import style from './UseYourProfile.module.scss'
-import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
-import Image from 'next/image'
-import CreateProfileBtn from '@/components/CreateProfileBtn/CreateProfileBtn'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { authOptions } from '@/app/(auth)/auth'
+import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
+import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findUserByEmail } from '@/backend/user/user.service'
-import MyProfileBtn from '@/components/MyProfileBtn/MyProfileBtn'
+import { getServerSession } from 'next-auth'
+import Image from 'next/image'
+import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
+import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
   const session = await getServerSession(authOptions)

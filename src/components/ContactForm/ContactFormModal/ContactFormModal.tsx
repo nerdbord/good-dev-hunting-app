@@ -1,5 +1,5 @@
+import { ProfileModel } from '@/app/(profile)/types'
 import { ToastContextProvider } from '@/contexts/ToastContext'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactForm from '../ContactForm'
 import styles from './ContactFormModal.module.scss'
 

@@ -38,6 +38,7 @@ model Profile {
   remoteOnly               Boolean
   position                 String
   seniority                String
+  isOpenForWork            Boolean           @default(true)
   techStack                Technology[]
   employmentTypes          EmploymentType[]
   state                    PublishingState   @default(DRAFT)

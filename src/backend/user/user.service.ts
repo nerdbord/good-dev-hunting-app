@@ -95,14 +95,14 @@ export const findOrCreateUser = async (data: {
   return createdUser
 }
 
-export async function createUser(userDataFromGh: CreateUserPayload) {
+export async function createUser(payload: CreateUserPayload) {
   const createdUser = await prisma.user.create({
     data: {
-      email: userDataFromGh.email,
-      avatarUrl: userDataFromGh.image,
+      email: payload.email,
+      avatarUrl: payload.image,
       githubDetails: {
         create: {
-          username: userDataFromGh.name,
+          username: payload.githubUsername,
         },
       },
     },
@@ -110,13 +110,7 @@ export async function createUser(userDataFromGh: CreateUserPayload) {
       githubDetails: true,
     },
   })
-  await sendDiscordNotificationToModeratorChannel(
-    `User ${createdUser.email} has created an account`,
-  )
-  await mailerliteClient.addSubscriberToMailerLite(
-    userDataFromGh.email,
-    mailerliteGroups.devGroup,
-  )
+
   return createdUser
 }
 

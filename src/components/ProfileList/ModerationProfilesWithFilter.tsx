@@ -1,6 +1,6 @@
 'use client'
+import { ProfileModel } from '@/app/(profile)/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 import { SearchResultsInfo } from '../SearchResultsInfo/SearchResultsInfo'

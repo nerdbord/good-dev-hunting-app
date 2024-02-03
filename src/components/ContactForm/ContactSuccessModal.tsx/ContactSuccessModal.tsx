@@ -1,5 +1,5 @@
 'use client'
-import { ProfileModel } from '@/data/frontend/profile/types'
+import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '../../Button/Button'
 import styles from './ContactResultModal.module.scss'
 

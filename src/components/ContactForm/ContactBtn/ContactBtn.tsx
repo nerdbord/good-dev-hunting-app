@@ -1,7 +1,7 @@
 'use client'
+import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
-import { ProfileModel } from '@/data/frontend/profile/types'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
 import ContactSuccessModal from '../ContactSuccessModal.tsx/ContactSuccessModal'
 
