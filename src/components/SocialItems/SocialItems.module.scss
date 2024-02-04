@@ -16,7 +16,6 @@
   padding: 12px 24px;
   color: #ffffff;
   font-weight: 500;
-  line-height: 20px;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -25,7 +24,7 @@
   transition: background-color 300ms;
   a {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     gap: 10px;
   }
   @include mobile {
