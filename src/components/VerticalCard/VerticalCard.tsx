@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 import styles from './VerticalCard.module.scss'
 
 const VerticalCard = ({
-  userId,
   position,
   techStack,
   city,
@@ -21,6 +20,7 @@ const VerticalCard = ({
   fullName,
   remoteOnly,
   employmentTypes,
+  isOpenForWork,
   avatarUrl,
   githubUsername,
 }: ProfileModel) => {
@@ -41,7 +41,7 @@ const VerticalCard = ({
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: githubUsername },
     })
-    router.push(`${AppRoutes.profiles}/${userId}`)
+    router.push(`${AppRoutes.profiles}/${githubUsername}`)
   }
 
   return (
@@ -64,12 +64,23 @@ const VerticalCard = ({
       </div>
       <div className={styles.techStack}>{...technologies}</div>
       <div className={styles.availability}>
-        <div className={styles.dot}></div>
-        {employmentTypes.includes(EmploymentType.FULL_TIME)
-          ? 'Available for full-time'
-          : employmentTypes.includes(EmploymentType.CONTRACT)
-          ? 'Available for a contract'
-          : 'Available for part-time'}
+        {isOpenForWork ? (
+          <>
+            <div className={styles.availableDot}></div>
+            {employmentTypes.includes(EmploymentType.FULL_TIME) ? (
+              <p className={styles.availableText}>Available for full-time</p>
+            ) : employmentTypes.includes(EmploymentType.CONTRACT) ? (
+              <p className={styles.availableText}>Available for a contract</p>
+            ) : (
+              <p className={styles.availableText}>Available for a contract</p>
+            )}
+          </>
+        ) : (
+          <>
+            <div className={styles.notAvailableDot}></div>
+            <p className={styles.notAvailableText}>Not available for work</p>
+          </>
+        )}
       </div>
     </div>
   )

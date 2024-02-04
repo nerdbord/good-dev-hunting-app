@@ -1,4 +1,4 @@
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ProfileFormValues } from '@/app/(profile)/types'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
@@ -39,8 +39,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
   addImportantIcon,
   tooltipText,
 }) => {
-  const { errors, handleBlur, touched } =
-    useFormikContext<CreateProfileFormValues>()
+  const { errors, handleBlur, touched } = useFormikContext<ProfileFormValues>()
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)

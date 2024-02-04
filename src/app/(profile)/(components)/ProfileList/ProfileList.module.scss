@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(280px, 380px));
   gap: 20px;
-  align-items: center;
   margin: 20px 0 100px;
   @include mobile {
     grid-template-columns: repeat(1, minmax(280px, 380px));

@@ -28,18 +28,17 @@ export interface ProfileModel {
   userEmail: string
 }
 
-export type CreateProfilePayload = Omit<
+export type ProfilePayload = Omit<
   ProfileModel,
-  'id' | 'userEmail' | 'techStack'
+  'id' | 'userEmail' | 'techStack' | 'userId'
 > & {
   techStack: TechStack
 }
 
 export type TechStack = {
-  techName: string
+  name: string
 }[]
 
-export type EditProfilePayload = CreateProfilePayload
 export type PublishingStateData = {
   state: PublishingState
 }
@@ -60,15 +59,14 @@ export enum AvailabilityEnum {
   CONTRACT = 'CONTRACT',
 }
 
-export interface CreateProfileFormValues {
+export interface ProfileFormValues {
   fullName: string
-  contactEmail: string
-  linkedin: string
+  linkedin: string | null
   bio: string
   country: string
   city: string
-  openToRelocationCountry: boolean
-  openToRelocationCity: boolean
+  openForCountryRelocation: boolean
+  openForCityRelocation: boolean
   remoteOnly: boolean
   position: DropdownOption
   seniority: DropdownOption
