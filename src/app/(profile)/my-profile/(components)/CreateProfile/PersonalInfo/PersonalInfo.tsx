@@ -1,6 +1,6 @@
 'use client'
 import { UserPhotoUploader } from '@/app/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ProfileFormValues } from '@/app/(profile)/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
@@ -17,7 +17,7 @@ export enum PersonalInfoFormKeys {
 
 const PersonalInfo = () => {
   const { values, handleChange, errors, touched, handleBlur } =
-    useFormikContext<CreateProfileFormValues>()
+    useFormikContext<ProfileFormValues>()
 
   const { data: session } = useSession()
 
@@ -71,7 +71,7 @@ const PersonalInfo = () => {
             onBlur={handleBlur}
             label="LinkedIn"
             placeholder="Paste link to you linkedin profile"
-            value={values[PersonalInfoFormKeys.LINKEDIN]}
+            value={values[PersonalInfoFormKeys.LINKEDIN] || ''}
             onChange={handleChange}
             name={PersonalInfoFormKeys.LINKEDIN}
             dataTestId={PersonalInfoFormKeys.LINKEDIN}
