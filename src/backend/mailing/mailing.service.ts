@@ -51,9 +51,22 @@ export const sendProfileRejectedEmail = async (
 ) => {
   const templateId = MailTemplateId.profileRejectedNotification
 
+  const variables = [
+    {
+      email,
+      substitutions: [
+        {
+          var: 'reason',
+          value: reason,
+        },
+      ],
+    },
+  ]
+
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId: templateId,
+    variables,
     config: {
       subject: '⚠️Your profile has been rejected',
       fromEmail: 'team@devhunting.co',
