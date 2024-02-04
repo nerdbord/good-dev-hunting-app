@@ -32,7 +32,7 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
-          <p className={styles.desc}>{`${profile?.bio}`}</p>
+          <p className={styles.desc}>{profile?.bio}</p>
         </div>
       </section>
     </>
