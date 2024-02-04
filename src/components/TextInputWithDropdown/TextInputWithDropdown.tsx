@@ -7,13 +7,13 @@ import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { TextInputProps } from '../TextInput/TextInput'
 
 import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ProfileFormValues } from '@/app/(profile)/types'
 import styles from './TextInputWithDropdown.module.scss'
 
 // Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)
 const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
   const { values, handleChange, setFieldValue } =
-    useFormikContext<CreateProfileFormValues>()
+    useFormikContext<ProfileFormValues>()
   const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)

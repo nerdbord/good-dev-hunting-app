@@ -1,3 +1,4 @@
+'use client'
 import { ProfileModel } from '@/app/(profile)/types'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'

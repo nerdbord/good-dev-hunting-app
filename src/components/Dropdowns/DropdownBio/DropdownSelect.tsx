@@ -1,5 +1,5 @@
 'use client'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ProfileFormValues } from '@/app/(profile)/types'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { useFormikContext } from 'formik'
 import 'material-icons/iconfont/material-icons.css'
@@ -27,7 +27,7 @@ export const DropdownSelect = ({
   optionTestId?: string
   error?: string
 }) => {
-  const { setFieldValue } = useFormikContext<CreateProfileFormValues>()
+  const { setFieldValue } = useFormikContext<ProfileFormValues>()
   const [inputError, setInputError] = useState<boolean>(false)
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)

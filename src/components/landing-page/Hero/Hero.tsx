@@ -1,19 +1,19 @@
 import { authOptions } from '@/app/(auth)/auth'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
+import { ProfileCardWrapper } from '@/app/(profile)/(components)/ProfileCard/ProfileCardWrapper/ProfileCardWrapper'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import ProfilePicture from '@/assets/images/ProfilePicture.png'
-import ProfilePicture2 from '@/assets/images/ProfilePicture2.png'
-import ProfilePicture3 from '@/assets/images/ProfilePicture3.png'
+import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
 import { findUserByEmail } from '@/backend/user/user.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import { getRandomIndexes } from '@/utils/getRandomProfiles'
 import { getServerSession } from 'next-auth'
-import Image from 'next/image'
 import styles from './Hero.module.scss'
-
 const Hero = async () => {
   const session = await getServerSession(authOptions)
-
+  const profiles = await getPublishedProfilesPayload()
   const user = session ? await findUserByEmail(session.user.email) : null
+
+  const randomIndexes = getRandomIndexes(profiles.length, 3)
 
   return (
     <section id="hero" className={styles.wrapper}>
@@ -35,58 +35,13 @@ const Hero = async () => {
       <div className={styles.right}>
         <div className={styles.section}>
           <div className={styles.frame1}>
-            <div className={styles.container}>
-              <div className={styles.profile}>
-                <Image src={ProfilePicture} alt="Profile Picture" />
-              </div>
-              <div className={styles.data}>
-                <p className={styles.name}>Karolina Morwinska</p>
-                <p className={styles.fullstack}>Senior Fullstack Developer</p>
-                <p className={styles.location}>Poland, Warsaw / Remote</p>
-              </div>
-            </div>
-            <div className={`${styles.technology} ${styles.fullstack}`}>
-              <span>Javascript</span>
-              <span>React</span>
-              <span>Vue.js</span>
-              <span>+5 more</span>
-            </div>
+            <ProfileCardWrapper profile={profiles[randomIndexes[0]]} />
           </div>
           <div className={styles.frame2}>
-            <div className={styles.container}>
-              <div className={styles.profile}>
-                <Image src={ProfilePicture2} alt="Profile Picture" />
-              </div>
-              <div className={styles.data}>
-                <p className={styles.name}>Kristin Watson</p>
-                <p className={styles.frontend}>Junior Frontend Developer</p>
-                <p className={styles.location}>Poland, Warsaw / Remote</p>
-              </div>
-            </div>
-            <div className={`${styles.technology} ${styles.frontend}`}>
-              <span>Javascript</span>
-              <span>React</span>
-              <span>Vue.js</span>
-              <span>+5 more</span>
-            </div>
+            <ProfileCardWrapper profile={profiles[randomIndexes[1]]} />
           </div>
           <div className={styles.frame3}>
-            <div className={styles.container}>
-              <div className={styles.profile}>
-                <Image src={ProfilePicture3} alt="Profile Picture" />
-              </div>
-              <div className={styles.data}>
-                <p className={styles.name}>Veres Panna</p>
-                <p className={styles.fullstack}>Mid Fullstack Developer</p>
-                <p className={styles.location}>Poland, Warsaw / Remote</p>
-              </div>
-            </div>
-            <div className={`${styles.technology} ${styles.fullstack}`}>
-              <span>Javascript</span>
-              <span>React</span>
-              <span>Vue.js</span>
-              <span>+5 more</span>
-            </div>
+            <ProfileCardWrapper profile={profiles[randomIndexes[2]]} />
           </div>
         </div>
       </div>

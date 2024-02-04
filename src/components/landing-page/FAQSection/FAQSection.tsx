@@ -22,7 +22,7 @@ const FAQSection = () => {
             It's really simple - all you need to do is create an account by
             logging in with your GitHub profile. Then, you'll create a profile
             by providing information about yourself. Once your profile is
-            approved by our moderators, you're ready to be hunted by employers
+            approved by our moderators, you're ready to be hunted by employers.
           </p>
         </Accordion>
         <Accordion title="Is it really free?">
@@ -33,7 +33,7 @@ const FAQSection = () => {
           with Nerdbord is optional, but we strongly encourage you to consider
           enhancing your profile with this option. This allows employers to get
           to know your work better through an attractive and user-friendly
-          Nerdbord portfolio."
+          Nerdbord portfolio.
         </Accordion>
       </div>
     </section>

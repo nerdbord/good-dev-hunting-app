@@ -5,6 +5,7 @@ export type ContactRequestEmailParams = {
   senderEmail: string
   senderFullName: string
   recipientEmail: string
+  recipientFullName: string
   message: string
   subject: string
 }
@@ -15,6 +16,7 @@ export const sendContactRequest = async ({
   subject,
   message,
   recipientEmail,
+  recipientFullName,
 }: ContactRequestEmailParams) => {
   try {
     const config = {
@@ -27,6 +29,14 @@ export const sendContactRequest = async ({
       {
         email: recipientEmail,
         substitutions: [
+          {
+            var: 'recipientFullName',
+            value: recipientFullName,
+          },
+          {
+            var: 'senderFullName',
+            value: senderFullName,
+          },
           {
             var: 'message',
             value: message,
@@ -47,16 +57,32 @@ export const sendContactRequest = async ({
   }
 }
 
-export const sendProfileApprovedEmail = async (email: string) => {
+export const sendProfileApprovedEmail = async (
+  email: string,
+  githubUsername: string,
+) => {
   const templateId = MailTemplateId.profileApprovedNotification
+
+  const variables = [
+    {
+      email,
+      substitutions: [
+        {
+          var: 'username',
+          value: githubUsername,
+        },
+      ],
+    },
+  ]
 
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
-    templateId: templateId,
+    templateId,
+    variables,
     config: {
-      subject: '✅Your profile has been approved',
+      subject: '✅ Your profile has been approved',
       fromEmail: 'team@devhunting.co',
-      fromName: 'Good DevHunting Team',
+      fromName: 'Good Dev Hunting Team',
     },
   })
 }
@@ -86,7 +112,7 @@ export const sendProfileRejectedEmail = async (
     config: {
       subject: '⚠️Your profile has been rejected',
       fromEmail: 'team@devhunting.co',
-      fromName: 'Good DevHunting Team',
+      fromName: 'Good Dev Hunting Team',
     },
   })
 }
@@ -111,7 +137,7 @@ export const sendWelcomeEmail = async (email: string, username: string) => {
     config: {
       subject: `Welcome to the Hunt, ${username}!`,
       fromEmail: 'team@devhunting.co',
-      fromName: 'Good DevHunting Team',
+      fromName: 'Good Dev Hunting Team',
     },
   })
 }
