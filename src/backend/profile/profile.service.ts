@@ -1,4 +1,4 @@
-import { CreateProfilePayload } from '@/app/(profile)/types'
+import { CreateProfilePayload, ProfileModel } from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState, Role } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
@@ -48,7 +48,7 @@ export async function getProfileById(id: string) {
   return null
 }
 
-export async function doesUserProfileExist(email: string) {
+export async function findProfileWithUserInclude(email: string) {
   const foundProfile = await prisma.profile.findFirst({
     where: {
       user: {
@@ -162,6 +162,19 @@ export async function getProfileByUserId(userId: string) {
   return null
 }
 
+export async function getProfileByGithubUsername(username: string) {
+  const profile = await prisma.profile.findFirst({
+    where: { user: { githubDetails: { username } } },
+    include: includeObject.include,
+  })
+
+  if (profile) {
+    return serializeProfileToProfileModel(profile)
+  }
+
+  return null
+}
+
 export async function getProfileByUserEmail(email: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { email } },
@@ -173,6 +186,25 @@ export async function getProfileByUserEmail(email: string) {
   }
 
   return null
+}
+
+export const hasProfileValuesChanged = async (
+  profileId: string,
+  payload: ProfileModel,
+) => {
+  const existingProfile = await findProfileById(profileId)
+
+  if (!existingProfile) {
+    return false
+  }
+
+  // Compare each field in the payload with the existing profile data
+  const hasChanged = Object.keys(payload).some((key) => {
+    // @ts-ignore
+    return existingProfile[key] !== payload[key]
+  })
+
+  return hasChanged
 }
 
 export async function getPublishedProfiles(take: number) {

@@ -5,14 +5,14 @@ import { CreateProfilePayload } from '@/app/(profile)/types'
 import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
 import {
   createUserProfile,
-  doesUserProfileExist,
+  findProfileWithUserInclude,
 } from '@/backend/profile/profile.service'
 import { withSentry } from '@/utils/errHandling'
 
 export const createProfile = withSentry(
   async (payload: CreateProfilePayload) => {
     const { email } = await authorizeUser()
-    const foundProfile = await doesUserProfileExist(email)
+    const foundProfile = await findProfileWithUserInclude(email)
 
     if (foundProfile) {
       throw new Error('Such profile already exist')

@@ -1,6 +1,6 @@
 'use client'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
-import { serverUpdateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
+import { updateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { createProfile } from '@/app/(profile)/_actions/createProfile'
 import CreateProfileTopBar from '@/app/(profile)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
@@ -111,7 +111,7 @@ const CreateProfileForm = () => {
           ? await uploadImage(formDataWithFile)
           : null
 
-        uploadedFileUrl && (await serverUpdateUserAvatar(uploadedFileUrl))
+        uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
 
         await createProfile(payload)
         router.push(AppRoutes.myProfile)

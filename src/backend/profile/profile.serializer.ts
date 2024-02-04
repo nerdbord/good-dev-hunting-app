@@ -29,7 +29,7 @@ export const serializeProfileToProfileModel = (
     })),
     userId: data.userId,
     avatarUrl: data.user.avatarUrl,
-    githubUsername: data.user.githubDetails?.username || null,
+    githubUsername: data.user.githubDetails?.username || '',
     userEmail: data.user.email,
   }
 }
