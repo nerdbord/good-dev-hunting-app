@@ -7,7 +7,7 @@ import { JobSpecialization } from '@/app/(profile)/types'
 const cx = classNames.bind(styles)
 
 interface DevTypeButtonProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   variant:
     | JobSpecialization.Frontend
     | JobSpecialization.Backend

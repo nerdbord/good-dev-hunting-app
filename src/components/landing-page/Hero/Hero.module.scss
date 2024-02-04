@@ -119,14 +119,12 @@
 
 .frame-common {
   position: absolute;
-  min-height: 189px;
-  background: #0f1217;
-  border-radius: 4px;
-  border: 1px solid #2a2f35;
-  transition: background-color 300ms;
-  padding: 20px 30px;
+  max-width: 380px;
+  width: 100%;
+  min-height: 180px;
   @include mobile {
-    transform: scale(0.5);
+    width: 500px;
+    scale: 0.5
   }
 }
 
@@ -135,10 +133,11 @@
   z-index: 1;
   top: 45px;
   left: 107px;
+
   @include mobile {
     top: calc(50px + 1%);
     left: calc(10px + 1%);
-    transform: scale(0.5) translate(-31%, -100%);
+    transform: scale(1) translate(-31%, -100%);
   }
 }
 
@@ -150,7 +149,7 @@
   @include mobile {
     top: calc(50px + 1%);
     left: auto;
-    transform: scale(0.5) translate(22%, -40%);
+    transform: scale(1) translate(22%, -40%);
   }
 }
 
@@ -162,7 +161,7 @@
   @include mobile {
     top: calc(50px + 1%);
     left: calc(10px + 1%);
-    transform: scale(0.5) translate(-60%, 10%);
+    transform: scale(1) translate(-60%, 10%);
   }
 }
 

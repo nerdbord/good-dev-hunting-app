@@ -37,11 +37,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
         />
       )}
       {state === PublishingState.PENDING ? (
-        <DevTypeButton
-          onClick={handleButtonClick}
-          variant={JobSpecialization.Backend}
-          isPressed={false}
-        >
+        <DevTypeButton variant={JobSpecialization.Backend} isPressed={false}>
           Pending
         </DevTypeButton>
       ) : (

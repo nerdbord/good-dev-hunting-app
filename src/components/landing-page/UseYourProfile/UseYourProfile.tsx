@@ -19,9 +19,9 @@ const UseYourProfile = async () => {
       </div>
       <div className={style.textContainer}>
         <p className={style.text}>
-          Use your profile and share it with your friend! Help us build the
-          biggest, free, open sourced platform for connecting software engineers
-          with people with dev stuff to do.
+          Use your profile and share it with your friends! Join us in building
+          the largest, free, open sourced platform dedicated to connecting
+          software engineers with a world of development opportunities.
         </p>
         <div className={style.btn}>
           {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}

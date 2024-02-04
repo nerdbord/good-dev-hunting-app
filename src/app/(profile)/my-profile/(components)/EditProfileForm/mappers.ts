@@ -1,11 +1,11 @@
 import { mapSeniorityLevel } from '@/app/(profile)/mappers'
-import { EditProfileFormValues } from '@/app/(profile)/my-profile/(components)/EditProfileForm/EditProfileForm'
-import { ProfileModel } from '@/app/(profile)/types'
+
+import { ProfileFormValues, ProfileModel } from '@/app/(profile)/types'
 import { SeniorityLevel } from '@/backend/profile/profile.types'
 
 export const mapProfileModelToEditProfileFormValues = (
   profile: ProfileModel,
-): EditProfileFormValues => ({
+): ProfileFormValues => ({
   fullName: profile.fullName,
   linkedin: profile.linkedIn,
   bio: profile.bio,
