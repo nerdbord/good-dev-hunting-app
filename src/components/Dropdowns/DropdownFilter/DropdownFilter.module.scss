@@ -43,7 +43,7 @@
   flex-direction: column;
   gap: 16px;
   max-height: 308px;
-  overflow-y: scroll;
+  overflow-y: auto;
   @include mobile {
     position: fixed;
     flex-direction: column;
