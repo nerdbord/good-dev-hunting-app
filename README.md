@@ -3,14 +3,25 @@
     Good Dev Hunting
 </h1>
 <h3 align="center">
-    Free, open sourced platform for connecting software engineers with tech projects. 
+    Free, open sourced platform for connecting software engineers with tech projects.
 </h3>
+<h3 align="center">
+    <a href="https://www.devhunting.co/">🌐 Visit the Live Site</a>
+</h3>
+
 <p align="center">
-    <img src="/src/assets/images/Screenshot.png" alt="Good Dev Hunting Screenshot">
+    <a href="https://www.devhunting.co/">
+        <img src="/src/assets/images/Screenshot.png" alt="Good Dev Hunting Screenshot">
+    </a>
 </p>
+
 <h3>
     Good Dev Hunting – Bridging the Tech World
 </h3>
+
+<p>
+    Good Dev Hunting is a unique platform connecting skilled software engineers with those in need of tech talent. Using modern technologies like Next.js, Typescript, Prisma, and PostgreSQL, we aim to facilitate efficient, intuitive connections between companies and developers.
+</p>
 
 <p>
     Good Dev Hunting is a unique platform connecting skilled software engineers with those in need of tech talent. Using modern technologies like Next.js, Typescript, Prisma, and PostgreSQL, we aim to facilitate efficient, intuitive connections between companies and developers.
@@ -56,8 +67,8 @@
 
 ### Testing 🧪
 
-- Our testing suite includes Jest and React Testing Library.
-- To run tests, use the command `npm run test`.
+- Our testing suite includes React Testing Library and Cypress.
+- To run React Testing Library tests, use the command `npm run test`.
 
 ---
 
