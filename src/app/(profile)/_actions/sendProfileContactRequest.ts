@@ -61,6 +61,7 @@ export const sendProfileContactRequest = withSentry(
         subject,
         message,
         recipientEmail: foundProfile.userEmail,
+        recipientFullName: foundProfile.fullName,
       })
 
       await mailerliteClient.addSubscriberToMailerLite(

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "ContactRequest" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

@@ -136,6 +136,44 @@ export async function updateProfileById(
   return updatedProfile
 }
 
+export const validateIfProfileWasContactedXTimesInLastYMinutes = async (
+  profileId: string,
+  minutes: number,
+  times: number,
+) => {
+  const contactedCount = await prisma.contactRequest.count({
+    where: {
+      profileId,
+      createdAt: {
+        gte: new Date(new Date().getTime() - minutes * 60 * 1000),
+      },
+    },
+  })
+
+  return contactedCount >= times
+}
+
+export const findGithubUsernameByProfileId = async (profileId: string) => {
+  const profile = await prisma.profile.findFirst({
+    where: {
+      id: profileId,
+    },
+    include: {
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+    },
+  })
+
+  if (!profile?.user.githubDetails?.username) {
+    throw new Error('User does not have a GitHub username')
+  }
+
+  return profile.user.githubDetails.username
+}
+
 export async function findProfileById(id: string) {
   const profile = await prisma.profile.findFirst({
     where: { id },
