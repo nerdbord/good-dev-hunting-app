@@ -1,11 +1,18 @@
+'use client'
+
 import { mapSeniorityLevel } from '@/app/(profile)/mappers'
 import { ProfileModel } from '@/app/(profile)/types'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
+import { PlausibleEvents } from '@/lib/plausible'
+import { AppRoutes } from '@/utils/routes'
 import { EmploymentType } from '@prisma/client'
+import { usePlausible } from 'next-plausible'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import styles from './VerticalCard.module.scss'
 
 const VerticalCard = ({
+  userId,
   position,
   techStack,
   city,
@@ -15,7 +22,11 @@ const VerticalCard = ({
   remoteOnly,
   employmentTypes,
   avatarUrl,
+  githubUsername,
 }: ProfileModel) => {
+  const router = useRouter()
+  const plausible = usePlausible()
+
   const technologies = techStack.map((tech, index) => {
     if (index < 4) {
       return (
@@ -25,8 +36,16 @@ const VerticalCard = ({
       )
     }
   })
+
+  const handleOpenProfile = () => {
+    plausible(PlausibleEvents.OpenProfile, {
+      props: { username: githubUsername },
+    })
+    router.push(`${AppRoutes.profiles}/${userId}`)
+  }
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleOpenProfile}>
       <Image
         width={120}
         height={120}
