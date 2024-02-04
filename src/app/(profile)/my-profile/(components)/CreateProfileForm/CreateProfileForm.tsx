@@ -1,7 +1,7 @@
 'use client'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { serverUpdateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
-import { uploadImage } from '@/app/(auth)/_actions/uploadImage'
+import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { createProfile } from '@/app/(profile)/_actions/createProfile'
 import CreateProfileTopBar from '@/app/(profile)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'

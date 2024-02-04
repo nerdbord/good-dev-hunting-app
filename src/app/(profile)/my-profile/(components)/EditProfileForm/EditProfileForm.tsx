@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 
 import { serverUpdateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
-import { uploadImage } from '@/app/(auth)/_actions/uploadImage'
+import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyProfile } from '@/app/(profile)/_actions/updateMyProfile'
 import CreateProfileTopBar from '@/app/(profile)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
