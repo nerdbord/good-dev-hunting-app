@@ -2,6 +2,8 @@ import { authOptions } from '@/app/(auth)/auth'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
+import ProfilePicture2 from '@/assets/images/ProfilePicture2.png'
+import ProfilePicture3 from '@/assets/images/ProfilePicture3.png'
 import { findUserByEmail } from '@/backend/user/user.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { getServerSession } from 'next-auth'
@@ -53,7 +55,7 @@ const Hero = async () => {
           <div className={styles.frame2}>
             <div className={styles.container}>
               <div className={styles.profile}>
-                <Image src={ProfilePicture} alt="Profile Picture" />
+                <Image src={ProfilePicture2} alt="Profile Picture" />
               </div>
               <div className={styles.data}>
                 <p className={styles.name}>Kristin Watson</p>
@@ -71,7 +73,7 @@ const Hero = async () => {
           <div className={styles.frame3}>
             <div className={styles.container}>
               <div className={styles.profile}>
-                <Image src={ProfilePicture} alt="Profile Picture" />
+                <Image src={ProfilePicture3} alt="Profile Picture" />
               </div>
               <div className={styles.data}>
                 <p className={styles.name}>Veres Panna</p>
