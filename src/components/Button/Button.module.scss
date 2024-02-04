@@ -36,14 +36,10 @@
 }
 
 .secondary {
-  margin-bottom: 6px;
   height: 44px;
   color: #7d54f1;
   background: transparent;
   align-items: center;
-  @include mobile {
-    margin-bottom: 5px;
-  }
 }
 
 .secondary:hover:enabled {

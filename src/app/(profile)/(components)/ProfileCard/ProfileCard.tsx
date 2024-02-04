@@ -49,8 +49,8 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
               {mapSeniorityLevel(data.seniority)} {data.position}&nbsp;Developer
             </p>
             <p className={styles.location}>
-              {data.country.name}, {data.city.name}&nbsp;/&nbsp;
-              {data.remoteOnly && 'Remote'}
+              {data.country.name}, {data.city.name}
+              {data.remoteOnly && ' / Remote'}
             </p>
           </div>
         </div>

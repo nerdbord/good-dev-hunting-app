@@ -6,14 +6,14 @@ import { ProfileModel } from '@/app/(profile)/types'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { apiClient } from '@/lib/apiClient'
-import { AppRoutes } from '@/utils/routes'
 import { EmploymentType, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 
+import { uploadImage } from '@/app/(files)/_actions/uploadImage'
+import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import CreateProfileTopBar from '../../(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '../../(components)/CreateProfile/LocationPreferences/LocationPreferences'
@@ -76,7 +76,7 @@ const EditProfileForm = ({
   const { data: session } = useSession()
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
-  const { selectedFile } = useUploadContext()
+  const { formDataWithFile } = useUploadContext()
 
   if (!session) {
     return null
@@ -114,8 +114,8 @@ const EditProfileForm = ({
     }
 
     await runAsync(async () => {
-      const uploadedFileUrl = selectedFile
-        ? await apiClient.userPhotoUpload(selectedFile)
+      const uploadedFileUrl = formDataWithFile
+        ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
       await saveMyProfile(payload)
