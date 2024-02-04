@@ -10,6 +10,7 @@ interface SwitchInputProps {
   name: string
   dataTestId?: string
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  children?: React.ReactNode
 }
 
 const SwitchInput: React.FC<SwitchInputProps> = ({
@@ -20,12 +21,14 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   name,
   dataTestId,
   onBlur,
+  children,
 }) => {
   const [isChecked, setIsChecked] = React.useState(checked)
 
   React.useEffect(() => {
     setIsChecked(checked)
   }, [checked])
+
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(!isChecked)
     onChange(event)
@@ -34,6 +37,7 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
   return (
     <div className={styles.switchLabel} data-testid={dataTestId}>
       <span className={styles.label}>{label}</span>
+      {children}
       <label className={styles.switch} htmlFor={id}>
         <input
           id={id}

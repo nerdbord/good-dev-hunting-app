@@ -21,21 +21,11 @@ export const DropdownFilterMulti = ({
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setDropdownActive(false)
-        setArrow('IoIosArrowDown')
-      }
-    }
-    document.addEventListener('mousedown', handler)
-    return () => {
-      document.removeEventListener('mousedown', handler)
-    }
-  }, [])
+  useOutsideClick(
+    dropdownRef,
+    () => setDropdownActive(false),
+    () => setArrow('IoIosArrowDown'),
+  )
 
   useEffect(() => {
     switch (isDropdownActive) {
@@ -70,7 +60,7 @@ export const DropdownFilterMulti = ({
   const [isOverlayActive, setOverlayActive] = useState(false)
   return (
     <div className={styles.buttonBox}>
-      <div ref={dropdownRef}>
+      <div>
         <button onClick={handleDropdown} className={styles.featuresBtn}>
           {selectedValue.length === 0 ? (
             <div className={styles.buttonText}>{text}</div>
@@ -84,7 +74,7 @@ export const DropdownFilterMulti = ({
         </button>
         {isOverlayActive && <div className={styles.overlay}></div>}
         {isDropdownActive && (
-          <div className={styles.dropdown}>
+          <div className={styles.dropdown} ref={dropdownRef}>
             <div className={styles.titleContainer}>
               <div className={styles.dropdownTitle}>{text}</div>
               <Button variant="tertiary" type="submit" onClick={closeDropdown}>

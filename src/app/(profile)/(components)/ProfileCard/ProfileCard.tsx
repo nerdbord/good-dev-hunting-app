@@ -1,4 +1,4 @@
-import { mapSeniorityLevel } from '@/app/(profile)/mappers'
+import { mapEmploymentTypes, mapSeniorityLevel } from '@/app/(profile)/mappers'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
 import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
@@ -49,8 +49,9 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
               {mapSeniorityLevel(data.seniority)} {data.position}&nbsp;Developer
             </p>
             <p className={styles.location}>
-              {data.country.name}, {data.city.name}&nbsp;/&nbsp;
-              {data.remoteOnly && 'Remote'}
+              {data.country.name}, {data.city.name}
+              {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
+              {data.remoteOnly && ' / Remote'}
             </p>
           </div>
         </div>
