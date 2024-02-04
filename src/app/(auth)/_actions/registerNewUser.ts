@@ -19,9 +19,11 @@ export const registerNewUser = withSentry(
       throw new Error('Failed to create user')
     }
 
-    await sendWelcomeEmail(createdUser.email)
+    const devName = createdUser.githubDetails?.username || 'Developer'
+
+    await sendWelcomeEmail(createdUser.email, devName)
     await sendDiscordNotificationToModeratorChannel(
-      `User ${createdUser.email} has created an account`,
+      `User ${devName} has created an account`,
     )
     await mailerliteClient.addSubscriberToMailerLite(
       createdUser.email,

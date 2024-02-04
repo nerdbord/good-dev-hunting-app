@@ -15,7 +15,9 @@ import styles from './LandingHeader.module.scss'
 const LandingHeader = async () => {
   const session = await getServerSession(authOptions)
 
-  const user = session ? await findUserByEmail(session.user.email) : null
+  const user = session?.user?.email
+    ? await findUserByEmail(session.user.email)
+    : null
   const userIsModerator = user?.roles.includes(Role.MODERATOR)
 
   if (session) {

@@ -38,9 +38,9 @@ export const sendProfileApprovedEmail = async (email: string) => {
     recipients: [new Recipient(email)],
     templateId: templateId,
     config: {
-      subject: 'Good DevHunting profile status notification.',
+      subject: '✅Your profile has been approved',
       fromEmail: 'team@devhunting.co',
-      fromName: 'DevHunting Team',
+      fromName: 'Good DevHunting Team',
     },
   })
 }
@@ -55,21 +55,34 @@ export const sendProfileRejectedEmail = async (
     recipients: [new Recipient(email)],
     templateId: templateId,
     config: {
-      subject: 'Good DevHunting profile status notification.',
+      subject: '⚠️Your profile has been rejected',
       fromEmail: 'team@devhunting.co',
-      fromName: 'DevHunting Team',
+      fromName: 'Good DevHunting Team',
     },
   })
 }
 
-export const sendWelcomeEmail = async (email: string) => {
+export const sendWelcomeEmail = async (email: string, username: string) => {
+  const variables = [
+    {
+      email,
+      substitutions: [
+        {
+          var: 'name',
+          value: username,
+        },
+      ],
+    },
+  ]
+
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId: MailTemplateId.welcomeMail,
+    variables,
     config: {
-      subject: 'Welcome to Good DevHunting!',
+      subject: `Welcome to the Hunt, ${username}!`,
       fromEmail: 'team@devhunting.co',
-      fromName: 'DevHunting Team',
+      fromName: 'Good DevHunting Team',
     },
   })
 }

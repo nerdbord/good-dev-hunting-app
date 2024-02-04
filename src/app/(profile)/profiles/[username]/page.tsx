@@ -1,15 +1,19 @@
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
-import { getProfileByUserId } from '@/backend/profile/profile.service'
+import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { username: string }
+}) {
   try {
-    const selectedProfile = await getProfileByUserId(params.id)
+    const selectedProfile = await getProfileByGithubUsername(params.username)
 
     if (!selectedProfile) {
       return {
@@ -34,8 +38,12 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-const UserProfilePage = async ({ params }: { params: { id: string } }) => {
-  const selectedProfile = await getProfileByUserId(params.id)
+const UserProfilePage = async ({
+  params,
+}: {
+  params: { username: string }
+}) => {
+  const selectedProfile = await getProfileByGithubUsername(params.username)
 
   if (!selectedProfile) {
     redirect(AppRoutes.profiles)
