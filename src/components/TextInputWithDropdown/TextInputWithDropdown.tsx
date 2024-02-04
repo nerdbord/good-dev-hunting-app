@@ -6,6 +6,7 @@ import { ChangeEvent, useRef, useState } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { TextInputProps } from '../TextInput/TextInput'
 
+import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { CreateProfileFormValues } from '@/app/(profile)/types'
 import styles from './TextInputWithDropdown.module.scss'
 
@@ -16,18 +17,16 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
   const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  // const inputRef = useRef<HTMLInputElement>(null)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
     if (event.target.value !== values.country) {
-      setFieldValue('country', '')
+      setFieldValue(LocationPreferencesFormKeys.COUNTRY, '')
     }
     preventInvalidCountry()
   }
 
   const preventInvalidCountry = () => {
-    // const inputValue = inputRef.current?.value
     if (!isValidCountry(inputValue)) {
       const validCountry = countries.find((country) =>
         inputValue?.includes(country.name),
@@ -64,7 +63,6 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
         name={name}
         excludeDigits
         onClick={handleCountryInputClick}
-        // inputRef={inputRef}
       />
       {inputValue.length !== 0 && isDropdownActive && (
         <div ref={dropdownRef}>
