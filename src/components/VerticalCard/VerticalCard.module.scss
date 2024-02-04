@@ -72,7 +72,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #86efac;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -80,9 +79,25 @@
   margin-top: 18px;
 }
 
-.dot {
+.availableText {
+  color: #86efac;
+}
+
+.notAvailableText {
+  color: #3D434B
+}
+
+.availableDot, .notAvailableDot {
   border-radius: 50%;
   width: 12px;
   height: 12px;
+}
+
+.availableDot {
   background-color: #00a700;
+
+}
+
+.notAvailableDot {
+  background-color: #3D434B;
 }

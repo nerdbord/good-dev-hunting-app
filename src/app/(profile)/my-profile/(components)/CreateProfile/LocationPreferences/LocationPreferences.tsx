@@ -6,20 +6,20 @@ import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { useFormikContext } from 'formik'
 
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ProfileFormValues } from '@/app/(profile)/types'
 import styles from './LocationPreferences.module.scss'
 
 export enum LocationPreferencesFormKeys {
   COUNTRY = 'country',
-  OPEN_TO_RELOCATION_COUNTRY = 'openToRelocationCountry',
+  OPEN_FOR_COUNTRY_RELOCATION = 'openForCountryRelocation',
   CITY = 'city',
-  OPEN_TO_RELOCATION_CITY = 'openToRelocationCity',
+  OPEN_FOR_CITY_RELOCATION = 'openForCityRelocation',
   REMOTE_ONLY = 'remoteOnly',
 }
 
 const LocationPreferences = () => {
   const { values, setFieldValue, handleChange, errors, touched, handleBlur } =
-    useFormikContext<CreateProfileFormValues>()
+    useFormikContext<ProfileFormValues>()
 
   const handleToggleCheckbox = (
     value: boolean,
@@ -53,19 +53,19 @@ const LocationPreferences = () => {
           </InputFormError>
           <CheckboxInput
             onBlur={handleBlur}
-            id={LocationPreferencesFormKeys.OPEN_TO_RELOCATION_COUNTRY}
+            id={LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION}
             label="I’m open to residency relocation"
             checked={
-              values[LocationPreferencesFormKeys.OPEN_TO_RELOCATION_COUNTRY]
+              values[LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION]
             }
             onChange={() => {
               handleToggleCheckbox(
                 true,
-                LocationPreferencesFormKeys.OPEN_TO_RELOCATION_COUNTRY,
+                LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION,
               )
             }}
-            name={LocationPreferencesFormKeys.OPEN_TO_RELOCATION_COUNTRY}
-            dataTestId={LocationPreferencesFormKeys.OPEN_TO_RELOCATION_COUNTRY}
+            name={LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION}
+            dataTestId={LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION}
           />
         </div>
         <div>
@@ -90,19 +90,19 @@ const LocationPreferences = () => {
             />
           </InputFormError>
           <CheckboxInput
-            id={LocationPreferencesFormKeys.OPEN_TO_RELOCATION_CITY + 1}
+            id={LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION + 1}
             label="I’m open to city relocation"
             checked={
-              values[LocationPreferencesFormKeys.OPEN_TO_RELOCATION_CITY]
+              values[LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION]
             }
             onChange={() => {
               handleToggleCheckbox(
                 true,
-                LocationPreferencesFormKeys.OPEN_TO_RELOCATION_CITY,
+                LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION,
               )
             }}
-            name={LocationPreferencesFormKeys.OPEN_TO_RELOCATION_CITY}
-            dataTestId={LocationPreferencesFormKeys.OPEN_TO_RELOCATION_CITY}
+            name={LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION}
+            dataTestId={LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION}
           />
         </div>
         <SwitchInput

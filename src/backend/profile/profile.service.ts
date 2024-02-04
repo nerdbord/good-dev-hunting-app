@@ -1,4 +1,4 @@
-import { CreateProfilePayload, ProfileModel } from '@/app/(profile)/types'
+import { ProfilePayload } from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, PublishingState, Role } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
@@ -68,7 +68,7 @@ export async function findProfileWithUserInclude(email: string) {
 
 export async function createUserProfile(
   email: string,
-  profileData: CreateProfilePayload,
+  profileData: ProfilePayload,
 ) {
   const createdUser = await prisma.profile.create({
     data: {
@@ -101,9 +101,9 @@ export async function createUserProfile(
       },
       techStack: {
         connectOrCreate: profileData.techStack.map((tech) => ({
-          where: { name: tech.techName },
+          where: { name: tech.name },
           create: {
-            name: tech.techName,
+            name: tech.name,
           },
         })),
       },
@@ -228,7 +228,7 @@ export async function getProfileByUserEmail(email: string) {
 
 export const hasProfileValuesChanged = async (
   profileId: string,
-  payload: ProfileModel,
+  payload: ProfilePayload,
 ) => {
   const existingProfile = await findProfileById(profileId)
 
