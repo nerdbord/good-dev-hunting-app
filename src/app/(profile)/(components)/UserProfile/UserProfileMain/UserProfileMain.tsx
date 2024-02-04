@@ -51,7 +51,7 @@ const UserProfileMain = ({
           </div>
           <div className={styles.addInfo}>
             <div className={styles.addInfoItem}>
-              {mapEmploymentTypes(userProfile.employmentTypes)}
+              {mapEmploymentTypes(userProfile.employmentTypes).join(' / ')}
             </div>
           </div>
         </div>

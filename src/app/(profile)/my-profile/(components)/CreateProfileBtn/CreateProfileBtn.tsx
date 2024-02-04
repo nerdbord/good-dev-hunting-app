@@ -4,8 +4,11 @@ import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { signIn, useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 const CreateProfileBtn = () => {
+  const [isCalled, setIsCalled] = useState(false)
+
   const router = useRouter()
   const path = usePathname()
   const { data: session } = useSession()
@@ -15,6 +18,7 @@ const CreateProfileBtn = () => {
   }
 
   const onClickHandler = async () => {
+    setIsCalled(true)
     if (!session) {
       await signIn('github', {
         callbackUrl: AppRoutes.githubOAuth,
@@ -26,6 +30,7 @@ const CreateProfileBtn = () => {
 
   return (
     <Button
+      disabled={isCalled}
       onClick={onClickHandler}
       variant={'primary'}
       dataTestId="createProfileButton"

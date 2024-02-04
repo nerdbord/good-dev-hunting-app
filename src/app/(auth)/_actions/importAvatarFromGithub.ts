@@ -3,7 +3,7 @@ import { authOptions } from '@/app/(auth)/auth'
 import {
   findUserByEmail,
   getGitHubDetails,
-  updateUserAvatar,
+  updateAvatar,
 } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
 import { getServerSession } from 'next-auth'
@@ -29,7 +29,7 @@ export const importAvatarFromGithub = withSentry(async () => {
     throw new Error('Avatar not found')
   }
 
-  const updatedUser = await updateUserAvatar(session.user.email, avatarUrl)
+  const updatedUser = await updateAvatar(session.user.email, avatarUrl)
 
   return updatedUser.avatarUrl
 })
