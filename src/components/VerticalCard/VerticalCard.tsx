@@ -14,6 +14,7 @@ const VerticalCard = ({
   fullName,
   remoteOnly,
   employmentTypes,
+  avatarUrl,
 }: ProfileModel) => {
   const technologies = techStack.map((tech, index) => {
     if (index < 4) {
@@ -29,7 +30,7 @@ const VerticalCard = ({
       <Image
         width={120}
         height={120}
-        src={ProfilePicture}
+        src={avatarUrl || ProfilePicture}
         alt="Profile Picture"
         className={styles.avatar}
       />
