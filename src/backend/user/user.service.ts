@@ -172,7 +172,7 @@ export async function removeUserRole(id: string, role: Role) {
   })
 }
 
-export async function updateUserAvatar(email: string, avatarUrl: string) {
+export async function updateAvatar(email: string, avatarUrl: string) {
   return await prisma.user.update({
     where: { email },
     data: { avatarUrl },
