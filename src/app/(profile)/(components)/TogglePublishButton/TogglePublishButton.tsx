@@ -37,14 +37,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
         />
       )}
       {state === PublishingState.PENDING ? (
-        <DevTypeButton
-          onClick={() => {
-            // onclick bo linter wywala błąd :( przy pustej funkcji
-            const lint = ''
-          }}
-          variant={JobSpecialization.Backend}
-          isPressed={false}
-        >
+        <DevTypeButton variant={JobSpecialization.Backend} isPressed={false}>
           Pending
         </DevTypeButton>
       ) : (
