@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CancelIcon = () => {
   return (
     <svg
@@ -12,13 +10,13 @@ const CancelIcon = () => {
       <path
         d="M15.5358 15.536L8.46477 8.46492"
         stroke="#A687FF"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
 
       <path
         d="M8.46416 15.536L15.5352 8.46492"
         stroke="#A687FF"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
 
       <path
