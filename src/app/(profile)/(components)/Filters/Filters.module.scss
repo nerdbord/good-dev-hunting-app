@@ -8,7 +8,7 @@
   @include mobile {
     overflow-x: auto;
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+    // -webkit-overflow-scrolling: touch;
     gap: 8px;
     align-items: flex-start;
     padding-bottom: 10px;
