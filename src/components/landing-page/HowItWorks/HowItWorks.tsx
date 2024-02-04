@@ -1,11 +1,10 @@
-import React from 'react'
-import styles from './HowItWorks.module.scss'
-import TraitTemplate from './TraitTemplate/TraitTemplate'
+import ConnectIcon from '@/assets/icons/ConnectIcon'
+import DollarIcon from '@/assets/icons/DollarIcon'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import GlobeIcon from '@/assets/icons/GlobeIcon'
-import DollarIcon from '@/assets/icons/DollarIcon'
-import ConnectIcon from '@/assets/icons/ConnectIcon'
+import styles from './HowItWorks.module.scss'
 import Step from './Step/Step'
+import TraitTemplate from './TraitTemplate/TraitTemplate'
 
 const HowItWorks = () => {
   return (
@@ -31,23 +30,23 @@ const HowItWorks = () => {
         <div className={styles.traits}>
           <TraitTemplate
             icon={<GlobeIcon />}
-            title="Open source"
-            description="All of the programs are focused on teaching problem-solving skills and processes."
-          />
-          <TraitTemplate
-            icon={<DollarIcon />}
-            title="Completely free"
-            description="Each program has an assigned mentor who guides mentees and provides feedback on their work."
+            title="Reversed recruitment"
+            description="Open the doors to a world of opportunities where employers and project owners across the globe seek you out. Embrace the simplicity of being discovered."
           />
           <TraitTemplate
             icon={<GithubIcon />}
-            title="Connected to Github"
-            description="Invest as much time as you wish. The amount of work that you put into the program is completely up to you. "
+            title="Open source"
+            description="The source code is available to the public, allowing you to inspect, modify, and distribute the code. You're welcome to contribute to the codebase, enhance features and fix bugs."
           />
           <TraitTemplate
             icon={<ConnectIcon />}
-            title="Use as portfolio"
-            description="Receive more in-depth and detailed evaluation of your work, as mentors review and provide feedback to your tasks."
+            title="Be noticed"
+            description="Your profile isn't just another CV. With Good Dev Hunt, it's a dynamic portfolio that puts your best work front and center."
+          />
+          <TraitTemplate
+            icon={<DollarIcon />}
+            title="Completely free access"
+            description="With Good Dev Hunt, creating your profile and engaging with the platform costs you nothing."
           />
         </div>
       </div>
