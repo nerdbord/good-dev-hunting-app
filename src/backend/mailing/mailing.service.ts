@@ -5,6 +5,7 @@ export type ContactRequestEmailParams = {
   senderEmail: string
   senderFullName: string
   recipientEmail: string
+  message: string
   subject: string
 }
 
@@ -12,6 +13,7 @@ export const sendContactRequest = async ({
   senderEmail,
   senderFullName,
   subject,
+  message,
   recipientEmail,
 }: ContactRequestEmailParams) => {
   try {
@@ -20,11 +22,25 @@ export const sendContactRequest = async ({
       fromName: senderFullName,
       subject: subject,
     }
+
+    const variables = [
+      {
+        email: recipientEmail,
+        substitutions: [
+          {
+            var: 'message',
+            value: message,
+          },
+        ],
+      },
+    ]
+
     const recipients = [new Recipient(recipientEmail)]
     await mailersendClient.sendMail({
       recipients,
       templateId: MailTemplateId.contactRequest,
       config,
+      variables,
     })
   } catch (error) {
     console.error('Error occured whilst sending contact request.', error)

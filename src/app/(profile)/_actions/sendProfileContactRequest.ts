@@ -59,6 +59,7 @@ export const sendProfileContactRequest = withSentry(
         senderEmail,
         senderFullName,
         subject,
+        message,
         recipientEmail: foundProfile.userEmail,
       })
 
