@@ -1,6 +1,7 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import useOutsideClick from '@/hooks/useOutsideClick'
 import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'
@@ -59,6 +60,13 @@ export const DropdownFilterMulti = ({
     onSelect(option)
   }
 
+  const closeDropdown = () => {
+    setDropdownActive(false)
+    setArrow('IoIosArrowDown')
+  }
+
+  useOutsideClick(dropdownRef, closeDropdown)
+
   const [isOverlayActive, setOverlayActive] = useState(false)
   return (
     <div className={styles.buttonBox}>
@@ -79,14 +87,7 @@ export const DropdownFilterMulti = ({
           <div className={styles.dropdown}>
             <div className={styles.titleContainer}>
               <div className={styles.dropdownTitle}>{text}</div>
-              <Button
-                variant="tertiary"
-                type="submit"
-                onClick={() => {
-                  setDropdownActive(false)
-                  setArrow('IoIosArrowDown')
-                }}
-              >
+              <Button variant="tertiary" type="submit" onClick={closeDropdown}>
                 Apply
               </Button>
             </div>
