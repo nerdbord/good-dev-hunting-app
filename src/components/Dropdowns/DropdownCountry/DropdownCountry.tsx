@@ -7,9 +7,11 @@ import styles from './DropdownCountry.module.scss'
 
 const DropdownCountry = ({
   value,
+  setValue,
   setIsDropdownActive,
 }: {
   value: string
+  setValue: (value: string) => void
   setIsDropdownActive: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const { values, setFieldValue } = useFormikContext<CreateProfileFormValues>()
@@ -18,7 +20,8 @@ const DropdownCountry = ({
     e: React.MouseEvent<HTMLLIElement>,
     country: ICountries,
   ) => {
-    setFieldValue('country', values.country)
+    setValue(country.name)
+    setFieldValue('country', country.name)
     setIsDropdownActive(false)
     values.country = country.name
   }
