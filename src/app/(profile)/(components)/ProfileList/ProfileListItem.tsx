@@ -14,7 +14,7 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })
-    router.push(`${AppRoutes.profiles}/${data.userId}`)
+    router.push(`${AppRoutes.profiles}/${data.githubUsername}`)
   }
 
   return <ProfileCard data={data} onClick={handleOpenProfile} />

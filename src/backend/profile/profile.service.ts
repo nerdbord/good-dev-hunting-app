@@ -162,6 +162,19 @@ export async function getProfileByUserId(userId: string) {
   return null
 }
 
+export async function getProfileByGithubUsername(username: string) {
+  const profile = await prisma.profile.findFirst({
+    where: { user: { githubDetails: { username } } },
+    include: includeObject.include,
+  })
+
+  if (profile) {
+    return serializeProfileToProfileModel(profile)
+  }
+
+  return null
+}
+
 export async function getProfileByUserEmail(email: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { email } },
