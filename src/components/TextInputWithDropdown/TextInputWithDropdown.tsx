@@ -2,22 +2,32 @@
 import { countries } from '@/data/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useFormikContext } from 'formik'
-import { useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { TextInputProps } from '../TextInput/TextInput'
 
 import { CreateProfileFormValues } from '@/app/(profile)/types'
 import styles from './TextInputWithDropdown.module.scss'
 
+// Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)
 const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
   const { values, handleChange, setFieldValue } =
     useFormikContext<CreateProfileFormValues>()
+  const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  // const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value)
+    if (event.target.value !== values.country) {
+      setFieldValue('country', '')
+    }
+    preventInvalidCountry()
+  }
 
   const preventInvalidCountry = () => {
-    const inputValue = inputRef.current?.value
+    // const inputValue = inputRef.current?.value
     if (!isValidCountry(inputValue)) {
       const validCountry = countries.find((country) =>
         inputValue?.includes(country.name),
@@ -49,17 +59,18 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
         onBlur={onBlur}
         label="Country of residency"
         placeholder="Start typing location"
-        value={values.country}
-        onChange={handleChange}
+        value={inputValue}
+        onChange={handleInputChange}
         name={name}
         excludeDigits
         onClick={handleCountryInputClick}
-        inputRef={inputRef}
+        // inputRef={inputRef}
       />
-      {values.country.length !== 0 && isDropdownActive && (
+      {inputValue.length !== 0 && isDropdownActive && (
         <div ref={dropdownRef}>
           <DropdownCountry
-            value={values.country}
+            value={inputValue}
+            setValue={setInputValue}
             setIsDropdownActive={setIsDropdownActive}
           />
         </div>
