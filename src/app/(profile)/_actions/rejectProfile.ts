@@ -9,6 +9,7 @@ import {
   deleteRejectingReason,
   saveRejectingReason,
 } from '@/backend/profile/rejection.service'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { requireUserRoles } from '@/utils/auths'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState, Role } from '@prisma/client'
@@ -35,6 +36,9 @@ export const rejectProfile = withSentry(
     })
     try {
       await sendProfileRejectedEmail(profile?.userEmail, reason)
+      await sendDiscordNotificationToModeratorChannel(
+        `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
+      )
       return updatedProfile
     } catch (error) {
       await deleteRejectingReason(createdReason.id)

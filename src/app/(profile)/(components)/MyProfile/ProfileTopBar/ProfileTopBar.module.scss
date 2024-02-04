@@ -16,6 +16,7 @@
 
 .buttonBox {
   display: flex;
+  align-items: center;
   gap: $spacing-2;
   @include mobile {
     position: fixed;
