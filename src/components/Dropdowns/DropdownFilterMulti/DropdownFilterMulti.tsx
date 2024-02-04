@@ -50,6 +50,13 @@ export const DropdownFilterMulti = ({
     onSelect(option)
   }
 
+  const closeDropdown = () => {
+    setDropdownActive(false)
+    setArrow('IoIosArrowDown')
+  }
+
+  useOutsideClick(dropdownRef, closeDropdown)
+
   const [isOverlayActive, setOverlayActive] = useState(false)
   return (
     <div className={styles.buttonBox}>
@@ -70,14 +77,7 @@ export const DropdownFilterMulti = ({
           <div className={styles.dropdown} ref={dropdownRef}>
             <div className={styles.titleContainer}>
               <div className={styles.dropdownTitle}>{text}</div>
-              <Button
-                variant="tertiary"
-                type="submit"
-                onClick={() => {
-                  setDropdownActive(false)
-                  setArrow('IoIosArrowDown')
-                }}
-              >
+              <Button variant="tertiary" type="submit" onClick={closeDropdown}>
                 Apply
               </Button>
             </div>
