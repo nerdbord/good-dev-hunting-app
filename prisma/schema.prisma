@@ -87,6 +87,7 @@ model ContactRequest {
   senderEmail    String
   profile        Profile @relation(fields: [profileId], references: [id])
   profileId      String
+  createdAt      DateTime @default(now())
 }
 
 enum EmploymentType {

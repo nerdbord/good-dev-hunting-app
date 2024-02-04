@@ -2,8 +2,8 @@ import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 import { APIResponse } from 'mailersend/lib/services/request.service'
 
 export enum MailTemplateId {
-  welcomeMail = 'x2p03478r1ylzdrn',
-  contactRequest = 'vywj2lpj1pjl7oqz',
+  welcomeMail = 'vywj2lpj1pjl7oqz',
+  contactRequest = '7dnvo4dded345r86',
   profileApprovedNotification = '0r83ql3nq6x4zw1j',
   profileRejectedNotification = 'vywj2lpj1pjl7oqz',
 }
