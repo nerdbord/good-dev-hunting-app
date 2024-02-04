@@ -8,10 +8,7 @@ import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateP
 import PersonalInfo from '@/app/(profile)/my-profile/(components)/CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '@/app/(profile)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
 import styles from '@/app/(profile)/my-profile/create/page.module.scss'
-import {
-  CreateProfileFormValues,
-  CreateProfilePayload,
-} from '@/app/(profile)/types'
+import { ProfileFormValues, ProfilePayload } from '@/app/(profile)/types'
 import { initialFilterOption } from '@/contexts/FilterContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -22,15 +19,14 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
 
-const initialValues: CreateProfileFormValues = {
+const initialValues: ProfileFormValues = {
   fullName: '',
-  contactEmail: '',
   linkedin: '',
   bio: '',
   country: '',
   city: '',
-  openToRelocationCountry: false,
-  openToRelocationCity: false,
+  openForCountryRelocation: false,
+  openForCityRelocation: false,
   remoteOnly: false,
   position: initialFilterOption,
   seniority: initialFilterOption,
@@ -78,9 +74,8 @@ const CreateProfileForm = () => {
     return null
   }
 
-  const handleCreateProfile = async (values: CreateProfileFormValues) => {
-    const payload: CreateProfilePayload = {
-      userId: session.user.id,
+  const handleCreateProfile = async (values: ProfileFormValues) => {
+    const payload: ProfilePayload = {
       fullName: values.fullName,
       avatarUrl: session.user.image || null,
       linkedIn: values.linkedin,
@@ -88,17 +83,17 @@ const CreateProfileForm = () => {
       country: {
         name: values.country,
       },
-      openForCountryRelocation: values.openToRelocationCountry,
+      openForCountryRelocation: values.openForCountryRelocation,
       city: {
         name: values.city,
       },
       isOpenForWork: true,
-      openForCityRelocation: values.openToRelocationCity,
+      openForCityRelocation: values.openForCityRelocation,
       remoteOnly: values.remoteOnly,
       position: values.position.value,
       seniority: values.seniority.value,
       techStack: values.techStack.map((tech) => ({
-        techName: tech.value,
+        name: tech.value,
       })),
       employmentTypes: values.employment,
       githubUsername: session.user.name,

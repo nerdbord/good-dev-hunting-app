@@ -1,6 +1,6 @@
 'use client'
 import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { ProfileFormValues } from '@/app/(profile)/types'
 import { ICountries, countries } from '@/data/countries'
 import { useFormikContext } from 'formik'
 import React from 'react'
@@ -15,7 +15,7 @@ const DropdownCountry = ({
   setValue: (value: string) => void
   setIsDropdownActive: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
-  const { values, setFieldValue } = useFormikContext<CreateProfileFormValues>()
+  const { values, setFieldValue } = useFormikContext<ProfileFormValues>()
 
   const handleCountryClick = (
     e: React.MouseEvent<HTMLLIElement>,
