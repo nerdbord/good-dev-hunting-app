@@ -1,6 +1,6 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
 import classNames from 'classnames/bind'
+import React, { PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
@@ -30,7 +30,7 @@ export const Button = ({
   return (
     <button
       data-testid={dataTestId}
-      className={buttonClasses}
+      className={`${buttonClasses}`}
       disabled={disabled || loading}
       onClick={onClick}
       type={type}
