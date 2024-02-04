@@ -2,6 +2,7 @@
 import { authorizeUser } from '@/app/(auth)/auth'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import { updateProfileById } from '@/backend/profile/profile.service'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { requireUserRoles } from '@/utils/auths'
 import { withSentry } from '@/utils/errHandling'
 import { Prisma, Role } from '@prisma/client'
@@ -19,6 +20,9 @@ export const approveProfile = withSentry(
     const updatedProfile = await updateProfileById(profileId, payload)
 
     await sendProfileApprovedEmail(updatedProfile.user.email)
+    await sendDiscordNotificationToModeratorChannel(
+      `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
+    )
 
     return updatedProfile
   },
