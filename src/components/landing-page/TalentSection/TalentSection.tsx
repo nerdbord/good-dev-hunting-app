@@ -19,7 +19,7 @@ const TalentSection = async () => {
       <div className={styles.talents}>
         {profiles?.map((cardData) => (
           <Link
-            href={`${AppRoutes.profiles}/${cardData.userId}`}
+            href={`${AppRoutes.profiles}/${cardData.githubUsername}`}
             key={cardData.id}
           >
             <ProfileCard data={cardData} />

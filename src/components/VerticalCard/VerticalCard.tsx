@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 import styles from './VerticalCard.module.scss'
 
 const VerticalCard = ({
-  userId,
   position,
   techStack,
   city,
@@ -41,7 +40,7 @@ const VerticalCard = ({
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: githubUsername },
     })
-    router.push(`${AppRoutes.profiles}/${userId}`)
+    router.push(`${AppRoutes.profiles}/${githubUsername}`)
   }
 
   return (
