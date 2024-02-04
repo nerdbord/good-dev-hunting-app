@@ -1,4 +1,5 @@
 'use client'
+import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { CreateProfileFormValues } from '@/app/(profile)/types'
 import { ICountries, countries } from '@/data/countries'
 import { useFormikContext } from 'formik'
@@ -21,7 +22,7 @@ const DropdownCountry = ({
     country: ICountries,
   ) => {
     setValue(country.name)
-    setFieldValue('country', country.name)
+    setFieldValue(LocationPreferencesFormKeys.COUNTRY, country.name)
     setIsDropdownActive(false)
     values.country = country.name
   }
