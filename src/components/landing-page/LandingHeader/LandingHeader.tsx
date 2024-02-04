@@ -36,7 +36,7 @@ const LandingHeader = async () => {
                 </>
               ) : (
                 <>
-                  <MyProfileBtn />
+                  <GitHubButtonClient />
                   <CreateProfileBtn />
                 </>
               )}
