@@ -22,30 +22,15 @@
     max-width: 100%;
     flex-direction: column;
   }
-}
-
-.personalInfo {
-  background-color: rgba(15, 18, 23, 1);
-  color: #69717b;
-  border-radius: 2px;
-  padding: 20px;
-  display: flex;
-  width: 280px;
-  align-items: flex-start;
-  gap: 20px;
-  font-size: 14px;
-  @include mobile {
-    position: static;
-    width: auto;
-  }
+  font-size: 22px;
+  justify-content: center;
 }
 
 .right {
-  flex: 0 0 40%;
+  flex: 0 0 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 24px;
   @include mobile {
     max-width: 100%;
     flex-direction: column;
@@ -53,8 +38,11 @@
   }
 }
 
-.checkboxContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.label {
+  font-size: 14px;
+  justify-content: baseline;
+}
+
+.link {
+  text-decoration: underline;
 }

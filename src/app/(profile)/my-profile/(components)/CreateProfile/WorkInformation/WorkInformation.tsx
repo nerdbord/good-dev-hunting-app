@@ -11,7 +11,7 @@ import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import { EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
-import { ProfileFormValues } from '@/app/(profile)/types'
+import { CreateProfileFormValues } from '@/app/(profile)/types'
 import styles from './WorkInformations.module.scss'
 
 export enum WorkInformationFormKeys {
@@ -23,7 +23,7 @@ export enum WorkInformationFormKeys {
 
 const WorkInformation = () => {
   const { values, errors, setFieldValue, touched } =
-    useFormikContext<ProfileFormValues>()
+    useFormikContext<CreateProfileFormValues>()
 
   const handleEmploymentType = (option: EmploymentType): void => {
     let newFilters: string[]

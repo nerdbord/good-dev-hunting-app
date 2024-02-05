@@ -8,8 +8,9 @@ import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateP
 import PersonalInfo from '@/app/(profile)/my-profile/(components)/CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '@/app/(profile)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
 import styles from '@/app/(profile)/my-profile/create/page.module.scss'
-import { ProfileFormValues, ProfilePayload } from '@/app/(profile)/types'
+import { CreateProfileFormValues, ProfilePayload } from '@/app/(profile)/types'
 import { initialFilterOption } from '@/contexts/FilterContext'
+import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
@@ -18,8 +19,9 @@ import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
+import TermsOfUse from '../CreateProfile/TermsOfUse/TermsOfUse'
 
-const initialValues: ProfileFormValues = {
+const initialValues: CreateProfileFormValues = {
   fullName: '',
   linkedin: '',
   bio: '',
@@ -34,6 +36,7 @@ const initialValues: ProfileFormValues = {
   techStack: [],
   githubUsername: '',
   state: PublishingState.DRAFT,
+  terms: false,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -62,6 +65,7 @@ export const validationSchema = Yup.object().shape({
       /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
       'Invalid LinkedIn URL',
     ),
+  terms: Yup.boolean<true>().required('Agreement is required'),
 })
 
 const CreateProfileForm = () => {
@@ -69,12 +73,18 @@ const CreateProfileForm = () => {
   const { runAsync } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-
+  const { addToast } = useToast()
   if (!session) {
     return null
   }
 
-  const handleCreateProfile = async (values: ProfileFormValues) => {
+  const handleCreateProfile = async (values: CreateProfileFormValues) => {
+    if (!values.terms) {
+      addToast(
+        'You have to agree to our Terms of use and Privacy Policy in order to continue.',
+        ToastStatus.INVALID,
+      )
+    }
     const payload: ProfilePayload = {
       fullName: values.fullName,
       avatarUrl: session.user.image || null,
@@ -130,6 +140,7 @@ const CreateProfileForm = () => {
           <PersonalInfo />
           <LocationPreferences />
           <WorkInformation />
+          <TermsOfUse />
         </div>
         <LogOutBtn />
       </div>
