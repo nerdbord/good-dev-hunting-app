@@ -1,10 +1,16 @@
 import { ProfileModel } from '@/app/(profile)/types'
+import { EditProfileButton } from '../../EditProfileButton'
+import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
 
 const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
   return (
     <>
       <section className={styles.container}>
+        <div className={styles.mobileView}>
+          <EditProfileButton />
+          <TogglePublishButton state={profile.state} profileId={profile.id} />
+        </div>{' '}
         <div className={styles.left}>
           <div className={styles.techStack}>
             <p className={styles.title}>Tech stack</p>
