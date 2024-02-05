@@ -30,8 +30,6 @@ export const authOptions: NextAuthOptions = {
       const foundUser =
         token && token.email ? await findUserByEmail(token.email) : null
 
-      console.log('token', token)
-
       if (!foundUser) {
         return null
       }
@@ -44,8 +42,6 @@ export const authOptions: NextAuthOptions = {
 
       if (user && githubDetails) {
         const foundUser = await findUserByEmail(castedUser.email)
-
-        console.log('foundUser 2', foundUser)
 
         if (foundUser) {
           return true
