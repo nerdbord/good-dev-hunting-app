@@ -31,22 +31,22 @@ const HowItWorks = () => {
           <TraitTemplate
             icon={<GlobeIcon />}
             title="Reversed recruitment"
-            description="Open the doors to a world of opportunities where employers and project owners across the globe seek you out. Embrace the simplicity of being discovered."
+            description="Employers will find you based on your skills and availability. You don't need to apply for jobs."
           />
           <TraitTemplate
             icon={<GithubIcon />}
             title="Open source"
-            description="The source code is available to the public, allowing you to inspect, modify, and distribute the code. You're welcome to contribute to the codebase, enhance features and fix bugs."
+            description="Our platform is open source and we are proud of it. We believe in transparency and community."
           />
           <TraitTemplate
             icon={<ConnectIcon />}
-            title="Be noticed"
-            description="Your profile isn't just another CV. With Good Dev Hunt, it's a dynamic portfolio that puts your best work front and center."
+            title="Remote first"
+            description="Our mission is to connect talents with employers from all over the world despite the distance."
           />
           <TraitTemplate
             icon={<DollarIcon />}
-            title="Completely free access"
-            description="With Good Dev Hunt, creating your profile and engaging with the platform costs you nothing."
+            title="Completely free"
+            description="Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
           />
         </div>
       </div>
