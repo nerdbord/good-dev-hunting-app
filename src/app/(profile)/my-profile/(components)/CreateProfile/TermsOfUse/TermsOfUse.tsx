@@ -5,7 +5,8 @@ import { useFormikContext } from 'formik'
 import Link from 'next/link'
 import styles from './TermsOfUse.module.scss'
 
-const terms = 'terms'
+export const terms = 'terms'
+
 export default function TermsOfUse() {
   const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
