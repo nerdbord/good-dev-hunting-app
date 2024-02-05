@@ -49,8 +49,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  row-gap: 20px;
-  column-gap: 21px;
+  gap: 20px;
+  width: 100%;
 
   @include mobile {
     row-gap: 8px;
