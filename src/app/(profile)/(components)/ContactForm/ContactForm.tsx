@@ -118,7 +118,7 @@ export default function ContactForm({
               height={195}
             />
           </InputFormError>
-          <InputFormError error={formik.touched.terms && formik.errors.terms}>
+          <InputFormError error={formik.errors.terms}>
             <CheckboxInput
               id={'terms'}
               label=""
@@ -155,7 +155,6 @@ export default function ContactForm({
               variant="primary"
               onClick={() => formik.handleSubmit}
               loading={loading}
-              disabled={!formik.isValid}
             >
               Send
             </Button>
