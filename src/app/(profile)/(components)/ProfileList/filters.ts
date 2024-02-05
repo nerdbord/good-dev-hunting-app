@@ -22,7 +22,9 @@ export const filterBySeniority =
 export const filterByLocation =
   (locationFilter: FilterOption[]) => (profile: ProfileModel) => {
     if (locationFilter.length === 0) return true
-    return true
+    return locationFilter.some(
+      (location) => profile.country.name === location.value,
+    )
   }
 
 export const filterByTechnology =
