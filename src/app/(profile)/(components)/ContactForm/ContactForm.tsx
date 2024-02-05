@@ -112,6 +112,7 @@ export default function ContactForm({
               height={195}
             />
           </InputFormError>
+          {/* <CheckboxInput label="Terms" checked={formik.values.terms}></CheckboxInput> */}
         </div>
         <div className={styles.btnContainer}>
           <div className={styles.primaryBtn} data-test-id="submitBtn">
