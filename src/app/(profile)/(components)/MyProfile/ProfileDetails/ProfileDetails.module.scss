@@ -107,3 +107,11 @@
   background-color: #161a1f;
   color: #13cbaa;
 }
+
+.mobileView {
+  display: none;
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+  }
+}

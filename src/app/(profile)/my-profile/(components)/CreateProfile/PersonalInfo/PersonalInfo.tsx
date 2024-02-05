@@ -1,6 +1,6 @@
 'use client'
 import { UserPhotoUploader } from '@/app/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
-import { ProfileFormValues } from '@/app/(profile)/types'
+import { CreateProfileFormValues } from '@/app/(profile)/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
@@ -17,7 +17,7 @@ export enum PersonalInfoFormKeys {
 
 const PersonalInfo = () => {
   const { values, handleChange, errors, touched, handleBlur } =
-    useFormikContext<ProfileFormValues>()
+    useFormikContext<CreateProfileFormValues>()
 
   const { data: session } = useSession()
 

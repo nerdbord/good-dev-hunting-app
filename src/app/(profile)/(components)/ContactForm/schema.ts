@@ -7,15 +7,20 @@ export interface ContactFormValues {
   message: string
 }
 
+export interface ContactFormValuesWithTerms extends ContactFormValues {
+  terms: boolean
+}
+
 export interface ContactFormRequest extends ContactFormValues {
   profileId: string
 }
 
-export const initialValues: ContactFormValues = {
+export const initialValues: ContactFormValuesWithTerms = {
   senderFullName: '',
   senderEmail: '',
   subject: `Job offer - let's talk!`,
   message: '',
+  terms: false,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -25,4 +30,7 @@ export const validationSchema = Yup.object().shape({
     .required('Email is required'),
   subject: Yup.string().required('Subject is required'),
   message: Yup.string().required('Message is required'),
+  terms: Yup.boolean()
+    .required('Agreement is required')
+    .oneOf([true], 'Agreement is required'),
 })
