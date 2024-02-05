@@ -7,7 +7,8 @@
 </h3>
 
 <h4 align="center">
-    <a href="https://www.devhunting.co/">🌐 Visit the Live Site</a>
+    ![Discord](https://img.shields.io/discord/1203791941679194122)
+    [![Hunt live](https://img.shields.io/website?up_message=live&url=https%3A%2F%2Fwww.devhunting.co%2F)](https://www.devhunting.co/)
 </h4>
 
 <p align="center">
