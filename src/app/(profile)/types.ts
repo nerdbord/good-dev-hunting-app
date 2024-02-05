@@ -75,3 +75,7 @@ export interface ProfileFormValues {
   githubUsername: string | null
   state: PublishingState
 }
+
+export interface CreateProfileFormValues extends ProfileFormValues {
+  terms: boolean
+}

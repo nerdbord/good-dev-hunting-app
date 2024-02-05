@@ -1,3 +1,7 @@
 .landing_background {
   background-color: black;
+  overflow: hidden;
+  @include mobile {
+    overflow: visible;
+  }
 }
