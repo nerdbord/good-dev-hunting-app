@@ -15,9 +15,9 @@ const CreateProfilePage = async () => {
 
   const profile = await getProfileByUserEmail(session.user.email)
 
-  // if (profile) {
-  //   redirect(AppRoutes.myProfile)
-  // }
+  if (profile) {
+    redirect(AppRoutes.myProfile)
+  }
 
   return (
     <UploadProvider>
