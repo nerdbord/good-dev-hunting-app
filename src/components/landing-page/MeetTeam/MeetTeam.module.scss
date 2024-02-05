@@ -57,14 +57,14 @@
 
 .cardsBox {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(8, minmax(287px, 1fr));
   gap: 30px;
   width: 100%;
   align-items: flex-start;
   padding-bottom: 16px;
   @include mobile {
     padding-bottom: 10px;
-    grid-template-columns: repeat(4, minmax(287px, 1fr));
+    grid-template-columns: repeat(8, minmax(287px, 1fr));
   }
 }
 
