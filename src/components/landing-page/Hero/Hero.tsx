@@ -20,10 +20,10 @@ const Hero = async () => {
       <div className={styles.left}>
         <div className={styles.title}>
           <span>Let your next</span>
-          <span>employer find you</span>
+          <span>project find you</span>
         </div>
         <div className={styles.subtitle}>
-          <p>Open sourced, free, hub for software developers to be present</p>
+          <p>Open source, free hub for software developers to be present</p>
           <p>and ready for next commission work.</p>
         </div>
         <div className={styles.buttons}>
