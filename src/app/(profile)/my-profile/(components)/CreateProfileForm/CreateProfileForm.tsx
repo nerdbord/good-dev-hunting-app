@@ -72,7 +72,7 @@ export const validationSchema = Yup.object().shape({
 
 const CreateProfileForm = () => {
   const { data: session } = useSession()
-  const { runAsync } = useAsyncAction()
+  const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
@@ -137,7 +137,7 @@ const CreateProfileForm = () => {
       onSubmit={handleCreateProfile}
     >
       <div className={styles.wrapper}>
-        <CreateProfileTopBar />
+        <CreateProfileTopBar isSubmitting={isCreatingProfile} />
         <div className={styles.formBox}>
           <PersonalInfo />
           <LocationPreferences />
