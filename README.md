@@ -6,6 +6,14 @@
     Free, open sourced platform for connecting software engineers with tech projects.
 </h3>
 
+<p align="center">
+    <a href="https://github.com/nerdbord/good-dev-hunting/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/nerdbord/good-dev-hunting" /></a>
+    <a href="https://discord.gg/KHf8n8zTfJ">
+        <img src="https://img.shields.io/discord/1203791941679194122?logo=discord"
+            alt="chat on Discord"></a>
+</p>
+
 <h4 align="center">
     ![Discord](https://img.shields.io/discord/1203791941679194122)
     [![Hunt live](https://img.shields.io/website?up_message=live&url=https%3A%2F%2Fwww.devhunting.co%2F)](https://www.devhunting.co/)
