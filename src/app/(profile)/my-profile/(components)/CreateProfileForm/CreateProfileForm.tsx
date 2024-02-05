@@ -65,7 +65,9 @@ export const validationSchema = Yup.object().shape({
       /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
       'Invalid LinkedIn URL',
     ),
-  terms: Yup.boolean<true>().required('Agreement is required'),
+  terms: Yup.boolean()
+    .required('Agreement is required')
+    .oneOf([true], 'Agreement is required'),
 })
 
 const CreateProfileForm = () => {
