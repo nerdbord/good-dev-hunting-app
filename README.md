@@ -7,6 +7,9 @@
 </h3>
 
 <p align="center">
+    <a href="https://devhunting.co"> 
+        <img src="https://img.shields.io/badge/Start%20hunting-7d54f1"
+            alt="Visit live"></a>
     <a href="https://github.com/nerdbord/good-dev-hunting-app/graphs/contributors" alt="Contributors">
         <img src="https://img.shields.io/github/contributors/nerdbord/good-dev-hunting-app" /></a>
     <a href="https://discord.gg/KHf8n8zTfJ"> 
