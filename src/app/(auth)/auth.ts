@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
       const foundUser =
         token && token.email ? await findUserByEmail(token.email) : null
 
-      console.log('foundUser', foundUser)
+      console.log('token', token)
 
       if (!foundUser) {
         return null
