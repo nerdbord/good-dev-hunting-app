@@ -57,7 +57,7 @@
 
 .cardsBox {
   display: grid;
-  grid-template-columns: repeat(8, minmax(287px, 1fr));
+  grid-template-columns: repeat(8, minmax(287px, minmax(287px, 1fr));
   gap: 30px;
   width: 100%;
   align-items: flex-start;

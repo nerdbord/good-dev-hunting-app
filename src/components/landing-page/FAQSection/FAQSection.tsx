@@ -12,7 +12,7 @@ const FAQSection = () => {
         <Accordion title="What is reverted recruitment process?">
           <p>
             Reverse recruiting (also known as "reverse job hunting") is an
-            approach in which the roles of job seekers and employers are
+            approach in which the roles of jobseekers and employers are
             reversed. Instead of candidates applying for positions, employers or
             recruiters actively seek out potential candidates.
           </p>
@@ -26,14 +26,17 @@ const FAQSection = () => {
           </p>
         </Accordion>
         <Accordion title="Is it really free?">
-          <p>Yes! Creating a profile comes with no charges, no hidden fees!</p>
+          <p>
+            Yes! Using our platform is free. You can create profile, and get
+            hired without any additional costs.
+          </p>
         </Accordion>
-        <Accordion title="Do I need to have an account on GitHub and Nerdbord?">
-          To create a profile, having a GitHub account is necessary. Connecting
-          with Nerdbord is optional, but we strongly encourage you to consider
-          enhancing your profile with this option. This allows employers to get
-          to know your work better through an attractive and user-friendly
-          Nerdbord portfolio.
+        <Accordion title="Do I need to have an account on GitHub?">
+          To create a profile, having a GitHub account is necessary as we want
+          to make sure that you are a real developer. We also use GitHub to
+          fetch your profile picture and other public information to make the
+          process of creating a profile as easy as possible. We do not GitHub
+          tokens.
         </Accordion>
       </div>
     </section>
