@@ -1,7 +1,9 @@
 'use client'
+import classNames from 'classnames/bind'
 import { ReactNode, useState } from 'react'
 import styles from './Accordion.module.scss'
 import AccordionIcon from './icons/AccordionIcon'
+const cx = classNames.bind(styles)
 
 export enum AccordionIconType {
   Add = 'add',
@@ -19,6 +21,12 @@ const Accordion = (props: AccordionProps) => {
   const handleOpen = () => {
     setAccordionOpen((prevOpen) => !prevOpen)
   }
+
+  const getContentClasses = cx({
+    [styles.accordionContent]: true,
+    [styles.isOpen]: accordionOpen,
+  })
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.titleWrapper} onClick={handleOpen}>
@@ -31,9 +39,9 @@ const Accordion = (props: AccordionProps) => {
           />
         </div>
       </div>
-      {accordionOpen && (
-        <div className={styles.accordionContent}>{props.children}</div>
-      )}
+      <div className={getContentClasses}>
+        <p className={styles.content}>{props.children}</p>
+      </div>
     </section>
   )
 }
