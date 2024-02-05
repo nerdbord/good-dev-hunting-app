@@ -7,6 +7,7 @@ import {
   createUserProfile,
   findProfileWithUserInclude,
 } from '@/backend/profile/profile.service'
+import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
 
 export const createProfile = withSentry(async (payload: ProfilePayload) => {
@@ -19,6 +20,11 @@ export const createProfile = withSentry(async (payload: ProfilePayload) => {
 
   const createdProfile = await createUserProfile(email, payload)
   const serializedProfile = serializeProfileToProfileModel(createdProfile)
+
+  await mailerliteClient.addSubscriberToMailerLite(
+    createdProfile.user.email,
+    mailerliteGroups.devGroup,
+  )
 
   return serializedProfile
 })
