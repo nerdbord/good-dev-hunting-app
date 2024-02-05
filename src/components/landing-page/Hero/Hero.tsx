@@ -24,7 +24,7 @@ const Hero = async () => {
           <p>and ready for next commission work.</p>
         </div>
         <div className={styles.buttons}>
-          {user ? <MyProfileBtn /> : <CreateProfileBtn />}
+          {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
           <FindTalentsBtn variant={'secondary'}>Find talents</FindTalentsBtn>
         </div>
       </div>
