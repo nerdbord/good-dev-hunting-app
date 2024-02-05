@@ -13,8 +13,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-
-  /* Header 3 */
   font-size: 22px;
   font-weight: 500;
   line-height: 28px; /* 127.273% */
@@ -28,4 +26,15 @@
 
 .accordionContent {
   margin-top: 16px;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.content {
+overflow: hidden;
+}
+
+.isOpen {
+  grid-template-rows: 1fr;
 }
