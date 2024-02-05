@@ -1,5 +1,6 @@
+'use client'
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
-import { CreateProfileFormValues, ProfileModel } from '@/app/(profile)/types'
+import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
@@ -8,7 +9,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
-import { useFormik, useFormikContext } from 'formik'
+import { useFormik } from 'formik'
 import { usePlausible } from 'next-plausible'
 import Link from 'next/link'
 import styles from './ContactForm.module.scss'
@@ -26,8 +27,6 @@ export default function ContactForm({
   closeModal: () => void
   showSuccessMsg: () => void
 }) {
-  const { values, errors, touched, handleChange, handleBlur, isValid } =
-    useFormikContext<CreateProfileFormValues>()
   const { runAsync, loading } = useAsyncAction()
   const { addToast } = useToast()
   const plausible = usePlausible()
@@ -119,13 +118,13 @@ export default function ContactForm({
               height={195}
             />
           </InputFormError>
-          <InputFormError error={touched.terms && errors.terms}>
+          <InputFormError error={formik.touched.terms && formik.errors.terms}>
             <CheckboxInput
               id={'terms'}
               label=""
-              checked={values.terms}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              checked={formik.values.terms}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="terms"
             >
               <span className={styles.label}>
@@ -156,7 +155,7 @@ export default function ContactForm({
               variant="primary"
               onClick={() => formik.handleSubmit}
               loading={loading}
-              disabled={!isValid}
+              disabled={!formik.isValid}
             >
               Send
             </Button>
