@@ -30,5 +30,7 @@ export const validationSchema = Yup.object().shape({
     .required('Email is required'),
   subject: Yup.string().required('Subject is required'),
   message: Yup.string().required('Message is required'),
-  terms: Yup.boolean().required('Agreement is required'),
+  terms: Yup.boolean()
+    .required('Agreement is required')
+    .oneOf([true], 'Agreement is required'),
 })
