@@ -7,22 +7,13 @@
 </h3>
 
 <p align="center">
-    <a href="https://github.com/nerdbord/good-dev-hunting/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/nerdbord/good-dev-hunting" /></a>
-    <a href="https://discord.gg/KHf8n8zTfJ">
-        <img src="https://img.shields.io/discord/1203791941679194122?logo=discord"
+    <a href="https://github.com/nerdbord/good-dev-hunting-app/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/nerdbord/good-dev-hunting-app" /></a>
+    <a href="https://discord.gg/KHf8n8zTfJ"> 
+        <img src="https://img.shields.io/discord/1203791941679194122?label=Discord&logo=discord l"
             alt="chat on Discord"></a>
-</p>
-
-<h4 align="center">
-    ![Discord](https://img.shields.io/discord/1203791941679194122)
-    [![Hunt live](https://img.shields.io/website?up_message=live&url=https%3A%2F%2Fwww.devhunting.co%2F)](https://www.devhunting.co/)
-</h4>
-
-<p align="center">
-    <a href="https://www.devhunting.co/">
-        <img src="/src/assets/images/Screenshot.png" alt="Good Dev Hunting Screenshot">
-    </a>
+  <a href="https://github.com/nerdbord/good-dev-hunting-app/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/nerdbord/good-dev-hunting-app" /></a>
 </p>
 
 <h3>
