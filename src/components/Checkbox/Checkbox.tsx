@@ -12,6 +12,7 @@ interface CheckboxInputProps {
   name: string
   dataTestId?: string
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  children?: JSX.Element
 }
 
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
@@ -22,6 +23,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
   name,
   dataTestId,
   onBlur,
+  children,
 }) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event)
@@ -44,7 +46,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
         />
         {checked && <IoIosCheckmark className={styles.checkmark} />}
       </div>
-      {label}
+      {label || children}
     </label>
   )
 }
