@@ -6,7 +6,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { useFormikContext } from 'formik'
 
-import { ProfileFormValues } from '@/app/(profile)/types'
+import { CreateProfileFormValues } from '@/app/(profile)/types'
 import styles from './LocationPreferences.module.scss'
 
 export enum LocationPreferencesFormKeys {
@@ -19,7 +19,7 @@ export enum LocationPreferencesFormKeys {
 
 const LocationPreferences = () => {
   const { values, setFieldValue, handleChange, errors, touched, handleBlur } =
-    useFormikContext<ProfileFormValues>()
+    useFormikContext<CreateProfileFormValues>()
 
   const handleToggleCheckbox = (
     value: boolean,
@@ -38,7 +38,7 @@ const LocationPreferences = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <div>
+        <div className={styles.checkboxContainer}>
           <InputFormError
             error={
               touched[LocationPreferencesFormKeys.COUNTRY] &&
@@ -68,7 +68,7 @@ const LocationPreferences = () => {
             dataTestId={LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION}
           />
         </div>
-        <div>
+        <div className={styles.checkboxContainer}>
           <InputFormError
             error={
               touched[LocationPreferencesFormKeys.CITY] &&

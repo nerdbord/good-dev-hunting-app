@@ -1,6 +1,7 @@
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
 import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
+import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
@@ -9,8 +10,14 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
 import { useFormik } from 'formik'
 import { usePlausible } from 'next-plausible'
+import Link from 'next/link'
+import { terms } from '../../my-profile/(components)/CreateProfile/TermsOfUse/TermsOfUse'
 import styles from './ContactForm.module.scss'
-import { ContactFormValues, initialValues, validationSchema } from './schema'
+import {
+  ContactFormValuesWithTerms,
+  initialValues,
+  validationSchema,
+} from './schema'
 
 export default function ContactForm({
   userProfile,
@@ -25,7 +32,7 @@ export default function ContactForm({
   const { addToast } = useToast()
   const plausible = usePlausible()
 
-  const handleSendEmail = (values: ContactFormValues) => {
+  const handleSendEmail = (values: ContactFormValuesWithTerms) => {
     runAsync(async () => {
       try {
         await sendProfileContactRequest({
@@ -112,6 +119,34 @@ export default function ContactForm({
               height={195}
             />
           </InputFormError>
+          <CheckboxInput
+            id={terms}
+            label=""
+            checked={formik.values.terms}
+            onChange={() => {
+              formik.setFieldValue(terms, !formik.values.terms)
+            }}
+            name="terms"
+          >
+            <span className={styles.label}>
+              I have read and accept{' '}
+              <Link
+                target="_blank"
+                href="https://glory-licorice-2e2.notion.site/Good-Dev-Hunting-User-Terms-and-Conditions-77b1c52963f94edbb898a36e2a2ac512"
+                className={styles.link}
+              >
+                Terms & conditions
+              </Link>{' '}
+              and{' '}
+              <Link
+                target="_blank"
+                href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
+                className={styles.link}
+              >
+                Privacy Policy
+              </Link>
+            </span>
+          </CheckboxInput>
         </div>
         <div className={styles.btnContainer}>
           <div className={styles.primaryBtn} data-test-id="submitBtn">
