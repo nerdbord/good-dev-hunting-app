@@ -3,10 +3,13 @@
     Good Dev Hunting
 </h1>
 <h3 align="center">
-    Free, open sourced platform for connecting software engineers with tech projects.
+    Free, and open source platform for connecting skilled software engineers with those in need of tech talent.
 </h3>
 
 <p align="center">
+    <a href="https://devhunting.co"> 
+        <img src="https://img.shields.io/badge/Start%20hunting-7d54f1"
+            alt="Visit live"></a>
     <a href="https://github.com/nerdbord/good-dev-hunting-app/graphs/contributors" alt="Contributors">
         <img src="https://img.shields.io/github/contributors/nerdbord/good-dev-hunting-app" /></a>
     <a href="https://discord.gg/KHf8n8zTfJ"> 
@@ -16,12 +19,8 @@
         <img src="https://img.shields.io/github/commit-activity/m/nerdbord/good-dev-hunting-app" /></a>
 </p>
 
-<h3>
-    Good Dev Hunting – Bridging the Tech World
-</h3>
-
 <p>
-    Good Dev Hunting is a unique platform connecting skilled software engineers with those in need of tech talent.
+    Our mission is to democratize the way of finding and hiring talents for tech teams.
 </p>
 
 ---
@@ -31,8 +30,7 @@
 * <b>Advanced Filtering:</b> Sort candidates by technology, seniority, availability, location, and skill area.
 * <b>Customizable Developer Profiles:</b> 1500-character BIOs allowing developers to showcase their unique skills and experiences.
 * <b>Direct Communication:</b> Engage with developers directly through the platform.
-* <b>Seamless Integration:</b> GitHub login for easy access and profile integration.
-* <b>Professional Networking:</b> Direct links to GitHub and LinkedIn profiles.
+* <b>Professional Networking:</b> We make sure that the platform is filled with only quality candidates that are being moderated manually by our team.
 
 ---
 
@@ -50,25 +48,6 @@
 2. Setup the PostgreSQL database and update the `prisma/.env` file with your database credentials.
 3. Run `npx prisma migrate dev` to apply the database schema.
 4. Run `npm run dev` to start the development server.
-
----
-
-### Coding Conventions 📏
-
-- We follow the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript).
-- Consistency is key; we use Prettier and ESLint for code formatting and linting.
-
----
-
-### Testing 🧪
-
-- Our testing suite includes Cypress.
-
----
-
-### Deployment 🚀
-
-- The project is deployed using Vercel, ensuring smooth and continuous integration.
 
 ---
 ### Community and Contributions 👥
