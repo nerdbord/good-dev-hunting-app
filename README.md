@@ -79,6 +79,6 @@ You can use one of these channels to ask a question:
 ---
 ### License & Trademarks 🪪
 
-Good Dev Hunting is open source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can find it here.
+Good Dev Hunting is open source under the GNU General Public License Version 3 or any later version. You can find it here.
 
 Copyright (c) 2024-present Nerdbord OÜ. Good Dev Hunting name and logo are trademarks of Nerdbord OÜ. Please see our [trademark guidelines](https://glory-licorice-2e2.notion.site/Good-Dev-Huntuing-Trademark-Guidelines-0db46ee9541141d4b796bb9c60afb269) for info on acceptable usage.
