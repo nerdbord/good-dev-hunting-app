@@ -64,8 +64,7 @@ export default function ContactForm({
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: handleSendEmail,
-    validateOnChange: false,
-    validateOnBlur: false,
+    validateOnMount: true,
   })
 
   return (
@@ -78,9 +77,14 @@ export default function ContactForm({
             be delivered safely.
           </p>
 
-          <InputFormError error={formik.errors.senderFullName}>
+          <InputFormError
+            error={
+              formik.touched.senderFullName && formik.errors.senderFullName
+            }
+          >
             <TextInput
               label="Your full name"
+              onBlur={formik.handleBlur}
               placeholder="eg. Monica Griffin"
               value={formik.values.senderFullName}
               onChange={formik.handleChange}
@@ -88,9 +92,12 @@ export default function ContactForm({
             />
           </InputFormError>
 
-          <InputFormError error={formik.errors.senderEmail}>
+          <InputFormError
+            error={formik.touched.senderEmail && formik.errors.senderEmail}
+          >
             <TextInput
               label="Your email"
+              onBlur={formik.handleBlur}
               placeholder="eg. monica.griffin@watercompany.com"
               value={formik.values.senderEmail}
               onChange={formik.handleChange}
@@ -98,9 +105,12 @@ export default function ContactForm({
             />
           </InputFormError>
 
-          <InputFormError error={formik.errors.subject}>
+          <InputFormError
+            error={formik.touched.subject && formik.errors.subject}
+          >
             <TextInput
               label="Subject"
+              onBlur={formik.handleBlur}
               placeholder="eg. Job offer - let&rsquo;s talk!"
               value={formik.values.subject}
               onChange={formik.handleChange}
@@ -109,9 +119,12 @@ export default function ContactForm({
             />
           </InputFormError>
 
-          <InputFormError error={formik.errors.message}>
+          <InputFormError
+            error={formik.touched.message && formik.errors.message}
+          >
             <TextArea
               label="Message"
+              onBlur={formik.handleBlur}
               placeholder="eg. Hey! We&rsquo;re looking for a talent in our company..."
               value={formik.values.message}
               onChange={formik.handleChange}
@@ -122,9 +135,14 @@ export default function ContactForm({
           <CheckboxInput
             id={terms}
             label=""
+            onBlur={formik.handleBlur}
             checked={formik.values.terms}
             onChange={() => {
-              formik.setFieldValue(terms, !formik.values.terms)
+              if (formik.values.terms) {
+                formik.setFieldValue(terms, false)
+                return
+              }
+              formik.setFieldValue(terms, true)
             }}
             name="terms"
           >
@@ -153,6 +171,7 @@ export default function ContactForm({
             <Button
               type="submit"
               variant="primary"
+              disabled={!formik.isValid}
               onClick={() => formik.handleSubmit}
               loading={loading}
             >
