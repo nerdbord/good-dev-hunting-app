@@ -105,3 +105,9 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.hideOnMobile {
+  @include mobile {
+    display: none !important;
+  }
+}
