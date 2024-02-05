@@ -20,7 +20,7 @@
 </p>
 
 <p>
-    Our mission is to democratize the way of finding and hiring talents for tech teams that are looking for skilled software engineers.
+    Our mission is to democratize the way of finding and hiring talents for tech teams.
 </p>
 
 ---
@@ -48,25 +48,6 @@
 2. Setup the PostgreSQL database and update the `prisma/.env` file with your database credentials.
 3. Run `npx prisma migrate dev` to apply the database schema.
 4. Run `npm run dev` to start the development server.
-
----
-
-### Coding Conventions 📏
-
-- We follow the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript).
-- Consistency is key; we use Prettier and ESLint for code formatting and linting.
-
----
-
-### Testing 🧪
-
-- Our testing suite includes Cypress.
-
----
-
-### Deployment 🚀
-
-- The project is deployed using Vercel, ensuring smooth and continuous integration.
 
 ---
 ### Community and Contributions 👥
