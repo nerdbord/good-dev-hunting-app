@@ -1,5 +1,5 @@
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
-import { ProfileModel } from '@/app/(profile)/types'
+import { CreateProfileFormValues, ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
@@ -8,17 +8,15 @@ import TextInput from '@/components/TextInput/TextInput'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
-import { useFormik } from 'formik'
+import { useFormik, useFormikContext } from 'formik'
 import { usePlausible } from 'next-plausible'
 import Link from 'next/link'
-import { terms } from '../../my-profile/(components)/CreateProfile/TermsOfUse/TermsOfUse'
 import styles from './ContactForm.module.scss'
 import {
   ContactFormValuesWithTerms,
   initialValues,
   validationSchema,
 } from './schema'
-
 export default function ContactForm({
   userProfile,
   closeModal,
@@ -28,6 +26,8 @@ export default function ContactForm({
   closeModal: () => void
   showSuccessMsg: () => void
 }) {
+  const { values, errors, touched, handleChange, handleBlur, isValid } =
+    useFormikContext<CreateProfileFormValues>()
   const { runAsync, loading } = useAsyncAction()
   const { addToast } = useToast()
   const plausible = usePlausible()
@@ -64,7 +64,8 @@ export default function ContactForm({
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: handleSendEmail,
-    validateOnMount: true,
+    validateOnChange: false,
+    validateOnBlur: false,
   })
 
   return (
@@ -77,14 +78,9 @@ export default function ContactForm({
             be delivered safely.
           </p>
 
-          <InputFormError
-            error={
-              formik.touched.senderFullName && formik.errors.senderFullName
-            }
-          >
+          <InputFormError error={formik.errors.senderFullName}>
             <TextInput
               label="Your full name"
-              onBlur={formik.handleBlur}
               placeholder="eg. Monica Griffin"
               value={formik.values.senderFullName}
               onChange={formik.handleChange}
@@ -92,12 +88,9 @@ export default function ContactForm({
             />
           </InputFormError>
 
-          <InputFormError
-            error={formik.touched.senderEmail && formik.errors.senderEmail}
-          >
+          <InputFormError error={formik.errors.senderEmail}>
             <TextInput
               label="Your email"
-              onBlur={formik.handleBlur}
               placeholder="eg. monica.griffin@watercompany.com"
               value={formik.values.senderEmail}
               onChange={formik.handleChange}
@@ -105,12 +98,9 @@ export default function ContactForm({
             />
           </InputFormError>
 
-          <InputFormError
-            error={formik.touched.subject && formik.errors.subject}
-          >
+          <InputFormError error={formik.errors.subject}>
             <TextInput
               label="Subject"
-              onBlur={formik.handleBlur}
               placeholder="eg. Job offer - let&rsquo;s talk!"
               value={formik.values.subject}
               onChange={formik.handleChange}
@@ -119,12 +109,9 @@ export default function ContactForm({
             />
           </InputFormError>
 
-          <InputFormError
-            error={formik.touched.message && formik.errors.message}
-          >
+          <InputFormError error={formik.errors.message}>
             <TextArea
               label="Message"
-              onBlur={formik.handleBlur}
               placeholder="eg. Hey! We&rsquo;re looking for a talent in our company..."
               value={formik.values.message}
               onChange={formik.handleChange}
@@ -132,48 +119,44 @@ export default function ContactForm({
               height={195}
             />
           </InputFormError>
-          <CheckboxInput
-            id={terms}
-            label=""
-            onBlur={formik.handleBlur}
-            checked={formik.values.terms}
-            onChange={() => {
-              if (formik.values.terms) {
-                formik.setFieldValue(terms, false)
-                return
-              }
-              formik.setFieldValue(terms, true)
-            }}
-            name="terms"
-          >
-            <span className={styles.label}>
-              I have read and accept{' '}
-              <Link
-                target="_blank"
-                href="https://glory-licorice-2e2.notion.site/Good-Dev-Hunting-User-Terms-and-Conditions-77b1c52963f94edbb898a36e2a2ac512"
-                className={styles.link}
-              >
-                Terms & conditions
-              </Link>{' '}
-              and{' '}
-              <Link
-                target="_blank"
-                href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
-                className={styles.link}
-              >
-                Privacy Policy
-              </Link>
-            </span>
-          </CheckboxInput>
+          <InputFormError error={touched.terms && errors.terms}>
+            <CheckboxInput
+              id={'terms'}
+              label=""
+              checked={values.terms}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="terms"
+            >
+              <span className={styles.label}>
+                I have read and accept{' '}
+                <Link
+                  target="_blank"
+                  href="https://glory-licorice-2e2.notion.site/Good-Dev-Hunting-User-Terms-and-Conditions-77b1c52963f94edbb898a36e2a2ac512"
+                  className={styles.link}
+                >
+                  Terms & conditions
+                </Link>{' '}
+                and{' '}
+                <Link
+                  target="_blank"
+                  href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
+                  className={styles.link}
+                >
+                  Privacy Policy
+                </Link>
+              </span>
+            </CheckboxInput>
+          </InputFormError>
         </div>
         <div className={styles.btnContainer}>
           <div className={styles.primaryBtn} data-test-id="submitBtn">
             <Button
               type="submit"
               variant="primary"
-              disabled={!formik.isValid}
               onClick={() => formik.handleSubmit}
               loading={loading}
+              disabled={!isValid}
             >
               Send
             </Button>
