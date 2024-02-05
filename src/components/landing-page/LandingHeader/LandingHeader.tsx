@@ -13,7 +13,6 @@ import { getServerSession } from 'next-auth'
 import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
-  // const session = await getServerSession(authOptions)
   const session = await getServerSession(authOptions)
 
   const user = session?.user?.email
