@@ -15,12 +15,22 @@ const ProfileTopBar = async ({
 }) => {
   return (
     <div className={styles.titleBox}>
-      <span className={styles.title}>Profile preview</span>
+      <div className={styles.mobileProfilePreview}>
+        <span className={styles.title}>Profile preview</span>
+        <div className={styles.toogleMobileView}>
+          <ToggleOpenToWork
+            profileId={profile.id}
+            isOpenForWork={profile.isOpenForWork}
+          />
+        </div>
+      </div>
       <div className={styles.buttonBox}>
-        <ToggleOpenToWork
-          profileId={profile.id}
-          isOpenForWork={profile.isOpenForWork}
-        />
+        <div className={styles.mobileView}>
+          <ToggleOpenToWork
+            profileId={profile.id}
+            isOpenForWork={profile.isOpenForWork}
+          />
+        </div>
         {isConnectedToNerdbord ? (
           <p className={styles.nerdbord}>
             <CheckMarkIcon />

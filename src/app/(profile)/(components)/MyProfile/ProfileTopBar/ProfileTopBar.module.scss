@@ -23,7 +23,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: $spacing-4 12%;
+    padding: $spacing-6 12%;
     justify-content: center;
     background-color: #04080d;
   }
@@ -52,5 +52,21 @@
   display: flex;
   @include mobile {
     display: none;
+  }
+}
+
+.mobileProfilePreview {
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.toogleMobileView {
+  display: none;
+
+  @include mobile {
+    display: flex;
   }
 }

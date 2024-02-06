@@ -24,10 +24,6 @@
   display: inline-block;
   width: 28px;
   height: 16.5px;
-
-  @include mobile {
-    width: 50px;
-  }
 }
 
 .switch input {
