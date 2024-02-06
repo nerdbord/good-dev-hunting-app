@@ -7,8 +7,8 @@ import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { EmploymentType } from '@prisma/client'
 import { usePlausible } from 'next-plausible'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { Avatar } from '../Avatar/Avatar'
 import styles from './VerticalCard.module.scss'
 
 const VerticalCard = ({
@@ -46,13 +46,7 @@ const VerticalCard = ({
 
   return (
     <div className={styles.card} onClick={handleOpenProfile}>
-      <Image
-        width={120}
-        height={120}
-        src={avatarUrl || ProfilePicture}
-        alt="Profile Picture"
-        className={styles.avatar}
-      />
+      <Avatar src={avatarUrl || ProfilePicture} size={120} />
       <div className={styles.person}>
         <h4 className={styles.name}>{fullName}</h4>
         <div className={styles.position}>

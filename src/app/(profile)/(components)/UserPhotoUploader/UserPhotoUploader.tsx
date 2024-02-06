@@ -1,9 +1,9 @@
 'use client'
 import { fetchUserAvatar } from '@/app/(auth)/_actions/fetchUserAvatar'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
+import { Avatar } from '@/components/Avatar/Avatar'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useSession } from 'next-auth/react'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../../../components/Button/Button'
 import GithubUserPhotoUploader from './GithubUserPhotoUploader'
@@ -66,16 +66,7 @@ export const UserPhotoUploader = () => {
           </div>
         )}
         <div className={styles.contentWrapper}>
-          {userImage && (
-            <Image
-              className={styles.picture}
-              src={userImage || ''}
-              alt="User uploaded"
-              width={100}
-              height={100}
-              object-fit="cover"
-            />
-          )}
+          {userImage && <Avatar src={userImage || ''} size={100} />}
           <div className={styles.buttonsWrapper}>
             <Button variant="secondary">
               <label htmlFor="file-input">
