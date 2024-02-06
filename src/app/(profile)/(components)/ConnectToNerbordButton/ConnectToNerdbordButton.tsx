@@ -24,7 +24,7 @@ export const ConnectToNerdbordButton = () => {
           <RotateIcon /> Syncing
         </>
       ) : (
-        'Connect with Nerdbord'
+        'Connect to Nerdbord'
       )}
     </Button>
   )
