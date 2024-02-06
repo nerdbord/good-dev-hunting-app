@@ -29,8 +29,10 @@ const ProfileTopBar = async ({
         ) : (
           <ConnectToNerdbordButton />
         )}
-        <EditProfileButton />
-        <TogglePublishButton state={profile.state} profileId={profile.id} />
+        <div className={styles.mobileView}>
+          <EditProfileButton />
+          <TogglePublishButton state={profile.state} profileId={profile.id} />
+        </div>
       </div>
     </div>
   )
