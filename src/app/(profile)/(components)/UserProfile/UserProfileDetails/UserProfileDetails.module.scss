@@ -44,6 +44,7 @@
   line-height: 28px;
   padding: 40px;
   background-color: #0f1217;
+  white-space: pre-wrap;
   @include mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;
