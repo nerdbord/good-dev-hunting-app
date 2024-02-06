@@ -67,14 +67,17 @@ export const UserPhotoUploader = () => {
         )}
         <div className={styles.contentWrapper}>
           {userImage && (
-            <Image
-              className={styles.picture}
-              src={userImage || ''}
-              alt="User uploaded"
-              width={100}
-              height={100}
-              object-fit="cover"
-            />
+            <div className={styles.pictureWrapper}>
+              {' '}
+              <Image
+                className={styles.picture}
+                src={userImage || ''}
+                alt="User uploaded"
+                width={100}
+                height={100}
+                object-fit="cover"
+              />
+            </div>
           )}
           <div className={styles.buttonsWrapper}>
             <Button variant="secondary">
