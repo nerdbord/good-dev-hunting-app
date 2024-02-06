@@ -1,0 +1,12 @@
+.avatarWrapper {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f1217;
+  }
+  
+  .avatar {
+    width: 100%;
+    object-fit: cover;
+  }
