@@ -47,3 +47,10 @@
   line-height: 20px;
   font-size: 14px;
 }
+
+.mobileView {
+  display: flex;
+  @include mobile {
+    display: none;
+  }
+}
