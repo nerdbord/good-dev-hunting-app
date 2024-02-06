@@ -3,8 +3,8 @@ import { ProfileModel } from '@/app/(profile)/types'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import { SeniorityLevel } from '@/backend/profile/profile.types'
+import { Avatar } from '@/components/Avatar/Avatar'
 import { countries } from '@/data/countries'
-import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
 
 const ProfileMain = async ({
@@ -63,15 +63,7 @@ const ProfileMain = async ({
         </ul>
         <div className={styles.profile}>
           <div className={styles.user}>
-            <Image
-              src={avatarUrl || ''}
-              key={avatarUrl}
-              width={100}
-              height={100}
-              alt="user's avatar"
-              className={styles.avatar}
-              object-fit="cover"
-            />
+            <Avatar src={avatarUrl || ''} size={100} />
             <div className={styles.name}>{profile.fullName}</div>
           </div>
           <div className={styles.locationBox}>
