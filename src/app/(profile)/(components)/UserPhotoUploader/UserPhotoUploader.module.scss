@@ -48,12 +48,20 @@
   gap: 20px;
 }
 
-.picture {
+.pictureWrapper {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #0f1217;
-  color: #0f1217;
+}
+
+.picture {
+  width: 100%;
+  object-fit: cover;
 }
 
 .buttonsWrapper {
