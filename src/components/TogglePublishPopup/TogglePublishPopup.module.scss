@@ -27,6 +27,9 @@
   button {
     padding: 0 55px;
   }
+  @include mobile {
+    width: 90%;
+  }
 }
 
 .header {
