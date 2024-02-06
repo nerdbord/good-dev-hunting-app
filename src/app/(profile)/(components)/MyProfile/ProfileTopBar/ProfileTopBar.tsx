@@ -1,3 +1,4 @@
+import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
 import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
@@ -32,12 +33,22 @@ const ProfileTopBar = async ({
           />
         </div>
         {isConnectedToNerdbord ? (
-          <p className={styles.nerdbord}>
-            <CheckMarkIcon />
-            Nerdbord connected
-          </p>
+          <div className={styles.conectAndLogOutWrapper}>
+            <p className={styles.nerdbord}>
+              <CheckMarkIcon />
+              Nerdbord connected
+            </p>
+            <div className={styles.toogleMobileView}>
+              <LogOutBtn />
+            </div>
+          </div>
         ) : (
-          <ConnectToNerdbordButton />
+          <div className={styles.conectAndLogOutWrapper}>
+            <ConnectToNerdbordButton />
+            <div className={styles.toogleMobileView}>
+              <LogOutBtn />
+            </div>
+          </div>
         )}
         <div className={styles.mobileView}>
           <EditProfileButton />
