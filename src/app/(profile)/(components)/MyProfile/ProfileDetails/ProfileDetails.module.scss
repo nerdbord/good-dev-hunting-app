@@ -6,7 +6,7 @@
   gap: 100px;
   @include mobile {
     padding: $spacing-6 $spacing-4;
-    padding-bottom: 40px;
+    padding-bottom: 150px;
     gap: 0;
     display: flex;
     flex-direction: column;

@@ -39,7 +39,9 @@ const MyProfilePage = async () => {
         isConnectedToNerdbord={isConnectedToNerdbord}
       />
       <ProfileDetails profile={profile} />
-      <LogOutBtn />
+      <div className={styles.disabledOnMobile}>
+        <LogOutBtn />
+      </div>
     </div>
   )
 }
