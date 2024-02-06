@@ -13,6 +13,10 @@
   line-height: 20px;
   color: #e2eaf1;
   margin-right: $spacing-2;
+
+  @include mobile {
+    font-size: 14px !important;
+  }
 }
 
 .switch {
