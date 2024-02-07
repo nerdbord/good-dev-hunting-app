@@ -7,6 +7,9 @@
   border-radius: 4px;
   border: 1px solid #2a2f35;
   transition: box-shadow 300ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .frameWrapper:hover {
@@ -82,18 +85,23 @@
 }
 
 .technology span {
-  min-width: 75px;
+  // min-width: 75px;
   background: #161a1f;
   text-align: center;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px;
+  padding: 8px 2px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: 15px;
-  letter-spacing: -0.24px;
+  letter-spacing: -0.34px;
+  max-width: 95px;
+  overflow: hidden;
+  -webkit-line-clamp: 1;white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 // state status

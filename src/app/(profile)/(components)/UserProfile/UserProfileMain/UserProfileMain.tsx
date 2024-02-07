@@ -1,7 +1,7 @@
 import { mapEmploymentTypes, mapSeniorityLevel } from '@/app/(profile)/mappers'
 import { ProfileModel } from '@/app/(profile)/types'
+import { Avatar } from '@/components/Avatar/Avatar'
 import { countries } from '@/data/countries'
-import Image from 'next/image'
 import { PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 
@@ -20,13 +20,7 @@ const UserProfileMain = ({
     <div className={styles.container}>
       <div className={styles.profile}>
         <div className={styles.user}>
-          <Image
-            src={userProfile.avatarUrl || ''}
-            width={100}
-            height={100}
-            alt="user's avatar"
-            className={styles.avatar}
-          />
+          <Avatar src={userProfile.avatarUrl || ''} size={100} />
           <div className={styles.name}>{userProfile.fullName}</div>
         </div>
         <div className={styles.locationBox}>
