@@ -2,7 +2,7 @@
 import { countries } from '@/data/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useFormikContext } from 'formik'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { TextInputProps } from '../TextInput/TextInput'
 
@@ -16,12 +16,6 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
   const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!isValidCountry(inputValue)) {
-      setFieldValue(LocationPreferencesFormKeys.COUNTRY, '')
-    }
-  }, [inputValue, setFieldValue])
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
@@ -68,6 +62,7 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
         name={name}
         excludeDigits
         onClick={handleCountryInputClick}
+        autoComplete={'new-password'}
       />
       {inputValue.length !== 0 && isDropdownActive && (
         <div ref={dropdownRef}>
