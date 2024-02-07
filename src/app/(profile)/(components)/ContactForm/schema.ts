@@ -7,20 +7,22 @@ export interface ContactFormValues {
   message: string
 }
 
-export interface ContactFormValuesWithTerms extends ContactFormValues {
+export interface ContactFormValuesWithChecks extends ContactFormValues {
   terms: boolean
+  captcha: boolean
 }
 
 export interface ContactFormRequest extends ContactFormValues {
   profileId: string
 }
 
-export const initialValues: ContactFormValuesWithTerms = {
+export const initialValues: ContactFormValuesWithChecks = {
   senderFullName: '',
   senderEmail: '',
   subject: `Job offer - let's talk!`,
   message: '',
   terms: false,
+  captcha: false,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -33,4 +35,7 @@ export const validationSchema = Yup.object().shape({
   terms: Yup.boolean()
     .required('Agreement is required')
     .oneOf([true], 'Agreement is required'),
+  catcha: Yup.boolean()
+    .required('Captcha verification is required')
+    .oneOf([true], 'Captcha verification is required'),
 })
