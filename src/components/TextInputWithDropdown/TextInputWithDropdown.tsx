@@ -12,8 +12,7 @@ import styles from './TextInputWithDropdown.module.scss'
 
 // Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)
 const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
-  const { values, handleChange, setFieldValue } =
-    useFormikContext<ProfileFormValues>()
+  const { values, setFieldValue } = useFormikContext<ProfileFormValues>()
   const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -63,6 +62,7 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
         name={name}
         excludeDigits
         onClick={handleCountryInputClick}
+        autoComplete={'new-password'}
       />
       {inputValue.length !== 0 && isDropdownActive && (
         <div ref={dropdownRef}>
