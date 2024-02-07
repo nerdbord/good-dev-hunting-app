@@ -44,7 +44,7 @@ export const rejectProfile = withSentry(
       await sendDiscordNotificationToModeratorChannel(
         `${
           moderator?.profile?.fullName || 'Moderator'
-        } rejected ${profileOwnerUsername} profile. [Show Profile](${
+        } rejected ${profileOwnerUsername} profile. Reason: ${reason} [Show Profile](${
           process.env.NEXT_PUBLIC_APP_ORIGIN_URL
         }/moderation/profile/${updatedProfile.userId})`,
       )
