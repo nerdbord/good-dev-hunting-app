@@ -13,3 +13,9 @@
   font-weight: 500;
   line-height: 20px;
 }
+
+.disabledOnMobile {
+  @include mobile {
+    display: none;
+  }
+}
