@@ -42,9 +42,9 @@ export const rejectProfile = withSentry(
     try {
       await sendProfileRejectedEmail(profile?.userEmail, reason)
       await sendDiscordNotificationToModeratorChannel(
-        `${
-          moderator?.profile?.fullName || 'Moderator'
-        } rejected ${profileOwnerUsername} profile. [Show Profile](${
+        `⛔️ ${moderator?.profile?.fullName || 'Moderator'} rejected ${
+          updatedProfile.fullName
+        } profile. [Show Profile](${
           process.env.NEXT_PUBLIC_APP_ORIGIN_URL
         }/moderation/profile/${updatedProfile.userId})`,
       )

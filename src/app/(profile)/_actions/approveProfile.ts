@@ -32,9 +32,9 @@ export const approveProfile = withSentry(
     )
 
     await sendDiscordNotificationToModeratorChannel(
-      `${
-        moderator?.profile?.fullName || 'Moderator'
-      } approved ${profileOwnerUsername} profile. [Show Profile](${
+      `✅ ${moderator?.profile?.fullName || 'Moderator'} approved ${
+        updatedProfile.fullName
+      } profile. [Show Profile](${
         process.env.NEXT_PUBLIC_APP_ORIGIN_URL
       }/moderation/profile/${updatedProfile.userId})`,
     )
