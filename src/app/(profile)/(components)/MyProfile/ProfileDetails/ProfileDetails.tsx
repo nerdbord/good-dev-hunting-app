@@ -1,4 +1,6 @@
 import { ProfileModel } from '@/app/(profile)/types'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
@@ -38,7 +40,10 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
-          <p className={styles.desc}>{profile?.bio}</p>
+          {/* <p className={styles.desc}>{profile?.bio}</p> */}
+          <ReactMarkdown className={styles.desc} remarkPlugins={[remarkGfm]}>
+            {profile?.bio || 'This user has not written a bio yet.'}
+          </ReactMarkdown>
         </div>
       </section>
     </>
