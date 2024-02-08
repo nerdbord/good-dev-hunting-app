@@ -1,24 +1,18 @@
 import { NextResponse } from 'next/server'
 
-export function middleware(request: any) {
-  const basicAuth = request.headers.get('authorization')
-
+export function middleware(req: Request) {
   const USERNAME = process.env.BASIC_AUTH_USERNAME
   const PASSWORD = process.env.BASIC_AUTH_PASSWORD
 
-  const authString = `Basic ${Buffer.from(`${USERNAME}:${PASSWORD}`).toString(
-    'base64',
-  )}`
+  const basicAuth = req.headers.get('authorization')
 
-  // const isProtected = Boolean(USERNAME && PASSWORD)
-  //
-  // if (!isProtected) {
-  //   return NextResponse.next()
-  // }
+  if (basicAuth) {
+    const authValue = basicAuth.split(' ')[1]
+    const [user, pwd] = atob(authValue).split(':')
 
-  if (basicAuth === authString) {
-    // Authentication successful
-    return NextResponse.next()
+    if (user === USERNAME && pwd === PASSWORD) {
+      return NextResponse.next()
+    }
   } else {
     // Construct a response for the unauthorized request
     const response = new Response('Authentication required', {
