@@ -1,14 +1,13 @@
 'use client'
 import { CreateProfileFormValues } from '@/app/(profile)/types'
+import ImportantIcon from '@/assets/icons/ImportantIcon'
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
-  CreateLink,
   ListsToggle,
   MDXEditor,
   UndoRedo,
   headingsPlugin,
-  linkDialogPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   toolbarPlugin,
@@ -16,9 +15,10 @@ import {
 import '@mdxeditor/editor/style.css'
 import { useFormikContext } from 'formik'
 import React from 'react'
+import Tooltip from '../Tooltip/Tooltip'
 import styles from './TextArea.module.scss'
 
-interface TextAreaProps {
+export interface TextAreaProps {
   label: string
   value: string
   placeholder: string
@@ -34,27 +34,31 @@ interface TextAreaProps {
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
-  placeholder,
   label,
   value,
-  onChange,
   addImportantIcon,
   name,
-  excludeDigits,
-  maxLength,
-  height,
   tooltipText,
-  dataTestId,
-  onBlur,
 }) => {
   const { setFieldValue } = useFormikContext<CreateProfileFormValues>()
+  const maxLength = 1500
 
   const handleChange = (newValue: string) => {
-    setFieldValue(name, newValue)
+    if (newValue.length <= maxLength) {
+      setFieldValue(name, newValue)
+    }
   }
 
   return (
     <div>
+      <label className={styles.formLabel}>
+        {label}
+        {addImportantIcon && (
+          <Tooltip text={tooltipText || null}>
+            <ImportantIcon />
+          </Tooltip>
+        )}
+      </label>
       <MDXEditor
         className={`${styles.mdxEditorCustom} dark-theme dark-editor`}
         onChange={(newValue) => handleChange(newValue)}
@@ -65,7 +69,6 @@ const TextArea: React.FC<TextAreaProps> = ({
               <>
                 {' '}
                 <UndoRedo />
-                <CreateLink />
                 <ListsToggle />
                 <BlockTypeSelect />
                 <BoldItalicUnderlineToggles />
@@ -74,7 +77,6 @@ const TextArea: React.FC<TextAreaProps> = ({
           }),
           headingsPlugin(),
           listsPlugin(),
-          linkDialogPlugin(),
           markdownShortcutPlugin(),
         ]}
       />

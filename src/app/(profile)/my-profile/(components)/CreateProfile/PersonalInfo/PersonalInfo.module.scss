@@ -91,3 +91,30 @@
 .errorMsg p {
   color: red;
 }
+
+.desc {
+  color: #e2eaf1;
+  font-size: 16px;
+  line-height: 28px;
+  padding: 40px;
+  background-color: #0f1217;
+  //white-space: pre-wrap;
+  @include mobile {
+    padding: $spacing-5 $spacing-4;
+    padding-right: $spacing-6;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  li {
+    color: white;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+}

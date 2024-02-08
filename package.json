@@ -47,6 +47,7 @@
     "react-icons": "^4.9.0",
     "react-markdown": "^9.0.1",
     "react-select": "^5.7.3",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.63.4",
     "yup": "^1.2.0"
