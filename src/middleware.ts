@@ -10,11 +10,11 @@ export function middleware(request: any) {
     'base64',
   )}`
 
-  const isProtected = USERNAME && PASSWORD
-
-  if (!isProtected) {
-    return NextResponse.next()
-  }
+  // const isProtected = Boolean(USERNAME && PASSWORD)
+  //
+  // if (!isProtected) {
+  //   return NextResponse.next()
+  // }
 
   if (basicAuth === authString) {
     // Authentication successful
