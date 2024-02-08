@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@mdxeditor/editor'],
+  reactStrictMode: true,
+  webpack: (config) => {
+    // this will override the experiments
+    config.experiments = { ...config.experiments, topLevelAwait: true }
+    // this will just update topLevelAwait property of config.experiments
+    // config.experiments.topLevelAwait = true
+    return config
+  },
+
   sassOptions: {
     additionalData: `@import "src/styles/mixins.scss"; @import "src/styles/tokens.scss";`,
   },

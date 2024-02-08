@@ -35,10 +35,29 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 10px;
+  width: auto;
 }
 
 .typed {
   background-color: #0f1217;
   color: rgba(226, 234, 241, 1);
   border: 1px solid #2a2f35;
+}
+
+.mdxEditorCustom {
+  --mdx-ul-color: white;
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  li {
+    color: white;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
 }
