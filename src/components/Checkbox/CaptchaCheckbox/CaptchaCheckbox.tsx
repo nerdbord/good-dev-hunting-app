@@ -1,3 +1,4 @@
+import { captchaValidation } from '@/app/(profile)/_actions/captchaValidation'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -20,7 +21,6 @@ export default function CaptchaCheckbox(props: CaptchaCheckboxProps) {
   const { addToast } = useToast()
   // not sure if this is the proper way to handle such case
   if (!process.env.NEXT_PUBLIC_HIDDEN_CAPTCHA_SITE_KEY) {
-    // TODO: add sentry method handling the error
     addToast(
       'Captcha internal error, please try again later',
       ToastStatus.HIDDEN,
@@ -35,9 +35,17 @@ export default function CaptchaCheckbox(props: CaptchaCheckboxProps) {
     }
   }
 
-  const handleCaptchaChange = (value: string | null) => {
+  const handleCaptchaChange = async (value: string | null) => {
     if (value) {
-      props.onChange(props.name, true)
+      try {
+        const captchaResult = await captchaValidation(value)
+        captchaResult && props.onChange(props.name, true)
+      } catch (error) {
+        addToast(
+          'Captcha internal error, please try again later',
+          ToastStatus.HIDDEN,
+        )
+      }
     }
     setVerificationComplete(true)
   }
