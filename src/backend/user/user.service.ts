@@ -62,22 +62,13 @@ export async function findUserByGithubCredentials(
     if (!foundUserByEmail) {
       return null
     }
-    await prisma.gitHubDetails.update({
-      data: { username },
-      where: { id: foundUserByEmail.githubDetails?.id },
-    })
+    await updateGithubDetailsById(foundUserByEmail.githubDetails?.id || '')
     return foundUserByEmail
   }
   if (email !== foundUserByUsername.user.email) {
-    await prisma.user.update({
-      data: {
-        email,
-      },
-      where: {
-        id: foundUserByUsername.user.id,
-      },
-    })
+    await updateUserDataByUserId(foundUserByUsername.user.id)
   }
+
   // formatting the user in a way so it would certainly return the same value as usual (by usual i mean findUserByEmail return value)
   const foundUser = {
     ...foundUserByUsername.user,
@@ -85,6 +76,24 @@ export async function findUserByGithubCredentials(
     githubDetails: { ...foundUserByUsername, user: undefined },
   }
   return foundUser
+
+  async function updateUserDataByUserId(id: string) {
+    await prisma.user.update({
+      data: {
+        email,
+      },
+      where: {
+        id: id,
+      },
+    })
+  }
+
+  async function updateGithubDetailsById(githubDetailsId: string) {
+    await prisma.gitHubDetails.update({
+      data: { username },
+      where: { id: githubDetailsId },
+    })
+  }
 }
 
 export async function findUserByGithubUsername(username: string) {
