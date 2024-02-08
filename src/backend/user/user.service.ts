@@ -52,6 +52,57 @@ export async function findUserByEmail(email: string) {
   return foundUser
 }
 
+export async function findUserByGithubCredentials(
+  username: string,
+  email: string,
+) {
+  const foundUserByUsername = await findUserByGithubUsername(username)
+  if (!foundUserByUsername) {
+    const foundUserByEmail = await findUserByEmail(email)
+    if (!foundUserByEmail) {
+      return null
+    }
+    await prisma.gitHubDetails.update({
+      data: { username },
+      where: { id: foundUserByEmail.githubDetails?.id },
+    })
+    return foundUserByEmail
+  }
+  if (email !== foundUserByUsername.user.email) {
+    await prisma.user.update({
+      data: {
+        email,
+      },
+      where: {
+        id: foundUserByUsername.user.id,
+      },
+    })
+  }
+  // formatting the user in a way so it would certainly return the same value as usual (by usual i mean findUserByEmail return value)
+  const foundUser = {
+    ...foundUserByUsername.user,
+    profile: foundUserByUsername.user.profile,
+    githubDetails: { ...foundUserByUsername, user: undefined },
+  }
+  return foundUser
+}
+
+export async function findUserByGithubUsername(username: string) {
+  const foundUser = await prisma.gitHubDetails.findUnique({
+    where: {
+      username,
+    },
+    include: {
+      user: {
+        include: {
+          profile: true,
+        },
+      },
+    },
+  })
+  return foundUser
+}
+
 export async function doesUserExist(email: string) {
   const foundUser = await findUserByEmail(email)
 
