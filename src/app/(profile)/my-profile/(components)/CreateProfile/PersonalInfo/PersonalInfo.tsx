@@ -1,9 +1,11 @@
 'use client'
 import { UserPhotoUploader } from '@/app/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { CreateProfileFormValues } from '@/app/(profile)/types'
+import ImportantIcon from '@/assets/icons/ImportantIcon'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
+import Tooltip from '@/components/Tooltip/Tooltip'
 import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRef, useState } from 'react'
@@ -115,11 +117,27 @@ const PersonalInfo = () => {
             </InputFormError>
           </div>
         ) : (
-          <div onClick={toogleEditBio}>
-            <ReactMarkdown className={styles.desc} rehypePlugins={[rehypeRaw]}>
-              {values.bio || 'This user has not written a bio yet.'}
-            </ReactMarkdown>
-          </div>
+          <>
+            <label className={styles.formLabel}>
+              {'Bio'}
+              <Tooltip
+                text={
+                  '"Let others know you - write a few sentences about yourself."' ||
+                  null
+                }
+              >
+                <ImportantIcon />
+              </Tooltip>
+            </label>
+            <div onClick={toogleEditBio}>
+              <ReactMarkdown
+                className={styles.desc}
+                rehypePlugins={[rehypeRaw]}
+              >
+                {values.bio || 'This user has not written a bio yet.'}
+              </ReactMarkdown>
+            </div>
+          </>
         )}
       </div>
     </div>
