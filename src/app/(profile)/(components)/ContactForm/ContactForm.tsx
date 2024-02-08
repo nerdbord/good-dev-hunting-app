@@ -152,7 +152,7 @@ export default function ContactForm({
           <InputFormError error={formik.errors.captcha}>
             <CaptchaCheckbox
               id="captcha"
-              label="I am not a robot"
+              label="Confirm your humanity with a quick click"
               name="captcha"
               checked={formik.values.captcha}
               onChange={formik.setFieldValue}

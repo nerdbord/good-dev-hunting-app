@@ -1,4 +1,4 @@
-import { captchaValidation } from '@/app/(profile)/_actions/captchaValidation'
+import { validateCaptcha } from '@/app/(profile)/_actions/validateCaptcha'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -20,13 +20,6 @@ export type CaptchaCheckboxProps = {
 export default function CaptchaCheckbox(props: CaptchaCheckboxProps) {
   const { addToast } = useToast()
   // not sure if this is the proper way to handle such case
-  if (!process.env.NEXT_PUBLIC_HIDDEN_CAPTCHA_SITE_KEY) {
-    addToast(
-      'Captcha internal error, please try again later',
-      ToastStatus.HIDDEN,
-    )
-    return
-  }
   const captchaRef = useRef<ReCAPTCHA>(null)
   const [verificationComplete, setVerificationComplete] = useState(false)
   const handleChange = () => {
@@ -36,15 +29,16 @@ export default function CaptchaCheckbox(props: CaptchaCheckboxProps) {
   }
 
   const handleCaptchaChange = async (value: string | null) => {
+    if (!process.env.NEXT_PUBLIC_HIDDEN_CAPTCHA_SITE_KEY) {
+      addToast('Captcha site key is not set', ToastStatus.HIDDEN)
+      return
+    }
     if (value) {
       try {
-        const captchaResult = await captchaValidation(value)
+        const captchaResult = await validateCaptcha(value)
         captchaResult && props.onChange(props.name, true)
       } catch (error) {
-        addToast(
-          'Captcha internal error, please try again later',
-          ToastStatus.HIDDEN,
-        )
+        addToast(JSON.stringify(error), ToastStatus.HIDDEN)
       }
     }
     setVerificationComplete(true)
@@ -64,7 +58,7 @@ export default function CaptchaCheckbox(props: CaptchaCheckboxProps) {
         size="invisible"
         theme="dark"
         className={styles.captcha}
-        sitekey={process.env.NEXT_PUBLIC_HIDDEN_CAPTCHA_SITE_KEY}
+        sitekey={process.env.NEXT_PUBLIC_HIDDEN_CAPTCHA_SITE_KEY || ''}
         ref={captchaRef}
         onChange={handleCaptchaChange}
       ></ReCAPTCHA>
