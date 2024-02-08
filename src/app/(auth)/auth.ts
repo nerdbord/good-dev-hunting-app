@@ -1,5 +1,5 @@
 import { registerNewUser } from '@/app/(auth)/_actions/registerNewUser'
-import { findUserByEmail } from '@/backend/user/user.service'
+import { findUserByGithubCredentials } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
@@ -27,8 +27,12 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
+      console.log('TOKEN: ', token)
+      console.log('USER: ', user)
       const foundUser =
-        token && token.email ? await findUserByEmail(token.email) : null
+        token && token.email && token.name
+          ? await findUserByGithubCredentials(token.name, token.email)
+          : null
 
       if (!foundUser) {
         return null
@@ -38,10 +42,14 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ user, profile: githubDetails }): Promise<boolean> {
       const castedUser = user as UserAuthed
+      console.log(castedUser)
       const castedGithubDetails = githubDetails as GitHubProfileAuthed
 
       if (user && githubDetails) {
-        const foundUser = await findUserByEmail(castedUser.email)
+        const foundUser = await findUserByGithubCredentials(
+          castedUser.name,
+          castedUser.email,
+        )
 
         if (foundUser) {
           return true
