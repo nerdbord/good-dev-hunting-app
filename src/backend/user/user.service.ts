@@ -2,6 +2,7 @@ import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, Role } from '@prisma/client'
+import { updateGithubDetailsById } from '../github-details/github-details.service'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
 
@@ -52,64 +53,29 @@ export async function findUserByEmail(email: string) {
   return foundUser
 }
 
-export async function findUserByGithubCredentials(
-  username: string,
-  email: string,
-) {
-  const foundUserByUsername = await findUserByGithubUsername(username)
-  if (!foundUserByUsername) {
-    const foundUserByEmail = await findUserByEmail(email)
-    if (!foundUserByEmail) {
-      return null
-    }
-    await updateGithubDetailsById(foundUserByEmail.githubDetails?.id || '')
-    return foundUserByEmail
-  }
-  if (email !== foundUserByUsername.user.email) {
-    await updateUserDataByUserId(foundUserByUsername.user.id)
-  }
-
-  // formatting the user in a way so it would certainly return the same value as usual (by usual i mean findUserByEmail return value)
-  const foundUser = {
-    ...foundUserByUsername.user,
-    profile: foundUserByUsername.user.profile,
-    githubDetails: { ...foundUserByUsername, user: undefined },
-  }
-  return foundUser
-
-  async function updateUserDataByUserId(id: string) {
-    await prisma.user.update({
-      data: {
-        email,
-      },
-      where: {
-        id: id,
-      },
-    })
-  }
-
-  async function updateGithubDetailsById(githubDetailsId: string) {
-    await prisma.gitHubDetails.update({
-      data: { username },
-      where: { id: githubDetailsId },
-    })
-  }
-}
-
-export async function findUserByGithubUsername(username: string) {
-  const foundUser = await prisma.gitHubDetails.findUnique({
+export async function syncGithubCredentialsWithUser(credentials: {
+  username: string
+  email: string
+}) {
+  const foundCredentials = await prisma.gitHubDetails.findFirst({
     where: {
-      username,
+      OR: [
+        { username: credentials.username },
+        { user: { email: credentials.email } },
+      ],
     },
     include: {
-      user: {
-        include: {
-          profile: true,
-        },
-      },
+      user: true,
     },
   })
-  return foundUser
+  if (foundCredentials) {
+    return await updateGithubDetailsById(foundCredentials.id, {
+      username: credentials.username,
+      email: credentials.email,
+    })
+  }
+
+  return null
 }
 
 export async function doesUserExist(email: string) {
