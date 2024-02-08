@@ -12,7 +12,11 @@ export function middleware(request: any) {
 
   const isStaging = process.env.NODE_ENV === 'test'
 
-  if (!isStaging) {
+  console.log('isStaging', isStaging)
+  console.log('basicAuth', basicAuth)
+  console.log('password', PASSWORD)
+
+  if (USERNAME && PASSWORD) {
     return NextResponse.next()
   }
 
