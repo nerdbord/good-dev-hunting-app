@@ -4,7 +4,6 @@ import { CreateProfileFormValues } from '@/app/(profile)/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
-import useOutsideClick from '@/hooks/useOutsideClick'
 import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRef, useState } from 'react'
@@ -28,7 +27,7 @@ const PersonalInfo = () => {
 
   const toogleEditBio = () => setIsEditBio(!isEditBio)
 
-  useOutsideClick(editRef, () => setIsEditBio(false))
+  // useOutsideClick(editRef, () => setIsEditBio(false))
 
   const { data: session } = useSession()
 
