@@ -10,13 +10,9 @@ export function middleware(request: any) {
     'base64',
   )}`
 
-  const isStaging = process.env.NODE_ENV === 'test'
+  const isProtected = USERNAME && PASSWORD
 
-  console.log('isStaging', isStaging)
-  console.log('basicAuth', basicAuth)
-  console.log('password', PASSWORD)
-
-  if (USERNAME && PASSWORD) {
+  if (!isProtected) {
     return NextResponse.next()
   }
 
