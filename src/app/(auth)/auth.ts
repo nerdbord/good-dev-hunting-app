@@ -27,8 +27,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log('TOKEN: ', token)
-      console.log('USER: ', user)
       const foundUser =
         token && token.email && token.name
           ? await findUserByGithubCredentials(token.name, token.email)
@@ -42,7 +40,6 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ user, profile: githubDetails }): Promise<boolean> {
       const castedUser = user as UserAuthed
-      console.log(castedUser)
       const castedGithubDetails = githubDetails as GitHubProfileAuthed
 
       if (user && githubDetails) {
