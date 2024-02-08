@@ -1,7 +1,7 @@
 'use server'
 import { withSentry } from '@/utils/errHandling'
 
-export const captchaValidation = withSentry(async (captchaValue: string) => {
+export const validateCaptcha = withSentry(async (captchaValue: string) => {
   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRET_HIDDEN_CAPTCHA_KEY}&response=${captchaValue}`
   try {
     const response = await fetch(url, {
