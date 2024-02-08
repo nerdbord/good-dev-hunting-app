@@ -4,15 +4,19 @@ import ImportantIcon from '@/assets/icons/ImportantIcon'
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
+  CreateLink,
   ListsToggle,
   MDXEditor,
   UndoRedo,
   headingsPlugin,
+  linkDialogPlugin,
+  linkPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   toolbarPlugin,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
+
 import { useFormikContext } from 'formik'
 import React from 'react'
 import Tooltip from '../Tooltip/Tooltip'
@@ -72,9 +76,12 @@ const TextArea: React.FC<TextAreaProps> = ({
                 <ListsToggle />
                 <BlockTypeSelect />
                 <BoldItalicUnderlineToggles />
+                <CreateLink />
               </>
             ),
           }),
+          linkPlugin(),
+          linkDialogPlugin(),
           headingsPlugin(),
           listsPlugin(),
           markdownShortcutPlugin(),
