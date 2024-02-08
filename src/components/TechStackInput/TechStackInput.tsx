@@ -43,7 +43,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)
-  const maxChips = 8
+  const maxChips = 16
 
   const [inputValue, setInputValue] =
     useState<DropdownOption>(initialFilterOption)
