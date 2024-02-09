@@ -40,7 +40,6 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
-          {/* <p className={styles.desc}>{profile?.bio}</p> */}
           <ReactMarkdown className={styles.desc} rehypePlugins={[rehypeRaw]}>
             {profile?.bio || 'This user has not written a bio yet.'}
           </ReactMarkdown>
