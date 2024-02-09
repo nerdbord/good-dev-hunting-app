@@ -1,8 +1,9 @@
 import { prisma } from '@/lib/prismaClient'
+import { Prisma } from '@prisma/client'
 
 export async function updateGithubDetailsById(
   id: string,
-  credentials: { username: string; email: string },
+  credentials: Prisma.GitHubDetailsUpdateInput,
 ) {
   const result = await prisma.gitHubDetails.update({
     data: { ...credentials },
