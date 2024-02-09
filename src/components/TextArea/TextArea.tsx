@@ -1,28 +1,10 @@
 'use client'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
-import {
-  BlockTypeSelect,
-  BoldItalicUnderlineToggles,
-  CreateLink,
-  ListsToggle,
-  MDXEditor,
-  UndoRedo,
-  headingsPlugin,
-  linkDialogPlugin,
-  linkPlugin,
-  listsPlugin,
-  markdownShortcutPlugin,
-  toolbarPlugin,
-} from '@mdxeditor/editor'
-import '@mdxeditor/editor/style.css'
-
-import { useFormikContext } from 'formik'
-import React from 'react'
-import Tooltip from '../Tooltip/Tooltip'
+import Tooltip from '@/components/Tooltip/Tooltip'
+import React, { ChangeEvent, useState } from 'react'
 import styles from './TextArea.module.scss'
 
-export interface TextAreaProps {
+interface TextAreaProps {
   label: string
   value: string
   placeholder: string
@@ -38,23 +20,30 @@ export interface TextAreaProps {
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
+  placeholder,
   label,
   value,
+  onChange,
   addImportantIcon,
   name,
+  excludeDigits,
+  maxLength,
+  height,
   tooltipText,
+  dataTestId,
+  onBlur,
 }) => {
-  const { setFieldValue } = useFormikContext<CreateProfileFormValues>()
-  const maxLength = 1500
-
-  const handleChange = (newValue: string) => {
-    if (newValue.length <= maxLength) {
-      setFieldValue(name, newValue)
+  const [isTyped, setIsTyped] = useState(false)
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    if (excludeDigits) {
+      event.target.value = event.target.value.replace(/[0-9]/g, '')
     }
+    setIsTyped(event.target.value.length > 0)
+    onChange(event)
   }
 
   return (
-    <div>
+    <div className={styles.formItem}>
       <label className={styles.formLabel}>
         {label}
         {addImportantIcon && (
@@ -63,29 +52,16 @@ const TextArea: React.FC<TextAreaProps> = ({
           </Tooltip>
         )}
       </label>
-      <MDXEditor
-        className={`${styles.mdxEditorCustom} dark-theme dark-editor`}
-        onChange={(newValue) => handleChange(newValue)}
-        markdown={value}
-        plugins={[
-          toolbarPlugin({
-            toolbarContents: () => (
-              <>
-                {' '}
-                <UndoRedo />
-                <ListsToggle />
-                <BlockTypeSelect />
-                <BoldItalicUnderlineToggles />
-                <CreateLink />
-              </>
-            ),
-          }),
-          linkPlugin(),
-          linkDialogPlugin(),
-          headingsPlugin(),
-          listsPlugin(),
-          markdownShortcutPlugin(),
-        ]}
+      <textarea
+        className={`${styles.formTextarea} ${isTyped ? styles.typed : ''}`}
+        style={height ? { height: `${height}px` } : {}}
+        value={value}
+        placeholder={placeholder}
+        onChange={handleChange}
+        name={name}
+        maxLength={maxLength}
+        data-testid={dataTestId}
+        onBlur={onBlur}
       />
     </div>
   )

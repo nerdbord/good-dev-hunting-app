@@ -3,12 +3,12 @@ import { UserPhotoUploader } from '@/app/(profile)/(components)/UserPhotoUploade
 import { CreateProfileFormValues } from '@/app/(profile)/types'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import InputFormError from '@/components/InputFormError/InputFormError'
-import TextArea from '@/components/TextArea/TextArea'
+import BioTextArea from '@/components/TextArea/BioTextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import styles from './PersonalInfo.module.scss'
@@ -25,11 +25,8 @@ const PersonalInfo = () => {
     useFormikContext<CreateProfileFormValues>()
 
   const [isEditBio, setIsEditBio] = useState<boolean>(false)
-  const editRef = useRef(null)
 
   const toogleEditBio = () => setIsEditBio(!isEditBio)
-
-  // useOutsideClick(editRef, () => setIsEditBio(false))
 
   const { data: session } = useSession()
 
@@ -90,7 +87,7 @@ const PersonalInfo = () => {
           />
         </InputFormError>
         {isEditBio ? (
-          <div ref={editRef}>
+          <div>
             <InputFormError
               error={
                 touched[PersonalInfoFormKeys.BIO] &&
@@ -98,7 +95,7 @@ const PersonalInfo = () => {
               }
             >
               <div className={styles.lettersCountParent}>
-                <TextArea
+                <BioTextArea
                   onBlur={handleBlur}
                   label="Bio"
                   placeholder="Introduce yourself with few sentences"

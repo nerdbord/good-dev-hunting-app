@@ -4,7 +4,7 @@ import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
-import TextAreaForContactForm from '@/components/TextArea/TextAreaForContactForm'
+import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -109,7 +109,7 @@ export default function ContactForm({
           </InputFormError>
 
           <InputFormError error={formik.errors.message}>
-            <TextAreaForContactForm
+            <TextArea
               label="Message"
               placeholder="eg. Hey! We&rsquo;re looking for a talent in our company..."
               value={formik.values.message}
