@@ -27,6 +27,7 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 16px;
+  min-height: 90px;
 }
 
 .profile {
@@ -99,7 +100,8 @@
   letter-spacing: -0.34px;
   max-width: 95px;
   overflow: hidden;
-  -webkit-line-clamp: 1;white-space: nowrap;
+  -webkit-line-clamp: 1;
+  white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
 }
