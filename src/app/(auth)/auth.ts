@@ -26,11 +26,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, profile: githubDetails }) {
+      const castedGithubDetails = githubDetails as GitHubProfileAuthed
       const foundUser =
         token && token.email && token.name
           ? await syncUserWithGithub({
-              username: token.name,
+              username: castedGithubDetails.login,
               email: token.email,
             })
           : null
