@@ -1,5 +1,5 @@
 import { registerNewUser } from '@/app/(auth)/_actions/registerNewUser'
-import { syncGithubCredentialsWithUser } from '@/backend/user/user.service'
+import { syncUserWithGithub } from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       const foundUser =
         token && token.email && token.name
-          ? await syncGithubCredentialsWithUser({
+          ? await syncUserWithGithub({
               username: token.name,
               email: token.email,
             })
@@ -46,8 +46,8 @@ export const authOptions: NextAuthOptions = {
       const castedGithubDetails = githubDetails as GitHubProfileAuthed
 
       if (user && githubDetails) {
-        const foundUser = await syncGithubCredentialsWithUser({
-          username: castedUser.name,
+        const foundUser = await syncUserWithGithub({
+          username: castedGithubDetails.login,
           email: castedUser.email,
         })
 
