@@ -53,6 +53,30 @@ export async function syncUserWithGithub(credentials: {
   })
 
   if (foundUser) {
+    const hasEmailChanged = foundUser.email !== credentials.email
+    const hasUsernameChanged =
+      foundUser.githubDetails?.username !== credentials.username
+
+    if (hasEmailChanged || hasUsernameChanged) {
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: foundUser.id,
+        },
+        data: {
+          ...(hasEmailChanged && { email: credentials.email }),
+          ...(hasUsernameChanged && {
+            githubDetails: {
+              update: {
+                username: credentials.username,
+              },
+            },
+          }),
+        },
+      })
+
+      return updatedUser
+    }
+
     return foundUser
   }
 
