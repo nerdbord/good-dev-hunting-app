@@ -1,4 +1,5 @@
 import { ProfileModel } from '@/app/(profile)/types'
+import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import styles from './UserProfileDetails.module.scss'
 
 const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
@@ -32,7 +33,9 @@ const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <div className={styles.title}>Bio</div>
-          <div className={styles.desc}>{userProfile?.bio}</div>
+          <MarkdownReader
+            text={userProfile.bio || 'This user has not written a bio yet.'}
+          />
         </div>
       </div>
     </>
