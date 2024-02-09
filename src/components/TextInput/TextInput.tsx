@@ -21,6 +21,7 @@ export interface TextInputProps {
   maxLength?: number
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
   customClass?: string
+  autoComplete?: string
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -39,6 +40,7 @@ const TextInput: React.FC<TextInputProps> = ({
   maxLength,
   onBlur,
   customClass = '',
+  autoComplete,
 }) => {
   const [isTyped, setIsTyped] = useState(false)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +76,7 @@ const TextInput: React.FC<TextInputProps> = ({
         data-testid={dataTestId}
         maxLength={maxLength}
         onBlur={onBlur}
+        autoComplete={autoComplete}
       />
     </div>
   )

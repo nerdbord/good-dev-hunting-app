@@ -1,11 +1,16 @@
 'use client'
 import { UserPhotoUploader } from '@/app/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { CreateProfileFormValues } from '@/app/(profile)/types'
+import ImportantIcon from '@/assets/icons/ImportantIcon'
 import InputFormError from '@/components/InputFormError/InputFormError'
-import TextArea from '@/components/TextArea/TextArea'
+import BioTextArea from '@/components/TextArea/BioTextArea'
 import TextInput from '@/components/TextInput/TextInput'
+import Tooltip from '@/components/Tooltip/Tooltip'
 import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
+import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import styles from './PersonalInfo.module.scss'
 
 export enum PersonalInfoFormKeys {
@@ -18,6 +23,10 @@ export enum PersonalInfoFormKeys {
 const PersonalInfo = () => {
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
+
+  const [isEditBio, setIsEditBio] = useState<boolean>(false)
+
+  const toogleEditBio = () => setIsEditBio(!isEditBio)
 
   const { data: session } = useSession()
 
@@ -77,33 +86,58 @@ const PersonalInfo = () => {
             dataTestId={PersonalInfoFormKeys.LINKEDIN}
           />
         </InputFormError>
-        <InputFormError
-          error={
-            touched[PersonalInfoFormKeys.BIO] &&
-            errors[PersonalInfoFormKeys.BIO]
-          }
-        >
-          <div className={styles.lettersCountParent}>
-            <TextArea
-              onBlur={handleBlur}
-              label="Bio"
-              placeholder="Introduce yourself with few sentences"
-              value={values[PersonalInfoFormKeys.BIO]}
-              addImportantIcon={true}
-              onChange={handleChange}
-              name={PersonalInfoFormKeys.BIO}
-              maxLength={1500}
-              tooltipText="Let others know you - write a few sentences about yourself."
-              dataTestId={PersonalInfoFormKeys.BIO}
-            />
-            <div className={styles.lettersCount}>
-              {values[PersonalInfoFormKeys.BIO].length} / 1500 characters
-            </div>
+        {isEditBio ? (
+          <div>
+            <InputFormError
+              error={
+                touched[PersonalInfoFormKeys.BIO] &&
+                errors[PersonalInfoFormKeys.BIO]
+              }
+            >
+              <div className={styles.lettersCountParent}>
+                <BioTextArea
+                  onBlur={handleBlur}
+                  label="Bio"
+                  placeholder="Introduce yourself with few sentences"
+                  value={values[PersonalInfoFormKeys.BIO]}
+                  addImportantIcon={true}
+                  onChange={handleChange}
+                  name={PersonalInfoFormKeys.BIO}
+                  maxLength={1500}
+                  tooltipText="Let others know you - write a few sentences about yourself."
+                  dataTestId={PersonalInfoFormKeys.BIO}
+                />
+                <div className={styles.lettersCount}>
+                  {values[PersonalInfoFormKeys.BIO].length} / 1500 characters
+                </div>
+              </div>
+            </InputFormError>
           </div>
-        </InputFormError>
+        ) : (
+          <>
+            <label className={styles.formLabel}>
+              {'Bio'}
+              <Tooltip
+                text={
+                  '"Let others know you - write a few sentences about yourself."' ||
+                  null
+                }
+              >
+                <ImportantIcon />
+              </Tooltip>
+            </label>
+            <div onClick={toogleEditBio}>
+              <ReactMarkdown
+                className={styles.desc}
+                rehypePlugins={[rehypeRaw]}
+              >
+                {values?.bio || 'This user has not written a bio yet.'}
+              </ReactMarkdown>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
 }
-
 export default PersonalInfo
