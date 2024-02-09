@@ -1,24 +1,7 @@
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
-import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, Role } from '@prisma/client'
-import { updateGithubDetailsById } from '../github-details/github-details.service'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
-
-export async function getUsersPayload() {
-  const users = await prisma.user.findMany({
-    include: {
-      githubDetails: true,
-      profile: true,
-    },
-  })
-
-  const serializedProfile = users.map((user) => {
-    return serializeUserToUserPayload(user)
-  })
-  return serializedProfile
-}
 
 export async function getUserById(id: string) {
   const userById = await prisma.user.findFirst({
@@ -53,72 +36,27 @@ export async function findUserByEmail(email: string) {
   return foundUser
 }
 
-export async function syncGithubCredentialsWithUser(credentials: {
+export async function syncUserWithGithub(credentials: {
   username: string
   email: string
 }) {
-  const foundCredentials = await prisma.gitHubDetails.findFirst({
+  const foundUser = await prisma.user.findFirst({
     where: {
       OR: [
-        { username: credentials.username },
-        { user: { email: credentials.email } },
+        { githubDetails: { username: credentials.username } },
+        { email: credentials.email },
       ],
     },
     include: {
-      user: true,
+      githubDetails: true,
     },
-  })
-  if (foundCredentials) {
-    return await updateGithubDetailsById(foundCredentials.id, {
-      username: credentials.username,
-      email: credentials.email,
-    })
-  }
-
-  return null
-}
-
-export async function doesUserExist(email: string) {
-  const foundUser = await findUserByEmail(email)
-
-  return !!foundUser
-}
-
-export const findOrCreateUser = async (data: {
-  email: string
-  username: string
-  imageSrc: string
-}) => {
-  const foundUser = await prisma.user.findFirst({
-    where: { email: data.email },
   })
 
   if (foundUser) {
     return foundUser
   }
 
-  const createdUser = await prisma.user.create({
-    data: {
-      email: data.email,
-      avatarUrl: data.imageSrc,
-      githubDetails: {
-        create: {
-          username: data.username,
-        },
-      },
-    },
-    include: {
-      githubDetails: true,
-    },
-  })
-  await mailerliteClient.addSubscriberToMailerLite(
-    data.email,
-    mailerliteGroups.devGroup,
-  )
-  await sendDiscordNotificationToModeratorChannel(
-    `User ${createdUser.email} has created an account`,
-  )
-  return createdUser
+  return null
 }
 
 export async function createUser(payload: CreateUserPayload) {
