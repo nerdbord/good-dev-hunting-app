@@ -1,8 +1,8 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
-import styles from './TextArea.module.scss'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import Tooltip from '@/components/Tooltip/Tooltip'
+import React, { ChangeEvent, useState } from 'react'
+import styles from './TextArea.module.scss'
 
 interface TextAreaProps {
   label: string
