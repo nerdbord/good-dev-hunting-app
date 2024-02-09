@@ -4,10 +4,18 @@
   line-height: 28px;
   padding: 40px;
   background-color: #0f1217;
-  //white-space: pre-wrap;
   @include mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 36px;
+  }
+
+  p, a, li {
+    line-height: 28px;
   }
 
   ul {
