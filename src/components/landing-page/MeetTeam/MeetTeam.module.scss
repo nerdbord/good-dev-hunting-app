@@ -64,7 +64,6 @@
   padding-bottom: 16px;
   @include mobile {
     padding-bottom: 10px;
-    grid-template-columns: repeat(4, minmax(287px, 1fr));
   }
 }
 
