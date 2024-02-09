@@ -1,5 +1,8 @@
 import { registerNewUser } from '@/app/(auth)/_actions/registerNewUser'
-import { syncUserWithGithub } from '@/backend/user/user.service'
+import {
+  findUserByEmail,
+  syncUserWithGithub,
+} from '@/backend/user/user.service'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
@@ -26,14 +29,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, profile: githubDetails }) {
-      const castedGithubDetails = githubDetails as GitHubProfileAuthed
+    async jwt({ token, user }) {
       const foundUser =
         token && token.email && token.name
-          ? await syncUserWithGithub({
-              username: castedGithubDetails.login,
-              email: token.email,
-            })
+          ? await findUserByEmail(token.email)
           : null
 
       if (!foundUser) {
