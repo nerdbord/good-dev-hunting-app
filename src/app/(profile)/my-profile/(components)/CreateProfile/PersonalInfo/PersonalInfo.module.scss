@@ -95,8 +95,9 @@
 .desc {
   color: #e2eaf1;
   font-size: 16px;
+  min-height: 414px;
   line-height: 28px;
-  padding: 40px;
+  padding: 16px 24px 16px 20px;
   background-color: #0f1217;
   @include mobile {
     padding: $spacing-5 $spacing-4;
@@ -106,6 +107,13 @@
   ul {
     list-style-type: disc;
     padding-left: 20px;
+  }
+
+  a {
+    color: #a687ff;
+    &:hover {
+      color: #a687ff;
+    }
   }
 
   li {
