@@ -122,7 +122,7 @@ const WorkInformation = () => {
         <div className={styles.addInfo}>
           Start typing and separate technologies with commas.
           <br />
-          Choose max. 8
+          Choose max. 16
         </div>
         <div className={styles.employmentType}>
           Employment type

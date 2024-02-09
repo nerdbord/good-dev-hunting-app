@@ -1,8 +1,6 @@
 'use client'
 import React, { ChangeEvent, useState } from 'react'
 import styles from './TextArea.module.scss'
-import ImportantIcon from '@/assets/icons/ImportantIcon'
-import Tooltip from '@/components/Tooltip/Tooltip'
 
 interface TextAreaProps {
   label: string
@@ -44,14 +42,6 @@ const TextArea: React.FC<TextAreaProps> = ({
 
   return (
     <div className={styles.formItem}>
-      <label className={styles.formLabel}>
-        {label}
-        {addImportantIcon && (
-          <Tooltip text={tooltipText || null}>
-            <ImportantIcon />
-          </Tooltip>
-        )}
-      </label>
       <textarea
         className={`${styles.formTextarea} ${isTyped ? styles.typed : ''}`}
         style={height ? { height: `${height}px` } : {}}

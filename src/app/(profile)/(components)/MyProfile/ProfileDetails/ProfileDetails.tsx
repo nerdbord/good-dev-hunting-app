@@ -1,4 +1,5 @@
 import { ProfileModel } from '@/app/(profile)/types'
+import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
@@ -38,7 +39,9 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
-          <p className={styles.desc}>{profile?.bio}</p>
+          <MarkdownReader
+            text={profile?.bio || 'This user has not written a bio yet.'}
+          />
         </div>
       </section>
     </>

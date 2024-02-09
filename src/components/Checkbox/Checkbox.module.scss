@@ -1,13 +1,16 @@
+$lineHeight: 20px;
+$checkboxSize: 16px;
+
 .checkboxLabel {
   display: flex;
   flex-direction: row;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
+  line-height: $lineHeight;
   color: #e2eaf1;
   cursor: pointer;
 }
@@ -17,9 +20,10 @@
 }
 
 .checkbox {
+  margin: calc(($lineHeight - $checkboxSize) / 2);
   position: relative;
-  width: 16px;
-  height: 16px;
+  width: $checkboxSize;
+  height: $checkboxSize;
   border: 1px solid #e2eaf1;
   border-radius: 2px;
   cursor: pointer;
@@ -40,4 +44,15 @@
   color: #a687ff;
   width: 26px;
   height: 26px;
+}
+
+.captcha {
+  height: 0px;
+  visibility: hidden;
+}
+
+.captchaContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,0 +1,41 @@
+.markdownReader {
+  color: #e2eaf1;
+  font-size: 16px;
+  line-height: 28px;
+  padding: 40px;
+  background-color: #0f1217;
+  @include mobile {
+    padding: $spacing-5 $spacing-4;
+    padding-right: $spacing-6;
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 36px;
+  }
+
+  p, a, li {
+    line-height: 28px;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  li {
+    color: white;
+  }
+
+  a {
+    color: #a687ff;
+    &:hover {
+      color: #a687ff;
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+}
