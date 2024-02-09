@@ -1,6 +1,5 @@
 import { ProfileModel } from '@/app/(profile)/types'
-import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
+import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import styles from './UserProfileDetails.module.scss'
 
 const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
@@ -34,9 +33,9 @@ const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <div className={styles.title}>Bio</div>
-          <ReactMarkdown className={styles.desc} rehypePlugins={[rehypeRaw]}>
-            {userProfile.bio || 'This user has not written a bio yet.'}
-          </ReactMarkdown>{' '}
+          <MarkdownReader
+            text={userProfile.bio || 'This user has not written a bio yet.'}
+          />
         </div>
       </div>
     </>
