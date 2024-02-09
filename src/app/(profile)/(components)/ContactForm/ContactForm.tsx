@@ -2,6 +2,7 @@
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
 import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
+import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
@@ -14,10 +15,11 @@ import { usePlausible } from 'next-plausible'
 import Link from 'next/link'
 import styles from './ContactForm.module.scss'
 import {
-  ContactFormValuesWithTerms,
+  ContactFormValuesWithChecks,
   initialValues,
   validationSchema,
 } from './schema'
+
 export default function ContactForm({
   userProfile,
   closeModal,
@@ -31,7 +33,7 @@ export default function ContactForm({
   const { addToast } = useToast()
   const plausible = usePlausible()
 
-  const handleSendEmail = (values: ContactFormValuesWithTerms) => {
+  const handleSendEmail = (values: ContactFormValuesWithChecks) => {
     runAsync(async () => {
       try {
         await sendProfileContactRequest({
@@ -120,7 +122,7 @@ export default function ContactForm({
           </InputFormError>
           <InputFormError error={formik.errors.terms}>
             <CheckboxInput
-              id={'terms'}
+              id="terms"
               label=""
               checked={formik.values.terms}
               onChange={formik.handleChange}
@@ -146,6 +148,15 @@ export default function ContactForm({
                 </Link>
               </span>
             </CheckboxInput>
+          </InputFormError>
+          <InputFormError error={formik.errors.captcha}>
+            <CaptchaCheckbox
+              id="captcha"
+              label="Confirm your humanity with a quick click"
+              name="captcha"
+              checked={formik.values.captcha}
+              onChange={formik.setFieldValue}
+            />
           </InputFormError>
         </div>
         <div className={styles.btnContainer}>
