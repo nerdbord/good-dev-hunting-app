@@ -35,7 +35,7 @@ export const validationSchema = Yup.object().shape({
   terms: Yup.boolean()
     .required('Agreement is required')
     .oneOf([true], 'Agreement is required'),
-  catcha: Yup.boolean()
+  captcha: Yup.boolean()
     .required('Captcha verification is required')
     .oneOf([true], 'Captcha verification is required'),
 })
