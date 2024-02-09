@@ -51,15 +51,20 @@
   border-radius: 3px;
   width: 100%;
   height: 414px;
-  line-height: 28px;
+  overflow-y: scroll;
   align-items: flex-start;
   border: 1px solid #2a2f35;
+  line-height: 28px;
   color: #69717b;
   resize: none;
   font-size: 16px;
 
   h1, h2, h3, h4, h5, h6 {
     line-height: 36px;
+  }
+
+  p, a, li {
+    line-height: 28px;
   }
 
   ul {
