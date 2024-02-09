@@ -2,6 +2,7 @@ import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { prisma } from '@/lib/prismaClient'
 import { Prisma, Role } from '@prisma/client'
+import { updateGithubDetailsById } from '../github-details/github-details.service'
 import { serializeUserToUserPayload } from './user.serializer'
 import { CreateUserPayload } from './user.types'
 
@@ -50,6 +51,31 @@ export async function findUserByEmail(email: string) {
   })
 
   return foundUser
+}
+
+export async function syncGithubCredentialsWithUser(credentials: {
+  username: string
+  email: string
+}) {
+  const foundCredentials = await prisma.gitHubDetails.findFirst({
+    where: {
+      OR: [
+        { username: credentials.username },
+        { user: { email: credentials.email } },
+      ],
+    },
+    include: {
+      user: true,
+    },
+  })
+  if (foundCredentials) {
+    return await updateGithubDetailsById(foundCredentials.id, {
+      username: credentials.username,
+      email: credentials.email,
+    })
+  }
+
+  return null
 }
 
 export async function doesUserExist(email: string) {
