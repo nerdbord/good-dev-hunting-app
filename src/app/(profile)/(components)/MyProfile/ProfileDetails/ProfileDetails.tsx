@@ -1,6 +1,5 @@
 import { ProfileModel } from '@/app/(profile)/types'
-import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
+import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
@@ -40,9 +39,9 @@ const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
-          <ReactMarkdown className={styles.desc} rehypePlugins={[rehypeRaw]}>
-            {profile?.bio || 'This user has not written a bio yet.'}
-          </ReactMarkdown>
+          <MarkdownReader
+            text={profile?.bio || 'This user has not written a bio yet.'}
+          />
         </div>
       </section>
     </>

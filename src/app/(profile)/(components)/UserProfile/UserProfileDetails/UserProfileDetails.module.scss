@@ -59,6 +59,13 @@
     color: white;
   }
 
+  a {
+    color: #a687ff;
+    &:hover {
+      color: #a687ff;
+    }
+  }
+
   ol {
     list-style-type: decimal;
     padding-left: 20px;
