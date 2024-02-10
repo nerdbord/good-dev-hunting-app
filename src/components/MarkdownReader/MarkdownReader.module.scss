@@ -9,22 +9,56 @@
     padding-right: $spacing-6;
   }
 
-
   h1, h2, h3, h4, h5, h6 {
-    line-height: 36px;
+    margin: 1.414em 0 .5em;
+    line-height: 1.2;
+  }
+
+  h1 {
+    margin-top: 0;
   }
 
   p, a, li {
-    line-height: 28px;
+    margin: 0 0 1.5em;
+    line-height: 1.6;
+  }
+
+  ul, ol {
+    margin: 1em 0 1em 2em;
   }
 
   ul {
     list-style-type: disc;
-    padding-left: 20px;
+  }
+
+  ol {
+    list-style-type: decimal;
   }
 
   li {
-    color: white;
+    margin: .5em 0;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  blockquote {
+    margin: 1.5em 0;
+    padding: 0 1.5em;
+    border-left: 2px solid #ddd;
+  }
+
+  code {
+    padding: .2em .5em;
+    margin: 0 .2em;
+    line-height: 1.6;
+  }
+
+  pre > code {
+    display: block;
+    padding: 1em 1.5em;
+    white-space: pre;
   }
 
   a {
@@ -34,8 +68,4 @@
     }
   }
 
-  ol {
-    list-style-type: decimal;
-    padding-left: 20px;
-  }
 }
