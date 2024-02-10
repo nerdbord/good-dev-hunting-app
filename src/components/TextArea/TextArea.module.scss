@@ -46,7 +46,7 @@
 }
 
 .mdxEditorCustom {
-  --mdx-ul-color: white;
+  //--mdx-ul-color: white;
   background-color: #0f1217;
   border-radius: 3px;
   width: 100%;
@@ -101,5 +101,24 @@
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: transparent;
+  }
+
+  button {
+    background-color: #0f1217;
+    // color: #2a2f35;
+    //border: 1px solid #2a2f35;
+    // border-radius: 2px;
+    color: #69717b;
+    border: none;
+  }
+
+  div {
+    background-color: #0f1217;
+    color: #69717b;
+    border-radius: 2px;
+  }
+
+  button:hover::after {
+    border-radius: 2px;
   }
 }
