@@ -1,4 +1,5 @@
 'use client'
+import { PublishingState } from '@prisma/client'
 import { PropsWithChildren } from 'react'
 import styles from './tabs.module.scss'
 
@@ -13,7 +14,7 @@ function counterFormat(counter: number): string {
   return counter > 0 ? ` (${counter})` : ' '
 }
 
-export function formatStateName(name: string) {
+export function formatStateName(name: string | PublishingState): string {
   const nameToLower = name.toLowerCase()
   return (
     nameToLower.toLowerCase().charAt(0).toUpperCase() + nameToLower.slice(1)

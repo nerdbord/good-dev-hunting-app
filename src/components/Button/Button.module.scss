@@ -99,6 +99,10 @@
   }
 }
 
+.action:hover:disabled {
+  background-color: #04080d;
+}
+
 .logout {
   height: 44px;
   color: #7d54f1;
