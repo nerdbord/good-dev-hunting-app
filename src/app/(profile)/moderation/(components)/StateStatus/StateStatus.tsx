@@ -3,12 +3,11 @@ import RejectingReasonModal from '@/app/(profile)/moderation/(components)/Reject
 import { ProfileModel } from '@/app/(profile)/types'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
+import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
-import { useToast } from '@/contexts/ToastContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
 import classNames from 'classnames/bind'
-import { Button } from '../../../../../components/Button/Button'
 import styles from './StateStatus.module.scss'
 
 const cx = classNames.bind(styles)
@@ -19,135 +18,48 @@ type StateStatusProps = {
 
 export function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
-  const { addToast } = useToast()
   const { showModal, closeModal } = useModal()
   const { runAsync, loading } = useAsyncAction()
 
-  const handleClose = () => {
-    closeModal()
+  const handleApprove = async () => {
+    await runAsync(
+      async () => {
+        await approveProfile(id, { state: PublishingState.APPROVED })
+      },
+      {
+        successMessage: 'Profile accepted and will be visible on the main page',
+      },
+    )
   }
 
-  if (!(state in PublishingState)) return <></>
-  if (state === PublishingState.PENDING) {
-    return (
-      <div className={styles.actions}>
-        <Button
-          variant="action"
-          loading={loading}
-          onClick={() => {
-            runAsync(
-              async () => {
-                await approveProfile(id, {
-                  state: PublishingState.APPROVED,
-                })
-              },
-              {
-                successMessage:
-                  'Profile accepted and will be visible on the main page',
-              },
-            )
-          }}
-        >
-          Accept
-          <AcceptIcon />
-        </Button>
-        <Button
-          variant="action"
-          onClick={() => {
-            showModal(
-              <RejectingReasonModal
-                profileId={profile.id}
-                onClose={handleClose}
-              />,
-            )
-          }}
-        >
-          Reject
-          <RejectIcon />
-        </Button>
-      </div>
-    )
+  const handleShowRejectModal = () => {
+    showModal(<RejectingReasonModal profileId={id} onClose={closeModal} />)
   }
-  if (state === PublishingState.APPROVED) {
-    return (
-      <div className={styles.actions}>
-        <Button
-          disabled
-          variant="action"
-          loading={loading}
-          onClick={() => {
-            runAsync(
-              async () => {
-                await approveProfile(id, {
-                  state: PublishingState.APPROVED,
-                })
-              },
-              {
-                successMessage:
-                  'Profile accepted and will be visible on the main page',
-              },
-            )
-          }}
-        >
-          Accept
-          <AcceptIcon />
-        </Button>
-        <Button
-          variant="action"
-          onClick={() => {
-            showModal(
-              <RejectingReasonModal
-                profileId={profile.id}
-                onClose={handleClose}
-              />,
-            )
-          }}
-        >
-          Reject
-          <RejectIcon />
-        </Button>
-      </div>
-    )
-  }
-  if (state === PublishingState.REJECTED) {
-    return (
-      <div className={styles.actions}>
-        <Button
-          variant="action"
-          loading={loading}
-          onClick={() => {
-            runAsync(
-              async () => {
-                await approveProfile(id, {
-                  state: PublishingState.APPROVED,
-                })
-              },
-              {
-                successMessage:
-                  'Profile accepted and will be visible on the main page',
-              },
-            )
-          }}
-        >
-          Accept
-          <AcceptIcon />
-        </Button>
-        <Button
-          disabled
-          variant="action"
-          onClick={() => {
-            showModal(
-              <RejectingReasonModal
-                profileId={profile.id}
-                onClose={handleClose}
-              />,
-            )
-          }}
-        >
-          Reject
-          <RejectIcon />
-        </Button>
-      </div>
-    )
-  }
+
+  if (!(state in PublishingState)) return null
+
+  const isPending = state === PublishingState.PENDING
+  const isApproved = state === PublishingState.APPROVED
+  const isRejected = state === PublishingState.REJECTED
+
+  return (
+    <div className={styles.actions}>
+      <Button
+        variant="action"
+        loading={loading}
+        onClick={handleApprove}
+        disabled={!isRejected && !isPending}
+      >
+        Accept <AcceptIcon />
+      </Button>
+      <Button
+        variant="action"
+        loading={loading}
+        onClick={handleShowRejectModal}
+        disabled={!isApproved && !isPending} // modified condition
+      >
+        Reject <RejectIcon />
+      </Button>
+    </div>
+  )
 }
