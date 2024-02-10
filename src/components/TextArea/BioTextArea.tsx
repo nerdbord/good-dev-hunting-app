@@ -3,7 +3,6 @@ import { CreateProfileFormValues } from '@/app/(profile)/types'
 import {
   BlockTypeSelect,
   CreateLink,
-  InsertThematicBreak,
   ListsToggle,
   MDXEditor,
   headingsPlugin,
@@ -11,7 +10,6 @@ import {
   linkPlugin,
   listsPlugin,
   markdownShortcutPlugin,
-  thematicBreakPlugin,
   toolbarPlugin,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
@@ -58,11 +56,9 @@ const BioTextArea: React.FC<TextAreaProps> = ({ value, name, onBlur }) => {
                 <ListsToggle />
                 <BlockTypeSelect />
                 <CreateLink />
-                <InsertThematicBreak />
               </>
             ),
           }),
-          thematicBreakPlugin(),
           linkPlugin(),
           linkDialogPlugin(),
           headingsPlugin(),
