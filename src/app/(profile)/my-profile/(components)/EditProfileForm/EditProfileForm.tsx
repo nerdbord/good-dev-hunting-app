@@ -64,14 +64,14 @@ const EditProfileForm = ({
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
 
-  if (!session) {
-    return null
-  }
-
   const mappedInitialValues: ProfileFormValues = useMemo(
     () => mapProfileModelToEditProfileFormValues(profile),
     [profile],
   )
+
+  if (!session) {
+    return null
+  }
 
   const handleEditProfile = async (values: ProfileFormValues) => {
     const payload: ProfilePayload = {
