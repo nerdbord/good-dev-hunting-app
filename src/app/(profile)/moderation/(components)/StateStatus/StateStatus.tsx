@@ -1,6 +1,5 @@
 import { formatStateName } from '@/app/(profile)/(components)/FilterTabs/Tab'
 import { approveProfile } from '@/app/(profile)/_actions/approveProfile'
-import RejectingReasonModal from '@/app/(profile)/moderation/(components)/RejectingReasonModal/RejectingReasonModal'
 import { ProfileModel } from '@/app/(profile)/types'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
@@ -9,6 +8,7 @@ import { useModal } from '@/contexts/ModalContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
 import classNames from 'classnames/bind'
+import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
 import styles from './StateStatus.module.scss'
 
 const cx = classNames.bind(styles)
