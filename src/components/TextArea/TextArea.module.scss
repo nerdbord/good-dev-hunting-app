@@ -58,12 +58,19 @@
   color: #69717b;
   resize: none;
   font-size: 16px;
-
-  h1, h2, h3, h4, h5, h6 {
+  max-width: 329px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     line-height: 36px;
   }
 
-  p, a, li {
+  p,
+  a,
+  li {
     line-height: 28px;
   }
 
@@ -86,5 +93,13 @@
   ol {
     list-style-type: decimal;
     padding-left: 20px;
+  }
+
+  hr {
+    border: none;
+    height: 0; /* Usuwa widzialność linii, ustawiając wysokość na 0 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: transparent;
   }
 }
