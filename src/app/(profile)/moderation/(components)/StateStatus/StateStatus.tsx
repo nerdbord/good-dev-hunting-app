@@ -1,4 +1,3 @@
-import { formatStateName } from '@/app/(profile)/(components)/FilterTabs/Tab'
 import { approveProfile } from '@/app/(profile)/_actions/approveProfile'
 import RejectingReasonModal from '@/app/(profile)/moderation/(components)/RejectingReasonModal/RejectingReasonModal'
 import { ProfileModel } from '@/app/(profile)/types'
@@ -69,17 +68,86 @@ export function StateStatus({ profile }: StateStatusProps) {
       </div>
     )
   }
-
-  const formattedName = formatStateName(state)
-  return (
-    <div
-      className={cx({
-        [styles.stateStatus]: true,
-        [styles.stateAccepted]: state === PublishingState.APPROVED,
-        [styles.stateRejected]: state === PublishingState.REJECTED,
-      })}
-    >
-      {formattedName}
-    </div>
-  )
+  if (state === PublishingState.APPROVED) {
+    return (
+      <div className={styles.actions}>
+        <Button
+          disabled
+          variant="action"
+          loading={loading}
+          onClick={() => {
+            runAsync(
+              async () => {
+                await approveProfile(id, {
+                  state: PublishingState.APPROVED,
+                })
+              },
+              {
+                successMessage:
+                  'Profile accepted and will be visible on the main page',
+              },
+            )
+          }}
+        >
+          Accept
+          <AcceptIcon />
+        </Button>
+        <Button
+          variant="action"
+          onClick={() => {
+            showModal(
+              <RejectingReasonModal
+                profileId={profile.id}
+                onClose={handleClose}
+              />,
+            )
+          }}
+        >
+          Reject
+          <RejectIcon />
+        </Button>
+      </div>
+    )
+  }
+  if (state === PublishingState.REJECTED) {
+    return (
+      <div className={styles.actions}>
+        <Button
+          variant="action"
+          loading={loading}
+          onClick={() => {
+            runAsync(
+              async () => {
+                await approveProfile(id, {
+                  state: PublishingState.APPROVED,
+                })
+              },
+              {
+                successMessage:
+                  'Profile accepted and will be visible on the main page',
+              },
+            )
+          }}
+        >
+          Accept
+          <AcceptIcon />
+        </Button>
+        <Button
+          disabled
+          variant="action"
+          onClick={() => {
+            showModal(
+              <RejectingReasonModal
+                profileId={profile.id}
+                onClose={handleClose}
+              />,
+            )
+          }}
+        >
+          Reject
+          <RejectIcon />
+        </Button>
+      </div>
+    )
+  }
 }
