@@ -40,7 +40,7 @@ const Accordion = (props: AccordionProps) => {
         </div>
       </div>
       <div className={getContentClasses}>
-        <p className={styles.content}>{props.children}</p>
+        <div className={styles.content}>{props.children}</div>
       </div>
     </section>
   )
