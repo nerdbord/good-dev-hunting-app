@@ -42,7 +42,7 @@ export const validationSchema = Yup.object().shape({
   techStack: Yup.array()
     .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
     .min(1, 'At least one technology is required')
-    .max(8, 'Max 8 technologies'),
+    .max(16, 'Max 16 technologies'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()
