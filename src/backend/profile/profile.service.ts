@@ -10,10 +10,9 @@ export async function getPublishedProfilesPayload() {
     },
     include: includeObject.include,
   })
-
-  const shuffledProfiles = publishedProfiles.sort(() => Math.random() - 0.5)
-
-  const serializedProfile = shuffledProfiles.map(serializeProfileToProfileModel)
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
   return serializedProfile
 }
 
