@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import { DevTypeButton } from '@/app/(profile)/(components)/Filters/Buttons/DevTypeButton/DevTypeButton'
+import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
+import { JobSpecialization } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
 import { PublishProfilePopup } from '../../../../components/TogglePublishPopup/TogglePublishPopup'
-
-import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
-import { JobSpecialization } from '@/app/(profile)/types'
+import styles from './TogglePublishButton.module.scss'
 
 interface TogglePublishButtonProps {
   profileId: string
@@ -36,13 +36,15 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
           onClose={() => setShowPopup(false)}
         />
       )}
-      {state === PublishingState.PENDING ? (
+      {state === PublishingState.REJECTED ? (
+        <span className={styles.rejectedInfo}>Rejected</span>
+      ) : state === PublishingState.PENDING ? (
         <DevTypeButton variant={JobSpecialization.Backend} isPressed={false}>
           Pending
         </DevTypeButton>
       ) : (
         <Button
-          variant={'primary'}
+          variant={'secondary'}
           loading={loading}
           onClick={handleButtonClick}
           dataTestId="publishProfileButton"

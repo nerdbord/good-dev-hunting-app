@@ -4,6 +4,7 @@ import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishB
 import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
 import { ProfileModel } from '@/app/(profile)/types'
 import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
+import { PublishingState } from '@prisma/client'
 import { ConnectToNerdbordButton } from '../../ConnectToNerbordButton/ConnectToNerdbordButton'
 import styles from './ProfileTopBar.module.scss'
 
@@ -14,24 +15,31 @@ const ProfileTopBar = async ({
   profile: ProfileModel
   isConnectedToNerdbord: boolean
 }) => {
+  const isPending = profile.state === PublishingState.PENDING
+  const isRejected = profile.state === PublishingState.REJECTED
   return (
     <div className={styles.titleBox}>
       <div className={styles.mobileProfilePreview}>
         <span className={styles.title}>Profile preview</span>
-        <div className={styles.toogleMobileView}>
-          <ToggleOpenToWork
-            profileId={profile.id}
-            isOpenForWork={profile.isOpenForWork}
-          />
-        </div>
+
+        {!(isPending || isRejected) && (
+          <div className={styles.toogleMobileView}>
+            <ToggleOpenToWork
+              profileId={profile.id}
+              isOpenForWork={profile.isOpenForWork}
+            />
+          </div>
+        )}
       </div>
       <div className={styles.buttonBox}>
-        <div className={styles.mobileView}>
-          <ToggleOpenToWork
-            profileId={profile.id}
-            isOpenForWork={profile.isOpenForWork}
-          />
-        </div>
+        {!(isPending || isRejected) && (
+          <div className={styles.mobileView}>
+            <ToggleOpenToWork
+              profileId={profile.id}
+              isOpenForWork={profile.isOpenForWork}
+            />
+          </div>
+        )}
         {isConnectedToNerdbord ? (
           <div className={styles.conectAndLogOutWrapper}>
             <p className={styles.nerdbord}>
