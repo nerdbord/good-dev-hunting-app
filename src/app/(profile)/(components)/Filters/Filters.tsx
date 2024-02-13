@@ -161,9 +161,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
             selectedValue={locationFilter}
           />
         </div>
-        <div className={styles.devType}>
-          <span>search bar</span>
-        </div>
+        <div className={styles.devType}></div>
       </div>
 
       <div className={styles.tabs}>
