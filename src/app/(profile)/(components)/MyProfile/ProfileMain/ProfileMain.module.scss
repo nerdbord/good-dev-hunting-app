@@ -25,6 +25,7 @@
 .social {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
   @include mobile {
     position: static;
     align-items: center;
@@ -44,7 +45,9 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-
+  border-radius: 2px;
+  border: 1px solid var(--Light-04, #89939E);
+  background: var(--Dark-01, #04080D);
   @include mobile {
     padding: $spacing-3 0;
   }
