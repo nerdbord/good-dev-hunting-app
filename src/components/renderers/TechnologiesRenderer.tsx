@@ -13,7 +13,7 @@ export default function TechnologiesRenderer({ data, classes }: Props) {
     () => ({
       color: jobSpecializationThemes[data.position],
     }),
-    [],
+    [data.position],
   )
   const renderTechnologies = () => {
     const sliceCount =
