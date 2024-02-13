@@ -73,6 +73,50 @@ export const jobSpecializationOptions: Record<
     name: 'Fullstack',
     value: JobSpecialization.Fullstack,
   },
+  [JobSpecialization.Mobile]: {
+    name: 'Mobile',
+    value: JobSpecialization.Mobile,
+  },
+  [JobSpecialization.DevOps]: {
+    name: 'DevOps',
+    value: JobSpecialization.DevOps,
+  },
+  [JobSpecialization.QA]: {
+    name: 'QA',
+    value: JobSpecialization.QA,
+  },
+  [JobSpecialization.UX_UI]: {
+    name: 'UI/UX',
+    value: JobSpecialization.UX_UI,
+  },
+  [JobSpecialization.DataScience]: {
+    name: 'Data Science',
+    value: JobSpecialization.DataScience,
+  },
+  [JobSpecialization.PM]: {
+    name: 'Product manager',
+    value: JobSpecialization.PM,
+  },
+  [JobSpecialization.GameDev]: {
+    name: 'GameDev',
+    value: JobSpecialization.GameDev,
+  },
+  [JobSpecialization.Crypto]: {
+    name: 'Crypto',
+    value: JobSpecialization.Crypto,
+  },
+  [JobSpecialization.VR_AR]: {
+    name: 'VR/AR',
+    value: JobSpecialization.VR_AR,
+  },
+  [JobSpecialization.CyberSecurity]: {
+    name: 'Cybersecurity',
+    value: JobSpecialization.CyberSecurity,
+  },
+  [JobSpecialization.SysAdmin]: {
+    name: 'SysAdmin',
+    value: JobSpecialization.SysAdmin,
+  },
 }
 
 export type FilterLists = {
