@@ -209,6 +209,83 @@ const technologies: string[] = [
   'Zabbix',
   'Zend',
   'Zeplin',
+  'Postman',
+  'JMeter',
+  'TestRail', // QA
+  'Ansible',
+  'Jenkins',
+  'Terraform', // DevOps
+  'Unreal Engine',
+  'Godot',
+  'Phaser', // GameDev
+  'React Native',
+  'Flutter',
+  'Xamarin', // Mobile
+  'Unity',
+  'Unreal Engine',
+  'A-Frame', // VR/AR
+  'Framer',
+  'Balsamiq',
+  'Marvel', // UX/UI
+  'Solidity',
+  'Web3.js',
+  'Truffle', // Crypto
+  'Jupyter',
+  'Pandas',
+  'Matplotlib', // Data science
+  'Laravel',
+  'Ruby on Rails',
+  'Phoenix', // Backend
+  'Flask',
+  'Spring Boot',
+  'Lumberyard',
+  'RPG Maker',
+  'GameMaker Studio',
+  'Ember.js',
+  'Gatsby.js',
+  'Thymeleaf',
+  'Appium',
+  'TestComplete',
+  'LoadRunner',
+  'Java',
+  'Objective-C',
+  'Cordova',
+  'WebXR',
+  'Magic Leap',
+  'Amazon Sumerian',
+  'Stellar',
+  'IOTA',
+  'SAS',
+  'SPSS',
+  'Stata',
+  'Hyperledger Fabric',
+  'Selenium',
+  'Cypress',
+  'Robot Framework', // QA
+  'Docker',
+  'Kubernetes',
+  'GitLab CI/CD', // DevOps
+  'Unity',
+  'CryEngine',
+  'Blender', // GameDev
+  'Swift',
+  'Kotlin',
+  'Ionic', // Mobile
+  'ARCore',
+  'ARKit',
+  'Vuforia', // VR/AR
+  'Sketch',
+  'InVision',
+  'Adobe XD', // UX/UI
+  'Cardano',
+  'Ripple',
+  'EOSIO', // Crypto
+  'R',
+  'TensorFlow',
+  'Scikit-learn', // Data science
 ]
 
-export default technologies
+const uniqueTechnologies = [...new Set(technologies)]
+uniqueTechnologies.sort()
+
+export default uniqueTechnologies

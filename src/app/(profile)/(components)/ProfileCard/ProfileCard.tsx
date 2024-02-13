@@ -1,9 +1,11 @@
+import { jobSpecializationThemes } from '@/app/(profile)/helpers'
 import { mapEmploymentTypes, mapSeniorityLevel } from '@/app/(profile)/mappers'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
-import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
+import { ProfileModel } from '@/app/(profile)/types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import classNames from 'classnames/bind'
+import { useMemo } from 'react'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
@@ -15,10 +17,15 @@ interface ProfileCardProps {
 const cx = classNames.bind(styles)
 
 const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
+  const specializationTheme = useMemo(
+    () => ({
+      color: jobSpecializationThemes[data.position],
+    }),
+    [],
+  )
+
   const commonClasses = {
-    [styles.frontend]: data.position === JobSpecialization.Frontend,
-    [styles.backend]: data.position === JobSpecialization.Backend,
-    [styles.fullstack]: data.position === JobSpecialization.Fullstack,
+    [data.position]: true,
   }
 
   const getStackClasses = cx(commonClasses)
@@ -28,6 +35,7 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
   })
   return (
     <div
+      style={specializationTheme}
       className={`${styles.frameWrapper} ${
         withStateStatus && styles.moderationFrame
       }`}
