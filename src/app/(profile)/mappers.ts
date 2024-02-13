@@ -97,9 +97,19 @@ export const mappedSeniorityLevel = Object.values(SeniorityLevel).map(
   }),
 )
 
+// If this mapping is not used anywhere else in the application, it can be safely removed once the application is fully operational and confirmed to work without it
 export const mappedSpecialization = Object.values(JobSpecialization).map(
   (specialization) => ({
     name: mapSpecialization(specialization),
     value: specialization,
   }),
 )
+
+export const mapSpecializations = (
+  specializations: string[],
+): DropdownOption[] => {
+  return specializations.map((specialization) => ({
+    name: mapSpecialization(specialization as JobSpecialization),
+    value: specialization,
+  }))
+}

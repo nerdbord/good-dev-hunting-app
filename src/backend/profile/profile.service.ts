@@ -312,3 +312,21 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     techStack: true,
   },
 })
+
+export async function getUniqueSpecializations() {
+  const profiles = await prisma.profile.findMany({
+    where: {
+      state: PublishingState.APPROVED,
+    },
+    select: {
+      position: true,
+    },
+  })
+
+  const uniqueSpecializations = profiles
+    .map((p) => p.position)
+    .filter((value, index, self) => self.indexOf(value) === index)
+    .sort()
+
+  return uniqueSpecializations
+}
