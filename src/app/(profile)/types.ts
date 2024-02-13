@@ -19,7 +19,7 @@ export interface ProfileModel {
   openForCityRelocation: boolean
   isOpenForWork: boolean
   remoteOnly: boolean
-  position: string
+  position: JobSpecialization
   seniority: string
   techStack: Omit<TechnologyModel, 'id'>[]
   employmentTypes: EmploymentType[]
@@ -39,24 +39,21 @@ export type TechStack = {
   name: string
 }[]
 
-export type PublishingStateData = {
-  state: PublishingState
-}
-
-export type RejectionReason = {
-  reason: string
-}
-
 export enum JobSpecialization {
   Frontend = 'Frontend',
   Backend = 'Backend',
   Fullstack = 'Fullstack',
-}
-
-export enum AvailabilityEnum {
-  PART_TIME = 'PART_TIME',
-  FULL_TIME = 'FULL_TIME',
-  CONTRACT = 'CONTRACT',
+  Mobile = 'Mobile',
+  DevOps = 'DevOps',
+  QA = 'QA',
+  PM = 'PM',
+  DataScience = 'DataScience',
+  GameDev = 'GameDev',
+  VR_AR = 'VR_AR',
+  UX_UI = 'UX_UI',
+  Crypto = 'Crypto',
+  CyberSecurity = 'CyberSecurity',
+  SysAdmin = 'SysAdmin',
 }
 
 export interface ProfileFormValues {
