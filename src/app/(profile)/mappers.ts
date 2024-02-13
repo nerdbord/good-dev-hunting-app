@@ -68,6 +68,8 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
       return 'Cybersecurity'
     case JobSpecialization.SysAdmin:
       return 'SysAdmin'
+    case JobSpecialization.PM:
+      return 'Project Manager'
     default:
       return specialization
   }

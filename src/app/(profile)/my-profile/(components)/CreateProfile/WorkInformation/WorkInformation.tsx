@@ -80,8 +80,8 @@ const WorkInformation = () => {
         >
           <DropdownSelect
             id={WorkInformationFormKeys.POSITION}
-            label="Position"
-            text="Choose position"
+            label="Specialization"
+            text="Choose your primary specialization"
             options={mappedSpecialization}
             selectedValue={values[WorkInformationFormKeys.POSITION]}
             name={WorkInformationFormKeys.POSITION}
