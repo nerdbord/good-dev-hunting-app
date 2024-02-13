@@ -283,6 +283,9 @@ const technologies: string[] = [
   'R',
   'TensorFlow',
   'Scikit-learn', // Data science
+  'Express.js',
+  'Azure',
+  'OpenAI API',
 ]
 
 const uniqueTechnologies = [...new Set(technologies)]
