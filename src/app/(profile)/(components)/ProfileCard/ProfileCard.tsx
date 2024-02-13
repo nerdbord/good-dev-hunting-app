@@ -21,17 +21,11 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
     () => ({
       color: jobSpecializationThemes[data.position],
     }),
-    [],
+    [data.position],
   )
 
-  const commonClasses = {
-    [data.position]: true,
-  }
-
-  const getStackClasses = cx(commonClasses)
   const getTechnologyClasses = cx({
     [styles.technology]: true,
-    ...commonClasses,
   })
   return (
     <div
@@ -47,7 +41,7 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
           </div>
           <div className={styles.data}>
             <p className={styles.name}>{data.fullName}</p>
-            <p className={`${getStackClasses} ${styles.wordWrap}`}>
+            <p className={styles.wordWrap}>
               {mapSeniorityLevel(data.seniority)} {data.position}&nbsp;Developer
             </p>
             <p className={styles.location}>
