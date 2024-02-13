@@ -9,3 +9,23 @@
     @content;
   }
 }
+
+@mixin custom-scrollbar {
+  $scrollbarSize: 8px;
+  $trackColor: transparent;
+  $thumbColor: #555;
+  $thumbRadius: 4px;
+
+  &::-webkit-scrollbar {
+    width: $scrollbarSize;
+    height: $scrollbarSize;
+
+    &-track {
+      background: $trackColor;
+    }
+    &-thumb {
+      background: $thumbColor;
+      border-radius: $thumbRadius;
+    }
+  }
+}

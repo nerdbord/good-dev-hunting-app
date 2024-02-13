@@ -11,6 +11,8 @@
     gap: 8px;
     align-items: flex-start;
     padding-bottom: 10px;
+
+    @include custom-scrollbar;
   }
 }
 
