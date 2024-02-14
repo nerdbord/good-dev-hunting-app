@@ -30,7 +30,6 @@
 }
 
 .position {
-  color: #55b5eb;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -59,7 +58,6 @@
   gap: 10px;
   border-radius: 4px;
   background: #161a1f;
-  color: #55b5eb;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -83,10 +81,11 @@
 }
 
 .notAvailableText {
-  color: #3D434B
+  color: #3d434b;
 }
 
-.availableDot, .notAvailableDot {
+.availableDot,
+.notAvailableDot {
   border-radius: 50%;
   width: 12px;
   height: 12px;
@@ -100,5 +99,5 @@
   border-radius: 50%;
 }
 .notAvailableDot {
-  background-color: #3D434B;
+  background-color: #3d434b;
 }
