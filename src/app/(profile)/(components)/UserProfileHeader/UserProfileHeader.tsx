@@ -13,14 +13,24 @@ export default function UserProfileHeader({
   withBackButton,
   isNerdbordConnected,
 }: UserProfileHeaderType) {
+  const socialItemCount =
+    (userProfile.githubUsername ? 1 : 0) +
+    (userProfile.linkedIn ? 1 : 0) +
+    (userProfile.githubUsername && isNerdbordConnected ? 1 : 0)
+
   const commonClasses = cx('wrapper', {
     [styles.withBackBackButton]: !!withBackButton,
+  })
+
+  const wrapClasses = cx({
+    [styles.actions]: true,
+    [styles.wrap]: socialItemCount > 1,
   })
 
   return (
     <div className={commonClasses}>
       {!!withBackButton && <GoBackButton>Go back</GoBackButton>}
-      <div className={styles.actions}>
+      <div className={wrapClasses}>
         <div className={styles.socialItemsWrapper}>
           <SocialItems
             userProfile={userProfile}

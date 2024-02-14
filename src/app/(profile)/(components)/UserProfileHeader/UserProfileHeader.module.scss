@@ -26,9 +26,14 @@
   row-gap: 12px;
   column-gap: 10px;
   @include mobile {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
+  }
+}
+.wrap {
+  @include mobile {
+    flex-wrap: wrap;
   }
 }
 
