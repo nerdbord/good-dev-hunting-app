@@ -44,7 +44,7 @@ export default function SocialItems({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Portfolio ↗︎
+            Portfolio↗︎
           </a>
         </li>
       )}

@@ -29,7 +29,7 @@ const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
         }}
         variant={'primary'}
       >
-        Contact
+        Send message
       </Button>
     </div>
   )

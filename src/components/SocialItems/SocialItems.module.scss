@@ -6,9 +6,9 @@
   right: 0;
   @include mobile {
     bottom: 0;
-    gap: 0;
+    gap: 0.5%;
     width: 100%;
-    justify-content: left;
+    // justify-content: left;
   }
 }
 
@@ -22,6 +22,9 @@
   gap: 10px;
   cursor: pointer;
   transition: background-color 300ms;
+  border-radius: 2px;
+  border: 1px solid var(--Light-04, #89939E);
+  background: var(--Dark-01, #04080D);
   a {
     display: flex;
     align-items: center;
@@ -31,6 +34,7 @@
     width: 100%;
     white-space: nowrap;
     padding: 12px 16px;
+    justify-content: center;
   }
 }
 
