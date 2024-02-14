@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import { Button } from '@/components/Button/Button'
+import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePublishPopup'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
-import { PublishProfilePopup } from '../../../../components/TogglePublishPopup/TogglePublishPopup'
 
 import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
 import { JobSpecialization } from '@/app/(profile)/types'
