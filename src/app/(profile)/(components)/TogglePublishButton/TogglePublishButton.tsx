@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
-import { DevTypeButton } from '@/app/(profile)/(components)/Filters/Buttons/DevTypeButton/DevTypeButton'
-import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
-import { JobSpecialization } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
+import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePublishPopup'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
-import { PublishProfilePopup } from '../../../../components/TogglePublishPopup/TogglePublishPopup'
 import styles from './TogglePublishButton.module.scss'
+
+import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
+import { JobSpecialization } from '@/app/(profile)/types'
+import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
 
 interface TogglePublishButtonProps {
   profileId: string

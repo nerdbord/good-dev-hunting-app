@@ -30,10 +30,10 @@
 }
 
 .dropdown {
-  display: flex;
-  flex-direction: column;
   position: absolute;
   width: 100%;
+  max-height: 350px;
+  overflow-y: auto; 
   border-radius: 2px;
   border: 1px solid #2a2f35;
   background-color: #0f1217;
@@ -41,7 +41,6 @@
   font-weight: 400;
   font-size: 14px;
   z-index: 1;
-
   & :hover {
     background-color: #2a2f35;
   }

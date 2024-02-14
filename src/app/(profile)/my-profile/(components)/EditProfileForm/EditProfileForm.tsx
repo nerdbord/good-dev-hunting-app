@@ -3,6 +3,7 @@ import { updateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
 import { saveMyProfile } from '@/app/(profile)/_actions/saveMyProfile'
 import { mapProfileModelToEditProfileFormValues } from '@/app/(profile)/my-profile/(components)/EditProfileForm/mappers'
 import {
+  JobSpecialization,
   ProfileFormValues,
   ProfileModel,
   ProfilePayload,
@@ -89,7 +90,7 @@ const EditProfileForm = ({
       openForCityRelocation: values.openForCityRelocation,
       isOpenForWork: true,
       remoteOnly: values.remoteOnly,
-      position: values.position.value,
+      position: values.position.value as JobSpecialization,
       seniority: values.seniority.value,
       techStack: values.techStack.map((tech) => {
         return {
