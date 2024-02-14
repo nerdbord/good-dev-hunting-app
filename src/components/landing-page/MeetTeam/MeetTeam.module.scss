@@ -53,6 +53,8 @@
   display: flex;
   overflow-x: auto;
   width: 100%;
+
+  @include custom-scrollbar;
 }
 
 .cardsBox {
