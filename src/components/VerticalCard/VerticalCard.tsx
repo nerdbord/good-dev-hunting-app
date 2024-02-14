@@ -1,5 +1,6 @@
 'use client'
 
+import { jobSpecializationThemes } from '@/app/(profile)/helpers'
 import { mapSeniorityLevel, mapSpecialization } from '@/app/(profile)/mappers'
 import { ProfileModel } from '@/app/(profile)/types'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
@@ -8,6 +9,7 @@ import { AppRoutes } from '@/utils/routes'
 import { EmploymentType } from '@prisma/client'
 import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/navigation'
+import { useMemo } from 'react'
 import { Avatar } from '../Avatar/Avatar'
 import styles from './VerticalCard.module.scss'
 
@@ -44,8 +46,19 @@ const VerticalCard = ({
     router.push(`${AppRoutes.profiles}/${githubUsername}`)
   }
 
+  const specializationTheme = useMemo(
+    () => ({
+      color: jobSpecializationThemes[position],
+    }),
+    [position],
+  )
+
   return (
-    <div className={styles.card} onClick={handleOpenProfile}>
+    <div
+      className={styles.card}
+      style={specializationTheme}
+      onClick={handleOpenProfile}
+    >
       <Avatar src={avatarUrl || ProfilePicture} size={120} />
       <div className={styles.person}>
         <h4 className={styles.name}>{fullName}</h4>
