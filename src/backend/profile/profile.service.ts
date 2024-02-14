@@ -314,19 +314,15 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
 })
 
 export async function getUniqueSpecializations() {
-  const profiles = await prisma.profile.findMany({
+  const uniqueSpecializations = await prisma.profile.findMany({
     where: {
       state: PublishingState.APPROVED,
     },
     select: {
       position: true,
     },
+    distinct: ['position'],
   })
 
-  const uniqueSpecializations = profiles
-    .map((p) => p.position)
-    .filter((value, index, self) => self.indexOf(value) === index)
-    .sort()
-
-  return uniqueSpecializations
+  return uniqueSpecializations.map((p) => p.position)
 }
