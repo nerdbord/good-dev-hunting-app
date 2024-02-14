@@ -33,6 +33,9 @@
   color: #ffffff;
   background-color: #7d54f1;
   min-width: 120px;
+  @include mobile {
+    width: 100%;
+  }
 }
 .headerContent {
   .primary {
@@ -47,11 +50,15 @@
   color: #7d54f1;
   background: transparent;
   align-items: center;
+  border-radius: 2px;
+  border: 1px solid var(--Main-03, #A687FF);
 }
 
 .secondary:hover:enabled {
   background-color: rgba(23, 27, 33, 1);
 }
+
+
 
 .tertiary {
   display: none;
@@ -109,3 +116,13 @@
   background: transparent;
   border: 1px solid #7d54f1;
 }
+
+
+.buttonWrapper {
+  @include mobile {
+  button {
+  width: 100%;
+  }
+  }
+}
+

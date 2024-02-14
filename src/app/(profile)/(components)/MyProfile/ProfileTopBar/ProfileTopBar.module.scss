@@ -50,6 +50,7 @@
 
 .mobileView {
   display: flex;
+  gap: 8px;
   @include mobile {
     display: none;
   }
@@ -75,4 +76,5 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+  display: none;
 }

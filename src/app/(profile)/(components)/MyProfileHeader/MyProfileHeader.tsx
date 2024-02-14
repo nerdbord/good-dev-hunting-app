@@ -1,5 +1,6 @@
 import { authOptions } from '@/app/(auth)/auth'
 import logo from '@/assets/images/logo.png'
+import { AppRoutes } from '@/utils/routes'
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,7 +12,7 @@ const MyProfileHeader = async () => {
   return (
     <div>
       <header className={styles.wrapper}>
-        <Link href="/" className={styles.logo}>
+        <Link href={AppRoutes.profiles} className={styles.logo}>
           <img src={logo.src} alt="Logo" />
           <div className={styles.title}>Good Dev Hunting</div>
         </Link>
