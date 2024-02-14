@@ -1,6 +1,6 @@
 'use client'
 
-import { mapSeniorityLevel } from '@/app/(profile)/mappers'
+import { mapSeniorityLevel, mapSpecialization } from '@/app/(profile)/mappers'
 import { ProfileModel } from '@/app/(profile)/types'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { PlausibleEvents } from '@/lib/plausible'
@@ -50,7 +50,7 @@ const VerticalCard = ({
       <div className={styles.person}>
         <h4 className={styles.name}>{fullName}</h4>
         <div className={styles.position}>
-          {mapSeniorityLevel(seniority)} {position}
+          {mapSeniorityLevel(seniority)} {mapSpecialization(position)}
         </div>
         <div className={styles.location}>
           {country.name}, {city.name} {remoteOnly && '/ Remote'}
