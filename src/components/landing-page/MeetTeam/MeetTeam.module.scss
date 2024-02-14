@@ -53,12 +53,14 @@
   display: flex;
   overflow-x: auto;
   width: 100%;
+
+  @include custom-scrollbar;
 }
 
 .cardsBox {
   display: grid;
   grid-template-columns: repeat(8, minmax(287px, 287px));
-  gap: 30px;
+  gap: 22px;
   width: 100%;
   align-items: flex-start;
   padding-bottom: 16px;

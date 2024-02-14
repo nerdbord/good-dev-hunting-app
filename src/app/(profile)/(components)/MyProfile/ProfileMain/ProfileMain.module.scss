@@ -25,28 +25,36 @@
 .social {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
   @include mobile {
     position: static;
     align-items: center;
     justify-content: center;
-    gap: 32px;
   }
 }
 
 .socialItem {
-  padding: 12px $spacing-5;
+  padding: 12px 24px;
   color: #ffffff;
   font-weight: 500;
-  line-height: 20px;
   font-size: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
   cursor: pointer;
-
+  border-radius: 2px;
+  border: 1px solid var(--Light-04, #89939E);
+  background: var(--Dark-01, #04080D);
+  a {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
   @include mobile {
-    padding: $spacing-3 0;
+    width: 100%;
+    white-space: nowrap;
+    padding: 12px 16px;
+    // justify-content: center;
   }
 }
 

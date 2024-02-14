@@ -1,0 +1,20 @@
+.default {
+  border-bottom: 1px solid var(--Dark-05, #3d434b);
+  background: var(--Dark-02, #0f1217);
+  cursor: pointer;
+  display: flex;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  color: var(--Light-03, #69717b);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.content {
+  display: flex;
+  gap: 3px;
+}
