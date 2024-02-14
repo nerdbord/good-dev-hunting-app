@@ -54,19 +54,5 @@
   overflow-y: auto;
   padding-bottom: 10px;
 
-  &::-webkit-scrollbar {
-    height: 2px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #2a2e35;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #69717b;
-    border-radius: 2px;
-  }
-
-  scrollbar-color: #69717b #2a2e35;
-  scrollbar-width: thin;
+  @include custom-scrollbar;
 }
