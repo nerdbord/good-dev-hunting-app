@@ -5,7 +5,6 @@ import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/Toggle
 import { ProfileModel } from '@/app/(profile)/types'
 import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
 import { PublishingState } from '@prisma/client'
-import { ConnectToNerdbordButton } from '../../ConnectToNerbordButton/ConnectToNerdbordButton'
 import styles from './ProfileTopBar.module.scss'
 
 const ProfileTopBar = async ({
@@ -52,7 +51,8 @@ const ProfileTopBar = async ({
           </div>
         ) : (
           <div className={styles.conectAndLogOutWrapper}>
-            <ConnectToNerdbordButton />
+            {/* TODO: Disabling for now */}
+            {/*<ConnectToNerdbordButton />*/}
             <div className={styles.toogleMobileView}>
               <LogOutBtn />
             </div>
