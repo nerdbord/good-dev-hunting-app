@@ -34,7 +34,9 @@ const AppHeader = async () => {
               {userIsModerator && <ModerationBtn />}
               {user?.profile ? (
                 <>
-                  <GitHubButtonClient />
+                  <div className={styles.hideOnMobile}>
+                    <GitHubButtonClient />
+                  </div>
                   <GithubAcc />
                 </>
               ) : (
