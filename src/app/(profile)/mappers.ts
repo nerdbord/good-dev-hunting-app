@@ -48,6 +48,28 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
       return 'Backend'
     case JobSpecialization.Fullstack:
       return 'Fullstack'
+    case JobSpecialization.Mobile:
+      return 'Mobile'
+    case JobSpecialization.DevOps:
+      return 'DevOps'
+    case JobSpecialization.QA:
+      return 'QA'
+    case JobSpecialization.DataScience:
+      return 'Data Science'
+    case JobSpecialization.GameDev:
+      return 'GameDev'
+    case JobSpecialization.VR_AR:
+      return 'VR/AR'
+    case JobSpecialization.UX_UI:
+      return 'UX/UI'
+    case JobSpecialization.Crypto:
+      return 'Crypto'
+    case JobSpecialization.CyberSecurity:
+      return 'Cybersecurity'
+    case JobSpecialization.SysAdmin:
+      return 'SysAdmin'
+    case JobSpecialization.PM:
+      return 'Project Manager'
     default:
       return specialization
   }
@@ -75,9 +97,19 @@ export const mappedSeniorityLevel = Object.values(SeniorityLevel).map(
   }),
 )
 
+// If this mapping is not used anywhere else in the application, it can be safely removed once the application is fully operational and confirmed to work without it
 export const mappedSpecialization = Object.values(JobSpecialization).map(
   (specialization) => ({
     name: mapSpecialization(specialization),
     value: specialization,
   }),
 )
+
+export const mapSpecializations = (
+  specializations: string[],
+): DropdownOption[] => {
+  return specializations.map((specialization) => ({
+    name: mapSpecialization(specialization as JobSpecialization),
+    value: specialization,
+  }))
+}

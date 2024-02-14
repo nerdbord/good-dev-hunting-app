@@ -21,9 +21,36 @@
 
 .actions {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
   row-gap: 12px;
   column-gap: 10px;
+  @include mobile {
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
 }
+.wrap {
+  @include mobile {
+    flex-wrap: wrap;
+  }
+}
+
+.buttonWrapper {
+  width: 100%;
+  @include mobile {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+  .socialItemsWrapper {
+    flex: 1;
+    justify-content: center;
+    @include mobile {
+    width: 100%;
+    }
+  }
+  

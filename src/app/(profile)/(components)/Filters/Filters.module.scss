@@ -11,6 +11,8 @@
     gap: 8px;
     align-items: flex-start;
     padding-bottom: 10px;
+
+    @include custom-scrollbar;
   }
 }
 
@@ -42,4 +44,15 @@
   font-weight: 400;
   font-style: normal;
   line-height: 40px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+  overflow-y: auto;
+  padding-bottom: 10px;
+
+  @include custom-scrollbar;
 }
