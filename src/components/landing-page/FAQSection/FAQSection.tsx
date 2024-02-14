@@ -35,8 +35,8 @@ const FAQSection = () => {
           To create a profile, having a GitHub account is necessary as we want
           to make sure that you are a real developer. We also use GitHub to
           fetch your profile picture and other public information to make the
-          process of creating a profile as easy as possible. We do not GitHub
-          tokens.
+          process of creating a profile as easy as possible. We do not store any
+          GitHub tokens.
         </Accordion>
       </div>
     </section>

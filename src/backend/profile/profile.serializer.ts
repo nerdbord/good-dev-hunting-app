@@ -1,4 +1,4 @@
-import { ProfileModel } from '@/app/(profile)/types'
+import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
 import { ProfileWithRelations } from '@/backend/profile/profile.types'
 
 export const serializeProfileToProfileModel = (
@@ -20,7 +20,7 @@ export const serializeProfileToProfileModel = (
     isOpenForWork: data.isOpenForWork,
     state: data.state,
     linkedIn: data.linkedIn,
-    position: data.position,
+    position: data.position as JobSpecialization,
     remoteOnly: data.remoteOnly,
     seniority: data.seniority,
     techStack: data.techStack.map((tech) => ({

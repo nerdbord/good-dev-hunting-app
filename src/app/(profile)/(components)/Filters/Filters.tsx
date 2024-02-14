@@ -1,23 +1,33 @@
 'use client'
-import { JobSpecialization } from '@/app/(profile)/types'
+import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import {
+  FilterOption,
   JobOfferFilters,
   JobOfferFiltersEnum,
   filterLists,
-  jobSpecializationOptions,
   useFilters,
 } from '@/contexts/FilterContext'
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import React from 'react'
 import { DropdownOption } from '../../../../components/Dropdowns/DropdownFilter/DropdownFilter'
-import { DevTypeButton } from './Buttons/DevTypeButton/DevTypeButton'
+import {
+  filterByAvailability,
+  filterByLocation,
+  filterBySeniority,
+  filterByTechnology,
+} from '../ProfileList/filters'
+
+import { jobSpecializationThemes } from '../../helpers'
 import styles from './Filters.module.scss'
+import { SpecializationTab } from './SpecializationsTabs/SpecializationTabs/SpecializationTab'
 
 interface FiltersProps {
-  technologies: DropdownOption[]
-  countries: DropdownOption[]
+  technologies: FilterOption[]
+  countries: FilterOption[]
+  specializations: FilterOption[]
+  data: ProfileModel[]
 }
 
 const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
@@ -35,17 +45,33 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     setLocationFilter,
   } = useFilters()
 
-  const handleButtonClick = (newStack: DropdownOption) => {
-    let newPos: DropdownOption[]
-    if (jobSpecializationFilter.includes(newStack)) {
-      newPos = jobSpecializationFilter.filter((x) => x !== newStack)
+  const handleSpecializationSelect = (option: FilterOption) => {
+    const isAlreadySelected = jobSpecializationFilter.find(
+      (o) => o.value === option.value,
+    )
+    if (isAlreadySelected) {
+      setJobSpecializationFilter([])
     } else {
-      newPos = [...jobSpecializationFilter, newStack]
-      plausible(PlausibleEvents.SelectSpecializationFilter, {
-        props: { specialization: newStack.value },
-      })
+      setJobSpecializationFilter([option])
     }
-    setJobSpecializationFilter(newPos)
+  }
+
+  const calculateSpecializationCounts = (): Record<string, number> => {
+    const counts: Record<string, number> = {}
+    props.specializations.forEach((spec) => {
+      const filteredProfiles = props.data
+        .filter((profile) => profile.position === spec.value)
+        .filter(filterBySeniority(seniorityFilter))
+        .filter(filterByLocation(locationFilter))
+        .filter(filterByTechnology(technologyFilter))
+        .filter(filterByAvailability(availabilityFilter))
+      counts[spec.value] = filteredProfiles.length
+    })
+    return counts
+  }
+
+  const handleAllSpecializationsClick = () => {
+    setJobSpecializationFilter([])
   }
 
   const handleSelectMulti = (
@@ -95,85 +121,74 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       return filteredList
     }
   }
-
+  const allTabColors =
+    jobSpecializationFilter.length === 0 ? '#13CBAA' : '#3d434b'
+  const specializationCounts = calculateSpecializationCounts()
   return (
-    <div className={styles.mainContainer}>
-      <div className={styles.features}>
-        <DropdownFilterMulti
-          text={'Technology'}
-          options={props.technologies}
-          onSelect={(option) =>
-            handleSelectMulti(option, JobOfferFiltersEnum.technology)
-          }
-          selectedValue={technologyFilter}
-        />
-        <DropdownFilterMulti
-          text={'Seniority'}
-          options={filterLists.seniority}
-          onSelect={(option) =>
-            handleSelectMulti(option, JobOfferFiltersEnum.seniority)
-          }
-          selectedValue={seniorityFilter}
-        />
-        <DropdownFilterMulti
-          text={'Availability'}
-          options={filterLists.availability}
-          onSelect={(option) =>
-            handleSelectMulti(option, JobOfferFiltersEnum.availability)
-          }
-          selectedValue={availabilityFilter}
-        />
-        <DropdownFilterMulti
-          text={'Location'}
-          options={props.countries}
-          onSelect={(option) =>
-            handleSelectMulti(option, JobOfferFiltersEnum.location)
-          }
-          selectedValue={locationFilter}
-        />
+    <>
+      <div className={styles.mainContainer}>
+        <div className={styles.features}>
+          <DropdownFilterMulti
+            text={'Technology'}
+            options={props.technologies}
+            onSelect={(option) =>
+              handleSelectMulti(option, JobOfferFiltersEnum.technology)
+            }
+            selectedValue={technologyFilter}
+          />
+          <DropdownFilterMulti
+            text={'Seniority'}
+            options={filterLists.seniority}
+            onSelect={(option) =>
+              handleSelectMulti(option, JobOfferFiltersEnum.seniority)
+            }
+            selectedValue={seniorityFilter}
+          />
+          <DropdownFilterMulti
+            text={'Availability'}
+            options={filterLists.availability}
+            onSelect={(option) =>
+              handleSelectMulti(option, JobOfferFiltersEnum.availability)
+            }
+            selectedValue={availabilityFilter}
+          />
+          <DropdownFilterMulti
+            text={'Location'}
+            options={props.countries}
+            onSelect={(option) =>
+              handleSelectMulti(option, JobOfferFiltersEnum.location)
+            }
+            selectedValue={locationFilter}
+          />
+        </div>
+        <div className={styles.devType}></div>
       </div>
-      <div className={styles.devType}>
-        <DevTypeButton
-          variant={JobSpecialization.Frontend}
-          onClick={() =>
-            handleButtonClick(
-              jobSpecializationOptions[JobSpecialization.Frontend],
-            )
-          }
-          isPressed={jobSpecializationFilter.includes(
-            jobSpecializationOptions[JobSpecialization.Frontend],
-          )}
+
+      <div className={styles.tabs}>
+        <SpecializationTab
+          onClick={handleAllSpecializationsClick}
+          isPressed={jobSpecializationFilter.length === 0}
+          count={props.data.length}
+          color={allTabColors}
         >
-          Frontend
-        </DevTypeButton>
-        <DevTypeButton
-          variant={JobSpecialization.Backend}
-          onClick={() =>
-            handleButtonClick(
-              jobSpecializationOptions[JobSpecialization.Backend],
-            )
-          }
-          isPressed={jobSpecializationFilter.includes(
-            jobSpecializationOptions[JobSpecialization.Backend],
-          )}
-        >
-          Backend
-        </DevTypeButton>
-        <DevTypeButton
-          variant={JobSpecialization.Fullstack}
-          onClick={() =>
-            handleButtonClick(
-              jobSpecializationOptions[JobSpecialization.Fullstack],
-            )
-          }
-          isPressed={jobSpecializationFilter.includes(
-            jobSpecializationOptions[JobSpecialization.Fullstack],
-          )}
-        >
-          Fullstack
-        </DevTypeButton>
+          All
+        </SpecializationTab>
+        {props.specializations.map((spec) => {
+          const color = jobSpecializationThemes[spec.value as JobSpecialization]
+          return (
+            <SpecializationTab
+              key={spec.value}
+              onClick={() => handleSpecializationSelect(spec)}
+              isPressed={jobSpecializationFilter.includes(spec)}
+              count={specializationCounts[spec.value] || 0}
+              color={color}
+            >
+              {spec.name}
+            </SpecializationTab>
+          )
+        })}
       </div>
-    </div>
+    </>
   )
 }
 
