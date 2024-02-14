@@ -11,10 +11,10 @@
 }
 
 @mixin custom-scrollbar {
-  $scrollbarSize: 8px;
+  $scrollbarSize: 4px;
   $trackColor: transparent;
   $thumbColor: #555;
-  $thumbRadius: 4px;
+  $thumbRadius: calc($scrollbarSize / 2);
 
   &::-webkit-scrollbar {
     width: $scrollbarSize;
