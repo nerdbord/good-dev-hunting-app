@@ -97,6 +97,7 @@
 }
 
 .logoAndGhStarsWrapper {
+  margin-right: $spacing-2;
   @include mobile {
     display: flex;
     align-items: center;

@@ -3,7 +3,7 @@ import { authOptions } from '@/app/(auth)/auth'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findUserByEmail } from '@/backend/user/user.service'
-import GitHubButtonClient from '@/components/Button/GitHubStarsBtn'
+import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import Logo from '@/components/Logo/Logo'
@@ -27,12 +27,12 @@ const LandingHeader = async () => {
             <div className={styles.frameButtons}>
               {user?.profile ? (
                 <>
-                  <GitHubButtonClient />
+                  <GithubStarsButton />
                   <MyProfileBtn />
                 </>
               ) : (
                 <>
-                  <GitHubButtonClient />
+                  <GithubStarsButton />
                   <CreateProfileBtn />
                 </>
               )}
@@ -47,17 +47,10 @@ const LandingHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <div className={styles.logoAndGhStarsWrapper}>
-            <Logo />
-            <div className={styles.starsMobile}>
-              <GitHubButtonClient />
-            </div>
-          </div>
+          <Logo />
           <div className={styles.frameButtons}>
+            <GithubStarsButton />
             <div className={styles.buttonBoxDesktop}>
-              <div>
-                <GitHubButtonClient />
-              </div>{' '}
               <FindTalentsBtn variant={'secondary'} />
               <GithubLoginButton />
               <CreateProfileBtn />
