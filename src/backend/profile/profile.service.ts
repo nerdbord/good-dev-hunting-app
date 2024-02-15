@@ -260,7 +260,7 @@ export async function getPublishedProfiles(take: number) {
   return serializedProfile
 }
 
-export async function getRandomProfiles(profilesCount: number) {
+export async function getRandomProfiles(take: number) {
   // Retrieve IDs of all approved profiles
   const approvedProfileIds = await prisma.profile.findMany({
     where: {
@@ -273,13 +273,15 @@ export async function getRandomProfiles(profilesCount: number) {
 
   const totalProfiles = approvedProfileIds.length
 
-  if (profilesCount >= totalProfiles) {
+  if (take >= totalProfiles) {
     // If requesting more profiles than available, return all without randomization
     return getPublishedProfiles(totalProfiles)
   }
 
   // Shuffle the array of IDs and select the first `profilesCount` elements
-  const shuffledIds = shuffleArray(approvedProfileIds.map((p) => p.id))
+  const shuffledIds = shuffleArray(approvedProfileIds)
+    .slice(0, take)
+    .map((p) => p.id)
 
   // Fetch the full profile details for the randomly selected IDs
   const randomProfiles = await prisma.profile.findMany({
@@ -288,7 +290,7 @@ export async function getRandomProfiles(profilesCount: number) {
         in: shuffledIds,
       },
     },
-    take: profilesCount,
+    take,
     include: includeObject.include, // Ensure this is correctly defined
   })
 
