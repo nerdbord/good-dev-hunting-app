@@ -1,5 +1,6 @@
 import { ProfilePayload } from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
+import shuffleArray from '@/utils/collections'
 import { Prisma, PublishingState, Role } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
@@ -260,29 +261,37 @@ export async function getPublishedProfiles(take: number) {
 }
 
 export async function getRandomProfiles(profilesCount: number) {
-  const totalProfiles = await prisma.profile.count()
-
-  if (profilesCount > totalProfiles) {
-    return getPublishedProfiles(6)
-  }
-
-  const maxSkipValue = totalProfiles - profilesCount
-  const skipValue =
-    maxSkipValue > 0 ? Math.floor(Math.random() * maxSkipValue) : 0
-
-  const randomRecords = await prisma.profile.findMany({
-    take: profilesCount,
+  // Retrieve IDs of all approved profiles
+  const approvedProfileIds = await prisma.profile.findMany({
     where: {
       state: PublishingState.APPROVED,
     },
-    orderBy: {
-      id: 'asc',
+    select: {
+      id: true, // Only select the ID
     },
-    skip: skipValue,
-    include: includeObject.include,
   })
 
-  return randomRecords.map(serializeProfileToProfileModel)
+  const totalProfiles = approvedProfileIds.length
+
+  if (profilesCount >= totalProfiles) {
+    // If requesting more profiles than available, return all without randomization
+    return getPublishedProfiles(totalProfiles)
+  }
+
+  // Shuffle the array of IDs and select the first `profilesCount` elements
+  const shuffledIds = shuffleArray(approvedProfileIds.map((p) => p.id))
+
+  // Fetch the full profile details for the randomly selected IDs
+  const randomProfiles = await prisma.profile.findMany({
+    where: {
+      id: {
+        in: shuffledIds,
+      },
+    },
+    include: includeObject.include, // Ensure this is correctly defined
+  })
+
+  return randomProfiles.map(serializeProfileToProfileModel)
 }
 
 export async function getTeamProfiles() {
