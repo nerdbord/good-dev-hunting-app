@@ -5,7 +5,7 @@ import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
 import { findUserByEmail } from '@/backend/user/user.service'
-import GitHubButtonClient from '@/components/Button/GitHubStarsBtn'
+import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { AppRoutes } from '@/utils/routes'
@@ -35,13 +35,13 @@ const AppHeader = async () => {
               {user?.profile ? (
                 <>
                   <div className={styles.hideOnMobile}>
-                    <GitHubButtonClient />
+                    <GithubStarsButton />
                   </div>
                   <GithubAcc />
                 </>
               ) : (
                 <>
-                  <GitHubButtonClient />
+                  <GithubStarsButton />
                   <CreateProfileBtn data-testid="create-profile-button" />
                 </>
               )}
@@ -63,8 +63,8 @@ const AppHeader = async () => {
 
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
-              <GitHubButtonClient />
-              <FindTalentsBtn variant="secondary">Find talents</FindTalentsBtn>
+              <GithubStarsButton />
+              <FindTalentsBtn variant="secondary" />
               <GithubLoginButton />
               <div className={styles.hideOnMobile}>
                 <CreateProfileBtn data-testid="create-profile-button" />
