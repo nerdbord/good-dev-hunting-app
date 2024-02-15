@@ -31,10 +31,8 @@ export const ProfilesWithFilter: React.FC<{
     .filter(filterByTechnology(technologyFilter))
     .filter(filterByAvailability(availabilityFilter))
 
-  const filteredCount = filteredProfileData.length
   return (
     <div className={styles.profileCards}>
-      <div className={styles.title}>Profiles found ({filteredCount})</div>
       <div className={styles.profileListCont}>
         {filteredProfileData.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
