@@ -1,14 +1,12 @@
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import { authOptions } from '@/app/(auth)/auth'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
-import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findUserByEmail } from '@/backend/user/user.service'
-import GitHubButtonClient from '@/components/Button/GitHubStarsBtn'
+import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import Logo from '@/components/Logo/Logo'
-import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 import styles from './LandingHeader.module.scss'
 
@@ -18,7 +16,6 @@ const LandingHeader = async () => {
   const user = session?.user?.email
     ? await findUserByEmail(session.user.email)
     : null
-  const userIsModerator = user?.roles.includes(Role.MODERATOR)
 
   if (session) {
     return (
@@ -28,15 +25,14 @@ const LandingHeader = async () => {
             <Logo />
 
             <div className={styles.frameButtons}>
-              {userIsModerator && <ModerationBtn />}
               {user?.profile ? (
                 <>
-                  <GitHubButtonClient />
+                  <GithubStarsButton />
                   <MyProfileBtn />
                 </>
               ) : (
                 <>
-                  <GitHubButtonClient />
+                  <GithubStarsButton />
                   <CreateProfileBtn />
                 </>
               )}
@@ -51,22 +47,11 @@ const LandingHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <div className={styles.logoAndGhStarsWrapper}>
-            <Logo />
-            <div className={styles.starsMobile}>
-              <GitHubButtonClient />
-            </div>
-          </div>
+          <Logo />
           <div className={styles.frameButtons}>
+            <GithubStarsButton />
             <div className={styles.buttonBoxDesktop}>
-              <div>
-                {' '}
-                <GitHubButtonClient />
-              </div>{' '}
-              {/* <div>Button</div>{' '} */}
-              <FindTalentsBtn variant={'secondary'}>
-                Find talents
-              </FindTalentsBtn>
+              <FindTalentsBtn variant={'secondary'} />
               <GithubLoginButton />
               <CreateProfileBtn />
             </div>
