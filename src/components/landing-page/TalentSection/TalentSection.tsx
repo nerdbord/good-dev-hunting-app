@@ -19,7 +19,7 @@ const TalentSection = async () => {
           <ProfileListItem key={profile.id} data={profile} />
         ))}
       </div>
-      <FindTalentsBtn variant="primary">Find all talents</FindTalentsBtn>
+      <FindTalentsBtn variant="primary" />
     </section>
   )
 }

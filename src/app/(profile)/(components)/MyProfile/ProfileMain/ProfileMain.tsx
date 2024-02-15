@@ -4,6 +4,7 @@ import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import { SeniorityLevel } from '@/backend/profile/profile.types'
 import { Avatar } from '@/components/Avatar/Avatar'
+import { AnchorButton } from '@/components/Button/AnchorButton'
 import { countries } from '@/data/countries'
 import styles from './ProfileMain.module.scss'
 
@@ -24,40 +25,26 @@ const ProfileMain = async ({
     <>
       <section className={styles.container}>
         <ul className={styles.social}>
-          <li className={styles.socialItem}>
-            <a
-              className={styles.socialLink}
+          <li>
+            <AnchorButton
               href={`https://github.com/${githubUsername}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              icon={<GithubIcon2 />}
             >
               Github
-              <GithubIcon2 />
-            </a>
+            </AnchorButton>
           </li>
           {profile.linkedIn && (
-            <li className={styles.socialItem}>
-              <a
-                className={styles.socialLink}
-                href={profile.linkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            <li>
+              <AnchorButton href={profile.linkedIn} icon={<LinkedIn />}>
                 LinkedIn
-                <LinkedIn />
-              </a>
+              </AnchorButton>
             </li>
           )}
           {isConnectedToNerdbord && (
-            <li className={styles.socialItem}>
-              <a
-                className={styles.socialLink}
-                href={`https://nerdbord.io/p/${githubUsername}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            <li>
+              <AnchorButton href={`https://nerdbord.io/p/${githubUsername}`}>
                 Portfolio ↗︎
-              </a>
+              </AnchorButton>
             </li>
           )}
         </ul>

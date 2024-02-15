@@ -5,8 +5,8 @@
   align-items: flex-start;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
   padding-bottom: 110px;
+  padding-top: 42px;
   @include mobile {
     overflow: visible;
     flex-direction: column;
@@ -28,18 +28,22 @@
   font-weight: 500;
   line-height: 74px;
   letter-spacing: 0em;
-  margin-top: 15%;
+  margin-top: $spacing-3;
   @include mobile {
     font-size: 38px;
     line-height: 44px;
     min-height: 80px;
-    margin-top: 7%;
+
   }
 }
 
 .left {
   width: 50%;
+  @include mobile {
+    width: 100%;
+  }
 }
+
 .subtitle {
   flex-direction: column;
   max-width: 535px;
@@ -99,7 +103,7 @@
   margin-top: 5%;
   gap: 16px;
   @include mobile {
-    min-width: 321px;
+    //min-width: 321px;
   }
 }
 
@@ -108,7 +112,9 @@
   position: relative;
   width: 50%;
   height: 100%;
-  margin-top: 6%;
+  @include mobile {
+    margin: 32px 0 16px;
+  }
 }
 
 @mixin frame-margins($top, $left, $z-index) {
