@@ -288,6 +288,7 @@ export async function getRandomProfiles(profilesCount: number) {
         in: shuffledIds,
       },
     },
+    take: profilesCount,
     include: includeObject.include, // Ensure this is correctly defined
   })
 
