@@ -3,13 +3,11 @@ import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButto
 import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
 import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
 import { ProfileModel } from '@/app/(profile)/types'
-import CheckMarkIcon from '@/assets/icons/CheckMarkIcon'
 import { PublishingState } from '@prisma/client'
 import styles from './ProfileTopBar.module.scss'
 
 const ProfileTopBar = async ({
   profile,
-  isConnectedToNerdbord,
 }: {
   profile: ProfileModel
   isConnectedToNerdbord: boolean
@@ -39,25 +37,21 @@ const ProfileTopBar = async ({
             />
           </div>
         )}
-        {isConnectedToNerdbord ? (
-          <div className={styles.conectAndLogOutWrapper}>
-            <p className={styles.nerdbord}>
-              <CheckMarkIcon />
-              Nerdbord connected
-            </p>
-            <div className={styles.toogleMobileView}>
-              <LogOutBtn />
-            </div>
+        <div className={styles.conectAndLogOutWrapper}>
+          {/* TODO: Disabling for now */}
+          {/*{isConnectedToNerdbord ? (*/}
+          {/*  <p className={styles.nerdbord}>*/}
+          {/*    <CheckMarkIcon />*/}
+          {/*    Nerdbord connected*/}
+          {/*  </p>*/}
+          {/*) : (*/}
+          {/*  <ConnectToNerdbordButton />*/}
+          {/*)}*/}
+          <div className={styles.toogleMobileView}>
+            <LogOutBtn />
           </div>
-        ) : (
-          <div className={styles.conectAndLogOutWrapper}>
-            {/* TODO: Disabling for now */}
-            {/*<ConnectToNerdbordButton />*/}
-            <div className={styles.toogleMobileView}>
-              <LogOutBtn />
-            </div>
-          </div>
-        )}
+        </div>
+
         <div className={styles.mobileView}>
           <EditProfileButton />
           <TogglePublishButton state={profile.state} profileId={profile.id} />

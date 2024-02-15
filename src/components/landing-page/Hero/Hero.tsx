@@ -16,16 +16,17 @@ const Hero = async () => {
     <section id="hero" className={styles.wrapper}>
       <div className={styles.left}>
         <div className={styles.title}>
-          <span>Let your next</span>
-          <span>project find you</span>
+          <span>Let your next project find you</span>
         </div>
         <div className={styles.subtitle}>
-          <p>Open source, free hub for software developers to be present</p>
-          <p>and ready for next commission work.</p>
+          <p>
+            Open source, free hub for software developers to be present and
+            ready for next commission work.
+          </p>
         </div>
         <div className={styles.buttons}>
           {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
-          <FindTalentsBtn variant={'secondary'}>Find talents</FindTalentsBtn>
+          <FindTalentsBtn variant={'secondary'} />
         </div>
       </div>
 

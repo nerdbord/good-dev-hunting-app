@@ -64,7 +64,7 @@ const AppHeader = async () => {
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
               <GitHubButtonClient />
-              <FindTalentsBtn variant="secondary">Find talents</FindTalentsBtn>
+              <FindTalentsBtn variant="secondary" />
               <GithubLoginButton />
               <div className={styles.hideOnMobile}>
                 <CreateProfileBtn data-testid="create-profile-button" />
