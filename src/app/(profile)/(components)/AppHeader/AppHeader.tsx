@@ -1,5 +1,6 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
+import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import { authOptions } from '@/app/(auth)/auth'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
@@ -25,10 +26,15 @@ const AppHeader = async () => {
       <header className={styles.wrapper}>
         <Container>
           <div className={styles.headerContent}>
-            <Link href={AppRoutes.profiles} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <div className={styles.title}>Good Dev Hunting</div>
-            </Link>
+            <div className={styles.appHeaderLogoAndMenuBtnWrapper}>
+              <Link href={AppRoutes.profiles} className={styles.logo}>
+                <img src={logo.src} alt="Logo" />
+                <div className={styles.title}>Good Dev Hunting</div>
+              </Link>
+              <div className={styles.hideOnDesktop}>
+                <HamburgerMenuMobileBtn />
+              </div>
+            </div>
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
