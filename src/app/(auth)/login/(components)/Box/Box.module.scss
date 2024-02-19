@@ -1,0 +1,29 @@
+.box {
+  background-color: #161a1f;
+  padding: 48px;
+  //   padding-right: 180px;
+  max-width: 580px;
+  width: 100%;
+
+  h2 {
+    //styleName: Header 2;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+
+    margin-bottom: 24px;
+  }
+
+  p {
+    //styleName: Body 2;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    margin-bottom: 24px;
+  }
+}
+
+.boxContent {
+  max-width: 350px;
+}
