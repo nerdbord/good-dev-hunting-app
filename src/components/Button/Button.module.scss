@@ -51,14 +51,12 @@
   background: transparent;
   align-items: center;
   border-radius: 2px;
-  border: 1px solid var(--Main-03, #A687FF);
+  border: 1px solid var(--Main-03, #a687ff);
 }
 
 .secondary:hover:enabled {
   background-color: rgba(23, 27, 33, 1);
 }
-
-
 
 .tertiary {
   display: none;
@@ -79,6 +77,27 @@
     background: transparent;
     white-space: nowrap;
   }
+}
+
+.standard {
+  display: flex;
+  height: 42px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--Dark-02, #0f1217);
+  border: 1px solid #2a2f35;
+  color: white;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  transition: background-color 300ms;
+  white-space: nowrap;
 }
 
 .action {
@@ -117,12 +136,10 @@
   border: 1px solid #7d54f1;
 }
 
-
 .buttonWrapper {
   @include mobile {
-  button {
-  width: 100%;
-  }
+    button {
+      width: 100%;
+    }
   }
 }
-
