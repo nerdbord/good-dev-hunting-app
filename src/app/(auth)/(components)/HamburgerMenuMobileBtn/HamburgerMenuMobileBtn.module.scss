@@ -15,7 +15,7 @@
 
 .hamburger {
   position: fixed;
-  top: 17%;
+  top: 21%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -27,4 +27,5 @@
   align-items: center;
   gap: 18px;
   z-index: 1000;
+  height: 20%;
 }
