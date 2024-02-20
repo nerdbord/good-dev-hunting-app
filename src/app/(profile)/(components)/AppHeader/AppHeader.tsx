@@ -26,15 +26,15 @@ const AppHeader = async () => {
       <header className={styles.wrapper}>
         <Container>
           <div className={styles.headerContent}>
-            <div className={styles.appHeaderLogoAndMenuBtnWrapper}>
-              <Link href={AppRoutes.profiles} className={styles.logo}>
-                <img src={logo.src} alt="Logo" />
-                <div className={styles.title}>Good Dev Hunting</div>
-              </Link>
-              <div className={styles.hideOnDesktop}>
-                <HamburgerMenuMobileBtn />
-              </div>
-            </div>
+            {/* <div className={styles.appHeaderLogoAndMenuBtnWrapper}> */}
+            <Link href={AppRoutes.profiles} className={styles.logo}>
+              <img src={logo.src} alt="Logo" />
+              <div className={styles.title}>Good Dev Hunting</div>
+            </Link>
+            {/* <div className={styles.hideOnDesktop}>
+              <HamburgerMenuMobileBtn />
+            </div> */}
+            {/* </div> */}
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
@@ -51,6 +51,9 @@ const AppHeader = async () => {
                   <CreateProfileBtn data-testid="create-profile-button" />
                 </>
               )}
+            </div>
+            <div className={styles.hideOnDesktop}>
+              <HamburgerMenuMobileBtn />
             </div>
           </div>
         </Container>

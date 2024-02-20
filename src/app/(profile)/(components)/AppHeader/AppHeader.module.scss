@@ -19,10 +19,10 @@
   align-items: center;
   height: 100%;
   @include mobile {
-    display: block;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     gap: 30px;
   }
 }
@@ -118,7 +118,8 @@
   display: none;
 
   @include mobile {
-    display: block;
+    display: flex;
+    align-items: center;
   }
 }
 
