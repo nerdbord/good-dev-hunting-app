@@ -69,6 +69,9 @@ const AppHeader = async () => {
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
+          <div className={styles.hideOnDesktop}>
+            <HamburgerMenuMobileBtn />
+          </div>
 
           <div className={styles.frameButtons}>
             <div className={styles.buttonBox}>
