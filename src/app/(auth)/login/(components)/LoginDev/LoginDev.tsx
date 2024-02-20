@@ -10,7 +10,7 @@ const LoginDev = () => {
         Login with authorised Github profile, get found by hunters and also hunt
         for fellow specialist.
       </p>
-      <GithubLoginButton />
+      <GithubLoginButton label="Login with Github" />
     </Box>
   )
 }
