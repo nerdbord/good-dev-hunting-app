@@ -1,14 +1,11 @@
 .profileViewsContainer {
   display: inline-block;
   height: 100%;
-  margin-left: 10px;
-  @include mobile {
-    margin: 5px 0;
-  }
+  margin-left: 15px;
 }
 
 .profileViews {
-  height: 25px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -22,4 +19,5 @@
 
 .profileViews > span {
   color: var(--Main-03, #a687ff);
+  margin-left: 3px;
 }

@@ -21,6 +21,15 @@
   gap: $spacing-2;
 }
 
+.titleContainer {
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    margin-bottom: 10px;
+  }
+}
+
 .title {
   font-size: 22px;
   font-weight: 500;
