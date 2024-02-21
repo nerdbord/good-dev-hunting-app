@@ -339,10 +339,7 @@ export async function getUniqueSpecializations() {
   return uniqueSpecializations.map((p) => p.position)
 }
 
-export async function incrementProfileViewCountById(
-  id: string,
-  data: Prisma.ProfileUpdateInput,
-) {
+export async function incrementProfileViewCountById(id: string) {
   const updatedProfile = await prisma.profile.update({
     where: {
       id,
