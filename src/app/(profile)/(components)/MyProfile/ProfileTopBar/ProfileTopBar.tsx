@@ -19,7 +19,7 @@ const ProfileTopBar = async ({
     <div className={styles.titleBox}>
       <div className={styles.mobileProfilePreview}>
         <span className={styles.title}>Profile preview</span>
-        <ProfileViews ViewCount={profile.viewCount} />
+        <ProfileViews viewCount={profile.viewCount} />
 
         {!(isPending || isRejected) && (
           <div className={styles.toogleMobileView}>
