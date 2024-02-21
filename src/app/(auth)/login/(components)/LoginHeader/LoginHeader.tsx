@@ -1,12 +1,14 @@
 import { authOptions } from '@/app/(auth)/auth'
+import { findUserByEmail } from '@/backend/user/user.service'
+import { getServerSession } from 'next-auth'
+import styles from './LoginHeader.module.scss'
+
+// components
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import { findUserByEmail } from '@/backend/user/user.service'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
-import { getServerSession } from 'next-auth'
-import styles from './LoginHeader.module.scss'
 
 const LoginHeader = async () => {
   const session = await getServerSession(authOptions)

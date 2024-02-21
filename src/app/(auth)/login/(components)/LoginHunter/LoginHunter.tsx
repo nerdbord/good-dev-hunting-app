@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 // components
-import Box from '@/app/(auth)/login/(components)/Box/Box'
+import Box from '@/components/Box/Box'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import TextInput from '@/components/TextInput/TextInput'

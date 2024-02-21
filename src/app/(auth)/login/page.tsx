@@ -11,7 +11,7 @@ const LoginPage = () => {
     <>
       <LoginHeader />
       <Container>
-        <div className={styles.pageContent}>
+        <div className={styles.loginPage}>
           <LoginDev />
           <LoginHunter />
         </div>

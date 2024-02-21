@@ -1,6 +1,6 @@
 // components
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import Box from '@/app/(auth)/login/(components)/Box/Box'
+import Box from '@/components/Box/Box'
 
 const LoginDev = () => {
   return (
