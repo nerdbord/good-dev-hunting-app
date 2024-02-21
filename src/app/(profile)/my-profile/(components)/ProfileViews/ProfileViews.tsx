@@ -2,13 +2,15 @@ import ViewIcon from '@/assets/icons/ViewIcon'
 
 import styles from './ProfileViews.module.scss'
 
-const ProfileViews = ({ ViewCount }: { ViewCount: number }) => {
+const ProfileViews = ({ viewCount }: { viewCount: number }) => {
   return (
-    <span className={styles.profileViews}>
-      <ViewIcon />
-      Profile views:
-      <span>{ViewCount}</span>
-    </span>
+    <div className={styles.profileViewsContainer}>
+      <div className={styles.profileViews}>
+        <ViewIcon />
+        Profile views:
+        <span>{viewCount}</span>
+      </div>
+    </div>
   )
 }
 

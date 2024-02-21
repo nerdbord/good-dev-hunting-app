@@ -53,12 +53,8 @@ const UserProfilePage = async ({
     redirect(AppRoutes.profiles)
   }
 
-  if (!session?.user) {
-    redirect(AppRoutes.profiles)
-  }
-
   try {
-    await countProfileView(selectedProfile.id, session.user.id)
+    await countProfileView(selectedProfile.id, session?.user.id)
   } catch (error) {
     console.error('Error counting profile view:', error)
   }

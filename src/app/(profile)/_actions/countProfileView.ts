@@ -1,3 +1,4 @@
+'use server'
 import {
   getProfileById,
   incrementProfileViewCountById,
@@ -5,10 +6,12 @@ import {
 import { withSentry } from '@/utils/errHandling'
 
 export const countProfileView = withSentry(
-  async (profileId: string, userId: string) => {
+  async (profileId: string, userProfileId?: string) => {
     const foundProfile = await getProfileById(profileId)
 
-    if (profileId !== userId) {
+    if (profileId === userProfileId) {
+      throw new Error("User can't incerement own profile view count")
+    } else {
       const updatedProfile = await incrementProfileViewCountById(profileId)
     }
   },
