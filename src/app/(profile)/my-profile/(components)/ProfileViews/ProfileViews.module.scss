@@ -1,0 +1,19 @@
+.profileViews {
+  height: 25px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-style: normal;
+  text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  gap: 3px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--Light-03, #69717b);
+}
+
+.profileViews > span {
+  color: var(--Main-03, #a687ff);
+}
