@@ -5,6 +5,10 @@
 
   margin-block: 32px;
 
+  @include mobile {
+    flex-direction: column;
+  }
+
   h2 {
     //styleName: Header 2;
     font-size: 32px;

@@ -2,6 +2,11 @@
   background-color: #161a1f;
   padding: 48px;
   width: 100%;
+
+  @include mobile {
+    padding: 16px;
+    padding-bottom: 32px;
+  }
 }
 .boxContent {
   max-width: 350px;
