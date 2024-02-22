@@ -103,3 +103,12 @@
     align-items: center;
   }
 }
+
+.btnSeparator::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 44px;
+  margin-inline: 6px;
+  background-color: #a687ff;
+}

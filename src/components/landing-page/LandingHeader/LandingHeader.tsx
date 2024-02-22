@@ -6,6 +6,7 @@ import { findUserByEmail } from '@/backend/user/user.service'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import Logo from '@/components/Logo/Logo'
 import { getServerSession } from 'next-auth'
 import styles from './LandingHeader.module.scss'
@@ -51,8 +52,10 @@ const LandingHeader = async () => {
           <div className={styles.frameButtons}>
             <GithubStarsButton />
             <div className={styles.buttonBoxDesktop}>
-              <FindTalentsBtn variant={'secondary'} />
-              <GithubLoginButton />
+              <FindTalentsBtn variant="tertiary" />
+              <LoginBtn variant="secondary">Login</LoginBtn>
+              <div className={styles.btnSeparator}></div>
+              <LoginBtn variant="secondary">Join as Hunter</LoginBtn>
               <CreateProfileBtn />
             </div>
             <div className={styles.buttonBoxMobile}>

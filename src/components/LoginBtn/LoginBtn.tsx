@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 interface LoginBtnProps {
   children: string
+  variant: 'secondary' | 'tertiary'
 }
 
 const LoginBtn = (props: LoginBtnProps) => {
@@ -16,7 +17,10 @@ const LoginBtn = (props: LoginBtnProps) => {
   }
 
   return (
-    <Button onClick={() => router.push(AppRoutes.login)} variant={'secondary'}>
+    <Button
+      onClick={() => router.push(AppRoutes.login)}
+      variant={props.variant}
+    >
       {props.children}
     </Button>
   )
