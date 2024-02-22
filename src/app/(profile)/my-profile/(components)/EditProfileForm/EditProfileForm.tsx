@@ -100,6 +100,7 @@ const EditProfileForm = ({
       employmentTypes: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
+      viewCount: values.viewCount,
     }
 
     await runAsync(async () => {
