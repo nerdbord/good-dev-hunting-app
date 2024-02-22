@@ -1,6 +1,4 @@
-import { authOptions } from '@/app/(auth)/auth'
-import { findUserByEmail } from '@/backend/user/user.service'
-import { getServerSession } from 'next-auth'
+import { getAuthorizedUser } from '@/app/(auth)/auth'
 import styles from './LoginHeader.module.scss'
 
 // components
@@ -11,11 +9,7 @@ import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
 
 const LoginHeader = async () => {
-  const session = await getServerSession(authOptions)
-
-  const user = session?.user?.email
-    ? await findUserByEmail(session.user.email)
-    : null
+  const { user } = await getAuthorizedUser()
 
   return (
     <header className={styles.wrapper}>
