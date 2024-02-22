@@ -89,3 +89,13 @@ export const authorizeUser = async () => {
 
   return { email: session.user.email }
 }
+
+export const getAuthorizedUser = async () => {
+  const session = await getServerSession(authOptions)
+
+  const user = session?.user?.email
+    ? await findUserByEmail(session.user.email)
+    : null
+
+  return { session, user }
+}

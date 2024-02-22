@@ -23,6 +23,7 @@ $checkboxSize: 16px;
   margin: calc(($lineHeight - $checkboxSize) / 2);
   position: relative;
   width: $checkboxSize;
+  min-width: $checkboxSize;
   height: $checkboxSize;
   border: 1px solid #e2eaf1;
   border-radius: 2px;

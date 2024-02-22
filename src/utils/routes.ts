@@ -7,4 +7,5 @@ export enum AppRoutes {
   moderation = '/moderation',
   moderationProfile = '/moderation/profile',
   profiles = '/profiles',
+  login = '/login',
 }
