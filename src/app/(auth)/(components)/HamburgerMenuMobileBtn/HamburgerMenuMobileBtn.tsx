@@ -1,7 +1,7 @@
 'use client'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { Button } from '@/components/Button/Button'
-import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
+import MobileGitHubStarsBtn from '@/components/Button/MobileGitHubStarsBtn'
 import { useState } from 'react'
 import { GithubLoginButton } from '../GithubLoginButton/GithubLoginButton'
 import styles from './HamburgerMenuMobileBtn.module.scss'
@@ -33,11 +33,12 @@ const HamburgerMenuMobileBtn = ({
             {userProfile ? (
               <>
                 <GithubLoginButton />
-                <GithubStarsButton />
+                <MobileGitHubStarsBtn />
               </>
             ) : (
               <>
-                <CreateProfileBtn /> <GithubStarsButton />
+                <CreateProfileBtn />
+                <MobileGitHubStarsBtn />
               </>
             )}
           </div>
