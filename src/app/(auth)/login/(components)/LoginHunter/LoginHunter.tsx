@@ -39,7 +39,7 @@ const LoginHunter = () => {
           }}
           disabled={true}
         />
-        <div style={{ marginBlock: '24px' }}>
+        <div style={{ marginBottom: '24px', marginTop: '16px' }}>
           <CheckboxInput
             id={'terms'} // TODO enum
             label={'I have read and accept T&C and Privacy Policy'}
