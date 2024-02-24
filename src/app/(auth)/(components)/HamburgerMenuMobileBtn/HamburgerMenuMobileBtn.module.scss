@@ -11,6 +11,7 @@
   height: 100%;
   background-color: rgba(4, 8, 13, 0.5);
   z-index: 999;
+  overflow: hidden;
 }
 
 .hamburger {
@@ -28,4 +29,9 @@
   gap: 18px;
   z-index: 1000;
   height: 21%;
+
+  button {
+    width: 201px;
+    height: 44px;
+  }
 }
