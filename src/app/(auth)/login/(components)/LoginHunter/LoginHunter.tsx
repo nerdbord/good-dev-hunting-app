@@ -37,6 +37,7 @@ const LoginHunter = () => {
           onChange={() => {
             console.log('')
           }}
+          disabled={true}
         />
         <div style={{ marginBlock: '24px' }}>
           <CheckboxInput
@@ -44,7 +45,7 @@ const LoginHunter = () => {
             label={'I have read and accept T&C and Privacy Policy'}
             checked={isChecked}
             onChange={() => {
-              setIsChecked((prevState) => !prevState)
+              // setIsChecked((prevState) => !prevState)
             }}
             name={'terms'} // TODO enum
           />
@@ -52,7 +53,7 @@ const LoginHunter = () => {
         <Button
           onClick={() => setIsSubmited(true)}
           variant={'primary'}
-          disabled={false}
+          disabled={true}
         >
           Join as a Hunter
         </Button>
