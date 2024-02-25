@@ -10,6 +10,17 @@ import TextInput from '@/components/TextInput/TextInput'
 
 const LoginHunter = () => {
   const [isChecked, setIsChecked] = useState(false)
+  const [isSubmited, setIsSubmited] = useState(false)
+
+  if (isSubmited) {
+    return (
+      <Box>
+        <h2>Magic Link sent 🪄</h2>
+        <p>Access platform via link sent to your email adress.</p>
+      </Box>
+    )
+  }
+
   return (
     <Box>
       <h2>Login as talent Hunter</h2>
@@ -26,19 +37,26 @@ const LoginHunter = () => {
           onChange={() => {
             console.log('')
           }}
+          disabled={true}
         />
-        <div style={{ marginBlock: '24px' }}>
+        <div style={{ marginBottom: '24px', marginTop: '16px' }}>
           <CheckboxInput
-            id={'terms'}
+            id={'terms'} // TODO enum
             label={'I have read and accept T&C and Privacy Policy'}
             checked={isChecked}
             onChange={() => {
-              setIsChecked((prevState) => !prevState)
+              // setIsChecked((prevState) => !prevState)
             }}
-            name={'terms'}
+            name={'terms'} // TODO enum
           />
         </div>
-        <Button variant={'primary'}>Join as a Hunter</Button>
+        <Button
+          onClick={() => setIsSubmited(true)}
+          variant={'primary'}
+          disabled={true}
+        >
+          Join as a Hunter
+        </Button>
       </form>
     </Box>
   )
