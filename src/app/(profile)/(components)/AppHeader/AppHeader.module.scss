@@ -19,9 +19,10 @@
   align-items: center;
   height: 100%;
   @include mobile {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     gap: 30px;
   }
 }
@@ -111,4 +112,19 @@
   @include mobile {
     display: none !important;
   }
+}
+
+.hideOnDesktop {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.appHeaderLogoAndMenuBtnWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
