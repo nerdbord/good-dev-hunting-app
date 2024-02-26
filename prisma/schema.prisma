@@ -44,6 +44,7 @@ model Profile {
   state                    PublishingState   @default(DRAFT)
   rejectionReasons         RejectionReason[]
   contactRequests          ContactRequest[]
+  viewCount                Int               @default(0)
 }
 
 model Technology {
