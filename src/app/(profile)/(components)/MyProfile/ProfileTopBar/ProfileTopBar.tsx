@@ -1,7 +1,6 @@
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
-import ProfileViews from '@/app/(profile)/my-profile/(components)/ProfileViews/ProfileViews'
 import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
 import { ProfileModel } from '@/app/(profile)/types'
 import { PublishingState } from '@prisma/client'
@@ -18,10 +17,7 @@ const ProfileTopBar = async ({
   return (
     <div className={styles.titleBox}>
       <div className={styles.mobileProfilePreview}>
-        <div className={styles.titleContainer}>
-          <span className={styles.title}>Profile preview</span>
-          <ProfileViews viewCount={profile.viewCount} />
-        </div>
+        <span className={styles.title}>Profile preview</span>
 
         {!(isPending || isRejected) && (
           <div className={styles.toogleMobileView}>
