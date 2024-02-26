@@ -37,9 +37,11 @@ export const ToggleOpenToWork: React.FC<ToggleOpenToWorkProps> = ({
         checked={isOpenForWork}
         onChange={() => handleToggleOpenForWork(!isOpenForWork)}
       >
-        <Tooltip text="Switch changes automatically every 7 days if you don't visit the platform. That prevents GDH from having inactive profiles.">
-          <ImportantIcon />
-        </Tooltip>
+        <div className={styles.tooltipContainer}>
+          <Tooltip text="Switch changes automatically every 7 days if you don't visit the platform. That prevents GDH from having inactive profiles.">
+            <ImportantIcon />
+          </Tooltip>
+        </div>
       </SwitchInput>
     </div>
   )
