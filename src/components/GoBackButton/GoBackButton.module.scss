@@ -1,5 +1,5 @@
 .back {
-  position: relative;
+  display: flex;
   padding: 12px 24px;
   color: #a687ff;
   font-weight: 500;
@@ -8,12 +8,11 @@
   cursor: pointer;
   background: none;
   border-radius: 2px;
-  border: 1px solid var(--Main-03, #A687FF);
+  border: 1px solid var(--Main-03, #a687ff);
   @include mobile {
-    position: fixed;
-    top: 2%;
-    right: 5%;
-    z-index: 10;
+    margin-top: 12px;
+    color: #a687ff !important;
+    display: flex;
   }
 }
 
