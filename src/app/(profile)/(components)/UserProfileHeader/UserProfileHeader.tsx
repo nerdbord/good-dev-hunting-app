@@ -1,6 +1,5 @@
 import ContactBtn from '@/app/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
 import { Button } from '@/components/Button/Button'
-import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
 import classNames from 'classnames/bind'
 import { UserProfileHeaderType } from '../types'
@@ -29,7 +28,6 @@ export default function UserProfileHeader({
 
   return (
     <div className={commonClasses}>
-      {!!withBackButton && <GoBackButton>Go back</GoBackButton>}
       <div className={wrapClasses}>
         <div className={styles.socialItemsWrapper}>
           <SocialItems

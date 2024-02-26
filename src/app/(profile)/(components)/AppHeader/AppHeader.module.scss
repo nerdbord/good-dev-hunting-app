@@ -19,9 +19,10 @@
   align-items: center;
   height: 100%;
   @include mobile {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     gap: 30px;
   }
 }
@@ -55,15 +56,7 @@
   gap: $spacing-3;
 
   @include mobile {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    justify-content: center;
-    padding: $spacing-4 12%;
-    background-color: #04080d;
-    z-index: 10;
+    display: none;
   }
 }
 
@@ -111,4 +104,19 @@
   @include mobile {
     display: none !important;
   }
+}
+
+.hideOnDesktop {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.appHeaderLogoAndMenuBtnWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

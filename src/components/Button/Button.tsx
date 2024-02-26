@@ -5,7 +5,13 @@ import styles from './Button.module.scss'
 
 interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  variant: 'primary' | 'secondary' | 'tertiary' | 'action' | 'logout'
+  variant:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'action'
+    | 'logout'
+    | 'standard'
   type?: 'button' | 'submit'
   disabled?: boolean
   loading?: boolean

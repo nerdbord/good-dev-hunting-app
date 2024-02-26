@@ -26,6 +26,7 @@ export interface ProfileModel {
   githubUsername: string
   state: PublishingState
   userEmail: string
+  viewCount: number
 }
 
 export type ProfilePayload = Omit<
@@ -57,6 +58,7 @@ export enum JobSpecialization {
 }
 
 export interface ProfileFormValues {
+  viewCount: number
   fullName: string
   linkedin: string | null
   bio: string

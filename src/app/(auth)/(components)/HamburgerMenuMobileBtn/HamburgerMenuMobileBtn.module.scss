@@ -1,0 +1,49 @@
+.menu {
+  position: relative;
+  background-color: #04080d;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(4, 8, 13, 0.5);
+  z-index: 999;
+  overflow: hidden;
+}
+
+.hamburger {
+  position: fixed;
+  top: 26%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  background-color: #04080d;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  z-index: 1000;
+  height: 32%;
+
+  button {
+    width: 201px;
+    height: 44px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+
+  button {
+    width: 101px;
+    height: 44px;
+  }
+}
