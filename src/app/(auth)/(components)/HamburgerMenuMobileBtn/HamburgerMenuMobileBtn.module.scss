@@ -35,3 +35,15 @@
     height: 44px;
   }
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+
+  button {
+    width: 101px;
+    height: 44px;
+  }
+}

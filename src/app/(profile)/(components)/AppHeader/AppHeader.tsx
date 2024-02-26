@@ -1,4 +1,5 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
+import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import { authOptions } from '@/app/(auth)/auth'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
@@ -46,7 +47,10 @@ const AppHeader = async () => {
               )}
             </div>
             <div className={styles.hideOnDesktop}>
-              <HamburgerMenuMobileBtn userProfile={!!user?.profile} />
+              <HamburgerMenuMobileBtn
+                userProfile={!!user?.profile}
+                userIsModerator={userIsModerator}
+              />
             </div>
           </div>
         </Container>
@@ -63,10 +67,16 @@ const AppHeader = async () => {
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
           <div className={styles.hideOnDesktop}>
-            <HamburgerMenuMobileBtn userProfile={!!user?.profile} />
+            <HamburgerMenuMobileBtn
+              userProfile={!!user?.profile}
+              userIsModerator={userIsModerator}
+            />
           </div>
 
-          <div className={styles.frameButtons}></div>
+          <div className={styles.frameButtons}>
+            <GithubLoginButton />
+            <CreateProfileBtn />
+          </div>
         </div>
       </Container>
     </header>

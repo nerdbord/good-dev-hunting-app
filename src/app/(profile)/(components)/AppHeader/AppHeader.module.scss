@@ -56,15 +56,7 @@
   gap: $spacing-3;
 
   @include mobile {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    justify-content: center;
-    padding: $spacing-4 12%;
-    background-color: #04080d;
-    z-index: 10;
+    display: none;
   }
 }
 
