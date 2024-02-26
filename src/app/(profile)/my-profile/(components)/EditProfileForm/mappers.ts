@@ -29,4 +29,5 @@ export const mapProfileModelToEditProfileFormValues = (
   employment: profile.employmentTypes,
   githubUsername: profile.githubUsername,
   state: profile.state,
+  viewCount: profile.viewCount,
 })
