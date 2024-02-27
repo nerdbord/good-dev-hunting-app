@@ -70,6 +70,14 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     return counts
   }
 
+  const calculateFilteredProfilesCount = () => {
+    return props.data
+      .filter(filterBySeniority(seniorityFilter))
+      .filter(filterByLocation(locationFilter))
+      .filter(filterByTechnology(technologyFilter))
+      .filter(filterByAvailability(availabilityFilter)).length;
+  }
+
   const handleAllSpecializationsClick = () => {
     setJobSpecializationFilter([])
   }
@@ -123,6 +131,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
   }
   const allTabColors =
     jobSpecializationFilter.length === 0 ? '#13CBAA' : '#3d434b'
+    const filteredProfilesCount = calculateFilteredProfilesCount(); 
   const specializationCounts = calculateSpecializationCounts()
   return (
     <>
@@ -168,7 +177,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
         <SpecializationTab
           onClick={handleAllSpecializationsClick}
           isPressed={jobSpecializationFilter.length === 0}
-          count={props.data.length}
+          count={filteredProfilesCount}
           color={allTabColors}
         >
           All

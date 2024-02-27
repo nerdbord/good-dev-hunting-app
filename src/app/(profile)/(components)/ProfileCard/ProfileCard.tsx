@@ -2,7 +2,7 @@ import { jobSpecializationThemes } from '@/app/(profile)/helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
-  mapSpecialization,
+  mapSpecializationToTitle,
 } from '@/app/(profile)/mappers'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
 import { ProfileModel } from '@/app/(profile)/types'
@@ -47,7 +47,7 @@ const ProfileCard = ({ data, onClick, withStateStatus }: ProfileCardProps) => {
             <p className={styles.name}>{data.fullName}</p>
             <p className={styles.wordWrap}>
               {mapSeniorityLevel(data.seniority)}{' '}
-              {mapSpecialization(data.position)}&nbsp;Developer
+              {mapSpecializationToTitle(data.position)}
             </p>
             <p className={styles.location}>
               {data.country.name}, {data.city.name}
