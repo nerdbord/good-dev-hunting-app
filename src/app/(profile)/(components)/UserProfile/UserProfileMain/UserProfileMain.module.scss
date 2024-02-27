@@ -6,7 +6,7 @@
   @include mobile {
     position: static;
     margin: 22px 0;
-    padding: 40px $spacing-4;
+    padding: $spacing-4 $spacing-4 40px;
   }
 }
 
@@ -46,6 +46,7 @@
   gap: 35px;
   @include mobile {
     gap: $spacing-5;
+    margin-top: 12px;
   }
 }
 
@@ -150,4 +151,16 @@
 
 .flag {
   background-color: #0f1217;
+}
+
+.backBtnMobile {
+  display: none;
+
+  button {
+    margin: 0;
+  }
+
+  @include mobile {
+    display: block;
+  }
 }

@@ -19,8 +19,10 @@ const UserProfileMain = ({
 
   return (
     <>
-      <GoBackButton>Go Back</GoBackButton>
       <div className={styles.container}>
+        <div className={styles.backBtnMobile}>
+          <GoBackButton>Go back</GoBackButton>
+        </div>
         <div className={styles.profile}>
           <div className={styles.user}>
             <Avatar src={userProfile.avatarUrl || ''} size={100} />
