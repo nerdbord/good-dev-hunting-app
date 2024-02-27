@@ -40,7 +40,7 @@ const ProfileCard = ({ data, withStateStatus }: ProfileCardProps) => {
         withStateStatus && styles.moderationFrame
       }`}
     >
-      <Link href={`${AppRoutes.profiles}/${data.githubUsername}`} passHref>
+      <Link href={`${AppRoutes.profiles}/${data.githubUsername}`} passHref target='_blank'>
           <div className={styles.frame}>
             <div className={styles.container} data-test-id="profileContainer">
               <div className={styles.profile}>
