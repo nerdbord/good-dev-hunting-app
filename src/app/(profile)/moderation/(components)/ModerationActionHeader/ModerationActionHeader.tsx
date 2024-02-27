@@ -1,7 +1,6 @@
 'use client'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
 import { Button } from '@/components/Button/Button'
-import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { useModal } from '@/contexts/ModalContext'
 
 import AssignRoleModal from '@/app/(profile)/moderation/(components)/AssignRoleModal/AssignRoleModal'
@@ -17,7 +16,6 @@ export default function ModerationActionHeader({
 
   return (
     <div className={styles.wrapper}>
-      <GoBackButton>Go back</GoBackButton>
       <div className={styles.actionsWrapper}>
         <Button
           variant="action"
