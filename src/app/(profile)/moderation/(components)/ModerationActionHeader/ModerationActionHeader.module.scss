@@ -6,7 +6,8 @@
   width: 100%;
   @include mobile {
     overflow-x: scroll;
-    padding: $spacing-3 0;
+    padding: $spacing-3 0 10px;
+    @include custom-scrollbar;
   }
 }
 
