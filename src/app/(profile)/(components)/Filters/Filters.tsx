@@ -31,6 +31,7 @@ interface FiltersProps {
 }
 
 const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
+
   const plausible = usePlausible()
   const {
     setJobSpecializationFilter,
@@ -44,7 +45,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     locationFilter,
     setLocationFilter,
   } = useFilters()
-
+  
   const handleSpecializationSelect = (option: FilterOption) => {
     const isAlreadySelected = jobSpecializationFilter.find(
       (o) => o.value === option.value,
