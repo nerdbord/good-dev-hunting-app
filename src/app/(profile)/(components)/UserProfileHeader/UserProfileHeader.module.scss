@@ -5,7 +5,6 @@
   top: $spacing-5;
   width: calc(100% - 48px);
   margin: 0;
-  padding: 0 $spacing-5 0 0;
   @include mobile {
     position: static;
     width: 100%;
@@ -46,11 +45,16 @@
   }
 }
 
-  .socialItemsWrapper {
-    flex: 1;
-    justify-content: center;
-    @include mobile {
+.socialItemsWrapper {
+  flex: 1;
+  justify-content: center;
+  @include mobile {
     width: 100%;
-    }
   }
-  
+}
+
+.hideOnMobile {
+  @include mobile {
+    display: none;
+  }
+}
