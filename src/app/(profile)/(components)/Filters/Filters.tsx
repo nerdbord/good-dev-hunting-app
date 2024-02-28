@@ -10,7 +10,7 @@ import {
 } from '@/contexts/FilterContext'
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DropdownOption } from '../../../../components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
   filterByAvailability,
@@ -19,11 +19,16 @@ import {
   filterByTechnology,
 } from '../ProfileList/filters'
 
+import { usePathname, useSearchParams } from 'next/navigation'
 import { jobSpecializationThemes } from '../../helpers'
 import styles from './Filters.module.scss'
 import { SpecializationTab } from './SpecializationsTabs/SpecializationTabs/SpecializationTab'
+import {
+  setFiltersBasedOnUrlParams,
+  syncFiltersWithUrlParams,
+} from './filterUtils'
 
-interface FiltersProps {
+export interface FiltersProps {
   technologies: FilterOption[]
   countries: FilterOption[]
   specializations: FilterOption[]
@@ -31,6 +36,8 @@ interface FiltersProps {
 }
 
 const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
   const plausible = usePlausible()
   const {
     setJobSpecializationFilter,
@@ -44,6 +51,36 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     locationFilter,
     setLocationFilter,
   } = useFilters()
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
+
+    syncFiltersWithUrlParams(params, technologyFilter, 'tech')
+    syncFiltersWithUrlParams(params, seniorityFilter, 'exp')
+    syncFiltersWithUrlParams(params, jobSpecializationFilter, 'spec')
+    syncFiltersWithUrlParams(params, availabilityFilter, 'avail')
+    syncFiltersWithUrlParams(params, locationFilter, 'loc')
+
+    const newUrl = `${pathname}?${params.toString()}`
+    window.history.pushState({ path: newUrl }, '', newUrl)
+  }, [
+    technologyFilter,
+    seniorityFilter,
+    jobSpecializationFilter,
+    availabilityFilter,
+    locationFilter,
+  ])
+
+  useEffect(() => {
+    const filters = setFiltersBasedOnUrlParams(searchParams, props, filterLists);
+
+    setTechnologyFilter(filters.technologyOptions);
+    setSeniorityFilter(filters.seniorityOptions);
+    setJobSpecializationFilter(filters.jobSpecializationOptions);
+    setAvailabilityFilter(filters.availabilityOptions);
+    setLocationFilter(filters.locationOptions);
+
+  }, [searchParams, props, filterLists]);
 
   const handleSpecializationSelect = (option: FilterOption) => {
     const isAlreadySelected = jobSpecializationFilter.find(
@@ -116,6 +153,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
         plausible(PlausibleEvents.SelectTechnologyFilter, {
           props: { technology: option.value },
         })
+
         break
       default:
         return
