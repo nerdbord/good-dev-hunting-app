@@ -1,6 +1,6 @@
 'use client'
+import { useFilters } from '@/app/(profile)/providers/FilterProviders/FilterContext'
 import { ProfileModel } from '@/app/(profile)/types'
-import { useFilters } from '@/contexts/FilterContext'
 import React from 'react'
 import { ProfileListItem } from '../ProfileList/ProfileListItem'
 

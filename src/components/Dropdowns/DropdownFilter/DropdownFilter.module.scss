@@ -35,7 +35,7 @@
   border: 1px solid #3d434b;
   border-radius: 2px;
   min-height: 40px;
-  padding: 0 15px 15px 15px;
+  padding: 0 15px 20px 15px;
   font-weight: 400;
   font-size: 14px;
   z-index: 1000;
@@ -64,6 +64,19 @@
 
 .titleContainer {
   display: none;
+
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.titleContainerSearch {
+  display: none;
+
   @include mobile {
     display: flex;
     justify-content: space-between;
@@ -89,12 +102,12 @@
   gap: 8px;
   cursor: pointer;
   &:first-of-type {
-    margin-top: 55px;
+    margin-top: 20px;
     @include mobile {
       margin-top: 0px;
     }
   }
-  .dropdownInput input {
+input {
     width: 16px;
     height: 16px;
     border: 1px solid #e2eaf1;
@@ -164,49 +177,5 @@
   @include mobile {
     display: block;
     filter: blur(5px);
-  }
-}
-
-.searchInput {
-  background-color: transparent;
-  padding: 40px -20px;
-  height: 42px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-radius: 0px;
-  outline: none;
-  border: none;
-  border-radius: 2px;
-  background-color: #0f1217;
-  border: 1px solid #2a2f35;
-  color: #69717b;
-  border-radius: 2px;
-  padding: 16px 24px 16px 20px;
-  width: 100%;
-  font-size: 14px;
-  @include mobile {
-    height: 50px;
-    position: fixed;
-    top: auto;
-    bottom: 260px;
-    z-index: 5;
-  }
-  &::placeholder {
-    color: #69717b;
-  }
-  &:focus {
-    color: white; 
-  }
-}
-
-.noMatchingOptions {
-  margin-top: 55px;
-  font-size: 12px;
-  font-weight: 400;
-  color: white;
-  opacity: 0.5;
-  @include mobile {
-    margin-top: 5px;
   }
 }

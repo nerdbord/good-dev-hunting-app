@@ -1,13 +1,7 @@
 'use client'
-import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
+import { useFilters } from '@/app/(profile)/providers/FilterProviders/FilterContext'
+import { JobSpecialization } from '@/app/(profile)/types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
-import {
-  FilterOption,
-  JobOfferFilters,
-  JobOfferFiltersEnum,
-  filterLists,
-  useFilters,
-} from '@/contexts/FilterContext'
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import React, { useEffect } from 'react'
@@ -21,19 +15,19 @@ import {
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import { jobSpecializationThemes } from '../../helpers'
-import styles from './Filters.module.scss'
-import { SpecializationTab } from './SpecializationsTabs/SpecializationTabs/SpecializationTab'
 import {
   setFiltersBasedOnUrlParams,
   syncFiltersWithUrlParams,
-} from './filterUtils'
-
-export interface FiltersProps {
-  technologies: FilterOption[]
-  countries: FilterOption[]
-  specializations: FilterOption[]
-  data: ProfileModel[]
-}
+} from '../../providers/FilterProviders/filterUtils'
+import {
+  FilterOption,
+  FiltersProps,
+  JobOfferFilters,
+  JobOfferFiltersEnum,
+  filterLists,
+} from '../../providers/FilterProviders/types'
+import styles from './Filters.module.scss'
+import { SpecializationTab } from './SpecializationsTabs/SpecializationTabs/SpecializationTab'
 
 const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
   const searchParams = useSearchParams()
@@ -83,7 +77,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
 
   const handleSpecializationSelect = (option: FilterOption) => {
     const isAlreadySelected = jobSpecializationFilter.find(
-      (o) => o.value === option.value,
+      (o: { value: string }) => o.value === option.value,
     )
     if (isAlreadySelected) {
       setJobSpecializationFilter([])

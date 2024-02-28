@@ -1,6 +1,7 @@
 'use client'
+
+import { initialFilterOption } from '@/app/(profile)/providers/FilterProviders/types'
 import { Button } from '@/components/Button/Button'
-import { initialFilterOption } from '@/contexts/FilterContext'
 import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'

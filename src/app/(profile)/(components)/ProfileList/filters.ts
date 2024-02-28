@@ -1,5 +1,5 @@
 import { ProfileModel } from '@/app/(profile)/types'
-import { FilterOption } from '@/contexts/FilterContext'
+import { FilterOption } from '../../providers/FilterProviders/types'
 
 export const filterByPosition =
   (positionFilter: FilterOption[]) => (profile: ProfileModel) => {

@@ -4,8 +4,10 @@ import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFi
 import useOutsideClick from '@/hooks/useOutsideClick'
 import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'
-import { IoIosArrowDown, IoIosArrowUp, IoIosCheckmark } from 'react-icons/io'
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import styles from '../DropdownFilter/DropdownFilter.module.scss'
+import { DropdownOptionItem } from '../DropdownOptionItem/DropdownOptionItem'
+import { DropdownSearchInput } from '../DropdownSearchInput/DropdownSearchInput'
 
 export const DropdownFilterMulti = ({
   text,
@@ -51,9 +53,6 @@ export const DropdownFilterMulti = ({
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
   }
-  const handleSelect = (option: DropdownOption) => {
-    onSelect(option)
-  }
 
   const closeDropdown = () => {
     setDropdownActive(false)
@@ -83,50 +82,34 @@ export const DropdownFilterMulti = ({
         {isOverlayActive && <div className={styles.overlay}></div>}
         {isDropdownActive && (
           <div className={styles.dropdown} ref={dropdownRef}>
-            <div className={styles.titleContainer}>
+            <div
+              className={
+                hasSearchInput
+                  ? styles.titleContainerSearch
+                  : styles.titleContainer
+              }
+            >
               <div className={styles.dropdownTitle}>{text}</div>
               <Button variant="tertiary" type="submit" onClick={closeDropdown}>
                 <p>Apply</p>
               </Button>
             </div>
             {hasSearchInput && (
-              <input
-                type="text"
-                className={styles.searchInput}
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+              <DropdownSearchInput
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                showNoMatchingOptions={filteredOptions.length < 1}
               />
             )}
-            {filteredOptions.length < 1 && (
-              <p className={styles.noMatchingOptions}>
-                No matching options found
-              </p>
-            )}
-            {options
-              .filter((option) =>
-                option.name.toLowerCase().includes(searchTerm.toLowerCase()),
-              )
-              .map((option, index) => (
-                <label key={index} className={styles.dropdownInput}>
-                  <div
-                    className={`${styles.checkbox} ${
-                      selectedValue.includes(option) ? styles.checked : ''
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      className={styles.hidden}
-                      checked={selectedValue.includes(option)}
-                      onChange={() => handleSelect(option)}
-                    />
-                    {selectedValue.includes(option) && (
-                      <IoIosCheckmark className={styles.checkmark} />
-                    )}
-                  </div>{' '}
-                  {option.name}
-                </label>
-              ))}
+            {filteredOptions.map((option, index) => (
+              <DropdownOptionItem
+                key={index}
+                option={option}
+                onSelect={onSelect}
+                isSelected={selectedValue.includes(option)}
+                hasSearchInput={hasSearchInput}
+              />
+            ))}
           </div>
         )}
       </div>

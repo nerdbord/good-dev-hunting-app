@@ -8,12 +8,12 @@ import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateP
 import PersonalInfo from '@/app/(profile)/my-profile/(components)/CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '@/app/(profile)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
 import styles from '@/app/(profile)/my-profile/create/page.module.scss'
+import { initialFilterOption } from '@/app/(profile)/providers/FilterProviders/types'
 import {
   CreateProfileFormValues,
   JobSpecialization,
   ProfilePayload,
 } from '@/app/(profile)/types'
-import { initialFilterOption } from '@/contexts/FilterContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'

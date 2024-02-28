@@ -1,11 +1,12 @@
 'use client'
+
 import {
   mappedEmploymentType,
   mappedSeniorityLevel,
 } from '@/app/(profile)/mappers'
-import { JobSpecialization } from '@/app/(profile)/types'
+import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import React, { createContext, useContext, useState } from 'react'
+import { createContext } from 'react'
 
 export type FiltersContextType = {
   jobSpecializationFilter: FilterOption[]
@@ -20,7 +21,7 @@ export type FiltersContextType = {
   setLocationFilter: (value: FilterOption[]) => void
 }
 
-export interface FilterOption extends DropdownOption {}
+export type FilterOption = DropdownOption
 
 export const FiltersContext = createContext<FiltersContextType | undefined>(
   undefined,
@@ -127,45 +128,9 @@ export const filterLists: FilterLists = {
   availability: mappedEmploymentType,
 }
 
-export const FiltersProvider = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
-  const [jobSpecializationFilter, setJobSpecializationFilter] = useState<
-    FilterOption[]
-  >([])
-  const [technologyFilter, setTechnologyFilter] = useState<FilterOption[]>([])
-  const [seniorityFilter, setSeniorityFilter] = useState<FilterOption[]>([])
-  const [locationFilter, setLocationFilter] = useState<FilterOption[]>([])
-  const [availabilityFilter, setAvailabilityFilter] = useState<FilterOption[]>(
-    [],
-  )
-
-  return (
-    <FiltersContext.Provider
-      value={{
-        jobSpecializationFilter,
-        setJobSpecializationFilter,
-        technologyFilter,
-        setTechnologyFilter,
-        seniorityFilter,
-        setSeniorityFilter,
-        availabilityFilter,
-        setAvailabilityFilter,
-        locationFilter,
-        setLocationFilter,
-      }}
-    >
-      {children}
-    </FiltersContext.Provider>
-  )
-}
-
-export const useFilters = (): FiltersContextType => {
-  const context = useContext(FiltersContext)
-  if (!context) {
-    throw new Error('useFilters must be used within a FiltersProvider')
-  }
-  return context
+export interface FiltersProps {
+  technologies: FilterOption[]
+  countries: FilterOption[]
+  specializations: FilterOption[]
+  data: ProfileModel[]
 }
