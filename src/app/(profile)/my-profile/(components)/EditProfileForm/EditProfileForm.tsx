@@ -27,6 +27,9 @@ import styles from '../../../my-profile/edit/page.module.scss'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
+  userEmail: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
@@ -77,6 +80,7 @@ const EditProfileForm = ({
   const handleEditProfile = async (values: ProfileFormValues) => {
     const payload: ProfilePayload = {
       fullName: values.fullName,
+      userEmail: values.userEmail,
       avatarUrl: session.user.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,

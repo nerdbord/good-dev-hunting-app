@@ -26,7 +26,6 @@ export const DropdownFilter = ({
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
-
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

@@ -25,13 +25,13 @@ export interface ProfileModel {
   employmentTypes: EmploymentType[]
   githubUsername: string
   state: PublishingState
-  userEmail: string
   viewCount: number
+  userEmail: string
 }
 
 export type ProfilePayload = Omit<
   ProfileModel,
-  'id' | 'userEmail' | 'techStack' | 'userId'
+  'id' | 'techStack' | 'userId'
 > & {
   techStack: TechStack
 }
@@ -73,6 +73,7 @@ export interface ProfileFormValues {
   techStack: DropdownOption[]
   githubUsername: string | null
   state: PublishingState
+  userEmail: string
 }
 
 export interface CreateProfileFormValues extends ProfileFormValues {

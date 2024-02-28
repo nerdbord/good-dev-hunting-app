@@ -30,4 +30,5 @@ export const mapProfileModelToEditProfileFormValues = (
   githubUsername: profile.githubUsername,
   state: profile.state,
   viewCount: profile.viewCount,
+  userEmail: profile.userEmail,
 })

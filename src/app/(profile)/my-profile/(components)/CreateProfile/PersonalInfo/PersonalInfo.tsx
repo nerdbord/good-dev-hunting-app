@@ -12,7 +12,7 @@ import styles from './PersonalInfo.module.scss'
 
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',
-  CONTACT_EMAIL = 'contactEmail',
+  CONTACT_EMAIL = 'userEmail',
   LINKEDIN = 'linkedin',
   BIO = 'bio',
 }
@@ -50,17 +50,24 @@ const PersonalInfo = () => {
           />
         </InputFormError>
         <div className={styles.emailContainer}>
-          <TextInput
-            label="Contact email"
-            value={session?.user?.email || ''}
-            onChange={handleChange}
-            addImportantIcon={true}
-            name={PersonalInfoFormKeys.CONTACT_EMAIL}
-            disabled={true}
-            tooltipText=" Email is connected to your Github profile and cannot be changed"
-            dataTestId=""
-            maxLength={30}
-          />
+          <InputFormError
+            error={
+              touched[PersonalInfoFormKeys.CONTACT_EMAIL] &&
+              errors[PersonalInfoFormKeys.CONTACT_EMAIL]
+            }
+          >
+            <TextInput
+              onBlur={handleBlur}
+              label="Contact email"
+              value={
+                values[PersonalInfoFormKeys.CONTACT_EMAIL] ||
+                session?.user.email
+              }
+              onChange={handleChange}
+              name={PersonalInfoFormKeys.CONTACT_EMAIL}
+              disabled={false}
+            />{' '}
+          </InputFormError>
         </div>
         <UserPhotoUploader />
         <InputFormError

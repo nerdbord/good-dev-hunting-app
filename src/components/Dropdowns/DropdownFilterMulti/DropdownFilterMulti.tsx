@@ -12,15 +12,20 @@ export const DropdownFilterMulti = ({
   options,
   onSelect,
   selectedValue,
+  hasSearchInput,
 }: {
   text: string
   options: DropdownOption[]
   onSelect: (option: DropdownOption) => void
   selectedValue: DropdownOption[]
+  hasSearchInput?: boolean
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isOverlayActive, setOverlayActive] = useState(false)
+
   useOutsideClick(
     dropdownRef,
     () => setDropdownActive(false),
@@ -57,7 +62,10 @@ export const DropdownFilterMulti = ({
 
   useOutsideClick(dropdownRef, closeDropdown)
 
-  const [isOverlayActive, setOverlayActive] = useState(false)
+  const filteredOptions = options.filter((option) =>
+    option.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
+
   return (
     <div className={styles.buttonBox}>
       <div>
@@ -78,29 +86,47 @@ export const DropdownFilterMulti = ({
             <div className={styles.titleContainer}>
               <div className={styles.dropdownTitle}>{text}</div>
               <Button variant="tertiary" type="submit" onClick={closeDropdown}>
-                Apply
+                <p>Apply</p>
               </Button>
             </div>
-            {options.map((option, index) => (
-              <label key={index} className={styles.dropdownInput}>
-                <div
-                  className={`${styles.checkbox} ${
-                    selectedValue.includes(option) ? styles.checked : ''
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    className={styles.hidden}
-                    checked={selectedValue.includes(option)}
-                    onChange={() => handleSelect(option)}
-                  />
-                  {selectedValue.includes(option) && (
-                    <IoIosCheckmark className={styles.checkmark} />
-                  )}
-                </div>{' '}
-                {option.name}
-              </label>
-            ))}
+            {hasSearchInput && (
+              <input
+                type="text"
+                className={styles.searchInput}
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            )}
+            {filteredOptions.length < 1 && (
+              <p className={styles.noMatchingOptions}>
+                No matching options found
+              </p>
+            )}
+            {options
+              .filter((option) =>
+                option.name.toLowerCase().includes(searchTerm.toLowerCase()),
+              )
+              .map((option, index) => (
+                <label key={index} className={styles.dropdownInput}>
+                  <div
+                    className={`${styles.checkbox} ${
+                      selectedValue.includes(option) ? styles.checked : ''
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      className={styles.hidden}
+                      checked={selectedValue.includes(option)}
+                      onChange={() => handleSelect(option)}
+                    />
+                    {selectedValue.includes(option) && (
+                      <IoIosCheckmark className={styles.checkmark} />
+                    )}
+                  </div>{' '}
+                  {option.name}
+                </label>
+              ))}
           </div>
         )}
       </div>

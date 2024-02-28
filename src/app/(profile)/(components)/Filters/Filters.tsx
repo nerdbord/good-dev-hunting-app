@@ -72,15 +72,14 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
   ])
 
   useEffect(() => {
-    const filters = setFiltersBasedOnUrlParams(searchParams, props, filterLists);
+    const filters = setFiltersBasedOnUrlParams(searchParams, props, filterLists)
 
-    setTechnologyFilter(filters.technologyOptions);
-    setSeniorityFilter(filters.seniorityOptions);
-    setJobSpecializationFilter(filters.jobSpecializationOptions);
-    setAvailabilityFilter(filters.availabilityOptions);
-    setLocationFilter(filters.locationOptions);
-
-  }, [searchParams, props, filterLists]);
+    setTechnologyFilter(filters.technologyOptions)
+    setSeniorityFilter(filters.seniorityOptions)
+    setJobSpecializationFilter(filters.jobSpecializationOptions)
+    setAvailabilityFilter(filters.availabilityOptions)
+    setLocationFilter(filters.locationOptions)
+  }, [searchParams, props, filterLists])
 
   const handleSpecializationSelect = (option: FilterOption) => {
     const isAlreadySelected = jobSpecializationFilter.find(
@@ -182,6 +181,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
               handleSelectMulti(option, JobOfferFiltersEnum.technology)
             }
             selectedValue={technologyFilter}
+            hasSearchInput={true}
           />
           <DropdownFilterMulti
             text={'Seniority'}
