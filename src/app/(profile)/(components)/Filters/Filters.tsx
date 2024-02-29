@@ -144,6 +144,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
               handleSelectMulti(option, JobOfferFiltersEnum.technology)
             }
             selectedValue={technologyFilter}
+            hasSearchInput
           />
           <DropdownFilterMulti
             text={'Seniority'}
