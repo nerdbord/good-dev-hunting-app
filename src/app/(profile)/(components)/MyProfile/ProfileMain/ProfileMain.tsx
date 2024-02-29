@@ -1,4 +1,8 @@
-import { mapEmploymentTypes, mapSeniorityLevel } from '@/app/(profile)/mappers'
+import {
+  mapEmploymentTypes,
+  mapSeniorityLevel,
+  mapSpecializationToTitle,
+} from '@/app/(profile)/mappers'
 import { ProfileModel } from '@/app/(profile)/types'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
@@ -80,7 +84,7 @@ const ProfileMain = async ({
             <span className={styles.seniority}>
               {mapSeniorityLevel(profile.seniority as SeniorityLevel) ||
                 profile.seniority}{' '}
-              {profile.position} Developer
+              {mapSpecializationToTitle(profile.position)}
             </span>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>

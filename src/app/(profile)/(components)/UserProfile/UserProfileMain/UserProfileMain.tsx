@@ -1,4 +1,8 @@
-import { mapEmploymentTypes, mapSeniorityLevel } from '@/app/(profile)/mappers'
+import {
+  mapEmploymentTypes,
+  mapSeniorityLevel,
+  mapSpecializationToTitle,
+} from '@/app/(profile)/mappers'
 import { ProfileModel } from '@/app/(profile)/types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
@@ -45,8 +49,8 @@ const UserProfileMain = ({
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
-              {mapSeniorityLevel(userProfile.seniority)} {userProfile.position}{' '}
-              Developer
+              {mapSeniorityLevel(userProfile.seniority)}{' '}
+              {mapSpecializationToTitle(userProfile.position)}
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
