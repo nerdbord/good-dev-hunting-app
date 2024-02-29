@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@/components/Button/Button'
 import { initialFilterOption } from '@/contexts/FilterContext'
 import 'material-icons/iconfont/material-icons.css'
@@ -26,7 +27,6 @@ export const DropdownFilter = ({
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
-
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

@@ -49,7 +49,7 @@ const UserProfileMain = ({
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
-              {mapSeniorityLevel(userProfile.seniority)}
+              {mapSeniorityLevel(userProfile.seniority)}{' '}
               {mapSpecializationToTitle(userProfile.position)}
             </div>
             <div className={styles.addInfo}>
