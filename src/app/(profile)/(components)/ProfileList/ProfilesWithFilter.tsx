@@ -4,14 +4,6 @@ import { useFilters } from '@/contexts/FilterContext'
 import React from 'react'
 import { ProfileListItem } from '../ProfileList/ProfileListItem'
 
-import {
-  filterByAvailability,
-  filterByLocation,
-  filterByPosition,
-  filterBySeniority,
-  filterByTechnology,
-} from './filters'
-
 import styles from './ProfileList.module.scss'
 
 export const ProfilesWithFilter: React.FC<{
@@ -24,17 +16,17 @@ export const ProfilesWithFilter: React.FC<{
     locationFilter,
     jobSpecializationFilter,
   } = useFilters()
-  const filteredProfileData = (data || [])
-    .filter(filterByPosition(jobSpecializationFilter))
-    .filter(filterBySeniority(seniorityFilter))
-    .filter(filterByLocation(locationFilter))
-    .filter(filterByTechnology(technologyFilter))
-    .filter(filterByAvailability(availabilityFilter))
+  // const filteredProfileData = (data || [])
+  //   .filter(filterByPosition(jobSpecializationFilter))
+  //   .filter(filterBySeniority(seniorityFilter))
+  //   .filter(filterByLocation(locationFilter))
+  //   .filter(filterByTechnology(technologyFilter))
+  //   .filter(filterByAvailability(availabilityFilter))
 
   return (
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
-        {filteredProfileData.map((profile) => (
+        {data.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
         ))}
       </div>
