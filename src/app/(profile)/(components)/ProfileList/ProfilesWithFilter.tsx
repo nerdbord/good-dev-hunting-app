@@ -23,6 +23,7 @@ export const ProfilesWithFilter: React.FC<{
     availabilityFilter,
     locationFilter,
     jobSpecializationFilter,
+    searchTermFilter,
   } = useFilters()
   const filteredProfileData = (data || [])
     .filter(filterByPosition(jobSpecializationFilter))
@@ -30,6 +31,9 @@ export const ProfilesWithFilter: React.FC<{
     .filter(filterByLocation(locationFilter))
     .filter(filterByTechnology(technologyFilter))
     .filter(filterByAvailability(availabilityFilter))
+    .filter((profile) =>
+      profile.fullName.toLowerCase().includes(searchTermFilter.toLowerCase()),
+    )
 
   return (
     <div className={styles.profileCards}>

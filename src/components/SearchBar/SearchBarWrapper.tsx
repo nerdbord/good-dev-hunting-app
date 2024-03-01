@@ -3,17 +3,14 @@ import { ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { ChangeEvent, useRef, useState } from 'react'
-import styles from './SearchByNameWrapper.module.scss'
+import styles from './SearchBarWrapper.module.scss'
 
 type Props = {
   profiles: ProfileModel[]
   onSearchChange: (value: string) => void
 }
 
-export default function SearchByNameWrapper({
-  profiles,
-  onSearchChange,
-}: Props) {
+export default function SearchBarWrapper({ profiles, onSearchChange }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestionRef = useRef<HTMLUListElement>(null)
@@ -36,7 +33,7 @@ export default function SearchByNameWrapper({
   }
 
   console.log('Lista profili przed filtrowaniem:', profiles)
-  const filteredProfiles = profiles.filter((profile: ProfileModel) => {
+  const filteredProfiles = profiles.filter((profile) => {
     return (
       searchValue !== '' &&
       profile.fullName.toLowerCase().includes(searchValue.toLowerCase())

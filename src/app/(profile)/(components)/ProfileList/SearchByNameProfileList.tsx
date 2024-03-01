@@ -1,7 +1,7 @@
 'use client'
 import { ProfileModel } from '@/app/(profile)/types'
 import { getAllPublishedProfilesPayload } from '@/backend/profile/profile.service'
-import SearchByNameWrapper from '@/components/SearchByName/SearchByNameWrapper'
+import SearchByNameWrapper from '@/components/SearchBar/SearchBarWrapper'
 import { useEffect, useState } from 'react'
 import SearchByNameProfilesWithFilter from './SearchByNameProfilesWithFilter'
 
