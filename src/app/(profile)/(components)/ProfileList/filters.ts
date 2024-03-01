@@ -49,3 +49,9 @@ export const filterByAvailability =
         ),
     )
   }
+
+export const FilterByFullName = (searchValue: string) => {
+  return (profile: ProfileModel) => {
+    return profile.fullName.toLowerCase().includes(searchValue.toLowerCase())
+  }
+}
