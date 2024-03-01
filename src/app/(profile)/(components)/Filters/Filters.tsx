@@ -10,7 +10,7 @@ import {
 } from '@/contexts/FilterContext'
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { DropdownOption } from '../../../../components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
   filterByAvailability,
@@ -19,6 +19,7 @@ import {
   filterByTechnology,
 } from '../ProfileList/filters'
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { jobSpecializationThemes } from '../../helpers'
 import styles from './Filters.module.scss'
 import { SpecializationTab } from './SpecializationsTabs/SpecializationTabs/SpecializationTab'
@@ -44,6 +45,26 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     locationFilter,
     setLocationFilter,
   } = useFilters()
+  const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+
+      if (value === '') {
+        params.delete(name)
+      } else if (params.has(name)) {
+        params.set(name, value)
+      } else {
+        params.append(name, value)
+      }
+
+      return params.toString().replaceAll('%2C', ',')
+    },
+    [searchParams],
+  )
 
   const handleSpecializationSelect = (option: FilterOption) => {
     const isAlreadySelected = jobSpecializationFilter.find(
@@ -54,6 +75,8 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     } else {
       setJobSpecializationFilter([option])
     }
+
+    router.push(`${pathname}?${createQueryString('position', option.value)}`)
   }
 
   const calculateSpecializationCounts = (): Record<string, number> => {
@@ -92,6 +115,12 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       case JobOfferFiltersEnum.seniority:
         newFilters = manageFilter(seniorityFilter)
         setSeniorityFilter(newFilters)
+        router.push(
+          `${pathname}?${createQueryString(
+            JobOfferFiltersEnum.seniority,
+            newFilters.map((f) => f.value).join(','),
+          )}`,
+        )
         plausible(PlausibleEvents.SelectSeniorityFilter, {
           props: { seniority: option.value },
         })
@@ -99,6 +128,12 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       case JobOfferFiltersEnum.availability:
         newFilters = manageFilter(availabilityFilter)
         setAvailabilityFilter(newFilters)
+        router.push(
+          `${pathname}?${createQueryString(
+            JobOfferFiltersEnum.availability,
+            newFilters.map((f) => f.value).join(','),
+          )}`,
+        )
         plausible(PlausibleEvents.SelectAvailabilityFilter, {
           props: { availability: option.value },
         })
@@ -106,6 +141,12 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       case JobOfferFiltersEnum.location:
         newFilters = manageFilter(locationFilter)
         setLocationFilter(newFilters)
+        router.push(
+          `${pathname}?${createQueryString(
+            JobOfferFiltersEnum.location,
+            newFilters.map((f) => f.value).join(','),
+          )}`,
+        )
         plausible(PlausibleEvents.SelectLocationFilter, {
           props: { location: option.value },
         })
@@ -113,6 +154,12 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
       case JobOfferFiltersEnum.technology:
         newFilters = manageFilter(technologyFilter)
         setTechnologyFilter(newFilters)
+        router.push(
+          `${pathname}?${createQueryString(
+            JobOfferFiltersEnum.technology,
+            newFilters.map((f) => f.value).join(','),
+          )}`,
+        )
         plausible(PlausibleEvents.SelectTechnologyFilter, {
           props: { technology: option.value },
         })
@@ -133,6 +180,8 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     jobSpecializationFilter.length === 0 ? '#13CBAA' : '#3d434b'
   const filteredProfilesCount = calculateFilteredProfilesCount()
   const specializationCounts = calculateSpecializationCounts()
+
+  console.log(seniorityFilter)
   return (
     <>
       <div className={styles.mainContainer}>

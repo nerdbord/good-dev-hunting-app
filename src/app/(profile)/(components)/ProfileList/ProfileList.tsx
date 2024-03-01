@@ -1,11 +1,10 @@
 import ProfilesWithFilter from '@/app/(profile)/(components)/ProfileList/ProfilesWithFilter'
-import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
-import shuffleArray from '@/utils/collections'
+import { ProfileModel } from '@/app/(profile)/types'
 
-const ProfileList = async () => {
-  const profiles = await getPublishedProfilesPayload()
-  const shuffledProfiles = shuffleArray(profiles)
+const ProfileList = async ({ profiles }: { profiles: ProfileModel[] }) => {
+  // const profiles = await getPublishedProfilesPayload()
+  // const shuffledProfiles = shuffleArray(profiles)
 
-  return <ProfilesWithFilter data={shuffledProfiles} />
+  return <ProfilesWithFilter data={profiles} />
 }
 export default ProfileList
