@@ -76,7 +76,7 @@ export const DropdownFilterMulti = ({
       )}`,
     )
   }, [selectedValue])
-  console.log('selectedValue', selectedValue)
+
   useEffect(() => {
     switch (isDropdownActive) {
       case true:
