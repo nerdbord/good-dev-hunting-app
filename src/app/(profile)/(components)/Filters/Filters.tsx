@@ -175,8 +175,13 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
             selectedValue={locationFilter}
           />
         </div>
+        <SearchBarWrapper
+          profiles={props.data}
+          onSearchChange={(value) => handleSearchChange(value)}
+        />
         <div className={styles.devType}></div>
       </div>
+
       <div className={styles.tabsContainer}>
         <div className={styles.tabs}>
           <SpecializationTab
@@ -203,10 +208,6 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
             )
           })}
         </div>
-        <SearchBarWrapper
-          profiles={props.data}
-          onSearchChange={(value) => handleSearchChange(value)}
-        />
       </div>
     </>
   )

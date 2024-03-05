@@ -11,8 +11,7 @@ type Props = {
 
 export default function SearchBarWrapper({ profiles, onSearchChange }: Props) {
   const [searchValue, setSearchValue] = useState('')
-  const [showSuggestions, setShowSuggestions] = useState(false)
-  const suggestionRef = useRef<HTMLUListElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
@@ -25,25 +24,29 @@ export default function SearchBarWrapper({ profiles, onSearchChange }: Props) {
     onSearchChange('')
   }
 
+  const focusInput = () => {
+    inputRef.current?.focus()
+  }
+
   return (
     <div className={styles.searchWrapper}>
       <div className={styles.inputContainer}>
         <input
+          ref={inputRef}
           name="searchValue"
           className={styles.searchInput}
           placeholder="Search by name"
           onChange={changeHandler}
           value={searchValue}
-          onFocus={() => setShowSuggestions(true)}
         />
         {searchValue ? (
           <button onClick={clearSearch} className={styles.clearButton}>
             <CloseIcon />
           </button>
         ) : (
-          <div className={styles.searchIcon}>
+          <button onClick={focusInput} className={styles.searchIcon}>
             <SearchIcon />
-          </div>
+          </button>
         )}
       </div>
     </div>
