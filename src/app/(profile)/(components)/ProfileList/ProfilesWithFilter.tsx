@@ -35,6 +35,16 @@ export const ProfilesWithFilter: React.FC<{
       profile.fullName.toLowerCase().includes(searchTermFilter.toLowerCase()),
     )
 
+  if (filteredProfileData.length === 0) {
+    return (
+      <div className={styles.profileCards}>
+        <div className={styles.profileListCont}>
+          <p>No matching profiles found</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
