@@ -1,5 +1,5 @@
 import { ProfileModel } from '@/app/(profile)/types'
-import CloseIcon from '@/assets/icons/CloseIcon'
+import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { ChangeEvent, useRef, useState } from 'react'
 import styles from './SearchBarWrapper.module.scss'
@@ -41,7 +41,7 @@ export default function SearchBarWrapper({ profiles, onSearchChange }: Props) {
         />
         {searchValue ? (
           <button onClick={clearSearch} className={styles.clearButton}>
-            <CloseIcon />
+            <ClearIcon />
           </button>
         ) : (
           <button onClick={focusInput} className={styles.searchIcon}>
