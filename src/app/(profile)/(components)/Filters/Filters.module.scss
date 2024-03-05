@@ -56,3 +56,9 @@
 
   @include custom-scrollbar;
 }
+
+.tabsContainer {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
