@@ -1,10 +1,18 @@
-import ProfilesWithFilter from '@/app/(profile)/(components)/ProfileList/ProfilesWithFilter'
+import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
 import { ProfileModel } from '@/app/(profile)/types'
+import styles from './ProfileList.module.scss'
 
-const ProfileList = async ({ profiles }: { profiles: ProfileModel[] }) => {
-  // const profiles = await getPublishedProfilesPayload()
+const ProfileList = ({ profiles }: { profiles: ProfileModel[] }) => {
   // const shuffledProfiles = shuffleArray(profiles)
 
-  return <ProfilesWithFilter data={profiles} />
+  return (
+    <div className={styles.profileCards}>
+      <div className={styles.profileListCont}>
+        {profiles.map((profile) => (
+          <ProfileListItem key={profile.id} data={profile} />
+        ))}
+      </div>
+    </div>
+  )
 }
 export default ProfileList
