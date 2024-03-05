@@ -27,13 +27,10 @@ const ProfileCard = ({
   withStateStatus,
   searchTerm,
 }: ProfileCardProps) => {
-  console.log('Search term in ProfileCard:', searchTerm)
   const highlightText = (text: string, searchText?: string) => {
-    console.log('Highlighting:', text, 'with:', searchText)
     if (!searchText || !searchText.trim()) {
       return <span className={styles.rest}>{text}</span>
     }
-
     const regex = new RegExp(`(${searchText})`, 'gi')
     const parts = text.split(regex)
 

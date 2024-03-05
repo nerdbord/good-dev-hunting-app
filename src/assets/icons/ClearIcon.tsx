@@ -1,4 +1,4 @@
-const CloseIcon = () => {
+const ClearIcon = () => {
   return (
     <svg
       width="24"
@@ -20,4 +20,4 @@ const CloseIcon = () => {
     </svg>
   )
 }
-export default CloseIcon
+export default ClearIcon

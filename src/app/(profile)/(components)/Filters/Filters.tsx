@@ -14,6 +14,7 @@ import React from 'react'
 import { DropdownOption } from '../../../../components/Dropdowns/DropdownFilter/DropdownFilter'
 import {
   filterByAvailability,
+  filterByFullName,
   filterByLocation,
   filterBySeniority,
   filterByTechnology,
@@ -67,9 +68,8 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     const counts: Record<string, number> = {}
     props.specializations.forEach((spec) => {
       const filteredProfiles = props.data
-        .filter((profile) =>
-          profile.fullName.toLowerCase().includes(searchTermFilter),
-        )
+
+        .filter(filterByFullName(searchTermFilter))
         .filter((profile) => profile.position === spec.value)
         .filter(filterBySeniority(seniorityFilter))
         .filter(filterByLocation(locationFilter))

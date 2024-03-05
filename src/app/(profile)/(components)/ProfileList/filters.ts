@@ -50,8 +50,10 @@ export const filterByAvailability =
     )
   }
 
-export const filterByFullName = (searchValue: string) => {
+export const filterByFullName = (searchTermFilter: string) => {
   return (profile: ProfileModel) => {
-    return profile.fullName.toLowerCase().includes(searchValue.toLowerCase())
+    return profile.fullName
+      .toLowerCase()
+      .includes(searchTermFilter.toLowerCase())
   }
 }
