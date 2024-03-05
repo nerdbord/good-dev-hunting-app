@@ -347,3 +347,78 @@ export async function incrementProfileViewCountById(id: string) {
     data: { viewCount: { increment: 1 } },
   })
 }
+
+////
+
+export async function updateOrCreateProfileView(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const existingView = await prisma.profileView.findFirst({
+    where: {
+      viewerId: viewerId,
+      viewedProfileId: viewedProfileId,
+    },
+  })
+
+  if (existingView) {
+    await prisma.profileView.update({
+      where: {
+        id: existingView.id,
+      },
+      data: {
+        createdAt: new Date(),
+      },
+    })
+  } else {
+    await prisma.profileView.create({
+      data: {
+        viewerId: viewerId,
+        viewedProfileId: viewedProfileId,
+        createdAt: new Date(),
+      },
+    })
+  }
+}
+
+///
+
+export async function markContactRequestAsSent(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const existingView = await prisma.profileView.create({
+    data: {
+      viewerId: viewerId,
+      viewedProfileId: viewedProfileId,
+      contactRequestSent: true,
+    },
+  })
+  return existingView
+
+  // const existingView = await prisma.profileView.findFirst({
+  //   where: {
+  //     viewerId: viewerId,
+  //     viewedProfileId: viewedProfileId,
+  //   },
+  // })
+
+  // if (existingView) {
+  //   await prisma.profileView.update({
+  //     where: {
+  //       id: existingView.id,
+  //     },
+  //     data: {
+  //       contactRequestSent: true,
+  //     },
+  //   })
+  // } else {
+  //   await prisma.profileView.create({
+  //     data: {
+  //       viewerId: viewerId,
+  //       viewedProfileId: viewedProfileId,
+  //       contactRequestSent: true,
+  //     },
+  //   })
+  // }
+}

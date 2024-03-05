@@ -59,6 +59,12 @@ const UserProfilePage = async ({
     console.error('Error counting profile view:', error)
   }
 
+  // try {
+  //   await updateOrCreateProfileView(session?.user.id, selectedProfile.userId)
+  // } catch (error) {
+  //   console.error('Error updating or creating profile view:', error)
+  // }
+
   const user = await findUserByEmail(selectedProfile.userEmail)
   const isConnectedToNerdbord = !!user?.nerdbordUserId
 
