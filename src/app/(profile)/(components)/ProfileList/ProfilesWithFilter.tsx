@@ -39,7 +39,11 @@ export const ProfilesWithFilter: React.FC<{
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
         {filteredProfileData.map((profile) => (
-          <ProfileListItem key={profile.id} data={profile} />
+          <ProfileListItem
+            key={profile.id}
+            data={profile}
+            searchTerm={searchTermFilter}
+          />
         ))}
       </div>
     </div>

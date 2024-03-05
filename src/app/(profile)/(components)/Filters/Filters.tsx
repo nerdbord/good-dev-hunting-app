@@ -80,6 +80,11 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     return counts
   }
 
+  const specializationCounts = calculateSpecializationCounts()
+  const hasProfilesInAnySpecialization = Object.values(
+    specializationCounts,
+  ).some((count) => count > 0)
+
   const handleAllSpecializationsClick = () => {
     setJobSpecializationFilter([])
   }
@@ -133,7 +138,6 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
   }
   const allTabColors =
     jobSpecializationFilter.length === 0 ? '#13CBAA' : '#3d434b'
-  const specializationCounts = calculateSpecializationCounts()
   return (
     <>
       <div className={styles.mainContainer}>
@@ -173,35 +177,37 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
         </div>
         <div className={styles.devType}></div>
       </div>
-
-      <div className={styles.tabs}>
-        <SpecializationTab
-          onClick={handleAllSpecializationsClick}
-          isPressed={jobSpecializationFilter.length === 0}
-          count={props.data.length}
-          color={allTabColors}
-        >
-          All
-        </SpecializationTab>
-        {props.specializations.map((spec) => {
-          const color = jobSpecializationThemes[spec.value as JobSpecialization]
-          return (
-            <SpecializationTab
-              key={spec.value}
-              onClick={() => handleSpecializationSelect(spec)}
-              isPressed={jobSpecializationFilter.includes(spec)}
-              count={specializationCounts[spec.value] || 0}
-              color={color}
-            >
-              {spec.name}
-            </SpecializationTab>
-          )
-        })}
+      <div className={styles.tabsContainer}>
+        <div className={styles.tabs}>
+          <SpecializationTab
+            onClick={handleAllSpecializationsClick}
+            isPressed={jobSpecializationFilter.length === 0}
+            count={props.data.length}
+            color={allTabColors}
+          >
+            All
+          </SpecializationTab>
+          {props.specializations.map((spec) => {
+            const color =
+              jobSpecializationThemes[spec.value as JobSpecialization]
+            return (
+              <SpecializationTab
+                key={spec.value}
+                onClick={() => handleSpecializationSelect(spec)}
+                isPressed={jobSpecializationFilter.includes(spec)}
+                count={specializationCounts[spec.value] || 0}
+                color={color}
+              >
+                {spec.name}
+              </SpecializationTab>
+            )
+          })}
+        </div>
+        <SearchBarWrapper
+          profiles={props.data}
+          onSearchChange={(value) => handleSearchChange(value)}
+        />
       </div>
-      <SearchBarWrapper
-        profiles={props.data}
-        onSearchChange={(value) => handleSearchChange(value)}
-      />
     </>
   )
 }

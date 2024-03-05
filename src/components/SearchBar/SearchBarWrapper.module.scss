@@ -1,17 +1,22 @@
 .searchWrapper {
     position: relative;
     display: inline-flex;
-    width: 473px;
-    height: 44px;
+    width: 380px;
+    height: 52px;
     justify-content: space-between;
     align-items: center;
     gap: 4px;
     flex-shrink: 0;
   }
+
+  .inputContainer {
+    position: relative;
+    width: 90%;
+  }
   
   .searchInput {
     width: 100%;
-    border: none;
+    border: #2A2F35 1px solid;
     border-radius: 2px;
     padding: 12px 24px 12px 20px;
     background-color: #161a1f;
@@ -20,10 +25,12 @@
     font-weight: 400;
     line-height: 20px;
     color: #e2eaf1;
+    background-repeat: no-repeat;
+    background-position: right 20px center;
   }
   
   .searchInput::placeholder {
-    color: #e2eaf1;
+    color: #69717B;
   }
   
   .suggestionsBox {
@@ -41,3 +48,21 @@
     z-index: 10;
   }
   
+  .iconBox {
+  width: 14px;
+  height: 14px;
+}
+
+.clearButton, .searchIcon {
+  position: absolute;
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.highlighted {
+  color: grey;
+}

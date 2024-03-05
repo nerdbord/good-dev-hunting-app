@@ -7,7 +7,15 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import ProfileCard from '../ProfileCard/ProfileCard'
 
-export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
+interface ProfileListItemProps {
+  data: ProfileModel
+  searchTerm?: string
+}
+
+export const ProfileListItem: React.FC<ProfileListItemProps> = ({
+  data,
+  searchTerm,
+}) => {
   const router = useRouter()
   const plausible = usePlausible()
 
@@ -17,6 +25,9 @@ export const ProfileListItem: React.FC<{ data: ProfileModel }> = ({ data }) => {
     })
     router.push(`${AppRoutes.profiles}/${data.githubUsername}`)
   }
-
-  return <ProfileCard data={data} onClick={handleOpenProfile} />
+  return (
+    <div onClick={handleOpenProfile}>
+      <ProfileCard data={data} searchTerm={searchTerm} />
+    </div>
+  )
 }
