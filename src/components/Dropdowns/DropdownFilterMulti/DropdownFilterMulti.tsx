@@ -1,9 +1,11 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { JobOfferFiltersEnum } from '@/contexts/FilterContext'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import 'material-icons/iconfont/material-icons.css'
-import { useEffect, useRef, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import styles from '../DropdownFilter/DropdownFilter.module.scss'
 import { DropdownOptionItem } from '../DropdownOptionItem/DropdownOptionItem'
@@ -12,21 +14,53 @@ import { DropdownSearchInput } from '../DropdownSearchInput/DropdownSearchInput'
 export const DropdownFilterMulti = ({
   text,
   options,
-  onSelect,
-  selectedValue,
+  jobOfferFilterName,
   hasSearchInput,
 }: {
   text: string
   options: DropdownOption[]
-  onSelect: (option: DropdownOption) => void
-  selectedValue: DropdownOption[]
   hasSearchInput?: boolean
+  jobOfferFilterName: JobOfferFiltersEnum
 }) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [isOverlayActive, setOverlayActive] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const params = searchParams.getAll(jobOfferFilterName)
+  const [selectedValue, setSelectedValue] = useState<string[]>(params || [])
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+
+      if (value === '') {
+        params.delete(name)
+      } else if (params.has(name)) {
+        params.set(name, value)
+      } else {
+        params.append(name, value)
+      }
+
+      return params.toString().replaceAll('%2C', ',')
+    },
+    [searchParams],
+  )
+
+  const handleSelect = (option: string) => {
+    setSelectedValue((prev) => {
+      const isExists = prev.some((p) => p === option)
+
+      if (!isExists) {
+        return [...prev, option]
+      }
+
+      return prev.filter((p) => p !== option)
+    })
+  }
 
   useOutsideClick(
     dropdownRef,
@@ -34,6 +68,15 @@ export const DropdownFilterMulti = ({
     () => setArrow('IoIosArrowDown'),
   )
 
+  useEffect(() => {
+    router.push(
+      `${pathname}?${createQueryString(
+        jobOfferFilterName,
+        selectedValue.join(','),
+      )}`,
+    )
+  }, [selectedValue])
+  console.log('selectedValue', selectedValue)
   useEffect(() => {
     switch (isDropdownActive) {
       case true:
@@ -105,8 +148,8 @@ export const DropdownFilterMulti = ({
               <DropdownOptionItem
                 key={index}
                 option={option}
-                onSelect={onSelect}
-                isSelected={selectedValue.includes(option)}
+                onSelect={() => handleSelect(option.value)}
+                isSelected={selectedValue.includes(option.value)}
                 hasSearchInput={hasSearchInput}
               />
             ))}

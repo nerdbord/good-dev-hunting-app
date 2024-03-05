@@ -1,3 +1,4 @@
+import { DropdownFilters } from '@/app/(profile)/(components)/Filters/DropdownFilters'
 import { getCountries } from '@/backend/country/country.service'
 import {
   getPublishedProfilesPayload,
@@ -5,7 +6,6 @@ import {
 } from '@/backend/profile/profile.service'
 import { getTechnologies } from '@/backend/technology/technology.service'
 import { mapOptions, mapSpecializations } from '../../mappers'
-import Filters from './Filters'
 
 export default async function FiltersWithData() {
   const profiles = await getPublishedProfilesPayload()
@@ -14,11 +14,15 @@ export default async function FiltersWithData() {
   const countries = mapOptions(await getCountries())
 
   return (
-    <Filters
-      data={profiles}
-      specializations={specializations}
-      technologies={technologies}
-      countries={countries}
-    />
+    // <Filters
+    //   data={profiles}
+    //   specializations={specializations}
+    //   technologies={technologies}
+    //   countries={countries}
+    // />
+    <>
+      <DropdownFilters technologies={technologies} countries={countries} />
+      {/* <TabFilters /> */}
+    </>
   )
 }
