@@ -7,10 +7,14 @@ import Box from '@/components/Box/Box'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import TextInput from '@/components/TextInput/TextInput'
+import { AppRoutes } from '@/utils/routes'
+import { signIn } from 'next-auth/react'
 
 const LoginHunter = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [isSubmited, setIsSubmited] = useState(false)
+
+  const [email, setEmail] = useState('')
 
   if (isSubmited) {
     return (
@@ -34,10 +38,7 @@ const LoginHunter = () => {
           tooltipText=" Lorem ipsum dolor sit amet, consectetur adipisicing elit."
           addImportantIcon={true}
           placeholder="eg. peter.parker@oscorp.com"
-          onChange={() => {
-            console.log('')
-          }}
-          disabled={true}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <div style={{ marginBottom: '24px', marginTop: '16px' }}>
           <CheckboxInput
@@ -51,9 +52,14 @@ const LoginHunter = () => {
           />
         </div>
         <Button
-          onClick={() => setIsSubmited(true)}
+          onClick={(e) => {
+            e.preventDefault()
+            signIn('email', {
+              email,
+              callbackUrl: AppRoutes.home,
+            })
+          }}
           variant={'primary'}
-          disabled={true}
         >
           Join as a Hunter
         </Button>
