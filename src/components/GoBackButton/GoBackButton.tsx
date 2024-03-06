@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import styles from './GoBackButton.module.scss'
 
 interface GoBackButtonProps {

@@ -5,7 +5,7 @@ import {
   mapSpecializationToTitle,
 } from '@/app/(profile)/mappers'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
