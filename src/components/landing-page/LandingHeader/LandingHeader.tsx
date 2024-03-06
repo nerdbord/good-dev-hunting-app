@@ -27,6 +27,7 @@ const LandingHeader = async () => {
                 </>
               ) : (
                 <>
+                  {user?.email}
                   <GithubStarsButton />
                   <CreateProfileBtn />
                 </>
