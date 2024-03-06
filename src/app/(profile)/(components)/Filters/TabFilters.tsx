@@ -5,7 +5,7 @@ import { type JobSpecialization } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { createQueryString } from '@/utils/createQueryString'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './Filters.module.scss'
 
 type TabFiltersProps = {
@@ -23,10 +23,16 @@ export const TabFilters = ({ specializations, counts }: TabFiltersProps) => {
   const handleSpecializationSelect = (option: string | null) => {
     const isAlreadySelected = tab?.toUpperCase() === option?.toUpperCase()
 
-    if (isAlreadySelected) {
+    if (isAlreadySelected || option === null) {
       setTab(null)
+      router.push(
+        `${pathname}?${createQueryString('position', '', searchParams)}`,
+      )
     } else {
       setTab(option)
+      router.push(
+        `${pathname}?${createQueryString('position', option, searchParams)}`,
+      )
     }
   }
 
@@ -35,18 +41,6 @@ export const TabFilters = ({ specializations, counts }: TabFiltersProps) => {
     (acc, curr) => acc + curr,
     0,
   )
-
-  useEffect(() => {
-    if (tab) {
-      router.push(
-        `${pathname}?${createQueryString('position', tab, searchParams)}`,
-      )
-    } else {
-      router.push(
-        `${pathname}?${createQueryString('position', '', searchParams)}`,
-      )
-    }
-  }, [tab])
 
   return (
     <div className={styles.tabs}>
