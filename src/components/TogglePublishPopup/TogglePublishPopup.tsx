@@ -1,5 +1,5 @@
 import { ProfileVerification } from '@/app/(profile)/helpers'
-import { PublishingState } from '@prisma/client'
+import { type PublishingState } from '@prisma/client'
 import { Button } from '../Button/Button'
 import styles from './TogglePublishPopup.module.scss'
 

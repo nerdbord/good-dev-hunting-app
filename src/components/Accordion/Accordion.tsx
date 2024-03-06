@@ -1,6 +1,6 @@
 'use client'
 import classNames from 'classnames/bind'
-import { ReactNode, useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import styles from './Accordion.module.scss'
 import AccordionIcon from './icons/AccordionIcon'
 const cx = classNames.bind(styles)

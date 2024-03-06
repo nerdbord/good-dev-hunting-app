@@ -3,7 +3,7 @@ import { Button } from '@/components/Button/Button'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
 import classNames from 'classnames/bind'
-import { UserProfileHeaderType } from '../types'
+import { type UserProfileHeaderType } from '../types'
 import styles from './UserProfileHeader.module.scss'
 
 const cx = classNames.bind(styles)

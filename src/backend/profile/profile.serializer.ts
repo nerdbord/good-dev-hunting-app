@@ -1,5 +1,8 @@
-import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
-import { ProfileWithRelations } from '@/backend/profile/profile.types'
+import {
+  type JobSpecialization,
+  type ProfileModel,
+} from '@/app/(profile)/types'
+import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 
 export const serializeProfileToProfileModel = (
   data: ProfileWithRelations,

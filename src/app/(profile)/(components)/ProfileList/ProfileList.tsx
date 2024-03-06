@@ -1,5 +1,5 @@
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import styles from './ProfileList.module.scss'
 
 const ProfileList = ({ profiles }: { profiles: ProfileModel[] }) => {

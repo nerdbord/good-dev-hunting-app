@@ -1,7 +1,7 @@
 'use server'
 import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
 import { createUser } from '@/backend/user/user.service'
-import { CreateUserPayload } from '@/backend/user/user.types'
+import { type CreateUserPayload } from '@/backend/user/user.types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
 

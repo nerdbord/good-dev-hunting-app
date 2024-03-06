@@ -1,6 +1,6 @@
 'use client'
 import { jobSpecializationThemes } from '@/app/(profile)/helpers'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { useMemo } from 'react'
 
 type Props = {

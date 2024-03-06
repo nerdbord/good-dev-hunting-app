@@ -1,4 +1,4 @@
-import { JobSpecialization } from '@/app/(profile)/types'
+import { type JobSpecialization } from '@/app/(profile)/types'
 import { PublishingState } from '@prisma/client'
 
 export const ProfileVerification = {
