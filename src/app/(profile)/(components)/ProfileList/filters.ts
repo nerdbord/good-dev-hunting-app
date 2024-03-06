@@ -1,4 +1,4 @@
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 
 export const filterByPosition =
   (positionFilter: string[]) => (profile: ProfileModel) => {

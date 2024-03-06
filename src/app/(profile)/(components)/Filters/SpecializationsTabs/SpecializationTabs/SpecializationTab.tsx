@@ -1,6 +1,6 @@
 'use client'
 import classNames from 'classnames/bind'
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import styles from './SpecializationTab.module.scss'
 
 const cx = classNames.bind(styles)

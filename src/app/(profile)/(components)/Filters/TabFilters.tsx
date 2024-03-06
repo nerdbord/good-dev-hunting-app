@@ -1,35 +1,25 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
 import { jobSpecializationThemes } from '@/app/(profile)/helpers'
-import { mappedSpecialization } from '@/app/(profile)/mappers'
-import { JobSpecialization } from '@/app/(profile)/types'
+import { type JobSpecialization } from '@/app/(profile)/types'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { createQueryString } from '@/utils/createQueryString'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Filters.module.scss'
 
-export const TabFilters = () => {
+type TabFiltersProps = {
+  specializations: DropdownOption[]
+  counts: Record<string, number>
+}
+
+export const TabFilters = ({ specializations, counts }: TabFiltersProps) => {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
   const params = searchParams.get('position')
   const [tab, setTab] = useState(params)
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-
-      if (value === '') {
-        params.delete(name)
-      } else if (params.has(name)) {
-        params.set(name, value)
-      } else {
-        params.append(name, value)
-      }
-
-      return params.toString().replaceAll('%2C', ',')
-    },
-    [searchParams],
-  )
   const handleSpecializationSelect = (option: string | null) => {
     const isAlreadySelected = tab?.toUpperCase() === option?.toUpperCase()
 
@@ -41,12 +31,20 @@ export const TabFilters = () => {
   }
 
   const allTabColors = tab === null ? '#13CBAA' : '#3d434b'
+  const countAllProfiles = Object.values(counts).reduce(
+    (acc, curr) => acc + curr,
+    0,
+  )
 
   useEffect(() => {
     if (tab) {
-      router.push(`${pathname}?${createQueryString('position', tab)}`)
+      router.push(
+        `${pathname}?${createQueryString('position', tab, searchParams)}`,
+      )
     } else {
-      router.push(`${pathname}?${createQueryString('position', '')}`)
+      router.push(
+        `${pathname}?${createQueryString('position', '', searchParams)}`,
+      )
     }
   }, [tab])
 
@@ -55,19 +53,19 @@ export const TabFilters = () => {
       <SpecializationTab
         onClick={() => handleSpecializationSelect(null)}
         isPressed={tab === null}
-        // count={filteredProfilesCount}
+        count={countAllProfiles}
         color={allTabColors}
       >
         All
       </SpecializationTab>
-      {mappedSpecialization.map((spec) => {
+      {specializations.map((spec) => {
         const color = jobSpecializationThemes[spec.value as JobSpecialization]
         return (
           <SpecializationTab
             key={spec.value}
             onClick={() => handleSpecializationSelect(spec.value)}
             isPressed={tab === spec.value}
-            // count={specializationCounts[spec.value] || 0}
+            count={counts[spec.value] || 0}
             color={color}
           >
             {spec.name}

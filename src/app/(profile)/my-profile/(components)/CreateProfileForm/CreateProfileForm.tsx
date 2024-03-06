@@ -9,11 +9,10 @@ import PersonalInfo from '@/app/(profile)/my-profile/(components)/CreateProfile/
 import WorkInformation from '@/app/(profile)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
 import styles from '@/app/(profile)/my-profile/create/page.module.scss'
 import {
-  CreateProfileFormValues,
-  JobSpecialization,
-  ProfilePayload,
+  type CreateProfileFormValues,
+  type JobSpecialization,
+  type ProfilePayload,
 } from '@/app/(profile)/types'
-import { initialFilterOption } from '@/contexts/FilterContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -34,8 +33,8 @@ const initialValues: CreateProfileFormValues = {
   openForCountryRelocation: false,
   openForCityRelocation: false,
   remoteOnly: false,
-  position: initialFilterOption,
-  seniority: initialFilterOption,
+  position: { name: '', value: '' },
+  seniority: { name: '', value: '' },
   employment: [],
   techStack: [],
   githubUsername: '',
