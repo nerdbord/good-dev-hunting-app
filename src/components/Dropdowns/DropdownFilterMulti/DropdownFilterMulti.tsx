@@ -1,27 +1,32 @@
 'use client'
+import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import { JobOfferFiltersEnum } from '@/contexts/FilterContext'
 import useOutsideClick from '@/hooks/useOutsideClick'
+import { createQueryString } from '@/utils/createQueryString'
 import 'material-icons/iconfont/material-icons.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
-import styles from '../DropdownFilter/DropdownFilter.module.scss'
-import { DropdownOptionItem } from '../DropdownOptionItem/DropdownOptionItem'
+import {
+  DropdownOptionItem,
+  type DropdownOption,
+} from '../DropdownOptionItem/DropdownOptionItem'
 import { DropdownSearchInput } from '../DropdownSearchInput/DropdownSearchInput'
+import styles from './DropdownFilterMulti.module.scss'
+
+type DropdownFilterMultiProps = {
+  text: string
+  options: DropdownOption[]
+  hasSearchInput?: boolean
+  jobOfferFilterName: JobOfferFiltersEnum
+}
 
 export const DropdownFilterMulti = ({
   text,
   options,
   jobOfferFilterName,
   hasSearchInput,
-}: {
-  text: string
-  options: DropdownOption[]
-  hasSearchInput?: boolean
-  jobOfferFilterName: JobOfferFiltersEnum
-}) => {
+}: DropdownFilterMultiProps) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -32,23 +37,6 @@ export const DropdownFilterMulti = ({
   const searchParams = useSearchParams()
   const params = searchParams.getAll(jobOfferFilterName)
   const [selectedValue, setSelectedValue] = useState<string[]>(params || [])
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-
-      if (value === '') {
-        params.delete(name)
-      } else if (params.has(name)) {
-        params.set(name, value)
-      } else {
-        params.append(name, value)
-      }
-
-      return params.toString().replaceAll('%2C', ',')
-    },
-    [searchParams],
-  )
 
   const handleSelect = (option: string) => {
     setSelectedValue((prev) => {
@@ -73,6 +61,7 @@ export const DropdownFilterMulti = ({
       `${pathname}?${createQueryString(
         jobOfferFilterName,
         selectedValue.join(','),
+        searchParams,
       )}`,
     )
   }, [selectedValue])

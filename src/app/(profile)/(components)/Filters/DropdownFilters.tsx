@@ -4,15 +4,9 @@ import {
   mappedEmploymentType,
   mappedSeniorityLevel,
 } from '@/app/(profile)/mappers'
-import { DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { JobOfferFiltersEnum } from '@/app/(profile)/types'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import styles from './Filters.module.scss'
-
-export enum JobOfferFiltersEnum {
-  technology = 'technology',
-  seniority = 'seniority',
-  availability = 'availability',
-  location = 'location',
-}
 
 type DropdownFiltersProps = {
   technologies: DropdownOption[]
