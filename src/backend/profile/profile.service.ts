@@ -1,7 +1,15 @@
-import { type ProfilePayload } from '@/app/(profile)/types'
+import {
+  type JobOfferFiltersEnum,
+  type ProfilePayload,
+} from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import shuffleArray from '@/utils/collections'
-import { Prisma, PublishingState, Role } from '@prisma/client'
+import {
+  Prisma,
+  PublishingState,
+  Role,
+  type EmploymentType,
+} from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
@@ -348,15 +356,31 @@ export async function incrementProfileViewCountById(id: string) {
   })
 }
 
-export async function countPublishedProfilesForPositions() {
+export async function countProfilesForPositionsByFilters(
+  filters: Record<JobOfferFiltersEnum, string>,
+) {
+  const { seniority, location, technology, availability } = filters
+
+  const query: Prisma.ProfileWhereInput = {
+    state: PublishingState.APPROVED,
+    ...(seniority && { seniority: { in: seniority.split(',') } }),
+    ...(location && { country: { name: location } }),
+    ...(technology && {
+      techStack: { some: { name: { in: technology.split(',') } } },
+    }),
+    ...(availability && {
+      employmentTypes: { hasSome: availability.split(',') as EmploymentType[] },
+    }),
+  }
+
   const positions = await getUniqueSpecializations()
   const counts: Record<string, number> = {}
 
   for (const position of positions) {
     const count = await prisma.profile.count({
       where: {
-        position: position,
-        state: PublishingState.APPROVED,
+        ...query,
+        position,
       },
     })
     counts[position] = count
