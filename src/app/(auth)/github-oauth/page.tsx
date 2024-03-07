@@ -1,11 +1,10 @@
-﻿import { authOptions } from '@/app/(auth)/auth'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+﻿import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
+import { auth } from '../../../auth'
 
 const GithubOAuth = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   const profile = session
     ? await getProfileByUserEmail(session.user.email)

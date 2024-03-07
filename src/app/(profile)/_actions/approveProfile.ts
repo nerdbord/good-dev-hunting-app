@@ -1,5 +1,5 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/auth'
+import { authorizeUser } from '@/auth'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import {
   findGithubUsernameByProfileId,

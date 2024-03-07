@@ -1,10 +1,5 @@
 import { findUserByEmail } from '@/backend/user/user.service'
 import { prisma } from '@/lib/prismaClient'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { NextAuthOptions } from 'next-auth'
-import { getServerSession } from 'next-auth'
-import EmailProvider from 'next-auth/providers/email'
-import GithubProvider from 'next-auth/providers/github'
 
 interface UserAuthed {
   id: string
@@ -18,17 +13,25 @@ interface GitHubProfileAuthed {
   avatar_url: string
 }
 
-export const authOptions: NextAuthOptions = {
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth from 'next-auth'
+import Email from 'next-auth/providers/email'
+import Github from 'next-auth/providers/github'
+
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
   },
   providers: [
-    GithubProvider({
+    Github({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
     }),
-    EmailProvider({
+    Email({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
         port: process.env.EMAIL_SERVER_PORT,
@@ -38,8 +41,16 @@ export const authOptions: NextAuthOptions = {
         },
       },
       from: process.env.EMAIL_FROM,
+      // sendVerificationRequest() {},
     }),
   ],
+  pages: {
+    signIn: '/login',
+    signOut: '/auth/signout',
+    error: '/auth/error', // Error code passed in query string as ?error=
+    verifyRequest: '/login', // (used for check email message)
+    newUser: '/auth/new-user', // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
   // callbacks: {
   //   async jwt({ token, user }) {
   //     const foundUser =
@@ -90,10 +101,10 @@ export const authOptions: NextAuthOptions = {
   //     return session
   //   },
   // },
-}
+})
 
 export const authorizeUser = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user?.email) {
     throw Error('Unauthorized')
@@ -103,7 +114,7 @@ export const authorizeUser = async () => {
 }
 
 export const getAuthorizedUser = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   const user = session?.user?.email
     ? await findUserByEmail(session.user.email)

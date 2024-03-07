@@ -1,6 +1,6 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/auth'
 import { ProfilePayload } from '@/app/(profile)/types'
+import { authorizeUser } from '@/auth'
 import {
   findProfileWithUserInclude,
   hasProfileValuesChanged,

@@ -1,13 +1,12 @@
-import { authOptions } from '@/app/(auth)/auth'
 import CreateProfileForm from '@/app/(profile)/my-profile/(components)/CreateProfileForm/CreateProfileForm'
+import { auth } from '@/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { UploadProvider } from '@/contexts/UploadContext'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 
 const CreateProfilePage = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user) {
     redirect(AppRoutes.profiles)

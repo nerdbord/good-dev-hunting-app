@@ -1,10 +1,9 @@
-import { authOptions } from '@/app/(auth)/auth'
+import { auth } from '@/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { Role } from '@prisma/client'
-import { getServerSession } from 'next-auth'
 
 export async function requireUserRoles(roles: Role[]) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   const user = session && (await findUserByEmail(session.user.email))
 
   if (!user) return false

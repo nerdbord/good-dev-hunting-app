@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/auth'
 import styles from './LoginHeader.module.scss'
 
 // components

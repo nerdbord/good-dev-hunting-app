@@ -1,7 +1,7 @@
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import { getAuthorizedUser } from '@/app/(auth)/auth'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
+import { getAuthorizedUser } from '@/auth'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
@@ -11,6 +11,9 @@ import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
   const { session, user } = await getAuthorizedUser()
+
+  // const session = await auth()
+  // const user = session ? await findUserByEmail(session.user?.email) : null
 
   if (session) {
     return (
