@@ -1,7 +1,7 @@
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import { ProfileCardWrapper } from '@/app/(profile)/(components)/ProfileCard/ProfileCardWrapper/ProfileCardWrapper'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import { getAuthorizedUser } from '@/auth'
 import { getRandomProfiles } from '@/backend/profile/profile.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import styles from './Hero.module.scss'
