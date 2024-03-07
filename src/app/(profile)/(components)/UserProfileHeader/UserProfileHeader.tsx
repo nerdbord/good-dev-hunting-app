@@ -2,6 +2,7 @@ import ContactBtn from '@/app/(profile)/(components)/ContactForm/ContactBtn/Cont
 import { Button } from '@/components/Button/Button'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
+import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
 import { UserProfileHeaderType } from '../types'
 import styles from './UserProfileHeader.module.scss'
@@ -29,7 +30,11 @@ export default function UserProfileHeader({
 
   return (
     <div className={commonClasses}>
-      {!!withBackButton && <GoBackButton>Go back</GoBackButton>}
+      {withBackButton && (
+        <div className={styles.hideOnMobile}>
+          <GoBackButton href={AppRoutes.profiles}>Go back</GoBackButton>
+        </div>
+      )}
       <div className={wrapClasses}>
         <div className={styles.socialItemsWrapper}>
           <SocialItems

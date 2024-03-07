@@ -26,7 +26,7 @@ export default async function ModerationUserProfile({
     <div className={styles.wrapper}>
       <ModerationActionHeader userProfile={profile} userRoles={user.roles} />
       <UserProfileMain userProfile={profile}>
-        <UserProfileHeader userProfile={profile} />
+        <UserProfileHeader withBackButton userProfile={profile} />
       </UserProfileMain>
       <UserProfileDetails userProfile={profile} />
     </div>

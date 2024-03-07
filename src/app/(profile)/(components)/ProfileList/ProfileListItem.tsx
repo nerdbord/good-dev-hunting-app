@@ -19,7 +19,8 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   const router = useRouter()
   const plausible = usePlausible()
 
-  const handleOpenProfile = () => {
+  const handleOpenProfile = (event: React.MouseEvent) => {
+    event.preventDefault()
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })

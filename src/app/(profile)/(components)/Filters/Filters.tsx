@@ -80,10 +80,13 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
     return counts
   }
 
-  const specializationCounts = calculateSpecializationCounts()
-  const hasProfilesInAnySpecialization = Object.values(
-    specializationCounts,
-  ).some((count) => count > 0)
+  const calculateFilteredProfilesCount = () => {
+    return props.data
+      .filter(filterBySeniority(seniorityFilter))
+      .filter(filterByLocation(locationFilter))
+      .filter(filterByTechnology(technologyFilter))
+      .filter(filterByAvailability(availabilityFilter)).length
+  }
 
   const handleAllSpecializationsClick = () => {
     setJobSpecializationFilter([])
@@ -138,6 +141,8 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
   }
   const allTabColors =
     jobSpecializationFilter.length === 0 ? '#13CBAA' : '#3d434b'
+  const filteredProfilesCount = calculateFilteredProfilesCount()
+  const specializationCounts = calculateSpecializationCounts()
   return (
     <>
       <div className={styles.mainContainer}>
@@ -149,6 +154,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
               handleSelectMulti(option, JobOfferFiltersEnum.technology)
             }
             selectedValue={technologyFilter}
+            hasSearchInput
           />
           <DropdownFilterMulti
             text={'Seniority'}
@@ -187,7 +193,7 @@ const Filters: React.FC<FiltersProps> = (props: FiltersProps) => {
           <SpecializationTab
             onClick={handleAllSpecializationsClick}
             isPressed={jobSpecializationFilter.length === 0}
-            count={props.data.length}
+            count={filteredProfilesCount}
             color={allTabColors}
           >
             All
