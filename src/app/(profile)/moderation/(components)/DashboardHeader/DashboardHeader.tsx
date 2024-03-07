@@ -1,6 +1,5 @@
-import { authOptions } from '@/app/(auth)/auth'
 import { Role } from '@prisma/client'
-import { getServerSession } from 'next-auth'
+
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -12,10 +11,11 @@ import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProf
 import logo from '@/assets/images/logo.png'
 import { Container } from '@/components/Container/Container'
 
+import { auth } from '@/auth'
 import styles from './DashboardHeader.module.scss'
 
 const DashboardHeader = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   const user = session && (await findUserByEmail(session.user.email))
 

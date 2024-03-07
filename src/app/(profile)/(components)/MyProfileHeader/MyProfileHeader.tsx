@@ -1,13 +1,12 @@
-import { authOptions } from '@/app/(auth)/auth'
 import logo from '@/assets/images/logo.png'
+import { auth } from '@/auth'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
 
 const MyProfileHeader = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   return (
     <div>

@@ -1,9 +1,8 @@
-import { authOptions } from '@/app/(auth)/auth'
-import { getServerSession } from 'next-auth'
+import { auth } from '@/auth'
 import styles from './VisitorBanner.module.scss'
 
 const VisitorBanner = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user) {
     return (
