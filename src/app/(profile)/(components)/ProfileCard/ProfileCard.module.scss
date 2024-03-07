@@ -74,7 +74,6 @@
 }
 
 .technology span {
-  // min-width: 75px;
   background: #161a1f;
   text-align: center;
   align-items: center;
@@ -94,7 +93,6 @@
   width: 100%;
 }
 
-// state status
 .detailsWrapper {
   display: flex;
   margin: 0 16px 0 14px;
@@ -107,7 +105,14 @@
   padding-bottom: 11px;
 }
 
-// utils
 .wordWrap {
   word-wrap: break-word;
+}
+
+.highlighted {
+  font-weight: bold;
+}
+
+.rest {
+  font-weight: normal;
 }
