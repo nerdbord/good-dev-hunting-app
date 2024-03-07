@@ -78,38 +78,37 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
 export const mapSpecializationToTitle = (specialization: JobSpecialization) => {
   switch (specialization) {
     case JobSpecialization.Frontend:
-      return 'Frontend Developer';
+      return 'Frontend Developer'
     case JobSpecialization.Backend:
-      return 'Backend Developer';
+      return 'Backend Developer'
     case JobSpecialization.Fullstack:
-      return 'Fullstack Developer';
+      return 'Fullstack Developer'
     case JobSpecialization.Mobile:
-      return 'Mobile Developer';
+      return 'Mobile Developer'
     case JobSpecialization.DevOps:
-      return 'DevOps Engineer';
+      return 'DevOps Engineer'
     case JobSpecialization.QA:
-      return 'QA Engineer';
+      return 'QA Engineer'
     case JobSpecialization.DataScience:
-      return 'Data Scientist';
+      return 'Data Scientist'
     case JobSpecialization.GameDev:
-      return 'Game Developer';
+      return 'Game Developer'
     case JobSpecialization.VR_AR:
-      return 'VR/AR Developer';
+      return 'VR/AR Developer'
     case JobSpecialization.UX_UI:
-      return 'UX/UI Designer';
+      return 'UX/UI Designer'
     case JobSpecialization.Crypto:
-      return 'Blockchain Developer';
+      return 'Blockchain Developer'
     case JobSpecialization.CyberSecurity:
-      return 'Cybersecurity Specialist';
+      return 'Cybersecurity Specialist'
     case JobSpecialization.SysAdmin:
-      return 'System Administrator';
+      return 'System Administrator'
     case JobSpecialization.PM:
-      return 'Project Manager';
+      return 'Project Manager'
     default:
-      return `${specialization} Specialist`;
+      return `${specialization} Specialist`
   }
 }
-
 
 export const mapOptions = <T extends { name: string }>(
   items: T[],
