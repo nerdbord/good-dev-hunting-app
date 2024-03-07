@@ -1,4 +1,4 @@
-import FiltersWithData from '@/app/(profile)/(components)/Filters/FiltersWithData'
+import { FiltersWithData } from '@/app/(profile)/(components)/Filters/FiltersWithData'
 import {
   filterByAvailability,
   filterByLocation,
@@ -29,7 +29,7 @@ export default async function Home({
 
   return (
     <Suspense fallback={<Loader />}>
-      <FiltersWithData />
+      <FiltersWithData filters={searchParams} />
       <ProfileList profiles={filteredProfiles} />
     </Suspense>
   )
