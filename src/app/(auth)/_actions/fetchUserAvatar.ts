@@ -1,5 +1,5 @@
 'use server'
-import { authorizeUser } from '@/auth'
+import { authorizeUser } from '@/app/(auth)/helpers'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
 

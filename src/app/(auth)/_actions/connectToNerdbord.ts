@@ -1,6 +1,6 @@
 ﻿'use server'
 
-import { authorizeUser } from '@/auth'
+import { authorizeUser } from '@/app/(auth)/helpers'
 import {
   findUserByEmail,
   getGitHubDetails,
