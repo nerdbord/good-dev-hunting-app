@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 30px;
   padding: 23px 0 10px;
   @include mobile {
     overflow-x: auto;
@@ -56,3 +56,10 @@
 
   @include custom-scrollbar;
 }
+
+.tabsContainer {
+  width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }

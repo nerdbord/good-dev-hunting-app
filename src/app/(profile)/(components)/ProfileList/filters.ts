@@ -45,3 +45,11 @@ export const filterByAvailability =
         ),
     )
   }
+
+export const filterByFullName = (searchTermFilter: string) => {
+  return (profile: ProfileModel) => {
+    return profile.fullName
+      .toLowerCase()
+      .includes(searchTermFilter.toLowerCase())
+  }
+}
