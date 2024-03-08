@@ -117,6 +117,30 @@ export const jobSpecializationOptions: Record<
     name: 'SysAdmin',
     value: JobSpecialization.SysAdmin,
   },
+  [JobSpecialization.UX_Designer]: {
+    name: 'UX Designer',
+    value: JobSpecialization.UX_Designer,
+  },
+  [JobSpecialization.UX_Researcher]: {
+    name: 'UX Researcher',
+    value: JobSpecialization.UX_Researcher,
+  },
+  [JobSpecialization.UX_Writer]: {
+    name: 'UX Writer',
+    value: JobSpecialization.UX_Writer,
+  },
+  [JobSpecialization.UI_Designer]: {
+    name: 'UI Designer',
+    value: JobSpecialization.UI_Designer,
+  },
+  [JobSpecialization.UX_UI_Designer]: {
+    name: 'UX/UI Designer',
+    value: JobSpecialization.UX_UI_Designer,
+  },
+  [JobSpecialization.Product_Designer]: {
+    name: 'Product Designer',
+    value: JobSpecialization.Product_Designer,
+  },
 }
 
 export type FilterLists = {

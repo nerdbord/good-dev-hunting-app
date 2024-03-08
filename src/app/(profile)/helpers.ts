@@ -22,4 +22,10 @@ export const jobSpecializationThemes: Record<JobSpecialization, string> = {
   CyberSecurity: '#6FD2CC',
   SysAdmin: '#9CE79B',
   PM: '#55EB91',
+  UX_Designer: '#fff',
+  UX_Researcher: '#fff',
+  UX_Writer: '#fff',
+  UI_Designer: '#fff',
+  UX_UI_Designer: '#fff',
+  Product_Designer: '#fff',
 }
