@@ -7,8 +7,9 @@ import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
-import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
 import { JobSpecialization } from '@/app/(profile)/types'
+import { publishProfile } from '../../_actions/publishProfile'
+import { unpublishProfile } from '../../_actions/unpublishProfile'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
 
 interface TogglePublishButtonProps {
@@ -23,10 +24,17 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   const { loading, runAsync } = useAsyncAction()
 
   const handleButtonClick = async () => {
-    await runAsync(async () => {
-      await publishProfile(profileId)
-      setShowPopup(true)
-    })
+    if (state == PublishingState.APPROVED) {
+      await runAsync(async () => {
+        await unpublishProfile(profileId)
+        setShowPopup(true)
+      })
+    } else if (state == PublishingState.DRAFT) {
+      await runAsync(async () => {
+        await publishProfile(profileId)
+        setShowPopup(true)
+      })
+    }
   }
 
   return (
