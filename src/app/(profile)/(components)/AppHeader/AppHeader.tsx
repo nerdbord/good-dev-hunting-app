@@ -37,6 +37,7 @@ const AppHeader = async () => {
                   <div className={styles.hideOnMobile}>
                     <GithubStarsButton />
                   </div>
+                  {/* add role checking for hunter/user and display component*/}
                   <GithubAcc />
                 </>
               ) : (
