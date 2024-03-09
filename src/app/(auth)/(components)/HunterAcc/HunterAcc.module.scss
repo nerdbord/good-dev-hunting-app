@@ -1,0 +1,37 @@
+.hunterAccConnected {
+  color: #89939e;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.hunter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+.hunterAcc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 2px;
+  gap: 10px;
+  background-color: #0f1217;
+  padding: 8px 24px 8px 16px;
+}
+
+.hunterRole {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--light-03, hsla(213, 8, 45, 1));
+  text-transform: uppercase;
+}
