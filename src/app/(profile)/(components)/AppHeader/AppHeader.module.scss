@@ -97,7 +97,12 @@
 
 .logoAndGhStarsWrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+
+  > div {
+    margin-top: 5px;
+  }
 }
 
 .hideOnMobile {
