@@ -30,6 +30,9 @@
     position: static;
     align-items: center;
     justify-content: center;
+    li {
+      max-height: 45px;
+    }
   }
 }
 
