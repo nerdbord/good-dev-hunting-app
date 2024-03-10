@@ -24,16 +24,27 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   const { loading, runAsync } = useAsyncAction()
 
   const handleButtonClick = async () => {
-    if (state == PublishingState.APPROVED) {
-      await runAsync(async () => {
-        await unpublishProfile(profileId)
-        setShowPopup(true)
-      })
-    } else if (state == PublishingState.DRAFT) {
-      await runAsync(async () => {
-        await publishProfile(profileId)
-        setShowPopup(true)
-      })
+    switch (state) {
+      case PublishingState.APPROVED:
+        await runAsync(async () => {
+          await unpublishProfile(profileId)
+          setShowPopup(true)
+        })
+        return
+      case PublishingState.DRAFT:
+        await runAsync(async () => {
+          await publishProfile(profileId)
+          setShowPopup(true)
+        })
+        return
+      case PublishingState.REJECTED:
+        await runAsync(async () => {
+          await publishProfile(profileId)
+          setShowPopup(true)
+        })
+        return
+      default:
+        throw Error('Wrong profile action')
     }
   }
 
