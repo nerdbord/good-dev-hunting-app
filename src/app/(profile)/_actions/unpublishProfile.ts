@@ -21,7 +21,7 @@ export const unpublishProfile = withSentry(async (profileId: string) => {
   })
 
   await sendDiscordNotificationToModeratorChannel(
-    `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
+    `User's **${updatedProfile.fullName}** has unpublished profile`,
   )
 
   return updatedProfile
