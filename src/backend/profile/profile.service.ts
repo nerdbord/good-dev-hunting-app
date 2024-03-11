@@ -359,7 +359,7 @@ export async function incrementProfileViewCountById(id: string) {
 export async function countProfilesForPositionsByFilters(
   filters: Record<JobOfferFiltersEnum, string>,
 ) {
-  const { seniority, location, technology, availability } = filters
+  const { seniority, location, technology, availability, search } = filters
 
   const query: Prisma.ProfileWhereInput = {
     state: PublishingState.APPROVED,
@@ -371,6 +371,7 @@ export async function countProfilesForPositionsByFilters(
     ...(availability && {
       employmentTypes: { hasSome: availability.split(',') as EmploymentType[] },
     }),
+    ...(search && { fullName: { contains: search, mode: 'insensitive' } }),
   }
 
   const positions = await getUniqueSpecializations()

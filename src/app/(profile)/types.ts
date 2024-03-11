@@ -63,6 +63,7 @@ export enum JobOfferFiltersEnum {
   availability = 'availability',
   location = 'location',
   position = 'position',
+  search = 'search',
 }
 
 export interface ProfileFormValues {

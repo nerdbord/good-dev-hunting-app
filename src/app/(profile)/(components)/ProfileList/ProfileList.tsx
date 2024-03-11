@@ -1,6 +1,7 @@
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
 import {
   filterByAvailability,
+  filterByFullName,
   filterByLocation,
   filterByPosition,
   filterBySeniority,
@@ -24,6 +25,17 @@ const ProfileList = async ({
     .filter(filterByLocation(filters.location?.split(',')))
     .filter(filterByTechnology(filters.technology?.split(',')))
     .filter(filterByAvailability(filters.availability?.split(',')))
+    .filter(filterByFullName(filters.search))
+
+  if (filteredProfiles.length === 0) {
+    return (
+      <div className={styles.profileCards}>
+        <div className={styles.profileListCont}>
+          <p>No matching profiles found</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={styles.profileCards}>
