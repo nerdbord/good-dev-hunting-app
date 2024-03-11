@@ -1,11 +1,10 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { useState } from 'react'
 
 const LogOutBtn = () => {
-  const { data: session } = useSession()
   const [isCalled, setIsCalled] = useState(false)
   return (
     <div>
