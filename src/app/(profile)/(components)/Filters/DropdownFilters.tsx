@@ -6,6 +6,7 @@ import {
 } from '@/app/(profile)/mappers'
 import { JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import styles from './Filters.module.scss'
 
 type DropdownFiltersProps = {
@@ -42,7 +43,7 @@ export const DropdownFilters = ({
           jobOfferFilterName={JobOfferFiltersEnum.location}
         />
       </div>
-      <div className={styles.devType}></div>
+      <SearchBarWrapper />
     </div>
   )
 }

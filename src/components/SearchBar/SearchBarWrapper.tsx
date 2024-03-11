@@ -1,32 +1,49 @@
-import { type ProfileModel } from '@/app/(profile)/types'
+'use client'
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
-import { useRef, useState, type ChangeEvent } from 'react'
+import { useDebounce } from '@/hooks/useDebounce'
+import { createQueryString } from '@/utils/createQueryString'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import styles from './SearchBarWrapper.module.scss'
 
-type Props = {
-  profiles: ProfileModel[]
-  onSearchChange: (value: string) => void
-}
-
-export default function SearchBarWrapper({ profiles, onSearchChange }: Props) {
-  const [searchValue, setSearchValue] = useState('')
+export const SearchBarWrapper = () => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const params = searchParams.get('search')
+  const [searchValue, setSearchValue] = useState(params || '')
+  const debouncedSearchValue = useDebounce(searchValue, 500)
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
     setSearchValue(newValue)
-    onSearchChange(newValue)
   }
 
   const clearSearch = () => {
     setSearchValue('')
-    onSearchChange('')
   }
 
   const focusInput = () => {
     inputRef.current?.focus()
   }
+
+  useEffect(() => {
+    if (debouncedSearchValue) {
+      router.push(
+        `${pathname}?${createQueryString(
+          'search',
+          debouncedSearchValue,
+          searchParams,
+        )}`,
+      )
+    } else {
+      router.push(
+        `${pathname}?${createQueryString('search', '', searchParams)}`,
+      )
+    }
+  }, [debouncedSearchValue, router])
 
   return (
     <div className={styles.searchWrapper}>

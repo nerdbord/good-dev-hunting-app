@@ -30,14 +30,6 @@
   }
 }
 
-.devType {
-  display: flex;
-  gap: 16px;
-  @include mobile {
-    align-items: center;
-  }
-}
-
 .title {
   color: var(--light-03, #69717b);
   font-size: 32px;
@@ -56,10 +48,3 @@
 
   @include custom-scrollbar;
 }
-
-.tabsContainer {
-  width: 100%;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-  }
