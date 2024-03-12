@@ -1,7 +1,7 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import { authOptions } from '@/app/(auth)/auth'
+import { AppHeaderMobileMenu } from '@/app/(profile)/(components)/AppHeaderMobileMenu/AppHeaderMobileMenu'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
@@ -19,6 +19,7 @@ const AppHeader = async () => {
 
   const user = session ? await findUserByEmail(session.user.email) : null
   const userIsModerator = user?.roles.includes(Role.MODERATOR)
+  const userHasProfile = !!user?.profile
 
   if (session) {
     return (
@@ -46,12 +47,17 @@ const AppHeader = async () => {
                 </>
               )}
             </div>
-            <div className={styles.hideOnDesktop}>
+            {/* <div className={styles.hideOnDesktop}>
               <HamburgerMenuMobileBtn
-                userProfile={!!user?.profile}
+                userHasProfile={userHasProfile}
                 userIsModerator={userIsModerator}
               />
-            </div>
+              {isOnProfilesPage && <SearchBarWrapper />}
+            </div> */}
+            <AppHeaderMobileMenu
+              userHasProfile={userHasProfile}
+              userIsModerator={userIsModerator}
+            />
           </div>
         </Container>
       </header>
@@ -66,12 +72,17 @@ const AppHeader = async () => {
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
-          <div className={styles.hideOnDesktop}>
+          {/* <div className={styles.hideOnDesktop}>
             <HamburgerMenuMobileBtn
-              userProfile={!!user?.profile}
+              userHasProfile={userHasProfile}
               userIsModerator={userIsModerator}
             />
-          </div>
+            {isOnProfilesPage && <SearchBarWrapper />}
+          </div> */}
+          <AppHeaderMobileMenu
+            userHasProfile={userHasProfile}
+            userIsModerator={userIsModerator}
+          />
 
           <div className={styles.frameButtons}>
             <GithubLoginButton />

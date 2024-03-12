@@ -14,15 +14,12 @@
 }
 
 .headerContent {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   @include mobile {
-    display: flex;
-    // flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     gap: 30px;
   }
 }
@@ -112,6 +109,8 @@
   @include mobile {
     display: flex;
     align-items: center;
+    gap: 8px;
+
   }
 }
 
