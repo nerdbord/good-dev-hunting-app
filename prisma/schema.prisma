@@ -13,19 +13,42 @@ datasource db {
 }
 
 model User {
-  id             String         @id @default(uuid())
-  avatarUrl      String?
-  email          String         @unique
-  emailVerified  DateTime?
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  avatarUrl     String?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
   profile        Profile?
   githubDetails  GitHubDetails?
   roles          Role[]         @default([USER])
   nerdbordUserId String?        @unique
-  sessions       Session[]
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(uuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
