@@ -47,25 +47,23 @@ export const SearchBarWrapper = () => {
 
   return (
     <div className={styles.searchWrapper}>
-      <div className={styles.inputContainer}>
-        <input
-          ref={inputRef}
-          name="searchValue"
-          className={styles.searchInput}
-          placeholder="Search by name"
-          onChange={changeHandler}
-          value={searchValue}
-        />
-        {searchValue ? (
-          <button onClick={clearSearch} className={styles.clearButton}>
-            <ClearIcon />
-          </button>
-        ) : (
-          <button onClick={focusInput} className={styles.searchIcon}>
-            <SearchIcon />
-          </button>
-        )}
-      </div>
+      <input
+        ref={inputRef}
+        name="searchValue"
+        className={styles.searchInput}
+        placeholder="Search by name"
+        onChange={changeHandler}
+        value={searchValue}
+      />
+      {searchValue ? (
+        <button onClick={clearSearch} className={styles.searchBtn}>
+          <ClearIcon />
+        </button>
+      ) : (
+        <button onClick={focusInput} className={styles.searchBtn}>
+          <SearchIcon />
+        </button>
+      )}
     </div>
   )
 }
