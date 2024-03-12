@@ -3,7 +3,6 @@ import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { createQueryString } from '@/utils/createQueryString'
-import 'material-icons/iconfont/material-icons.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
@@ -31,11 +30,10 @@ export const DropdownFilterMulti = ({
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [isOverlayActive, setOverlayActive] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const params = searchParams.getAll(jobOfferFilterName)
+  const params = searchParams.get(jobOfferFilterName)?.split(',')
   const [selectedValue, setSelectedValue] = useState<string[]>(params || [])
 
   const handleSelect = (option: string) => {
@@ -66,21 +64,6 @@ export const DropdownFilterMulti = ({
     )
   }, [selectedValue])
 
-  useEffect(() => {
-    switch (isDropdownActive) {
-      case true:
-        setOverlayActive(true)
-        document.body.classList.add('blurBackground')
-        break
-      case false:
-        setOverlayActive(false)
-        document.body.classList.remove('blurBackground')
-        break
-      default:
-        break
-    }
-  }, [isDropdownActive])
-
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
@@ -98,9 +81,10 @@ export const DropdownFilterMulti = ({
   )
 
   return (
-    <div className={styles.buttonBox}>
-      <div>
-        <button onClick={handleDropdown} className={styles.featuresBtn}>
+    <>
+      {isDropdownActive && <div className={styles.overlay}></div>}
+      <div className={styles.buttonBox} ref={dropdownRef}>
+        <button onClick={() => handleDropdown()} className={styles.featuresBtn}>
           {selectedValue.length === 0 ? (
             <div className={styles.buttonText}>{text}</div>
           ) : (
@@ -111,9 +95,8 @@ export const DropdownFilterMulti = ({
           )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
-        {isOverlayActive && <div className={styles.overlay}></div>}
         {isDropdownActive && (
-          <div className={styles.dropdown} ref={dropdownRef}>
+          <div className={styles.dropdown}>
             <div
               className={
                 hasSearchInput
@@ -145,6 +128,6 @@ export const DropdownFilterMulti = ({
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 }
