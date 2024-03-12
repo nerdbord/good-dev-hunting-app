@@ -10,6 +10,8 @@ const GithubOAuth = async () => {
     ? await getProfileByUserEmail(session.user.email)
     : null
 
+  // update role
+
   if (!profile) {
     return redirect(AppRoutes.createProfile)
   }
