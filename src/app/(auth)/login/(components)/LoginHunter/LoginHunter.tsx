@@ -10,11 +10,26 @@ import TextInput from '@/components/TextInput/TextInput'
 import { AppRoutes } from '@/utils/routes'
 import { signIn } from 'next-auth/react'
 
+const Login = async (email: string) => {
+  await signIn('email', {
+    email: email.trim().toLowerCase(),
+    redirect: false,
+    callbackUrl: AppRoutes.home,
+  })
+}
+
 const LoginHunter = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [isSubmited, setIsSubmited] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [email, setEmail] = useState('')
+
+  const onSubmit = async (email: string) => {
+    setIsLoading(true)
+    await Login(email)
+    setIsSubmited(true)
+  }
 
   if (isSubmited) {
     return (
@@ -46,18 +61,17 @@ const LoginHunter = () => {
             label={'I have read and accept T&C and Privacy Policy'}
             checked={isChecked}
             onChange={() => {
-              // setIsChecked((prevState) => !prevState)
+              setIsChecked((prevState) => !prevState)
             }}
             name={'terms'} // TODO enum
           />
         </div>
         <Button
+          loading={isLoading}
+          disabled={!isChecked}
           onClick={(e) => {
             e.preventDefault()
-            signIn('email', {
-              email,
-              callbackUrl: AppRoutes.home,
-            })
+            onSubmit(email)
           }}
           variant={'primary'}
         >

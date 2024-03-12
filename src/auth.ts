@@ -4,6 +4,21 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github from 'next-auth/providers/github'
+import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
+
+const sendVerificationRequest = async ({
+  url, // magic link
+  identifier, // user email
+}: {
+  url: string
+  identifier: string
+}) => {
+  try {
+    await sendMagicLinkEmail(identifier, url)
+  } catch (error) {
+    throw new Error('Failed to send verification email.')
+  }
+}
 
 export const {
   handlers: { GET, POST },
@@ -19,6 +34,9 @@ export const {
       clientSecret: process.env.GITHUB_SECRET || '',
     }),
     Email({
+      sendVerificationRequest,
+
+      // if deleted, throws error
       server: {
         host: process.env.EMAIL_SERVER_HOST,
         port: process.env.EMAIL_SERVER_PORT,
@@ -28,9 +46,11 @@ export const {
         },
       },
       from: process.env.EMAIL_FROM,
-      // sendVerificationRequest() {},
     }),
   ],
+  pages: {
+    signIn: '/login',
+  },
   // callbacks: {
   //   async jwt({ token, user }) {
   //     const foundUser =

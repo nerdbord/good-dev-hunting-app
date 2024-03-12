@@ -141,3 +141,28 @@ export const sendWelcomeEmail = async (email: string, username: string) => {
     },
   })
 }
+
+export const sendMagicLinkEmail = async (email: string, url: string) => {
+  const variables = [
+    {
+      email,
+      substitutions: [
+        {
+          var: 'name',
+          value: email,
+        },
+      ],
+    },
+  ]
+
+  await mailersendClient.sendMail({
+    recipients: [new Recipient(email)],
+    templateId: MailTemplateId.welcomeMail, // TODO - new template
+    variables,
+    config: {
+      subject: url, // change to: Sign in to GDH
+      fromEmail: 'team@devhunting.co',
+      fromName: 'Good Dev Hunting Team',
+    },
+  })
+}
