@@ -28,7 +28,7 @@
 }
 
 .logo {
-  width: 187px;
+  width: 175px;
   height: 26px;
   display: flex;
   gap: 8px;
@@ -99,6 +99,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 14px;
 
   > div {
     margin-top: 5px;
