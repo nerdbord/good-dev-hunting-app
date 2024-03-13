@@ -6,6 +6,7 @@ export enum MailTemplateId {
   contactRequest = '7dnvo4dded345r86',
   profileApprovedNotification = '0r83ql3nq6x4zw1j',
   profileRejectedNotification = 'vywj2lpj1pjl7oqz',
+  verificationRequest = 'vywj2lpj96kl7oqz',
 }
 
 interface MailConfig {
