@@ -148,8 +148,8 @@ export const sendMagicLinkEmail = async (email: string, url: string) => {
       email,
       substitutions: [
         {
-          var: 'name',
-          value: email,
+          var: 'authUrl',
+          value: url,
         },
       ],
     },
@@ -157,10 +157,10 @@ export const sendMagicLinkEmail = async (email: string, url: string) => {
 
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
-    templateId: MailTemplateId.welcomeMail, // TODO - new template
+    templateId: MailTemplateId.verificationRequest,
     variables,
     config: {
-      subject: url, // change to: Sign in to GDH
+      subject: `Welcome to the Hunt, ${email}!`,
       fromEmail: 'team@devhunting.co',
       fromName: 'Good Dev Hunting Team',
     },
