@@ -25,23 +25,24 @@ const AppHeader = async () => {
       <header className={styles.wrapper}>
         <Container>
           <div className={styles.headerContent}>
-            <Link href={AppRoutes.profiles} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <div className={styles.title}>Good Dev Hunting</div>
-            </Link>
+            <div className={styles.logoAndGhStarsWrapper}>
+              <Link href={AppRoutes.profiles} className={styles.logo}>
+                <img src={logo.src} alt="Logo" />
+                <div className={styles.title}>Good Dev Hunting</div>
+              </Link>
+              <div className={styles.hideOnMobile}>
+                <GithubStarsButton />
+              </div>
+            </div>
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
               {user?.profile ? (
                 <>
-                  <div className={styles.hideOnMobile}>
-                    <GithubStarsButton />
-                  </div>
                   <GithubAcc />
                 </>
               ) : (
                 <>
-                  <GithubStarsButton />
                   <CreateProfileBtn data-testid="create-profile-button" />
                 </>
               )}
@@ -62,10 +63,15 @@ const AppHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href={AppRoutes.profiles} className={styles.logo}>
-            <img src={logo.src} alt="Logo" />
-            <div className={styles.title}>Good Dev Hunting</div>
-          </Link>
+          <div className={styles.logoAndGhStarsWrapper}>
+            <Link href={AppRoutes.profiles} className={styles.logo}>
+              <img src={logo.src} alt="Logo" />
+              <div className={styles.title}>Good Dev Hunting</div>
+            </Link>
+            <div className={styles.hideOnMobile}>
+              <GithubStarsButton />
+            </div>
+          </div>
           <div className={styles.hideOnDesktop}>
             <HamburgerMenuMobileBtn
               userProfile={!!user?.profile}
