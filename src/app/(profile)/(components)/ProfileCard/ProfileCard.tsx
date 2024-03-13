@@ -18,11 +18,41 @@ interface ProfileCardProps {
   onClick?: (e: React.MouseEvent) => void
   data: ProfileModel
   withStateStatus?: boolean
+  searchTerm?: string
 }
 
 const cx = classNames.bind(styles)
 
-const ProfileCard = ({ data, withStateStatus, onClick }: ProfileCardProps) => {
+const ProfileCard = ({
+  data,
+  onClick,
+  withStateStatus,
+  searchTerm,
+}: ProfileCardProps) => {
+  const highlightText = (text: string, searchText?: string) => {
+    if (!searchText || !searchText.trim()) {
+      return <span className={styles.rest}>{text}</span>
+    }
+    const regex = new RegExp(`(${searchText})`, 'gi')
+    const parts = text.split(regex)
+
+    return (
+      <span>
+        {parts.map((part, index) =>
+          part.toLowerCase() === searchText.toLowerCase() ? (
+            <span key={index} className={styles.highlighted}>
+              {part}
+            </span>
+          ) : (
+            <span key={index} className={styles.rest}>
+              {part}
+            </span>
+          ),
+        )}
+      </span>
+    )
+  }
+
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -51,7 +81,9 @@ const ProfileCard = ({ data, withStateStatus, onClick }: ProfileCardProps) => {
               <Avatar src={data.avatarUrl || ''} size={78} />
             </div>
             <div className={styles.data}>
-              <p className={styles.name}>{data.fullName}</p>
+              <p className={styles.name}>
+                {highlightText(data.fullName, searchTerm)}
+              </p>
               <p className={styles.wordWrap}>
                 {mapSeniorityLevel(data.seniority)}{' '}
                 {mapSpecializationToTitle(data.position)}

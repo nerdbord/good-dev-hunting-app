@@ -83,7 +83,7 @@ const ProfileMain = async ({
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
               {mapSeniorityLevel(profile.seniority as SeniorityLevel) ||
-                profile.seniority}
+                profile.seniority}{' '}
               {mapSpecializationToTitle(profile.position)}
             </span>
             <div className={styles.addInfo}>
