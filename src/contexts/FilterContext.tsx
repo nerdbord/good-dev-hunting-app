@@ -18,6 +18,8 @@ export type FiltersContextType = {
   setAvailabilityFilter: (value: FilterOption[]) => void
   locationFilter: FilterOption[]
   setLocationFilter: (value: FilterOption[]) => void
+  searchTermFilter: string
+  setSearchTerm: (value: string) => void
 }
 
 export interface FilterOption extends DropdownOption {}
@@ -165,6 +167,7 @@ export const FiltersProvider = ({
   const [availabilityFilter, setAvailabilityFilter] = useState<FilterOption[]>(
     [],
   )
+  const [searchTermFilter, setSearchTerm] = useState('')
 
   return (
     <FiltersContext.Provider
@@ -179,6 +182,8 @@ export const FiltersProvider = ({
         setAvailabilityFilter,
         locationFilter,
         setLocationFilter,
+        searchTermFilter,
+        setSearchTerm,
       }}
     >
       {children}
