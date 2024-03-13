@@ -1,54 +1,57 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
+import { countProfilesForPositions } from '@/app/(profile)/_actions/countProfiles'
 import { jobSpecializationThemes } from '@/app/(profile)/helpers'
-import { type JobSpecialization } from '@/app/(profile)/types'
+import {
+  type JobOfferFiltersEnum,
+  type JobSpecialization,
+} from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { createQueryString } from '@/utils/createQueryString'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { AppRoutes } from '@/utils/routes'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useMemo, useState } from 'react'
 import styles from './Filters.module.scss'
 
 type TabFiltersProps = {
   specializations: DropdownOption[]
-  counts: Record<string, number>
 }
 
-export const TabFilters = ({ specializations, counts }: TabFiltersProps) => {
-  const pathname = usePathname()
-  const router = useRouter()
+export const TabFilters = ({ specializations }: TabFiltersProps) => {
   const searchParams = useSearchParams()
-  const params = searchParams.get('position')
-  const [tab, setTab] = useState(params)
+  const filters: Record<JobOfferFiltersEnum, string> = useMemo(() => {
+    return Object.fromEntries(searchParams.entries()) as Record<
+      JobOfferFiltersEnum,
+      string
+    >
+  }, [searchParams])
 
-  const handleSpecializationSelect = (option: string | null) => {
-    const isAlreadySelected = tab?.toUpperCase() === option?.toUpperCase()
+  const [numberOfProfiles, setNumberOfProfiles] = useState<Record<
+    string,
+    number
+  > | null>(null)
 
-    if (isAlreadySelected || option === null) {
-      setTab(null)
-      router.push(
-        `${pathname}?${createQueryString('position', '', searchParams)}`,
-      )
-    } else {
-      setTab(option)
-      router.push(
-        `${pathname}?${createQueryString('position', option, searchParams)}`,
-      )
+  const countAllProfiles =
+    numberOfProfiles &&
+    Object.values(numberOfProfiles).reduce((acc, curr) => acc + curr, 0)
+
+  useEffect(() => {
+    const countProfiles = async () => {
+      const counts = await countProfilesForPositions(filters)
+
+      setNumberOfProfiles(counts)
     }
-  }
 
-  const allTabColors = tab === null ? '#13CBAA' : '#3d434b'
-  const countAllProfiles = Object.values(counts).reduce(
-    (acc, curr) => acc + curr,
-    0,
-  )
+    countProfiles()
+  }, [searchParams])
 
   return (
     <div className={styles.tabs}>
       <SpecializationTab
-        onClick={() => handleSpecializationSelect(null)}
-        isPressed={tab === null}
-        count={countAllProfiles}
-        color={allTabColors}
+        count={countAllProfiles || 0}
+        color={'#13CBAA'}
+        href={`${AppRoutes.profiles}?${new URLSearchParams(
+          searchParams.toString(),
+        )}`}
       >
         All
       </SpecializationTab>
@@ -57,10 +60,11 @@ export const TabFilters = ({ specializations, counts }: TabFiltersProps) => {
         return (
           <SpecializationTab
             key={spec.value}
-            onClick={() => handleSpecializationSelect(spec.value)}
-            isPressed={tab === spec.value}
-            count={counts[spec.value] || 0}
+            count={numberOfProfiles?.[spec.value] || 0}
             color={color}
+            href={`${AppRoutes.profiles}/${spec.value}?${new URLSearchParams(
+              searchParams.toString(),
+            )}`}
           >
             {spec.name}
           </SpecializationTab>
