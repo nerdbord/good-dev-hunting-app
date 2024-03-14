@@ -1,8 +1,12 @@
 ﻿'use client'
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import { JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
+import { createFiltersObjFromSearchParams } from '@/utils/createFiltersObjFromSearchParams'
+import { createQueryString } from '@/utils/createQueryString'
 import { AppRoutes } from '@/utils/routes'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
 import styles from './AppHeaderMobileMenu.module.scss'
 
 type AppHeaderMobileMenuProps = {
@@ -15,6 +19,24 @@ export const AppHeaderMobileMenu = ({
   userIsModerator,
 }: AppHeaderMobileMenuProps) => {
   const pathname = usePathname()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const filters: Record<JobOfferFiltersEnum, string[]> = useMemo(
+    () => createFiltersObjFromSearchParams(searchParams),
+    [searchParams],
+  )
+
+  const handleSearchChange = (value: string) => {
+    const newSearchParams = createQueryString(
+      JobOfferFiltersEnum.search,
+      value,
+      searchParams,
+    )
+
+    router.push(`${pathname}?${newSearchParams}`)
+  }
+
   const isOnProfilesPage = pathname === AppRoutes.profiles
 
   return (
@@ -23,7 +45,12 @@ export const AppHeaderMobileMenu = ({
         userHasProfile={userHasProfile}
         userIsModerator={userIsModerator}
       />
-      {isOnProfilesPage && <SearchBarWrapper />}
+      {isOnProfilesPage && (
+        <SearchBarWrapper
+          onSearch={handleSearchChange}
+          value={filters[JobOfferFiltersEnum.search][0]}
+        />
+      )}
     </div>
   )
 }

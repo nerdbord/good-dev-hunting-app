@@ -25,6 +25,20 @@ export async function getPublishedProfilesPayload() {
   return serializedProfile
 }
 
+export async function getPublishedProfilesPayloadByPosition(position: string) {
+  const publishedProfiles = await prisma.profile.findMany({
+    where: {
+      position,
+      state: PublishingState.APPROVED,
+    },
+    include: includeObject.include,
+  })
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
+  return serializedProfile
+}
+
 export async function getAllPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
     where: {
@@ -357,21 +371,23 @@ export async function incrementProfileViewCountById(id: string) {
 }
 
 export async function countProfilesForPositionsByFilters(
-  filters: Record<JobOfferFiltersEnum, string>,
+  filters: Record<JobOfferFiltersEnum, string[]>,
 ) {
   const { seniority, location, technology, availability, search } = filters
 
   const query: Prisma.ProfileWhereInput = {
     state: PublishingState.APPROVED,
-    ...(seniority && { seniority: { in: seniority.split(',') } }),
-    ...(location && { country: { name: location } }),
-    ...(technology && {
-      techStack: { some: { name: { in: technology.split(',') } } },
+    ...(seniority.length > 0 && { seniority: { in: seniority } }),
+    ...(location.length > 0 && { country: { name: { in: location } } }),
+    ...(technology.length > 0 && {
+      techStack: { some: { name: { in: technology } } },
     }),
-    ...(availability && {
-      employmentTypes: { hasSome: availability.split(',') as EmploymentType[] },
+    ...(availability.length > 0 && {
+      employmentTypes: { hasSome: availability as EmploymentType[] },
     }),
-    ...(search && { fullName: { contains: search, mode: 'insensitive' } }),
+    ...(search.length > 0 && {
+      fullName: { contains: search.toString(), mode: 'insensitive' },
+    }),
   }
 
   const positions = await getUniqueSpecializations()
