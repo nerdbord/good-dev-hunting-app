@@ -47,13 +47,6 @@ const AppHeader = async () => {
                 </>
               )}
             </div>
-            {/* <div className={styles.hideOnDesktop}>
-              <HamburgerMenuMobileBtn
-                userHasProfile={userHasProfile}
-                userIsModerator={userIsModerator}
-              />
-              {isOnProfilesPage && <SearchBarWrapper />}
-            </div> */}
             <AppHeaderMobileMenu
               userHasProfile={userHasProfile}
               userIsModerator={userIsModerator}
@@ -72,13 +65,6 @@ const AppHeader = async () => {
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
-          {/* <div className={styles.hideOnDesktop}>
-            <HamburgerMenuMobileBtn
-              userHasProfile={userHasProfile}
-              userIsModerator={userIsModerator}
-            />
-            {isOnProfilesPage && <SearchBarWrapper />}
-          </div> */}
           <AppHeaderMobileMenu
             userHasProfile={userHasProfile}
             userIsModerator={userIsModerator}

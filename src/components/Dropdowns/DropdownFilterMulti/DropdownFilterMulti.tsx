@@ -1,7 +1,7 @@
 import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import {
   DropdownOptionItem,
@@ -16,7 +16,7 @@ type DropdownFilterMultiProps = {
   hasSearchInput?: boolean
   jobOfferFilterName: JobOfferFiltersEnum
   value: string[]
-  onChange: (filterName: JobOfferFiltersEnum, value: string) => void
+  onSearch: (filterName: JobOfferFiltersEnum, value: string) => void
 }
 
 export const DropdownFilterMulti = ({
@@ -25,12 +25,13 @@ export const DropdownFilterMulti = ({
   jobOfferFilterName,
   hasSearchInput,
   value,
-  onChange,
+  onSearch,
 }: DropdownFilterMultiProps) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedValue, setSelectedValue] = useState<string[]>(value)
 
   useOutsideClick(
     dropdownRef,
@@ -48,11 +49,27 @@ export const DropdownFilterMulti = ({
     setArrow('IoIosArrowDown')
   }
 
+  const handleSelect = (option: string) => {
+    setSelectedValue((prev) => {
+      const isExists = prev.some((p) => p === option)
+
+      if (!isExists) {
+        return [...prev, option]
+      }
+
+      return prev.filter((p) => p !== option)
+    })
+  }
+
   useOutsideClick(dropdownRef, closeDropdown)
 
   const filteredOptions = options.filter((option) =>
     option.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
+
+  useEffect(() => {
+    onSearch(jobOfferFilterName, selectedValue.join(','))
+  }, [selectedValue])
 
   return (
     <>
@@ -94,8 +111,8 @@ export const DropdownFilterMulti = ({
               <DropdownOptionItem
                 key={index}
                 option={option}
-                onSelect={() => onChange(jobOfferFilterName, option.value)}
-                isSelected={value?.includes(option.value)}
+                onSelect={() => handleSelect(option.value)}
+                isSelected={selectedValue.includes(option.value)}
                 hasSearchInput={hasSearchInput}
               />
             ))}
