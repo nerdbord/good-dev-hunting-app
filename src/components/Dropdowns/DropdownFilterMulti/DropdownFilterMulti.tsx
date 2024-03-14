@@ -1,10 +1,7 @@
-'use client'
 import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import { createQueryString } from '@/utils/createQueryString'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import {
   DropdownOptionItem,
@@ -18,6 +15,8 @@ type DropdownFilterMultiProps = {
   options: DropdownOption[]
   hasSearchInput?: boolean
   jobOfferFilterName: JobOfferFiltersEnum
+  value: string[]
+  onChange: (filterName: JobOfferFiltersEnum, value: string) => void
 }
 
 export const DropdownFilterMulti = ({
@@ -25,44 +24,19 @@ export const DropdownFilterMulti = ({
   options,
   jobOfferFilterName,
   hasSearchInput,
+  value,
+  onChange,
 }: DropdownFilterMultiProps) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const pathname = usePathname()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const params = searchParams.get(jobOfferFilterName)?.split(',')
-  const [selectedValue, setSelectedValue] = useState<string[]>(params || [])
-
-  const handleSelect = (option: string) => {
-    setSelectedValue((prev) => {
-      const isExists = prev.some((p) => p === option)
-
-      if (!isExists) {
-        return [...prev, option]
-      }
-
-      return prev.filter((p) => p !== option)
-    })
-  }
 
   useOutsideClick(
     dropdownRef,
     () => setDropdownActive(false),
     () => setArrow('IoIosArrowDown'),
   )
-
-  useEffect(() => {
-    router.push(
-      `${pathname}?${createQueryString(
-        jobOfferFilterName,
-        selectedValue.join(','),
-        searchParams,
-      )}`,
-    )
-  }, [selectedValue])
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
@@ -85,13 +59,13 @@ export const DropdownFilterMulti = ({
       {isDropdownActive && <div className={styles.overlay}></div>}
       <div className={styles.buttonBox} ref={dropdownRef}>
         <button onClick={() => handleDropdown()} className={styles.featuresBtn}>
-          {selectedValue.length === 0 ? (
+          {value.length === 0 ? (
             <div className={styles.buttonText}>{text}</div>
           ) : (
             <div className={styles.buttonTextChecked}>{text}</div>
           )}
-          {selectedValue.length !== 0 && (
-            <div className={styles.selectedCount}>{selectedValue.length}</div>
+          {value.length !== 0 && (
+            <div className={styles.selectedCount}>{value.length}</div>
           )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
@@ -120,8 +94,8 @@ export const DropdownFilterMulti = ({
               <DropdownOptionItem
                 key={index}
                 option={option}
-                onSelect={() => handleSelect(option.value)}
-                isSelected={selectedValue.includes(option.value)}
+                onSelect={() => onChange(jobOfferFilterName, option.value)}
+                isSelected={value?.includes(option.value)}
                 hasSearchInput={hasSearchInput}
               />
             ))}

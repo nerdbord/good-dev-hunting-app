@@ -62,7 +62,6 @@ export enum JobOfferFiltersEnum {
   seniority = 'seniority',
   availability = 'availability',
   location = 'location',
-  position = 'position',
   search = 'search',
 }
 

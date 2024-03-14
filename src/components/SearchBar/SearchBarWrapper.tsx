@@ -1,19 +1,20 @@
-'use client'
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { useDebounce } from '@/hooks/useDebounce'
-import { createQueryString } from '@/utils/createQueryString'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import styles from './SearchBarWrapper.module.scss'
 
-export const SearchBarWrapper = () => {
+type SearchBarWrapperProps = {
+  onSearch: (value: string) => void
+  value: string
+}
+
+export const SearchBarWrapper = ({
+  onSearch,
+  value,
+}: SearchBarWrapperProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const pathname = usePathname()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const params = searchParams.get('search')
-  const [searchValue, setSearchValue] = useState(params || '')
+  const [searchValue, setSearchValue] = useState(value || '')
   const debouncedSearchValue = useDebounce(searchValue, 500)
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +24,7 @@ export const SearchBarWrapper = () => {
 
   const clearSearch = () => {
     setSearchValue('')
+    onSearch('')
   }
 
   const focusInput = () => {
@@ -31,19 +33,9 @@ export const SearchBarWrapper = () => {
 
   useEffect(() => {
     if (debouncedSearchValue) {
-      router.push(
-        `${pathname}?${createQueryString(
-          'search',
-          debouncedSearchValue,
-          searchParams,
-        )}`,
-      )
-    } else {
-      router.push(
-        `${pathname}?${createQueryString('search', '', searchParams)}`,
-      )
+      onSearch(debouncedSearchValue)
     }
-  }, [debouncedSearchValue, router])
+  }, [debouncedSearchValue])
 
   return (
     <div className={styles.searchWrapper}>

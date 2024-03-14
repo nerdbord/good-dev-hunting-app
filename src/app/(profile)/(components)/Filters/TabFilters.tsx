@@ -7,6 +7,7 @@ import {
   type JobSpecialization,
 } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { createFiltersObjFromSearchParams } from '@/utils/createFiltersObjFromSearchParams'
 import { AppRoutes } from '@/utils/routes'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
@@ -18,12 +19,10 @@ type TabFiltersProps = {
 
 export const TabFilters = ({ specializations }: TabFiltersProps) => {
   const searchParams = useSearchParams()
-  const filters: Record<JobOfferFiltersEnum, string> = useMemo(() => {
-    return Object.fromEntries(searchParams.entries()) as Record<
-      JobOfferFiltersEnum,
-      string
-    >
-  }, [searchParams])
+  const filters: Record<JobOfferFiltersEnum, string[]> = useMemo(
+    () => createFiltersObjFromSearchParams(searchParams),
+    [searchParams],
+  )
 
   const [numberOfProfiles, setNumberOfProfiles] = useState<Record<
     string,
@@ -51,7 +50,9 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
         color={'#13CBAA'}
         href={`${AppRoutes.profiles}?${new URLSearchParams(
           searchParams.toString(),
-        )}`}
+        )
+          .toString()
+          .replaceAll('%2C', ',')}`}
       >
         All
       </SpecializationTab>
@@ -64,7 +65,9 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
             color={color}
             href={`${AppRoutes.profiles}/${spec.value}?${new URLSearchParams(
               searchParams.toString(),
-            )}`}
+            )
+              .toString()
+              .replaceAll('%2C', ',')}`}
           >
             {spec.name}
           </SpecializationTab>
