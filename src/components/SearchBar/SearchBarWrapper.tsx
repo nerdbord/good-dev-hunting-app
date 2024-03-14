@@ -1,3 +1,4 @@
+import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { useDebounce } from '@/hooks/useDebounce'
@@ -5,13 +6,15 @@ import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import styles from './SearchBarWrapper.module.scss'
 
 type SearchBarWrapperProps = {
-  onSearch: (value: string) => void
+  onSearch: (filterName: JobOfferFiltersEnum, value: string) => void
   value: string
+  jobOfferFilterName: JobOfferFiltersEnum
 }
 
 export const SearchBarWrapper = ({
   onSearch,
   value,
+  jobOfferFilterName,
 }: SearchBarWrapperProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [searchValue, setSearchValue] = useState(value || '')
@@ -24,7 +27,7 @@ export const SearchBarWrapper = ({
 
   const clearSearch = () => {
     setSearchValue('')
-    onSearch('')
+    onSearch(jobOfferFilterName, '')
   }
 
   const focusInput = () => {
@@ -32,9 +35,7 @@ export const SearchBarWrapper = ({
   }
 
   useEffect(() => {
-    if (debouncedSearchValue) {
-      onSearch(debouncedSearchValue)
-    }
+    onSearch(jobOfferFilterName, debouncedSearchValue)
   }, [debouncedSearchValue])
 
   return (

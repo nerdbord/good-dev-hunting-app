@@ -27,17 +27,16 @@ export const AppHeaderMobileMenu = ({
     [searchParams],
   )
 
-  const handleSearchChange = (value: string) => {
-    const newSearchParams = createQueryString(
-      JobOfferFiltersEnum.search,
-      value,
-      searchParams,
-    )
+  const handleFilterChange = (
+    filterName: JobOfferFiltersEnum,
+    value: string,
+  ) => {
+    const newSearchParams = createQueryString(filterName, value, searchParams)
 
     router.push(`${pathname}?${newSearchParams}`)
   }
 
-  const isOnProfilesPage = pathname === AppRoutes.profiles
+  const isOnProfilesPage = pathname.startsWith(AppRoutes.profiles)
 
   return (
     <div className={styles.menuWrapper}>
@@ -47,7 +46,8 @@ export const AppHeaderMobileMenu = ({
       />
       {isOnProfilesPage && (
         <SearchBarWrapper
-          onSearch={handleSearchChange}
+          jobOfferFilterName={JobOfferFiltersEnum.search}
+          onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.search][0]}
         />
       )}
