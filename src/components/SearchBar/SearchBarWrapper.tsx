@@ -56,11 +56,11 @@ export const SearchBarWrapper = ({
         value={searchValue}
       />
       {((isMobile && isFocused) || !isMobile) && searchValue ? (
-        <button onClick={clearSearch} className={styles.searchBtn}>
+        <button tabIndex={0} onClick={clearSearch} className={styles.searchBtn}>
           <ClearIcon />
         </button>
       ) : (
-        <button onClick={focusInput} className={styles.searchBtn}>
+        <button tabIndex={0} onClick={focusInput} className={styles.searchBtn}>
           <SearchIcon />
         </button>
       )}
