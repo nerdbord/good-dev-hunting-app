@@ -1,7 +1,9 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import { authOptions } from '@/app/(auth)/auth'
-import { AppHeaderMobileMenu } from '@/app/(profile)/(components)/AppHeaderMobileMenu/AppHeaderMobileMenu'
+
+import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
@@ -33,7 +35,7 @@ const AppHeader = async () => {
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {user?.profile ? (
+              {userHasProfile ? (
                 <>
                   <div className={styles.hideOnMobile}>
                     <GithubStarsButton />
@@ -47,10 +49,13 @@ const AppHeader = async () => {
                 </>
               )}
             </div>
-            <AppHeaderMobileMenu
-              userHasProfile={userHasProfile}
-              userIsModerator={userIsModerator}
-            />
+            <div className={styles.hideOnDesktop}>
+              <HamburgerMenuMobileBtn
+                userHasProfile={userHasProfile}
+                userIsModerator={userIsModerator}
+              />
+              <AppHeaderMobileSearchFilter />
+            </div>
           </div>
         </Container>
       </header>
@@ -65,11 +70,13 @@ const AppHeader = async () => {
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>
-          <AppHeaderMobileMenu
-            userHasProfile={userHasProfile}
-            userIsModerator={userIsModerator}
-          />
-
+          <div className={styles.hideOnDesktop}>
+            <HamburgerMenuMobileBtn
+              userHasProfile={userHasProfile}
+              userIsModerator={userIsModerator}
+            />
+            <AppHeaderMobileSearchFilter />
+          </div>
           <div className={styles.frameButtons}>
             <GithubLoginButton />
             <CreateProfileBtn />

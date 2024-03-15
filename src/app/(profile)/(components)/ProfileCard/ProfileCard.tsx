@@ -32,11 +32,13 @@ const highlightText = (text: string, searchText?: string | null) => {
 
   return (
     <>
-      {parts.map((part) =>
+      {parts.map((part, idx) =>
         part.toLowerCase() === searchText.toLowerCase() ? (
           part
         ) : (
-          <span className={styles.rest}>{part}</span>
+          <span key={idx} className={styles.rest}>
+            {part}
+          </span>
         ),
       )}
     </>

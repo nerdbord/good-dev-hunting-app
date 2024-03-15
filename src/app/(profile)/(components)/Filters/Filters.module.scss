@@ -42,11 +42,3 @@
 
   @include custom-scrollbar;
 }
-
-.hideOnMobile {
-  flex-grow: 1;
-  max-width: 380px;
-  @include mobile {
-    display: none;
-  }
-}

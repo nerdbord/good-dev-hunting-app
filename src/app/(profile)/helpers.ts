@@ -1,5 +1,9 @@
-import { type JobSpecialization } from '@/app/(profile)/types'
+import {
+  JobOfferFiltersEnum,
+  type JobSpecialization,
+} from '@/app/(profile)/types'
 import { PublishingState } from '@prisma/client'
+import { type ReadonlyURLSearchParams } from 'next/navigation'
 
 export const ProfileVerification = {
   isApproved: (state: PublishingState) => state === PublishingState.APPROVED,
@@ -22,4 +26,40 @@ export const jobSpecializationThemes: Record<JobSpecialization, string> = {
   CyberSecurity: '#6FD2CC',
   SysAdmin: '#9CE79B',
   PM: '#55EB91',
+}
+
+export const createFiltersObjFromSearchParams = (
+  searchParams: ReadonlyURLSearchParams,
+) => {
+  const filters: Record<JobOfferFiltersEnum, string[]> = {
+    [JobOfferFiltersEnum.technology]: [],
+    [JobOfferFiltersEnum.seniority]: [],
+    [JobOfferFiltersEnum.availability]: [],
+    [JobOfferFiltersEnum.location]: [],
+    [JobOfferFiltersEnum.search]: [],
+  }
+
+  for (const [key, value] of searchParams.entries()) {
+    filters[key as JobOfferFiltersEnum] = value.split(',')
+  }
+
+  return filters
+}
+
+export const createQueryString = (
+  name: string,
+  value: string,
+  initialParams?: ReadonlyURLSearchParams,
+) => {
+  const params = new URLSearchParams(initialParams?.toString())
+
+  if (value === '') {
+    params.delete(name)
+  } else if (params.has(name)) {
+    params.set(name, value)
+  } else {
+    params.append(name, value)
+  }
+
+  return params.toString().replaceAll('%2C', ',')
 }

@@ -84,19 +84,6 @@
   }
 }
 
-.starsMobile {
-  display: flex;
-
-  @include mobile {
-    display: flex;
-  }
-}
-
-.logoAndGhStarsWrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .hideOnMobile {
   @include mobile {
     display: none !important;
@@ -112,10 +99,4 @@
     gap: 8px;
 
   }
-}
-
-.appHeaderLogoAndMenuBtnWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
