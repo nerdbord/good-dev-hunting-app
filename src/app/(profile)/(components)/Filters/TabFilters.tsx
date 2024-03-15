@@ -1,13 +1,15 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
 import { countProfilesForPositions } from '@/app/(profile)/_actions/countProfiles'
-import { jobSpecializationThemes } from '@/app/(profile)/helpers'
+import {
+  createFiltersObjFromSearchParams,
+  jobSpecializationThemes,
+} from '@/app/(profile)/helpers'
 import {
   type JobOfferFiltersEnum,
   type JobSpecialization,
 } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { createFiltersObjFromSearchParams } from '@/utils/createFiltersObjFromSearchParams'
 import { AppRoutes } from '@/utils/routes'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
@@ -23,7 +25,6 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
     () => createFiltersObjFromSearchParams(searchParams),
     [searchParams],
   )
-
   const [numberOfProfiles, setNumberOfProfiles] = useState<Record<
     string,
     number
@@ -48,11 +49,7 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
       <SpecializationTab
         count={countAllProfiles || 0}
         color={'#13CBAA'}
-        href={`${AppRoutes.profiles}?${new URLSearchParams(
-          searchParams.toString(),
-        )
-          .toString()
-          .replaceAll('%2C', ',')}`}
+        href={`${AppRoutes.profiles}?${searchParams.toString()}`}
       >
         All
       </SpecializationTab>
@@ -63,11 +60,9 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
             key={spec.value}
             count={numberOfProfiles?.[spec.value] || 0}
             color={color}
-            href={`${AppRoutes.profiles}/${spec.value}?${new URLSearchParams(
-              searchParams.toString(),
-            )
-              .toString()
-              .replaceAll('%2C', ',')}`}
+            href={`${AppRoutes.profiles}/${
+              spec.value
+            }?${searchParams.toString()}`}
           >
             {spec.name}
           </SpecializationTab>

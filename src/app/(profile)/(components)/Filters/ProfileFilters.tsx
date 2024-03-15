@@ -1,5 +1,9 @@
 ﻿'use client'
 import {
+  createFiltersObjFromSearchParams,
+  createQueryString,
+} from '@/app/(profile)/helpers'
+import {
   mappedEmploymentType,
   mappedSeniorityLevel,
 } from '@/app/(profile)/mappers'
@@ -7,8 +11,7 @@ import { JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
-import { createFiltersObjFromSearchParams } from '@/utils/createFiltersObjFromSearchParams'
-import { createQueryString } from '@/utils/createQueryString'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import styles from './Filters.module.scss'
@@ -25,6 +28,7 @@ export const ProfileFilters = ({
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const isMobile = useMediaQuery()
 
   const filters: Record<JobOfferFiltersEnum, string[]> = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
@@ -73,13 +77,13 @@ export const ProfileFilters = ({
           value={filters[JobOfferFiltersEnum.location]}
         />
       </div>
-      <div className={styles.hideOnMobile}>
+      {!isMobile && (
         <SearchBarWrapper
           jobOfferFilterName={JobOfferFiltersEnum.search}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.search][0]}
         />
-      </div>
+      )}
     </div>
   )
 }

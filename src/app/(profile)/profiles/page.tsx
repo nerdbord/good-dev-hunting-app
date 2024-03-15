@@ -8,8 +8,6 @@ import {
 } from '@/app/(profile)/(components)/ProfileList/filters'
 import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
-import Loader from '@/components/Loader/Loader'
-import { Suspense } from 'react'
 
 export default async function Home({
   searchParams,
@@ -25,9 +23,5 @@ export default async function Home({
     .filter(filterByAvailability(searchParams.availability?.split(',')))
     .filter(filterByFullName(searchParams.search))
 
-  return (
-    <Suspense key={JSON.stringify(searchParams)} fallback={<Loader />}>
-      <ProfileList profiles={filteredProfiles} />
-    </Suspense>
-  )
+  return <ProfileList profiles={filteredProfiles} />
 }

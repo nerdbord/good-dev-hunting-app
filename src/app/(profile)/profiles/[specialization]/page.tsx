@@ -8,17 +8,17 @@ import {
 } from '@/app/(profile)/(components)/ProfileList/filters'
 import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { getPublishedProfilesPayloadByPosition } from '@/backend/profile/profile.service'
-import Loader from '@/components/Loader/Loader'
-import { Suspense } from 'react'
 
-export default async function PositionPage({
+export default async function SpecializationPage({
   searchParams,
   params,
 }: {
   searchParams: Record<JobOfferFiltersEnum, string>
-  params: { position: string }
+  params: { specialization: string }
 }) {
-  const profiles = await getPublishedProfilesPayloadByPosition(params.position)
+  const profiles = await getPublishedProfilesPayloadByPosition(
+    params.specialization,
+  )
 
   const filteredProfiles = profiles
     .filter(filterBySeniority(searchParams.seniority?.split(',')))
@@ -27,9 +27,5 @@ export default async function PositionPage({
     .filter(filterByAvailability(searchParams.availability?.split(',')))
     .filter(filterByFullName(searchParams.search))
 
-  return (
-    <Suspense key={JSON.stringify(searchParams)} fallback={<Loader />}>
-      <ProfileList profiles={filteredProfiles} />
-    </Suspense>
-  )
+  return <ProfileList profiles={filteredProfiles} />
 }
