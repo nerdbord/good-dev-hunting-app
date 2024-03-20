@@ -19,6 +19,7 @@ export const SearchBarWrapper = ({
   jobOfferFilterName,
 }: SearchBarWrapperProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const searchRef = useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = useState(value || '')
   const debouncedSearchValue = useDebounce(searchValue, 500)
   const isMobile = useMediaQuery()
@@ -32,6 +33,7 @@ export const SearchBarWrapper = ({
   const clearSearch = () => {
     setSearchValue('')
     onSearch(jobOfferFilterName, '')
+    focusInput()
   }
 
   const focusInput = () => {
@@ -39,14 +41,14 @@ export const SearchBarWrapper = ({
     setIsFocused(true)
   }
 
-  useOutsideClick(inputRef, () => setIsFocused(false))
+  useOutsideClick(searchRef, () => setIsFocused(false))
 
   useEffect(() => {
     onSearch(jobOfferFilterName, debouncedSearchValue)
   }, [debouncedSearchValue])
 
   return (
-    <div className={styles.searchWrapper}>
+    <div className={styles.searchWrapper} ref={searchRef}>
       <input
         ref={inputRef}
         name="searchValue"
