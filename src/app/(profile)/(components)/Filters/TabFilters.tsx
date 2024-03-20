@@ -6,8 +6,8 @@ import {
   jobSpecializationThemes,
 } from '@/app/(profile)/helpers'
 import {
-  type JobOfferFiltersEnum,
   type JobSpecialization,
+  type SearchParamsFilters,
 } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { AppRoutes } from '@/utils/routes'
@@ -21,7 +21,7 @@ type TabFiltersProps = {
 
 export const TabFilters = ({ specializations }: TabFiltersProps) => {
   const searchParams = useSearchParams()
-  const filters: Record<JobOfferFiltersEnum, string[]> = useMemo(
+  const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
     [searchParams],
   )

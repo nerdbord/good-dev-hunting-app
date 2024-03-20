@@ -1,6 +1,7 @@
 import {
   JobOfferFiltersEnum,
   type JobSpecialization,
+  type SearchParamsFilters,
 } from '@/app/(profile)/types'
 import { PublishingState } from '@prisma/client'
 import { type ReadonlyURLSearchParams } from 'next/navigation'
@@ -31,7 +32,7 @@ export const jobSpecializationThemes: Record<JobSpecialization, string> = {
 export const createFiltersObjFromSearchParams = (
   searchParams: ReadonlyURLSearchParams,
 ) => {
-  const filters: Record<JobOfferFiltersEnum, string[]> = {
+  const filters: SearchParamsFilters = {
     [JobOfferFiltersEnum.technology]: [],
     [JobOfferFiltersEnum.seniority]: [],
     [JobOfferFiltersEnum.availability]: [],
@@ -40,7 +41,7 @@ export const createFiltersObjFromSearchParams = (
   }
 
   for (const [key, value] of searchParams.entries()) {
-    filters[key as JobOfferFiltersEnum] = value.split(',')
+    filters[key as keyof SearchParamsFilters] = value.split(',')
   }
 
   return filters

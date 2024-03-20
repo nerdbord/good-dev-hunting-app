@@ -1,6 +1,6 @@
 import {
-  type JobOfferFiltersEnum,
   type ProfilePayload,
+  type SearchParamsFilters,
 } from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import shuffleArray from '@/utils/collections'
@@ -371,7 +371,7 @@ export async function incrementProfileViewCountById(id: string) {
 }
 
 export async function countProfilesForPositionsByFilters(
-  filters: Record<JobOfferFiltersEnum, string[]>,
+  filters: SearchParamsFilters,
 ) {
   const { seniority, location, technology, availability, search } = filters
 

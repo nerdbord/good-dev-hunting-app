@@ -7,7 +7,10 @@ import {
   mappedEmploymentType,
   mappedSeniorityLevel,
 } from '@/app/(profile)/mappers'
-import { JobOfferFiltersEnum } from '@/app/(profile)/types'
+import {
+  JobOfferFiltersEnum,
+  type SearchParamsFilters,
+} from '@/app/(profile)/types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
@@ -30,7 +33,7 @@ export const ProfileFilters = ({
   const searchParams = useSearchParams()
   const isMobile = useMediaQuery()
 
-  const filters: Record<JobOfferFiltersEnum, string[]> = useMemo(
+  const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
     [searchParams],
   )
