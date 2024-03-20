@@ -55,6 +55,12 @@ export enum JobSpecialization {
   Crypto = 'Crypto',
   CyberSecurity = 'CyberSecurity',
   SysAdmin = 'SysAdmin',
+  UX_Designer = 'UX_Designer',
+  UX_Researcher = 'UX_Researcher',
+  UX_Writer = 'UX_Writer',
+  UI_Designer = 'UI_Designer',
+  UX_UI_Designer = 'UX_UI_Designer',
+  Product_Designer = 'Product_Designer',
 }
 
 export enum JobOfferFiltersEnum {

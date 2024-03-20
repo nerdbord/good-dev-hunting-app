@@ -27,6 +27,12 @@ export const jobSpecializationThemes: Record<JobSpecialization, string> = {
   CyberSecurity: '#6FD2CC',
   SysAdmin: '#9CE79B',
   PM: '#55EB91',
+  UX_Designer: '#AB96FF',
+  UX_Researcher: '#AB96FF',
+  UX_Writer: '#AB96FF',
+  UI_Designer: '#AB96FF',
+  UX_UI_Designer: '#AB96FF',
+  Product_Designer: '#AB96FF',
 }
 
 export const createFiltersObjFromSearchParams = (
