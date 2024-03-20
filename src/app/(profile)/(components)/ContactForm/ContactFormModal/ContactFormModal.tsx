@@ -1,4 +1,4 @@
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import ContactForm from '../ContactForm'
 import styles from './ContactFormModal.module.scss'

@@ -1,4 +1,4 @@
-import { ContactFormRequest } from '@/app/(profile)/(components)/ContactForm/schema'
+import { type ContactFormRequest } from '@/app/(profile)/(components)/ContactForm/schema'
 import { prisma } from '@/lib/prismaClient'
 
 export async function createContactRequest(contactRequest: ContactFormRequest) {

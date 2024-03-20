@@ -1,6 +1,6 @@
 import { JobSpecialization } from '@/app/(profile)/types'
 import { SeniorityLevel } from '@/backend/profile/profile.types'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { EmploymentType } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {

@@ -1,7 +1,9 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import { authOptions } from '@/app/(auth)/auth'
+
+import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
@@ -19,6 +21,7 @@ const AppHeader = async () => {
 
   const user = session ? await findUserByEmail(session.user.email) : null
   const userIsModerator = user?.roles.includes(Role.MODERATOR)
+  const userHasProfile = !!user?.profile
 
   if (session) {
     return (
@@ -37,7 +40,7 @@ const AppHeader = async () => {
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {user?.profile ? (
+              {userHasProfile ? (
                 <>
                   <GithubAcc />
                 </>
@@ -49,9 +52,10 @@ const AppHeader = async () => {
             </div>
             <div className={styles.hideOnDesktop}>
               <HamburgerMenuMobileBtn
-                userProfile={!!user?.profile}
+                userHasProfile={userHasProfile}
                 userIsModerator={userIsModerator}
               />
+              <AppHeaderMobileSearchFilter />
             </div>
           </div>
         </Container>
@@ -74,11 +78,11 @@ const AppHeader = async () => {
           </div>
           <div className={styles.hideOnDesktop}>
             <HamburgerMenuMobileBtn
-              userProfile={!!user?.profile}
+              userHasProfile={userHasProfile}
               userIsModerator={userIsModerator}
             />
+            <AppHeaderMobileSearchFilter />
           </div>
-
           <div className={styles.frameButtons}>
             <GithubLoginButton />
             <CreateProfileBtn />

@@ -1,9 +1,14 @@
 'use client'
 import Toast from '@/components/Toast/Toast'
-import { createContext, useState, useContext, PropsWithChildren } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+} from 'react'
 
-import styles from '@/components/Toast/toast.module.scss'
 import Portal from '@/components/Portal/Portal'
+import styles from '@/components/Toast/toast.module.scss'
 
 export enum ToastStatus {
   SUCCESS,
