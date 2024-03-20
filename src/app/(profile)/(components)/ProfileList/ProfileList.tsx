@@ -1,11 +1,33 @@
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import { type ProfileModel } from '@/app/(profile)/types'
+import {
+  filterByAvailability,
+  filterByFullName,
+  filterByLocation,
+  filterByPosition,
+  filterBySeniority,
+  filterByTechnology,
+} from '@/app/(profile)/(components)/ProfileList/filters'
+import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
+import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
 import styles from './ProfileList.module.scss'
 
-const ProfileList = ({ profiles }: { profiles: ProfileModel[] }) => {
+const ProfileList = async ({
+  filters,
+}: {
+  filters: Record<JobOfferFiltersEnum, string>
+}) => {
   // const shuffledProfiles = shuffleArray(profiles)
+  const profiles = await getPublishedProfilesPayload()
 
-  if (profiles.length === 0) {
+  const filteredProfiles = profiles
+    .filter(filterBySeniority(filters.seniority?.split(',')))
+    .filter(filterByLocation(filters.location?.split(',')))
+    .filter(filterByTechnology(filters.technology?.split(',')))
+    .filter(filterByAvailability(filters.availability?.split(',')))
+    .filter(filterByFullName(filters.search))
+    .filter(filterByPosition(filters.specialization?.split(',')))
+
+  if (filteredProfiles.length === 0) {
     return (
       <div className={styles.profileCards}>
         <div className={styles.profileListCont}>
@@ -18,7 +40,7 @@ const ProfileList = ({ profiles }: { profiles: ProfileModel[] }) => {
   return (
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
-        {profiles.map((profile) => (
+        {filteredProfiles.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
         ))}
       </div>

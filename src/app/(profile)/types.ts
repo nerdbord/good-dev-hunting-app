@@ -63,7 +63,13 @@ export enum JobOfferFiltersEnum {
   availability = 'availability',
   location = 'location',
   search = 'search',
+  specialization = 'specialization',
 }
+
+export type SearchParamsFilters = Omit<
+  Record<JobOfferFiltersEnum, string[]>,
+  'specialization'
+>
 
 export interface ProfileFormValues {
   viewCount: number

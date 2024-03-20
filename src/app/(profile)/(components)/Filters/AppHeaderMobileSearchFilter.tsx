@@ -3,7 +3,10 @@ import {
   createFiltersObjFromSearchParams,
   createQueryString,
 } from '@/app/(profile)/helpers'
-import { JobOfferFiltersEnum } from '@/app/(profile)/types'
+import {
+  JobOfferFiltersEnum,
+  type SearchParamsFilters,
+} from '@/app/(profile)/types'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AppRoutes } from '@/utils/routes'
@@ -16,7 +19,7 @@ export const AppHeaderMobileSearchFilter = () => {
   const searchParams = useSearchParams()
   const isMobile = useMediaQuery()
 
-  const filters: Record<JobOfferFiltersEnum, string[]> = useMemo(
+  const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
     [searchParams],
   )

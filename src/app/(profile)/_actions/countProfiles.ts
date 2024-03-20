@@ -1,10 +1,10 @@
 ﻿'use server'
 
-import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
+import { type SearchParamsFilters } from '@/app/(profile)/types'
 import { countProfilesForPositionsByFilters } from '@/backend/profile/profile.service'
 
 export const countProfilesForPositions = async (
-  filters: Record<JobOfferFiltersEnum, string[]>,
+  filters: SearchParamsFilters,
 ) => {
   try {
     return await countProfilesForPositionsByFilters(filters)
