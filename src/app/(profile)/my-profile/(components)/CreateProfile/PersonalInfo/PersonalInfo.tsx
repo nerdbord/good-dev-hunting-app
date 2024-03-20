@@ -1,6 +1,6 @@
 'use client'
 import { UserPhotoUploader } from '@/app/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { type CreateProfileFormValues } from '@/app/(profile)/types'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import BioTextArea from '@/components/TextArea/BioTextArea'

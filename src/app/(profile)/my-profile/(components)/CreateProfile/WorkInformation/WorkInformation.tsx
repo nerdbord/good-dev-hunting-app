@@ -5,13 +5,14 @@ import {
 } from '@/app/(profile)/mappers'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import { EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { type CreateProfileFormValues } from '@/app/(profile)/types'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import styles from './WorkInformations.module.scss'
 
 export enum WorkInformationFormKeys {

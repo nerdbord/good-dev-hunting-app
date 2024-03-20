@@ -1,6 +1,6 @@
 'use client'
-import { PublishingState } from '@prisma/client'
-import { PropsWithChildren } from 'react'
+import { type PublishingState } from '@prisma/client'
+import { type PropsWithChildren } from 'react'
 import styles from './tabs.module.scss'
 
 type TabProps = {

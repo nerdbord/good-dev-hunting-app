@@ -9,10 +9,10 @@ import { GithubLoginButton } from '../GithubLoginButton/GithubLoginButton'
 import styles from './HamburgerMenuMobileBtn.module.scss'
 
 const HamburgerMenuMobileBtn = ({
-  userProfile,
+  userHasProfile,
   userIsModerator,
 }: {
-  userProfile?: boolean | null | undefined
+  userHasProfile?: boolean | null | undefined
   userIsModerator?: boolean | null | undefined
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
@@ -34,7 +34,7 @@ const HamburgerMenuMobileBtn = ({
         <>
           <div className={styles.overlay} onClick={handleCloseMenu}></div>
           <div className={styles.hamburger}>
-            {userProfile ? (
+            {userHasProfile ? (
               <>
                 <div className={styles.wrapper}>
                   <GithubAcc />

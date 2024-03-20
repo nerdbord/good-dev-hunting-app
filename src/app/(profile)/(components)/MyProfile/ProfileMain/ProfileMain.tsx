@@ -3,10 +3,10 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/(profile)/mappers'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
-import { SeniorityLevel } from '@/backend/profile/profile.types'
+import { type SeniorityLevel } from '@/backend/profile/profile.types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import { AnchorButton } from '@/components/Button/AnchorButton'
 import { countries } from '@/data/countries'

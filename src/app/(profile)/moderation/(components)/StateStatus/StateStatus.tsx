@@ -1,6 +1,6 @@
 import { formatStateName } from '@/app/(profile)/(components)/FilterTabs/Tab'
 import { approveProfile } from '@/app/(profile)/_actions/approveProfile'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
 import { Button } from '@/components/Button/Button'

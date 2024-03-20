@@ -1,6 +1,6 @@
 'use client'
 import classNames from 'classnames/bind'
-import React, { PropsWithChildren } from 'react'
+import React, { type PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
