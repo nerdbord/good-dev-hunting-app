@@ -3,7 +3,6 @@ import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import useOutsideClick from '@/hooks/useOutsideClick'
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import styles from './SearchBarWrapper.module.scss'
 
@@ -19,7 +18,7 @@ export const SearchBarWrapper = ({
   jobOfferFilterName,
 }: SearchBarWrapperProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const searchRef = useRef<HTMLDivElement>(null)
+  // const searchRef = useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = useState(value || '')
   const debouncedSearchValue = useDebounce(searchValue, 500)
   const isMobile = useMediaQuery()
@@ -41,31 +40,46 @@ export const SearchBarWrapper = ({
     setIsFocused(true)
   }
 
-  useOutsideClick(searchRef, () => setIsFocused(false))
+  // useOutsideClick(searchRef, () => setIsFocused(false))
 
   useEffect(() => {
     onSearch(jobOfferFilterName, debouncedSearchValue)
   }, [debouncedSearchValue])
 
   return (
-    <div className={styles.searchWrapper} ref={searchRef}>
-      <input
-        ref={inputRef}
-        name="searchValue"
-        className={styles.searchInput}
-        placeholder="Search by name"
-        onChange={changeHandler}
-        value={searchValue}
-      />
-      {((isMobile && isFocused) || !isMobile) && searchValue ? (
-        <button tabIndex={0} onClick={clearSearch} className={styles.searchBtn}>
-          <ClearIcon />
-        </button>
-      ) : (
-        <button tabIndex={0} onClick={focusInput} className={styles.searchBtn}>
-          <SearchIcon />
-        </button>
-      )}
-    </div>
+    <>
+      <div className={styles.searchWrapper}>
+        <input
+          ref={inputRef}
+          name="searchValue"
+          className={styles.searchInput}
+          placeholder="Search by name"
+          onChange={changeHandler}
+          value={searchValue}
+        />
+
+        {!searchValue ||
+          (searchValue && !isFocused && isMobile ? (
+            <button
+              tabIndex={0}
+              onClick={focusInput}
+              className={styles.searchBtn}
+            >
+              <SearchIcon />
+            </button>
+          ) : null)}
+
+        {(!isMobile && searchValue) ||
+        (searchValue && isFocused && isMobile) ? (
+          <button
+            tabIndex={0}
+            onClick={clearSearch}
+            className={styles.searchBtn}
+          >
+            <ClearIcon />
+          </button>
+        ) : null}
+      </div>
+    </>
   )
 }
