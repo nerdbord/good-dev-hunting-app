@@ -68,8 +68,7 @@ export const SearchBarWrapper = ({
           </button>
         )}
 
-        {(!isMobile && searchValue) ||
-        (searchValue && isFocused && isMobile) ? (
+        {searchValue ? (
           <button
             tabIndex={0}
             onClick={clearSearch}
