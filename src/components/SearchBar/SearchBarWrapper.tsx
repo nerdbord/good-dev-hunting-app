@@ -58,16 +58,15 @@ export const SearchBarWrapper = ({
           value={searchValue}
         />
 
-        {!searchValue ||
-          (searchValue && !isFocused && isMobile ? (
-            <button
-              tabIndex={0}
-              onClick={focusInput}
-              className={styles.searchBtn}
-            >
-              <SearchIcon />
-            </button>
-          ) : null)}
+        {!searchValue && (
+          <button
+            tabIndex={0}
+            onClick={focusInput}
+            className={styles.searchBtn}
+          >
+            <SearchIcon />
+          </button>
+        )}
 
         {(!isMobile && searchValue) ||
         (searchValue && isFocused && isMobile) ? (
