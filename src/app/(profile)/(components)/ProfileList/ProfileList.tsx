@@ -9,17 +9,21 @@ import {
 } from '@/app/(profile)/(components)/ProfileList/filters'
 import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
+import shuffleArray from '@/utils/collections'
+import { cache } from 'react'
 import styles from './ProfileList.module.scss'
+
+const getCachedProfiles = cache(getPublishedProfilesPayload)
 
 const ProfileList = async ({
   filters,
 }: {
   filters: Record<JobOfferFiltersEnum, string>
 }) => {
-  // const shuffledProfiles = shuffleArray(profiles)
-  const profiles = await getPublishedProfilesPayload()
+  const profiles = await getCachedProfiles()
+  const shuffledProfiles = shuffleArray(profiles)
 
-  const filteredProfiles = profiles
+  const filteredProfiles = shuffledProfiles
     .filter(filterBySeniority(filters.seniority?.split(',')))
     .filter(filterByLocation(filters.location?.split(',')))
     .filter(filterByTechnology(filters.technology?.split(',')))
