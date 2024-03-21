@@ -142,6 +142,8 @@ enum Role {
   USER
   MODERATOR
   TEAM
+  SPECIALIST
+  HUNTER
 }
 
 enum PublishingState {
