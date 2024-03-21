@@ -1,12 +1,16 @@
-import FiltersWithData from '@/app/(profile)/(components)/Filters/FiltersWithData'
 import ProfileList from '@/app/(profile)/(components)/ProfileList/ProfileList'
-import { FiltersProvider } from '@/contexts/FilterContext'
+import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
+import Loader from '@/components/Loader/Loader'
+import { Suspense } from 'react'
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Record<JobOfferFiltersEnum, string>
+}) {
   return (
-    <FiltersProvider>
-      <FiltersWithData />
-      <ProfileList />
-    </FiltersProvider>
+    <Suspense key={JSON.stringify(searchParams)} fallback={<Loader />}>
+      <ProfileList filters={searchParams} />
+    </Suspense>
   )
 }
