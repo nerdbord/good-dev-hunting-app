@@ -10,25 +10,45 @@ import TextInput from '@/components/TextInput/TextInput'
 import { AppRoutes } from '@/utils/routes'
 import { signIn } from 'next-auth/react'
 
-const Login = async (email: string) => {
-  await signIn('email', {
-    email: email.trim().toLowerCase(),
-    redirect: false,
-    callbackUrl: AppRoutes.profiles,
-  })
-}
-
 const LoginHunter = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [isSubmited, setIsSubmited] = useState(false)
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const [email, setEmail] = useState('')
 
-  const onSubmit = async (email: string) => {
+  const handleSignIn = async (email: string) => {
     setIsLoading(true)
-    await Login(email)
-    setIsSubmited(true)
+    try {
+      const result = await signIn('email', {
+        email: email.trim().toLowerCase(),
+        redirect: false,
+        callbackUrl: AppRoutes.profiles,
+      })
+      if (result?.error) {
+        setError(
+          result.error === 'AccessDenied'
+            ? 'User is already a specialist!'
+            : result.error,
+        )
+      } else {
+        setIsSubmited(true)
+      }
+    } catch (error) {
+      setError('Failed to sign in. Please try again later.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  if (error) {
+    return (
+      <Box>
+        <h2>Oops! Something went wrong! 😢</h2>
+        <p>{error}</p>
+      </Box>
+    )
   }
 
   if (isSubmited) {
@@ -71,7 +91,7 @@ const LoginHunter = () => {
           disabled={!isChecked}
           onClick={(e) => {
             e.preventDefault()
-            onSubmit(email)
+            handleSignIn(email)
           }}
           variant={'primary'}
         >
