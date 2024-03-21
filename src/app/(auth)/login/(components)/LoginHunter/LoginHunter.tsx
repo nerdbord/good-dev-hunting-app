@@ -14,7 +14,7 @@ const Login = async (email: string) => {
   await signIn('email', {
     email: email.trim().toLowerCase(),
     redirect: false,
-    callbackUrl: AppRoutes.home,
+    callbackUrl: AppRoutes.profiles,
   })
 }
 

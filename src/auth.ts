@@ -1,10 +1,13 @@
 import { prisma } from '@/lib/prismaClient'
 
 import { PrismaAdapter } from '@auth/prisma-adapter'
+import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github from 'next-auth/providers/github'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
+import { addUserRole, getUserById } from './backend/user/user.service'
+import { AppRoutes } from './utils/routes'
 
 const sendVerificationRequest = async ({
   url, // magic link
@@ -51,7 +54,113 @@ export const {
     }),
   ],
   pages: {
-    signIn: '/login',
+    signIn: AppRoutes.login,
+    error: AppRoutes.error,
+  },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      // WORKS for existing user with role added
+      // if user exists - must login with the same provider
+
+      // !!!!!!!
+      // if hunter tries to log in with github
+      // his id is different then the one in db so this guard below is useless then
+      // and app redirects to page which does not exist api/auth/login?error.... instead of /login?error or /error
+      if (user.id) {
+        const foundUser = await getUserById(user.id)
+        console.log(user.id)
+        console.log(foundUser)
+
+        if (foundUser && account) {
+          console.log(account.provider)
+          console.log(foundUser.roles)
+          if (
+            (account.provider === 'github' &&
+              foundUser.roles.includes(Role.SPECIALIST)) ||
+            (account.provider === 'email' &&
+              foundUser.roles.includes(Role.HUNTER))
+          ) {
+            console.log('ACCESS GRANTED')
+            return true
+          } else {
+            console.log('ACCESS DENIED')
+            return false
+          }
+        }
+
+        // if user doen not exist:
+        // - add role SPECIALIST when loged in with github
+        // - add role HUNTER when loged in with magic link
+
+        // if (!foundUser) {
+        //   console.log('USER NOT REGISTERED YET')
+        //   // if (!user.id) {
+        //   let roleToAdd: Role = 'USER'
+
+        //   if (account?.provider === 'github') {
+        //     roleToAdd = Role.SPECIALIST
+        //     console.log('added specialist')
+        //   } else if (account?.provider === 'email') {
+        //     roleToAdd = Role.HUNTER
+        //     console.log('added hunter')
+        //   }
+
+        //   // here is a problem because id does not match
+        //   // i think this should go somewhere else because it should be executed after succesfull login
+        //   if (roleToAdd) {
+        //     console.log('Found role to add ' + roleToAdd)
+        //     // addUserRole expects id
+        //     if (user.id) {
+        //       console.log('Found user id: ' + user.id)
+        //       addUserRole(user.id, roleToAdd)
+        //       console.log('Role added!!!!<3 ' + roleToAdd)
+        //     } else {
+        //       console.log('NO ID FOUND')
+        //     }
+        //     return true
+        //   } else {
+        //     console.log('ERROR: Provider not recognized.')
+        //     return false
+        //   }
+        // }
+      }
+      console.log('[PROVIDER USED -->>>]: ' + account?.provider)
+
+      return true
+    },
+  },
+  events: {
+    signIn({ user, account, profile, isNewUser }) {
+      console.log(
+        'this is from sign in event ================== ' + account?.provider,
+      )
+      console.log('isNewUser????===================== ' + isNewUser)
+
+      // if user doen not exist:
+      // - add role SPECIALIST when loged in with github
+      // - add role HUNTER when loged in with magic link
+      if (!isNewUser) return
+
+      let roleToAdd: Role = 'USER'
+      if (account?.provider === 'github') {
+        roleToAdd = Role.SPECIALIST
+        console.log('added specialist')
+      } else if (account?.provider === 'email') {
+        roleToAdd = Role.HUNTER
+        console.log('added hunter')
+      }
+
+      if (roleToAdd) {
+        console.log('Found role to add ' + roleToAdd)
+        if (user.id) {
+          console.log('Found user id: ' + user.id)
+          addUserRole(user.id, roleToAdd)
+          console.log('Role added!!!!<3 ' + roleToAdd)
+        } else {
+          console.log('NO ID FOUND')
+        }
+      }
+    },
   },
   // callbacks: {
   //   async jwt({ token, user }) {
