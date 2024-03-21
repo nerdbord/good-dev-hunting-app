@@ -1,51 +1,56 @@
-import { ProfileModel } from '@/app/(profile)/types'
-import { FilterOption } from '@/contexts/FilterContext'
+import { type ProfileModel } from '@/app/(profile)/types'
 
 export const filterByPosition =
-  (positionFilter: FilterOption[]) => (profile: ProfileModel) => {
-    if (positionFilter.length === 0) return true
+  (positionFilter: string[]) => (profile: ProfileModel) => {
+    if (!positionFilter) return true
     return positionFilter.some(
-      (pos) => profile.position.toUpperCase() === pos.value.toUpperCase(),
+      (pos) => profile.position.toUpperCase() === pos.toUpperCase(),
     )
   }
 
 export const filterBySeniority =
-  (seniorityFilter: FilterOption[]) => (profile: ProfileModel) => {
-    if (seniorityFilter.length === 0) return true
+  (seniorityFilter: string[]) => (profile: ProfileModel) => {
+    if (!seniorityFilter) return true
     return seniorityFilter.some(
-      (filter) =>
-        filter.value.toUpperCase() === profile.seniority.toUpperCase(),
+      (filter) => filter.toUpperCase() === profile.seniority.toUpperCase(),
     )
   }
 
 // TODO: implement filter by location (cities and countreis should be implemented )
 export const filterByLocation =
-  (locationFilter: FilterOption[]) => (profile: ProfileModel) => {
-    if (locationFilter.length === 0) return true
-    return locationFilter.some(
-      (location) => profile.country.name === location.value,
-    )
+  (locationFilter: string[]) => (profile: ProfileModel) => {
+    if (!locationFilter) return true
+    return locationFilter.some((location) => profile.country.name === location)
   }
 
 export const filterByTechnology =
-  (technologyFilter: FilterOption[]) => (profile: ProfileModel) => {
-    if (technologyFilter.length === 0) return true
+  (technologyFilter: string[]) => (profile: ProfileModel) => {
+    if (!technologyFilter) return true
     return technologyFilter.some(
       (techFilter) =>
         !!profile.techStack.find(
-          (tech) => tech.name.toUpperCase() === techFilter.value.toUpperCase(),
+          (tech) => tech.name.toUpperCase() === techFilter.toUpperCase(),
         ),
     )
   }
 
 export const filterByAvailability =
-  (availabilityFilter: FilterOption[]) => (profile: ProfileModel) => {
-    if (availabilityFilter.length === 0) return true
+  (availabilityFilter: string[]) => (profile: ProfileModel) => {
+    if (!availabilityFilter) return true
     return availabilityFilter.some(
       (availability) =>
         !!profile.employmentTypes.find(
           (employmentType) =>
-            employmentType.toUpperCase() === availability.value.toUpperCase(),
+            employmentType.toUpperCase() === availability.toUpperCase(),
         ),
     )
   }
+
+export const filterByFullName = (searchTermFilter: string) => {
+  return (profile: ProfileModel) => {
+    if (!searchTermFilter) return true
+    return profile.fullName
+      .toUpperCase()
+      .includes(searchTermFilter.toUpperCase())
+  }
+}

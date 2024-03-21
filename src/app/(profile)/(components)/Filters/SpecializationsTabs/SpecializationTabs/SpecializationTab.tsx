@@ -1,39 +1,42 @@
 'use client'
 import classNames from 'classnames/bind'
-import React, { PropsWithChildren } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { type PropsWithChildren } from 'react'
 import styles from './SpecializationTab.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface SpecializationTabProps {
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
-  isPressed: boolean
   count?: number
   color: string
+  href: string
 }
 
 export const SpecializationTab = ({
-  onClick,
   children,
-  isPressed,
   count,
   color,
+  href,
 }: PropsWithChildren<SpecializationTabProps>) => {
-  const buttonStyle = isPressed ? { borderColor: color, color: color } : {}
+  const pathname = usePathname()
+  const isActive = pathname === href.split('?')[0]
+
+  const buttonStyle = isActive ? { borderColor: color, color: color } : {}
   const getSpecializationTabClasses = cx({
     [styles.default]: true,
   })
 
   return (
-    <div
+    <Link
       className={getSpecializationTabClasses}
-      onClick={onClick}
       style={buttonStyle}
+      href={href}
     >
       <div className={styles.content}>
         <span>{children}</span>
         <p>{count !== undefined ? `(${count})` : ''}</p>
       </div>
-    </div>
+    </Link>
   )
 }

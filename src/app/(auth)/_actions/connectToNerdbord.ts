@@ -6,7 +6,7 @@ import {
   getGitHubDetails,
   updateUserNerdbordId,
 } from '@/backend/user/user.service'
-import { NerdbordUser } from '@/lib/nerdbord/types'
+import { type NerdbordUser } from '@/lib/nerdbord/types'
 import { withSentry } from '@/utils/errHandling'
 
 export const connectToNerdbord = withSentry(async () => {

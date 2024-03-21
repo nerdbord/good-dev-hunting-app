@@ -1,53 +1,43 @@
-'use client'
+import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
-import styles from '../DropdownFilter/DropdownFilter.module.scss'
-import { DropdownOptionItem } from '../DropdownOptionItem/DropdownOptionItem'
+import {
+  DropdownOptionItem,
+  type DropdownOption,
+} from '../DropdownOptionItem/DropdownOptionItem'
 import { DropdownSearchInput } from '../DropdownSearchInput/DropdownSearchInput'
+import styles from './DropdownFilterMulti.module.scss'
+
+type DropdownFilterMultiProps = {
+  text: string
+  options: DropdownOption[]
+  hasSearchInput?: boolean
+  jobOfferFilterName: JobOfferFiltersEnum
+  value: string[]
+  onSearch: (filterName: JobOfferFiltersEnum, value: string) => void
+}
 
 export const DropdownFilterMulti = ({
   text,
   options,
-  onSelect,
-  selectedValue,
+  jobOfferFilterName,
   hasSearchInput,
-}: {
-  text: string
-  options: DropdownOption[]
-  onSelect: (option: DropdownOption) => void
-  selectedValue: DropdownOption[]
-  hasSearchInput?: boolean
-}) => {
+  value,
+  onSearch,
+}: DropdownFilterMultiProps) => {
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [isOverlayActive, setOverlayActive] = useState(false)
+  const [selectedValue, setSelectedValue] = useState<string[]>(value)
 
   useOutsideClick(
     dropdownRef,
     () => setDropdownActive(false),
     () => setArrow('IoIosArrowDown'),
   )
-
-  useEffect(() => {
-    switch (isDropdownActive) {
-      case true:
-        setOverlayActive(true)
-        document.body.classList.add('blurBackground')
-        break
-      case false:
-        setOverlayActive(false)
-        document.body.classList.remove('blurBackground')
-        break
-      default:
-        break
-    }
-  }, [isDropdownActive])
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
@@ -59,29 +49,45 @@ export const DropdownFilterMulti = ({
     setArrow('IoIosArrowDown')
   }
 
+  const handleSelect = (option: string) => {
+    setSelectedValue((prev) => {
+      const isExists = prev.some((p) => p === option)
+
+      if (!isExists) {
+        return [...prev, option]
+      }
+
+      return prev.filter((p) => p !== option)
+    })
+  }
+
   useOutsideClick(dropdownRef, closeDropdown)
 
   const filteredOptions = options.filter((option) =>
     option.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
+  useEffect(() => {
+    onSearch(jobOfferFilterName, selectedValue.join(','))
+  }, [selectedValue])
+
   return (
-    <div className={styles.buttonBox}>
-      <div>
-        <button onClick={handleDropdown} className={styles.featuresBtn}>
-          {selectedValue.length === 0 ? (
+    <>
+      {isDropdownActive && <div className={styles.overlay}></div>}
+      <div className={styles.buttonBox} ref={dropdownRef}>
+        <button onClick={() => handleDropdown()} className={styles.featuresBtn}>
+          {value.length === 0 ? (
             <div className={styles.buttonText}>{text}</div>
           ) : (
             <div className={styles.buttonTextChecked}>{text}</div>
           )}
-          {selectedValue.length !== 0 && (
-            <div className={styles.selectedCount}>{selectedValue.length}</div>
+          {value.length !== 0 && (
+            <div className={styles.selectedCount}>{value.length}</div>
           )}
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
-        {isOverlayActive && <div className={styles.overlay}></div>}
         {isDropdownActive && (
-          <div className={styles.dropdown} ref={dropdownRef}>
+          <div className={styles.dropdown}>
             <div
               className={
                 hasSearchInput
@@ -105,14 +111,14 @@ export const DropdownFilterMulti = ({
               <DropdownOptionItem
                 key={index}
                 option={option}
-                onSelect={onSelect}
-                isSelected={selectedValue.includes(option)}
+                onSelect={() => handleSelect(option.value)}
+                isSelected={selectedValue.includes(option.value)}
                 hasSearchInput={hasSearchInput}
               />
             ))}
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 }

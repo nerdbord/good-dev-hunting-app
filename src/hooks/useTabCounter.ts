@@ -1,5 +1,5 @@
-import { ProfileModel } from '@/app/(profile)/types'
-import { PublishingState } from '@prisma/client'
+import { type ProfileModel } from '@/app/(profile)/types'
+import { type PublishingState } from '@prisma/client'
 import { useEffect } from 'react'
 
 export default function (

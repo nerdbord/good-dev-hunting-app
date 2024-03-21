@@ -1,9 +1,9 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
 import { useModal } from '@/contexts/ModalContext'
+import { type PropsWithChildren } from 'react'
 
-import styles from './Modal.module.scss'
 import Portal from '../Portal/Portal'
+import styles from './Modal.module.scss'
 
 export default function Modal({ children }: PropsWithChildren) {
   const { modalContent } = useModal()

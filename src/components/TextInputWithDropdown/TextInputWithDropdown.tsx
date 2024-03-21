@@ -2,12 +2,12 @@
 import { countries } from '@/data/countries'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useFormikContext } from 'formik'
-import { ChangeEvent, useRef, useState } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
-import TextInput, { TextInputProps } from '../TextInput/TextInput'
+import TextInput, { type TextInputProps } from '../TextInput/TextInput'
 
 import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
-import { ProfileFormValues } from '@/app/(profile)/types'
+import { type ProfileFormValues } from '@/app/(profile)/types'
 import styles from './TextInputWithDropdown.module.scss'
 
 // Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)

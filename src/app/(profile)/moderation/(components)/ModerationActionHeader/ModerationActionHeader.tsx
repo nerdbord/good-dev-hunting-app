@@ -5,7 +5,7 @@ import { useModal } from '@/contexts/ModalContext'
 
 import AssignRoleModal from '@/app/(profile)/moderation/(components)/AssignRoleModal/AssignRoleModal'
 import { Role } from '@prisma/client'
-import { ModerationActionHeaderType } from '../../../(components)/types'
+import { type ModerationActionHeaderType } from '../../../(components)/types'
 import styles from './ModerationActionHeader.module.scss'
 
 export default function ModerationActionHeader({

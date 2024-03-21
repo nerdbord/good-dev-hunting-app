@@ -1,7 +1,7 @@
 'use client'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
-import { ChangeEvent, useRef, useState } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import { Button } from '../../../../../components/Button/Button'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
 

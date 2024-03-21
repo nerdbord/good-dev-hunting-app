@@ -1,6 +1,6 @@
 'use server'
 import { addUserRole } from '@/backend/user/user.service'
-import { Role } from '@prisma/client'
+import { type Role } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
 export const assignRole = async (id: string, role: Role) => {

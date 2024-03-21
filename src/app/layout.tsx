@@ -10,7 +10,7 @@ import './globals.scss'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['100', '400', '500'],
   variable: '--font-ibm',
 })
 
