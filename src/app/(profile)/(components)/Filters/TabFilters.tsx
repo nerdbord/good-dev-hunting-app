@@ -12,12 +12,14 @@ import {
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { AppRoutes } from '@/utils/routes'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { cache, useEffect, useMemo, useState } from 'react'
 import styles from './Filters.module.scss'
 
 type TabFiltersProps = {
   specializations: DropdownOption[]
 }
+
+const cachedCountProfiles = cache(countProfilesForPositions)
 
 export const TabFilters = ({ specializations }: TabFiltersProps) => {
   const searchParams = useSearchParams()
@@ -36,7 +38,7 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
 
   useEffect(() => {
     const countProfiles = async () => {
-      const counts = await countProfilesForPositions(filters)
+      const counts = await cachedCountProfiles(filters)
 
       setNumberOfProfiles(counts)
     }
