@@ -2,7 +2,6 @@ import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import styles from './SearchBarWrapper.module.scss'
 
@@ -18,11 +17,8 @@ export const SearchBarWrapper = ({
   jobOfferFilterName,
 }: SearchBarWrapperProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  // const searchRef = useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = useState(value || '')
   const debouncedSearchValue = useDebounce(searchValue, 500)
-  const isMobile = useMediaQuery()
-  const [isFocused, setIsFocused] = useState(false)
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
@@ -37,10 +33,7 @@ export const SearchBarWrapper = ({
 
   const focusInput = () => {
     inputRef.current?.focus()
-    setIsFocused(true)
   }
-
-  // useOutsideClick(searchRef, () => setIsFocused(false))
 
   useEffect(() => {
     onSearch(jobOfferFilterName, debouncedSearchValue)
