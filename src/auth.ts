@@ -6,7 +6,7 @@ import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github from 'next-auth/providers/github'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
-import { addUserRole, getUserById } from './backend/user/user.service'
+import { addUserRole, findUserByEmail } from './backend/user/user.service'
 import { AppRoutes } from './utils/routes'
 
 const sendVerificationRequest = async ({
@@ -66,9 +66,10 @@ export const {
       // if hunter tries to log in with github
       // his id is different then the one in db so this guard below is useless then
       // and app redirects to page which does not exist api/auth/login?error.... instead of /login?error or /error
-      if (user.id) {
-        const foundUser = await getUserById(user.id)
+      if (user.email) {
+        const foundUser = await findUserByEmail(user.email)
         console.log(user.id)
+        console.log(user.email)
         console.log(foundUser)
 
         if (foundUser && account) {
