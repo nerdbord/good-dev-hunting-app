@@ -55,7 +55,7 @@ export const {
   ],
   pages: {
     signIn: AppRoutes.login,
-    error: AppRoutes.error,
+    error: AppRoutes.loginError,
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {

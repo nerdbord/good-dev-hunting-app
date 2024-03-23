@@ -8,5 +8,5 @@ export enum AppRoutes {
   moderationProfile = '/moderation/profile',
   profiles = '/profiles',
   login = '/login',
-  error = '/error',
+  loginError = '/login-error',
 }
