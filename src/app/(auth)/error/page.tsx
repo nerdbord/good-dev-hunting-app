@@ -1,5 +1,5 @@
 import { Container } from '@/components/Container/Container'
-import LoginHeader from '../login/(components)/LoginHeader/LoginHeader'
+import LoginHeader from '../signin/(components)/LoginHeader/LoginHeader'
 import ErrorBox from './(components)/ErrorBox'
 
 const LoginErrorPage = () => {

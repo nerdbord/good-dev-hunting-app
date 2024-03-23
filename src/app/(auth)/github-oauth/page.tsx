@@ -7,10 +7,10 @@ import { auth } from '../../../auth'
 
 const GithubOAuth = async () => {
   const session = await auth()
-  if (!session) redirect(AppRoutes.login)
+  if (!session) redirect(AppRoutes.signIn)
 
   const foundUser = await getUserById(session.user.id)
-  if (!foundUser) redirect(AppRoutes.login)
+  if (!foundUser) redirect(AppRoutes.signIn)
 
   const userIsHunter = foundUser.roles.includes(Role.HUNTER)
   const profile = await getProfileByUserEmail(session.user.email)

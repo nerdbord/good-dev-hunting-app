@@ -54,8 +54,9 @@ export const {
     }),
   ],
   pages: {
-    signIn: AppRoutes.login,
-    error: AppRoutes.loginError,
+    // must be named like this - otherwise throws error when route with search params
+    signIn: AppRoutes.signIn,
+    error: AppRoutes.error,
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
