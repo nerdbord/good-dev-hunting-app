@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prismaClient'
 
+import LinkedIn from '@auth/core/providers/linkedin'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
@@ -34,6 +35,47 @@ export const {
     strategy: 'jwt',
   },
   providers: [
+    // https://github.com/nextauthjs/next-auth/issues/8831
+
+    // error {
+    // error: 'invalid_client',
+    // error_description: 'Client authentication failed'
+    // }
+    // [auth][error] CallbackRouteError: Read more at https://errors.authjs.dev#callbackrouteerror
+    // [auth][cause]: Error: TODO: Handle OIDC response body error
+    LinkedIn({
+      clientId: process.env.LINKEDIN_CLIENT_ID!,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
+      client: { token_endpoint_auth_method: 'client_secret_post' },
+      authorization: {
+        url: 'https://www.linkedin.com/oauth/v2/authorization',
+        params: { scope: 'openid profile email' },
+      },
+      wellKnown:
+        'https://www.linkedin.com/oauth/.well-known/openid-configuration',
+      issuer: 'https://www.linkedin.com',
+      jwks_endpoint: 'https://www.linkedin.com/oauth/openid/jwks',
+      // userinfo: {
+      //   url: 'https://api.linkedin.com/v2/me',
+      //   params: {
+      //     projection: ``,
+      //   },
+      // },
+      token: {
+        url: 'https://www.linkedin.com/oauth/v2/accessToken',
+      },
+      userinfo: {
+        url: 'https://api.linkedin.com/v2/userinfo',
+      },
+      async profile(profile) {
+        return {
+          id: profile.sub,
+          name: `${profile.given_name} ${profile.family_name}`,
+          email: profile.email,
+        }
+      },
+    }),
+
     Github({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
@@ -69,6 +111,8 @@ export const {
           if (
             (account.provider === 'github' &&
               foundUser.roles.includes(Role.SPECIALIST)) ||
+            (account.provider === 'linkedin' &&
+              foundUser.roles.includes(Role.SPECIALIST)) ||
             (account.provider === 'email' &&
               foundUser.roles.includes(Role.HUNTER))
           ) {
@@ -92,7 +136,7 @@ export const {
       if (!isNewUser) return
 
       let roleToAdd: Role = 'USER'
-      if (account?.provider === 'github') {
+      if (account?.provider === 'github' || account?.provider === 'linkedin') {
         roleToAdd = Role.SPECIALIST
       } else if (account?.provider === 'email') {
         roleToAdd = Role.HUNTER

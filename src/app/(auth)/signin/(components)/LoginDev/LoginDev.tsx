@@ -1,5 +1,6 @@
 // components
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
+import { LinkedInLoginButton } from '@/app/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
 import Box from '@/components/Box/Box'
 
 const LoginDev = () => {
@@ -11,6 +12,7 @@ const LoginDev = () => {
         for fellow specialist.
       </p>
       <GithubLoginButton label="Login with Github" />
+      <LinkedInLoginButton label="Login with LinkedIn" />
     </Box>
   )
 }
