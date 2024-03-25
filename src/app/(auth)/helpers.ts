@@ -1,5 +1,6 @@
 import { auth } from '@/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
+import { Role, User } from '@prisma/client'
 
 interface UserAuthed {
   id: string
@@ -30,4 +31,8 @@ export const getAuthorizedUser = async () => {
     : null
 
   return { session, user }
+}
+
+export const userIsHunter = (user: User) => {
+  return user?.roles.includes(Role.HUNTER)
 }
