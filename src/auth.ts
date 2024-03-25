@@ -5,7 +5,7 @@ import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github from 'next-auth/providers/github'
-import { userIsHunter } from './app/(auth)/helpers'
+import { userHasRole } from './app/(auth)/helpers'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { addUserRole, findUserByEmail } from './backend/user/user.service'
 import { AppRoutes } from './utils/routes'
@@ -67,10 +67,10 @@ export const {
         const foundUser = await findUserByEmail(user.email)
 
         if (foundUser && account) {
-          const isHunter = userIsHunter(foundUser)
+          const userIsHunter = userHasRole(foundUser, Role.HUNTER)
           if (
-            (account.provider === 'github' && !isHunter) ||
-            (account.provider === 'email' && isHunter)
+            (account.provider === 'github' && !userIsHunter) ||
+            (account.provider === 'email' && userIsHunter)
           ) {
             console.log('ACCESS GRANTED')
             return true

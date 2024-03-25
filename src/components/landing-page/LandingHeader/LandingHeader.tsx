@@ -10,15 +10,9 @@ import Logo from '@/components/Logo/Logo'
 import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
-  const { session, user } = await getAuthorizedUser()
+  const { user, userIsHunter } = await getAuthorizedUser()
 
-  console.log('session', session)
-  console.log('user', user)
-
-  // const session = await auth()
-  // const user = session ? await findUserByEmail(session.user?.email) : null
-
-  if (session) {
+  if (user) {
     return (
       <header className={styles.wrapper}>
         <Container>
@@ -26,17 +20,9 @@ const LandingHeader = async () => {
             <Logo />
 
             <div className={styles.frameButtons}>
-              {user?.profile ? (
-                <>
-                  <GithubStarsButton />
-                  <MyProfileBtn />
-                </>
-              ) : (
-                <>
-                  {user?.email}
-                  <GithubStarsButton />
-                  <CreateProfileBtn />
-                </>
+              <GithubStarsButton />
+              {!userIsHunter && (
+                <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
               )}
             </div>
           </div>

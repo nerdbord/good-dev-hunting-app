@@ -1,18 +1,18 @@
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import EditProfileForm from '@/app/(profile)/my-profile/(components)/EditProfileForm/EditProfileForm'
-import { auth } from '@/auth'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
 import { UploadProvider } from '@/contexts/UploadContext'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
 const EditProfilePage = async () => {
-  const session = await auth()
+  const { user, userIsHunter } = await getAuthorizedUser()
 
-  if (!session?.user) {
+  if (!user || userIsHunter) {
     redirect(AppRoutes.profiles)
   }
 
-  const profile = await getProfileByUserEmail(session.user.email)
+  const profile = await getProfileByUserEmail(user.email)
 
   if (!profile) {
     redirect(AppRoutes.createProfile)
