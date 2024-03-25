@@ -1,15 +1,13 @@
-import { authOptions } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import { ProfileCardWrapper } from '@/app/(profile)/(components)/ProfileCard/ProfileCardWrapper/ProfileCardWrapper'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { getRandomProfiles } from '@/backend/profile/profile.service'
-import { findUserByEmail } from '@/backend/user/user.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import { getServerSession } from 'next-auth'
 import styles from './Hero.module.scss'
+
 const Hero = async () => {
-  const session = await getServerSession(authOptions)
-  const user = session ? await findUserByEmail(session.user.email) : null
+  const { user, userIsHunter } = await getAuthorizedUser()
   const [first, second, third] = await getRandomProfiles(3)
 
   return (
@@ -25,7 +23,9 @@ const Hero = async () => {
           </p>
         </div>
         <div className={styles.buttons}>
-          {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
+          {!userIsHunter && (
+            <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+          )}
           <FindTalentsBtn variant={'secondary'} />
         </div>
       </div>

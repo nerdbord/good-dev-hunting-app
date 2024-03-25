@@ -1,5 +1,5 @@
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import { getAuthorizedUser } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
@@ -10,9 +10,9 @@ import Logo from '@/components/Logo/Logo'
 import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
-  const { session, user } = await getAuthorizedUser()
+  const { user, userIsHunter } = await getAuthorizedUser()
 
-  if (session) {
+  if (user) {
     return (
       <header className={styles.wrapper}>
         <Container>
@@ -20,16 +20,9 @@ const LandingHeader = async () => {
             <Logo />
 
             <div className={styles.frameButtons}>
-              {user?.profile ? (
-                <>
-                  <GithubStarsButton />
-                  <MyProfileBtn />
-                </>
-              ) : (
-                <>
-                  <GithubStarsButton />
-                  <CreateProfileBtn />
-                </>
+              <GithubStarsButton />
+              {!userIsHunter && (
+                <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
               )}
             </div>
           </div>

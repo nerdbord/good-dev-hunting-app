@@ -1,26 +1,20 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
-import { authOptions } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
-import { findUserByEmail } from '@/backend/user/user.service'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
-import { Role } from '@prisma/client'
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import styles from './AppHeader.module.scss'
 
 const AppHeader = async () => {
-  const session = await getServerSession(authOptions)
+  const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
 
-  const user = session ? await findUserByEmail(session.user.email) : null
-  const userIsModerator = user?.roles.includes(Role.MODERATOR)
-
-  if (session) {
+  if (user) {
     return (
       <header className={styles.wrapper}>
         <Container>
@@ -32,7 +26,7 @@ const AppHeader = async () => {
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {user?.profile ? (
+              {!userIsHunter && user.profile ? (
                 <>
                   <div className={styles.hideOnMobile}>
                     <GithubStarsButton />
@@ -42,7 +36,9 @@ const AppHeader = async () => {
               ) : (
                 <>
                   <GithubStarsButton />
-                  <CreateProfileBtn data-testid="create-profile-button" />
+                  {!userIsHunter && (
+                    <CreateProfileBtn data-testid="create-profile-button" />
+                  )}
                 </>
               )}
             </div>

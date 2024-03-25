@@ -12,13 +12,13 @@ const LoginBtn = (props: LoginBtnProps) => {
   const router = useRouter()
   const pathname = usePathname()
 
-  if (pathname === AppRoutes.login) {
+  if (pathname === AppRoutes.signIn) {
     return null
   }
 
   return (
     <Button
-      onClick={() => router.push(AppRoutes.login)}
+      onClick={() => router.push(AppRoutes.signIn)}
       variant={props.variant}
     >
       {props.children}

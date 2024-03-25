@@ -1,7 +1,7 @@
-import { getAuthorizedUser } from '@/app/(auth)/auth'
 import styles from './LoginHeader.module.scss'
 
 // components
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
@@ -9,7 +9,7 @@ import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
 
 const LoginHeader = async () => {
-  const { user } = await getAuthorizedUser()
+  const { user, userIsHunter } = await getAuthorizedUser()
 
   return (
     <header className={styles.wrapper}>
@@ -20,7 +20,9 @@ const LoginHeader = async () => {
             <GithubStarsButton />
           </div>
 
-          {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
+          {!userIsHunter && (
+            <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+          )}
         </div>
       </Container>
     </header>
