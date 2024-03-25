@@ -26,13 +26,16 @@ export const authorizeUser = async () => {
 export const getAuthorizedUser = async () => {
   const session = await auth()
 
-  const user = session?.user?.email
+  const user = session?.user.email
     ? await findUserByEmail(session.user.email)
     : null
 
-  return { session, user }
+  const userIsHunter = user && userHasRole(user, Role.HUNTER)
+  const userIsModerator = user && userHasRole(user, Role.MODERATOR)
+
+  return { user, userIsHunter, userIsModerator }
 }
 
-export const userIsHunter = (user: User) => {
-  return user?.roles.includes(Role.HUNTER)
+export const userHasRole = (user: User, role: Role) => {
+  return user.roles.includes(role)
 }

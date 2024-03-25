@@ -7,9 +7,7 @@ import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import styles from './Hero.module.scss'
 
 const Hero = async () => {
-  // const session = await auth()
-  // const user = session ? await findUserByEmail(session.user?.email) : null
-  const { user } = await getAuthorizedUser()
+  const { user, userIsHunter } = await getAuthorizedUser()
   const [first, second, third] = await getRandomProfiles(3)
 
   return (
@@ -25,7 +23,9 @@ const Hero = async () => {
           </p>
         </div>
         <div className={styles.buttons}>
-          {user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}
+          {!userIsHunter && (
+            <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+          )}
           <FindTalentsBtn variant={'secondary'} />
         </div>
       </div>
