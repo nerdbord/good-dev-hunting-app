@@ -30,8 +30,8 @@ export const SpecializationTab = ({
   )
 
   const isActive = filters?.specialization?.length
-    ? filters.specialization[0] === name
-    : !filters?.specialization?.length && name === 'All'
+    ? filters.specialization[0] === value
+    : !filters?.specialization?.length && value === 'All'
 
   const buttonStyle = isActive ? { borderColor: color, color: color } : {}
   const getSpecializationTabClasses = cx({
