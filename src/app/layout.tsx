@@ -1,4 +1,5 @@
 import AuthProvider from '@/app/(auth)/(components)/AuthProvider'
+import { ProfilesProvider } from '@/app/(profile)/(components)/ProfilesProvider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
@@ -41,7 +42,9 @@ export default function RootLayout({
         >
           <AuthProvider>
             <ToastContextProvider>
-              <ModalProvider>{children}</ModalProvider>
+              <ProfilesProvider>
+                <ModalProvider>{children}</ModalProvider>
+              </ProfilesProvider>
             </ToastContextProvider>
           </AuthProvider>
         </PlausibleProvider>

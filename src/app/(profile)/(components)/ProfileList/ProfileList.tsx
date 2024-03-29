@@ -1,33 +1,21 @@
+'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import {
-  filterByAvailability,
-  filterByFullName,
-  filterByLocation,
-  filterByPosition,
-  filterBySeniority,
-  filterByTechnology,
-} from '@/app/(profile)/(components)/ProfileList/filters'
-import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
-import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
+import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
+import Loading from '@/app/loading'
 import styles from './ProfileList.module.scss'
 
-const ProfileList = async ({
-  filters,
-}: {
-  filters: Record<JobOfferFiltersEnum, string>
-}) => {
-  // const shuffledProfiles = shuffleArray(profiles)
-  const profiles = await getPublishedProfilesPayload()
+const ProfileList = () => {
+  const { filteredProfiles: profiles, isFetching } = useProfiles()
 
-  const filteredProfiles = profiles
-    .filter(filterBySeniority(filters.seniority?.split(',')))
-    .filter(filterByLocation(filters.location?.split(',')))
-    .filter(filterByTechnology(filters.technology?.split(',')))
-    .filter(filterByAvailability(filters.availability?.split(',')))
-    .filter(filterByFullName(filters.search))
-    .filter(filterByPosition(filters.specialization?.split(',')))
+  if (isFetching && profiles.length === 0) {
+    return (
+      <div className={styles.profileCards}>
+        <Loading />
+      </div>
+    )
+  }
 
-  if (filteredProfiles.length === 0) {
+  if (profiles.length === 0 && !isFetching) {
     return (
       <div className={styles.profileCards}>
         <div className={styles.profileListCont}>
@@ -40,7 +28,7 @@ const ProfileList = async ({
   return (
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
-        {filteredProfiles.map((profile) => (
+        {profiles.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
         ))}
       </div>

@@ -3,14 +3,14 @@ import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
 import Loader from '@/components/Loader/Loader'
 import { Suspense } from 'react'
 
-export default async function Home({
+export default async function Profiles({
   searchParams,
 }: {
   searchParams: Record<JobOfferFiltersEnum, string>
 }) {
   return (
     <Suspense key={JSON.stringify(searchParams)} fallback={<Loader />}>
-      <ProfileList filters={searchParams} />
+      <ProfileList />
     </Suspense>
   )
 }
