@@ -3,18 +3,24 @@ import { TabFilters } from '@/app/(profile)/(components)/Filters/TabFilters'
 import { getCountries } from '@/backend/country/country.service'
 import { getUniqueSpecializations } from '@/backend/profile/profile.service'
 import { getTechnologies } from '@/backend/technology/technology.service'
+import { cache } from 'react'
 import { mapOptions, mapSpecializations } from '../../mappers'
+
 import styles from './Filters.module.scss'
 
+const tech = cache(getTechnologies)
+const countries = cache(getCountries)
+const specializations = cache(getUniqueSpecializations)
+
 export const FiltersWithData = async () => {
-  const technologies = mapOptions(await getTechnologies())
-  const countries = mapOptions(await getCountries())
-  const specializations = mapSpecializations(await getUniqueSpecializations())
+  const mappedTech = mapOptions(await tech())
+  const mappedCountries = mapOptions(await countries())
+  const mappedSpecializations = mapSpecializations(await specializations())
 
   return (
     <div className={styles.mainContainer}>
-      <ProfileFilters technologies={technologies} countries={countries} />
-      <TabFilters specializations={specializations} />
+      <ProfileFilters technologies={mappedTech} countries={mappedCountries} />
+      <TabFilters specializations={mappedSpecializations} />
     </div>
   )
 }

@@ -43,8 +43,8 @@ export const ProfileFilters = ({
     value: string,
   ) => {
     const newSearchParams = createQueryString(filterName, value, searchParams)
-
-    router.push(`${pathname}?${newSearchParams}`)
+    //
+    router.replace(`${pathname}?${newSearchParams}`)
   }
 
   return (
