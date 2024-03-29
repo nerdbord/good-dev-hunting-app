@@ -1,6 +1,7 @@
 'use client'
 import {
   filterByAvailability,
+  filterByFullName,
   filterByLocation,
   filterBySeniority,
   filterBySpecialization,
@@ -79,6 +80,7 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
             : filterBySpecialization(filters.specialization),
         )
         .filter(filterByAvailability(filters.availability))
+        .filter(filterByFullName(filters.search[0]))
         .filter(() => true)
       return filteredProfiles
     },
