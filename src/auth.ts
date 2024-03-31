@@ -1,13 +1,22 @@
 import { prisma } from '@/lib/prismaClient'
 
+import { withSentry } from '@/utils/errHandling'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github from 'next-auth/providers/github'
 import { userHasRole } from './app/(auth)/helpers'
-import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
-import { addUserRole, findUserByEmail } from './backend/user/user.service'
+import {
+  sendMagicLinkEmail,
+  sendWelcomeEmail,
+} from './backend/mailing/mailing.service'
+import {
+  addUserRole,
+  createGithubDetails,
+  findUserByEmail,
+} from './backend/user/user.service'
+import { sendDiscordNotificationToModeratorChannel } from './lib/discord'
 import { AppRoutes } from './utils/routes'
 
 const sendVerificationRequest = async ({
@@ -30,7 +39,27 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: {
+    ...PrismaAdapter(prisma),
+    createUser: withSentry(async ({ id: _id, ...data }) => {
+      const createdUser = await prisma.user.create({ data })
+
+      if (!createdUser) {
+        throw new Error('Failed to create user')
+      }
+
+      const devName = createdUser.name
+        ? createdUser.name
+        : createdUser.email || 'Developer'
+
+      await sendWelcomeEmail(createdUser.email, devName)
+      await sendDiscordNotificationToModeratorChannel(
+        `User ${devName} has created an account`,
+      )
+
+      return createdUser
+    }),
+  },
   session: {
     strategy: 'jwt',
   },
@@ -93,7 +122,10 @@ export const {
 
       let roleToAdd: Role = 'USER'
       if (account?.provider === 'github') {
-        roleToAdd = Role.SPECIALIST
+        if (profile?.login && user.id) {
+          createGithubDetails(user.id, profile.login as string)
+          roleToAdd = Role.SPECIALIST
+        }
       } else if (account?.provider === 'email') {
         roleToAdd = Role.HUNTER
       }
