@@ -114,7 +114,7 @@ export const {
     },
   },
   events: {
-    signIn({ user, account, profile, isNewUser }) {
+    async signIn({ user, account, profile, isNewUser }) {
       // if user does not exist:
       // - add role SPECIALIST when loged in with github
       // - add role HUNTER when loged in with magic link
@@ -123,7 +123,7 @@ export const {
       let roleToAdd: Role = 'USER'
       if (account?.provider === 'github') {
         if (profile?.login && user.id) {
-          createGithubDetails(user.id, profile.login as string)
+          await createGithubDetails(user.id, profile.login as string)
           roleToAdd = Role.SPECIALIST
         }
       } else if (account?.provider === 'email') {
@@ -132,7 +132,7 @@ export const {
 
       if (roleToAdd) {
         if (user.id) {
-          addUserRole(user.id, roleToAdd)
+          await addUserRole(user.id, roleToAdd)
         } else {
           console.log('NO ID FOUND')
         }
