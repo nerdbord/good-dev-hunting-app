@@ -71,25 +71,32 @@ export const {
     async signIn({ user, account, profile, email, credentials }) {
       // WORKS for existing user with role added
       // if user exists - must login with the same provider
-      if (user.email) {
-        const foundUser = await findUserByEmail(user.email)
 
-        if (foundUser && account) {
-          const userIsHunter = userHasRole(foundUser, Role.HUNTER)
-          if (
-            (account.provider === 'github' && !userIsHunter) ||
-            (account.provider === 'email' && userIsHunter)
-          ) {
-            console.log('ACCESS GRANTED')
-            return true
-          } else {
-            console.log('ACCESS DENIED')
-            return false
-          }
-        }
+      if (!user.email) {
+        throw new Error('Email not provided for sign-in.')
       }
-
-      return true
+      const foundUser = await findUserByEmail(user.email)
+      if (!foundUser) {
+        console.log(`User ${user.email} not found. Registering as new user.`)
+        return true
+      }
+      if (!account) {
+        throw new Error('Account not found')
+      }
+      const userIsHunter = userHasRole(foundUser, Role.HUNTER)
+      if (
+        (account.provider === 'github' && !userIsHunter) ||
+        (account.provider === 'email' && userIsHunter)
+      ) {
+        console.log('ACCESS GRANTED')
+        return true
+      } else {
+        throw new Error(
+          `Error during sign-in: ACCESS DENIED - ${
+            userIsHunter ? 'User with HUNTER role' : 'User without HUNTER role'
+          } is not allowed to log in with ${account.provider} provider.`,
+        )
+      }
     },
   },
   events: {
@@ -97,24 +104,27 @@ export const {
       // if user does not exist:
       // - add role SPECIALIST when loged in with github
       // - add role HUNTER when loged in with magic link
+
       if (!isNewUser) return
+      if (!account) throw new Error('Account not found')
 
       let roleToAdd: Role = 'USER'
-      if (account?.provider === 'github') {
-        if (profile?.login && user.id) {
-          await createGithubDetails(user.id, profile.login as string)
-          roleToAdd = Role.SPECIALIST
+      if (account.provider === 'github') {
+        if (!profile?.login || !user.id) {
+          throw new Error('GitHub profile login or user ID not provided.')
         }
-      } else if (account?.provider === 'email') {
+        await createGithubDetails(user.id, profile.login as string)
+        roleToAdd = Role.SPECIALIST
+      } else if (account.provider === 'email') {
         roleToAdd = Role.HUNTER
+      } else {
+        throw new Error('Provider not recognized')
       }
 
-      if (roleToAdd) {
-        if (user.id) {
-          await addUserRole(user.id, roleToAdd)
-        } else {
-          console.log('NO ID FOUND')
-        }
+      if (user.id) {
+        await addUserRole(user.id, roleToAdd)
+      } else {
+        throw new Error('No user ID found for adding role.')
       }
     },
   },
