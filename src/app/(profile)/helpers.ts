@@ -41,6 +41,7 @@ export const createFiltersObjFromSearchParams = (
   const filters: SearchParamsFilters = {
     [JobOfferFiltersEnum.technology]: [],
     [JobOfferFiltersEnum.seniority]: [],
+    [JobOfferFiltersEnum.specialization]: [],
     [JobOfferFiltersEnum.availability]: [],
     [JobOfferFiltersEnum.location]: [],
     [JobOfferFiltersEnum.search]: [],
