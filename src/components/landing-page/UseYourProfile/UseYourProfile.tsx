@@ -7,12 +7,6 @@ import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
 import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
-  // const session = await auth()
-
-  // const profile = session
-  //   ? await findProfileWithUserInclude(session.user.email)
-  //   : null
-
   const { user } = await getAuthorizedUser()
   const profile = user ? await findProfileWithUserInclude(user.email) : null
 
