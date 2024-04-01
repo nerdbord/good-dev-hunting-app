@@ -22,7 +22,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })
-    router.push(`${AppRoutes.p}/${data.githubUsername}`)
+    router.push(`${AppRoutes.profile}/${data.githubUsername}`)
   }
 
   return (

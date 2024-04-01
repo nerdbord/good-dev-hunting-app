@@ -39,7 +39,7 @@ export const AppHeaderMobileMenu = ({
     router.push(`${pathname}?${newSearchParams}`)
   }
 
-  const isOnProfilesPage = pathname.startsWith(AppRoutes.profiles)
+  const isOnProfilesPage = pathname.startsWith(AppRoutes.profilesList)
 
   return (
     <div className={styles.menuWrapper}>
