@@ -33,7 +33,7 @@ export const AppHeaderMobileSearchFilter = () => {
     router.push(`${pathname}?${newSearchParams}`)
   }
 
-  const isOnProfilesPage = pathname.startsWith(AppRoutes.profiles)
+  const isOnProfilesPage = pathname.startsWith(AppRoutes.profilesList)
 
   if (isMobile) {
     return (

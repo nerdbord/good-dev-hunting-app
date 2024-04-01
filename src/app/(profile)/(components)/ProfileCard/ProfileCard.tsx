@@ -70,7 +70,7 @@ const ProfileCard = ({
     >
       <Link
         onClick={onClick}
-        href={`${AppRoutes.p}/${data.githubUsername}`}
+        href={`${AppRoutes.profile}/${data.githubUsername}`}
         passHref
       >
         <div className={styles.frame}>

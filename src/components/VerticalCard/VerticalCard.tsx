@@ -43,7 +43,7 @@ const VerticalCard = ({
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: githubUsername },
     })
-    router.push(`${AppRoutes.profiles}/${githubUsername}`)
+    router.push(`${AppRoutes.profile}/${githubUsername}`)
   }
 
   const specializationTheme = useMemo(

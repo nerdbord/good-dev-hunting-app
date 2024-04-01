@@ -15,7 +15,7 @@ const GithubOAuth = async () => {
     return redirect(AppRoutes.createProfile)
   }
 
-  redirect(AppRoutes.profiles)
+  redirect(AppRoutes.profilesList)
 }
 
 export default GithubOAuth

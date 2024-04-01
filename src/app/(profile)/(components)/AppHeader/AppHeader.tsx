@@ -29,7 +29,7 @@ const AppHeader = async () => {
         <Container>
           <div className={styles.headerContent}>
             <div className={styles.logoAndGhStarsWrapper}>
-              <Link href={AppRoutes.profiles} className={styles.logo}>
+              <Link href={AppRoutes.profilesList} className={styles.logo}>
                 <img src={logo.src} alt="Logo" />
                 <div className={styles.title}>Good Dev Hunting</div>
               </Link>
@@ -68,7 +68,7 @@ const AppHeader = async () => {
       <Container>
         <div className={styles.headerContent}>
           <div className={styles.logoAndGhStarsWrapper}>
-            <Link href={AppRoutes.profiles} className={styles.logo}>
+            <Link href={AppRoutes.profilesList} className={styles.logo}>
               <img src={logo.src} alt="Logo" />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
