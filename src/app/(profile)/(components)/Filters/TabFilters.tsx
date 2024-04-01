@@ -1,70 +1,82 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
-import { countProfilesForPositions } from '@/app/(profile)/_actions/countProfiles'
+import { filterBySpecialization } from '@/app/(profile)/(components)/ProfileList/filters'
+import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 import {
-  createFiltersObjFromSearchParams,
+  createQueryString,
   jobSpecializationThemes,
 } from '@/app/(profile)/helpers'
 import {
+  JobOfferFiltersEnum,
   type JobSpecialization,
-  type SearchParamsFilters,
 } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { AppRoutes } from '@/utils/routes'
-import { useSearchParams } from 'next/navigation'
-import { cache, useEffect, useMemo, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import styles from './Filters.module.scss'
 
 type TabFiltersProps = {
   specializations: DropdownOption[]
 }
 
-const cachedCountProfiles = cache(countProfilesForPositions)
-
 export const TabFilters = ({ specializations }: TabFiltersProps) => {
+  const { allProfiles, handleFilterProfiles } = useProfiles()
   const searchParams = useSearchParams()
-  const filters: SearchParamsFilters = useMemo(
-    () => createFiltersObjFromSearchParams(searchParams),
-    [searchParams],
-  )
-  const [numberOfProfiles, setNumberOfProfiles] = useState<Record<
-    string,
-    number
-  > | null>(null)
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const countAllProfiles =
-    numberOfProfiles &&
-    Object.values(numberOfProfiles).reduce((acc, curr) => acc + curr, 0)
-
-  useEffect(() => {
-    const countProfiles = async () => {
-      const counts = await cachedCountProfiles(filters)
-
-      setNumberOfProfiles(counts)
+  const handleSetSpecialization =
+    (filterName: JobOfferFiltersEnum, value: string) => () => {
+      const newSearchParams = createQueryString(filterName, value, searchParams)
+      router.replace(`${pathname}?${newSearchParams}`)
     }
 
-    countProfiles()
-  }, [searchParams])
+  const getProfilesBySpecialization = (specialization: JobSpecialization) => {
+    const specProfiles = allProfiles.filter(
+      filterBySpecialization([specialization]),
+    )
+
+    return handleFilterProfiles(specProfiles, {
+      disableSpecFilter: true,
+    })
+  }
+
+  const getAllProfiles = () => {
+    return handleFilterProfiles(allProfiles, {
+      disableSpecFilter: true,
+    })
+  }
+
+  const allProfilesCount = getAllProfiles().length
 
   return (
     <div className={styles.tabs}>
       <SpecializationTab
-        count={countAllProfiles || 0}
+        value={'All'}
+        name={'All'}
+        count={allProfilesCount || 0}
         color={'#13CBAA'}
-        href={`${AppRoutes.profiles}?${searchParams.toString()}`}
+        onClick={handleSetSpecialization(
+          JobOfferFiltersEnum.specialization,
+          '',
+        )}
       >
         All
       </SpecializationTab>
       {specializations.map((spec) => {
-        const color = jobSpecializationThemes[spec.value as JobSpecialization]
+        const specialization = spec.value as JobSpecialization
+        const filteredSpecProfiles = getProfilesBySpecialization(specialization)
+        const color = jobSpecializationThemes[specialization]
         return (
           <SpecializationTab
+            name={spec.name}
             key={spec.value}
-            count={numberOfProfiles?.[spec.value] || 0}
+            value={specialization}
+            count={filteredSpecProfiles.length || 0}
             color={color}
-            href={`${AppRoutes.profiles}/${
-              spec.value
-            }?${searchParams.toString()}`}
+            onClick={handleSetSpecialization(
+              JobOfferFiltersEnum.specialization,
+              spec.value,
+            )}
           >
             {spec.name}
           </SpecializationTab>

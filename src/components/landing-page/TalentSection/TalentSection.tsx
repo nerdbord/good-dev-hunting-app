@@ -1,10 +1,17 @@
+'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import { getRandomProfiles } from '@/backend/profile/profile.service'
+import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import { useMemo } from 'react'
 import styles from './TalentSection.module.scss'
 
-const TalentSection = async () => {
-  const profiles = await getRandomProfiles(6)
+const TalentSection = () => {
+  const { allProfiles } = useProfiles()
+
+  const randomSixProfiles = useMemo(
+    () => allProfiles.sort(() => 0.5 - Math.random()).slice(0, 6),
+    [allProfiles],
+  )
 
   return (
     <section className={styles.wrapper}>
@@ -15,7 +22,7 @@ const TalentSection = async () => {
         </small>
       </div>
       <div className={styles.talents}>
-        {profiles?.map((profile) => (
+        {randomSixProfiles?.map((profile) => (
           <ProfileListItem key={profile.id} data={profile} />
         ))}
       </div>
