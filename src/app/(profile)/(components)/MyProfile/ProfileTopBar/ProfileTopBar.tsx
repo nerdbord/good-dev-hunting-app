@@ -3,7 +3,7 @@ import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButto
 import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
 import ProfileViews from '@/app/(profile)/my-profile/(components)/ProfileViews/ProfileViews'
 import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { PublishingState } from '@prisma/client'
 import styles from './ProfileTopBar.module.scss'
 

@@ -1,12 +1,34 @@
-import { ProfilePayload } from '@/app/(profile)/types'
+import {
+  type ProfilePayload,
+  type SearchParamsFilters,
+} from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import shuffleArray from '@/utils/collections'
-import { Prisma, PublishingState, Role } from '@prisma/client'
+import {
+  Prisma,
+  PublishingState,
+  Role,
+  type EmploymentType,
+} from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
     where: {
+      state: PublishingState.APPROVED,
+    },
+    include: includeObject.include,
+  })
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
+  return serializedProfile
+}
+
+export async function getPublishedProfilesPayloadByPosition(position: string) {
+  const publishedProfiles = await prisma.profile.findMany({
+    where: {
+      position,
       state: PublishingState.APPROVED,
     },
     include: includeObject.include,

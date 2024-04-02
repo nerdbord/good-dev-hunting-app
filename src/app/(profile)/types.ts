@@ -1,6 +1,6 @@
-import { TechnologyModel } from '@/backend/profile/profile.types'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import { EmploymentType, PublishingState } from '@prisma/client'
+import { type TechnologyModel } from '@/backend/profile/profile.types'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { type EmploymentType, type PublishingState } from '@prisma/client'
 
 export interface ProfileModel {
   id: string
@@ -55,7 +55,24 @@ export enum JobSpecialization {
   Crypto = 'Crypto',
   CyberSecurity = 'CyberSecurity',
   SysAdmin = 'SysAdmin',
+  UX_Designer = 'UX_Designer',
+  UX_Researcher = 'UX_Researcher',
+  UX_Writer = 'UX_Writer',
+  UI_Designer = 'UI_Designer',
+  UX_UI_Designer = 'UX_UI_Designer',
+  Product_Designer = 'Product_Designer',
 }
+
+export enum JobOfferFiltersEnum {
+  technology = 'technology',
+  seniority = 'seniority',
+  availability = 'availability',
+  location = 'location',
+  search = 'search',
+  specialization = 'specialization',
+}
+
+export type SearchParamsFilters = Record<JobOfferFiltersEnum, string[]>
 
 export interface ProfileFormValues {
   viewCount: number

@@ -1,9 +1,13 @@
-import { mapEmploymentTypes, mapSeniorityLevel } from '@/app/(profile)/mappers'
-import { ProfileModel } from '@/app/(profile)/types'
+import {
+  mapEmploymentTypes,
+  mapSeniorityLevel,
+  mapSpecializationToTitle,
+} from '@/app/(profile)/mappers'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { countries } from '@/data/countries'
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {
@@ -45,8 +49,8 @@ const UserProfileMain = ({
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
-              {mapSeniorityLevel(userProfile.seniority)} {userProfile.position}{' '}
-              Developer
+              {mapSeniorityLevel(userProfile.seniority)}{' '}
+              {mapSpecializationToTitle(userProfile.position)}
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>

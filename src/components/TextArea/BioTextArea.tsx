@@ -1,5 +1,5 @@
 'use client'
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { type CreateProfileFormValues } from '@/app/(profile)/types'
 import {
   BlockTypeSelect,
   CreateLink,

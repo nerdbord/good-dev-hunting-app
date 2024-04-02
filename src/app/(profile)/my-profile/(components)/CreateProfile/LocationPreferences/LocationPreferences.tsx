@@ -6,7 +6,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { useFormikContext } from 'formik'
 
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { type CreateProfileFormValues } from '@/app/(profile)/types'
 import styles from './LocationPreferences.module.scss'
 
 export enum LocationPreferencesFormKeys {

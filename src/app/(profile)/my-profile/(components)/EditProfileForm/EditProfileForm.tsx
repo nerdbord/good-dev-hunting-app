@@ -3,10 +3,10 @@ import { updateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
 import { saveMyProfile } from '@/app/(profile)/_actions/saveMyProfile'
 import { mapProfileModelToEditProfileFormValues } from '@/app/(profile)/my-profile/(components)/EditProfileForm/mappers'
 import {
-  JobSpecialization,
-  ProfileFormValues,
-  ProfileModel,
-  ProfilePayload,
+  type JobSpecialization,
+  type ProfileFormValues,
+  type ProfileModel,
+  type ProfilePayload,
 } from '@/app/(profile)/types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -14,7 +14,7 @@ import { PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { PropsWithChildren, useMemo } from 'react'
+import { useMemo, type PropsWithChildren } from 'react'
 
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { AppRoutes } from '@/utils/routes'

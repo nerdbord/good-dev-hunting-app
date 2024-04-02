@@ -1,9 +1,12 @@
 import { getTeamProfiles } from '@/backend/profile/profile.service'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
+import { cache } from 'react'
 import styles from './MeetTeam.module.scss'
 
+const cacheGetTeamProfiles = cache(getTeamProfiles)
+
 const MeetTeam = async () => {
-  const teamProfiles = await getTeamProfiles()
+  const teamProfiles = await cacheGetTeamProfiles()
 
   // Calculate midpoint differently to ensure one half has at least 4 items
   let midpoint

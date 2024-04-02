@@ -1,7 +1,12 @@
 'use client'
 
 import Modal from '@/components/Modal/Modal'
-import { PropsWithChildren, createContext, useContext, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+} from 'react'
 
 export type ModalContextType = {
   showModal: (element: React.ReactNode) => void
