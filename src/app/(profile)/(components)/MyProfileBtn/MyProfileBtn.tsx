@@ -7,7 +7,10 @@ const MyProfileBtn = () => {
   const router = useRouter()
   const path = usePathname()
 
-  if (path.includes(AppRoutes.myProfile) || path.includes(AppRoutes.profiles)) {
+  if (
+    path.includes(AppRoutes.myProfile) ||
+    path.includes(AppRoutes.profilesList)
+  ) {
     return null
   }
 

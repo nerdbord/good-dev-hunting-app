@@ -20,13 +20,13 @@ const DashboardHeader = async () => {
   const user = session && (await findUserByEmail(session.user.email))
 
   if (!user?.roles.includes(Role.MODERATOR) || !user)
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
 
   return (
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href={AppRoutes.profiles} className={styles.logo}>
+          <Link href={AppRoutes.profilesList} className={styles.logo}>
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>

@@ -6,6 +6,6 @@ export enum AppRoutes {
   githubOAuth = '/github-oauth',
   moderation = '/moderation',
   moderationProfile = '/moderation/profile',
-  profiles = '/profiles',
-  p = '/p',
+  profilesList = '/profiles',
+  profile = '/p',
 }
