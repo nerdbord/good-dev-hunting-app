@@ -46,6 +46,7 @@ export const {
     Github({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
+      allowDangerousEmailAccountLinking: true,
     }),
     Email({
       sendVerificationRequest,
@@ -68,6 +69,26 @@ export const {
     error: AppRoutes.error,
   },
   callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user }
+    },
+    async session({ session, token, user }) {
+      const foundUser =
+        token && token.email ? await findUserByEmail(token.email) : null
+
+      if (!foundUser) {
+        return session
+      }
+
+      session.user.id = foundUser.id
+      session.user.name = foundUser.name || foundUser.profile?.fullName || ''
+      session.user.image = (
+        foundUser.avatarUrl ? foundUser.avatarUrl : foundUser.image
+      ) as string
+      // session.user.roles = foundUser.roles // TODO: type error, but works fine
+
+      return session
+    },
     async signIn({ user, account, profile, email, credentials }) {
       // WORKS for existing user with role added
       // if user exists - must login with the same provider
