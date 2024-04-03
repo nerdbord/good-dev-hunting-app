@@ -20,9 +20,13 @@ const LoginHeader = async () => {
             <GithubStarsButton />
           </div>
 
-          {!userIsHunter && (
-            <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
-          )}
+          <>
+            {userIsHunter ? (
+              <p>HUNTER: {user?.email}</p>
+            ) : (
+              <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+            )}
+          </>
         </div>
       </Container>
     </header>
