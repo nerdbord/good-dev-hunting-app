@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './TraitTemplate.module.scss'
 
 interface TraitTemplateProps {
@@ -7,11 +7,7 @@ interface TraitTemplateProps {
   description: string
 }
 
-const TraitTemplate: FC<TraitTemplateProps> = ({
-  icon,
-  title,
-  description,
-}) => {
+const TraitTemplate = ({ icon, title, description }: TraitTemplateProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.icon}>{icon}</div>

@@ -1,4 +1,4 @@
-import { UserWithRelations } from './user.types'
+import { type UserWithRelations } from './user.types'
 
 export const serializeUserToUserPayload = (data: UserWithRelations) => {
   return {

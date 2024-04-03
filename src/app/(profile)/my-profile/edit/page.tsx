@@ -10,7 +10,7 @@ const EditProfilePage = async () => {
   const session = await getServerSession(authOptions)
 
   if (!session?.user) {
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
   }
 
   const profile = await getProfileByUserEmail(session.user.email)

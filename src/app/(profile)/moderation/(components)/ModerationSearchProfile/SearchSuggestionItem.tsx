@@ -1,4 +1,4 @@
-﻿import { ProfileModel } from '@/app/(profile)/types'
+﻿import { type ProfileModel } from '@/app/(profile)/types'
 import Image from 'next/image'
 
 import styles from './SearchSuggestionItem.module.scss'

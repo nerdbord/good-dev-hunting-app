@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, Role } from '@prisma/client'
+import { type Prisma, type Role } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
-import { CreateUserPayload } from './user.types'
+import { type CreateUserPayload } from './user.types'
 
 export async function getUserById(id: string) {
   const userById = await prisma.user.findFirst({
