@@ -1,4 +1,3 @@
-import React, { FC } from 'react'
 import style from './Step.module.scss'
 
 interface StepProps {
@@ -7,7 +6,7 @@ interface StepProps {
   description2: string
 }
 
-const Step: FC<StepProps> = ({ title, description1, description2 }) => {
+const Step = ({ title, description1, description2 }: StepProps) => {
   return (
     <div className={style.stepBox}>
       <span className={style.title}>{title}</span>

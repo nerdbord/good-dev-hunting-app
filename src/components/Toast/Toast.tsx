@@ -1,8 +1,8 @@
 'use client'
-import { useEffect } from 'react'
+import { ToastStatus, type ToastType } from '@/contexts/ToastContext'
 import classNames from 'classnames/bind'
+import { useEffect } from 'react'
 import styles from './toast.module.scss'
-import { ToastStatus, ToastType } from '@/contexts/ToastContext'
 
 const cx = classNames.bind(styles)
 

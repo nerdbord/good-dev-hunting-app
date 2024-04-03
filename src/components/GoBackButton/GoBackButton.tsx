@@ -1,13 +1,20 @@
 'use client'
-import React, { PropsWithChildren } from 'react'
-import styles from './GoBackButton.module.scss'
 import { useRouter } from 'next/navigation'
+import { type PropsWithChildren } from 'react'
+import styles from './GoBackButton.module.scss'
 
-export const GoBackButton = ({ children }: PropsWithChildren<object>) => {
+interface GoBackButtonProps {
+  href?: string
+}
+
+export const GoBackButton = ({
+  children,
+  href,
+}: PropsWithChildren<GoBackButtonProps>) => {
   const router = useRouter()
 
   const handleClick = () => {
-    router.back()
+    href ? router.push(href) : router.back()
   }
 
   return (

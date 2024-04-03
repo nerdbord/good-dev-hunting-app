@@ -1,15 +1,12 @@
 import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
-import { ProfileCardWrapper } from '@/app/(profile)/(components)/ProfileCard/ProfileCardWrapper/ProfileCardWrapper'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import { getRandomProfiles } from '@/backend/profile/profile.service'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import { HeroProfilesSection } from '@/components/landing-page/Hero/HeroProfilesSection'
 import styles from './Hero.module.scss'
 
 const Hero = async () => {
   const { user, userIsHunter } = await getAuthorizedUser()
-  const [first, second, third] = await getRandomProfiles(3)
-
   return (
     <section id="hero" className={styles.wrapper}>
       <div className={styles.left}>
@@ -30,25 +27,7 @@ const Hero = async () => {
         </div>
       </div>
 
-      <div className={styles.right}>
-        <div className={styles.section}>
-          {first && (
-            <div className={styles.frame1}>
-              <ProfileCardWrapper profile={first} />
-            </div>
-          )}
-          {second && (
-            <div className={styles.frame2}>
-              <ProfileCardWrapper profile={second} />
-            </div>
-          )}
-          {third && (
-            <div className={styles.frame3}>
-              <ProfileCardWrapper profile={third} />
-            </div>
-          )}
-        </div>
-      </div>
+      <HeroProfilesSection />
     </section>
   )
 }

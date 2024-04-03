@@ -1,11 +1,17 @@
 'use client'
 import classNames from 'classnames/bind'
-import React, { PropsWithChildren } from 'react'
+import React, { type PropsWithChildren } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  variant: 'primary' | 'secondary' | 'tertiary' | 'action' | 'logout'
+  variant:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'action'
+    | 'logout'
+    | 'standard'
   type?: 'button' | 'submit'
   disabled?: boolean
   loading?: boolean

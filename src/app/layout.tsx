@@ -1,4 +1,5 @@
 import AuthProvider from '@/app/(auth)/(components)/AuthProvider'
+import { ProfilesProvider } from '@/app/(profile)/(components)/ProfilesProvider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
@@ -10,7 +11,7 @@ import './globals.scss'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['100', '400', '500'],
   variable: '--font-ibm',
 })
 
@@ -41,7 +42,9 @@ export default function RootLayout({
         >
           <AuthProvider>
             <ToastContextProvider>
-              <ModalProvider>{children}</ModalProvider>
+              <ProfilesProvider>
+                <ModalProvider>{children}</ModalProvider>
+              </ProfilesProvider>
             </ToastContextProvider>
           </AuthProvider>
         </PlausibleProvider>

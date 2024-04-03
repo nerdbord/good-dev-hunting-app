@@ -1,39 +1,54 @@
 'use client'
+import { createFiltersObjFromSearchParams } from '@/app/(profile)/helpers'
+import { type SearchParamsFilters } from '@/app/(profile)/types'
 import classNames from 'classnames/bind'
-import React, { PropsWithChildren } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useMemo, type PropsWithChildren } from 'react'
 import styles from './SpecializationTab.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface SpecializationTabProps {
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
-  isPressed: boolean
+  name: string
+  value: string
   count?: number
   color: string
+  onClick?: () => void
 }
 
 export const SpecializationTab = ({
-  onClick,
-  children,
-  isPressed,
   count,
   color,
+  onClick,
+  name,
+  value,
 }: PropsWithChildren<SpecializationTabProps>) => {
-  const buttonStyle = isPressed ? { borderColor: color, color: color } : {}
+  const searchParams = useSearchParams()
+  const filters: SearchParamsFilters = useMemo(
+    () => createFiltersObjFromSearchParams(searchParams),
+    [searchParams],
+  )
+
+  const isActive = filters?.specialization?.length
+    ? filters.specialization[0] === value
+    : !filters?.specialization?.length && value === 'All'
+
+  const buttonStyle = isActive ? { borderColor: color, color: color } : {}
   const getSpecializationTabClasses = cx({
     [styles.default]: true,
   })
 
   return (
-    <div
+    <a
       className={getSpecializationTabClasses}
-      onClick={onClick}
       style={buttonStyle}
+      onClick={onClick}
+      role={'button'}
     >
       <div className={styles.content}>
-        <span>{children}</span>
+        <span>{name}</span>
         <p>{count !== undefined ? `(${count})` : ''}</p>
       </div>
-    </div>
+    </a>
   )
 }

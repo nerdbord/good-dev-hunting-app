@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
-import { Role } from '@prisma/client'
+import { type Role } from '@prisma/client'
 
 export async function requireUserRoles(roles: Role[]) {
   const session = await auth()

@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
-import { Role, User } from '@prisma/client'
+import { Role, type User } from '@prisma/client'
 
 interface UserAuthed {
   id: string

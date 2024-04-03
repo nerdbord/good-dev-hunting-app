@@ -13,12 +13,12 @@ export const revalidate = 0
 const MyProfilePage = async () => {
   const { user, userIsHunter } = await getAuthorizedUser()
   if (!user || userIsHunter) {
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
   }
 
   const profile = await getProfileByUserEmail(user.email)
   if (!profile) {
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
   }
 
   const isConnectedToNerdbord = !!user?.nerdbordUserId
