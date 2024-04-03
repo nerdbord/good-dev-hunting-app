@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prismaClient'
-import { Prisma } from '@prisma/client'
+import { type Prisma } from '@prisma/client'
 
 export async function updateGithubDetailsById(
   id: string,

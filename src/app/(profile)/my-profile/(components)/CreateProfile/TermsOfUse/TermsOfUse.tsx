@@ -1,5 +1,4 @@
-// import Link from "next/link"
-import { CreateProfileFormValues } from '@/app/(profile)/types'
+import { type CreateProfileFormValues } from '@/app/(profile)/types'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
@@ -9,6 +8,7 @@ import styles from './TermsOfUse.module.scss'
 export default function TermsOfUse() {
   const { values, errors, touched, handleChange, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>Terms of use</div>

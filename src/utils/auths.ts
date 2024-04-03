@@ -1,6 +1,6 @@
 import { authOptions } from '@/app/(auth)/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
-import { Role } from '@prisma/client'
+import { type Role } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 
 export async function requireUserRoles(roles: Role[]) {

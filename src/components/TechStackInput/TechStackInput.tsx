@@ -1,14 +1,15 @@
-import { ProfileFormValues } from '@/app/(profile)/types'
+import { type ProfileFormValues } from '@/app/(profile)/types'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
-import { initialFilterOption } from '@/contexts/FilterContext'
+
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import technologies from '@/data/technologies'
 import classNames from 'classnames/bind'
 import { useFormikContext } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
 import Tooltip from '../Tooltip/Tooltip'
 import styles from './TechStackInput.module.scss'
+
 const cx = classNames.bind(styles)
 
 interface TechStackInputProps {
@@ -29,6 +30,8 @@ export const mapTechnologiesToDropdownOptions = (technologies: string[]) => {
   }))
 }
 
+const initialTechStack: DropdownOption = { name: '', value: '' }
+
 export const TechStackInput: React.FC<TechStackInputProps> = ({
   chips,
   onTechSelect,
@@ -45,8 +48,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
   const chipsContainerRef = useRef(null)
   const maxChips = 16
 
-  const [inputValue, setInputValue] =
-    useState<DropdownOption>(initialFilterOption)
+  const [inputValue, setInputValue] = useState<DropdownOption>(initialTechStack)
   const [filteredSuggestions, setFilteredSuggestions] = useState<
     DropdownOption[]
   >([])
@@ -67,7 +69,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
         )
       ) {
         onTechSelect(inputValue)
-        setInputValue(initialFilterOption)
+        setInputValue(initialTechStack)
       }
     }
   }
@@ -75,7 +77,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
   const handleSuggestionClick = (suggestion: DropdownOption) => {
     if (chips.length < maxChips) {
       onTechSelect(suggestion)
-      setInputValue(initialFilterOption)
+      setInputValue(initialTechStack)
       inputRef.current?.focus()
     }
   }
