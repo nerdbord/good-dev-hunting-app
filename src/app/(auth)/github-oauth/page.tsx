@@ -1,5 +1,5 @@
 ﻿import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-import { getUserById } from '@/backend/user/user.service'
+import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
 import { Role } from '@prisma/client'
 import { redirect } from 'next/navigation'
@@ -9,7 +9,7 @@ const GithubOAuth = async () => {
   const session = await auth()
   if (!session) redirect(AppRoutes.signIn)
 
-  const foundUser = await getUserById(session.user.id)
+  const foundUser = await findUserByEmail(session.user.email)
   if (!foundUser) redirect(AppRoutes.signIn)
 
   const userIsHunter = foundUser.roles.includes(Role.HUNTER)
