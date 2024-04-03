@@ -17,10 +17,12 @@ const LandingHeader = async () => {
       <header className={styles.wrapper}>
         <Container>
           <div className={styles.headerContent}>
-            <Logo />
+            <div className={styles.logoAndGhStarsWrapper}>
+              <Logo />
+              <GithubStarsButton />
+            </div>
 
             <div className={styles.frameButtons}>
-              <GithubStarsButton />
               {!userIsHunter && (
                 <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
               )}
@@ -35,9 +37,12 @@ const LandingHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Logo />
-          <div className={styles.frameButtons}>
+          <div className={styles.logoAndGhStarsWrapper}>
+            <Logo />
             <GithubStarsButton />
+          </div>
+
+          <div className={styles.frameButtons}>
             <div className={styles.buttonBoxDesktop}>
               <FindTalentsBtn variant="tertiary" />
               <LoginBtnsWrapper />

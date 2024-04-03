@@ -1,6 +1,6 @@
 'use client'
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -15,9 +15,9 @@ import { usePlausible } from 'next-plausible'
 import Link from 'next/link'
 import styles from './ContactForm.module.scss'
 import {
-  ContactFormValuesWithChecks,
   initialValues,
   validationSchema,
+  type ContactFormValuesWithChecks,
 } from './schema'
 
 export default function ContactForm({

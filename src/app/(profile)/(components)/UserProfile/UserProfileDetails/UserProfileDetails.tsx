@@ -1,4 +1,4 @@
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import styles from './UserProfileDetails.module.scss'
 

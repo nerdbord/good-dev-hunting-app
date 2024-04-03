@@ -1,6 +1,6 @@
 import { JobSpecialization } from '@/app/(profile)/types'
 import { SeniorityLevel } from '@/backend/profile/profile.types'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { EmploymentType } from '@prisma/client'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
@@ -70,8 +70,67 @@ export const mapSpecialization = (specialization: JobSpecialization) => {
       return 'SysAdmin'
     case JobSpecialization.PM:
       return 'Project Manager'
+    case JobSpecialization.UX_Designer:
+      return 'UX Designer'
+    case JobSpecialization.UX_Researcher:
+      return 'UX Researcher'
+    case JobSpecialization.UX_Writer:
+      return 'UX Writer'
+    case JobSpecialization.UI_Designer:
+      return 'UI Designer'
+    case JobSpecialization.UX_UI_Designer:
+      return 'UX/UI Designer'
+    case JobSpecialization.Product_Designer:
+      return 'Product Designer'
     default:
       return specialization
+  }
+}
+
+export const mapSpecializationToTitle = (specialization: JobSpecialization) => {
+  switch (specialization) {
+    case JobSpecialization.Frontend:
+      return 'Frontend Developer'
+    case JobSpecialization.Backend:
+      return 'Backend Developer'
+    case JobSpecialization.Fullstack:
+      return 'Fullstack Developer'
+    case JobSpecialization.Mobile:
+      return 'Mobile Developer'
+    case JobSpecialization.DevOps:
+      return 'DevOps Engineer'
+    case JobSpecialization.QA:
+      return 'QA Engineer'
+    case JobSpecialization.DataScience:
+      return 'Data Scientist'
+    case JobSpecialization.GameDev:
+      return 'Game Developer'
+    case JobSpecialization.VR_AR:
+      return 'VR/AR Developer'
+    case JobSpecialization.UX_UI:
+      return 'UX/UI Designer'
+    case JobSpecialization.Crypto:
+      return 'Blockchain Developer'
+    case JobSpecialization.CyberSecurity:
+      return 'Cybersecurity Specialist'
+    case JobSpecialization.SysAdmin:
+      return 'System Administrator'
+    case JobSpecialization.PM:
+      return 'Project Manager'
+    case JobSpecialization.UX_Designer:
+      return 'UX Designer'
+    case JobSpecialization.UX_Researcher:
+      return 'UX Researcher'
+    case JobSpecialization.UX_Writer:
+      return 'UX Writer'
+    case JobSpecialization.UI_Designer:
+      return 'UI Designer'
+    case JobSpecialization.UX_UI_Designer:
+      return 'UX/UI Designer'
+    case JobSpecialization.Product_Designer:
+      return 'Product Designer'
+    default:
+      return `${specialization} Specialist`
   }
 }
 

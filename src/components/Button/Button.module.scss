@@ -64,6 +64,26 @@
   background: transparent;
 }
 
+.standard {
+  display: flex;
+  height: 52px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--Dark-02, #0f1217);
+  border: 1px solid #2a2f35;
+  color: white;
+  border-radius: 2px;
+  outline: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  transition: background-color 300ms;
+  white-space: nowrap;
+}
+
 .action {
   display: flex;
   min-width: 129px;

@@ -20,13 +20,13 @@ export default async function ModerationUserProfile({
   const user = profile && (await findUserByEmail(profile.userEmail))
 
   if (!profile || !user || !requireUserRoles([Role.MODERATOR]))
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
 
   return (
     <div className={styles.wrapper}>
       <ModerationActionHeader userProfile={profile} userRoles={user.roles} />
       <UserProfileMain userProfile={profile}>
-        <UserProfileHeader userProfile={profile} />
+        <UserProfileHeader withBackButton userProfile={profile} />
       </UserProfileMain>
       <UserProfileDetails userProfile={profile} />
     </div>

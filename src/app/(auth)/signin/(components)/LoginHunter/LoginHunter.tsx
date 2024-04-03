@@ -24,7 +24,7 @@ const LoginHunter = () => {
       const result = await signIn('email', {
         email: email.trim().toLowerCase(),
         redirect: false,
-        callbackUrl: AppRoutes.profiles,
+        callbackUrl: AppRoutes.profilesList,
       })
       if (result?.error) {
         setError(

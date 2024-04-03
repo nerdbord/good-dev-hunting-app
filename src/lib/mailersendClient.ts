@@ -1,5 +1,5 @@
-import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
-import { APIResponse } from 'mailersend/lib/services/request.service'
+import { EmailParams, MailerSend, Sender, type Recipient } from 'mailersend'
+import { type APIResponse } from 'mailersend/lib/services/request.service'
 
 export enum MailTemplateId {
   welcomeMail = '0r83ql3njn04zw1j',

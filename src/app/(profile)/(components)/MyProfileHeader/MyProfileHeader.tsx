@@ -11,7 +11,7 @@ const MyProfileHeader = async () => {
   return (
     <div>
       <header className={styles.wrapper}>
-        <Link href={AppRoutes.profiles} className={styles.logo}>
+        <Link href={AppRoutes.profilesList} className={styles.logo}>
           <img src={logo.src} alt="Logo" />
           <div className={styles.title}>Good Dev Hunting</div>
         </Link>

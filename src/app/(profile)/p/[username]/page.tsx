@@ -49,7 +49,7 @@ const UserProfilePage = async ({
   const session = await auth()
 
   if (!selectedProfile) {
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
   }
 
   try {

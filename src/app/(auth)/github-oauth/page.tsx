@@ -16,7 +16,7 @@ const GithubOAuth = async () => {
   const profile = await getProfileByUserEmail(session.user.email)
   if (!profile && !userIsHunter) redirect(AppRoutes.createProfile)
 
-  redirect(AppRoutes.profiles)
+  redirect(AppRoutes.profilesList)
 }
 
 export default GithubOAuth

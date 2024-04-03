@@ -34,7 +34,8 @@
   width: 210px;
   border: 1px solid #3d434b;
   border-radius: 2px;
-  padding: 25px;
+  min-height: 40px;
+  padding: 0 15px 20px 15px;
   font-weight: 400;
   font-size: 14px;
   z-index: 1000;
@@ -57,16 +58,32 @@
     border-right: none;
     border-bottom: none;
     overflow-y: auto;
-    max-height: 300px;
+    height: 300px;
   }
 }
 
 .titleContainer {
   display: none;
+
   @include mobile {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.titleContainerSearch {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    margin-top: 50px;
   }
 }
 
@@ -84,8 +101,13 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-
-  .dropdownInput input {
+  &:first-of-type {
+    margin-top: 20px;
+    @include mobile {
+      margin-top: 0px;
+    }
+  }
+input {
     width: 16px;
     height: 16px;
     border: 1px solid #e2eaf1;

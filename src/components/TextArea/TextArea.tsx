@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState, type ChangeEvent } from 'react'
 import styles from './TextArea.module.scss'
 
 interface TextAreaProps {

@@ -1,5 +1,5 @@
-import { ProfileModel } from '@/app/(profile)/types'
-import { Role } from '@prisma/client'
+import { type ProfileModel } from '@/app/(profile)/types'
+import { type Role } from '@prisma/client'
 
 export type UserProfileHeaderType = {
   userProfile: ProfileModel

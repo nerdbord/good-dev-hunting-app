@@ -11,12 +11,12 @@ import styles from './DashboardHeader.module.scss'
 const DashboardHeader = async () => {
   const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
 
-  if (!userIsModerator || !user) redirect(AppRoutes.profiles)
+  if (!userIsModerator || !user) redirect(AppRoutes.profilesList)
   return (
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href={AppRoutes.profiles} className={styles.logo}>
+          <Link href={AppRoutes.profilesList} className={styles.logo}>
             <img src={logo.src} alt="Logo" />
             <div className={styles.title}>Good Dev Hunting</div>
           </Link>

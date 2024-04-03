@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './Box.module.scss'
 
 const Box = ({ children }: { children: ReactNode }) => {

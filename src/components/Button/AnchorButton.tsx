@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 import Link from 'next/link'
 import styles from './AnchorButton.module.scss'

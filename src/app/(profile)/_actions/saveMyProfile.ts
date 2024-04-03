@@ -1,6 +1,6 @@
 'use server'
 import { authorizeUser } from '@/app/(auth)/helpers'
-import { ProfilePayload } from '@/app/(profile)/types'
+import { type ProfilePayload } from '@/app/(profile)/types'
 import {
   findProfileWithUserInclude,
   hasProfileValuesChanged,
@@ -8,7 +8,7 @@ import {
 } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
-import { Prisma, PublishingState } from '@prisma/client'
+import { PublishingState, type Prisma } from '@prisma/client'
 
 export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
   await authorizeUser()

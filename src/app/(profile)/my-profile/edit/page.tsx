@@ -9,7 +9,7 @@ const EditProfilePage = async () => {
   const { user, userIsHunter } = await getAuthorizedUser()
 
   if (!user || userIsHunter) {
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
   }
 
   const profile = await getProfileByUserEmail(user.email)
