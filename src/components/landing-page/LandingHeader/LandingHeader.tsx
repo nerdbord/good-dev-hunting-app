@@ -1,6 +1,8 @@
+import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
+import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/(auth)/helpers'
-import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
+import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
@@ -10,7 +12,7 @@ import Logo from '@/components/Logo/Logo'
 import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
-  const { user, userIsHunter } = await getAuthorizedUser()
+  const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
 
   if (user) {
     return (
@@ -23,8 +25,23 @@ const LandingHeader = async () => {
             </div>
 
             <div className={styles.frameButtons}>
-              {!userIsHunter && (
-                <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+              {userIsModerator && <ModerationBtn />}
+              {!userIsHunter && user.profile ? (
+                <GithubAcc />
+              ) : (
+                <>
+                  {userIsHunter ? (
+                    <>
+                      <p>HUNTER: {user.email}</p>
+                      <LogOutBtn />
+                    </>
+                  ) : (
+                    <>
+                      <CreateProfileBtn data-testid="create-profile-button" />
+                      <LogOutBtn />
+                    </>
+                  )}
+                </>
               )}
             </div>
           </div>

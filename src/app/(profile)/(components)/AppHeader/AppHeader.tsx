@@ -1,14 +1,15 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import { getAuthorizedUser } from '@/app/(auth)/helpers'
 
-import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
+import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
 import styles from './AppHeader.module.scss'
@@ -38,9 +39,16 @@ const AppHeader = async () => {
                 <GithubAcc />
               ) : (
                 <>
-                  <GithubAcc />
-                  {!userIsHunter && (
-                    <CreateProfileBtn data-testid="create-profile-button" />
+                  {userIsHunter ? (
+                    <>
+                      <p>HUNTER: {user.email}</p>
+                      <LogOutBtn />
+                    </>
+                  ) : (
+                    <>
+                      <CreateProfileBtn data-testid="create-profile-button" />
+                      <LogOutBtn />
+                    </>
                   )}
                 </>
               )}
@@ -79,7 +87,7 @@ const AppHeader = async () => {
             <AppHeaderMobileSearchFilter />
           </div>
           <div className={styles.frameButtons}>
-            <GithubLoginButton />
+            <LoginBtnsWrapper />
             <CreateProfileBtn />
           </div>
         </div>
