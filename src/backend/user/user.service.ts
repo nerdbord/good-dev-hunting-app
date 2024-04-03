@@ -86,7 +86,18 @@ export async function createGithubDetails(
   userId: string,
   githubUsername: string,
 ) {
-  await prisma.gitHubDetails.create({
+  const existingDetails = await prisma.gitHubDetails.findUnique({
+    where: {
+      userId: userId,
+    },
+  })
+
+  if (existingDetails) {
+    // GitHub details already exist for this user, so we don't need to create again
+    return
+  }
+
+  return await prisma.gitHubDetails.create({
     data: {
       userId: userId,
       username: githubUsername,
