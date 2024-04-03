@@ -10,4 +10,5 @@ export enum AppRoutes {
   profile = '/p',
   signIn = '/signin',
   error = '/error',
+  login = '/login',
 }
