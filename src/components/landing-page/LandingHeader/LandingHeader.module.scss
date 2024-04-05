@@ -32,6 +32,10 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-3;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .buttonBoxDesktop {
@@ -88,21 +92,30 @@
   }
 }
 
-.starsMobile {
-  display: none;
-
-  @include mobile {
-    display: flex;
-  }
-}
-
 .logoAndGhStarsWrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 14px;
 
-  > span {
+  > div,
+  span {
     margin-top: 5px;
+  }
+}
+
+.hideOnMobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.hideOnDesktop {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    // align-items: center;
+    // gap: 8px;
   }
 }
