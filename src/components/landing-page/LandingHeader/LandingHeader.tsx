@@ -1,5 +1,5 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
-import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
+import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
@@ -7,12 +7,14 @@ import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProf
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import Logo from '@/components/Logo/Logo'
 import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
   const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
+  const userHasProfile = !!user?.profile
 
   if (user) {
     return (
@@ -21,7 +23,9 @@ const LandingHeader = async () => {
           <div className={styles.headerContent}>
             <div className={styles.logoAndGhStarsWrapper}>
               <Logo />
-              <GithubStarsButton />
+              <div className={styles.hideOnMobile}>
+                <GithubStarsButton />
+              </div>
             </div>
 
             <div className={styles.frameButtons}>
@@ -44,6 +48,13 @@ const LandingHeader = async () => {
                 </>
               )}
             </div>
+            <div className={styles.hideOnDesktop}>
+              <HamburgerMenuMobileBtn
+                userHasProfile={userHasProfile}
+                userIsModerator={userIsModerator}
+                userIsHunter={userIsHunter}
+              />
+            </div>
           </div>
         </Container>
       </header>
@@ -59,15 +70,13 @@ const LandingHeader = async () => {
             <GithubStarsButton />
           </div>
 
+          <div className={styles.hideOnDesktop}>
+            <LoginBtn variant={'tertiary'}>Login</LoginBtn>
+          </div>
           <div className={styles.frameButtons}>
-            <div className={styles.buttonBoxDesktop}>
-              <FindTalentsBtn variant="tertiary" />
-              <LoginBtnsWrapper />
-              <CreateProfileBtn />
-            </div>
-            <div className={styles.buttonBoxMobile}>
-              <GithubLoginButton />
-            </div>
+            <FindTalentsBtn variant="tertiary" />
+            <LoginBtnsWrapper />
+            <CreateProfileBtn />
           </div>
         </div>
       </Container>

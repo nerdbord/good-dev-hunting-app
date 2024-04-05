@@ -57,6 +57,7 @@ const AppHeader = async () => {
               <HamburgerMenuMobileBtn
                 userHasProfile={userHasProfile}
                 userIsModerator={userIsModerator}
+                userIsHunter={userIsHunter}
               />
               <AppHeaderMobileSearchFilter />
             </div>

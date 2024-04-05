@@ -1,3 +1,4 @@
+import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import styles from './LoginHeader.module.scss'
 
 // components
@@ -17,16 +18,25 @@ const LoginHeader = async () => {
         <div className={styles.headerContent}>
           <div className={styles.brandingContainer}>
             <Logo />
-            <GithubStarsButton />
+            <div className={styles.hideOnMobile}>
+              <GithubStarsButton />
+            </div>
           </div>
 
-          <>
-            {userIsHunter ? (
-              <p>HUNTER: {user?.email}</p>
-            ) : (
-              <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
-            )}
-          </>
+          <div className={styles.frameButtons}>
+            <div className={styles.buttonBoxDesktop}>
+              <>
+                {userIsHunter ? (
+                  <p>HUNTER: {user?.email}</p>
+                ) : (
+                  <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+                )}
+              </>
+            </div>
+            <div className={styles.buttonBoxMobile}>
+              <HamburgerMenuMobileBtn />
+            </div>
+          </div>
         </div>
       </Container>
     </header>
