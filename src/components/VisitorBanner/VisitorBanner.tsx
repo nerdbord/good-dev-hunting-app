@@ -1,6 +1,5 @@
 import { auth } from '@/auth'
 import styles from './VisitorBanner.module.scss'
-
 const VisitorBanner = async () => {
   const session = await auth()
 
