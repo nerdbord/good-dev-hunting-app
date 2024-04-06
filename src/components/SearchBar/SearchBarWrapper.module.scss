@@ -1,41 +1,41 @@
 .searchWrapper {
   display: flex;
-  width: 380px;
-  height: 52px;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-  margin-left: 160px;
-  @include mobile {
-    position: fixed;
-    top: 10px;
-    z-index: 5;
-    right: 15px;
-    width: 52px;
-  }
-}
-
-.inputContainer {
+  max-width: 380px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  position: relative;
+  height: 52px;
+  border: #2a2f35 1px solid;
+  border-radius: 2px;
+  padding: 12px 14px 12px 20px;
+  background-color: #0F1217;
+  @include mobile {
+    justify-content: center;
+    width: 52px;
+    padding: 0;
+    &:focus-within {
+      width: 100%;
+      max-width: none;
+      justify-content: end;
+      padding: 12px 14px 12px 20px;
+
+      & input {
+        display: block;
+      }
+    }
+  }
 }
 
 .searchInput {
   width: 100%;
-  border: #2a2f35 1px solid;
-  border-radius: 2px;
-  padding: 12px 24px 12px 20px;
-  background-color: #161a1f;
+  height: 100%;
+  border: none;
+  background-color: #0F1217;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
   color: #e2eaf1;
-  background-repeat: no-repeat;
-  background-position: right 20px center;
   &::placeholder {
     color: #69717b;
     @include mobile {
@@ -44,54 +44,17 @@
   }
   &:focus {
     outline: none;
-    @include mobile {
-      left: 50%;
-      transform: translateX(-50%);
-      right: 15px;
-      width: calc(100% - 30px);
-      margin: 0 auto;
-    }
   }
   @include mobile {
-    position: fixed;
-    top: 10px;
-    z-index: 5;
-    right: 15px;
-    width: 52px;
+    display: none;
+    font-size: 16px;
   }
 }
 
-.suggestionsBox {
-  position: absolute;
-  top: 51px;
-  left: 0;
+.searchBtn {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 340px;
-  padding: 8px;
-  background-color: #161a1f;
-  box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
-  z-index: 10;
-}
-
-.iconBox {
-  width: 14px;
-  height: 14px;
-}
-
-.clearButton,
-.searchIcon {
-  position: absolute;
-  right: 10px; 
-  top: 50%;
-  transform: translateY(-50%);
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
-  @include mobile {
-    right: 15px;
-    z-index: 10;
-  }
 }

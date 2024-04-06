@@ -22,7 +22,7 @@
   @include mobile {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 }
@@ -32,6 +32,10 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-3;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .buttonBoxDesktop {
@@ -88,18 +92,30 @@
   }
 }
 
-.starsMobile {
+.logoAndGhStarsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+
+  > div,
+  span {
+    margin-top: 5px;
+  }
+}
+
+.hideOnMobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.hideOnDesktop {
   display: none;
 
   @include mobile {
     display: flex;
-  }
-}
-
-.logoAndGhStarsWrapper {
-  margin-right: $spacing-2;
-  @include mobile {
-    display: flex;
-    align-items: center;
+    // align-items: center;
+    // gap: 8px;
   }
 }

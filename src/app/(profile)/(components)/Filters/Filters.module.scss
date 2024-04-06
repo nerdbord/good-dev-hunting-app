@@ -1,65 +1,44 @@
 .mainContainer {
   background: #0f1217;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 30px;
-  padding: 23px 0 10px;
-  @include mobile {
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 8px;
-    align-items: flex-start;
-    padding-bottom: 10px;
+  margin-top: 23px;
 
-    @include custom-scrollbar;
+  @include mobile {
+    gap: 8px;
   }
 }
 
-.tabsWrapper {
-  display: inline-flex;
-  gap: 54px;
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 10px;
+  
+  @include mobile {
+    overflow-x: auto;
+    white-space: nowrap;
+
+    @include custom-scrollbar;
+  }
+  
 }
 
 .features {
   display: flex;
   gap: 11px;
-  @include mobile {
-    flex-wrap: nowrap;
-    align-items: center;
-  }
-}
-
-.devType {
-  display: flex;
-  gap: 16px;
-  @include mobile {
-    align-items: center;
-  }
-}
-
-.title {
-  color: var(--light-03, #69717b);
-  font-size: 32px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 40px;
 }
 
 .tabs {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: 10px;
+  width: 100%;
   overflow-y: auto;
   padding-bottom: 10px;
 
   @include custom-scrollbar;
 }
-
-.tabsContainer {
-  width: 100%;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-  }

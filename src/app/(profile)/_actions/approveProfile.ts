@@ -1,5 +1,5 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/auth'
+import { authorizeUser } from '@/app/(auth)/helpers'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import {
   findGithubUsernameByProfileId,
@@ -9,7 +9,7 @@ import { findUserByEmail } from '@/backend/user/user.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { requireUserRoles } from '@/utils/auths'
 import { withSentry } from '@/utils/errHandling'
-import { Prisma, Role } from '@prisma/client'
+import { Role, type Prisma } from '@prisma/client'
 
 export const approveProfile = withSentry(
   async (profileId: string, payload: Prisma.ProfileUpdateInput) => {

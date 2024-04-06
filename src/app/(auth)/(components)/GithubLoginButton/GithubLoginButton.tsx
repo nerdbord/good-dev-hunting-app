@@ -6,7 +6,11 @@ import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import styles from './GithubLoginButton.module.scss'
 
-export const GithubLoginButton = () => {
+interface GithubLoginButtonProps {
+  label?: string
+}
+
+export const GithubLoginButton = (props: GithubLoginButtonProps) => {
   const [isCalled, setIsCalled] = useState(false)
   return (
     <Button
@@ -19,7 +23,7 @@ export const GithubLoginButton = () => {
       }}
       variant={'secondary'}
     >
-      Login
+      {props.label ? props.label : 'Login'}
       <div className={styles.iconBox}>
         <GithubIcon />
       </div>

@@ -3,18 +3,23 @@ import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { Button } from '@/components/Button/Button'
 import MobileGitHubStarsBtn from '@/components/Button/MobileGitHubStarsBtn'
+import LoginBtn from '@/components/LoginBtn/LoginBtn'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import GithubAcc from '../GithubAcc/GithubAcc'
-import { GithubLoginButton } from '../GithubLoginButton/GithubLoginButton'
+import LogOutBtn from '../LogOutBtn/LogOutBtn'
 import styles from './HamburgerMenuMobileBtn.module.scss'
 
 const HamburgerMenuMobileBtn = ({
-  userProfile,
+  userHasProfile,
   userIsModerator,
+  userIsHunter,
 }: {
-  userProfile?: boolean | null | undefined
+  userHasProfile?: boolean | null | undefined
   userIsModerator?: boolean | null | undefined
+  userIsHunter?: boolean | null | undefined
 }) => {
+  const { data: session } = useSession()
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const handleOpenMenu = () => {
@@ -34,7 +39,7 @@ const HamburgerMenuMobileBtn = ({
         <>
           <div className={styles.overlay} onClick={handleCloseMenu}></div>
           <div className={styles.hamburger}>
-            {userProfile ? (
+            {userHasProfile ? (
               <>
                 <div className={styles.wrapper}>
                   <GithubAcc />
@@ -45,8 +50,22 @@ const HamburgerMenuMobileBtn = ({
             ) : (
               <>
                 <div className={styles.wrapper}>
-                  <CreateProfileBtn />
-                  <GithubLoginButton />
+                  {userIsHunter ? (
+                    <>
+                      <p>HUNTER: {session?.user.email}</p>
+                      <LogOutBtn />
+                    </>
+                  ) : (
+                    <>
+                      <CreateProfileBtn data-testid="create-profile-button" />
+                      {session?.user && <LogOutBtn />}
+                    </>
+                  )}
+                  {userIsModerator && <ModerationBtn />}
+
+                  {!session?.user && (
+                    <LoginBtn variant={'secondary'}>Join as hunter</LoginBtn>
+                  )}
                 </div>
 
                 <MobileGitHubStarsBtn />

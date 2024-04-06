@@ -1,11 +1,10 @@
-import { authOptions } from '@/app/(auth)/auth'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
+import { auth } from '@/auth'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { countProfileView } from '../../_actions/countProfileView'
 import styles from './page.module.scss'
@@ -46,11 +45,14 @@ const UserProfilePage = async ({
 }: {
   params: { username: string }
 }) => {
-  const selectedProfile = await getProfileByGithubUsername(params.username)
-  const session = await getServerSession(authOptions)
+  const session = await auth()
+  if (!session?.user) {
+    return redirect(AppRoutes.signIn)
+  }
 
+  const selectedProfile = await getProfileByGithubUsername(params.username)
   if (!selectedProfile) {
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
   }
 
   try {

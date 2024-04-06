@@ -1,57 +1,66 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
-import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
+
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
-import { authOptions } from '@/app/(auth)/auth'
+import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
+import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
-import { findUserByEmail } from '@/backend/user/user.service'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
+import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
-import { Role } from '@prisma/client'
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import styles from './AppHeader.module.scss'
 
 const AppHeader = async () => {
-  const session = await getServerSession(authOptions)
+  const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
+  const userHasProfile = !!user?.profile
 
-  const user = session ? await findUserByEmail(session.user.email) : null
-  const userIsModerator = user?.roles.includes(Role.MODERATOR)
-
-  if (session) {
+  if (user) {
     return (
       <header className={styles.wrapper}>
         <Container>
           <div className={styles.headerContent}>
-            <Link href={AppRoutes.profiles} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <div className={styles.title}>Good Dev Hunting</div>
-            </Link>
+            <div className={styles.logoAndGhStarsWrapper}>
+              <Link href={AppRoutes.profilesList} className={styles.logo}>
+                <img src={logo.src} alt="Logo" />
+                <div className={styles.title}>Good Dev Hunting</div>
+              </Link>
+              <div className={styles.hideOnMobile}>
+                <GithubStarsButton />
+              </div>
+            </div>
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {user?.profile ? (
-                <>
-                  <div className={styles.hideOnMobile}>
-                    <GithubStarsButton />
-                  </div>
-                  {/* add role checking for hunter/user and display component*/}
-                  <GithubAcc />
-                </>
+              {!userIsHunter && user.profile ? (
+                <GithubAcc />
+
               ) : (
                 <>
-                  <GithubStarsButton />
-                  <CreateProfileBtn data-testid="create-profile-button" />
+                  {userIsHunter ? (
+                    <>
+                      <p>HUNTER: {user.email}</p>
+                      <LogOutBtn />
+                    </>
+                  ) : (
+                    <>
+                      <CreateProfileBtn data-testid="create-profile-button" />
+                      <LogOutBtn />
+                    </>
+                  )}
                 </>
               )}
             </div>
             <div className={styles.hideOnDesktop}>
               <HamburgerMenuMobileBtn
-                userProfile={!!user?.profile}
+                userHasProfile={userHasProfile}
                 userIsModerator={userIsModerator}
+                userIsHunter={userIsHunter}
               />
+              <AppHeaderMobileSearchFilter />
             </div>
           </div>
         </Container>
@@ -63,19 +72,24 @@ const AppHeader = async () => {
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
-          <Link href={AppRoutes.profiles} className={styles.logo}>
-            <img src={logo.src} alt="Logo" />
-            <div className={styles.title}>Good Dev Hunting</div>
-          </Link>
+          <div className={styles.logoAndGhStarsWrapper}>
+            <Link href={AppRoutes.profilesList} className={styles.logo}>
+              <img src={logo.src} alt="Logo" />
+              <div className={styles.title}>Good Dev Hunting</div>
+            </Link>
+            <div className={styles.hideOnMobile}>
+              <GithubStarsButton />
+            </div>
+          </div>
           <div className={styles.hideOnDesktop}>
             <HamburgerMenuMobileBtn
-              userProfile={!!user?.profile}
+              userHasProfile={userHasProfile}
               userIsModerator={userIsModerator}
             />
+            <AppHeaderMobileSearchFilter />
           </div>
-
           <div className={styles.frameButtons}>
-            <GithubLoginButton />
+            <LoginBtnsWrapper />
             <CreateProfileBtn />
           </div>
         </div>
