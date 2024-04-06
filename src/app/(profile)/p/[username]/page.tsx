@@ -45,9 +45,12 @@ const UserProfilePage = async ({
 }: {
   params: { username: string }
 }) => {
-  const selectedProfile = await getProfileByGithubUsername(params.username)
   const session = await auth()
+  if (!session?.user) {
+    return redirect(AppRoutes.signIn)
+  }
 
+  const selectedProfile = await getProfileByGithubUsername(params.username)
   if (!selectedProfile) {
     redirect(AppRoutes.profilesList)
   }
