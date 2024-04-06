@@ -1,18 +1,9 @@
-'use client'
 import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
 import Link from 'next/link'
 import styles from './LandingFooter.module.scss'
 
 const LandingFooter = () => {
-  const handleContact = () => {
-    const link = document.createElement('a')
-    link.href = 'mailto:team@devhunting.co'
-    link.target = '_blank'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
   return (
     <section id="LandingFooter" className={styles.footer}>
       <Container>
@@ -20,12 +11,13 @@ const LandingFooter = () => {
           <Logo />
           <div className={styles.contact}>
             <span className={styles.textDark}>Good Dev Hunting</span>
-            <span
+            <Link
+              href="mailto:team@devhunting.co"
+              target="_blank"
               className={`${styles.textLight} ${styles.pointer}`}
-              onClick={handleContact}
             >
               Contact
-            </span>
+            </Link>
             <Link
               target={'_blank'}
               href="https://discord.gg/gqjHV3t5pF"

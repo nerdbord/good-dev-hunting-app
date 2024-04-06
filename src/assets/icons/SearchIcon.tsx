@@ -7,14 +7,10 @@ const SearchIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <path d="M14.4121 14.4121L20 20" stroke="#E2EAF1" strokeLinecap="round" />
       <path
-        d="M14.4121 14.4121L20 20"
-        stroke="#E2EAF1"
-        stroke-linecap="round"
-      />
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10 16C13.3137 16 16 13.3137 16 10C16 6.68629 13.3137 4 10 4C6.68629 4 4 6.68629 4 10C4 13.3137 6.68629 16 10 16Z"
         stroke="#E2EAF1"
       />

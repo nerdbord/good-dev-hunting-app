@@ -1,21 +1,22 @@
-﻿import { authOptions } from '@/app/(auth)/auth'
-import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+﻿import { getProfileByUserEmail } from '@/backend/profile/profile.service'
+import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
+import { Role } from '@prisma/client'
 import { redirect } from 'next/navigation'
+import { auth } from '../../../auth'
 
 const GithubOAuth = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
+  if (!session) redirect(AppRoutes.signIn)
 
-  const profile = session
-    ? await getProfileByUserEmail(session.user.email)
-    : null
+  const foundUser = await findUserByEmail(session.user.email)
+  if (!foundUser) redirect(AppRoutes.signIn)
 
-  if (!profile) {
-    return redirect(AppRoutes.createProfile)
-  }
+  const userIsHunter = foundUser.roles.includes(Role.HUNTER)
+  const profile = await getProfileByUserEmail(session.user.email)
+  if (!profile && !userIsHunter) redirect(AppRoutes.createProfile)
 
-  redirect(AppRoutes.profiles)
+  redirect(AppRoutes.profilesList)
 }
 
 export default GithubOAuth

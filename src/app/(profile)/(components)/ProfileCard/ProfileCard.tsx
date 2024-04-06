@@ -5,7 +5,7 @@ import {
   mapSpecializationToTitle,
 } from '@/app/(profile)/mappers'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
@@ -18,10 +18,32 @@ interface ProfileCardProps {
   onClick?: (e: React.MouseEvent) => void
   data: ProfileModel
   withStateStatus?: boolean
-  searchTerm?: string
+  searchTerm?: string | null
 }
 
 const cx = classNames.bind(styles)
+
+const highlightText = (text: string, searchText?: string | null) => {
+  if (!searchText || !searchText.trim()) {
+    return text
+  }
+  const regex = new RegExp(`(${searchText})`, 'gi')
+  const parts = text.split(regex)
+
+  return (
+    <>
+      {parts.map((part, idx) =>
+        part.toLowerCase() === searchText.toLowerCase() ? (
+          part
+        ) : (
+          <span key={idx} className={styles.rest}>
+            {part}
+          </span>
+        ),
+      )}
+    </>
+  )
+}
 
 const ProfileCard = ({
   data,
@@ -29,30 +51,6 @@ const ProfileCard = ({
   withStateStatus,
   searchTerm,
 }: ProfileCardProps) => {
-  const highlightText = (text: string, searchText?: string) => {
-    if (!searchText || !searchText.trim()) {
-      return <span className={styles.rest}>{text}</span>
-    }
-    const regex = new RegExp(`(${searchText})`, 'gi')
-    const parts = text.split(regex)
-
-    return (
-      <span>
-        {parts.map((part, index) =>
-          part.toLowerCase() === searchText.toLowerCase() ? (
-            <span key={index} className={styles.highlighted}>
-              {part}
-            </span>
-          ) : (
-            <span key={index} className={styles.rest}>
-              {part}
-            </span>
-          ),
-        )}
-      </span>
-    )
-  }
-
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -72,7 +70,7 @@ const ProfileCard = ({
     >
       <Link
         onClick={onClick}
-        href={`${AppRoutes.profiles}/${data.githubUsername}`}
+        href={`${AppRoutes.profile}/${data.githubUsername}`}
         passHref
       >
         <div className={styles.frame}>

@@ -1,12 +1,12 @@
 ﻿'use server'
 
-import { authorizeUser } from '@/app/(auth)/auth'
+import { authorizeUser } from '@/app/(auth)/helpers'
 import {
   findUserByEmail,
   getGitHubDetails,
   updateUserNerdbordId,
 } from '@/backend/user/user.service'
-import { NerdbordUser } from '@/lib/nerdbord/types'
+import { type NerdbordUser } from '@/lib/nerdbord/types'
 import { withSentry } from '@/utils/errHandling'
 
 export const connectToNerdbord = withSentry(async () => {

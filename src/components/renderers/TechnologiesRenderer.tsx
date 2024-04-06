@@ -1,6 +1,7 @@
 'use client'
 import { jobSpecializationThemes } from '@/app/(profile)/helpers'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useMemo } from 'react'
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 }
 
 export default function TechnologiesRenderer({ data, classes }: Props) {
+  const isMobile = useMediaQuery()
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -16,8 +18,7 @@ export default function TechnologiesRenderer({ data, classes }: Props) {
     [data.position],
   )
   const renderTechnologies = () => {
-    const sliceCount =
-      typeof window !== 'undefined' && window.innerWidth <= 768 ? 2 : 3
+    const sliceCount = isMobile ? 2 : 3
 
     if (data.techStack.length <= sliceCount) {
       return data.techStack.map((tech, index) => (

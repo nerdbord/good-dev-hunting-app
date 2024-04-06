@@ -4,20 +4,20 @@ import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
 interface FindTalentsBtnProps {
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'tertiary'
 }
 
 const FindTalentsBtn = (props: FindTalentsBtnProps) => {
   const router = useRouter()
   const pathname = usePathname()
 
-  if (pathname === AppRoutes.profiles) {
+  if (pathname === AppRoutes.profilesList) {
     return null
   }
 
   return (
     <Button
-      onClick={() => router.push(AppRoutes.profiles)}
+      onClick={() => router.push(AppRoutes.profilesList)}
       variant={props.variant}
     >
       Find talents

@@ -1,12 +1,34 @@
-import { ProfilePayload } from '@/app/(profile)/types'
+import {
+  type ProfilePayload,
+  type SearchParamsFilters,
+} from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import shuffleArray from '@/utils/collections'
-import { Prisma, PublishingState, Role } from '@prisma/client'
+import {
+  Prisma,
+  PublishingState,
+  Role,
+  type EmploymentType,
+} from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
   const publishedProfiles = await prisma.profile.findMany({
     where: {
+      state: PublishingState.APPROVED,
+    },
+    include: includeObject.include,
+  })
+  const serializedProfile = publishedProfiles.map(
+    serializeProfileToProfileModel,
+  )
+  return serializedProfile
+}
+
+export async function getPublishedProfilesPayloadByPosition(position: string) {
+  const publishedProfiles = await prisma.profile.findMany({
+    where: {
+      position,
       state: PublishingState.APPROVED,
     },
     include: includeObject.include,
@@ -346,4 +368,40 @@ export async function incrementProfileViewCountById(id: string) {
     },
     data: { viewCount: { increment: 1 } },
   })
+}
+
+export async function countProfilesForPositionsByFilters(
+  filters: SearchParamsFilters,
+) {
+  const { seniority, location, technology, availability, search } = filters
+
+  const query: Prisma.ProfileWhereInput = {
+    state: PublishingState.APPROVED,
+    ...(seniority.length > 0 && { seniority: { in: seniority } }),
+    ...(location.length > 0 && { country: { name: { in: location } } }),
+    ...(technology.length > 0 && {
+      techStack: { some: { name: { in: technology } } },
+    }),
+    ...(availability.length > 0 && {
+      employmentTypes: { hasSome: availability as EmploymentType[] },
+    }),
+    ...(search.length > 0 && {
+      fullName: { contains: search.toString(), mode: 'insensitive' },
+    }),
+  }
+
+  const positions = await getUniqueSpecializations()
+  const counts: Record<string, number> = {}
+
+  for (const position of positions) {
+    const count = await prisma.profile.count({
+      where: {
+        ...query,
+        position,
+      },
+    })
+    counts[position] = count
+  }
+
+  return counts
 }

@@ -1,7 +1,7 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/auth'
 
-import { ProfilePayload } from '@/app/(profile)/types'
+import { authorizeUser } from '@/app/(auth)/helpers'
+import { type ProfilePayload } from '@/app/(profile)/types'
 import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
 import {
   createUserProfile,

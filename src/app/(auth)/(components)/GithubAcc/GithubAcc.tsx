@@ -24,7 +24,7 @@ const GithubAcc = () => {
     )
   }
 
-  return pathname !== AppRoutes.home ? (
+  return (
     <Link href={AppRoutes.myProfile}>
       <div className={styles.github}>
         <div className={styles.githubAcc}>
@@ -33,7 +33,7 @@ const GithubAcc = () => {
         </div>
       </div>
     </Link>
-  ) : null
+  )
 }
 
 export default GithubAcc

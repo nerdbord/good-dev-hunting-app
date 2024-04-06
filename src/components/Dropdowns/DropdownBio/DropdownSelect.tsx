@@ -1,6 +1,6 @@
 'use client'
-import { ProfileFormValues } from '@/app/(profile)/types'
-import { DropdownOption } from '@/components/Dropdowns/DropdownFilter/DropdownFilter'
+import { type ProfileFormValues } from '@/app/(profile)/types'
+import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { useFormikContext } from 'formik'
 import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'

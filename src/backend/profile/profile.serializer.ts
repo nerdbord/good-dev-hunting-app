@@ -1,5 +1,8 @@
-import { JobSpecialization, ProfileModel } from '@/app/(profile)/types'
-import { ProfileWithRelations } from '@/backend/profile/profile.types'
+import {
+  type JobSpecialization,
+  type ProfileModel,
+} from '@/app/(profile)/types'
+import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 
 export const serializeProfileToProfileModel = (
   data: ProfileWithRelations,
@@ -28,7 +31,7 @@ export const serializeProfileToProfileModel = (
       name: tech.name,
     })),
     userId: data.userId,
-    avatarUrl: data.user.avatarUrl,
+    avatarUrl: data.user.avatarUrl || data.user.image,
     githubUsername: data.user.githubDetails?.username || '',
     userEmail: data.user.email,
     viewCount: data.viewCount,

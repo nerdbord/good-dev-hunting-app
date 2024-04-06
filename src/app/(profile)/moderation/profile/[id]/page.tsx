@@ -20,7 +20,7 @@ export default async function ModerationUserProfile({
   const user = profile && (await findUserByEmail(profile.userEmail))
 
   if (!profile || !user || !requireUserRoles([Role.MODERATOR]))
-    redirect(AppRoutes.profiles)
+    redirect(AppRoutes.profilesList)
 
   return (
     <div className={styles.wrapper}>

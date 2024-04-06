@@ -2,7 +2,7 @@
 
 import { jobSpecializationThemes } from '@/app/(profile)/helpers'
 import { mapSeniorityLevel, mapSpecialization } from '@/app/(profile)/mappers'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
@@ -43,7 +43,7 @@ const VerticalCard = ({
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: githubUsername },
     })
-    router.push(`${AppRoutes.profiles}/${githubUsername}`)
+    router.push(`${AppRoutes.profile}/${githubUsername}`)
   }
 
   const specializationTheme = useMemo(

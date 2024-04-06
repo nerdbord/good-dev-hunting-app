@@ -1,5 +1,6 @@
 .primary,
 .secondary,
+.tertiary,
 .logout {
   display: flex;
   height: 42px;
@@ -10,7 +11,6 @@
   background-color: #7d54f1;
   border-radius: 2px;
   border: none;
-  outline: none;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -59,29 +59,14 @@
 }
 
 .tertiary {
-  display: none;
-  transition: background-color 300ms;
-  @include mobile {
-    display: block;
-    position: static;
-    height: 42px;
-    width: auto;
-    margin-right: 30px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    color: #7d54f1;
-    background: transparent;
-    white-space: nowrap;
-  }
+  border: none;
+  color: #7d54f1;
+  background: transparent;
 }
 
 .standard {
   display: flex;
-  height: 42px;
+  height: 52px;
   padding: 12px 24px;
   justify-content: center;
   align-items: center;

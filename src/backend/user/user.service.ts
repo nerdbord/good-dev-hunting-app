@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, Role } from '@prisma/client'
+import { type Prisma, type Role } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
-import { CreateUserPayload } from './user.types'
 
 export async function getUserById(id: string) {
   const userById = await prisma.user.findFirst({
@@ -83,23 +82,27 @@ export async function syncUserWithGithub(credentials: {
   return null
 }
 
-export async function createUser(payload: CreateUserPayload) {
-  const createdUser = await prisma.user.create({
-    data: {
-      email: payload.email,
-      avatarUrl: payload.image,
-      githubDetails: {
-        create: {
-          username: payload.githubUsername,
-        },
-      },
-    },
-    include: {
-      githubDetails: true,
+export async function createGithubDetails(
+  userId: string,
+  githubUsername: string,
+) {
+  const existingDetails = await prisma.gitHubDetails.findUnique({
+    where: {
+      userId: userId,
     },
   })
 
-  return createdUser
+  if (existingDetails) {
+    // GitHub details already exist for this user, so we don't need to create again
+    return
+  }
+
+  return await prisma.gitHubDetails.create({
+    data: {
+      userId: userId,
+      username: githubUsername,
+    },
+  })
 }
 
 export async function updateUserData(

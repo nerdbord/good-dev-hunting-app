@@ -3,11 +3,11 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/(profile)/mappers'
-import { ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/types'
 import { Avatar } from '@/components/Avatar/Avatar'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { countries } from '@/data/countries'
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {

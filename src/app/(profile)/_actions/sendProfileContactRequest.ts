@@ -1,5 +1,5 @@
 'use server'
-import { ContactFormRequest } from '@/app/(profile)/(components)/ContactForm/schema'
+import { type ContactFormRequest } from '@/app/(profile)/(components)/ContactForm/schema'
 import {
   createContactRequest,
   deleteContactRequest,
@@ -9,7 +9,7 @@ import { sendContactRequest } from '@/backend/mailing/mailing.service'
 import { getProfileById } from '@/backend/profile/profile.service'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
-import { ContactRequest } from '@prisma/client'
+import { type ContactRequest } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
 export const sendProfileContactRequest = withSentry(

@@ -14,21 +14,17 @@
 }
 
 .headerContent {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   @include mobile {
-    display: flex;
-    // flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     gap: 30px;
   }
 }
 
 .logo {
-  width: 187px;
   height: 26px;
   display: flex;
   gap: 8px;
@@ -45,7 +41,7 @@
   justify-content: center;
   align-items: center;
   @include mobile {
-    letter-spacing: -1.08px;
+    display: none;
   }
 }
 
@@ -66,7 +62,6 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
-  max-width: 420px;
 }
 
 .mobileButton {
@@ -97,7 +92,13 @@
 
 .logoAndGhStarsWrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+
+  > div {
+    margin-top: 5px;
+  }
 }
 
 .hideOnMobile {
@@ -112,6 +113,8 @@
   @include mobile {
     display: flex;
     align-items: center;
+    gap: 8px;
+
   }
 }
 
@@ -119,4 +122,5 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 14px;
 }
