@@ -37,6 +37,7 @@ const AppHeader = async () => {
               {userIsModerator && <ModerationBtn />}
               {!userIsHunter && user.profile ? (
                 <GithubAcc />
+
               ) : (
                 <>
                   {userIsHunter ? (
