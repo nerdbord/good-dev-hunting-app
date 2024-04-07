@@ -1,3 +1,4 @@
+import { type Profile, type Role } from '@prisma/client'
 import 'next-auth'
 
 declare module 'next-auth' {
@@ -10,6 +11,9 @@ declare module 'next-auth' {
       email: string
       image: string
       name: string
+      roles: Role[]
+      profile: Profile | null
+      nerdbordUserId: string
     }
   }
 }
@@ -21,5 +25,8 @@ declare module 'next-auth/jwt' {
     email?: string | null
     picture?: string | null
     sub?: string
+    roles: Role[]
+    profile?: Profile | null
+    nerdbordUserId?: string
   } | null
 }
