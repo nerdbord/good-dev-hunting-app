@@ -85,7 +85,8 @@ export const {
       session.user.image = (
         foundUser.avatarUrl ? foundUser.avatarUrl : foundUser.image
       ) as string
-      // session.user.roles = foundUser.roles // TODO: type error, but works fine
+      session.user.roles = foundUser.roles
+      session.user.profile = foundUser.profile
 
       return session
     },
