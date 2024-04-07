@@ -1,11 +1,8 @@
 'use client'
-import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
-import { usePathname } from 'next/navigation'
 import styles from './HunterAcc.module.scss'
 
 const HunterAcc = () => {
-  const pathname = usePathname()
   const { data: session } = useSession()
 
   if (!session) {
@@ -18,14 +15,14 @@ const HunterAcc = () => {
     )
   }
 
-  return pathname !== AppRoutes.home ? (
+  return (
     <div className={styles.hunter}>
       <div className={styles.hunterRole}>HUNTER</div>
       <div className={styles.hunterAcc}>
-        <p className={styles.hunterAccEmail}>{session?.user.email}</p>
+        <p className={styles.hunterAccEmail}>{session.user.email}</p>
       </div>
     </div>
-  ) : null
+  )
 }
 
 export default HunterAcc

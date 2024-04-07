@@ -1,5 +1,6 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import HunterAcc from '@/app/(auth)/(components)/HunterAcc/HunterAcc'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
@@ -36,7 +37,7 @@ const LandingHeader = async () => {
                 <>
                   {userIsHunter ? (
                     <>
-                      <p>HUNTER: {user.email}</p>
+                      <HunterAcc />
                       <LogOutBtn />
                     </>
                   ) : (

@@ -7,6 +7,7 @@ import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import GithubAcc from '../GithubAcc/GithubAcc'
+import HunterAcc from '../HunterAcc/HunterAcc'
 import LogOutBtn from '../LogOutBtn/LogOutBtn'
 import styles from './HamburgerMenuMobileBtn.module.scss'
 
@@ -52,7 +53,7 @@ const HamburgerMenuMobileBtn = ({
                 <div className={styles.wrapper}>
                   {userIsHunter ? (
                     <>
-                      <p>HUNTER: {session?.user.email}</p>
+                      <HunterAcc />
                       <LogOutBtn />
                     </>
                   ) : (
