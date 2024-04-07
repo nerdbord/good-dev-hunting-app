@@ -2,18 +2,6 @@ import { auth } from '@/auth'
 import { findUserByEmail } from '@/backend/user/user.service'
 import { Role, type User } from '@prisma/client'
 
-interface UserAuthed {
-  id: string
-  name: string
-  email: string
-  image: string
-}
-
-interface GitHubProfileAuthed {
-  login: string
-  avatar_url: string
-}
-
 export const authorizeUser = async () => {
   const session = await auth()
 
