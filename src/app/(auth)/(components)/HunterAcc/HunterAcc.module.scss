@@ -26,6 +26,9 @@
   gap: 10px;
   background-color: #0f1217;
   padding: 8px 24px 8px 16px;
+  @include mobile {
+    background-color: #171b21;
+  }
 }
 
 .hunterRole {

@@ -1,8 +1,8 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
-
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import HunterAcc from '@/app/(auth)/(components)/HunterAcc/HunterAcc'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
@@ -37,12 +37,11 @@ const AppHeader = async () => {
               {userIsModerator && <ModerationBtn />}
               {!userIsHunter && user.profile ? (
                 <GithubAcc />
-
               ) : (
                 <>
                   {userIsHunter ? (
                     <>
-                      <p>HUNTER: {user.email}</p>
+                      <HunterAcc />
                       <LogOutBtn />
                     </>
                   ) : (
