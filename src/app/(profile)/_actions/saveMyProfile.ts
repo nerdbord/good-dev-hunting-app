@@ -81,4 +81,6 @@ export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
       `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
     )
   }
+
+  return updatedProfile
 })

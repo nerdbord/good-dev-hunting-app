@@ -60,7 +60,7 @@ interface EditProfileFormWrapperProps {
 const EditProfileForm = ({
   profile,
 }: PropsWithChildren<EditProfileFormWrapperProps>) => {
-  const { data: session, update } = useSession()
+  const { data: session, update: updateSession } = useSession()
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
@@ -108,8 +108,8 @@ const EditProfileForm = ({
         ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
-      await saveMyProfile(payload)
-      update({ ...session.user, name: payload.fullName })
+      const savedProfile = await saveMyProfile(payload)
+      savedProfile && updateSession({ ...session.user, name: payload.fullName })
 
       router.push(AppRoutes.myProfile)
     })
