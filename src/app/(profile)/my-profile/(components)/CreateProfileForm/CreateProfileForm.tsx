@@ -75,7 +75,7 @@ export const validationSchema = Yup.object().shape({
 })
 
 const CreateProfileForm = () => {
-  const { data: session } = useSession()
+  const { data: session, update } = useSession()
   const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()

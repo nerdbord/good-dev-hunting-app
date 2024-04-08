@@ -69,10 +69,11 @@ export const {
     error: AppRoutes.error,
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
+      console.log(token)
       return { ...token, ...user }
     },
-    async session({ session, token, user }) {
+    async session({ session, token, user, trigger }) {
       const foundUser =
         token && token.email ? await findUserByEmail(token.email) : null
 
@@ -81,12 +82,14 @@ export const {
       }
 
       session.user.id = foundUser.id
-      session.user.name = foundUser.name || foundUser.profile?.fullName || ''
+      session.user.name = foundUser.profile?.fullName || ''
       session.user.image = (
         foundUser.avatarUrl ? foundUser.avatarUrl : foundUser.image
       ) as string
       session.user.roles = foundUser.roles
-      session.user.profile = foundUser.profile
+      session.user.profileId = foundUser.profile && foundUser.profile.id
+      session.user.githubUsername =
+        foundUser.githubDetails && foundUser.githubDetails.username
 
       return session
     },

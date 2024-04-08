@@ -21,7 +21,7 @@ const MyProfilePage = async () => {
     redirect(AppRoutes.profilesList)
   }
 
-  const isConnectedToNerdbord = !!user?.nerdbordUserId
+  const isConnectedToNerdbord = false // connected to nerdbord feature is currently dissabled
 
   return (
     <div className={styles.wrapper}>

@@ -15,8 +15,8 @@ import Link from 'next/link'
 import styles from './AppHeader.module.scss'
 
 const AppHeader = async () => {
-  const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
-  const userHasProfile = !!user?.profile
+  const { user, userIsHunter, userIsModerator, userHasProfile } =
+    await getAuthorizedUser()
 
   if (user) {
     return (
@@ -35,7 +35,8 @@ const AppHeader = async () => {
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {!userIsHunter && user.profile ? (
+
+              {!userIsHunter && userHasProfile ? (
                 <GithubAcc />
               ) : (
                 <>
