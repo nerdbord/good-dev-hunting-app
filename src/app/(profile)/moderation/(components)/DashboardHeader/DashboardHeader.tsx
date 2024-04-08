@@ -9,7 +9,8 @@ import { redirect } from 'next/navigation'
 import styles from './DashboardHeader.module.scss'
 
 const DashboardHeader = async () => {
-  const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
+  const { user, userIsHunter, userIsModerator, userHasProfile } =
+    await getAuthorizedUser()
 
   if (!userIsModerator || !user) redirect(AppRoutes.profilesList)
   return (
@@ -22,7 +23,7 @@ const DashboardHeader = async () => {
           </Link>
           <div className={styles.frameButtons}>
             {!userIsHunter && (
-              <>{user.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+              <>{userHasProfile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
             )}
           </div>
         </div>

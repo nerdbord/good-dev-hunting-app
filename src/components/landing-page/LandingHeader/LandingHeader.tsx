@@ -14,8 +14,8 @@ import Logo from '@/components/Logo/Logo'
 import styles from './LandingHeader.module.scss'
 
 const LandingHeader = async () => {
-  const { user, userIsHunter, userIsModerator } = await getAuthorizedUser()
-  const userHasProfile = !!user?.profile
+  const { user, userIsHunter, userIsModerator, userHasProfile } =
+    await getAuthorizedUser()
 
   if (user) {
     return (
@@ -31,7 +31,7 @@ const LandingHeader = async () => {
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {!userIsHunter && user.profile ? (
+              {!userIsHunter && userHasProfile ? (
                 <GithubAcc />
               ) : (
                 <>

@@ -10,7 +10,7 @@ import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
 
 const LoginHeader = async () => {
-  const { user, userIsHunter } = await getAuthorizedUser()
+  const { user, userIsHunter, userHasProfile } = await getAuthorizedUser()
 
   return (
     <header className={styles.wrapper}>
@@ -29,7 +29,9 @@ const LoginHeader = async () => {
                 {userIsHunter ? (
                   <p>HUNTER: {user?.email}</p>
                 ) : (
-                  <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+                  <>
+                    {userHasProfile ? <MyProfileBtn /> : <CreateProfileBtn />}
+                  </>
                 )}
               </>
             </div>

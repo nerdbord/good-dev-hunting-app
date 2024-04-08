@@ -6,7 +6,7 @@ import { HeroProfilesSection } from '@/components/landing-page/Hero/HeroProfiles
 import styles from './Hero.module.scss'
 
 const Hero = async () => {
-  const { user, userIsHunter } = await getAuthorizedUser()
+  const { user, userIsHunter, userHasProfile } = await getAuthorizedUser()
   return (
     <section id="hero" className={styles.wrapper}>
       <div className={styles.left}>
@@ -21,7 +21,7 @@ const Hero = async () => {
         </div>
         <div className={styles.buttons}>
           {!userIsHunter && (
-            <>{user?.profile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
+            <>{userHasProfile ? <MyProfileBtn /> : <CreateProfileBtn />}</>
           )}
           <FindTalentsBtn variant={'secondary'} />
         </div>
