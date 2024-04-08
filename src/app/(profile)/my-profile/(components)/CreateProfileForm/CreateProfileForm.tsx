@@ -75,7 +75,7 @@ export const validationSchema = Yup.object().shape({
 })
 
 const CreateProfileForm = () => {
-  const { data: session, update } = useSession()
+  const { data: session, update: updateSession } = useSession()
   const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
@@ -125,7 +125,9 @@ const CreateProfileForm = () => {
 
         uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
 
-        await createProfile(payload)
+        const createdProfile = await createProfile(payload)
+        createdProfile &&
+          updateSession({ ...session.user, name: payload.fullName })
         router.push(AppRoutes.myProfile)
       })
     } catch (error) {
