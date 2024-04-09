@@ -70,7 +70,6 @@ export const {
   },
   callbacks: {
     async jwt({ token, user, trigger }) {
-      console.log(token)
       return { ...token, ...user }
     },
     async session({ session, token, user, trigger }) {
