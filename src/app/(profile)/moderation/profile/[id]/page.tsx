@@ -1,11 +1,10 @@
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import ModerationActionHeader from '@/app/(profile)/moderation/(components)/ModerationActionHeader/ModerationActionHeader'
 import { getProfileByUserId } from '@/backend/profile/profile.service'
-import { requireUserRoles } from '@/utils/auths'
 import { AppRoutes } from '@/utils/routes'
-import { Role } from '@prisma/client'
 import { redirect } from 'next/navigation'
 
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import { findUserByEmail } from '@/backend/user/user.service'
@@ -16,10 +15,13 @@ export default async function ModerationUserProfile({
 }: {
   params: { id: string }
 }) {
+  const { userIsModerator: authorizedUserIsModerator } =
+    await getAuthorizedUser()
+
   const profile = await getProfileByUserId(params.id)
   const user = profile && (await findUserByEmail(profile.userEmail))
 
-  if (!profile || !user || !requireUserRoles([Role.MODERATOR]))
+  if (!profile || !user || !authorizedUserIsModerator)
     redirect(AppRoutes.profilesList)
 
   return (

@@ -1,9 +1,8 @@
-import { auth } from '@/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import styles from './VisitorBanner.module.scss'
 const VisitorBanner = async () => {
-  const session = await auth()
-
-  if (!session?.user) {
+  const { user } = await getAuthorizedUser()
+  if (!user) {
     return (
       <div className={styles.wrapper}>
         <span>
