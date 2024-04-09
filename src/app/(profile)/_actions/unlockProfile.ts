@@ -1,5 +1,5 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import {
   findProfileById,
   updateProfileById,
@@ -7,7 +7,9 @@ import {
 import { withSentry } from '@/utils/errHandling'
 
 export const unlockProfile = withSentry(async (profileId: string) => {
-  await authorizeUser()
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
+
   const foundProfile = await findProfileById(profileId)
 
   if (!foundProfile) {

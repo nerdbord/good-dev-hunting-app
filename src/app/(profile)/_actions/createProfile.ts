@@ -1,24 +1,18 @@
 'use server'
 
-import { authorizeUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import { type ProfilePayload } from '@/app/(profile)/types'
 import { serializeProfileToProfileModel } from '@/backend/profile/profile.serializer'
-import {
-  createUserProfile,
-  findProfileWithUserInclude,
-} from '@/backend/profile/profile.service'
+import { createUserProfile } from '@/backend/profile/profile.service'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
 
 export const createProfile = withSentry(async (payload: ProfilePayload) => {
-  const { email } = await authorizeUser()
-  const foundProfile = await findProfileWithUserInclude(email)
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
+  if (user.profileId) throw new Error('Such profile already exist')
 
-  if (foundProfile) {
-    throw new Error('Such profile already exist')
-  }
-
-  const createdProfile = await createUserProfile(email, payload)
+  const createdProfile = await createUserProfile(user.email, payload)
   const serializedProfile = serializeProfileToProfileModel(createdProfile)
 
   await mailerliteClient.addSubscriberToMailerLite(
