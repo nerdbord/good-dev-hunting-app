@@ -88,7 +88,7 @@ export const {
       session.user.name = foundUser.profile?.fullName || ''
       session.user.image = foundUser.avatarUrl ? foundUser.avatarUrl : ''
       session.user.roles = foundUser.roles
-      session.user.profileId = foundUser.profile && foundUser.profile.id
+      session.user.profileId = foundUser.profile ? foundUser.profile.id : null
       session.user.githubUsername = foundUser.githubDetails
         ? foundUser.githubDetails.username
         : ''
