@@ -1,13 +1,12 @@
-import { authOptions } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import logo from '@/assets/images/logo.png'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './MyProfileHeader.module.scss'
 
 const MyProfileHeader = async () => {
-  const session = await getServerSession(authOptions)
+  const { user } = await getAuthorizedUser()
 
   return (
     <div>
@@ -24,16 +23,16 @@ const MyProfileHeader = async () => {
               </p>
             </div>
             <div className={styles.githubAcc}>
-              {session?.user?.image && (
+              {user?.image && (
                 <Image
                   className={styles.githubAccImg}
-                  src={session.user.image}
+                  src={user.image}
                   width={38}
                   height={38}
                   alt="github avatar"
                 />
               )}
-              <p className={styles.githubAccName}>{session?.user.name}</p>
+              <p className={styles.githubAccName}>{user?.name}</p>
             </div>
           </div>
         </div>

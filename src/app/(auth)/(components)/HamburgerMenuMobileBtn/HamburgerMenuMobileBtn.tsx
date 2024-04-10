@@ -3,18 +3,24 @@ import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { Button } from '@/components/Button/Button'
 import MobileGitHubStarsBtn from '@/components/Button/MobileGitHubStarsBtn'
+import LoginBtn from '@/components/LoginBtn/LoginBtn'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import GithubAcc from '../GithubAcc/GithubAcc'
-import { GithubLoginButton } from '../GithubLoginButton/GithubLoginButton'
+import HunterAcc from '../HunterAcc/HunterAcc'
+import LogOutBtn from '../LogOutBtn/LogOutBtn'
 import styles from './HamburgerMenuMobileBtn.module.scss'
 
 const HamburgerMenuMobileBtn = ({
   userHasProfile,
   userIsModerator,
+  userIsHunter,
 }: {
   userHasProfile?: boolean | null | undefined
   userIsModerator?: boolean | null | undefined
+  userIsHunter?: boolean | null | undefined
 }) => {
+  const { data: session } = useSession()
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const handleOpenMenu = () => {
@@ -45,8 +51,22 @@ const HamburgerMenuMobileBtn = ({
             ) : (
               <>
                 <div className={styles.wrapper}>
-                  <CreateProfileBtn />
-                  <GithubLoginButton />
+                  {userIsHunter ? (
+                    <>
+                      <HunterAcc />
+                      <LogOutBtn />
+                    </>
+                  ) : (
+                    <>
+                      <CreateProfileBtn data-testid="create-profile-button" />
+                      {session?.user && <LogOutBtn />}
+                    </>
+                  )}
+                  {userIsModerator && <ModerationBtn />}
+
+                  {!session?.user && (
+                    <LoginBtn variant={'secondary'}>Join as hunter</LoginBtn>
+                  )}
                 </div>
 
                 <MobileGitHubStarsBtn />

@@ -4,7 +4,7 @@ import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
 
 interface FindTalentsBtnProps {
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'tertiary'
 }
 
 const FindTalentsBtn = (props: FindTalentsBtnProps) => {

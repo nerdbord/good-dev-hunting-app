@@ -1,5 +1,5 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import { type ProfilePayload } from '@/app/(profile)/types'
 import {
   findProfileWithUserInclude,
@@ -11,10 +11,10 @@ import { withSentry } from '@/utils/errHandling'
 import { PublishingState, type Prisma } from '@prisma/client'
 
 export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
-  await authorizeUser()
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
 
-  const { email } = await authorizeUser()
-  const foundProfile = await findProfileWithUserInclude(email)
+  const foundProfile = await findProfileWithUserInclude(user.email)
 
   if (!foundProfile) {
     throw new Error('Profile not found')
@@ -81,4 +81,6 @@ export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
       `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
     )
   }
+
+  return updatedProfile
 })

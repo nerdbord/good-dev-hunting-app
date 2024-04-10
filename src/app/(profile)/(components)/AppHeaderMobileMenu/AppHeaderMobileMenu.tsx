@@ -15,11 +15,13 @@ import styles from './AppHeaderMobileMenu.module.scss'
 type AppHeaderMobileMenuProps = {
   userHasProfile?: boolean | null | undefined
   userIsModerator?: boolean | null | undefined
+  userIsHunter?: boolean | null | undefined
 }
 
 export const AppHeaderMobileMenu = ({
   userHasProfile,
   userIsModerator,
+  userIsHunter,
 }: AppHeaderMobileMenuProps) => {
   const pathname = usePathname()
   const router = useRouter()
@@ -46,6 +48,7 @@ export const AppHeaderMobileMenu = ({
       <HamburgerMenuMobileBtn
         userHasProfile={userHasProfile}
         userIsModerator={userIsModerator}
+        userIsHunter={userIsHunter}
       />
       {isOnProfilesPage && (
         <SearchBarWrapper

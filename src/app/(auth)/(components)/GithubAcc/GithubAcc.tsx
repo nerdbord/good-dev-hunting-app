@@ -3,12 +3,10 @@ import { Avatar } from '@/components/Avatar/Avatar'
 import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import defaultUserImg from '../../../../../public/default-avatar.png'
 import styles from './GithubAcc.module.scss'
 
 const GithubAcc = () => {
-  const pathname = usePathname()
   const { data: session } = useSession()
 
   if (!session) {
@@ -24,7 +22,7 @@ const GithubAcc = () => {
     )
   }
 
-  return pathname !== AppRoutes.home ? (
+  return (
     <Link href={AppRoutes.myProfile}>
       <div className={styles.github}>
         <div className={styles.githubAcc}>
@@ -33,7 +31,7 @@ const GithubAcc = () => {
         </div>
       </div>
     </Link>
-  ) : null
+  )
 }
 
 export default GithubAcc
