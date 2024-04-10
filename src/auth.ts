@@ -1,18 +1,13 @@
 import { prisma } from '@/lib/prismaClient'
-
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
-import Github from 'next-auth/providers/github'
+import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import { registerNewUser } from './app/(auth)/_actions/registerNewUser'
 import { userHasRole } from './app/(auth)/helpers'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
-import {
-  addUserRole,
-  createGithubDetails,
-  findUserByEmail,
-} from './backend/user/user.service'
+import { addUserRole, findUserByEmail } from './backend/user/user.service'
 import { AppRoutes } from './utils/routes'
 
 const sendVerificationRequest = async ({
@@ -47,6 +42,15 @@ export const {
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
       allowDangerousEmailAccountLinking: true,
+      profile: (profile: GitHubProfile) => {
+        return {
+          id: profile.id.toString(),
+          email: profile.email,
+          avatarUrl: profile.avatar_url,
+          githubUsername: profile.login,
+          name: profile.name, // this property is used only in registerNewUser (prisma adapter custom method) to send welcome mail and discord notification
+        }
+      },
     }),
     Email({
       sendVerificationRequest,
@@ -82,13 +86,12 @@ export const {
 
       session.user.id = foundUser.id
       session.user.name = foundUser.profile?.fullName || ''
-      session.user.image = (
-        foundUser.avatarUrl ? foundUser.avatarUrl : foundUser.image
-      ) as string
+      session.user.image = foundUser.avatarUrl ? foundUser.avatarUrl : ''
       session.user.roles = foundUser.roles
       session.user.profileId = foundUser.profile && foundUser.profile.id
-      session.user.githubUsername =
-        foundUser.githubDetails && foundUser.githubDetails.username
+      session.user.githubUsername = foundUser.githubDetails
+        ? foundUser.githubDetails.username
+        : ''
 
       return session
     },
@@ -137,7 +140,6 @@ export const {
         if (!profile?.login || !user.id) {
           throw new Error('GitHub profile login or user ID not provided.')
         }
-        await createGithubDetails(user.id, profile.login as string)
         roleToAdd = Role.SPECIALIST
       } else if (account.provider === 'email') {
         roleToAdd = Role.HUNTER
