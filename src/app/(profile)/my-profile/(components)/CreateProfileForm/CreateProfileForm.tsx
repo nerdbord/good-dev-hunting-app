@@ -126,9 +126,14 @@ const CreateProfileForm = () => {
         uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
 
         const createdProfile = await createProfile(payload)
-        createdProfile &&
-          updateSession({ ...session.user, name: payload.fullName })
-        router.push(AppRoutes.myProfile)
+        if (createdProfile) {
+          updateSession({
+            ...session.user,
+            name: payload.fullName,
+            profileId: createdProfile.id,
+          })
+          router.push(AppRoutes.myProfile)
+        }
       })
     } catch (error) {
       console.log(error)
