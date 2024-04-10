@@ -1,6 +1,6 @@
 .menu {
   position: relative;
-  background-color: #0F1217;
+  background-color: #0f1217;
 }
 
 .overlay {
@@ -16,11 +16,11 @@
 
 .hamburger {
   position: fixed;
-  top: 26%;
+  top: 250px;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  background-color: #0F1217;
+  background-color: #0f1217;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@
   align-items: center;
   gap: 18px;
   z-index: 1000;
-  height: 32%;
+  height: 300px;
 
   button {
     width: 201px;
@@ -38,12 +38,12 @@
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 15px;
 
   button {
-    width: 101px;
+    // width: 101px;
     height: 44px;
   }
 }

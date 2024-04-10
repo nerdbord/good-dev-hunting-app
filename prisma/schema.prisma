@@ -14,12 +14,41 @@ datasource db {
 
 model User {
   id             String         @id @default(uuid())
-  avatarUrl      String?
   email          String         @unique
+  emailVerified  DateTime?
+  avatarUrl      String?
+  accounts       Account[]
   profile        Profile?
   githubDetails  GitHubDetails?
   roles          Role[]         @default([USER])
   nerdbordUserId String?        @unique
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Profile {
@@ -81,12 +110,12 @@ model RejectionReason {
 }
 
 model ContactRequest {
-  id             String  @id @default(uuid())
+  id             String   @id @default(uuid())
   subject        String
   message        String
   senderFullName String
   senderEmail    String
-  profile        Profile @relation(fields: [profileId], references: [id])
+  profile        Profile  @relation(fields: [profileId], references: [id])
   profileId      String
   createdAt      DateTime @default(now())
 }
@@ -101,6 +130,8 @@ enum Role {
   USER
   MODERATOR
   TEAM
+  SPECIALIST
+  HUNTER
 }
 
 enum PublishingState {

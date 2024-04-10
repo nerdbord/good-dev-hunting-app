@@ -1,15 +1,12 @@
 'use server'
-import { authOptions } from '@/app/(auth)/auth'
 import { updateAvatar } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
-import { getServerSession } from 'next-auth'
+import { getAuthorizedUser } from '../helpers'
 
 export const updateUserAvatar = withSentry(async (avatarUrl: string) => {
-  const session = await getServerSession(authOptions)
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
 
-  if (!session?.user.email) {
-    throw new Error('User not found')
-  }
-  const updatedUser = await updateAvatar(session.user.email, avatarUrl)
+  const updatedUser = await updateAvatar(user.email, avatarUrl)
   return updatedUser.avatarUrl
 })

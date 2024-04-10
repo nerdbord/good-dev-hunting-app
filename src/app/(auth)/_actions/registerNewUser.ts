@@ -1,24 +1,27 @@
-'use server'
 import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
-import { createUser } from '@/backend/user/user.service'
-import { type CreateUserPayload } from '@/backend/user/user.types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { prisma } from '@/lib/prismaClient'
 import { withSentry } from '@/utils/errHandling'
 
 export const registerNewUser = withSentry(
-  async ({ email, name, image, githubUsername }: CreateUserPayload) => {
-    const createdUser = await createUser({
-      email,
-      name,
-      image,
-      githubUsername,
-    })
+  async ({ id: _id, githubUsername, name, ...data }) => {
+    const userData = { ...data }
 
+    if (githubUsername) {
+      userData.githubDetails = {
+        create: {
+          username: githubUsername,
+        },
+      }
+    }
+
+    const createdUser = await prisma.user.create({
+      data: userData,
+    })
     if (!createdUser) {
       throw new Error('Failed to create user')
     }
-
-    const devName = createdUser.githubDetails?.username || 'Developer'
+    const devName = name ? name : createdUser.email || 'Developer'
 
     await sendWelcomeEmail(createdUser.email, devName)
     await sendDiscordNotificationToModeratorChannel(
