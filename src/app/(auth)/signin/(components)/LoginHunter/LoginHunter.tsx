@@ -1,5 +1,8 @@
 'use client'
 
+import { AppRoutes } from '@/utils/routes'
+import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 import { useState } from 'react'
 
 // components
@@ -7,8 +10,6 @@ import Box from '@/components/Box/Box'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import TextInput from '@/components/TextInput/TextInput'
-import { AppRoutes } from '@/utils/routes'
-import { signIn } from 'next-auth/react'
 
 const LoginHunter = () => {
   const [isChecked, setIsChecked] = useState(false)
@@ -64,27 +65,46 @@ const LoginHunter = () => {
     <Box>
       <h2>Login as talent Hunter</h2>
       <p>
-        Join and login alaways with magic link. Hunters don't have public
+        Join and login always with magic link. Hunters don't have public
         profiles.
       </p>
       <form>
         <TextInput
           label="Email"
-          tooltipText=" Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          tooltipText="Account associated with this email must always be Hunter and cannot be specialist."
           addImportantIcon={true}
           placeholder="eg. peter.parker@oscorp.com"
           onChange={(e) => setEmail(e.target.value)}
         />
         <div style={{ marginBottom: '24px', marginTop: '16px' }}>
           <CheckboxInput
-            id={'terms'} // TODO enum
-            label={'I have read and accept T&C and Privacy Policy'}
+            id={'terms'}
+            label=""
             checked={isChecked}
             onChange={() => {
               setIsChecked((prevState) => !prevState)
             }}
-            name={'terms'} // TODO enum
-          />
+            name={'terms'}
+          >
+            <span style={{ fontSize: '14px', justifyContent: 'baseline' }}>
+              I have read and accept{' '}
+              <Link
+                style={{ textDecoration: 'underline' }}
+                target="_blank"
+                href="https://glory-licorice-2e2.notion.site/Good-Dev-Hunting-User-Terms-and-Conditions-77b1c52963f94edbb898a36e2a2ac512"
+              >
+                T&C
+              </Link>{' '}
+              and{' '}
+              <Link
+                style={{ textDecoration: 'underline' }}
+                target="_blank"
+                href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
+              >
+                Privacy Policy
+              </Link>
+            </span>
+          </CheckboxInput>
         </div>
         <Button
           loading={isLoading}
