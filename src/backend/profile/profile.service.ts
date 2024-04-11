@@ -1,15 +1,7 @@
-import {
-  type ProfilePayload,
-  type SearchParamsFilters,
-} from '@/app/(profile)/types'
+import { type ProfilePayload } from '@/app/(profile)/types'
 import { prisma } from '@/lib/prismaClient'
 import shuffleArray from '@/utils/collections'
-import {
-  Prisma,
-  PublishingState,
-  Role,
-  type EmploymentType,
-} from '@prisma/client'
+import { Prisma, PublishingState, Role } from '@prisma/client'
 import { serializeProfileToProfileModel } from './profile.serializer'
 
 export async function getPublishedProfilesPayload() {
@@ -22,20 +14,7 @@ export async function getPublishedProfilesPayload() {
   const serializedProfile = publishedProfiles.map(
     serializeProfileToProfileModel,
   )
-  return serializedProfile
-}
 
-export async function getPublishedProfilesPayloadByPosition(position: string) {
-  const publishedProfiles = await prisma.profile.findMany({
-    where: {
-      position,
-      state: PublishingState.APPROVED,
-    },
-    include: includeObject.include,
-  })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
   return serializedProfile
 }
 
@@ -344,6 +323,7 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     country: true,
     city: true,
     techStack: true,
+    profileViews: true,
   },
 })
 
@@ -361,30 +341,25 @@ export async function getUniqueSpecializations() {
   return uniqueSpecializations.map((p) => p.position)
 }
 
-export async function incrementProfileViewCountById(id: string) {
-  const updatedProfile = await prisma.profile.update({
-    where: {
-      id,
-    },
-    data: { viewCount: { increment: 1 } },
-  })
-}
-
-////
-
 export async function updateOrCreateProfileView(
   viewerId: string,
   viewedProfileId: string,
 ) {
+  const foundProfile = await getProfileById(viewedProfileId)
+
+  if (foundProfile?.userId === viewerId) {
+    return null
+  }
+
   const existingView = await prisma.profileView.findFirst({
     where: {
-      viewerId: viewerId,
-      viewedProfileId: viewedProfileId,
+      viewerId,
+      viewedProfileId,
     },
   })
 
   if (existingView) {
-    await prisma.profileView.update({
+    return prisma.profileView.update({
       where: {
         id: existingView.id,
       },
@@ -392,55 +367,12 @@ export async function updateOrCreateProfileView(
         createdAt: new Date(),
       },
     })
-  } else {
-    await prisma.profileView.create({
-      data: {
-        viewerId: viewerId,
-        viewedProfileId: viewedProfileId,
-        createdAt: new Date(),
-      },
-    })
   }
-}
 
-///
-
-export async function markContactRequestAsSent(
-  viewerId: string,
-  viewedProfileId: string,
-) {
-  const existingView = await prisma.profileView.create({
+  return prisma.profileView.create({
     data: {
-      viewerId: viewerId,
-      viewedProfileId: viewedProfileId,
-      contactRequestSent: true,
+      viewerId,
+      viewedProfileId,
     },
   })
-  return existingView
-
-  // const existingView = await prisma.profileView.findFirst({
-  //   where: {
-  //     viewerId: viewerId,
-  //     viewedProfileId: viewedProfileId,
-  //   },
-  // })
-
-  // if (existingView) {
-  //   await prisma.profileView.update({
-  //     where: {
-  //       id: existingView.id,
-  //     },
-  //     data: {
-  //       contactRequestSent: true,
-  //     },
-  //   })
-  // } else {
-  //   await prisma.profileView.create({
-  //     data: {
-  //       viewerId: viewerId,
-  //       viewedProfileId: viewedProfileId,
-  //       contactRequestSent: true,
-  //     },
-  //   })
-  // }
 }

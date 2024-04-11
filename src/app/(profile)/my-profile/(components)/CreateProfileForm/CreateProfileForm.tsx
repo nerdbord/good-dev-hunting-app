@@ -114,7 +114,6 @@ const CreateProfileForm = () => {
       employmentTypes: values.employment,
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,
-      viewCount: values.viewCount,
     }
 
     try {

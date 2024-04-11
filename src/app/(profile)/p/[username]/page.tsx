@@ -2,10 +2,12 @@ import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
-import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
+import {
+  getProfileByGithubUsername,
+  updateOrCreateProfileView,
+} from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
-import { countProfileView } from '../../_actions/countProfileView'
 import styles from './page.module.scss'
 
 export async function generateMetadata({
@@ -55,16 +57,10 @@ const UserProfilePage = async ({
   }
 
   try {
-    await countProfileView(selectedProfile.id, authorizedUser.id)
+    await updateOrCreateProfileView(authorizedUser.id, selectedProfile.id)
   } catch (error) {
-    console.error('Error counting profile view:', error)
+    console.error('Error creating or updating profile view:', error)
   }
-
-  // try {
-  //   await updateOrCreateProfileView(session?.user.id, selectedProfile.userId)
-  // } catch (error) {
-  //   console.error('Error updating or creating profile view:', error)
-  // }
 
   // const user = await findUserByEmail(selectedProfile.userEmail)
   // const isConnectedToNerdbord = !!user?.nerdbordUserId

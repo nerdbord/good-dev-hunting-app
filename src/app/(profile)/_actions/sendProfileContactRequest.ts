@@ -6,10 +6,7 @@ import {
   findExistingContactRequest,
 } from '@/backend/contact-request/contact-request.service'
 import { sendContactRequest } from '@/backend/mailing/mailing.service'
-import {
-  getProfileById,
-  markContactRequestAsSent,
-} from '@/backend/profile/profile.service'
+import { getProfileById } from '@/backend/profile/profile.service'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
 import { type ContactRequest } from '@prisma/client'
@@ -66,9 +63,6 @@ export const sendProfileContactRequest = withSentry(
         recipientEmail: foundProfile.userEmail,
         recipientFullName: foundProfile.fullName,
       })
-      // add uptade markContactRequestAsSent from profile.services to ProfileView in schema
-      await markContactRequestAsSent(profileId, foundProfile?.id)
-      // i'm not sure if this is the right way
 
       await mailerliteClient.addSubscriberToMailerLite(
         senderEmail,

@@ -1,6 +1,10 @@
 import { type TechnologyModel } from '@/backend/profile/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { type EmploymentType, type PublishingState } from '@prisma/client'
+import {
+  type EmploymentType,
+  type ProfileView,
+  type PublishingState,
+} from '@prisma/client'
 
 export interface ProfileModel {
   id: string
@@ -27,11 +31,12 @@ export interface ProfileModel {
   state: PublishingState
   userEmail: string
   viewCount: number
+  profileViews: ProfileView[]
 }
 
 export type ProfilePayload = Omit<
   ProfileModel,
-  'id' | 'userEmail' | 'techStack' | 'userId'
+  'id' | 'userEmail' | 'techStack' | 'userId' | 'profileViews' | 'viewCount'
 > & {
   techStack: TechStack
 }
