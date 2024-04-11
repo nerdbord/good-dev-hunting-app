@@ -1,31 +1,17 @@
 ﻿'use server'
 
-import { authorizeUser } from '@/app/(auth)/auth'
-import {
-  findUserByEmail,
-  getGitHubDetails,
-  updateUserNerdbordId,
-} from '@/backend/user/user.service'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { updateUserNerdbordId } from '@/backend/user/user.service'
 import { type NerdbordUser } from '@/lib/nerdbord/types'
 import { withSentry } from '@/utils/errHandling'
 
 export const connectToNerdbord = withSentry(async () => {
-  const { email } = await authorizeUser()
-
-  const user = await findUserByEmail(email)
-
-  if (!user) {
-    throw new Error('User not found')
-  }
-
-  const userGitHubDetails = await getGitHubDetails(user?.id)
-
-  if (!userGitHubDetails) {
-    throw new Error('User not found')
-  }
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
+  if (!user.githubUsername) throw new Error('Github Username not found')
 
   const resp = await fetch(
-    `https://core.nerdbord.io/v1/users/${userGitHubDetails.username}`,
+    `https://core.nerdbord.io/v1/users/${user.githubUsername}`,
   )
 
   if (!resp.ok) {
