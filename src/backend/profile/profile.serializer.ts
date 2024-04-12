@@ -36,5 +36,6 @@ export const serializeProfileToProfileModel = (
     userEmail: data.user.email,
     viewCount: data.viewCount,
     profileViews: data.profileViews,
+    contactRequests: data.contactRequests,
   }
 }

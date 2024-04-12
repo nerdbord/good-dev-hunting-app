@@ -1,6 +1,7 @@
 import { type TechnologyModel } from '@/backend/profile/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import {
+  type ContactRequest,
   type EmploymentType,
   type ProfileView,
   type PublishingState,
@@ -32,11 +33,18 @@ export interface ProfileModel {
   userEmail: string
   viewCount: number
   profileViews: ProfileView[]
+  contactRequests: ContactRequest[]
 }
 
 export type ProfilePayload = Omit<
   ProfileModel,
-  'id' | 'userEmail' | 'techStack' | 'userId' | 'profileViews' | 'viewCount'
+  | 'id'
+  | 'userEmail'
+  | 'techStack'
+  | 'userId'
+  | 'profileViews'
+  | 'viewCount'
+  | 'contactRequests'
 > & {
   techStack: TechStack
 }

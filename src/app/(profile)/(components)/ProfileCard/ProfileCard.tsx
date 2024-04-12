@@ -6,6 +6,7 @@ import {
 } from '@/app/(profile)/mappers'
 import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
 import { type ProfileModel } from '@/app/(profile)/types'
+import { SendIcon } from '@/assets/icons/SendIcon'
 import ViewIcon from '@/assets/icons/ViewIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
 import Tooltip from '@/components/Tooltip/Tooltip'
@@ -34,7 +35,7 @@ const highlightText = (text: string, searchText?: string | null) => {
   const parts = text.split(regex)
 
   return (
-    <>
+    <div>
       {parts.map((part, idx) =>
         part.toLowerCase() === searchText.toLowerCase() ? (
           part
@@ -44,7 +45,7 @@ const highlightText = (text: string, searchText?: string | null) => {
           </span>
         ),
       )}
-    </>
+    </div>
   )
 }
 
@@ -55,6 +56,7 @@ const ProfileCard = ({
   searchTerm,
 }: ProfileCardProps) => {
   const { data: session } = useSession()
+
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -70,9 +72,9 @@ const ProfileCard = ({
     (view) => view.viewerId === session?.user?.id,
   )
 
-  // const isContacted = data.contactRequests?.some(
-  //   (contact) => contact.senderEmail === session?.user?.email,
-  // )
+  const isContacted = data.contactRequests?.some(
+    (contact) => contact.senderEmail === session?.user?.email,
+  )
 
   return (
     <div
@@ -92,18 +94,22 @@ const ProfileCard = ({
               <Avatar src={data.avatarUrl || ''} size={78} />
             </div>
             <div className={styles.data}>
-              <p className={`${styles.name}`}>
+              <p
+                className={`${styles.name} ${
+                  (isContacted || isVisited) && styles.active
+                }`}
+              >
                 {highlightText(data.fullName, searchTerm)}
-                {isVisited && (
+                {isVisited && !isContacted && (
                   <Tooltip text="You have visited this profile today">
                     <ViewIcon color="#5E28F6" />
                   </Tooltip>
                 )}
-                {/* {isContacted && (
+                {isContacted && (
                   <Tooltip text="You have messaged this profile today">
                     <SendIcon color="#5E28F6" />
                   </Tooltip>
-                )} */}
+                )}
               </p>
               <p className={styles.wordWrap}>
                 {mapSeniorityLevel(data.seniority)}{' '}

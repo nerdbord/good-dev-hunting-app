@@ -324,6 +324,7 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     city: true,
     techStack: true,
     profileViews: true,
+    contactRequests: true,
   },
 })
 
