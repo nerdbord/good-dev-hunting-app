@@ -127,7 +127,6 @@ model ProfileView {
   viewerId           String
   viewedProfileId    String
   createdAt          DateTime @default(now())
-  contactRequestSent Boolean  @default(false)
   viewer             User     @relation(fields: [viewerId], references: [id])
   viewedProfile      Profile  @relation(fields: [viewedProfileId], references: [id])
 }
