@@ -11,6 +11,7 @@ import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 import styles from './ProfileCard.module.scss'
 
@@ -51,6 +52,15 @@ const ProfileCard = ({
   withStateStatus,
   searchTerm,
 }: ProfileCardProps) => {
+  //
+  //const router = useRouter()
+  const pathname = usePathname()
+  const isModerationPage = pathname.includes(AppRoutes.moderation)
+
+  const profileLink = isModerationPage
+    ? `${AppRoutes.moderationProfile}/${data.userId}`
+    : `${AppRoutes.profile}/${data.githubUsername}`
+  //
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -70,7 +80,8 @@ const ProfileCard = ({
     >
       <Link
         onClick={onClick}
-        href={`${AppRoutes.moderationProfile}/${data.userId}`}
+        //href={`${AppRoutes.moderationProfile}/${data.userId}`}
+        href={profileLink}
         passHref
       >
         <div className={styles.frame}>
