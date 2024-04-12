@@ -35,6 +35,7 @@ interface ProfilesContextProps {
       disableSpecFilter?: boolean
     },
   ): ProfileModel[]
+  handleFetchProfiles(): void
 }
 
 export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
@@ -53,19 +54,7 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
   )
 
   useEffect(() => {
-    const fetchProfiles = async () => {
-      setIsFetching(true)
-      try {
-        const fetchedProfiles = await findAllPublishedProfiles()
-        setAllProfiles(fetchedProfiles)
-        setIsFetching(false)
-      } catch (err) {
-        setAllProfiles([])
-        setIsFetching(false)
-      }
-    }
-
-    fetchProfiles()
+    handleFetchProfiles()
   }, [])
 
   const handleFilterProfiles = useCallback(
@@ -87,6 +76,18 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
     [filters],
   )
 
+  const handleFetchProfiles = async () => {
+    setIsFetching(true)
+    try {
+      const fetchedProfiles = await findAllPublishedProfiles()
+      setAllProfiles(fetchedProfiles)
+      setIsFetching(false)
+    } catch (err) {
+      setAllProfiles([])
+      setIsFetching(false)
+    }
+  }
+
   const filteredProfiles = handleFilterProfiles(allProfiles)
 
   return (
@@ -96,6 +97,7 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
         filteredProfiles,
         isFetching,
         handleFilterProfiles,
+        handleFetchProfiles,
       }}
     >
       {children}

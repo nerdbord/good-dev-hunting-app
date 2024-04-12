@@ -1,4 +1,5 @@
 'use client'
+import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 import { useRouter } from 'next/navigation'
 import { type PropsWithChildren } from 'react'
 import styles from './GoBackButton.module.scss'
@@ -12,9 +13,15 @@ export const GoBackButton = ({
   href,
 }: PropsWithChildren<GoBackButtonProps>) => {
   const router = useRouter()
+  const { handleFetchProfiles } = useProfiles()
 
   const handleClick = () => {
-    href ? router.push(href) : router.back()
+    if (href) {
+      router.push(href)
+    } else {
+      handleFetchProfiles()
+      router.back()
+    }
   }
 
   return (
