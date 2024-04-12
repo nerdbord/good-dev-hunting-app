@@ -13,7 +13,6 @@ import Tooltip from '@/components/Tooltip/Tooltip'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import styles from './ProfileCard.module.scss'
@@ -23,6 +22,8 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
+  isVisited?: boolean
+  isContacted?: boolean
 }
 
 const cx = classNames.bind(styles)
@@ -54,9 +55,9 @@ const ProfileCard = ({
   onClick,
   withStateStatus,
   searchTerm,
+  isContacted,
+  isVisited,
 }: ProfileCardProps) => {
-  const { data: session } = useSession()
-
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -67,14 +68,6 @@ const ProfileCard = ({
   const getTechnologyClasses = cx({
     [styles.technology]: true,
   })
-
-  const isVisited = data.profileViews?.some(
-    (view) => view.viewerId === session?.user?.id,
-  )
-
-  const isContacted = data.contactRequests?.some(
-    (contact) => contact.senderEmail === session?.user?.email,
-  )
 
   return (
     <div
