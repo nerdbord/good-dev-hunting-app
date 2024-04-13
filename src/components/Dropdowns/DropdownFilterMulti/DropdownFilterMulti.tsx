@@ -71,6 +71,12 @@ export const DropdownFilterMulti = ({
     onSearch(jobOfferFilterName, selectedValue.join(','))
   }, [selectedValue])
 
+  const clearSelect = () => {
+    setSelectedValue([])
+    setSearchTerm('')
+    setArrow('IoIosArrowDown')
+  }
+
   return (
     <>
       {isDropdownActive && <div className={styles.overlay}></div>}
@@ -95,10 +101,34 @@ export const DropdownFilterMulti = ({
                   : styles.titleContainer
               }
             >
-              <div className={styles.dropdownTitle}>{text}</div>
-              <Button variant="tertiary" type="submit" onClick={closeDropdown}>
-                <p>Apply</p>
-              </Button>
+              <div className={styles.container}>
+                <div className={styles.dropdownTitle}>
+                  {text}
+                  {selectedValue.length > 0 && (
+                    <span
+                      className={styles.counter}
+                    >{`(${selectedValue.length})`}</span>
+                  )}
+                </div>
+                <div className={styles.buttonContainer}>
+                  {selectedValue.length > 0 && (
+                    <Button
+                      variant="tertiary"
+                      type="submit"
+                      onClick={clearSelect}
+                    >
+                      <p>Clear</p>
+                    </Button>
+                  )}
+                  <Button
+                    variant="tertiary"
+                    type="submit"
+                    onClick={closeDropdown}
+                  >
+                    <p>Apply</p>
+                  </Button>
+                </div>
+              </div>
             </div>
             {hasSearchInput && (
               <DropdownSearchInput
