@@ -1,8 +1,8 @@
-import { type ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import styles from './UserProfileDetails.module.scss'
 
-const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
+const UserProfileDetails = ({ profile }: { profile: ProfileModel }) => {
   return (
     <>
       <div className={styles.container}>
@@ -10,7 +10,7 @@ const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
           <div className={styles.techStack}>
             <div className={styles.title}>Tech stack</div>
             <div className={styles.techStackList}>
-              {userProfile?.techStack.map((item, index) => (
+              {profile?.techStack.map((item, index) => (
                 <div key={index} className={styles.techStackItem}>
                   {item.name}
                 </div>
@@ -34,7 +34,7 @@ const UserProfileDetails = ({ userProfile }: { userProfile: ProfileModel }) => {
         <div className={styles.right}>
           <div className={styles.title}>Bio</div>
           <MarkdownReader
-            text={userProfile.bio || 'This user has not written a bio yet.'}
+            text={profile.bio || 'This user has not written a bio yet.'}
           />
         </div>
       </div>

@@ -10,6 +10,7 @@ export const authorizeUser = async () => {
 
   return { email: session.user.email }
 }
+
 export const getAuthorizedUser = async () => {
   const session = await auth()
   if (!session || !session.user) {
@@ -18,7 +19,7 @@ export const getAuthorizedUser = async () => {
 
   const userIsHunter = session.user.roles.includes(Role.HUNTER)
   const userIsModerator = session.user.roles.includes(Role.MODERATOR)
-  const userHasProfile = session.user.profileId ? true : false
+  const userHasProfile = !!session.user.profileId
 
   return { user: session.user, userIsHunter, userIsModerator, userHasProfile }
 }

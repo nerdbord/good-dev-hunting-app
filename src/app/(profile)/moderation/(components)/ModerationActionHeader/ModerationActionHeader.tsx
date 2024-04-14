@@ -3,16 +3,17 @@ import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import AssignRoleModal from '@/app/(profile)/moderation/(components)/AssignRoleModal/AssignRoleModal'
 import { Role } from '@prisma/client'
 import { type ModerationActionHeaderType } from '../../../(components)/types'
 import styles from './ModerationActionHeader.module.scss'
 
 export default function ModerationActionHeader({
-  userProfile,
   userRoles,
 }: ModerationActionHeaderType) {
   const { showModal, closeModal } = useModal()
+  const { profile } = useProfileModel()
 
   return (
     <div className={styles.wrapper}>
@@ -22,7 +23,7 @@ export default function ModerationActionHeader({
           onClick={() => {
             showModal(
               <AssignRoleModal
-                userId={userProfile.userId}
+                userId={profile.userId}
                 userRoles={userRoles}
                 onClose={closeModal}
               />,
@@ -34,7 +35,7 @@ export default function ModerationActionHeader({
             : 'Assign admin role'}
         </Button>
         <div className={styles.vl}></div>
-        <StateStatus profile={userProfile} />
+        <StateStatus profile={profile} />
       </div>
     </div>
   )

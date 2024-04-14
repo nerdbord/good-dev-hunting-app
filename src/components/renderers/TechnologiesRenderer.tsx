@@ -1,6 +1,6 @@
 'use client'
-import { jobSpecializationThemes } from '@/app/(profile)/helpers'
-import { type ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { jobSpecializationThemes } from '@/app/(profile)/profile.helpers'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useMemo } from 'react'
 

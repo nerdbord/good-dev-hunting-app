@@ -1,10 +1,11 @@
-import { type ProfileModel } from '@/app/(profile)/types'
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
 
-const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
+const ProfileDetails = () => {
+  const { profile } = useProfileModel()
   return (
     <>
       <section className={styles.container}>

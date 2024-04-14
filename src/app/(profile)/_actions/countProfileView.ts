@@ -11,6 +11,8 @@ export const countProfileView = withSentry(
 
     if (foundProfile?.userId !== userId) {
       const updatedProfile = await incrementProfileViewCountById(profileId)
+      return updatedProfile
     }
+    return foundProfile
   },
 )

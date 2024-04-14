@@ -1,7 +1,8 @@
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
+import { findProfileByGithubUsername } from '@/app/(profile)/_actions/findProfileByGithubUsername'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
@@ -27,7 +28,7 @@ export async function generateMetadata({
       title: selectedProfile.fullName,
       description: selectedProfile.bio,
       openGraph: {
-        images: selectedProfile.avatarUrl || '',
+        images: selectedProfile.user.avatarUrl || '',
       },
     }
   } catch (error) {
@@ -49,13 +50,13 @@ const UserProfilePage = async ({
     return redirect(AppRoutes.signIn)
   }
 
-  const selectedProfile = await getProfileByGithubUsername(params.username)
-  if (!selectedProfile) {
+  const profile = await findProfileByGithubUsername(params.username)
+  if (!profile) {
     redirect(AppRoutes.profilesList)
   }
 
   try {
-    await countProfileView(selectedProfile.id, authorizedUser.id)
+    await countProfileView(profile.id, authorizedUser.id)
   } catch (error) {
     console.error('Error counting profile view:', error)
   }
@@ -66,14 +67,14 @@ const UserProfilePage = async ({
 
   return (
     <div className={styles.wrapper}>
-      <UserProfileMain userProfile={selectedProfile}>
+      <UserProfileMain profile={profile}>
         <UserProfileHeader
           isNerdbordConnected={isConnectedToNerdbord}
           withBackButton
-          userProfile={selectedProfile}
+          profile={profile}
         />
       </UserProfileMain>
-      <UserProfileDetails userProfile={selectedProfile} />
+      <UserProfileDetails profile={profile} />
     </div>
   )
 }

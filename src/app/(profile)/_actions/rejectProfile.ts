@@ -1,8 +1,9 @@
 'use server'
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { sendProfileRejectedEmail } from '@/backend/mailing/mailing.service'
 import {
-  getProfileById,
+  findProfileById,
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import {
@@ -19,7 +20,7 @@ export const rejectProfile = withSentry(
     if (!user) throw new Error('User not found')
     if (!userIsModerator) throw new Error('Unauthorized')
 
-    const profile = await getProfileById(profileId)
+    const profile = await findProfileById(profileId)
     if (!profile) {
       throw new Error('Rejection failed, profile not found.')
     }
@@ -30,7 +31,7 @@ export const rejectProfile = withSentry(
     })
 
     try {
-      await sendProfileRejectedEmail(profile?.userEmail, reason)
+      await sendProfileRejectedEmail(profile?.user.email, reason)
       await sendDiscordNotificationToModeratorChannel(
         `⛔️ ${user.name || 'Moderator'} rejected ${
           updatedProfile.fullName
@@ -38,10 +39,10 @@ export const rejectProfile = withSentry(
           process.env.NEXT_PUBLIC_APP_ORIGIN_URL
         }/moderation/profile/${updatedProfile.userId})`,
       )
-      return updatedProfile
+      return new ProfileModel(updatedProfile)
     } catch (error) {
       await deleteRejectingReason(createdReason.id)
-      return updatedProfile
+      return new ProfileModel(updatedProfile)
     }
   },
 )

@@ -2,7 +2,11 @@
 import { Container } from '@/components/Container/Container'
 import React from 'react'
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <main>
       <AppHeader />

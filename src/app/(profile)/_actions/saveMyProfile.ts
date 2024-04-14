@@ -1,6 +1,6 @@
 'use server'
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
-import { type ProfilePayload } from '@/app/(profile)/types'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   findProfileWithUserInclude,
   hasProfileValuesChanged,
@@ -10,7 +10,7 @@ import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState, type Prisma } from '@prisma/client'
 
-export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
+export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const { user } = await getAuthorizedUser()
   if (!user) throw new Error('User not found')
 
@@ -38,18 +38,18 @@ export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
     country: {
       connectOrCreate: {
         create: {
-          name: payload.country.name,
+          name: payload.country,
         },
-        where: { name: payload.country.name },
+        where: { name: payload.country },
       },
     },
     openForCountryRelocation: payload.openForCountryRelocation,
     city: {
       connectOrCreate: {
         create: {
-          name: payload.city.name,
+          name: payload.city,
         },
-        where: { name: payload.city.name },
+        where: { name: payload.city },
       },
     },
     techStack: {
@@ -82,5 +82,5 @@ export const saveMyProfile = withSentry(async (payload: ProfilePayload) => {
     )
   }
 
-  return updatedProfile
+  return new ProfileModel(updatedProfile)
 })

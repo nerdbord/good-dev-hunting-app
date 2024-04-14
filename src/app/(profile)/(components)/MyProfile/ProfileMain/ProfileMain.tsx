@@ -1,9 +1,9 @@
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
   mapSpecializationToTitle,
-} from '@/app/(profile)/mappers'
-import { type ProfileModel } from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.mappers'
 import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
@@ -12,18 +12,12 @@ import { AnchorButton } from '@/components/Button/AnchorButton'
 import { countries } from '@/data/countries'
 import styles from './ProfileMain.module.scss'
 
-const ProfileMain = async ({
-  profile,
-  isConnectedToNerdbord,
-}: {
-  profile: ProfileModel
-  isConnectedToNerdbord: boolean
-}) => {
+const ProfileMain = async () => {
+  const { profile } = useProfileModel()
   const githubUsername = profile.githubUsername
   const avatarUrl = profile.avatarUrl
   const countryFlag =
-    countries.find((country) => country.name === profile.country.name)?.flag ||
-    ''
+    countries.find((country) => country.name === profile.country)?.flag || ''
 
   return (
     <>
@@ -44,13 +38,13 @@ const ProfileMain = async ({
               </AnchorButton>
             </li>
           )}
-          {isConnectedToNerdbord && (
-            <li>
-              <AnchorButton href={`https://nerdbord.io/p/${githubUsername}`}>
-                Portfolio ↗︎
-              </AnchorButton>
-            </li>
-          )}
+          {/*{profile.isConnectedToNerdbord && (*/}
+          {/*  <li>*/}
+          {/*    <AnchorButton href={`https://nerdbord.io/p/${githubUsername}`}>*/}
+          {/*      Portfolio ↗︎*/}
+          {/*    </AnchorButton>*/}
+          {/*  </li>*/}
+          {/*)}*/}
         </ul>
         <div className={styles.profile}>
           <div className={styles.user}>
@@ -62,7 +56,7 @@ const ProfileMain = async ({
               <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
 
               <p>
-                {profile.country.name}, {profile.city.name}
+                {profile.country}, {profile.city}
               </p>
             </div>
 

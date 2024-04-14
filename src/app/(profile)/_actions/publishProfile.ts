@@ -1,5 +1,6 @@
 'use server'
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   findProfileById,
   updateProfileById,
@@ -26,5 +27,5 @@ export const publishProfile = withSentry(async (profileId: string) => {
     `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
   )
 
-  return updatedProfile
+  return new ProfileModel(updatedProfile)
 })

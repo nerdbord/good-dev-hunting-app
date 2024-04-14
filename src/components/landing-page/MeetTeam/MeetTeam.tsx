@@ -1,9 +1,9 @@
-import { getTeamProfiles } from '@/backend/profile/profile.service'
+import { findAllTeamProfiles } from '@/app/(profile)/_actions/findAllTeamProfiles'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
 import { cache } from 'react'
 import styles from './MeetTeam.module.scss'
 
-const cacheGetTeamProfiles = cache(getTeamProfiles)
+const cacheGetTeamProfiles = cache(findAllTeamProfiles)
 
 const MeetTeam = async () => {
   const teamProfiles = await cacheGetTeamProfiles()
@@ -32,7 +32,7 @@ const MeetTeam = async () => {
         <div className={styles.slider}>
           <div className={styles.cardsBox}>
             {firstHalfProfiles.map((profile) => (
-              <VerticalCard {...profile} />
+              <VerticalCard profile={profile} />
             ))}
           </div>
         </div>
@@ -40,7 +40,7 @@ const MeetTeam = async () => {
           <div className={styles.slider}>
             <div className={styles.cardsBox}>
               {secondHalfProfiles.map((profile) => (
-                <VerticalCard {...profile} />
+                <VerticalCard profile={profile} />
               ))}
             </div>
           </div>

@@ -2,7 +2,7 @@
 import {
   mappedSeniorityLevel,
   mappedSpecialization,
-} from '@/app/(profile)/mappers'
+} from '@/app/(profile)/profile.mappers'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 
@@ -11,7 +11,7 @@ import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import { EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
-import { type CreateProfileFormValues } from '@/app/(profile)/types'
+import { type CreateProfileFormValues } from '@/app/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import styles from './WorkInformations.module.scss'
 

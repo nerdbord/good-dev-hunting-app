@@ -1,22 +1,21 @@
 'use client'
-import { updateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
-import { saveMyProfile } from '@/app/(profile)/_actions/saveMyProfile'
+import { updateMyAvatar } from '@/app/(auth)/_actions/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/(profile)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,
   type ProfileFormValues,
-  type ProfileModel,
-  type ProfilePayload,
-} from '@/app/(profile)/types'
+  type ProfileUpdateParams,
+} from '@/app/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useMemo, type PropsWithChildren } from 'react'
+import { useMemo } from 'react'
 
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import CreateProfileTopBar from '../../(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
@@ -53,17 +52,12 @@ export const validationSchema = Yup.object().shape({
     ),
 })
 
-interface EditProfileFormWrapperProps {
-  profile: ProfileModel
-}
-
-const EditProfileForm = ({
-  profile,
-}: PropsWithChildren<EditProfileFormWrapperProps>) => {
+const EditProfileForm = () => {
   const { data: session, update: updateSession } = useSession()
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
+  const { profile } = useProfileModel()
 
   const mappedInitialValues: ProfileFormValues = useMemo(
     () => mapProfileModelToEditProfileFormValues(profile),
@@ -75,18 +69,14 @@ const EditProfileForm = ({
   }
 
   const handleEditProfile = async (values: ProfileFormValues) => {
-    const payload: ProfilePayload = {
+    const updateParams: ProfileUpdateParams = {
       fullName: values.fullName,
       avatarUrl: session.user.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
-      country: {
-        name: values.country,
-      },
+      country: values.country,
       openForCountryRelocation: values.openForCountryRelocation,
-      city: {
-        name: values.city,
-      },
+      city: values.city,
       openForCityRelocation: values.openForCityRelocation,
       isOpenForWork: true,
       remoteOnly: values.remoteOnly,
@@ -107,9 +97,10 @@ const EditProfileForm = ({
       const uploadedFileUrl = formDataWithFile
         ? await uploadImage(formDataWithFile)
         : null
-      uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
-      const savedProfile = await saveMyProfile(payload)
-      savedProfile && updateSession({ ...session.user, name: payload.fullName })
+      uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
+      const savedProfile = await profile.save(updateParams)
+      savedProfile &&
+        updateSession({ ...session.user, name: savedProfile.fullName })
 
       router.push(AppRoutes.myProfile)
     })

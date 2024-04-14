@@ -1,3 +1,4 @@
+import { UserModel } from '@/app/(auth)/_models/User.model'
 import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
@@ -17,6 +18,9 @@ export const registerNewUser = withSentry(
 
     const createdUser = await prisma.user.create({
       data: userData,
+      include: {
+        githubDetails: true,
+      },
     })
     if (!createdUser) {
       throw new Error('Failed to create user')
@@ -28,6 +32,6 @@ export const registerNewUser = withSentry(
       `User ${devName} has created an account`,
     )
 
-    return createdUser
+    return new UserModel(createdUser)
   },
 )

@@ -1,5 +1,5 @@
 'use client'
-import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+import { useModerationFilter } from '@/app/(profile)/_providers/ModerationFilter.provider'
 import { PublishingState } from '@prisma/client'
 import Tab from './Tab'
 

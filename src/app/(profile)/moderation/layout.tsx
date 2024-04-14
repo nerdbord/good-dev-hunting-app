@@ -2,7 +2,7 @@
 import { Container } from '@/components/Container/Container'
 import React from 'react'
 
-export default function DashboardLayout({
+export default function ModerationLayout({
   children,
 }: {
   children: React.ReactNode

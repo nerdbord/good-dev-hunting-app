@@ -1,4 +1,4 @@
-﻿import { type ProfileModel } from '@/app/(profile)/types'
+﻿import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import Image from 'next/image'
 
 import styles from './SearchSuggestionItem.module.scss'
@@ -34,7 +34,7 @@ export const SearchSuggestionItem = ({
   return (
     <li
       className={styles.suggestionItem}
-      onClick={() => onClick(profile.userEmail)}
+      onClick={() => onClick(profile.email)}
     >
       {profile.avatarUrl && (
         <Image
@@ -47,7 +47,7 @@ export const SearchSuggestionItem = ({
       )}
       <div>
         <p className={styles.userName}>{profile.fullName}</p>
-        {highlightText(profile.userEmail, searchValue)}
+        {highlightText(profile.email, searchValue)}
       </div>
     </li>
   )

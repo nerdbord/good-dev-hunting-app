@@ -1,9 +1,9 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
-import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useModerationFilter } from '@/app/(profile)/_providers/ModerationFilter.provider'
+import { SearchResultsInfo } from '@/components/SearchResultsInfo/SearchResultsInfo'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
-import { SearchResultsInfo } from '../../../../components/SearchResultsInfo/SearchResultsInfo'
 import { ModerationProfileListItem } from './ModerationProfileListItem'
 
 import styles from './ProfileList.module.scss'
@@ -20,7 +20,7 @@ export default function ModerationProfilesWithFilters({
 
   const filteredProfiles = profiles.filter((profile: ProfileModel) => {
     if (searchEmailValue) {
-      return profile.userEmail.includes(searchEmailValue)
+      return profile.email.includes(searchEmailValue)
     }
     return profile.state === publishingStateFilter
   })
