@@ -8,11 +8,9 @@ import {
   filterByTechnology,
 } from '@/app/(profile)/(components)/ProfileList/filters'
 import { findAllPublishedProfiles } from '@/app/(profile)/_actions/findAllPublishedProfiles'
-import { createFiltersObjFromSearchParams } from '@/app/(profile)/helpers'
-import {
-  type ProfileModel,
-  type SearchParamsFilters,
-} from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
+import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import { useSearchParams } from 'next/navigation'
 import {
   createContext,

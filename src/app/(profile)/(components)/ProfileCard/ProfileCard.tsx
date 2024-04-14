@@ -1,11 +1,11 @@
-import { jobSpecializationThemes } from '@/app/(profile)/helpers'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
+import { jobSpecializationThemes } from '@/app/(profile)/profile.helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
   mapSpecializationToTitle,
-} from '@/app/(profile)/mappers'
-import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
-import { type ProfileModel } from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.mappers'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
@@ -87,7 +87,7 @@ const ProfileCard = ({
                 {mapSpecializationToTitle(data.position)}
               </p>
               <p className={styles.location}>
-                {data.country.name}, {data.city.name}
+                {data.country}, {data.city}
                 {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
                 {data.remoteOnly && ' / Remote'}
               </p>

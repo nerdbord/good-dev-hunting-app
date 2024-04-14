@@ -1,5 +1,5 @@
 import ProfileList from '@/app/(profile)/(components)/ProfileList/ProfileList'
-import { type JobOfferFiltersEnum } from '@/app/(profile)/types'
+import { type JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
 import Loader from '@/components/Loader/Loader'
 import { Suspense } from 'react'
 

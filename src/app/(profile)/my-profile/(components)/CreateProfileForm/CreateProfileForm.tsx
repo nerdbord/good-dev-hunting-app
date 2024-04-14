@@ -1,8 +1,9 @@
 'use client'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
-import { updateUserAvatar } from '@/app/(auth)/_actions/updateUserAvatar'
+import { updateMyAvatar } from '@/app/(auth)/_actions/updateMyAvatar'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { createProfile } from '@/app/(profile)/_actions/createProfile'
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import CreateProfileTopBar from '@/app/(profile)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '@/app/(profile)/my-profile/(components)/CreateProfile/PersonalInfo/PersonalInfo'
@@ -11,8 +12,8 @@ import styles from '@/app/(profile)/my-profile/create/page.module.scss'
 import {
   type CreateProfileFormValues,
   type JobSpecialization,
-  type ProfilePayload,
-} from '@/app/(profile)/types'
+  type ProfileCreateParams,
+} from '@/app/(profile)/profile.types'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -79,6 +80,7 @@ const CreateProfileForm = () => {
   const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
+  const { profile } = useProfileModel()
   const { addToast } = useToast()
   if (!session) {
     return null
@@ -91,18 +93,14 @@ const CreateProfileForm = () => {
         ToastStatus.INVALID,
       )
     }
-    const payload: ProfilePayload = {
+    const payload: ProfileCreateParams = {
       fullName: values.fullName,
       avatarUrl: session.user.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
-      country: {
-        name: values.country,
-      },
+      country: values.country,
       openForCountryRelocation: values.openForCountryRelocation,
-      city: {
-        name: values.city,
-      },
+      city: values.city,
       isOpenForWork: true,
       openForCityRelocation: values.openForCityRelocation,
       remoteOnly: values.remoteOnly,
@@ -123,9 +121,11 @@ const CreateProfileForm = () => {
           ? await uploadImage(formDataWithFile)
           : null
 
-        uploadedFileUrl && (await updateUserAvatar(uploadedFileUrl))
+        uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
 
         const createdProfile = await createProfile(payload)
+        profile.sync(createdProfile)
+
         if (createdProfile) {
           updateSession({
             ...session.user,

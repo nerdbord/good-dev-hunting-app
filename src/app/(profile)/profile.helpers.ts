@@ -2,7 +2,7 @@ import {
   JobOfferFiltersEnum,
   type JobSpecialization,
   type SearchParamsFilters,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { PublishingState } from '@prisma/client'
 import { type ReadonlyURLSearchParams } from 'next/navigation'
 

@@ -1,9 +1,7 @@
-import { mapSeniorityLevel } from '@/app/(profile)/mappers'
+import { mapSeniorityLevel } from '@/app/(profile)/profile.mappers'
 
-import {
-  type ProfileFormValues,
-  type ProfileModel,
-} from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileFormValues } from '@/app/(profile)/profile.types'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
 
 export const mapProfileModelToEditProfileFormValues = (
@@ -12,9 +10,9 @@ export const mapProfileModelToEditProfileFormValues = (
   fullName: profile.fullName,
   linkedin: profile.linkedIn,
   bio: profile.bio,
-  country: profile.country.name,
+  country: profile.country,
   openForCountryRelocation: profile.openForCountryRelocation,
-  city: profile.city.name,
+  city: profile.city,
   openForCityRelocation: profile.openForCityRelocation,
   remoteOnly: profile.remoteOnly,
   position: {

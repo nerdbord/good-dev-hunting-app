@@ -1,11 +1,11 @@
 import Tabs from '@/app/(profile)/(components)/FilterTabs/Tabs'
 import SearchWrapper from '@/app/(profile)/moderation/(components)/ModerationSearchProfile/SearchWrapper'
-import { getAllPublishedProfilesPayload } from '@/backend/profile/profile.service'
 
+import { findAllPublishedProfiles } from '@/app/(profile)/_actions/findAllPublishedProfiles'
 import styles from './Filters.module.scss'
 
 export default async function ModerationFilters() {
-  const profiles = await getAllPublishedProfilesPayload()
+  const profiles = await findAllPublishedProfiles()
 
   return (
     <div className={styles.mainContainer}>

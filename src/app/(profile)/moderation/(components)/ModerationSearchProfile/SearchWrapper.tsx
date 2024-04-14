@@ -1,8 +1,8 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
-import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useModerationFilter } from '@/app/(profile)/_providers/ModerationFilter.provider'
+import { Button } from '@/components/Button/Button'
 import { useRef, useState, type ChangeEvent } from 'react'
-import { Button } from '../../../../../components/Button/Button'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
 
 import useOutsideClick from '@/hooks/useOutsideClick'
@@ -36,7 +36,7 @@ export default function SearchWrapper({ profiles = [] }: Props) {
   }
 
   const filteredProfiles = profiles.filter((profile) => {
-    return searchValue !== '' && profile.userEmail.includes(searchValue)
+    return searchValue !== '' && profile.email.includes(searchValue)
   })
 
   useOutsideClick(

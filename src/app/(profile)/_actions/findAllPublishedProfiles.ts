@@ -1,8 +1,15 @@
 'use server'
 
-import { getPublishedProfilesPayload } from '@/backend/profile/profile.service'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { getApprovedProfiles } from '@/backend/profile/profile.service'
+import { withSentry } from '@/utils/errHandling'
 
-export const findAllPublishedProfiles = async () => {
-  const profiles = await getPublishedProfilesPayload()
-  return profiles
-}
+export const findAllPublishedProfiles = withSentry(async () => {
+  const profiles = await getApprovedProfiles()
+
+  const serializedProfiles = profiles.map(
+    (profile) => new ProfileModel(profile),
+  )
+
+  return serializedProfiles
+})

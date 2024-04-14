@@ -1,28 +1,17 @@
-import {
-  type ProfilePayload,
-  type SearchParamsFilters,
-} from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import shuffleArray from '@/utils/collections'
-import {
-  Prisma,
-  PublishingState,
-  Role,
-  type EmploymentType,
-} from '@prisma/client'
-import { serializeProfileToProfileModel } from './profile.serializer'
+import { Prisma, PublishingState, Role } from '@prisma/client'
 
-export async function getPublishedProfilesPayload() {
-  const publishedProfiles = await prisma.profile.findMany({
+export async function getApprovedProfiles() {
+  const approvedProfiles = await prisma.profile.findMany({
     where: {
       state: PublishingState.APPROVED,
     },
     include: includeObject.include,
   })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
+
+  return approvedProfiles
 }
 
 export async function getPublishedProfilesPayloadByPosition(position: string) {
@@ -33,10 +22,8 @@ export async function getPublishedProfilesPayloadByPosition(position: string) {
     },
     include: includeObject.include,
   })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
+
+  return publishedProfiles
 }
 
 export async function getAllPublishedProfilesPayload() {
@@ -49,10 +36,7 @@ export async function getAllPublishedProfilesPayload() {
     include: includeObject.include,
   })
 
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
+  return publishedProfiles
 }
 
 export async function getProfileById(id: string) {
@@ -64,7 +48,7 @@ export async function getProfileById(id: string) {
   })
 
   if (profileById !== null) {
-    return serializeProfileToProfileModel(profileById)
+    return profileById
   }
 
   // Handle the case when profileById is null
@@ -91,7 +75,7 @@ export async function findProfileWithUserInclude(email: string) {
 
 export async function createUserProfile(
   email: string,
-  profileData: ProfilePayload,
+  profileData: ProfileCreateParams,
 ) {
   const createdUser = await prisma.profile.create({
     data: {
@@ -104,10 +88,10 @@ export async function createUserProfile(
       country: {
         connectOrCreate: {
           create: {
-            name: profileData.country.name,
+            name: profileData.country,
           },
           where: {
-            name: profileData.country.name,
+            name: profileData.country,
           },
         },
       },
@@ -115,10 +99,10 @@ export async function createUserProfile(
       city: {
         connectOrCreate: {
           create: {
-            name: profileData.city.name,
+            name: profileData.city,
           },
           where: {
-            name: profileData.city.name,
+            name: profileData.city,
           },
         },
       },
@@ -152,7 +136,14 @@ export async function updateProfileById(
     },
     data,
     include: {
-      user: true,
+      user: {
+        include: {
+          githubDetails: true,
+        },
+      },
+      techStack: true,
+      country: true,
+      city: true,
     },
   })
 
@@ -204,7 +195,7 @@ export async function findProfileById(id: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -217,7 +208,7 @@ export async function getProfileByUserId(userId: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -230,7 +221,7 @@ export async function getProfileByGithubUsername(username: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -243,7 +234,7 @@ export async function getProfileByUserEmail(email: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -251,7 +242,7 @@ export async function getProfileByUserEmail(email: string) {
 
 export const hasProfileValuesChanged = async (
   profileId: string,
-  payload: ProfilePayload,
+  payload: ProfileModel,
 ) => {
   const existingProfile = await findProfileById(profileId)
 
@@ -276,47 +267,8 @@ export async function getPublishedProfiles(take: number) {
     },
     include: includeObject.include,
   })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
-}
 
-export async function getRandomProfiles(take: number) {
-  // Retrieve IDs of all approved profiles
-  const approvedProfileIds = await prisma.profile.findMany({
-    where: {
-      state: PublishingState.APPROVED,
-    },
-    select: {
-      id: true, // Only select the ID
-    },
-  })
-
-  const totalProfiles = approvedProfileIds.length
-
-  if (take >= totalProfiles) {
-    // If requesting more profiles than available, return all without randomization
-    return getPublishedProfiles(totalProfiles)
-  }
-
-  // Shuffle the array of IDs and select the first `profilesCount` elements
-  const shuffledIds = shuffleArray(approvedProfileIds)
-    .slice(0, take)
-    .map((p) => p.id)
-
-  // Fetch the full profile details for the randomly selected IDs
-  const randomProfiles = await prisma.profile.findMany({
-    where: {
-      id: {
-        in: shuffledIds,
-      },
-    },
-    take,
-    include: includeObject.include, // Ensure this is correctly defined
-  })
-
-  return randomProfiles.map(serializeProfileToProfileModel)
+  return publishedProfiles
 }
 
 export async function getTeamProfiles() {
@@ -330,7 +282,7 @@ export async function getTeamProfiles() {
     },
     include: includeObject.include,
   })
-  return teamProfiles.map(serializeProfileToProfileModel)
+  return teamProfiles
 }
 
 // Reusable include object for retrieving Profile with all of its relationships
@@ -368,40 +320,5 @@ export async function incrementProfileViewCountById(id: string) {
     },
     data: { viewCount: { increment: 1 } },
   })
-}
-
-export async function countProfilesForPositionsByFilters(
-  filters: SearchParamsFilters,
-) {
-  const { seniority, location, technology, availability, search } = filters
-
-  const query: Prisma.ProfileWhereInput = {
-    state: PublishingState.APPROVED,
-    ...(seniority.length > 0 && { seniority: { in: seniority } }),
-    ...(location.length > 0 && { country: { name: { in: location } } }),
-    ...(technology.length > 0 && {
-      techStack: { some: { name: { in: technology } } },
-    }),
-    ...(availability.length > 0 && {
-      employmentTypes: { hasSome: availability as EmploymentType[] },
-    }),
-    ...(search.length > 0 && {
-      fullName: { contains: search.toString(), mode: 'insensitive' },
-    }),
-  }
-
-  const positions = await getUniqueSpecializations()
-  const counts: Record<string, number> = {}
-
-  for (const position of positions) {
-    const count = await prisma.profile.count({
-      where: {
-        ...query,
-        position,
-      },
-    })
-    counts[position] = count
-  }
-
-  return counts
+  return updatedProfile
 }

@@ -1,5 +1,6 @@
 'use server'
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   findProfileById,
   updateProfileById,
@@ -20,5 +21,5 @@ export const unlockProfile = withSentry(async (profileId: string) => {
     isOpenForWork: true,
   })
 
-  return updatedProfile
+  return new ProfileModel(updatedProfile)
 })

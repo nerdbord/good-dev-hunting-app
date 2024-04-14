@@ -18,9 +18,9 @@ export type ModerationFilterType = PropsWithChildren & {
   setActiveTab: (value: PublishingState | null) => void
 }
 
-const ModerationFilterContext = createContext<ModerationFilterType | undefined>(
-  undefined,
-)
+const ModerationFilterProvider = createContext<
+  ModerationFilterType | undefined
+>(undefined)
 
 function ModerationFilterContextProvider({
   children,
@@ -49,7 +49,7 @@ function ModerationFilterContextProvider({
   }
 
   return (
-    <ModerationFilterContext.Provider
+    <ModerationFilterProvider.Provider
       value={{
         publishingStateFilter: publishingState,
         setPublishingStateFilter,
@@ -62,14 +62,14 @@ function ModerationFilterContextProvider({
       }}
     >
       {children}
-    </ModerationFilterContext.Provider>
+    </ModerationFilterProvider.Provider>
   )
 }
 
-export { ModerationFilterContext, ModerationFilterContextProvider }
+export { ModerationFilterContextProvider, ModerationFilterProvider }
 
 export const useModerationFilter = (): ModerationFilterType => {
-  const context = useContext(ModerationFilterContext)
+  const context = useContext(ModerationFilterProvider)
   if (!context) {
     throw new Error(
       'useModerationFilter must be used within a ModerationFilterProvider',

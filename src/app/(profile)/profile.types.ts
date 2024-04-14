@@ -1,39 +1,27 @@
-import { type TechnologyModel } from '@/backend/profile/profile.types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { type EmploymentType, type PublishingState } from '@prisma/client'
 
-export interface ProfileModel {
-  id: string
+export type ProfileUpdateParams = Partial<ProfileModel>
+
+export type ProfileCreateParams = {
   fullName: string
   avatarUrl: string | null
   linkedIn: string | null
-  userId: string
   bio: string
-  country: {
-    name: string
-  }
+  country: string
   openForCountryRelocation: boolean
-  city: {
-    name: string
-  }
-  openForCityRelocation: boolean
+  city: string
   isOpenForWork: boolean
+  openForCityRelocation: boolean
   remoteOnly: boolean
   position: JobSpecialization
   seniority: string
-  techStack: Omit<TechnologyModel, 'id'>[]
+  techStack: { name: string }[]
   employmentTypes: EmploymentType[]
   githubUsername: string
   state: PublishingState
-  userEmail: string
   viewCount: number
-}
-
-export type ProfilePayload = Omit<
-  ProfileModel,
-  'id' | 'userEmail' | 'techStack' | 'userId'
-> & {
-  techStack: TechStack
 }
 
 export type TechStack = {

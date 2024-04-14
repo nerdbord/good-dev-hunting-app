@@ -1,8 +1,8 @@
 import ModerationProfilesWithFilter from '@/app/(profile)/(components)/ProfileList/ModerationProfilesWithFilter'
-import { getAllPublishedProfilesPayload } from '@/backend/profile/profile.service'
+import { findAllPublishedProfiles } from '@/app/(profile)/_actions/findAllPublishedProfiles'
 
 export default async function ModerationProfileList() {
-  const profiles = await getAllPublishedProfilesPayload()
+  const profiles = await findAllPublishedProfiles()
 
   return <ModerationProfilesWithFilter profiles={profiles} />
 }

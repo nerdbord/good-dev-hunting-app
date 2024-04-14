@@ -2,7 +2,7 @@ import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobil
 import styles from './LoginHeader.module.scss'
 
 // components
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'

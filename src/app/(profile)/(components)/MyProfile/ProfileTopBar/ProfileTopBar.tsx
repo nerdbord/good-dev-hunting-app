@@ -1,18 +1,14 @@
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import ProfileViews from '@/app/(profile)/my-profile/(components)/ProfileViews/ProfileViews'
 import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
-import { type ProfileModel } from '@/app/(profile)/types'
 import { PublishingState } from '@prisma/client'
 import styles from './ProfileTopBar.module.scss'
 
-const ProfileTopBar = async ({
-  profile,
-}: {
-  profile: ProfileModel
-  isConnectedToNerdbord: boolean
-}) => {
+const ProfileTopBar = async () => {
+  const { profile } = useProfileModel()
   const isPending = profile.state === PublishingState.PENDING
   const isRejected = profile.state === PublishingState.REJECTED
   return (

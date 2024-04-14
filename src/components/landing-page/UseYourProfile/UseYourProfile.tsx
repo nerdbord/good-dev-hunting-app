@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findProfileWithUserInclude } from '@/backend/profile/profile.service'

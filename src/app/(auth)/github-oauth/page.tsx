@@ -1,6 +1,6 @@
-﻿import { AppRoutes } from '@/utils/routes'
+﻿import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
-import { getAuthorizedUser } from '../helpers'
 
 const GithubOAuth = async () => {
   const { user, userIsHunter, userHasProfile } = await getAuthorizedUser()

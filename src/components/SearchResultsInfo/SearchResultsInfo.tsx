@@ -1,6 +1,6 @@
-﻿import { Button } from '../Button/Button'
-import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+﻿import { useModerationFilter } from '@/app/(profile)/_providers/ModerationFilter.provider'
 import { PublishingState } from '@prisma/client'
+import { Button } from '../Button/Button'
 
 import styles from './SearchResultsInfo.module.scss'
 

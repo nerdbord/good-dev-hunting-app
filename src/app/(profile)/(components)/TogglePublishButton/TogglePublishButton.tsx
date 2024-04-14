@@ -7,7 +7,7 @@ import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
-import { JobSpecialization } from '@/app/(profile)/types'
+import { JobSpecialization } from '@/app/(profile)/profile.types'
 import { publishProfile } from '../../_actions/publishProfile'
 import { unpublishProfile } from '../../_actions/unpublishProfile'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'

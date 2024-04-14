@@ -1,6 +1,6 @@
 ﻿'use server'
 
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import { updateUserNerdbordId } from '@/backend/user/user.service'
 import { type NerdbordUser } from '@/lib/nerdbord/types'
 import { withSentry } from '@/utils/errHandling'
