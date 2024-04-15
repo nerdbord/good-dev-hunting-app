@@ -1,4 +1,5 @@
 'use client'
+import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
 import { type ProfileModel } from '@/app/(profile)/types'
 import { Button } from '@/components/Button/Button'
@@ -31,18 +32,21 @@ export default function ContactForm({
 }) {
   const { runAsync, loading } = useAsyncAction()
   const { addToast } = useToast()
+  const { refreshProfilesWithContactRequests } = useProfiles()
   const plausible = usePlausible()
 
   const handleSendEmail = (values: ContactFormValuesWithChecks) => {
     runAsync(async () => {
       try {
-        await sendProfileContactRequest({
+        const contactRequest = await sendProfileContactRequest({
           senderEmail: values.senderEmail,
           senderFullName: values.senderFullName,
           profileId: userProfile.id,
           message: values.message,
           subject: values.subject,
         })
+
+        refreshProfilesWithContactRequests(userProfile.id, contactRequest)
 
         plausible(PlausibleEvents.ContactDeveloper, {
           props: {

@@ -13,7 +13,7 @@ import {
   type ProfileModel,
   type SearchParamsFilters,
 } from '@/app/(profile)/types'
-import { type ProfileView } from '@prisma/client'
+import { type ContactRequest, type ProfileView } from '@prisma/client'
 import { useSearchParams } from 'next/navigation'
 import {
   createContext,
@@ -40,6 +40,10 @@ interface ProfilesContextProps {
     viewerID: string,
     viewedProfileID: string,
     profileView: ProfileView,
+  ): void
+  refreshProfilesWithContactRequests(
+    profileID: string,
+    contactRequest: ContactRequest,
   ): void
 }
 
@@ -124,6 +128,22 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
     })
   }
 
+  const refreshProfilesWithContactRequests = (
+    profileID: string,
+    contactRequest: ContactRequest,
+  ) => {
+    setAllProfiles((prevProfiles) => {
+      return prevProfiles.map((profile) => {
+        if (profile.id !== profileID) return profile
+
+        return {
+          ...profile,
+          contactRequests: [...profile.contactRequests, contactRequest],
+        }
+      })
+    })
+  }
+
   const filteredProfiles = handleFilterProfiles(allProfiles)
 
   return (
@@ -134,6 +154,7 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
         isFetching,
         handleFilterProfiles,
         refreshProfilesWithProfileViews,
+        refreshProfilesWithContactRequests,
       }}
     >
       {children}
