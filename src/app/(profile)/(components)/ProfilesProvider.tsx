@@ -13,6 +13,7 @@ import {
   type ProfileModel,
   type SearchParamsFilters,
 } from '@/app/(profile)/types'
+import { type ProfileView } from '@prisma/client'
 import { useSearchParams } from 'next/navigation'
 import {
   createContext,
@@ -35,7 +36,11 @@ interface ProfilesContextProps {
       disableSpecFilter?: boolean
     },
   ): ProfileModel[]
-  handleFetchProfiles(): void
+  refreshProfilesWithProfileViews(
+    viewerID: string,
+    viewedProfileID: string,
+    profileView: ProfileView,
+  ): void
 }
 
 export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
@@ -54,7 +59,19 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
   )
 
   useEffect(() => {
-    handleFetchProfiles()
+    const fetchProfiles = async () => {
+      setIsFetching(true)
+      try {
+        const fetchedProfiles = await findAllPublishedProfiles()
+        setAllProfiles(fetchedProfiles)
+        setIsFetching(false)
+      } catch (err) {
+        setAllProfiles([])
+        setIsFetching(false)
+      }
+    }
+
+    fetchProfiles()
   }, [])
 
   const handleFilterProfiles = useCallback(
@@ -76,16 +93,35 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
     [filters],
   )
 
-  const handleFetchProfiles = async () => {
-    setIsFetching(true)
-    try {
-      const fetchedProfiles = await findAllPublishedProfiles()
-      setAllProfiles(fetchedProfiles)
-      setIsFetching(false)
-    } catch (err) {
-      setAllProfiles([])
-      setIsFetching(false)
-    }
+  const refreshProfilesWithProfileViews = (
+    viewerID: string,
+    viewedProfileID: string,
+    profileView: ProfileView,
+  ) => {
+    setAllProfiles((prevProfiles) => {
+      return prevProfiles.map((profile) => {
+        if (profile.id !== viewedProfileID) return profile
+
+        const existingProfileView = profile.profileViews.find(
+          (view) => view.viewerId === viewerID,
+        )
+
+        let updatedProfileViews
+
+        if (existingProfileView) {
+          updatedProfileViews = profile.profileViews.map((view) => {
+            return { ...view, createdAt: new Date() }
+          })
+        } else {
+          updatedProfileViews = [...profile.profileViews, profileView]
+        }
+
+        return {
+          ...profile,
+          profileViews: updatedProfileViews,
+        }
+      })
+    })
   }
 
   const filteredProfiles = handleFilterProfiles(allProfiles)
@@ -97,7 +133,7 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
         filteredProfiles,
         isFetching,
         handleFilterProfiles,
-        handleFetchProfiles,
+        refreshProfilesWithProfileViews,
       }}
     >
       {children}

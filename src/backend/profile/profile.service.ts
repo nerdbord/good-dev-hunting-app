@@ -346,12 +346,6 @@ export async function updateOrCreateProfileView(
   viewerId: string,
   viewedProfileId: string,
 ) {
-  const foundProfile = await getProfileById(viewedProfileId)
-
-  if (foundProfile?.userId === viewerId) {
-    return null
-  }
-
   const existingView = await prisma.profileView.findFirst({
     where: {
       viewerId,
