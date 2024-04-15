@@ -1,5 +1,5 @@
 'use server'
-import { authorizeUser } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import {
   findProfileById,
   updateProfileById,
@@ -9,7 +9,9 @@ import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
 
 export const publishProfile = withSentry(async (profileId: string) => {
-  await authorizeUser()
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
+
   const foundProfile = await findProfileById(profileId)
 
   if (!foundProfile) {

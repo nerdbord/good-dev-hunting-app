@@ -1,0 +1,15 @@
+.box {
+  background-color: #161a1f;
+  padding: 50px;
+  width: 100%;
+  min-height: 444px;
+
+  @include mobile {
+    padding: 16px;
+    padding-bottom: 32px;
+    min-height: auto;
+  }
+}
+.boxContent {
+  max-width: 350px;
+}

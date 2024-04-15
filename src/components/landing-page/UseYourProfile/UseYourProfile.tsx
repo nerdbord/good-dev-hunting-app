@@ -1,18 +1,14 @@
-import { authOptions } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findProfileWithUserInclude } from '@/backend/profile/profile.service'
-import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
 import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
-  const session = await getServerSession(authOptions)
-
-  const profile = session
-    ? await findProfileWithUserInclude(session.user.email)
-    : null
+  const { user } = await getAuthorizedUser()
+  const profile = user ? await findProfileWithUserInclude(user.email) : null
 
   return (
     <section id="UseYourProfile" className={style.container}>

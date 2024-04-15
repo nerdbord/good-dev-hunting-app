@@ -1,6 +1,21 @@
+import { type Role } from '@prisma/client'
 import 'next-auth'
 
 declare module 'next-auth' {
+  interface User {
+    id?: string
+    email?: string | null
+    avatarUrl?: string | null
+    githubUsername?: string | null
+  }
+
+  interface AdapterUser {
+    id?: string
+    email?: string | null
+    avatarUrl?: string | null
+    githubUsername?: string | null
+  }
+
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
@@ -10,6 +25,9 @@ declare module 'next-auth' {
       email: string
       image: string
       name: string
+      roles: Role[]
+      profileId: string | null
+      githubUsername: string | null
     }
   }
 }
@@ -21,5 +39,8 @@ declare module 'next-auth/jwt' {
     email?: string | null
     picture?: string | null
     sub?: string
+    roles: Role[]
+    profileId: string | null
+    githubUsername: string | null
   } | null
 }
