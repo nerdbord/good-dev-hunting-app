@@ -44,6 +44,7 @@ const BioTextArea: React.FC<TextAreaProps> = ({ value, name, onBlur }) => {
     <div className={styles.editorWrapper}>
       <MDXEditor
         className={`${styles.mdxEditorCustom} dark-theme dark-editor`}
+        contentEditableClassName={styles.mdxContentEditable}
         onChange={handleChange}
         //@ts-ignore
         onBlur={onBlur}
