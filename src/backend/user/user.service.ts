@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prismaClient'
 import { type Prisma, type Role } from '@prisma/client'
 import { serializeUserToUserPayload } from './user.serializer'
-import { type CreateUserPayload } from './user.types'
 
 export async function getUserById(id: string) {
   const userById = await prisma.user.findFirst({
@@ -81,25 +80,6 @@ export async function syncUserWithGithub(credentials: {
   }
 
   return null
-}
-
-export async function createUser(payload: CreateUserPayload) {
-  const createdUser = await prisma.user.create({
-    data: {
-      email: payload.email,
-      avatarUrl: payload.image,
-      githubDetails: {
-        create: {
-          username: payload.githubUsername,
-        },
-      },
-    },
-    include: {
-      githubDetails: true,
-    },
-  })
-
-  return createdUser
 }
 
 export async function updateUserData(

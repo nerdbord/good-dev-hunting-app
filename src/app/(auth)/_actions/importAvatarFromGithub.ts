@@ -1,35 +1,19 @@
 'use server'
-import { authOptions } from '@/app/(auth)/auth'
-import {
-  findUserByEmail,
-  getGitHubDetails,
-  updateAvatar,
-} from '@/backend/user/user.service'
+import { updateAvatar } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
-import { getServerSession } from 'next-auth'
+import { getAuthorizedUser } from '../helpers'
 
 export const importAvatarFromGithub = withSentry(async () => {
-  const session = await getServerSession(authOptions)
-  if (!session?.user.email) {
-    throw new Error('User not found')
-  }
+  const { user } = await getAuthorizedUser()
+  if (!user) throw new Error('User not found')
+  if (!user.githubUsername) throw new Error('Github Username not found')
 
-  const user = await findUserByEmail(session.user.email)
-  if (!user) {
-    throw new Error('User not found')
-  }
-
-  const userGitHubDetails = await getGitHubDetails(user.id)
-  if (!userGitHubDetails) {
-    throw new Error('User not found')
-  }
-
-  const avatarUrl = `https://github.com/${userGitHubDetails.username}.png`
+  const avatarUrl = `https://github.com/${user.githubUsername}.png`
   if (!avatarUrl) {
     throw new Error('Avatar not found')
   }
 
-  const updatedUser = await updateAvatar(session.user.email, avatarUrl)
+  const updatedUser = await updateAvatar(user.email, avatarUrl)
 
   return updatedUser.avatarUrl
 })

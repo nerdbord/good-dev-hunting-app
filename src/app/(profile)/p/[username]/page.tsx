@@ -1,11 +1,9 @@
-import { authOptions } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
-import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { countProfileView } from '../../_actions/countProfileView'
 import styles from './page.module.scss'
@@ -46,21 +44,25 @@ const UserProfilePage = async ({
 }: {
   params: { username: string }
 }) => {
-  const selectedProfile = await getProfileByGithubUsername(params.username)
-  const session = await getServerSession(authOptions)
+  const { user: authorizedUser } = await getAuthorizedUser()
+  if (!authorizedUser) {
+    return redirect(AppRoutes.signIn)
+  }
 
+  const selectedProfile = await getProfileByGithubUsername(params.username)
   if (!selectedProfile) {
     redirect(AppRoutes.profilesList)
   }
 
   try {
-    await countProfileView(selectedProfile.id, session?.user.id)
+    await countProfileView(selectedProfile.id, authorizedUser.id)
   } catch (error) {
     console.error('Error counting profile view:', error)
   }
 
-  const user = await findUserByEmail(selectedProfile.userEmail)
-  const isConnectedToNerdbord = !!user?.nerdbordUserId
+  // const user = await findUserByEmail(selectedProfile.userEmail)
+  // const isConnectedToNerdbord = !!user?.nerdbordUserId
+  const isConnectedToNerdbord = false // connected to nerdbord feature is currently dissabled
 
   return (
     <div className={styles.wrapper}>

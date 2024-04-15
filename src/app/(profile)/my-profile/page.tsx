@@ -1,32 +1,27 @@
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
-import { authOptions } from '@/app/(auth)/auth'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import ProfileDetails from '@/app/(profile)/(components)/MyProfile/ProfileDetails/ProfileDetails'
 import ProfileMain from '@/app/(profile)/(components)/MyProfile/ProfileMain/ProfileMain'
 import ProfileTopBar from '@/app/(profile)/(components)/MyProfile/ProfileTopBar/ProfileTopBar'
 import { getProfileByUserEmail } from '@/backend/profile/profile.service'
-import { findUserByEmail } from '@/backend/user/user.service'
 import { AppRoutes } from '@/utils/routes'
-import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
 
 export const revalidate = 0
 
 const MyProfilePage = async () => {
-  const session = await getServerSession(authOptions)
-
-  if (!session?.user) {
+  const { user, userIsHunter } = await getAuthorizedUser()
+  if (!user || userIsHunter) {
     redirect(AppRoutes.profilesList)
   }
 
-  const profile = await getProfileByUserEmail(session.user.email)
-
+  const profile = await getProfileByUserEmail(user.email)
   if (!profile) {
     redirect(AppRoutes.profilesList)
   }
 
-  const user = await findUserByEmail(session.user.email)
-  const isConnectedToNerdbord = !!user?.nerdbordUserId
+  const isConnectedToNerdbord = false // connected to nerdbord feature is currently dissabled
 
   return (
     <div className={styles.wrapper}>
