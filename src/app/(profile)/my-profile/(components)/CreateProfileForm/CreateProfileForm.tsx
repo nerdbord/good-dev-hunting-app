@@ -40,7 +40,6 @@ const initialValues: CreateProfileFormValues = {
   githubUsername: '',
   state: PublishingState.DRAFT,
   terms: false,
-  viewCount: 0,
 }
 
 export const validationSchema = Yup.object().shape({

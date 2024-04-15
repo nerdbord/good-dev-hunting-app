@@ -88,7 +88,6 @@ export enum JobOfferFiltersEnum {
 export type SearchParamsFilters = Record<JobOfferFiltersEnum, string[]>
 
 export interface ProfileFormValues {
-  viewCount: number
   fullName: string
   linkedin: string | null
   bio: string
