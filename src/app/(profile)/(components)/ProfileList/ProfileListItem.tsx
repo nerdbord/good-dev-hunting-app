@@ -24,11 +24,11 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
   const { refreshProfilesWithProfileViews } = useProfiles()
   const { runAsync } = useAsyncAction()
 
-  const isVisited = data.profileViews?.some(
+  const visitedProfile = data.profileViews?.find(
     (view) => view.viewerId === session?.user?.id,
   )
 
-  const isContacted = data.contactRequests?.some(
+  const contactedProfile = data.contactRequests?.find(
     (contact) => contact.senderEmail === session?.user?.email,
   )
 
@@ -62,8 +62,8 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
-      isVisited={isVisited}
-      isContacted={isContacted}
+      visitedProfile={visitedProfile}
+      contactedProfile={contactedProfile}
     />
   )
 }

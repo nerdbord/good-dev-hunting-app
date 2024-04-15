@@ -71,3 +71,21 @@ export const createQueryString = (
 
   return params.toString().replaceAll('%2C', ',')
 }
+
+export const renderRelativeDateLabel = (date: Date) => {
+  const today = new Date().setHours(0, 0, 0, 0)
+  const dateToCheck = new Date(date).setHours(0, 0, 0, 0)
+
+  const daysDifference = Math.round(
+    (today - dateToCheck) / (1000 * 60 * 60 * 24),
+  )
+
+  switch (daysDifference) {
+    case 0:
+      return 'today'
+    case 1:
+      return 'yesterday'
+    default:
+      return `on ${date.toLocaleDateString()}`
+  }
+}

@@ -1,4 +1,7 @@
-import { jobSpecializationThemes } from '@/app/(profile)/helpers'
+import {
+  jobSpecializationThemes,
+  renderRelativeDateLabel,
+} from '@/app/(profile)/helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -12,6 +15,7 @@ import { Avatar } from '@/components/Avatar/Avatar'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
+import { type ContactRequest, type ProfileView } from '@prisma/client'
 import classNames from 'classnames/bind'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -22,8 +26,8 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
-  isVisited?: boolean
-  isContacted?: boolean
+  visitedProfile?: ProfileView
+  contactedProfile?: ContactRequest
 }
 
 const cx = classNames.bind(styles)
@@ -55,8 +59,8 @@ const ProfileCard = ({
   onClick,
   withStateStatus,
   searchTerm,
-  isContacted,
-  isVisited,
+  contactedProfile,
+  visitedProfile,
 }: ProfileCardProps) => {
   const specializationTheme = useMemo(
     () => ({
@@ -67,6 +71,11 @@ const ProfileCard = ({
 
   const getTechnologyClasses = cx({
     [styles.technology]: true,
+  })
+
+  const getNameClasses = cx({
+    [styles.name]: true,
+    [styles.active]: contactedProfile || visitedProfile,
   })
 
   return (
@@ -87,19 +96,23 @@ const ProfileCard = ({
               <Avatar src={data.avatarUrl || ''} size={78} />
             </div>
             <div className={styles.data}>
-              <p
-                className={`${styles.name} ${
-                  (isContacted || isVisited) && styles.active
-                }`}
-              >
+              <p className={getNameClasses}>
                 {highlightText(data.fullName, searchTerm)}
-                {isVisited && !isContacted && (
-                  <Tooltip text="You have visited this profile today">
+                {visitedProfile && !contactedProfile && (
+                  <Tooltip
+                    text={`You have visited this profile ${renderRelativeDateLabel(
+                      visitedProfile.createdAt,
+                    )}`}
+                  >
                     <ViewIcon color="#5E28F6" />
                   </Tooltip>
                 )}
-                {isContacted && (
-                  <Tooltip text="You have messaged this profile today">
+                {contactedProfile && (
+                  <Tooltip
+                    text={`You have messaged this profile ${renderRelativeDateLabel(
+                      contactedProfile.createdAt,
+                    )}`}
+                  >
                     <SendIcon color="#5E28F6" />
                   </Tooltip>
                 )}
