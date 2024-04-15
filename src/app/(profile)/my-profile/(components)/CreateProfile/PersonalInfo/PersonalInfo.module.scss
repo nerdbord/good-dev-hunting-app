@@ -76,8 +76,13 @@
 
 .lettersCountParent {
   position: relative;
+  min-height: 414px;
+  display: grid;
+  grid-template-rows: minmax(auto, 1fr);
+  @include mobile {
+    min-height: 414px;
+  }
 }
-
 
 .lettersCount {
   position: absolute;
