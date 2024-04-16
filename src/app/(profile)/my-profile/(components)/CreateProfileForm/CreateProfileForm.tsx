@@ -75,16 +75,6 @@ export const validationSchema = Yup.object().shape({
   terms: Yup.boolean()
     .required('Agreement is required')
     .oneOf([true], 'Agreement is required'),
-  // hourlyRateMin: Yup.number()
-  //   .nullable()
-  //   .when('hourlyRateMax', (hourlyRateMax, schema) =>
-  //     hourlyRateMax ? schema : schema.required('Hourly rate is required'),
-  //   ),
-  // hourlyRateMax: Yup.number()
-  //   .nullable()
-  //   .when('hourlyRateMin', (hourlyRateMin, schema) =>
-  //     hourlyRateMin ? schema : schema.required('Hourly rate is required'),
-  //   ),
 })
 
 const CreateProfileForm = () => {

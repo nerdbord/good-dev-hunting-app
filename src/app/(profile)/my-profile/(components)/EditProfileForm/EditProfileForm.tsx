@@ -102,7 +102,7 @@ const EditProfileForm = ({
       state: PublishingState.PENDING,
       viewCount: values.viewCount,
       hourlyRateMin: values.hourlyRateMin || null,
-      hourlyRateMax: values.hourlyRateMax || null,
+      hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
     }
 
