@@ -29,10 +29,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
   )
 }
 
-export const useUserModel = () => {
+export const useAuth = () => {
   const context = React.useContext(UserContext)
   if (context === undefined) {
-    throw new Error('useUserModel must be used within a UserProvider')
+    throw new Error('useAuth must be used within a UserProvider')
   }
   return context
 }
