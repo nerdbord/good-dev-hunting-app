@@ -1,10 +1,15 @@
-import { type ProfileModel } from '@/app/(profile)/types'
+import { findProfileById } from '@/app/(profile)/_actions'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
 
-const ProfileDetails = async ({ profile }: { profile: ProfileModel }) => {
+interface ProfileDetailsProps {
+  profileId: string
+}
+
+const ProfileDetails = async (props: ProfileDetailsProps) => {
+  const profile = await findProfileById(props.profileId)
   return (
     <>
       <section className={styles.container}>

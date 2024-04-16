@@ -1,6 +1,6 @@
 'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import Loading from '@/app/loading'
 import styles from './ProfileList.module.scss'
 

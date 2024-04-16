@@ -1,6 +1,5 @@
 import { prisma } from '@/lib/prismaClient'
 import { type Prisma, type Role } from '@prisma/client'
-import { serializeUserToUserPayload } from './user.serializer'
 
 export async function getUserById(id: string) {
   const userById = await prisma.user.findFirst({
@@ -14,7 +13,7 @@ export async function getUserById(id: string) {
   })
 
   if (userById !== null) {
-    return serializeUserToUserPayload(userById)
+    return userById
   }
 
   // Handle the case when profileById is null
@@ -25,6 +24,20 @@ export async function findUserByEmail(email: string) {
   const foundUser = await prisma.user.findUnique({
     where: {
       email,
+    },
+    include: {
+      githubDetails: true,
+      profile: true,
+    },
+  })
+
+  return foundUser
+}
+
+export async function findUserById(id: string) {
+  const foundUser = await prisma.user.findUnique({
+    where: {
+      id,
     },
     include: {
       githubDetails: true,
@@ -118,6 +131,9 @@ export async function addUserRole(id: string, role: Role) {
         set: updatedRoles,
       },
     },
+    include: {
+      githubDetails: true,
+    },
   })
 }
 
@@ -136,6 +152,9 @@ export async function removeUserRole(id: string, role: Role) {
       roles: {
         set: updatedRoles,
       },
+    },
+    include: {
+      githubDetails: true,
     },
   })
 }
@@ -164,6 +183,9 @@ export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
     },
     data: {
       nerdbordUserId: nerdbordId,
+    },
+    include: {
+      githubDetails: true,
     },
   })
 

@@ -1,12 +1,17 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
+import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
 import ContactSuccessModal from '../ContactSuccessModal.tsx/ContactSuccessModal'
 
-const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
+const ContactBtn = () => {
   const { showModal, closeModal } = useModal()
+  const { profile } = useProfileModel()
+
+  if (!profile) {
+    return null
+  }
 
   return (
     <div data-test-id="contactBtn">
@@ -14,11 +19,11 @@ const ContactBtn = ({ userProfile }: { userProfile: ProfileModel }) => {
         onClick={() => {
           showModal(
             <ContactFormModal
-              userProfile={userProfile}
+              userProfile={profile}
               showSuccessMsg={() => {
                 showModal(
                   <ContactSuccessModal
-                    userProfile={userProfile}
+                    userProfile={profile}
                     onClose={closeModal}
                   />,
                 )

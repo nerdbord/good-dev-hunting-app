@@ -1,7 +1,7 @@
 ﻿import {
   JobOfferFiltersEnum,
   type SearchParamsFilters,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { type ReadonlyURLSearchParams } from 'next/navigation'
 
 export const createFiltersObjFromSearchParams = (

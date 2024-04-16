@@ -2,15 +2,15 @@
 import {
   createFiltersObjFromSearchParams,
   createQueryString,
-} from '@/app/(profile)/helpers'
+} from '@/app/(profile)/profile.helpers'
 import {
   mappedEmploymentType,
   mappedSeniorityLevel,
-} from '@/app/(profile)/mappers'
+} from '@/app/(profile)/profile.mappers'
 import {
   JobOfferFiltersEnum,
   type SearchParamsFilters,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
