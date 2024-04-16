@@ -2,10 +2,11 @@
 import { type ProfileModel } from '@/app/(profile)/types'
 import { useModerationFilter } from '@/contexts/ModerationFilterContext'
 import useTabCounter from '@/hooks/useTabCounter'
-import { PublishingState } from '@prisma/client'
+import { PublishingState, Role } from '@prisma/client'
 import { SearchResultsInfo } from '../../../../components/SearchResultsInfo/SearchResultsInfo'
 import { ModerationProfileListItem } from './ModerationProfileListItem'
 
+import { useSession } from 'next-auth/react'
 import styles from './ProfileList.module.scss'
 
 type Props = {
@@ -17,6 +18,9 @@ export default function ModerationProfilesWithFilters({
 }: Props) {
   const { publishingStateFilter, setPendingStateCounter, searchEmailValue } =
     useModerationFilter()
+
+  const { data: session } = useSession()
+  const userIsModerator = session?.user.roles.includes(Role.MODERATOR)
 
   const filteredProfiles = profiles.filter((profile: ProfileModel) => {
     if (searchEmailValue) {
@@ -45,7 +49,11 @@ export default function ModerationProfilesWithFilters({
       <div className={hasResults ? styles.profileListCont : styles.noProfiles}>
         {hasResults ? (
           filteredProfiles.map((profile) => (
-            <ModerationProfileListItem key={profile.id} profile={profile} />
+            <ModerationProfileListItem
+              key={profile.id}
+              profile={profile}
+              userIsModerator={userIsModerator}
+            />
           ))
         ) : (
           <p>No profiles found</p>

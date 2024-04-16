@@ -19,6 +19,7 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
+  userIsModerator: boolean | undefined
 }
 
 const cx = classNames.bind(styles)
@@ -50,7 +51,9 @@ const ProfileCard = ({
   onClick,
   withStateStatus,
   searchTerm,
+  userIsModerator,
 }: ProfileCardProps) => {
+  // ...
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -61,6 +64,10 @@ const ProfileCard = ({
   const getTechnologyClasses = cx({
     [styles.technology]: true,
   })
+
+  const linkRoute = userIsModerator
+    ? `${AppRoutes.moderationProfile}/${data.userId}`
+    : `${AppRoutes.profile}/${data.githubUsername}`
   return (
     <div
       style={specializationTheme}
@@ -68,11 +75,7 @@ const ProfileCard = ({
         withStateStatus && styles.moderationFrame
       }`}
     >
-      <Link
-        onClick={onClick}
-        href={`${AppRoutes.profile}/${data.githubUsername}`}
-        passHref
-      >
+      <Link onClick={onClick} href={linkRoute} passHref>
         <div className={styles.frame}>
           <div className={styles.container} data-test-id="profileContainer">
             <div className={styles.profile}>
