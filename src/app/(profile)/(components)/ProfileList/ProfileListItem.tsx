@@ -28,7 +28,6 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
     <ProfileCard
       data={data}
       searchTerm={searchParams.get('search')}
-      onClick={handleOpenProfile}
       userIsModerator
     />
   )

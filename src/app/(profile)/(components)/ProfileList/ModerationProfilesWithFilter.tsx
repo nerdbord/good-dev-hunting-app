@@ -6,7 +6,9 @@ import { PublishingState, Role } from '@prisma/client'
 import { SearchResultsInfo } from '../../../../components/SearchResultsInfo/SearchResultsInfo'
 import { ModerationProfileListItem } from './ModerationProfileListItem'
 
+import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import styles from './ProfileList.module.scss'
 
 type Props = {
@@ -49,11 +51,13 @@ export default function ModerationProfilesWithFilters({
       <div className={hasResults ? styles.profileListCont : styles.noProfiles}>
         {hasResults ? (
           filteredProfiles.map((profile) => (
-            <ModerationProfileListItem
-              key={profile.id}
-              profile={profile}
-              userIsModerator={userIsModerator}
-            />
+            <Link href={`${AppRoutes.moderationProfile}/${profile.userId}`}>
+              <ModerationProfileListItem
+                key={profile.id}
+                profile={profile}
+                userIsModerator={userIsModerator}
+              />
+            </Link>
           ))
         ) : (
           <p>No profiles found</p>

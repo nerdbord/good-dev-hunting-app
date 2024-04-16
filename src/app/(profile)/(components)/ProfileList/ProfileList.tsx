@@ -2,6 +2,8 @@
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
 import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 import Loading from '@/app/loading'
+import { AppRoutes } from '@/utils/routes'
+import Link from 'next/link'
 import styles from './ProfileList.module.scss'
 
 const ProfileList = () => {
@@ -29,7 +31,9 @@ const ProfileList = () => {
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
         {profiles.map((profile) => (
-          <ProfileListItem key={profile.id} data={profile} />
+          <Link href={`${AppRoutes.profile}/${profile.githubUsername}`}>
+            <ProfileListItem key={profile.id} data={profile} />
+          </Link>
         ))}
       </div>
     </div>
