@@ -1,4 +1,3 @@
-import { sendContactRequest } from '@/backend/mailing/mailing.service'
 import { type ContactRequest } from '@prisma/client'
 
 interface ContactRequestRecipient {
@@ -6,7 +5,7 @@ interface ContactRequestRecipient {
   recipientEmail: string
 }
 
-export class ContactRequestModel implements ContactRequest {
+type ContactRequestModel = {
   id: string
   subject: string
   message: string
@@ -16,27 +15,20 @@ export class ContactRequestModel implements ContactRequest {
   recipientEmail: string
   recipientFullName: string
   createdAt: Date
+}
 
-  constructor(data: ContactRequest & ContactRequestRecipient) {
-    this.id = data.id
-    this.subject = data.subject
-    this.message = data.message
-    this.recipientFullName = data.recipientFullName
-    this.recipientEmail = data.recipientEmail
-    this.senderFullName = data.senderFullName
-    this.senderEmail = data.senderEmail
-    this.profileId = data.profileId
-    this.createdAt = new Date()
-  }
-
-  async send() {
-    return await sendContactRequest({
-      subject: this.subject,
-      message: this.message,
-      senderFullName: this.senderFullName,
-      senderEmail: this.senderEmail,
-      recipientEmail: this.recipientEmail,
-      recipientFullName: this.recipientFullName,
-    })
+export function createContactRequestModel(
+  data: ContactRequest & ContactRequestRecipient,
+): ContactRequestModel {
+  return {
+    id: data.id,
+    subject: data.subject,
+    message: data.message,
+    senderFullName: data.senderFullName,
+    senderEmail: data.senderEmail,
+    profileId: data.profileId,
+    recipientEmail: data.recipientEmail,
+    recipientFullName: data.recipientFullName,
+    createdAt: new Date(),
   }
 }

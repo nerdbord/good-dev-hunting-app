@@ -1,6 +1,6 @@
 'use client'
 import { findAllProfiles } from '@/app/(profile)/_actions'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PublishingState } from '@prisma/client'
 import {
   createContext,
@@ -41,7 +41,7 @@ function ModerationProvider({ children }: { children: React.ReactNode }) {
     const fetchProfiles = async () => {
       try {
         const fetchedProfiles = await findAllProfiles()
-        setProfiles(ProfileModel.mapProfilesWithRelations(fetchedProfiles))
+        setProfiles(fetchedProfiles)
       } catch (err) {
         setProfiles([])
       }

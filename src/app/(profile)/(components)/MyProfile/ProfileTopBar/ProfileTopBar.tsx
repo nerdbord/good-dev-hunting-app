@@ -4,7 +4,6 @@ import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishB
 import ProfileViews from '@/app/(profile)/(routes)/my-profile/(components)/ProfileViews/ProfileViews'
 import { ToggleOpenToWork } from '@/app/(profile)/(routes)/my-profile/(components)/ToggleOpenToWork'
 import { findProfileById } from '@/app/(profile)/_actions'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PublishingState } from '@prisma/client'
 import styles from './ProfileTopBar.module.scss'
 
@@ -14,23 +13,22 @@ interface ProfileTopBarProps {
 
 const ProfileTopBar = async (props: ProfileTopBarProps) => {
   const profile = await findProfileById(props.profileId)
-  const profileModel = new ProfileModel(profile)
 
-  const isPending = profileModel.state === PublishingState.PENDING
-  const isRejected = profileModel.state === PublishingState.REJECTED
+  const isPending = profile.state === PublishingState.PENDING
+  const isRejected = profile.state === PublishingState.REJECTED
   return (
     <div className={styles.titleBox}>
       <div className={styles.mobileProfilePreview}>
         <div className={styles.titleContainer}>
           <span className={styles.title}>Profile preview</span>
-          <ProfileViews viewCount={profileModel.viewCount} />
+          <ProfileViews viewCount={profile.viewCount} />
         </div>
 
         {!(isPending || isRejected) && (
           <div className={styles.toogleMobileView}>
             <ToggleOpenToWork
               profileId={props.profileId}
-              isOpenForWork={profileModel.isOpenForWork}
+              isOpenForWork={profile.isOpenForWork}
             />
           </div>
         )}
@@ -40,7 +38,7 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
           <div className={styles.mobileView}>
             <ToggleOpenToWork
               profileId={props.profileId}
-              isOpenForWork={profileModel.isOpenForWork}
+              isOpenForWork={profile.isOpenForWork}
             />
           </div>
         )}
@@ -62,7 +60,7 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
         <div className={styles.mobileView}>
           <EditProfileButton />
           <TogglePublishButton
-            state={profileModel.state}
+            state={profile.state}
             profileId={props.profileId}
           />
         </div>

@@ -1,5 +1,4 @@
 import { findProfileById } from '@/app/(profile)/_actions'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -19,10 +18,8 @@ const UserProfileMain = async ({
   profileId,
 }: PropsWithChildren<UserProfileProps>) => {
   const profile = await findProfileById(profileId)
-  const mappedProfile = new ProfileModel(profile)
   const countryFlag =
-    countries.find((country) => country.name === mappedProfile.country)?.flag ||
-    ''
+    countries.find((country) => country.name === profile.country)?.flag || ''
 
   return (
     <>
@@ -32,32 +29,32 @@ const UserProfileMain = async ({
         </div>
         <div className={styles.profile}>
           <div className={styles.user}>
-            <Avatar src={mappedProfile.avatarUrl || ''} size={100} />
+            <Avatar src={profile.avatarUrl || ''} size={100} />
             <div className={styles.name}>{profile.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
               <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
-              {mappedProfile.country}, {mappedProfile.city}
+              {profile.country}, {profile.city}
             </div>
-            {mappedProfile.openForCountryRelocation && (
+            {profile.openForCountryRelocation && (
               <div className={styles.location}>Open to country relocation</div>
             )}
-            {mappedProfile.openForCityRelocation && (
+            {profile.openForCityRelocation && (
               <div className={styles.location}>Open to city relocation</div>
             )}
-            {mappedProfile.remoteOnly && (
+            {profile.remoteOnly && (
               <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
               {mapSeniorityLevel(profile.seniority)}{' '}
-              {mapSpecializationToTitle(mappedProfile.position)}
+              {mapSpecializationToTitle(profile.position)}
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {mapEmploymentTypes(mappedProfile.employmentTypes).join(' / ')}
+                {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
               </div>
             </div>
           </div>

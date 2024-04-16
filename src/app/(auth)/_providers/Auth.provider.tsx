@@ -1,12 +1,11 @@
 'use client'
-import { UserModel } from '@/app/(auth)/_models/User.model'
-import { type UserWithRelations } from '@/backend/user/user.types'
+import { type UserModel } from '@/app/(auth)/_models/User.model'
 import { SessionProvider } from 'next-auth/react'
 import React, { createContext, type ReactNode } from 'react'
 
 interface AuthProviderProps {
   children: ReactNode
-  initialUser: UserWithRelations | null
+  initialUser: UserModel | null
 }
 
 export const UserContext = createContext<
@@ -21,9 +20,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
   initialUser,
 }) => {
   return (
-    <UserContext.Provider
-      value={{ user: initialUser ? new UserModel(initialUser) : null }}
-    >
+    <UserContext.Provider value={{ user: initialUser ? initialUser : null }}>
       <SessionProvider>{children}</SessionProvider>
     </UserContext.Provider>
   )

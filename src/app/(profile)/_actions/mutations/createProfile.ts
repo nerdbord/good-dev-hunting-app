@@ -1,6 +1,7 @@
 'use server'
 
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { createProfileModel } from '@/app/(profile)/_models/profile.model'
 import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
 import { createUserProfile } from '@/backend/profile/profile.service'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
@@ -19,6 +20,6 @@ export const createProfile = withSentry(
       mailerliteGroups.devGroup,
     )
 
-    return createdProfile
+    return createProfileModel(createdProfile)
   },
 )

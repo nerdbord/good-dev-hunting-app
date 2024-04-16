@@ -1,5 +1,6 @@
 'use server'
 
+import { createProfileModel } from '@/app/(profile)/_models/profile.model'
 import { getProfileByUserId } from '@/backend/profile/profile.service'
 import { withSentry } from '@/utils/errHandling'
 import { cache } from 'react'
@@ -9,9 +10,9 @@ export const findProfileByUserId = cache(
     const profile = await getProfileByUserId(userId)
 
     if (!profile) {
-      return null
+      throw new Error(`Profile with userId ${userId} not found`)
     }
 
-    return profile
+    return createProfileModel(profile)
   }),
 )

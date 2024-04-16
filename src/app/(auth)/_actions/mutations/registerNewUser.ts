@@ -1,3 +1,4 @@
+import { createUserModel } from '@/app/(auth)/_models/User.model'
 import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
@@ -31,6 +32,6 @@ export const registerNewUser = withSentry(
       `User ${devName} has created an account`,
     )
 
-    return createdUser
+    return createUserModel(createdUser)
   },
 )

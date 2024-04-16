@@ -1,4 +1,5 @@
 import { formatStateName } from '@/app/(profile)/(components)/FilterTabs/Tab'
+import { approveProfile } from '@/app/(profile)/_actions'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
@@ -24,7 +25,7 @@ export function StateStatus({ profile }: StateStatusProps) {
   const handleApprove = async () => {
     await runAsync(
       async () => {
-        await profile.approve()
+        await approveProfile(id)
       },
       {
         successMessage: 'Profile accepted and will be visible on the main page',

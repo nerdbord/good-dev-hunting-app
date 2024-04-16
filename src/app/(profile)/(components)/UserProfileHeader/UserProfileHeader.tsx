@@ -1,6 +1,5 @@
 import ContactBtn from '@/app/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
 import { findProfileById } from '@/app/(profile)/_actions'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { Button } from '@/components/Button/Button'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
@@ -16,12 +15,11 @@ export default async function UserProfileHeader({
   isNerdbordConnected,
 }: UserProfileHeaderType) {
   const profile = await findProfileById(profileId)
-  const mappedProfile = new ProfileModel(profile)
 
   const socialItemCount =
-    (mappedProfile.githubUsername ? 1 : 0) +
+    (profile.githubUsername ? 1 : 0) +
     (profile.linkedIn ? 1 : 0) +
-    (mappedProfile.githubUsername && isNerdbordConnected ? 1 : 0)
+    (profile.githubUsername && isNerdbordConnected ? 1 : 0)
 
   const commonClasses = cx('wrapper', {
     [styles.withBackBackButton]: !!withBackButton,
@@ -42,8 +40,8 @@ export default async function UserProfileHeader({
       <div className={wrapClasses}>
         <div className={styles.socialItemsWrapper}>
           <SocialItems
-            githubUsername={mappedProfile.githubUsername}
-            linkedIn={mappedProfile.linkedIn}
+            githubUsername={profile.githubUsername}
+            linkedIn={profile.linkedIn}
             isNerdbordConnected={isNerdbordConnected}
           />
         </div>

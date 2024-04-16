@@ -8,7 +8,7 @@ import {
   filterByTechnology,
 } from '@/app/(profile)/(components)/ProfileList/filters'
 import { findAllApprovedProfiles } from '@/app/(profile)/_actions/queries/findAllApprovedProfiles'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import { useSearchParams } from 'next/navigation'
@@ -55,7 +55,7 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
       setIsFetching(true)
       try {
         const fetchedProfiles = await findAllApprovedProfiles()
-        setAllProfiles(ProfileModel.mapProfilesWithRelations(fetchedProfiles))
+        setAllProfiles(fetchedProfiles)
         setIsFetching(false)
       } catch (err) {
         setAllProfiles([])
