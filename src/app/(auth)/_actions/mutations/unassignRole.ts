@@ -1,5 +1,4 @@
 'use server'
-import { UserModel } from '@/app/(auth)/_models/User.model'
 import { removeUserRole } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
 import { type Role } from '@prisma/client'
@@ -13,7 +12,7 @@ export const unassignRole = withSentry(async (id: string, role: Role) => {
       throw new Error('Failed to assign role')
     }
 
-    return new UserModel(updatedUser)
+    return updatedUser
   } catch (error) {
     Sentry.captureException(error)
     throw error

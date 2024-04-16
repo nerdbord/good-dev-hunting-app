@@ -117,9 +117,7 @@ const EditProfileForm = () => {
         ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
-      console.log('pre save profile', profile)
       const savedProfile = await profile.save(updateParams)
-      console.log('savedProfile', savedProfile)
       savedProfile &&
         updateSession({ ...session.user, name: savedProfile.fullName })
 

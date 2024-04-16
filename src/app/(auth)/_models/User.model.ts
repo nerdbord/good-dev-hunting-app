@@ -49,7 +49,7 @@ export class UserModel implements User {
     await updateMyAvatar(avatarUrl)
   }
 
-  sync(nextData: UserModel): UserModel {
+  sync(nextData: User): UserModel {
     return Object.assign(this, nextData)
   }
 }
