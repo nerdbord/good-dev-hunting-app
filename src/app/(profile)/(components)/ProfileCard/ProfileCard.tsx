@@ -19,7 +19,7 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
-  userIsModerator: boolean | undefined
+  userIsModerator?: boolean | undefined
 }
 
 const cx = classNames.bind(styles)
