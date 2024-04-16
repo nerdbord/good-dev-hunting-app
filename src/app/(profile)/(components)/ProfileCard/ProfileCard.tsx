@@ -61,6 +61,10 @@ const ProfileCard = ({
   const getTechnologyClasses = cx({
     [styles.technology]: true,
   })
+
+  const moderationView = withStateStatus
+    ? `${AppRoutes.moderationProfile}/${data.userId}`
+    : `${AppRoutes.profile}/${data.githubUsername}`
   return (
     <div
       style={specializationTheme}
@@ -68,11 +72,7 @@ const ProfileCard = ({
         withStateStatus && styles.moderationFrame
       }`}
     >
-      <Link
-        onClick={onClick}
-        href={`${AppRoutes.profile}/${data.githubUsername}`}
-        passHref
-      >
+      <Link onClick={onClick} href={moderationView} passHref>
         <div className={styles.frame}>
           <div className={styles.container} data-test-id="profileContainer">
             <div className={styles.profile}>
