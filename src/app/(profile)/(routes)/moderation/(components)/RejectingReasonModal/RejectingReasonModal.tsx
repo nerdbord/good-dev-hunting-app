@@ -3,20 +3,20 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useState } from 'react'
 import { Button } from '../../../../../../components/Button/Button'
 
-import { rejectProfile } from '@/app/(profile)/_actions/mutations/rejectProfile'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import styles from './RejectingReason.module.scss'
 
 export default function RejectingReasonModal({
   profileId,
   onClose,
+  onReject,
 }: {
   profileId: string
+  onReject: (profileId: string, reason: string) => Promise<void>
   onClose: () => void
 }) {
   const [reasonText, setReasonText] = useState('')
   const { runAsync, loading } = useAsyncAction()
-
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault()
     setReasonText(e.target.value)
@@ -25,7 +25,7 @@ export default function RejectingReasonModal({
     e.preventDefault()
     runAsync(
       async () => {
-        await rejectProfile(profileId, reasonText)
+        await onReject(profileId, reasonText)
         onClose()
       },
       {

@@ -1,6 +1,6 @@
 import { formatStateName } from '@/app/(profile)/(components)/FilterTabs/Tab'
-import { approveProfile } from '@/app/(profile)/_actions'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
 import { Button } from '@/components/Button/Button'
@@ -20,6 +20,7 @@ type StateStatusProps = {
 export function StateStatus({ profile }: StateStatusProps) {
   const { id, state } = profile
   const { showModal, closeModal } = useModal()
+  const { handleApprove: approveProfile, handleReject } = useModeration()
   const { runAsync, loading } = useAsyncAction()
 
   const handleApprove = async () => {
@@ -34,7 +35,13 @@ export function StateStatus({ profile }: StateStatusProps) {
   }
 
   const handleShowRejectModal = () => {
-    showModal(<RejectingReasonModal profileId={id} onClose={closeModal} />)
+    showModal(
+      <RejectingReasonModal
+        profileId={id}
+        onReject={handleReject}
+        onClose={closeModal}
+      />,
+    )
   }
 
   if (!(state in PublishingState)) return null
