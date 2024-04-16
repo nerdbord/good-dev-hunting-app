@@ -1,5 +1,5 @@
 'use client'
-import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
+import { LocationPreferencesFormKeys } from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { type ProfileFormValues } from '@/app/(profile)/profile.types'
 import { countries, type ICountries } from '@/data/countries'
 import { useFormikContext } from 'formik'

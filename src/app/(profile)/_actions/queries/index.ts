@@ -1,0 +1,6 @@
+export { findAllApprovedProfiles } from './findAllApprovedProfiles'
+export { findAllProfiles } from './findAllProfiles'
+export { findAllTeamProfiles } from './findAllTeamProfiles'
+export { findProfileByGithubUsername } from './findProfileByGithubUsername'
+export { findProfileById } from './findProfileById'
+export { findProfileByUserId } from './findProfileByUserId'

@@ -1,8 +1,13 @@
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { findProfileById } from '@/app/(profile)/_actions'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import styles from './UserProfileDetails.module.scss'
 
-const UserProfileDetails = ({ profile }: { profile: ProfileModel }) => {
+interface UserProfileDetailsProps {
+  profileId: string
+}
+
+const UserProfileDetails = async (props: UserProfileDetailsProps) => {
+  const profile = await findProfileById(props.profileId)
   return (
     <>
       <div className={styles.container}>

@@ -1,5 +1,5 @@
 'use client'
-import { useModerationFilter } from '@/app/(profile)/_providers/ModerationFilter.provider'
+import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
 import { PublishingState } from '@prisma/client'
 import Tab from './Tab'
 
@@ -16,7 +16,7 @@ export default function Tabs() {
     activeTab,
     setActiveTab,
     setEmailSearchValue,
-  } = useModerationFilter()
+  } = useModeration()
 
   const setModerationFilter = (tab: PublishingState) => {
     setActiveTab(PublishingState[tab])

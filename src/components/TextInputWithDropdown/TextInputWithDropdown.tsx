@@ -6,7 +6,7 @@ import { useRef, useState, type ChangeEvent } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { type TextInputProps } from '../TextInput/TextInput'
 
-import { LocationPreferencesFormKeys } from '@/app/(profile)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
+import { LocationPreferencesFormKeys } from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { type ProfileFormValues } from '@/app/(profile)/profile.types'
 import styles from './TextInputWithDropdown.module.scss'
 

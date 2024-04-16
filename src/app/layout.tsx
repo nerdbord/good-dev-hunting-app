@@ -1,6 +1,5 @@
-import AuthProvider from '@/app/(auth)/(components)/AuthProvider'
-import { findUserById } from '@/app/(auth)/_actions/findUserById'
-import { UserProvider } from '@/app/(auth)/_providers/User.provider'
+import { findUserById } from '@/app/(auth)/_actions'
+import AuthProvider from '@/app/(auth)/_providers/Auth.provider'
 import { ProfilesProvider } from '@/app/(profile)/_providers/Profiles.provider'
 import { auth } from '@/auth'
 import { ModalProvider } from '@/contexts/ModalContext'
@@ -38,7 +37,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await auth()
-  const user = session?.user.id ? await findUserById(session.user.id) : null
+  const user = session?.user ? await findUserById(session.user.id) : null
 
   return (
     <html lang="en">
@@ -46,13 +45,11 @@ export default async function RootLayout({
         <PlausibleProvider
           domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
         >
-          <AuthProvider>
+          <AuthProvider initialUser={user}>
             <ToastContextProvider>
-              <UserProvider user={user}>
-                <ProfilesProvider>
-                  <ModalProvider>{children}</ModalProvider>
-                </ProfilesProvider>
-              </UserProvider>
+              <ProfilesProvider>
+                <ModalProvider>{children}</ModalProvider>
+              </ProfilesProvider>
             </ToastContextProvider>
           </AuthProvider>
         </PlausibleProvider>

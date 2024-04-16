@@ -1,5 +1,5 @@
+import { StateStatus } from '@/app/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
 import { jobSpecializationThemes } from '@/app/(profile)/profile.helpers'
 import {
   mapEmploymentTypes,

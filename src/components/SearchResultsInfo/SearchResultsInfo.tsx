@@ -1,4 +1,4 @@
-﻿import { useModerationFilter } from '@/app/(profile)/_providers/ModerationFilter.provider'
+﻿import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
 import { PublishingState } from '@prisma/client'
 import { Button } from '../Button/Button'
 
@@ -16,7 +16,7 @@ export const SearchResultsInfo = ({
   hasResults,
 }: SearchResultsInfoProps) => {
   const { searchEmailValue, setEmailSearchValue, setActiveTab } =
-    useModerationFilter()
+    useModeration()
 
   const clearHandler = () => {
     setEmailSearchValue(null)

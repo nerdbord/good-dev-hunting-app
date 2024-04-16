@@ -7,8 +7,8 @@ import {
   filterBySpecialization,
   filterByTechnology,
 } from '@/app/(profile)/(components)/ProfileList/filters'
-import { findAllPublishedProfiles } from '@/app/(profile)/_actions/findAllPublishedProfiles'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { findAllApprovedProfiles } from '@/app/(profile)/_actions/queries/findAllApprovedProfiles'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import { useSearchParams } from 'next/navigation'
@@ -54,8 +54,8 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
     const fetchProfiles = async () => {
       setIsFetching(true)
       try {
-        const fetchedProfiles = await findAllPublishedProfiles()
-        setAllProfiles(fetchedProfiles)
+        const fetchedProfiles = await findAllApprovedProfiles()
+        setAllProfiles(ProfileModel.mapProfilesWithRelations(fetchedProfiles))
         setIsFetching(false)
       } catch (err) {
         setAllProfiles([])

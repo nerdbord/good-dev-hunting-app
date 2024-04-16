@@ -8,8 +8,8 @@ import { useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
 import { JobSpecialization } from '@/app/(profile)/profile.types'
-import { publishProfile } from '../../_actions/publishProfile'
-import { unpublishProfile } from '../../_actions/unpublishProfile'
+import { publishProfile } from '../../_actions/mutations/publishProfile'
+import { unpublishProfile } from '../../_actions/mutations/unpublishProfile'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
 
 interface TogglePublishButtonProps {

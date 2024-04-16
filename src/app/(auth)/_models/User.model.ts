@@ -1,12 +1,11 @@
-import { assignRole } from '@/app/(auth)/_actions/assignRole'
-import { importAvatarFromGithub } from '@/app/(auth)/_actions/importAvatarFromGithub'
-import { unassignRole } from '@/app/(auth)/_actions/unassignRole'
-import { updateMyAvatar } from '@/app/(auth)/_actions/updateMyAvatar'
-import { type BaseModel } from '@/app/types'
+import { assignRole } from '@/app/(auth)/_actions/mutations/assignRole'
+import { importAvatarFromGithub } from '@/app/(auth)/_actions/mutations/importAvatarFromGithub'
+import { unassignRole } from '@/app/(auth)/_actions/mutations/unassignRole'
+import { updateMyAvatar } from '@/app/(auth)/_actions/mutations/updateMyAvatar'
 import { type UserWithRelations } from '@/backend/user/user.types'
 import { type Role, type User } from '@prisma/client'
 
-export class UserModel implements BaseModel<User> {
+export class UserModel implements User {
   id: string
   email: string
   emailVerified: Date | null
