@@ -1,29 +1,24 @@
 import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
-import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import { authOptions } from '@/app/(auth)/auth'
-
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import HunterAcc from '@/app/(auth)/(components)/HunterAcc/HunterAcc'
+import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
+import { getAuthorizedUser } from '@/app/(auth)/helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
-import { findUserByEmail } from '@/backend/user/user.service'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
+import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
-import { Role } from '@prisma/client'
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import styles from './AppHeader.module.scss'
 
 const AppHeader = async () => {
-  const session = await getServerSession(authOptions)
+  const { user, userIsHunter, userIsModerator, userHasProfile } =
+    await getAuthorizedUser()
 
-  const user = session ? await findUserByEmail(session.user.email) : null
-  const userIsModerator = user?.roles.includes(Role.MODERATOR)
-  const userHasProfile = !!user?.profile
-
-  if (session) {
+  if (user) {
     return (
       <header className={styles.wrapper}>
         <Container>
@@ -40,13 +35,22 @@ const AppHeader = async () => {
 
             <div className={styles.frameButtons}>
               {userIsModerator && <ModerationBtn />}
-              {userHasProfile ? (
-                <>
-                  <GithubAcc />
-                </>
+
+              {!userIsHunter && userHasProfile ? (
+                <GithubAcc />
               ) : (
                 <>
-                  <CreateProfileBtn data-testid="create-profile-button" />
+                  {userIsHunter ? (
+                    <>
+                      <HunterAcc />
+                      <LogOutBtn />
+                    </>
+                  ) : (
+                    <>
+                      <CreateProfileBtn data-testid="create-profile-button" />
+                      <LogOutBtn />
+                    </>
+                  )}
                 </>
               )}
             </div>
@@ -54,6 +58,7 @@ const AppHeader = async () => {
               <HamburgerMenuMobileBtn
                 userHasProfile={userHasProfile}
                 userIsModerator={userIsModerator}
+                userIsHunter={userIsHunter}
               />
               <AppHeaderMobileSearchFilter />
             </div>
@@ -84,7 +89,7 @@ const AppHeader = async () => {
             <AppHeaderMobileSearchFilter />
           </div>
           <div className={styles.frameButtons}>
-            <GithubLoginButton />
+            <LoginBtnsWrapper />
             <CreateProfileBtn />
           </div>
         </div>

@@ -1,0 +1,79 @@
+.wrapper {
+  background: black;
+  padding: 24px 0;
+  overflow-x: hidden;
+  z-index: 5;
+  @include mobile {
+    padding-left: $spacing-4;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  max-width: 100%;
+
+  @include mobile {
+    align-items: center;
+  }
+}
+
+.brandingContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.frameButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-3;
+}
+
+.buttonBoxDesktop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: auto;
+  @include mobile {
+    display: none;
+  }
+}
+
+.buttonBoxMobile {
+  display: none;
+  @include mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: auto;
+  }
+}
+
+.buttonBoxMobile {
+  display: none;
+  @include mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    max-width: 420px;
+  }
+}
+
+.hideOnMobile {
+  @include mobile {
+    display: none !important;
+  }
+}
