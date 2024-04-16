@@ -3,7 +3,6 @@ import ModerationActionHeader from '@/app/(profile)/(routes)/moderation/(compone
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
-import { findUserById } from '@/app/(auth)/_actions/queries/findUserById'
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
@@ -20,13 +19,11 @@ export default async function ModerationUserProfile({
     await getAuthorizedUser()
 
   const profile = await findProfileByUserId(params.id)
-  const user = profile && (await findUserById(params.id))
 
-  if (!profile || !user || !authorizedUserIsModerator)
-    redirect(AppRoutes.profilesList)
+  if (!profile || !authorizedUserIsModerator) redirect(AppRoutes.profilesList)
 
   return (
-    <ProfileProvider userId={user.id}>
+    <ProfileProvider userId={profile.userId}>
       <div className={styles.wrapper}>
         <ModerationActionHeader />
         <UserProfileMain profileId={profile.id}>
