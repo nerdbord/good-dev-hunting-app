@@ -1,6 +1,5 @@
 'use server'
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import {
   findGithubUsernameByProfileId,
@@ -34,5 +33,5 @@ export const approveProfile = withSentry(async (profileId: string) => {
     }/moderation/profile/${updatedProfile.userId})`,
   )
 
-  return new ProfileModel(updatedProfile)
+  return updatedProfile
 })
