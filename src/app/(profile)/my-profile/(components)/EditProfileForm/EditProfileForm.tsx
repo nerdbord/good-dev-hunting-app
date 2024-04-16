@@ -10,7 +10,7 @@ import {
 } from '@/app/(profile)/types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { PublishingState } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -101,6 +101,9 @@ const EditProfileForm = ({
       githubUsername: session.user.name,
       state: PublishingState.PENDING,
       viewCount: values.viewCount,
+      hourlyRateMin: values.hourlyRateMin || null,
+      hourlyRateMax: values.hourlyRateMax || null,
+      currency: Currency.PLN,
     }
 
     await runAsync(async () => {

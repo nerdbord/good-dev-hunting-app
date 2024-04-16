@@ -1,4 +1,4 @@
-import { JobSpecialization } from '@/app/(profile)/types'
+import { JobSpecialization, type HourlyRateValue } from '@/app/(profile)/types'
 import { SeniorityLevel } from '@/backend/profile/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { EmploymentType } from '@prisma/client'
@@ -171,4 +171,31 @@ export const mapSpecializations = (
     name: mapSpecialization(specialization as JobSpecialization),
     value: specialization,
   }))
+}
+//HOURLY RATE
+export const hourlyRateOptions: DropdownOption[] = [
+  { name: '< 100 zł/h', value: '0-99' },
+  { name: '100 - 150 zł/h', value: '100-150' },
+  { name: '150 - 200 zł/h', value: '150-200' },
+  { name: '200 - 250 zł/h', value: '200-250' },
+  { name: '250 - 300 zł/h', value: '250-300' },
+  { name: '300 - 350 zł/h', value: '300-350' },
+  { name: '> 300 zł/h', value: '300-null' },
+]
+
+export const parseHourlyRateValue = (value: string): HourlyRateValue => {
+  const [min, max] = value.split('-')
+  return {
+    hourlyRateMin: min === 'null' ? null : parseInt(min),
+    hourlyRateMax: max === 'null' ? null : parseInt(max),
+  }
+}
+
+export const formatHourlyRateLabel = (
+  min: number | null,
+  max: number | null,
+): string => {
+  if (min === null) return `< ${max} zł/h`
+  if (max === null) return `> ${min} zł/h`
+  return `${min} - ${max} zł/h`
 }

@@ -17,7 +17,7 @@ import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
-import { PublishingState } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -41,6 +41,9 @@ const initialValues: CreateProfileFormValues = {
   state: PublishingState.DRAFT,
   terms: false,
   viewCount: 0,
+  hourlyRateMin: 0,
+  hourlyRateMax: 0,
+  currency: Currency.PLN,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -72,6 +75,16 @@ export const validationSchema = Yup.object().shape({
   terms: Yup.boolean()
     .required('Agreement is required')
     .oneOf([true], 'Agreement is required'),
+  // hourlyRateMin: Yup.number()
+  //   .nullable()
+  //   .when('hourlyRateMax', (hourlyRateMax, schema) =>
+  //     hourlyRateMax ? schema : schema.required('Hourly rate is required'),
+  //   ),
+  // hourlyRateMax: Yup.number()
+  //   .nullable()
+  //   .when('hourlyRateMin', (hourlyRateMin, schema) =>
+  //     hourlyRateMin ? schema : schema.required('Hourly rate is required'),
+  //   ),
 })
 
 const CreateProfileForm = () => {
@@ -115,6 +128,9 @@ const CreateProfileForm = () => {
       githubUsername: session.user.name,
       state: PublishingState.DRAFT,
       viewCount: values.viewCount,
+      hourlyRateMin: values.hourlyRateMin || null,
+      hourlyRateMax: values.hourlyRateMax || null,
+      currency: Currency.PLN,
     }
 
     try {

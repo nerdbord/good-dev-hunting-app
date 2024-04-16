@@ -1,4 +1,5 @@
 'use client'
+import { parseHourlyRateValue } from '@/app/(profile)/mappers'
 import { type ProfileFormValues } from '@/app/(profile)/types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { useFormikContext } from 'formik'
@@ -16,6 +17,7 @@ export const DropdownSelect = ({
   id,
   dropdownTestId,
   optionTestId,
+  onChange,
 }: {
   label: string
   name: string
@@ -26,8 +28,9 @@ export const DropdownSelect = ({
   dropdownTestId?: string
   optionTestId?: string
   error?: string
+  onChange?: (option: DropdownOption) => void
 }) => {
-  const { setFieldValue } = useFormikContext<ProfileFormValues>()
+  const { setFieldValue, values } = useFormikContext<ProfileFormValues>()
   const [inputError, setInputError] = useState<boolean>(false)
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const [isDropdownActive, setDropdownActive] = useState(false)
@@ -65,13 +68,32 @@ export const DropdownSelect = ({
   }
 
   const handleSelection = (option: DropdownOption) => {
-    setFieldValue(name, option)
+    console.log('Selected option:', option)
+    console.log('formik values', name, option)
+
+    // wydzieliłem tutaj ten dropdown osobno bo on przyjmuje w selekcie dwie wartości, min i max.
+    if (name === 'hourlyRate') {
+      const { hourlyRateMin, hourlyRateMax } = parseHourlyRateValue(
+        option.value,
+      )
+      console.log('Parsed hourlyRateMin:', hourlyRateMin)
+      console.log('Parsed hourlyRateMax:', hourlyRateMax)
+      // tutaj widzimy w konsoli że values ustawiają się prawidłowo
+      setFieldValue('hourlyRateMin', hourlyRateMin)
+      setFieldValue('hourlyRateMax', hourlyRateMax)
+      console.log('Updated Formik Values:', values)
+    } else {
+      // tak było zawsze, standardowo
+      setFieldValue(name, option)
+      console.log('huj', name, option)
+      console.log('Updated Formik Values:', values)
+    }
+
     setDropdownActive(false)
     setHasInteracted(false)
     setHasError(false)
     setInputError(false)
   }
-
   return (
     <div className={styles.buttonBox}>
       <div className={styles.label}>{label}</div>

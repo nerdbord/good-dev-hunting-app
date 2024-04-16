@@ -74,6 +74,9 @@ model Profile {
   rejectionReasons         RejectionReason[]
   contactRequests          ContactRequest[]
   viewCount                Int               @default(0)
+  hourlyRateMin            Int               @default(0)
+  hourlyRateMax            Int               @default(0)
+  currency                 Currency          @default(PLN)
 }
 
 model Technology {
@@ -119,6 +122,10 @@ model ContactRequest {
   profileId      String
   createdAt      DateTime @default(now())
 }
+
+enum Currency {
+   PLN
+ }
 
 enum EmploymentType {
   FULL_TIME

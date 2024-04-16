@@ -1,6 +1,10 @@
 import { type TechnologyModel } from '@/backend/profile/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { type EmploymentType, type PublishingState } from '@prisma/client'
+import {
+  type Currency,
+  type EmploymentType,
+  type PublishingState,
+} from '@prisma/client'
 
 export interface ProfileModel {
   id: string
@@ -27,6 +31,9 @@ export interface ProfileModel {
   state: PublishingState
   userEmail: string
   viewCount: number
+  hourlyRateMin: number | null
+  hourlyRateMax: number | null
+  currency: Currency
 }
 
 export type ProfilePayload = Omit<
@@ -72,6 +79,11 @@ export enum JobOfferFiltersEnum {
   specialization = 'specialization',
 }
 
+export interface HourlyRateValue {
+  hourlyRateMin: number | null
+  hourlyRateMax: number | null
+}
+
 export type SearchParamsFilters = Record<JobOfferFiltersEnum, string[]>
 
 export interface ProfileFormValues {
@@ -90,6 +102,9 @@ export interface ProfileFormValues {
   techStack: DropdownOption[]
   githubUsername: string | null
   state: PublishingState
+  hourlyRateMin: number | null
+  hourlyRateMax: number | null
+  currency: Currency
 }
 
 export interface CreateProfileFormValues extends ProfileFormValues {

@@ -1,5 +1,6 @@
 'use client'
 import {
+  hourlyRateOptions,
   mappedSeniorityLevel,
   mappedSpecialization,
 } from '@/app/(profile)/mappers'
@@ -20,6 +21,8 @@ export enum WorkInformationFormKeys {
   SENIORITY = 'seniority',
   TECH_STACK = 'techStack',
   EMPLOYMENT = 'employment',
+  HOURLY_RATE_MIN = 'hourlyRateMin',
+  HOURLY_RATE_MAX = 'hourlyRateMax',
 }
 
 const WorkInformation = () => {
@@ -103,6 +106,23 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.SENIORITY}
           />
         </InputFormError>
+
+        <DropdownSelect
+          id="hourlyRate"
+          label="Hourly rate"
+          text="Choose hourly rate"
+          options={hourlyRateOptions}
+          selectedValue={
+            hourlyRateOptions.find(
+              (option) =>
+                option.value ===
+                `${values[WorkInformationFormKeys.HOURLY_RATE_MIN]}-${
+                  values[WorkInformationFormKeys.HOURLY_RATE_MAX]
+                }`,
+            ) || { name: '', value: '' }
+          }
+          name="hourlyRate"
+        />
         <InputFormError
           error={
             touched[WorkInformationFormKeys.TECH_STACK] &&
