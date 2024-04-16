@@ -1,4 +1,4 @@
-import { type ProfileFormValues } from '@/app/(profile)/types'
+import { type ProfileFormValues } from '@/app/(profile)/profile.types'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 

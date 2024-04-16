@@ -1,11 +1,11 @@
-import { jobSpecializationThemes } from '@/app/(profile)/helpers'
+import { StateStatus } from '@/app/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { jobSpecializationThemes } from '@/app/(profile)/profile.helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
   mapSpecializationToTitle,
-} from '@/app/(profile)/mappers'
-import { StateStatus } from '@/app/(profile)/moderation/(components)/StateStatus/StateStatus'
-import { type ProfileModel } from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.mappers'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import classNames from 'classnames/bind'
@@ -87,6 +87,26 @@ const ProfileCard = ({
               {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
               {data.remoteOnly && ' / Remote'}
             </p>
+
+        <div className={styles.frame}>
+          <div className={styles.container} data-test-id="profileContainer">
+            <div className={styles.profile}>
+              <Avatar src={data.avatarUrl || ''} size={78} />
+            </div>
+            <div className={styles.data}>
+              <p className={styles.name}>
+                {highlightText(data.fullName, searchTerm)}
+              </p>
+              <p className={styles.wordWrap}>
+                {mapSeniorityLevel(data.seniority)}{' '}
+                {mapSpecializationToTitle(data.position)}
+              </p>
+              <p className={styles.location}>
+                {data.country}, {data.city}
+                {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
+                {data.remoteOnly && ' / Remote'}
+              </p>
+            </div>
           </div>
         </div>
         <TechnologiesRenderer data={data} classes={getTechnologyClasses} />

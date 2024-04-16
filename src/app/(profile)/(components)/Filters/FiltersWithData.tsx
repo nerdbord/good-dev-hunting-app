@@ -4,8 +4,8 @@ import { getCountries } from '@/backend/country/country.service'
 import { getUniqueSpecializations } from '@/backend/profile/profile.service'
 import { getTechnologies } from '@/backend/technology/technology.service'
 import { cache } from 'react'
-import { mapOptions, mapSpecializations } from '../../mappers'
 
+import { mapOptions, mapSpecializations } from '@/app/(profile)/profile.mappers'
 import styles from './Filters.module.scss'
 
 const tech = cache(getTechnologies)

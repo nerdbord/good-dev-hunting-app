@@ -1,5 +1,5 @@
 ﻿'use client'
-import { connectToNerdbord } from '@/app/(auth)/_actions/connectToNerdbord'
+import { connectToNerdbord } from '@/app/(auth)/_actions/mutations/connectToNerdbord'
 import RotateIcon from '@/assets/icons/RotateIcon'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Button } from '../../../../components/Button/Button'

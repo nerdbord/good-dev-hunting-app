@@ -1,10 +1,10 @@
 ﻿'use client'
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
-import { createQueryString } from '@/app/(profile)/helpers'
+import { createQueryString } from '@/app/(profile)/profile.helpers'
 import {
   JobOfferFiltersEnum,
   type SearchParamsFilters,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import { createFiltersObjFromSearchParams } from '@/utils/createFiltersObjFromSearchParams'
 import { AppRoutes } from '@/utils/routes'

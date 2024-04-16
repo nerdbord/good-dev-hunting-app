@@ -1,6 +1,11 @@
 'use client'
 import { type ProfileModel } from '@/app/(profile)/types'
 import { useSearchParams } from 'next/navigation'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { PlausibleEvents } from '@/lib/plausible'
+import { AppRoutes } from '@/utils/routes'
+import { usePlausible } from 'next-plausible'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import ProfileCard from '../ProfileCard/ProfileCard'
 

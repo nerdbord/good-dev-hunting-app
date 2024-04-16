@@ -1,9 +1,9 @@
 'use client'
 import ProfileCard from '@/app/(profile)/(components)/ProfileCard/ProfileCard'
-import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 
 import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import { useMemo } from 'react'
 import styles from './Hero.module.scss'
 
