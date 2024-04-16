@@ -1,9 +1,11 @@
 'use client'
-import { findAllProfiles } from '@/app/(profile)/_actions'
+import { approveProfile, findAllProfiles } from '@/app/(profile)/_actions'
+import { rejectProfile } from '@/app/(profile)/_actions/mutations/rejectProfile'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PublishingState } from '@prisma/client'
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -19,6 +21,8 @@ export type ModerationFilterType = PropsWithChildren & {
   setEmailSearchValue: (text: string | null) => void
   activeTab: PublishingState | null
   setActiveTab: (value: PublishingState | null) => void
+  handleApprove: (profileId: string) => Promise<void>
+  handleReject: (profileId: string, reason: string) => Promise<void>
   profiles: ProfileModel[]
 }
 
@@ -46,9 +50,38 @@ function ModerationProvider({ children }: { children: React.ReactNode }) {
         setProfiles([])
       }
     }
-
     fetchProfiles()
   }, [])
+
+  const handleApprove = useCallback(
+    async (profileId: string) => {
+      try {
+        const updatedProfile = await approveProfile(profileId)
+        const updatedProfiles = profiles.map((profile) =>
+          profile.id === updatedProfile.id ? updatedProfile : profile,
+        )
+        setProfiles(updatedProfiles)
+      } catch (err) {
+        // handle error
+      }
+    },
+    [profiles],
+  )
+
+  const handleReject = useCallback(
+    async (profileId: string, reason: string) => {
+      try {
+        const updatedProfile = await rejectProfile(profileId, reason)
+        const updatedProfiles = profiles.map((profile) =>
+          profile.id === updatedProfile.id ? updatedProfile : profile,
+        )
+        setProfiles(updatedProfiles)
+      } catch (err) {
+        // handle error
+      }
+    },
+    [profiles],
+  )
 
   const setPublishingStateFilter = (filter: PublishingState) => {
     setPublishingState(filter)
@@ -71,6 +104,8 @@ function ModerationProvider({ children }: { children: React.ReactNode }) {
         setPendingStateCounter,
         searchEmailValue: searchValue,
         setEmailSearchValue,
+        handleApprove,
+        handleReject,
         activeTab,
         setActiveTab,
         profiles,
