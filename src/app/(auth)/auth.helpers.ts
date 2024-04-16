@@ -17,9 +17,9 @@ export const getAuthorizedUser = async () => {
     return { user: null, userIsHunter: false, userIsModerator: false }
   }
 
-  const userIsHunter = session.user.roles.includes(Role.HUNTER)
-  const userIsModerator = session.user.roles.includes(Role.MODERATOR)
-  const userHasProfile = !!session.user.profileId
+  const userIsHunter = session?.user?.roles.includes(Role.HUNTER)
+  const userIsModerator = session?.user?.roles.includes(Role.MODERATOR)
+  const userHasProfile = !!session?.user?.profileId
 
   return { user: session.user, userIsHunter, userIsModerator, userHasProfile }
 }

@@ -19,9 +19,7 @@ export type ProfileCreateParams = {
   seniority: string
   techStack: { name: string }[]
   employmentTypes: EmploymentType[]
-  githubUsername: string
   state: PublishingState
-  viewCount: number
 }
 
 export type TechStack = {
@@ -63,7 +61,6 @@ export enum JobOfferFiltersEnum {
 export type SearchParamsFilters = Record<JobOfferFiltersEnum, string[]>
 
 export interface ProfileFormValues {
-  viewCount: number
   fullName: string
   linkedin: string | null
   bio: string
@@ -76,7 +73,6 @@ export interface ProfileFormValues {
   seniority: DropdownOption
   employment: EmploymentType[]
   techStack: DropdownOption[]
-  githubUsername: string | null
   state: PublishingState
 }
 

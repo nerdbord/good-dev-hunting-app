@@ -1,7 +1,7 @@
 'use client'
+import { Button } from '@/components/Button/Button'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useState } from 'react'
-import { Button } from '../../../../../../components/Button/Button'
 
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import styles from './RejectingReason.module.scss'
