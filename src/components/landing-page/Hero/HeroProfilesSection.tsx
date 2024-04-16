@@ -2,6 +2,8 @@
 import ProfileCard from '@/app/(profile)/(components)/ProfileCard/ProfileCard'
 import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
 
+import { AppRoutes } from '@/utils/routes'
+import Link from 'next/link'
 import { useMemo } from 'react'
 import styles from './Hero.module.scss'
 
@@ -17,19 +19,25 @@ export const HeroProfilesSection = () => {
     <div className={styles.right}>
       <div className={styles.section}>
         {first && (
-          <div className={styles.frame1}>
-            <ProfileCard data={first} />
-          </div>
+          <Link href={`${AppRoutes.profile}/${first.githubUsername}`}>
+            <div className={styles.frame1}>
+              <ProfileCard data={first} />
+            </div>
+          </Link>
         )}
         {second && (
-          <div className={styles.frame2}>
-            <ProfileCard data={second} />
-          </div>
+          <Link href={`${AppRoutes.profile}/${second.githubUsername}`}>
+            <div className={styles.frame2}>
+              <ProfileCard data={second} />
+            </div>
+          </Link>
         )}
         {third && (
-          <div className={styles.frame3}>
-            <ProfileCard data={third} />
-          </div>
+          <Link href={`${AppRoutes.profile}/${third.githubUsername}`}>
+            <div className={styles.frame3}>
+              <ProfileCard data={third} />
+            </div>
+          </Link>
         )}
       </div>
     </div>

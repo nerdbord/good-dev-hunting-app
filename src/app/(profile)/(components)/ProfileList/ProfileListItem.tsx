@@ -17,8 +17,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
 
-  const handleOpenProfile = (event: React.MouseEvent) => {
-    event.preventDefault()
+  const handleOpenProfile = () => {
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })
