@@ -10,7 +10,7 @@ export const findProfileByUserId = cache(
     const profile = await getProfileByUserId(userId)
 
     if (!profile) {
-      throw new Error(`Profile with userId ${userId} not found`)
+      return null
     }
 
     return createProfileModel(profile)

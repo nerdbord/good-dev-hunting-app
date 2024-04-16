@@ -55,7 +55,7 @@ export const validationSchema = Yup.object().shape({
 })
 
 const EditProfileForm = () => {
-  const { data: session, update: updateSession } = useSession()
+  const { update: updateSession } = useSession()
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
@@ -86,7 +86,7 @@ const EditProfileForm = () => {
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
-  if (!session || !profile || !user) {
+  if (!user || !profile || !user) {
     return null
   }
 
@@ -94,7 +94,7 @@ const EditProfileForm = () => {
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,
-      avatarUrl: session.user.image || null,
+      avatarUrl: user.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -111,9 +111,7 @@ const EditProfileForm = () => {
         }
       }),
       employmentTypes: values.employment,
-      githubUsername: session.user.name,
       state: PublishingState.PENDING,
-      viewCount: values.viewCount,
     }
 
     await runAsync(async () => {
@@ -122,8 +120,7 @@ const EditProfileForm = () => {
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
-      savedProfile &&
-        updateSession({ ...session.user, name: savedProfile.fullName })
+      savedProfile && updateSession({ ...user, name: savedProfile.fullName })
 
       router.push(AppRoutes.myProfile)
     })

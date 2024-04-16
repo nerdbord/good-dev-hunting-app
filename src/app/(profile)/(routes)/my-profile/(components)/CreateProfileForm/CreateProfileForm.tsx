@@ -1,6 +1,7 @@
 'use client'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { updateMyAvatar } from '@/app/(auth)/_actions/mutations/updateMyAvatar'
+import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import CreateProfileTopBar from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
@@ -37,10 +38,8 @@ const initialValues: CreateProfileFormValues = {
   seniority: { name: '', value: '' },
   employment: [],
   techStack: [],
-  githubUsername: '',
   state: PublishingState.DRAFT,
   terms: false,
-  viewCount: 0,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -75,14 +74,12 @@ export const validationSchema = Yup.object().shape({
 })
 
 const CreateProfileForm = () => {
-  const { data: session, update: updateSession } = useSession()
+  const { update: updateSession } = useSession()
   const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
-  if (!session) {
-    return null
-  }
+  const { user } = useAuth()
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -93,7 +90,7 @@ const CreateProfileForm = () => {
     }
     const payload: ProfileCreateParams = {
       fullName: values.fullName,
-      avatarUrl: session.user.image || null,
+      avatarUrl: user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -108,9 +105,7 @@ const CreateProfileForm = () => {
         name: tech.value,
       })),
       employmentTypes: values.employment,
-      githubUsername: session.user.name,
       state: PublishingState.DRAFT,
-      viewCount: values.viewCount,
     }
 
     try {
@@ -125,7 +120,7 @@ const CreateProfileForm = () => {
 
         if (createdProfile) {
           updateSession({
-            ...session.user,
+            ...user,
             name: payload.fullName,
             profileId: createdProfile.id,
           })
