@@ -19,21 +19,30 @@ export const HeroProfilesSection = () => {
     <div className={styles.right}>
       <div className={styles.section}>
         {first && (
-          <Link href={`${AppRoutes.profile}/${first.githubUsername}`}>
+          <Link
+            key={first.id}
+            href={`${AppRoutes.profile}/${first.githubUsername}`}
+          >
             <div className={styles.frame1}>
               <ProfileCard data={first} />
             </div>
           </Link>
         )}
         {second && (
-          <Link href={`${AppRoutes.profile}/${second.githubUsername}`}>
+          <Link
+            key={second.id}
+            href={`${AppRoutes.profile}/${second.githubUsername}`}
+          >
             <div className={styles.frame2}>
               <ProfileCard data={second} />
             </div>
           </Link>
         )}
         {third && (
-          <Link href={`${AppRoutes.profile}/${third.githubUsername}`}>
+          <Link
+            key={third.id}
+            href={`${AppRoutes.profile}/${third.githubUsername}`}
+          >
             <div className={styles.frame3}>
               <ProfileCard data={third} />
             </div>

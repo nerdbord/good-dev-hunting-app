@@ -51,7 +51,10 @@ export default function ModerationProfilesWithFilters({
       <div className={hasResults ? styles.profileListCont : styles.noProfiles}>
         {hasResults ? (
           filteredProfiles.map((profile) => (
-            <Link href={`${AppRoutes.moderationProfile}/${profile.userId}`}>
+            <Link
+              key={profile.id}
+              href={`${AppRoutes.moderationProfile}/${profile.userId}`}
+            >
               <ModerationProfileListItem
                 key={profile.id}
                 profile={profile}

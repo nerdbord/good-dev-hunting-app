@@ -31,7 +31,10 @@ const ProfileList = () => {
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
         {profiles.map((profile) => (
-          <Link href={`${AppRoutes.profile}/${profile.githubUsername}`}>
+          <Link
+            key={profile.id}
+            href={`${AppRoutes.profile}/${profile.githubUsername}`}
+          >
             <ProfileListItem key={profile.id} data={profile} />
           </Link>
         ))}
