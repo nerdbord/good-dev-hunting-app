@@ -1,6 +1,6 @@
-﻿import { Button } from '../Button/Button'
-import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+﻿import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
 import { PublishingState } from '@prisma/client'
+import { Button } from '../Button/Button'
 
 import styles from './SearchResultsInfo.module.scss'
 
@@ -16,7 +16,7 @@ export const SearchResultsInfo = ({
   hasResults,
 }: SearchResultsInfoProps) => {
   const { searchEmailValue, setEmailSearchValue, setActiveTab } =
-    useModerationFilter()
+    useModeration()
 
   const clearHandler = () => {
     setEmailSearchValue(null)
