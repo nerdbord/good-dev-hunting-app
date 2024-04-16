@@ -18,17 +18,17 @@ export const HeroProfilesSection = () => {
       <div className={styles.section}>
         {first && (
           <div className={styles.frame1}>
-            <ProfileCard data={first} />
+            <ProfileCard data={first} userIsModerator />
           </div>
         )}
         {second && (
           <div className={styles.frame2}>
-            <ProfileCard data={second} />
+            <ProfileCard data={second} userIsModerator />
           </div>
         )}
         {third && (
           <div className={styles.frame3}>
-            <ProfileCard data={third} />
+            <ProfileCard data={third} userIsModerator />
           </div>
         )}
       </div>
