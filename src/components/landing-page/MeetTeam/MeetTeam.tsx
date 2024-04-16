@@ -1,15 +1,9 @@
 import { findAllTeamProfiles } from '@/app/(profile)/_actions/queries/findAllTeamProfiles'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
-import { cache } from 'react'
 import styles from './MeetTeam.module.scss'
 
-const cacheGetTeamProfiles = cache(findAllTeamProfiles)
-
 const MeetTeam = async () => {
-  const teamProfiles = ProfileModel.mapProfilesWithRelations(
-    await cacheGetTeamProfiles(),
-  )
+  const teamProfiles = await findAllTeamProfiles()
 
   // Calculate midpoint differently to ensure one half has at least 4 items
   let midpoint

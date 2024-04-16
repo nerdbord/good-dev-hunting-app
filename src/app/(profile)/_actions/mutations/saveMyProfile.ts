@@ -1,6 +1,9 @@
 'use server'
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import {
+  createProfileModel,
+  type ProfileModel,
+} from '@/app/(profile)/_models/profile.model'
 import {
   findProfileWithUserInclude,
   hasProfileValuesChanged,
@@ -82,5 +85,5 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     )
   }
 
-  return updatedProfile
+  return createProfileModel(updatedProfile)
 })

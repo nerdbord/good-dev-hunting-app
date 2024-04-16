@@ -1,5 +1,6 @@
 'use server'
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { createProfileModel } from '@/app/(profile)/_models/profile.model'
 import { sendProfileRejectedEmail } from '@/backend/mailing/mailing.service'
 import {
   findProfileById,
@@ -38,10 +39,10 @@ export const rejectProfile = withSentry(
           process.env.NEXT_PUBLIC_APP_ORIGIN_URL
         }/moderation/profile/${updatedProfile.userId})`,
       )
-      return updatedProfile
+      return createProfileModel(updatedProfile)
     } catch (error) {
       await deleteRejectingReason(createdReason.id)
-      return updatedProfile
+      return createProfileModel(updatedProfile)
     }
   },
 )

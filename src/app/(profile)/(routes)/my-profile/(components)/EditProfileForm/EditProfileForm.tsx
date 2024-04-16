@@ -4,7 +4,6 @@ import { mapProfileModelToEditProfileFormValues } from '@/app/(profile)/(routes)
 import {
   type JobSpecialization,
   type ProfileFormValues,
-  type ProfileUpdateParams,
 } from '@/app/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
@@ -14,7 +13,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
+import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
+import { saveMyProfile } from '@/app/(profile)/_actions'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
@@ -58,6 +60,7 @@ const EditProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { profile } = useProfileModel()
+  const { user } = useAuth()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -83,12 +86,13 @@ const EditProfileForm = () => {
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
-  if (!session || !profile) {
+  if (!session || !profile || !user) {
     return null
   }
 
   const handleEditProfile = async (values: ProfileFormValues) => {
-    const updateParams: ProfileUpdateParams = {
+    const updateParams: ProfileModel = {
+      ...profile,
       fullName: values.fullName,
       avatarUrl: session.user.image || null,
       linkedIn: values.linkedin,
@@ -117,7 +121,7 @@ const EditProfileForm = () => {
         ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
-      const savedProfile = await profile.save(updateParams)
+      const savedProfile = await saveMyProfile(updateParams)
       savedProfile &&
         updateSession({ ...session.user, name: savedProfile.fullName })
 

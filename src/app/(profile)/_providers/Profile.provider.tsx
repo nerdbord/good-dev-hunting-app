@@ -1,6 +1,6 @@
 'use client'
 import { findProfileByUserId } from '@/app/(profile)/_actions/queries/findProfileByUserId'
-import { ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   createContext,
   useContext,
@@ -32,7 +32,7 @@ export const ProfileProvider = ({
     // Fetch the profile
     const fetchProfile = async () => {
       const fetchedProfile = await findProfileByUserId(userId)
-      fetchedProfile && setProfile(new ProfileModel(fetchedProfile))
+      fetchedProfile && setProfile(fetchedProfile)
     }
     fetchProfile()
   }, [])

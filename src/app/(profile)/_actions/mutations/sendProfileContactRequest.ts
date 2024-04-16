@@ -1,5 +1,6 @@
 'use server'
 import { type ContactFormRequest } from '@/app/(profile)/(components)/ContactForm/schema'
+import { createContactRequestModel } from '@/app/(profile)/_models/contact-request.model'
 import {
   createContactRequest,
   deleteContactRequest,
@@ -69,7 +70,11 @@ export const sendProfileContactRequest = withSentry(
         mailerliteGroups.contactGroup,
       )
 
-      return createdContactRequest
+      return createContactRequestModel({
+        ...createdContactRequest,
+        recipientEmail: foundProfile.user.email,
+        recipientFullName: foundProfile.fullName,
+      })
     } catch (error) {
       Sentry.captureException(error)
       contactRequest && (await deleteContactRequest(contactRequest.id))

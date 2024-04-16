@@ -184,6 +184,9 @@ export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
     data: {
       nerdbordUserId: nerdbordId,
     },
+    include: {
+      githubDetails: true,
+    },
   })
 
   return updatedUser

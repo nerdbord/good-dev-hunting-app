@@ -1,4 +1,5 @@
 'use server'
+import { createUserModel } from '@/app/(auth)/_models/User.model'
 import { findUserById as findOne } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
 import { cache } from 'react'
@@ -11,6 +12,6 @@ export const findUserById = cache(
       throw new Error('User not found')
     }
 
-    return foundUser
+    return createUserModel(foundUser)
   }),
 )

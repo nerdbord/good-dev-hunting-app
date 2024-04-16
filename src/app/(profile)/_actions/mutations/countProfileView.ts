@@ -1,4 +1,5 @@
 'use server'
+import { createProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   getProfileById,
   incrementProfileViewCountById,
@@ -13,6 +14,6 @@ export const countProfileView = withSentry(
       const updatedProfile = await incrementProfileViewCountById(profileId)
       return updatedProfile
     }
-    return foundProfile
+    return createProfileModel(foundProfile)
   },
 )
