@@ -68,25 +68,14 @@ export const DropdownSelect = ({
   }
 
   const handleSelection = (option: DropdownOption) => {
-    console.log('Selected option:', option)
-    console.log('formik values', name, option)
-
-    // wydzieliłem tutaj ten dropdown osobno bo on przyjmuje w selekcie dwie wartości, min i max.
     if (name === 'hourlyRate') {
       const { hourlyRateMin, hourlyRateMax } = parseHourlyRateValue(
         option.value,
       )
-      console.log('Parsed hourlyRateMin:', hourlyRateMin)
-      console.log('Parsed hourlyRateMax:', hourlyRateMax)
-      // tutaj widzimy w konsoli że values ustawiają się prawidłowo
       setFieldValue('hourlyRateMin', hourlyRateMin)
       setFieldValue('hourlyRateMax', hourlyRateMax)
-      console.log('Updated Formik Values:', values)
     } else {
-      // tak było zawsze, standardowo
       setFieldValue(name, option)
-      console.log('huj', name, option)
-      console.log('Updated Formik Values:', values)
     }
 
     setDropdownActive(false)

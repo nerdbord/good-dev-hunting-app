@@ -136,6 +136,8 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       employmentTypes: profileData.employmentTypes,
       state: PublishingState.DRAFT,
+      hourlyRateMin: profileData.hourlyRateMin ?? 0,
+      hourlyRateMax: profileData.hourlyRateMax ?? 0,
     },
     include: includeObject.include,
   })
