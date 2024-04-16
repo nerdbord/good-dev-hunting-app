@@ -3,7 +3,7 @@ import { StateStatus } from '@/app/(profile)/(routes)/moderation/(components)/St
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 
-import { useUserModel } from '@/app/(auth)/_providers/Auth.provider'
+import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import AssignRoleModal from '@/app/(profile)/(routes)/moderation/(components)/AssignRoleModal/AssignRoleModal'
 import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import { Role } from '@prisma/client'
@@ -12,7 +12,7 @@ import styles from './ModerationActionHeader.module.scss'
 export default function ModerationActionHeader() {
   const { showModal, closeModal } = useModal()
   const { profile } = useProfileModel()
-  const { user } = useUserModel()
+  const { user } = useAuth()
 
   const userRoles = user?.roles || []
 
