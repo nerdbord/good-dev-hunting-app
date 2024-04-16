@@ -18,7 +18,17 @@ import styles from './VerticalCard.module.scss'
 
 const VerticalCard = (
   props: PropsWithChildren<{
-    profile: ProfileModel
+    avatarUrl: ProfileModel['avatarUrl']
+    city: ProfileModel['city']
+    country: ProfileModel['country']
+    employmentTypes: ProfileModel['employmentTypes']
+    fullName: ProfileModel['fullName']
+    githubUsername: ProfileModel['githubUsername']
+    isOpenForWork: ProfileModel['isOpenForWork']
+    position: ProfileModel['position']
+    remoteOnly: ProfileModel['remoteOnly']
+    seniority: ProfileModel['seniority']
+    techStack: ProfileModel['techStack']
   }>,
 ) => {
   const router = useRouter()
@@ -36,7 +46,7 @@ const VerticalCard = (
     remoteOnly,
     seniority,
     techStack,
-  } = props.profile
+  } = props
 
   const technologies = techStack.map((tech, index) => {
     if (index < 4) {

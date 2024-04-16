@@ -1,21 +1,41 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { createContext, useContext, type PropsWithChildren } from 'react'
+import { findProfileByUserId } from '@/app/(profile)/_actions/queries/findProfileByUserId'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from 'react'
 
 // Define the context
-interface ProfilesContextProps {
-  profile: ProfileModel
+interface ProfileContextProps {
+  userId: string
 }
 
-export const ProfileContext = createContext<ProfilesContextProps | undefined>(
-  undefined,
-)
+export const ProfileContext = createContext<
+  | {
+      profile: ProfileModel | null
+    }
+  | undefined
+>(undefined)
 
 // Define the provider
 export const ProfileProvider = ({
   children,
-  profile,
-}: PropsWithChildren<ProfilesContextProps>) => {
+  userId,
+}: PropsWithChildren<ProfileContextProps>) => {
+  const [profile, setProfile] = useState<ProfileModel | null>(null)
+
+  useEffect(() => {
+    // Fetch the profile
+    const fetchProfile = async () => {
+      const fetchedProfile = await findProfileByUserId(userId)
+      fetchedProfile && setProfile(new ProfileModel(fetchedProfile))
+    }
+    fetchProfile()
+  }, [])
   return (
     <ProfileContext.Provider
       value={{
@@ -31,7 +51,7 @@ export const ProfileProvider = ({
 export const useProfileModel = () => {
   const context = useContext(ProfileContext)
   if (context === undefined) {
-    throw new Error('useProfile must be used within a ProfilesProvider')
+    throw new Error('useProfile must be used within a ProfileProvider')
   }
   return context
 }

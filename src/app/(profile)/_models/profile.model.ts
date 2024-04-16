@@ -1,16 +1,15 @@
-import { approveProfile } from '@/app/(profile)/_actions/approveProfile'
-import { countProfileView } from '@/app/(profile)/_actions/countProfileView'
-import { lockProfile } from '@/app/(profile)/_actions/lockProfile'
-import { publishProfile } from '@/app/(profile)/_actions/publishProfile'
-import { saveMyProfile } from '@/app/(profile)/_actions/saveMyProfile'
-import { unlockProfile } from '@/app/(profile)/_actions/unlockProfile'
-import { unpublishProfile } from '@/app/(profile)/_actions/unpublishProfile'
+import { approveProfile } from '@/app/(profile)/_actions/mutations/approveProfile'
+import { countProfileView } from '@/app/(profile)/_actions/mutations/countProfileView'
+import { lockProfile } from '@/app/(profile)/_actions/mutations/lockProfile'
+import { publishProfile } from '@/app/(profile)/_actions/mutations/publishProfile'
+import { saveMyProfile } from '@/app/(profile)/_actions/mutations/saveMyProfile'
+import { unlockProfile } from '@/app/(profile)/_actions/mutations/unlockProfile'
+import { unpublishProfile } from '@/app/(profile)/_actions/mutations/unpublishProfile'
 import {
   type JobSpecialization,
   type ProfileUpdateParams,
   type TechStack,
 } from '@/app/(profile)/profile.types'
-import { type BaseModel } from '@/app/types'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 import {
   type EmploymentType,
@@ -18,7 +17,7 @@ import {
   type PublishingState,
 } from '@prisma/client'
 
-export class ProfileModel implements BaseModel<Profile> {
+export class ProfileModel implements Profile {
   id: string
   userId: string
   fullName: string
@@ -71,23 +70,29 @@ export class ProfileModel implements BaseModel<Profile> {
   }
 
   async approve() {
-    return await approveProfile(this.id)
+    const updatedProfile = await approveProfile(this.id)
+
+    return this.sync(updatedProfile)
   }
 
   async publish() {
-    return await publishProfile(this.id)
+    const updatedProfile = await publishProfile(this.id)
+    return this.sync(updatedProfile)
   }
 
   async unpublish() {
-    return await unpublishProfile(this.id)
+    const updatedProfile = await unpublishProfile(this.id)
+    return this.sync(updatedProfile)
   }
 
   async unlock() {
-    return unlockProfile(this.id)
+    const updatedProfile = await unlockProfile(this.id)
+    return this.sync(updatedProfile)
   }
 
   async lock() {
-    return lockProfile(this.id)
+    const updatedProfile = await lockProfile(this.id)
+    return this.sync(updatedProfile)
   }
 
   sync(newModel: Profile) {
@@ -109,5 +114,9 @@ export class ProfileModel implements BaseModel<Profile> {
     if (updatedProfile) {
       return this.sync(updatedProfile)
     }
+  }
+
+  static mapProfilesWithRelations(data: ProfileWithRelations[]) {
+    return data.map((profile) => new ProfileModel(profile))
   }
 }

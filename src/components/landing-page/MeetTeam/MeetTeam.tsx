@@ -1,4 +1,5 @@
-import { findAllTeamProfiles } from '@/app/(profile)/_actions/findAllTeamProfiles'
+import { findAllTeamProfiles } from '@/app/(profile)/_actions/queries/findAllTeamProfiles'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
 import { cache } from 'react'
 import styles from './MeetTeam.module.scss'
@@ -6,7 +7,9 @@ import styles from './MeetTeam.module.scss'
 const cacheGetTeamProfiles = cache(findAllTeamProfiles)
 
 const MeetTeam = async () => {
-  const teamProfiles = await cacheGetTeamProfiles()
+  const teamProfiles = ProfileModel.mapProfilesWithRelations(
+    await cacheGetTeamProfiles(),
+  )
 
   // Calculate midpoint differently to ensure one half has at least 4 items
   let midpoint
@@ -32,7 +35,19 @@ const MeetTeam = async () => {
         <div className={styles.slider}>
           <div className={styles.cardsBox}>
             {firstHalfProfiles.map((profile) => (
-              <VerticalCard profile={profile} />
+              <VerticalCard
+                avatarUrl={profile.avatarUrl}
+                city={profile.city}
+                country={profile.country}
+                employmentTypes={profile.employmentTypes}
+                fullName={profile.fullName}
+                githubUsername={profile.githubUsername}
+                isOpenForWork={profile.isOpenForWork}
+                position={profile.position}
+                remoteOnly={profile.remoteOnly}
+                seniority={profile.seniority}
+                techStack={profile.techStack}
+              />
             ))}
           </div>
         </div>
@@ -40,7 +55,19 @@ const MeetTeam = async () => {
           <div className={styles.slider}>
             <div className={styles.cardsBox}>
               {secondHalfProfiles.map((profile) => (
-                <VerticalCard profile={profile} />
+                <VerticalCard
+                  avatarUrl={profile.avatarUrl}
+                  city={profile.city}
+                  country={profile.country}
+                  employmentTypes={profile.employmentTypes}
+                  fullName={profile.fullName}
+                  githubUsername={profile.githubUsername}
+                  isOpenForWork={profile.isOpenForWork}
+                  position={profile.position}
+                  remoteOnly={profile.remoteOnly}
+                  seniority={profile.seniority}
+                  techStack={profile.techStack}
+                />
               ))}
             </div>
           </div>

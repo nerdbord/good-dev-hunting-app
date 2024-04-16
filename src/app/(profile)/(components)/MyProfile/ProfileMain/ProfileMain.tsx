@@ -1,4 +1,5 @@
-import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
+import { findProfileById } from '@/app/(profile)/_actions'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -12,12 +13,19 @@ import { AnchorButton } from '@/components/Button/AnchorButton'
 import { countries } from '@/data/countries'
 import styles from './ProfileMain.module.scss'
 
-const ProfileMain = async () => {
-  const { profile } = useProfileModel()
-  const githubUsername = profile.githubUsername
-  const avatarUrl = profile.avatarUrl
+interface ProfileMainProps {
+  profileId: string
+}
+
+const ProfileMain = async (props: ProfileMainProps) => {
+  const profile = await findProfileById(props.profileId)
+  const profileModel = new ProfileModel(profile)
+
+  const githubUsername = profileModel.githubUsername
+  const avatarUrl = profileModel.avatarUrl
   const countryFlag =
-    countries.find((country) => country.name === profile.country)?.flag || ''
+    countries.find((country) => country.name === profileModel.country)?.flag ||
+    ''
 
   return (
     <>
@@ -31,9 +39,9 @@ const ProfileMain = async () => {
               Github
             </AnchorButton>
           </li>
-          {profile.linkedIn && (
+          {profileModel.linkedIn && (
             <li>
-              <AnchorButton href={profile.linkedIn} icon={<LinkedIn />}>
+              <AnchorButton href={profileModel.linkedIn} icon={<LinkedIn />}>
                 LinkedIn
               </AnchorButton>
             </li>
@@ -49,41 +57,41 @@ const ProfileMain = async () => {
         <div className={styles.profile}>
           <div className={styles.user}>
             <Avatar src={avatarUrl || ''} size={100} />
-            <div className={styles.name}>{profile.fullName}</div>
+            <div className={styles.name}>{profileModel.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
               <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
 
               <p>
-                {profile.country}, {profile.city}
+                {profileModel.country}, {profileModel.city}
               </p>
             </div>
 
             <div className={styles.optionBox}>
-              {profile.openForCountryRelocation && (
+              {profileModel.openForCountryRelocation && (
                 <div className={styles.location}>
                   Open to country relocation
                 </div>
               )}
-              {profile.openForCityRelocation && (
+              {profileModel.openForCityRelocation && (
                 <div className={styles.location}>Open to city relocation</div>
               )}
-              {profile.remoteOnly && (
+              {profileModel.remoteOnly && (
                 <div className={styles.location}>Remote only</div>
               )}
             </div>
           </div>
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
-              {mapSeniorityLevel(profile.seniority as SeniorityLevel) ||
-                profile.seniority}{' '}
-              {mapSpecializationToTitle(profile.position)}
+              {mapSeniorityLevel(profileModel.seniority as SeniorityLevel) ||
+                profileModel.seniority}{' '}
+              {mapSpecializationToTitle(profileModel.position)}
             </span>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
                 {/* TODO: https://www.figma.com/file/PIj2atelHFirCiOoFoTO64/Good-Dev-Hunting-x-Nerdbord?type=design&node-id=47-11819&mode=design&t=npBqi8TnjgduU999-4 */}
-                {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
+                {mapEmploymentTypes(profileModel.employmentTypes).join(' / ')}
               </div>
             </div>
           </div>

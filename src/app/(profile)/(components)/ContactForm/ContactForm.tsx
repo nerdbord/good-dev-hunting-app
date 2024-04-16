@@ -1,5 +1,5 @@
 'use client'
-import { sendProfileContactRequest } from '@/app/(profile)/_actions/sendProfileContactRequest'
+import { sendProfileContactRequest } from '@/app/(profile)/_actions/mutations/sendProfileContactRequest'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { Button } from '@/components/Button/Button'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'

@@ -1,11 +1,15 @@
-import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
+import { findProfileById } from '@/app/(profile)/_actions'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
 
-const ProfileDetails = () => {
-  const { profile } = useProfileModel()
+interface ProfileDetailsProps {
+  profileId: string
+}
+
+const ProfileDetails = async (props: ProfileDetailsProps) => {
+  const profile = await findProfileById(props.profileId)
   return (
     <>
       <section className={styles.container}>

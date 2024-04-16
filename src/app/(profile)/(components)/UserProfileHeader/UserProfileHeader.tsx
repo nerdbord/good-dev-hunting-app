@@ -1,4 +1,6 @@
 import ContactBtn from '@/app/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
+import { findProfileById } from '@/app/(profile)/_actions'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { Button } from '@/components/Button/Button'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
@@ -8,15 +10,18 @@ import styles from './UserProfileHeader.module.scss'
 
 const cx = classNames.bind(styles)
 
-export default function UserProfileHeader({
-  profile,
+export default async function UserProfileHeader({
+  profileId,
   withBackButton,
   isNerdbordConnected,
 }: UserProfileHeaderType) {
+  const profile = await findProfileById(profileId)
+  const mappedProfile = new ProfileModel(profile)
+
   const socialItemCount =
-    (profile.githubUsername ? 1 : 0) +
+    (mappedProfile.githubUsername ? 1 : 0) +
     (profile.linkedIn ? 1 : 0) +
-    (profile.githubUsername && isNerdbordConnected ? 1 : 0)
+    (mappedProfile.githubUsername && isNerdbordConnected ? 1 : 0)
 
   const commonClasses = cx('wrapper', {
     [styles.withBackBackButton]: !!withBackButton,
@@ -37,13 +42,14 @@ export default function UserProfileHeader({
       <div className={wrapClasses}>
         <div className={styles.socialItemsWrapper}>
           <SocialItems
-            userProfile={profile}
+            githubUsername={mappedProfile.githubUsername}
+            linkedIn={mappedProfile.linkedIn}
             isNerdbordConnected={isNerdbordConnected}
           />
         </div>
         {profile.isOpenForWork ? (
           <div className={styles.buttonWrapper}>
-            <ContactBtn userProfile={profile} />
+            <ContactBtn />
           </div>
         ) : (
           <Button variant={'primary'} disabled>

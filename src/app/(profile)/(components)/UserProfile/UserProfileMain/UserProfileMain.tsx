@@ -1,4 +1,5 @@
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { findProfileById } from '@/app/(profile)/_actions'
+import { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -11,14 +12,17 @@ import { type PropsWithChildren } from 'react'
 import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {
-  profile: ProfileModel
+  profileId: string
 }
-const UserProfileMain = ({
+const UserProfileMain = async ({
   children,
-  profile,
+  profileId,
 }: PropsWithChildren<UserProfileProps>) => {
+  const profile = await findProfileById(profileId)
+  const mappedProfile = new ProfileModel(profile)
   const countryFlag =
-    countries.find((country) => country.name === profile.country)?.flag || ''
+    countries.find((country) => country.name === mappedProfile.country)?.flag ||
+    ''
 
   return (
     <>
@@ -28,32 +32,32 @@ const UserProfileMain = ({
         </div>
         <div className={styles.profile}>
           <div className={styles.user}>
-            <Avatar src={profile.avatarUrl || ''} size={100} />
+            <Avatar src={mappedProfile.avatarUrl || ''} size={100} />
             <div className={styles.name}>{profile.fullName}</div>
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
               <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
-              {profile.country}, {profile.city}
+              {mappedProfile.country}, {mappedProfile.city}
             </div>
-            {profile.openForCountryRelocation && (
+            {mappedProfile.openForCountryRelocation && (
               <div className={styles.location}>Open to country relocation</div>
             )}
-            {profile.openForCityRelocation && (
+            {mappedProfile.openForCityRelocation && (
               <div className={styles.location}>Open to city relocation</div>
             )}
-            {profile.remoteOnly && (
+            {mappedProfile.remoteOnly && (
               <div className={styles.location}>Remote only</div>
             )}
           </div>
           <div className={styles.addInfoBox}>
             <div className={styles.seniority}>
               {mapSeniorityLevel(profile.seniority)}{' '}
-              {mapSpecializationToTitle(profile.position)}
+              {mapSpecializationToTitle(mappedProfile.position)}
             </div>
             <div className={styles.addInfo}>
               <div className={styles.addInfoItem}>
-                {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
+                {mapEmploymentTypes(mappedProfile.employmentTypes).join(' / ')}
               </div>
             </div>
           </div>

@@ -14,45 +14,23 @@ export async function getApprovedProfiles() {
   return approvedProfiles
 }
 
-export async function getPublishedProfilesPayloadByPosition(position: string) {
-  const publishedProfiles = await prisma.profile.findMany({
-    where: {
-      position,
-      state: PublishingState.APPROVED,
-    },
+export async function getAllProfiles() {
+  const allProfiles = await prisma.profile.findMany({
     include: includeObject.include,
   })
 
-  return publishedProfiles
-}
-
-export async function getAllPublishedProfilesPayload() {
-  const publishedProfiles = await prisma.profile.findMany({
-    where: {
-      NOT: {
-        state: PublishingState.DRAFT,
-      },
-    },
-    include: includeObject.include,
-  })
-
-  return publishedProfiles
+  return allProfiles
 }
 
 export async function getProfileById(id: string) {
-  const profileById = await prisma.profile.findFirst({
+  const profileById = await prisma.profile.findUniqueOrThrow({
     where: {
       id,
     },
     include: includeObject.include,
   })
 
-  if (profileById !== null) {
-    return profileById
-  }
-
-  // Handle the case when profileById is null
-  return null
+  return profileById
 }
 
 export async function findProfileWithUserInclude(email: string) {
@@ -150,23 +128,6 @@ export async function updateProfileById(
   return updatedProfile
 }
 
-export const validateIfProfileWasContactedXTimesInLastYMinutes = async (
-  profileId: string,
-  minutes: number,
-  times: number,
-) => {
-  const contactedCount = await prisma.contactRequest.count({
-    where: {
-      profileId,
-      createdAt: {
-        gte: new Date(new Date().getTime() - minutes * 60 * 1000),
-      },
-    },
-  })
-
-  return contactedCount >= times
-}
-
 export const findGithubUsernameByProfileId = async (profileId: string) => {
   const profile = await prisma.profile.findFirst({
     where: {
@@ -217,19 +178,6 @@ export async function getProfileByUserId(userId: string) {
 export async function getProfileByGithubUsername(username: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { githubDetails: { username } } },
-    include: includeObject.include,
-  })
-
-  if (profile) {
-    return profile
-  }
-
-  return null
-}
-
-export async function getProfileByUserEmail(email: string) {
-  const profile = await prisma.profile.findFirst({
-    where: { user: { email } },
     include: includeObject.include,
   })
 
