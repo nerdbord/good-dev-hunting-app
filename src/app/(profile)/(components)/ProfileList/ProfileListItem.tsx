@@ -1,5 +1,5 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import type { ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
