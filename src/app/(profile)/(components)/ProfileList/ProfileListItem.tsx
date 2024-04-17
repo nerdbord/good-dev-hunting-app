@@ -4,7 +4,7 @@ import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
-import { UrlObject } from 'url'
+import { type UrlObject } from 'url'
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
