@@ -23,7 +23,9 @@ export function StateStatus({ profile }: StateStatusProps) {
   const { handleApprove: approveProfile, handleReject } = useModeration()
   const { runAsync, loading } = useAsyncAction()
 
-  const handleApprove = async () => {
+  const handleApprove = async (event: React.MouseEvent) => {
+    event.stopPropagation()
+
     await runAsync(
       async () => {
         await approveProfile(id)
@@ -34,7 +36,8 @@ export function StateStatus({ profile }: StateStatusProps) {
     )
   }
 
-  const handleShowRejectModal = () => {
+  const handleShowRejectModal = (event: React.MouseEvent) => {
+    event.stopPropagation()
     showModal(
       <RejectingReasonModal
         profileId={id}
