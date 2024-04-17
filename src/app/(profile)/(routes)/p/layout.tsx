@@ -21,7 +21,7 @@ export default async function ProfileLayout({
   }
 
   return (
-    <ProfileProvider userId={profile.userId}>
+    <ProfileProvider profile={profile}>
       <AppHeader />
       <Container>{children}</Container>
     </ProfileProvider>

@@ -1,17 +1,9 @@
 'use client'
-import { findProfileByUserId } from '@/app/(profile)/_actions/queries/findProfileByUserId'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type PropsWithChildren,
-} from 'react'
+import { createContext, useContext, type PropsWithChildren } from 'react'
 
-// Define the context
 interface ProfileContextProps {
-  userId: string
+  profile: ProfileModel | null
 }
 
 export const ProfileContext = createContext<
@@ -21,21 +13,10 @@ export const ProfileContext = createContext<
   | undefined
 >(undefined)
 
-// Define the provider
 export const ProfileProvider = ({
   children,
-  userId,
+  profile,
 }: PropsWithChildren<ProfileContextProps>) => {
-  const [profile, setProfile] = useState<ProfileModel | null>(null)
-
-  useEffect(() => {
-    // Fetch the profile
-    const fetchProfile = async () => {
-      const fetchedProfile = await findProfileByUserId(userId)
-      fetchedProfile && setProfile(fetchedProfile)
-    }
-    fetchProfile()
-  }, [])
   return (
     <ProfileContext.Provider
       value={{
