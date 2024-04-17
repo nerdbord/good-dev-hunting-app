@@ -3,30 +3,16 @@ import {
   type TechStack,
 } from '@/app/(profile)/profile.types'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
-import { type EmploymentType, type PublishingState } from '@prisma/client'
+import { type Profile, type PublishingState } from '@prisma/client'
 
-export type ProfileModel = {
-  id: string
-  userId: string
-  fullName: string
-  linkedIn: string | null
-  bio: string
-  countryId: string
-  openForCountryRelocation: boolean
-  cityId: string
-  openForCityRelocation: boolean
-  remoteOnly: boolean
+export interface ProfileModel extends Profile {
   position: JobSpecialization
-  seniority: string
-  isOpenForWork: boolean
-  employmentTypes: EmploymentType[]
   state: PublishingState
-  viewCount: number
   avatarUrl: string | null
   techStack: TechStack
   githubUsername: string | null
-  country: string
   city: string
+  country: string
   email: string
 }
 
