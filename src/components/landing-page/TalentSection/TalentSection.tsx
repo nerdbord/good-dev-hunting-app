@@ -1,7 +1,8 @@
 'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import { AppRoutes } from '@/utils/routes'
 import { useMemo } from 'react'
 import styles from './TalentSection.module.scss'
 
@@ -23,7 +24,11 @@ const TalentSection = () => {
       </div>
       <div className={styles.talents}>
         {randomSixProfiles?.map((profile) => (
-          <ProfileListItem key={profile.id} data={profile} />
+          <ProfileListItem
+            key={profile.id}
+            data={profile}
+            href={`${AppRoutes.profile}/${profile.githubUsername}`}
+          />
         ))}
       </div>
       <FindTalentsBtn variant="primary" />

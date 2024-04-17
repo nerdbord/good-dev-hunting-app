@@ -1,26 +1,25 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
-import { useModerationFilter } from '@/contexts/ModerationFilterContext'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
+import { SearchResultsInfo } from '@/components/SearchResultsInfo/SearchResultsInfo'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
-import { SearchResultsInfo } from '../../../../components/SearchResultsInfo/SearchResultsInfo'
-import { ModerationProfileListItem } from './ModerationProfileListItem'
 
+import { AppRoutes } from '@/utils/routes'
+import ProfileCard from '../ProfileCard/ProfileCard'
 import styles from './ProfileList.module.scss'
 
-type Props = {
-  profiles: ProfileModel[]
-}
-
-export default function ModerationProfilesWithFilters({
-  profiles = [],
-}: Props) {
-  const { publishingStateFilter, setPendingStateCounter, searchEmailValue } =
-    useModerationFilter()
+export default function ModerationProfilesWithFilters() {
+  const {
+    publishingStateFilter,
+    setPendingStateCounter,
+    searchEmailValue,
+    profiles,
+  } = useModeration()
 
   const filteredProfiles = profiles.filter((profile: ProfileModel) => {
     if (searchEmailValue) {
-      return profile.userEmail.includes(searchEmailValue)
+      return profile.email.includes(searchEmailValue)
     }
     return profile.state === publishingStateFilter
   })
@@ -45,7 +44,11 @@ export default function ModerationProfilesWithFilters({
       <div className={hasResults ? styles.profileListCont : styles.noProfiles}>
         {hasResults ? (
           filteredProfiles.map((profile) => (
-            <ModerationProfileListItem key={profile.id} profile={profile} />
+            <ProfileCard
+              key={profile.id}
+              data={profile}
+              href={`${AppRoutes.moderationProfile}/${profile.userId}`}
+            />
           ))
         ) : (
           <p>No profiles found</p>

@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import logo from '@/assets/images/logo.png'
 import { AppRoutes } from '@/utils/routes'
 import Image from 'next/image'

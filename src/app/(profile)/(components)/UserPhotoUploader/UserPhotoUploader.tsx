@@ -1,5 +1,5 @@
 'use client'
-import { fetchUserAvatar } from '@/app/(auth)/_actions/fetchUserAvatar'
+import { fetchMyAvatar } from '@/app/(auth)/_actions/mutations/fetchMyAvatar'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
 import { useUploadContext } from '@/contexts/UploadContext'
@@ -19,7 +19,7 @@ export const UserPhotoUploader = () => {
 
   useEffect(() => {
     async function fetchAvatar() {
-      const url = (await fetchUserAvatar()) || session?.user.image
+      const url = (await fetchMyAvatar()) || session?.user.image
       url && setUserImage(url)
     }
     fetchAvatar()

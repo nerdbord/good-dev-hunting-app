@@ -1,18 +1,19 @@
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/(profile)/(components)/TogglePublishButton/TogglePublishButton'
-import ProfileViews from '@/app/(profile)/my-profile/(components)/ProfileViews/ProfileViews'
-import { ToggleOpenToWork } from '@/app/(profile)/my-profile/(components)/ToggleOpenToWork'
-import { type ProfileModel } from '@/app/(profile)/types'
+import ProfileViews from '@/app/(profile)/(routes)/my-profile/(components)/ProfileViews/ProfileViews'
+import { ToggleOpenToWork } from '@/app/(profile)/(routes)/my-profile/(components)/ToggleOpenToWork'
+import { findProfileById } from '@/app/(profile)/_actions'
 import { PublishingState } from '@prisma/client'
 import styles from './ProfileTopBar.module.scss'
 
-const ProfileTopBar = async ({
-  profile,
-}: {
-  profile: ProfileModel
-  isConnectedToNerdbord: boolean
-}) => {
+interface ProfileTopBarProps {
+  profileId: string
+}
+
+const ProfileTopBar = async (props: ProfileTopBarProps) => {
+  const profile = await findProfileById(props.profileId)
+
   const isPending = profile.state === PublishingState.PENDING
   const isRejected = profile.state === PublishingState.REJECTED
   return (
@@ -26,7 +27,7 @@ const ProfileTopBar = async ({
         {!(isPending || isRejected) && (
           <div className={styles.toogleMobileView}>
             <ToggleOpenToWork
-              profileId={profile.id}
+              profileId={props.profileId}
               isOpenForWork={profile.isOpenForWork}
             />
           </div>
@@ -36,7 +37,7 @@ const ProfileTopBar = async ({
         {!(isPending || isRejected) && (
           <div className={styles.mobileView}>
             <ToggleOpenToWork
-              profileId={profile.id}
+              profileId={props.profileId}
               isOpenForWork={profile.isOpenForWork}
             />
           </div>
@@ -58,7 +59,10 @@ const ProfileTopBar = async ({
 
         <div className={styles.mobileView}>
           <EditProfileButton />
-          <TogglePublishButton state={profile.state} profileId={profile.id} />
+          <TogglePublishButton
+            state={profile.state}
+            profileId={props.profileId}
+          />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-﻿import { importAvatarFromGithub } from '@/app/(auth)/_actions/importAvatarFromGithub'
+﻿import { importAvatarFromGithub } from '@/app/(auth)/_actions/mutations/importAvatarFromGithub'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import React from 'react'
 import { Button } from '../../../../components/Button/Button'

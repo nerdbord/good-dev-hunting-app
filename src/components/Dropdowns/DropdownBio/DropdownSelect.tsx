@@ -1,5 +1,5 @@
 'use client'
-import { type ProfileFormValues } from '@/app/(profile)/types'
+import { type ProfileFormValues } from '@/app/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { useFormikContext } from 'formik'
 import 'material-icons/iconfont/material-icons.css'

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind'
 import React, { type PropsWithChildren } from 'react'
 import styles from './DevTypeButton.module.scss'
 
-import { type JobSpecialization } from '@/app/(profile)/types'
+import { type JobSpecialization } from '@/app/(profile)/profile.types'
 const cx = classNames.bind(styles)
 
 interface DevTypeButtonProps {
