@@ -1,4 +1,4 @@
-import { type ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 
 export const filterByPosition =
   (positionFilter: string[]) => (profile: ProfileModel) => {
@@ -28,7 +28,7 @@ export const filterBySpecialization =
 export const filterByLocation =
   (locationFilter: string[]) => (profile: ProfileModel) => {
     if (!locationFilter.length) return true
-    return locationFilter.some((location) => profile.country.name === location)
+    return locationFilter.some((location) => profile.country === location)
   }
 
 export const filterByTechnology =

@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/helpers'
+import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import styles from './VisitorBanner.module.scss'
 const VisitorBanner = async () => {
   const { user } = await getAuthorizedUser()

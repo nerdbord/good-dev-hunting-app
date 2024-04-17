@@ -2,11 +2,11 @@
 import {
   createFiltersObjFromSearchParams,
   createQueryString,
-} from '@/app/(profile)/helpers'
+} from '@/app/(profile)/profile.helpers'
 import {
   JobOfferFiltersEnum,
   type SearchParamsFilters,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { AppRoutes } from '@/utils/routes'

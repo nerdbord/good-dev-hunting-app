@@ -1,28 +1,29 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PlausibleEvents } from '@/lib/plausible'
-import { AppRoutes } from '@/utils/routes'
 import { usePlausible } from 'next-plausible'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import React from 'react'
+import { type UrlObject } from 'url'
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
   data: ProfileModel
   searchTerm?: string
+  href: string | UrlObject
 }
 
-export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
-  const router = useRouter()
+export const ProfileListItem: React.FC<ProfileListItemProps> = ({
+  data,
+  href,
+}) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
 
-  const handleOpenProfile = (event: React.MouseEvent) => {
-    event.preventDefault()
+  const handleOpenProfile = () => {
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })
-    router.push(`${AppRoutes.profile}/${data.githubUsername}`)
   }
 
   return (
@@ -30,6 +31,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
+      href={href}
     />
   )
 }
