@@ -8,10 +8,10 @@ import {
 } from '@/app/(profile)/profile.mappers'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
-import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
 import Link from 'next/link'
 import { useMemo } from 'react'
+import { UrlObject } from 'url'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
@@ -19,6 +19,7 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
+  href: string | UrlObject
 }
 
 const cx = classNames.bind(styles)
@@ -50,6 +51,7 @@ const ProfileCard = ({
   onClick,
   withStateStatus,
   searchTerm,
+  href,
 }: ProfileCardProps) => {
   const specializationTheme = useMemo(
     () => ({
@@ -62,46 +64,42 @@ const ProfileCard = ({
     [styles.technology]: true,
   })
   return (
-    <div
+    <Link
+      href={href}
+      onClick={onClick}
       style={specializationTheme}
       className={`${styles.frameWrapper} ${
         withStateStatus && styles.moderationFrame
       }`}
     >
-      <Link
-        onClick={onClick}
-        href={`${AppRoutes.profile}/${data.githubUsername}`}
-        passHref
-      >
-        <div className={styles.frame}>
-          <div className={styles.container} data-test-id="profileContainer">
-            <div className={styles.profile}>
-              <Avatar src={data.avatarUrl || ''} size={78} />
-            </div>
-            <div className={styles.data}>
-              <p className={styles.name}>
-                {highlightText(data.fullName, searchTerm)}
-              </p>
-              <p className={styles.wordWrap}>
-                {mapSeniorityLevel(data.seniority)}{' '}
-                {mapSpecializationToTitle(data.position)}
-              </p>
-              <p className={styles.location}>
-                {data.country}, {data.city}
-                {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
-                {data.remoteOnly && ' / Remote'}
-              </p>
-            </div>
+      <div className={styles.frame}>
+        <div className={styles.container} data-test-id="profileContainer">
+          <div className={styles.profile}>
+            <Avatar src={data.avatarUrl || ''} size={78} />
           </div>
-          <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
+          <div className={styles.data}>
+            <p className={styles.name}>
+              {highlightText(data.fullName, searchTerm)}
+            </p>
+            <p className={styles.wordWrap}>
+              {mapSeniorityLevel(data.seniority)}{' '}
+              {mapSpecializationToTitle(data.position)}
+            </p>
+            <p className={styles.location}>
+              {data.country}, {data.city}
+              {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
+              {data.remoteOnly && ' / Remote'}
+            </p>
+          </div>
         </div>
-      </Link>
+        <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
+      </div>
       {withStateStatus && (
         <div className={styles.detailsWrapper}>
           <StateStatus profile={data} />
         </div>
       )}
-    </div>
+    </Link>
   )
 }
 
