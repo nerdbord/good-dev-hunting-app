@@ -23,7 +23,7 @@ export default async function ModerationUserProfile({
   if (!profile || !authorizedUserIsModerator) redirect(AppRoutes.profilesList)
 
   return (
-    <ProfileProvider userId={profile.userId}>
+    <ProfileProvider profile={profile}>
       <div className={styles.wrapper}>
         <ModerationActionHeader />
         <UserProfileMain profileId={profile.id}>

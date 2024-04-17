@@ -1,5 +1,6 @@
 import { findUserById } from '@/app/(auth)/_actions'
 import AuthProvider from '@/app/(auth)/_providers/Auth.provider'
+import { findAllApprovedProfiles } from '@/app/(profile)/_actions'
 import { ProfilesProvider } from '@/app/(profile)/_providers/Profiles.provider'
 import { auth } from '@/auth'
 import { ModalProvider } from '@/contexts/ModalContext'
@@ -39,6 +40,9 @@ export default async function RootLayout({
   const session = await auth()
   const user = session?.user ? await findUserById(session.user.id) : null
 
+  // TODO: We need to store it in some global state management (eg. zustand), and replace provider
+  const fetchedProfiles = await findAllApprovedProfiles()
+
   return (
     <html lang="en">
       <body className={commonClasses}>
@@ -47,7 +51,7 @@ export default async function RootLayout({
         >
           <AuthProvider initialUser={user}>
             <ToastContextProvider>
-              <ProfilesProvider>
+              <ProfilesProvider initialProfiles={fetchedProfiles}>
                 <ModalProvider>{children}</ModalProvider>
               </ProfilesProvider>
             </ToastContextProvider>

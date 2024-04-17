@@ -1,5 +1,5 @@
 'use client'
-import { approveProfile, findAllProfiles } from '@/app/(profile)/_actions'
+import { approveProfile } from '@/app/(profile)/_actions'
 import { rejectProfile } from '@/app/(profile)/_actions/mutations/rejectProfile'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PublishingState } from '@prisma/client'
@@ -7,7 +7,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState,
   type PropsWithChildren,
 } from 'react'
@@ -30,7 +29,13 @@ const ModerationContext = createContext<ModerationFilterType | undefined>(
   undefined,
 )
 
-function ModerationProvider({ children }: { children: React.ReactNode }) {
+function ModerationProvider({
+  children,
+  initialProfiles,
+}: {
+  children: React.ReactNode
+  initialProfiles: ProfileModel[]
+}) {
   const [publishingState, setPublishingState] = useState<PublishingState>(
     PublishingState.PENDING,
   )
@@ -39,19 +44,7 @@ function ModerationProvider({ children }: { children: React.ReactNode }) {
   const [activeTab, setActiveTab] = useState<PublishingState | null>(
     PublishingState.PENDING,
   )
-  const [profiles, setProfiles] = useState<ProfileModel[]>([])
-
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      try {
-        const fetchedProfiles = await findAllProfiles()
-        setProfiles(fetchedProfiles)
-      } catch (err) {
-        setProfiles([])
-      }
-    }
-    fetchProfiles()
-  }, [])
+  const [profiles, setProfiles] = useState<ProfileModel[]>(initialProfiles)
 
   const handleApprove = useCallback(
     async (profileId: string) => {

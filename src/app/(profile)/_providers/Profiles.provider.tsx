@@ -7,7 +7,6 @@ import {
   filterBySpecialization,
   filterByTechnology,
 } from '@/app/(profile)/(components)/ProfileList/filters'
-import { findAllApprovedProfiles } from '@/app/(profile)/_actions/queries/findAllApprovedProfiles'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
@@ -16,7 +15,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
   type PropsWithChildren,
@@ -26,7 +24,7 @@ import {
 interface ProfilesContextProps {
   allProfiles: ProfileModel[]
   filteredProfiles: ProfileModel[]
-  isFetching?: boolean
+
   handleFilterProfiles(
     profiles: ProfileModel[],
     options?: {
@@ -40,31 +38,20 @@ export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
 )
 
 // Define the provider
-export const ProfilesProvider = ({ children }: PropsWithChildren) => {
+export const ProfilesProvider = ({
+  children,
+  initialProfiles,
+}: PropsWithChildren<{
+  initialProfiles: ProfileModel[]
+}>) => {
   const searchParams = useSearchParams()
-  const [allProfiles, setAllProfiles] = useState<ProfileModel[]>([])
-  const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [allProfiles, setAllProfiles] =
+    useState<ProfileModel[]>(initialProfiles)
 
   const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
     [searchParams],
   )
-
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      setIsFetching(true)
-      try {
-        const fetchedProfiles = await findAllApprovedProfiles()
-        setAllProfiles(fetchedProfiles)
-        setIsFetching(false)
-      } catch (err) {
-        setAllProfiles([])
-        setIsFetching(false)
-      }
-    }
-
-    fetchProfiles()
-  }, [])
 
   const handleFilterProfiles = useCallback(
     (profiles: ProfileModel[], options?: { disableSpecFilter?: boolean }) => {
@@ -92,7 +79,6 @@ export const ProfilesProvider = ({ children }: PropsWithChildren) => {
       value={{
         allProfiles,
         filteredProfiles,
-        isFetching,
         handleFilterProfiles,
       }}
     >

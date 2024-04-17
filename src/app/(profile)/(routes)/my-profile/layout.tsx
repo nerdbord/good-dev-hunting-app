@@ -1,5 +1,6 @@
 ﻿import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import AppHeader from '@/app/(profile)/(components)/AppHeader/AppHeader'
+import { findProfileByUserId } from '@/app/(profile)/_actions'
 import { ProfileProvider } from '@/app/(profile)/_providers/Profile.provider'
 import { Container } from '@/components/Container/Container'
 import { AppRoutes } from '@/utils/routes'
@@ -16,8 +17,10 @@ export default async function AppLayout({
     redirect(AppRoutes.profilesList)
   }
 
+  const fetchedProfile = await findProfileByUserId(user.id)
+
   return (
-    <ProfileProvider userId={user.id}>
+    <ProfileProvider profile={fetchedProfile}>
       <main>
         <AppHeader />
         <Container>{children}</Container>
