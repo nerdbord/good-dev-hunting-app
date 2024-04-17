@@ -5,16 +5,9 @@ interface ContactRequestRecipient {
   recipientEmail: string
 }
 
-type ContactRequestModel = {
-  id: string
-  subject: string
-  message: string
-  senderFullName: string
-  senderEmail: string
-  profileId: string
-  recipientEmail: string
+interface ContactRequestModel extends ContactRequest {
   recipientFullName: string
-  createdAt: Date
+  recipientEmail: string
 }
 
 export function createContactRequestModel(

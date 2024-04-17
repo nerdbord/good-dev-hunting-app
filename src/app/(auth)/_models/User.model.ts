@@ -1,13 +1,7 @@
 import { type UserWithRelations } from '@/backend/user/user.types'
-import { type Role } from '@prisma/client'
+import { type User } from '@prisma/client'
 
-export type UserModel = {
-  id: string
-  email: string
-  emailVerified: Date | null
-  avatarUrl: string | null
-  roles: Role[]
-  nerdbordUserId: string | null
+export interface UserModel extends User {
   githubUsername: string | null
 }
 
