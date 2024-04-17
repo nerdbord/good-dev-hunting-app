@@ -11,7 +11,7 @@ import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import classNames from 'classnames/bind'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import { UrlObject } from 'url'
+import { type UrlObject } from 'url'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
