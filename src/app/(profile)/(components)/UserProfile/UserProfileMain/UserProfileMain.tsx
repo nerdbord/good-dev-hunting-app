@@ -1,3 +1,4 @@
+import { getHourlyRateDisplay } from '@/app/(profile)/helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -17,6 +18,9 @@ const UserProfileMain = ({
   userProfile,
   children,
 }: PropsWithChildren<UserProfileProps>) => {
+  const hourlyRateMin = userProfile.hourlyRateMin
+  const hourlyRateMax = userProfile.hourlyRateMax
+  const currency = userProfile.currency
   const countryFlag =
     countries.find((country) => country.name === userProfile.country.name)
       ?.flag || ''
@@ -58,6 +62,9 @@ const UserProfileMain = ({
               </div>
             </div>
           </div>
+          <p className={styles.salary}>
+            {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
+          </p>
         </div>
         {children}
       </div>

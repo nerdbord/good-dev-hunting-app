@@ -1,4 +1,7 @@
-import { jobSpecializationThemes } from '@/app/(profile)/helpers'
+import {
+  getHourlyRateDisplay,
+  jobSpecializationThemes,
+} from '@/app/(profile)/helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -51,6 +54,10 @@ const ProfileCard = ({
   withStateStatus,
   searchTerm,
 }: ProfileCardProps) => {
+  const hourlyRateMin = data.hourlyRateMin
+  const hourlyRateMax = data.hourlyRateMax
+  const currency = data.currency
+
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -90,6 +97,9 @@ const ProfileCard = ({
                 {data.country.name}, {data.city.name}
                 {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
                 {data.remoteOnly && ' / Remote'}
+              </p>
+              <p className={styles.salary}>
+                {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
               </p>
             </div>
           </div>

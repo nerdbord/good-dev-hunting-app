@@ -71,3 +71,19 @@ export const createQueryString = (
 
   return params.toString().replaceAll('%2C', ',')
 }
+
+export const getHourlyRateDisplay = (
+  hourlyRateMin: number | null,
+  currency: string,
+  hourlyRateMax: number | null,
+) => {
+  if (hourlyRateMin === null) {
+    return `Rate not specified`
+  } else if (hourlyRateMin >= 350) {
+    return `above ${hourlyRateMin} ${currency}/h`
+  } else if (hourlyRateMin < 100) {
+    return `below 100 ${currency}/h`
+  } else {
+    return `${hourlyRateMin} - ${hourlyRateMax} ${currency}/h`
+  }
+}

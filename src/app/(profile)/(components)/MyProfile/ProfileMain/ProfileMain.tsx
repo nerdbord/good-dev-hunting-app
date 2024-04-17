@@ -1,3 +1,4 @@
+import { getHourlyRateDisplay } from '@/app/(profile)/helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -21,6 +22,9 @@ const ProfileMain = async ({
 }) => {
   const githubUsername = profile.githubUsername
   const avatarUrl = profile.avatarUrl
+  const hourlyRateMin = profile.hourlyRateMin
+  const hourlyRateMax = profile.hourlyRateMax
+  const currency = profile.currency
   const countryFlag =
     countries.find((country) => country.name === profile.country.name)?.flag ||
     ''
@@ -93,6 +97,9 @@ const ProfileMain = async ({
               </div>
             </div>
           </div>
+          <p className={styles.salary}>
+            {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
+          </p>
         </div>
       </section>
     </>
