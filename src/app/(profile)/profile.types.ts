@@ -24,8 +24,8 @@ export type ProfileCreateParams = {
   techStack: { name: string }[]
   employmentTypes: EmploymentType[]
   state: PublishingState
-  hourlyRateMin: number | null
-  hourlyRateMax: number | null
+  hourlyRateMin: number
+  hourlyRateMax: number
   currency: Currency
 }
 
