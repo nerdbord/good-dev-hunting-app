@@ -18,7 +18,7 @@ import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
-import { PublishingState } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -40,6 +40,9 @@ const initialValues: CreateProfileFormValues = {
   techStack: [],
   state: PublishingState.DRAFT,
   terms: false,
+  hourlyRateMin: 0,
+  hourlyRateMax: 0,
+  currency: Currency.PLN,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -106,6 +109,9 @@ const CreateProfileForm = () => {
       })),
       employmentTypes: values.employment,
       state: PublishingState.DRAFT,
+      hourlyRateMin: values.hourlyRateMin || null,
+      hourlyRateMax: values.hourlyRateMax || null,
+      currency: Currency.PLN,
     }
 
     try {
