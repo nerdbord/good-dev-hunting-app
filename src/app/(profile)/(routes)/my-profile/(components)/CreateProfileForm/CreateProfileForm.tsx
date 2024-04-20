@@ -109,8 +109,8 @@ const CreateProfileForm = () => {
       })),
       employmentTypes: values.employment,
       state: PublishingState.DRAFT,
-      hourlyRateMin: values.hourlyRateMin || null,
-      hourlyRateMax: values.hourlyRateMax || null,
+      hourlyRateMin: values.hourlyRateMin,
+      hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
     }
 
