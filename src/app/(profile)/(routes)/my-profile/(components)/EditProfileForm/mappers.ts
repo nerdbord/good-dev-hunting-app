@@ -29,4 +29,7 @@ export const mapProfileModelToEditProfileFormValues = (
   })),
   employment: profile.employmentTypes,
   state: profile.state,
+  hourlyRateMin: profile.hourlyRateMin,
+  hourlyRateMax: profile.hourlyRateMax,
+  currency: profile.currency,
 })

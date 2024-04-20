@@ -1,6 +1,10 @@
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { type EmploymentType, type PublishingState } from '@prisma/client'
+import {
+  type Currency,
+  type EmploymentType,
+  type PublishingState,
+} from '@prisma/client'
 
 export type ProfileUpdateParams = Partial<ProfileModel>
 
@@ -20,6 +24,9 @@ export type ProfileCreateParams = {
   techStack: { name: string }[]
   employmentTypes: EmploymentType[]
   state: PublishingState
+  hourlyRateMin: number | null
+  hourlyRateMax: number | null
+  currency: Currency
 }
 
 export type TechStack = {
@@ -74,8 +81,16 @@ export interface ProfileFormValues {
   employment: EmploymentType[]
   techStack: DropdownOption[]
   state: PublishingState
+  hourlyRateMin: number
+  hourlyRateMax: number
+  currency: Currency
 }
 
 export interface CreateProfileFormValues extends ProfileFormValues {
   terms: boolean
+}
+
+export interface HourlyRateValue {
+  hourlyRateMin: number | null
+  hourlyRateMax: number | null
 }

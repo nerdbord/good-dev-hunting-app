@@ -1,7 +1,7 @@
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, PublishingState, Role } from '@prisma/client'
+import { Currency, Prisma, PublishingState, Role } from '@prisma/client'
 
 export async function getApprovedProfiles() {
   const approvedProfiles = await prisma.profile.findMany({
@@ -98,6 +98,9 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       employmentTypes: profileData.employmentTypes,
       state: PublishingState.DRAFT,
+      hourlyRateMin: profileData.hourlyRateMin ?? 0,
+      hourlyRateMax: profileData.hourlyRateMax ?? 0,
+      currency: Currency.PLN,
     },
     include: includeObject.include,
   })
