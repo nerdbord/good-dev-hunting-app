@@ -40,5 +40,8 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
     country: data.country.name,
     city: data.city.name,
     email: data.user.email,
+    hourlyRateMin: data.hourlyRateMin,
+    hourlyRateMax: data.hourlyRateMax,
+    currency: data.currency,
   }
 }

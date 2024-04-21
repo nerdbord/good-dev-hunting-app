@@ -1,4 +1,6 @@
 'use client'
+import { WorkInformationFormKeys } from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
+import { parseHourlyRateValue } from '@/app/(profile)/profile.helpers'
 import { type ProfileFormValues } from '@/app/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { useFormikContext } from 'formik'
@@ -66,6 +68,16 @@ export const DropdownSelect = ({
 
   const handleSelection = (option: DropdownOption) => {
     setFieldValue(name, option)
+    if (name === WorkInformationFormKeys.HOURLY_RATE) {
+      const { hourlyRateMin, hourlyRateMax } = parseHourlyRateValue(
+        option.value,
+      )
+      setFieldValue(WorkInformationFormKeys.HOURLY_RATE_MIN, hourlyRateMin)
+      setFieldValue(WorkInformationFormKeys.HOURLY_RATE_MAX, hourlyRateMax)
+    } else {
+      setFieldValue(name, option)
+    }
+
     setDropdownActive(false)
     setHasInteracted(false)
     setHasError(false)

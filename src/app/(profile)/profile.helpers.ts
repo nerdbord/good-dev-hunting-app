@@ -1,5 +1,6 @@
 import {
   JobOfferFiltersEnum,
+  type HourlyRateValue,
   type JobSpecialization,
   type SearchParamsFilters,
 } from '@/app/(profile)/profile.types'
@@ -70,4 +71,37 @@ export const createQueryString = (
   }
 
   return params.toString().replaceAll('%2C', ',')
+}
+
+export const getHourlyRateDisplay = (
+  hourlyRateMin: number | null,
+  currency: string,
+  hourlyRateMax: number | null,
+) => {
+  if (hourlyRateMin === null) {
+    return `Rate not specified`
+  } else if (hourlyRateMin >= 350) {
+    return `above ${hourlyRateMin} ${currency}/h`
+  } else if (hourlyRateMin < 100) {
+    return `below 100 ${currency}/h`
+  } else {
+    return `${hourlyRateMin} - ${hourlyRateMax} ${currency}/h`
+  }
+}
+
+export const parseHourlyRateValue = (value: string): HourlyRateValue => {
+  const [min, max] = value.split('-')
+  return {
+    hourlyRateMin: min === 'null' ? null : parseInt(min),
+    hourlyRateMax: max === 'null' ? null : parseInt(max),
+  }
+}
+
+export const formatHourlyRateLabel = (
+  min: number | null,
+  max: number | null,
+): string => {
+  if (min === null) return `< ${max} zł/h`
+  if (max === null) return `> ${min} zł/h`
+  return `${min} - ${max} zł/h`
 }
