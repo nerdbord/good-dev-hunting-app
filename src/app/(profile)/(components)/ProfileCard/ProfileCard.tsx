@@ -1,6 +1,9 @@
 import { StateStatus } from '@/app/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { jobSpecializationThemes } from '@/app/(profile)/profile.helpers'
+import {
+  getHourlyRateDisplay,
+  jobSpecializationThemes,
+} from '@/app/(profile)/profile.helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -53,6 +56,10 @@ const ProfileCard = ({
   searchTerm,
   href,
 }: ProfileCardProps) => {
+  const hourlyRateMin = data.hourlyRateMin
+  const hourlyRateMax = data.hourlyRateMax
+  const currency = data.currency
+
   const specializationTheme = useMemo(
     () => ({
       color: jobSpecializationThemes[data.position],
@@ -89,6 +96,9 @@ const ProfileCard = ({
               {data.country}, {data.city}
               {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
               {data.remoteOnly && ' / Remote'}
+            </p>
+            <p className={styles.salary}>
+              {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
             </p>
           </div>
         </div>

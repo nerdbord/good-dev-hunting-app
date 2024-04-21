@@ -7,7 +7,7 @@ import {
 } from '@/app/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { PublishingState } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -80,6 +80,9 @@ const EditProfileForm = () => {
         githubUsername: '',
         state: PublishingState.PENDING,
         viewCount: 0,
+        hourlyRateMin: 0,
+        hourlyRateMax: 0,
+        currency: Currency.PLN,
       }
     }
 
@@ -112,6 +115,9 @@ const EditProfileForm = () => {
       }),
       employmentTypes: values.employment,
       state: PublishingState.PENDING,
+      hourlyRateMin: values.hourlyRateMin,
+      hourlyRateMax: values.hourlyRateMax,
+      currency: Currency.PLN,
     }
 
     await runAsync(async () => {
