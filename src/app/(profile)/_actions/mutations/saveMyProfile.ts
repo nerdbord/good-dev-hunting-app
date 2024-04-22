@@ -11,7 +11,7 @@ import {
 } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
-import { PublishingState, type Prisma } from '@prisma/client'
+import { Currency, PublishingState, type Prisma } from '@prisma/client'
 
 export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const { user } = await getAuthorizedUser()
@@ -74,6 +74,9 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     seniority: payload.seniority,
     employmentTypes: payload.employmentTypes,
     state: PublishingState.PENDING,
+    hourlyRateMin: payload.hourlyRateMin,
+    hourlyRateMax: payload.hourlyRateMax,
+    currency: Currency.PLN,
   }
 
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
