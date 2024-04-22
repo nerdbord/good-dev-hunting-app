@@ -62,3 +62,21 @@ export const filterByFullName = (searchTermFilter: string) => {
       .includes(searchTermFilter.toUpperCase())
   }
 }
+
+export const filterBySalary =
+  (salaryFilter: string[]) => (profile: ProfileModel) => {
+    if (salaryFilter.length === 0) return true
+
+    return salaryFilter.some((salaryRange) => {
+      const [min, max] = salaryRange
+        .split('-')
+        .map((str) => (str === 'null' ? Infinity : Number(str)))
+      if (profile.hourlyRateMax === 0 && profile.hourlyRateMin === 350) {
+        return min >= 350
+      }
+      if (profile.hourlyRateMin === 0 && profile.hourlyRateMax === 0) {
+        return false
+      }
+      return profile.hourlyRateMin >= min && profile.hourlyRateMax <= max
+    })
+  }
