@@ -43,5 +43,7 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
     hourlyRateMin: data.hourlyRateMin,
     hourlyRateMax: data.hourlyRateMax,
     currency: data.currency,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
   }
 }
