@@ -1,6 +1,7 @@
 'use client'
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/mutations/sendProfileContactRequest'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import { Button } from '@/components/Button/Button'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -32,17 +33,20 @@ export default function ContactForm({
   const { runAsync, loading } = useAsyncAction()
   const { addToast } = useToast()
   const plausible = usePlausible()
+  const { handleSetProfileContactRequest } = useProfiles()
 
   const handleSendEmail = (values: ContactFormValuesWithChecks) => {
     runAsync(async () => {
       try {
-        await sendProfileContactRequest({
+        const contactRequest = await sendProfileContactRequest({
           senderEmail: values.senderEmail,
           senderFullName: values.senderFullName,
           profileId: userProfile.id,
           message: values.message,
           subject: values.subject,
         })
+
+        handleSetProfileContactRequest(contactRequest)
 
         plausible(PlausibleEvents.ContactDeveloper, {
           props: {

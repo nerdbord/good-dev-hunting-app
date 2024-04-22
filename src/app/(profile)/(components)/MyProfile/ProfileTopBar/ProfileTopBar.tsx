@@ -21,7 +21,9 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
       <div className={styles.mobileProfilePreview}>
         <div className={styles.titleContainer}>
           <span className={styles.title}>Profile preview</span>
-          <ProfileViews viewCount={profile.viewCount} />
+          <ProfileViews
+            viewCount={profile.viewCount + profile.profileViews.length}
+          />
         </div>
 
         {!(isPending || isRejected) && (
