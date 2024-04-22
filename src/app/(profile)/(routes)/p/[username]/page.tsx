@@ -2,7 +2,6 @@ import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
-import { countProfileView } from '@/app/(profile)/_actions'
 import { findProfileByGithubUsername } from '@/app/(profile)/_actions/queries/findProfileByGithubUsername'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
@@ -53,12 +52,6 @@ const UserProfilePage = async ({
   const profile = await findProfileByGithubUsername(params.username)
   if (!profile) {
     redirect(AppRoutes.profilesList)
-  }
-
-  try {
-    await countProfileView(profile.id, authorizedUser.id)
-  } catch (error) {
-    console.error('Error counting profile view:', error)
   }
 
   // const user = await findUserByEmail(selectedProfile.userEmail)

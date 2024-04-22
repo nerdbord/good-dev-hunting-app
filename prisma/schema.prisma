@@ -22,6 +22,7 @@ model User {
   githubDetails  GitHubDetails?
   roles          Role[]         @default([USER])
   nerdbordUserId String?        @unique
+  viewedProfiles ProfileView[]
 }
 
 model Account {
@@ -77,6 +78,7 @@ model Profile {
   hourlyRateMin            Int               @default(0)
   hourlyRateMax            Int               @default(0)
   currency                 Currency          @default(PLN)
+  profileViews             ProfileView[]
 }
 
 model Technology {
@@ -121,6 +123,15 @@ model ContactRequest {
   profile        Profile  @relation(fields: [profileId], references: [id])
   profileId      String
   createdAt      DateTime @default(now())
+}
+
+model ProfileView {
+  id                 String   @id @default(uuid())
+  viewerId           String
+  viewedProfileId    String
+  createdAt          DateTime @default(now())
+  viewer             User     @relation(fields: [viewerId], references: [id])
+  viewedProfile      Profile  @relation(fields: [viewedProfileId], references: [id])
 }
 
 enum Currency {

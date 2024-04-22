@@ -10,6 +10,7 @@ import {
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
+import { type ContactRequest, type ProfileView } from '@prisma/client'
 import { useSearchParams } from 'next/navigation'
 import {
   createContext,
@@ -31,6 +32,8 @@ interface ProfilesContextProps {
       disableSpecFilter?: boolean
     },
   ): ProfileModel[]
+  handleVisitProfile(profileView: ProfileView): void
+  handleSetProfileContactRequest(contactRequest: ContactRequest): void
 }
 
 export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
@@ -72,6 +75,46 @@ export const ProfilesProvider = ({
     [filters],
   )
 
+  const handleVisitProfile = (profileView: ProfileView) => {
+    setAllProfiles((prevProfiles) => {
+      return prevProfiles.map((profile) => {
+        if (profile.id !== profileView.viewedProfileId) return profile
+
+        const existingProfileView = profile.profileViews.find(
+          (view) => view.viewerId === profileView.viewerId,
+        )
+
+        let updatedProfileViews
+
+        if (existingProfileView) {
+          updatedProfileViews = profile.profileViews.map((view) => {
+            return { ...view, createdAt: new Date() }
+          })
+        } else {
+          updatedProfileViews = [...profile.profileViews, profileView]
+        }
+
+        return {
+          ...profile,
+          profileViews: updatedProfileViews,
+        }
+      })
+    })
+  }
+
+  const handleSetProfileContactRequest = (contactRequest: ContactRequest) => {
+    setAllProfiles((prevProfiles) => {
+      return prevProfiles.map((profile) => {
+        if (profile.id !== contactRequest.profileId) return profile
+
+        return {
+          ...profile,
+          contactRequests: [...profile.contactRequests, contactRequest],
+        }
+      })
+    })
+  }
+
   const filteredProfiles = handleFilterProfiles(allProfiles)
 
   return (
@@ -80,6 +123,8 @@ export const ProfilesProvider = ({
         allProfiles,
         filteredProfiles,
         handleFilterProfiles,
+        handleVisitProfile,
+        handleSetProfileContactRequest,
       }}
     >
       {children}

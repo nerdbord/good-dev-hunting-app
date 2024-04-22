@@ -38,7 +38,7 @@ export default function ModerationActionHeader() {
             : 'Assign admin role'}
         </Button>
         <div className={styles.vl}></div>
-        <StateStatus profile={profile} />
+        <StateStatus profileId={profile.id} profileState={profile.state} />
       </div>
     </div>
   )

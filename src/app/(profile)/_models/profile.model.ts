@@ -3,7 +3,12 @@ import {
   type TechStack,
 } from '@/app/(profile)/profile.types'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
-import { type Profile, type PublishingState } from '@prisma/client'
+import {
+  type ContactRequest,
+  type Profile,
+  type ProfileView,
+  type PublishingState,
+} from '@prisma/client'
 
 export interface ProfileModel extends Profile {
   position: JobSpecialization
@@ -14,6 +19,8 @@ export interface ProfileModel extends Profile {
   city: string
   country: string
   email: string
+  contactRequests: ContactRequest[]
+  profileViews: ProfileView[]
 }
 
 export function createProfileModel(data: ProfileWithRelations): ProfileModel {
@@ -43,5 +50,7 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
     hourlyRateMin: data.hourlyRateMin,
     hourlyRateMax: data.hourlyRateMax,
     currency: data.currency,
+    profileViews: data.profileViews,
+    contactRequests: data.contactRequests,
   }
 }
