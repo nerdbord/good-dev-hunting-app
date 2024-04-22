@@ -3,6 +3,7 @@ import {
   filterByAvailability,
   filterByFullName,
   filterByLocation,
+  filterBySalary,
   filterBySeniority,
   filterBySpecialization,
   filterByTechnology,
@@ -56,6 +57,7 @@ export const ProfilesProvider = ({
   const handleFilterProfiles = useCallback(
     (profiles: ProfileModel[], options?: { disableSpecFilter?: boolean }) => {
       const filteredProfiles = profiles
+        .filter(filterBySalary(filters.salary))
         .filter(filterBySeniority(filters.seniority))
         .filter(filterByLocation(filters.location))
         .filter(filterByTechnology(filters.technology))
