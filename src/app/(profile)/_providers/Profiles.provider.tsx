@@ -57,6 +57,14 @@ export const ProfilesProvider = ({
   const handleFilterProfiles = useCallback(
     (profiles: ProfileModel[], options?: { disableSpecFilter?: boolean }) => {
       const filteredProfiles = profiles
+        .sort((a, b) => {
+          if (a.hourlyRateMin > 0 && b.hourlyRateMin === 0) {
+            return -1
+          } else if (a.hourlyRateMin === 0 && b.hourlyRateMin > 0) {
+            return 1
+          }
+          return 0
+        })
         .filter(filterBySalary(filters.salary))
         .filter(filterBySeniority(filters.seniority))
         .filter(filterByLocation(filters.location))
