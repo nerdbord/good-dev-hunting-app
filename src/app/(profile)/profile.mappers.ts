@@ -182,5 +182,5 @@ export const hourlyRateOptions: DropdownOption[] = [
   { name: '200 - 250 zł/h', value: '200-250' },
   { name: '250 - 300 zł/h', value: '250-300' },
   { name: '300 - 350 zł/h', value: '300-350' },
-  { name: '> 350 zł/h', value: '350-null' },
+  { name: '> 350 zł/h', value: '350-0' },
 ]
