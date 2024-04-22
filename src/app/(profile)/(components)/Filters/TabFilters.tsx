@@ -1,9 +1,9 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
-import { filterBySpecialization } from '@/app/(profile)/(components)/ProfileList/filters'
 import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import {
   createQueryString,
+  filterBySpecialization,
   jobSpecializationThemes,
 } from '@/app/(profile)/profile.helpers'
 import {
