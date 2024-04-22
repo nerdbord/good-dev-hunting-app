@@ -78,12 +78,12 @@ export const getHourlyRateDisplay = (
   currency: string,
   hourlyRateMax: number | null,
 ) => {
-  if (hourlyRateMin === null) {
+  if (hourlyRateMin === null || hourlyRateMin < 10) {
     return `Rate not specified`
   } else if (hourlyRateMin >= 350) {
     return `above ${hourlyRateMin} ${currency}/h`
-  } else if (hourlyRateMin < 100) {
-    return `below 100 ${currency}/h`
+  } else if (hourlyRateMin < 50) {
+    return `below 50 ${currency}/h`
   } else {
     return `${hourlyRateMin} - ${hourlyRateMax} ${currency}/h`
   }
