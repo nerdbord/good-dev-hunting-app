@@ -1,5 +1,7 @@
 'use client'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
+  createFiltersObjFromSearchParams,
   filterByAvailability,
   filterByFullName,
   filterByLocation,
@@ -7,9 +9,7 @@ import {
   filterBySeniority,
   filterBySpecialization,
   filterByTechnology,
-} from '@/app/(profile)/(components)/ProfileList/filters'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
+} from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import { useSearchParams } from 'next/navigation'
 import {
