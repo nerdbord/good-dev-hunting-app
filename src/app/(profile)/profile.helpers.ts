@@ -46,11 +46,13 @@ export const createFiltersObjFromSearchParams = (
     [JobOfferFiltersEnum.availability]: [],
     [JobOfferFiltersEnum.location]: [],
     [JobOfferFiltersEnum.search]: [],
+    [JobOfferFiltersEnum.salary]: [],
   }
 
   for (const [key, value] of searchParams.entries()) {
     filters[key as keyof SearchParamsFilters] = value.split(',')
   }
+  console.log(filters)
 
   return filters
 }

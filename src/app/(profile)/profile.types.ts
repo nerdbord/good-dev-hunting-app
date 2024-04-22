@@ -63,6 +63,7 @@ export enum JobOfferFiltersEnum {
   location = 'location',
   search = 'search',
   specialization = 'specialization',
+  salary = 'salary',
 }
 
 export type SearchParamsFilters = Record<JobOfferFiltersEnum, string[]>
