@@ -295,9 +295,5 @@ export async function findProfileViewByViewerIdAndProfileId(
     },
   })
 
-  if (!profileView) {
-    throw Error('Profile view not found')
-  }
-
   return profileView
 }

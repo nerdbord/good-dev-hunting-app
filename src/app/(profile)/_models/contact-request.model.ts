@@ -5,7 +5,7 @@ interface ContactRequestRecipient {
   recipientEmail: string
 }
 
-interface ContactRequestModel extends ContactRequest {
+export interface ContactRequestModel extends ContactRequest {
   recipientFullName: string
   recipientEmail: string
 }

@@ -1,4 +1,6 @@
 'use client'
+import { type ContactRequestModel } from '@/app/(profile)/_models/contact-request.model'
+import { type ProfileViewModel } from '@/app/(profile)/_models/profile-view.model'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   createFiltersObjFromSearchParams,
@@ -11,7 +13,6 @@ import {
   filterByTechnology,
 } from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
-import { type ContactRequest, type ProfileView } from '@prisma/client'
 import { useSearchParams } from 'next/navigation'
 import {
   createContext,
@@ -33,8 +34,8 @@ interface ProfilesContextProps {
       disableSpecFilter?: boolean
     },
   ): ProfileModel[]
-  handleVisitProfile(profileView: ProfileView): void
-  handleSetProfileContactRequest(contactRequest: ContactRequest): void
+  handleVisitProfile(profileView: ProfileViewModel): void
+  handleSetProfileContactRequest(contactRequest: ContactRequestModel): void
 }
 
 export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
@@ -77,7 +78,7 @@ export const ProfilesProvider = ({
     [filters],
   )
 
-  const handleVisitProfile = (profileView: ProfileView) => {
+  const handleVisitProfile = (profileView: ProfileViewModel) => {
     setAllProfiles((prevProfiles) => {
       return prevProfiles.map((profile) => {
         if (profile.id !== profileView.viewedProfileId) return profile
@@ -86,25 +87,29 @@ export const ProfilesProvider = ({
           (view) => view.viewerId === profileView.viewerId,
         )
 
-        let updatedProfileViews
+        let profileViews: ProfileViewModel[]
 
         if (existingProfileView) {
-          updatedProfileViews = profile.profileViews.map((view) => {
+          profileViews = profile.profileViews.map((view) => {
+            if (view.viewerId !== profileView.viewerId) return view
+
             return { ...view, createdAt: new Date() }
           })
         } else {
-          updatedProfileViews = [...profile.profileViews, profileView]
+          profileViews = [...profile.profileViews, profileView]
         }
 
         return {
           ...profile,
-          profileViews: updatedProfileViews,
+          profileViews: profileViews,
         }
       })
     })
   }
 
-  const handleSetProfileContactRequest = (contactRequest: ContactRequest) => {
+  const handleSetProfileContactRequest = (
+    contactRequest: ContactRequestModel,
+  ) => {
     setAllProfiles((prevProfiles) => {
       return prevProfiles.map((profile) => {
         if (profile.id !== contactRequest.profileId) return profile
