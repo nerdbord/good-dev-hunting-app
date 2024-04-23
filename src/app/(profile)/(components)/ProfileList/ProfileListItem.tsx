@@ -4,23 +4,19 @@ import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
+import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
-import { type UrlObject } from 'url'
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
   data: ProfileModel
   searchTerm?: string
-  href: string | UrlObject
 }
 
-export const ProfileListItem: React.FC<ProfileListItemProps> = ({
-  data,
-  href,
-}) => {
+export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
   const { data: session } = useSession()
@@ -42,17 +38,13 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
 
     if (session && session.user) {
       runAsync(async () => {
-        try {
-          const profileView = await createOrUpdateProfileView(
-            session.user.id,
-            data.id,
-          )
+        const profileView = await createOrUpdateProfileView(
+          session.user.id,
+          data.id,
+        )
 
-          if (profileView) {
-            handleVisitProfile(profileView)
-          }
-        } catch (error) {
-          console.error(error)
+        if (profileView) {
+          handleVisitProfile(profileView)
         }
       })
     }
@@ -63,7 +55,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
-      href={href}
+      href={`${AppRoutes.profile}/${data.githubUsername}`}
       visitedDate={visitedProfile?.createdAt}
       contactedDate={contactedProfile?.createdAt}
     />
