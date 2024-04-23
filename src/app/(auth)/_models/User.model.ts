@@ -14,5 +14,6 @@ export function createUserModel(data: UserWithRelations): UserModel {
     roles: data.roles,
     nerdbordUserId: data.nerdbordUserId,
     githubUsername: data.githubDetails?.username || null,
+    createdAt: data.createdAt,
   }
 }
