@@ -34,8 +34,8 @@ interface ProfilesContextProps {
       disableSpecFilter?: boolean
     },
   ): ProfileModel[]
-  handleVisitProfile(profileView: ProfileViewModel): void
-  handleSetProfileContactRequest(contactRequest: ContactRequestModel): void
+  markProfileAsVisited(profileView: ProfileViewModel): void
+  markProfileAsContacted(contactRequest: ContactRequestModel): void
 }
 
 export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
@@ -78,7 +78,7 @@ export const ProfilesProvider = ({
     [filters],
   )
 
-  const handleVisitProfile = (profileView: ProfileViewModel) => {
+  const markProfileAsVisited = (profileView: ProfileViewModel) => {
     setAllProfiles((prevProfiles) => {
       return prevProfiles.map((profile) => {
         if (profile.id !== profileView.viewedProfileId) return profile
@@ -107,9 +107,7 @@ export const ProfilesProvider = ({
     })
   }
 
-  const handleSetProfileContactRequest = (
-    contactRequest: ContactRequestModel,
-  ) => {
+  const markProfileAsContacted = (contactRequest: ContactRequestModel) => {
     setAllProfiles((prevProfiles) => {
       return prevProfiles.map((profile) => {
         if (profile.id !== contactRequest.profileId) return profile
@@ -130,8 +128,8 @@ export const ProfilesProvider = ({
         allProfiles,
         filteredProfiles,
         handleFilterProfiles,
-        handleVisitProfile,
-        handleSetProfileContactRequest,
+        markProfileAsVisited,
+        markProfileAsContacted,
       }}
     >
       {children}

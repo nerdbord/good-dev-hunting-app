@@ -21,7 +21,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
   const searchParams = useSearchParams()
   const { data: session } = useSession()
   const { runAsync } = useAsyncAction()
-  const { handleVisitProfile } = useProfiles()
+  const { markProfileAsVisited } = useProfiles()
 
   const visitedProfile = data.profileViews?.find(
     (view) => view.viewerId === session?.user?.id,
@@ -44,7 +44,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
         )
 
         if (profileView) {
-          handleVisitProfile(profileView)
+          markProfileAsVisited(profileView)
         }
       })
     }
