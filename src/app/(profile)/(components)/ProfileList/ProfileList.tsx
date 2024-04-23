@@ -7,6 +7,12 @@ import styles from './ProfileList.module.scss'
 const ProfileList = () => {
   const { filteredProfiles: profiles } = useProfiles()
 
+  const sortedProfiles = profiles.sort((a, b) => {
+    if (a.hourlyRateMin && !b.hourlyRateMin) return -1
+    if (!a.hourlyRateMin && b.hourlyRateMin) return 1
+    else return 0
+  })
+
   if (profiles.length === 0) {
     return (
       <div className={styles.profileCards}>
@@ -20,7 +26,7 @@ const ProfileList = () => {
   return (
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
-        {profiles.map((profile) => (
+        {sortedProfiles.map((profile) => (
           <ProfileListItem
             key={profile.id}
             data={profile}
