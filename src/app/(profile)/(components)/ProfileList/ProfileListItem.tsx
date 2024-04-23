@@ -11,11 +11,13 @@ interface ProfileListItemProps {
   data: ProfileModel
   searchTerm?: string
   href: string | UrlObject
+  isHiddenName?: boolean
 }
 
 export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   data,
   href,
+  isHiddenName = false,
 }) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
@@ -32,6 +34,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
       href={href}
+      isHiddenName={isHiddenName}
     />
   )
 }

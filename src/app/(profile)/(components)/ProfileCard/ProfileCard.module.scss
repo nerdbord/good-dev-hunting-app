@@ -49,6 +49,12 @@
   padding-top: 3px;
 }
 
+.nameContainer {
+  display: flex;
+  gap: 6px;
+  align-items: start;
+}
+
 .name {
   color: #ffffff;
   font-weight: 500;
@@ -119,4 +125,42 @@
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+}
+
+.nameCover {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-top: 2px;
+  color: #ffffff;
+}
+
+.paddlockContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 5px;
+}
+.paddlockTop {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #a687ff;
+  border-bottom: 0;
+  width: 10px;
+  height: 8px;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+}
+.paddlockBottom {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #a687ff;
+  width: 14px;
+  height: 10px;
+  border-radius: 1.5px;
 }

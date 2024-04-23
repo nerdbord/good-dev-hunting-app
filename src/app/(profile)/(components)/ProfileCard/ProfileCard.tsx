@@ -23,6 +23,7 @@ interface ProfileCardProps {
   withStateStatus?: boolean
   searchTerm?: string | null
   href: string | UrlObject
+  isHiddenName?: boolean
 }
 
 const cx = classNames.bind(styles)
@@ -55,6 +56,7 @@ const ProfileCard = ({
   withStateStatus,
   searchTerm,
   href,
+  isHiddenName = false,
 }: ProfileCardProps) => {
   const hourlyRateMin = data.hourlyRateMin
   const hourlyRateMax = data.hourlyRateMax
@@ -85,9 +87,20 @@ const ProfileCard = ({
             <Avatar src={data.avatarUrl || ''} size={78} />
           </div>
           <div className={styles.data}>
-            <p className={styles.name}>
-              {highlightText(data.fullName, searchTerm)}
-            </p>
+            <div className={styles.nameContainer}>
+              <p className={styles.name}>
+                {highlightText(data.fullName, searchTerm)}
+              </p>
+              {isHiddenName ? (
+                <div className={styles.nameCover}>
+                  <div className={styles.paddlockContainer}>
+                    <div className={styles.paddlockTop}></div>
+                    <div className={styles.paddlockBottom}></div>
+                  </div>
+                  Login to access
+                </div>
+              ) : null}
+            </div>
             <p className={styles.wordWrap}>
               {mapSeniorityLevel(data.seniority)}{' '}
               {mapSpecializationToTitle(data.position)}
