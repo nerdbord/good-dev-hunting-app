@@ -33,7 +33,7 @@ export default function ContactForm({
   const { runAsync, loading } = useAsyncAction()
   const { addToast } = useToast()
   const plausible = usePlausible()
-  const { handleSetProfileContactRequest } = useProfiles()
+  const { markProfileAsContacted } = useProfiles()
 
   const handleSendEmail = (values: ContactFormValuesWithChecks) => {
     runAsync(async () => {
@@ -46,7 +46,7 @@ export default function ContactForm({
           subject: values.subject,
         })
 
-        handleSetProfileContactRequest(contactRequest)
+        markProfileAsContacted(contactRequest)
 
         plausible(PlausibleEvents.ContactDeveloper, {
           props: {
