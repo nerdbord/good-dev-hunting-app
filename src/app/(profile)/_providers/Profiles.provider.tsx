@@ -1,14 +1,15 @@
 'use client'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
+  createFiltersObjFromSearchParams,
   filterByAvailability,
   filterByFullName,
   filterByLocation,
+  filterBySalary,
   filterBySeniority,
   filterBySpecialization,
   filterByTechnology,
-} from '@/app/(profile)/(components)/ProfileList/filters'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
+} from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import { type ContactRequest, type ProfileView } from '@prisma/client'
 import { useSearchParams } from 'next/navigation'
@@ -59,6 +60,7 @@ export const ProfilesProvider = ({
   const handleFilterProfiles = useCallback(
     (profiles: ProfileModel[], options?: { disableSpecFilter?: boolean }) => {
       const filteredProfiles = profiles
+        .filter(filterBySalary(filters.salary))
         .filter(filterBySeniority(filters.seniority))
         .filter(filterByLocation(filters.location))
         .filter(filterByTechnology(filters.technology))

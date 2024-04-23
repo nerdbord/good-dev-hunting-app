@@ -4,6 +4,7 @@ import {
   createQueryString,
 } from '@/app/(profile)/profile.helpers'
 import {
+  hourlyRateOptions,
   mappedEmploymentType,
   mappedSeniorityLevel,
 } from '@/app/(profile)/profile.mappers'
@@ -78,6 +79,13 @@ export const ProfileFilters = ({
           jobOfferFilterName={JobOfferFiltersEnum.location}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.location]}
+        />
+        <DropdownFilterMulti
+          text={'Salary'}
+          options={hourlyRateOptions}
+          jobOfferFilterName={JobOfferFiltersEnum.salary}
+          onSearch={handleFilterChange}
+          value={filters[JobOfferFiltersEnum.salary]}
         />
       </div>
       {!isMobile && (
