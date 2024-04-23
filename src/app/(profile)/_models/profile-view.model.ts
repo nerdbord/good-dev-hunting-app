@@ -1,6 +1,6 @@
 ﻿import { type ProfileView } from '@prisma/client'
 
-type ProfileViewModel = ProfileView
+export type ProfileViewModel = ProfileView
 
 export function createProfileViewModel(data: ProfileView): ProfileViewModel {
   return {
