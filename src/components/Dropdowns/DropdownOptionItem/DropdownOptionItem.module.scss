@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    z-index: 1000;
     cursor: pointer;
     &:first-of-type {
-      margin-top: 20px;
+      margin-top: 0px;
       @include mobile {
         margin-top: 0px;
       }
@@ -24,7 +25,7 @@
     gap: 8px;
     cursor: pointer;
     &:first-of-type {
-      margin-top: 55px;
+      margin-top: 0px;
       @include mobile {
         margin-top: 0px;
       }

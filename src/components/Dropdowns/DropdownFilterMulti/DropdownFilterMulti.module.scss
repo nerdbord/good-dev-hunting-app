@@ -58,7 +58,18 @@
     border-right: none;
     border-bottom: none;
     overflow-y: auto;
-    height: 300px;
+    max-height: 300px;
+  }
+}
+.dropdownHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  @include mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -83,22 +94,7 @@
     align-items: center;
     font-size: 16px;
     color: white;
-    margin-top: 50px;
-  }
-}
-
-.container {
-  @include mobile {
-    // width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    color: white;
     margin-top: 40px;
-    position: fixed;
-    background-color: #04080d;
-    z-index: 5;
   }
 }
 
@@ -108,6 +104,48 @@
     display: block;
     font-size: 16px;
     color: white;
+  }
+}
+
+.buttonContainerMulti {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1000;
+  height: 30px;
+  margin-top: 30px;
+  @include mobile {
+    padding-right: 10px;
+    margin-top: 0px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1000;
+  height: 30px;
+  @include mobile {
+    padding-right: 10px;
+    bottom: 0;
+    position: fixed;
+  }
+}
+
+.clearButton {
+  display: flex;
+
+  justify-content: center;
+
+}
+
+.applyButton {
+  display: none;
+  @include mobile {
+    display: flex;
   }
 }
 
@@ -199,10 +237,3 @@ input {
   }
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: flex-start;
-  padding: 10px;
-  box-sizing: border-box;
-  margin-right: auto; 
-}
