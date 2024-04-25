@@ -1,4 +1,4 @@
-import { type JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
+import { JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useEffect, useRef, useState } from 'react'
@@ -100,34 +100,15 @@ export const DropdownFilterMulti = ({
                   ? styles.titleContainerSearch
                   : styles.titleContainer
               }
-            >
-              <div className={styles.container}>
-                <div className={styles.dropdownTitle}>
-                  {text}
-                  {selectedValue.length > 0 && (
-                    <span
-                      className={styles.counter}
-                    >{`(${selectedValue.length})`}</span>
-                  )}
-                </div>
-                <div className={styles.buttonContainer}>
-                  {selectedValue.length > 0 && (
-                    <Button
-                      variant="tertiary"
-                      type="submit"
-                      onClick={clearSelect}
-                    >
-                      <p>Clear</p>
-                    </Button>
-                  )}
-                  <Button
-                    variant="tertiary"
-                    type="submit"
-                    onClick={closeDropdown}
-                  >
-                    <p>Apply</p>
-                  </Button>
-                </div>
+            ></div>
+            <div className={styles.dropdownHeader}>
+              <div className={styles.dropdownTitle}>
+                {text}
+                {selectedValue.length > 0 && (
+                  <span
+                    className={styles.counter}
+                  >{`(${selectedValue.length})`}</span>
+                )}
               </div>
             </div>
             {hasSearchInput && (
@@ -137,6 +118,34 @@ export const DropdownFilterMulti = ({
                 showNoMatchingOptions={filteredOptions.length < 1}
               />
             )}
+            <div
+              className={
+                jobOfferFilterName === JobOfferFiltersEnum.technology
+                  ? styles.buttonContainerMulti
+                  : styles.buttonContainer
+              }
+            >
+              {selectedValue.length > 0 && (
+                <div className={styles.clearButton}>
+                  <Button
+                    variant="tertiary"
+                    type="submit"
+                    onClick={clearSelect}
+                  >
+                    <p>Clear</p>
+                  </Button>
+                </div>
+              )}
+              <div className={styles.applyButton}>
+                <Button
+                  variant="tertiary"
+                  type="submit"
+                  onClick={closeDropdown}
+                >
+                  <p>Apply</p>
+                </Button>
+              </div>
+            </div>
             {filteredOptions.map((option, index) => (
               <DropdownOptionItem
                 key={index}
