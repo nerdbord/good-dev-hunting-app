@@ -34,8 +34,10 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode
+  params: { locale: string }
 }) {
   const session = await auth()
   const user = session?.user ? await findUserById(session.user.id) : null
@@ -44,7 +46,7 @@ export default async function RootLayout({
   const fetchedProfiles = await findAllApprovedProfiles()
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={commonClasses}>
         <PlausibleProvider
           domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
