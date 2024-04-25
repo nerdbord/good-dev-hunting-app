@@ -1,10 +1,10 @@
-﻿import AppHeader from '@/app/(profile)/(components)/AppHeader/AppHeader'
-import { findProfileByGithubUsername } from '@/app/(profile)/_actions'
+﻿import { findProfileByGithubUsername } from '@/app/(profile)/_actions'
 import { ProfileProvider } from '@/app/(profile)/_providers/Profile.provider'
 import { Container } from '@/components/Container/Container'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import Header from '../../(components)/Header/Header'
 
 export default async function ProfileLayout({
   children,
@@ -22,7 +22,7 @@ export default async function ProfileLayout({
 
   return (
     <ProfileProvider profile={profile}>
-      <AppHeader />
+      <Header />
       <Container>{children}</Container>
     </ProfileProvider>
   )

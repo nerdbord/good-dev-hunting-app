@@ -1,4 +1,4 @@
-import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
+import Header from '@/app/(profile)/(components)/Header/Header'
 import ModerationActionHeader from '@/app/(profile)/(routes)/moderation/(components)/ModerationActionHeader/ModerationActionHeader'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
@@ -27,7 +27,7 @@ export default async function ModerationUserProfile({
       <div className={styles.wrapper}>
         <ModerationActionHeader />
         <UserProfileMain profileId={profile.id}>
-          <UserProfileHeader profileId={profile.id} withBackButton />
+          <Header />
         </UserProfileMain>
         <UserProfileDetails profileId={profile.id} />
       </div>
