@@ -3,6 +3,7 @@ import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserPro
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { findProfileByGithubUsername } from '@/app/(profile)/_actions/queries/findProfileByGithubUsername'
+import { ProfileProvider } from '@/app/(profile)/_providers/Profile.provider'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
@@ -59,16 +60,18 @@ const UserProfilePage = async ({
   const isConnectedToNerdbord = false // connected to nerdbord feature is currently dissabled
 
   return (
-    <div className={styles.wrapper}>
-      <UserProfileMain profileId={profile.id}>
-        <UserProfileHeader
-          isNerdbordConnected={isConnectedToNerdbord}
-          withBackButton
-          profileId={profile.id}
-        />
-      </UserProfileMain>
-      <UserProfileDetails profileId={profile.id} />
-    </div>
+    <ProfileProvider profile={profile}>
+      <div className={styles.wrapper}>
+        <UserProfileMain profileId={profile.id}>
+          <UserProfileHeader
+            isNerdbordConnected={isConnectedToNerdbord}
+            withBackButton
+            profileId={profile.id}
+          />
+        </UserProfileMain>
+        <UserProfileDetails profileId={profile.id} />
+      </div>
+    </ProfileProvider>
   )
 }
 
