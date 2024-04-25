@@ -10,7 +10,7 @@ import PlausibleProvider from 'next-plausible'
 import { IBM_Plex_Sans, Inter } from 'next/font/google'
 import * as process from 'process'
 import React from 'react'
-import './globals.scss'
+import '../globals.scss'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],

@@ -8,7 +8,7 @@ import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
 import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProfile'
 import React from 'react'
-import styles from './page.module.scss'
+import styles from '../page.module.scss'
 
 const Page: React.FC = () => {
   return (
