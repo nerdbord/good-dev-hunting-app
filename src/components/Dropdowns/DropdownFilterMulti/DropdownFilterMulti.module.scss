@@ -58,18 +58,23 @@
     border-right: none;
     border-bottom: none;
     overflow-y: auto;
-    max-height: 300px;
+    height: 300px;
   }
 }
 .dropdownHeader {
   display: flex;
-  justify-content: flex-start;
+  position: fixed;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  background-color: #0f1217;
+  z-index: 1000;
+  padding: 0;
   @include mobile {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 15px 0px;
+  
   }
 }
 
@@ -109,41 +114,42 @@
 
 .buttonContainerMulti {
   display: flex;
-  width: 100%;
-  justify-content: flex-end;
+  width: 180px;
+  justify-content: space-between;
   align-items: center;
   z-index: 1000;
   height: 30px;
-  margin-top: 30px;
+  margin-top: 50px;
   @include mobile {
-    padding-right: 10px;
-    margin-top: 0px;
+    justify-content: flex-end;
+    margin-top: 55px;
   }
 }
 
 .buttonContainer {
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   z-index: 1000;
-  height: 30px;
+  margin-top: 10px;
+  width: 190px;
+  background-color: #0f1217;
+  opacity: 0.7;
   @include mobile {
-    padding-right: 10px;
-    bottom: 0;
-    position: fixed;
+    justify-content: flex-end;
+    margin-top: 0;
+
   }
 }
 
 .clearButton {
   display: flex;
-
-  justify-content: center;
-
+  justify-content: flex-start;
 }
 
 .applyButton {
-  display: none;
+  display: flex;
+  justify-content: flex-end;
   @include mobile {
     display: flex;
   }

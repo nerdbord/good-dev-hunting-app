@@ -2,12 +2,11 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    z-index: 1000;
     cursor: pointer;
     &:first-of-type {
-      margin-top: 0px;
+      margin-top: 55px;
       @include mobile {
-        margin-top: 0px;
+        margin-top: 40px;
       }
     }
   input {
@@ -25,9 +24,9 @@
     gap: 8px;
     cursor: pointer;
     &:first-of-type {
-      margin-top: 0px;
+      margin-top: 90px;
       @include mobile {
-        margin-top: 0px;
+        margin-top: 40px;
       }
     }
   }
