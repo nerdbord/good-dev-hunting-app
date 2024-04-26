@@ -6,6 +6,7 @@ import { auth } from '@/auth'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
+import { unstable_setRequestLocale } from 'next-intl/server'
 import PlausibleProvider from 'next-plausible'
 import { IBM_Plex_Sans, Inter } from 'next/font/google'
 import * as process from 'process'
@@ -32,6 +33,13 @@ export const metadata = {
     "Catch coding legends! Good Dev Hunting is reverse recruitment platform that allows you to find the best developers for your team. Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs.",
 }
 
+// Can be imported from a shared config
+const locales = ['en', 'de', 'pl']
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
+
 export default async function RootLayout({
   children,
   params: { locale },
@@ -39,6 +47,8 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: string }
 }) {
+  unstable_setRequestLocale(locale)
+
   const session = await auth()
   const user = session?.user ? await findUserById(session.user.id) : null
 

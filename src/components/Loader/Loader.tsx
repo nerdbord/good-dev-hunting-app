@@ -7,12 +7,12 @@ const Loader = () => {
   return (
     <div className={styles.loaderWrapper}>
       <div className={styles.loading}>
-        {/* <p>
-          Fetching that data for you <span className={styles.dot1}>.</span>
+        <p>
+          {t('title')}
+          <span className={styles.dot1}>.</span>
           <span className={styles.dot2}>.</span>
           <span className={styles.dot3}>.</span>
-        </p> */}
-        {t('title')}
+        </p>
       </div>
     </div>
   )
