@@ -24,6 +24,7 @@ model User {
   nerdbordUserId String?        @unique
   createdAt      DateTime       @default(now())
   viewedProfiles ProfileView[]
+  contactRequests ContactRequest[]
 }
 
 model Account {
@@ -123,6 +124,8 @@ model ContactRequest {
   message        String
   senderFullName String
   senderEmail    String
+  senderId       String?
+  sender         User?     @relation(fields: [senderId], references: [id])
   profile        Profile  @relation(fields: [profileId], references: [id])
   profileId      String
   createdAt      DateTime @default(now())
