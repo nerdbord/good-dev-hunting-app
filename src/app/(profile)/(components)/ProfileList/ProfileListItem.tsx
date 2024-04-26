@@ -28,7 +28,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
   )
 
   const contactedProfile = data.contactRequests?.find(
-    (contact) => contact.senderEmail === session?.user?.email,
+    (contact) => contact.senderId === session?.user?.id,
   )
 
   const handleOpenProfile = () => {
