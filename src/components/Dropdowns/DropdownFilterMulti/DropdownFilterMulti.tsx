@@ -110,42 +110,44 @@ export const DropdownFilterMulti = ({
                   >{`(${selectedValue.length})`}</span>
                 )}
               </div>
-            </div>
-            {hasSearchInput && (
-              <DropdownSearchInput
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                showNoMatchingOptions={filteredOptions.length < 1}
-              />
-            )}
-            <div
-              className={
-                jobOfferFilterName === JobOfferFiltersEnum.technology
-                  ? styles.buttonContainerMulti
-                  : styles.buttonContainer
-              }
-            >
-              {selectedValue.length > 0 && (
-                <div className={styles.clearButton}>
+
+              {hasSearchInput && (
+                <DropdownSearchInput
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  showNoMatchingOptions={filteredOptions.length < 1}
+                />
+              )}
+              <div
+                className={
+                  jobOfferFilterName === JobOfferFiltersEnum.technology
+                    ? styles.buttonContainerMulti
+                    : styles.buttonContainer
+                }
+              >
+                {selectedValue.length > 0 && (
+                  <div className={styles.clearButton}>
+                    <Button
+                      variant="tertiary"
+                      type="submit"
+                      onClick={clearSelect}
+                    >
+                      <p>Clear</p>
+                    </Button>
+                  </div>
+                )}
+                <div className={styles.applyButton}>
                   <Button
                     variant="tertiary"
                     type="submit"
-                    onClick={clearSelect}
+                    onClick={closeDropdown}
                   >
-                    <p>Clear</p>
+                    <p>Apply</p>
                   </Button>
                 </div>
-              )}
-              <div className={styles.applyButton}>
-                <Button
-                  variant="tertiary"
-                  type="submit"
-                  onClick={closeDropdown}
-                >
-                  <p>Apply</p>
-                </Button>
               </div>
             </div>
+
             {filteredOptions.map((option, index) => (
               <DropdownOptionItem
                 key={index}
