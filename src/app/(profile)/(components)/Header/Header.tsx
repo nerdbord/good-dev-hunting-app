@@ -3,97 +3,83 @@ import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobil
 import HunterAcc from '@/app/(auth)/(components)/HunterAcc/HunterAcc'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import { AppHeaderMobileSearchFilter } from '@/app/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
 import { Container } from '@/components/Container/Container'
+import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
 import styles from './Header.module.scss'
+interface HeaderProps {
+  pathname?: '/' | '/profiles'
+}
 
-const Header = async () => {
+const Header = async ({ pathname = '/' }: HeaderProps) => {
   const { user, userIsHunter, userIsModerator, userHasProfile } =
     await getAuthorizedUser()
 
-  //   if (user) {
-  //     return (
-  //       <header className={styles.wrapper}>
-  //         <Container>
-  //           <div className={styles.headerContent}>
-  //             <div className={styles.logoAndGhStarsWrapper}>
-  //               <Link href={AppRoutes.profilesList} className={styles.logo}>
-  //                 <img src={logo.src} alt="Logo" />
-  //                 <div className={styles.title}>Good Dev Hunting</div>
-  //               </Link>
-  //               <div className={styles.hideOnMobile}>
-  //                 <GithubStarsButton />
-  //               </div>
-  //             </div>
+  let contentDesktop: JSX.Element | null = null
+  if (pathname === '/') {
+    contentDesktop = (
+      <>
+        <FindTalentsBtn variant="tertiary" />
+        <LoginBtnsWrapper />
+        <CreateProfileBtn />
+      </>
+    )
+  }
+  if (pathname === '/profiles') {
+    contentDesktop = (
+      <>
+        <FindTalentsBtn variant="tertiary" />
+        <LoginBtnsWrapper />
+        <CreateProfileBtn />
+      </>
+    )
+  }
 
-  //             <div className={styles.frameButtons}>
-  //               {userIsModerator && <ModerationBtn />}
+  let contentMobile: JSX.Element | null = null
+  if (pathname === '/') {
+    contentMobile = <LoginBtn variant="tertiary">Login</LoginBtn>
+  }
 
-  //               {!userIsHunter && userHasProfile ? (
-  //                 <GithubAcc />
-  //               ) : (
-  //                 <>
-  //                   {userIsHunter ? (
-  //                     <>
-  //                       <HunterAcc />
-  //                       <LogOutBtn />
-  //                     </>
-  //                   ) : (
-  //                     <>
-  //                       <CreateProfileBtn data-testid="create-profile-button" />
-  //                       <LogOutBtn />
-  //                     </>
-  //                   )}
-  //                 </>
-  //               )}
-  //             </div>
-  //             <div className={styles.hideOnDesktop}>
-  //               <HamburgerMenuMobileBtn
-  //                 userHasProfile={userHasProfile}
-  //                 userIsModerator={userIsModerator}
-  //                 userIsHunter={userIsHunter}
-  //               />
-  //               <AppHeaderMobileSearchFilter />
-  //             </div>
-  //           </div>
-  //         </Container>
-  //       </header>
-  //     )
-  //   }
+  if (pathname === '/profiles') {
+    contentMobile = (
+      <>
+        <HamburgerMenuMobileBtn
+          userHasProfile={userHasProfile}
+          userIsModerator={userIsModerator}
+        />
+      </>
+    )
+  }
 
   return (
     <header className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
           <div className={styles.logoAndGhStarsWrapper}>
-            <Link href={AppRoutes.profilesList} className={styles.logo}>
+            <Link href={AppRoutes.home} className={styles.logo}>
               <img src={logo.src} alt="Logo" />
               <div className={styles.title}>Good Dev Hunting</div>
             </Link>
-            <div className={styles.hideOnMobile}>
-              <GithubStarsButton />
-            </div>
+            <GithubStarsButton />
           </div>
-          <div className={styles.hideOnDesktop}>
-            <HamburgerMenuMobileBtn
-              userHasProfile={userHasProfile}
-              userIsModerator={userIsModerator}
-            />
-            <AppHeaderMobileSearchFilter />
+          <div className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
+            {contentMobile}
           </div>
-          <div className={styles.frameButtons}>
+          <div className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
             {userIsModerator && <ModerationBtn />}
             {user ? (
               <>
                 {!userIsHunter && userHasProfile ? (
-                  <GithubAcc />
+                  <>
+                    <GithubAcc />
+                  </>
                 ) : (
                   <>
                     {userIsHunter ? (
@@ -111,20 +97,13 @@ const Header = async () => {
                 )}
               </>
             ) : (
-              <>
-                <LoginBtnsWrapper />
-                <CreateProfileBtn />
-              </>
+              contentDesktop
             )}
           </div>
-
-          {/* <div className={styles.frameButtons}>
-            <LoginBtnsWrapper />
-            <CreateProfileBtn />
-          </div> */}
         </div>
       </Container>
     </header>
   )
 }
+
 export default Header
