@@ -109,5 +109,6 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
     },
   )
 } else {
+  // module.exports = withNextIntl(nextConfig) // Konfiguracja tylko z next-intl, jeśli Sentry nie jest konfigurowane
   module.exports = withNextIntl(nextConfig) // Konfiguracja tylko z next-intl, jeśli Sentry nie jest konfigurowane
 }

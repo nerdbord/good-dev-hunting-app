@@ -7,12 +7,12 @@ import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader
 import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
 import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProfile'
-import React from 'react'
-import styles from '../page.module.scss'
+import { useTranslations } from 'next-intl'
 
-const Page: React.FC = () => {
+export default function IndexPage() {
+  const t = useTranslations('Index')
   return (
-    <main className={styles.landing_background}>
+    <main>
       <LandingHeader />
       <Container>
         <Hero />
@@ -26,4 +26,3 @@ const Page: React.FC = () => {
     </main>
   )
 }
-export default Page
