@@ -38,7 +38,7 @@
     "formik": "^2.4.2",
     "mailersend": "^2.2.0",
     "material-icons": "^1.13.8",
-    "next": "^14.0.1",
+    "next": "^14.2.3",
     "next-auth": "^5.0.0-beta.15",
     "next-intl": "^3.11.3",
     "next-plausible": "^3.12.0",
