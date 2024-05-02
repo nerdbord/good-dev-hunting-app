@@ -13,7 +13,7 @@ import styles from './page.module.scss'
 const Page: React.FC = () => {
   return (
     <main className={styles.landing_background}>
-      <Header />
+      <Header pathname={'/'} />
       <Container>
         <Hero />
         <HowItWorks />
@@ -26,4 +26,5 @@ const Page: React.FC = () => {
     </main>
   )
 }
+
 export default Page
