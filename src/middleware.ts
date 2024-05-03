@@ -42,13 +42,26 @@ export default createMiddleware({
 //   ],
 // }
 
+// export const config = {
+//   matcher: [
+//     '/',
+//     '/(de|en|pl)/:path*',
+//     '/profiles',
+//     '/(de|en|pl)/profiles',
+//     '/my-profile',
+//     '/(de|en|pl)/my-profile',
+//   ],
+// }
+
 export const config = {
   matcher: [
     '/',
     '/(de|en|pl)/:path*',
     '/profiles',
     '/(de|en|pl)/profiles',
-    '/my-profiles',
-    '/(de|en|pl)/my-profiles',
+    '/my-profile',
+    '/(de|en|pl)/my-profile',
+    '/p/:profileSlug*', // Dla nieprefiksowanych ścieżek
+    '/(de|en|pl)/p/:profileSlug*', // Dla prefiksowanych ścieżek
   ],
 }

@@ -1,4 +1,4 @@
-import { validateCaptcha } from '@/app/(profile)/_actions/mutations/validateCaptcha'
+import { validateCaptcha } from '@/app/[locale]/(profile)/_actions/mutations/validateCaptcha'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'

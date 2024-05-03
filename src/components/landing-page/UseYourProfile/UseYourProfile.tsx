@@ -1,6 +1,6 @@
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import MyProfileBtn from '@/app/(profile)/(components)/MyProfileBtn/MyProfileBtn'
-import CreateProfileBtn from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
+import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyProfileBtn'
+import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findProfileWithUserInclude } from '@/backend/profile/profile.service'
 import Image from 'next/image'
 import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'

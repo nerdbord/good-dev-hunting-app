@@ -1,4 +1,4 @@
-import { type JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
+import { type JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useEffect, useRef, useState } from 'react'

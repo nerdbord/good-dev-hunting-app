@@ -1,4 +1,4 @@
-import { findAllTeamProfiles } from '@/app/(profile)/_actions/queries/findAllTeamProfiles'
+import { findAllTeamProfiles } from '@/app/[locale]/(profile)/_actions/queries/findAllTeamProfiles'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
 import styles from './MeetTeam.module.scss'
 

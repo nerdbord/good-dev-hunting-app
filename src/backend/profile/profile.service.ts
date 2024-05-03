@@ -1,5 +1,5 @@
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
+import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { type ProfileCreateParams } from '@/app/[locale]/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
 import { Currency, Prisma, PublishingState, Role } from '@prisma/client'
 
