@@ -2,27 +2,30 @@ import ConnectIcon from '@/assets/icons/ConnectIcon'
 import DollarIcon from '@/assets/icons/DollarIcon'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import GlobeIcon from '@/assets/icons/GlobeIcon'
+import { useTranslations } from 'next-intl'
 import styles from './HowItWorks.module.scss'
 import Step from './Step/Step'
 import TraitTemplate from './TraitTemplate/TraitTemplate'
 
 const HowItWorks = () => {
+  const t = useTranslations('HowItWorks')
+
   return (
     <section id="HowItWorks" className={styles.wrapper}>
       <div className={styles.titleBox}>
-        <span className={styles.sectionName}>How it works</span>
-        <span className={styles.title}>Reverted recruitment process</span>
+        <span className={styles.sectionName}>{t('howitworks')}</span>
+        <span className={styles.title}>{t('faqsection')}</span>
       </div>
       <div className={styles.steps}>
         <Step
-          title="Step 1 – CREATE PROFILE"
-          description1="Describe your skillset,"
-          description2="personality and availability."
+          title={t('titleOne')}
+          description1={t('stepOneDescriptionOne')}
+          description2={t('stepOneDescriptionTwo')}
         />
         <Step
-          title="Step 2 – SIMPLY WAIT"
-          description1="Grow and get found."
-          description2="Update your availability regularly."
+          title={t('titleTwo')}
+          description1={t('stepTwoDescriptionOne')}
+          description2={t('stepTwoDescriptionTwo')}
         />
       </div>
 

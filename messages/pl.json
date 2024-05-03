@@ -4,5 +4,16 @@
     "findtalents": "Odkryj Talenty",
     "hero": "Niech Twój następny projekt znajdzie Ciebie",
     "opensource": "Open Source, darmowa platforma dla programistów, gotowych na kolejne zlecenia."
+  },
+
+  "HowItWorks": {
+    "faqsection": "Odwrotny proces rekrutacyjny",
+    "howitworks": "JAK TO DZIAŁA",
+    "titleOne": "Krok 1 – STWÓRZ PROFIL",
+    "stepOneDescriptionOne": "Opisz swoje umiejętności,",
+    "stepOneDescriptionTwo": "osobowość i dostępność.",
+    "titleTwo": "KROK 2 – PO PROSTU CZEKAJ",
+    "stepTwoDescriptionOne": "Rozwijaj się i daj się znaleźć.",
+    "stepTwoDescriptionTwo": "Regularnie aktualizuj swoją dostępność."
   }
 }

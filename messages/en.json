@@ -2,6 +2,18 @@
   "Index": {
     "title": "Fetching that data for you",
     "findtalents": "Find talents",
+    "hero": "Let your next project find you",
     "opensource": "Open source, free hub for software developers to be present and ready for next commission work."
+  },
+
+  "HowItWorks": {
+    "faqsection": "Reverted recruitment process",
+    "howitworks": "HOW IT WORKS",
+    "titleOne": "Step 1 – CREATE PROFILE",
+    "stepOneDescriptionOne": "Describe your skillset,",
+    "stepOneDescriptionTwo": "personality and availability.",
+    "titleTwo": "Step 2 – SIMPLY WAIT",
+    "stepTwoDescriptionOne": "Grow and get found.",
+    "stepTwoDescriptionTwo": "Update your availability regularly."
   }
 }
