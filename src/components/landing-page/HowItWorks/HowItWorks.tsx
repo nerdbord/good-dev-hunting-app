@@ -33,23 +33,23 @@ const HowItWorks = () => {
         <div className={styles.traits}>
           <TraitTemplate
             icon={<GlobeIcon />}
-            title="Reversed recruitment"
-            description="Employers will find you based on your skills and availability. You don't need to apply for jobs."
+            title={t('titleThree')}
+            description={t('descriptionOne')}
           />
           <TraitTemplate
             icon={<GithubIcon />}
-            title="Open source"
-            description="Our platform is open source and we are proud of it. We believe in transparency and community."
+            title={t('titleFour')}
+            description={t('descriptionTwo')}
           />
           <TraitTemplate
             icon={<ConnectIcon />}
-            title="Remote first"
-            description="Our mission is to connect talents with employers from all over the world despite the distance."
+            title={t('titleFive')}
+            description={t('descriptionThree')}
           />
           <TraitTemplate
             icon={<DollarIcon />}
-            title="Completely free"
-            description="Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
+            title={t('titleSix')}
+            description={t('descriptionFour')}
           />
         </div>
       </div>

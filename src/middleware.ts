@@ -28,31 +28,6 @@ export default createMiddleware({
   localePrefix: 'as-needed',
 })
 
-// export const config = {
-//   // Matcher, który identyfikuje ścieżki międzynarodowe
-//   matcher: [
-//     '/', // Domyślna ścieżka
-//     '/(de|en|pl)/:path*', // Ścieżki z prefiksem językowym
-
-//     // Specyficzne ścieżki, które powinny być dostępne z i bez prefiksu lokalizacji
-//     '/profiles',
-//     '/(de|en|pl)/profiles',
-//     '/my-profiles',
-//     '/(de|en|pl)/my-profiles',
-//   ],
-// }
-
-// export const config = {
-//   matcher: [
-//     '/',
-//     '/(de|en|pl)/:path*',
-//     '/profiles',
-//     '/(de|en|pl)/profiles',
-//     '/my-profile',
-//     '/(de|en|pl)/my-profile',
-//   ],
-// }
-
 export const config = {
   matcher: [
     '/',
@@ -61,7 +36,11 @@ export const config = {
     '/(de|en|pl)/profiles',
     '/my-profile',
     '/(de|en|pl)/my-profile',
-    '/p/:profileSlug*', // Dla nieprefiksowanych ścieżek
-    '/(de|en|pl)/p/:profileSlug*', // Dla prefiksowanych ścieżek
+    '/p/:profileSlug*', // Dynamiczne ścieżki profilów
+    '/(de|en|pl)/p/:profileSlug*',
+    '/moderation', // Dodanie ścieżki /moderation
+    '/(de|en|pl)/moderation', // Dodanie lokalizowanych ścieżek /moderation
+    '/moderation/profile/:profileId*', // Dynamiczne ścieżki do konkretnego profilu
+    '/(de|en|pl)/moderation/profile/:profileId*', // Lokalizowane dynamiczne ścieżki do konkretnego profilu
   ],
 }
