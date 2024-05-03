@@ -2,11 +2,13 @@ import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findProfileWithUserInclude } from '@/backend/profile/profile.service'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
 import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
+  const t = useTranslations('UserProfile')
   const { user } = await getAuthorizedUser()
   const profile = user ? await findProfileWithUserInclude(user.email) : null
 
@@ -16,11 +18,7 @@ const UseYourProfile = async () => {
         <Image src={UseYourProfileImg} alt="Use your profile image" />
       </div>
       <div className={style.textContainer}>
-        <p className={style.text}>
-          Join us in building the largest, free, open source platform dedicated
-          to connecting software engineers with a world of development
-          opportunities.
-        </p>
+        <p className={style.text}>{t('howItWork')}</p>
         <div className={style.btn}>
           {profile ? <MyProfileBtn /> : <CreateProfileBtn />}
         </div>

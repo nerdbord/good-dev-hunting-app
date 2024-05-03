@@ -23,5 +23,33 @@
     "descriptionThree": "Our mission is to connect talents with employers from all over the world despite the distance.",
     "titleSix": "Completely free",
     "descriptionFour": "Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
+  },
+
+  "UserProfile": {
+    "howItWork": "   Join us in building the largest, free, open source platform dedicated to connecting software engineers with a world of development opportunities."
+  },
+
+  "TalentSection": {
+    "title": "Find your next talent",
+    "description": "Explore our growing talents community. Contact as many as you want."
+  },
+
+  "MeetTeam": {
+    "sectionName": "WORKING AS A TEAM",
+    "title": "Meet our team",
+    "subtitle": "Meet passionates behind the scene"
+  },
+
+  "Faq": {
+    "title": "FAQ",
+    "description": "Let us know if&nbsp;you&nbsp;have any&nbsp;questions.",
+    "questionOne": "What is reverted recruitment process?",
+    "answerOne": "  Reverse recruiting (also known as reverse job hunting) is an approach in which the roles of jobseekers and employers are reversed. Instead of candidates applying for positions, employers or recruiters actively seek out potential candidates.",
+    "questionTwo": "How does GDH work exactly?",
+    "answerTwo": "It's really simple - all you need to do is create an account by logging in with your GitHub profile. Then, you'll create a profile by providing information about yourself. Once your profile is approved by our moderators, you're ready to be hunted by employers.",
+    "questionThree": "Is it really free?",
+    "answerThree": "Yes! Using our platform is free. You can create profile, and get hired without any additional costs.",
+    "questionFour": "Do I need to have an account on GitHub?",
+    "answerFour": "To create a profile, having a GitHub account is necessary as we want to make sure that you are a real developer. We also use GitHub to fetch your profile picture and other public information to make the process of creating a profile as easy as possible. We do not store any GitHub tokens."
   }
 }
