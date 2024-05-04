@@ -47,6 +47,7 @@
     "react-dom": "18.2.0",
     "react-github-btn": "^1.4.0",
     "react-google-recaptcha": "^3.1.0",
+    "react-hydration-provider": "^2.1.0",
     "react-icons": "^4.9.0",
     "react-markdown": "^9.0.1",
     "react-select": "^5.7.3",

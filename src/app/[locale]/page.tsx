@@ -8,21 +8,26 @@ import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
 import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProfile'
 import { useTranslations } from 'next-intl'
+import { Client, HydrationProvider } from 'react-hydration-provider'
 
 export default function IndexPage() {
   const t = useTranslations('Index')
   return (
-    <main>
-      <LandingHeader />
-      <Container>
-        <Hero />
-        <HowItWorks />
-        <UseYourProfile />
-        <MeetTeam />
-        <TalentSection />
-        <FAQSection />
-      </Container>
-      <LandingFooter />
-    </main>
+    <HydrationProvider>
+      <main>
+        <Client>
+          <LandingHeader />
+          <Container>
+            <Hero />
+            <HowItWorks />
+            <UseYourProfile />
+            <MeetTeam />
+            <TalentSection />
+            <FAQSection />
+          </Container>
+          <LandingFooter />
+        </Client>
+      </main>
+    </HydrationProvider>
   )
 }
