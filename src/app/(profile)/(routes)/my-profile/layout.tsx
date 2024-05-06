@@ -1,11 +1,11 @@
 ﻿import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import AppHeader from '@/app/(profile)/(components)/AppHeader/AppHeader'
 import { findProfileByUserId } from '@/app/(profile)/_actions'
 import { ProfileProvider } from '@/app/(profile)/_providers/Profile.provider'
 import { Container } from '@/components/Container/Container'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import Header from '../../(components)/Header/Header'
 
 export default async function AppLayout({
   children,
@@ -22,7 +22,7 @@ export default async function AppLayout({
   return (
     <ProfileProvider profile={fetchedProfile}>
       <main>
-        <AppHeader />
+        <Header />
         <Container>{children}</Container>
       </main>
     </ProfileProvider>

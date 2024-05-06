@@ -15,7 +15,7 @@ const LoginPage = async () => {
 
   return (
     <>
-      <Header />
+      <Header buttonsVariant="signin" />
       <Container>
         <div className={styles.loginPage}>
           <LoginDev />

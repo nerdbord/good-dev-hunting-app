@@ -13,17 +13,18 @@ import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
+import { AppHeaderMobileSearchFilter } from '../Filters/AppHeaderMobileSearchFilter'
 import styles from './Header.module.scss'
 interface HeaderProps {
-  pathname?: '/' | '/profiles'
+  buttonsVariant?: 'main' | 'profiles' | 'signin'
 }
 
-const Header = async ({ pathname = '/' }: HeaderProps) => {
+const Header = async ({ buttonsVariant = 'main' }: HeaderProps) => {
   const { user, userIsHunter, userIsModerator, userHasProfile } =
     await getAuthorizedUser()
 
   let contentDesktop: JSX.Element | null = null
-  if (pathname === '/') {
+  if (buttonsVariant === 'main') {
     contentDesktop = (
       <>
         <FindTalentsBtn variant="tertiary" />
@@ -31,8 +32,7 @@ const Header = async ({ pathname = '/' }: HeaderProps) => {
         <CreateProfileBtn />
       </>
     )
-  }
-  if (pathname === '/profiles') {
+  } else if (buttonsVariant === 'profiles') {
     contentDesktop = (
       <>
         <FindTalentsBtn variant="tertiary" />
@@ -40,14 +40,31 @@ const Header = async ({ pathname = '/' }: HeaderProps) => {
         <CreateProfileBtn />
       </>
     )
+  } else if (buttonsVariant === 'signin') {
+    contentDesktop = <CreateProfileBtn />
   }
 
   let contentMobile: JSX.Element | null = null
-  if (pathname === '/') {
-    contentMobile = <LoginBtn variant="tertiary">Login</LoginBtn>
-  }
-
-  if (pathname === '/profiles') {
+  if (buttonsVariant === 'main') {
+    contentMobile = user ? (
+      <HamburgerMenuMobileBtn
+        userHasProfile={userHasProfile}
+        userIsModerator={userIsModerator}
+      />
+    ) : (
+      <LoginBtn variant="tertiary">Login</LoginBtn>
+    )
+  } else if (buttonsVariant === 'profiles') {
+    contentMobile = (
+      <>
+        <HamburgerMenuMobileBtn
+          userHasProfile={userHasProfile}
+          userIsModerator={userIsModerator}
+        />
+        <AppHeaderMobileSearchFilter />
+      </>
+    )
+  } else if (buttonsVariant === 'signin') {
     contentMobile = (
       <>
         <HamburgerMenuMobileBtn
@@ -77,9 +94,7 @@ const Header = async ({ pathname = '/' }: HeaderProps) => {
             {user ? (
               <>
                 {!userIsHunter && userHasProfile ? (
-                  <>
-                    <GithubAcc />
-                  </>
+                  <GithubAcc />
                 ) : (
                   <>
                     {userIsHunter ? (
