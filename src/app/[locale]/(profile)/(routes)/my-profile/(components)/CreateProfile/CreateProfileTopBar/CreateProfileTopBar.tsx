@@ -4,6 +4,7 @@ import { Button } from '@/components/Button/Button'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { AppRoutes } from '@/utils/routes'
 import { useFormikContext } from 'formik'
+import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import styles from './CreateProfileTopBar.module.scss'
 
@@ -13,6 +14,7 @@ interface CreateProfileTopBarProps {
 
 const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
   const pathname = usePathname()
+  const t = useTranslations('Buttons')
 
   const { errors, touched, isValid, handleSubmit } = useFormikContext()
   const { imageUploadError } = useUploadContext()
@@ -27,10 +29,10 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
       <div className={styles.errorWrapper}>
         <span className={styles.title}>
           {pathname === AppRoutes.createProfile
-            ? 'Create profile'
+            ? t('createProfile')
             : pathname === AppRoutes.editProfile
-            ? 'Edit profile'
-            : 'My profile'}
+            ? t('editProfile')
+            : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>

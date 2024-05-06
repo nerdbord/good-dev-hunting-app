@@ -2,10 +2,12 @@
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { signOut } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 const LogOutBtn = () => {
   const [isCalled, setIsCalled] = useState(false)
+  const t = useTranslations('Buttons')
   return (
     <div>
       <Button
@@ -16,7 +18,7 @@ const LogOutBtn = () => {
           signOut({ callbackUrl: AppRoutes.home })
         }}
       >
-        Log out
+        {t('logOut')}
       </Button>
     </div>
   )

@@ -8,6 +8,7 @@ import { useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types'
+import { useTranslations } from 'next-intl'
 import { publishProfile } from '../../_actions/mutations/publishProfile'
 import { unpublishProfile } from '../../_actions/mutations/unpublishProfile'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
@@ -18,6 +19,8 @@ interface TogglePublishButtonProps {
 }
 
 export const TogglePublishButton = (props: TogglePublishButtonProps) => {
+  const t = useTranslations('Buttons')
+
   const [showPopup, setShowPopup] = useState(false)
   const { profileId, state } = props
 
@@ -70,8 +73,8 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
           dataTestId="publishProfileButton"
         >
           {state === PublishingState.APPROVED
-            ? 'Unpublish profile'
-            : 'Publish profile'}
+            ? t('unpublish')
+            : t('publishProfile')}
         </Button>
       )}
     </div>

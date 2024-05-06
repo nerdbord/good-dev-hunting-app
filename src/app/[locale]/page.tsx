@@ -15,8 +15,8 @@ export default function IndexPage() {
   return (
     <HydrationProvider>
       <main>
+        <LandingHeader />
         <Client>
-          <LandingHeader />
           <Container>
             <Hero />
             <HowItWorks />

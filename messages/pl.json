@@ -50,5 +50,36 @@
     "answerThree": "Tak! Korzystanie z naszej platformy jest bezpłatne. Możesz stworzyć profil i zostać zatrudnionym bez żadnych dodatkowych kosztów.",
     "questionFour": "Czy muszę mieć konto na GitHubie?",
     "answerFour": "Aby stworzyć profil, konieczne jest posiadanie konta na GitHubie, gdyż chcemy mieć pewność, że jesteś prawdziwym programistą. Korzystamy również z GitHuba do pobierania Twojego zdjęcia profilowego oraz innych publicznych informacji, aby proces tworzenia profilu był jak najłatwiejszy. Nie przechowujemy żadnych tokenów GitHub."
+  },
+
+  "Buttons": {
+    "createProfile": "Utwórz profil",
+    "editProfile": "Edytuj profil",
+    "myProfile": "Mój profil",
+    "saveAndPreview": "Zapisz i podejrzyj",
+    "saveAndPreviewProfile": "Zapisz i podejrzyj profil",
+    "edit": "Edytuj",
+    "unpublish": "Wycofaj profil",
+    "publishProfile": "Publikuj profil",
+    "logOut": "Wyloguj"
+  },
+
+  "LandingFooter": {
+    "contact": "Kontakt",
+    "joinOurDiscord": "Dołącz do naszego Discorda",
+    "privacyPolicy": "Polityka prywatności",
+    "termsOfService": "Warunki korzystania z usługi"
+  },
+
+  "DropdownFilter": {
+    "technology": "Technologia",
+    "seniority": "Doświadczenie",
+    "availability": "Dostępność",
+    "location": "Lokalizacja",
+    "salary": "Wynagrodzenie"
+  },
+
+  "Search": {
+    "searchByName": "Szukaj po imieniu"
   }
 }

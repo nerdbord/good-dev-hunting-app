@@ -51,5 +51,36 @@
     "answerThree": "Yes! Using our platform is free. You can create profile, and get hired without any additional costs.",
     "questionFour": "Do I need to have an account on GitHub?",
     "answerFour": "To create a profile, having a GitHub account is necessary as we want to make sure that you are a real developer. We also use GitHub to fetch your profile picture and other public information to make the process of creating a profile as easy as possible. We do not store any GitHub tokens."
+  },
+
+  "Buttons": {
+    "createProfile": "Create profile",
+    "editProfile": "Edit profile",
+    "myProfile": "My profile",
+    "saveAndPreview": "Save and preview",
+    "saveAndPreviewProfile": "Save and preview profile",
+    "edit": "Edit",
+    "unpublish": "Unpublish profile",
+    "publishProfile": "Publish profile",
+    "logOut": "Log out"
+  },
+
+  "LandingFooter": {
+    "contact": "Contact",
+    "joinOurDiscord": "Join our Discord",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of service"
+  },
+
+  "DropdownFilter": {
+    "technology": "Technology",
+    "seniority": "Seniority",
+    "availability": "Availability",
+    "location": "Location",
+    "salary": "Salary"
+  },
+
+  "Search": {
+    "searchByName": "Search by name"
   }
 }

@@ -16,6 +16,7 @@ import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useTranslations } from 'next-intl'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import styles from './Filters.module.scss'
@@ -29,6 +30,7 @@ export const ProfileFilters = ({
   technologies,
   countries,
 }: ProfileFiltersProps) => {
+  const t = useTranslations('DropdownFilter')
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -52,7 +54,7 @@ export const ProfileFilters = ({
     <div className={styles.wrapper}>
       <div className={styles.features}>
         <DropdownFilterMulti
-          text={'Technology'}
+          text={t('technology')}
           options={technologies}
           jobOfferFilterName={JobOfferFiltersEnum.technology}
           hasSearchInput
@@ -60,28 +62,28 @@ export const ProfileFilters = ({
           value={filters[JobOfferFiltersEnum.technology]}
         />
         <DropdownFilterMulti
-          text={'Seniority'}
+          text={t('seniority')}
           options={mappedSeniorityLevel}
           jobOfferFilterName={JobOfferFiltersEnum.seniority}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.seniority]}
         />
         <DropdownFilterMulti
-          text={'Availability'}
+          text={t('availability')}
           options={mappedEmploymentType}
           jobOfferFilterName={JobOfferFiltersEnum.availability}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.availability]}
         />
         <DropdownFilterMulti
-          text={'Location'}
+          text={t('location')}
           options={countries}
           jobOfferFilterName={JobOfferFiltersEnum.location}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.location]}
         />
         <DropdownFilterMulti
-          text={'Salary'}
+          text={t('salary')}
           options={hourlyRateOptions}
           jobOfferFilterName={JobOfferFiltersEnum.salary}
           onSearch={handleFilterChange}
