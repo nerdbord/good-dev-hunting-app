@@ -11,7 +11,7 @@ export default async function ProfilesLayout({
 }) {
   return (
     <main>
-      <Header pathname="/profiles" />
+      <Header buttonsVariant="profiles" />
       <VisitorBanner />
       <Container>
         <FiltersWithData />

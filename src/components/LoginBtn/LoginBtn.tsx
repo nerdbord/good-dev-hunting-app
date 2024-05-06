@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 interface LoginBtnProps {
   children: string
@@ -10,11 +10,6 @@ interface LoginBtnProps {
 
 const LoginBtn = (props: LoginBtnProps) => {
   const router = useRouter()
-  const pathname = usePathname()
-
-  if (pathname === AppRoutes.signIn) {
-    return null
-  }
 
   return (
     <Button

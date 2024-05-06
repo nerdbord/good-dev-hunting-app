@@ -13,7 +13,7 @@ import styles from './page.module.scss'
 const Page: React.FC = () => {
   return (
     <main className={styles.landing_background}>
-      <Header pathname={'/'} />
+      <Header buttonsVariant={'main'} />
       <Container>
         <Hero />
         <HowItWorks />

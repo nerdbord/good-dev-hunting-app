@@ -1,7 +1,7 @@
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import Header from '@/app/(profile)/(components)/Header/Header'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
-import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { countProfileView } from '@/app/(profile)/_actions'
 import { findProfileByGithubUsername } from '@/app/(profile)/_actions/queries/findProfileByGithubUsername'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
@@ -68,11 +68,7 @@ const UserProfilePage = async ({
   return (
     <div className={styles.wrapper}>
       <UserProfileMain profileId={profile.id}>
-        <UserProfileHeader
-          isNerdbordConnected={isConnectedToNerdbord}
-          withBackButton
-          profileId={profile.id}
-        />
+        <Header buttonsVariant="profiles" />
       </UserProfileMain>
       <UserProfileDetails profileId={profile.id} />
     </div>
