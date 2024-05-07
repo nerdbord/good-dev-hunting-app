@@ -5,7 +5,6 @@ import { SearchResultsInfo } from '@/components/SearchResultsInfo/SearchResultsI
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 
-import { AppRoutes } from '@/utils/routes'
 import ProfileCard from '../ProfileCard/ProfileCard'
 import styles from './ProfileList.module.scss'
 
@@ -44,11 +43,7 @@ export default function ModerationProfilesWithFilters() {
       <div className={hasResults ? styles.profileListCont : styles.noProfiles}>
         {hasResults ? (
           filteredProfiles.map((profile) => (
-            <ProfileCard
-              key={profile.id}
-              data={profile}
-              href={`${AppRoutes.moderationProfile}/${profile.userId}`}
-            />
+            <ProfileCard key={profile.id} data={profile} />
           ))
         ) : (
           <p>No profiles found</p>

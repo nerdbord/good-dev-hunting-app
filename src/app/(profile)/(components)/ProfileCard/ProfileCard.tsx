@@ -9,12 +9,14 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/(profile)/profile.mappers'
+import PadlockIcon from '@/assets/icons/PadlockIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
+import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import { type UrlObject } from 'url'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
@@ -22,7 +24,6 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
-  href: string | UrlObject
   isHiddenName?: boolean
 }
 
@@ -55,9 +56,10 @@ const ProfileCard = ({
   onClick,
   withStateStatus,
   searchTerm,
-  href,
   isHiddenName = false,
 }: ProfileCardProps) => {
+  const { data: session } = useSession()
+
   const hourlyRateMin = data.hourlyRateMin
   const hourlyRateMax = data.hourlyRateMax
   const currency = data.currency
@@ -72,9 +74,10 @@ const ProfileCard = ({
   const getTechnologyClasses = cx({
     [styles.technology]: true,
   })
+
   return (
     <Link
-      href={href}
+      href={`${AppRoutes.profile}/${data.githubUsername}`}
       onClick={onClick}
       style={specializationTheme}
       className={`${styles.frameWrapper} ${
@@ -88,18 +91,21 @@ const ProfileCard = ({
           </div>
           <div className={styles.data}>
             <div className={styles.nameContainer}>
-              <p className={styles.name}>
-                {highlightText(data.fullName, searchTerm)}
-              </p>
-              {isHiddenName ? (
-                <div className={styles.nameCover}>
-                  <div className={styles.paddlockContainer}>
-                    <div className={styles.paddlockTop}></div>
-                    <div className={styles.paddlockBottom}></div>
+              {session?.user || !isHiddenName ? (
+                <p className={styles.name}>
+                  {highlightText(data.fullName, searchTerm)}
+                </p>
+              ) : (
+                <>
+                  <p className={styles.name}>
+                    {highlightText(data.fullName.slice(0, 1) + '.', searchTerm)}
+                  </p>
+                  <div className={styles.nameCover}>
+                    <PadlockIcon />
+                    Login to access
                   </div>
-                  Login to access
-                </div>
-              ) : null}
+                </>
+              )}
             </div>
             <p className={styles.wordWrap}>
               {mapSeniorityLevel(data.seniority)}{' '}
