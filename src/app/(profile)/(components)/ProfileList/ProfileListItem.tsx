@@ -4,20 +4,17 @@ import { PlausibleEvents } from '@/lib/plausible'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
-import { type UrlObject } from 'url'
+
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
   data: ProfileModel
-  searchTerm?: string
-  href: string | UrlObject
   isHiddenName?: boolean
 }
 
 export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   data,
-  href,
-  isHiddenName = false,
+  isHiddenName,
 }) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
@@ -33,7 +30,6 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
-      href={href}
       isHiddenName={isHiddenName}
     />
   )
