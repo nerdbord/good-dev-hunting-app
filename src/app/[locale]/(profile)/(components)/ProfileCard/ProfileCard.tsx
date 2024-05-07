@@ -1,4 +1,3 @@
-import { StateStatus } from '@/app/[locale]/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
   getHourlyRateDisplay,
@@ -12,9 +11,11 @@ import {
 import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import classNames from 'classnames/bind'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { type UrlObject } from 'url'
+import { StateStatus } from '../../(routes)/moderation/(components)/StateStatus/StateStatus'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
@@ -70,8 +71,10 @@ const ProfileCard = ({
   const getTechnologyClasses = cx({
     [styles.technology]: true,
   })
+
   return (
     <Link
+      suppressHydrationWarning={true}
       href={href}
       onClick={onClick}
       style={specializationTheme}
@@ -85,21 +88,21 @@ const ProfileCard = ({
             <Avatar src={data.avatarUrl || ''} size={78} />
           </div>
           <div className={styles.data}>
-            <p className={styles.name}>
+            <div className={styles.name}>
               {highlightText(data.fullName, searchTerm)}
-            </p>
-            <p className={styles.wordWrap}>
+            </div>
+            <div className={styles.wordWrap}>
               {mapSeniorityLevel(data.seniority)}{' '}
               {mapSpecializationToTitle(data.position)}
-            </p>
-            <p className={styles.location}>
+            </div>
+            <div className={styles.location}>
               {data.country}, {data.city}
               {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
               {data.remoteOnly && ' / Remote'}
-            </p>
-            <p className={styles.salary}>
+            </div>
+            <div className={styles.salary}>
               {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
-            </p>
+            </div>
           </div>
         </div>
         <TechnologiesRenderer data={data} classes={getTechnologyClasses} />
@@ -113,4 +116,4 @@ const ProfileCard = ({
   )
 }
 
-export default ProfileCard
+export default dynamic(() => Promise.resolve(ProfileCard), { ssr: false })

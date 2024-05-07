@@ -3,11 +3,11 @@ import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyP
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { HeroProfilesSection } from '@/components/landing-page/Hero/HeroProfilesSection'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import styles from './Hero.module.scss'
 
 const Hero = async () => {
-  const t = useTranslations('Index')
+  const t = await getTranslations('Index')
 
   const { user, userIsHunter, userHasProfile } = await getAuthorizedUser()
 

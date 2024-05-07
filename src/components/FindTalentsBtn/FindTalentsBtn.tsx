@@ -12,7 +12,6 @@ const FindTalentsBtn = (props: FindTalentsBtnProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const t = useTranslations('Index')
-  //const findTalentsText = t('findtalents');  // Pobiera tłumaczenie dla "findtalents"
 
   if (pathname === AppRoutes.profilesList) {
     return null

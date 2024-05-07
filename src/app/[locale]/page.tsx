@@ -7,27 +7,21 @@ import LandingHeader from '@/components/landing-page/LandingHeader/LandingHeader
 import MeetTeam from '@/components/landing-page/MeetTeam/MeetTeam'
 import TalentSection from '@/components/landing-page/TalentSection/TalentSection'
 import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProfile'
-import { useTranslations } from 'next-intl'
-import { Client, HydrationProvider } from 'react-hydration-provider'
+import styles from '../page.module.scss'
 
 export default function IndexPage() {
-  const t = useTranslations('Index')
   return (
-    <HydrationProvider>
-      <main>
-        <LandingHeader />
-        <Client>
-          <Container>
-            <Hero />
-            <HowItWorks />
-            <UseYourProfile />
-            <MeetTeam />
-            <TalentSection />
-            <FAQSection />
-          </Container>
-          <LandingFooter />
-        </Client>
-      </main>
-    </HydrationProvider>
+    <main className={styles.landing_background}>
+      <LandingHeader />
+      <Container>
+        <Hero />
+        <HowItWorks />
+        <UseYourProfile />
+        <MeetTeam />
+        <TalentSection />
+        <FAQSection />
+      </Container>
+      <LandingFooter />
+    </main>
   )
 }

@@ -2,13 +2,13 @@ import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { findProfileWithUserInclude } from '@/backend/profile/profile.service'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
 import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
-  const t = useTranslations('UserProfile')
+  const t = await getTranslations('UserProfile')
   const { user } = await getAuthorizedUser()
   const profile = user ? await findProfileWithUserInclude(user.email) : null
 

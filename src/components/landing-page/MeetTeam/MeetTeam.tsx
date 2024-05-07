@@ -1,10 +1,10 @@
 import { findAllTeamProfiles } from '@/app/[locale]/(profile)/_actions/queries/findAllTeamProfiles'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import styles from './MeetTeam.module.scss'
 
 const MeetTeam = async () => {
-  const t = useTranslations('MeetTeam')
+  const t = await getTranslations('MeetTeam')
   const teamProfiles = await findAllTeamProfiles()
 
   // Calculate midpoint differently to ensure one half has at least 4 items
