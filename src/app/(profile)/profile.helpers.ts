@@ -188,3 +188,25 @@ export const filterBySalary =
       return profile.hourlyRateMin >= min && profile.hourlyRateMax <= max
     })
   }
+
+export const hasProfileValuesChanged = (
+  foundProfile: ProfileModel,
+  payload: ProfileModel,
+) => {
+  // Initialize array to store changed fields
+  const changedFields: string[] = []
+
+  // Compare each field in the payload with the existing profile data
+  Object.keys(payload).some((key) => {
+    // @ts-ignore
+    if (foundProfile[key].toString() !== payload[key].toString()) {
+      changedFields.push(key)
+    }
+  })
+
+  if (changedFields.length === 0) {
+    return false
+  } else {
+    return changedFields
+  }
+}
