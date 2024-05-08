@@ -5,7 +5,10 @@ import {
   createProfileModel,
   type ProfileModel,
 } from '@/app/(profile)/_models/profile.model'
-import { hasProfileValuesChanged } from '@/app/(profile)/profile.helpers'
+import {
+  hasCommonFields,
+  hasProfileValuesChanged,
+} from '@/app/(profile)/profile.helpers'
 import { updateProfileById } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
@@ -22,10 +25,39 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     throw new Error('Profile not found')
   }
 
-  const shouldUpdateProfile = hasProfileValuesChanged(foundProfile, payload)
-  if (!shouldUpdateProfile) {
+  const changedFields = hasProfileValuesChanged(foundProfile, payload)
+  if (!changedFields) {
     return foundProfile
   }
+
+  const profilePendingFields = [
+    // fields that should change profile publishing state to PENDING
+    // PERSONAL INFORMATION
+    'fullName',
+    'email',
+    'avatarUrl',
+    'linkedIn',
+    'bio',
+
+    // LOCATION PREFERENCES
+    'country',
+    'openForCountryRelocation',
+    'city',
+    'openForCityRelocation',
+    'remoteOnly',
+
+    // WORK INFORMATION
+    // 'position',
+    // 'seniority',
+    // 'hourlyRateMin',
+    // 'hourlyRateMax',
+    // 'techStack',
+    // 'employmentTypes',
+  ]
+
+  const updatedState = hasCommonFields(changedFields, profilePendingFields)
+    ? PublishingState.PENDING
+    : payload.state
 
   const updatedTechStack = payload.techStack.map((tech) => tech.name)
 
@@ -68,7 +100,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     position: payload.position,
     seniority: payload.seniority,
     employmentTypes: payload.employmentTypes,
-    state: PublishingState.PENDING,
+    state: updatedState,
     hourlyRateMin: payload.hourlyRateMin,
     hourlyRateMax: payload.hourlyRateMax,
     currency: Currency.PLN,
