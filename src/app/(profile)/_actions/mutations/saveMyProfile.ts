@@ -1,33 +1,28 @@
 'use server'
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { findProfileByUserId } from '@/app/(profile)/_actions/queries'
 import {
   createProfileModel,
   type ProfileModel,
 } from '@/app/(profile)/_models/profile.model'
-import {
-  findProfileWithUserInclude,
-  hasProfileValuesChanged,
-  updateProfileById,
-} from '@/backend/profile/profile.service'
+import { hasProfileValuesChanged } from '@/app/(profile)/profile.helpers'
+import { updateProfileById } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
 import { Currency, PublishingState, type Prisma } from '@prisma/client'
 
 export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const { user } = await getAuthorizedUser()
-  if (!user) throw new Error('User not found')
+  if (!user) {
+    throw new Error('User not found')
+  }
 
-  const foundProfile = await findProfileWithUserInclude(user.email)
-
+  const foundProfile = await findProfileByUserId(user.id)
   if (!foundProfile) {
     throw new Error('Profile not found')
   }
 
-  const shouldUpdateProfile = await hasProfileValuesChanged(
-    foundProfile.id,
-    payload,
-  )
-
+  const shouldUpdateProfile = hasProfileValuesChanged(foundProfile, payload)
   if (!shouldUpdateProfile) {
     return foundProfile
   }
