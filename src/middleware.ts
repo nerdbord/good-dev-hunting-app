@@ -21,6 +21,8 @@ export const config = {
     '/(de|en|pl)/profiles',
     '/my-profile',
     '/(de|en|pl)/my-profile',
+    '/my-profile/edit',
+    '/(de|en|pl)/my-profile/edit',
     '/p/:profileSlug*', // Dynamiczne ścieżki profilów
     '/(de|en|pl)/p/:profileSlug*',
     '/moderation', // Dodanie ścieżki /moderation
