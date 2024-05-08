@@ -101,7 +101,20 @@ export const DropdownFilterMulti = ({
                   : styles.titleContainer
               }
             ></div>
-            <div className={styles.dropdownHeader}>
+            {hasSearchInput && (
+              <DropdownSearchInput
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                showNoMatchingOptions={filteredOptions.length < 1}
+              />
+            )}
+            <div
+              className={
+                jobOfferFilterName === JobOfferFiltersEnum.technology
+                  ? styles.dropdownHeaderMulti
+                  : styles.dropdownHeader
+              }
+            >
               <div className={styles.dropdownTitle}>
                 {text}
                 {selectedValue.length > 0 && (
@@ -110,14 +123,6 @@ export const DropdownFilterMulti = ({
                   >{`(${selectedValue.length})`}</span>
                 )}
               </div>
-
-              {hasSearchInput && (
-                <DropdownSearchInput
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                  showNoMatchingOptions={filteredOptions.length < 1}
-                />
-              )}
               <div
                 className={
                   jobOfferFilterName === JobOfferFiltersEnum.technology
@@ -125,17 +130,15 @@ export const DropdownFilterMulti = ({
                     : styles.buttonContainer
                 }
               >
-                {selectedValue.length > 0 && (
-                  <div className={styles.clearButton}>
-                    <Button
-                      variant="tertiary"
-                      type="submit"
-                      onClick={clearSelect}
-                    >
-                      <p>Clear</p>
-                    </Button>
-                  </div>
-                )}
+                <div className={styles.clearButton}>
+                  <Button
+                    variant="tertiary"
+                    type="submit"
+                    onClick={clearSelect}
+                  >
+                    <p>Clear</p>
+                  </Button>
+                </div>
                 <div className={styles.applyButton}>
                   <Button
                     variant="tertiary"
