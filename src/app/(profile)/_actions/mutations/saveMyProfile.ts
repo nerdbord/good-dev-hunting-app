@@ -9,10 +9,36 @@ import {
   hasCommonFields,
   hasProfileValuesChanged,
 } from '@/app/(profile)/profile.helpers'
+import { type EditProfileFormFields } from '@/app/(profile)/profile.types'
 import { updateProfileById } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
 import { Currency, PublishingState, type Prisma } from '@prisma/client'
+
+const profilePendingFields: EditProfileFormFields[] = [
+  // fields that should change profile publishing state to PENDING
+  // PERSONAL INFORMATION
+  'fullName',
+  'email',
+  'avatarUrl',
+  'linkedIn',
+  'bio',
+
+  // LOCATION PREFERENCES
+  'country',
+  'openForCountryRelocation',
+  'city',
+  'openForCityRelocation',
+  'remoteOnly',
+
+  // WORK INFORMATION
+  // 'position',
+  // 'seniority',
+  // 'hourlyRateMin',
+  // 'hourlyRateMax',
+  // 'techStack',
+  // 'employmentTypes',
+]
 
 export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const { user } = await getAuthorizedUser()
@@ -29,31 +55,6 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   if (!changedFields) {
     return foundProfile
   }
-
-  const profilePendingFields = [
-    // fields that should change profile publishing state to PENDING
-    // PERSONAL INFORMATION
-    'fullName',
-    'email',
-    'avatarUrl',
-    'linkedIn',
-    'bio',
-
-    // LOCATION PREFERENCES
-    'country',
-    'openForCountryRelocation',
-    'city',
-    'openForCityRelocation',
-    'remoteOnly',
-
-    // WORK INFORMATION
-    // 'position',
-    // 'seniority',
-    // 'hourlyRateMin',
-    // 'hourlyRateMax',
-    // 'techStack',
-    // 'employmentTypes',
-  ]
 
   const updatedState = hasCommonFields(changedFields, profilePendingFields)
     ? PublishingState.PENDING
