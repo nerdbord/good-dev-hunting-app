@@ -210,3 +210,18 @@ export const hasProfileValuesChanged = (
     return changedFields
   }
 }
+
+export const hasCommonFields = (
+  changedFields: string[],
+  profilePendingFields: string[],
+): boolean => {
+  let hasCommon = false
+
+  profilePendingFields.forEach((field) => {
+    if (changedFields.includes(field)) {
+      hasCommon = true
+    }
+  })
+
+  return hasCommon
+}

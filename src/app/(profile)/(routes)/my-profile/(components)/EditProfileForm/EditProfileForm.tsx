@@ -114,7 +114,6 @@ const EditProfileForm = () => {
         }
       }),
       employmentTypes: values.employment,
-      state: PublishingState.PENDING,
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
