@@ -1,7 +1,6 @@
 'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
 import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
-import { AppRoutes } from '@/utils/routes'
 import styles from './ProfileList.module.scss'
 
 const ProfileList = () => {
@@ -31,7 +30,6 @@ const ProfileList = () => {
             key={profile.id}
             data={profile}
             isHiddenName={true}
-            href={`${AppRoutes.profile}/${profile.githubUsername}`}
           />
         ))}
       </div>
