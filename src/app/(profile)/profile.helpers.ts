@@ -142,7 +142,7 @@ export const filterByLocation =
 export const filterByTechnology =
   (technologyFilter: string[]) => (profile: ProfileModel) => {
     if (!technologyFilter.length) return true
-    return technologyFilter.some(
+    return technologyFilter.every(
       (techFilter) =>
         !!profile.techStack.find(
           (tech) => tech.name.toUpperCase() === techFilter.toUpperCase(),
