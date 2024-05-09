@@ -48,7 +48,7 @@
   @include mobile {
     position: fixed;
     flex-direction: column;
-    bottom: 10px;
+    bottom: 7px;
     left: 0;
     width: 100%;
     height: auto;
@@ -59,6 +59,42 @@
     border-bottom: none;
     overflow-y: auto;
     height: 300px;
+  }
+}
+.dropdownHeaderMulti {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f1217;
+  z-index: 1000;
+  padding: 0;
+  margin-top: 45px;
+  @include mobile {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    background-color: #04080d;
+    height: 50px;
+
+  }
+}
+.dropdownHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f1217;
+  z-index: 1000;
+  padding: 0;
+  @include mobile {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #04080d;
+    height: 50px;
   }
 }
 
@@ -83,7 +119,7 @@
     align-items: center;
     font-size: 16px;
     color: white;
-    margin-top: 50px;
+    margin-top: 40px;
   }
 }
 
@@ -93,7 +129,56 @@
     display: block;
     font-size: 16px;
     color: white;
+    padding-top: 10px;
   }
+}
+
+.buttonContainerMulti {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  margin-top: 10px;
+  width: 190px;
+  @include mobile {
+    justify-content: flex-end;
+    z-index: 5;
+    width: auto;
+    padding-right: 10px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  margin-top: 10px;
+  width: 190px;
+  @include mobile {
+    justify-content: flex-end;
+    margin-top: 0;
+    z-index: 5;
+    padding-right: 10px;
+  }
+}
+
+
+.clearButton {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.applyButton {
+  display: flex;
+  justify-content: flex-end;
+  @include mobile {
+    display: flex;
+  }
+}
+
+.counter {
+margin-left: 3px;
 }
 
 .dropdownInput {
@@ -179,3 +264,4 @@ input {
     filter: blur(5px);
   }
 }
+

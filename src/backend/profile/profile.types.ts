@@ -10,6 +10,8 @@ export type ProfileWithRelations = Prisma.ProfileGetPayload<{
     country: true
     city: true
     techStack: true
+    profileViews: true
+    contactRequests: true
   }
 }>
 

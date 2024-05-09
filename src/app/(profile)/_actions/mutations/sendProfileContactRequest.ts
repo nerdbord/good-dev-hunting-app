@@ -20,6 +20,7 @@ export const sendProfileContactRequest = withSentry(
     senderFullName,
     subject,
     profileId,
+    senderId,
   }: ContactFormRequest) => {
     let contactRequest: ContactRequest | null = null
     try {
@@ -48,6 +49,7 @@ export const sendProfileContactRequest = withSentry(
         subject,
         profileId,
         message,
+        senderId,
       })
 
       contactRequest = createdContactRequest

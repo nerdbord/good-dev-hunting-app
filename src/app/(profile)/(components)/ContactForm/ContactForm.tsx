@@ -1,12 +1,14 @@
-'use client'
+import { type SenderData } from '@/app/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
+import ContactSuccessModal from '@/app/(profile)/(components)/ContactForm/ContactSuccessModal.tsx/ContactSuccessModal'
 import { sendProfileContactRequest } from '@/app/(profile)/_actions/mutations/sendProfileContactRequest'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import { Button } from '@/components/Button/Button'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextArea from '@/components/TextArea/TextArea'
 import TextInput from '@/components/TextInput/TextInput'
+import { useModal } from '@/contexts/ModalContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
@@ -21,36 +23,41 @@ import {
 } from './schema'
 
 export default function ContactForm({
-  userProfile,
-  closeModal,
-  showSuccessMsg,
+  senderData,
 }: {
-  userProfile: ProfileModel
-  closeModal: () => void
-  showSuccessMsg: () => void
+  senderData: SenderData
 }) {
   const { runAsync, loading } = useAsyncAction()
+  const { closeModal, showModal } = useModal()
   const { addToast } = useToast()
   const plausible = usePlausible()
+  const { markProfileAsContacted } = useProfiles()
+  const { userId, userEmail, userFullName, userGithubName, userProfileId } =
+    senderData
 
   const handleSendEmail = (values: ContactFormValuesWithChecks) => {
     runAsync(async () => {
       try {
-        await sendProfileContactRequest({
+        const contactRequest = await sendProfileContactRequest({
           senderEmail: values.senderEmail,
           senderFullName: values.senderFullName,
-          profileId: userProfile.id,
+          profileId: userProfileId,
           message: values.message,
           subject: values.subject,
+          senderId: userId,
         })
+
+        markProfileAsContacted(contactRequest)
 
         plausible(PlausibleEvents.ContactDeveloper, {
           props: {
-            username: userProfile.githubUsername,
+            username: userGithubName,
             senderEmail: values.senderEmail,
           },
         })
-        showSuccessMsg()
+        showModal(
+          <ContactSuccessModal name={userFullName} onClose={closeModal} />,
+        )
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } catch (error) {
         addToast(
@@ -62,7 +69,7 @@ export default function ContactForm({
   }
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: initialValues(userEmail),
     validationSchema: validationSchema,
     onSubmit: handleSendEmail,
     validateOnChange: false,
@@ -72,7 +79,7 @@ export default function ContactForm({
   return (
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit}>
-        <h4>Contact {userProfile.fullName}</h4>
+        <h4>Contact {userFullName}</h4>
         <div className={styles.formContainer}>
           <p className={styles.info}>
             Send a message to this candidate. We&rsquo;ll make sure it&rsquo;ll
