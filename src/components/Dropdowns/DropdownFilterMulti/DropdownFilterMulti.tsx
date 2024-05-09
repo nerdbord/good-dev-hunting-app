@@ -108,6 +108,7 @@ export const DropdownFilterMulti = ({
                 showNoMatchingOptions={filteredOptions.length < 1}
               />
             )}
+
             <div
               className={
                 jobOfferFilterName === JobOfferFiltersEnum.technology
@@ -123,6 +124,7 @@ export const DropdownFilterMulti = ({
                   >{`(${selectedValue.length})`}</span>
                 )}
               </div>
+
               <div
                 className={
                   jobOfferFilterName === JobOfferFiltersEnum.technology
@@ -130,15 +132,17 @@ export const DropdownFilterMulti = ({
                     : styles.buttonContainer
                 }
               >
-                <div className={styles.clearButton}>
-                  <Button
-                    variant="tertiary"
-                    type="submit"
-                    onClick={clearSelect}
-                  >
-                    <p>Clear</p>
-                  </Button>
-                </div>
+                {selectedValue.length > 0 && (
+                  <div className={styles.clearButton}>
+                    <Button
+                      variant="tertiary"
+                      type="submit"
+                      onClick={clearSelect}
+                    >
+                      <p>Clear</p>
+                    </Button>
+                  </div>
+                )}
                 <div className={styles.applyButton}>
                   <Button
                     variant="tertiary"
