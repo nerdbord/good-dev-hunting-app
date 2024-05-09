@@ -189,6 +189,43 @@ export const filterBySalary =
     })
   }
 
+export const hasProfileValuesChanged = (
+  foundProfile: ProfileModel,
+  payload: ProfileModel,
+) => {
+  // Initialize array to store changed fields
+  const changedFields: string[] = []
+
+  // Compare each field in the payload with the existing profile data
+  Object.keys(payload).some((key) => {
+    // @ts-ignore
+    if (foundProfile[key].toString() !== payload[key].toString()) {
+      changedFields.push(key)
+    }
+  })
+
+  if (changedFields.length === 0) {
+    return false
+  } else {
+    return changedFields
+  }
+}
+
+export const hasCommonFields = (
+  changedFields: string[],
+  profilePendingFields: string[],
+): boolean => {
+  let hasCommon = false
+
+  profilePendingFields.forEach((field) => {
+    if (changedFields.includes(field)) {
+      hasCommon = true
+    }
+  })
+
+  return hasCommon
+}
+
 export const renderRelativeDateLabel = (date: Date) => {
   const today = new Date().setHours(0, 0, 0, 0)
   const dateToCheck = new Date(date).setHours(0, 0, 0, 0)
@@ -206,3 +243,4 @@ export const renderRelativeDateLabel = (date: Date) => {
       return `on ${date.toLocaleDateString()}`
   }
 }
+

@@ -1,4 +1,3 @@
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
 import { Currency, Prisma, PublishingState, Role } from '@prisma/client'
@@ -180,25 +179,6 @@ export async function getProfileByGithubUsername(username: string) {
   }
 
   return null
-}
-
-export const hasProfileValuesChanged = async (
-  profileId: string,
-  payload: ProfileModel,
-) => {
-  const existingProfile = await findProfileById(profileId)
-
-  if (!existingProfile) {
-    return false
-  }
-
-  // Compare each field in the payload with the existing profile data
-  const hasChanged = Object.keys(payload).some((key) => {
-    // @ts-ignore
-    return existingProfile[key] !== payload[key]
-  })
-
-  return hasChanged
 }
 
 export async function getPublishedProfiles(take: number) {
