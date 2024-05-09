@@ -2,15 +2,16 @@
 import {
   createFiltersObjFromSearchParams,
   createQueryString,
-} from '@/app/(profile)/helpers'
+} from '@/app/(profile)/profile.helpers'
 import {
+  hourlyRateOptions,
   mappedEmploymentType,
   mappedSeniorityLevel,
-} from '@/app/(profile)/mappers'
+} from '@/app/(profile)/profile.mappers'
 import {
   JobOfferFiltersEnum,
   type SearchParamsFilters,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
@@ -78,6 +79,13 @@ export const ProfileFilters = ({
           jobOfferFilterName={JobOfferFiltersEnum.location}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.location]}
+        />
+        <DropdownFilterMulti
+          text={'Salary'}
+          options={hourlyRateOptions}
+          jobOfferFilterName={JobOfferFiltersEnum.salary}
+          onSearch={handleFilterChange}
+          value={filters[JobOfferFiltersEnum.salary]}
         />
       </div>
       {!isMobile && (

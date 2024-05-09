@@ -1,0 +1,7 @@
+export { assignRole } from './assignRole'
+export { connectToNerdbord } from './connectToNerdbord'
+export { fetchMyAvatar } from './fetchMyAvatar'
+export { importAvatarFromGithub } from './importAvatarFromGithub'
+export { registerNewUser } from './registerNewUser'
+export { unassignRole } from './unassignRole'
+export { updateMyAvatar } from './updateMyAvatar'

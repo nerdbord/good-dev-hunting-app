@@ -1,13 +1,11 @@
-'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
 import { Button } from '../../../../../components/Button/Button'
 import styles from './ContactResultModal.module.scss'
 
 export default function ContactSuccessModal({
-  userProfile,
+  name,
   onClose,
 }: {
-  userProfile: ProfileModel
+  name: string
   onClose: () => void
 }) {
   const getName = (name: string) => {
@@ -18,10 +16,10 @@ export default function ContactSuccessModal({
       <h4>Message sent!</h4>
       <p>
         Your message was sent, you can now relax and wait for the response from{' '}
-        {getName(userProfile.fullName)}.
+        {getName(name)}.
       </p>
       <div data-test-id="closeBtn">
-        <Button variant={'primary'} onClick={() => onClose()}>
+        <Button variant={'primary'} onClick={onClose}>
           Close
         </Button>
       </div>

@@ -1,4 +1,4 @@
-const ViewIcon = () => {
+const ViewIcon = ({ color = '#69717B' }: { color?: string }) => {
   return (
     <svg
       width="24"
@@ -9,10 +9,10 @@ const ViewIcon = () => {
     >
       <path
         d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"
-        stroke="#69717B"
-        stroke-linecap="round"
+        stroke={color}
+        strokeLinecap="round"
       />
-      <circle cx="12" cy="12" r="3" stroke="#69717B" stroke-linecap="round" />
+      <circle cx="12" cy="12" r="3" stroke={color} strokeLinecap="round" />
     </svg>
   )
 }

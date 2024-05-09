@@ -1,15 +1,15 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
-import { filterBySpecialization } from '@/app/(profile)/(components)/ProfileList/filters'
-import { useProfiles } from '@/app/(profile)/(components)/ProfilesProvider'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import {
   createQueryString,
+  filterBySpecialization,
   jobSpecializationThemes,
-} from '@/app/(profile)/helpers'
+} from '@/app/(profile)/profile.helpers'
 import {
   JobOfferFiltersEnum,
   type JobSpecialization,
-} from '@/app/(profile)/types'
+} from '@/app/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import styles from './Filters.module.scss'

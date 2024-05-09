@@ -1,9 +1,13 @@
 'use client'
-import { type ProfileModel } from '@/app/(profile)/types'
+import { createOrUpdateProfileView } from '@/app/(profile)/_actions'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
+import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
+import { useSession } from 'next-auth/react'
 import { usePlausible } from 'next-plausible'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import React from 'react'
 import ProfileCard from '../ProfileCard/ProfileCard'
 
@@ -13,16 +17,37 @@ interface ProfileListItemProps {
 }
 
 export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
-  const router = useRouter()
   const plausible = usePlausible()
   const searchParams = useSearchParams()
+  const { data: session } = useSession()
+  const { runAsync } = useAsyncAction()
+  const { markProfileAsVisited } = useProfiles()
 
-  const handleOpenProfile = (event: React.MouseEvent) => {
-    event.preventDefault()
+  const visitedProfile = data.profileViews?.find(
+    (view) => view.viewerId === session?.user?.id,
+  )
+
+  const contactedProfile = data.contactRequests?.find(
+    (contact) => contact.senderId === session?.user?.id,
+  )
+
+  const handleOpenProfile = () => {
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })
-    router.push(`${AppRoutes.profile}/${data.githubUsername}`)
+
+    if (session && session.user) {
+      runAsync(async () => {
+        const profileView = await createOrUpdateProfileView(
+          session.user.id,
+          data.id,
+        )
+
+        if (profileView) {
+          markProfileAsVisited(profileView)
+        }
+      })
+    }
   }
 
   return (
@@ -30,6 +55,9 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
+      href={`${AppRoutes.profile}/${data.githubUsername}`}
+      visitedDate={visitedProfile?.createdAt}
+      contactedDate={contactedProfile?.createdAt}
     />
   )
 }

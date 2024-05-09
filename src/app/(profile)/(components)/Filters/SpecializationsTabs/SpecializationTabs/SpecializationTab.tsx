@@ -1,6 +1,6 @@
 'use client'
-import { createFiltersObjFromSearchParams } from '@/app/(profile)/helpers'
-import { type SearchParamsFilters } from '@/app/(profile)/types'
+import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
+import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import classNames from 'classnames/bind'
 import { useSearchParams } from 'next/navigation'
 import { useMemo, type PropsWithChildren } from 'react'
