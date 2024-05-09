@@ -48,6 +48,7 @@ export default function ModerationProfilesWithFilters() {
               key={profile.id}
               data={profile}
               href={`${AppRoutes.moderationProfile}/${profile.userId}`}
+              withStateStatus
             />
           ))
         ) : (
