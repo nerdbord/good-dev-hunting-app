@@ -1,6 +1,7 @@
 'use client'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { PlausibleEvents } from '@/lib/plausible'
+import { useSession } from 'next-auth/react'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
@@ -19,6 +20,8 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   const plausible = usePlausible()
   const searchParams = useSearchParams()
 
+  const { data: session } = useSession()
+
   const handleOpenProfile = () => {
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
@@ -30,7 +33,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
-      isHiddenName={isHiddenName}
+      isHiddenName={!(!isHiddenName || session?.user)}
     />
   )
 }
