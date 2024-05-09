@@ -13,7 +13,6 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
-import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { saveMyProfile } from '@/app/(profile)/_actions'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
@@ -60,7 +59,7 @@ const EditProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { profile } = useProfileModel()
-  const { user } = useAuth()
+  const { data: session } = useSession()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -89,7 +88,7 @@ const EditProfileForm = () => {
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
-  if (!user || !profile || !user) {
+  if (!session || !profile || !session) {
     return null
   }
 
@@ -97,7 +96,7 @@ const EditProfileForm = () => {
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,
-      avatarUrl: user.avatarUrl || null,
+      avatarUrl: session.user?.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -126,7 +125,8 @@ const EditProfileForm = () => {
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
-      savedProfile && updateSession({ ...user, name: savedProfile.fullName })
+      savedProfile &&
+        updateSession({ ...session.user, name: savedProfile.fullName })
 
       router.push(AppRoutes.myProfile)
     })
