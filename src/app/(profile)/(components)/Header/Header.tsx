@@ -27,17 +27,29 @@ const Header = async ({ buttonsVariant = 'main' }: HeaderProps) => {
   if (buttonsVariant === 'main') {
     contentDesktop = (
       <>
-        <FindTalentsBtn variant="tertiary" />
-        <LoginBtnsWrapper />
-        <CreateProfileBtn />
+        <li>
+          <FindTalentsBtn variant="tertiary" />
+        </li>
+        <li>
+          <LoginBtnsWrapper />
+        </li>
+        <li>
+          <CreateProfileBtn />
+        </li>
       </>
     )
   } else if (buttonsVariant === 'profiles') {
     contentDesktop = (
       <>
-        <FindTalentsBtn variant="tertiary" />
-        <LoginBtnsWrapper />
-        <CreateProfileBtn />
+        <li>
+          <FindTalentsBtn variant="tertiary" />
+        </li>
+        <li>
+          <LoginBtnsWrapper />
+        </li>
+        <li>
+          <CreateProfileBtn />
+        </li>
       </>
     )
   } else if (buttonsVariant === 'signin') {
@@ -47,30 +59,40 @@ const Header = async ({ buttonsVariant = 'main' }: HeaderProps) => {
   let contentMobile: JSX.Element | null = null
   if (buttonsVariant === 'main') {
     contentMobile = user ? (
-      <HamburgerMenuMobileBtn
-        userHasProfile={userHasProfile}
-        userIsModerator={userIsModerator}
-      />
-    ) : (
-      <LoginBtn variant="tertiary">Login</LoginBtn>
-    )
-  } else if (buttonsVariant === 'profiles') {
-    contentMobile = (
-      <>
+      <li>
         <HamburgerMenuMobileBtn
           userHasProfile={userHasProfile}
           userIsModerator={userIsModerator}
         />
-        <AppHeaderMobileSearchFilter />
+      </li>
+    ) : (
+      <li>
+        <LoginBtn variant="tertiary">Login</LoginBtn>
+      </li>
+    )
+  } else if (buttonsVariant === 'profiles') {
+    contentMobile = (
+      <>
+        <li>
+          <HamburgerMenuMobileBtn
+            userHasProfile={userHasProfile}
+            userIsModerator={userIsModerator}
+          />
+        </li>
+        <li>
+          <AppHeaderMobileSearchFilter />
+        </li>
       </>
     )
   } else if (buttonsVariant === 'signin') {
     contentMobile = (
       <>
-        <HamburgerMenuMobileBtn
-          userHasProfile={userHasProfile}
-          userIsModerator={userIsModerator}
-        />
+        <li>
+          <HamburgerMenuMobileBtn
+            userHasProfile={userHasProfile}
+            userIsModerator={userIsModerator}
+          />
+        </li>
       </>
     )
   }
@@ -82,39 +104,55 @@ const Header = async ({ buttonsVariant = 'main' }: HeaderProps) => {
           <div className={styles.logoAndGhStarsWrapper}>
             <Link href={AppRoutes.home} className={styles.logo}>
               <img src={logo.src} alt="Logo" />
-              <div className={styles.title}>Good Dev Hunting</div>
+              <h1 className={styles.title}>Good Dev Hunting</h1>
             </Link>
             <GithubStarsButton />
           </div>
-          <div className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
-            {contentMobile}
-          </div>
-          <div className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
-            {userIsModerator && <ModerationBtn />}
-            {user ? (
-              <>
-                {!userIsHunter && userHasProfile ? (
-                  <GithubAcc />
-                ) : (
-                  <>
-                    {userIsHunter ? (
-                      <>
-                        <HunterAcc />
-                        <LogOutBtn />
-                      </>
-                    ) : (
-                      <>
-                        <CreateProfileBtn data-testid="create-profile-button" />
-                        <LogOutBtn />
-                      </>
-                    )}
-                  </>
-                )}
-              </>
-            ) : (
-              contentDesktop
-            )}
-          </div>
+          <nav>
+            <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
+              {contentMobile}
+            </ul>
+            <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
+              {userIsModerator && (
+                <li>
+                  <ModerationBtn />
+                </li>
+              )}
+              {user ? (
+                <>
+                  {!userIsHunter && userHasProfile ? (
+                    <li>
+                      <GithubAcc />
+                    </li>
+                  ) : (
+                    <>
+                      {userIsHunter ? (
+                        <>
+                          <li>
+                            <HunterAcc />
+                          </li>
+                          <li>
+                            <LogOutBtn />
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li>
+                            <CreateProfileBtn data-testid="create-profile-button" />
+                          </li>
+                          <li>
+                            <LogOutBtn />
+                          </li>
+                        </>
+                      )}
+                    </>
+                  )}
+                </>
+              ) : (
+                contentDesktop
+              )}
+            </ul>
+          </nav>
         </div>
       </Container>
     </header>
