@@ -91,6 +91,22 @@ export interface CreateProfileFormValues extends ProfileFormValues {
   terms: boolean
 }
 
+export type EditProfileFormFields = keyof Omit<
+  ProfileModel,
+  | 'id'
+  | 'userId'
+  | 'countryId'
+  | 'cityId'
+  | 'techStack'
+  | 'isOpenForWork'
+  | 'state'
+  | 'viewCount'
+  | 'githubUsername'
+  | 'currency'
+  | 'createdAt'
+  | 'updatedAt'
+>
+
 export interface HourlyRateValue {
   hourlyRateMin: number | null
   hourlyRateMax: number | null
