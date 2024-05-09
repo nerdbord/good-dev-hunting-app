@@ -1,9 +1,9 @@
 ﻿import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import AppHeader from '@/app/(profile)/(components)/AppHeader/AppHeader'
 import { Container } from '@/components/Container/Container'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import Header from '../../(components)/Header/Header'
 
 export default async function AppLayout({
   children,
@@ -18,7 +18,7 @@ export default async function AppLayout({
 
   return (
     <main>
-      <AppHeader />
+      <Header />
       <Container>{children}</Container>
     </main>
   )

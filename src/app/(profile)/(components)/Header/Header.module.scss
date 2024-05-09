@@ -1,3 +1,6 @@
+.hideOnDesktop {
+  display: none;
+}
 .wrapper {
   height: min-content;
   background: #04080d;
@@ -51,9 +54,9 @@
   justify-content: center;
   gap: $spacing-3;
 
-  @include mobile {
-    display: none;
-  }
+  // @include mobile {
+  //   display: none;
+  // }
 }
 
 .buttonBox {
@@ -99,22 +102,17 @@
   > div {
     margin-top: 5px;
   }
-}
 
-.hideOnMobile {
-  @include mobile {
-    display: none !important;
+  > span:first-of-type {
+    margin-top: 4px;
   }
 }
 
-.hideOnDesktop {
-  display: none;
-
+.loginBtnsMobile {
   @include mobile {
     display: flex;
     align-items: center;
     gap: 8px;
-
   }
 }
 
@@ -123,4 +121,10 @@
   justify-content: space-between;
   align-items: center;
   gap: 14px;
+}
+
+.hideOnMobile {
+  @include mobile {
+    display: none;
+  }
 }

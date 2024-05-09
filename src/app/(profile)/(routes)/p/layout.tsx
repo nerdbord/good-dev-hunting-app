@@ -1,6 +1,6 @@
-﻿import AppHeader from '@/app/(profile)/(components)/AppHeader/AppHeader'
-import { Container } from '@/components/Container/Container'
+﻿import { Container } from '@/components/Container/Container'
 import React from 'react'
+import Header from '../../(components)/Header/Header'
 
 export default async function ProfileLayout({
   children,
@@ -9,7 +9,7 @@ export default async function ProfileLayout({
 }) {
   return (
     <>
-      <AppHeader />
+      <Header />
       <Container>{children}</Container>
     </>
   )
