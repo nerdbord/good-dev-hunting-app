@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    z-index: 1000;
     cursor: pointer;
     &:first-of-type {
       margin-top: 0;
@@ -22,6 +23,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    z-index: 1000;
     cursor: pointer;
     &:first-of-type {
       margin-top: 0px;
