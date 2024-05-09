@@ -14,7 +14,6 @@ import { Avatar } from '@/components/Avatar/Avatar'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
 import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import styles from './ProfileCard.module.scss'
@@ -58,8 +57,6 @@ const ProfileCard = ({
   searchTerm,
   isHiddenName = false,
 }: ProfileCardProps) => {
-  const { data: session } = useSession()
-
   const hourlyRateMin = data.hourlyRateMin
   const hourlyRateMax = data.hourlyRateMax
   const currency = data.currency
@@ -91,7 +88,7 @@ const ProfileCard = ({
           </div>
           <div className={styles.data}>
             <div className={styles.nameContainer}>
-              {session?.user || !isHiddenName ? (
+              {!isHiddenName ? (
                 <p className={styles.name}>
                   {highlightText(data.fullName, searchTerm)}
                 </p>
