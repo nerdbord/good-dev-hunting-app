@@ -4,24 +4,22 @@ import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
+import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
-import { type UrlObject } from 'url'
 
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
   data: ProfileModel
   isHiddenName?: boolean
-  href: string | UrlObject
 }
 
 export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   data,
   isHiddenName,
-  href,
 }) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
@@ -64,7 +62,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
       isHiddenName={!(!isHiddenName || session?.user)}
       visitedDate={visitedProfile?.createdAt}
       contactedDate={contactedProfile?.createdAt}
-      href={href}
+      href={`${AppRoutes.profile}/${data.githubUsername}`}
     />
   )
 }
