@@ -25,11 +25,15 @@ export const registerNewUser = withSentry(
     if (!createdUser) {
       throw new Error('Failed to create user')
     }
-    const devName = name ? name : createdUser.email || 'Developer'
+    const devName = name ?? githubUsername ?? createdUser.email
 
     await sendWelcomeEmail(createdUser.email, devName)
     await sendDiscordNotificationToModeratorChannel(
-      `User ${devName} has created an account`,
+      `User ${devName} has created an account as ${
+        githubUsername
+          ? `SPECIALIST ${!name ? `with ${createdUser.email}` : ''}`
+          : 'HUNTER'
+      }`,
     )
 
     return createUserModel(createdUser)

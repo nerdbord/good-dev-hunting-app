@@ -3,6 +3,7 @@ import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   getHourlyRateDisplay,
   jobSpecializationThemes,
+  renderRelativeDateLabel,
 } from '@/app/(profile)/profile.helpers'
 import {
   mapEmploymentTypes,
@@ -10,12 +11,15 @@ import {
   mapSpecializationToTitle,
 } from '@/app/(profile)/profile.mappers'
 import PadlockIcon from '@/assets/icons/PadlockIcon'
+import { SendIcon } from '@/assets/icons/SendIcon'
+import ViewIcon from '@/assets/icons/ViewIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
+import Tooltip from '@/components/Tooltip/Tooltip'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
-import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
 import Link from 'next/link'
 import { useMemo } from 'react'
+import { type UrlObject } from 'url'
 import styles from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
@@ -24,6 +28,9 @@ interface ProfileCardProps {
   withStateStatus?: boolean
   searchTerm?: string | null
   isHiddenName?: boolean
+  visitedDate?: Date
+  contactedDate?: Date
+  href: string | UrlObject
 }
 
 const cx = classNames.bind(styles)
@@ -36,7 +43,7 @@ const highlightText = (text: string, searchText?: string | null) => {
   const parts = text.split(regex)
 
   return (
-    <>
+    <p>
       {parts.map((part, idx) =>
         part.toLowerCase() === searchText.toLowerCase() ? (
           part
@@ -46,7 +53,7 @@ const highlightText = (text: string, searchText?: string | null) => {
           </span>
         ),
       )}
-    </>
+    </p>
   )
 }
 
@@ -56,25 +63,45 @@ const ProfileCard = ({
   withStateStatus,
   searchTerm,
   isHiddenName = false,
+  href,
+  visitedDate,
+  contactedDate,
 }: ProfileCardProps) => {
-  const hourlyRateMin = data.hourlyRateMin
-  const hourlyRateMax = data.hourlyRateMax
-  const currency = data.currency
+  const {
+    id,
+    fullName,
+    avatarUrl,
+    seniority,
+    position,
+    country,
+    city,
+    employmentTypes,
+    remoteOnly,
+    hourlyRateMax,
+    hourlyRateMin,
+    currency,
+    state,
+  } = data
 
   const specializationTheme = useMemo(
     () => ({
-      color: jobSpecializationThemes[data.position],
+      color: jobSpecializationThemes[position],
     }),
-    [data.position],
+    [position],
   )
 
   const getTechnologyClasses = cx({
     [styles.technology]: true,
   })
 
+  const getNameClasses = cx({
+    [styles.name]: true,
+    [styles.active]: visitedDate || contactedDate,
+  })
+
   return (
     <Link
-      href={`${AppRoutes.profile}/${data.githubUsername}`}
+      href={href}
       onClick={onClick}
       style={specializationTheme}
       className={`${styles.frameWrapper} ${
@@ -84,14 +111,32 @@ const ProfileCard = ({
       <div className={styles.frame}>
         <div className={styles.container} data-test-id="profileContainer">
           <div className={styles.profile}>
-            <Avatar src={data.avatarUrl || ''} size={78} />
+            <Avatar src={avatarUrl || ''} size={78} />
           </div>
           <div className={styles.data}>
             <div className={styles.nameContainer}>
               {!isHiddenName ? (
-                <p className={styles.name}>
+                <div className={getNameClasses}>
                   {highlightText(data.fullName, searchTerm)}
-                </p>
+                  {visitedDate && !contactedDate && (
+                    <Tooltip
+                      text={`You have visited this profile ${renderRelativeDateLabel(
+                        visitedDate,
+                      )}`}
+                    >
+                      <ViewIcon color="#5E28F6" />
+                    </Tooltip>
+                  )}
+                  {contactedDate && (
+                    <Tooltip
+                      text={`You have messaged this profile ${renderRelativeDateLabel(
+                        contactedDate,
+                      )}`}
+                    >
+                      <SendIcon color="#5E28F6" />
+                    </Tooltip>
+                  )}
+                </div>
               ) : (
                 <>
                   <p className={styles.name}>
@@ -105,13 +150,13 @@ const ProfileCard = ({
               )}
             </div>
             <p className={styles.wordWrap}>
-              {mapSeniorityLevel(data.seniority)}{' '}
-              {mapSpecializationToTitle(data.position)}
+              {mapSeniorityLevel(seniority)}{' '}
+              {mapSpecializationToTitle(position)}
             </p>
             <p className={styles.location}>
-              {data.country}, {data.city}
-              {` - ${mapEmploymentTypes(data.employmentTypes).join(' / ')}`}
-              {data.remoteOnly && ' / Remote'}
+              {country}, {city}
+              {` - ${mapEmploymentTypes(employmentTypes).join(' / ')}`}
+              {remoteOnly && ' / Remote'}
             </p>
             <p className={styles.salary}>
               {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
@@ -122,7 +167,7 @@ const ProfileCard = ({
       </div>
       {withStateStatus && (
         <div className={styles.detailsWrapper}>
-          <StateStatus profile={data} />
+          <StateStatus profileId={id} profileState={state} />
         </div>
       )}
     </Link>

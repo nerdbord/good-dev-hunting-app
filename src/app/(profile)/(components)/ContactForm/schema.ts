@@ -14,15 +14,20 @@ export interface ContactFormValuesWithChecks extends ContactFormValues {
 
 export interface ContactFormRequest extends ContactFormValues {
   profileId: string
+  senderId: string
 }
 
-export const initialValues: ContactFormValuesWithChecks = {
-  senderFullName: '',
-  senderEmail: '',
-  subject: `Job offer - let's talk!`,
-  message: '',
-  terms: false,
-  captcha: false,
+export const initialValues = (
+  initEmail?: string,
+): ContactFormValuesWithChecks => {
+  return {
+    senderFullName: '',
+    senderEmail: initEmail || '',
+    subject: `Job offer - let's talk!`,
+    message: '',
+    terms: false,
+    captcha: false,
+  }
 }
 
 export const validationSchema = Yup.object().shape({
