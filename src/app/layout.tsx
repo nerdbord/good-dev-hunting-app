@@ -1,5 +1,8 @@
-import AuthProvider from '@/app/(auth)/(components)/AuthProvider'
-import { ProfilesProvider } from '@/app/(profile)/(components)/ProfilesProvider'
+import { findUserById } from '@/app/(auth)/_actions'
+import AuthProvider from '@/app/(auth)/_providers/Auth.provider'
+import { findAllApprovedProfiles } from '@/app/(profile)/_actions'
+import { ProfilesProvider } from '@/app/(profile)/_providers/Profiles.provider'
+import { auth } from '@/auth'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
@@ -29,20 +32,26 @@ export const metadata = {
     "Catch coding legends! Good Dev Hunting is reverse recruitment platform that allows you to find the best developers for your team. Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs.",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await auth()
+  const user = session?.user ? await findUserById(session.user.id) : null
+
+  // TODO: We need to store it in some global state management (eg. zustand), and replace provider
+  const fetchedProfiles = await findAllApprovedProfiles()
+
   return (
     <html lang="en">
       <body className={commonClasses}>
         <PlausibleProvider
           domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
         >
-          <AuthProvider>
+          <AuthProvider initialUser={user}>
             <ToastContextProvider>
-              <ProfilesProvider>
+              <ProfilesProvider initialProfiles={fetchedProfiles}>
                 <ModalProvider>{children}</ModalProvider>
               </ProfilesProvider>
             </ToastContextProvider>

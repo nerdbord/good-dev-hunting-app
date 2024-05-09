@@ -1,74 +1,36 @@
-import {
-  type ProfilePayload,
-  type SearchParamsFilters,
-} from '@/app/(profile)/types'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import shuffleArray from '@/utils/collections'
-import {
-  Prisma,
-  PublishingState,
-  Role,
-  type EmploymentType,
-} from '@prisma/client'
-import { serializeProfileToProfileModel } from './profile.serializer'
+import { Currency, Prisma, PublishingState, Role } from '@prisma/client'
 
-export async function getPublishedProfilesPayload() {
-  const publishedProfiles = await prisma.profile.findMany({
+export async function getApprovedProfiles() {
+  const approvedProfiles = await prisma.profile.findMany({
     where: {
       state: PublishingState.APPROVED,
     },
     include: includeObject.include,
   })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
+
+  return approvedProfiles
 }
 
-export async function getPublishedProfilesPayloadByPosition(position: string) {
-  const publishedProfiles = await prisma.profile.findMany({
-    where: {
-      position,
-      state: PublishingState.APPROVED,
-    },
-    include: includeObject.include,
-  })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
-}
-
-export async function getAllPublishedProfilesPayload() {
-  const publishedProfiles = await prisma.profile.findMany({
-    where: {
-      NOT: {
-        state: PublishingState.DRAFT,
-      },
-    },
+export async function getAllProfiles() {
+  const allProfiles = await prisma.profile.findMany({
     include: includeObject.include,
   })
 
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
+  return allProfiles
 }
 
 export async function getProfileById(id: string) {
-  const profileById = await prisma.profile.findFirst({
+  const profileById = await prisma.profile.findUniqueOrThrow({
     where: {
       id,
     },
     include: includeObject.include,
   })
 
-  if (profileById !== null) {
-    return serializeProfileToProfileModel(profileById)
-  }
-
-  // Handle the case when profileById is null
-  return null
+  return profileById
 }
 
 export async function findProfileWithUserInclude(email: string) {
@@ -91,7 +53,7 @@ export async function findProfileWithUserInclude(email: string) {
 
 export async function createUserProfile(
   email: string,
-  profileData: ProfilePayload,
+  profileData: ProfileCreateParams,
 ) {
   const createdUser = await prisma.profile.create({
     data: {
@@ -104,10 +66,10 @@ export async function createUserProfile(
       country: {
         connectOrCreate: {
           create: {
-            name: profileData.country.name,
+            name: profileData.country,
           },
           where: {
-            name: profileData.country.name,
+            name: profileData.country,
           },
         },
       },
@@ -115,10 +77,10 @@ export async function createUserProfile(
       city: {
         connectOrCreate: {
           create: {
-            name: profileData.city.name,
+            name: profileData.city,
           },
           where: {
-            name: profileData.city.name,
+            name: profileData.city,
           },
         },
       },
@@ -136,6 +98,9 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       employmentTypes: profileData.employmentTypes,
       state: PublishingState.DRAFT,
+      hourlyRateMin: profileData.hourlyRateMin ?? 0,
+      hourlyRateMax: profileData.hourlyRateMax ?? 0,
+      currency: Currency.PLN,
     },
     include: includeObject.include,
   })
@@ -151,29 +116,10 @@ export async function updateProfileById(
       id,
     },
     data,
-    include: {
-      user: true,
-    },
+    include: includeObject.include,
   })
 
   return updatedProfile
-}
-
-export const validateIfProfileWasContactedXTimesInLastYMinutes = async (
-  profileId: string,
-  minutes: number,
-  times: number,
-) => {
-  const contactedCount = await prisma.contactRequest.count({
-    where: {
-      profileId,
-      createdAt: {
-        gte: new Date(new Date().getTime() - minutes * 60 * 1000),
-      },
-    },
-  })
-
-  return contactedCount >= times
 }
 
 export const findGithubUsernameByProfileId = async (profileId: string) => {
@@ -204,7 +150,7 @@ export async function findProfileById(id: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -217,7 +163,7 @@ export async function getProfileByUserId(userId: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -230,20 +176,7 @@ export async function getProfileByGithubUsername(username: string) {
   })
 
   if (profile) {
-    return serializeProfileToProfileModel(profile)
-  }
-
-  return null
-}
-
-export async function getProfileByUserEmail(email: string) {
-  const profile = await prisma.profile.findFirst({
-    where: { user: { email } },
-    include: includeObject.include,
-  })
-
-  if (profile) {
-    return serializeProfileToProfileModel(profile)
+    return profile
   }
 
   return null
@@ -251,7 +184,7 @@ export async function getProfileByUserEmail(email: string) {
 
 export const hasProfileValuesChanged = async (
   profileId: string,
-  payload: ProfilePayload,
+  payload: ProfileModel,
 ) => {
   const existingProfile = await findProfileById(profileId)
 
@@ -276,47 +209,8 @@ export async function getPublishedProfiles(take: number) {
     },
     include: includeObject.include,
   })
-  const serializedProfile = publishedProfiles.map(
-    serializeProfileToProfileModel,
-  )
-  return serializedProfile
-}
 
-export async function getRandomProfiles(take: number) {
-  // Retrieve IDs of all approved profiles
-  const approvedProfileIds = await prisma.profile.findMany({
-    where: {
-      state: PublishingState.APPROVED,
-    },
-    select: {
-      id: true, // Only select the ID
-    },
-  })
-
-  const totalProfiles = approvedProfileIds.length
-
-  if (take >= totalProfiles) {
-    // If requesting more profiles than available, return all without randomization
-    return getPublishedProfiles(totalProfiles)
-  }
-
-  // Shuffle the array of IDs and select the first `profilesCount` elements
-  const shuffledIds = shuffleArray(approvedProfileIds)
-    .slice(0, take)
-    .map((p) => p.id)
-
-  // Fetch the full profile details for the randomly selected IDs
-  const randomProfiles = await prisma.profile.findMany({
-    where: {
-      id: {
-        in: shuffledIds,
-      },
-    },
-    take,
-    include: includeObject.include, // Ensure this is correctly defined
-  })
-
-  return randomProfiles.map(serializeProfileToProfileModel)
+  return publishedProfiles
 }
 
 export async function getTeamProfiles() {
@@ -330,7 +224,7 @@ export async function getTeamProfiles() {
     },
     include: includeObject.include,
   })
-  return teamProfiles.map(serializeProfileToProfileModel)
+  return teamProfiles
 }
 
 // Reusable include object for retrieving Profile with all of its relationships
@@ -344,6 +238,8 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     country: true,
     city: true,
     techStack: true,
+    contactRequests: true,
+    profileViews: true,
   },
 })
 
@@ -361,47 +257,43 @@ export async function getUniqueSpecializations() {
   return uniqueSpecializations.map((p) => p.position)
 }
 
-export async function incrementProfileViewCountById(id: string) {
-  const updatedProfile = await prisma.profile.update({
+export async function createProfileView(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const newProfileView = await prisma.profileView.create({
+    data: {
+      viewerId,
+      viewedProfileId,
+    },
+  })
+
+  return newProfileView
+}
+
+export async function updateProfileView(id: string) {
+  const updatedProfileView = await prisma.profileView.update({
     where: {
       id,
     },
-    data: { viewCount: { increment: 1 } },
+    data: {
+      createdAt: new Date(),
+    },
   })
+
+  return updatedProfileView
 }
 
-export async function countProfilesForPositionsByFilters(
-  filters: SearchParamsFilters,
+export async function findProfileViewByViewerIdAndProfileId(
+  viewerId: string,
+  viewedProfileId: string,
 ) {
-  const { seniority, location, technology, availability, search } = filters
+  const profileView = await prisma.profileView.findFirst({
+    where: {
+      viewerId,
+      viewedProfileId,
+    },
+  })
 
-  const query: Prisma.ProfileWhereInput = {
-    state: PublishingState.APPROVED,
-    ...(seniority.length > 0 && { seniority: { in: seniority } }),
-    ...(location.length > 0 && { country: { name: { in: location } } }),
-    ...(technology.length > 0 && {
-      techStack: { some: { name: { in: technology } } },
-    }),
-    ...(availability.length > 0 && {
-      employmentTypes: { hasSome: availability as EmploymentType[] },
-    }),
-    ...(search.length > 0 && {
-      fullName: { contains: search.toString(), mode: 'insensitive' },
-    }),
-  }
-
-  const positions = await getUniqueSpecializations()
-  const counts: Record<string, number> = {}
-
-  for (const position of positions) {
-    const count = await prisma.profile.count({
-      where: {
-        ...query,
-        position,
-      },
-    })
-    counts[position] = count
-  }
-
-  return counts
+  return profileView
 }
