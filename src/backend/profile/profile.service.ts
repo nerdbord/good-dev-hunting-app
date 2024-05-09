@@ -115,16 +115,7 @@ export async function updateProfileById(
       id,
     },
     data,
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      techStack: true,
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   return updatedProfile
@@ -227,6 +218,8 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     country: true,
     city: true,
     techStack: true,
+    contactRequests: true,
+    profileViews: true,
   },
 })
 
@@ -244,12 +237,43 @@ export async function getUniqueSpecializations() {
   return uniqueSpecializations.map((p) => p.position)
 }
 
-export async function incrementProfileViewCountById(id: string) {
-  const updatedProfile = await prisma.profile.update({
+export async function createProfileView(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const newProfileView = await prisma.profileView.create({
+    data: {
+      viewerId,
+      viewedProfileId,
+    },
+  })
+
+  return newProfileView
+}
+
+export async function updateProfileView(id: string) {
+  const updatedProfileView = await prisma.profileView.update({
     where: {
       id,
     },
-    data: { viewCount: { increment: 1 } },
+    data: {
+      createdAt: new Date(),
+    },
   })
-  return updatedProfile
+
+  return updatedProfileView
+}
+
+export async function findProfileViewByViewerIdAndProfileId(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const profileView = await prisma.profileView.findFirst({
+    where: {
+      viewerId,
+      viewedProfileId,
+    },
+  })
+
+  return profileView
 }

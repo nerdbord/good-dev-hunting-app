@@ -1,11 +1,9 @@
-import { findUserById } from '@/app/(auth)/_actions'
-import AuthProvider from '@/app/(auth)/_providers/Auth.provider'
 import { findAllApprovedProfiles } from '@/app/(profile)/_actions'
 import { ProfilesProvider } from '@/app/(profile)/_providers/Profiles.provider'
-import { auth } from '@/auth'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
+import { SessionProvider } from 'next-auth/react'
 import PlausibleProvider from 'next-plausible'
 import { IBM_Plex_Sans, Inter } from 'next/font/google'
 import * as process from 'process'
@@ -37,9 +35,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth()
-  const user = session?.user ? await findUserById(session.user.id) : null
-
   // TODO: We need to store it in some global state management (eg. zustand), and replace provider
   const fetchedProfiles = await findAllApprovedProfiles()
 
@@ -49,13 +44,13 @@ export default async function RootLayout({
         <PlausibleProvider
           domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
         >
-          <AuthProvider initialUser={user}>
+          <SessionProvider>
             <ToastContextProvider>
               <ProfilesProvider initialProfiles={fetchedProfiles}>
                 <ModalProvider>{children}</ModalProvider>
               </ProfilesProvider>
             </ToastContextProvider>
-          </AuthProvider>
+          </SessionProvider>
         </PlausibleProvider>
         <div id="portal" />
         <div id="toasts" />

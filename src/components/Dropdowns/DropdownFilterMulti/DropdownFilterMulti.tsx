@@ -1,4 +1,4 @@
-import { type JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
+import { JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
 import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useEffect, useRef, useState } from 'react'
@@ -71,6 +71,12 @@ export const DropdownFilterMulti = ({
     onSearch(jobOfferFilterName, selectedValue.join(','))
   }, [selectedValue])
 
+  const clearSelect = () => {
+    setSelectedValue([])
+    setSearchTerm('')
+    setArrow('IoIosArrowDown')
+  }
+
   return (
     <>
       {isDropdownActive && <div className={styles.overlay}></div>}
@@ -94,12 +100,7 @@ export const DropdownFilterMulti = ({
                   ? styles.titleContainerSearch
                   : styles.titleContainer
               }
-            >
-              <div className={styles.dropdownTitle}>{text}</div>
-              <Button variant="tertiary" type="submit" onClick={closeDropdown}>
-                <p>Apply</p>
-              </Button>
-            </div>
+            ></div>
             {hasSearchInput && (
               <DropdownSearchInput
                 searchTerm={searchTerm}
@@ -107,6 +108,53 @@ export const DropdownFilterMulti = ({
                 showNoMatchingOptions={filteredOptions.length < 1}
               />
             )}
+
+            <div
+              className={
+                jobOfferFilterName === JobOfferFiltersEnum.technology
+                  ? styles.dropdownHeaderMulti
+                  : styles.dropdownHeader
+              }
+            >
+              <div className={styles.dropdownTitle}>
+                {text}
+                {selectedValue.length > 0 && (
+                  <span
+                    className={styles.counter}
+                  >{`(${selectedValue.length})`}</span>
+                )}
+              </div>
+
+              <div
+                className={
+                  jobOfferFilterName === JobOfferFiltersEnum.technology
+                    ? styles.buttonContainerMulti
+                    : styles.buttonContainer
+                }
+              >
+                {selectedValue.length > 0 && (
+                  <div className={styles.clearButton}>
+                    <Button
+                      variant="tertiary"
+                      type="submit"
+                      onClick={clearSelect}
+                    >
+                      <p>Clear</p>
+                    </Button>
+                  </div>
+                )}
+                <div className={styles.applyButton}>
+                  <Button
+                    variant="tertiary"
+                    type="submit"
+                    onClick={closeDropdown}
+                  >
+                    <p>Apply</p>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
             {filteredOptions.map((option, index) => (
               <DropdownOptionItem
                 key={index}
