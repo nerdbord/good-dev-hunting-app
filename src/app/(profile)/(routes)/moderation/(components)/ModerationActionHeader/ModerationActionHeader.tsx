@@ -3,18 +3,21 @@ import { StateStatus } from '@/app/(profile)/(routes)/moderation/(components)/St
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 
-import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import AssignRoleModal from '@/app/(profile)/(routes)/moderation/(components)/AssignRoleModal/AssignRoleModal'
 import { useProfileModel } from '@/app/(profile)/_providers/Profile.provider'
 import { Role } from '@prisma/client'
+
 import styles from './ModerationActionHeader.module.scss'
 
-export default function ModerationActionHeader() {
+interface ModerationActionHeaderProps {
+  profileOwnerRoles: Role[]
+}
+
+export default function ModerationActionHeader(
+  props: ModerationActionHeaderProps,
+) {
   const { showModal, closeModal } = useModal()
   const { profile } = useProfileModel()
-  const { user } = useAuth()
-
-  const userRoles = user?.roles || []
 
   if (!profile) return <div>No profile found</div>
 
@@ -27,18 +30,18 @@ export default function ModerationActionHeader() {
             showModal(
               <AssignRoleModal
                 userId={profile.userId}
-                userRoles={userRoles}
+                userRoles={props.profileOwnerRoles}
                 onClose={closeModal}
               />,
             )
           }}
         >
-          {userRoles.includes(Role.MODERATOR)
+          {props.profileOwnerRoles.includes(Role.MODERATOR)
             ? 'Unassign admin role'
             : 'Assign admin role'}
         </Button>
         <div className={styles.vl}></div>
-        <StateStatus profile={profile} />
+        <StateStatus profileId={profile.id} profileState={profile.state} />
       </div>
     </div>
   )

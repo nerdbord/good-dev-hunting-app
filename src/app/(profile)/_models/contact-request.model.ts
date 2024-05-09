@@ -5,7 +5,7 @@ interface ContactRequestRecipient {
   recipientEmail: string
 }
 
-interface ContactRequestModel extends ContactRequest {
+export interface ContactRequestModel extends ContactRequest {
   recipientFullName: string
   recipientEmail: string
 }
@@ -19,6 +19,7 @@ export function createContactRequestModel(
     message: data.message,
     senderFullName: data.senderFullName,
     senderEmail: data.senderEmail,
+    senderId: data.senderId,
     profileId: data.profileId,
     recipientEmail: data.recipientEmail,
     recipientFullName: data.recipientFullName,
