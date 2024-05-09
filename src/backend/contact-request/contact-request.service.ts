@@ -9,6 +9,7 @@ export async function createContactRequest(contactRequest: ContactFormRequest) {
       senderFullName: contactRequest.senderFullName,
       senderEmail: contactRequest.senderEmail,
       profileId: contactRequest.profileId,
+      senderId: contactRequest.senderId,
     },
   })
 }

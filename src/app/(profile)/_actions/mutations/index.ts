@@ -1,5 +1,5 @@
 export { approveProfile } from './approveProfile'
-export { countProfileView } from './countProfileView'
+export { createOrUpdateProfileView } from './createOrUpdateProfileView'
 export { createProfile } from './createProfile'
 export { lockProfile } from './lockProfile'
 export { publishProfile } from './publishProfile'
