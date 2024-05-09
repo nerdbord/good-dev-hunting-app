@@ -1,5 +1,4 @@
 import { formatStateName } from '@/app/(profile)/(components)/FilterTabs/Tab'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
@@ -14,11 +13,11 @@ import styles from './StateStatus.module.scss'
 const cx = classNames.bind(styles)
 
 type StateStatusProps = {
-  profile: ProfileModel
+  profileId: string
+  profileState: PublishingState
 }
 
-export function StateStatus({ profile }: StateStatusProps) {
-  const { id, state } = profile
+export function StateStatus({ profileId, profileState }: StateStatusProps) {
   const { showModal, closeModal } = useModal()
   const { handleApprove: approveProfile, handleReject } = useModeration()
   const { runAsync, loading } = useAsyncAction()
@@ -28,7 +27,7 @@ export function StateStatus({ profile }: StateStatusProps) {
 
     await runAsync(
       async () => {
-        await approveProfile(id)
+        await approveProfile(profileId)
       },
       {
         successMessage: 'Profile accepted and will be visible on the main page',
@@ -40,20 +39,20 @@ export function StateStatus({ profile }: StateStatusProps) {
     event.stopPropagation()
     showModal(
       <RejectingReasonModal
-        profileId={id}
+        profileId={profileId}
         onReject={handleReject}
         onClose={closeModal}
       />,
     )
   }
 
-  if (!(state in PublishingState)) return null
+  if (!(profileState in PublishingState)) return null
 
-  const isPending = state === PublishingState.PENDING
-  const isApproved = state === PublishingState.APPROVED
-  const isRejected = state === PublishingState.REJECTED
+  const isPending = profileState === PublishingState.PENDING
+  const isApproved = profileState === PublishingState.APPROVED
+  const isRejected = profileState === PublishingState.REJECTED
 
-  const formattedName = formatStateName(state)
+  const formattedName = formatStateName(profileState)
 
   return (
     <div className={styles.actions}>
@@ -61,8 +60,8 @@ export function StateStatus({ profile }: StateStatusProps) {
         <div
           className={cx({
             [styles.stateStatus]: true,
-            [styles.stateAccepted]: state === PublishingState.APPROVED,
-            [styles.stateRejected]: state === PublishingState.REJECTED,
+            [styles.stateAccepted]: profileState === PublishingState.APPROVED,
+            [styles.stateRejected]: profileState === PublishingState.REJECTED,
           })}
         >
           {formattedName}
