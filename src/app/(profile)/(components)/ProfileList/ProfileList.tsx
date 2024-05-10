@@ -26,7 +26,11 @@ const ProfileList = () => {
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
         {sortedProfiles.map((profile) => (
-          <ProfileListItem key={profile.id} data={profile} />
+          <ProfileListItem
+            key={profile.id}
+            data={profile}
+            isHiddenName={true}
+          />
         ))}
       </div>
     </div>

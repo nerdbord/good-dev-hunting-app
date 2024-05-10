@@ -10,6 +10,7 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/(profile)/profile.mappers'
+import PadlockIcon from '@/assets/icons/PadlockIcon'
 import { SendIcon } from '@/assets/icons/SendIcon'
 import ViewIcon from '@/assets/icons/ViewIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
@@ -26,9 +27,10 @@ interface ProfileCardProps {
   data: ProfileModel
   withStateStatus?: boolean
   searchTerm?: string | null
-  href: string | UrlObject
+  isHiddenName?: boolean
   visitedDate?: Date
   contactedDate?: Date
+  href: string | UrlObject
 }
 
 const cx = classNames.bind(styles)
@@ -60,6 +62,7 @@ const ProfileCard = ({
   onClick,
   withStateStatus,
   searchTerm,
+  isHiddenName = false,
   href,
   visitedDate,
   contactedDate,
@@ -111,25 +114,39 @@ const ProfileCard = ({
             <Avatar src={avatarUrl || ''} size={78} />
           </div>
           <div className={styles.data}>
-            <div className={getNameClasses}>
-              {highlightText(fullName, searchTerm)}
-              {visitedDate && !contactedDate && (
-                <Tooltip
-                  text={`You have visited this profile ${renderRelativeDateLabel(
-                    visitedDate,
-                  )}`}
-                >
-                  <ViewIcon color="#5E28F6" />
-                </Tooltip>
-              )}
-              {contactedDate && (
-                <Tooltip
-                  text={`You have messaged this profile ${renderRelativeDateLabel(
-                    contactedDate,
-                  )}`}
-                >
-                  <SendIcon color="#5E28F6" />
-                </Tooltip>
+            <div className={styles.nameContainer}>
+              {!isHiddenName ? (
+                <div className={getNameClasses}>
+                  {highlightText(data.fullName, searchTerm)}
+                  {visitedDate && !contactedDate && (
+                    <Tooltip
+                      text={`You have visited this profile ${renderRelativeDateLabel(
+                        visitedDate,
+                      )}`}
+                    >
+                      <ViewIcon color="#5E28F6" />
+                    </Tooltip>
+                  )}
+                  {contactedDate && (
+                    <Tooltip
+                      text={`You have messaged this profile ${renderRelativeDateLabel(
+                        contactedDate,
+                      )}`}
+                    >
+                      <SendIcon color="#5E28F6" />
+                    </Tooltip>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <p className={styles.name}>
+                    {highlightText(data.fullName.slice(0, 1) + '.', searchTerm)}
+                  </p>
+                  <div className={styles.nameCover}>
+                    <PadlockIcon />
+                    Login to access
+                  </div>
+                </>
               )}
             </div>
             <p className={styles.wordWrap}>

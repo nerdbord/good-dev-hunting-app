@@ -9,14 +9,18 @@ import { useSession } from 'next-auth/react'
 import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
+
 import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
   data: ProfileModel
-  searchTerm?: string
+  isHiddenName?: boolean
 }
 
-export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
+export const ProfileListItem: React.FC<ProfileListItemProps> = ({
+  data,
+  isHiddenName,
+}) => {
   const plausible = usePlausible()
   const searchParams = useSearchParams()
   const { data: session } = useSession()
@@ -55,9 +59,10 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({ data }) => {
       data={data}
       searchTerm={searchParams.get('search')}
       onClick={handleOpenProfile}
-      href={`${AppRoutes.profile}/${data.githubUsername}`}
+      isHiddenName={!(!isHiddenName || session?.user)}
       visitedDate={visitedProfile?.createdAt}
       contactedDate={contactedProfile?.createdAt}
+      href={`${AppRoutes.profile}/${data.githubUsername}`}
     />
   )
 }
