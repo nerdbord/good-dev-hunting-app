@@ -1,14 +1,17 @@
 'use client'
+import { type ContactRequestModel } from '@/app/(profile)/_models/contact-request.model'
+import { type ProfileViewModel } from '@/app/(profile)/_models/profile-view.model'
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
+  createFiltersObjFromSearchParams,
   filterByAvailability,
   filterByFullName,
   filterByLocation,
+  filterBySalary,
   filterBySeniority,
   filterBySpecialization,
   filterByTechnology,
-} from '@/app/(profile)/(components)/ProfileList/filters'
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
-import { createFiltersObjFromSearchParams } from '@/app/(profile)/profile.helpers'
+} from '@/app/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/(profile)/profile.types'
 import { useSearchParams } from 'next/navigation'
 import {
@@ -31,6 +34,8 @@ interface ProfilesContextProps {
       disableSpecFilter?: boolean
     },
   ): ProfileModel[]
+  markProfileAsVisited(profileView: ProfileViewModel): void
+  markProfileAsContacted(contactRequest: ContactRequestModel): void
 }
 
 export const ProfilesContext = createContext<ProfilesContextProps | undefined>(
@@ -56,6 +61,7 @@ export const ProfilesProvider = ({
   const handleFilterProfiles = useCallback(
     (profiles: ProfileModel[], options?: { disableSpecFilter?: boolean }) => {
       const filteredProfiles = profiles
+        .filter(filterBySalary(filters.salary))
         .filter(filterBySeniority(filters.seniority))
         .filter(filterByLocation(filters.location))
         .filter(filterByTechnology(filters.technology))
@@ -72,6 +78,48 @@ export const ProfilesProvider = ({
     [filters],
   )
 
+  const markProfileAsVisited = (profileView: ProfileViewModel) => {
+    setAllProfiles((prevProfiles) => {
+      return prevProfiles.map((profile) => {
+        if (profile.id !== profileView.viewedProfileId) return profile
+
+        const existingProfileView = profile.profileViews.find(
+          (view) => view.viewerId === profileView.viewerId,
+        )
+
+        let profileViews: ProfileViewModel[]
+
+        if (existingProfileView) {
+          profileViews = profile.profileViews.map((view) => {
+            if (view.viewerId !== profileView.viewerId) return view
+
+            return { ...view, createdAt: new Date() }
+          })
+        } else {
+          profileViews = [...profile.profileViews, profileView]
+        }
+
+        return {
+          ...profile,
+          profileViews: profileViews,
+        }
+      })
+    })
+  }
+
+  const markProfileAsContacted = (contactRequest: ContactRequestModel) => {
+    setAllProfiles((prevProfiles) => {
+      return prevProfiles.map((profile) => {
+        if (profile.id !== contactRequest.profileId) return profile
+
+        return {
+          ...profile,
+          contactRequests: [...profile.contactRequests, contactRequest],
+        }
+      })
+    })
+  }
+
   const filteredProfiles = handleFilterProfiles(allProfiles)
 
   return (
@@ -80,6 +128,8 @@ export const ProfilesProvider = ({
         allProfiles,
         filteredProfiles,
         handleFilterProfiles,
+        markProfileAsVisited,
+        markProfileAsContacted,
       }}
     >
       {children}

@@ -164,3 +164,13 @@
     display: block;
   }
 }
+
+.salary {
+  margin-top: 10px;
+
+  @include mobile {
+    margin-top: 1px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+}

@@ -7,13 +7,12 @@ import {
 } from '@/app/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { PublishingState } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
-import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { saveMyProfile } from '@/app/(profile)/_actions'
 import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
@@ -60,7 +59,7 @@ const EditProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { profile } = useProfileModel()
-  const { user } = useAuth()
+  const { data: session } = useSession()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -80,13 +79,16 @@ const EditProfileForm = () => {
         githubUsername: '',
         state: PublishingState.PENDING,
         viewCount: 0,
+        hourlyRateMin: 0,
+        hourlyRateMax: 0,
+        currency: Currency.PLN,
       }
     }
 
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
-  if (!user || !profile || !user) {
+  if (!session || !profile || !session) {
     return null
   }
 
@@ -94,7 +96,7 @@ const EditProfileForm = () => {
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,
-      avatarUrl: user.avatarUrl || null,
+      avatarUrl: session.user?.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -111,7 +113,9 @@ const EditProfileForm = () => {
         }
       }),
       employmentTypes: values.employment,
-      state: PublishingState.PENDING,
+      hourlyRateMin: values.hourlyRateMin,
+      hourlyRateMax: values.hourlyRateMax,
+      currency: Currency.PLN,
     }
 
     await runAsync(async () => {
@@ -120,7 +124,8 @@ const EditProfileForm = () => {
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
-      savedProfile && updateSession({ ...user, name: savedProfile.fullName })
+      savedProfile &&
+        updateSession({ ...session.user, name: savedProfile.fullName })
 
       router.push(AppRoutes.myProfile)
     })

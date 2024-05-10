@@ -1,5 +1,7 @@
+import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import {
   JobOfferFiltersEnum,
+  type HourlyRateValue,
   type JobSpecialization,
   type SearchParamsFilters,
 } from '@/app/(profile)/profile.types'
@@ -45,6 +47,7 @@ export const createFiltersObjFromSearchParams = (
     [JobOfferFiltersEnum.availability]: [],
     [JobOfferFiltersEnum.location]: [],
     [JobOfferFiltersEnum.search]: [],
+    [JobOfferFiltersEnum.salary]: [],
   }
 
   for (const [key, value] of searchParams.entries()) {
@@ -70,4 +73,179 @@ export const createQueryString = (
   }
 
   return params.toString().replaceAll('%2C', ',')
+}
+
+export const getHourlyRateDisplay = (
+  hourlyRateMin: number | null,
+  currency: string,
+  hourlyRateMax: number | null,
+) => {
+  if (hourlyRateMin === null || hourlyRateMin < 1) {
+    return null
+  } else if (hourlyRateMin >= 350) {
+    return `above ${hourlyRateMin} ${currency}/h`
+  } else if (hourlyRateMin < 50) {
+    return `below 50 ${currency}/h`
+  } else {
+    return `${hourlyRateMin} - ${hourlyRateMax} ${currency}/h`
+  }
+}
+
+export const parseHourlyRateValue = (value: string): HourlyRateValue => {
+  const [min, max] = value.split('-')
+  return {
+    hourlyRateMin: min === 'null' ? null : parseInt(min),
+    hourlyRateMax: max === 'null' ? null : parseInt(max),
+  }
+}
+
+export const formatHourlyRateLabel = (
+  min: number | null,
+  max: number | null,
+): string => {
+  if (min === null) return `< ${max} zł/h`
+  if (max === null) return `> ${min} zł/h`
+  return `${min} - ${max} zł/h`
+}
+
+export const filterByPosition =
+  (positionFilter: string[]) => (profile: ProfileModel) => {
+    if (!positionFilter.length) return true
+    return positionFilter.some(
+      (pos) => profile.position.toUpperCase() === pos.toUpperCase(),
+    )
+  }
+
+export const filterBySeniority =
+  (seniorityFilter: string[]) => (profile: ProfileModel) => {
+    if (!seniorityFilter.length) return true
+    return seniorityFilter.some(
+      (filter) => filter.toUpperCase() === profile.seniority.toUpperCase(),
+    )
+  }
+
+export const filterBySpecialization =
+  (specializations: string[]) => (profile: ProfileModel) => {
+    if (!specializations.length) return true
+    return specializations.some(
+      (filter) => filter.toUpperCase() === profile.position.toUpperCase(),
+    )
+  }
+
+// TODO: implement filter by location (cities and countreis should be implemented )
+export const filterByLocation =
+  (locationFilter: string[]) => (profile: ProfileModel) => {
+    if (!locationFilter.length) return true
+    return locationFilter.some((location) => profile.country === location)
+  }
+
+export const filterByTechnology =
+  (technologyFilter: string[]) => (profile: ProfileModel) => {
+    if (!technologyFilter.length) return true
+    return technologyFilter.every(
+      (techFilter) =>
+        !!profile.techStack.find(
+          (tech) => tech.name.toUpperCase() === techFilter.toUpperCase(),
+        ),
+    )
+  }
+
+export const filterByAvailability =
+  (availabilityFilter: string[]) => (profile: ProfileModel) => {
+    if (!availabilityFilter.length) return true
+    return availabilityFilter.some(
+      (availability) =>
+        !!profile.employmentTypes.find(
+          (employmentType) =>
+            employmentType.toUpperCase() === availability.toUpperCase(),
+        ),
+    )
+  }
+
+export const filterByFullName = (searchTermFilter: string) => {
+  return (profile: ProfileModel) => {
+    if (!searchTermFilter) return true
+    return profile.fullName
+      .toUpperCase()
+      .includes(searchTermFilter.toUpperCase())
+  }
+}
+
+export const filterBySalary =
+  (salaryFilter: string[]) => (profile: ProfileModel) => {
+    if (salaryFilter.length === 0) return true
+
+    return salaryFilter.some((salaryRange) => {
+      const [min, max] = salaryRange
+        .split('-')
+        .map((str) => (str === 'null' ? Infinity : Number(str)))
+      if (profile.hourlyRateMax === 0 && profile.hourlyRateMin === 350) {
+        return min >= 350
+      }
+      if (profile.hourlyRateMin === 0 && profile.hourlyRateMax === 0) {
+        return false
+      }
+      return profile.hourlyRateMin >= min && profile.hourlyRateMax <= max
+    })
+  }
+
+export const hasProfileValuesChanged = (
+  foundProfile: ProfileModel,
+  payload: ProfileModel,
+) => {
+  // Initialize array to store changed fields
+  const changedFields: string[] = []
+
+  // Compare each field in the payload with the existing profile data
+  Object.keys(payload).some((key) => {
+    // @ts-ignore
+    if (foundProfile[key].toString() !== payload[key].toString()) {
+      changedFields.push(key)
+    }
+  })
+
+  if (changedFields.length === 0) {
+    return false
+  } else {
+    return changedFields
+  }
+}
+
+export const hasCommonFields = (
+  changedFields: string[],
+  profilePendingFields: string[],
+): boolean => {
+  let hasCommon = false
+
+  profilePendingFields.forEach((field) => {
+    if (changedFields.includes(field)) {
+      hasCommon = true
+    }
+  })
+
+  return hasCommon
+}
+
+export const renderRelativeDateLabel = (date: Date) => {
+  const today = new Date().setHours(0, 0, 0, 0)
+  const dateToCheck = new Date(date).setHours(0, 0, 0, 0)
+
+  const daysDifference = Math.round(
+    (today - dateToCheck) / (1000 * 60 * 60 * 24),
+  )
+
+  switch (daysDifference) {
+    case 0:
+      return 'today'
+    case 1:
+      return 'yesterday'
+    default:
+      return `on ${date.toLocaleDateString()}`
+  }
+}
+
+export const sortProfilesBySalary = (a: ProfileModel, b: ProfileModel) => {
+  if (a.hourlyRateMin && !b.hourlyRateMin) return -1
+  if (!a.hourlyRateMin && b.hourlyRateMin) return 1
+  else return 0
 }

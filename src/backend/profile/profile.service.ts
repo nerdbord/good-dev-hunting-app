@@ -1,7 +1,6 @@
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { type ProfileCreateParams } from '@/app/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, PublishingState, Role } from '@prisma/client'
+import { Currency, Prisma, PublishingState, Role } from '@prisma/client'
 
 export async function getApprovedProfiles() {
   const approvedProfiles = await prisma.profile.findMany({
@@ -98,6 +97,9 @@ export async function createUserProfile(
       seniority: profileData.seniority,
       employmentTypes: profileData.employmentTypes,
       state: PublishingState.DRAFT,
+      hourlyRateMin: profileData.hourlyRateMin ?? 0,
+      hourlyRateMax: profileData.hourlyRateMax ?? 0,
+      currency: Currency.PLN,
     },
     include: includeObject.include,
   })
@@ -113,16 +115,7 @@ export async function updateProfileById(
       id,
     },
     data,
-    include: {
-      user: {
-        include: {
-          githubDetails: true,
-        },
-      },
-      techStack: true,
-      country: true,
-      city: true,
-    },
+    include: includeObject.include,
   })
 
   return updatedProfile
@@ -188,25 +181,6 @@ export async function getProfileByGithubUsername(username: string) {
   return null
 }
 
-export const hasProfileValuesChanged = async (
-  profileId: string,
-  payload: ProfileModel,
-) => {
-  const existingProfile = await findProfileById(profileId)
-
-  if (!existingProfile) {
-    return false
-  }
-
-  // Compare each field in the payload with the existing profile data
-  const hasChanged = Object.keys(payload).some((key) => {
-    // @ts-ignore
-    return existingProfile[key] !== payload[key]
-  })
-
-  return hasChanged
-}
-
 export async function getPublishedProfiles(take: number) {
   const publishedProfiles = await prisma.profile.findMany({
     take,
@@ -244,6 +218,8 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     country: true,
     city: true,
     techStack: true,
+    contactRequests: true,
+    profileViews: true,
   },
 })
 
@@ -261,12 +237,43 @@ export async function getUniqueSpecializations() {
   return uniqueSpecializations.map((p) => p.position)
 }
 
-export async function incrementProfileViewCountById(id: string) {
-  const updatedProfile = await prisma.profile.update({
+export async function createProfileView(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const newProfileView = await prisma.profileView.create({
+    data: {
+      viewerId,
+      viewedProfileId,
+    },
+  })
+
+  return newProfileView
+}
+
+export async function updateProfileView(id: string) {
+  const updatedProfileView = await prisma.profileView.update({
     where: {
       id,
     },
-    data: { viewCount: { increment: 1 } },
+    data: {
+      createdAt: new Date(),
+    },
   })
-  return updatedProfile
+
+  return updatedProfileView
+}
+
+export async function findProfileViewByViewerIdAndProfileId(
+  viewerId: string,
+  viewedProfileId: string,
+) {
+  const profileView = await prisma.profileView.findFirst({
+    where: {
+      viewerId,
+      viewedProfileId,
+    },
+  })
+
+  return profileView
 }
