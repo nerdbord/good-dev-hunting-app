@@ -244,3 +244,8 @@ export const renderRelativeDateLabel = (date: Date) => {
   }
 }
 
+export const sortProfilesBySalary = (a: ProfileModel, b: ProfileModel) => {
+  if (a.hourlyRateMin && !b.hourlyRateMin) return -1
+  if (!a.hourlyRateMin && b.hourlyRateMin) return 1
+  else return 0
+}
