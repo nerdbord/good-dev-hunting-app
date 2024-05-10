@@ -1,16 +1,21 @@
 'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
 import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
+import { sortProfilesBySalary } from '@/app/(profile)/profile.helpers'
+import Loader from '@/components/Loader/Loader'
+import { useSession } from 'next-auth/react'
 import styles from './ProfileList.module.scss'
 
+//
 const ProfileList = () => {
   const { filteredProfiles: profiles } = useProfiles()
+  const { status } = useSession()
 
-  const sortedProfiles = profiles.sort((a, b) => {
-    if (a.hourlyRateMin && !b.hourlyRateMin) return -1
-    if (!a.hourlyRateMin && b.hourlyRateMin) return 1
-    else return 0
-  })
+  const sortedProfiles = profiles.sort(sortProfilesBySalary)
+
+  if (status === 'loading') {
+    return <Loader />
+  }
 
   if (profiles.length === 0) {
     return (
