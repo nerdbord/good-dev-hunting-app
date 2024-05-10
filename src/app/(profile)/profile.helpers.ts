@@ -199,7 +199,7 @@ export const hasProfileValuesChanged = (
   // Compare each field in the payload with the existing profile data
   Object.keys(payload).some((key) => {
     // @ts-ignore
-    if (foundProfile[key].toString() !== payload[key].toString()) {
+    if (JSON.stringify(foundProfile[key]) !== JSON.stringify(payload[key])) {
       changedFields.push(key)
     }
   })
