@@ -1,8 +1,8 @@
-﻿import DashboardHeader from '@/app/(profile)/(routes)/moderation/(components)/DashboardHeader/DashboardHeader'
-import { findAllProfiles } from '@/app/(profile)/_actions'
+﻿import { findAllProfiles } from '@/app/(profile)/_actions'
 import { ModerationProvider } from '@/app/(profile)/_providers/Moderation.provider'
 import { Container } from '@/components/Container/Container'
 import React from 'react'
+import Header from '../../(components)/Header/Header'
 
 export default async function ModerationLayout({
   children,
@@ -12,7 +12,7 @@ export default async function ModerationLayout({
   const fetchedProfiles = await findAllProfiles()
   return (
     <ModerationProvider initialProfiles={fetchedProfiles}>
-      <DashboardHeader />
+      <Header />
       <Container>{children}</Container>
     </ModerationProvider>
   )

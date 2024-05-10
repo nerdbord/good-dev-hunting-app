@@ -16,12 +16,14 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
 
   const isPending = profile.state === PublishingState.PENDING
   const isRejected = profile.state === PublishingState.REJECTED
+  const viewCount = profile.viewCount + profile.profileViews.length
+
   return (
     <div className={styles.titleBox}>
       <div className={styles.mobileProfilePreview}>
         <div className={styles.titleContainer}>
           <span className={styles.title}>Profile preview</span>
-          <ProfileViews viewCount={profile.viewCount} />
+          <ProfileViews viewCount={viewCount} />
         </div>
 
         {!(isPending || isRejected) && (

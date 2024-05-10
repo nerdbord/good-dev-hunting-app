@@ -1,11 +1,21 @@
 'use client'
 import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
 import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
-import { AppRoutes } from '@/utils/routes'
+import { sortProfilesBySalary } from '@/app/(profile)/profile.helpers'
+import Loader from '@/components/Loader/Loader'
+import { useSession } from 'next-auth/react'
 import styles from './ProfileList.module.scss'
 
+//
 const ProfileList = () => {
   const { filteredProfiles: profiles } = useProfiles()
+  const { status } = useSession()
+
+  const sortedProfiles = profiles.sort(sortProfilesBySalary)
+
+  if (status === 'loading') {
+    return <Loader />
+  }
 
   if (profiles.length === 0) {
     return (
@@ -20,11 +30,11 @@ const ProfileList = () => {
   return (
     <div className={styles.profileCards}>
       <div className={styles.profileListCont}>
-        {profiles.map((profile) => (
+        {sortedProfiles.map((profile) => (
           <ProfileListItem
             key={profile.id}
             data={profile}
-            href={`${AppRoutes.profile}/${profile.githubUsername}`}
+            isHiddenName={true}
           />
         ))}
       </div>

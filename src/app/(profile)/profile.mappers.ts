@@ -172,3 +172,15 @@ export const mapSpecializations = (
     value: specialization,
   }))
 }
+
+//HOURLY RATE
+export const hourlyRateOptions: DropdownOption[] = [
+  { name: '< 50 zł/h', value: '1-50' },
+  { name: '50 - 100 zł/h', value: '50-100' },
+  { name: '100 - 150 zł/h', value: '100-150' },
+  { name: '150 - 200 zł/h', value: '150-200' },
+  { name: '200 - 250 zł/h', value: '200-250' },
+  { name: '250 - 300 zł/h', value: '250-300' },
+  { name: '300 - 350 zł/h', value: '300-350' },
+  { name: '> 350 zł/h', value: '350-0' },
+]

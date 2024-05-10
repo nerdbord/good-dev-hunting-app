@@ -3,9 +3,8 @@ import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
 import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
 import { SearchResultsInfo } from '@/components/SearchResultsInfo/SearchResultsInfo'
 import useTabCounter from '@/hooks/useTabCounter'
-import { PublishingState } from '@prisma/client'
-
 import { AppRoutes } from '@/utils/routes'
+import { PublishingState } from '@prisma/client'
 import ProfileCard from '../ProfileCard/ProfileCard'
 import styles from './ProfileList.module.scss'
 
@@ -48,6 +47,7 @@ export default function ModerationProfilesWithFilters() {
               key={profile.id}
               data={profile}
               href={`${AppRoutes.moderationProfile}/${profile.userId}`}
+              withStateStatus
             />
           ))
         ) : (

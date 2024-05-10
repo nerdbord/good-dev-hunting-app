@@ -1,7 +1,6 @@
 'use client'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { updateMyAvatar } from '@/app/(auth)/_actions/mutations/updateMyAvatar'
-import { useAuth } from '@/app/(auth)/_providers/Auth.provider'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import CreateProfileTopBar from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
@@ -18,7 +17,7 @@ import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
-import { PublishingState } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -40,6 +39,9 @@ const initialValues: CreateProfileFormValues = {
   techStack: [],
   state: PublishingState.DRAFT,
   terms: false,
+  hourlyRateMin: 0,
+  hourlyRateMax: 0,
+  currency: Currency.PLN,
 }
 
 export const validationSchema = Yup.object().shape({
@@ -79,7 +81,7 @@ const CreateProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
-  const { user } = useAuth()
+  const { data: session } = useSession()
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -90,7 +92,7 @@ const CreateProfileForm = () => {
     }
     const payload: ProfileCreateParams = {
       fullName: values.fullName,
-      avatarUrl: user?.avatarUrl || null,
+      avatarUrl: session?.user?.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -106,6 +108,9 @@ const CreateProfileForm = () => {
       })),
       employmentTypes: values.employment,
       state: PublishingState.DRAFT,
+      hourlyRateMin: values.hourlyRateMin,
+      hourlyRateMax: values.hourlyRateMax,
+      currency: Currency.PLN,
     }
 
     try {
@@ -120,7 +125,7 @@ const CreateProfileForm = () => {
 
         if (createdProfile) {
           updateSession({
-            ...user,
+            ...session?.user,
             name: payload.fullName,
             profileId: createdProfile.id,
           })

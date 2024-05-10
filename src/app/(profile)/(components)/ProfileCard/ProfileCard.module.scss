@@ -49,12 +49,25 @@
   padding-top: 3px;
 }
 
+.nameContainer {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
 .name {
+  display: flex;
+  align-items: center;
+  gap:5px;
   color: #ffffff;
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
   overflow-wrap: break-word;
+
+  &.active {
+    color: #5E28F6;
+  }
 }
 
 .location {
@@ -111,4 +124,23 @@
 
 .rest {
   font-weight: 100;
+}
+
+.salary {
+  color: var(--Light-01, #fff);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.nameCover {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #ffffff;
 }

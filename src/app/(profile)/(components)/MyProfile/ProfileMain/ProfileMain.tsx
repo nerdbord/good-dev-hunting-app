@@ -1,4 +1,5 @@
 import { findProfileById } from '@/app/(profile)/_actions'
+import { getHourlyRateDisplay } from '@/app/(profile)/profile.helpers'
 import {
   mapEmploymentTypes,
   mapSeniorityLevel,
@@ -21,6 +22,9 @@ const ProfileMain = async (props: ProfileMainProps) => {
 
   const githubUsername = profile.githubUsername
   const avatarUrl = profile.avatarUrl
+  const hourlyRateMin = profile.hourlyRateMin
+  const hourlyRateMax = profile.hourlyRateMax
+  const currency = profile.currency
   const countryFlag =
     countries.find((country) => country.name === profile.country)?.flag || ''
 
@@ -92,6 +96,9 @@ const ProfileMain = async (props: ProfileMainProps) => {
               </div>
             </div>
           </div>
+          <p className={styles.salary}>
+            {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
+          </p>
         </div>
       </section>
     </>

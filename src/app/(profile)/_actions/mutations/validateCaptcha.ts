@@ -2,6 +2,10 @@
 import { withSentry } from '@/utils/errHandling'
 
 export const validateCaptcha = withSentry(async (captchaValue: string) => {
+  if (!process.env.SECRET_HIDDEN_CAPTCHA_KEY) {
+    throw new TypeError('Captcha secret key is not set')
+  }
+
   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRET_HIDDEN_CAPTCHA_KEY}&response=${captchaValue}`
   try {
     const response = await fetch(url, {
