@@ -1,5 +1,6 @@
 // Simplified imports with index files
 
+import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
 import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
 import HunterAcc from '@/app/(auth)/(components)/HunterAcc/HunterAcc'
 import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
@@ -17,7 +18,11 @@ import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 
-async function Header({ buttonsVariant = 'main' }) {
+interface HeaderProps {
+  buttonsVariant?: 'main' | 'profiles' | 'signin'
+}
+
+async function Header({ buttonsVariant = 'main' }: HeaderProps) {
   const { user, userIsHunter, userIsModerator, userHasProfile } =
     await getAuthorizedUser()
 
@@ -50,14 +55,28 @@ async function Header({ buttonsVariant = 'main' }) {
 
   const profilesMobileButtons = (
     <>
-      {mainMobileButtons}
       <li>
-        <AppHeaderMobileSearchFilter />
+        <HamburgerMenuMobileBtn
+          userHasProfile={userHasProfile}
+          userIsModerator={userIsModerator}
+        />
       </li>
+      {user && (
+        <li>
+          <AppHeaderMobileSearchFilter />
+        </li>
+      )}
     </>
   )
 
   const renderDesktopContent = () => {
+    if (buttonsVariant === 'signin') {
+      return (
+        <li>
+          <CreateProfileBtn data-testid="create-profile-button" />
+        </li>
+      )
+    }
     if (user) {
       return (
         <>
@@ -78,12 +97,17 @@ async function Header({ buttonsVariant = 'main' }) {
           ) : (
             <>
               {!userHasProfile && (
-                <li>
-                  <CreateProfileBtn data-testid="create-profile-button" />
-                </li>
+                <>
+                  <li>
+                    <CreateProfileBtn data-testid="create-profile-button" />
+                  </li>
+                  <li>
+                    <LogOutBtn />
+                  </li>
+                </>
               )}
               <li>
-                <LogOutBtn />
+                <GithubAcc />
               </li>
             </>
           )}
