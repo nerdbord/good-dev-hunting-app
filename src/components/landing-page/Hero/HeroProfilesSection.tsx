@@ -22,7 +22,7 @@ export const HeroProfilesSection = () => {
             <ProfileCard
               data={first}
               href={`${AppRoutes.profile}/${first.githubUsername}`}
-            />{' '}
+            />
           </div>
         )}
         {second && (
@@ -30,7 +30,7 @@ export const HeroProfilesSection = () => {
             <ProfileCard
               data={second}
               href={`${AppRoutes.profile}/${second.githubUsername}`}
-            />{' '}
+            />
           </div>
         )}
         {third && (
@@ -38,7 +38,7 @@ export const HeroProfilesSection = () => {
             <ProfileCard
               data={third}
               href={`${AppRoutes.profile}/${third.githubUsername}`}
-            />{' '}
+            />
           </div>
         )}
       </div>
