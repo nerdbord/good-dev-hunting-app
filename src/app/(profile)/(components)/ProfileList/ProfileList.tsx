@@ -6,6 +6,7 @@ import Loader from '@/components/Loader/Loader'
 import { useSession } from 'next-auth/react'
 import styles from './ProfileList.module.scss'
 
+//
 const ProfileList = () => {
   const { filteredProfiles: profiles } = useProfiles()
   const { status } = useSession()
