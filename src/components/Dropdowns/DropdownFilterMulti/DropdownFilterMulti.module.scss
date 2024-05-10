@@ -72,7 +72,6 @@
     width: 100%;
     margin-top: 0;
     background-color: #04080d;
-    height: 50px;
   }
 }
 .dropdownHeader {
@@ -86,7 +85,7 @@
     position: fixed;
     width: 100%;
     background-color: #04080d;
-    height: 50px;
+    margin-top: 1%;
   }
 }
 
@@ -121,37 +120,39 @@
     display: block;
     font-size: 16px;
     color: white;
-    padding-top: 10px;
   }
 }
 
 .buttonContainerMulti {
   display: flex;
   position: fixed;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   z-index: 1000;
-  width: 190px;
+  width: 200px;
   margin-top: 45px;
+  margin-left: 60px;
   @include mobile {
-    position: static;
+    justify-content: flex-end;
+    width: 80%;
     z-index: 5;
-    width: auto;
+    margin-top: 10px;
     padding-right: 10px;
-    margin-top: 0;
   }
 }
 
 .buttonContainer {
   display: flex;
   position: fixed;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   z-index: 1000;
   margin-top: 45px;
   width: 200px;
+  margin-left: 60px;
   @include mobile {
     position: static;
+    justify-content: flex-end;
     margin-top: 0;
     z-index: 5;
     padding-right: 10px;
