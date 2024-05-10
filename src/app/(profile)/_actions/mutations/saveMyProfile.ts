@@ -108,9 +108,8 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   }
 
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
-  const isPreviouslyPending = foundProfile.state === PublishingState.PENDING
 
-  if (!isPreviouslyPending) {
+  if (updatedProfile.state === PublishingState.PENDING) {
     await sendDiscordNotificationToModeratorChannel(
       `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
     )
