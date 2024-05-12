@@ -1,7 +1,7 @@
 import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
-import Header from '@/app/(profile)/(components)/Header/Header'
 import UserProfileDetails from '@/app/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
+import UserProfileHeader from '@/app/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { findProfileByGithubUsername } from '@/app/(profile)/_actions/queries/findProfileByGithubUsername'
 import { ProfileProvider } from '@/app/(profile)/_providers/Profile.provider'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
@@ -63,7 +63,11 @@ const UserProfilePage = async ({
     <ProfileProvider profile={profile}>
       <div className={styles.wrapper}>
         <UserProfileMain profileId={profile.id}>
-          <Header buttonsVariant="profiles" />
+          <UserProfileHeader
+            isNerdbordConnected={isConnectedToNerdbord}
+            withBackButton
+            profileId={profile.id}
+          />
         </UserProfileMain>
         <UserProfileDetails profileId={profile.id} />
       </div>
