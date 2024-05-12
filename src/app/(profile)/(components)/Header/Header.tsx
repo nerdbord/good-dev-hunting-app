@@ -97,18 +97,15 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
           ) : (
             <>
               {!userHasProfile && (
-                <>
-                  <li>
-                    <CreateProfileBtn data-testid="create-profile-button" />
-                  </li>
-                  <li>
-                    <LogOutBtn />
-                  </li>
-                </>
+                <li>
+                  <CreateProfileBtn data-testid="create-profile-button" />
+                </li>
               )}
-              <li>
-                <GithubAcc />
-              </li>
+              {userHasProfile && (
+                <li>
+                  <GithubAcc />
+                </li>
+              )}
             </>
           )}
         </>
