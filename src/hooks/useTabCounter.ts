@@ -1,4 +1,4 @@
-import { type ProfileModel } from '@/app/(profile)/_models/profile.model'
+import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { type PublishingState } from '@prisma/client'
 import { useEffect } from 'react'
 

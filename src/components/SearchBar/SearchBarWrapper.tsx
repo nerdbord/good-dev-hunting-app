@@ -1,4 +1,4 @@
-import { type JobOfferFiltersEnum } from '@/app/(profile)/profile.types'
+import { type JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { useDebounce } from '@/hooks/useDebounce'

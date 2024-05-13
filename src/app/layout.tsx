@@ -1,5 +1,5 @@
-import { findAllApprovedProfiles } from '@/app/(profile)/_actions'
-import { ProfilesProvider } from '@/app/(profile)/_providers/Profiles.provider'
+import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
+import { ProfilesProvider } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'

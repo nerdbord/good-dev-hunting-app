@@ -1,4 +1,4 @@
-import Header from '@/app/(profile)/(components)/Header/Header'
+import Header from '@/app/[locale]/(profile)/(components)/Header/Header'
 import { Container } from '@/components/Container/Container'
 import ErrorBox from './(components)/ErrorBox'
 

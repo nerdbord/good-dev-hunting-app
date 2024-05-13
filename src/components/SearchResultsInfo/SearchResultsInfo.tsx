@@ -1,4 +1,4 @@
-﻿import { useModeration } from '@/app/(profile)/_providers/Moderation.provider'
+﻿import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
 import { PublishingState } from '@prisma/client'
 import { Button } from '../Button/Button'
 
