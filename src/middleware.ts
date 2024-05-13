@@ -28,5 +28,7 @@ export const config = {
     '/(en|pl)/moderation',
     '/moderation/profile/:profileId*',
     '/(en|pl)/moderation/profile/:profileId*',
+    '/signin',
+    '/(en|pl)/signin',
   ],
 }

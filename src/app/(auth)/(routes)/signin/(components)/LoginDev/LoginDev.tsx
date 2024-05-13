@@ -1,16 +1,15 @@
 // components
 import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import Box from '@/components/Box/Box'
+import { useTranslations } from 'next-intl'
 
 const LoginDev = () => {
+  const t = useTranslations('loginDev')
   return (
     <Box>
-      <h2>Login as IT specialist</h2>
-      <p>
-        Login with authorised Github profile, get found by hunters and also hunt
-        for fellow specialist.
-      </p>
-      <GithubLoginButton label="Login with Github" />
+      <h2>{t('title')}</h2>
+      <p>{t('description')}</p>
+      <GithubLoginButton label={t('loginWithGithub')} />
     </Box>
   )
 }

@@ -3,13 +3,10 @@ import AddIcon from '@/assets/icons/AddIcon'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { signIn, useSession } from 'next-auth/react'
-import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const CreateProfileBtn = () => {
-  const t = useTranslations('Buttons')
-
   const [isCalled, setIsCalled] = useState(false)
 
   const router = useRouter()
@@ -38,7 +35,8 @@ const CreateProfileBtn = () => {
       variant={'primary'}
       dataTestId="createProfileButton"
     >
-      {t('createProfile')} <AddIcon />
+      Create profile
+      <AddIcon />
     </Button>
   )
 }

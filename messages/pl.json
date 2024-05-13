@@ -4,7 +4,8 @@
     "findtalents": "Odkryj Talenty",
     "hero": "Niech Twój następny projekt znajdzie Ciebie",
     "opensource": "Open Source, darmowa platforma dla programistów, gotowych na kolejne zlecenia.",
-    "joinAsAHunter:": "Dołącz jako łowca talentów"
+    "joinAsAHunter:": "Dołącz jako łowca talentów",
+    "visitorBaner": "Utwórz darmowe konto, aby uzyskać nieograniczony dostęp do wszystkich profili"
   },
 
   "HowItWorks": {
@@ -82,5 +83,11 @@
 
   "Search": {
     "searchByName": "Szukaj po imieniu"
+  },
+
+  "loginDev": {
+    "title": "Zaloguj się jako specjalista IT",
+    "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
+    "loginWithGithub": "Zaloguj się przez Github"
   }
 }
