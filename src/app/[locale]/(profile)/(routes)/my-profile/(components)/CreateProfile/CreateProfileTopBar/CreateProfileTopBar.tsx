@@ -4,6 +4,7 @@ import { Button } from '@/components/Button/Button'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { AppRoutes } from '@/utils/routes'
 import { useFormikContext } from 'formik'
+import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 import styles from './CreateProfileTopBar.module.scss'
 
@@ -12,6 +13,7 @@ interface CreateProfileTopBarProps {
 }
 
 const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
+  const t = useTranslations('Buttons')
   const pathname = usePathname()
 
   const { errors, touched, isValid, handleSubmit } = useFormikContext()
@@ -27,15 +29,15 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
       <div className={styles.errorWrapper}>
         <span className={styles.title}>
           {pathname === AppRoutes.createProfile
-            ? 'Create profile'
+            ? t('createProfile')
             : pathname === AppRoutes.editProfile
-            ? 'Edit profile'
-            : 'My profile'}
+            ? t('editProfile')
+            : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>
             <ErrorIcon />
-            <span>Fill out the form to complete the profile</span>
+            <span>{t('fillOut')}</span>
           </div>
         )}
       </div>
@@ -48,7 +50,7 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           disabled={props.isSubmitting || !isValid}
           dataTestId="saveAndPreviewProfile"
         >
-          {isMobile ? 'Save and preview' : 'Save and preview profile'}
+          {isMobile ? t('saveAndPreview') : t('saveAndPreviewProfile')}
         </Button>
       </div>
     </div>

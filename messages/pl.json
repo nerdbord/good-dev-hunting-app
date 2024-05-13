@@ -63,7 +63,10 @@
     "edit": "Edytuj",
     "unpublish": "Wycofaj profil",
     "publishProfile": "Publikuj profil",
-    "logOut": "Wyloguj"
+    "logOut": "Wyloguj",
+    "pending": "Oczekuje na zatwierdzenie",
+    "fillOut": "Wypełnij formularz, aby uzupełnić profil",
+    "sendMessage": "Wyślij wiadmość"
   },
 
   "LandingFooter": {
@@ -98,5 +101,20 @@
     "policyTwo": "oraz",
     "policyThree": "Politykę prywatności",
     "joinAsAHunter": "Dołącz jako Łowca"
+  },
+
+  "PersonalInfo": {
+    "title": "Informacje osobiste",
+    "description": "Udostępnij informacje osobiste, aby rekruterzy mogli Cię poznać."
+  },
+
+  "LocationPreferences": {
+    "title": "Preferencje lokalizacyjne",
+    "description": "Udostępnij informacje o swoich aktualnych kwalifikacjach. Będziesz mógł je zmienić w dowolnym momencie."
+  },
+
+  "WorkInformation": {
+    "title": "Informacje o pracy",
+    "description": "Udostępnij informacje o swoich aktualnych kwalifikacjach. Będziesz mógł"
   }
 }
