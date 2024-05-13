@@ -64,7 +64,10 @@
     "edit": "Edit",
     "unpublish": "Unpublish profile",
     "publishProfile": "Publish profile",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "pending": "Pending",
+    "fillOut": "Fill out the form to complete the profile",
+    "sendMessage": "Send message"
   },
 
   "LandingFooter": {
@@ -99,5 +102,20 @@
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
     "joinAsAHunter": "Join as a Hunter"
+  },
+
+  "PersonalInfo": {
+    "title": "Personal information",
+    "description": "Share personal information to let the recruiters get to know you."
+  },
+
+  "LocationPreferences": {
+    "title": "Location preferences",
+    "description": "Share your current qualifications information. You’ll be able to change it at any moment."
+  },
+
+  "WorkInformation": {
+    "title": "Work information",
+    "description": "Share your current qualifications information. You’ll be able to change it at any moment."
   }
 }

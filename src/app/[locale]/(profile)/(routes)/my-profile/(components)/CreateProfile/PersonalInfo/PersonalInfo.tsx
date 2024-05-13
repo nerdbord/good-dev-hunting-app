@@ -8,6 +8,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import styles from './PersonalInfo.module.scss'
 
 export enum PersonalInfoFormKeys {
@@ -18,6 +19,7 @@ export enum PersonalInfoFormKeys {
 }
 
 const PersonalInfo = () => {
+  const t = useTranslations('PersonalInfo')
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 
@@ -26,10 +28,8 @@ const PersonalInfo = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Personal information</div>
-        <div className={styles.personalInfo}>
-          Share personal information to let the recruiters get to know you.
-        </div>
+        <div>{t('title')}</div>
+        <div className={styles.personalInfo}>{t('description')} </div>
       </div>
       <div className={styles.right}>
         <InputFormError

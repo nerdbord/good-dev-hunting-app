@@ -7,6 +7,7 @@ import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputW
 import { useFormikContext } from 'formik'
 
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
+import { useTranslations } from 'next-intl'
 import styles from './LocationPreferences.module.scss'
 
 export enum LocationPreferencesFormKeys {
@@ -18,6 +19,7 @@ export enum LocationPreferencesFormKeys {
 }
 
 const LocationPreferences = () => {
+  const t = useTranslations('LocationPreferences')
   const { values, setFieldValue, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 
@@ -31,11 +33,8 @@ const LocationPreferences = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Location preferences</div>
-        <div className={styles.personalInfo}>
-          Share your current qualifications information. You’ll be able to
-          change it at any moment.
-        </div>
+        <div>{t('title')}</div>
+        <div className={styles.personalInfo}>{t('description')}</div>
       </div>
       <div className={styles.right}>
         <div className={styles.checkboxContainer}>

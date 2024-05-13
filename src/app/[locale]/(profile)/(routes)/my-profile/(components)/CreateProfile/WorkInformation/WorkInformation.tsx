@@ -14,6 +14,7 @@ import { useFormikContext } from 'formik'
 
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
 
 export enum WorkInformationFormKeys {
@@ -27,6 +28,7 @@ export enum WorkInformationFormKeys {
 }
 
 const WorkInformation = () => {
+  const t = useTranslations('WorkInformation')
   const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
 
@@ -69,11 +71,8 @@ const WorkInformation = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Work information</div>
-        <div className={styles.personalInfo}>
-          Share your current qualifications information. You’ll be able to
-          change it at any moment.
-        </div>
+        <div>{t('title')}</div>
+        <div className={styles.personalInfo}>{t('description')}</div>
       </div>
 
       <div className={styles.right}>

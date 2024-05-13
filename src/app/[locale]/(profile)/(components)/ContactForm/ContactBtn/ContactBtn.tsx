@@ -3,6 +3,7 @@ import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.pro
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
 
 export type SenderData = {
@@ -14,6 +15,7 @@ export type SenderData = {
 }
 
 const ContactBtn = () => {
+  const t = useTranslations('Buttons')
   const { showModal } = useModal()
   const { profile } = useProfileModel()
   const { data: session } = useSession()
@@ -38,7 +40,7 @@ const ContactBtn = () => {
         }}
         variant={'primary'}
       >
-        Send message
+        {t('sendMessage')}{' '}
       </Button>
     </div>
   )
