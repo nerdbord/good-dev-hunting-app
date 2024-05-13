@@ -1,5 +1,7 @@
 import { StateStatus } from '@/app/[locale]/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import dynamic from 'next/dynamic'
+
 import {
   getHourlyRateDisplay,
   jobSpecializationThemes,
@@ -174,4 +176,4 @@ const ProfileCard = ({
   )
 }
 
-export default ProfileCard
+export default dynamic(() => Promise.resolve(ProfileCard), { ssr: false })
