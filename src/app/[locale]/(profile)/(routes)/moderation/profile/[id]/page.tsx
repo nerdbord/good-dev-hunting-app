@@ -3,10 +3,10 @@ import ModerationActionHeader from '@/app/[locale]/(profile)/(routes)/moderation
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
-import { findUserById } from '@/app/(auth)/_actions'
+import { findUserById } from '@/app/[locale]/(auth)/_actions'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions/queries/findProfileByUserId'
 
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'

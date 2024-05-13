@@ -1,5 +1,5 @@
-import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import ProfileDetails from '@/app/[locale]/(profile)/(components)/MyProfile/ProfileDetails/ProfileDetails'
 import ProfileMain from '@/app/[locale]/(profile)/(components)/MyProfile/ProfileMain/ProfileMain'
 import ProfileTopBar from '@/app/[locale]/(profile)/(components)/MyProfile/ProfileTopBar/ProfileTopBar'

@@ -1,5 +1,5 @@
-import { registerNewUser } from '@/app/(auth)/_actions/mutations/registerNewUser'
-import { userHasRole } from '@/app/(auth)/auth.helpers'
+import { registerNewUser } from '@/app/[locale]/(auth)/_actions/mutations/registerNewUser'
+import { userHasRole } from '@/app/[locale]/(auth)/auth.helpers'
 import { prisma } from '@/lib/prismaClient'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Role } from '@prisma/client'

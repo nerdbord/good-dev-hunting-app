@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { getTranslations } from 'next-intl/server'
 import styles from './VisitorBanner.module.scss'
 const VisitorBanner = async () => {

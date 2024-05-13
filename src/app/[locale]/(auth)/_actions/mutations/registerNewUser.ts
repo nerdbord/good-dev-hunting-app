@@ -1,4 +1,4 @@
-import { createUserModel } from '@/app/(auth)/_models/User.model'
+import { createUserModel } from '@/app/[locale]/(auth)/_models/User.model'
 import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'

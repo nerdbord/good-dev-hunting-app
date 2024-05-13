@@ -1,10 +1,10 @@
 // Simplified imports with index files
 
-import GithubAcc from '@/app/(auth)/(components)/GithubAcc/GithubAcc'
-import HamburgerMenuMobileBtn from '@/app/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
-import HunterAcc from '@/app/(auth)/(components)/HunterAcc/HunterAcc'
-import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import GithubAcc from '@/app/[locale]/(auth)/(components)/GithubAcc/GithubAcc'
+import HamburgerMenuMobileBtn from '@/app/[locale]/(auth)/(components)/HamburgerMenuMobileBtn/HamburgerMenuMobileBtn'
+import HunterAcc from '@/app/[locale]/(auth)/(components)/HunterAcc/HunterAcc'
+import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'

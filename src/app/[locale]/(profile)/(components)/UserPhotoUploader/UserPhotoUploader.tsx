@@ -1,5 +1,5 @@
 'use client'
-import { fetchMyAvatar } from '@/app/(auth)/_actions/mutations/fetchMyAvatar'
+import { fetchMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/fetchMyAvatar'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
 import { useUploadContext } from '@/contexts/UploadContext'

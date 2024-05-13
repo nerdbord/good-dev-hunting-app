@@ -10,8 +10,10 @@ import Box from '@/components/Box/Box'
 import { Button } from '@/components/Button/Button'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import TextInput from '@/components/TextInput/TextInput'
+import { useTranslations } from 'next-intl'
 
 const LoginHunter = () => {
+  const t = useTranslations('loginHunter')
   const [isChecked, setIsChecked] = useState(false)
   const [isSubmited, setIsSubmited] = useState(false)
   const [error, setError] = useState('')
@@ -63,11 +65,8 @@ const LoginHunter = () => {
 
   return (
     <Box>
-      <h2>Login as talent Hunter</h2>
-      <p>
-        Join and login always with magic link. Hunters don't have public
-        profiles.
-      </p>
+      <h2>{t('login')}</h2>
+      <p>{t('description')}</p>
       <form>
         <TextInput
           label="Email"
@@ -87,7 +86,7 @@ const LoginHunter = () => {
             name={'terms'}
           >
             <span style={{ fontSize: '14px', justifyContent: 'baseline' }}>
-              I have read and accept{' '}
+              {t('policyOne')}{' '}
               <Link
                 style={{ textDecoration: 'underline' }}
                 target="_blank"
@@ -95,13 +94,13 @@ const LoginHunter = () => {
               >
                 T&C
               </Link>{' '}
-              and{' '}
+              {t('policyTwo')}{' '}
               <Link
                 style={{ textDecoration: 'underline' }}
                 target="_blank"
                 href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
               >
-                Privacy Policy
+                {t('policyThree')}{' '}
               </Link>
             </span>
           </CheckboxInput>
@@ -115,7 +114,7 @@ const LoginHunter = () => {
           }}
           variant={'primary'}
         >
-          Join as a Hunter
+          {t('joinAsAHunter')}{' '}
         </Button>
       </form>
     </Box>

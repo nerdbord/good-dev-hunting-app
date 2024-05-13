@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import EditProfileForm from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/EditProfileForm'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions'
 import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'

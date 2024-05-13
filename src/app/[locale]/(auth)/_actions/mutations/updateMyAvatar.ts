@@ -1,5 +1,5 @@
 'use server'
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { updateAvatar } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
 
