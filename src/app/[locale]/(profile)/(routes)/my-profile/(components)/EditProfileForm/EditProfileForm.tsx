@@ -1,5 +1,5 @@
 'use client'
-import { updateMyAvatar } from '@/app/(auth)/_actions/mutations/updateMyAvatar'
+import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,

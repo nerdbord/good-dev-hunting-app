@@ -1,5 +1,5 @@
 'use server'
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import {

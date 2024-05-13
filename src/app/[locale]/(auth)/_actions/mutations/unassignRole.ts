@@ -1,5 +1,5 @@
 'use server'
-import { createUserModel } from '@/app/(auth)/_models/User.model'
+import { createUserModel } from '@/app/[locale]/(auth)/_models/User.model'
 import { removeUserRole } from '@/backend/user/user.service'
 import { withSentry } from '@/utils/errHandling'
 import { type Role } from '@prisma/client'

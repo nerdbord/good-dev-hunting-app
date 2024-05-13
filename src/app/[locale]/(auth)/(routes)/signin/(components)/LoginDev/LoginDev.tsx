@@ -1,5 +1,5 @@
 // components
-import { GithubLoginButton } from '@/app/(auth)/(components)/GithubLoginButton/GithubLoginButton'
+import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import Box from '@/components/Box/Box'
 import { useTranslations } from 'next-intl'
 

@@ -30,5 +30,7 @@ export const config = {
     '/(en|pl)/moderation/profile/:profileId*',
     '/signin',
     '/(en|pl)/signin',
+    '/github-oauth',
+    '/(en|pl)/github-oauth',
   ],
 }

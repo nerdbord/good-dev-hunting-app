@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfileHeader/UserProfileHeader'

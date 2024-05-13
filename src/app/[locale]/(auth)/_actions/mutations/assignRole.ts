@@ -1,5 +1,5 @@
 'use server'
-import { createUserModel } from '@/app/(auth)/_models/User.model'
+import { createUserModel } from '@/app/[locale]/(auth)/_models/User.model'
 import { addUserRole } from '@/backend/user/user.service'
 import { type Role } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'

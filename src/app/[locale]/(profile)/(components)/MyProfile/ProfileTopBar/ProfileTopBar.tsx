@@ -1,4 +1,4 @@
-import LogOutBtn from '@/app/(auth)/(components)/LogOutBtn/LogOutBtn'
+import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/[locale]/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/[locale]/(profile)/(components)/TogglePublishButton/TogglePublishButton'
 import ProfileViews from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ProfileViews/ProfileViews'

@@ -1,4 +1,4 @@
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'

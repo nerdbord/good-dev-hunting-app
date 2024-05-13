@@ -1,4 +1,4 @@
-﻿import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+﻿import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { Container } from '@/components/Container/Container'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'

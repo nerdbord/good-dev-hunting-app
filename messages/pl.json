@@ -89,5 +89,14 @@
     "title": "Zaloguj się jako specjalista IT",
     "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
     "loginWithGithub": "Zaloguj się przez Github"
+  },
+
+  "loginHunter": {
+    "login": "Zaloguj się jako łowca talentów",
+    "description": "Dołącz i zaloguj się zawsze za pomocą magicznego linku. Łowcy nie mają publicznych profili.",
+    "policyOne": "Przeczytałem i akceptuję",
+    "policyTwo": "oraz",
+    "policyThree": "Politykę prywatności",
+    "joinAsAHunter": "Dołącz jako Łowca"
   }
 }

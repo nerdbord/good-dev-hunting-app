@@ -1,6 +1,6 @@
 'use server'
 
-import { getAuthorizedUser } from '@/app/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { type ProfileCreateParams } from '@/app/[locale]/(profile)/profile.types'
 import { createUserProfile } from '@/backend/profile/profile.service'
