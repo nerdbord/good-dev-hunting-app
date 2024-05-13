@@ -4,7 +4,8 @@
     "findtalents": "Find talents",
     "hero": "Let your next project find you",
     "opensource": "Open source, free hub for software developers to be present and ready for next commission work.",
-    "joinAsAHunter:": "Join as a hunter"
+    "joinAsAHunter:": "Join as a hunter",
+    "visitorBaner": "Create a free account to get unlimited access to all profiles"
   },
 
   "HowItWorks": {
@@ -83,5 +84,11 @@
 
   "Search": {
     "searchByName": "Search by name"
+  },
+
+  "loginDev": {
+    "title": "Login as IT specialist",
+    "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
+    "loginWithGithub": "Login with Github"
   }
 }

@@ -2,6 +2,7 @@ import { type JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 import { useDebounce } from '@/hooks/useDebounce'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import styles from './SearchBarWrapper.module.scss'
 
@@ -16,6 +17,7 @@ export const SearchBarWrapper = ({
   value,
   jobOfferFilterName,
 }: SearchBarWrapperProps) => {
+  const t = useTranslations('Search')
   const inputRef = useRef<HTMLInputElement>(null)
   const [searchValue, setSearchValue] = useState(value || '')
   const debouncedSearchValue = useDebounce(searchValue, 500)
@@ -46,7 +48,7 @@ export const SearchBarWrapper = ({
           ref={inputRef}
           name="searchValue"
           className={styles.searchInput}
-          placeholder="Search by name"
+          placeholder={t('searchByName')}
           onChange={changeHandler}
           value={searchValue}
         />
