@@ -1,8 +1,10 @@
 import { findAllTeamProfiles } from '@/app/[locale]/(profile)/_actions/queries/findAllTeamProfiles'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
+import { getTranslations } from 'next-intl/server'
 import styles from './MeetTeam.module.scss'
 
 const MeetTeam = async () => {
+  const t = await getTranslations('MeetTeam')
   const teamProfiles = await findAllTeamProfiles()
 
   // Calculate midpoint differently to ensure one half has at least 4 items
@@ -21,9 +23,9 @@ const MeetTeam = async () => {
   return (
     <section id="MeetTeam" className={styles.wrapper}>
       <div className={styles.titleBox}>
-        <p className={styles.sectionName}>WORKING AS A TEAM</p>
-        <h2 className={styles.title}>Meet our team</h2>
-        <h5 className={styles.subtitle}>Meet passionates behind the scene</h5>
+        <p className={styles.sectionName}>{t('sectionName')}</p>
+        <h2 className={styles.title}>{t('title')}</h2>
+        <h5 className={styles.subtitle}>{t('subtitle')}</h5>
       </div>
       <div className={styles.cardsWrapper}>
         <div className={styles.slider}>

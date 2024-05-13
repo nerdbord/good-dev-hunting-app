@@ -2,27 +2,30 @@ import ConnectIcon from '@/assets/icons/ConnectIcon'
 import DollarIcon from '@/assets/icons/DollarIcon'
 import GithubIcon from '@/assets/icons/GithubIcon'
 import GlobeIcon from '@/assets/icons/GlobeIcon'
+import { useTranslations } from 'next-intl'
 import styles from './HowItWorks.module.scss'
 import Step from './Step/Step'
 import TraitTemplate from './TraitTemplate/TraitTemplate'
 
 const HowItWorks = () => {
+  const t = useTranslations('HowItWorks')
+
   return (
     <section id="HowItWorks" className={styles.wrapper}>
       <div className={styles.titleBox}>
-        <span className={styles.sectionName}>How it works</span>
-        <span className={styles.title}>Reverted recruitment process</span>
+        <span className={styles.sectionName}>{t('howitworks')}</span>
+        <span className={styles.title}>{t('faqsection')}</span>
       </div>
       <div className={styles.steps}>
         <Step
-          title="Step 1 – CREATE PROFILE"
-          description1="Describe your skillset,"
-          description2="personality and availability."
+          title={t('titleOne')}
+          description1={t('stepOneDescriptionOne')}
+          description2={t('stepOneDescriptionTwo')}
         />
         <Step
-          title="Step 2 – SIMPLY WAIT"
-          description1="Grow and get found."
-          description2="Update your availability regularly."
+          title={t('titleTwo')}
+          description1={t('stepTwoDescriptionOne')}
+          description2={t('stepTwoDescriptionTwo')}
         />
       </div>
 
@@ -30,23 +33,23 @@ const HowItWorks = () => {
         <div className={styles.traits}>
           <TraitTemplate
             icon={<GlobeIcon />}
-            title="Reversed recruitment"
-            description="Employers will find you based on your skills and availability. You don't need to apply for jobs."
+            title={t('titleThree')}
+            description={t('descriptionOne')}
           />
           <TraitTemplate
             icon={<GithubIcon />}
-            title="Open source"
-            description="Our platform is open source and we are proud of it. We believe in transparency and community."
+            title={t('titleFour')}
+            description={t('descriptionTwo')}
           />
           <TraitTemplate
             icon={<ConnectIcon />}
-            title="Remote first"
-            description="Our mission is to connect talents with employers from all over the world despite the distance."
+            title={t('titleFive')}
+            description={t('descriptionThree')}
           />
           <TraitTemplate
             icon={<DollarIcon />}
-            title="Completely free"
-            description="Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
+            title={t('titleSix')}
+            description={t('descriptionFour')}
           />
         </div>
       </div>
