@@ -1,6 +1,6 @@
 'use client'
-import ModerationBtn from '@/app/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
-import CreateProfileBtn from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
+import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
+import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { Button } from '@/components/Button/Button'
 import MobileGitHubStarsBtn from '@/components/Button/MobileGitHubStarsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'

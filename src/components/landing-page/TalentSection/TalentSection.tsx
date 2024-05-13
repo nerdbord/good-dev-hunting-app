@@ -1,6 +1,6 @@
 'use client'
-import { ProfileListItem } from '@/app/(profile)/(components)/ProfileList/ProfileListItem'
-import { useProfiles } from '@/app/(profile)/_providers/Profiles.provider'
+import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
+import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { useMemo } from 'react'
 import styles from './TalentSection.module.scss'

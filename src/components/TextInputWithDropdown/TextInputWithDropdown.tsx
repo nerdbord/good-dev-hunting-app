@@ -6,8 +6,8 @@ import { useRef, useState, type ChangeEvent } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { type TextInputProps } from '../TextInput/TextInput'
 
-import { LocationPreferencesFormKeys } from '@/app/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
-import { type ProfileFormValues } from '@/app/(profile)/profile.types'
+import { LocationPreferencesFormKeys } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
+import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import styles from './TextInputWithDropdown.module.scss'
 
 // Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)
