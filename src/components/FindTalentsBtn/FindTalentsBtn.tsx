@@ -1,6 +1,7 @@
 'use client'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
+import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 
 interface FindTalentsBtnProps {
@@ -10,6 +11,7 @@ interface FindTalentsBtnProps {
 const FindTalentsBtn = (props: FindTalentsBtnProps) => {
   const router = useRouter()
   const pathname = usePathname()
+  const t = useTranslations('Index')
 
   if (pathname === AppRoutes.profilesList) {
     return null
@@ -20,7 +22,7 @@ const FindTalentsBtn = (props: FindTalentsBtnProps) => {
       onClick={() => router.push(AppRoutes.profilesList)}
       variant={props.variant}
     >
-      Find talents
+      {t('findtalents')}{' '}
     </Button>
   )
 }
