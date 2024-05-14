@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="/src/assets/images/logo.png" alt="Logo Good Dev Hunting">
+    <img src="/apps/platform-app/srcs/platform-app/src/assets/images/logo.png" alt="Logo Good Dev Hunting">
     Good Dev Hunting
 </h1>
 <h3 align="center">
