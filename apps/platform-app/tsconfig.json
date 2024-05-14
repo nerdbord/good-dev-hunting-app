@@ -20,14 +20,14 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
+    "baseUrl": "../..",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
   "include": [
     "next-env.d.ts",
-    "types/**/*.ts",
+    "apps/platform-app/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
     "cypress/support/commands.ts",
