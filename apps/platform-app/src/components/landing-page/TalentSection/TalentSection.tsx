@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
 import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
@@ -7,7 +8,7 @@ import { useMemo } from 'react'
 import styles from './TalentSection.module.scss'
 
 const TalentSection = () => {
-  const t = useTranslations('TalentSection')
+  const t = useTranslations(I18nNamespaces.TalentSection)
   const { allProfiles } = useProfiles()
 
   const randomSixProfiles = useMemo(

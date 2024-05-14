@@ -1,8 +1,10 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { getTranslations } from 'next-intl/server'
 import styles from './VisitorBanner.module.scss'
+
 const VisitorBanner = async () => {
-  const t = await getTranslations('Index')
+  const t = await getTranslations(I18nNamespaces.Index)
   const { user } = await getAuthorizedUser()
   if (!user) {
     return (

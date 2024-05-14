@@ -1,4 +1,5 @@
 ﻿'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import {
   createFiltersObjFromSearchParams,
   createQueryString,
@@ -30,7 +31,7 @@ export const ProfileFilters = ({
   technologies,
   countries,
 }: ProfileFiltersProps) => {
-  const t = useTranslations('DropdownFilter')
+  const t = useTranslations(I18nNamespaces.DropdownFilter)
 
   const pathname = usePathname()
   const router = useRouter()
