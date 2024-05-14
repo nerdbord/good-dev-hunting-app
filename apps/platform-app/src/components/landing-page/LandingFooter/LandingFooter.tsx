@@ -1,3 +1,4 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
 import { useTranslations } from 'next-intl'
@@ -5,7 +6,7 @@ import Link from 'next/link'
 import styles from './LandingFooter.module.scss'
 
 const LandingFooter = () => {
-  const t = useTranslations('LandingFooter')
+  const t = useTranslations(I18nNamespaces.LandingFooter)
   return (
     <section id="LandingFooter" className={styles.footer}>
       <Container>

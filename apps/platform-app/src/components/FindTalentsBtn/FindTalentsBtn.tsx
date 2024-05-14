@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'
@@ -11,7 +12,7 @@ interface FindTalentsBtnProps {
 const FindTalentsBtn = (props: FindTalentsBtnProps) => {
   const router = useRouter()
   const pathname = usePathname()
-  const t = useTranslations('Index')
+  const t = useTranslations(I18nNamespaces.Index)
 
   if (pathname === AppRoutes.profilesList) {
     return null

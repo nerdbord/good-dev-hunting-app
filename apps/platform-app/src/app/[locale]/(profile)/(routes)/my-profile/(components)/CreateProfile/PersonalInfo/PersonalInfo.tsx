@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
@@ -19,7 +20,7 @@ export enum PersonalInfoFormKeys {
 }
 
 const PersonalInfo = () => {
-  const t = useTranslations('PersonalInfo')
+  const t = useTranslations(I18nNamespaces.PersonalInfo)
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 

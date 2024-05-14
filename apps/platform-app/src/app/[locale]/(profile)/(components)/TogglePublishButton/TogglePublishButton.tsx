@@ -7,6 +7,7 @@ import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types'
 import { useTranslations } from 'next-intl'
 import { publishProfile } from '../../_actions/mutations/publishProfile'
@@ -19,7 +20,7 @@ interface TogglePublishButtonProps {
 }
 
 export const TogglePublishButton = (props: TogglePublishButtonProps) => {
-  const t = useTranslations('Buttons')
+  const t = useTranslations(I18nNamespaces.Buttons)
   const [showPopup, setShowPopup] = useState(false)
   const { profileId, state } = props
 

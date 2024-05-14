@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 import SwitchInput from '@/components/Switch/Switch'
 import Tooltip from '@/components/Tooltip/Tooltip'
@@ -18,7 +19,7 @@ export const ToggleOpenToWork: React.FC<ToggleOpenToWorkProps> = ({
   profileId,
   isOpenForWork,
 }) => {
-  const t = useTranslations('Index')
+  const t = useTranslations(I18nNamespaces.Index)
   const switchId = useId()
   const { runAsync } = useAsyncAction()
 

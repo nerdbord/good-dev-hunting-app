@@ -1,5 +1,6 @@
 'use client'
 
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { jobSpecializationThemes } from '@/app/[locale]/(profile)/profile.helpers'
 import {
@@ -34,7 +35,7 @@ const VerticalCard = (
 ) => {
   const router = useRouter()
   const plausible = usePlausible()
-  const t = useTranslations('VerticalCard')
+  const t = useTranslations(I18nNamespaces.VerticalCard)
 
   const {
     avatarUrl,

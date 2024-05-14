@@ -1,5 +1,6 @@
 ﻿import { importAvatarFromGithub } from '@/app/[locale]/(auth)/_actions/mutations/importAvatarFromGithub'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { I18nNamespaces } from '@enums/I18nNamespaces'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import { Button } from '../../../../../components/Button/Button'
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const GithubUserPhotoUploader = ({ setImage, showError }: Props) => {
-  const t = useTranslations('Buttons')
+  const t = useTranslations(I18nNamespaces.Buttons)
   const { runAsync, loading } = useAsyncAction()
 
   const importFromGithub = () => {
