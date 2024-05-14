@@ -8,10 +8,12 @@ import TextInput, { type TextInputProps } from '../TextInput/TextInput'
 
 import { LocationPreferencesFormKeys } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
+import { useTranslations } from 'next-intl'
 import styles from './TextInputWithDropdown.module.scss'
 
 // Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)
 const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
+  const t = useTranslations('LocationPreferences')
   const { values, setFieldValue } = useFormikContext<ProfileFormValues>()
   const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
@@ -55,8 +57,8 @@ const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
     <div className={styles.container} onClick={handleCountryInputClick}>
       <TextInput
         onBlur={onBlur}
-        label="Country of residency"
-        placeholder="Start typing location"
+        label={t('residence')}
+        placeholder={t('residencePlaceholder')}
         value={inputValue}
         onChange={handleInputChange}
         name={name}
