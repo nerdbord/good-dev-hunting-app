@@ -5,6 +5,7 @@ import ProfileViews from '@/app/[locale]/(profile)/(routes)/my-profile/(componen
 import { ToggleOpenToWork } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ToggleOpenToWork'
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { PublishingState } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 import styles from './ProfileTopBar.module.scss'
 
 interface ProfileTopBarProps {
@@ -12,6 +13,7 @@ interface ProfileTopBarProps {
 }
 
 const ProfileTopBar = async (props: ProfileTopBarProps) => {
+  const t = await getTranslations('Index')
   const profile = await findProfileById(props.profileId)
 
   const isPending = profile.state === PublishingState.PENDING
@@ -22,7 +24,7 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
     <div className={styles.titleBox}>
       <div className={styles.mobileProfilePreview}>
         <div className={styles.titleContainer}>
-          <span className={styles.title}>Profile preview</span>
+          <span className={styles.title}>{t('preview')}</span>
           <ProfileViews viewCount={viewCount} />
         </div>
 

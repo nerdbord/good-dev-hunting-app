@@ -10,6 +10,7 @@ import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { EmploymentType } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/navigation'
 import { useMemo, type PropsWithChildren } from 'react'
@@ -33,6 +34,7 @@ const VerticalCard = (
 ) => {
   const router = useRouter()
   const plausible = usePlausible()
+  const t = useTranslations('VerticalCard')
 
   const {
     avatarUrl,
@@ -85,7 +87,7 @@ const VerticalCard = (
           {mapSeniorityLevel(seniority)} {mapSpecialization(position)}
         </div>
         <div className={styles.location}>
-          {country}, {city} {remoteOnly && '/ Remote'}
+          {country}, {city} {remoteOnly && t('remote')}
         </div>
       </div>
       <div className={styles.techStack}>{...technologies}</div>
@@ -94,17 +96,17 @@ const VerticalCard = (
           <>
             <div className={styles.availableDot}></div>
             {employmentTypes.includes(EmploymentType.FULL_TIME) ? (
-              <p className={styles.availableText}>Available for full-time</p>
+              <p className={styles.availableText}>{t('fullTime')}</p>
             ) : employmentTypes.includes(EmploymentType.CONTRACT) ? (
-              <p className={styles.availableText}>Available for a contract</p>
+              <p className={styles.availableText}>{t('contratAvaible')}</p>
             ) : (
-              <p className={styles.availableText}>Available for a contract</p>
+              <p className={styles.availableText}>{t('contratAvaible')}</p>
             )}
           </>
         ) : (
           <>
             <div className={styles.notAvailableDot}></div>
-            <p className={styles.notAvailableText}>Not available for work</p>
+            <p className={styles.notAvailableText}>{t('notAvaible')}</p>
           </>
         )}
       </div>

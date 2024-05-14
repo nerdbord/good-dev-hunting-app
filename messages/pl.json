@@ -5,7 +5,10 @@
     "hero": "Niech Twój następny projekt znajdzie Ciebie",
     "opensource": "Open Source, darmowa platforma dla programistów, gotowych na kolejne zlecenia.",
     "joinAsAHunter:": "Dołącz jako łowca talentów",
-    "visitorBaner": "Utwórz darmowe konto, aby uzyskać nieograniczony dostęp do wszystkich profili"
+    "visitorBaner": "Utwórz darmowe konto, aby uzyskać nieograniczony dostęp do wszystkich profili",
+    "preview": "Podgląd profilu",
+    "profileViews": "Wyświetlenia profilu:",
+    "availability": "Jestem otwarty na nową pracę"
   },
 
   "HowItWorks": {
@@ -66,7 +69,10 @@
     "logOut": "Wyloguj",
     "pending": "Oczekuje na zatwierdzenie",
     "fillOut": "Wypełnij formularz, aby uzupełnić profil",
-    "sendMessage": "Wyślij wiadmość"
+    "sendMessage": "Wyślij wiadmość",
+    "changePicture": "Zmień zdjęcie",
+    "importFromGithub": "Zaimportuj z Github",
+    "importing": "Importowanie..."
   },
 
   "LandingFooter": {
@@ -105,16 +111,52 @@
 
   "PersonalInfo": {
     "title": "Informacje osobiste",
-    "description": "Udostępnij informacje osobiste, aby rekruterzy mogli Cię poznać."
+    "description": "Podziel się informacjami osobistymi, aby rekruterzy mogli Cię lepiej poznać.",
+    "name": "Pełne imię i nazwisko",
+    "email": "Email kontaktowy",
+    "emailTooltip": "Email jest powiązany z Twoim profilem na Githubie i nie może być zmieniany",
+    "linkedin": "Wklej link do swojego profilu na LinkedIn",
+    "bio": "Pozwól innym Cię poznać - napisz kilka zdań o sobie.",
+    "bioPlaceholder": "Możesz użyć **markdown** do formatowania tekstu. [Linki](https://devhunting.co) są również obsługiwane.",
+    "characters": "znaki"
   },
 
   "LocationPreferences": {
     "title": "Preferencje lokalizacyjne",
-    "description": "Udostępnij informacje o swoich aktualnych kwalifikacjach. Będziesz mógł je zmienić w dowolnym momencie."
+    "description": "Udostępnij informacje o swoich aktualnych kwalifikacjach. Będziesz mógł je zmienić w dowolnym momencie.",
+    "residence": "Kraj zamieszkania",
+    "residencePlaceholder": "Zacznij wpisywać lokalizację",
+    "relocationOpen": "Jestem otwarty na przeprowadzkę",
+    "city": "Miasto zamieszkania",
+    "cityPlaceholder": "Zacznij wpisywać lokalizację",
+    "cityTooltip": "Używamy tych informacji, aby dopasować Cię do najlepszych ofert pracy.",
+    "cityRelocation": "Jestem otwarty na przeprowadzkę między miastami",
+    "remontOnly": "Szukam tylko pracy zdalnej"
   },
 
   "WorkInformation": {
     "title": "Informacje o pracy",
-    "description": "Udostępnij informacje o swoich aktualnych kwalifikacjach. Będziesz mógł"
+    "description": "Podziel się informacjami o swoich aktualnych kwalifikacjach. Będziesz mógł je zmienić w dowolnym momencie.",
+    "specialization": "Specjalizacja",
+    "specializationText": "Wybierz swoją główną specjalizację",
+    "seniority": "Poziom doświadczenia",
+    "seniorityText": "Wybierz poziom doświadczenia",
+    "hourlyRate": "Stawka godzinowa",
+    "chooseHourlyRate": "Wybierz stawkę godzinową",
+    "techstack": "Stos technologiczny",
+    "startTyping": "Zacznij wpisywać",
+    "techstackTooltip": "Wymień technologie, które znasz lub którymi jesteś zainteresowany.",
+    "techstackInfo": "Zacznij wpisywać i oddziel technologie przecinkami.",
+    "techstackChoose": "Wybierz maksymalnie 16",
+    "employerType": "Rodzaj zatrudnienia",
+    "employFull": "Pełny etat",
+    "employPart": "Część etatu",
+    "employContract": "Umowa"
+  },
+  "VerticalCard": {
+    "fullTime": "Dostępny na pełen etat",
+    "contratAvaible": "Dostępny do pracy na kontrakt",
+    "notAvaible": "Niedostępny do pracy",
+    "remote": "Zdalnie"
   }
 }

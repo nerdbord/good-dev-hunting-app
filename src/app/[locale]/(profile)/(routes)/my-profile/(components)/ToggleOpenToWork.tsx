@@ -3,6 +3,7 @@ import ImportantIcon from '@/assets/icons/ImportantIcon'
 import SwitchInput from '@/components/Switch/Switch'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useTranslations } from 'next-intl'
 import React, { useId } from 'react'
 import { lockProfile } from '../../../_actions/mutations/lockProfile'
 import { unlockProfile } from '../../../_actions/mutations/unlockProfile'
@@ -17,6 +18,7 @@ export const ToggleOpenToWork: React.FC<ToggleOpenToWorkProps> = ({
   profileId,
   isOpenForWork,
 }) => {
+  const t = useTranslations('Index')
   const switchId = useId()
   const { runAsync } = useAsyncAction()
 
@@ -33,7 +35,7 @@ export const ToggleOpenToWork: React.FC<ToggleOpenToWorkProps> = ({
       <SwitchInput
         id={switchId}
         name="open-to-work"
-        label="I’m available for work"
+        label={t('availability')}
         checked={isOpenForWork}
         onChange={() => handleToggleOpenForWork(!isOpenForWork)}
       >

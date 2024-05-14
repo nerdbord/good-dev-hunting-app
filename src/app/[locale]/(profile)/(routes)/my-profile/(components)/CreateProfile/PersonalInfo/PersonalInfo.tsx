@@ -40,7 +40,7 @@ const PersonalInfo = () => {
         >
           <TextInput
             onBlur={handleBlur}
-            label="Full name"
+            label={t('name')}
             placeholder="eg. Anna Oxford"
             value={values[PersonalInfoFormKeys.FULL_NAME]}
             onChange={handleChange}
@@ -51,13 +51,13 @@ const PersonalInfo = () => {
         </InputFormError>
         <div className={styles.emailContainer}>
           <TextInput
-            label="Contact email"
+            label={t('email')}
             value={session?.user?.email || ''}
             onChange={handleChange}
             addImportantIcon={true}
             name={PersonalInfoFormKeys.CONTACT_EMAIL}
             disabled={true}
-            tooltipText=" Email is connected to your Github profile and cannot be changed"
+            tooltipText={t('emailTooltip')}
             dataTestId=""
             maxLength={30}
           />
@@ -72,7 +72,7 @@ const PersonalInfo = () => {
           <TextInput
             onBlur={handleBlur}
             label="LinkedIn"
-            placeholder="Paste link to you linkedin profile"
+            placeholder={t('linkedin')}
             value={values[PersonalInfoFormKeys.LINKEDIN] || ''}
             onChange={handleChange}
             name={PersonalInfoFormKeys.LINKEDIN}
@@ -88,18 +88,14 @@ const PersonalInfo = () => {
           >
             <label className={styles.formLabel}>
               {'Bio'}
-              <Tooltip
-                text={
-                  'Let others know you - write a few sentences about yourself.'
-                }
-              >
+              <Tooltip text={t('bio')}>
                 <ImportantIcon />
               </Tooltip>
             </label>
             <div className={styles.lettersCountParent}>
               <BioTextArea
                 onBlur={handleBlur}
-                placeholder="You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported."
+                placeholder={t('bioPlaceholder')}
                 value={values[PersonalInfoFormKeys.BIO]}
                 onChange={handleChange}
                 name={PersonalInfoFormKeys.BIO}
@@ -107,7 +103,8 @@ const PersonalInfo = () => {
                 dataTestId={PersonalInfoFormKeys.BIO}
               />
               <div className={styles.lettersCount}>
-                {values[PersonalInfoFormKeys.BIO].length} / 1500 characters
+                {values[PersonalInfoFormKeys.BIO].length} / 1500{' '}
+                {t('characters')}
               </div>
             </div>
           </InputFormError>
