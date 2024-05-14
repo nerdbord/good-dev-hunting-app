@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { Button } from '@/components/Button/Button'
 import { useUploadContext } from '@/contexts/UploadContext'
@@ -13,7 +14,7 @@ interface CreateProfileTopBarProps {
 }
 
 const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
-  const t = useTranslations('Buttons')
+  const t = useTranslations(I18nNamespaces.Buttons)
   const pathname = usePathname()
 
   const { errors, touched, isValid, handleSubmit } = useFormikContext()

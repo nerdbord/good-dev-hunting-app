@@ -1,3 +1,4 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
@@ -8,7 +9,7 @@ import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
 import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
-  const t = await getTranslations('UserProfile')
+  const t = await getTranslations(I18nNamespaces.UserProfile)
   const { user } = await getAuthorizedUser()
   const profile = user ? await findProfileWithUserInclude(user.email) : null
 

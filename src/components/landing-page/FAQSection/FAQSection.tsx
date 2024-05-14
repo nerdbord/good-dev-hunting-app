@@ -1,9 +1,10 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { useTranslations } from 'next-intl'
 import Accordion from '../../Accordion/Accordion'
 import styles from './FAQSection.module.scss'
 
 const FAQSection = () => {
-  const t = useTranslations('Faq')
+  const t = useTranslations(I18nNamespaces.Faq)
   return (
     <section id="FAQ" className={styles.wrapper}>
       <div className={styles.heading}>

@@ -1,5 +1,6 @@
 'use client'
 
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { AppRoutes } from '@/utils/routes'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
@@ -13,7 +14,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import { useTranslations } from 'next-intl'
 
 const LoginHunter = () => {
-  const t = useTranslations('loginHunter')
+  const t = useTranslations(I18nNamespaces.LoginHunter)
   const [isChecked, setIsChecked] = useState(false)
   const [isSubmited, setIsSubmited] = useState(false)
   const [error, setError] = useState('')

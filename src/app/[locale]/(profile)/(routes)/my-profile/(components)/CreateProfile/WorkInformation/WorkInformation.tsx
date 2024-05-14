@@ -14,6 +14,7 @@ import { useFormikContext } from 'formik'
 
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { I18nNamespaces } from '@enums/I18nNamespaces'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
 
@@ -28,7 +29,8 @@ export enum WorkInformationFormKeys {
 }
 
 const WorkInformation = () => {
-  const t = useTranslations('WorkInformation')
+  const t = useTranslations(I18nNamespaces.WorkInformation)
+
   const { values, errors, setFieldValue, touched } =
     useFormikContext<CreateProfileFormValues>()
 

@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { fetchMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/fetchMyAvatar'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
@@ -11,7 +12,7 @@ import GithubUserPhotoUploader from './GithubUserPhotoUploader'
 import styles from './UserPhotoUploader.module.scss'
 
 export const UserPhotoUploader = () => {
-  const t = useTranslations('Buttons')
+  const t = useTranslations(I18nNamespaces.Buttons)
   const { data: session } = useSession()
   const [userImage, setUserImage] = useState<string | null>(null)
   const { imageUploadError, setImageUploadError, setFormDataWithFile } =

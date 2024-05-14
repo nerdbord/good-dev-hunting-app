@@ -1,3 +1,4 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { type JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
 import ClearIcon from '@/assets/icons/ClearIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
@@ -17,7 +18,7 @@ export const SearchBarWrapper = ({
   value,
   jobOfferFilterName,
 }: SearchBarWrapperProps) => {
-  const t = useTranslations('Search')
+  const t = useTranslations(I18nNamespaces.Search)
   const inputRef = useRef<HTMLInputElement>(null)
   const [searchValue, setSearchValue] = useState(value || '')
   const debouncedSearchValue = useDebounce(searchValue, 500)
