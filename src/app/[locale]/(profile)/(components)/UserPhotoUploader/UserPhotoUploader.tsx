@@ -4,12 +4,14 @@ import { ErrorIcon } from '@/assets/icons/ErrorIcon'
 import { Avatar } from '@/components/Avatar/Avatar'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../../../../components/Button/Button'
 import GithubUserPhotoUploader from './GithubUserPhotoUploader'
 import styles from './UserPhotoUploader.module.scss'
 
 export const UserPhotoUploader = () => {
+  const t = useTranslations('Buttons')
   const { data: session } = useSession()
   const [userImage, setUserImage] = useState<string | null>(null)
   const { imageUploadError, setImageUploadError, setFormDataWithFile } =
@@ -79,7 +81,7 @@ export const UserPhotoUploader = () => {
                   multiple={false}
                   accept="image/*"
                 />
-                Change picture
+                {t('changePicture')}{' '}
               </label>
             </Button>
             <GithubUserPhotoUploader

@@ -1,5 +1,6 @@
 ﻿import { importAvatarFromGithub } from '@/app/[locale]/(auth)/_actions/mutations/importAvatarFromGithub'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { Button } from '../../../../../components/Button/Button'
 
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const GithubUserPhotoUploader = ({ setImage, showError }: Props) => {
+  const t = useTranslations('Buttons')
   const { runAsync, loading } = useAsyncAction()
 
   const importFromGithub = () => {
@@ -26,7 +28,7 @@ const GithubUserPhotoUploader = ({ setImage, showError }: Props) => {
 
   return (
     <Button variant="secondary" onClick={importFromGithub} disabled={loading}>
-      {loading ? 'Importing...' : 'Import from Github'}
+      {loading ? t('importing') : t('importFromGithub')}
     </Button>
   )
 }

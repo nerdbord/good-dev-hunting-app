@@ -84,8 +84,8 @@ const WorkInformation = () => {
         >
           <DropdownSelect
             id={WorkInformationFormKeys.POSITION}
-            label="Specialization"
-            text="Choose your primary specialization"
+            label={t('specialization')}
+            text={t('specializationText')}
             options={mappedSpecialization}
             selectedValue={values[WorkInformationFormKeys.POSITION]}
             name={WorkInformationFormKeys.POSITION}
@@ -99,8 +99,8 @@ const WorkInformation = () => {
         >
           <DropdownSelect
             id={WorkInformationFormKeys.SENIORITY}
-            label="Seniority"
-            text="Choose seniority"
+            label={t('seniority')}
+            text={t('seniorityText')}
             options={mappedSeniorityLevel}
             selectedValue={values[WorkInformationFormKeys.SENIORITY]}
             name={WorkInformationFormKeys.SENIORITY}
@@ -108,8 +108,8 @@ const WorkInformation = () => {
         </InputFormError>
         <DropdownSelect
           id={WorkInformationFormKeys.HOURLY_RATE}
-          label="Hourly rate"
-          text="Choose hourly rate"
+          label={t('hourlyRate')}
+          text={t('chooseHourlyRate')}
           options={hourlyRateOptions}
           selectedValue={
             hourlyRateOptions.find(
@@ -130,39 +130,38 @@ const WorkInformation = () => {
         >
           <TechStackInput
             chips={values[WorkInformationFormKeys.TECH_STACK]}
-            label="Tech stack"
-            placeholder="Start typing"
+            label={t('techstack')}
+            placeholder={t('startTyping')}
             name={WorkInformationFormKeys.TECH_STACK}
             onTechSelect={handleTechSelect}
             onTechRemove={handleTechRemove}
             addImportantIcon={true}
-            tooltipText="List the technologies you are comfortable with or interested in."
+            tooltipText={t('techstackTooltip')}
           />
         </InputFormError>
         <div className={styles.addInfo}>
-          Start typing and separate technologies with commas.
-          <br />
-          Choose max. 16
+          {t('techstackInfo')} <br />
+          {t('techstackChoose')}
         </div>
         <div className={styles.employmentType}>
-          Employment type
+          {t('employerType')}{' '}
           <CheckboxInput
             id={WorkInformationFormKeys.EMPLOYMENT + 1}
-            label="Full-time"
+            label={t('employFull')}
             checked={isEmploymentTypeSelected(EmploymentType.FULL_TIME)}
             onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
             id={WorkInformationFormKeys.EMPLOYMENT + 2}
-            label="Part-time"
+            label={t('employPart')}
             checked={isEmploymentTypeSelected(EmploymentType.PART_TIME)}
             onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
             name={WorkInformationFormKeys.EMPLOYMENT}
           />
           <CheckboxInput
             id={WorkInformationFormKeys.EMPLOYMENT + 3}
-            label="Contract"
+            label={t('employContract')}
             checked={isEmploymentTypeSelected(EmploymentType.CONTRACT)}
             onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
             name={WorkInformationFormKeys.EMPLOYMENT}
