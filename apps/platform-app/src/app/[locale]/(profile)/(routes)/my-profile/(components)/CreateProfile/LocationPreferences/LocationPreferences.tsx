@@ -53,7 +53,7 @@ const LocationPreferences = () => {
           <CheckboxInput
             onBlur={handleBlur}
             id={LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION}
-            label="I’m open to residency relocation"
+            label={t('relocationOpen')}
             checked={
               values[LocationPreferencesFormKeys.OPEN_FOR_COUNTRY_RELOCATION]
             }
@@ -76,21 +76,21 @@ const LocationPreferences = () => {
           >
             <TextInput
               onBlur={handleBlur}
-              label="City residency"
-              placeholder="Start typing location"
+              label={t('city')}
+              placeholder={t('cityPlaceholder')}
               value={values[LocationPreferencesFormKeys.CITY]}
               onChange={handleChange}
               addImportantIcon={true}
               name={LocationPreferencesFormKeys.CITY}
               excludeDigits
-              tooltipText="We use this information to match you with the best job opportunities."
+              tooltipText={t('cityTooltip')}
               dataTestId={LocationPreferencesFormKeys.CITY}
               maxLength={40}
             />
           </InputFormError>
           <CheckboxInput
             id={LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION + 1}
-            label="I’m open to city relocation"
+            label={t('cityRelocation')}
             checked={
               values[LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION]
             }
@@ -107,7 +107,7 @@ const LocationPreferences = () => {
         <SwitchInput
           id={LocationPreferencesFormKeys.REMOTE_ONLY + 2}
           checked={values[LocationPreferencesFormKeys.REMOTE_ONLY]}
-          label="I’m looking for remote jobs only"
+          label={t('remontOnly')}
           onChange={handleChange}
           name={LocationPreferencesFormKeys.REMOTE_ONLY}
           dataTestId={LocationPreferencesFormKeys.REMOTE_ONLY}

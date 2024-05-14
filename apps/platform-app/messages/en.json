@@ -5,7 +5,10 @@
     "hero": "Let your next project find you",
     "opensource": "Open source, free hub for software developers to be present and ready for next commission work.",
     "joinAsAHunter:": "Join as a hunter",
-    "visitorBaner": "Create a free account to get unlimited access to all profiles"
+    "visitorBaner": "Create a free account to get unlimited access to all profiles",
+    "preview": "Profile preview",
+    "profileViews": "Profile views",
+    "availability": "I’m available for work"
   },
 
   "HowItWorks": {
@@ -67,7 +70,10 @@
     "logOut": "Log out",
     "pending": "Pending",
     "fillOut": "Fill out the form to complete the profile",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "changePicture": "Change picture",
+    "importFromGithub": "Import from Github",
+    "importing": "Importing..."
   },
 
   "LandingFooter": {
@@ -106,16 +112,53 @@
 
   "PersonalInfo": {
     "title": "Personal information",
-    "description": "Share personal information to let the recruiters get to know you."
+    "description": "Share personal information to let the recruiters get to know you.",
+    "name": "Full name",
+    "email": "Contact email",
+    "emailTooltip": " Email is connected to your Github profile and cannot be changed",
+    "linkedin": "Paste link to you linkedin profile",
+    "bio": "Let others know you - write a few sentences about yourself.",
+    "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
+    "characters": "characters"
   },
 
   "LocationPreferences": {
     "title": "Location preferences",
-    "description": "Share your current qualifications information. You’ll be able to change it at any moment."
+    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "residence": "Country of residency",
+    "residencePlaceholder": "Start typing location",
+    "relocationOpen": "I’m open to residency relocation",
+    "city": "City residency",
+    "cityPlaceholder": "Start typing location",
+    "cityTooltip": "We use this information to match you with the best job opportunities.",
+    "cityRelocation": "I’m open to city relocation",
+    "remontOnly": "I’m looking for remote jobs only"
   },
 
   "WorkInformation": {
     "title": "Work information",
-    "description": "Share your current qualifications information. You’ll be able to change it at any moment."
+    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "specialization": "Specialization",
+    "specializationText": "Choose your primary specialization",
+    "seniority": "Seniority",
+    "seniorityText": "Choose seniority",
+    "hourlyRate": "Hourly rate",
+    "chooseHourlyRate": "Choose hourly rate",
+    "techstack": "Tech stack",
+    "startTyping": "Start typing",
+    "techstackTooltip": "List the technologies you are comfortable with or interested in.",
+    "techstackInfo": "Start typing and separate technologies with commas.",
+    "techstackChoose": "Choose max. 16",
+    "employerType": "Employment type",
+    "employFull": "Full-time",
+    "employPart": "Part-time",
+    "employContract": "Contract"
+  },
+
+  "VerticalCard": {
+    "fullTime": "Available for full-time",
+    "contratAvaible": "Available for a contract",
+    "notAvaible": "Not available for work",
+    "remote": "Remote"
   }
 }
