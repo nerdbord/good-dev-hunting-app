@@ -1,3 +1,4 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/[locale]/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/[locale]/(profile)/(components)/TogglePublishButton/TogglePublishButton'
@@ -13,7 +14,7 @@ interface ProfileTopBarProps {
 }
 
 const ProfileTopBar = async (props: ProfileTopBarProps) => {
-  const t = await getTranslations('Index')
+  const t = await getTranslations(I18nNamespaces.Index)
   const profile = await findProfileById(props.profileId)
 
   const isPending = profile.state === PublishingState.PENDING

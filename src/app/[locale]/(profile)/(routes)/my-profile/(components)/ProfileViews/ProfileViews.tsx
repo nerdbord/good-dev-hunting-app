@@ -1,10 +1,11 @@
 import ViewIcon from '@/assets/icons/ViewIcon'
+import { I18nNamespaces } from '@/I18nNamespaces'
 
 import { useTranslations } from 'next-intl'
 import styles from './ProfileViews.module.scss'
 
 const ProfileViews = ({ viewCount }: { viewCount: number }) => {
-  const t = useTranslations('Index')
+  const t = useTranslations(I18nNamespaces.Index)
   return (
     <div className={styles.profileViewsContainer}>
       <div className={styles.profileViews}>

@@ -1,12 +1,13 @@
 'use client'
 
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 export const EditProfileButton = () => {
-  const t = useTranslations('Buttons')
+  const t = useTranslations(I18nNamespaces.Buttons)
   const router = useRouter()
 
   const handleEditClick = () => {

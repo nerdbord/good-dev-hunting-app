@@ -1,3 +1,4 @@
+import { I18nNamespaces } from '@/I18nNamespaces'
 import ConnectIcon from '@/assets/icons/ConnectIcon'
 import DollarIcon from '@/assets/icons/DollarIcon'
 import GithubIcon from '@/assets/icons/GithubIcon'
@@ -8,7 +9,7 @@ import Step from './Step/Step'
 import TraitTemplate from './TraitTemplate/TraitTemplate'
 
 const HowItWorks = () => {
-  const t = useTranslations('HowItWorks')
+  const t = useTranslations(I18nNamespaces.HowItWorks)
 
   return (
     <section id="HowItWorks" className={styles.wrapper}>

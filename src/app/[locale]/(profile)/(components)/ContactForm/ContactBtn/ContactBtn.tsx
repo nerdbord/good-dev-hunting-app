@@ -1,4 +1,5 @@
 'use client'
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
@@ -15,7 +16,7 @@ export type SenderData = {
 }
 
 const ContactBtn = () => {
-  const t = useTranslations('Buttons')
+  const t = useTranslations(I18nNamespaces.Buttons)
   const { showModal } = useModal()
   const { profile } = useProfileModel()
   const { data: session } = useSession()

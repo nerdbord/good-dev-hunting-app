@@ -6,6 +6,7 @@ import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { useFormikContext } from 'formik'
 
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { useTranslations } from 'next-intl'
 import styles from './LocationPreferences.module.scss'
@@ -19,7 +20,7 @@ export enum LocationPreferencesFormKeys {
 }
 
 const LocationPreferences = () => {
-  const t = useTranslations('LocationPreferences')
+  const t = useTranslations(I18nNamespaces.LocationPreferences)
   const { values, setFieldValue, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
 

@@ -6,6 +6,7 @@ import { useRef, useState, type ChangeEvent } from 'react'
 import DropdownCountry from '../Dropdowns/DropdownCountry/DropdownCountry'
 import TextInput, { type TextInputProps } from '../TextInput/TextInput'
 
+import { I18nNamespaces } from '@/I18nNamespaces'
 import { LocationPreferencesFormKeys } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { useTranslations } from 'next-intl'
@@ -13,7 +14,7 @@ import styles from './TextInputWithDropdown.module.scss'
 
 // Note: it's reusable by concept but inner methods are strictly suited for countries! (it's only usage for now)
 const TextInputWithDropdown = ({ onBlur, name }: TextInputProps) => {
-  const t = useTranslations('LocationPreferences')
+  const t = useTranslations(I18nNamespaces.LocationPreferences)
   const { values, setFieldValue } = useFormikContext<ProfileFormValues>()
   const [inputValue, setInputValue] = useState(values.country)
   const [isDropdownActive, setIsDropdownActive] = useState(false)
