@@ -6,8 +6,8 @@ import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { useFormikContext } from 'formik'
 
-import { I18nNamespaces } from '@/I18nNamespaces'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
+import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
 import styles from './LocationPreferences.module.scss'
 

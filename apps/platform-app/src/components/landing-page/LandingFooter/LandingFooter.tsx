@@ -1,6 +1,6 @@
-import { I18nNamespaces } from '@/I18nNamespaces'
 import { Container } from '@/components/Container/Container'
 import Logo from '@/components/Logo/Logo'
+import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import styles from './LandingFooter.module.scss'

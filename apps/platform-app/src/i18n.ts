@@ -12,3 +12,22 @@ export default getRequestConfig(async ({ locale }) => {
     messages: (await import(`../messages/${locale}.json`)).default,
   }
 })
+
+export enum I18nNamespaces {
+  Index = 'Index',
+  HowItWorks = 'HowItWorks',
+  UserProfile = 'UserProfile',
+  TalentSection = 'TalentSection',
+  MeetTeam = 'MeetTeam',
+  Faq = 'Faq',
+  Buttons = 'Buttons',
+  LandingFooter = 'LandingFooter',
+  DropdownFilter = 'DropdownFilter',
+  Search = 'Search',
+  LoginDev = 'LoginDev',
+  LoginHunter = 'LoginHunter',
+  PersonalInfo = 'PersonalInfo',
+  LocationPreferences = 'LocationPreferences',
+  WorkInformation = 'WorkInformation',
+  VerticalCard = 'VerticalCard',
+}

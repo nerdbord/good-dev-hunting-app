@@ -1,5 +1,5 @@
 import ViewIcon from '@/assets/icons/ViewIcon'
-import { I18nNamespaces } from '@/I18nNamespaces'
+import { I18nNamespaces } from '@/i18n'
 
 import { useTranslations } from 'next-intl'
 import styles from './ProfileViews.module.scss'

@@ -1,6 +1,5 @@
 'use client'
 
-import { I18nNamespaces } from '@/I18nNamespaces'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { jobSpecializationThemes } from '@/app/[locale]/(profile)/profile.helpers'
 import {
@@ -8,6 +7,7 @@ import {
   mapSpecialization,
 } from '@/app/[locale]/(profile)/profile.mappers'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
+import { I18nNamespaces } from '@/i18n'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { EmploymentType } from '@prisma/client'
