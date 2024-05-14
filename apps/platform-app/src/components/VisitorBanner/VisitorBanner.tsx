@@ -1,5 +1,5 @@
-import { I18nNamespaces } from '@/I18nNamespaces'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
+import { I18nNamespaces } from '@/i18n'
 import { getTranslations } from 'next-intl/server'
 import styles from './VisitorBanner.module.scss'
 

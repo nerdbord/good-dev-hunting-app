@@ -1,12 +1,12 @@
 'use client'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
-import styles from '@/app/(profile)/(routes)/my-profile/create/page.module.scss'
 import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import CreateProfileTopBar from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
+import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
 import { createProfile } from '@/app/[locale]/(profile)/_actions/mutations/createProfile'
 import {
   type CreateProfileFormValues,

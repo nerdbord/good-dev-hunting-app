@@ -1,7 +1,7 @@
 // components
-import { I18nNamespaces } from '@/I18nNamespaces'
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import Box from '@/components/Box/Box'
+import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
 
 const LoginDev = () => {

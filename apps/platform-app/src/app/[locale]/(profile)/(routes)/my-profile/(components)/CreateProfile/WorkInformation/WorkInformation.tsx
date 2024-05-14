@@ -14,7 +14,7 @@ import { useFormikContext } from 'formik'
 
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
-import { I18nNamespaces } from '@enums/I18nNamespaces'
+import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
 
