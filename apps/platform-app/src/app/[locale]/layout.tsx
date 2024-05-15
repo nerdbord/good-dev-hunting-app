@@ -1,6 +1,5 @@
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import React from 'react'
-import '../globals.scss'
 
 export default function LocaleLayout({
   children,
