@@ -8,9 +8,19 @@
   ],
   "scripts": {
     "dev": "npm run dev -w apps/platform-app",
-    "start": "npm run start -w apps/platform-app"
+    "start": "npm run start -w apps/platform-app",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run lint -w apps/platform-app",
+      "npm run format:staged -w apps/platform-app"
+    ]
   },
   "devDependencies": {
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "lint-staged": "^15.1.0"
   }
 }
