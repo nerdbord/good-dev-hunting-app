@@ -1,11 +1,4 @@
 # This is an example CODEOWNERS file
 
 # These owners will be the default owners for everything in the repo.
-*       @wawrzonnn @hansac91 @sumick @mmcode9407 @AniaPiWo
-
-# Owners of specific platform parts
-api/ @wawrzonnn @sumick @mmcode9407
-my-profile/ @wawrzonnn @mmcode9407 @CharlesSquirel
-moderation/ @meczajkowski @CharlesSquirel @mmcode9407
-profiles/ @mr-fox93 @szymonkadas @wawrzonnn @hansac91
-landing-page/ @AniaPiWo @hansac91 @meczajkowski
+*       @hansac91 @sumick @mmcode9407 @meczajkowski @mr-fox93
