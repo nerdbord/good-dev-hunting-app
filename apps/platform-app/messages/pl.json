@@ -31,7 +31,9 @@
   },
 
   "UserProfile": {
-    "howItWork": "Dołącz do nas w tworzeniu największej, darmowej platformy open source dedykowanej łączeniu specjalistów i specjalistek branży IT z całego świata."
+    "howItWork": "Dołącz do nas w tworzeniu największej, darmowej platformy open source dedykowanej łączeniu specjalistów i specjalistek branży IT z całego świata.",
+    "goBack": "Wróć",
+    "notOpenForWork": "Niedostępny dla nowych zleceń"
   },
 
   "TalentSection": {

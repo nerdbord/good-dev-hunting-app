@@ -3,7 +3,9 @@ import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { Button } from '@/components/Button/Button'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
+import { I18nNamespaces } from '@/i18n'
 import classNames from 'classnames/bind'
+import { getTranslations } from 'next-intl/server'
 import { type UserProfileHeaderType } from '../types'
 import styles from './UserProfileHeader.module.scss'
 
@@ -15,6 +17,7 @@ export default async function UserProfileHeader({
   isNerdbordConnected,
 }: UserProfileHeaderType) {
   const profile = await findProfileById(profileId)
+  const t = await getTranslations(I18nNamespaces.UserProfile)
 
   const socialItemCount =
     (profile.githubUsername ? 1 : 0) +
@@ -34,7 +37,7 @@ export default async function UserProfileHeader({
     <div className={commonClasses}>
       {withBackButton && (
         <div className={styles.hideOnMobile}>
-          <GoBackButton>Go back</GoBackButton>
+          <GoBackButton>{t('goBack')}</GoBackButton>
         </div>
       )}
       <div className={wrapClasses}>
@@ -51,7 +54,7 @@ export default async function UserProfileHeader({
           </div>
         ) : (
           <Button variant={'primary'} disabled>
-            Not available for new projects
+            {t('notOpenForWork')}
           </Button>
         )}
       </div>
