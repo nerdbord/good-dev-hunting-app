@@ -6,6 +6,7 @@ import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
+import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { addUserRole, findUserByEmail } from './backend/user/user.service'
 import { AppRoutes } from './utils/routes'
@@ -38,6 +39,20 @@ export const {
     strategy: 'jwt',
   },
   providers: [
+    LinkedIn({
+      clientId: process.env.LINKEDIN_CLIENT_ID,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
+      profile: (profile: LinkedInProfile) => {
+        return {
+          id: profile.sub.toString(),
+          email: profile.email,
+          avatarUrl: profile.picture,
+          name: `${profile.given_name} ${profile.family_name}`,
+          provider: 'linkedin',
+        }
+      },
+    }),
     Github({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
@@ -48,6 +63,7 @@ export const {
           email: profile.email,
           avatarUrl: profile.avatar_url,
           githubUsername: profile.login,
+          provider: 'github',
           name: profile.name, // this property is used only in registerNewUser (prisma adapter custom method) to send welcome mail and discord notification
         }
       },
@@ -112,7 +128,8 @@ export const {
       }
       const userIsHunter = userHasRole(foundUser, Role.HUNTER)
       if (
-        (account.provider === 'github' && !userIsHunter) ||
+        ((account.provider === 'github' || account.provider === 'linkedin') &&
+          !userIsHunter) ||
         (account.provider === 'email' && userIsHunter)
       ) {
         console.log('ACCESS GRANTED')
@@ -138,10 +155,21 @@ export const {
       let roleToAdd: Role = 'USER'
       if (account.provider === 'github') {
         if (!profile?.login || !user.id) {
-          throw new Error('GitHub profile login or user ID not provided.')
+          throw new Error(
+            '[GitHub provider] GitHub profile login or user ID not provided.',
+          )
+        }
+        roleToAdd = Role.SPECIALIST
+        console.log(roleToAdd)
+      } else if (account.provider === 'linkedin') {
+        if (!user.id) {
+          throw new Error('[LinkedIn provider] User ID not provided.')
         }
         roleToAdd = Role.SPECIALIST
       } else if (account.provider === 'email') {
+        if (!user.id) {
+          throw new Error('[Email provider] User ID not provided.')
+        }
         roleToAdd = Role.HUNTER
       } else {
         throw new Error('Provider not recognized')

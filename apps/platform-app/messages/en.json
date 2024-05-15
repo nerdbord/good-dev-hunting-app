@@ -97,13 +97,14 @@
     "searchByName": "Search by name"
   },
 
-  "loginDev": {
+  "LoginDev": {
     "title": "Login as IT specialist",
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
-    "loginWithGithub": "Login with Github"
+    "loginWithGithub": "Login with Github",
+    "loginWithLinkedin": "Login with LinkedIn"
   },
 
-  "loginHunter": {
+  "LoginHunter": {
     "login": "Login as talent Hunter",
     "description": "  Join and login always with magic link. Hunters don't have public profiles.",
     "policyOne": "I have read and accept",

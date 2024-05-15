@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prismaClient'
 import { withSentry } from '@/utils/errHandling'
 
 export const registerNewUser = withSentry(
-  async ({ id: _id, githubUsername, name, ...data }) => {
+  async ({ id: _id, provider, githubUsername, name, ...data }) => {
     const userData = { ...data }
 
     if (githubUsername) {
@@ -27,10 +27,12 @@ export const registerNewUser = withSentry(
     }
     const devName = name ?? githubUsername ?? createdUser.email
 
+    const isSpecialist = provider === 'github' || provider === 'linkedin'
+
     await sendWelcomeEmail(createdUser.email, devName)
     await sendDiscordNotificationToModeratorChannel(
       `User ${devName} has created an account as ${
-        githubUsername
+        isSpecialist
           ? `SPECIALIST ${!name ? `with ${createdUser.email}` : ''}`
           : 'HUNTER'
       }`,

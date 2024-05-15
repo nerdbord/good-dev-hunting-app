@@ -99,7 +99,8 @@
   "LoginDev": {
     "title": "Zaloguj się jako specjalista IT",
     "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
-    "loginWithGithub": "Zaloguj się przez Github"
+    "loginWithGithub": "Zaloguj się przez Github",
+    "loginWithLinkedin": "Zaloguj się przez LinkedIn"
   },
 
   "LoginHunter": {
