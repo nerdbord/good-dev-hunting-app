@@ -1,0 +1,166 @@
+{
+  "Index": {
+    "title": "Fetching that data for you",
+    "findtalents": "Find talents",
+    "hero": "Let your next project find you",
+    "opensource": "Open source, free hub for software developers to be present and ready for next commission work.",
+    "joinAsAHunter:": "Join as a hunter",
+    "visitorBaner": "Create a free account to get unlimited access to all profiles",
+    "preview": "Profile preview",
+    "profileViews": "Profile views",
+    "availability": "I’m available for work"
+  },
+
+  "HowItWorks": {
+    "faqsection": "Reverted recruitment process",
+    "howitworks": "HOW IT WORKS",
+    "titleOne": "Step 1 – CREATE PROFILE",
+    "stepOneDescriptionOne": "Describe your skillset,",
+    "stepOneDescriptionTwo": "personality and availability.",
+    "titleTwo": "Step 2 – SIMPLY WAIT",
+    "stepTwoDescriptionOne": "Grow and get found.",
+    "stepTwoDescriptionTwo": "Update your availability regularly.",
+    "titleThree": "Reversed recruitment",
+    "descriptionOne": "Employers will find you based on your skills and availability. You don't need to apply for jobs.",
+    "titleFour": "Open source",
+    "descriptionTwo": "Our platform is open source and we are proud of it. We believe in transparency and community.",
+    "titleFive": "Remote first",
+    "descriptionThree": "Our mission is to connect talents with employers from all over the world despite the distance.",
+    "titleSix": "Completely free",
+    "descriptionFour": "Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
+  },
+
+  "UserProfile": {
+    "howItWork": "Join us in building the largest, free, open source platform dedicated to connecting software engineers with a world of development opportunities.",
+    "goBack": "Go back",
+    "notOpenForWork": "Not available for new projects"
+  },
+
+  "TalentSection": {
+    "title": "Find your next talent",
+    "description": "Explore our growing talents community. Contact as many as you want."
+  },
+
+  "MeetTeam": {
+    "sectionName": "WORKING AS A TEAM",
+    "title": "Meet our team",
+    "subtitle": "Meet passionates behind the scene"
+  },
+
+  "Faq": {
+    "title": "FAQ",
+    "description": "Let us know if&nbsp;you&nbsp;have any&nbsp;questions.",
+    "questionOne": "What is reverted recruitment process?",
+    "answerOne": "  Reverse recruiting (also known as reverse job hunting) is an approach in which the roles of jobseekers and employers are reversed. Instead of candidates applying for positions, employers or recruiters actively seek out potential candidates.",
+    "questionTwo": "How does GDH work exactly?",
+    "answerTwo": "It's really simple - all you need to do is create an account by logging in with your GitHub profile. Then, you'll create a profile by providing information about yourself. Once your profile is approved by our moderators, you're ready to be hunted by employers.",
+    "questionThree": "Is it really free?",
+    "answerThree": "Yes! Using our platform is free. You can create profile, and get hired without any additional costs.",
+    "questionFour": "Do I need to have an account on GitHub?",
+    "answerFour": "To create a profile, having a GitHub account is necessary as we want to make sure that you are a real developer. We also use GitHub to fetch your profile picture and other public information to make the process of creating a profile as easy as possible. We do not store any GitHub tokens."
+  },
+
+  "Buttons": {
+    "createProfile": "Create profile",
+    "editProfile": "Edit profile",
+    "myProfile": "My profile",
+    "saveAndPreview": "Save and preview",
+    "saveAndPreviewProfile": "Save and preview profile",
+    "edit": "Edit",
+    "unpublish": "Unpublish profile",
+    "publishProfile": "Publish profile",
+    "logOut": "Log out",
+    "pending": "Pending",
+    "fillOut": "Fill out the form to complete the profile",
+    "sendMessage": "Send message",
+    "changePicture": "Change picture",
+    "importFromGithub": "Import from Github",
+    "importing": "Importing..."
+  },
+
+  "LandingFooter": {
+    "contact": "Contact",
+    "joinOurDiscord": "Join our Discord",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of service"
+  },
+
+  "DropdownFilter": {
+    "technology": "Technology",
+    "seniority": "Seniority",
+    "availability": "Availability",
+    "location": "Location",
+    "salary": "Salary"
+  },
+
+  "Search": {
+    "searchByName": "Search by name"
+  },
+
+  "loginDev": {
+    "title": "Login as IT specialist",
+    "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
+    "loginWithGithub": "Login with Github"
+  },
+
+  "loginHunter": {
+    "login": "Login as talent Hunter",
+    "description": "  Join and login always with magic link. Hunters don't have public profiles.",
+    "policyOne": "I have read and accept",
+    "policyTwo": "and",
+    "policyThree": "Privacy Policy",
+    "joinAsAHunter": "Join as a Hunter"
+  },
+
+  "PersonalInfo": {
+    "title": "Personal information",
+    "description": "Share personal information to let the recruiters get to know you.",
+    "name": "Full name",
+    "email": "Contact email",
+    "emailTooltip": " Email is connected to your Github profile and cannot be changed",
+    "linkedin": "Paste link to you linkedin profile",
+    "bio": "Let others know you - write a few sentences about yourself.",
+    "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
+    "characters": "characters"
+  },
+
+  "LocationPreferences": {
+    "title": "Location preferences",
+    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "residence": "Country of residency",
+    "residencePlaceholder": "Start typing location",
+    "relocationOpen": "I’m open to residency relocation",
+    "city": "City residency",
+    "cityPlaceholder": "Start typing location",
+    "cityTooltip": "We use this information to match you with the best job opportunities.",
+    "cityRelocation": "I’m open to city relocation",
+    "remontOnly": "I’m looking for remote jobs only"
+  },
+
+  "WorkInformation": {
+    "title": "Work information",
+    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "specialization": "Specialization",
+    "specializationText": "Choose your primary specialization",
+    "seniority": "Seniority",
+    "seniorityText": "Choose seniority",
+    "hourlyRate": "Hourly rate",
+    "chooseHourlyRate": "Choose hourly rate",
+    "techstack": "Tech stack",
+    "startTyping": "Start typing",
+    "techstackTooltip": "List the technologies you are comfortable with or interested in.",
+    "techstackInfo": "Start typing and separate technologies with commas.",
+    "techstackChoose": "Choose max. 16",
+    "employerType": "Employment type",
+    "employFull": "Full-time",
+    "employPart": "Part-time",
+    "employContract": "Contract"
+  },
+
+  "VerticalCard": {
+    "fullTime": "Available for full-time",
+    "contratAvaible": "Available for a contract",
+    "notAvaible": "Not available for work",
+    "remote": "Remote"
+  }
+}
