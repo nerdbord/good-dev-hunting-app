@@ -13,24 +13,6 @@ export default createMiddleware({
 })
 
 export const config = {
-  matcher: [
-    '/',
-    '/(en|pl)/:path*',
-    '/profiles',
-    '/(en|pl)/profiles',
-    '/my-profile',
-    '/(en|pl)/my-profile',
-    '/my-profile/edit',
-    '/(en|pl)/my-profile/edit',
-    '/p/:profileSlug*', // Dynamiczne ścieżki profilów
-    '/(en|pl)/p/:profileSlug*',
-    '/moderation',
-    '/(en|pl)/moderation',
-    '/moderation/profile/:profileId*',
-    '/(en|pl)/moderation/profile/:profileId*',
-    '/signin',
-    '/(en|pl)/signin',
-    '/github-oauth',
-    '/(en|pl)/github-oauth',
-  ],
+  // Match only internationalized pathnames
+  matcher: ['/', '/(pl|en)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)'],
 }
