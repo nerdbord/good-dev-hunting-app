@@ -31,7 +31,9 @@
   },
 
   "UserProfile": {
-    "howItWork": "   Join us in building the largest, free, open source platform dedicated to connecting software engineers with a world of development opportunities."
+    "howItWork": "Join us in building the largest, free, open source platform dedicated to connecting software engineers with a world of development opportunities.",
+    "goBack": "Go back",
+    "notOpenForWork": "Not available for new projects"
   },
 
   "TalentSection": {
