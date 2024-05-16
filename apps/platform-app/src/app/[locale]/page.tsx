@@ -16,7 +16,6 @@ const Page: React.FC = () => {
     <main className={styles.landing_background}>
       <Header buttonsVariant={'main'} />
       <Container>
-        <TestButton label="asdf"></TestButton>
         <Hero />
         <HowItWorks />
         <UseYourProfile />
