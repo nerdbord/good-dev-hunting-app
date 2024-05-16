@@ -17,7 +17,7 @@ import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
 import styles from './Header.module.scss'
-interface test {}
+
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
 }
