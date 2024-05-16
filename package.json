@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "npm run dev -w apps/platform-app",
     "start": "npm run start -w apps/platform-app",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "iall": "npm install && cd apps/platform-app && npm install && npx prisma generate "
   },
   "lint-staged": {
     "*.{ts,tsx}": [
