@@ -49,7 +49,7 @@
 
   "Faq": {
     "title": "FAQ",
-    "description": "Let us know if&nbsp;you&nbsp;have any&nbsp;questions.",
+    "description": "Let us know if you have any questions.",
     "questionOne": "What is reverted recruitment process?",
     "answerOne": "  Reverse recruiting (also known as reverse job hunting) is an approach in which the roles of jobseekers and employers are reversed. Instead of candidates applying for positions, employers or recruiters actively seek out potential candidates.",
     "questionTwo": "How does GDH work exactly?",
@@ -97,13 +97,13 @@
     "searchByName": "Search by name"
   },
 
-  "loginDev": {
+  "LoginDev": {
     "title": "Login as IT specialist",
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github"
   },
 
-  "loginHunter": {
+  "LoginHunter": {
     "login": "Login as talent Hunter",
     "description": "  Join and login always with magic link. Hunters don't have public profiles.",
     "policyOne": "I have read and accept",
