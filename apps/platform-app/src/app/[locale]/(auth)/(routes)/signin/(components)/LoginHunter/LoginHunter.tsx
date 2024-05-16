@@ -32,15 +32,13 @@ const LoginHunter = () => {
       })
       if (result?.error) {
         setError(
-          result.error === 'AccessDenied'
-            ? 'User is already a specialist!'
-            : result.error,
+          result.error === t('accesDenied') ? t('userExists') : result.error,
         )
       } else {
         setIsSubmited(true)
       }
     } catch (error) {
-      setError('Failed to sign in. Please try again later.')
+      setError(t('error'))
     } finally {
       setIsLoading(false)
     }
@@ -49,7 +47,7 @@ const LoginHunter = () => {
   if (error) {
     return (
       <Box>
-        <h2>Oops! Something went wrong! 😢</h2>
+        <h2>{t('loginError')} 😢</h2>
         <p>{error}</p>
       </Box>
     )
@@ -58,8 +56,8 @@ const LoginHunter = () => {
   if (isSubmited) {
     return (
       <Box>
-        <h2>Magic Link sent 🪄</h2>
-        <p>Access platform via link sent to your email adress.</p>
+        <h2>{t('magicLink')}🧙🏻‍♂️ </h2>
+        <p>{t('magicAcces')}</p>
       </Box>
     )
   }
@@ -71,7 +69,7 @@ const LoginHunter = () => {
       <form>
         <TextInput
           label="Email"
-          tooltipText="Account associated with this email must always be Hunter and cannot be specialist."
+          tooltipText={t('magicTooltip')}
           addImportantIcon={true}
           placeholder="eg. peter.parker@oscorp.com"
           onChange={(e) => setEmail(e.target.value)}

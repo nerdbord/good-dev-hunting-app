@@ -108,7 +108,14 @@
     "policyOne": "Przeczytałem i akceptuję",
     "policyTwo": "oraz",
     "policyThree": "Politykę prywatności",
-    "joinAsAHunter": "Dołącz jako Łowca"
+    "joinAsAHunter": "Dołącz jako Łowca",
+    "magicLink": "Wysłano Magiczny Link",
+    "magicAcces": "Uzyskaj dostęp do platformy za pomocą linku wysłanego na Twój adres email.",
+    "magicTooltip": "Konto powiązane z tym adresem email musi zawsze być Hunter i nie może być specjalistą.",
+    "loginError": "Ups! Coś poszło nie tak!",
+    "accesDenied": "Dostęp Zabroniony",
+    "userExists": "Użytkownik jest już specjalistą!",
+    "error": "Nie udało się zalogować. Spróbuj ponownie później."
   },
 
   "PersonalInfo": {

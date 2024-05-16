@@ -109,7 +109,14 @@
     "policyOne": "I have read and accept",
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
-    "joinAsAHunter": "Join as a Hunter"
+    "joinAsAHunter": "Join as a Hunter",
+    "magicLink": "Magic Link sent",
+    "magicAcces": "Access platform via link sent to your email adress.",
+    "magicTooltip": "Account associated with this email must always be Hunter and cannot be specialist.",
+    "loginError": "Oops! Something went wrong!",
+    "accesDenied": "AccessDenied",
+    "userExists": "User is already a specialist!",
+    "error": "Failed to sign in. Please try again later."
   },
 
   "PersonalInfo": {
