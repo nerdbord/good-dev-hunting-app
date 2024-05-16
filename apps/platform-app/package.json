@@ -45,6 +45,7 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.63.4",
+    "ui-system": "^0.1.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {

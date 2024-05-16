@@ -1,8 +1,8 @@
 {
   "name": "ui-system",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -12,6 +12,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "publishConfig": {},
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
