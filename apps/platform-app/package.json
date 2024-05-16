@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.5.0",
+    "@gdh/ui-system": "^0.1.0",
     "@mailerlite/mailerlite-nodejs": "^1.2.0",
     "@mdxeditor/editor": "^2.8.1",
     "@prisma/client": "^4.15.0",
@@ -45,7 +46,6 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.63.4",
-    "ui-system": "^0.1.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {

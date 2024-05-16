@@ -9,7 +9,7 @@ import UseYourProfile from '@/components/landing-page/UseYourProfile/UseYourProf
 import React from 'react'
 import styles from '../page.module.scss'
 import Header from './(profile)/(components)/Header/Header'
-import { TestButton } from 'ui-system'
+
 
 const Page: React.FC = () => {
   return (
