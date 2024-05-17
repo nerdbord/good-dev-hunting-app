@@ -15,7 +15,7 @@ interface CheckboxInputProps {
   children?: JSX.Element
 }
 
-const CheckboxInput: React.FC<CheckboxInputProps> = ({
+export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   id,
   label,
   checked,
@@ -50,5 +50,3 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
     </label>
   )
 }
-
-export default CheckboxInput

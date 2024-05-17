@@ -8,9 +8,8 @@ import { useState } from 'react'
 
 // components
 import Box from '@/components/Box/Box'
-import { Button } from '@gdh/ui-system'
-import CheckboxInput from '@/components/Checkbox/Checkbox'
 import TextInput from '@/components/TextInput/TextInput'
+import { Button, CheckboxInput } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 
 const LoginHunter = () => {

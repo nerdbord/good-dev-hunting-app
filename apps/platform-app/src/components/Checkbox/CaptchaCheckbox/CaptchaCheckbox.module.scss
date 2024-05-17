@@ -1,0 +1,10 @@
+.captcha {
+    height: 0px;
+    visibility: hidden;
+  }
+  
+  .captchaContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
