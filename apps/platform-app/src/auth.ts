@@ -5,6 +5,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
+
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { addUserRole, findUserByEmail } from './backend/user/user.service'
