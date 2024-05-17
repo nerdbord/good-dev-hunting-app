@@ -37,6 +37,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",
+    "process": "^0.11.10",
     "sass": "^1.77.2",
     "storybook": "^8.1.1",
     "storybook-css-modules": "^1.0.8",
