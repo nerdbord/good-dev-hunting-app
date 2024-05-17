@@ -7,7 +7,7 @@ import { I18nNamespaces } from '@/i18n'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
-import { Button } from '../../../../../components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import GithubUserPhotoUploader from './GithubUserPhotoUploader'
 import styles from './UserPhotoUploader.module.scss'
 

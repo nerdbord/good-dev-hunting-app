@@ -1,6 +1,6 @@
 'use client'
 import { ErrorIcon } from '@/assets/icons/ErrorIcon'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n'
 import { AppRoutes } from '@/utils/routes'

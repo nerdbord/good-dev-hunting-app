@@ -1,5 +1,5 @@
 import { JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'

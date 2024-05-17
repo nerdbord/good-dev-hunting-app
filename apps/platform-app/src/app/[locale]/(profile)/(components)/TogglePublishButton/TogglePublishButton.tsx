@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePublishPopup'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'
