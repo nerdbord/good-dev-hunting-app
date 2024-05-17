@@ -1,4 +1,3 @@
-'use client'
 import GitHubButton from 'react-github-btn'
 
 const GithubStarsButton = () => {
