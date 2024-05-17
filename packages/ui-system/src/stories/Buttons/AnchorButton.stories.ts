@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AnchorButton } from '../components/Button/AnchorButton';
+import { AnchorButton } from '../../components/Button/AnchorButton';
 
 const meta = {
   title: 'Components/Buttons/AnchorButton',

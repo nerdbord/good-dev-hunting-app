@@ -10,6 +10,7 @@ import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(compone
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
 import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
+//import { GithubStarsButton } from '@gdh/ui-system'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'

@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MobileGitHubStarsButton } from '../components/Button/MobileGitHubStarsButton';
-
-
+import { MobileGitHubStarsButton } from '../../components/Button/MobileGitHubStarsButton';
 
 const meta = {
   title: 'Components/Buttons/MobileGitHubStarsButton',
@@ -19,9 +17,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    href: '#',
-    children: 'Anchor Button',
-  },
-};
+export const Primary: Story = {};
