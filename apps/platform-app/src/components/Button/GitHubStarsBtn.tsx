@@ -1,7 +1,7 @@
 'use client'
 import GitHubButton from 'react-github-btn'
 
-const GithubStarsButton = () => {
+export const GithubStarsButton = () => {
   return (
     <GitHubButton
       href="https://github.com/nerdbord/good-dev-hunting-app"
@@ -16,4 +16,4 @@ const GithubStarsButton = () => {
   )
 }
 
-export default GithubStarsButton
+//export default GithubStarsButton

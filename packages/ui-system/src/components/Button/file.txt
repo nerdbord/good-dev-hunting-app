@@ -1,0 +1,8 @@
+eksperymentowalem dalej i mam nastepujace wnioski: 
+
+
+* problem sprawiaja niektore komponenty, ale nie wszystkie i nie jestem w stanie sprecyzowac co odroznia je od tych dzialajacych.
+* na ten moment sposrod wszystkich zmigrowanych nie dziala **Accordion** oraz **GitHubStarsButton**, ale na przyklad **MobileGitHubStarsButton** dziala bez problemu
+* zaimportowanie bezposrednio z katalogu package za pomoca '../../../../../../../../packages/ui-system/src/components/Button/GitHubStarsButton' zamiast '@gdh/ui-system' naprawia problem
+* dodanie 'use client' na gorze komponentu zawierajacego problematyczny komponent naprawia problem
+* 

@@ -14,8 +14,10 @@
   },
   "publishConfig": {},
   "dependencies": {
+    "classnames": "^2.5.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-github-btn": "^1.4.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.1.1",

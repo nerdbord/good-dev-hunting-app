@@ -1,10 +1,11 @@
+import { PropsWithChildren } from 'react'
 import { AccordionIconType } from '../Accordion'
 
 interface AccordionIconProps {
   type: AccordionIconType
 }
 
-const AccordionIcon = (props: AccordionIconProps) => {
+const AccordionIcon = (props: PropsWithChildren<AccordionIconProps>) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

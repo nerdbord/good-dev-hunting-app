@@ -23,7 +23,8 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"],
-      "@enums/*": ["src/*"]
+      "@enums/*": ["src/*"],
+      "@gdh/ui-system*": ["../../packages/ui-system/src/*"]
     }
   },
   "include": [

@@ -1,8 +1,7 @@
 'use client'
+import GitHubButton from 'react-github-btn';
 
-import GitHubButton from 'react-github-btn'
-
-export const GithubStarsButton = () => {
+export const GitHubStarsButton = () => {
   return (
     <GitHubButton
       href="https://github.com/nerdbord/good-dev-hunting-app"
@@ -14,5 +13,5 @@ export const GithubStarsButton = () => {
     >
       Star
     </GitHubButton>
-  )
-}
+  );
+};

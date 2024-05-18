@@ -10,7 +10,6 @@ import React from 'react'
 import styles from '../page.module.scss'
 import Header from './(profile)/(components)/Header/Header'
 
-
 const Page: React.FC = () => {
   return (
     <main className={styles.landing_background}>
