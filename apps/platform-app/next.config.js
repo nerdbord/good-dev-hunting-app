@@ -18,6 +18,7 @@ const nextConfig = {
       'avatars.githubusercontent.com',
       'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
       'github.com',
+      'i.imgur.com',
     ],
   },
   //reactStrictMode: true, // Włącz tryb ścisły dla React

@@ -1,8 +1,6 @@
-'use client'
-
 import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
-import { Accordion } from '@gdh/ui-system'
+import { Accordion } from '@gdh/ui-system/src/components/Accordion/Accordion'
 import styles from './FAQSection.module.scss'
 
 const FAQSection = () => {

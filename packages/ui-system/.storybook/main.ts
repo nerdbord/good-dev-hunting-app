@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { dirname, join } from 'path';
 import { mergeConfig } from 'vite';
 import process from 'process';
+
 /**
  * This function is used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
@@ -15,7 +16,7 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-styling-webpack'),
+    //getAbsolutePath('@storybook/addon-styling-webpack'),
     getAbsolutePath('@storybook/addon-interactions'),
     getAbsolutePath('storybook-css-modules'),
   ],

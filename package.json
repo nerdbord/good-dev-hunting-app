@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "npm run dev -w apps/platform-app",
     "start": "npm run start -w apps/platform-app",
+    "storybook": "npm run storybook -w packages/ui-system",
     "precommit": "lint-staged"
   },
   "lint-staged": {

@@ -1,8 +1,9 @@
 {
   "name": "@gdh/ui-system",
   "version": "0.1.0",
+  "description": "ui system for the good dev hunting open source project",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "index.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -14,10 +15,12 @@
   },
   "publishConfig": {},
   "dependencies": {
+    "@storybook/nextjs": "^8.1.1",
     "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-github-btn": "^1.4.0"
+    "react-github-btn": "^1.4.0",
+    "storybook-addon-next": "^1.8.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.1.1",

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { GitHubStarsButton } from '../../components/Button/GitHubStarsButton';
+import { Avatar } from '../../components/index'
 
 const meta = {
-  title: 'Components/Buttons/GithubStarsButton',
-  component: GitHubStarsButton,
+  title: 'Components/Avatar/Avatar',
+  component: Avatar,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -12,9 +12,13 @@ const meta = {
   tags: ['autodocs'],
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: {},
-} satisfies Meta<typeof GitHubStarsButton>;
+} satisfies Meta<typeof Avatar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Default: Story = {
+  args: {
+    src: "/public/default-avatar.png"
+  },
+};

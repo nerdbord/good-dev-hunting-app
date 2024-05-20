@@ -9,14 +9,12 @@ import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(component
 import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
-import { GithubStarsButton } from '@/components/Button/GitHubStarsBtn'
-//import { GitHubStarsButton } from '@gdh/ui-system'
-import { GitHubStarsButton } from '../../../../../../../../packages/ui-system/src/components/Button/GitHubStarsButton'
 import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
+import { GitHubStarsButton } from '@gdh/ui-system/src/components/Button/GitHubStarsButton'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 
@@ -136,7 +134,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               <img src={logo.src} alt="Logo" />
               <h1 className={styles.title}>Good Dev Hunting</h1>
             </Link>
-            <GithubStarsButton />
             <GitHubStarsButton />
           </div>
           <nav>
