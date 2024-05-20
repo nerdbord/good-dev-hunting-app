@@ -1,17 +1,21 @@
 ﻿'use client'
 import { SpecializationTab } from '@/app/[locale]/(profile)/(components)/Filters/SpecializationsTabs/SpecializationTabs/SpecializationTab'
-import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import {
+  createFiltersObjFromSearchParams,
   createQueryString,
   filterBySpecialization,
+  filterProfiles,
   jobSpecializationThemes,
 } from '@/app/[locale]/(profile)/profile.helpers'
 import {
   JobOfferFiltersEnum,
   type JobSpecialization,
+  type SearchParamsFilters,
 } from '@/app/[locale]/(profile)/profile.types'
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
 import styles from './Filters.module.scss'
 
 type TabFiltersProps = {
@@ -19,10 +23,15 @@ type TabFiltersProps = {
 }
 
 export const TabFilters = ({ specializations }: TabFiltersProps) => {
-  const { allProfiles, handleFilterProfiles } = useProfiles()
+  const profiles = useProfilesStore((state) => state.profiles)
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
+
+  const filters: SearchParamsFilters = useMemo(
+    () => createFiltersObjFromSearchParams(searchParams),
+    [searchParams],
+  )
 
   const handleSetSpecialization =
     (filterName: JobOfferFiltersEnum, value: string) => () => {
@@ -31,17 +40,17 @@ export const TabFilters = ({ specializations }: TabFiltersProps) => {
     }
 
   const getProfilesBySpecialization = (specialization: JobSpecialization) => {
-    const specProfiles = allProfiles.filter(
+    const specProfiles = profiles.filter(
       filterBySpecialization([specialization]),
     )
 
-    return handleFilterProfiles(specProfiles, {
+    return filterProfiles(specProfiles, filters, {
       disableSpecFilter: true,
     })
   }
 
   const getAllProfiles = () => {
-    return handleFilterProfiles(allProfiles, {
+    return filterProfiles(profiles, filters, {
       disableSpecFilter: true,
     })
   }
