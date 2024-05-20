@@ -119,7 +119,7 @@ const ProfileCard = ({
             <div className={styles.nameContainer}>
               {!isHiddenName ? (
                 <div className={getNameClasses}>
-                  {highlightText(data.fullName, searchTerm)}
+                  {highlightText(fullName, searchTerm)}
                   {visitedDate && !contactedDate && (
                     <Tooltip
                       text={`You have visited this profile ${renderRelativeDateLabel(
@@ -142,7 +142,7 @@ const ProfileCard = ({
               ) : (
                 <>
                   <p className={styles.name}>
-                    {highlightText(data.fullName.slice(0, 1) + '.', searchTerm)}
+                    {highlightText(fullName.slice(0, 1) + '.', searchTerm)}
                   </p>
                   <div className={styles.nameCover}>
                     <PadlockIcon />

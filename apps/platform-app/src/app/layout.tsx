@@ -1,5 +1,5 @@
 import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
-import { ProfilesProvider } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
+import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
@@ -35,7 +35,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // TODO: We need to store it in some global state management (eg. zustand), and replace provider
   const fetchedProfiles = await findAllApprovedProfiles()
 
   return (
@@ -46,9 +45,9 @@ export default async function RootLayout({
         >
           <SessionProvider>
             <ToastContextProvider>
-              <ProfilesProvider initialProfiles={fetchedProfiles}>
+              <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
                 <ModalProvider>{children}</ModalProvider>
-              </ProfilesProvider>
+              </ProfilesStoreProvider>
             </ToastContextProvider>
           </SessionProvider>
         </PlausibleProvider>

@@ -1,15 +1,15 @@
 'use client'
 import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
-import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import { sortProfilesBySalary } from '@/app/[locale]/(profile)/profile.helpers'
 import Loader from '@/components/Loader/Loader'
 import { useSession } from 'next-auth/react'
 import styles from './ProfileList.module.scss'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 //
 const ProfileList = () => {
-  const { filteredProfiles: profiles } = useProfiles()
   const { status } = useSession()
+  const { profiles } = useProfilesStore((state) => state)
 
   const sortedProfiles = profiles.sort(sortProfilesBySalary)
 

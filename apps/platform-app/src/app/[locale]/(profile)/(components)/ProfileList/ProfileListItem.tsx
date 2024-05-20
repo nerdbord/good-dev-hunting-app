@@ -1,7 +1,6 @@
 'use client'
 import { createOrUpdateProfileView } from '@/app/[locale]/(profile)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
@@ -11,6 +10,7 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 import ProfileCard from '../ProfileCard/ProfileCard'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 interface ProfileListItemProps {
   data: ProfileModel
@@ -25,7 +25,9 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   const searchParams = useSearchParams()
   const { data: session } = useSession()
   const { runAsync } = useAsyncAction()
-  const { markProfileAsVisited } = useProfiles()
+  const markProfileAsVisited = useProfilesStore(
+    (state) => state.markProfileAsVisited,
+  )
 
   const visitedProfile = data.profileViews?.find(
     (view) => view.viewerId === session?.user?.id,
