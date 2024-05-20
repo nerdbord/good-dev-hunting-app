@@ -45,7 +45,8 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.63.4",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/cypress-dotenv": "^2.0.3",
