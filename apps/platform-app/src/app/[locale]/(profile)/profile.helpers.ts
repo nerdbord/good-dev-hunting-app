@@ -6,7 +6,6 @@ import {
   type SearchParamsFilters,
 } from '@/app/[locale]/(profile)/profile.types'
 import { PublishingState } from '@prisma/client'
-import { profile } from 'console'
 import { type ReadonlyURLSearchParams } from 'next/navigation'
 
 export const ProfileVerification = {
