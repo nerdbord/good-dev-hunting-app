@@ -6,6 +6,7 @@ import {
   type SearchParamsFilters,
 } from '@/app/[locale]/(profile)/profile.types'
 import { PublishingState } from '@prisma/client'
+import { profile } from 'console'
 import { type ReadonlyURLSearchParams } from 'next/navigation'
 
 export const ProfileVerification = {
@@ -188,6 +189,27 @@ export const filterBySalary =
       return profile.hourlyRateMin >= min && profile.hourlyRateMax <= max
     })
   }
+
+export const filterProfiles = (
+  profiles: ProfileModel[],
+  filters: SearchParamsFilters,
+  options?: { disableSpecFilter?: boolean },
+) => {
+  const filteredProfiles = profiles
+    .filter(filterBySalary(filters.salary))
+    .filter(filterBySeniority(filters.seniority))
+    .filter(filterByLocation(filters.location))
+    .filter(filterByTechnology(filters.technology))
+    .filter(
+      options?.disableSpecFilter
+        ? () => true
+        : filterBySpecialization(filters.specialization),
+    )
+    .filter(filterByAvailability(filters.availability))
+    .filter(filterByFullName(filters.search[0]))
+    .filter(() => true)
+  return filteredProfiles
+}
 
 export const hasProfileValuesChanged = (
   foundProfile: ProfileModel,

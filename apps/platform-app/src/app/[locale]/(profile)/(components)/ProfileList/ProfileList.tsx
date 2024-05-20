@@ -1,17 +1,34 @@
 'use client'
 import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
-import { sortProfilesBySalary } from '@/app/[locale]/(profile)/profile.helpers'
+import {
+  createFiltersObjFromSearchParams,
+  filterProfiles,
+  sortProfilesBySalary,
+} from '@/app/[locale]/(profile)/profile.helpers'
 import Loader from '@/components/Loader/Loader'
 import { useSession } from 'next-auth/react'
 import styles from './ProfileList.module.scss'
 import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
+import { useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
+import { type SearchParamsFilters } from '@/app/[locale]/(profile)/profile.types'
 
-//
 const ProfileList = () => {
   const { status } = useSession()
   const { profiles } = useProfilesStore((state) => state)
+  const searchParams = useSearchParams()
 
-  const sortedProfiles = profiles.sort(sortProfilesBySalary)
+  const filters: SearchParamsFilters = useMemo(
+    () => createFiltersObjFromSearchParams(searchParams),
+    [searchParams],
+  )
+
+  const filteredProfiles = useMemo(
+    () => filterProfiles(profiles, filters),
+    [filters],
+  )
+
+  const sortedProfiles = filteredProfiles.sort(sortProfilesBySalary)
 
   if (status === 'loading') {
     return <Loader />

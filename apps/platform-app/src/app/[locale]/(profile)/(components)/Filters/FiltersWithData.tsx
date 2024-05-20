@@ -22,7 +22,7 @@ export const FiltersWithData = async () => {
 
   return (
     <div className={styles.mainContainer}>
-      {/* <ProfileFilters technologies={mappedTech} countries={mappedCountries} /> */}
+      <ProfileFilters technologies={mappedTech} countries={mappedCountries} />
       {/* <TabFilters specializations={mappedSpecializations} /> */}
     </div>
   )
