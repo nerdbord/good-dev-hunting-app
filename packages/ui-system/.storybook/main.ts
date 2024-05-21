@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import { dirname, join } from 'path';
-import { mergeConfig } from 'vite';
+import { dirname, join, resolve } from 'path';
 import process from 'process';
+import { mergeConfig } from 'vite';
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -51,6 +51,10 @@ const config: StorybookConfig = {
       },
       resolve: {
         alias: {
+          'next/image': resolve(
+            __dirname,
+            '../.storybook/NextImageMock.tsx',
+          ),
           process: 'process/browser',
         },
       },

@@ -1,5 +1,5 @@
 'use client'
-import { Avatar } from '@/components/Avatar/Avatar'
+import { Avatar } from '@gdh/ui-system'
 import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
