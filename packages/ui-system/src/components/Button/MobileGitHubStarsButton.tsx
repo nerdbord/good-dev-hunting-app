@@ -1,3 +1,4 @@
+'use client';
 import GitHubButton from 'react-github-btn';
 import styles from './MobileGitHubStarsButton.module.scss';
 

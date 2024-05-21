@@ -14,11 +14,10 @@ import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
-// import { GitHubStarsButton } from '@gdh/ui-system'
+import { GitHubStarsButton } from '@gdh/ui-system'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 
-// elo
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
 }
@@ -40,7 +39,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       </li>
     </>
   )
-  //
+
   const mainMobileButtons = user ? (
     <li>
       <HamburgerMenuMobileBtn
@@ -135,7 +134,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               <img src={logo.src} alt="Logo" />
               <h1 className={styles.title}>Good Dev Hunting</h1>
             </Link>
-            {/*<GitHubStarsButton />*/}
+            <GitHubStarsButton />
           </div>
           <nav>
             <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
