@@ -9,12 +9,11 @@ import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(component
 import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import logo from '@/assets/images/logo.png'
-import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
-import { GitHubStarsButton } from '@gdh/ui-system'
+import { Container, GitHubStarsButton } from '@gdh/ui-system'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 

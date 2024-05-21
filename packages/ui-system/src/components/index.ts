@@ -6,3 +6,4 @@ export { Button } from './Button/Button';
 export { GitHubStarsButton } from './Button/GitHubStarsButton';
 export { MobileGitHubStarsButton } from './Button/MobileGitHubStarsButton';
 export { CheckboxInput } from './Checkbox/Checkbox';
+export { Container } from './Container/Container';
