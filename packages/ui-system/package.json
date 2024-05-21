@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "ui system for the good dev hunting open source project",
   "type": "module",
-  "main": "index.ts",
+  "main": "src/index.ts",
+  "source": "src/index.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -47,6 +48,7 @@
     "storybook": "^8.1.1",
     "storybook-css-modules": "^1.0.8",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1"
   }
 }

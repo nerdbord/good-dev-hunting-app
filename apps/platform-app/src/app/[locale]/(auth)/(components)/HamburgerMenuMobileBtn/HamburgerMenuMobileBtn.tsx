@@ -1,8 +1,10 @@
 'use client'
 import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import { Button, MobileGitHubStarsButton } from '@gdh/ui-system'
+
+//
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
+import { Button } from '@gdh/ui-system'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import GithubAcc from '../GithubAcc/GithubAcc'
@@ -45,7 +47,7 @@ const HamburgerMenuMobileBtn = ({
                   <GithubAcc />
                   {userIsModerator && <ModerationBtn />}
                 </div>
-                <MobileGitHubStarsButton />
+                {/*<MobileGitHubStarsButton />*/}
               </>
             ) : (
               <>
@@ -68,7 +70,7 @@ const HamburgerMenuMobileBtn = ({
                   )}
                 </div>
 
-                <MobileGitHubStarsButton />
+                {/*<MobileGitHubStarsButton />*/}
               </>
             )}
           </div>
