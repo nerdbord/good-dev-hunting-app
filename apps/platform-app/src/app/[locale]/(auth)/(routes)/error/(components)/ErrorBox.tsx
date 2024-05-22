@@ -1,7 +1,7 @@
 'use client'
 
 import Box from '@/components/Box/Box'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useRouter, useSearchParams } from 'next/navigation'
 import styles from './ErrorBox.module.scss'
 

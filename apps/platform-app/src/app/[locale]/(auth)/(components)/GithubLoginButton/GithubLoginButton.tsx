@@ -1,6 +1,6 @@
 'use client'
 import GithubIcon from '@/assets/icons/GithubIcon'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { AppRoutes } from '@/utils/routes'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'

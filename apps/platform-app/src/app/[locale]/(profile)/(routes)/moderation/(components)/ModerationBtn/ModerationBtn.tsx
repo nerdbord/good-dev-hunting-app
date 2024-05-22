@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { AppRoutes } from '@/utils/routes'
 import { usePathname, useRouter } from 'next/navigation'
 

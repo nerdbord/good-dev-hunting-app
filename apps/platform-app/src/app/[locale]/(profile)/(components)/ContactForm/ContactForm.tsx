@@ -2,7 +2,7 @@ import { type SenderData } from '@/app/[locale]/(profile)/(components)/ContactFo
 import ContactSuccessModal from '@/app/[locale]/(profile)/(components)/ContactForm/ContactSuccessModal.tsx/ContactSuccessModal'
 import { sendProfileContactRequest } from '@/app/[locale]/(profile)/_actions/mutations/sendProfileContactRequest'
 import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'

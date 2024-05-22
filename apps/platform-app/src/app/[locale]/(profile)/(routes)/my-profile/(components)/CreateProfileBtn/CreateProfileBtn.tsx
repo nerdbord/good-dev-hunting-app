@@ -1,6 +1,6 @@
 'use client'
 import AddIcon from '@/assets/icons/AddIcon'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { AppRoutes } from '@/utils/routes'
 import { signIn, useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
