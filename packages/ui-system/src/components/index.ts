@@ -8,3 +8,8 @@ export { MobileGitHubStarsButton } from "./Button/MobileGitHubStarsButton";
 export { CheckboxInput } from "./Checkbox/Checkbox";
 export { Container } from "./Container/Container";
 export { CopyEmail } from "./CopyEmail/CopyEmail";
+export {
+  DropdownOptionItem,
+  type DropdownOption,
+} from "./Dropdowns/DropdownOptionItem/DropdownOptionItem";
+export { DropdownSearchInput } from "./Dropdowns/DropdownSearchInput/DropdownSearchInput";
