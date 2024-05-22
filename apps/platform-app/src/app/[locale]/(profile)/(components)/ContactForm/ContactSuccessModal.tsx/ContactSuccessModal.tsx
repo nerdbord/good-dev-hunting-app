@@ -1,4 +1,4 @@
-import { Button } from '../../../../../../components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import styles from './ContactResultModal.module.scss'
 
 export default function ContactSuccessModal({

@@ -2,7 +2,7 @@ import { formatStateName } from '@/app/[locale]/(profile)/(components)/FilterTab
 import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useModal } from '@/contexts/ModalContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PublishingState } from '@prisma/client'

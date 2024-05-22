@@ -1,7 +1,7 @@
 'use client'
 import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import MobileGitHubStarsBtn from '@/components/Button/MobileGitHubStarsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import { useSession } from 'next-auth/react'
