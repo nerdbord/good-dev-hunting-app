@@ -15,7 +15,7 @@ interface AccordionProps {
   children: ReactNode
 }
 
-const Accordion = (props: AccordionProps) => {
+export const Accordion = (props: AccordionProps) => {
   const [accordionOpen, setAccordionOpen] = useState(false)
 
   const handleOpen = () => {
@@ -45,5 +45,3 @@ const Accordion = (props: AccordionProps) => {
     </section>
   )
 }
-
-export default Accordion

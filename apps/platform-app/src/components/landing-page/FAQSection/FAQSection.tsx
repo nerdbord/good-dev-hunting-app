@@ -1,6 +1,6 @@
 import { I18nNamespaces } from '@/i18n'
+import { Accordion } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-import Accordion from '../../Accordion/Accordion'
 import styles from './FAQSection.module.scss'
 
 const FAQSection = () => {
