@@ -1,7 +1,9 @@
-import GitHubButton from 'react-github-btn'
-import styles from './MobileGitHubStarsBtn.module.scss'
+'use client'
 
-const MobileGitHubStarsBtn = () => {
+import GitHubButton from 'react-github-btn'
+import styles from './MobileGitHubStarsButton.module.scss'
+
+export const MobileGitHubStarsButton = () => {
   return (
     <>
       <div className={styles.wrapper}>
@@ -25,5 +27,3 @@ const MobileGitHubStarsBtn = () => {
     </>
   )
 }
-
-export default MobileGitHubStarsBtn

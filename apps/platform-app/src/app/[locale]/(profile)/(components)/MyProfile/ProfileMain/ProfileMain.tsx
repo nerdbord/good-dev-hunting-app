@@ -9,7 +9,7 @@ import GithubIcon2 from '@/assets/icons/GithubIcon2'
 import LinkedIn from '@/assets/icons/LinkedIn'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
 import { Avatar } from '@/components/Avatar/Avatar'
-import { AnchorButton } from '@/components/Button/AnchorButton'
+import { AnchorButton } from '@gdh/ui-system'
 import { countries } from '@/data/countries'
 import styles from './ProfileMain.module.scss'
 
