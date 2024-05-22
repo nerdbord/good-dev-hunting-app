@@ -1,6 +1,6 @@
 ﻿import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
-import { Container } from '@/components/Container/Container'
 import { AppRoutes } from '@/utils/routes'
+import { Container } from '@gdh/ui-system'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import Header from '../../(components)/Header/Header'

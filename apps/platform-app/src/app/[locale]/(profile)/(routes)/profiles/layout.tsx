@@ -1,6 +1,6 @@
 ﻿import { FiltersWithData } from '@/app/[locale]/(profile)/(components)/Filters/FiltersWithData'
-import { Container } from '@/components/Container/Container'
 import VisitorBanner from '@/components/VisitorBanner/VisitorBanner'
+import { Container } from '@gdh/ui-system'
 import React from 'react'
 import Header from '../../(components)/Header/Header'
 
