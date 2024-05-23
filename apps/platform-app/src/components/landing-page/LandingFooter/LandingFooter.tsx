@@ -1,4 +1,4 @@
-import Logo from '@/components/Logo/Logo'
+import {Logo} from '@gdh/ui-system'
 import { I18nNamespaces } from '@/i18n'
 import { Container } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
