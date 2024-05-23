@@ -17,7 +17,7 @@ interface TextAreaProps {
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void
 }
 
-const TextArea: React.FC<TextAreaProps> = ({
+export const TextArea: React.FC<TextAreaProps> = ({
   placeholder,
   label,
   value,
@@ -56,5 +56,3 @@ const TextArea: React.FC<TextAreaProps> = ({
     </div>
   )
 }
-
-export default TextArea
