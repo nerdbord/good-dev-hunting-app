@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from '../index';
 
 const meta = {
-  title: 'Components/Box/Box',
+  title: 'Components/Box',
   component: Box,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout

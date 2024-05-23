@@ -13,3 +13,4 @@ export {
   type DropdownOption,
 } from "./Dropdowns/DropdownOptionItem/DropdownOptionItem";
 export { DropdownSearchInput } from "./Dropdowns/DropdownSearchInput/DropdownSearchInput";
+export { Logo } from "./Logo/Logo";
