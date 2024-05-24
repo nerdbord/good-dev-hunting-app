@@ -1,6 +1,7 @@
 import { type SenderData } from '@/app/[locale]/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
 import ContactSuccessModal from '@/app/[locale]/(profile)/(components)/ContactForm/ContactSuccessModal.tsx/ContactSuccessModal'
 import { sendProfileContactRequest } from '@/app/[locale]/(profile)/_actions/mutations/sendProfileContactRequest'
+import { useProfileStore } from '@/app/[locale]/(profile)/_providers/profile-store.provider'
 import { Button } from '@/components/Button/Button'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
@@ -20,7 +21,6 @@ import {
   validationSchema,
   type ContactFormValuesWithChecks,
 } from './schema'
-import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 export default function ContactForm({
   senderData,
@@ -31,9 +31,7 @@ export default function ContactForm({
   const { closeModal, showModal } = useModal()
   const { addToast } = useToast()
   const plausible = usePlausible()
-  const markProfileAsContacted = useProfilesStore(
-    (state) => state.markProfileAsContacted,
-  )
+  const { markProfileAsContacted } = useProfileStore((state) => state)
   const { userId, userEmail, userFullName, userGithubName, userProfileId } =
     senderData
 

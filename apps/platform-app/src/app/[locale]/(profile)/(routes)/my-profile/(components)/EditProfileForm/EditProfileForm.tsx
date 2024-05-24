@@ -16,7 +16,6 @@ import { useMemo } from 'react'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import styles from '../../edit/page.module.scss'
@@ -24,6 +23,7 @@ import CreateProfileTopBar from '../CreateProfile/CreateProfileTopBar/CreateProf
 import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
+import { useProfileStore } from '@/app/[locale]/(profile)/_providers/profile-store.provider'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -58,7 +58,7 @@ const EditProfileForm = () => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  const { profile } = useProfileModel()
+  const { profile } = useProfileStore((state) => state)
   const { data: session } = useSession()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {

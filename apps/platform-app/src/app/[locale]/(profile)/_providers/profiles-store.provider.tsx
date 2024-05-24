@@ -3,7 +3,7 @@ import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.mode
 import {
   type ProfilesStore,
   createProfilesStore,
-} from '@/app/[locale]/(profile)/_stores/profiles-store'
+} from '@/app/[locale]/(profile)/_stores/profiles.store'
 import {
   type PropsWithChildren,
   createContext,

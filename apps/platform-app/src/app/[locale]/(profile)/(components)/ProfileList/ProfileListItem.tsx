@@ -1,7 +1,5 @@
 'use client'
-import { createOrUpdateProfileView } from '@/app/[locale]/(profile)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
@@ -10,7 +8,6 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
 import ProfileCard from '../ProfileCard/ProfileCard'
-import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 interface ProfileListItemProps {
   data: ProfileModel
@@ -24,10 +21,6 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   const plausible = usePlausible()
   const searchParams = useSearchParams()
   const { data: session } = useSession()
-  const { runAsync } = useAsyncAction()
-  const markProfileAsVisited = useProfilesStore(
-    (state) => state.markProfileAsVisited,
-  )
 
   const visitedProfile = data.profileViews?.find(
     (view) => view.viewerId === session?.user?.id,
@@ -41,19 +34,6 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: data.githubUsername },
     })
-
-    if (session && session.user) {
-      runAsync(async () => {
-        const profileView = await createOrUpdateProfileView(
-          session.user.id,
-          data.id,
-        )
-
-        if (profileView) {
-          markProfileAsVisited(profileView)
-        }
-      })
-    }
   }
 
   return (

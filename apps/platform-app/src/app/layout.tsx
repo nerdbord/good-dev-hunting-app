@@ -1,5 +1,3 @@
-import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
-import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
@@ -35,8 +33,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const fetchedProfiles = await findAllApprovedProfiles()
-
   return (
     <html lang="en">
       <body className={commonClasses}>
@@ -45,9 +41,7 @@ export default async function RootLayout({
         >
           <SessionProvider>
             <ToastContextProvider>
-              <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
-                <ModalProvider>{children}</ModalProvider>
-              </ProfilesStoreProvider>
+              <ModalProvider>{children}</ModalProvider>
             </ToastContextProvider>
           </SessionProvider>
         </PlausibleProvider>

@@ -1,13 +1,13 @@
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
+import { UserProfilePage } from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfilePage/UserProfilePage'
 import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { findProfileByGithubUsername } from '@/app/[locale]/(profile)/_actions/queries/findProfileByGithubUsername'
-import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'
+import { ProfileStoreProvider } from '@/app/[locale]/(profile)/_providers/profile-store.provider'
 import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
-import styles from './page.module.scss'
 
 export async function generateMetadata({
   params,
@@ -40,11 +40,7 @@ export async function generateMetadata({
   }
 }
 
-const UserProfilePage = async ({
-  params,
-}: {
-  params: { username: string }
-}) => {
+const UserProfile = async ({ params }: { params: { username: string } }) => {
   const { user: authorizedUser } = await getAuthorizedUser()
   if (!authorizedUser) {
     return redirect(AppRoutes.signIn)
@@ -60,19 +56,18 @@ const UserProfilePage = async ({
   const isConnectedToNerdbord = false // connected to nerdbord feature is currently dissabled
 
   return (
-    <ProfileProvider profile={profile}>
-      <div className={styles.wrapper}>
-        <UserProfileMain profileId={profile.id}>
-          <UserProfileHeader
-            isNerdbordConnected={isConnectedToNerdbord}
-            withBackButton
-            profileId={profile.id}
-          />
-        </UserProfileMain>
+    <ProfileStoreProvider profile={profile}>
+      <UserProfilePage>
+        <UserProfileMain profileId={profile.id} />
+        <UserProfileHeader
+          isNerdbordConnected={isConnectedToNerdbord}
+          withBackButton
+          profileId={profile.id}
+        />
         <UserProfileDetails profileId={profile.id} />
-      </div>
-    </ProfileProvider>
+      </UserProfilePage>
+    </ProfileStoreProvider>
   )
 }
 
-export default UserProfilePage
+export default UserProfile

@@ -1,16 +1,15 @@
+import { FiltersWithData } from '@/app/[locale]/(profile)/(components)/Filters/FiltersWithData'
 import ProfileList from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileList'
-import { type JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
-import Loader from '@/components/Loader/Loader'
-import { Suspense } from 'react'
+import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
+import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
-export default async function Profiles({
-  searchParams,
-}: {
-  searchParams: Record<JobOfferFiltersEnum, string>
-}) {
+export default async function Profiles() {
+  const fetchedProfiles = await findAllApprovedProfiles()
+
   return (
-    <Suspense key={JSON.stringify(searchParams)} fallback={<Loader />}>
+    <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
+      <FiltersWithData />
       <ProfileList />
-    </Suspense>
+    </ProfilesStoreProvider>
   )
 }
