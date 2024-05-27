@@ -13,8 +13,8 @@ import { EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { I18nNamespaces } from '@/i18n'
+import { type DropdownOption } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
 
