@@ -1,0 +1,59 @@
+$lineHeight: 20px;
+$checkboxSize: 16px;
+
+.checkboxLabel {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: $lineHeight;
+  color: #e2eaf1;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.checkbox {
+  margin: calc(($lineHeight - $checkboxSize) / 2);
+  position: relative;
+  width: $checkboxSize;
+  min-width: $checkboxSize;
+  height: $checkboxSize;
+  border: 1px solid #e2eaf1;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  border: 1px solid #a687ff;
+}
+
+.checked {
+  border: 1px solid #a687ff;
+}
+
+.checkmark {
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  color: #a687ff;
+  width: 26px;
+  height: 26px;
+}
+
+.captcha {
+  height: 0px;
+  visibility: hidden;
+}
+
+.captchaContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,4 +1,4 @@
-export default function () {
+const AcceptIcon = () => {
   return (
     <svg
       width="13"
@@ -14,3 +14,4 @@ export default function () {
     </svg>
   )
 }
+export default AcceptIcon

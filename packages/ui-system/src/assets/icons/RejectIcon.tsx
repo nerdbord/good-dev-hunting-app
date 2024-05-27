@@ -1,4 +1,4 @@
-export default function () {
+const RejectIcon = () => {
   return (
     <svg
       width="9"
@@ -14,3 +14,4 @@ export default function () {
     </svg>
   )
 }
+export default RejectIcon
