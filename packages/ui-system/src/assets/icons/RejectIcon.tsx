@@ -1,4 +1,4 @@
-const RejectIcon = () => {
+export const RejectIcon = () => {
   return (
     <svg
       width="9"
@@ -14,4 +14,3 @@ const RejectIcon = () => {
     </svg>
   )
 }
-export default RejectIcon

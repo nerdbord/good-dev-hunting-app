@@ -1,4 +1,4 @@
-const AcceptIcon = () => {
+export const AcceptIcon = () => {
   return (
     <svg
       width="13"
@@ -14,4 +14,4 @@ const AcceptIcon = () => {
     </svg>
   )
 }
-export default AcceptIcon
+

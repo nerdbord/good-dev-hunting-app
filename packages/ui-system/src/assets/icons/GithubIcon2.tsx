@@ -1,6 +1,4 @@
-import React from 'react'
-
-const GithubIcon2 = () => {
+export const GithubIcon2 = () => {
   return (
     <svg
       width="14"
@@ -16,5 +14,3 @@ const GithubIcon2 = () => {
     </svg>
   )
 }
-
-export default GithubIcon2

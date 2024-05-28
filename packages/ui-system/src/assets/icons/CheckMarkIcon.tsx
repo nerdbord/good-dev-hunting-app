@@ -1,6 +1,4 @@
-﻿import React from 'react'
-
-const CheckMarkIcon = () => {
+﻿export const CheckMarkIcon = () => {
   return (
     <svg
       width="24"
@@ -28,5 +26,3 @@ const CheckMarkIcon = () => {
     </svg>
   )
 }
-
-export default CheckMarkIcon

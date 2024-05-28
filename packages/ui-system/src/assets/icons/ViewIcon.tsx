@@ -1,4 +1,4 @@
-const ViewIcon = ({ color = '#69717B' }: { color?: string }) => {
+export const ViewIcon = ({ color = '#69717B' }: { color?: string }) => {
   return (
     <svg
       width="24"
@@ -16,5 +16,3 @@ const ViewIcon = ({ color = '#69717B' }: { color?: string }) => {
     </svg>
   )
 }
-
-export default ViewIcon
