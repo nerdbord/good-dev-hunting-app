@@ -6,6 +6,16 @@
   "type": "module",
   "main": "src/index.ts",
   "source": "src/index.ts",
+  "exports": {
+    ".": {
+      "require": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./images": {
+      "require": "./src/assets/images/index.ts",
+      "import": "./src/assets/images/index.ts"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
