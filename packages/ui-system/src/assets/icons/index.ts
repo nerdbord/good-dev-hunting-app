@@ -1,3 +1,5 @@
+import { AcceptIcon } from './AcceptIcon'
+import { AddIcon } from './AddIcon'
 import { CancelIcon } from './CancelIcon'
 import { CheckMarkIcon } from './CheckMarkIcon'
 import { ClearIcon } from './ClearIcon'
@@ -19,6 +21,8 @@ import { SendIcon } from './SendIcon'
 import { ViewIcon } from './ViewIcon'
 
 export {
+  AcceptIcon,
+  AddIcon,
   CancelIcon,
   CheckMarkIcon,
   ClearIcon,
