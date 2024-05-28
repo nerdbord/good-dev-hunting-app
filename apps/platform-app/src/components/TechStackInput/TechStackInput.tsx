@@ -1,9 +1,7 @@
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import CancelIcon from '@/assets/icons/CancelIcon'
-import ImportantIcon from '@/assets/icons/ImportantIcon'
-
 import technologies from '@/data/technologies'
 import { type DropdownOption } from '@gdh/ui-system'
+import { CancelIcon, ImportantIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import { useFormikContext } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'

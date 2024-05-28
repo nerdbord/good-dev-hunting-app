@@ -5,11 +5,10 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import GithubIcon2 from '@/assets/icons/GithubIcon2'
-import LinkedIn from '@/assets/icons/LinkedIn'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
 import { countries } from '@/data/countries'
 import { AnchorButton, Avatar } from '@gdh/ui-system'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import styles from './ProfileMain.module.scss'
 
 interface ProfileMainProps {
