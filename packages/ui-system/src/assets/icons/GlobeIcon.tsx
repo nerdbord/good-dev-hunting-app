@@ -1,4 +1,4 @@
-const GlobeIcon = () => {
+export const GlobeIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -36,5 +36,3 @@ const GlobeIcon = () => {
     </svg>
   )
 }
-
-export default GlobeIcon

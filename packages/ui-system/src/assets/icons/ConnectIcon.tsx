@@ -1,4 +1,4 @@
-const ConnectIcon = () => {
+export const ConnectIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -28,5 +28,3 @@ const ConnectIcon = () => {
     </svg>
   )
 }
-
-export default ConnectIcon

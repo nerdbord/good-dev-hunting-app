@@ -1,4 +1,4 @@
-const CancelIcon = () => {
+export const CancelIcon = () => {
   return (
     <svg
       width="24"
@@ -29,4 +29,3 @@ const CancelIcon = () => {
   )
 }
 
-export default CancelIcon

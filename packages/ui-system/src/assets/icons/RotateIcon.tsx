@@ -1,6 +1,4 @@
-﻿import React from 'react'
-
-const RotateIcon = () => {
+﻿export const RotateIcon = () => {
   return (
     <svg
       width="24"
@@ -25,4 +23,3 @@ const RotateIcon = () => {
   )
 }
 
-export default RotateIcon

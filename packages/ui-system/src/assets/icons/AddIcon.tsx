@@ -1,6 +1,4 @@
-import React from 'react'
-
-const AddIcon = () => {
+export const AddIcon = () => {
   return (
     <svg
       width="20"
@@ -35,4 +33,3 @@ const AddIcon = () => {
   )
 }
 
-export default AddIcon

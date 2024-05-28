@@ -1,4 +1,4 @@
-const LogoGDH = () => {
+export const LogoGDH = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,5 +27,3 @@ const LogoGDH = () => {
     </svg>
   )
 }
-
-export default LogoGDH

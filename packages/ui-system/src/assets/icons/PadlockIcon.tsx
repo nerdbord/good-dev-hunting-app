@@ -1,4 +1,4 @@
-const PadlockIcon = () => {
+export const PadlockIcon = () => {
   return (
     <svg
       width="24"
@@ -26,5 +26,3 @@ const PadlockIcon = () => {
     </svg>
   )
 }
-
-export default PadlockIcon

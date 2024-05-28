@@ -1,6 +1,4 @@
-import React from 'react'
-
-const ImportantIcon = () => {
+export const ImportantIcon = () => {
   return (
     <svg
       width="12"
@@ -24,5 +22,3 @@ const ImportantIcon = () => {
     </svg>
   )
 }
-
-export default ImportantIcon
