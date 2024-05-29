@@ -1,16 +1,17 @@
 'use client'
 
 import ProfileCard from '@/app/[locale]/(profile)/(components)/ProfileCard/ProfileCard'
-import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import { AppRoutes } from '@/utils/routes'
 import { useMemo } from 'react'
 import styles from './Hero.module.scss'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 export const HeroProfilesSection = () => {
-  const { allProfiles } = useProfiles()
+  const { profiles } = useProfilesStore((state) => state)
+
   const selectedProfiles = useMemo(() => {
-    return allProfiles.sort(() => 0.5 - Math.random()).slice(0, 3)
-  }, [allProfiles])
+    return profiles.sort(() => 0.5 - Math.random()).slice(0, 3)
+  }, [profiles])
 
   const [first, second, third] = selectedProfiles
 

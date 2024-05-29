@@ -23,7 +23,7 @@ import CreateProfileTopBar from '../CreateProfile/CreateProfileTopBar/CreateProf
 import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
-import { useProfileStore } from '@/app/[locale]/(profile)/_providers/profile-store.provider'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -58,7 +58,7 @@ const EditProfileForm = () => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  const { profile } = useProfileStore((state) => state)
+  const { profile } = useProfilesStore((state) => state)
   const { data: session } = useSession()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
@@ -88,7 +88,7 @@ const EditProfileForm = () => {
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
-  if (!session || !profile || !session) {
+  if (!session || !profile) {
     return null
   }
 

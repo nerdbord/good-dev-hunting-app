@@ -4,8 +4,8 @@ import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import Header from '../../(components)/Header/Header'
-import { ProfileStoreProvider } from '@/app/[locale]/(profile)/_providers/profile-store.provider'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions'
+import { MyProfileLayout } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/MyProfileLayout/MyProfileLayout'
 
 export default async function AppLayout({
   children,
@@ -25,11 +25,9 @@ export default async function AppLayout({
   }
 
   return (
-    <ProfileStoreProvider profile={profile}>
-      <main>
-        <Header />
-        <Container>{children}</Container>
-      </main>
-    </ProfileStoreProvider>
+    <MyProfileLayout profileId={profile.id}>
+      <Header />
+      <Container>{children}</Container>
+    </MyProfileLayout>
   )
 }

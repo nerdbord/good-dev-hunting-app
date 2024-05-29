@@ -1,7 +1,11 @@
 import { type ContactFormRequest } from '@/app/[locale]/(profile)/(components)/ContactForm/schema'
 import { prisma } from '@/lib/prismaClient'
 
-export async function createContactRequest(contactRequest: ContactFormRequest) {
+
+export async function createContactRequest(
+  contactRequest: ContactFormRequest,
+  senderId: string,
+) {
   return prisma.contactRequest.create({
     data: {
       subject: contactRequest.subject,
@@ -9,7 +13,7 @@ export async function createContactRequest(contactRequest: ContactFormRequest) {
       senderFullName: contactRequest.senderFullName,
       senderEmail: contactRequest.senderEmail,
       profileId: contactRequest.profileId,
-      senderId: contactRequest.senderId,
+      senderId,
     },
   })
 }

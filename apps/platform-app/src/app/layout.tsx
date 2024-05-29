@@ -7,6 +7,8 @@ import { IBM_Plex_Sans, Inter } from 'next/font/google'
 import * as process from 'process'
 import React from 'react'
 import './globals.scss'
+import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
+import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -33,6 +35,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const fetchedProfiles = await findAllApprovedProfiles()
+
   return (
     <html lang="en">
       <body className={commonClasses}>
@@ -41,7 +45,9 @@ export default async function RootLayout({
         >
           <SessionProvider>
             <ToastContextProvider>
-              <ModalProvider>{children}</ModalProvider>
+              <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
+                <ModalProvider>{children}</ModalProvider>
+              </ProfilesStoreProvider>
             </ToastContextProvider>
           </SessionProvider>
         </PlausibleProvider>
