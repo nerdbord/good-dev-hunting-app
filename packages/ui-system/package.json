@@ -11,10 +11,6 @@
       "require": "./src/index.ts",
       "import": "./src/index.ts"
     },
-    "./images": {
-      "require": "./src/assets/images/index.ts",
-      "import": "./src/assets/images/index.ts"
-    },
     "./icons": {
       "require": "./src/assets/icons/index.ts",
       "import": "./src/assets/icons/index.ts"

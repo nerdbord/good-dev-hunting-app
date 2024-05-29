@@ -13,7 +13,8 @@ import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
-import { LogoPNG } from '@gdh/ui-system/images'
+
+import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 
@@ -130,7 +131,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
         <div className={styles.headerContent}>
           <div className={styles.logoAndGhStarsWrapper}>
             <Link href={AppRoutes.home} className={styles.logo}>
-              <img src={LogoPNG.src} alt="Logo" />
+              <img src={logo.src} alt="Logo" />
               <h1 className={styles.title}>Good Dev Hunting</h1>
             </Link>
             <GitHubStarsButton />
