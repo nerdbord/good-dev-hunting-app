@@ -66,6 +66,7 @@ const UserProfileMain = async ({
             {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
           </p>
         </div>
+        {children}
       </div>
     </>
   )
