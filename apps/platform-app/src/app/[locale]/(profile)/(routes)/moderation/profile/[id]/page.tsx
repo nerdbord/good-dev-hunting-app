@@ -1,4 +1,3 @@
-import Header from '@/app/[locale]/(profile)/(components)/Header/Header'
 import ModerationActionHeader from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationActionHeader/ModerationActionHeader'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
@@ -11,6 +10,7 @@ import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfil
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 
+import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import styles from './page.module.scss'
 
 export default async function ModerationUserProfile({
@@ -31,7 +31,7 @@ export default async function ModerationUserProfile({
       <div className={styles.wrapper}>
         <ModerationActionHeader profileOwnerRoles={profileOwner.roles} />
         <UserProfileMain profileId={profile.id}>
-          <Header />
+          <UserProfileHeader profileId={profile.id} withBackButton />
         </UserProfileMain>
         <UserProfileDetails profileId={profile.id} />
       </div>
