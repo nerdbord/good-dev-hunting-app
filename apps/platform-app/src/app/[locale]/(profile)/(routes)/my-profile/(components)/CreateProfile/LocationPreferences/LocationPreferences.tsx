@@ -1,5 +1,5 @@
 'use client'
-import CheckboxInput from '@/components/Checkbox/Checkbox'
+import {CheckboxInput} from '@gdh/ui-system'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import SwitchInput from '@/components/Switch/Switch'
 import TextInput from '@/components/TextInput/TextInput'

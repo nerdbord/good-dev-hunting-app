@@ -1,13 +1,13 @@
 import { JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
-import { Button } from '@/components/Button/Button'
 import useOutsideClick from '@/hooks/useOutsideClick'
+import {
+  Button,
+  DropdownOptionItem,
+  DropdownSearchInput,
+  type DropdownOption,
+} from '@gdh/ui-system'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
-import {
-  DropdownOptionItem,
-  type DropdownOption,
-} from '../DropdownOptionItem/DropdownOptionItem'
-import { DropdownSearchInput } from '../DropdownSearchInput/DropdownSearchInput'
 import styles from './DropdownFilterMulti.module.scss'
 
 type DropdownFilterMultiProps = {

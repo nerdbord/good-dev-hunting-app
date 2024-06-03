@@ -1,6 +1,6 @@
 'use client'
 import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.provider'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n'
 import { useSession } from 'next-auth/react'

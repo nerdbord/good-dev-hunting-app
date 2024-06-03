@@ -1,6 +1,6 @@
 'use client'
 import { StateStatus } from '@/app/[locale]/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useModal } from '@/contexts/ModalContext'
 
 import AssignRoleModal from '@/app/[locale]/(profile)/(routes)/moderation/(components)/AssignRoleModal/AssignRoleModal'

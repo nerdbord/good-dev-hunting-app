@@ -1,5 +1,5 @@
 import Header from '@/app/[locale]/(profile)/(components)/Header/Header'
-import { Container } from '@/components/Container/Container'
+import { Container } from '@gdh/ui-system'
 import ErrorBox from './(components)/ErrorBox'
 
 const LoginErrorPage = () => {
