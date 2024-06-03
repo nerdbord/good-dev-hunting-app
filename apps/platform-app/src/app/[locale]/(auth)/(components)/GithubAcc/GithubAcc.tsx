@@ -1,6 +1,6 @@
 'use client'
-import { Avatar } from '@/components/Avatar/Avatar'
 import { AppRoutes } from '@/utils/routes'
+import { Avatar } from '@gdh/ui-system'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import defaultUserImg from '../../../../../../public/default-avatar.png'

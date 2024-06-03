@@ -10,7 +10,7 @@ import {
   JobOfferFiltersEnum,
   type JobSpecialization,
 } from '@/app/[locale]/(profile)/profile.types'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { type DropdownOption } from '@gdh/ui-system'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import styles from './Filters.module.scss'
 
