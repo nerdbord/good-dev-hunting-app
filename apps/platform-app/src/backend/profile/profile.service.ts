@@ -100,7 +100,7 @@ export async function createUserProfile(
       hourlyRateMin: profileData.hourlyRateMin ?? 0,
       hourlyRateMax: profileData.hourlyRateMax ?? 0,
       currency: Currency.PLN,
-      languages: {
+      language: {
         connectOrCreate: profileData.language.map(
           (lang) => ({
             where: { name: lang.name },
