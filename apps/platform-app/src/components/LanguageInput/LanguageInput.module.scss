@@ -1,0 +1,105 @@
+.container {
+    width: 100%;
+    border: 1px solid #2a2f35;
+    background-color: #0f1217;
+    margin-top: 10px;
+    input {
+      border: none;
+      outline: none;
+    }
+    min-height: 200px;
+  }
+  
+  .chipsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #0f1217;
+    padding: 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    padding: 0 10px;
+    height: 36px;
+    background-color: #161a1f;
+    color: #a687ff;
+    font-size: 12px;
+    gap: 5px;
+    span {
+      cursor: pointer;
+      margin-top: 1px;
+    }
+  }
+  
+  .inputField {
+    flex-grow: 1;
+    color: white;
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+    background-color: transparent;
+    input {
+      border: none;
+      outline: none;
+    }
+  }
+  
+  .sugesstionsWrapper {
+    position: relative;
+  }
+  
+  .suggestions {
+    background: var(--Dark-04, #171b21);
+    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1000;
+    top: 40px;
+  }
+  
+  .suggestionItem {
+    color: var(--Light-04, #89939e);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    width: 100%;
+    &:hover {
+      background-color: #2a2f35;
+    }
+  }
+  
+  .active {
+    border: 1px solid white;
+  }
+  
+  .formLabel {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #89939e;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .error {
+    border: 1px solid red;
+  }
+  
+  .errMsgText {
+    color: var(--Error-Fill, #d62626);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    margin-bottom: 2px;
+  }
+  

@@ -42,6 +42,7 @@ const initialValues: CreateProfileFormValues = {
   hourlyRateMin: 0,
   hourlyRateMax: 0,
   currency: Currency.PLN,
+  language: [],
 }
 
 export const validationSchema = Yup.object().shape({
@@ -111,6 +112,9 @@ const CreateProfileForm = () => {
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
+      language: values.language.map((lang) => ({
+        name: lang.value,
+      })),
     }
 
     try {

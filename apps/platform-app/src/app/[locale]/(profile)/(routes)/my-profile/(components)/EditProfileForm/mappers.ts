@@ -32,4 +32,8 @@ export const mapProfileModelToEditProfileFormValues = (
   hourlyRateMin: profile.hourlyRateMin ?? 0,
   hourlyRateMax: profile.hourlyRateMax ?? 0,
   currency: profile.currency,
+  language: profile.languages.map((language) => ({
+    name: language.name,
+    value: language.name,
+  })),
 })
