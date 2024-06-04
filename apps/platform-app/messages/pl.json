@@ -133,7 +133,8 @@
     "cityPlaceholder": "Zacznij wpisywać lokalizację",
     "cityTooltip": "Używamy tych informacji, aby dopasować Cię do najlepszych ofert pracy.",
     "cityRelocation": "Jestem otwarty na przeprowadzkę między miastami",
-    "remontOnly": "Szukam tylko pracy zdalnej"
+    "remontOnly": "Szukam tylko pracy zdalnej",
+    "languageTooltip": "Wymień języki, którymi posługujesz się biegle"
   },
 
   "WorkInformation": {

@@ -28,6 +28,16 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
               ))}
             </div>
           </div>
+          {/* <div className={styles.techStack}>
+            <p className={styles.title}>Languages</p>
+            <div className={styles.techStackList}>
+              {profile?.language.map((item, index) => (
+                <p key={index} className={styles.techStackItem}>
+                  {item.name}
+                </p>
+              ))}
+            </div>
+          </div> */}
 
           {/* this feature below will be added in the future */}
           {/*         <div className={styles.gitActivities}>
