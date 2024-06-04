@@ -116,7 +116,11 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
-      language: mapLanguagesToProfileModel(values.language),
+      language: values.language.map((language) => {
+        return {
+          name: language.value,
+        }
+      }),
     }
 
     await runAsync(async () => {
