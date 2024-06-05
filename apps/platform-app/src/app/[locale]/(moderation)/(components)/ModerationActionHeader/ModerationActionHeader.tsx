@@ -1,12 +1,12 @@
 'use client'
-import { StateStatus } from '@/app/[locale]/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
+
 import { Button } from '@/components/Button/Button'
 import { useModal } from '@/contexts/ModalContext'
 
-import AssignRoleModal from '@/app/[locale]/(profile)/(routes)/moderation/(components)/AssignRoleModal/AssignRoleModal'
-import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 import { Role } from '@prisma/client'
 
+import AssignRoleModal from '@/app/[locale]/(moderation)/(components)/AssignRoleModal/AssignRoleModal'
+import { StateStatus } from '@/app/[locale]/(moderation)/(components)/StateStatus/StateStatus'
 import styles from './ModerationActionHeader.module.scss'
 
 interface ModerationActionHeaderProps {

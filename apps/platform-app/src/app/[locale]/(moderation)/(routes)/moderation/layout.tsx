@@ -2,7 +2,7 @@
 import { ModerationProvider } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
 import { Container } from '@/components/Container/Container'
 import React from 'react'
-import Header from '../../(components)/Header/Header'
+import Header from '../../../(profile)/(components)/Header/Header'
 
 export default async function ModerationLayout({
   children,

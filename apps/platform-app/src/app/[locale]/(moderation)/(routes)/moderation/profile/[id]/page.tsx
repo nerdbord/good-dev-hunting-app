@@ -1,5 +1,6 @@
 import Header from '@/app/[locale]/(profile)/(components)/Header/Header'
-import ModerationActionHeader from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationActionHeader/ModerationActionHeader'
+
+import ModerationActionHeader from '@/app/[locale]/(moderation)/(components)/ModerationActionHeader/ModerationActionHeader'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
@@ -9,7 +10,6 @@ import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions/queries/f
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
-import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 
 import styles from './page.module.scss'
 
