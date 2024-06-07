@@ -1,5 +1,5 @@
 'use client'
-import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
+
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import { Button } from '@/components/Button/Button'
 import MobileGitHubStarsBtn from '@/components/Button/MobileGitHubStarsBtn'
@@ -10,6 +10,7 @@ import GithubAcc from '../GithubAcc/GithubAcc'
 import HunterAcc from '../HunterAcc/HunterAcc'
 import LogOutBtn from '../LogOutBtn/LogOutBtn'
 import styles from './HamburgerMenuMobileBtn.module.scss'
+import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
 
 const HamburgerMenuMobileBtn = ({
   userHasProfile,

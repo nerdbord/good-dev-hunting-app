@@ -1,7 +1,7 @@
-import { StateStatus } from '@/app/[locale]/(profile)/(routes)/moderation/(components)/StateStatus/StateStatus'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import dynamic from 'next/dynamic'
 
+import { StateStatus } from '@/app/[locale]/(moderation)/(components)/StateStatus/StateStatus'
 import {
   getHourlyRateDisplay,
   jobSpecializationThemes,

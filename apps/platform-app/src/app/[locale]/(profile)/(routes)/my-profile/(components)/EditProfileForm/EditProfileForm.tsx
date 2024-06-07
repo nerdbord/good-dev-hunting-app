@@ -7,7 +7,7 @@ import {
 } from '@/app/[locale]/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { Currency, PublishingState } from '@prisma/client'
+import { Currency } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -23,7 +23,6 @@ import CreateProfileTopBar from '../CreateProfile/CreateProfileTopBar/CreateProf
 import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
-import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -53,50 +52,21 @@ export const validationSchema = Yup.object().shape({
     ),
 })
 
-const EditProfileForm = () => {
-  const { update: updateSession } = useSession()
+const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
+  const { update: updateSession, data: session } = useSession()
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  const { profile } = useProfilesStore((state) => state)
-  const { data: session } = useSession()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
-    if (!profile) {
-      return {
-        fullName: '',
-        linkedin: '',
-        bio: '',
-        country: '',
-        openForCountryRelocation: false,
-        city: '',
-        openForCityRelocation: false,
-        remoteOnly: false,
-        position: { name: '', value: '' },
-        seniority: { name: '', value: '' },
-        techStack: [],
-        employment: [],
-        githubUsername: '',
-        state: PublishingState.PENDING,
-        viewCount: 0,
-        hourlyRateMin: 0,
-        hourlyRateMax: 0,
-        currency: Currency.PLN,
-      }
-    }
-
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
-
-  if (!session || !profile) {
-    return null
-  }
 
   const handleEditProfile = async (values: ProfileFormValues) => {
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,
-      avatarUrl: session.user?.image || null,
+      avatarUrl: session?.user?.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -125,7 +95,7 @@ const EditProfileForm = () => {
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
       savedProfile &&
-        updateSession({ ...session.user, name: savedProfile.fullName })
+        updateSession({ ...session?.user, name: savedProfile.fullName })
 
       router.push(AppRoutes.myProfile)
     })

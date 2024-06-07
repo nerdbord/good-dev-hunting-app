@@ -20,7 +20,7 @@ export const UserProfilePage = ({ children, profileId }: UserProfileProps) => {
     return () => {
       resetProfile()
     }
-  }, [])
+  }, [profileId])
 
   useEffect(() => {
     if (profile) {
