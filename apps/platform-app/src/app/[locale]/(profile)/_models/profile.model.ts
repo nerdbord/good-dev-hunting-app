@@ -21,7 +21,7 @@ export interface ProfileModel extends Profile {
   email: string
   contactRequests: ContactRequest[]
   profileViews: ProfileView[]
-  languages: { name: string }[]
+  language: { name: string }[]
 }
 
 export function createProfileModel(data: ProfileWithRelations): ProfileModel {
@@ -55,6 +55,6 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
     updatedAt: data.updatedAt,
     profileViews: data.profileViews,
     contactRequests: data.contactRequests,
-    languages: data.language,
+    language: data.language,
   }
 }
