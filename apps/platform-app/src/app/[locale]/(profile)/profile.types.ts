@@ -107,6 +107,7 @@ export type EditProfileFormFields = keyof Omit<
   | 'currency'
   | 'createdAt'
   | 'updatedAt'
+  | 'language'
 >
 
 export interface HourlyRateValue {

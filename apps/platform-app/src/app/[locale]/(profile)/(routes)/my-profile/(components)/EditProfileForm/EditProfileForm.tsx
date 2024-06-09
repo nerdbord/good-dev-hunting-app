@@ -117,7 +117,7 @@ const EditProfileForm = () => {
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
-      languages: values.language.map((language) => {
+      language: values.language.map((language) => {
         return {
           name: language.value,
         }
