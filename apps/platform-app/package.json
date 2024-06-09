@@ -15,7 +15,7 @@
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "cypress:open": "cypress open",
     "prisma:generate": "prisma generate --schema=$PRISMA_SCHEMA_PATH",
-    "prisma:studio": "prisma studio --schema=$PRISMA_SCHEMA_PATH"
+    "prisma:studio": "prisma studio  --schema=./apps/platform-app/prisma/schema.prisma"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
