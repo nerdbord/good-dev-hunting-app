@@ -3,12 +3,12 @@ import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
 
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import styles from '@/components/TechStackInput/TechStackInput.module.scss'
 import languages from '@/data/languages'
 import classNames from 'classnames/bind'
 import { useFormikContext } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
 import Tooltip from '../Tooltip/Tooltip'
-import styles from './LanguageInput.module.scss'
 
 const cx = classNames.bind(styles)
 
