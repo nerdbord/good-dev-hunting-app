@@ -2,7 +2,7 @@
 import { WorkInformationFormKeys } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
 import { parseHourlyRateValue } from '@/app/[locale]/(profile)/profile.helpers'
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { type DropdownOption } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import 'material-icons/iconfont/material-icons.css'
 import { useEffect, useRef, useState } from 'react'
