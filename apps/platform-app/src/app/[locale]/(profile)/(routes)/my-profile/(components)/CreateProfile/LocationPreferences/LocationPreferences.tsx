@@ -150,7 +150,7 @@ const LocationPreferences = () => {
           <LanguageInput
             chips={values[LocationPreferencesFormKeys.LANGUAGE]}
             label={t('languages')}
-            placeholder={t('startTyping')}
+            placeholder={t('languagePlaceholder')}
             name={LocationPreferencesFormKeys.LANGUAGE}
             onTechSelect={handleLangSelect}
             onTechRemove={handleLangRemove}
