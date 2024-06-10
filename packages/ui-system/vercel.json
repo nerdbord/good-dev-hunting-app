@@ -4,5 +4,5 @@
   "devCommand": "npm run storybook",
   "installCommand": "npm install",
   "framework": null,
-  "outputDirectory": "./public"
+  "outputDirectory": "./storybook-static"
 }
