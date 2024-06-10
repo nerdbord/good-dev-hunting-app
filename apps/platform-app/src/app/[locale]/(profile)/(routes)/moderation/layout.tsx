@@ -1,6 +1,6 @@
 ﻿import { findAllProfiles } from '@/app/[locale]/(profile)/_actions'
 import { ModerationProvider } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
-import { Container } from '@/components/Container/Container'
+import { Container } from '@gdh/ui-system'
 import React from 'react'
 import Header from '../../(components)/Header/Header'
 

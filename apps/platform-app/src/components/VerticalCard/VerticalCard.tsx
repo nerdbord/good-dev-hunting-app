@@ -10,12 +10,12 @@ import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { I18nNamespaces } from '@/i18n'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
+import { Avatar } from '@gdh/ui-system'
 import { EmploymentType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/navigation'
 import { useMemo, type PropsWithChildren } from 'react'
-import { Avatar } from '../Avatar/Avatar'
 import styles from './VerticalCard.module.scss'
 
 const VerticalCard = (

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { I18nNamespaces } from '@/i18n'
 import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'

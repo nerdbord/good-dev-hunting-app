@@ -3,7 +3,7 @@ import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
 import React from 'react'
-import { Button } from '../../../../../components/Button/Button'
+import { Button } from '@gdh/ui-system'
 
 interface Props {
   setImage: (url: string) => void

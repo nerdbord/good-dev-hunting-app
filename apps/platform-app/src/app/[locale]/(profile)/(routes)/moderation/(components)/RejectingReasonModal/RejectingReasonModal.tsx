@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useState } from 'react'
 

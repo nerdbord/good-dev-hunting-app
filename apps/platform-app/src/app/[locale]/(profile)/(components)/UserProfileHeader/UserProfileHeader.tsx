@@ -1,6 +1,6 @@
 import ContactBtn from '@/app/[locale]/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
 import { I18nNamespaces } from '@/i18n'
