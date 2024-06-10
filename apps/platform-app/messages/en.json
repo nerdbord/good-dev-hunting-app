@@ -135,7 +135,9 @@
     "cityTooltip": "We use this information to match you with the best job opportunities.",
     "cityRelocation": "I’m open to city relocation",
     "remontOnly": "I’m looking for remote jobs only",
-    "languageTooltip": "List the languages you speak fluently"
+    "languages": "Languages",
+    "languageTooltip": "List the languages you speak fluently",
+    "languagePlaceholder": "Start typing..."
   },
 
   "WorkInformation": {

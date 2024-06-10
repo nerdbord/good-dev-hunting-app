@@ -134,7 +134,9 @@
     "cityTooltip": "Używamy tych informacji, aby dopasować Cię do najlepszych ofert pracy.",
     "cityRelocation": "Jestem otwarty na przeprowadzkę między miastami",
     "remontOnly": "Szukam tylko pracy zdalnej",
-    "languageTooltip": "Wymień języki, którymi posługujesz się biegle"
+    "languages": "Języki",
+    "languageTooltip": "Wymień języki, którymi posługujesz się biegle",
+    "languagePlaceholder": "Zacznij wpisywać..."
   },
 
   "WorkInformation": {
