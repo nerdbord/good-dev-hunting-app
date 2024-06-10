@@ -1,0 +1,26 @@
+{
+  "projects": [
+    {
+      "src": "apps/platform-app",
+      "buildCommand": "npm run build",
+      "outputDirectory": "apps/platform-app/out",
+      "routes": [
+        {
+          "src": "/(.*)",
+          "dest": "apps/platform-app/$1"
+        }
+      ]
+    },
+    {
+      "src": "packages/ui-system",
+      "buildCommand": "npm run build-storybook",
+      "outputDirectory": "packages/ui-system/storybook-static",
+      "routes": [
+        {
+          "src": "/storybook/(.*)",
+          "dest": "packages/ui-system/storybook-static/$1"
+        }
+      ]
+    }
+  ]
+}
