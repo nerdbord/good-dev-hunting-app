@@ -101,13 +101,10 @@ export async function createUserProfile(
       hourlyRateMax: profileData.hourlyRateMax ?? 0,
       currency: Currency.PLN,
       language: {
-        connectOrCreate: profileData.language.map(
-          (lang) => ({
-            where: { name: lang.name },
-            create: { name: lang.name },
-          }),
-          console.log('profileData', profileData),
-        ),
+        connectOrCreate: profileData.language.map((lang) => ({
+          where: { name: lang.name },
+          create: { name: lang.name },
+        })),
       },
     },
     include: includeObject.include,
