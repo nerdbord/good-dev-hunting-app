@@ -4,6 +4,21 @@ import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.mode
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
 
+export const mapLanguagesToProfileModel = (
+  languages: { name: string; value: string }[],
+): { name: string }[] => {
+  return languages.map((language) => ({ name: language.value }))
+}
+
+export const mapLanguagesToProfileFormValues = (
+  languages: { name: string }[],
+): { name: string; value: string }[] => {
+  return languages.map((language) => ({
+    name: language.name,
+    value: language.name,
+  }))
+}
+
 export const mapProfileModelToEditProfileFormValues = (
   profile: ProfileModel,
 ): ProfileFormValues => ({
@@ -32,8 +47,5 @@ export const mapProfileModelToEditProfileFormValues = (
   hourlyRateMin: profile.hourlyRateMin ?? 0,
   hourlyRateMax: profile.hourlyRateMax ?? 0,
   currency: profile.currency,
-  language: profile.language.map((language) => ({
-    name: language.name,
-    value: language.name,
-  })),
+  language: mapLanguagesToProfileFormValues(profile.language),
 })
