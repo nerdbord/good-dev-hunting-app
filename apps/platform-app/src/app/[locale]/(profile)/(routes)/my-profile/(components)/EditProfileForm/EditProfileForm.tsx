@@ -1,6 +1,9 @@
 'use client'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
-import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import {
+  mapLanguagesToProfileModel,
+  mapProfileModelToEditProfileFormValues,
+} from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,
   type ProfileFormValues,
@@ -51,6 +54,9 @@ export const validationSchema = Yup.object().shape({
       /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
       'Invalid LinkedIn URL',
     ),
+  language: Yup.array()
+    .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
+    .min(1, 'At least one language is required'),
 })
 
 const EditProfileForm = () => {
@@ -117,11 +123,7 @@ const EditProfileForm = () => {
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
-      language: values.language.map((language) => {
-        return {
-          name: language.value,
-        }
-      }),
+      language: mapLanguagesToProfileModel(values.language),
     }
 
     await runAsync(async () => {
