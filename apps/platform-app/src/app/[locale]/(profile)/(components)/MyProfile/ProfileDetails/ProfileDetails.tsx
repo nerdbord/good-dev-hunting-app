@@ -27,6 +27,16 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
                 </p>
               ))}
             </div>
+            <div className={styles.languages}>
+              <p className={styles.title}>Languages</p>
+              <div className={styles.techStackList}>
+                {profile?.language.map((item, index) => (
+                  <p key={index} className={styles.techStackItem}>
+                    {item.name}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
           <div className={styles.techStack}>
             <p className={styles.title}>Languages</p>
