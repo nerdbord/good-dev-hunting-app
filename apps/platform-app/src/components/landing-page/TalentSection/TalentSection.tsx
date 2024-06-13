@@ -24,7 +24,7 @@ const TalentSection = () => {
       </div>
       <div className={styles.talents}>
         {randomSixProfiles?.map((profile) => (
-          <ProfileListItem key={profile.id} data={profile} />
+          <ProfileListItem key={profile.id} profile={profile} />
         ))}
       </div>
       <FindTalentsBtn variant="primary" />
