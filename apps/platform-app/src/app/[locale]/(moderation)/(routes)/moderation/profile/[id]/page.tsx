@@ -1,5 +1,3 @@
-import Header from '@/app/[locale]/(profile)/(components)/Header/Header'
-
 import ModerationActionHeader from '@/app/[locale]/(moderation)/(components)/ModerationActionHeader/ModerationActionHeader'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
@@ -11,7 +9,9 @@ import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 
-import styles from './page.module.scss'
+import { ModerationUserProfilePage } from '@/app/[locale]/(moderation)/(components)/ModerationUserProfilePage/ModerationUserProfilePage'
+import styles from '@/app/[locale]/(moderation)/(routes)/moderation/profile/[id]/page.module.scss'
+import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 
 export default async function ModerationUserProfile({
   params,
@@ -27,14 +27,13 @@ export default async function ModerationUserProfile({
   if (!profile || !authorizedUserIsModerator) redirect(AppRoutes.profilesList)
 
   return (
-    <ProfileProvider profile={profile}>
-      <div className={styles.wrapper}>
-        <ModerationActionHeader profileOwnerRoles={profileOwner.roles} />
-        <UserProfileMain profileId={profile.id}>
-          <Header />
-        </UserProfileMain>
+    <ModerationUserProfilePage profileId={profile.id}>
+      <ModerationActionHeader profileOwnerRoles={profileOwner.roles} />
+      <div className={styles.container}>
+        <UserProfileMain profileId={profile.id} />
+        <UserProfileHeader profileId={profile.id} withBackButton />
         <UserProfileDetails profileId={profile.id} />
       </div>
-    </ProfileProvider>
+    </ModerationUserProfilePage>
   )
 }

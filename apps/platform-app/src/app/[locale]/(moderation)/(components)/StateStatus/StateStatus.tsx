@@ -1,5 +1,5 @@
+import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { formatStateName } from '@/app/[locale]/(profile)/(components)/FilterTabs/Tab'
-import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
 import { Button } from '@/components/Button/Button'
@@ -19,15 +19,19 @@ type StateStatusProps = {
 
 export function StateStatus({ profileId, profileState }: StateStatusProps) {
   const { showModal, closeModal } = useModal()
-  const { handleApprove: approveProfile, handleReject } = useModeration()
+  const {
+    approveModerationProfile,
+    rejectModerationProfile,
+    setModerationProfile,
+  } = useModerationProfilesStore((state) => state)
   const { runAsync, loading } = useAsyncAction()
 
-  const handleApprove = async (event: React.MouseEvent) => {
-    event.stopPropagation()
+  const handleApprove = () => {
+    setModerationProfile(profileId)
 
-    await runAsync(
+    runAsync(
       async () => {
-        await approveProfile(profileId)
+        await approveModerationProfile(profileId)
       },
       {
         successMessage: 'Profile accepted and will be visible on the main page',
@@ -35,12 +39,11 @@ export function StateStatus({ profileId, profileState }: StateStatusProps) {
     )
   }
 
-  const handleShowRejectModal = (event: React.MouseEvent) => {
-    event.stopPropagation()
+  const handleShowRejectModal = () => {
     showModal(
       <RejectingReasonModal
         profileId={profileId}
-        onReject={handleReject}
+        onReject={rejectModerationProfile}
         onClose={closeModal}
       />,
     )

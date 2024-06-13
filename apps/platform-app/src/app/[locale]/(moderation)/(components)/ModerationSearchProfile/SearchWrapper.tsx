@@ -1,15 +1,16 @@
 'use client'
-import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
 import { Button } from '@/components/Button/Button'
 import { useRef, useState, type ChangeEvent } from 'react'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
 
+import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import styles from './SearchWrapper.module.scss'
 
 export default function SearchWrapper() {
   const [searchValue, setSearchValue] = useState('')
-  const { setEmailSearchValue, setActiveTab, profiles } = useModeration()
+  const { setEmailSearchValue, setActiveTab, moderationProfiles } =
+    useModerationProfilesStore((state) => state)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestionRef = useRef<HTMLUListElement>(null)
 
@@ -30,7 +31,7 @@ export default function SearchWrapper() {
     setSearchValue('')
   }
 
-  const filteredProfiles = profiles.filter((profile) => {
+  const filteredProfiles = moderationProfiles.filter((profile) => {
     return searchValue !== '' && profile.email.includes(searchValue)
   })
 

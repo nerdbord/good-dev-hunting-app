@@ -1,8 +1,8 @@
 'use client'
-import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
 import { PublishingState } from '@prisma/client'
 import Tab from './Tab'
 
+import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import styles from './tabs.module.scss'
 
 export const availableTabs: PublishingState[] = Object.values(PublishingState)
@@ -11,12 +11,12 @@ export const availableTabs: PublishingState[] = Object.values(PublishingState)
 
 export default function Tabs() {
   const {
-    pendingStateCounter,
-    setPublishingStateFilter,
     activeTab,
+    setPublishingStateFilter,
     setActiveTab,
     setEmailSearchValue,
-  } = useModeration()
+    stateCounter,
+  } = useModerationProfilesStore((state) => state)
 
   const setModerationFilter = (tab: PublishingState) => {
     setActiveTab(PublishingState[tab])
@@ -36,7 +36,7 @@ export default function Tabs() {
             active={tab === activeTab}
             name={
               tab === PublishingState.PENDING
-                ? nameWithCounter(pendingStateCounter, tab)
+                ? nameWithCounter(stateCounter, tab)
                 : tab
             }
             action={() => setModerationFilter(PublishingState[tab])}
