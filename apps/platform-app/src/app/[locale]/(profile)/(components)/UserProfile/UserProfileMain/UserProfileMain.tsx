@@ -9,12 +9,15 @@ import { Avatar } from '@/components/Avatar/Avatar'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { countries } from '@/data/countries'
 import styles from './UserProfileMain.module.scss'
+import { getTranslations } from 'next-intl/server'
+import { I18nNamespaces } from '@/i18n'
 
 type UserProfileProps = {
   profileId: string
 }
 const UserProfileMain = async ({ profileId }: UserProfileProps) => {
   const profile = await findProfileById(profileId)
+  const t = await getTranslations(I18nNamespaces.UserProfile)
 
   const hourlyRateMin = profile.hourlyRateMin
   const hourlyRateMax = profile.hourlyRateMax
@@ -25,7 +28,7 @@ const UserProfileMain = async ({ profileId }: UserProfileProps) => {
   return (
     <>
       <div className={styles.backBtnMobile}>
-        <GoBackButton href="/profiles">Go back</GoBackButton>
+        <GoBackButton>{t('goBack')}</GoBackButton>
       </div>
       <div className={styles.profile}>
         <div className={styles.user}>
