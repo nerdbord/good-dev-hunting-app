@@ -1,11 +1,13 @@
 'use client'
-import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
+import ProfileCard from '@/app/[locale]/(profile)/(components)/ProfileCard/ProfileCard'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { I18nNamespaces } from '@/i18n'
+import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useMemo } from 'react'
 import styles from './TalentSection.module.scss'
-import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 
 const TalentSection = () => {
   const t = useTranslations(I18nNamespaces.TalentSection)
@@ -24,7 +26,13 @@ const TalentSection = () => {
       </div>
       <div className={styles.talents}>
         {randomSixProfiles?.map((profile) => (
-          <ProfileListItem key={profile.id} profile={profile} />
+          <Link
+            href={`${AppRoutes.profile}/${profile.githubUsername}`}
+            className={`${styles.frameWrapper}`}
+            key={profile.id}
+          >
+            <ProfileCard profile={profile} />
+          </Link>
         ))}
       </div>
       <FindTalentsBtn variant="primary" />

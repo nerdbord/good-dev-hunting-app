@@ -3,7 +3,9 @@
 import { useMemo } from 'react'
 import styles from './Hero.module.scss'
 import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
-import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
+import ProfileCard from '@/app/[locale]/(profile)/(components)/ProfileCard/ProfileCard'
+import { AppRoutes } from '@/utils/routes'
+import Link from 'next/link'
 
 export const HeroProfilesSection = () => {
   const { profiles } = useProfilesStore((state) => state)
@@ -20,7 +22,13 @@ export const HeroProfilesSection = () => {
 
           return (
             <div className={styles[frameClass]}>
-              <ProfileListItem key={profile.id} profile={profile} />
+              <Link
+                href={`${AppRoutes.profile}/${profile.githubUsername}`}
+                className={`${styles.frameWrapper}`}
+                key={profile.id}
+              >
+                <ProfileCard profile={profile} />
+              </Link>
             </div>
           )
         })}
