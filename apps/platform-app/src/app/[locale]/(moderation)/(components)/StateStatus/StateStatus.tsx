@@ -19,16 +19,11 @@ type StateStatusProps = {
 
 export function StateStatus({ profileId, profileState }: StateStatusProps) {
   const { showModal, closeModal } = useModal()
-  const {
-    approveModerationProfile,
-    rejectModerationProfile,
-    setModerationProfile,
-  } = useModerationProfilesStore((state) => state)
+  const { approveModerationProfile, rejectModerationProfile } =
+    useModerationProfilesStore((state) => state)
   const { runAsync, loading } = useAsyncAction()
 
   const handleApprove = () => {
-    setModerationProfile(profileId)
-
     runAsync(
       async () => {
         await approveModerationProfile(profileId)
