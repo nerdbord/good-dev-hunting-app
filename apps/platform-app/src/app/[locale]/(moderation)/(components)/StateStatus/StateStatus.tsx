@@ -1,5 +1,5 @@
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
-import { formatStateName } from '@/app/[locale]/(profile)/(components)/FilterTabs/Tab'
+import { formatStateName } from '@/app/[locale]/(moderation)/(components)/FilterTabs/Tab'
 import AcceptIcon from '@/assets/icons/AcceptIcon'
 import RejectIcon from '@/assets/icons/RejectIcon'
 import { Button } from '@/components/Button/Button'

@@ -1,13 +1,13 @@
-﻿import ModerationFilters from '@/app/[locale]/(profile)/(components)/Filters/ModerationFilters'
-import ModerationProfilesWithFilter from '@/app/[locale]/(profile)/(components)/ProfileList/ModerationProfilesWithFilter'
+﻿import { ModerationFilters } from '@/app/[locale]/(moderation)/(components)/ModerationFilters/ModerationFilters'
+import { ModerationProfileList } from '@/app/[locale]/(moderation)/(components)/ModerationProfileList/ModerationProfileList'
 
-const DashboardPage = () => {
+const ModerationPage = () => {
   return (
     <>
       <ModerationFilters />
-      <ModerationProfilesWithFilter />
+      <ModerationProfileList />
     </>
   )
 }
 
-export default DashboardPage
+export default ModerationPage

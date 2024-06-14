@@ -1,8 +1,8 @@
-import Tabs from '@/app/[locale]/(profile)/(components)/FilterTabs/Tabs'
+import Tabs from '@/app/[locale]/(moderation)/(components)/FilterTabs/Tabs'
 import SearchWrapper from '@/app/[locale]/(moderation)/(components)/ModerationSearchProfile/SearchWrapper'
-import styles from './Filters.module.scss'
+import styles from './ModerationFilters.module.scss'
 
-export default async function ModerationFilters() {
+export const ModerationFilters = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.tabsWrapper}>

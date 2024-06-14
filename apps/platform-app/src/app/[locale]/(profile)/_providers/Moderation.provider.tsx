@@ -1,6 +1,8 @@
 'use client'
-import { approveProfile } from '@/app/[locale]/(profile)/_actions'
-import { rejectProfile } from '@/app/[locale]/(profile)/_actions/mutations/rejectProfile'
+import {
+  approveProfile,
+  rejectProfile,
+} from '@/app/[locale]/(moderation)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { PublishingState } from '@prisma/client'
 import {

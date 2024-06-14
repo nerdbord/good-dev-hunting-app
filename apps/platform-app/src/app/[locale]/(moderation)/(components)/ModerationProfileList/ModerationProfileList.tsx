@@ -1,18 +1,15 @@
 'use client'
-import { StateStatus } from '@/app/[locale]/(moderation)/(components)/StateStatus/StateStatus'
+import { ModerationProfileListItem } from '@/app/[locale]/(moderation)/(components)/ModerationProfileList/ModerationProfileListItem'
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import Loader from '@/components/Loader/Loader'
 import { SearchResultsInfo } from '@/components/SearchResultsInfo/SearchResultsInfo'
 import useTabCounter from '@/hooks/useTabCounter'
-import { AppRoutes } from '@/utils/routes'
 import { PublishingState } from '@prisma/client'
-import Link from 'next/link'
-import ProfileCard from '../ProfileCard/ProfileCard'
-import styles from './ProfileList.module.scss'
 import { useSession } from 'next-auth/react'
-import Loader from '@/components/Loader/Loader'
+import styles from './ModerationProfileList.module.scss'
 
-export default function ModerationProfilesWithFilters() {
+export function ModerationProfileList() {
   const { status } = useSession()
   const {
     publishingState,
@@ -65,17 +62,7 @@ export default function ModerationProfilesWithFilters() {
 
       <div className={styles.profileListCont}>
         {filteredProfiles.map((profile) => (
-          <div className={styles.frameWrapper} key={profile.id}>
-            <Link href={`${AppRoutes.moderationProfile}/${profile.userId}`}>
-              <ProfileCard key={profile.id} profile={profile} />
-            </Link>
-            <div className={styles.detailsWrapper}>
-              <StateStatus
-                profileId={profile.id}
-                profileState={profile.state}
-              />
-            </div>
-          </div>
+          <ModerationProfileListItem key={profile.id} profile={profile} />
         ))}
       </div>
     </div>

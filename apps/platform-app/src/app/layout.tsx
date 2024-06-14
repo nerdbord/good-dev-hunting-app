@@ -7,8 +7,6 @@ import { IBM_Plex_Sans, Inter } from 'next/font/google'
 import * as process from 'process'
 import React from 'react'
 import './globals.scss'
-import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
-import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
 
 const ibm = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -30,13 +28,11 @@ export const metadata = {
     "Catch coding legends! Good Dev Hunting is reverse recruitment platform that allows you to find the best developers for your team. Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs.",
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const fetchedProfiles = await findAllApprovedProfiles()
-
   return (
     <html lang="en">
       <body className={commonClasses}>
@@ -45,9 +41,7 @@ export default async function RootLayout({
         >
           <SessionProvider>
             <ToastContextProvider>
-              <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
-                <ModalProvider>{children}</ModalProvider>
-              </ProfilesStoreProvider>
+              <ModalProvider>{children}</ModalProvider>
             </ToastContextProvider>
           </SessionProvider>
         </PlausibleProvider>

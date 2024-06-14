@@ -8,10 +8,6 @@
   }
 }
 
-.noProfiles {
-  margin-top: 40px;
-}
-
 .profileCards {
   margin-top: 40px;
   width: 100%;
@@ -25,11 +21,6 @@
   font-size: 14px;
   line-height: 20px;
   color: #e2eaf1;
-}
-
-.moderationProfiles {
-  width: 100%;
-  margin-top: 40px;
 }
 
 .frameWrapper {
@@ -48,16 +39,4 @@
 
 .frameWrapper:hover {
   box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
-}
-
-.moderationFrame {
-  padding-bottom: 11px;
-}
-
-.detailsWrapper {
-  display: flex;
-  margin: 0 16px 11px 14px;
-  padding-top: 18px;
-  border-top: 1px solid #2a2f35;
-  overflow-x: hidden;
 }
