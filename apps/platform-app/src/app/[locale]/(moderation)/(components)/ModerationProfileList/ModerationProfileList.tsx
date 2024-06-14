@@ -3,7 +3,7 @@ import { ModerationProfileListItem } from '@/app/[locale]/(moderation)/(componen
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import Loader from '@/components/Loader/Loader'
-import { SearchResultsInfo } from '@/components/SearchResultsInfo/SearchResultsInfo'
+import { SearchResultsInfo } from '@/app/[locale]/(moderation)/(components)/SearchResultsInfo/SearchResultsInfo'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 import { useSession } from 'next-auth/react'

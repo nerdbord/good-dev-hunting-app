@@ -1,7 +1,6 @@
-﻿import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
+﻿import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { PublishingState } from '@prisma/client'
-import { Button } from '../Button/Button'
-
+import { Button } from '../../../../../components/Button/Button'
 import styles from './SearchResultsInfo.module.scss'
 
 interface SearchResultsInfoProps {
@@ -15,8 +14,8 @@ export const SearchResultsInfo = ({
   resultsQty = 0,
   hasResults,
 }: SearchResultsInfoProps) => {
-  const { searchEmailValue, setEmailSearchValue, setActiveTab } =
-    useModeration()
+  const { searchValue, setEmailSearchValue, setActiveTab } =
+    useModerationProfilesStore((state) => state)
 
   const clearHandler = () => {
     setEmailSearchValue(null)
@@ -33,7 +32,7 @@ export const SearchResultsInfo = ({
         <p className={styles.searchInfo}>
           {text}{' '}
           <span className={styles.searchValue}>
-            "{searchEmailValue}" ({resultsQty})
+            "{searchValue}" ({resultsQty})
           </span>
         </p>
         <Button
