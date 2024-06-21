@@ -74,6 +74,10 @@ export const validationSchema = Yup.object().shape({
   terms: Yup.boolean()
     .required('Agreement is required')
     .oneOf([true], 'Agreement is required'),
+
+  language: Yup.array()
+    .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
+    .min(1, 'At least one language is required'),
 })
 
 const CreateProfileForm = () => {

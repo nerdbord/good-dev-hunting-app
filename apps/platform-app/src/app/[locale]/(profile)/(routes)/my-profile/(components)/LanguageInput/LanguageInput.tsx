@@ -1,14 +1,11 @@
-import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import CancelIcon from '@/assets/icons/CancelIcon'
 import ImportantIcon from '@/assets/icons/ImportantIcon'
-
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import styles from '@/components/TechStackInput/TechStackInput.module.scss'
 import languages from '@/data/languages'
 import classNames from 'classnames/bind'
-import { useFormikContext } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
-import Tooltip from '../Tooltip/Tooltip'
+import Tooltip from '../../../../../../../components/Tooltip/Tooltip'
 
 const cx = classNames.bind(styles)
 
@@ -21,6 +18,9 @@ interface LanguageInputProps {
   label: string
   addImportantIcon?: boolean
   tooltipText?: string | null
+  errors: any
+  touched: any
+  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
 export const mapLanguagesToDropdownOptions = (languages: string[]) => {
@@ -41,8 +41,10 @@ export const LanguageInput: React.FC<LanguageInputProps> = ({
   label,
   addImportantIcon,
   tooltipText,
+  errors,
+  touched,
+  handleBlur,
 }) => {
-  const { errors, handleBlur, touched } = useFormikContext<ProfileFormValues>()
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipsContainerRef = useRef(null)

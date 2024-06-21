@@ -6,6 +6,7 @@ import {
   type PublishingState,
 } from '@prisma/client'
 
+export type { DropdownOption }
 export type ProfileUpdateParams = Partial<ProfileModel>
 
 export type ProfileCreateParams = {

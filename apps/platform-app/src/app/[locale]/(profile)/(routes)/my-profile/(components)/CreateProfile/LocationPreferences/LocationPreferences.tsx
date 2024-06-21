@@ -1,9 +1,11 @@
 'use client'
-import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
+import { LanguageInput } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/LanguageInput/LanguageInput'
+import type {
+  CreateProfileFormValues,
+  DropdownOption,
+} from '@/app/[locale]/(profile)/profile.types'
 import CheckboxInput from '@/components/Checkbox/Checkbox'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import InputFormError from '@/components/InputFormError/InputFormError'
-import { LanguageInput } from '@/components/LanguageInput/LanguageInput'
 import SwitchInput from '@/components/Switch/Switch'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
@@ -156,6 +158,9 @@ const LocationPreferences = () => {
             onTechRemove={handleLangRemove}
             addImportantIcon={true}
             tooltipText={t('languageTooltip')}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
           />
         </InputFormError>
       </div>
