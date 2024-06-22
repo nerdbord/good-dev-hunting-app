@@ -4,6 +4,8 @@ import ImportantIcon from '@/assets/icons/ImportantIcon'
 
 import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import languages from '@/data/languages'
+import { type DropdownOption } from '@gdh/ui-system'
+import { CancelIcon, ImportantIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import { useFormikContext } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
