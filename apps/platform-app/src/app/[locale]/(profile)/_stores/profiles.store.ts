@@ -1,5 +1,5 @@
-﻿import { type ContactRequestModel } from '@/app/[locale]/(profile)/_models/contact-request.model'
-import { type ProfileViewModel } from '@/app/[locale]/(profile)/_models/profile-view.model'
+﻿import { createOrUpdateProfileView } from '@/app/[locale]/(profile)/_actions'
+import { type ContactRequestModel } from '@/app/[locale]/(profile)/_models/contact-request.model'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { createStore } from 'zustand'
 
@@ -10,7 +10,7 @@ export type ProfilesState = {
 
 export type ProfilesActions = {
   setProfile(profileId: string): void
-  markProfileAsVisited(profileView: ProfileViewModel): void
+  markProfileAsVisited(): Promise<void>
   markProfileAsContacted(contactRequest: ContactRequestModel): void
   resetProfile(): void
 }
@@ -18,7 +18,7 @@ export type ProfilesActions = {
 export type ProfilesStore = ProfilesState & ProfilesActions
 
 export const createProfilesStore = (initState: ProfileModel[]) => {
-  return createStore<ProfilesStore>()((set) => ({
+  return createStore<ProfilesStore>()((set, get) => ({
     profiles: initState,
     profile: null,
     setProfile: (profileId) => {
@@ -30,12 +30,16 @@ export const createProfilesStore = (initState: ProfileModel[]) => {
         return { ...state, profile }
       })
     },
-    markProfileAsVisited: (profileView) => {
+    markProfileAsVisited: async () => {
+      const profile = get().profile
+
+      if (!profile) return
+
+      const profileView = await createOrUpdateProfileView(profile.id)
+
+      if (!profileView) return
+
       set((state) => {
-        const profile = state.profile
-
-        if (!profile) return state
-
         const existingProfileView = profile.profileViews.find(
           (view) => view.viewerId === profileView.viewerId,
         )
