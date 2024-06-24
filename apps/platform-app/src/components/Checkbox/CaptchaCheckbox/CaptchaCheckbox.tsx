@@ -1,8 +1,8 @@
 import { validateCaptcha } from '@/app/[locale]/(profile)/_actions/mutations/validateCaptcha'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
+import { CheckboxInput } from '@gdh/ui-system'
 import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
-import CheckboxInput from '../Checkbox'
 import styles from '../Checkbox.module.scss'
 
 export type CaptchaCheckboxProps = {

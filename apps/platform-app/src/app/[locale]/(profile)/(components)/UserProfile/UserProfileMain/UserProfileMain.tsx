@@ -5,9 +5,9 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import { Avatar } from '@/components/Avatar/Avatar'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { countries } from '@/data/countries'
+import { Avatar } from '@gdh/ui-system'
 import styles from './UserProfileMain.module.scss'
 import { getTranslations } from 'next-intl/server'
 import { I18nNamespaces } from '@/i18n'

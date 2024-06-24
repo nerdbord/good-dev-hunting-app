@@ -1,10 +1,10 @@
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { formatStateName } from '@/app/[locale]/(moderation)/(components)/FilterTabs/Tab'
-import AcceptIcon from '@/assets/icons/AcceptIcon'
-import RejectIcon from '@/assets/icons/RejectIcon'
-import { Button } from '@/components/Button/Button'
+import { AcceptIcon, RejectIcon } from '@gdh/ui-system/icons'
+
 import { useModal } from '@/contexts/ModalContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
 import classNames from 'classnames/bind'
 import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'

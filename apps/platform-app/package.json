@@ -21,6 +21,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^1.5.0",
     "@mailerlite/mailerlite-nodejs": "^1.2.0",
+    "@gdh/ui-system": "^0.1.0",
     "@mdxeditor/editor": "^2.8.1",
     "@prisma/client": "^4.15.0",
     "@sentry/nextjs": "^7.114.0",

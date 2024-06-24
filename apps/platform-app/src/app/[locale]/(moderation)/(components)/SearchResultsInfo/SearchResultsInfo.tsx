@@ -1,6 +1,7 @@
 ﻿import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { PublishingState } from '@prisma/client'
-import { Button } from '../../../../../components/Button/Button'
+import { Button } from '@gdh/ui-system'
+
 import styles from './SearchResultsInfo.module.scss'
 
 interface SearchResultsInfoProps {

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useModal } from '@/contexts/ModalContext'
 
 import { Role } from '@prisma/client'

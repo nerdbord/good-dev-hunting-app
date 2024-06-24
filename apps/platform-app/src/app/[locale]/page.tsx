@@ -1,4 +1,3 @@
-import { Container } from '@/components/Container/Container'
 import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
 import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import {
@@ -10,6 +9,7 @@ import {
   TalentSection,
   UseYourProfile,
 } from '@/components/landing-page'
+import { Container } from '@gdh/ui-system'
 import React from 'react'
 import styles from '../page.module.scss'
 import Header from './(profile)/(components)/Header/Header'

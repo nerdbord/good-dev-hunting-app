@@ -1,5 +1,4 @@
-import GithubIcon2 from '@/assets/icons/GithubIcon2'
-import LinkedIn from '@/assets/icons/LinkedIn'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 
 import styles from './SocialItems.module.scss'
 

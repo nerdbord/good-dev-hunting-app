@@ -8,13 +8,13 @@ import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import logo from '@/assets/images/logo.png'
-import GithubStarsButton from '@/components/Button/GitHubStarsBtn'
-import { Container } from '@/components/Container/Container'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
+import { Container, GitHubStarsButton } from '@gdh/ui-system'
+
+import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
@@ -135,7 +135,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               <img src={logo.src} alt="Logo" />
               <h1 className={styles.title}>Good Dev Hunting</h1>
             </Link>
-            <GithubStarsButton />
+            <GitHubStarsButton />
           </div>
           <nav>
             <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>

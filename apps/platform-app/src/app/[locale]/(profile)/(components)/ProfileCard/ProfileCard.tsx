@@ -11,12 +11,10 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import PadlockIcon from '@/assets/icons/PadlockIcon'
-import { SendIcon } from '@/assets/icons/SendIcon'
-import ViewIcon from '@/assets/icons/ViewIcon'
-import { Avatar } from '@/components/Avatar/Avatar'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
+import { Avatar } from '@gdh/ui-system'
+import { PadlockIcon, SendIcon, ViewIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import { useMemo } from 'react'
 import styles from './ProfileCard.module.scss'

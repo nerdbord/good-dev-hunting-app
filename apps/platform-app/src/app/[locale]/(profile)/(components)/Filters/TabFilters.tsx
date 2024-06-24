@@ -13,7 +13,7 @@ import {
   type JobSpecialization,
   type SearchParamsFilters,
 } from '@/app/[locale]/(profile)/profile.types'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { type DropdownOption } from '@gdh/ui-system'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import styles from './Filters.module.scss'

@@ -1,6 +1,6 @@
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
+import { CheckboxInput } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import Link from 'next/link'
 import styles from './TermsOfUse.module.scss'

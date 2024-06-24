@@ -1,8 +1,59 @@
 {
-  "name": "ui-system",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "@gdh/ui-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ui system for the good dev hunting open source project",
+  "type": "module",
+  "main": "src/index.ts",
+  "source": "src/index.ts",
+  "exports": {
+    ".": {
+      "require": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./icons": {
+      "require": "./src/assets/icons/index.ts",
+      "import": "./src/assets/icons/index.ts"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook-static"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-github-btn": "^1.4.0",
+    "react-icons": "^4.9.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.4.0",
+    "@storybook/addon-essentials": "^8.1.2",
+    "@storybook/addon-interactions": "^8.1.2",
+    "@storybook/addon-links": "^8.1.2",
+    "@storybook/addon-onboarding": "^8.1.2",
+    "@storybook/blocks": "^8.1.2",
+    "@storybook/nextjs": "^8.1.2",
+    "@storybook/react": "^8.1.2",
+    "@storybook/test": "^8.1.2",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "css-loader": "^7.1.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "eslint-plugin-storybook": "^0.8.0",
+    "sass": "^1.77.2",
+    "sass-loader": "^14.2.1",
+    "storybook": "^8.1.2",
+    "style-loader": "^4.0.0",
+    "typescript": "^5"
   }
 }
