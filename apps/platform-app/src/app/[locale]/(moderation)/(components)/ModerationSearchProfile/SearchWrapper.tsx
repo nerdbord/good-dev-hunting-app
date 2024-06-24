@@ -6,11 +6,12 @@ import { SearchSuggestionItem } from './SearchSuggestionItem'
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import styles from './SearchWrapper.module.scss'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 export default function SearchWrapper() {
   const [searchValue, setSearchValue] = useState('')
   const { setEmailSearchValue, setActiveTab, moderationProfiles } =
-    useModerationProfilesStore((state) => state)
+    useModerationProfilesStore(getModerationCurrentState)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestionRef = useRef<HTMLUListElement>(null)
 

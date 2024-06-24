@@ -3,6 +3,7 @@ import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileLi
 import {
   createFiltersObjFromSearchParams,
   filterProfiles,
+  getProfileCurrentState,
   sortProfilesBySalary,
 } from '@/app/[locale]/(profile)/profile.helpers'
 import Loader from '@/components/Loader/Loader'
@@ -15,7 +16,7 @@ import { type SearchParamsFilters } from '@/app/[locale]/(profile)/profile.types
 
 const ProfileList = () => {
   const { status } = useSession()
-  const { profiles } = useProfilesStore((state) => state)
+  const { profiles } = useProfilesStore(getProfileCurrentState)
   const searchParams = useSearchParams()
 
   const filters: SearchParamsFilters = useMemo(

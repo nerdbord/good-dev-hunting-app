@@ -8,6 +8,7 @@ import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import styles from './ModerationProfileList.module.scss'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 export function ModerationProfileList() {
   const { status } = useSession()
@@ -16,7 +17,7 @@ export function ModerationProfileList() {
     setPendingStateCounter,
     searchValue,
     moderationProfiles,
-  } = useModerationProfilesStore((state) => state)
+  } = useModerationProfilesStore(getModerationCurrentState)
 
   const filteredProfiles = moderationProfiles.filter(
     (profile: ProfileModel) => {

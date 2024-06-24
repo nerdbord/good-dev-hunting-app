@@ -3,6 +3,7 @@ import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-s
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useEffect, type PropsWithChildren } from 'react'
 import styles from './UserProfilePage.module.scss'
+import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 
 type UserProfileProps = PropsWithChildren & {
   profileId: string
@@ -11,7 +12,7 @@ type UserProfileProps = PropsWithChildren & {
 export const UserProfilePage = ({ children, profileId }: UserProfileProps) => {
   const { runAsync } = useAsyncAction()
   const { markProfileAsVisited, setProfile, profile, resetProfile } =
-    useProfilesStore((state) => state)
+    useProfilesStore(getProfileCurrentState)
 
   useEffect(() => {
     setProfile(profileId)

@@ -4,6 +4,7 @@ import Tab from './Tab'
 
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import styles from './Tabs.module.scss'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 export const availableTabs: PublishingState[] = Object.values(PublishingState)
   .filter((key) => key !== 'DRAFT')
@@ -16,7 +17,7 @@ export default function Tabs() {
     setActiveTab,
     setEmailSearchValue,
     stateCounter,
-  } = useModerationProfilesStore((state) => state)
+  } = useModerationProfilesStore(getModerationCurrentState)
 
   const setModerationFilter = (tab: PublishingState) => {
     setActiveTab(PublishingState[tab])

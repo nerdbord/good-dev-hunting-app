@@ -19,6 +19,7 @@ import {
   validationSchema,
   type ContactFormValuesWithChecks,
 } from './schema'
+import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 
 export default function ContactForm({
   senderData,
@@ -29,7 +30,7 @@ export default function ContactForm({
   const { closeModal, showModal } = useModal()
   const { addToast } = useToast()
   const plausible = usePlausible()
-  const { markProfileAsContacted } = useProfilesStore((state) => state)
+  const { markProfileAsContacted } = useProfilesStore(getProfileCurrentState)
   const { userEmail, userFullName, userGithubName, userProfileId } = senderData
 
   const handleSendEmail = (values: ContactFormValuesWithChecks) => {

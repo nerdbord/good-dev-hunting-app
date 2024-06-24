@@ -1,4 +1,5 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { type ProfilesStore } from '@/app/[locale]/(profile)/_stores/profiles.store'
 import {
   JobOfferFiltersEnum,
   type HourlyRateValue,
@@ -270,3 +271,6 @@ export const sortProfilesBySalary = (a: ProfileModel, b: ProfileModel) => {
   if (!a.hourlyRateMin && b.hourlyRateMin) return 1
   else return 0
 }
+
+export const getProfileCurrentState = (state: ProfilesStore): ProfilesStore =>
+  state

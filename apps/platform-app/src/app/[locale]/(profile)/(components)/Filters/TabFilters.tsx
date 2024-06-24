@@ -6,6 +6,7 @@ import {
   createQueryString,
   filterBySpecialization,
   filterProfiles,
+  getProfileCurrentState,
   jobSpecializationThemes,
 } from '@/app/[locale]/(profile)/profile.helpers'
 import {
@@ -23,7 +24,7 @@ type TabFiltersProps = {
 }
 
 export const TabFilters = ({ specializations }: TabFiltersProps) => {
-  const profiles = useProfilesStore((state) => state.profiles)
+  const { profiles } = useProfilesStore(getProfileCurrentState)
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()

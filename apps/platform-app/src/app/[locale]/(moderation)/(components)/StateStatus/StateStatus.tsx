@@ -9,6 +9,7 @@ import { PublishingState } from '@prisma/client'
 import classNames from 'classnames/bind'
 import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
 import styles from './StateStatus.module.scss'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 const cx = classNames.bind(styles)
 
@@ -20,7 +21,7 @@ type StateStatusProps = {
 export function StateStatus({ profileId, profileState }: StateStatusProps) {
   const { showModal, closeModal } = useModal()
   const { approveModerationProfile, rejectModerationProfile } =
-    useModerationProfilesStore((state) => state)
+    useModerationProfilesStore(getModerationCurrentState)
   const { runAsync, loading } = useAsyncAction()
 
   const handleApprove = () => {

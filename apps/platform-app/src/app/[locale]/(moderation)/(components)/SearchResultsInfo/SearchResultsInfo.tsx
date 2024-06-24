@@ -3,6 +3,7 @@ import { PublishingState } from '@prisma/client'
 import { Button } from '@gdh/ui-system'
 
 import styles from './SearchResultsInfo.module.scss'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 interface SearchResultsInfoProps {
   text: string
@@ -16,7 +17,7 @@ export const SearchResultsInfo = ({
   hasResults,
 }: SearchResultsInfoProps) => {
   const { searchValue, setEmailSearchValue, setActiveTab } =
-    useModerationProfilesStore((state) => state)
+    useModerationProfilesStore(getModerationCurrentState)
 
   const clearHandler = () => {
     setEmailSearchValue(null)

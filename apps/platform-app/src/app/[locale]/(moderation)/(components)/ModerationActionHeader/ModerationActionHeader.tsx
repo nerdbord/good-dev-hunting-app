@@ -9,6 +9,7 @@ import AssignRoleModal from '@/app/[locale]/(moderation)/(components)/AssignRole
 import { StateStatus } from '@/app/[locale]/(moderation)/(components)/StateStatus/StateStatus'
 import styles from './ModerationActionHeader.module.scss'
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 interface ModerationActionHeaderProps {
   profileOwnerRoles: Role[]
@@ -18,7 +19,9 @@ export default function ModerationActionHeader(
   props: ModerationActionHeaderProps,
 ) {
   const { showModal, closeModal } = useModal()
-  const { moderationProfile } = useModerationProfilesStore((state) => state)
+  const { moderationProfile } = useModerationProfilesStore(
+    getModerationCurrentState,
+  )
 
   if (!moderationProfile) return null
 

@@ -3,6 +3,7 @@ import { ToastContextProvider } from '@/contexts/ToastContext'
 import { useSession } from 'next-auth/react'
 import ContactForm from '../ContactForm'
 import styles from './ContactFormModal.module.scss'
+import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 
 export type SenderData = {
   userId: string
@@ -13,7 +14,7 @@ export type SenderData = {
 }
 
 export default function ContactFormModal() {
-  const { profile } = useProfilesStore((state) => state)
+  const { profile } = useProfilesStore(getProfileCurrentState)
   const { data: session } = useSession()
 
   if (!profile || !session || !session.user) {
