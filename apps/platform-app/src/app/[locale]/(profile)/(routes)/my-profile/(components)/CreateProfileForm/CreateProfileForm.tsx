@@ -76,12 +76,11 @@ export const validationSchema = Yup.object().shape({
 })
 
 const CreateProfileForm = () => {
-  const { update: updateSession } = useSession()
+  const { update: updateSession, data: session } = useSession()
   const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
-  const { data: session } = useSession()
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {

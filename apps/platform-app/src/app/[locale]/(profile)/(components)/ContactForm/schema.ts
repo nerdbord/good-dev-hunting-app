@@ -14,7 +14,6 @@ export interface ContactFormValuesWithChecks extends ContactFormValues {
 
 export interface ContactFormRequest extends ContactFormValues {
   profileId: string
-  senderId: string
 }
 
 export const initialValues = (

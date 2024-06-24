@@ -1,32 +1,32 @@
 'use client'
-import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { jobSpecializationThemes } from '@/app/[locale]/(profile)/profile.helpers'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { useMemo } from 'react'
+import classNames from 'classnames'
+import styles from './TechnologiesRenderer.module.scss'
 
 type Props = {
-  data: ProfileModel
-  classes?: string
+  techStack: { name: string }[]
+  color: { color: string }
 }
 
-export default function TechnologiesRenderer({ data, classes }: Props) {
+const cx = classNames.bind(styles)
+
+export default function TechnologiesRenderer({ techStack, color }: Props) {
   const isMobile = useMediaQuery()
-  const specializationTheme = useMemo(
-    () => ({
-      color: jobSpecializationThemes[data.position],
-    }),
-    [data.position],
-  )
+
+  const getTechnologyClasses = cx({
+    [styles.technology]: true,
+  })
+
   const renderTechnologies = () => {
     const sliceCount = isMobile ? 2 : 3
 
-    if (data.techStack.length <= sliceCount) {
-      return data.techStack.map((tech, index) => (
+    if (techStack.length <= sliceCount) {
+      return techStack.map((tech, index) => (
         <span key={index}>{tech.name}</span>
       ))
     } else {
-      const displayedTechnologies = data.techStack.slice(0, sliceCount)
-      const othersCount = data.techStack.length - sliceCount
+      const displayedTechnologies = techStack.slice(0, sliceCount)
+      const othersCount = techStack.length - sliceCount
       return (
         <>
           {displayedTechnologies.map((tech, index) => (
@@ -41,7 +41,7 @@ export default function TechnologiesRenderer({ data, classes }: Props) {
   }
 
   return (
-    <div className={classes} style={specializationTheme}>
+    <div className={getTechnologyClasses} style={color}>
       {renderTechnologies()}
     </div>
   )

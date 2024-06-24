@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 'latest',
@@ -21,6 +22,15 @@ module.exports = {
         prefer: 'type-imports',
         fixStyle: 'inline-type-imports',
         disallowTypeAnnotations: false,
+      },
+    ],
+    // allow {} even though it's unsafe but comes handy
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        types: {
+          '{}': false,
+        },
       },
     ],
   },

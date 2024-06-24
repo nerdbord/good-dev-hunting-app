@@ -1,4 +1,5 @@
 'use server'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { type ContactFormRequest } from '@/app/[locale]/(profile)/(components)/ContactForm/schema'
 import { createContactRequestModel } from '@/app/[locale]/(profile)/_models/contact-request.model'
 import {
@@ -20,9 +21,16 @@ export const sendProfileContactRequest = withSentry(
     senderFullName,
     subject,
     profileId,
-    senderId,
   }: ContactFormRequest) => {
+    const { user: authorizedUser } = await getAuthorizedUser()
+
+    if (!authorizedUser) {
+      throw Error('Unauthorized')
+    }
+
+    const senderId = authorizedUser.id
     let contactRequest: ContactRequest | null = null
+
     try {
       const foundProfile = await getProfileById(profileId)
 
@@ -43,14 +51,16 @@ export const sendProfileContactRequest = withSentry(
         throw Error('You already contacted this dev')
       }
 
-      const createdContactRequest = await createContactRequest({
-        senderEmail,
-        senderFullName,
-        subject,
-        profileId,
-        message,
+      const createdContactRequest = await createContactRequest(
+        {
+          senderEmail,
+          senderFullName,
+          subject,
+          profileId,
+          message,
+        },
         senderId,
-      })
+      )
 
       contactRequest = createdContactRequest
 

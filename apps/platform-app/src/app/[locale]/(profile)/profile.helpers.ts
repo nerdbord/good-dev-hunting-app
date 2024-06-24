@@ -1,4 +1,5 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { type ProfilesStore } from '@/app/[locale]/(profile)/_stores/profiles.store'
 import {
   JobOfferFiltersEnum,
   type HourlyRateValue,
@@ -189,6 +190,27 @@ export const filterBySalary =
     })
   }
 
+export const filterProfiles = (
+  profiles: ProfileModel[],
+  filters: SearchParamsFilters,
+  options?: { disableSpecFilter?: boolean },
+) => {
+  const filteredProfiles = profiles
+    .filter(filterBySalary(filters.salary))
+    .filter(filterBySeniority(filters.seniority))
+    .filter(filterByLocation(filters.location))
+    .filter(filterByTechnology(filters.technology))
+    .filter(
+      options?.disableSpecFilter
+        ? () => true
+        : filterBySpecialization(filters.specialization),
+    )
+    .filter(filterByAvailability(filters.availability))
+    .filter(filterByFullName(filters.search[0]))
+    .filter(() => true)
+  return filteredProfiles
+}
+
 export const hasProfileValuesChanged = (
   foundProfile: ProfileModel,
   payload: ProfileModel,
@@ -249,3 +271,6 @@ export const sortProfilesBySalary = (a: ProfileModel, b: ProfileModel) => {
   if (!a.hourlyRateMin && b.hourlyRateMin) return 1
   else return 0
 }
+
+export const getProfileCurrentState = (state: ProfilesStore): ProfilesStore =>
+  state

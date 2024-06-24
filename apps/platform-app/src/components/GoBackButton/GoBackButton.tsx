@@ -18,11 +18,9 @@ export const GoBackButton = ({
   }
 
   return (
-    <div>
-      <button className={styles.back} onClick={handleClick}>
-        {children}
-      </button>
-    </div>
+    <button className={styles.back} onClick={handleClick}>
+      {children}
+    </button>
   )
 }
 

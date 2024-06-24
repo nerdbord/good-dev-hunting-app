@@ -1,4 +1,3 @@
-export { approveProfile } from './approveProfile'
 export { createOrUpdateProfileView } from './createOrUpdateProfileView'
 export { createProfile } from './createProfile'
 export { lockProfile } from './lockProfile'
