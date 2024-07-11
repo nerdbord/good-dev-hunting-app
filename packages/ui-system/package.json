@@ -22,12 +22,16 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook-static"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-github-btn": "^1.4.0",
+    "react-icons": "^4.9.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.4.0",

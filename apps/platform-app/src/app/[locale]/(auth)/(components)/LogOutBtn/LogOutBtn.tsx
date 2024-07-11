@@ -9,19 +9,18 @@ import { useState } from 'react'
 const LogOutBtn = () => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isCalled, setIsCalled] = useState(false)
+  
   return (
-    <div>
-      <Button
-        variant={'secondary'}
-        disabled={isCalled}
-        onClick={() => {
-          setIsCalled(true)
-          signOut({ callbackUrl: AppRoutes.home })
-        }}
-      >
-        {t('logOut')}{' '}
-      </Button>
-    </div>
+    <Button
+      variant={'secondary'}
+      disabled={isCalled}
+      onClick={() => {
+        setIsCalled(true)
+        signOut({ callbackUrl: AppRoutes.home })
+      }}
+    >
+      {t('logOut')}{' '}
+    </Button>
   )
 }
 
