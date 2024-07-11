@@ -8,7 +8,7 @@ import { getTranslations } from 'next-intl/server'
 import styles from './Hero.module.scss'
 
 const Hero = async () => {
-  const { user, userIsHunter, userHasProfile } = await getAuthorizedUser()
+  const { userIsHunter, userHasProfile } = await getAuthorizedUser()
   const t = await getTranslations(I18nNamespaces.Index)
 
   return (

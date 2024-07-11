@@ -6,7 +6,7 @@ import HunterAcc from '@/app/[locale]/(auth)/(components)/HunterAcc/HunterAcc'
 import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
-import ModerationBtn from '@/app/[locale]/(profile)/(routes)/moderation/(components)/ModerationBtn/ModerationBtn'
+
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
@@ -17,6 +17,7 @@ import { Container, GitHubStarsButton } from '@gdh/ui-system'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import styles from './Header.module.scss'
+import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
 
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
