@@ -28,7 +28,6 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
               ))}
             </div>
           </div>
-
           {/* this feature below will be added in the future */}
           {/*         <div className={styles.gitActivities}>
             <div className={styles.title}>Git activity</div>
@@ -39,8 +38,7 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
             <div className={styles.gitActivityBox}>
               <div className={styles.gitActivity}>Pull requests</div>
               <div className={styles.gitActivityValue}>48</div>
-            </div>
-          </div>  */}
+            </div> */}
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>

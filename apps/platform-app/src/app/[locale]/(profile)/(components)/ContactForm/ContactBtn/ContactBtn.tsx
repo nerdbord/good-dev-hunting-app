@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@gdh/ui-system'
 import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n'
+import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import ContactFormModal from '../ContactFormModal/ContactFormModal'
 

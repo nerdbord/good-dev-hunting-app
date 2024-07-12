@@ -26,6 +26,5 @@ export const CancelIcon = () => {
         stroke="#A687FF"
       />
     </svg>
-  )
-}
-
+  );
+};

@@ -34,5 +34,5 @@ export const GlobeIcon = () => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

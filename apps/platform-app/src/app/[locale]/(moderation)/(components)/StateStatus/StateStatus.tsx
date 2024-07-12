@@ -1,7 +1,8 @@
-import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { formatStateName } from '@/app/[locale]/(moderation)/(components)/FilterTabs/Tab'
+import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { AcceptIcon, RejectIcon } from '@gdh/ui-system/icons'
 
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 import { useModal } from '@/contexts/ModalContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Button } from '@gdh/ui-system'
@@ -9,7 +10,6 @@ import { PublishingState } from '@prisma/client'
 import classNames from 'classnames/bind'
 import RejectingReasonModal from '../RejectingReasonModal/RejectingReasonModal'
 import styles from './StateStatus.module.scss'
-import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 const cx = classNames.bind(styles)
 

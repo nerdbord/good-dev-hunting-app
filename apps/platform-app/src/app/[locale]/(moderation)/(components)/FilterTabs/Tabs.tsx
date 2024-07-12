@@ -3,8 +3,8 @@ import { PublishingState } from '@prisma/client'
 import Tab from './Tab'
 
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
-import styles from './Tabs.module.scss'
 import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
+import styles from './Tabs.module.scss'
 
 export const availableTabs: PublishingState[] = Object.values(PublishingState)
   .filter((key) => key !== 'DRAFT')

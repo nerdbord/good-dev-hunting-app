@@ -25,5 +25,5 @@ export const LogoGDH = () => {
       />
       <path d="M18 12.4V6H23.6V12.4H18Z" fill="#161A1F" />
     </svg>
-  )
-}
+  );
+};

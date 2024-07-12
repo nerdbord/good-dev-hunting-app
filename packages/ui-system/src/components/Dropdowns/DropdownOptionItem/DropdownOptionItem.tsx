@@ -1,16 +1,16 @@
-import { IoIosCheckmark } from 'react-icons/io'
-import styles from './DropdownOptionItem.module.scss'
+import { IoIosCheckmark } from "react-icons/io";
+import styles from "./DropdownOptionItem.module.scss";
 
 export interface DropdownOption {
-  name: string
-  value: string
+  name: string;
+  value: string;
 }
 
 interface DropdownOptionItemProps {
-  option: DropdownOption
-  onSelect: (option: DropdownOption) => void
-  hasSearchInput: boolean | undefined
-  isSelected: boolean
+  option: DropdownOption;
+  onSelect: (option: DropdownOption) => void;
+  hasSearchInput: boolean | undefined;
+  isSelected: boolean;
 }
 
 export const DropdownOptionItem = ({
@@ -24,7 +24,7 @@ export const DropdownOptionItem = ({
       hasSearchInput ? styles.dropdownInputSearchBar : styles.dropdownInput
     }
   >
-    <div className={`${styles.checkbox} ${isSelected ? styles.checked : ''}`}>
+    <div className={`${styles.checkbox} ${isSelected ? styles.checked : ""}`}>
       <input
         type="checkbox"
         className={styles.hidden}
@@ -35,4 +35,4 @@ export const DropdownOptionItem = ({
     </div>
     {option.name}
   </label>
-)
+);

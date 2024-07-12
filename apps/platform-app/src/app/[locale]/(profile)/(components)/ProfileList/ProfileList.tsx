@@ -1,18 +1,18 @@
 'use client'
 import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
+import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import {
   createFiltersObjFromSearchParams,
   filterProfiles,
   getProfileCurrentState,
   sortProfilesBySalary,
 } from '@/app/[locale]/(profile)/profile.helpers'
+import { type SearchParamsFilters } from '@/app/[locale]/(profile)/profile.types'
 import Loader from '@/components/Loader/Loader'
 import { useSession } from 'next-auth/react'
-import styles from './ProfileList.module.scss'
-import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
-import { type SearchParamsFilters } from '@/app/[locale]/(profile)/profile.types'
+import styles from './ProfileList.module.scss'
 
 const ProfileList = () => {
   const { status } = useSession()

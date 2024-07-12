@@ -1,9 +1,9 @@
 import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
+import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import { useSession } from 'next-auth/react'
 import ContactForm from '../ContactForm'
 import styles from './ContactFormModal.module.scss'
-import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 
 export type SenderData = {
   userId: string

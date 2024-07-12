@@ -8,8 +8,8 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 import styles from './ProfileList.module.scss'
 
-import ProfileCard from '../ProfileCard/ProfileCard'
 import Link from 'next/link'
+import ProfileCard from '../ProfileCard/ProfileCard'
 
 interface ProfileListItemProps {
   profile: ProfileModel

@@ -4,9 +4,9 @@ import { useRef, useState, type ChangeEvent } from 'react'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
 
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import styles from './SearchWrapper.module.scss'
-import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 export default function SearchWrapper() {
   const [searchValue, setSearchValue] = useState('')

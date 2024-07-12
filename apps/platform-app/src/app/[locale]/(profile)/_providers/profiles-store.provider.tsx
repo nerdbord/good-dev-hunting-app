@@ -1,16 +1,16 @@
 ﻿'use client'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
-  type ProfilesStore,
   createProfilesStore,
+  type ProfilesStore,
 } from '@/app/[locale]/(profile)/_stores/profiles.store'
 import {
-  type PropsWithChildren,
   createContext,
   useContext,
-  useRef
+  useRef,
+  type PropsWithChildren,
 } from 'react'
-import { type StoreApi, useStore } from 'zustand'
+import { useStore, type StoreApi } from 'zustand'
 
 export const ProfilesStoreContext =
   createContext<StoreApi<ProfilesStore> | null>(null)
@@ -33,7 +33,7 @@ export const ProfilesStoreProvider = ({
 }
 
 export const useProfilesStore = <T,>(
-  selector: (store: ProfilesStore) => T
+  selector: (store: ProfilesStore) => T,
 ): T => {
   const profilesStoreContext = useContext(ProfilesStoreContext)
 

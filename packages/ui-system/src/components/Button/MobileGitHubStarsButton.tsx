@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import GitHubButton from 'react-github-btn'
-import styles from './MobileGitHubStarsButton.module.scss'
+import GitHubButton from "react-github-btn";
+import styles from "./MobileGitHubStarsButton.module.scss";
 
 export const MobileGitHubStarsButton = () => {
   return (
@@ -25,5 +25,5 @@ export const MobileGitHubStarsButton = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

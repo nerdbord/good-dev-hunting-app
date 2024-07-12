@@ -1,31 +1,31 @@
-'use client'
-import classNames from 'classnames/bind'
-import { useState, type ReactNode } from 'react'
-import styles from './Accordion.module.scss'
-import AccordionIcon from './icons/AccordionIcon'
-const cx = classNames.bind(styles)
+"use client";
+import classNames from "classnames/bind";
+import { useState, type ReactNode } from "react";
+import styles from "./Accordion.module.scss";
+import AccordionIcon from "./icons/AccordionIcon";
+const cx = classNames.bind(styles);
 
 export enum AccordionIconType {
-  Add = 'add',
-  Subtract = 'subtract',
+  Add = "add",
+  Subtract = "subtract",
 }
 
 interface AccordionProps {
-  title: string
-  children: ReactNode
+  title: string;
+  children: ReactNode;
 }
 
 export const Accordion = (props: AccordionProps) => {
-  const [accordionOpen, setAccordionOpen] = useState(false)
+  const [accordionOpen, setAccordionOpen] = useState(false);
 
   const handleOpen = () => {
-    setAccordionOpen((prevOpen) => !prevOpen)
-  }
+    setAccordionOpen((prevOpen) => !prevOpen);
+  };
 
   const getContentClasses = cx({
     [styles.accordionContent]: true,
     [styles.isOpen]: accordionOpen,
-  })
+  });
 
   return (
     <section className={styles.wrapper}>
@@ -43,5 +43,5 @@ export const Accordion = (props: AccordionProps) => {
         <div className={styles.content}>{props.children}</div>
       </div>
     </section>
-  )
-}
+  );
+};

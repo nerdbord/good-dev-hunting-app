@@ -30,5 +30,5 @@ export const ErrorIcon = () => {
         />
       </g>
     </svg>
-  )
-}
+  );
+};

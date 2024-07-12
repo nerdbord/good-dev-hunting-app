@@ -1,9 +1,9 @@
 ﻿'use client'
 import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
+import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { useEffect, type PropsWithChildren } from 'react'
 import styles from './UserProfilePage.module.scss'
-import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 
 type UserProfileProps = PropsWithChildren & {
   profileId: string
