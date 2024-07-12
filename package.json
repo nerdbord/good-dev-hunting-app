@@ -23,5 +23,8 @@
     "@commitlint/config-conventional": "^17.6.3",
     "husky": "^8.0.0",
     "lint-staged": "^15.1.0"
+  },
+  "dependencies": {
+    "zustand": "^4.5.4"
   }
 }
