@@ -152,12 +152,15 @@ const LocationPreferences = () => {
           <LanguageInput
             chips={values[LocationPreferencesFormKeys.LANGUAGE]}
             label={t('languages')}
-            placeholder={t('startTyping')}
+            placeholder={t('languagePlaceholder')}
             name={LocationPreferencesFormKeys.LANGUAGE}
             onTechSelect={handleLangSelect}
             onTechRemove={handleLangRemove}
             addImportantIcon={true}
             tooltipText={t('languageTooltip')}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
           />
         </InputFormError>
       </div>
