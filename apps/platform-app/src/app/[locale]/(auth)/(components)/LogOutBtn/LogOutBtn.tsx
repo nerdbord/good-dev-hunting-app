@@ -1,7 +1,7 @@
 'use client'
-import { Button } from '@/components/Button/Button'
 import { I18nNamespaces } from '@/i18n'
 import { AppRoutes } from '@/utils/routes'
+import { Button } from '@gdh/ui-system'
 import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'

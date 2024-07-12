@@ -4,12 +4,12 @@ import type {
   CreateProfileFormValues,
   DropdownOption,
 } from '@/app/[locale]/(profile)/profile.types'
-import CheckboxInput from '@/components/Checkbox/Checkbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import SwitchInput from '@/components/Switch/Switch'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { I18nNamespaces } from '@/i18n'
+import { CheckboxInput } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import styles from './LocationPreferences.module.scss'

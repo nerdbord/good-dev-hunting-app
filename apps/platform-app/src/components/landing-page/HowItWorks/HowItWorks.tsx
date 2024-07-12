@@ -1,8 +1,10 @@
-import ConnectIcon from '@/assets/icons/ConnectIcon'
-import DollarIcon from '@/assets/icons/DollarIcon'
-import GithubIcon from '@/assets/icons/GithubIcon'
-import GlobeIcon from '@/assets/icons/GlobeIcon'
 import { I18nNamespaces } from '@/i18n'
+import {
+  ConnectIcon,
+  DollarIcon,
+  GithubIcon,
+  GlobeIcon,
+} from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
 import styles from './HowItWorks.module.scss'
 import Step from './Step/Step'

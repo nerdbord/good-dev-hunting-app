@@ -1,6 +1,6 @@
 'use client'
-import { Button } from '@/components/Button/Button'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { Button } from '@gdh/ui-system'
 import { useState } from 'react'
 
 import modalStyles from '@/components/Modal/Modal.module.scss'
