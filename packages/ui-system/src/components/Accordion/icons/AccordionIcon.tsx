@@ -1,7 +1,7 @@
-import { AccordionIconType } from '../Accordion'
+import { AccordionIconType } from "../Accordion";
 
 interface AccordionIconProps {
-  type: AccordionIconType
+  type: AccordionIconType;
 }
 
 const AccordionIcon = (props: AccordionIconProps) => {
@@ -24,7 +24,7 @@ const AccordionIcon = (props: AccordionIconProps) => {
         stroke="#E2EAF1"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default AccordionIcon
+export default AccordionIcon;

@@ -23,5 +23,5 @@ export const EmailIcon = () => {
       </mask>
       <g mask="url(#mask0_453_4209)"></g>
     </svg>
-  )
-}
+  );
+};

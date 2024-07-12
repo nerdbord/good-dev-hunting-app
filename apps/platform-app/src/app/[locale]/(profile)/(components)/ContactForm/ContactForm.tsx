@@ -2,6 +2,7 @@ import { type SenderData } from '@/app/[locale]/(profile)/(components)/ContactFo
 import ContactSuccessModal from '@/app/[locale]/(profile)/(components)/ContactForm/ContactSuccessModal.tsx/ContactSuccessModal'
 import { sendProfileContactRequest } from '@/app/[locale]/(profile)/_actions/mutations/sendProfileContactRequest'
 import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
+import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
@@ -19,7 +20,6 @@ import {
   validationSchema,
   type ContactFormValuesWithChecks,
 } from './schema'
-import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers'
 
 export default function ContactForm({
   senderData,

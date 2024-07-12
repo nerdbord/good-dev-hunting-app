@@ -10,7 +10,6 @@ import {
   UseYourProfile,
 } from '@/components/landing-page'
 import { Container } from '@gdh/ui-system'
-import React from 'react'
 import styles from '../page.module.scss'
 import Header from './(profile)/(components)/Header/Header'
 

@@ -62,6 +62,8 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
 
   const updatedTechStack = payload.techStack.map((tech) => tech.name)
 
+  const updatedLanguage = payload.language.map((lang) => lang.name)
+
   const updatedData: Prisma.ProfileUpdateInput = {
     fullName: payload.fullName,
     linkedIn: payload.linkedIn,
@@ -105,6 +107,19 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     hourlyRateMin: payload.hourlyRateMin,
     hourlyRateMax: payload.hourlyRateMax,
     currency: Currency.PLN,
+    language: {
+      disconnect: foundProfile.language
+        .filter((lang) => !updatedLanguage.includes(lang.name))
+        .map((lang) => ({
+          name: lang.name,
+        })),
+      connectOrCreate: payload.language.map((lang) => ({
+        where: { name: lang.name },
+        create: {
+          name: lang.name,
+        },
+      })),
+    },
   }
 
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)

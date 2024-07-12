@@ -12,5 +12,5 @@ export const RejectIcon = () => {
         fill="white"
       />
     </svg>
-  )
-}
+  );
+};

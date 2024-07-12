@@ -1,4 +1,4 @@
-﻿export const SendIcon = ({ color = '#69717B' }: { color?: string }) => {
+﻿export const SendIcon = ({ color = "#69717B" }: { color?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,5 +15,5 @@
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

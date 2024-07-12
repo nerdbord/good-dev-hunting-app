@@ -20,5 +20,5 @@ export const ImportantIcon = () => {
         fill="#69717B"
       />
     </svg>
-  )
-}
+  );
+};

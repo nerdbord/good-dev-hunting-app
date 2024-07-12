@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { IoIosCheckmark } from 'react-icons/io'
-import styles from './Checkbox.module.scss'
+import React from "react";
+import { IoIosCheckmark } from "react-icons/io";
+import styles from "./Checkbox.module.scss";
 
 interface CheckboxInputProps {
-  id: string
-  label: string
-  checked: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  name: string
-  dataTestId?: string
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
-  children?: JSX.Element
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  dataTestId?: string;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  children?: JSX.Element;
 }
 
 export const CheckboxInput: React.FC<CheckboxInputProps> = ({
@@ -26,15 +26,15 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   children,
 }) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event)
-  }
+    onChange(event);
+  };
   return (
     <label
       className={styles.checkboxLabel}
       htmlFor={id}
       data-testid={dataTestId}
     >
-      <div className={`${styles.checkbox} ${checked ? styles.checked : ''}`}>
+      <div className={`${styles.checkbox} ${checked ? styles.checked : ""}`}>
         <input
           id={id}
           type="checkbox"
@@ -48,5 +48,5 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
       </div>
       {label || children}
     </label>
-  )
-}
+  );
+};

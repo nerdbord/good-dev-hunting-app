@@ -24,5 +24,5 @@
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

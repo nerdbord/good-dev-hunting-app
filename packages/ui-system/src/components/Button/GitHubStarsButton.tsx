@@ -1,5 +1,5 @@
-'use client'
-import GitHubButton from 'react-github-btn'
+"use client";
+import GitHubButton from "react-github-btn";
 
 export const GitHubStarsButton = () => {
   return (
@@ -13,7 +13,5 @@ export const GitHubStarsButton = () => {
     >
       Star
     </GitHubButton>
-  )
-}
-
-
+  );
+};

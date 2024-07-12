@@ -27,7 +27,7 @@ export const Default: Story = {
     option: { name: "Option 1", value: "option1" },
     hasSearchInput: false,
     isSelected: false,
-    onSelect: ()=>{}
+    onSelect: () => {},
   },
 };
 
@@ -36,7 +36,7 @@ export const Selected: Story = {
     option: { name: "Option 2", value: "option2" },
     hasSearchInput: false,
     isSelected: true,
-    onSelect: ()=>{}
+    onSelect: () => {},
   },
 };
 
@@ -45,6 +45,6 @@ export const WithSearchInput: Story = {
     option: { name: "Option 3", value: "option3" },
     hasSearchInput: true,
     isSelected: false,
-    onSelect: ()=>{}
+    onSelect: () => {},
   },
 };

@@ -24,5 +24,5 @@ export const PadlockIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

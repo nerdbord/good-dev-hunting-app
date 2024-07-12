@@ -1,8 +1,8 @@
 ﻿'use client'
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 import { useEffect, type PropsWithChildren } from 'react'
 import styles from './ModerationUserProfilePage.module.scss'
-import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 type ModerationUserProfileProps = PropsWithChildren & {
   profileId: string

@@ -1,4 +1,4 @@
-export const ViewIcon = ({ color = '#69717B' }: { color?: string }) => {
+export const ViewIcon = ({ color = "#69717B" }: { color?: string }) => {
   return (
     <svg
       width="24"
@@ -14,5 +14,5 @@ export const ViewIcon = ({ color = '#69717B' }: { color?: string }) => {
       />
       <circle cx="12" cy="12" r="3" stroke={color} strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

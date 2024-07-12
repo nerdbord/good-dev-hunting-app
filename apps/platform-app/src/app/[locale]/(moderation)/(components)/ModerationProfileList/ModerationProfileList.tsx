@@ -1,14 +1,14 @@
 'use client'
 import { ModerationProfileListItem } from '@/app/[locale]/(moderation)/(components)/ModerationProfileList/ModerationProfileListItem'
+import { SearchResultsInfo } from '@/app/[locale]/(moderation)/(components)/SearchResultsInfo/SearchResultsInfo'
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
+import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import Loader from '@/components/Loader/Loader'
-import { SearchResultsInfo } from '@/app/[locale]/(moderation)/(components)/SearchResultsInfo/SearchResultsInfo'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import styles from './ModerationProfileList.module.scss'
-import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 
 export function ModerationProfileList() {
   const { status } = useSession()

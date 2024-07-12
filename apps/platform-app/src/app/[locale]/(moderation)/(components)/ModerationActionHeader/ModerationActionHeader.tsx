@@ -1,15 +1,15 @@
 'use client'
 
-import { Button } from '@gdh/ui-system'
 import { useModal } from '@/contexts/ModalContext'
+import { Button } from '@gdh/ui-system'
 
 import { Role } from '@prisma/client'
 
 import AssignRoleModal from '@/app/[locale]/(moderation)/(components)/AssignRoleModal/AssignRoleModal'
 import { StateStatus } from '@/app/[locale]/(moderation)/(components)/StateStatus/StateStatus'
-import styles from './ModerationActionHeader.module.scss'
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
+import styles from './ModerationActionHeader.module.scss'
 
 interface ModerationActionHeaderProps {
   profileOwnerRoles: Role[]

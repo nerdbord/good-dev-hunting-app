@@ -32,8 +32,8 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           {pathname === AppRoutes.createProfile
             ? t('createProfile')
             : pathname === AppRoutes.editProfile
-            ? t('editProfile')
-            : t('myProfile')}
+              ? t('editProfile')
+              : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>

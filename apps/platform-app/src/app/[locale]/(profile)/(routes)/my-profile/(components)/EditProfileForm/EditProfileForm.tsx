@@ -1,13 +1,16 @@
 'use client'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
-import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import {
+  mapLanguagesToProfileModel,
+  mapProfileModelToEditProfileFormValues,
+} from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,
   type ProfileFormValues,
 } from '@/app/[locale]/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { Currency } from '@prisma/client'
+import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -50,6 +53,9 @@ export const validationSchema = Yup.object().shape({
       /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
       'Invalid LinkedIn URL',
     ),
+  language: Yup.array()
+    .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
+    .min(1, 'At least one language is required'),
 })
 
 const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
@@ -59,6 +65,30 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { formDataWithFile } = useUploadContext()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
+    if (!profile) {
+      return {
+        fullName: '',
+        linkedin: '',
+        bio: '',
+        country: '',
+        openForCountryRelocation: false,
+        city: '',
+        openForCityRelocation: false,
+        remoteOnly: false,
+        position: { name: '', value: '' },
+        seniority: { name: '', value: '' },
+        techStack: [],
+        employment: [],
+        githubUsername: '',
+        state: PublishingState.PENDING,
+        viewCount: 0,
+        hourlyRateMin: 0,
+        hourlyRateMax: 0,
+        currency: Currency.PLN,
+        language: [],
+      }
+    }
+
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
@@ -86,6 +116,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
+      language: mapLanguagesToProfileModel(values.language),
     }
 
     await runAsync(async () => {

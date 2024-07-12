@@ -1,9 +1,9 @@
-﻿import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
-import { PublishingState } from '@prisma/client'
+import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { Button } from '@gdh/ui-system'
+import { PublishingState } from '@prisma/client'
 
-import styles from './SearchResultsInfo.module.scss'
 import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
+import styles from './SearchResultsInfo.module.scss'
 
 interface SearchResultsInfoProps {
   text: string

@@ -1,21 +1,21 @@
-'use client'
-import classNames from 'classnames/bind'
-import React, { type PropsWithChildren } from 'react'
-import styles from './Button.module.scss'
+"use client";
+import classNames from "classnames/bind";
+import React, { type PropsWithChildren } from "react";
+import styles from "./Button.module.scss";
 
 interface ButtonProps {
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   variant:
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'action'
-    | 'logout'
-    | 'standard'
-  type?: 'button' | 'submit'
-  disabled?: boolean
-  loading?: boolean
-  dataTestId?: string
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "action"
+    | "logout"
+    | "standard";
+  type?: "button" | "submit";
+  disabled?: boolean;
+  loading?: boolean;
+  dataTestId?: string;
 }
 
 export const Button = ({
@@ -27,11 +27,11 @@ export const Button = ({
   dataTestId,
   type,
 }: PropsWithChildren<ButtonProps>) => {
-  const cx = classNames.bind(styles)
+  const cx = classNames.bind(styles);
   const buttonClasses = cx({
     [variant]: true,
     [styles.disabled]: disabled || loading,
-  })
+  });
 
   return (
     <button
@@ -41,7 +41,7 @@ export const Button = ({
       onClick={onClick}
       type={type}
     >
-      {loading ? 'Loading...' : children}
+      {loading ? "Loading..." : children}
     </button>
-  )
-}
+  );
+};

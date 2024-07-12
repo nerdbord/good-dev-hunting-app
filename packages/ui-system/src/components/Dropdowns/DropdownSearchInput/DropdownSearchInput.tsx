@@ -1,10 +1,10 @@
-import React from 'react'
-import styles from './DropdownSearchInput.module.scss'
+import React from "react";
+import styles from "./DropdownSearchInput.module.scss";
 
 interface SearchInputProps {
-  searchTerm: string
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
-  showNoMatchingOptions: boolean
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  showNoMatchingOptions: boolean;
 }
 
 export const DropdownSearchInput = ({
@@ -25,5 +25,5 @@ export const DropdownSearchInput = ({
         <p className={styles.noMatchingOptions}>No matching options found</p>
       )}
     </>
-  )
-}
+  );
+};
