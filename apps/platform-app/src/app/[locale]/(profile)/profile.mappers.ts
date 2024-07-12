@@ -1,5 +1,5 @@
 import { SeniorityLevel } from '@/backend/profile/profile.types'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { type DropdownOption } from '@gdh/ui-system'
 import { EmploymentType } from '@prisma/client'
 import { JobSpecialization } from './profile.types'
 

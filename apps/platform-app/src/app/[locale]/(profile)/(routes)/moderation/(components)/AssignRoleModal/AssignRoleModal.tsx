@@ -1,8 +1,8 @@
 import { assignRole } from '@/app/[locale]/(auth)/_actions/mutations/assignRole'
 import { unassignRole } from '@/app/[locale]/(auth)/_actions/mutations/unassignRole'
-import { Button } from '@/components/Button/Button'
 import modalStyles from '@/components/Modal/Modal.module.scss'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { Button } from '@gdh/ui-system'
 import { Role } from '@prisma/client'
 import styles from './AssignRole.module.scss'
 

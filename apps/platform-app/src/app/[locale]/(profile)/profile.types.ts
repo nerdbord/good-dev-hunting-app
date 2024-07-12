@@ -1,5 +1,5 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
+import { type DropdownOption } from '@gdh/ui-system'
 import {
   type Currency,
   type EmploymentType,

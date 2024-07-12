@@ -1,5 +1,5 @@
 'use client'
-import ImportantIcon from '@/assets/icons/ImportantIcon'
+import { ImportantIcon } from '@gdh/ui-system/icons'
 import React, { useState } from 'react'
 import Tooltip from '../Tooltip/Tooltip'
 import styles from './TextInput.module.scss'

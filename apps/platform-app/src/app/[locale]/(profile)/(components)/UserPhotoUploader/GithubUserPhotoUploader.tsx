@@ -1,9 +1,9 @@
 ﻿import { importAvatarFromGithub } from '@/app/[locale]/(auth)/_actions/mutations/importAvatarFromGithub'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { I18nNamespaces } from '@/i18n'
+import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import React from 'react'
-import { Button } from '../../../../../components/Button/Button'
 
 interface Props {
   setImage: (url: string) => void

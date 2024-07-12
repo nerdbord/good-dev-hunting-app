@@ -1,6 +1,6 @@
 'use client'
 import { useModeration } from '@/app/[locale]/(profile)/_providers/Moderation.provider'
-import { Button } from '@/components/Button/Button'
+import { Button } from '@gdh/ui-system'
 import { useRef, useState, type ChangeEvent } from 'react'
 import { SearchSuggestionItem } from './SearchSuggestionItem'
 

@@ -7,10 +7,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 // components
-import Box from '@/components/Box/Box'
-import { Button } from '@/components/Button/Button'
-import CheckboxInput from '@/components/Checkbox/Checkbox'
 import TextInput from '@/components/TextInput/TextInput'
+import { Box, Button, CheckboxInput } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 
 const LoginHunter = () => {
