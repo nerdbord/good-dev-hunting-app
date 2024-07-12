@@ -1,5 +1,3 @@
-import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
-import { ProfilesProvider } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
 import { ModalProvider } from '@/contexts/ModalContext'
 import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
@@ -30,14 +28,11 @@ export const metadata = {
     "Catch coding legends! Good Dev Hunting is reverse recruitment platform that allows you to find the best developers for your team. Our site provides access to detailed profiles of developers, allowing for a quick match of their skills to your company's needs.",
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // TODO: We need to store it in some global state management (eg. zustand), and replace provider
-  const fetchedProfiles = await findAllApprovedProfiles()
-
   return (
     <html lang="en">
       <body className={commonClasses}>
@@ -46,9 +41,7 @@ export default async function RootLayout({
         >
           <SessionProvider>
             <ToastContextProvider>
-              <ProfilesProvider initialProfiles={fetchedProfiles}>
-                <ModalProvider>{children}</ModalProvider>
-              </ProfilesProvider>
+              <ModalProvider>{children}</ModalProvider>
             </ToastContextProvider>
           </SessionProvider>
         </PlausibleProvider>

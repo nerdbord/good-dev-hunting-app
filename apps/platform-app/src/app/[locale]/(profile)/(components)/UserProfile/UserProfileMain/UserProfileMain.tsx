@@ -7,18 +7,18 @@ import {
 } from '@/app/[locale]/(profile)/profile.mappers'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { countries } from '@/data/countries'
+import { I18nNamespaces } from '@/i18n'
 import { Avatar } from '@gdh/ui-system'
-import { type PropsWithChildren } from 'react'
+import { getTranslations } from 'next-intl/server'
 import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {
   profileId: string
 }
-const UserProfileMain = async ({
-  children,
-  profileId,
-}: PropsWithChildren<UserProfileProps>) => {
+const UserProfileMain = async ({ profileId }: UserProfileProps) => {
   const profile = await findProfileById(profileId)
+  const t = await getTranslations(I18nNamespaces.UserProfile)
+
   const hourlyRateMin = profile.hourlyRateMin
   const hourlyRateMax = profile.hourlyRateMax
   const currency = profile.currency
@@ -27,46 +27,43 @@ const UserProfileMain = async ({
 
   return (
     <>
-      <div className={styles.container}>
-        <div className={styles.backBtnMobile}>
-          <GoBackButton>Go back</GoBackButton>
+      <div className={styles.backBtnMobile}>
+        <GoBackButton>{t('goBack')}</GoBackButton>
+      </div>
+      <div className={styles.profile}>
+        <div className={styles.user}>
+          <Avatar src={profile.avatarUrl || ''} size={100} />
+          <div className={styles.name}>{profile.fullName}</div>
         </div>
-        <div className={styles.profile}>
-          <div className={styles.user}>
-            <Avatar src={profile.avatarUrl || ''} size={100} />
-            <div className={styles.name}>{profile.fullName}</div>
+        <div className={styles.locationBox}>
+          <div className={styles.country}>
+            <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
+            {profile.country}, {profile.city}
           </div>
-          <div className={styles.locationBox}>
-            <div className={styles.country}>
-              <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
-              {profile.country}, {profile.city}
-            </div>
-            {profile.openForCountryRelocation && (
-              <div className={styles.location}>Open to country relocation</div>
-            )}
-            {profile.openForCityRelocation && (
-              <div className={styles.location}>Open to city relocation</div>
-            )}
-            {profile.remoteOnly && (
-              <div className={styles.location}>Remote only</div>
-            )}
-          </div>
-          <div className={styles.addInfoBox}>
-            <div className={styles.seniority}>
-              {mapSeniorityLevel(profile.seniority)}{' '}
-              {mapSpecializationToTitle(profile.position)}
-            </div>
-            <div className={styles.addInfo}>
-              <div className={styles.addInfoItem}>
-                {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
-              </div>
-            </div>
-          </div>
-          <p className={styles.salary}>
-            {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
-          </p>
+          {profile.openForCountryRelocation && (
+            <div className={styles.location}>Open to country relocation</div>
+          )}
+          {profile.openForCityRelocation && (
+            <div className={styles.location}>Open to city relocation</div>
+          )}
+          {profile.remoteOnly && (
+            <div className={styles.location}>Remote only</div>
+          )}
         </div>
-        {children}
+        <div className={styles.addInfoBox}>
+          <div className={styles.seniority}>
+            {mapSeniorityLevel(profile.seniority)}{' '}
+            {mapSpecializationToTitle(profile.position)}
+          </div>
+          <div className={styles.addInfo}>
+            <div className={styles.addInfoItem}>
+              {mapEmploymentTypes(profile.employmentTypes).join(' / ')}
+            </div>
+          </div>
+        </div>
+        <p className={styles.salary}>
+          {getHourlyRateDisplay(hourlyRateMin, currency, hourlyRateMax)}
+        </p>
       </div>
     </>
   )

@@ -1,4 +1,4 @@
-﻿import { FiltersWithData } from '@/app/[locale]/(profile)/(components)/Filters/FiltersWithData'
+import { FiltersWithData } from '@/app/[locale]/(profile)/(components)/Filters/FiltersWithData'
 import VisitorBanner from '@/components/VisitorBanner/VisitorBanner'
 import { Container } from '@gdh/ui-system'
 import React from 'react'
