@@ -10,6 +10,11 @@ interface ProfileDetailsProps {
 
 const ProfileDetails = async (props: ProfileDetailsProps) => {
   const profile = await findProfileById(props.profileId)
+  const sortedLanguages =
+    profile?.language.sort((a, b) => a.name.localeCompare(b.name)) || []
+  const sortedTechStack =
+    profile?.techStack.sort((a, b) => a.name.localeCompare(b.name)) || []
+
   return (
     <>
       <section className={styles.container}>
@@ -21,24 +26,23 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
           <div className={styles.techStack}>
             <p className={styles.title}>Tech stack</p>
             <div className={styles.techStackList}>
-              {profile?.techStack.map((item, index) => (
+              {sortedTechStack.map((item, index) => (
                 <p key={index} className={styles.techStackItem}>
                   {item.name}
                 </p>
               ))}
             </div>
-          </div>
-          {/* this feature below will be added in the future */}
-          {/*         <div className={styles.gitActivities}>
-            <div className={styles.title}>Git activity</div>
-            <div className={styles.gitActivityBox}>
-              <div className={styles.gitActivity}>Commits</div>
-              <div className={styles.gitActivityValue}>23</div>
+            <div className={styles.languages}>
+              <p className={styles.title}>Languages</p>
+              <div className={styles.techStackList}>
+                {sortedLanguages.map((item, index) => (
+                  <p key={index} className={styles.techStackItem}>
+                    {item.name}
+                  </p>
+                ))}
+              </div>
             </div>
-            <div className={styles.gitActivityBox}>
-              <div className={styles.gitActivity}>Pull requests</div>
-              <div className={styles.gitActivityValue}>48</div>
-            </div> */}
+          </div>
         </div>
         <div className={styles.right}>
           <p className={styles.title}>Bio</p>
