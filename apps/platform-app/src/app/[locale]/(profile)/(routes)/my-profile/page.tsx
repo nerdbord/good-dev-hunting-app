@@ -4,7 +4,6 @@ import ProfileDetails from '@/app/[locale]/(profile)/(components)/MyProfile/Prof
 import ProfileMain from '@/app/[locale]/(profile)/(components)/MyProfile/ProfileMain/ProfileMain'
 import ProfileTopBar from '@/app/[locale]/(profile)/(components)/MyProfile/ProfileTopBar/ProfileTopBar'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions/queries/findProfileByUserId'
-import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import styles from './page.module.scss'
@@ -24,16 +23,14 @@ const MyProfilePage = async () => {
   }
 
   return (
-    <ProfileProvider profile={profile}>
-      <div className={styles.wrapper}>
-        <ProfileTopBar profileId={profile.id} />
-        <ProfileMain profileId={profile.id} />
-        <ProfileDetails profileId={profile.id} />
-        <div className={styles.disabledOnMobile}>
-          <LogOutBtn />
-        </div>
+    <div className={styles.wrapper}>
+      <ProfileTopBar profileId={profile.id} />
+      <ProfileMain profileId={profile.id} />
+      <ProfileDetails profileId={profile.id} />
+      <div className={styles.disabledOnMobile}>
+        <LogOutBtn />
       </div>
-    </ProfileProvider>
+    </div>
   )
 }
 

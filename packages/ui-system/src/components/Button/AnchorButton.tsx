@@ -1,11 +1,11 @@
-import { type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from "react";
 
-import Link from 'next/link'
-import styles from './AnchorButton.module.scss'
+import Link from "next/link";
+import styles from "./AnchorButton.module.scss";
 
 interface AnchorButton {
-  href: string
-  icon?: React.ReactElement
+  href: string;
+  icon?: React.ReactElement;
 }
 
 export const AnchorButton = (props: PropsWithChildren<AnchorButton>) => {
@@ -19,5 +19,5 @@ export const AnchorButton = (props: PropsWithChildren<AnchorButton>) => {
       {props.children}
       {props.icon}
     </Link>
-  )
-}
+  );
+};

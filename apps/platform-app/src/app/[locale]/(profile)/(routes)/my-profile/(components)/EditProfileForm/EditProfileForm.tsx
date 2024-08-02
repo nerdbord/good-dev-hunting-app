@@ -1,6 +1,9 @@
 'use client'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
-import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import {
+  mapLanguagesToProfileModel,
+  mapProfileModelToEditProfileFormValues,
+} from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,
   type ProfileFormValues,
@@ -16,7 +19,6 @@ import { useMemo } from 'react'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import styles from '../../edit/page.module.scss'
@@ -51,15 +53,16 @@ export const validationSchema = Yup.object().shape({
       /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
       'Invalid LinkedIn URL',
     ),
+  language: Yup.array()
+    .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
+    .min(1, 'At least one language is required'),
 })
 
-const EditProfileForm = () => {
-  const { update: updateSession } = useSession()
+const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
+  const { update: updateSession, data: session } = useSession()
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  const { profile } = useProfileModel()
-  const { data: session } = useSession()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -82,21 +85,18 @@ const EditProfileForm = () => {
         hourlyRateMin: 0,
         hourlyRateMax: 0,
         currency: Currency.PLN,
+        language: [],
       }
     }
 
     return mapProfileModelToEditProfileFormValues(profile)
   }, [profile])
 
-  if (!session || !profile || !session) {
-    return null
-  }
-
   const handleEditProfile = async (values: ProfileFormValues) => {
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,
-      avatarUrl: session.user?.image || null,
+      avatarUrl: session?.user?.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -116,6 +116,11 @@ const EditProfileForm = () => {
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
       currency: Currency.PLN,
+      language: values.language.map((language) => {
+        return {
+          name: language.value,
+        }
+      }),
     }
 
     await runAsync(async () => {
@@ -125,7 +130,7 @@ const EditProfileForm = () => {
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
       savedProfile &&
-        updateSession({ ...session.user, name: savedProfile.fullName })
+        updateSession({ ...session?.user, name: savedProfile.fullName })
 
       router.push(AppRoutes.myProfile)
     })

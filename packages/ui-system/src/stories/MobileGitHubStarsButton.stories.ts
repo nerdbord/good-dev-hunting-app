@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MobileGitHubStarsButton } from '../index';
+import { MobileGitHubStarsButton } from "../index";
 
 const meta = {
   title: "Components/Buttons/MobileGitHubStarsButton",

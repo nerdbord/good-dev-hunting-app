@@ -26,5 +26,5 @@ export const ConnectIcon = () => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

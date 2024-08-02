@@ -12,5 +12,5 @@ export const GithubIcon2 = () => {
         fill="white"
       />
     </svg>
-  )
-}
+  );
+};

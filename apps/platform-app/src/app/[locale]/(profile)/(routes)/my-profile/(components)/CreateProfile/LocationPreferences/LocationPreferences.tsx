@@ -1,13 +1,16 @@
 'use client'
-import {CheckboxInput} from '@gdh/ui-system'
+import { LanguageInput } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/LanguageInput/LanguageInput'
+import type {
+  CreateProfileFormValues,
+  DropdownOption,
+} from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import SwitchInput from '@/components/Switch/Switch'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
-import { useFormikContext } from 'formik'
-
-import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { I18nNamespaces } from '@/i18n'
+import { CheckboxInput } from '@gdh/ui-system'
+import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import styles from './LocationPreferences.module.scss'
 
@@ -17,6 +20,7 @@ export enum LocationPreferencesFormKeys {
   CITY = 'city',
   OPEN_FOR_CITY_RELOCATION = 'openForCityRelocation',
   REMOTE_ONLY = 'remoteOnly',
+  LANGUAGE = 'language',
 }
 
 const LocationPreferences = () => {
@@ -29,6 +33,32 @@ const LocationPreferences = () => {
     name: LocationPreferencesFormKeys,
   ) => {
     setFieldValue(name, values[name] ? false : value)
+  }
+
+  const handleLangSelect = (lang: DropdownOption) => {
+    const languageArray = Array.isArray(
+      values[LocationPreferencesFormKeys.LANGUAGE],
+    )
+      ? values[LocationPreferencesFormKeys.LANGUAGE]
+      : []
+    if (!languageArray.includes(lang)) {
+      setFieldValue(LocationPreferencesFormKeys.LANGUAGE, [
+        ...languageArray,
+        lang,
+      ])
+    }
+  }
+
+  const handleLangRemove = (langToRemove: DropdownOption) => {
+    const languageArray = Array.isArray(
+      values[LocationPreferencesFormKeys.LANGUAGE],
+    )
+      ? values[LocationPreferencesFormKeys.LANGUAGE]
+      : []
+    setFieldValue(
+      LocationPreferencesFormKeys.LANGUAGE,
+      languageArray.filter((lang) => lang.value !== langToRemove.value),
+    )
   }
 
   return (
@@ -113,6 +143,26 @@ const LocationPreferences = () => {
           name={LocationPreferencesFormKeys.REMOTE_ONLY}
           dataTestId={LocationPreferencesFormKeys.REMOTE_ONLY}
         />
+        <InputFormError
+          error={
+            touched[LocationPreferencesFormKeys.LANGUAGE] &&
+            ((errors[LocationPreferencesFormKeys.LANGUAGE] as string) || '')
+          }
+        >
+          <LanguageInput
+            chips={values[LocationPreferencesFormKeys.LANGUAGE]}
+            label={t('languages')}
+            placeholder={t('languagePlaceholder')}
+            name={LocationPreferencesFormKeys.LANGUAGE}
+            onTechSelect={handleLangSelect}
+            onTechRemove={handleLangRemove}
+            addImportantIcon={true}
+            tooltipText={t('languageTooltip')}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+          />
+        </InputFormError>
       </div>
     </div>
   )

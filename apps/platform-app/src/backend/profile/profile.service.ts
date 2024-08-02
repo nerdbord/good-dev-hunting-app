@@ -100,6 +100,12 @@ export async function createUserProfile(
       hourlyRateMin: profileData.hourlyRateMin ?? 0,
       hourlyRateMax: profileData.hourlyRateMax ?? 0,
       currency: Currency.PLN,
+      language: {
+        connectOrCreate: profileData.language.map((lang) => ({
+          where: { name: lang.name },
+          create: { name: lang.name },
+        })),
+      },
     },
     include: includeObject.include,
   })
@@ -220,6 +226,7 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     techStack: true,
     contactRequests: true,
     profileViews: true,
+    language: true,
   },
 })
 

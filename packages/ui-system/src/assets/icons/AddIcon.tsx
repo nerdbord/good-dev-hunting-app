@@ -30,6 +30,5 @@ export const AddIcon = () => {
       </mask>
       <g mask="url(#mask0_279_543)"></g>
     </svg>
-  )
-}
-
+  );
+};
