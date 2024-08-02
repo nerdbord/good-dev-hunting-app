@@ -6,6 +6,7 @@ import {
   type PublishingState,
 } from '@prisma/client'
 
+export type { DropdownOption }
 export type ProfileUpdateParams = Partial<ProfileModel>
 
 export type ProfileCreateParams = {
@@ -27,6 +28,7 @@ export type ProfileCreateParams = {
   hourlyRateMin: number
   hourlyRateMax: number
   currency: Currency
+  language: { name: string }[]
 }
 
 export type TechStack = {
@@ -85,6 +87,7 @@ export interface ProfileFormValues {
   hourlyRateMin: number
   hourlyRateMax: number
   currency: Currency
+  language: DropdownOption[]
 }
 
 export interface CreateProfileFormValues extends ProfileFormValues {
@@ -105,6 +108,7 @@ export type EditProfileFormFields = keyof Omit<
   | 'currency'
   | 'createdAt'
   | 'updatedAt'
+  | 'language'
 >
 
 export interface HourlyRateValue {

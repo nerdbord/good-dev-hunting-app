@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
-import { Button } from '@gdh/ui-system'
 import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePublishPopup'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
 import { useState } from 'react'
 import styles from './TogglePublishButton.module.scss'

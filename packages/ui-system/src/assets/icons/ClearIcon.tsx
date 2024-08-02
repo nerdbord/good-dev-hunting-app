@@ -18,5 +18,5 @@ export const ClearIcon = () => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

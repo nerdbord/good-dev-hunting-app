@@ -15,5 +15,5 @@ export const SearchIcon = () => {
         stroke="#E2EAF1"
       />
     </svg>
-  )
-}
+  );
+};

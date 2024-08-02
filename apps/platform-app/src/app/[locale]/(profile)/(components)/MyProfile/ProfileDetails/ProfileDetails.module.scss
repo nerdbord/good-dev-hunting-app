@@ -65,9 +65,13 @@
   }
 }
 
-.techStack {
+.techStack, .languages {
   display: flex;
   flex-direction: column;
+}
+
+.languages {
+  margin-top: 30px;
 }
 
 .techStackList {

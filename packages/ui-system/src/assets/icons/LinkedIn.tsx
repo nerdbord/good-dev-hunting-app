@@ -12,5 +12,5 @@ export const LinkedIn = () => {
         fill="white"
       />
     </svg>
-  )
-}
+  );
+};

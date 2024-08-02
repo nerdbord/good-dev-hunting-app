@@ -1,0 +1,28 @@
+﻿.technology {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  
+  .technology span {
+    background: #161a1f;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 2px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: -0.34px;
+    max-width: 95px;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+  }

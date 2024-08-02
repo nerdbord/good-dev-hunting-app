@@ -12,6 +12,5 @@ export const AcceptIcon = () => {
         fill="white"
       />
     </svg>
-  )
-}
-
+  );
+};

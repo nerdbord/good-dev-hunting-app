@@ -1,15 +1,15 @@
-'use client'
-import React from 'react'
-import { EmailIcon } from '../../assets/icons/EmailIcon'
-import styles from './CopyEmail.module.scss'
+"use client";
+import React from "react";
+import { EmailIcon } from "../../assets/icons/EmailIcon";
+import styles from "./CopyEmail.module.scss";
 
 interface CopyEmailProps {
-  email: string
+  email: string;
 }
 export const CopyEmail = ({ email }: CopyEmailProps) => {
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email).catch(console.error)
-  }
+    navigator.clipboard.writeText(email).catch(console.error);
+  };
 
   return (
     <div>
@@ -18,7 +18,7 @@ export const CopyEmail = ({ email }: CopyEmailProps) => {
         <EmailIcon />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CopyEmail
+export default CopyEmail;
