@@ -6,14 +6,11 @@ import { getProfileCurrentState } from '@/app/[locale]/(profile)/profile.helpers
 import CaptchaCheckbox from '@/components/Checkbox/CaptchaCheckbox/CaptchaCheckbox'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
-import { useModal } from '@/contexts/ModalContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
-import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { PlausibleEvents } from '@/lib/plausible'
 import { Button, CheckboxInput, TextArea } from '@gdh/ui-system'
 import { useFormik } from 'formik'
-import { usePlausible } from 'next-plausible'
 import Link from 'next/link'
+import { useState } from 'react'
 import styles from './ContactForm.module.scss'
 import {
   initialValues,
@@ -23,46 +20,41 @@ import {
 
 export default function ContactForm({
   senderData,
+  onClose,
 }: {
   senderData: SenderData
+  onClose: () => void
 }) {
-  const { runAsync, loading } = useAsyncAction()
-  const { closeModal, showModal } = useModal()
   const { addToast } = useToast()
-  const plausible = usePlausible()
   const { markProfileAsContacted } = useProfilesStore(getProfileCurrentState)
   const { userEmail, userFullName, userGithubName, userProfileId } = senderData
+  const [isSuccessModalOpen, showSuccessModal] = useState(false)
 
-  const handleSendEmail = (values: ContactFormValuesWithChecks) => {
-    runAsync(async () => {
-      try {
-        const contactRequest = await sendProfileContactRequest({
-          senderEmail: values.senderEmail,
-          senderFullName: values.senderFullName,
-          profileId: userProfileId,
-          message: values.message,
-          subject: values.subject,
-        })
+  const handleSendEmail = async (values: ContactFormValuesWithChecks) => {
+    try {
+      const contactRequest = await sendProfileContactRequest({
+        senderEmail: values.senderEmail,
+        senderFullName: values.senderFullName,
+        profileId: userProfileId,
+        message: values.message,
+        subject: values.subject,
+      })
 
+      if ('error' in contactRequest) {
+        addToast(`${contactRequest.error} `, ToastStatus.INVALID)
+      } else {
         markProfileAsContacted(contactRequest)
 
-        plausible(PlausibleEvents.ContactDeveloper, {
-          props: {
-            username: userGithubName,
-            senderEmail: values.senderEmail,
-          },
-        })
-        showModal(
-          <ContactSuccessModal name={userFullName} onClose={closeModal} />,
-        )
+        showSuccessModal(true)
         window.scrollTo({ top: 0, behavior: 'smooth' })
-      } catch (error) {
-        addToast(
-          `${error || 'An error occurred while sending the email'} `,
-          ToastStatus.INVALID,
-        )
       }
-    })
+    } catch (error) {
+      console.log('error', error)
+      addToast(
+        `${error || 'An error occurred while sending the email'} `,
+        ToastStatus.INVALID,
+      )
+    }
   }
 
   const formik = useFormik({
@@ -73,7 +65,7 @@ export default function ContactForm({
     validateOnBlur: false,
   })
 
-  return (
+  return !isSuccessModalOpen ? (
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit}>
         <h4>Contact {userFullName}</h4>
@@ -169,16 +161,23 @@ export default function ContactForm({
               type="submit"
               variant="primary"
               onClick={() => formik.handleSubmit}
-              loading={loading}
+              loading={formik.isSubmitting}
             >
               Send
             </Button>
           </div>
-          <Button variant={'secondary'} onClick={() => closeModal()}>
+          <Button variant={'secondary'} onClick={onClose}>
             Cancel
           </Button>
         </div>
       </form>
     </div>
+  ) : (
+    <ContactSuccessModal
+      name={userFullName}
+      onClose={() => {
+        onClose()
+      }}
+    />
   )
 }
