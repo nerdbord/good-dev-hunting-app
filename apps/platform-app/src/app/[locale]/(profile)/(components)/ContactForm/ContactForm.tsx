@@ -27,7 +27,7 @@ export default function ContactForm({
 }) {
   const { addToast } = useToast()
   const { markProfileAsContacted } = useProfilesStore(getProfileCurrentState)
-  const { userEmail, userFullName, userGithubName, userProfileId } = senderData
+  const { userEmail, userFullName, userProfileId } = senderData
   const [isSuccessModalOpen, showSuccessModal] = useState(false)
 
   const handleSendEmail = async (values: ContactFormValuesWithChecks) => {
@@ -49,7 +49,6 @@ export default function ContactForm({
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
     } catch (error) {
-      console.log('error', error)
       addToast(
         `${error || 'An error occurred while sending the email'} `,
         ToastStatus.INVALID,
@@ -173,11 +172,6 @@ export default function ContactForm({
       </form>
     </div>
   ) : (
-    <ContactSuccessModal
-      name={userFullName}
-      onClose={() => {
-        onClose()
-      }}
-    />
+    <ContactSuccessModal name={userFullName} onClose={onClose} />
   )
 }
