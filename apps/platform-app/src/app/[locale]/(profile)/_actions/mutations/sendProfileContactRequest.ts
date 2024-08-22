@@ -25,7 +25,9 @@ export const sendProfileContactRequest = withSentry(
     const { user: authorizedUser } = await getAuthorizedUser()
 
     if (!authorizedUser) {
-      throw Error('Unauthorized')
+      return {
+        error: 'Unauthorized',
+      }
     }
 
     const senderId = authorizedUser.id
@@ -35,11 +37,15 @@ export const sendProfileContactRequest = withSentry(
       const foundProfile = await getProfileById(profileId)
 
       if (!foundProfile) {
-        throw Error('Profile not found')
+        return {
+          error: 'Profile not found',
+        }
       }
 
       if (!foundProfile.isOpenForWork) {
-        throw Error('This dev is not open for work')
+        return {
+          error: 'Profile is not open for work',
+        }
       }
 
       const existingContactRequest = await findExistingContactRequest({
@@ -48,7 +54,9 @@ export const sendProfileContactRequest = withSentry(
       })
 
       if (existingContactRequest) {
-        throw Error('You already contacted this dev')
+        return {
+          error: 'You have already sent a contact request to this profile',
+        }
       }
 
       const createdContactRequest = await createContactRequest(
@@ -65,7 +73,9 @@ export const sendProfileContactRequest = withSentry(
       contactRequest = createdContactRequest
 
       if (!createdContactRequest) {
-        throw Error('Failed to save contact request')
+        return {
+          error: 'Could not create contact request',
+        }
       }
 
       await sendContactRequest({
