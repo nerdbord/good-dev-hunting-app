@@ -20,7 +20,7 @@ export type CaptchaCheckboxProps = {
 export default function CaptchaCheckbox(props: CaptchaCheckboxProps) {
   const { addToast } = useToast()
   // not sure if this is the proper way to handle such case
-  const captchaRef = useRef<ReCAPTCHA>(null)
+  const captchaRef = useRef<ReCAPTCHA | null>(null)
   const [verificationComplete, setVerificationComplete] = useState(false)
   const handleChange = () => {
     if (captchaRef.current && !verificationComplete) {
