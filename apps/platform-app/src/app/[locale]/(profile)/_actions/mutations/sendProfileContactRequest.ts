@@ -9,6 +9,7 @@ import {
 } from '@/backend/contact-request/contact-request.service'
 import { sendContactRequest } from '@/backend/mailing/mailing.service'
 import { getProfileById } from '@/backend/profile/profile.service'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
 import { type ContactRequest } from '@prisma/client'
@@ -86,6 +87,10 @@ export const sendProfileContactRequest = withSentry(
         recipientEmail: foundProfile.user.email,
         recipientFullName: foundProfile.fullName,
       })
+
+      await sendDiscordNotificationToModeratorChannel(
+        `💌 User ${senderEmail} / ${senderFullName} send message: '${message}' to: ${foundProfile.user.email} / ${foundProfile.fullName} ${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}`,
+      )
 
       await mailerliteClient.addSubscriberToMailerLite(
         senderEmail,
