@@ -89,7 +89,7 @@ export const sendProfileContactRequest = withSentry(
       })
 
       await sendDiscordNotificationToModeratorChannel(
-        `💌 User ${senderEmail} / ${senderFullName} send message: '${message}' to: ${foundProfile.user.email} / ${foundProfile.fullName} ${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}`,
+        `💌 User ${senderEmail} / name: ${senderFullName} send message: '${message}' to: ${foundProfile.user.email} / name: ${foundProfile.fullName}.`,
       )
 
       await mailerliteClient.addSubscriberToMailerLite(
