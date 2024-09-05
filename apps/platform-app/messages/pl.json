@@ -153,7 +153,7 @@
     "techstackTooltip": "Wymień technologie, które znasz lub którymi jesteś zainteresowany.",
     "techstackInfo": "Zacznij wpisywać i oddziel technologie przecinkami.",
     "techstackChoose": "Wybierz maksymalnie 16",
-    "employerType": "Rodzaj zatrudnienia",
+    "employerType": "Rodzaj zatrudnienia (opcjonalne)",
     "employFull": "Pełny etat",
     "employPart": "Część etatu",
     "employContract": "Umowa"
