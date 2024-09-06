@@ -11,3 +11,8 @@ export enum AppRoutes {
   signIn = '/signin',
   error = '/error',
 }
+
+export const removeLocaleFromPath = (pathname: string, locale: string) => {
+  const localePattern = new RegExp(`^/${locale}(/|$)`)
+  return pathname.replace(localePattern, '/')
+}
