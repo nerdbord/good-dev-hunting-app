@@ -35,7 +35,7 @@
   border: 1px solid #3d434b;
   border-radius: 2px;
   min-height: 40px;
-  padding: 0 15px 20px 15px;
+  padding: 10px 15px 20px 15px;
   font-weight: 400;
   font-size: 14px;
   z-index: 1000;
@@ -66,7 +66,6 @@
   background-color: #0f1217;
   z-index: 1000;
   padding: 0;
-  margin-top: 45px;
   @include mobile {
     display: flex;
     width: 100%;
@@ -130,7 +129,6 @@
   align-items: center;
   z-index: 1000;
   width: 200px;
-  margin-top: 45px;
   margin-left: 60px;
   @include mobile {
     justify-content: flex-end;
@@ -147,7 +145,6 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  margin-top: 45px;
   width: 200px;
   margin-left: 60px;
   @include mobile {
@@ -159,14 +156,14 @@
   }
 }
 
-
 .clearButton {
   display: flex;
   justify-content: flex-end;
+  margin-right: 3px;
 }
 
 .applyButton {
-display: none;
+  display: none;
   @include mobile {
     display: flex;
     justify-content: flex-end;
@@ -174,7 +171,7 @@ display: none;
 }
 
 .counter {
-margin-left: 3px;
+  margin-left: 3px;
 }
 
 .dropdownInput {
@@ -183,12 +180,11 @@ margin-left: 3px;
   gap: 8px;
   cursor: pointer;
   &:first-of-type {
-    margin-top: 20px;
     @include mobile {
       margin-top: 0px;
     }
   }
-input {
+  input {
     width: 16px;
     height: 16px;
     border: 1px solid #e2eaf1;
@@ -260,4 +256,3 @@ input {
     filter: blur(5px);
   }
 }
-
