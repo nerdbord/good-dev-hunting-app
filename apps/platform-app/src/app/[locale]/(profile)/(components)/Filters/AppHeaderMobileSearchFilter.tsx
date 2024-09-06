@@ -43,17 +43,13 @@ export const AppHeaderMobileSearchFilter = () => {
 
   const isOnProfilesPage = normalizedPathname.startsWith(AppRoutes.profilesList)
 
-  if (isMobile) {
+  if (isMobile && isOnProfilesPage) {
     return (
-      <>
-        {isOnProfilesPage && (
-          <SearchBarWrapper
-            jobOfferFilterName={JobOfferFiltersEnum.search}
-            onSearch={handleFilterChange}
-            value={filters[JobOfferFiltersEnum.search][0]}
-          />
-        )}
-      </>
+      <SearchBarWrapper
+        jobOfferFilterName={JobOfferFiltersEnum.search}
+        onSearch={handleFilterChange}
+        value={filters[JobOfferFiltersEnum.search][0]}
+      />
     )
   }
 
