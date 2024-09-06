@@ -1,44 +1,43 @@
 .searchInput {
-    background-color: transparent;
-    padding: 40px -20px;
-    height: 42px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-radius: 0px;
-    outline: none;
-    border: none;
-    border-radius: 2px;
-    background-color: #0f1217;
-    border: 1px solid #2a2f35;
+  background-color: transparent;
+  padding: 40px -20px;
+  height: 42px;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  border-radius: 0px;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  color: #69717b;
+  border-radius: 2px;
+  padding: 16px 24px 16px 20px;
+  width: 100%;
+  font-size: 14px;
+  z-index: 10;
+  @include mobile {
+    height: 50px;
+    position: fixed;
+    top: auto;
+    z-index: 5;
+  }
+  &::placeholder {
     color: #69717b;
-    border-radius: 2px;
-    padding: 16px 24px 16px 20px;
-    width: 100%;
-    font-size: 14px;
-    @include mobile {
-      height: 50px;
-      position: fixed;
-      top: auto;
-      // bottom: 260px;
-      z-index: 5;
-    }
-    &::placeholder {
-      color: #69717b;
-    }
-    &:focus {
-      color: white; 
-    }
   }
-  
-  .noMatchingOptions {
-    margin-top: 55px;
-    font-size: 12px;
-    font-weight: 400;
+  &:focus {
     color: white;
-    opacity: 0.5;
-    @include mobile {
-      margin-top: 5px;
-    }
   }
-  
+}
+
+.noMatchingOptions {
+  margin-top: 55px;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+  opacity: 0.5;
+  @include mobile {
+    margin-top: 5px;
+  }
+}
