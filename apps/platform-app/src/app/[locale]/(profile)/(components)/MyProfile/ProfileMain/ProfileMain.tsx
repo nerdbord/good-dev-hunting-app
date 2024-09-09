@@ -10,6 +10,7 @@ import { countries } from '@/data/countries'
 import { AnchorButton, Avatar } from '@gdh/ui-system'
 import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import styles from './ProfileMain.module.scss'
+import { ensureProtocol } from '@/utils/routes'
 
 interface ProfileMainProps {
   profileId: string
@@ -40,7 +41,7 @@ const ProfileMain = async (props: ProfileMainProps) => {
           </li>
           {profile.linkedIn && (
             <li>
-              <AnchorButton href={profile.linkedIn} icon={<LinkedIn />}>
+              <AnchorButton href={ensureProtocol(profile.linkedIn)} icon={<LinkedIn />}>
                 LinkedIn
               </AnchorButton>
             </li>
