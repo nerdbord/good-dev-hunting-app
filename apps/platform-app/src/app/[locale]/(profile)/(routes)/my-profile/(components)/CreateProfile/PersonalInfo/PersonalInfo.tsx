@@ -72,7 +72,7 @@ const PersonalInfo = () => {
         >
           <TextInput
             onBlur={handleBlur}
-            label="LinkedIn"
+            label="LinkedIn (optional)"
             placeholder={t('linkedin')}
             value={values[PersonalInfoFormKeys.LINKEDIN] || ''}
             onChange={handleChange}
