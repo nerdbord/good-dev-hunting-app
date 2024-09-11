@@ -4,4 +4,8 @@
   @include mobile {
     overflow: visible;
   }
+
+  @include smallMobile {
+    overflow: visible;
+  }
 }
