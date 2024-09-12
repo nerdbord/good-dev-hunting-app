@@ -154,7 +154,7 @@
     "techstackTooltip": "List the technologies you are comfortable with or interested in.",
     "techstackInfo": "Start typing and separate technologies with commas.",
     "techstackChoose": "Choose max. 16",
-    "employerType": "Employment type",
+    "employerType": "Employment type (optional)",
     "employFull": "Full-time",
     "employPart": "Part-time",
     "employContract": "Contract"
