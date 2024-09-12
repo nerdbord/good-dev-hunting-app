@@ -59,7 +59,7 @@ export const UserPhotoUploader = () => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.containerLabel}>Picture</p>
+      <p className={styles.containerLabel}>Picture (optional)</p>
       <div className={styles.errorMessageWrapper}>
         {imageUploadError && (
           <div className={styles.errorMessage}>

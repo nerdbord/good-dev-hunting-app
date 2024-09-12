@@ -9,7 +9,8 @@ import {
 } from '@/app/[locale]/(profile)/profile.types'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { AppRoutes } from '@/utils/routes'
+import { AppRoutes, removeLocaleFromPath } from '@/utils/routes'
+import { useLocale } from 'next-intl'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
@@ -18,6 +19,8 @@ export const AppHeaderMobileSearchFilter = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const isMobile = useMediaQuery()
+  const locale = useLocale()
+  const normalizedPathname = removeLocaleFromPath(pathname, locale)
 
   const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
@@ -33,19 +36,15 @@ export const AppHeaderMobileSearchFilter = () => {
     router.push(`${pathname}?${newSearchParams}`)
   }
 
-  const isOnProfilesPage = pathname.startsWith(AppRoutes.profilesList)
+  const isOnProfilesPage = normalizedPathname.startsWith(AppRoutes.profilesList)
 
-  if (isMobile) {
+  if (isMobile && isOnProfilesPage) {
     return (
-      <>
-        {isOnProfilesPage && (
-          <SearchBarWrapper
-            jobOfferFilterName={JobOfferFiltersEnum.search}
-            onSearch={handleFilterChange}
-            value={filters[JobOfferFiltersEnum.search][0]}
-          />
-        )}
-      </>
+      <SearchBarWrapper
+        jobOfferFilterName={JobOfferFiltersEnum.search}
+        onSearch={handleFilterChange}
+        value={filters[JobOfferFiltersEnum.search][0]}
+      />
     )
   }
 
