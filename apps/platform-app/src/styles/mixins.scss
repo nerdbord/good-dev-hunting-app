@@ -1,9 +1,4 @@
 /* ------MIXIN------ */
-@mixin smallMobile {
-  @media (max-width: 480px) {
-    @content;
-  } 
-}
 
 @mixin mobile {
   @media (max-width: 768px) {
