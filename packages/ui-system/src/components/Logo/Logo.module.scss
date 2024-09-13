@@ -3,9 +3,9 @@
   height: 26px;
   display: flex;
   gap: 8px;
-  @include mobile {
-    width: 44px;
-  }
+  // @include mobile {
+  //   width: 44px;
+  // }
 }
 
 .title {
@@ -18,8 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @include mobile {
-    letter-spacing: -1.08px;
-    display: none;
-  }
+  // @include mobile {
+  //   letter-spacing: -1.08px;
+  //   display: none;
+  // }
 }
