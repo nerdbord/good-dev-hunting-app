@@ -20,7 +20,7 @@ const ProfileList = () => {
   const { status } = useSession()
   const { profiles } = useProfilesStore(getProfileCurrentState)
   const searchParams = useSearchParams()
-  const t = useTranslations(I18nNamespaces.Index)
+  
 
   const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
@@ -34,6 +34,7 @@ const ProfileList = () => {
 
   const sortedProfiles = filteredProfiles.sort(sortProfilesBySalary)
 
+  const t = useTranslations(I18nNamespaces.Index)
   if (status === 'loading') {
     return <Loader>{t('title')}</Loader>
   }
