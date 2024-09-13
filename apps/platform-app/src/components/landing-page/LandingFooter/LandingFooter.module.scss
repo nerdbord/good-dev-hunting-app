@@ -15,7 +15,11 @@
   max-width: 1240px;
   margin: 0 auto;
 }
-
+.mobileHide {
+  @include mobile {
+    display: none;
+  }
+}
 .topBar,
 .bottomBar {
   display: flex;
@@ -39,10 +43,11 @@
 .contact,
 .terms {
   display: flex;
-  flex-direction: column;
+  
   align-items: flex-start;
   gap: 40px;
   @include mobile {
+    flex-direction: column;
     gap: 30px;
   }
 }
