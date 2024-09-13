@@ -12,7 +12,7 @@ const LandingFooter = () => {
         <div className={styles.topBar}>
           <Logo />
           <div className={styles.contact}>
-            {/* <span className={styles.textDark}>Good Dev Hunting</span> */}
+            <span className={`${styles.textDark} ${styles.mobileHide}`}>Good Dev Hunting</span>
             <Link
               href="mailto:team@devhunting.co"
               target="_blank"
