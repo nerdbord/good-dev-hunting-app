@@ -6,15 +6,9 @@
   padding-right: 20px;
   @include mobile {
     padding-left: 50px;
-    // padding-right: 50px;
     padding-bottom: 50px;
     gap: 26px;
   }
-  // @include smallMobile {
-  //   padding-left: 20px;
-  //   padding-right: 20px;
-  //   gap: 20px;
-  // }
 }
 
 .wrapper {
@@ -30,20 +24,15 @@
   @include mobile {
     flex-direction: column;
     align-items: flex-start;
-    gap: 34px;
+    gap: 30px;
   }
-  // @include smallMobile {
-  //   flex-direction: column;
-  //   align-items: flex-start;
-  //   gap: 20px;
-  // }
 }
 
 .bottomBar {
   margin-top: 60px;
   @include mobile {
-    // flex-direction: column-reverse;
     flex-direction: column-reverse;
+    margin-top: 30px;
   }
 }
 
@@ -53,20 +42,15 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
-  // @include smallMobile {
-  //   flex-direction: column;
-  //   align-items: center;
-  //   gap: 20px;
-  // }
+  @include mobile {
+    gap: 30px;
+  }
 }
 
 .terms {
   @include mobile {
     gap: 30px;
   }
-  // @include smallMobile {
-  //   gap: 15px;
-  // }
 }
 
 .textDark {
@@ -92,6 +76,11 @@
   font-weight: 500;
   line-height: 20px;
   color: #69717b;
+  @include mobile {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 30px;
+  }
 }
 
 .pointer {
