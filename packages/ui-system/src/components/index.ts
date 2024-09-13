@@ -15,3 +15,4 @@ export {
 export { DropdownSearchInput } from "./Dropdowns/DropdownSearchInput/DropdownSearchInput";
 export { Logo } from "./Logo/Logo";
 export { TextArea } from "./TextArea/TextArea";
+export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews"
