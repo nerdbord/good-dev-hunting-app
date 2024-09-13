@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background-color: #27272a;
+  width: 150px;
+  padding: 5.5px 8.25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  line-height: 150%;
+  white-space: pre-line;
+  word-wrap: break-word;
+  z-index: 1;
+}
+
+.tooltipTriangle::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #27272a;
+}
