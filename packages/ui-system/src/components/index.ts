@@ -18,3 +18,4 @@ export { TextArea } from "./TextArea/TextArea";
 export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews"
 export { Loader } from "./Loader/Loader"
 export { Tooltip } from "./Tooltip/Tooltip"
+export { VisitorBanner } from './VisitorBanner/VisitorBanner'
