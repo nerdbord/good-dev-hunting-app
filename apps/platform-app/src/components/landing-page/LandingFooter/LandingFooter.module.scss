@@ -6,7 +6,6 @@
   padding-right: 20px;
   @include mobile {
     padding-left: 50px;
-    padding-right: 50px;
     padding-bottom: 50px;
     gap: 26px;
   }
@@ -16,7 +15,11 @@
   max-width: 1240px;
   margin: 0 auto;
 }
-
+.mobileHide {
+  @include mobile {
+    display: none;
+  }
+}
 .topBar,
 .bottomBar {
   display: flex;
@@ -25,7 +28,7 @@
   @include mobile {
     flex-direction: column;
     align-items: flex-start;
-    gap: 34px;
+    gap: 30px;
   }
 }
 
@@ -33,13 +36,19 @@
   margin-top: 60px;
   @include mobile {
     flex-direction: column-reverse;
+    margin-top: 30px;
   }
 }
 
 .contact,
 .terms {
   display: flex;
+  align-items: flex-start;
   gap: 40px;
+  @include mobile {
+    flex-direction: column;
+    gap: 30px;
+  }
 }
 
 .terms {
@@ -71,6 +80,11 @@
   font-weight: 500;
   line-height: 20px;
   color: #69717b;
+  @include mobile {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 30px;
+  }
 }
 
 .pointer {
