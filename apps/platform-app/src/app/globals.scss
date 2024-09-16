@@ -31,3 +31,17 @@ body {
 ul {
   list-style-type: none;
 }
+
+/* Ukrywanie ikony dla rozwijanego menu w polach input */
+input::-webkit-contacts-auto-fill-button {
+  display: none;
+}
+
+/* Ukrywanie dla Firefox */
+input::-moz-dropdown-button {
+  display: none;
+}
+
+h2, h3, h4, h5, h6 {
+  background: none;
+}
