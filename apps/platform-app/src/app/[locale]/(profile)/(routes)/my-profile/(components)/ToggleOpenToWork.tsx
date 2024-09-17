@@ -1,8 +1,7 @@
 'use client'
-import SwitchInput from '@/components/Switch/Switch'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { I18nNamespaces } from '@/i18n'
-import { Tooltip } from '@gdh/ui-system'
+import { Tooltip, Switch } from '@gdh/ui-system'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
 import React, { useId } from 'react'
@@ -33,7 +32,7 @@ export const ToggleOpenToWork: React.FC<ToggleOpenToWorkProps> = ({
 
   return (
     <div className={styles.toggleOpenToWorkContainer}>
-      <SwitchInput
+      <Switch
         id={switchId}
         name="open-to-work"
         label={t('availability')}
@@ -45,7 +44,7 @@ export const ToggleOpenToWork: React.FC<ToggleOpenToWorkProps> = ({
             <ImportantIcon />
           </Tooltip>
         </div>
-      </SwitchInput>
+      </Switch>
     </div>
   )
 }
