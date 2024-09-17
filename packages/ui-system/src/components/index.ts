@@ -13,9 +13,10 @@ export {
   type DropdownOption,
 } from "./Dropdowns/DropdownOptionItem/DropdownOptionItem";
 export { DropdownSearchInput } from "./Dropdowns/DropdownSearchInput/DropdownSearchInput";
+export { Loader } from "./Loader/Loader";
 export { Logo } from "./Logo/Logo";
+export { Switch } from "./Switch/Switch";
 export { TextArea } from "./TextArea/TextArea";
-export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews"
-export { Loader } from "./Loader/Loader"
-export { Tooltip } from "./Tooltip/Tooltip"
-export { VisitorBanner } from './VisitorBanner/VisitorBanner'
+export { Tooltip } from "./Tooltip/Tooltip";
+export { VisitorBanner } from "./VisitorBanner/VisitorBanner";
+export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews";
