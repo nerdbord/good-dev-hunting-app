@@ -1,6 +1,7 @@
+'use client'
 import styles from "./VisitorBanner.module.scss";
 
-export const VisitorBanner = async ({
+export const VisitorBanner = ({
   children,
 }: {
   children: React.ReactNode;

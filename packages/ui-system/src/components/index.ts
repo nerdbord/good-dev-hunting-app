@@ -20,3 +20,4 @@ export { TextArea } from "./TextArea/TextArea";
 export { Tooltip } from "./Tooltip/Tooltip";
 export { VisitorBanner } from "./VisitorBanner/VisitorBanner";
 export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews";
+export { SocialItems } from "./SocialItems/SocialItems"
