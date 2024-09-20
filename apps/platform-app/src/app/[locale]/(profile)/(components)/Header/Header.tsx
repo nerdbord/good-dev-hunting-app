@@ -16,6 +16,7 @@ import { Container, GitHubStarsButton } from '@gdh/ui-system'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
 import logo from '@/assets/images/logo.png'
+import { LanguageSwitcher } from '@/components/LangSwitch/LangSwitch'
 import Link from 'next/link'
 import styles from './Header.module.scss'
 
@@ -75,6 +76,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       return (
         <li>
           <CreateProfileBtn data-testid="create-profile-button" />
+          <LanguageSwitcher />
         </li>
       )
     }
@@ -84,6 +86,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
           {userIsModerator && (
             <li>
               <ModerationBtn />
+              <LanguageSwitcher />
             </li>
           )}
           {userIsHunter ? (
