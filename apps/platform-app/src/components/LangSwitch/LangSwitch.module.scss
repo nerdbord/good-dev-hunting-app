@@ -1,67 +1,93 @@
-.language-switcher {
+.selectContainer {
+  width: 168px;
+
+  // Zdefiniowanie zmiennych lokalnych
+  --Dark-06: #2a2f35;
+  --Dark-02: #0f1217;
+  --Primary: #a855f7;
+}
+
+.selectBox {
+  width: 168px;
+  height: 43px;
+  border-radius: 2px;
+  border: 1px solid var(--Dark-06);
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 8px;
+  background-color: var(--Dark-02);
   position: relative;
+  cursor: pointer;
+}
+
+.selectedOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.languageText {
+  color: var(--Primary);
+}
+
+.icon {
+  font-size: 16px;
+  color: var(--Primary);
+  margin-right: 8px; // Odstęp między ikoną a tekstem
+}
+
+.arrow {
+  font-size: 14px;
+  color: var(--Primary);
+}
+
+.selectOptions {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 168px;
+  background-color: var(--Dark-02);
+  padding: 24px;
+  gap: 16px;
+  border: 1px solid var(--Dark-06);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+}
+
+.radioInput {
+  display: none;
+}
+
+.radioInput:checked + .radioLabel {
+  color: var(--Primary);
+}
+
+.radioLabel {
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px; // Odstęp między kropką a tekstem
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid white;
   display: inline-block;
-  font-family: 'Arial', sans-serif;
+}
 
-  select {
-    appearance: none;
-    background-color: var(--Dark-02, #0f1217);
-    color: var(--Light-02, #e2eaf1);
-    border: 1px solid var(--Dark-06, #2a2f35);
-    padding: 12px 20px;
-    border-radius: 2px;
-    font-size: 16px;
-    width: 100%;
-    max-width: 150px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  .dropdown-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--Dark-02, #0f1217);
-    border: 1px solid var(--Dark-06, #2a2f35);
-    padding: 10px;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 2px;
-
-    .option {
-      padding: 12px 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-
-      &.selected {
-        color: var(--Main-03, #a687ff);
-      }
-
-      &:hover {
-        background-color: var(--Dark-06, #2a2f35);
-      }
-
-      input[type='radio'] {
-        margin-right: 8px;
-      }
-    }
-  }
-
-  &:hover .dropdown-content {
-    display: block;
-  }
+.radioInput:checked + .radioLabel .dot {
+  background-color: var(--Primary);
 }

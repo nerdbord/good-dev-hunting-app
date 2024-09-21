@@ -1,47 +1,6 @@
-'use client'
-// import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-
-// export const LanguageSwitcher = () => {
-//   const pathname = usePathname()
-//   const searchParams = useSearchParams()
-//   const router = useRouter()
-
-//   const changeLanguage = (locale: string) => {
-//     const currentParams = searchParams ? `?${searchParams.toString()}` : ''
-//     router.push(`${locale}${pathname}${currentParams}`)
-//   }
-
-//   return (
-//     <div>
-//       <button onClick={() => changeLanguage('en')}>English</button>
-//       <button onClick={() => changeLanguage('pl')}>Polski</button>
-//     </div>
-//   )
-// }
-
-'use client'
-
-// import { usePathname, useRouter } from 'next/navigation'
-
-// export const LanguageSwitcher = () => {
-//   const router = useRouter()
-//   const pathname = usePathname()
-
-//   const changeLanguage = (locale: string) => {
-//     router.push(`/${locale}${pathname}`)
-//   }
-
-//   return (
-//     <div>
-//       <button onClick={() => changeLanguage('en')}>English</button>
-//       <button onClick={() => changeLanguage('pl')}>Polski</button>
-//     </div>
-//   )
-// }
 // 'use client'
 
 // import type { Locale } from '@/lib/locales'
-
 // import { useLocale } from 'next-intl'
 // import { useRouter } from 'next/navigation'
 // import React from 'react'
@@ -50,22 +9,20 @@
 //   const locale = useLocale() as Locale
 //   const router = useRouter()
 
-//   function handleLocaleChange(newLocale: Locale): void {
-//     if (locale === 'pl') {
-//       document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`
-//       router.refresh()
-//     }
+//   function handleLocaleChange(
+//     event: React.ChangeEvent<HTMLSelectElement>,
+//   ): void {
+//     const newLocale = event.target.value as Locale
+//     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`
+//     router.refresh()
 //   }
 
 //   return (
 //     <div>
-//       <button
-//         onClick={() => {
-//           handleLocaleChange('en')
-//         }}
-//       >
-//         EN
-//       </button>
+//       <select value={locale} onChange={handleLocaleChange}>
+//         <option value="en">English</option>
+//         <option value="pl">Polski</option>
+//       </select>
 //     </div>
 //   )
 // }
@@ -75,26 +32,68 @@
 import type { Locale } from '@/lib/locales'
 import { useLocale } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import styles from './LangSwitch.module.scss'
 
 export const LanguageSwitcher: React.FC = () => {
   const locale = useLocale() as Locale
   const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
 
-  function handleLocaleChange(
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ): void {
-    const newLocale = event.target.value as Locale
+  function handleLocaleChange(newLocale: Locale): void {
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`
     router.refresh()
   }
 
   return (
-    <div>
-      <select value={locale} onChange={handleLocaleChange}>
-        <option value="en">English</option>
-        <option value="pl">Polski</option>
-      </select>
+    <div className={styles.selectContainer}>
+      <div className={styles.selectBox} onClick={() => setIsOpen(!isOpen)}>
+        <div className={styles.selectedOption}>
+          <span className={styles.icon}>🌐</span>
+          <span className={styles.languageText}>
+            {locale === 'en' ? 'English (US)' : 'Polski'}
+          </span>
+          <span className={styles.arrow}>▾</span>
+        </div>
+        {isOpen && (
+          <div className={styles.selectOptions}>
+            <div
+              className={styles.option}
+              onClick={() => handleLocaleChange('en')}
+            >
+              <input
+                className={styles.radioInput}
+                type="radio"
+                id="english"
+                name="language"
+                checked={locale === 'en'}
+                readOnly
+              />
+              <label htmlFor="english" className={styles.radioLabel}>
+                <span className={styles.dot} />
+                English (US)
+              </label>
+            </div>
+            <div
+              className={styles.option}
+              onClick={() => handleLocaleChange('pl')}
+            >
+              <input
+                className={styles.radioInput}
+                type="radio"
+                id="polski"
+                name="language"
+                checked={locale === 'pl'}
+                readOnly
+              />
+              <label htmlFor="polski" className={styles.radioLabel}>
+                <span className={styles.dot} />
+                Polski
+              </label>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
