@@ -1,7 +1,6 @@
 .selectContainer {
   width: 168px;
 
-  // Zdefiniowanie zmiennych lokalnych
   --Dark-06: #2a2f35;
   --Dark-02: #0f1217;
   --Primary: #a855f7;
@@ -35,7 +34,7 @@
 .icon {
   font-size: 16px;
   color: var(--Primary);
-  margin-right: 8px; // Odstęp między ikoną a tekstem
+  margin-right: 8px;
 }
 
 .arrow {
@@ -55,6 +54,7 @@
   border-radius: 2px;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 
 .option {
@@ -76,7 +76,7 @@
   color: white;
   display: flex;
   align-items: center;
-  gap: 10px; // Odstęp między kropką a tekstem
+  gap: 10px;
 }
 
 .dot {

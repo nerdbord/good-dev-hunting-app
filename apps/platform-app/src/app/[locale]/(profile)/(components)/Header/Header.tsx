@@ -76,7 +76,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       return (
         <li>
           <CreateProfileBtn data-testid="create-profile-button" />
-          <LanguageSwitcher />
+          <LanguageSwitcher /> {/* Dodanie LanguageSwitcher */}
         </li>
       )
     }
@@ -86,7 +86,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
           {userIsModerator && (
             <li>
               <ModerationBtn />
-              <LanguageSwitcher />
             </li>
           )}
           {userIsHunter ? (
@@ -140,6 +139,11 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
             </Link>
             <GitHubStarsButton />
           </div>
+
+          <div className={styles.languageSwitcherWrapper}>
+            <LanguageSwitcher />
+          </div>
+
           <nav>
             <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
               {renderMobileContent()}

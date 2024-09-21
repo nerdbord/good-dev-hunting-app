@@ -1,32 +1,3 @@
-// 'use client'
-
-// import type { Locale } from '@/lib/locales'
-// import { useLocale } from 'next-intl'
-// import { useRouter } from 'next/navigation'
-// import React from 'react'
-
-// export const LanguageSwitcher: React.FC = () => {
-//   const locale = useLocale() as Locale
-//   const router = useRouter()
-
-//   function handleLocaleChange(
-//     event: React.ChangeEvent<HTMLSelectElement>,
-//   ): void {
-//     const newLocale = event.target.value as Locale
-//     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`
-//     router.refresh()
-//   }
-
-//   return (
-//     <div>
-//       <select value={locale} onChange={handleLocaleChange}>
-//         <option value="en">English</option>
-//         <option value="pl">Polski</option>
-//       </select>
-//     </div>
-//   )
-// }
-
 'use client'
 
 import type { Locale } from '@/lib/locales'
