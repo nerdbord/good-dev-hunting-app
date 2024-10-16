@@ -4,7 +4,9 @@ import { SearchResultsInfo } from '@/app/[locale]/(moderation)/(components)/Sear
 import { useModerationProfilesStore } from '@/app/[locale]/(moderation)/_providers/moderation-profiles-store.provider'
 import { getModerationCurrentState } from '@/app/[locale]/(moderation)/moderation.helpers'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import Loader from '@/components/Loader/Loader'
+import { Loader } from '@gdh/ui-system'
+import { I18nNamespaces } from '@/i18n'
+import { useTranslations } from 'next-intl'
 import useTabCounter from '@/hooks/useTabCounter'
 import { PublishingState } from '@prisma/client'
 import { useSession } from 'next-auth/react'
@@ -18,6 +20,7 @@ export function ModerationProfileList() {
     searchValue,
     moderationProfiles,
   } = useModerationProfilesStore(getModerationCurrentState)
+  const t = useTranslations(I18nNamespaces.Index)
 
   const filteredProfiles = moderationProfiles.filter(
     (profile: ProfileModel) => {
@@ -37,7 +40,7 @@ export function ModerationProfileList() {
   )
 
   if (status === 'loading') {
-    return <Loader />
+    return <Loader>{t('title')}</Loader>
   }
 
   if (!hasResults) {
