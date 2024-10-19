@@ -24,7 +24,7 @@ export const publishProfile = withSentry(async (profileId: string) => {
     state: PublishingState.PENDING,
   })
 
-  runEvaluateProfileAgent('', foundProfile.id)
+  runEvaluateProfileAgent('', foundProfile.userId)
 
   await sendDiscordNotificationToModeratorChannel(
     `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,

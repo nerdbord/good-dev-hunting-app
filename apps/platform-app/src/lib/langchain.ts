@@ -5,18 +5,17 @@ import { END, START, StateGraph } from '@langchain/langgraph'
 import { ToolNode } from '@langchain/langgraph/prebuilt'
 
 import { prisma } from '@/lib/prismaClient'
-import { setContextVariable } from '@langchain/core/context'
 import { type BaseMessage } from '@langchain/core/messages'
 import { Annotation } from '@langchain/langgraph'
 
 async function updateProfilePublishingState(
-  profileId: string,
+  userId: string,
   newState: PublishingState,
 ) {
   try {
     const updatedProfile = await prisma.profile.update({
       where: {
-        id: profileId,
+        userId,
       },
       data: {
         state: newState,
@@ -38,6 +37,11 @@ const StateAnnotation = Annotation.Root({
   profile: Annotation<{ name: string; bio: string }>(),
 })
 
+import {
+  sendProfileApprovedEmail,
+  sendProfileRejectedEmail,
+} from '@/backend/mailing/mailing.service'
+import { getUserById } from '@/backend/user/user.service'
 import { tool } from '@langchain/core/tools'
 import { type LangGraphRunnableConfig } from '@langchain/langgraph'
 import { type PublishingState } from '@prisma/client'
@@ -45,11 +49,20 @@ import { z } from 'zod'
 
 const acceptProfileTool = tool(
   async (_, config: LangGraphRunnableConfig) => {
-    const profileId = config.configurable?.profileId
+    const userId = config.configurable?.userId
 
-    updateProfilePublishingState(profileId, 'APPROVED')
+    updateProfilePublishingState(userId, 'APPROVED')
 
-    return `Profil został zaakceptowany i zapisany: ${profileId} `
+    const fetchedUser = await getUserById(userId)
+
+    if (fetchedUser) {
+      sendProfileApprovedEmail(
+        fetchedUser.email,
+        fetchedUser.githubDetails?.username || '',
+      )
+    }
+
+    return `Profil został zaakceptowany i zapisany: ${userId} `
   },
 
   {
@@ -62,11 +75,15 @@ const acceptProfileTool = tool(
 const rejectProfileTool = tool(
   async (input, config: LangGraphRunnableConfig) => {
     const { reason } = input
-    const profileId = config.configurable?.profileId
+    const userId = config.configurable?.userId
 
-    console.log('rejected', profileId, reason) //TODO:
+    updateProfilePublishingState(userId, 'REJECTED')
 
-    updateProfilePublishingState(profileId, 'REJECTED')
+    const fetchedUser = await getUserById(userId)
+
+    if (fetchedUser) {
+      sendProfileRejectedEmail(fetchedUser?.email, reason)
+    }
 
     return `Profil został odrzucony. Powód: ${reason}`
   },
@@ -166,17 +183,17 @@ async function retrieveProfile(
   state: typeof StateAnnotation.State,
   config: LangGraphRunnableConfig,
 ) {
-  const profileId = config.configurable?.profileId
+  const userId = config.configurable?.userId
 
-  const fetchedProfile = await fetchProfile(profileId)
+  const fetchedProfile = await fetchProfile(userId)
 
   return { profile: fetchedProfile }
 }
 
-const fetchProfile = async (profileId: string) => {
+const fetchProfile = async (userId: string) => {
   const fetchedProfile = await prisma.profile.findFirst({
     where: {
-      id: profileId,
+      userId,
     },
   })
 
@@ -190,8 +207,6 @@ const fetchProfile = async (profileId: string) => {
 }
 
 const toolNodeWithGraphState = async (state: typeof StateAnnotation.State) => {
-  // We set a context variable before invoking the tool node and running our tool.
-  setContextVariable('currentState', state)
   const toolNodeWithConfig = new ToolNode(tools)
   return toolNodeWithConfig.invoke(state)
 }
@@ -208,23 +223,12 @@ const workflow = new StateGraph(StateAnnotation)
 
 const graph = workflow.compile()
 
-// const inputs = {}
-// const config = {
-//   configurable: {
-//     thread_id: '1',
-//     profileId: 'a-user',
-//   },
-// }
-
-export const runEvaluateProfileAgent = async (
-  input: any,
-  profileId: string,
-) => {
+export const runEvaluateProfileAgent = async (input: any, userId: string) => {
   'use server'
   await graph.invoke(input, {
     configurable: {
       thread_id: '1',
-      profileId,
+      userId,
     },
   })
 }
