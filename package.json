@@ -25,6 +25,7 @@
     "lint-staged": "^15.1.0"
   },
   "dependencies": {
+    "@langchain/core": "^0.3.11",
     "zustand": "^4.5.4"
   }
 }
