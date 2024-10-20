@@ -4,67 +4,56 @@ import { ChatGroq } from '@langchain/groq'
 import { END, START, StateGraph } from '@langchain/langgraph'
 import { ToolNode } from '@langchain/langgraph/prebuilt'
 
-import { prisma } from '@/lib/prismaClient'
+import {
+  sendProfileApprovedEmail,
+  sendProfileRejectedEmail,
+} from '@/backend/mailing/mailing.service'
+import { updateProfileById } from '@/backend/profile/profile.service'
+import { getUserById } from '@/backend/user/user.service'
+import { type UserWithProfileAndGH } from '@/backend/user/user.types'
+import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { type BaseMessage } from '@langchain/core/messages'
-import { Annotation } from '@langchain/langgraph'
-
-async function updateProfilePublishingState(
-  userId: string,
-  newState: PublishingState,
-) {
-  try {
-    const updatedProfile = await prisma.profile.update({
-      where: {
-        userId,
-      },
-      data: {
-        state: newState,
-      },
-    })
-    return updatedProfile
-  } catch (error) {
-    console.error('Błąd podczas aktualizacji statusu profilu:', error)
-    throw error
-  } finally {
-    await prisma.$disconnect()
-  }
-}
+import { tool } from '@langchain/core/tools'
+import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
+import { z } from 'zod'
 
 const StateAnnotation = Annotation.Root({
   messages: Annotation<BaseMessage[]>({
     reducer: (x, y) => x.concat(y),
   }),
-  profile: Annotation<{ name: string; bio: string }>(),
+  user: Annotation<UserWithProfileAndGH>(),
 })
 
-import {
-  sendProfileApprovedEmail,
-  sendProfileRejectedEmail,
-} from '@/backend/mailing/mailing.service'
-import { getUserById } from '@/backend/user/user.service'
-import { tool } from '@langchain/core/tools'
-import { type LangGraphRunnableConfig } from '@langchain/langgraph'
-import { type PublishingState } from '@prisma/client'
-import { z } from 'zod'
+const evaluationModel = new ChatGroq({
+  model: 'llama-3.1-70b-versatile',
+  temperature: 0.2,
+})
+
+const executionModel = new ChatGroq({
+  model: 'llama3-groq-8b-8192-tool-use-preview',
+  temperature: 0.1,
+})
 
 const acceptProfileTool = tool(
   async (_, config: LangGraphRunnableConfig) => {
     const userId = config.configurable?.userId
+    const currentState =
+      getContextVariable<typeof StateAnnotation.State>('currentState')
 
-    updateProfilePublishingState(userId, 'APPROVED')
+    // updateProfilePublishingState(userId, 'APPROVED')
 
-    const fetchedUser = await getUserById(userId)
+    if (currentState?.user) {
+      if (currentState?.user.profile) {
+        updateProfileById(currentState.user.profile.id, { state: 'APPROVED' })
+      }
 
-    if (fetchedUser) {
       sendProfileApprovedEmail(
-        fetchedUser.email,
-        fetchedUser.githubDetails?.username || '',
+        currentState?.user.email,
+        currentState?.user.githubDetails?.username || '',
       )
     }
-
-    return `Profil został zaakceptowany i zapisany: ${userId} `
+    return `The profile has been accepted. UserId: ${userId} `
   },
-
   {
     name: 'accept_profile',
     description: 'Accept user apply and save his profile in our database',
@@ -74,18 +63,20 @@ const acceptProfileTool = tool(
 
 const rejectProfileTool = tool(
   async (input, config: LangGraphRunnableConfig) => {
-    const { reason } = input
     const userId = config.configurable?.userId
+    const { reason } = input
 
-    updateProfilePublishingState(userId, 'REJECTED')
+    const currentState =
+      getContextVariable<typeof StateAnnotation.State>('currentState')
 
-    const fetchedUser = await getUserById(userId)
-
-    if (fetchedUser) {
-      sendProfileRejectedEmail(fetchedUser?.email, reason)
+    if (currentState?.user) {
+      if (currentState.user.profile) {
+        updateProfileById(currentState.user.profile.id, { state: 'REJECTED' })
+      }
+      sendProfileRejectedEmail(currentState.user.email, reason)
     }
 
-    return `Profil został odrzucony. Powód: ${reason}`
+    return `The profile has been rejected. Reason: ${reason}, UserId: ${userId}`
   },
   {
     name: 'reject_profile',
@@ -100,24 +91,7 @@ const rejectProfileTool = tool(
 
 const tools = [acceptProfileTool, rejectProfileTool]
 
-// const evaluationModel = new ChatOpenAI({
-//   model: "gpt-4o-mini",
-//   temperature: 0,
-// });
 
-const evaluationModel = new ChatGroq({
-  model: 'llama-3.1-70b-versatile',
-  temperature: 0.2,
-})
-
-// const executionModel = new ChatOpenAI({
-//   model: "gpt-4o-mini",
-//   temperature: 0,
-// });
-const executionModel = new ChatGroq({
-  model: 'llama3-groq-8b-8192-tool-use-preview',
-  temperature: 0.1,
-})
 
 const routeMessage = (state: typeof StateAnnotation.State) => {
   const { messages } = state
@@ -130,24 +104,20 @@ const routeMessage = (state: typeof StateAnnotation.State) => {
   return 'tools'
 }
 
-const callModel = async (state: typeof StateAnnotation.State) => {
-  const { messages } = state
-  const lastMessage = messages[messages.length - 1] as AIMessage
+async function retrieveProfile(
+  state: typeof StateAnnotation.State,
+  config: LangGraphRunnableConfig,
+) {
+  const userId = config.configurable?.userId
+  const fetchedUser = await getUserById(userId)
 
-  const modelWithTools = executionModel.bindTools(tools)
-  const responseMessage = await modelWithTools.invoke([
-    {
-      role: 'system',
-      content:
-        "You are a personal assistant. Based on the user's submitted evaluation, invoke the appropriate tool.",
-    },
-    { role: 'human', content: lastMessage.content },
-  ])
-  return { messages: [responseMessage] }
+  return { user: fetchedUser }
 }
 
 const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
-  const { name, bio } = state.profile
+  const { profile } = state.user
+  const fullName = profile?.fullName || ''
+  const bio = profile?.bio || ''
 
   const responseMessage = await evaluationModel.invoke([
     {
@@ -171,7 +141,7 @@ const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
     {
       role: 'human',
       content: `profile details:
-        name: ${name}
+        name: ${fullName}
         bio: ${bio}`,
     },
   ])
@@ -179,34 +149,24 @@ const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
   return { messages: [responseMessage] }
 }
 
-async function retrieveProfile(
-  state: typeof StateAnnotation.State,
-  config: LangGraphRunnableConfig,
-) {
-  const userId = config.configurable?.userId
+const executeDecision = async (state: typeof StateAnnotation.State) => {
+  const { messages } = state
+  const lastMessage = messages[messages.length - 1] as AIMessage
 
-  const fetchedProfile = await fetchProfile(userId)
-
-  return { profile: fetchedProfile }
-}
-
-const fetchProfile = async (userId: string) => {
-  const fetchedProfile = await prisma.profile.findFirst({
-    where: {
-      userId,
+  const modelWithTools = executionModel.bindTools(tools)
+  const responseMessage = await modelWithTools.invoke([
+    {
+      role: 'system',
+      content:
+        "You are a personal assistant. Based on the user's submitted evaluation, invoke the appropriate tool.",
     },
-  })
-
-  if (fetchedProfile !== null) {
-    const profile = { name: fetchedProfile.fullName, bio: fetchedProfile.bio }
-    return profile
-  }
-
-  // Handle the case when profileById is null
-  return null
+    { role: 'human', content: lastMessage.content },
+  ])
+  return { messages: [responseMessage] }
 }
 
 const toolNodeWithGraphState = async (state: typeof StateAnnotation.State) => {
+  setContextVariable('currentState', state)
   const toolNodeWithConfig = new ToolNode(tools)
   return toolNodeWithConfig.invoke(state)
 }
@@ -214,7 +174,7 @@ const toolNodeWithGraphState = async (state: typeof StateAnnotation.State) => {
 const workflow = new StateGraph(StateAnnotation)
   .addNode('retrieveProfile', retrieveProfile)
   .addNode('evaluateProfile', evaluateProfileByModel)
-  .addNode('agent', callModel)
+  .addNode('agent', executeDecision)
   .addNode('tools', toolNodeWithGraphState)
   .addEdge(START, 'retrieveProfile')
   .addEdge('retrieveProfile', 'evaluateProfile')
