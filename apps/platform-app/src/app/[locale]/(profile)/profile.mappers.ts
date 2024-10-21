@@ -1,6 +1,6 @@
 import { SeniorityLevel } from '@/backend/profile/profile.types'
 import { type DropdownOption } from '@gdh/ui-system'
-import { EmploymentType } from '@prisma/client'
+import { Currency, EmploymentType } from '@prisma/client'
 import { JobSpecialization } from './profile.types'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
@@ -184,3 +184,16 @@ export const hourlyRateOptions: DropdownOption[] = [
   { name: '300 - 350 zł/h', value: '300-350' },
   { name: '> 350 zł/h', value: '350-0' },
 ]
+
+export const hourlyRateOptionsCurrency = (curr: Currency) => {
+  return [
+    { name: `< 50 ${curr}/h`, value: `1-50` },
+    { name: `50 - 100 ${curr}/h`, value: `50-100` },
+    { name: `100 - 150 ${curr}/h`, value: `100-150` },
+    { name: `150 - 200 ${curr}/h`, value: `150-200` },
+    { name: `200 - 250 ${curr}/h`, value: `200-250` },
+    { name: `250 - 300 ${curr}/h`, value: `250-300` },
+    { name: `300 - 350 ${curr}/h`, value: `300-350` },
+    { name: `> 350 ${curr}/h`, value: `350-0` },
+  ] as DropdownOption[]
+}
