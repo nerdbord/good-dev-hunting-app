@@ -1,12 +1,12 @@
 'use server'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { runEvaluateProfileAgent } from '@/app/[locale]/(profile)/_workflows/profile-evaluation.workflow'
 import {
   findProfileById,
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
-import { runEvaluateProfileAgent } from '@/lib/langchain'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
 
@@ -24,11 +24,13 @@ export const publishProfile = withSentry(async (profileId: string) => {
     state: PublishingState.PENDING,
   })
 
-  runEvaluateProfileAgent('', foundProfile.userId)
+  runEvaluateProfileAgent(foundProfile.userId)
 
-  await sendDiscordNotificationToModeratorChannel(
-    `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
-  )
+  if (!(process.env.BLOCK_DISCORD_NOTIFICATIONS === 'true')) {
+    await sendDiscordNotificationToModeratorChannel(
+      `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
+    )
+  }
 
   return createProfileModel(updatedProfile)
 })
