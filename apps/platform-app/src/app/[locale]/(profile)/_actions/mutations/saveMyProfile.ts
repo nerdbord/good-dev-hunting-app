@@ -5,6 +5,7 @@ import {
   createProfileModel,
   type ProfileModel,
 } from '@/app/[locale]/(profile)/_models/profile.model'
+import { runEvaluateProfileAgent } from '@/app/[locale]/(profile)/_workflows/profile-evaluation.workflow'
 import {
   hasCommonFields,
   hasProfileValuesChanged,
@@ -12,7 +13,6 @@ import {
 import { type EditProfileFormFields } from '@/app/[locale]/(profile)/profile.types'
 import { updateProfileById } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
-import { runEvaluateProfileAgent } from '@/lib/langchain'
 import { withSentry } from '@/utils/errHandling'
 import { Currency, PublishingState, type Prisma } from '@prisma/client'
 
@@ -126,11 +126,12 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
 
   if (updatedProfile.state === PublishingState.PENDING) {
-    runEvaluateProfileAgent('', user.id)
-
-    await sendDiscordNotificationToModeratorChannel(
-      `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
-    )
+    runEvaluateProfileAgent(user.id)
+    if (!(process.env.BLOCK_DISCORD_NOTIFICATIONS === 'true')) {
+      await sendDiscordNotificationToModeratorChannel(
+        `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
+      )
+    }
   }
 
   return createProfileModel(updatedProfile)
