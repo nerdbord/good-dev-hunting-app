@@ -84,7 +84,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
         viewCount: 0,
         hourlyRateMin: 0,
         hourlyRateMax: 0,
-        currency: Currency.PLN,
+        currency: Currency.EUR,
         language: [],
       }
     }

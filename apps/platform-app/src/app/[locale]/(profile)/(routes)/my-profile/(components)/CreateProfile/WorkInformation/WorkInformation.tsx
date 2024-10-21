@@ -1,6 +1,7 @@
 'use client'
 import {
   hourlyRateOptions,
+  hourlyRateOptionsCurrency,
   mappedSeniorityLevel,
   mappedSpecialization,
 } from '@/app/[locale]/(profile)/profile.mappers'
@@ -9,7 +10,7 @@ import { CheckboxInput } from '@gdh/ui-system'
 
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
-import { EmploymentType } from '@prisma/client'
+import { Currency, EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
@@ -112,7 +113,7 @@ const WorkInformation = () => {
           id={WorkInformationFormKeys.HOURLY_RATE}
           label={t('hourlyRate')}
           text={t('chooseHourlyRate')}
-          options={hourlyRateOptions}
+          options={hourlyRateOptionsCurrency(Currency.EUR)}
           selectedValue={
             hourlyRateOptions.find(
               (option) =>
