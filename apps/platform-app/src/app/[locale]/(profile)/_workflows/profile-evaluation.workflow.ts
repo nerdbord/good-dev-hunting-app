@@ -87,6 +87,8 @@ const rejectProfileTool = tool(
 
 const tools = [acceptProfileTool, rejectProfileTool]
 
+import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
+import { executeDecisionPrompt } from './prompts/executeDecisionNode'
 async function retrieveProfile(
   state: typeof StateAnnotation.State,
   config: LangGraphRunnableConfig,
@@ -102,32 +104,9 @@ const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
   const fullName = profile?.fullName || ''
   const bio = profile?.bio || ''
 
-  const responseMessage = await evaluationModel.invoke([
-    {
-      role: 'system',
-      content: `You are an assistant to a recruiter in the IT industry. 
-      You will receive a profile containing the candidate’s Name, BIO, and ID.
-      Before we send the applicant’s profile to our client, for whom we are seeking specialists, we need to ensure that the submitted applications meet our standards.
-      Approve or reject the profile based on the following conditions:
-      Conditions:
-      '''
-      The name contains obscene or offensive words
-      A fictitious character’s name is provided
-      The BIO contains obscene or offensive words
-      The BIO is shorter than 10 words
-      The BIO is in a language other than Polish or English
-      The BIO contains spelling errors
-      The BIO is written in an unprofessional style
-      '''
-`,
-    },
-    {
-      role: 'human',
-      content: `
-             Name: ${fullName}
-             BIO: ${bio}`,
-    },
-  ])
+  const chain = evaluateProfilePrompt.pipe(evaluationModel)
+  const responseMessage = await chain.invoke({ fullName, bio })
+
 
   return { evaluation: responseMessage.content }
 }
@@ -135,20 +114,15 @@ const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
 const executeDecision = async (state: typeof StateAnnotation.State) => {
   const { evaluation } = state
 
-
   const modelWithTools = executionModel.bindTools(tools)
-  const responseMessage = await modelWithTools.invoke([
-    {
-      role: 'system',
-      content:
-        "You are a personal assistant. Based on the user's submitted evaluation, invoke the appropriate tool.",
-    },
-    { role: 'human', content: evaluation },
-  ])
+  const chain = executeDecisionPrompt.pipe(modelWithTools)
+  const responseMessage = await chain.invoke({ evaluation })
 
   const messageWithSingleToolCall = new AIMessage({
     content: responseMessage.content,
-    tool_calls: responseMessage.tool_calls,
+    tool_calls: responseMessage.tool_calls?.[0]
+      ? [responseMessage.tool_calls?.[0]]
+      : undefined,
   })
 
   setContextVariable('currentState', state)
