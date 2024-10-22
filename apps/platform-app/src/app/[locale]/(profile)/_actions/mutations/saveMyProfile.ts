@@ -5,6 +5,7 @@ import {
   createProfileModel,
   type ProfileModel,
 } from '@/app/[locale]/(profile)/_models/profile.model'
+import { runEvaluateProfileAgent } from '@/app/[locale]/(profile)/_workflows/profile-evaluation.workflow'
 import {
   hasCommonFields,
   hasProfileValuesChanged,
@@ -125,6 +126,8 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
 
   if (updatedProfile.state === PublishingState.PENDING) {
+    await runEvaluateProfileAgent(foundProfile.id)
+
     await sendDiscordNotificationToModeratorChannel(
       `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
     )
