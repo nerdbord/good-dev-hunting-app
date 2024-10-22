@@ -8,16 +8,20 @@ import {
   sendProfileApprovedEmail,
   sendProfileRejectedEmail,
 } from '@/backend/mailing/mailing.service'
-import { updateProfileById } from '@/backend/profile/profile.service'
-import { getUserById } from '@/backend/user/user.service'
-import { type UserWithProfileAndGH } from '@/backend/user/user.types'
+import {
+  getProfileById,
+  updateProfileById,
+} from '@/backend/profile/profile.service'
+import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { tool } from '@langchain/core/tools'
 import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
 import { z } from 'zod'
+import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
+import { executeDecisionPrompt } from './prompts/executeDecisionNode'
 
 const StateAnnotation = Annotation.Root({
-  user: Annotation<UserWithProfileAndGH>(),
+  profile: Annotation<ProfileWithRelations>(),
   evaluation: Annotation<string>(),
 })
 
@@ -34,21 +38,20 @@ const executionModel = new ChatGroq({
 
 const acceptProfileTool = tool(
   async (_, config: LangGraphRunnableConfig) => {
-    const userId = config.configurable?.userId
+    const profileId = config.configurable?.profileId
     const currentState =
       getContextVariable<typeof StateAnnotation.State>('currentState')
-
-    if (currentState?.user) {
-      if (currentState?.user.profile) {
-        updateProfileById(currentState.user.profile.id, { state: 'APPROVED' })
-      }
-
-      sendProfileApprovedEmail(
-        currentState?.user.email,
-        currentState?.user.githubDetails?.username || '',
-      )
+    if (!currentState) {
+      throw new Error('currentState not found')
     }
-    return `The profile has been accepted. UserId: ${userId} `
+
+    updateProfileById(currentState.profile.user.id, { state: 'APPROVED' })
+    sendProfileApprovedEmail(
+      currentState.profile.user.email,
+      currentState.profile.user.githubDetails?.username || '',
+    )
+
+    return `The profile has been accepted. profileId: ${profileId} `
   },
   {
     name: 'accept_profile',
@@ -59,20 +62,18 @@ const acceptProfileTool = tool(
 
 const rejectProfileTool = tool(
   async (input, config: LangGraphRunnableConfig) => {
-    const userId = config.configurable?.userId
+    const profileId = config.configurable?.profileId
     const { reason } = input
-
     const currentState =
       getContextVariable<typeof StateAnnotation.State>('currentState')
-
-    if (currentState?.user) {
-      if (currentState.user.profile) {
-        updateProfileById(currentState.user.profile.id, { state: 'REJECTED' })
-      }
-      sendProfileRejectedEmail(currentState.user.email, reason)
+    if (!currentState) {
+      throw new Error('currentState not found')
     }
 
-    return `The profile has been rejected. Reason: ${reason}, UserId: ${userId}`
+    updateProfileById(profileId, { state: 'REJECTED' })
+    sendProfileRejectedEmail(currentState.profile.user.email, reason)
+
+    return `The profile has been rejected. Reason: ${reason}, profileId: ${profileId}`
   },
   {
     name: 'reject_profile',
@@ -87,26 +88,21 @@ const rejectProfileTool = tool(
 
 const tools = [acceptProfileTool, rejectProfileTool]
 
-import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
-import { executeDecisionPrompt } from './prompts/executeDecisionNode'
 async function retrieveProfile(
   state: typeof StateAnnotation.State,
   config: LangGraphRunnableConfig,
 ) {
-  const userId = config.configurable?.userId
-  const fetchedUser = await getUserById(userId)
+  const profileId = config.configurable?.profileId
+  const fetchedProfile = await getProfileById(profileId)
 
-  return { user: fetchedUser }
+  return { profile: fetchedProfile }
 }
 
 const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
-  const { profile } = state.user
-  const fullName = profile?.fullName || ''
-  const bio = profile?.bio || ''
+  const { fullName, bio } = state.profile
 
   const chain = evaluateProfilePrompt.pipe(evaluationModel)
   const responseMessage = await chain.invoke({ fullName, bio })
-
 
   return { evaluation: responseMessage.content }
 }
@@ -141,12 +137,12 @@ const workflow = new StateGraph(StateAnnotation)
 
 const graph = workflow.compile()
 
-export const runEvaluateProfileAgent = async (userId: string) => {
+export const runEvaluateProfileAgent = async (profileId: string) => {
   'use server'
   await graph.invoke('', {
     configurable: {
-      thread_id: userId,
-      userId,
+      thread_id: profileId,
+      profileId,
     },
   })
 }
