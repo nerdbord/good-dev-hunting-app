@@ -24,13 +24,11 @@ export const publishProfile = withSentry(async (profileId: string) => {
     state: PublishingState.PENDING,
   })
 
-  runEvaluateProfileAgent(foundProfile.userId)
+  await runEvaluateProfileAgent(foundProfile.id)
 
-  if (!(process.env.BLOCK_DISCORD_NOTIFICATIONS === 'true')) {
-    await sendDiscordNotificationToModeratorChannel(
-      `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
-    )
-  }
+  await sendDiscordNotificationToModeratorChannel(
+    `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
+  )
 
   return createProfileModel(updatedProfile)
 })
