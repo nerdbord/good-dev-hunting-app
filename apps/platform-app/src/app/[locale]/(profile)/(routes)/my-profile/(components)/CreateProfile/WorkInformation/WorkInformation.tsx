@@ -1,6 +1,5 @@
 'use client'
 import {
-  hourlyRateOptions,
   hourlyRateOptionsCurrency,
   mappedSeniorityLevel,
   mappedSpecialization,
@@ -24,6 +23,7 @@ export enum WorkInformationFormKeys {
   SENIORITY = 'seniority',
   TECH_STACK = 'techStack',
   EMPLOYMENT = 'employment',
+  CURRENCY = 'currency',
   HOURLY_RATE_MIN = 'hourlyRateMin',
   HOURLY_RATE_MAX = 'hourlyRateMax',
   HOURLY_RATE = 'hourlyRate',
@@ -66,6 +66,10 @@ const WorkInformation = () => {
       )
     }
   }
+  const handleCurrencyChange = (chosenCurrency: Currency) => {
+    setFieldValue(WorkInformationFormKeys.CURRENCY, chosenCurrency
+    )
+  }
 
   const isEmploymentTypeSelected = (option: EmploymentType): boolean => {
     return values.employment.includes(option)
@@ -94,6 +98,7 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.POSITION}
           />
         </InputFormError>
+
         <InputFormError
           error={
             touched[WorkInformationFormKeys.SENIORITY] &&
@@ -109,13 +114,26 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.SENIORITY}
           />
         </InputFormError>
+        <InputFormError
+          error={
+            touched[WorkInformationFormKeys.CURRENCY] &&
+            errors[WorkInformationFormKeys.CURRENCY]?.value
+          }
+        >
+          {Object.keys(Currency).map((value, index) => {
+            if (value === values.currency) {
+              return <>{' ' + value.toLocaleUpperCase() + ' '}</>
+            }
+            return <div onClick={() => handleCurrencyChange(value as Currency)}>{' ' + value.toLocaleLowerCase() + ' '}</div>
+          })}
+        </InputFormError>
         <DropdownSelect
           id={WorkInformationFormKeys.HOURLY_RATE}
           label={t('hourlyRate')}
           text={t('chooseHourlyRate')}
-          options={hourlyRateOptionsCurrency(Currency.EUR)}
+          options={hourlyRateOptionsCurrency(values.currency)}
           selectedValue={
-            hourlyRateOptions.find(
+            hourlyRateOptionsCurrency(values.currency).find(
               (option) =>
                 option.value ===
                 `${values[WorkInformationFormKeys.HOURLY_RATE_MIN]}-${
