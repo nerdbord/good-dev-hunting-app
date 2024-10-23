@@ -149,6 +149,8 @@ model Language {
 
 enum Currency {
    PLN
+   EUR
+   USD
  }
  
 enum EmploymentType {

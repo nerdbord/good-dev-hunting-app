@@ -84,13 +84,15 @@ export const ProfileFilters = ({
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.location]}
         />
-        <DropdownFilterMulti
+        
+        {/* SALARY FILTER TEMPORARILY DISABLED */
+        /* <DropdownFilterMulti
           text={t('salary')}
           options={hourlyRateOptions}
           jobOfferFilterName={JobOfferFiltersEnum.salary}
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.salary]}
-        />
+        /> */}
       </div>
       {!isMobile && (
         <SearchBarWrapper
