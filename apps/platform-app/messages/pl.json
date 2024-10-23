@@ -163,5 +163,11 @@
     "contratAvaible": "Dostępny do pracy na kontrakt",
     "notAvaible": "Niedostępny do pracy",
     "remote": "Zdalnie"
+  },
+
+  "ConfirmLeaveModal": {
+    "title": "Finish your Profile to Save",
+    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
+    "cancelBtn": "Finish profile"
   }
 }

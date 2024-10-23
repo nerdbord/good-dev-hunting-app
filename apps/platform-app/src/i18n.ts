@@ -30,4 +30,5 @@ export enum I18nNamespaces {
   LocationPreferences = 'LocationPreferences',
   WorkInformation = 'WorkInformation',
   VerticalCard = 'VerticalCard',
+  ConfirmLeaveModal = 'ConfirmLeaveModal',
 }
