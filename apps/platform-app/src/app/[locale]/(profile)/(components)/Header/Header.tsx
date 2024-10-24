@@ -17,8 +17,8 @@ import { Container, GitHubStarsButton } from '@gdh/ui-system'
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
-import styles from './Header.module.scss'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
+import styles from './Header.module.scss'
 
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
@@ -30,10 +30,12 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
 
   const mainDesktopButtons = (
     <>
+      <li>
+        <LocaleSwitcher />
+      </li>
       {/* <li>
         <FindTalentsBtn variant="tertiary" />
       </li> */}
-      <li><LocaleSwitcher /></li>
 
       <li>
         <LoginBtnsWrapper />
