@@ -8,7 +8,7 @@ import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+// import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
@@ -18,6 +18,7 @@ import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBt
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import styles from './Header.module.scss'
+import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
 
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
@@ -29,9 +30,11 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
 
   const mainDesktopButtons = (
     <>
-      <li>
+      {/* <li>
         <FindTalentsBtn variant="tertiary" />
-      </li>
+      </li> */}
+      <li><LocaleSwitcher /></li>
+
       <li>
         <LoginBtnsWrapper />
       </li>
