@@ -1,6 +1,6 @@
 import { getRequestConfig } from 'next-intl/server'
 
-const locales = ['en', 'pl']
+export const locales = ['en', 'pl']
 
 export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale)) {
@@ -14,6 +14,7 @@ export default getRequestConfig(async ({ locale }) => {
 })
 
 export enum I18nNamespaces {
+  LocaleSwitcher = 'LocaleSwitcher',
   Index = 'Index',
   HowItWorks = 'HowItWorks',
   UserProfile = 'UserProfile',

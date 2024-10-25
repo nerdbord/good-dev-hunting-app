@@ -1,4 +1,7 @@
-{
+{"LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, pl {Polski} en {🇺🇸 English} other {Unknown}}"
+  },
   "Index": {
     "title": "Fetching that data for you",
     "findtalents": "Find talents",
