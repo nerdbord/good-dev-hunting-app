@@ -1,17 +1,31 @@
 .container {
   position: relative;
   display: inline-block;
+  width: 178px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 .button {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-radius: 4px;
   cursor: pointer;
 
   height: 43px;
-  width: 168px;
-  align-self: stretch;
+  width: 178px;
+  // align-self: stretch;
   background: #0f1217;
   gap: 8px;
   padding: 12px 20px;
@@ -27,6 +41,10 @@
   line-height: 20px;
 }
 
+.localeName {
+  text-align: center;
+}
+
 .buttonIcon {
   margin-right: 0.5rem;
   width: 18px;
@@ -34,14 +52,14 @@
 }
 
 .arrow {
-  margin-left: auto;
+  // margin-left: auto;
   color: #e2eaf1;
   width: 18px;
   height: 18px;
 }
 
 .dropdown {
-  width: 168px;
+  width: 178px;
   position: absolute;
   background-color: #0f1217;
   border: 1px solid #3d434b;
