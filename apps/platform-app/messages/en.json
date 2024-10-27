@@ -1,6 +1,13 @@
-{"LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, pl {Polski} en {🇺🇸 English} other {Unknown}}"
+{"LocaleSwitcher1": {
+    "label": "Language",
+    "locale": "{locale, select, en {English (🇺🇸 )} pl {Polski}  other {Unknown}}"
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "locale": {
+    "en": "English (US)",
+    "pl": "Polski"
+    }
   },
   "Index": {
     "title": "Fetching that data for you",

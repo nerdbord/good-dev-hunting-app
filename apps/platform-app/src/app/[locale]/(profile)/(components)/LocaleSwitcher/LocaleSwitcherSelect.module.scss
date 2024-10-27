@@ -1,0 +1,90 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+
+  height: 43px;
+  width: 168px;
+  align-self: stretch;
+  background: #0f1217;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid #2a2f35;
+  margin-right: 14px;
+  // ten kolor gdy dropdown ma stan active. gdy sie chowa kolor textu w buttonie #E2EAF1
+  color: #a687ff;
+  text-align: center;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.buttonIcon {
+  margin-right: 0.5rem;
+  width: 18px;
+  height: 18px;
+}
+
+.arrow {
+  margin-left: auto;
+  color: #e2eaf1;
+  width: 18px;
+  height: 18px;
+}
+
+.dropdown {
+  width: 168px;
+  position: absolute;
+  background-color: #0f1217;
+  border: 1px solid #3d434b;
+  border-radius: 4px;
+  padding: 24px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 16px;
+  z-index: 10;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #e2eaf1;
+  font-size: 14px;
+}
+
+.dropdownItem input[type='radio'] {
+  margin-right: 0.5rem;
+  appearance: none; // Usuwa domyślny styl przeglądarki
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #7d54f1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+
+  // Pseudoelement reprezentujący zaznaczenie
+  &:checked::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #7d54f1;
+    border-radius: 50%;
+    display: block;
+  }
+}

@@ -1,6 +1,13 @@
-{"LocaleSwitcher": {
-    "label": "Zmień język",
-    "locale": "{locale, select, en {English (US)} pl {Polski} other {Unknown}}"
+{"LocaleSwitcher1": {
+    "label": "Język",
+    "locale": "{locale, select, en {English (US)} pl {Polski}  other {Unknown}}"
+  },
+  "LocaleSwitcher": {
+    "label": "Język",
+    "locale": {
+    "en": "English (US)",
+    "pl": "Polski"
+    }
   },
   "Index": {
     "title": "Trwa ładowanie danych",
