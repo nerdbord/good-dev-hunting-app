@@ -1,12 +1,12 @@
 {"LocaleSwitcher1": {
     "label": "Language",
-    "locale": "{locale, select, en {English (🇺🇸 )} pl {Polski}  other {Unknown}}"
+    "locale": "{locale, select, en {English (🇺🇸)} pl {Polski} other {Unknown}}"
   },
   "LocaleSwitcher": {
     "label": "Language",
     "locale": {
-    "en": "English (US)",
-    "pl": "Polski"
+      "pl": "Polski",
+      "en": "English (US)"
     }
   },
   "Index": {
