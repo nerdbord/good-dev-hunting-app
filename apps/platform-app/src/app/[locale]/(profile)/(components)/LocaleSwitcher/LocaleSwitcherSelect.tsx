@@ -35,14 +35,14 @@
 'use client'
 
 import useOutsideClick from '@/hooks/useOutsideClick'
+import { I18nNamespaces } from '@/i18n'
 import { locales } from '@/i18n.config'
 import { GlobeIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState, useTransition } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import styles from './LocaleSwitcherSelect.module.scss'
-import { I18nNamespaces } from '@/i18n'
 
 type LocaleSwitcherSelectProps = {
   defaultValue: string
@@ -55,6 +55,7 @@ export const LocaleSwitcherSelect = ({
 }: LocaleSwitcherSelectProps) => {
   const t = useTranslations(I18nNamespaces.LocaleSwitcher)
   const router = useRouter()
+  let currentPath = usePathname()
   const [isPending, startTransition] = useTransition()
   const [isOpen, setIsOpen] = useState(false)
   const [selectedLocale, setSelectedLocale] = useState(defaultValue)
@@ -63,7 +64,7 @@ export const LocaleSwitcherSelect = ({
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => !prev)
   }
 
   useOutsideClick(
@@ -78,15 +79,22 @@ export const LocaleSwitcherSelect = ({
   // }
 
   const onLocaleChange = (nextLocale: string) => {
+    // Usuwa istniejący segment języka na początku ścieżki, jeśli istnieje
+    const localeRegex = /^\/(pl|en)/
+    currentPath = currentPath.replace(localeRegex, '')
     setSelectedLocale(nextLocale)
     setIsOpen(false)
     startTransition(() => {
-      router.replace(`/${nextLocale}`)
+      router.replace(`/${nextLocale}${currentPath}`)
+      router.refresh()
     })
   }
 
   return (
-    <div className={`${styles.container} ${isOpen ? styles.open : ''}`} ref={dropdownRef}>
+    <div
+      className={`${styles.container} ${isOpen ? styles.open : ''}`}
+      ref={dropdownRef}
+    >
       <p className={styles.srOnly}>{label}</p>
       <button
         className={styles.button}
@@ -96,7 +104,7 @@ export const LocaleSwitcherSelect = ({
         <span className={styles.buttonIcon}>
           <GlobeIcon />
         </span>
-        <span className='localeName'>{t(`locale.${selectedLocale}`)}</span>
+        <span className="localeName">{t(`locale.${selectedLocale}`)}</span>
         <span className={styles.arrow}>
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </span>
