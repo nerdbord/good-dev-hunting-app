@@ -87,7 +87,7 @@ export const LocaleSwitcherSelect = ({
 
   return (
     <div className={`${styles.container} ${isOpen ? styles.open : ''}`} ref={dropdownRef}>
-      <p className="srOnly">{label}</p>
+      <p className={styles.srOnly}>{label}</p>
       <button
         className={styles.button}
         onClick={handleDropdown}
