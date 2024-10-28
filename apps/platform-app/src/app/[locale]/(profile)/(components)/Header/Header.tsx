@@ -78,9 +78,14 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
   const renderDesktopContent = () => {
     if (buttonsVariant === 'signin') {
       return (
-        <li>
-          <CreateProfileBtn data-testid="create-profile-button" />
-        </li>
+        <>
+          <li>
+            <LocaleSwitcher />
+          </li>
+          <li>
+            <CreateProfileBtn data-testid="create-profile-button" />
+          </li>
+        </>
       )
     }
     if (user) {
@@ -103,14 +108,24 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
           ) : (
             <>
               {!userHasProfile && (
-                <li>
-                  <CreateProfileBtn data-testid="create-profile-button" />
-                </li>
+                <>
+                  <li>
+                    <LocaleSwitcher />
+                  </li>
+                  <li>
+                    <CreateProfileBtn data-testid="create-profile-button" />
+                  </li>
+                </>
               )}
               {userHasProfile && (
-                <li>
-                  <GithubAcc />
-                </li>
+                <>
+                  <li>
+                    <LocaleSwitcher />
+                  </li>
+                  <li>
+                    <GithubAcc />
+                  </li>
+                </>
               )}
             </>
           )}
