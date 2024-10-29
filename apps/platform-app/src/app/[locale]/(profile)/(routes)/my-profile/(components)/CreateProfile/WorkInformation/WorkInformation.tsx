@@ -1,11 +1,12 @@
 'use client'
 import {
+  hourlyRateOptions,
   hourlyRateOptionsCurrency,
   mappedSeniorityLevel,
   mappedSpecialization,
 } from '@/app/[locale]/(profile)/profile.mappers'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
-import { CheckboxInput } from '@gdh/ui-system'
+import { Button, CheckboxInput } from '@gdh/ui-system'
 
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
@@ -17,6 +18,7 @@ import { I18nNamespaces } from '@/i18n'
 import { type DropdownOption } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
+import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
 
 export enum WorkInformationFormKeys {
   POSITION = 'position',
@@ -67,8 +69,7 @@ const WorkInformation = () => {
     }
   }
   const handleCurrencyChange = (chosenCurrency: Currency) => {
-    setFieldValue(WorkInformationFormKeys.CURRENCY, chosenCurrency
-    )
+    setFieldValue(WorkInformationFormKeys.CURRENCY, chosenCurrency)
   }
 
   const isEmploymentTypeSelected = (option: EmploymentType): boolean => {
@@ -120,20 +121,32 @@ const WorkInformation = () => {
             errors[WorkInformationFormKeys.CURRENCY]?.value
           }
         >
-          {Object.keys(Currency).map((value, index) => {
-            if (value === values.currency) {
-              return <>{' ' + value.toLocaleUpperCase() + ' '}</>
-            }
-            return <div onClick={() => handleCurrencyChange(value as Currency)}>{' ' + value.toLocaleLowerCase() + ' '}</div>
-          })}
+          <div className={styles.currencyButtonsContainer}>
+            {Object.keys(Currency).map((value, index) => {
+              if (value === values.currency) {
+                return (
+                  <Button variant="secondary" >{currencyButtonTextDisplay(value)}</Button>
+                )
+              }
+              return (
+                <Button
+                  variant="grayedOut"
+                  onClick={() => handleCurrencyChange(value as Currency)}
+                >
+                  {currencyButtonTextDisplay(value as Currency)}
+                </Button>
+              )
+            
+            })}
+          </div>
         </InputFormError>
         <DropdownSelect
           id={WorkInformationFormKeys.HOURLY_RATE}
           label={t('hourlyRate')}
           text={t('chooseHourlyRate')}
-          options={hourlyRateOptionsCurrency(values.currency)}
+          options={hourlyRateOptions(values.currency)}
           selectedValue={
-            hourlyRateOptionsCurrency(values.currency).find(
+            hourlyRateOptions(values.currency).find(
               (option) =>
                 option.value ===
                 `${values[WorkInformationFormKeys.HOURLY_RATE_MIN]}-${

@@ -120,6 +120,20 @@
   border: 1px solid #7d54f1;
 }
 
+.grayedOut {
+  height: 44px;
+  color: #69717B;
+  background: transparent;
+  align-items: center;
+  border-radius: 2px;
+  padding: 12px 24px;
+  border: 1px solid var(--Main-03, #a687ff);
+}
+
+.grayedOut:hover:enabled {
+  background-color: rgba(23, 27, 33, 1);
+}
+
 .buttonWrapper {
   @include mobile {
     button {
@@ -127,3 +141,4 @@
     }
   }
 }
+
