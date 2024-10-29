@@ -124,6 +124,8 @@ const executeDecision = async (state: typeof StateAnnotation.State) => {
   setContextVariable('currentState', state)
   const toolNode = new ToolNode(tools)
   await toolNode.invoke({ messages: [messageWithSingleToolCall] })
+
+  return { ...state }
 }
 
 const workflow = new StateGraph(StateAnnotation)
@@ -139,10 +141,11 @@ const graph = workflow.compile()
 
 export const runEvaluateProfileAgent = async (profileId: string) => {
   'use server'
-  await graph.invoke('', {
+  const res = await graph.invoke('', {
     configurable: {
       thread_id: profileId,
       profileId,
     },
   })
+  return res
 }
