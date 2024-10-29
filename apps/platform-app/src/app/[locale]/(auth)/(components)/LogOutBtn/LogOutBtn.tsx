@@ -6,7 +6,11 @@ import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-const LogOutBtn = () => {
+interface LogOutBtnProps {
+  onClick?: () => void
+}
+
+const LogOutBtn = ({ onClick }: LogOutBtnProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isCalled, setIsCalled] = useState(false)
 
@@ -16,7 +20,7 @@ const LogOutBtn = () => {
       disabled={isCalled}
       onClick={() => {
         setIsCalled(true)
-        signOut({ callbackUrl: AppRoutes.home })
+        onClick ? onclick : signOut({ callbackUrl: AppRoutes.home })
       }}
     >
       {t('logOut')}{' '}
