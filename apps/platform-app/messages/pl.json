@@ -166,8 +166,9 @@
   },
 
   "ConfirmLeaveModal": {
-    "title": "Finish your Profile to Save",
-    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
-    "cancelBtn": "Finish profile"
+    "title": "Ukończ swój profil, aby zapisać",
+    "description": " Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz opuścisz stronę, Twoje postępy zostaną utracone.",
+    "leaveBtn": "Opuść stronę",
+    "cancelBtn": "Ukończ profil"
   }
 }

@@ -1,28 +1,30 @@
 'use client'
 import { Button } from '@gdh/ui-system'
 
+import { I18nNamespaces } from '@/i18n'
+import { useTranslations } from 'next-intl'
+
 import modalStyles from './modalStyles.module.scss'
 
-export function ConfirmLeaveModal({
+export const ConfirmLeaveModal = ({
   onConfirm,
   onClose,
 }: {
   onConfirm: () => void
   onClose: () => void
-}) {
+}) => {
+  const t = useTranslations(I18nNamespaces.ConfirmLeaveModal)
+
   return (
     <div className={modalStyles.container}>
-      <h4>Finish your Profile to Save</h4>
-      <p className={modalStyles.description}>
-        Your profile isn’t fully completed yet. To save your changes please fill
-        in all fields. If you leave the page now, your progress will be lost.
-      </p>
+      <h4>{t('title')}</h4>
+      <p className={modalStyles.description}>{t('description')}</p>
       <div className={modalStyles.actionButtons}>
         <Button variant={'secondary'} onClick={() => onConfirm()}>
-          Leave Page
+          {t('leaveBtn')}
         </Button>
         <Button variant={'primary'} onClick={() => onClose()}>
-          Finish profile
+          {t('cancelBtn')}
         </Button>
       </div>
     </div>
