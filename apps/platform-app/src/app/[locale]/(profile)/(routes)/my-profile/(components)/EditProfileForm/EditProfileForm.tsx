@@ -1,9 +1,6 @@
 'use client'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
-import {
-  mapLanguagesToProfileModel,
-  mapProfileModelToEditProfileFormValues,
-} from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,
   type ProfileFormValues,
@@ -19,6 +16,7 @@ import { useMemo } from 'react'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { useWarnIfUnsavedChanges } from '@/hooks/useWarnIfUnsavedChanges/useWarnIfUnsavedChanges'
 import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import styles from '../../edit/page.module.scss'
@@ -63,6 +61,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
+  useWarnIfUnsavedChanges(true)
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {

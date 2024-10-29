@@ -16,10 +16,12 @@ import {
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useWarnIfUnsavedChanges } from '@/hooks/useWarnIfUnsavedChanges/useWarnIfUnsavedChanges'
 import { AppRoutes } from '@/utils/routes'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
 import TermsOfUse from '../CreateProfile/TermsOfUse/TermsOfUse'
@@ -86,6 +88,7 @@ const CreateProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
+  useWarnIfUnsavedChanges(true)
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -160,7 +163,9 @@ const CreateProfileForm = () => {
           <WorkInformation />
           <TermsOfUse />
         </div>
-        <LogOutBtn />
+        <Link href={AppRoutes.signOut}>
+          <LogOutBtn onClick={() => null} />
+        </Link>
       </div>
     </Formik>
   )
