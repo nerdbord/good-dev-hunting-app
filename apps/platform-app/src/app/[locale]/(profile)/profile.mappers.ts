@@ -173,60 +173,102 @@ export const mapSpecializations = (
   }))
 }
 
-//HOURLY RATE
-export const hourlyRateOptions: DropdownOption[] = [
-  { name: '< 50 zł/h', value: '1-50' },
-  { name: '50 - 100 zł/h', value: '50-100' },
-  { name: '100 - 150 zł/h', value: '100-150' },
-  { name: '150 - 200 zł/h', value: '150-200' },
-  { name: '200 - 250 zł/h', value: '200-250' },
-  { name: '250 - 300 zł/h', value: '250-300' },
-  { name: '300 - 350 zł/h', value: '300-350' },
-  { name: '> 350 zł/h', value: '350-0' },
-]
-
-export const hourlyRateOptionsCurrency = (curr: Currency) => {
-  return [
-    { name: `< 50 ${curr}/h`, value: `1-50` },
-    { name: `50 - 100 ${curr}/h`, value: `50-100` },
-    { name: `100 - 150 ${curr}/h`, value: `100-150` },
-    { name: `150 - 200 ${curr}/h`, value: `150-200` },
-    { name: `200 - 250 ${curr}/h`, value: `200-250` },
-    { name: `250 - 300 ${curr}/h`, value: `250-300` },
-    { name: `300 - 350 ${curr}/h`, value: `300-350` },
-    { name: `> 350 ${curr}/h`, value: `350-0` },
-  ] as DropdownOption[]
+export const currencyButtonTextDisplay = (value: Currency): string => {
+  switch (value) {
+    case Currency.PLN:
+      return 'PLN zł'
+    case Currency.EUR:
+      return 'EUR €'
+    case Currency.USD:
+      return 'USD $'
+  }
 }
 
-export const hourlyRateOptionsPLN: DropdownOption[] = [
-  { name: '< 50 zł/h', value: '1-50' },
-  { name: '50 - 100 zł/h', value: '50-100' },
-  { name: '100 - 150 zł/h', value: '100-150' },
-  { name: '150 - 200 zł/h', value: '150-200' },
-  { name: '200 - 250 zł/h', value: '200-250' },
-  { name: '250 - 300 zł/h', value: '250-300' },
-  { name: '300 - 350 zł/h', value: '300-350' },
-  { name: '> 350 zł/h', value: '350-0' },
-]
+//HOURLY RATE
+// export const hourlyRateOptions: DropdownOption[] = [
+//   { name: '< 50 zł/h', value: '1-50' },
+//   { name: '50 - 100 zł/h', value: '50-100' },
+//   { name: '100 - 150 zł/h', value: '100-150' },
+//   { name: '150 - 200 zł/h', value: '150-200' },
+//   { name: '200 - 250 zł/h', value: '200-250' },
+//   { name: '250 - 300 zł/h', value: '250-300' },
+//   { name: '300 - 350 zł/h', value: '300-350' },
+//   { name: '> 350 zł/h', value: '350-0' },
+// ]
 
-export const hourlyRateOptionsEUR: DropdownOption[] = [
-  { name: `< 20 USD/h`, value: `1-20` },
-  { name: `20 - 40 USD/h`, value: `20-40` },
-  { name: `40 - 60 USD/h`, value: `40-60` },
-  { name: `60 - 80 USD/h`, value: `60-80` },
-  { name: `80 - 100 USD/h`, value: `80-100` },
-  { name: `100 - 120 USD/h`, value: `100-120` },
-  { name: `120 - 140 USD/h`, value: `120-140` },
-  { name: `> 140 USD/h`, value: `140-0` },
-]
+// export const hourlyRateOptionsCurrency = (curr: Currency) => {
+//   return [
+//     { name: `< 50 ${curr}/h`, value: `1-50` },
+//     { name: `50 - 100 ${curr}/h`, value: `50-100` },
+//     { name: `100 - 150 ${curr}/h`, value: `100-150` },
+//     { name: `150 - 200 ${curr}/h`, value: `150-200` },
+//     { name: `200 - 250 ${curr}/h`, value: `200-250` },
+//     { name: `250 - 300 ${curr}/h`, value: `250-300` },
+//     { name: `300 - 350 ${curr}/h`, value: `300-350` },
+//     { name: `> 350 ${curr}/h`, value: `350-0` },
+//   ] as DropdownOption[]
+// }
 
-export const hourlyRateOptionsUSD: DropdownOption[] = [
-  { name: `< 18 EUR/h`, value: `1-18` },
-  { name: `18 - 36 EUR/h`, value: `18-36` },
-  { name: `36 - 54 EUR/h`, value: `36-54` },
-  { name: `54 - 72 EUR/h`, value: `54-72` },
-  { name: `72 - 90 EUR/h`, value: `72-90` },
-  { name: `90 - 108 EUR/h`, value: `90-108` },
-  { name: `108 - 126 EUR/h`, value: `108-126` },
-  { name: `> 126 EUR/h`, value: `126-0` },
-]
+// export const hourlyRateOptionsPLN: DropdownOption[] = [
+//   { name: '< 50 zł/h', value: '1-50' },
+//   { name: '50 - 100 zł/h', value: '50-100' },
+//   { name: '100 - 150 zł/h', value: '100-150' },
+//   { name: '150 - 200 zł/h', value: '150-200' },
+//   { name: '200 - 250 zł/h', value: '200-250' },
+//   { name: '250 - 300 zł/h', value: '250-300' },
+//   { name: '300 - 350 zł/h', value: '300-350' },
+//   { name: '> 350 zł/h', value: '350-0' },
+// ]
+
+// export const hourlyRateOptionsEUR: DropdownOption[] = [
+//   { name: `< 20 USD/h`, value: `1-20` },
+//   { name: `20 - 40 USD/h`, value: `20-40` },
+//   { name: `40 - 60 USD/h`, value: `40-60` },
+//   { name: `60 - 80 USD/h`, value: `60-80` },
+//   { name: `80 - 100 USD/h`, value: `80-100` },
+//   { name: `100 - 120 USD/h`, value: `100-120` },
+//   { name: `120 - 140 USD/h`, value: `120-140` },
+//   { name: `> 140 USD/h`, value: `140-0` },
+// ]
+
+// export const hourlyRateOptionsUSD: DropdownOption[] = [
+//   { name: `< 18 EUR/h`, value: `1-18` },
+//   { name: `18 - 36 EUR/h`, value: `18-36` },
+//   { name: `36 - 54 EUR/h`, value: `36-54` },
+//   { name: `54 - 72 EUR/h`, value: `54-72` },
+//   { name: `72 - 90 EUR/h`, value: `72-90` },
+//   { name: `90 - 108 EUR/h`, value: `90-108` },
+//   { name: `108 - 126 EUR/h`, value: `108-126` },
+//   { name: `> 126 EUR/h`, value: `126-0` },
+// ]
+
+export const hourlyRateOptions = (curr: Currency) => {
+  function hourlyRateOptionsMaker(currency: string, step: number, max: number) {
+    const ranges = []
+
+    for (let i = 1; i < max; i += step) {
+      const upper = i + step
+      ranges.push({
+        name: `${i} - ${upper} ${currency}/h`,
+        value: `${i}-${upper}`,
+      })
+    }
+
+    // Add the last "greater than max" range
+    ranges.push({
+      name: `> ${max} ${currency}/h`,
+      value: `${max}-0`,
+    })
+
+    return ranges as DropdownOption[]
+  }
+
+  switch (curr) {
+    case Currency.PLN:
+      return hourlyRateOptionsMaker('zł', 50, 300)
+    case Currency.EUR:
+      return hourlyRateOptionsMaker('€', 18, 126)
+    case Currency.USD:
+      return hourlyRateOptionsMaker('$', 20, 140)
+  }
+}
