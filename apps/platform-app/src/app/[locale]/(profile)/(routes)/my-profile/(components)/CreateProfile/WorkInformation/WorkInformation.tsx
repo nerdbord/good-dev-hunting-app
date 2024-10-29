@@ -1,7 +1,6 @@
 'use client'
 import {
   hourlyRateOptions,
-  hourlyRateOptionsCurrency,
   mappedSeniorityLevel,
   mappedSpecialization,
 } from '@/app/[locale]/(profile)/profile.mappers'
@@ -125,13 +124,14 @@ const WorkInformation = () => {
             {Object.keys(Currency).map((value, index) => {
               if (value === values.currency) {
                 return (
-                  <Button variant="secondary" >{currencyButtonTextDisplay(value)}</Button>
+                  <Button variant="secondary" key={index}>{currencyButtonTextDisplay(value)}</Button>
                 )
               }
               return (
                 <Button
                   variant="grayedOut"
                   onClick={() => handleCurrencyChange(value as Currency)}
+                  key={index}
                 >
                   {currencyButtonTextDisplay(value as Currency)}
                 </Button>
