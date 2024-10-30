@@ -1,6 +1,7 @@
 'use server'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { runEvaluateProfileAgent } from '@/app/[locale]/(profile)/_workflows/profile-evaluation.workflow'
 import {
   findProfileById,
   updateProfileById,
@@ -22,6 +23,8 @@ export const publishProfile = withSentry(async (profileId: string) => {
   const updatedProfile = await updateProfileById(foundProfile.id, {
     state: PublishingState.PENDING,
   })
+
+  await runEvaluateProfileAgent(foundProfile.id)
 
   await sendDiscordNotificationToModeratorChannel(
     `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
