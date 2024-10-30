@@ -62,6 +62,8 @@ export const LocaleSwitcherSelect = ({
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [arrow, setArrow] = useState('IoIosArrowDown')
 
+  const buttonWidth = selectedLocale === 'en' ? '178px' : '140px';
+
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setIsOpen((prev) => !prev)
@@ -99,9 +101,10 @@ export const LocaleSwitcherSelect = ({
       <button
         className={styles.button}
         onClick={handleDropdown}
+        style={{ width: buttonWidth, color: isOpen ? '#A687FF' : '#E2EAF1' }}
         disabled={isPending}
       >
-        <span className={styles.buttonIcon}>
+        <span className={`${styles.buttonIcon} ${isOpen ? styles.buttonIconOpen : ''}`}>
           <GlobeIcon />
         </span>
         <span className="localeName">{t(`locale.${selectedLocale}`)}</span>
@@ -110,7 +113,7 @@ export const LocaleSwitcherSelect = ({
         </span>
       </button>
       {isOpen && (
-        <div className={styles.dropdown}>
+        <div className={styles.dropdown} style={{ width: '178px' }}>
           {locales.map((locale) => (
             <label key={locale} className={styles.dropdownItem}>
               <input
