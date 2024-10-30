@@ -1,10 +1,5 @@
-import { ModalProvider } from '@/contexts/ModalContext'
-import { ToastContextProvider } from '@/contexts/ToastContext'
 import combineClasses from '@/utils/combineClasses'
-import { SessionProvider } from 'next-auth/react'
-import PlausibleProvider from 'next-plausible'
 import { IBM_Plex_Sans, Inter } from 'next/font/google'
-import * as process from 'process'
 import React from 'react'
 import './globals.scss'
 
@@ -35,19 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={commonClasses}>
-        <PlausibleProvider
-          domain={process.env.NEXT_PUBLIC_APP_ORIGIN_DOMAIN || ''}
-        >
-          <SessionProvider>
-            <ToastContextProvider>
-              <ModalProvider>{children}</ModalProvider>
-            </ToastContextProvider>
-          </SessionProvider>
-        </PlausibleProvider>
-        <div id="portal" />
-        <div id="toasts" />
-      </body>
+      <body className={commonClasses}>{children}</body>
     </html>
   )
 }

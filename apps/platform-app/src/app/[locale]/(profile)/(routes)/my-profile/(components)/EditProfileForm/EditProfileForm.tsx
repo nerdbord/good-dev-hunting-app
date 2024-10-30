@@ -11,7 +11,7 @@ import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
@@ -61,7 +61,9 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  useWarnIfUnsavedChanges(true)
+  const [blockLeave, setBlockLeave] = useState(true)
+
+  useWarnIfUnsavedChanges(blockLeave)
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -92,6 +94,8 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   }, [profile])
 
   const handleEditProfile = async (values: ProfileFormValues) => {
+    setBlockLeave(false)
+
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,

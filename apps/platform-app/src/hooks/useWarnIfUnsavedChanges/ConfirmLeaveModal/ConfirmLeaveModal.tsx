@@ -1,9 +1,8 @@
 'use client'
-import { Button } from '@gdh/ui-system'
 
 import { I18nNamespaces } from '@/i18n'
+import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-
 import modalStyles from './modalStyles.module.scss'
 
 export const ConfirmLeaveModal = ({
