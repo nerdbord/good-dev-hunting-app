@@ -1,9 +1,6 @@
 'use client'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
-import {
-  mapLanguagesToProfileModel,
-  mapProfileModelToEditProfileFormValues,
-} from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import {
   type JobSpecialization,
   type ProfileFormValues,
@@ -42,6 +39,9 @@ export const validationSchema = Yup.object().shape({
     name: Yup.string(),
     value: Yup.string(),
   }).required('Seniority is required'),
+  currency: Yup.string()
+    .oneOf(Object.keys(Currency), `Invalid currency`)
+    .required('Currency is required.'),
   techStack: Yup.array()
     .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
     .min(1, 'At least one technology is required')
@@ -115,7 +115,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       employmentTypes: values.employment,
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
-      currency: Currency.PLN,
+      currency: values.currency,
       language: values.language.map((language) => {
         return {
           name: language.value,

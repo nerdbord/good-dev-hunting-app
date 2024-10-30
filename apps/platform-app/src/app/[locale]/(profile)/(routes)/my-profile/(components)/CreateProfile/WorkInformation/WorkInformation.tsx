@@ -12,12 +12,12 @@ import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import { Currency, EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
+import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { I18nNamespaces } from '@/i18n'
 import { type DropdownOption } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
-import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
 
 export enum WorkInformationFormKeys {
   POSITION = 'position',
@@ -117,26 +117,34 @@ const WorkInformation = () => {
         <InputFormError
           error={
             touched[WorkInformationFormKeys.CURRENCY] &&
-            errors[WorkInformationFormKeys.CURRENCY]?.value
+            errors[WorkInformationFormKeys.CURRENCY]
           }
         >
           <div className={styles.currencyButtonsContainer}>
             {Object.keys(Currency).map((value, index) => {
               if (value === values.currency) {
                 return (
-                  <Button variant="secondary" key={index}>{currencyButtonTextDisplay(value)}</Button>
+                  <Button
+                    id={`${WorkInformationFormKeys.CURRENCY}-${value}`}
+                    variant="secondary"
+                    key={index}
+                  >
+                    {currencyButtonTextDisplay(value as Currency)}
+                  </Button>
                 )
               }
               return (
                 <Button
+                  id={`${WorkInformationFormKeys.CURRENCY}-${value}`}
                   variant="grayedOut"
-                  onClick={() => handleCurrencyChange(value as Currency)}
+                  onClick={() => {
+                    return handleCurrencyChange(value as Currency)
+                  }}
                   key={index}
                 >
                   {currencyButtonTextDisplay(value as Currency)}
                 </Button>
               )
-            
             })}
           </div>
         </InputFormError>
