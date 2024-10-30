@@ -41,13 +41,13 @@ export const useWarnIfUnsavedChanges = (unsaved: boolean) => {
     router.push = (url: string, options?: NavigateOptions) => {
       if (unsaved) {
         showModal(
-          ConfirmLeaveModal({
-            onClose: closeModal,
-            onConfirm: () => {
+          <ConfirmLeaveModal
+            onClose={closeModal}
+            onConfirm={() => {
               closeModal()
               originalPush(url, options)
-            },
-          }),
+            }}
+          />,
         )
       } else {
         originalPush(url, options)

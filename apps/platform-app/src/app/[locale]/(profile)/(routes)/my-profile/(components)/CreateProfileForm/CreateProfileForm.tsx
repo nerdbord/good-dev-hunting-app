@@ -23,6 +23,7 @@ import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import * as Yup from 'yup'
 import TermsOfUse from '../CreateProfile/TermsOfUse/TermsOfUse'
 
@@ -88,9 +89,13 @@ const CreateProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
-  useWarnIfUnsavedChanges(true)
+  const [blockLeave, setBlockLeave] = useState(true)
+
+  useWarnIfUnsavedChanges(blockLeave)
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
+    setBlockLeave(false)
+
     if (!values.terms) {
       addToast(
         'You have to agree to our Terms of use and Privacy Policy in order to continue.',
@@ -143,6 +148,7 @@ const CreateProfileForm = () => {
         }
       })
     } catch (error) {
+      setBlockLeave(true)
       console.log(error)
     }
   }
