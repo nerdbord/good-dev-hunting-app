@@ -125,7 +125,6 @@ const WorkInformation = () => {
               if (value === values.currency) {
                 return (
                   <Button
-                    id={`${WorkInformationFormKeys.CURRENCY}-${value}`}
                     variant="secondary"
                     key={index}
                   >
@@ -135,7 +134,6 @@ const WorkInformation = () => {
               }
               return (
                 <Button
-                  id={`${WorkInformationFormKeys.CURRENCY}-${value}`}
                   variant="grayedOut"
                   onClick={() => {
                     return handleCurrencyChange(value as Currency)
