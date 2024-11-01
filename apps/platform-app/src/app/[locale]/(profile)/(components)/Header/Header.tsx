@@ -54,9 +54,14 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       />
     </li>
   ) : (
-    <li>
-      <LoginBtn variant="tertiary">Login</LoginBtn>
-    </li>
+    <>
+      <li>
+        <LoginBtn variant="tertiary">Login</LoginBtn>
+      </li>
+      <li>
+        <LocaleSwitcher />
+      </li>
+    </>
   )
 
   const profilesMobileButtons = (
