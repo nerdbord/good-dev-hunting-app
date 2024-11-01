@@ -77,18 +77,20 @@ export const LocaleSwitcherSelect = ({
         style={{
           width: buttonWidth,
           padding: buttonPadding,
-          color: isOpen ? '#A687FF' : '#E2EAF1',
+          color: isMobile ? '#E2EAF1' : isOpen ? '#A687FF' : '#E2EAF1',
         }}
         disabled={isPending}
       >
         <span
           className={`${styles.buttonIcon} ${
-            isOpen ? styles.buttonIconOpen : ''
+            isOpen && !isMobile ? styles.buttonIconOpen : ''
           }`}
         >
           <GlobeIcon />
         </span>
-        <span className="localeName">{t(`locale.${selectedLocale}`)}</span>
+        <span className={`localeName ${
+            isOpen && !isMobile ? styles.localeNameOpen : ''
+          }`}>{t(`locale.${selectedLocale}`)}</span>
         <span className={styles.arrow}>
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </span>
