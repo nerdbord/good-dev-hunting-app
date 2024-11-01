@@ -17,7 +17,6 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   dataTestId?: string;
-  id?: string
 }
 
 export const Button = ({
@@ -28,7 +27,6 @@ export const Button = ({
   loading,
   dataTestId,
   type,
-  id,
 }: PropsWithChildren<ButtonProps>) => {
   const cx = classNames.bind(styles);
   const buttonClasses = cx({
@@ -37,17 +35,14 @@ export const Button = ({
   });
 
   return (
-    <label htmlFor={id}>
-      <button
-      
-        data-testid={dataTestId}
-        className={`${buttonClasses}`}
-        disabled={disabled || loading}
-        onClick={onClick}
-        type={type}
-      >
-        {loading ? "Loading..." : children}
-      </button>
-    </label>
+    <button
+      data-testid={dataTestId}
+      className={`${buttonClasses}`}
+      disabled={disabled || loading}
+      onClick={onClick}
+      type={type}
+    >
+      {loading ? "Loading..." : children}
+    </button>
   );
 };
