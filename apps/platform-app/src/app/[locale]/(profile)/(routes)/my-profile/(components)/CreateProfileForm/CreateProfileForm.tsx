@@ -50,20 +50,23 @@ export const validationSchema = Yup.object().shape({
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
+  openToRelocationCountry: Yup.boolean().oneOf([true, false]),
+  remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
   position: Yup.object({
-    value: Yup.string().required('Position is required'),
-  }),
+    name: Yup.string(),
+    value: Yup.string(),
+  }).required('Position is required'),
   seniority: Yup.object({
-    value: Yup.string().required('Seniority is required'),
-  }),
+    name: Yup.string(),
+    value: Yup.string(),
+  }).required('Seniority is required'),
+  currency: Yup.string()
+    .oneOf(Object.keys(Currency), `Invalid currency`)
+    .required('Currency is required.'),
   techStack: Yup.array()
-    .of(
-      Yup.object({
-        name: Yup.string(),
-        value: Yup.string(),
-      }),
-    )
-    .min(1, 'Tech stack is required'),
+    .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
+    .min(1, 'At least one technology is required')
+    .max(16, 'Max 16 technologies'),
   linkedin: Yup.string()
     .nullable()
     .notRequired()
@@ -71,10 +74,6 @@ export const validationSchema = Yup.object().shape({
       /^(https?:\/\/)?([\w]+\.)?linkedin\.com\/(.*)$/,
       'Invalid LinkedIn URL',
     ),
-  terms: Yup.boolean()
-    .required('Agreement is required')
-    .oneOf([true], 'Agreement is required'),
-
   language: Yup.array()
     .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
     .min(1, 'At least one language is required'),
@@ -114,7 +113,7 @@ const CreateProfileForm = () => {
       state: PublishingState.DRAFT,
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
-      currency: Currency.PLN,
+      currency: values.currency,
       language: values.language.map((lang) => ({
         name: lang.value,
       })),
