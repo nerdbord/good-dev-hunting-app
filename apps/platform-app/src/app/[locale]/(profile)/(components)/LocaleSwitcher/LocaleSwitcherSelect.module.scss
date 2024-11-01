@@ -54,6 +54,12 @@
   svg path {
     stroke: #e2eaf1;
   }
+
+  @include mobile {
+    &.buttonIconOpen svg path {
+      stroke: #a687ff;
+    }
+  }
 }
 
 .buttonIconOpen {
@@ -63,11 +69,19 @@
 }
 
 .buttonIconOpenMobile {
-  color: #E2EAF1;
+  color: #e2eaf1;
 }
 
 .localeNameOpenMobile {
-  color: #E2EAF1;
+  color: #e2eaf1;
+}
+
+.localeNameOpen {
+  color: #a687ff;
+
+  @include mobile {
+    color: #e2eaf1;
+  }
 }
 
 // .localeNameOpen {
