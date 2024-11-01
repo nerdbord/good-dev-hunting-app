@@ -10,6 +10,7 @@ import GithubAcc from '../GithubAcc/GithubAcc'
 import HunterAcc from '../HunterAcc/HunterAcc'
 import LogOutBtn from '../LogOutBtn/LogOutBtn'
 import styles from './HamburgerMenuMobileBtn.module.scss'
+import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwitcher/LocaleSwitcher'
 
 const HamburgerMenuMobileBtn = ({
   userHasProfile,
@@ -44,6 +45,7 @@ const HamburgerMenuMobileBtn = ({
               <>
                 <div className={styles.wrapper}>
                   <GithubAcc />
+                  <LocaleSwitcher />
                   {userIsModerator && <ModerationBtn />}
                 </div>
                 <MobileGitHubStarsButton />

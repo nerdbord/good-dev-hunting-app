@@ -4,6 +4,7 @@
   },
   "LocaleSwitcher": {
     "label": "Language",
+    "dropdownOpenLabel": "Language",
     "locale": {
       "pl": "Polski",
       "en": "English (US)"
@@ -85,7 +86,8 @@
     "sendMessage": "Send message",
     "changePicture": "Change picture",
     "importFromGithub": "Import from Github",
-    "importing": "Importing..."
+    "importing": "Importing...",
+    "apply": "Apply"
   },
 
   "LandingFooter": {
