@@ -25,9 +25,9 @@ export default function LocaleLayout({
             </ToastContextProvider>
           </SessionProvider>
         </PlausibleProvider>
+        <div id="toasts" />
+        <div id="portal" />
       </NextIntlClientProvider>
-      <div id="toasts" />
-      <div id="portal" />
     </>
   )
 }

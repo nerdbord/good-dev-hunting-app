@@ -11,12 +11,14 @@ import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
+import { ConfirmLeaveModal } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ConfirmLeaveModal/ConfirmLeaveModal'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { useWarnIfUnsavedChanges } from '@/hooks/useWarnIfUnsavedChanges/useWarnIfUnsavedChanges'
+import { useModal } from '@/contexts/ModalContext'
+import { useWarnBeforeLeave } from '@/hooks/useWarnBeforeLeave/useWarnBeforeLeave'
 import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import styles from '../../edit/page.module.scss'
@@ -61,9 +63,26 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  const [blockLeave, setBlockLeave] = useState(true)
+  const { closeModal, showModal } = useModal()
 
-  useWarnIfUnsavedChanges(blockLeave)
+  const handleLeave = (url: string) => {
+    setShowBrowserAlert(false)
+    showModal(
+      <ConfirmLeaveModal
+        onClose={() => {
+          setShowBrowserAlert(true)
+          closeModal()
+        }}
+        onConfirm={() => handleConfirm(url)}
+      />,
+    )
+  }
+  const { setShowBrowserAlert } = useWarnBeforeLeave(handleLeave)
+
+  const handleConfirm = (url: string) => {
+    router.push(url)
+    closeModal()
+  }
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -94,8 +113,6 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   }, [profile])
 
   const handleEditProfile = async (values: ProfileFormValues) => {
-    setBlockLeave(false)
-
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,

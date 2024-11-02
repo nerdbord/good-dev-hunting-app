@@ -19,8 +19,12 @@ const LogOutBtn = ({ onClick }: LogOutBtnProps) => {
       variant={'secondary'}
       disabled={isCalled}
       onClick={() => {
-        setIsCalled(true)
-        onClick ? onclick : signOut({ callbackUrl: AppRoutes.home })
+        if (onClick) {
+          onClick()
+        } else {
+          setIsCalled(true)
+          signOut({ callbackUrl: AppRoutes.home })
+        }
       }}
     >
       {t('logOut')}{' '}
