@@ -10,7 +10,7 @@ export enum AppRoutes {
   profile = '/p',
   signIn = '/signin',
   error = '/error',
-  signOut = '/signout',
+  logOut = '/logout',
 }
 
 export const removeLocaleFromPath = (pathname: string, locale: string) => {
