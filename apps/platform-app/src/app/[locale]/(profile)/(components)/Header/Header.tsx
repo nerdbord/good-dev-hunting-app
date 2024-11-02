@@ -58,9 +58,9 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       <li>
         <LoginBtn variant="tertiary">Login</LoginBtn>
       </li>
-      <li>
+      {/* <li>
         <LocaleSwitcher />
-      </li>
+      </li> */}
     </>
   )
 
