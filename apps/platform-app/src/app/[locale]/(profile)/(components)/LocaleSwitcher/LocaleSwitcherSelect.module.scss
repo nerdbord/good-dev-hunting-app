@@ -1,12 +1,14 @@
 .container {
   position: relative;
   display: inline-block;
+  // display: flex;
   font-size: 14px;
 
   @include mobile {
     width: 100vw;
     max-width: 100vw;
     height: auto;
+    display: flex;
   }
 }
 
@@ -114,18 +116,23 @@
   flex-direction: column;
   gap: $spacing-4;
   z-index: 10;
+  @include mobile {
+    display: none;
+  }
 }
 
 .mobileDropdown {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  // right: 0;
+  // dziala na mobile ale psuje desktop
+  bottom: -177%;
   width: 100vw;
   padding: 24px;
   background-color: #0f1217;
   border-top: 1px solid #3d434b;
-  z-index: 100;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   gap: $spacing-4;
