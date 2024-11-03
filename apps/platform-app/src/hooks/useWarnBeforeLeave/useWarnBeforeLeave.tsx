@@ -11,7 +11,8 @@ export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
     const handleLinkClick = (e: MouseEvent) => {
       e.preventDefault()
       const target = e.currentTarget as HTMLAnchorElement
-      const href = target.getAttribute('href') || '/my-profile'
+      const href = target.getAttribute('href') as string
+
       onLeave(href)
     }
 
@@ -23,10 +24,11 @@ export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
       e.preventDefault()
     }
 
-    const links = document.querySelectorAll<HTMLAnchorElement>('a')
+    const links = document.querySelectorAll<HTMLAnchorElement>('a[href]')
     links.forEach((link) => {
       link.addEventListener('click', handleLinkClick)
     })
+
     if (showBrowserAlert) {
       window.addEventListener('beforeunload', beforeUnloadHandler)
       window.addEventListener('popstate', handlePopState)

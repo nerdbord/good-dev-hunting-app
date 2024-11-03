@@ -171,7 +171,6 @@ const CreateProfileForm = () => {
         'Something went wrong while saving your profile. Please try again.',
         ToastStatus.INVALID,
       )
-      addToast(`${error}`, ToastStatus.INVALID)
     }
   }
 
