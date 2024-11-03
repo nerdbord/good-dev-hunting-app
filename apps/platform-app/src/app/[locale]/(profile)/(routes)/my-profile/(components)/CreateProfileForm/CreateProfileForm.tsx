@@ -2,6 +2,8 @@
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
+import { ConfirmLeaveModal } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ConfirmLeaveModal/ConfirmLeaveModal'
+import { ConfirmLogoutModal } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ConfirmLogoutModal/ConfirmLogoutModal'
 import CreateProfileTopBar from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/PersonalInfo/PersonalInfo'
@@ -13,9 +15,11 @@ import {
   type JobSpecialization,
   type ProfileCreateParams,
 } from '@/app/[locale]/(profile)/profile.types'
+import { useModal } from '@/contexts/ModalContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { useWarnBeforeLeave } from '@/hooks/useWarnBeforeLeave/useWarnBeforeLeave'
 import { AppRoutes } from '@/utils/routes'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
@@ -86,6 +90,27 @@ const CreateProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
+  const { closeModal, showModal } = useModal()
+
+  const handleLeave = (url: string) => {
+    setShowBrowserAlert(false)
+    showModal(
+      <ConfirmLeaveModal
+        onClose={() => {
+          setShowBrowserAlert(true)
+          closeModal()
+        }}
+        onConfirm={() => handleConfirm(url)}
+      />,
+    )
+  }
+
+  const { setShowBrowserAlert } = useWarnBeforeLeave(handleLeave)
+
+  const handleConfirm = (url: string) => {
+    router.push(url)
+    closeModal()
+  }
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -93,7 +118,9 @@ const CreateProfileForm = () => {
         'You have to agree to our Terms of use and Privacy Policy in order to continue.',
         ToastStatus.INVALID,
       )
+      return
     }
+
     const payload: ProfileCreateParams = {
       fullName: values.fullName,
       avatarUrl: session?.user?.image || null,
@@ -140,7 +167,10 @@ const CreateProfileForm = () => {
         }
       })
     } catch (error) {
-      console.log(error)
+      addToast(
+        'Something went wrong while saving your profile. Please try again.',
+        ToastStatus.INVALID,
+      )
     }
   }
 
@@ -160,7 +190,19 @@ const CreateProfileForm = () => {
           <WorkInformation />
           <TermsOfUse />
         </div>
-        <LogOutBtn />
+        <LogOutBtn
+          onClick={() => {
+            setShowBrowserAlert(false)
+            showModal(
+              <ConfirmLogoutModal
+                onClose={() => {
+                  setShowBrowserAlert(true)
+                  closeModal()
+                }}
+              />,
+            )
+          }}
+        />
       </div>
     </Formik>
   )
