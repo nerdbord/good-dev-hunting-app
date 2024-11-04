@@ -107,7 +107,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     state: updatedState,
     hourlyRateMin: payload.hourlyRateMin,
     hourlyRateMax: payload.hourlyRateMax,
-    currency: Currency.PLN,
+    currency: payload.currency,
     language: {
       disconnect: foundProfile.language
         .filter((lang) => !updatedLanguage.includes(lang.name))
