@@ -1,5 +1,6 @@
 import { mailersendClient, MailTemplateId } from '@/lib/mailersendClient'
 import { Recipient } from 'mailersend'
+import { type Personalization } from 'mailersend/lib/modules/Email.module'
 
 export type ContactRequestEmailParams = {
   senderEmail: string
@@ -93,22 +94,19 @@ export const sendProfileRejectedEmail = async (
 ) => {
   const templateId = MailTemplateId.profileRejectedNotification
 
-  const variables = [
+  const personalization: Personalization[] = [
     {
       email,
-      substitutions: [
-        {
-          var: 'reason',
-          value: reason,
-        },
-      ],
+      data: {
+        reason: reason,
+      },
     },
   ]
 
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId: templateId,
-    variables,
+    personalization,
     config: {
       subject: '⚠️Your profile has been rejected',
       fromEmail: 'team@devhunting.co',
