@@ -26,23 +26,14 @@ export const sendContactRequest = async ({
       subject: subject,
     }
 
-    const variables = [
+    const personalization: Personalization[] = [
       {
         email: recipientEmail,
-        substitutions: [
-          {
-            var: 'recipientFullName',
-            value: recipientFullName,
-          },
-          {
-            var: 'senderFullName',
-            value: senderFullName,
-          },
-          {
-            var: 'message',
-            value: message,
-          },
-        ],
+        data: {
+          recipientFullName,
+          senderFullName,
+          message,
+        },
       },
     ]
 
@@ -51,7 +42,7 @@ export const sendContactRequest = async ({
       recipients,
       templateId: MailTemplateId.contactRequest,
       config,
-      variables,
+      personalization,
     })
   } catch (error) {
     console.error('Error occured whilst sending contact request.', error)
@@ -64,22 +55,19 @@ export const sendProfileApprovedEmail = async (
 ) => {
   const templateId = MailTemplateId.profileApprovedNotification
 
-  const variables = [
+  const personalization: Personalization[] = [
     {
       email,
-      substitutions: [
-        {
-          var: 'username',
-          value: githubUsername,
-        },
-      ],
+      data: {
+        username: githubUsername,
+      },
     },
   ]
 
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId,
-    variables,
+    personalization,
     config: {
       subject: '✅ Your profile has been approved',
       fromEmail: 'team@devhunting.co',
@@ -116,22 +104,19 @@ export const sendProfileRejectedEmail = async (
 }
 
 export const sendWelcomeEmail = async (email: string, username: string) => {
-  const variables = [
+  const personalization: Personalization[] = [
     {
       email,
-      substitutions: [
-        {
-          var: 'name',
-          value: username,
-        },
-      ],
+      data: {
+        name: username,
+      },
     },
   ]
 
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId: MailTemplateId.welcomeMail,
-    variables,
+    personalization,
     config: {
       subject: `Welcome to the Hunt, ${username}!`,
       fromEmail: 'team@devhunting.co',
@@ -141,22 +126,19 @@ export const sendWelcomeEmail = async (email: string, username: string) => {
 }
 
 export const sendMagicLinkEmail = async (email: string, url: string) => {
-  const variables = [
+  const personalization: Personalization[] = [
     {
       email,
-      substitutions: [
-        {
-          var: 'authUrl',
-          value: url,
-        },
-      ],
+      data: {
+        authUrl: url,
+      },
     },
   ]
 
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId: MailTemplateId.verificationRequest,
-    variables,
+    personalization,
     config: {
       subject: `Welcome to the Hunt, ${email}!`,
       fromEmail: 'team@devhunting.co',
