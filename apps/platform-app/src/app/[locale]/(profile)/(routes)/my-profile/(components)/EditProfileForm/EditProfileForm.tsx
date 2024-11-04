@@ -42,6 +42,9 @@ export const validationSchema = Yup.object().shape({
     name: Yup.string(),
     value: Yup.string(),
   }).required('Seniority is required'),
+  currency: Yup.string()
+    .oneOf(Object.keys(Currency), `Invalid currency`)
+    .required('Currency is required.'),
   techStack: Yup.array()
     .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
     .min(1, 'At least one technology is required')
@@ -104,7 +107,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
         viewCount: 0,
         hourlyRateMin: 0,
         hourlyRateMax: 0,
-        currency: Currency.PLN,
+        currency: Currency.EUR,
         language: [],
       }
     }
@@ -135,7 +138,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       employmentTypes: values.employment,
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
-      currency: Currency.PLN,
+      currency: values.currency,
       language: values.language.map((language) => {
         return {
           name: language.value,
