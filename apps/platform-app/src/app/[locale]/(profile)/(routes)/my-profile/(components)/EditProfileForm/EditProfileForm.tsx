@@ -22,7 +22,7 @@ import CreateProfileTopBar from '../CreateProfile/CreateProfileTopBar/CreateProf
 import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
-import { FormWarnBeforeLeave } from '../FormStateMonitor/FormStateMonitor'
+import { FormNavigationWarning } from '../FormStateMonitor/FormStateMonitor'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -151,7 +151,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
           <LocationPreferences />
           <WorkInformation />
         </div>
-        <FormWarnBeforeLeave />
+        <FormNavigationWarning />
       </div>
     </Formik>
   )

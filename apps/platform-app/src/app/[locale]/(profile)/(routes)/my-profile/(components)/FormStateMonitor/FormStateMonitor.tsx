@@ -7,12 +7,7 @@ import { useEffect } from 'react'
 import { ConfirmLeaveModal } from '../ConfirmLeaveModal/ConfirmLeaveModal'
 import { ConfirmLogoutModal } from '../ConfirmLogoutModal/ConfirmLogoutModal'
 
-interface FormWarnBeforeLeaveProps {
-  showLogoutBtn?: boolean
-}
-export const FormWarnBeforeLeave = ({
-  showLogoutBtn = false,
-}: FormWarnBeforeLeaveProps) => {
+export const FormNavigationWarning = () => {
   const { dirty } = useFormikContext()
   const { closeModal, showModal } = useModal()
   const router = useRouter()
@@ -25,45 +20,46 @@ export const FormWarnBeforeLeave = ({
           setShowBrowserAlert(true)
           closeModal()
         }}
-        onConfirm={() => handleConfirm(url)}
+        onConfirm={() => {
+          router.push(url)
+          closeModal()
+        }}
       />,
     )
   }
-  const { setShowBrowserAlert, setShowModal } = useWarnBeforeLeave(handleLeave)
 
-  const handleConfirm = (url: string) => {
-    router.push(url)
-    closeModal()
-  }
+  const { setShowBrowserAlert, setShowModal } = useWarnBeforeLeave(handleLeave)
 
   useEffect(() => {
     setShowBrowserAlert(dirty)
     setShowModal(dirty)
-  }, [dirty])
-
-  if (showLogoutBtn) {
-    if (!dirty) {
-      return <LogOutBtn />
-    } else {
-      return (
-        <LogOutBtn
-          onClick={() => {
-            if (dirty) {
-              setShowBrowserAlert(false)
-              showModal(
-                <ConfirmLogoutModal
-                  onClose={() => {
-                    setShowBrowserAlert(true)
-                    closeModal()
-                  }}
-                />,
-              )
-            }
-          }}
-        />
-      )
-    }
-  }
+  }, [dirty, setShowBrowserAlert, setShowModal])
 
   return null
+}
+
+export const FormLogoutWarning = () => {
+  const { dirty } = useFormikContext()
+  const { closeModal, showModal } = useModal()
+  const { setShowBrowserAlert } = useWarnBeforeLeave()
+
+  if (!dirty) {
+    return <LogOutBtn />
+  }
+
+  return (
+    <LogOutBtn
+      onClick={() => {
+        setShowBrowserAlert(false)
+        showModal(
+          <ConfirmLogoutModal
+            onClose={() => {
+              setShowBrowserAlert(true)
+              closeModal()
+            }}
+          />,
+        )
+      }}
+    />
+  )
 }
