@@ -1,31 +1,28 @@
 'use client'
+import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
-import {
-  mapLanguagesToProfileModel,
-  mapProfileModelToEditProfileFormValues,
-} from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
+import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
   type JobSpecialization,
   type ProfileFormValues,
 } from '@/app/[locale]/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { AppRoutes } from '@/utils/routes'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
-
-import { uploadImage } from '@/app/(files)/_actions/uploadImage'
-import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
-import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import styles from '../../edit/page.module.scss'
 import CreateProfileTopBar from '../CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
+import { FormNavigationWarning } from '../FormStateMonitor/FormStateMonitor'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -42,6 +39,9 @@ export const validationSchema = Yup.object().shape({
     name: Yup.string(),
     value: Yup.string(),
   }).required('Seniority is required'),
+  currency: Yup.string()
+    .oneOf(Object.keys(Currency), `Invalid currency`)
+    .required('Currency is required.'),
   techStack: Yup.array()
     .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
     .min(1, 'At least one technology is required')
@@ -84,7 +84,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
         viewCount: 0,
         hourlyRateMin: 0,
         hourlyRateMax: 0,
-        currency: Currency.PLN,
+        currency: Currency.EUR,
         language: [],
       }
     }
@@ -115,7 +115,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       employmentTypes: values.employment,
       hourlyRateMin: values.hourlyRateMin,
       hourlyRateMax: values.hourlyRateMax,
-      currency: Currency.PLN,
+      currency: values.currency,
       language: values.language.map((language) => {
         return {
           name: language.value,
@@ -151,6 +151,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
           <LocationPreferences />
           <WorkInformation />
         </div>
+        <FormNavigationWarning />
       </div>
     </Formik>
   )

@@ -1,6 +1,6 @@
 import { SeniorityLevel } from '@/backend/profile/profile.types'
 import { type DropdownOption } from '@gdh/ui-system'
-import { EmploymentType } from '@prisma/client'
+import { Currency, EmploymentType } from '@prisma/client'
 import { JobSpecialization } from './profile.types'
 
 export const mapEmploymentTypes = (employmentTypes: EmploymentType[]) => {
@@ -173,14 +173,44 @@ export const mapSpecializations = (
   }))
 }
 
-//HOURLY RATE
-export const hourlyRateOptions: DropdownOption[] = [
-  { name: '< 50 zł/h', value: '1-50' },
-  { name: '50 - 100 zł/h', value: '50-100' },
-  { name: '100 - 150 zł/h', value: '100-150' },
-  { name: '150 - 200 zł/h', value: '150-200' },
-  { name: '200 - 250 zł/h', value: '200-250' },
-  { name: '250 - 300 zł/h', value: '250-300' },
-  { name: '300 - 350 zł/h', value: '300-350' },
-  { name: '> 350 zł/h', value: '350-0' },
-]
+export const currencyButtonTextDisplay = (value: Currency): string => {
+  switch (value) {
+    case Currency.PLN:
+      return 'PLN zł'
+    case Currency.EUR:
+      return 'EUR €'
+    case Currency.USD:
+      return 'USD $'
+  }
+}
+
+export const hourlyRateOptions = (curr: Currency) => {
+  function hourlyRateOptionsMaker(currency: string, step: number, max: number) {
+    const ranges = []
+
+    for (let i = 1; i < max; i += step) {
+      const upper = i + step -1
+      ranges.push({
+        name: `${i} - ${upper} ${currency}/h`,
+        value: `${i}-${upper}`,
+      })
+    }
+
+    // Add the last "greater than max" range
+    ranges.push({
+      name: `> ${max} ${currency}/h`,
+      value: `${max}-0`,
+    })
+
+    return ranges as DropdownOption[]
+  }
+
+  switch (curr) {
+    case Currency.PLN:
+      return hourlyRateOptionsMaker('zł', 50, 300)
+    case Currency.EUR:
+      return hourlyRateOptionsMaker('€', 18, 126)
+    case Currency.USD:
+      return hourlyRateOptionsMaker('$', 20, 140)
+  }
+}

@@ -5,3 +5,10 @@ export type UserWithRelations = Prisma.UserGetPayload<{
     githubDetails: true
   }
 }>
+
+export type UserWithProfileAndGH = Prisma.UserGetPayload<{
+  include: {
+    githubDetails: true
+    profile: true
+  }
+}>

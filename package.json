@@ -10,7 +10,8 @@
     "dev": "npm run dev -w apps/platform-app",
     "storybook": "npm run storybook -w packages/ui-system",
     "start": "npm run start -w apps/platform-app",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
