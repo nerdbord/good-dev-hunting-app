@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 //Other cases within the application may not be handled correctly.
 
 export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
-  const [showBrowserAlert, setShowBrowserAlert] = useState(true)
+  const [showBrowserAlert, setShowBrowserAlert] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     const handleLinkClick = (e: MouseEvent) => {
@@ -25,9 +26,15 @@ export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
     }
 
     const links = document.querySelectorAll<HTMLAnchorElement>('a[href]')
-    links.forEach((link) => {
-      link.addEventListener('click', handleLinkClick)
-    })
+    if (showModal) {
+      links.forEach((link) => {
+        link.addEventListener('click', handleLinkClick)
+      })
+    } else {
+      links.forEach((link) => {
+        link.removeEventListener('click', handleLinkClick)
+      })
+    }
 
     if (showBrowserAlert) {
       window.addEventListener('beforeunload', beforeUnloadHandler)
@@ -44,7 +51,7 @@ export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
       window.removeEventListener('beforeunload', beforeUnloadHandler)
       window.removeEventListener('popstate', handlePopState)
     }
-  }, [showBrowserAlert])
+  }, [showBrowserAlert, showModal])
 
-  return { setShowBrowserAlert }
+  return { setShowBrowserAlert, setShowModal }
 }
