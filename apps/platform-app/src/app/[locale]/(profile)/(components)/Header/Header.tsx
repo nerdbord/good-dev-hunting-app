@@ -9,7 +9,6 @@ import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(component
 
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 // import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
@@ -54,15 +53,28 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       />
     </li>
   ) : (
-    <>
-      <li>
-        <LoginBtn variant="tertiary">Login</LoginBtn>
-      </li>
-      {/* <li>
-        <LocaleSwitcher />
-      </li> */}
-    </>
+    <li>
+      <HamburgerMenuMobileBtn
+        userHasProfile={false} // tutaj ustawiam na false, żeby spełniało warunek dla niezalogowanych użytkowników
+        userIsModerator={false}
+        userIsHunter={false}
+      />
+    </li>
   )
+  // ) : (
+  //   <>
+  //   {/* to musi byc w hamburger menu */}
+  //     {/* <div className={styles.wrapperMainMobileLogin}> */}
+  //       <li>
+  //         <LoginBtn variant="tertiary">Login</LoginBtn>
+  //       </li>
+  //       {/* <li>
+  //         <LocaleSwitcher />
+  //       </li>
+  //       <MobileGitHubStarsButton />
+  //     </div> */}
+  //   </>
+  // )
 
   const profilesMobileButtons = (
     <>
