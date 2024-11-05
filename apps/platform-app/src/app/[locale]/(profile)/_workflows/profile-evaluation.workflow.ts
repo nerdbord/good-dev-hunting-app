@@ -13,6 +13,7 @@ import {
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { tool } from '@langchain/core/tools'
 import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
@@ -51,6 +52,10 @@ const acceptProfileTool = tool(
       currentState.profile.user.githubDetails?.username || '',
     )
 
+    await sendDiscordNotificationToModeratorChannel(
+      `✅ AI Workflow has approved ${currentState.profile.fullName} profile. [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
+    )
+
     return `The profile has been accepted. profileId: ${profileId} `
   },
   {
@@ -72,6 +77,9 @@ const rejectProfileTool = tool(
 
     updateProfileById(profileId, { state: 'REJECTED' })
     sendProfileRejectedEmail(currentState.profile.user.email, reason)
+    await sendDiscordNotificationToModeratorChannel(
+      `⛔️ AI Workflow has rejected ${currentState.profile.fullName} profile. Reason: ${reason} [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
+    )
 
     return `The profile has been rejected. Reason: ${reason}, profileId: ${profileId}`
   },
