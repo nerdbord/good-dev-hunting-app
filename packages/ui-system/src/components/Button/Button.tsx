@@ -11,7 +11,8 @@ interface ButtonProps {
     | "tertiary"
     | "action"
     | "logout"
-    | "standard";
+    | "standard"
+    | "grayedOut";
   type?: "button" | "submit";
   disabled?: boolean;
   loading?: boolean;

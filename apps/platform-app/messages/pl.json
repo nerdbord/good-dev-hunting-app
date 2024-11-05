@@ -175,5 +175,18 @@
     "contratAvaible": "Dostępny do pracy na kontrakt",
     "notAvaible": "Niedostępny do pracy",
     "remote": "Zdalnie"
+  },
+
+  "ConfirmLeaveModal": {
+    "title": "Ukończ swój profil, aby zapisać",
+    "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz opuścisz stronę, Twoje postępy zostaną utracone.",
+    "leaveBtn": "Opuść stronę",
+    "cancelBtn": "Ukończ profil"
+  },
+
+  "ConfirmLogoutModal": {
+    "title": "Ukończ swój profil, aby zapisać",
+    "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz się wylogujesz, Twoje postępy zostaną utracone.",
+    "cancelBtn": "Ukończ profil"
   }
 }
