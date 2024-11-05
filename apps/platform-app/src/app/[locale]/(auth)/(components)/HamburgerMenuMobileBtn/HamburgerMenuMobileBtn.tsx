@@ -1,6 +1,7 @@
 'use client'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
+import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwitcher/LocaleSwitcher'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import { Button, MobileGitHubStarsButton } from '@gdh/ui-system'
@@ -10,7 +11,6 @@ import GithubAcc from '../GithubAcc/GithubAcc'
 import HunterAcc from '../HunterAcc/HunterAcc'
 import LogOutBtn from '../LogOutBtn/LogOutBtn'
 import styles from './HamburgerMenuMobileBtn.module.scss'
-import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwitcher/LocaleSwitcher'
 
 const HamburgerMenuMobileBtn = ({
   userHasProfile,
@@ -60,18 +60,41 @@ const HamburgerMenuMobileBtn = ({
                     </>
                   ) : (
                     <>
-                      <CreateProfileBtn data-testid="create-profile-button" />
+                      {/* <CreateProfileBtn data-testid="create-profile-button" /> */}
                       {session?.user && <LogOutBtn />}
                     </>
                   )}
                   {userIsModerator && <ModerationBtn />}
 
                   {!session?.user && (
-                    <LoginBtn variant={'secondary'}>Join as hunter</LoginBtn>
+                    // <LoginBtn variant={'secondary'}>Join as hunter</LoginBtn>
+                    // tu dodalam na test:
+
+                    <>
+                      <div className={styles.wrapper}>
+                        <LoginBtn variant={'secondary'}>Login</LoginBtn>
+                        <LocaleSwitcher />
+                        {/* <MobileGitHubStarsButton /> */}
+                        {/* <div className={styles.fixedButtons}>
+                          <CreateProfileBtn />
+                          <Button variant={'secondary'}>
+                            Join as a Hunter
+                          </Button>
+                        </div> */}
+                      </div>
+                      <div className={styles.fixedButtons}>
+                        <CreateProfileBtn />
+                        <Button variant={'secondary'}>Join as a Hunter</Button>
+                      </div>
+                    </>
                   )}
                 </div>
 
                 <MobileGitHubStarsButton />
+                {/* <div className={styles.fixedButtons}>
+                  <CreateProfileBtn />
+                  <Button variant={'secondary'}>Join as a Hunter</Button>
+                </div> */}
               </>
             )}
           </div>
