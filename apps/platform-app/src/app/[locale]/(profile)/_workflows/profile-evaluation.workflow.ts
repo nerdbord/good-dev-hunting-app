@@ -45,7 +45,7 @@ const acceptProfileTool = tool(
       throw new Error('currentState not found')
     }
 
-    updateProfileById(currentState.profile.user.id, { state: 'APPROVED' })
+    updateProfileById(profileId, { state: 'APPROVED' })
     sendProfileApprovedEmail(
       currentState.profile.user.email,
       currentState.profile.user.githubDetails?.username || '',

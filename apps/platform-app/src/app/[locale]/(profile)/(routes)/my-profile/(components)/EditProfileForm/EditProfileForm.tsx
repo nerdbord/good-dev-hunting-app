@@ -1,31 +1,28 @@
 'use client'
+import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
+import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
+import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
   type JobSpecialization,
   type ProfileFormValues,
 } from '@/app/[locale]/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
+import { AppRoutes } from '@/utils/routes'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
-
-import { uploadImage } from '@/app/(files)/_actions/uploadImage'
-import { ConfirmLeaveModal } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ConfirmLeaveModal/ConfirmLeaveModal'
-import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
-import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { useModal } from '@/contexts/ModalContext'
-import { useWarnBeforeLeave } from '@/hooks/useWarnBeforeLeave/useWarnBeforeLeave'
-import { AppRoutes } from '@/utils/routes'
 import * as Yup from 'yup'
 import styles from '../../edit/page.module.scss'
 import CreateProfileTopBar from '../CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPreferences'
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
+import { FormNavigationWarning } from '../FormStateMonitor/FormStateMonitor'
 
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
@@ -66,26 +63,6 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
-  const { closeModal, showModal } = useModal()
-
-  const handleLeave = (url: string) => {
-    setShowBrowserAlert(false)
-    showModal(
-      <ConfirmLeaveModal
-        onClose={() => {
-          setShowBrowserAlert(true)
-          closeModal()
-        }}
-        onConfirm={() => handleConfirm(url)}
-      />,
-    )
-  }
-  const { setShowBrowserAlert } = useWarnBeforeLeave(handleLeave)
-
-  const handleConfirm = (url: string) => {
-    router.push(url)
-    closeModal()
-  }
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -174,6 +151,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
           <LocationPreferences />
           <WorkInformation />
         </div>
+        <FormNavigationWarning />
       </div>
     </Formik>
   )
