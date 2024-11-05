@@ -1,4 +1,5 @@
 import { EmailParams, MailerSend, Sender, type Recipient } from 'mailersend'
+import { type Personalization } from 'mailersend/lib/modules/Email.module'
 import { type APIResponse } from 'mailersend/lib/services/request.service'
 
 export enum MailTemplateId {
@@ -15,21 +16,11 @@ interface MailConfig {
   fromName: string
 }
 
-interface Substitution {
-  var: string
-  value: string
-}
-
-interface Variable {
-  email: string
-  substitutions: Substitution[]
-}
-
 interface SendMailParams {
   recipients: Recipient[]
   templateId: MailTemplateId
   config: MailConfig
-  variables?: Variable[]
+  personalization?: Personalization[]
 }
 
 export const mailersendClient = {
@@ -51,7 +42,7 @@ export const mailersendClient = {
       .setReplyTo(sentFrom)
       .setSubject(params.config.subject)
       .setTemplateId(params.templateId)
-      .setVariables(params?.variables || [])
+      .setPersonalization(params?.personalization || [])
 
     const response: APIResponse = await mailerSend.email.send(emailParams)
     if (response.statusCode < 300) {
