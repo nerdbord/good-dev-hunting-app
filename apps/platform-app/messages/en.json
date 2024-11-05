@@ -177,5 +177,18 @@
     "contratAvaible": "Available for a contract",
     "notAvaible": "Not available for work",
     "remote": "Remote"
+  },
+
+  "ConfirmLeaveModal": {
+    "title": "Finish your Profile to Save",
+    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
+    "leaveBtn": "Leave Page",
+    "cancelBtn": "Finish Profile"
+  },
+
+  "ConfirmLogoutModal": {
+    "title": "Finish your Profile to Save",
+    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
+    "cancelBtn": "Finish Profile"
   }
 }
