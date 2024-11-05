@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 //If the user tries to leave the page using the browser interface (back button, refresh, close, etc.), a native confirm box will be displayed.
 //Other cases within the application may not be handled correctly.
 
-export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
+export const useWarnBeforeLeave = (onLeave?: (url: string) => void) => {
   const [showBrowserAlert, setShowBrowserAlert] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -14,7 +14,7 @@ export const useWarnBeforeLeave = (onLeave: (url: string) => void) => {
       const target = e.currentTarget as HTMLAnchorElement
       const href = target.getAttribute('href') as string
 
-      onLeave(href)
+      onLeave && onLeave(href)
     }
 
     const beforeUnloadHandler = (e: BeforeUnloadEvent) => {

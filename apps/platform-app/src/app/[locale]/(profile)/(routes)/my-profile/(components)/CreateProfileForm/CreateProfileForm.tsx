@@ -22,7 +22,10 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
 import TermsOfUse from '../CreateProfile/TermsOfUse/TermsOfUse'
-import { FormWarnBeforeLeave } from '../FormStateMonitor/FormStateMonitor'
+import {
+  FormLogoutWarning,
+  FormNavigationWarning,
+} from '../FormStateMonitor/FormStateMonitor'
 
 const initialValues: CreateProfileFormValues = {
   fullName: '',
@@ -164,7 +167,8 @@ const CreateProfileForm = () => {
           <WorkInformation />
           <TermsOfUse />
         </div>
-        <FormWarnBeforeLeave showLogoutBtn={true} />
+        <FormNavigationWarning />
+        <FormLogoutWarning />
       </div>
     </Formik>
   )
