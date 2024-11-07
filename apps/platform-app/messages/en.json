@@ -1,8 +1,4 @@
-{"LocaleSwitcher1": {
-    "label": "Language",
-    "locale": "{locale, select, en {English (🇺🇸)} pl {Polski} other {Unknown}}"
-  },
-  "LocaleSwitcher": {
+{"LocaleSwitcher": {
     "label": "Language",
     "dropdownOpenLabel": "Language",
     "locale": {

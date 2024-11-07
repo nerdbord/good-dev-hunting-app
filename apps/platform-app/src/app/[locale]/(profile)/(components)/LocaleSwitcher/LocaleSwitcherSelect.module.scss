@@ -86,14 +86,6 @@
   }
 }
 
-// .localeNameOpen {
-//   color: #a687ff;
-// }
-
-// .localeNameClose {
-//   color: #E2EAF1;
-// }
-
 .arrow {
   color: #e2eaf1;
   width: 18px;
@@ -126,7 +118,7 @@
   bottom: 0;
   left: 0;
   // right: 0;
-  // dziala na mobile ale psuje desktop
+  // dziala na mobile ale psuje desktop?
   bottom: -177%;
   width: 100vw;
   padding: 24px;
@@ -153,7 +145,7 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px;
     text-align: center;
   }
 
@@ -178,7 +170,6 @@
   gap: $spacing-2;
 
   input[type='radio'] {
-    // margin-right: 0.5rem;
     appearance: none;
     width: 1rem;
     height: 1rem;
