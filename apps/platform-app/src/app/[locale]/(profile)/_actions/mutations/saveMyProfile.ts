@@ -12,9 +12,8 @@ import {
 } from '@/app/[locale]/(profile)/profile.helpers'
 import { type EditProfileFormFields } from '@/app/[locale]/(profile)/profile.types'
 import { updateProfileById } from '@/backend/profile/profile.service'
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
-import { Currency, PublishingState, type Prisma } from '@prisma/client'
+import { PublishingState, type Prisma } from '@prisma/client'
 
 const profilePendingFields: EditProfileFormFields[] = [
   // fields that should change profile publishing state to PENDING
@@ -127,10 +126,6 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
 
   if (updatedProfile.state === PublishingState.PENDING) {
     await runEvaluateProfileAgent(foundProfile.id)
-
-    await sendDiscordNotificationToModeratorChannel(
-      `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
-    )
   }
 
   return createProfileModel(updatedProfile)
