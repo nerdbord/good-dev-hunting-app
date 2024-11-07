@@ -59,42 +59,27 @@ const HamburgerMenuMobileBtn = ({
                       <LogOutBtn />
                     </>
                   ) : (
-                    <>
-                      {/* <CreateProfileBtn data-testid="create-profile-button" /> */}
-                      {session?.user && <LogOutBtn />}
-                    </>
+                    <>{session?.user && <LogOutBtn />}</>
                   )}
                   {userIsModerator && <ModerationBtn />}
 
                   {!session?.user && (
-                    // <LoginBtn variant={'secondary'}>Join as hunter</LoginBtn>
-                    // tu dodalam na test:
-
                     <>
                       <div className={styles.wrapper}>
                         <LoginBtn variant={'secondary'}>Login</LoginBtn>
                         <LocaleSwitcher />
-                        {/* <MobileGitHubStarsButton /> */}
-                        {/* <div className={styles.fixedButtons}>
-                          <CreateProfileBtn />
-                          <Button variant={'secondary'}>
-                            Join as a Hunter
-                          </Button>
-                        </div> */}
                       </div>
                       <div className={styles.fixedButtons}>
-                        <CreateProfileBtn />
-                        <Button variant={'secondary'}>Join as a Hunter</Button>
+                        <LoginBtn variant="secondary">
+                          Join as a Hunter
+                        </LoginBtn>
+                        <CreateProfileBtn data-testid="create-profile-button" />
                       </div>
                     </>
                   )}
                 </div>
 
                 <MobileGitHubStarsButton />
-                {/* <div className={styles.fixedButtons}>
-                  <CreateProfileBtn />
-                  <Button variant={'secondary'}>Join as a Hunter</Button>
-                </div> */}
               </>
             )}
           </div>

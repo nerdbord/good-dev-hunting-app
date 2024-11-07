@@ -8,7 +8,7 @@ import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-// import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
+
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
@@ -32,9 +32,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       <li>
         <LocaleSwitcher />
       </li>
-      {/* <li>
-        <FindTalentsBtn variant="tertiary" />
-      </li> */}
 
       <li>
         <LoginBtnsWrapper />
@@ -61,20 +58,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
       />
     </li>
   )
-  // ) : (
-  //   <>
-  //   {/* to musi byc w hamburger menu */}
-  //     {/* <div className={styles.wrapperMainMobileLogin}> */}
-  //       <li>
-  //         <LoginBtn variant="tertiary">Login</LoginBtn>
-  //       </li>
-  //       {/* <li>
-  //         <LocaleSwitcher />
-  //       </li>
-  //       <MobileGitHubStarsButton />
-  //     </div> */}
-  //   </>
-  // )
 
   const profilesMobileButtons = (
     <>
