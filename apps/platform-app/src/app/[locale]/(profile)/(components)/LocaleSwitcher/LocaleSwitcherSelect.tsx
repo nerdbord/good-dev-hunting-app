@@ -34,23 +34,6 @@ export const LocaleSwitcherSelect = ({
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const isMobile = useMediaQuery()
 
-  const buttonClassName = cx('button', {
-    // Width classes
-    btnWidthIsMobileEn: isMobile && selectedLocale === 'en',
-    btnWidthIsMobilePl: isMobile && selectedLocale === 'pl',
-    btnWidthIsDesktopEn: !isMobile && selectedLocale === 'en',
-    btnWidthIsDesktopPl: !isMobile && selectedLocale === 'pl',
-
-    // Padding classes
-    btnPaddingIsMobileEn: isMobile && selectedLocale === 'en',
-    btnPaddingIsMobilePl: isMobile && selectedLocale === 'pl',
-    btnPaddingDesktop: !isMobile,
-
-    // Color classes
-    isMobileColorLight02: isMobile,
-    isOpenColorMain03: !isMobile && isOpen,
-  })
-
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setIsOpen((prev) => !prev)
@@ -72,11 +55,35 @@ export const LocaleSwitcherSelect = ({
     })
   }
 
+  const buttonClassName = cx('button', {
+    btnWidthIsMobileEn: isMobile && selectedLocale === 'en',
+    btnWidthIsMobilePl: isMobile && selectedLocale === 'pl',
+    btnWidthIsDesktopEn: !isMobile && selectedLocale === 'en',
+    btnWidthIsDesktopPl: !isMobile && selectedLocale === 'pl',
+
+    btnPaddingIsMobileEn: isMobile && selectedLocale === 'en',
+    btnPaddingIsMobilePl: isMobile && selectedLocale === 'pl',
+    btnPaddingDesktop: !isMobile,
+
+    isMobileColorLight02: isMobile,
+    isOpenColorMain03: !isMobile && isOpen,
+  })
+
+  const buttonIconClassName = cx('buttonIcon', {
+    buttonIconOpen: isOpen && !isMobile,
+  })
+  const localeNameClassName = cx('localeName', {
+    localeNameOpen: isOpen && !isMobile,
+    localeNameOpenMobile: isOpen && isMobile,
+  })
+  const containerClassName = cx('container', { open: isOpen })
+  const dropdownClassName = cx({
+    mobileDropdown: isMobile,
+    dropdown: !isMobile,
+  })
+
   return (
-    <div
-      className={`${styles.container} ${isOpen ? styles.open : ''}`}
-      ref={dropdownRef}
-    >
+    <div className={containerClassName} ref={dropdownRef}>
       <p className={styles.srOnly}>
         {t('label')}
         {label}
@@ -86,18 +93,10 @@ export const LocaleSwitcherSelect = ({
         onClick={handleDropdown}
         disabled={isPending}
       >
-        <span
-          className={`${styles.buttonIcon} ${
-            isOpen && !isMobile ? styles.buttonIconOpen : ''
-          }`}
-        >
+        <span className={buttonIconClassName}>
           <GlobeIcon />
         </span>
-        <span
-          className={`localeName ${
-            isOpen && !isMobile ? styles.localeNameOpen : ''
-          }`}
-        >
+        <span className={localeNameClassName}>
           {t(`locale.${selectedLocale}`)}
         </span>
         <span className={styles.arrow}>
@@ -105,7 +104,7 @@ export const LocaleSwitcherSelect = ({
         </span>
       </button>
       {isOpen && (
-        <div className={isMobile ? styles.mobileDropdown : styles.dropdown}>
+        <div className={dropdownClassName}>
           {isMobile && (
             <div className={styles.applyBtnLanguageContainer}>
               <span className={styles.label}>{t('dropdownOpenLabel')}</span>
