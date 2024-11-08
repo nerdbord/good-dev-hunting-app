@@ -13,17 +13,18 @@ datasource db {
 }
 
 model User {
-  id             String         @id @default(uuid())
-  email          String         @unique
-  emailVerified  DateTime?
-  avatarUrl      String?
-  accounts       Account[]
-  profile        Profile?
-  githubDetails  GitHubDetails?
-  roles          Role[]         @default([USER])
-  nerdbordUserId String?        @unique
-  createdAt      DateTime       @default(now())
-  viewedProfiles ProfileView[]
+  id              String           @id @default(uuid())
+  email           String           @unique
+  emailVerified   DateTime?
+  avatarUrl       String?
+  accounts        Account[]
+  profile         Profile?
+  githubDetails   GitHubDetails?
+  linkedinDetails LinkedInDetails?
+  roles           Role[]           @default([USER])
+  nerdbordUserId  String?          @unique
+  createdAt       DateTime         @default(now())
+  viewedProfiles  ProfileView[]
   contactRequests ContactRequest[]
 }
 
@@ -98,6 +99,13 @@ model GitHubDetails {
   userId   String @unique
 }
 
+model LinkedInDetails {
+  id       String @id @default(uuid())
+  username String @unique
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @unique
+}
+
 model Country {
   id      String    @id @unique @default(uuid())
   name    String    @unique
@@ -125,25 +133,25 @@ model ContactRequest {
   senderFullName String
   senderEmail    String
   senderId       String?
-  sender         User?     @relation(fields: [senderId], references: [id])
+  sender         User?    @relation(fields: [senderId], references: [id])
   profile        Profile  @relation(fields: [profileId], references: [id])
   profileId      String
   createdAt      DateTime @default(now())
 }
 
 model ProfileView {
-  id                 String   @id @default(uuid())
-  viewerId           String
-  viewedProfileId    String
-  createdAt          DateTime @default(now())
-  viewer             User     @relation(fields: [viewerId], references: [id])
-  viewedProfile      Profile  @relation(fields: [viewedProfileId], references: [id])
+  id              String   @id @default(uuid())
+  viewerId        String
+  viewedProfileId String
+  createdAt       DateTime @default(now())
+  viewer          User     @relation(fields: [viewerId], references: [id])
+  viewedProfile   Profile  @relation(fields: [viewedProfileId], references: [id])
 }
 
 enum Currency {
-   PLN
- }
- 
+  PLN
+}
+
 enum EmploymentType {
   FULL_TIME
   PART_TIME
