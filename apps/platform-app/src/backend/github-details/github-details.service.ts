@@ -32,7 +32,7 @@ export async function createGitHubDetailsForUser(
   }
 
   if (user.githubDetails) {
-    throw new Error('User already has GitHub details')
+    return user.githubDetails
   }
 
   // Create GitHub details for the user

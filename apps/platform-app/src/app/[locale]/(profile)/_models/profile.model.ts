@@ -16,6 +16,7 @@ export interface ProfileModel extends Profile {
   avatarUrl: string | null
   techStack: TechStack
   githubUsername: string | null
+  linkedinUsername: string | null
   city: string
   country: string
   email: string
@@ -44,6 +45,7 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
     avatarUrl: data.user?.avatarUrl || null,
     techStack: data.techStack,
     githubUsername: data.user?.githubDetails?.username || null,
+    linkedinUsername: data.user?.linkedinDetails?.username || null,
     country: data.country.name,
     city: data.city.name,
     email: data.user.email,

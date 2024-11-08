@@ -14,16 +14,18 @@ export default function SocialItems({
 }) {
   return (
     <div className={styles.social}>
-      <div className={styles.socialItem}>
-        <a
-          href={`https://github.com/${githubUsername}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Github
-          <GithubIcon2 />
-        </a>
-      </div>
+      {githubUsername && (
+        <div className={styles.socialItem}>
+          <a
+            href={`https://github.com/${githubUsername}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+            <GithubIcon2 />
+          </a>
+        </div>
+      )}
       {linkedIn && (
         <div className={styles.socialItem}>
           <a

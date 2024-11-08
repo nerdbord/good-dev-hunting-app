@@ -1,8 +1,7 @@
 'use client'
 
-import ProfileCard from '@/app/[locale]/(profile)/(components)/ProfileCard/ProfileCard'
+import { ProfileListItem } from '@/app/[locale]/(profile)/(components)/ProfileList/ProfileListItem'
 import { useProfiles } from '@/app/[locale]/(profile)/_providers/Profiles.provider'
-import { AppRoutes } from '@/utils/routes'
 import { useMemo } from 'react'
 import styles from './Hero.module.scss'
 
@@ -19,26 +18,17 @@ export const HeroProfilesSection = () => {
       <div className={styles.section}>
         {first && (
           <div className={styles.frame1}>
-            <ProfileCard
-              data={first}
-              href={`${AppRoutes.profile}/${first.githubUsername}`}
-            />
+            <ProfileListItem key={first.id} data={first} />
           </div>
         )}
         {second && (
           <div className={styles.frame2}>
-            <ProfileCard
-              data={second}
-              href={`${AppRoutes.profile}/${second.githubUsername}`}
-            />
+            <ProfileListItem key={second.id} data={second} />
           </div>
         )}
         {third && (
           <div className={styles.frame3}>
-            <ProfileCard
-              data={third}
-              href={`${AppRoutes.profile}/${third.githubUsername}`}
-            />
+            <ProfileListItem key={third.id} data={third} />
           </div>
         )}
       </div>

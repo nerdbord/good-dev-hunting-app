@@ -37,7 +37,7 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
 
   const handleOpenProfile = () => {
     plausible(PlausibleEvents.OpenProfile, {
-      props: { username: data.githubUsername },
+      props: { username: data.githubUsername ?? data.linkedinUsername }, // not sure about that CC: Sumick
     })
 
     if (session && session.user) {
@@ -62,7 +62,9 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
       isHiddenName={!(!isHiddenName || session?.user)}
       visitedDate={visitedProfile?.createdAt}
       contactedDate={contactedProfile?.createdAt}
-      href={`${AppRoutes.profile}/${data.githubUsername}`}
+      href={`${AppRoutes.profile}/${
+        data.githubUsername ?? data.linkedinUsername
+      }`}
     />
   )
 }

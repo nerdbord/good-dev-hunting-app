@@ -26,6 +26,7 @@ const VerticalCard = (
     employmentTypes: ProfileModel['employmentTypes']
     fullName: ProfileModel['fullName']
     githubUsername: ProfileModel['githubUsername']
+    linkedinUsername: ProfileModel['linkedinUsername']
     isOpenForWork: ProfileModel['isOpenForWork']
     position: ProfileModel['position']
     remoteOnly: ProfileModel['remoteOnly']
@@ -44,6 +45,7 @@ const VerticalCard = (
     employmentTypes,
     fullName,
     githubUsername,
+    linkedinUsername,
     isOpenForWork,
     position,
     remoteOnly,
@@ -65,7 +67,7 @@ const VerticalCard = (
     plausible(PlausibleEvents.OpenProfile, {
       props: { username: githubUsername },
     })
-    router.push(`${AppRoutes.profile}/${githubUsername}`)
+    router.push(`${AppRoutes.profile}/${githubUsername ?? linkedinUsername}`)
   }
 
   const specializationTheme = useMemo(

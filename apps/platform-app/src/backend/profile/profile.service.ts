@@ -181,6 +181,19 @@ export async function getProfileByGithubUsername(username: string) {
   return null
 }
 
+export async function getProfileByLinkedinUsername(username: string) {
+  const profile = await prisma.profile.findFirst({
+    where: { user: { linkedinDetails: { username } } },
+    include: includeObject.include,
+  })
+
+  if (profile) {
+    return profile
+  }
+
+  return null
+}
+
 export async function getPublishedProfiles(take: number) {
   const publishedProfiles = await prisma.profile.findMany({
     take,
@@ -213,6 +226,7 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     user: {
       include: {
         githubDetails: true,
+        linkedinDetails: true,
       },
     },
     country: true,

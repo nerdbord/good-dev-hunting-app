@@ -34,7 +34,7 @@ export async function createLinkedInDetailsForUser(
   }
 
   if (user.linkedinDetails) {
-    throw new Error('User already has LinkedIn details')
+    return user.linkedinDetails
   }
 
   // Create LinkedInDetails for the user

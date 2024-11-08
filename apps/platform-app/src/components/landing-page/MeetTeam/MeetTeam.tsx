@@ -39,6 +39,7 @@ const MeetTeam = async () => {
                 employmentTypes={profile.employmentTypes}
                 fullName={profile.fullName}
                 githubUsername={profile.githubUsername}
+                linkedinUsername={profile.linkedinUsername}
                 isOpenForWork={profile.isOpenForWork}
                 position={profile.position}
                 remoteOnly={profile.remoteOnly}
@@ -59,6 +60,7 @@ const MeetTeam = async () => {
                   employmentTypes={profile.employmentTypes}
                   fullName={profile.fullName}
                   githubUsername={profile.githubUsername}
+                  linkedinUsername={profile.linkedinUsername}
                   isOpenForWork={profile.isOpenForWork}
                   position={profile.position}
                   remoteOnly={profile.remoteOnly}

@@ -5,6 +5,7 @@ export type ProfileWithRelations = Prisma.ProfileGetPayload<{
     user: {
       include: {
         githubDetails: true
+        linkedinDetails: true
       }
     }
     country: true
