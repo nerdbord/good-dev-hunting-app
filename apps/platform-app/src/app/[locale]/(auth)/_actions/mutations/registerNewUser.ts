@@ -48,10 +48,10 @@ export const registerNewUser = withSentry(
 
     await sendWelcomeEmail(createdUser.email, devName)
     await sendDiscordNotificationToModeratorChannel(
-      `User ${devName} has created an account as ${
+      `User **${devName}** has created an account with **${provider.toUpperCase()}** as ${
         isSpecialist
-          ? `SPECIALIST ${!name ? `with ${createdUser.email}` : ''}`
-          : 'HUNTER'
+          ? `**SPECIALIST** ${!name ? `with **${createdUser.email}**` : ''}`
+          : '**HUNTER**'
       }`,
     )
 
