@@ -138,35 +138,58 @@ export const {
       }
       const userIsHunter = userHasRole(foundUser, Role.HUNTER)
 
-      if (account.provider === 'email' && userIsHunter) {
-        console.log('[Email provider & user is hunter] ACCESS GRANTED')
-        return true
-      } else if (account.provider === 'github' && !userIsHunter) {
-        if (!profile?.login) {
-          throw new Error(
-            '[GitHub provider] GitHub profile login not provided.',
-          )
-        }
-        const githubUsername = profile.login as string
-        await createGitHubDetailsForUser(foundUser.id, githubUsername)
-        console.log('ACCESS GRANTED')
-        return true
-      } else if (account.provider === 'linkedin' && !userIsHunter) {
-        if (!profile?.given_name || !profile?.family_name) {
-          throw new Error(
-            '[Linkedin provider] LinkedIn profile given name or family name not provided.',
-          )
-        }
-        const name = `${profile.given_name} ${profile.family_name}`
-        const linkedinUsername = await createUsername(name)
-        await createLinkedInDetailsForUser(foundUser.id, linkedinUsername)
-        console.log('ACCESS GRANTED')
-        return true
-      } else {
+      // Define provider-specific access rules
+      const providerAccess = {
+        email: () => {
+          if (userIsHunter) {
+            return true
+          }
+          throwAccessDeniedError(account.provider, userIsHunter)
+        },
+        github: async () => {
+          if (userIsHunter)
+            throwAccessDeniedError(account.provider, userIsHunter)
+          const githubUsername = profile?.login as string
+          if (!githubUsername)
+            throw new Error(
+              '[GitHub provider] GitHub profile login not provided.',
+            )
+          await createGitHubDetailsForUser(foundUser.id, githubUsername)
+          return true
+        },
+        linkedin: async () => {
+          if (userIsHunter)
+            throwAccessDeniedError(account.provider, userIsHunter)
+          const { given_name, family_name } = profile ?? {}
+          const name = `${given_name} ${family_name}`
+          if (!name)
+            throw new Error(
+              '[LinkedIn provider] LinkedIn profile name not provided.',
+            )
+          const linkedinUsername = await createUsername(name)
+          await createLinkedInDetailsForUser(foundUser.id, linkedinUsername)
+          return true
+        },
+      }
+
+      // Check if account.provider is a valid key in providerAccess
+      if (account.provider in providerAccess) {
+        const accessHandler =
+          providerAccess[account.provider as keyof typeof providerAccess]
+        return await accessHandler()
+      }
+
+      throw new Error(`Unsupported provider: ${account.provider}`)
+
+      // Helper function for access denied error
+      function throwAccessDeniedError(
+        provider: string,
+        isHunter: boolean,
+      ): never {
         throw new Error(
           `Error during sign-in: ACCESS DENIED - ${
-            userIsHunter ? 'User with HUNTER role' : 'User without HUNTER role'
-          } is not allowed to log in with ${account.provider} provider.`,
+            isHunter ? 'User with HUNTER role' : 'User without HUNTER role'
+          } is not allowed to log in with ${provider} provider.`,
         )
       }
     },
