@@ -1,7 +1,6 @@
 .container {
   position: relative;
   display: inline-block;
-  // display: flex;
   font-size: 14px;
 
   @include mobile {
@@ -39,6 +38,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+  color: #e2eaf1;
 
   @include mobile {
     max-width: 201px;
@@ -108,6 +108,7 @@
   flex-direction: column;
   gap: $spacing-4;
   z-index: 10;
+  
   @include mobile {
     display: none;
   }
@@ -117,8 +118,6 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  // dziala na mobile ale psuje desktop?
-  // bottom: -177%;
   bottom: -402px;
   width: 100vw;
   padding: 24px;
@@ -192,4 +191,37 @@
       border-radius: 50%;
     }
   }
+}
+
+// Width classes
+.btnWidthIsMobileEn {
+  width: 201px;
+}
+.btnWidthIsMobilePl {
+  width: 198px;
+}
+.btnWidthIsDesktopEn {
+  width: 178px;
+}
+.btnWidthIsDesktopPl {
+  width: 140px;
+}
+
+// Padding classes
+.btnPaddingIsMobileEn {
+  padding: 12px 35px 12px 35px;
+}
+.btnPaddingIsMobilePl {
+  padding: 12px 54px;
+}
+.btnPaddingDesktop {
+  padding: 12px 20px;
+}
+
+// Color classes
+.isMobileColorLight02 {
+  color: #e2eaf1;
+}
+.isOpenColorMain03 {
+  color: #a687ff;
 }

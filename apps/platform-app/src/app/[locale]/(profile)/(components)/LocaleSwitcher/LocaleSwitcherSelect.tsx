@@ -5,11 +5,14 @@ import useOutsideClick from '@/hooks/useOutsideClick'
 import { I18nNamespaces } from '@/i18n'
 import { locales } from '@/i18n.config'
 import { GlobeIcon } from '@gdh/ui-system/icons'
+import classNames from 'classnames/bind'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState, useTransition } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import styles from './LocaleSwitcherSelect.module.scss'
+
+const cx = classNames.bind(styles)
 
 type LocaleSwitcherSelectProps = {
   defaultValue: string
@@ -31,18 +34,22 @@ export const LocaleSwitcherSelect = ({
   const [arrow, setArrow] = useState('IoIosArrowDown')
   const isMobile = useMediaQuery()
 
-  const buttonWidth = isMobile
-    ? selectedLocale === 'en'
-      ? '201px'
-      : '198px'
-    : selectedLocale === 'en'
-    ? '178px'
-    : '140px'
-  const buttonPadding = isMobile
-    ? selectedLocale === 'en'
-      ? '12px 35px 12px 35px'
-      : '12px 54px'
-    : '12px 20px'
+  const buttonClassName = cx('button', {
+    // Width classes
+    btnWidthIsMobileEn: isMobile && selectedLocale === 'en',
+    btnWidthIsMobilePl: isMobile && selectedLocale === 'pl',
+    btnWidthIsDesktopEn: !isMobile && selectedLocale === 'en',
+    btnWidthIsDesktopPl: !isMobile && selectedLocale === 'pl',
+
+    // Padding classes
+    btnPaddingIsMobileEn: isMobile && selectedLocale === 'en',
+    btnPaddingIsMobilePl: isMobile && selectedLocale === 'pl',
+    btnPaddingDesktop: !isMobile,
+
+    // Color classes
+    isMobileColorLight02: isMobile,
+    isOpenColorMain03: !isMobile && isOpen,
+  })
 
   const handleDropdown = () => {
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
@@ -70,15 +77,13 @@ export const LocaleSwitcherSelect = ({
       className={`${styles.container} ${isOpen ? styles.open : ''}`}
       ref={dropdownRef}
     >
-      <p className={styles.srOnly}>{t('label')}{label}</p>
+      <p className={styles.srOnly}>
+        {t('label')}
+        {label}
+      </p>
       <button
-        className={styles.button}
+        className={buttonClassName}
         onClick={handleDropdown}
-        style={{
-          width: buttonWidth,
-          padding: buttonPadding,
-          color: isMobile ? '#E2EAF1' : isOpen ? '#A687FF' : '#E2EAF1',
-        }}
         disabled={isPending}
       >
         <span
@@ -88,9 +93,13 @@ export const LocaleSwitcherSelect = ({
         >
           <GlobeIcon />
         </span>
-        <span className={`localeName ${
+        <span
+          className={`localeName ${
             isOpen && !isMobile ? styles.localeNameOpen : ''
-          }`}>{t(`locale.${selectedLocale}`)}</span>
+          }`}
+        >
+          {t(`locale.${selectedLocale}`)}
+        </span>
         <span className={styles.arrow}>
           {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </span>
