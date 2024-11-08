@@ -52,7 +52,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
   ) : (
     <li>
       <HamburgerMenuMobileBtn
-        userHasProfile={false} // tutaj ustawiam na false, żeby spełniało warunek dla niezalogowanych użytkowników
+        userHasProfile={false}
         userIsModerator={false}
         userIsHunter={false}
       />
