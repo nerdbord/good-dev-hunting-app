@@ -1,3 +1,4 @@
+'use client'
 import { I18nNamespaces } from '@/i18n'
 import { useLocale, useTranslations } from 'next-intl'
 import { LocaleSwitcherSelect } from './LocaleSwitcherSelect'
