@@ -8,6 +8,7 @@ export async function getUserById(id: string) {
     },
     include: {
       githubDetails: true,
+      linkedinDetails: true,
       profile: true,
     },
   })
@@ -27,6 +28,7 @@ export async function findUserByEmail(email: string) {
     },
     include: {
       githubDetails: true,
+      linkedinDetails: true,
       profile: true,
     },
   })
@@ -41,6 +43,7 @@ export async function findUserById(id: string) {
     },
     include: {
       githubDetails: true,
+      linkedinDetails: true,
       profile: true,
     },
   })
@@ -72,6 +75,7 @@ export async function addUserRole(id: string, role: Role) {
     },
     include: {
       githubDetails: true,
+      linkedinDetails: true,
     },
   })
 }
@@ -94,6 +98,7 @@ export async function removeUserRole(id: string, role: Role) {
     },
     include: {
       githubDetails: true,
+      linkedinDetails: true,
     },
   })
 }
@@ -115,6 +120,7 @@ export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
     },
     include: {
       githubDetails: true,
+      linkedinDetails: true,
     },
   })
 

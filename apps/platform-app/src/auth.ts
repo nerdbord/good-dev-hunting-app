@@ -7,6 +7,9 @@ import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
+import { createUsername } from './app/[locale]/(profile)/_actions/queries/createUsername'
+import { createGitHubDetailsForUser } from './backend/github-details/github-details.service'
+import { createLinkedInDetailsForUser } from './backend/linkedin-details/linkedin-details.service'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { addUserRole, findUserByEmail } from './backend/user/user.service'
 import { AppRoutes } from './utils/routes'
@@ -43,13 +46,17 @@ export const {
       clientId: process.env.LINKEDIN_CLIENT_ID,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
-      profile: (profile: LinkedInProfile) => {
+      profile: async (profile: LinkedInProfile) => {
+        const name = `${profile.given_name} ${profile.family_name}`
+        const linkedinUsername = await createUsername(name)
+
         return {
           id: profile.sub.toString(),
           email: profile.email,
           avatarUrl: profile.picture,
-          name: `${profile.given_name} ${profile.family_name}`,
+          linkedinUsername,
           provider: 'linkedin',
+          name, // this property is used only in registerNewUser (prisma adapter custom method) to send welcome mail and discord notification
         }
       },
     }),
@@ -108,6 +115,9 @@ export const {
       session.user.githubUsername = foundUser.githubDetails
         ? foundUser.githubDetails.username
         : ''
+      session.user.linkedinUsername = foundUser.linkedinDetails
+        ? foundUser.linkedinDetails.username
+        : ''
 
       return session
     },
@@ -127,11 +137,29 @@ export const {
         throw new Error('Account not found')
       }
       const userIsHunter = userHasRole(foundUser, Role.HUNTER)
-      if (
-        ((account.provider === 'github' || account.provider === 'linkedin') &&
-          !userIsHunter) ||
-        (account.provider === 'email' && userIsHunter)
-      ) {
+
+      if (account.provider === 'email' && userIsHunter) {
+        console.log('[Email provider & user is hunter] ACCESS GRANTED')
+        return true
+      } else if (account.provider === 'github' && !userIsHunter) {
+        if (!profile?.login) {
+          throw new Error(
+            '[GitHub provider] GitHub profile login not provided.',
+          )
+        }
+        const githubUsername = profile.login as string
+        await createGitHubDetailsForUser(foundUser.id, githubUsername)
+        console.log('ACCESS GRANTED')
+        return true
+      } else if (account.provider === 'linkedin' && !userIsHunter) {
+        if (!profile?.given_name || !profile?.family_name) {
+          throw new Error(
+            '[Linkedin provider] LinkedIn profile given name or family name not provided.',
+          )
+        }
+        const name = `${profile.given_name} ${profile.family_name}`
+        const linkedinUsername = await createUsername(name)
+        await createLinkedInDetailsForUser(foundUser.id, linkedinUsername)
         console.log('ACCESS GRANTED')
         return true
       } else {

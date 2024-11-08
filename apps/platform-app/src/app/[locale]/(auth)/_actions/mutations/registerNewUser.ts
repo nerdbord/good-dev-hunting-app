@@ -5,7 +5,14 @@ import { prisma } from '@/lib/prismaClient'
 import { withSentry } from '@/utils/errHandling'
 
 export const registerNewUser = withSentry(
-  async ({ id: _id, provider, githubUsername, name, ...data }) => {
+  async ({
+    id: _id,
+    provider,
+    githubUsername,
+    linkedinUsername,
+    name,
+    ...data
+  }) => {
     const userData = { ...data }
 
     if (githubUsername) {
@@ -16,16 +23,26 @@ export const registerNewUser = withSentry(
       }
     }
 
+    if (linkedinUsername) {
+      userData.linkedinDetails = {
+        create: {
+          username: linkedinUsername,
+        },
+      }
+    }
+
     const createdUser = await prisma.user.create({
       data: userData,
       include: {
         githubDetails: true,
+        linkedinDetails: true,
       },
     })
     if (!createdUser) {
       throw new Error('Failed to create user')
     }
-    const devName = name ?? githubUsername ?? createdUser.email
+    const devName =
+      name ?? githubUsername ?? linkedinUsername ?? createdUser.email
 
     const isSpecialist = provider === 'github' || provider === 'linkedin'
 
