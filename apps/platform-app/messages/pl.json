@@ -118,7 +118,7 @@
     "name": "Pełne imię i nazwisko",
     "email": "Email kontaktowy",
     "emailTooltip": "Email jest powiązany z Twoim profilem na Githubie i nie może być zmieniany",
-    "linkedin": "Wklej link do swojego profilu na LinkedIn",
+    "linkedin": "Wklej link do swojego profilu",
     "bio": "Pozwól innym Cię poznać - napisz kilka zdań o sobie.",
     "bioPlaceholder": "Możesz użyć **markdown** do formatowania tekstu. [Linki](https://devhunting.co) są również obsługiwane.",
     "characters": "znaki"
@@ -134,7 +134,10 @@
     "cityPlaceholder": "Zacznij wpisywać lokalizację",
     "cityTooltip": "Używamy tych informacji, aby dopasować Cię do najlepszych ofert pracy.",
     "cityRelocation": "Jestem otwarty na przeprowadzkę między miastami",
-    "remontOnly": "Szukam tylko pracy zdalnej"
+    "remontOnly": "Szukam tylko pracy zdalnej",
+    "languages": "Języki",
+    "languageTooltip": "Wymień języki, którymi posługujesz się biegle",
+    "languagePlaceholder": "Zacznij wpisywać..."
   },
 
   "WorkInformation": {
@@ -151,7 +154,7 @@
     "techstackTooltip": "Wymień technologie, które znasz lub którymi jesteś zainteresowany.",
     "techstackInfo": "Zacznij wpisywać i oddziel technologie przecinkami.",
     "techstackChoose": "Wybierz maksymalnie 16",
-    "employerType": "Rodzaj zatrudnienia",
+    "employerType": "Rodzaj zatrudnienia (opcjonalne)",
     "employFull": "Pełny etat",
     "employPart": "Część etatu",
     "employContract": "Umowa"
@@ -161,5 +164,18 @@
     "contratAvaible": "Dostępny do pracy na kontrakt",
     "notAvaible": "Niedostępny do pracy",
     "remote": "Zdalnie"
+  },
+
+  "ConfirmLeaveModal": {
+    "title": "Ukończ swój profil, aby zapisać",
+    "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz opuścisz stronę, Twoje postępy zostaną utracone.",
+    "leaveBtn": "Opuść stronę",
+    "cancelBtn": "Ukończ profil"
+  },
+
+  "ConfirmLogoutModal": {
+    "title": "Ukończ swój profil, aby zapisać",
+    "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz się wylogujesz, Twoje postępy zostaną utracone.",
+    "cancelBtn": "Ukończ profil"
   }
 }

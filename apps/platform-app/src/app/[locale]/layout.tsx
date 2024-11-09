@@ -1,6 +1,8 @@
+import { ModalProvider } from '@/contexts/ModalContext'
+import { ToastContextProvider } from '@/contexts/ToastContext'
+import { SessionProvider } from 'next-auth/react'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import React from 'react'
-import '../globals.scss'
 
 export default function LocaleLayout({
   children,
@@ -10,8 +12,16 @@ export default function LocaleLayout({
   const messages = useMessages()
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <>
+      <NextIntlClientProvider messages={messages}>
+        <SessionProvider>
+          <ToastContextProvider>
+            <ModalProvider>{children}</ModalProvider>
+          </ToastContextProvider>
+        </SessionProvider>
+        <div id="toasts" />
+        <div id="portal" />
+      </NextIntlClientProvider>
+    </>
   )
 }

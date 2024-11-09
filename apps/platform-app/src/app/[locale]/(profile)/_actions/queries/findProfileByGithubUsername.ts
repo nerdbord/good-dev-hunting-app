@@ -9,7 +9,7 @@ export const findProfileByGithubUsername = withSentry(
     const profile = await getProfileByGithubUsername(username)
 
     if (!profile) {
-      // throw new Error(`Profile with username ${username} not found`)
+      console.error(`Profile with github username ${username} not found`)
       return null
     }
 

@@ -1,7 +1,6 @@
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import EditProfileForm from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/EditProfileForm'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions'
-import { ProfileProvider } from '@/app/[locale]/(profile)/_providers/Profile.provider'
 import { UploadProvider } from '@/contexts/UploadContext'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
@@ -19,11 +18,9 @@ const EditProfilePage = async () => {
   }
 
   return (
-    <ProfileProvider profile={profile}>
-      <UploadProvider>
-        <EditProfileForm />
-      </UploadProvider>
-    </ProfileProvider>
+    <UploadProvider>
+      <EditProfileForm profile={profile} />
+    </UploadProvider>
   )
 }
 

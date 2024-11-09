@@ -1,5 +1,5 @@
-import GithubIcon2 from '@/assets/icons/GithubIcon2'
-import LinkedIn from '@/assets/icons/LinkedIn'
+import { ensureProtocol } from '@/utils/routes'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 
 import styles from './SocialItems.module.scss'
 
@@ -30,7 +30,7 @@ export default function SocialItems({
         <div className={styles.socialItem}>
           <a
             className={styles.socialLink}
-            href={linkedIn || ''}
+            href={ensureProtocol(linkedIn)}
             target="_blank"
             rel="noopener noreferrer"
           >

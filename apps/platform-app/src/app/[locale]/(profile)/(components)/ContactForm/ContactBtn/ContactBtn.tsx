@@ -1,48 +1,29 @@
 'use client'
-import { useProfileModel } from '@/app/[locale]/(profile)/_providers/Profile.provider'
-import { Button } from '@/components/Button/Button'
-import { useModal } from '@/contexts/ModalContext'
-import { I18nNamespaces } from '@/i18n'
-import { useSession } from 'next-auth/react'
-import { useTranslations } from 'next-intl'
-import ContactFormModal from '../ContactFormModal/ContactFormModal'
 
-export type SenderData = {
-  userId: string
-  userEmail: string
-  userFullName: string
-  userGithubName: string | null
-  userProfileId: string
-}
+import { I18nNamespaces } from '@/i18n'
+import { Button } from '@gdh/ui-system'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import ContactFormModal from '../ContactFormModal/ContactFormModal'
 
 const ContactBtn = () => {
   const t = useTranslations(I18nNamespaces.Buttons)
-  const { showModal } = useModal()
-  const { profile } = useProfileModel()
-  const { data: session } = useSession()
+  const [isModalOpen, showModal] = useState(false)
 
-  if (!profile || !session || !session.user) {
-    return null
+  const handleOpenModal = () => {
+    showModal(true)
   }
 
-  const senderData: SenderData = {
-    userId: session.user.id,
-    userEmail: session.user.email,
-    userFullName: profile.fullName,
-    userGithubName: profile.githubUsername,
-    userProfileId: profile.id,
+  const handleCloseModal = () => {
+    showModal(false)
   }
 
   return (
     <div data-test-id="contactBtn">
-      <Button
-        onClick={() => {
-          showModal(<ContactFormModal senderData={senderData} />)
-        }}
-        variant={'primary'}
-      >
+      <Button onClick={handleOpenModal} variant={'primary'}>
         {t('sendMessage')}{' '}
       </Button>
+      {isModalOpen && <ContactFormModal onClose={handleCloseModal} />}
     </div>
   )
 }

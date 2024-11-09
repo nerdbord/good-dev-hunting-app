@@ -1,9 +1,9 @@
 'use client'
-import { ErrorIcon } from '@/assets/icons/ErrorIcon'
-import { Button } from '@/components/Button/Button'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n'
 import { AppRoutes } from '@/utils/routes'
+import { Button } from '@gdh/ui-system'
+import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
@@ -32,8 +32,8 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           {pathname === AppRoutes.createProfile
             ? t('createProfile')
             : pathname === AppRoutes.editProfile
-            ? t('editProfile')
-            : t('myProfile')}
+              ? t('editProfile')
+              : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>

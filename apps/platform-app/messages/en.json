@@ -49,7 +49,7 @@
 
   "Faq": {
     "title": "FAQ",
-    "description": "Let us know if&nbsp;you&nbsp;have any&nbsp;questions.",
+    "description": "Let us know if you have any questions.",
     "questionOne": "What is reverted recruitment process?",
     "answerOne": "  Reverse recruiting (also known as reverse job hunting) is an approach in which the roles of jobseekers and employers are reversed. Instead of candidates applying for positions, employers or recruiters actively seek out potential candidates.",
     "questionTwo": "How does GDH work exactly?",
@@ -119,7 +119,7 @@
     "name": "Full name",
     "email": "Contact email",
     "emailTooltip": " Email is connected to your Github profile and cannot be changed",
-    "linkedin": "Paste link to you linkedin profile",
+    "linkedin": "Paste link to you profile",
     "bio": "Let others know you - write a few sentences about yourself.",
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
     "characters": "characters"
@@ -135,7 +135,10 @@
     "cityPlaceholder": "Start typing location",
     "cityTooltip": "We use this information to match you with the best job opportunities.",
     "cityRelocation": "I’m open to city relocation",
-    "remontOnly": "I’m looking for remote jobs only"
+    "remontOnly": "I’m looking for remote jobs only",
+    "languages": "Languages",
+    "languageTooltip": "List the languages you speak fluently",
+    "languagePlaceholder": "Start typing..."
   },
 
   "WorkInformation": {
@@ -152,7 +155,7 @@
     "techstackTooltip": "List the technologies you are comfortable with or interested in.",
     "techstackInfo": "Start typing and separate technologies with commas.",
     "techstackChoose": "Choose max. 16",
-    "employerType": "Employment type",
+    "employerType": "Employment type (optional)",
     "employFull": "Full-time",
     "employPart": "Part-time",
     "employContract": "Contract"
@@ -163,5 +166,18 @@
     "contratAvaible": "Available for a contract",
     "notAvaible": "Not available for work",
     "remote": "Remote"
+  },
+
+  "ConfirmLeaveModal": {
+    "title": "Finish your Profile to Save",
+    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
+    "leaveBtn": "Leave Page",
+    "cancelBtn": "Finish Profile"
+  },
+
+  "ConfirmLogoutModal": {
+    "title": "Finish your Profile to Save",
+    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
+    "cancelBtn": "Finish Profile"
   }
 }

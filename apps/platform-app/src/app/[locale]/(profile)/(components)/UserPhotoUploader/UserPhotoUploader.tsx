@@ -1,13 +1,12 @@
 'use client'
 import { fetchMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/fetchMyAvatar'
-import { ErrorIcon } from '@/assets/icons/ErrorIcon'
-import { Avatar } from '@/components/Avatar/Avatar'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n'
+import { Avatar, Button } from '@gdh/ui-system'
+import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
-import { Button } from '../../../../../components/Button/Button'
 import GithubUserPhotoUploader from './GithubUserPhotoUploader'
 import styles from './UserPhotoUploader.module.scss'
 
@@ -60,7 +59,7 @@ export const UserPhotoUploader = () => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.containerLabel}>Picture</p>
+      <p className={styles.containerLabel}>Picture (optional)</p>
       <div className={styles.errorMessageWrapper}>
         {imageUploadError && (
           <div className={styles.errorMessage}>

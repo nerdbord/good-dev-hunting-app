@@ -1,4 +1,5 @@
 'use server'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { type ContactFormRequest } from '@/app/[locale]/(profile)/(components)/ContactForm/schema'
 import { createContactRequestModel } from '@/app/[locale]/(profile)/_models/contact-request.model'
 import {
@@ -8,6 +9,7 @@ import {
 } from '@/backend/contact-request/contact-request.service'
 import { sendContactRequest } from '@/backend/mailing/mailing.service'
 import { getProfileById } from '@/backend/profile/profile.service'
+import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
 import { withSentry } from '@/utils/errHandling'
 import { type ContactRequest } from '@prisma/client'
@@ -20,18 +22,31 @@ export const sendProfileContactRequest = withSentry(
     senderFullName,
     subject,
     profileId,
-    senderId,
   }: ContactFormRequest) => {
+    const { user: authorizedUser } = await getAuthorizedUser()
+
+    if (!authorizedUser) {
+      return {
+        error: 'Unauthorized',
+      }
+    }
+
+    const senderId = authorizedUser.id
     let contactRequest: ContactRequest | null = null
+
     try {
       const foundProfile = await getProfileById(profileId)
 
       if (!foundProfile) {
-        throw Error('Profile not found')
+        return {
+          error: 'Profile not found',
+        }
       }
 
       if (!foundProfile.isOpenForWork) {
-        throw Error('This dev is not open for work')
+        return {
+          error: 'Profile is not open for work',
+        }
       }
 
       const existingContactRequest = await findExistingContactRequest({
@@ -40,22 +55,28 @@ export const sendProfileContactRequest = withSentry(
       })
 
       if (existingContactRequest) {
-        throw Error('You already contacted this dev')
+        return {
+          error: 'You have already sent a contact request to this profile',
+        }
       }
 
-      const createdContactRequest = await createContactRequest({
-        senderEmail,
-        senderFullName,
-        subject,
-        profileId,
-        message,
+      const createdContactRequest = await createContactRequest(
+        {
+          senderEmail,
+          senderFullName,
+          subject,
+          profileId,
+          message,
+        },
         senderId,
-      })
+      )
 
       contactRequest = createdContactRequest
 
       if (!createdContactRequest) {
-        throw Error('Failed to save contact request')
+        return {
+          error: 'Could not create contact request',
+        }
       }
 
       await sendContactRequest({
@@ -66,6 +87,10 @@ export const sendProfileContactRequest = withSentry(
         recipientEmail: foundProfile.user.email,
         recipientFullName: foundProfile.fullName,
       })
+
+      await sendDiscordNotificationToModeratorChannel(
+        `💌 User ${senderEmail} / name: ${senderFullName} send message: '${message}' to: ${foundProfile.user.email} / name: ${foundProfile.fullName}.`,
+      )
 
       await mailerliteClient.addSubscriberToMailerLite(
         senderEmail,

@@ -1,27 +1,34 @@
 'use client'
-import { Button } from '@/components/Button/Button'
 import { I18nNamespaces } from '@/i18n'
 import { AppRoutes } from '@/utils/routes'
+import { Button } from '@gdh/ui-system'
 import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-const LogOutBtn = () => {
+interface LogOutBtnProps {
+  onClick?: () => void
+}
+
+const LogOutBtn = ({ onClick }: LogOutBtnProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isCalled, setIsCalled] = useState(false)
+
   return (
-    <div>
-      <Button
-        variant={'secondary'}
-        disabled={isCalled}
-        onClick={() => {
+    <Button
+      variant={'secondary'}
+      disabled={isCalled}
+      onClick={() => {
+        if (onClick) {
+          onClick()
+        } else {
           setIsCalled(true)
           signOut({ callbackUrl: AppRoutes.home })
-        }}
-      >
-        {t('logOut')}{' '}
-      </Button>
-    </div>
+        }
+      }}
+    >
+      {t('logOut')}{' '}
+    </Button>
   )
 }
 

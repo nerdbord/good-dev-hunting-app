@@ -1,11 +1,11 @@
 'use server'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { runEvaluateProfileAgent } from '@/app/[locale]/(profile)/_workflows/profile-evaluation.workflow'
 import {
   findProfileById,
   updateProfileById,
 } from '@/backend/profile/profile.service'
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
 
@@ -23,9 +23,7 @@ export const publishProfile = withSentry(async (profileId: string) => {
     state: PublishingState.PENDING,
   })
 
-  await sendDiscordNotificationToModeratorChannel(
-    `User's **${updatedProfile.fullName}** profile has got new status: **${updatedProfile.state}**! [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${updatedProfile.userId})`,
-  )
+  await runEvaluateProfileAgent(foundProfile.id)
 
   return createProfileModel(updatedProfile)
 })

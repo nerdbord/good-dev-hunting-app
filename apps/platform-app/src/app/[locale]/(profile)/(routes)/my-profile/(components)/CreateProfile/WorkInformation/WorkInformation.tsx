@@ -4,17 +4,18 @@ import {
   mappedSeniorityLevel,
   mappedSpecialization,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import CheckboxInput from '@/components/Checkbox/Checkbox'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
+import { Button, CheckboxInput } from '@gdh/ui-system'
 
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
-import { EmploymentType } from '@prisma/client'
+import { Currency, EmploymentType } from '@prisma/client'
 import { useFormikContext } from 'formik'
 
+import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import { type DropdownOption } from '@/components/Dropdowns/DropdownOptionItem/DropdownOptionItem'
 import { I18nNamespaces } from '@/i18n'
+import { type DropdownOption } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'
 
@@ -23,6 +24,7 @@ export enum WorkInformationFormKeys {
   SENIORITY = 'seniority',
   TECH_STACK = 'techStack',
   EMPLOYMENT = 'employment',
+  CURRENCY = 'currency',
   HOURLY_RATE_MIN = 'hourlyRateMin',
   HOURLY_RATE_MAX = 'hourlyRateMax',
   HOURLY_RATE = 'hourlyRate',
@@ -65,6 +67,9 @@ const WorkInformation = () => {
       )
     }
   }
+  const handleCurrencyChange = (chosenCurrency: Currency) => {
+    setFieldValue(WorkInformationFormKeys.CURRENCY, chosenCurrency)
+  }
 
   const isEmploymentTypeSelected = (option: EmploymentType): boolean => {
     return values.employment.includes(option)
@@ -93,6 +98,7 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.POSITION}
           />
         </InputFormError>
+
         <InputFormError
           error={
             touched[WorkInformationFormKeys.SENIORITY] &&
@@ -108,13 +114,42 @@ const WorkInformation = () => {
             name={WorkInformationFormKeys.SENIORITY}
           />
         </InputFormError>
+        <InputFormError
+          error={
+            touched[WorkInformationFormKeys.CURRENCY] &&
+            errors[WorkInformationFormKeys.CURRENCY]
+          }
+        >
+          <div className={styles.currencyButtonsContainer}>
+            {Object.keys(Currency).map((value, index) => {
+              if (value === values.currency) {
+                return (
+                  <Button variant="secondary" key={index}>
+                    {currencyButtonTextDisplay(value as Currency)}
+                  </Button>
+                )
+              }
+              return (
+                <Button
+                  variant="grayedOut"
+                  onClick={() => {
+                    return handleCurrencyChange(value as Currency)
+                  }}
+                  key={index}
+                >
+                  {currencyButtonTextDisplay(value as Currency)}
+                </Button>
+              )
+            })}
+          </div>
+        </InputFormError>
         <DropdownSelect
           id={WorkInformationFormKeys.HOURLY_RATE}
           label={t('hourlyRate')}
           text={t('chooseHourlyRate')}
-          options={hourlyRateOptions}
+          options={hourlyRateOptions(values.currency)}
           selectedValue={
-            hourlyRateOptions.find(
+            hourlyRateOptions(values.currency).find(
               (option) =>
                 option.value ===
                 `${values[WorkInformationFormKeys.HOURLY_RATE_MIN]}-${

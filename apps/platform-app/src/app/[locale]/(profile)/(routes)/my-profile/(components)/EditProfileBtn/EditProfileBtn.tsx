@@ -1,6 +1,6 @@
 'use client'
-import { Button } from '@/components/Button/Button'
 import { AppRoutes } from '@/utils/routes'
+import { Button } from '@gdh/ui-system'
 import { useRouter } from 'next/navigation'
 
 const EditProfileBtn = () => {

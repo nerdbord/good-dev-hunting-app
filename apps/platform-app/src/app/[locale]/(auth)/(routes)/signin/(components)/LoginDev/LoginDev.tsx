@@ -1,8 +1,8 @@
 // components
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
-import Box from '@/components/Box/Box'
 import { I18nNamespaces } from '@/i18n'
+import { Box } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 
 const LoginDev = () => {

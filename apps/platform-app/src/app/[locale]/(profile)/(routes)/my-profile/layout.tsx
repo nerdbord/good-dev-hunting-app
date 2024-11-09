@@ -1,21 +1,12 @@
-﻿import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
-import { Container } from '@/components/Container/Container'
-import { AppRoutes } from '@/utils/routes'
-import { redirect } from 'next/navigation'
+import { Container } from '@gdh/ui-system'
 import React from 'react'
 import Header from '../../(components)/Header/Header'
 
-export default async function AppLayout({
+export default function MyProfileLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { user, userIsHunter } = await getAuthorizedUser()
-
-  if (!user || userIsHunter) {
-    redirect(AppRoutes.profilesList)
-  }
-
   return (
     <main>
       <Header />

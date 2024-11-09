@@ -1,12 +1,6 @@
 import { type ProfileCreateParams } from '@/app/[locale]/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import {
-  Currency,
-  Prisma,
-  PublishingState,
-  Role,
-  type Profile,
-} from '@prisma/client'
+import { Prisma, PublishingState, Role, type Profile } from '@prisma/client'
 
 export async function getApprovedProfiles() {
   const approvedProfiles = await prisma.profile.findMany({
@@ -105,7 +99,13 @@ export async function createUserProfile(
       state: PublishingState.DRAFT,
       hourlyRateMin: profileData.hourlyRateMin ?? 0,
       hourlyRateMax: profileData.hourlyRateMax ?? 0,
-      currency: Currency.PLN,
+      currency: profileData.currency,
+      language: {
+        connectOrCreate: profileData.language.map((lang) => ({
+          where: { name: lang.name },
+          create: { name: lang.name },
+        })),
+      },
     },
     include: includeObject.include,
   })
@@ -265,6 +265,7 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     techStack: true,
     contactRequests: true,
     profileViews: true,
+    language: true,
   },
 })
 

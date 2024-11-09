@@ -8,8 +8,10 @@
   ],
   "scripts": {
     "dev": "npm run dev -w apps/platform-app",
+    "storybook": "npm run storybook -w packages/ui-system",
     "start": "npm run start -w apps/platform-app",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -18,9 +20,12 @@
     ]
   },
   "devDependencies": {
-    "husky": "^8.0.0",
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "husky": "^8.0.0",
     "lint-staged": "^15.1.0"
+  },
+  "dependencies": {
+    "zustand": "^4.5.4"
   }
 }

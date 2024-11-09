@@ -1,12 +1,12 @@
 'use client'
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import ImportantIcon from '@/assets/icons/ImportantIcon'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import BioTextArea from '@/components/TextArea/BioTextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { I18nNamespaces } from '@/i18n'
+import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
@@ -72,7 +72,7 @@ const PersonalInfo = () => {
         >
           <TextInput
             onBlur={handleBlur}
-            label="LinkedIn"
+            label="LinkedIn (optional)"
             placeholder={t('linkedin')}
             value={values[PersonalInfoFormKeys.LINKEDIN] || ''}
             onChange={handleChange}

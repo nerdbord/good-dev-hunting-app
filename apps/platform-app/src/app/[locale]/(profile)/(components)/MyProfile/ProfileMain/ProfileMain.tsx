@@ -5,12 +5,11 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import GithubIcon2 from '@/assets/icons/GithubIcon2'
-import LinkedIn from '@/assets/icons/LinkedIn'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
-import { Avatar } from '@/components/Avatar/Avatar'
-import { AnchorButton } from '@/components/Button/AnchorButton'
 import { countries } from '@/data/countries'
+import { ensureProtocol } from '@/utils/routes'
+import { AnchorButton, Avatar } from '@gdh/ui-system'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import styles from './ProfileMain.module.scss'
 
 interface ProfileMainProps {
@@ -44,7 +43,10 @@ const ProfileMain = async (props: ProfileMainProps) => {
           )}
           {profile.linkedIn && (
             <li>
-              <AnchorButton href={profile.linkedIn} icon={<LinkedIn />}>
+              <AnchorButton
+                href={ensureProtocol(profile.linkedIn)}
+                icon={<LinkedIn />}
+              >
                 LinkedIn
               </AnchorButton>
             </li>

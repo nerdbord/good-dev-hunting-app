@@ -84,6 +84,7 @@ model Profile {
   createdAt                DateTime          @default(now())
   updatedAt                DateTime?         @updatedAt
   profileViews             ProfileView[]
+  language                 Language[]
 }
 
 model Technology {
@@ -148,8 +149,16 @@ model ProfileView {
   viewedProfile   Profile  @relation(fields: [viewedProfileId], references: [id])
 }
 
+model Language {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  profiles Profile[]
+}
+
 enum Currency {
   PLN
+  EUR
+  USD
 }
 
 enum EmploymentType {
