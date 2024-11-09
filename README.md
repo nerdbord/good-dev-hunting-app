@@ -1,6 +1,5 @@
 <h1 align="center">
-    <img width="190" height="42" src="https://i.imgur.com/d7w6K3N.png" alt="Logo Good Dev Hunting">
-    Good Dev Hunting
+    <img src="https://i.imgur.com/d7w6K3N.png" alt="Logo Good Dev Hunting">
 </h1>
 <h3 align="center">
     Free, and open source platform for connecting skilled software engineers with those in need of tech talent.
