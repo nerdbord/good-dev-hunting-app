@@ -189,7 +189,7 @@ export const hourlyRateOptions = (curr: Currency) => {
     const ranges = []
 
     for (let i = 1; i < max; i += step) {
-      const upper = i + step -1
+      const upper = i + step - 1
       ranges.push({
         name: `${i} - ${upper} ${currency}/h`,
         value: `${i}-${upper}`,

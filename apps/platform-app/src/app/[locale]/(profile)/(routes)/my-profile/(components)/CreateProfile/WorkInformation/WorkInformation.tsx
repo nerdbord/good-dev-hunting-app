@@ -124,10 +124,7 @@ const WorkInformation = () => {
             {Object.keys(Currency).map((value, index) => {
               if (value === values.currency) {
                 return (
-                  <Button
-                    variant="secondary"
-                    key={index}
-                  >
+                  <Button variant="secondary" key={index}>
                     {currencyButtonTextDisplay(value as Currency)}
                   </Button>
                 )

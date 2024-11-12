@@ -6,6 +6,10 @@ import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
 import Email from 'next-auth/providers/email'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
+import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
+import { createUsername } from './app/[locale]/(profile)/_actions/queries/createUsername'
+import { createGitHubDetailsForUser } from './backend/github-details/github-details.service'
+import { createLinkedInDetailsForUser } from './backend/linkedin-details/linkedin-details.service'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { addUserRole, findUserByEmail } from './backend/user/user.service'
 import { AppRoutes } from './utils/routes'
@@ -38,6 +42,24 @@ export const {
     strategy: 'jwt',
   },
   providers: [
+    LinkedIn({
+      clientId: process.env.LINKEDIN_CLIENT_ID,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
+      profile: async (profile: LinkedInProfile) => {
+        const name = `${profile.given_name} ${profile.family_name}`
+        const linkedinUsername = await createUsername(name)
+
+        return {
+          id: profile.sub.toString(),
+          email: profile.email,
+          avatarUrl: profile.picture,
+          linkedinUsername,
+          provider: 'linkedin',
+          name, // this property is used only in registerNewUser (prisma adapter custom method) to send welcome mail and discord notification
+        }
+      },
+    }),
     Github({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
@@ -48,6 +70,7 @@ export const {
           email: profile.email,
           avatarUrl: profile.avatar_url,
           githubUsername: profile.login,
+          provider: 'github',
           name: profile.name, // this property is used only in registerNewUser (prisma adapter custom method) to send welcome mail and discord notification
         }
       },
@@ -92,6 +115,9 @@ export const {
       session.user.githubUsername = foundUser.githubDetails
         ? foundUser.githubDetails.username
         : ''
+      session.user.linkedinUsername = foundUser.linkedinDetails
+        ? foundUser.linkedinDetails.username
+        : ''
 
       return session
     },
@@ -111,17 +137,59 @@ export const {
         throw new Error('Account not found')
       }
       const userIsHunter = userHasRole(foundUser, Role.HUNTER)
-      if (
-        (account.provider === 'github' && !userIsHunter) ||
-        (account.provider === 'email' && userIsHunter)
-      ) {
-        console.log('ACCESS GRANTED')
-        return true
-      } else {
+
+      // Define provider-specific access rules
+      const providerAccess = {
+        email: () => {
+          if (userIsHunter) {
+            return true
+          }
+          throwAccessDeniedError(account.provider, userIsHunter)
+        },
+        github: async () => {
+          if (userIsHunter)
+            throwAccessDeniedError(account.provider, userIsHunter)
+          const githubUsername = profile?.login as string
+          if (!githubUsername)
+            throw new Error(
+              '[GitHub provider] GitHub profile login not provided.',
+            )
+          await createGitHubDetailsForUser(foundUser.id, githubUsername)
+          return true
+        },
+        linkedin: async () => {
+          if (userIsHunter)
+            throwAccessDeniedError(account.provider, userIsHunter)
+          const { given_name, family_name } = profile ?? {}
+          const name = `${given_name} ${family_name}`
+          if (!name)
+            throw new Error(
+              '[LinkedIn provider] LinkedIn profile name not provided.',
+            )
+          const linkedinUsername = await createUsername(name)
+          await createLinkedInDetailsForUser(foundUser.id, linkedinUsername)
+          return true
+        },
+      }
+
+      // Check if account.provider is a valid key in providerAccess
+      if (account.provider in providerAccess) {
+        const accessHandler =
+          providerAccess[account.provider as keyof typeof providerAccess]
+        return await accessHandler()
+      }
+
+      throw new Error(`Unsupported provider: ${account.provider}`)
+
+      // Helper function for access denied error
+      function throwAccessDeniedError(
+        provider: string,
+        isHunter: boolean,
+      ): never {
         throw new Error(
           `Error during sign-in: ACCESS DENIED - ${
-            userIsHunter ? 'User with HUNTER role' : 'User without HUNTER role'
-          } is not allowed to log in with ${account.provider} provider.`,
+            isHunter ? 'User with HUNTER role' : 'User without HUNTER role'
+          } is not allowed to log in with ${provider} provider.`,
         )
       }
     },
@@ -138,10 +206,21 @@ export const {
       let roleToAdd: Role = 'USER'
       if (account.provider === 'github') {
         if (!profile?.login || !user.id) {
-          throw new Error('GitHub profile login or user ID not provided.')
+          throw new Error(
+            '[GitHub provider] GitHub profile login or user ID not provided.',
+          )
+        }
+        roleToAdd = Role.SPECIALIST
+        console.log(roleToAdd)
+      } else if (account.provider === 'linkedin') {
+        if (!user.id) {
+          throw new Error('[LinkedIn provider] User ID not provided.')
         }
         roleToAdd = Role.SPECIALIST
       } else if (account.provider === 'email') {
+        if (!user.id) {
+          throw new Error('[Email provider] User ID not provided.')
+        }
         roleToAdd = Role.HUNTER
       } else {
         throw new Error('Provider not recognized')

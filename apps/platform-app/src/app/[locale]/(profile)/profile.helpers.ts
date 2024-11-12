@@ -6,7 +6,7 @@ import {
   type JobSpecialization,
   type SearchParamsFilters,
 } from '@/app/[locale]/(profile)/profile.types'
-import { Currency, PublishingState } from '@prisma/client'
+import { PublishingState } from '@prisma/client'
 import { type ReadonlyURLSearchParams } from 'next/navigation'
 
 export const ProfileVerification = {
@@ -274,4 +274,3 @@ export const sortProfilesBySalary = (a: ProfileModel, b: ProfileModel) => {
 
 export const getProfileCurrentState = (state: ProfilesStore): ProfilesStore =>
   state
-

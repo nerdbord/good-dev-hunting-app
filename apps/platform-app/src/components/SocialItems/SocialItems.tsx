@@ -1,5 +1,5 @@
-import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import { ensureProtocol } from '@/utils/routes'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 
 import styles from './SocialItems.module.scss'
 
@@ -14,16 +14,18 @@ export default function SocialItems({
 }) {
   return (
     <div className={styles.social}>
-      <div className={styles.socialItem}>
-        <a
-          href={`https://github.com/${githubUsername}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Github
-          <GithubIcon2 />
-        </a>
-      </div>
+      {githubUsername && (
+        <div className={styles.socialItem}>
+          <a
+            href={`https://github.com/${githubUsername}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+            <GithubIcon2 />
+          </a>
+        </div>
+      )}
       {linkedIn && (
         <div className={styles.socialItem}>
           <a

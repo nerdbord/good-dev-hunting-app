@@ -34,13 +34,15 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
 
   const handleOpenProfile = () => {
     plausible(PlausibleEvents.OpenProfile, {
-      props: { username: profile.githubUsername },
+      props: { username: profile.githubUsername ?? profile.linkedinUsername }, // not sure about that CC: Sumick
     })
   }
 
   return (
     <Link
-      href={`${AppRoutes.profile}/${profile.githubUsername}`}
+      href={`${AppRoutes.profile}/${
+        profile.githubUsername ?? profile.linkedinUsername
+      }`}
       onClick={handleOpenProfile}
       className={`${styles.frameWrapper}`}
     >

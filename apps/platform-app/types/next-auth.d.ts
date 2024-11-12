@@ -7,6 +7,7 @@ declare module 'next-auth' {
     email?: string | null
     avatarUrl?: string | null
     githubUsername?: string | null
+    linkedinUsername?: string | null
   }
 
   interface AdapterUser {
@@ -14,6 +15,7 @@ declare module 'next-auth' {
     email?: string | null
     avatarUrl?: string | null
     githubUsername?: string | null
+    linkedinUsername?: string | null
   }
 
   /**
@@ -28,6 +30,7 @@ declare module 'next-auth' {
       roles: Role[]
       profileId: string | null
       githubUsername: string | null
+      linkedinUsername: string | null
     }
   }
 }
@@ -42,5 +45,6 @@ declare module 'next-auth/jwt' {
     roles: Role[]
     profileId: string | null
     githubUsername: string | null
+    linkedinUsername: string | null
   } | null
 }
