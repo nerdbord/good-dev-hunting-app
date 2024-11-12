@@ -1,12 +1,9 @@
 import { getRequestConfig } from 'next-intl/server'
-
-const locales = ['en', 'pl']
+import { notFound } from 'next/navigation'
+import { locales, type Locale } from './i18n.config'
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale)) {
-    // Tu można zwrócić domyślne tłumaczenia lub pusty obiekt
-    return { messages: {} }
-  }
+  if (!locales.includes(locale as Locale)) notFound()
 
   return {
     messages: (await import(`../messages/${locale}.json`)).default,
@@ -14,6 +11,7 @@ export default getRequestConfig(async ({ locale }) => {
 })
 
 export enum I18nNamespaces {
+  LocaleSwitcher = 'LocaleSwitcher',
   Index = 'Index',
   HowItWorks = 'HowItWorks',
   UserProfile = 'UserProfile',
