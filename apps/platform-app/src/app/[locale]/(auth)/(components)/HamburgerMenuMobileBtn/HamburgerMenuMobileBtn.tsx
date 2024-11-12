@@ -1,10 +1,13 @@
 'use client'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
+import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwitcher/LocaleSwitcher'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
+import { I18nNamespaces } from '@/i18n'
 import { Button, MobileGitHubStarsButton } from '@gdh/ui-system'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import GithubAcc from '../GithubAcc/GithubAcc'
 import HunterAcc from '../HunterAcc/HunterAcc'
@@ -21,6 +24,7 @@ const HamburgerMenuMobileBtn = ({
   userIsHunter?: boolean | null | undefined
 }) => {
   const { data: session } = useSession()
+  const t = useTranslations(I18nNamespaces.LoginHunter)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const handleOpenMenu = () => {
@@ -44,6 +48,7 @@ const HamburgerMenuMobileBtn = ({
               <>
                 <div className={styles.wrapper}>
                   <GithubAcc />
+                  <LocaleSwitcher />
                   {userIsModerator && <ModerationBtn />}
                 </div>
                 <MobileGitHubStarsButton />
@@ -57,15 +62,23 @@ const HamburgerMenuMobileBtn = ({
                       <LogOutBtn />
                     </>
                   ) : (
-                    <>
-                      <CreateProfileBtn data-testid="create-profile-button" />
-                      {session?.user && <LogOutBtn />}
-                    </>
+                    <>{session?.user && <LogOutBtn />}</>
                   )}
                   {userIsModerator && <ModerationBtn />}
 
                   {!session?.user && (
-                    <LoginBtn variant={'secondary'}>Join as hunter</LoginBtn>
+                    <>
+                      <div className={styles.wrapper}>
+                        <LoginBtn variant={'secondary'}>Login</LoginBtn>
+                        <LocaleSwitcher />
+                      </div>
+                      <div className={styles.fixedButtons}>
+                        <LoginBtn variant="secondary">
+                          {t('joinAsAHunter')}
+                        </LoginBtn>
+                        <CreateProfileBtn data-testid="create-profile-button" />
+                      </div>
+                    </>
                   )}
                 </div>
 
