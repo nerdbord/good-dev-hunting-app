@@ -57,6 +57,16 @@
     gap: 10px;
     border-radius: 2px;
     background: #7d54f1;
+
+    color: #fff;
+    text-align: center;
+
+    /* Button */
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
   }
 
   .declineBtn {
@@ -67,5 +77,15 @@
     gap: 8px;
     border-radius: 2px;
     border: 1px solid rgba(166, 135, 255, 0.5);
+
+    color: #a687ff;
+    text-align: center;
+
+    /* Button */
+    
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
   }
 }
