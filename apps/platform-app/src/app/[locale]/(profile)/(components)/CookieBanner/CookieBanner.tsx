@@ -1,21 +1,29 @@
 'use client'
+import { Button } from '@gdh/ui-system'
 import { useEffect, useState } from 'react'
-import { Button } from '@gdh/ui-system';
 import styles from './CookieBanner.module.scss'
 
 export const CookieBanner: React.FC = () => {
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(false)
 
   useEffect(() => {
-    const hasAcceptedCookies = localStorage.getItem('cookiesAccepted')
-    if (!hasAcceptedCookies) {
-      setIsBannerVisible(true)
+    try {
+      const hasAcceptedCookies = localStorage.getItem('cookiesAccepted')
+      if (!hasAcceptedCookies) {
+        setIsBannerVisible(true)
+      }
+    } catch (error) {
+      console.error('Could not access localStorage:', error)
     }
   }, [])
 
   const acceptCookies = () => {
-    localStorage.setItem('cookiesAccepted', 'true')
-    setIsBannerVisible(false)
+    try {
+      localStorage.setItem('cookiesAccepted', 'true')
+      setIsBannerVisible(false)
+    } catch (error) {
+      console.error('Could not set cookiesAccepted in localStorage:', error)
+    }
   }
 
   const declineCookies = () => {
@@ -32,10 +40,12 @@ export const CookieBanner: React.FC = () => {
         <span className={styles.cookiePrivacyPolicy}>Privacy Policy</span>.
       </div>
       <div className={styles.btnWrapper}>
-        <Button variant={'primary'} onClick={() => acceptCookies}>
+        <Button variant={'primary'} onClick={acceptCookies}>
           Accept all
         </Button>
-        <Button variant={'secondary'} onClick={()=> declineCookies}>Decline</Button>
+        <Button variant={'secondary'} onClick={declineCookies}>
+          Decline
+        </Button>
       </div>
     </div>
   )
