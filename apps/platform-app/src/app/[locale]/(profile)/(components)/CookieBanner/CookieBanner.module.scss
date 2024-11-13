@@ -5,7 +5,7 @@
   z-index: 1000;
   display: flex;
   width: 500px;
-  height: 322px;
+  // height: 322px;
   padding: 56px;
   flex-direction: column;
   align-items: flex-start;
@@ -17,6 +17,25 @@
   background: rgba(255, 255, 255, 0.96);
 
   box-shadow: 0px 5px 14px 0px rgba(8, 15, 52, 0.04);
+  
+
+  @include mobile {
+    display: flex;
+    max-width: 343px;
+    padding: 36px 34px;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    gap: 22px;
+
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    
+    z-index: 1000;
+    margin: 0 auto;
+    
+  }
 }
 
 .cookieHeader {
@@ -36,10 +55,6 @@
 
   .cookiePrivacyPolicy {
     color: #4a3aff;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 30px;
   }
 }
 
@@ -48,44 +63,53 @@
   align-items: center;
   gap: 16px;
 
-  .acceptBtn {
+  // .acceptBtn {
+  //   display: flex;
+  //   width: 180px;
+  //   padding: 12px 24px;
+  //   justify-content: center;
+  //   align-items: center;
+  //   gap: 10px;
+  //   border-radius: 2px;
+  //   background: #7d54f1;
+
+  //   color: #fff;
+  //   text-align: center;
+
+  //   /* Button */
+
+  //   font-size: 14px;
+  //   font-style: normal;
+  //   font-weight: 500;
+  //   line-height: 20px;
+  // }
+
+  // .declineBtn {
+  //   display: flex;
+  //   padding: 12px 24px;
+  //   justify-content: center;
+  //   align-items: center;
+  //   gap: 8px;
+  //   border-radius: 2px;
+  //   border: 1px solid rgba(166, 135, 255, 0.5);
+
+  //   color: #a687ff;
+  //   text-align: center;
+
+  //   /* Button */
+
+  //   font-size: 14px;
+  //   font-style: normal;
+  //   font-weight: 500;
+  //   line-height: 20px;
+  // }
+
+  @include mobile {
     display: flex;
-    width: 180px;
-    padding: 12px 24px;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 2px;
-    background: #7d54f1;
-
-    color: #fff;
-    text-align: center;
-
-    /* Button */
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-  }
-
-  .declineBtn {
-    display: flex;
-    padding: 12px 24px;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
-    border-radius: 2px;
-    border: 1px solid rgba(166, 135, 255, 0.5);
-
-    color: #a687ff;
-    text-align: center;
-
-    /* Button */
-    
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
+    align-self: stretch;
   }
 }

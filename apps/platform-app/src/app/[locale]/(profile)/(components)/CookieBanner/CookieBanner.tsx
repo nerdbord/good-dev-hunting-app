@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { Button } from '@gdh/ui-system';
 import styles from './CookieBanner.module.scss'
 
 export const CookieBanner: React.FC = () => {
@@ -31,10 +32,10 @@ export const CookieBanner: React.FC = () => {
         <span className={styles.cookiePrivacyPolicy}>Privacy Policy</span>.
       </div>
       <div className={styles.btnWrapper}>
-        <button className={styles.acceptBtn} onClick={() => acceptCookies}>
+        <Button variant={'primary'} onClick={() => acceptCookies}>
           Accept all
-        </button>
-        <button className={styles.declineBtn} onClick={()=> declineCookies}>Decline</button>
+        </Button>
+        <Button variant={'secondary'} onClick={()=> declineCookies}>Decline</Button>
       </div>
     </div>
   )
