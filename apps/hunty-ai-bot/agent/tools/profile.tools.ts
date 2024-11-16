@@ -1,21 +1,15 @@
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
-import { GoodDevHuntingAPIClient } from '../../libs/gdh-api.client';
-import { searchQueryParser } from "./profile.parsers";
-import { JsonOutputFunctionsParser } from "langchain/output_parsers";
+import { GoodDevHuntingAPIClient, SearchParamsSchema } from '../../libs/gdh-api.client';
+
 
 const apiClient = new GoodDevHuntingAPIClient();
+
+
 export const searchProfileTool = tool(
     async (params) => {
         try {
-            // // Validate the schema of the incoming search query
-            // const validatedParams = searchQuerySchema.parse(params);
 
-            // Log the validated parameters
-            console.log('validatedParams', params);
-
-            // Use the structured parameters to search profiles
-            //@ts-ignore
             const profiles = await apiClient.searchProfiles(params);
 
             // Return the search results
@@ -28,33 +22,7 @@ export const searchProfileTool = tool(
     {
         name: "searchProfile",
         description: "Use this tool to search for developers based on structured search parameters. Use only data provided by user to return proper search parameters. Do not hallucinate with search params that can not be reasoned from user query.",
-        schema: z.object({
-            techStack: z.array(z.string()).optional().describe("A list of technologies. Use only technologies that are mentioned in user query. Do not hallucinate and do not add any technologies that are not mentioned in user query."),
-            position: z.enum([
-                "Frontend",
-                "Backend",
-                "Fullstack",
-                "Mobile",
-                "DevOps",
-                "QA",
-                "PM",
-                "DataScience",
-                "GameDev",
-                "VR_AR",
-                "UX_UI",
-                "Crypto",
-                "CyberSecurity",
-                "SysAdmin",
-                "UX_Designer",
-                "UX_Researcher",
-                "UX_Writer",
-                "UI_Designer",
-                "UX_UI_Designer",
-                "Product_Designer",
-            ])
-                .optional()
-                .describe("Use only specializations that are mentioned in user query. Do not hallucinate and do not add any specializations that are not mentioned in user query."),
-        })
+        schema: SearchParamsSchema
     }
 );
 
