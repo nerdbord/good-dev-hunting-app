@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prismaClient';
-import { Prisma, EmploymentType, PublishingState, Currency } from '@prisma/client';
+import { type Prisma, PublishingState } from '@prisma/client';
 import { includeObject } from '@/backend/profile/profile.service';
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types';
 
@@ -13,22 +13,16 @@ export async function POST(request: NextRequest) {
     if (!apiKey || apiKey !== API_KEY) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    //
+
     try {
         const { params } = await request.json();
 
-        console.log('params', params)
-
         const whereConditions = buildSearchQuery(params);
-
-        console.log('whereConditions', whereConditions)
 
         const profiles = await prisma.profile.findMany({
             where: whereConditions,
             include: includeObject.include,
         });
-
-        console.log('profiles', profiles)
 
         return NextResponse.json(profiles);
     } catch (error) {
