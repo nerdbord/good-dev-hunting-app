@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prismaClient';
-import { type Prisma, PublishingState } from '@prisma/client';
+import { type Prisma, type PublishingState } from '@prisma/client';
 import { includeObject } from '@/backend/profile/profile.service';
-import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types';
+import { type JobSpecialization } from '@/app/[locale]/(profile)/profile.types';
 
 const API_KEY = process.env.GDH_API_KEY;
 
