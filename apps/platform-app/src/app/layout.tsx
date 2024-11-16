@@ -1,8 +1,9 @@
 import combineClasses from '@/utils/combineClasses'
-import { GoogleAnalytics } from '@next/third-parties/google'
+// import { GoogleAnalytics } from '@next/third-parties/google'
 import { IBM_Plex_Sans, Inter } from 'next/font/google'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { CookieBanner } from './[locale]/(profile)/(components)/CookieBanner/CookieBanner'
+import GoogleAnalytics from './[locale]/(profile)/(components)/CookieBanner/GoogleAnalytics'
 import './globals.scss'
 
 const ibm = IBM_Plex_Sans({
@@ -32,13 +33,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Suspense fallback={null}>
+        <GoogleAnalytics
+          GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''}
+        />
+      </Suspense>
       <body className={commonClasses}>
         {children}
         <CookieBanner />
       </body>
-      <GoogleAnalytics
+      {/* <GoogleAnalytics
         gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''}
-      />
+        
+      /> */}
     </html>
   )
 }
