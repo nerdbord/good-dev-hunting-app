@@ -22,6 +22,11 @@ export const huntySummarizeConversationPrompt = (messages: BaseMessage[]) => `
       4. **Ajmag (ID: 946913182763597896)**
       5. **wawrzon (ID: 946913182763597896)**
 
+      **My thoughts (Hunty):**
+      - I should be careful with my words next time.
+      - Ajmag seems to like me.
+      - Sumicki is not a fan of JavaScript.
+
       **Key Insights:**
       Sumicki:
       - He thinks that Javscript is the best and disagrees with me.
@@ -32,9 +37,7 @@ export const huntySummarizeConversationPrompt = (messages: BaseMessage[]) => `
       Ajmag:
       - He is sharing his knowledge about the new technologies.
       - He was really excited about it.
-      Hunty (your insights as the assistant):
-      - I asked Ajmag about his opinion on the new technologies and he shared his knowledge. He was really excited about it.
-      - I should be careful with my words next time.
+
       </example-output>
       
 `
