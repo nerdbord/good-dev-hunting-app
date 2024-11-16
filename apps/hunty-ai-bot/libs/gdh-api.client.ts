@@ -43,7 +43,7 @@ export class GoodDevHuntingAPIClient {
         }
     }
 
-    private async fetch<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+    private async req<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
         const response = await fetch(`${this.baseUrl}${endpoint}`, {
             ...options,
             headers: {
@@ -60,8 +60,8 @@ export class GoodDevHuntingAPIClient {
         return response.json();
     }
 
-    async searchProfiles(params: SearchParams) {
-        const response = await fetch(`${this.baseUrl}/profiles/search`, {
+    async searchProfiles(params: SearchParamsType) {
+        const profiles = await this.req(`${this.baseUrl}/profiles/search`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,11 +70,7 @@ export class GoodDevHuntingAPIClient {
             body: JSON.stringify({ params }),
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to search profiles');
-        }
-
-        return response.json();
+        return profiles;
     }
 
     // Add other methods for profile operations
