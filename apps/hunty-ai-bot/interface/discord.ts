@@ -4,10 +4,8 @@ import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from "@langchain/
 
 export class DiscordBot {
     private client: Client;
-    private aiAgent: AIAgent;
 
-    constructor(aiAgent: AIAgent) {
-        this.aiAgent = aiAgent;
+    constructor() {
         this.client = new Client({
             intents: [
                 GatewayIntentBits.Guilds,
@@ -100,8 +98,9 @@ export class DiscordBot {
         console.log('Processing question:', question);
 
         try {
+            const aiAgent = new AIAgent();
             const conversationHistory = await this.buildConversationHistory(message);
-            const response = await this.aiAgent.processMessage(
+            const response = await aiAgent.processMessage(
                 question,
                 message.channelId,
                 conversationHistory
