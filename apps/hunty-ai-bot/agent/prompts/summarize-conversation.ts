@@ -8,6 +8,9 @@ export const huntySummarizeConversationPrompt = (messages: BaseMessage[]) => `
 
       <rules>
       - Use conversation summary to understand the context of the conversation.
+      - Stick to the example output format.
+      - Remember to include your thoughts in the summary.
+      - Your name is Hunty so analyze the conversation from Hunty's perspective.
       </rules>
       
       <context>
