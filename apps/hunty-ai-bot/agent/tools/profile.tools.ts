@@ -5,18 +5,20 @@ import { searchQueryParser } from "./profile.parsers";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
 const apiClient = new GoodDevHuntingAPIClient();
-
 export const searchProfileTool = tool(
-    async ({ query }) => {
+    async (params) => {
         try {
-            // Parse natural language query
-            const parsedQuery = await searchQueryParser(query);
-            console.log('parsedQuery', parsedQuery);
+            // // Validate the schema of the incoming search query
+            // const validatedParams = searchQuerySchema.parse(params);
 
-            // Search profiles with structured parameters
-            const profiles = await apiClient.searchProfiles(parsedQuery);
+            // Log the validated parameters
+            console.log('validatedParams', params);
 
+            // Use the structured parameters to search profiles
+            //@ts-ignore
+            const profiles = await apiClient.searchProfiles(params);
 
+            // Return the search results
             return JSON.stringify(profiles, null, 2);
         } catch (error) {
             console.error('Search profile error:', error);
@@ -25,10 +27,34 @@ export const searchProfileTool = tool(
     },
     {
         name: "searchProfile",
-        description: "You should use this tool when someone asks you to search for developers. You can search by seniority, skills, employment type, availability, and remote work preference.",
+        description: "Use this tool to search for developers based on structured search parameters. Use only data provided by user to return proper search parameters. Do not hallucinate with search params that can not be reasoned from user query.",
         schema: z.object({
-            query: z.string().describe("Natural language search query (e.g., 'Find senior Python developers available for contract work')"),
-        }),
+            techStack: z.array(z.string()).optional().describe("A list of technologies. Use only technologies that are mentioned in user query. Do not hallucinate and do not add any technologies that are not mentioned in user query."),
+            position: z.enum([
+                "Frontend",
+                "Backend",
+                "Fullstack",
+                "Mobile",
+                "DevOps",
+                "QA",
+                "PM",
+                "DataScience",
+                "GameDev",
+                "VR_AR",
+                "UX_UI",
+                "Crypto",
+                "CyberSecurity",
+                "SysAdmin",
+                "UX_Designer",
+                "UX_Researcher",
+                "UX_Writer",
+                "UI_Designer",
+                "UX_UI_Designer",
+                "Product_Designer",
+            ])
+                .optional()
+                .describe("Use only specializations that are mentioned in user query. Do not hallucinate and do not add any specializations that are not mentioned in user query."),
+        })
     }
 );
 
