@@ -58,7 +58,11 @@
     color: #4a3aff;
 
     .link {
-      text-decoration: underline;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
