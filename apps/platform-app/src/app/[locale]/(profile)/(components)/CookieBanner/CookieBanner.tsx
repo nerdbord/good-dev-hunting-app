@@ -2,6 +2,7 @@
 import { getCookie, setCookie } from '@/utils/cookiesHelper'
 import { Button } from '@gdh/ui-system'
 import classNames from 'classnames'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import styles from './CookieBanner.module.scss'
 
@@ -46,7 +47,16 @@ export const CookieBanner: React.FC = () => {
       <div className={styles.cookieInfoText}>
         Our website use cookies. By continuing, we assume your permission to
         deploy cookies as detailed in our{' '}
-        <span className={styles.cookiePrivacyPolicy}>Privacy Policy</span>.
+        <span className={styles.cookiePrivacyPolicy}>
+          <Link
+            target="_blank"
+            href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
+            className={styles.link}
+          >
+            Privacy Policy
+          </Link>
+        </span>
+        .
       </div>
       <div className={styles.btnWrapper}>
         <Button variant={'primary'} onClick={handleAcceptCookies}>
