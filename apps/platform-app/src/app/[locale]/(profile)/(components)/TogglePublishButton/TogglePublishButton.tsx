@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl'
 import { publishProfile } from '../../_actions/mutations/publishProfile'
 import { unpublishProfile } from '../../_actions/mutations/unpublishProfile'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
+import VerificationModal from '../VerificationModal/VerificationModal'
 
 interface TogglePublishButtonProps {
   profileId: string
@@ -54,9 +55,9 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   return (
     <div>
       {showPopup && !loading && (
-        <PublishProfilePopup
-          state={state}
-          onClose={() => setShowPopup(false)}
+        <VerificationModal
+          profileStatus={state}
+          onClose={async () => setShowPopup(false)}
         />
       )}
       {state === PublishingState.REJECTED ? (
