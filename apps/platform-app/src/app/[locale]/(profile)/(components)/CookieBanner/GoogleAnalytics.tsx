@@ -1,6 +1,5 @@
 'use client'
 
-import { getCookie } from '@/utils/cookiesHelper'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { useEffect } from 'react'
@@ -29,10 +28,14 @@ export default function GoogleAnalytics({
   useEffect(() => {
     const url = pathname + searchParams.toString()
 
-    const consent = getCookie('cookie_consent') || 'denied'
+    const consent =
+      document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('cookie_consent='))
+        ?.split('=')[1] || 'denied'
 
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('consent', 'default', {
+      window.gtag('consent', 'update', {
         analytics_storage: consent,
       })
 

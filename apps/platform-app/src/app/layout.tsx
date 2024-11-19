@@ -1,8 +1,7 @@
 import combineClasses from '@/utils/combineClasses'
-// import { GoogleAnalytics } from '@next/third-parties/google'
 import { IBM_Plex_Sans, Inter } from 'next/font/google'
-import React, { Suspense } from 'react'
-import { CookieBanner } from './[locale]/(profile)/(components)/CookieBanner/CookieBanner'
+import React from 'react'
+import CookieBannerWrapper from './[locale]/(profile)/(components)/CookieBanner/CookieBannerWrapper'
 import GoogleAnalytics from './[locale]/(profile)/(components)/CookieBanner/GoogleAnalytics'
 import './globals.scss'
 
@@ -33,19 +32,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Suspense fallback={null}>
-        <GoogleAnalytics
-          GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''}
-        />
-      </Suspense>
+      <GoogleAnalytics
+        GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''}
+      />
       <body className={commonClasses}>
         {children}
-        <CookieBanner />
+        <CookieBannerWrapper />
       </body>
-      {/* <GoogleAnalytics
-        gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''}
-        
-      /> */}
     </html>
   )
 }

@@ -5,7 +5,6 @@
   z-index: 1000;
   display: flex;
   width: 500px;
-  // height: 322px;
   padding: 56px;
   flex-direction: column;
   align-items: flex-start;
@@ -16,16 +15,6 @@
   border: 1px solid #d9dbe9;
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 0px 5px 14px 0px rgba(8, 15, 52, 0.04);
-
-  visibility: hidden; // Default state
-
-  &.visible {
-    visibility: visible;
-  }
-
-  &.hidden {
-    visibility: hidden;
-  }
 
   @include mobile {
     display: flex;
