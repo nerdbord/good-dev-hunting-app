@@ -16,11 +16,7 @@ import { Container, GitHubStarsButton } from '@gdh/ui-system'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
 import logo from '@/assets/images/logo.png'
-import { getProfileByUserId } from '@/backend/profile/profile.service'
-import { Profile } from '@prisma/client'
 import Link from 'next/link'
-import { useState } from 'react'
-import VerificationModal from '../VerificationModal/VerificationModal'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
@@ -30,12 +26,6 @@ interface HeaderProps {
 async function Header({ buttonsVariant = 'main' }: HeaderProps) {
   const { user, userIsHunter, userIsModerator, userHasProfile } =
     await getAuthorizedUser()
-
-  const [profile, setProfile] = useState<Profile | null>()
-
-  if (userHasProfile) {
-    setProfile(await getProfileByUserId(user.id))
-  }
 
   const mainDesktopButtons = (
     <>
@@ -156,11 +146,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               {renderDesktopContent()}
             </ul>
           </nav>
-          {
-            <>
-              {user && userHasProfile && <VerificationModal userId={user.id} />}
-            </>
-          }
         </div>
       </Container>
     </header>
