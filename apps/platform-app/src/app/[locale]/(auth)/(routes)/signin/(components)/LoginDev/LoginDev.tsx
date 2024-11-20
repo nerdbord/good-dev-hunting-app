@@ -1,6 +1,6 @@
 // components
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Box } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 

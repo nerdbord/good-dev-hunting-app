@@ -2,7 +2,7 @@
 import SwitchInput from '@/components/Switch/Switch'
 import Tooltip from '@/components/Tooltip/Tooltip'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
 import React, { useId } from 'react'

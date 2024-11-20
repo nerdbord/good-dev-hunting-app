@@ -1,6 +1,6 @@
 import { type JobOfferFiltersEnum } from '@/app/[locale]/(profile)/profile.types'
 import { useDebounce } from '@/hooks/useDebounce'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { ClearIcon, SearchIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
