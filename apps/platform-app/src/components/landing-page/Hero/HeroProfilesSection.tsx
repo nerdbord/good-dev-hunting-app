@@ -21,11 +21,10 @@ export const HeroProfilesSection = () => {
           const frameClass = `frame${idx + 1}`
 
           return (
-            <div className={styles[frameClass]}>
+            <div className={styles[frameClass]} key={profile.id}>
               <Link
                 href={`${AppRoutes.profile}/${profile.githubUsername}`}
                 className={`${styles.frameWrapper}`}
-                key={profile.id}
               >
                 <ProfileCard profile={profile} />
               </Link>
