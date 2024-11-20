@@ -1,4 +1,4 @@
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { ViewIcon } from '@gdh/ui-system/icons'
 
 import { useTranslations } from 'next-intl'

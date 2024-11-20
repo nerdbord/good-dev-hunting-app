@@ -1,4 +1,4 @@
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import styles from './Loader.module.scss'
 

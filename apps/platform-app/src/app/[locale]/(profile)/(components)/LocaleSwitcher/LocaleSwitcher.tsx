@@ -1,5 +1,5 @@
 'use client'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { useLocale, useTranslations } from 'next-intl'
 import { LocaleSwitcherSelect } from './LocaleSwitcherSelect'
 

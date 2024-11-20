@@ -2,7 +2,7 @@
 import ProfileCard from '@/app/[locale]/(profile)/(components)/ProfileCard/ProfileCard'
 import { useProfilesStore } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
