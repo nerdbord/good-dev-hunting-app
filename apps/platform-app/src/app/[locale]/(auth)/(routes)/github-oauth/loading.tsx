@@ -1,6 +1,5 @@
-import React from 'react'
+import { I18nNamespaces } from '@/i18n/request'
 import { Loader } from '@gdh/ui-system'
-import { I18nNamespaces } from '@/i18n'
 import { useTranslations } from 'next-intl'
 
 const Loading = () => {
@@ -9,6 +8,3 @@ const Loading = () => {
 }
 
 export default Loading
-
-
-

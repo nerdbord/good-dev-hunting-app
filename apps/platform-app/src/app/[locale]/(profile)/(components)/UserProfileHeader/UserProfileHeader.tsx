@@ -2,7 +2,7 @@ import ContactBtn from '@/app/[locale]/(profile)/(components)/ContactForm/Contac
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import classNames from 'classnames/bind'
 import { getTranslations } from 'next-intl/server'
