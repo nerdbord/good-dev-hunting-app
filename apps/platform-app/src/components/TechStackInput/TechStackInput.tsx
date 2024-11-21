@@ -1,11 +1,10 @@
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import technologies from '@/data/technologies'
-import { type DropdownOption } from '@gdh/ui-system'
+import { Tooltip, type DropdownOption } from '@gdh/ui-system'
 import { CancelIcon, ImportantIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import { useFormikContext } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
-import Tooltip from '../Tooltip/Tooltip'
 import styles from './TechStackInput.module.scss'
 
 const cx = classNames.bind(styles)

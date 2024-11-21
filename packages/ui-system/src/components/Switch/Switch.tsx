@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from './Switch.module.scss'
 
-interface SwitchInputProps {
+interface SwitchProps {
   id: string
   label: string
   checked: boolean
@@ -13,7 +13,7 @@ interface SwitchInputProps {
   children?: React.ReactNode
 }
 
-const SwitchInput: React.FC<SwitchInputProps> = ({
+export const Switch: React.FC<SwitchProps> = ({
   id,
   label,
   checked,
@@ -53,5 +53,3 @@ const SwitchInput: React.FC<SwitchInputProps> = ({
     </div>
   )
 }
-
-export default SwitchInput
