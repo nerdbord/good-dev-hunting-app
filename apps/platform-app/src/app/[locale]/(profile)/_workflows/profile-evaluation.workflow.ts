@@ -17,13 +17,15 @@ import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { tool } from '@langchain/core/tools'
 import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
+import Groq from 'groq-sdk'
 import { z } from 'zod'
 import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
 import { executeDecisionPrompt } from './prompts/executeDecisionNode'
 
 const StateAnnotation = Annotation.Root({
   profile: Annotation<ProfileWithRelations>(),
-  evaluation: Annotation<string>(),
+  profileEvaluation: Annotation<string>(),
+  avatarDescription: Annotation<string>(),
 })
 
 const evaluationModel = new ChatGroq({
@@ -106,21 +108,70 @@ async function retrieveProfile(
   return { profile: fetchedProfile }
 }
 
+const describeAvatar = async (state: typeof StateAnnotation.State) => {
+  const { user } = state.profile
+  const { avatarUrl } = user
+
+  const groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY || '',
+  })
+
+  if (avatarUrl) {
+    try {
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: `What is on the photo, Describe it in one paragraph`,
+              },
+              {
+                type: 'image_url',
+                image_url: {
+                  url: avatarUrl,
+                },
+              },
+            ],
+          },
+        ],
+        model: 'llama-3.2-90b-vision-preview',
+        temperature: 0.5,
+        max_tokens: 1024,
+        stream: false,
+        stop: null,
+      })
+
+      return { avatarDescription: chatCompletion.choices[0].message.content }
+    } catch (error) {
+      console.error('Wystąpił błąd:', error)
+    }
+  } else {
+    return { avatarDescription: `Blank photo` }
+  }
+}
+
 const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
   const { fullName, bio } = state.profile
+  const { avatarDescription } = state
 
   const chain = evaluateProfilePrompt.pipe(evaluationModel)
-  const responseMessage = await chain.invoke({ fullName, bio })
+  const responseMessage = await chain.invoke({
+    fullName,
+    bio,
+    avatarDescription,
+  })
 
-  return { evaluation: responseMessage.content }
+  return { profileEvaluation: responseMessage.content }
 }
 
 const executeDecision = async (state: typeof StateAnnotation.State) => {
-  const { evaluation } = state
+  const { profileEvaluation } = state
 
   const modelWithTools = executionModel.bindTools(tools)
   const chain = executeDecisionPrompt.pipe(modelWithTools)
-  const responseMessage = await chain.invoke({ evaluation })
+  const responseMessage = await chain.invoke({ profileEvaluation })
 
   const messageWithSingleToolCall = new AIMessage({
     content: responseMessage.content,
@@ -138,10 +189,12 @@ const executeDecision = async (state: typeof StateAnnotation.State) => {
 
 const workflow = new StateGraph(StateAnnotation)
   .addNode('retrieveProfile', retrieveProfile)
+  .addNode('describeAvatar', describeAvatar)
   .addNode('evaluateProfile', evaluateProfileByModel)
   .addNode('executeDecision', executeDecision)
   .addEdge(START, 'retrieveProfile')
-  .addEdge('retrieveProfile', 'evaluateProfile')
+  .addEdge('retrieveProfile', 'describeAvatar')
+  .addEdge('describeAvatar', 'evaluateProfile')
   .addEdge('evaluateProfile', 'executeDecision')
   .addEdge('executeDecision', END)
 
