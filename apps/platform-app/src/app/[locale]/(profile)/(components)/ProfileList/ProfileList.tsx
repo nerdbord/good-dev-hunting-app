@@ -8,19 +8,18 @@ import {
   sortProfilesBySalary,
 } from '@/app/[locale]/(profile)/profile.helpers'
 import { type SearchParamsFilters } from '@/app/[locale]/(profile)/profile.types'
+import { I18nNamespaces } from '@/i18n/request'
+import { Loader } from '@gdh/ui-system'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import styles from './ProfileList.module.scss'
-import { Loader } from '@gdh/ui-system'
-import { I18nNamespaces } from '@/i18n'
-import { useTranslations } from 'next-intl'
 
 const ProfileList = () => {
   const { status } = useSession()
   const { profiles } = useProfilesStore(getProfileCurrentState)
   const searchParams = useSearchParams()
-  
 
   const filters: SearchParamsFilters = useMemo(
     () => createFiltersObjFromSearchParams(searchParams),
