@@ -1,4 +1,4 @@
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Container, Logo } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -12,7 +12,9 @@ const LandingFooter = () => {
         <div className={styles.topBar}>
           <Logo />
           <div className={styles.contact}>
-            <span className={`${styles.textDark} ${styles.mobileHide}`}>Good Dev Hunting</span>
+            <span className={`${styles.textDark} ${styles.mobileHide}`}>
+              Good Dev Hunting
+            </span>
             <Link
               href="mailto:team@devhunting.co"
               target="_blank"

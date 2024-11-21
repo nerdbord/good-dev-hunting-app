@@ -2,8 +2,8 @@
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import { I18nNamespaces } from '@/i18n'
-import { locales } from '@/i18n.config'
+import { I18nNamespaces } from '@/i18n/request'
+import { routing } from '@/i18n/routing'
 import { GlobeIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import { useTranslations } from 'next-intl'
@@ -117,7 +117,7 @@ export const LocaleSwitcherSelect = ({
             </div>
           )}
           <div className={styles.options}>
-            {locales.map((locale) => (
+            {routing.locales.map((locale) => (
               <label key={locale} className={styles.dropdownItem}>
                 <input
                   type="radio"

@@ -4,7 +4,7 @@ import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBt
 import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwitcher/LocaleSwitcher'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Button, MobileGitHubStarsButton } from '@gdh/ui-system'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'

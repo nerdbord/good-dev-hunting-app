@@ -4,7 +4,7 @@ import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.t
 import InputFormError from '@/components/InputFormError/InputFormError'
 import BioTextArea from '@/components/TextArea/BioTextArea'
 import TextInput from '@/components/TextInput/TextInput'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Tooltip } from '@gdh/ui-system'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'

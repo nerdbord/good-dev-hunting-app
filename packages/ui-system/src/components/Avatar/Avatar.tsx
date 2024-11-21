@@ -1,9 +1,9 @@
-import Image, { type StaticImageData } from "next/image";
-import styles from "./Avatar.module.scss";
+import Image, { type StaticImageData } from 'next/image'
+import styles from './Avatar.module.scss'
 
 interface AvatarProps {
-  src: string | StaticImageData;
-  size?: number;
+  src: string | StaticImageData
+  size?: number
 }
 
 export const Avatar = ({ src, size = 50 }: AvatarProps) => {
@@ -17,9 +17,8 @@ export const Avatar = ({ src, size = 50 }: AvatarProps) => {
         alt="User Avatar"
         width={size}
         height={size}
-        objectFit="cover"
         className={styles.avatar}
       />
     </div>
-  );
-};
+  )
+}

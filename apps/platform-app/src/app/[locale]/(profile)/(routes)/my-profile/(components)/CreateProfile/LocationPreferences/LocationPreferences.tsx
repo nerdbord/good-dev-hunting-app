@@ -7,7 +7,7 @@ import type {
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { CheckboxInput, Switch } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'

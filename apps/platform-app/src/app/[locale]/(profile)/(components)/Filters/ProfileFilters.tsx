@@ -4,7 +4,6 @@ import {
   createQueryString,
 } from '@/app/[locale]/(profile)/profile.helpers'
 import {
-  hourlyRateOptions,
   mappedEmploymentType,
   mappedSeniorityLevel,
 } from '@/app/[locale]/(profile)/profile.mappers'
@@ -15,7 +14,7 @@ import {
 import { DropdownFilterMulti } from '@/components/Dropdowns/DropdownFilterMulti/DropdownFilterMulti'
 import { SearchBarWrapper } from '@/components/SearchBar/SearchBarWrapper'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { type DropdownOption } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -84,7 +83,7 @@ export const ProfileFilters = ({
           onSearch={handleFilterChange}
           value={filters[JobOfferFiltersEnum.location]}
         />
-        
+
         {/* SALARY FILTER TEMPORARILY DISABLED */
         /* <DropdownFilterMulti
           text={t('salary')}

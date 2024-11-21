@@ -3,7 +3,7 @@ import { EditProfileButton } from '@/app/[locale]/(profile)/(components)/EditPro
 import { TogglePublishButton } from '@/app/[locale]/(profile)/(components)/TogglePublishButton/TogglePublishButton'
 import { ToggleOpenToWork } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ToggleOpenToWork'
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { PublishingState } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
 import styles from './ProfileTopBar.module.scss'

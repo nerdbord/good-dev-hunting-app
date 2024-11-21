@@ -7,7 +7,7 @@ import {
 } from '@/app/[locale]/(profile)/profile.mappers'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import { countries } from '@/data/countries'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Avatar } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
 import styles from './UserProfileMain.module.scss'
