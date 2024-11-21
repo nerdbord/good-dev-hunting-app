@@ -8,6 +8,7 @@ import classNames from 'classnames/bind'
 import { getTranslations } from 'next-intl/server'
 import { type UserProfileHeaderType } from '../types'
 import styles from './UserProfileHeader.module.scss'
+import { ensureProtocol } from '@/utils/routes'
 
 const cx = classNames.bind(styles)
 
@@ -44,7 +45,7 @@ export default async function UserProfileHeader({
         <div className={styles.socialItemsWrapper}>
           <SocialItems
             githubUsername={profile.githubUsername}
-            linkedIn={profile.linkedIn}
+            linkedInUrl={ensureProtocol(profile.linkedIn || "")}
             isNerdbordConnected={isNerdbordConnected}
           />
         </div>

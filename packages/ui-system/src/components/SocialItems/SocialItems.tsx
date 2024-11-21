@@ -1,9 +1,8 @@
-import { ensureProtocol } from '@/utils/routes'
 import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import { AnchorButton } from '@gdh/ui-system'
 import styles from './SocialItems.module.scss'
 
-export default function SocialItems({
+export function SocialItems({
   githubUsername,
   linkedInUrl,
   isNerdbordConnected,
@@ -21,7 +20,7 @@ export default function SocialItems({
         Github
       </AnchorButton>
       {linkedInUrl && (
-        <AnchorButton href={ensureProtocol(linkedInUrl)} icon={<LinkedIn />}>
+        <AnchorButton href={linkedInUrl} icon={<LinkedIn />}>
           LinkedIn
         </AnchorButton>
       )}
