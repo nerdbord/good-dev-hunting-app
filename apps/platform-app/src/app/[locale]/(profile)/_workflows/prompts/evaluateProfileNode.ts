@@ -12,14 +12,14 @@ Your task is to review the user-submitted applications to ensure they comply wit
   -The BIO does not contain offensive words.
   -The BIO is longer than 10 words.
   -The BIO is written in Polish or English.
-  -The BIO does not contain glaring spelling errors.
+  -The BIO does not contain major errors, such as a major spelling error or many minor spelling errors, mistakes in the names of IT technologies, and names of programming languages.
   -The photo does not contain NSFW elements, pornography, political symbols, or offensive elements.
 </objective>
 
 <rules>
   -If all requirements are met, respond with 'Accept the profile'. 
   -If any requirement is violated, respond with 'Reject the profile' and provide the reason. 
-  -Write the reason for rejecting the profile in the language in which the profile BIO is written.
+  -If you are unsure whether the application meets the criteria, for example, it has minor spelling errors, but fewer than 5 and more than 2 or the photo contains elements that may or may not be considered unacceptable, send the application for further review. Respond with 'Send for manual verfication' and provide the reason.
 </rules>
 
 <examples description="Examples of how you should respond. These showcase how to evaulate users applications">
@@ -67,14 +67,30 @@ Reject the profile. Reason: The BIO contain offensive words.
 
 User:
 <Name> Camille Moreau
-<BIO> "A highly skilled software developer with extensive experience in designing, implementing, and testing cutting-edge applications. Proficient in a variety of programming languages such as JavaScript, Python, and Java.
+<BIO> A highly skilled software developer with extensive experience in designing, implementing, and testing cutting-edge applications. Proficient in a variety of programming languages such as JavaScript, Python, and Java.
 <Avatar description> The image depicts a red and black flag with a white circle in the center, featuring a swastika symbol. The flag's design is divided into four sections by two black lines that intersect at the center, where the swastika 
 is located. The swastika itself is a black symbol with four arms of equal length, arranged in a cross-like pattern. The background of the flag is 
 a deep red color, which provides a striking contrast to the white circle 
 and black swastika. Overall, the image presents a bold and eye-catching design that is likely intended to convey a sense of power or authority.   
 AI:
 Reject the profile. Reason: The photo contains a political symbol (swastika) which is considered an offensive element
-    
+
+User:
+<Name> Karen Kovalsky
+<BIO> With over 50 years of hands-on experience in software development, I have honed my skills in various programming languages including Java, Python, and C++. My expertise lies in designing, implementing, and maintaining robust and scalable applications that meet the highest industry standards.
+<Avatar description> The image depicts a man with dark hair, gazing directly at the camera. His hair is styled in a manner that suggests it may be wet or damp, and he 
+appears to be shirtless. The background of the image is predominantly white, with a subtle shadow cast by the man's head and shoulders. Notably, there are no other individuals or objects visible in the image.
+AI:
+Send for manual verfication. Reason: An incredible amount of years of experience.    
+
+User:
+<Name> Dawid Florian
+<BIO> With a solid foudation in software enginering and over seven yaers of professinal experiance, I excells in deve high-performance webb aplications. My proficency spans accross multiple programing languages, including JavaSscript, Pyton, and PLP, allowing me to delivver inovative sotutioons that drivve buisness sucses. Know for my atention to detale and comitment to writting clean, maintainableecode, I continuosly strive to improve and adapt to new techologies in the fast-paced tech industy
+<Avatar description> The image depicts a man with dark hair, gazing directly at the camera. His hair is styled in a manner that suggests it may be wet or damp, and he 
+appears to be shirtless. The background of the image is predominantly white, with a subtle shadow cast by the man's head and shoulders. Notably, there are no other individuals or objects visible in the image.
+AI:
+Reject the profile. Reason: Multiple serious language errors    
+
 `)
 
 const humanMessage = HumanMessagePromptTemplate.fromTemplate(`
