@@ -96,7 +96,40 @@ const rejectProfileTool = tool(
   },
 )
 
-const tools = [acceptProfileTool, rejectProfileTool]
+const sendForManualVerificationTool = tool(
+  async (input, config: LangGraphRunnableConfig) => {
+    const { reason } = input
+    const profileId = config.configurable?.profileId
+    const currentState =
+      getContextVariable<typeof StateAnnotation.State>('currentState')
+    if (!currentState) {
+      throw new Error('currentState not found')
+    }
+
+    await sendDiscordNotificationToModeratorChannel(
+      `❓❓❓ AI Workflow doesn't know what to do with ${currentState.profile.fullName} profile. ❓❓❓
+      Reason: ${reason}
+      [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
+    )
+
+    return `Discord notification has been sended. profileId: ${profileId} `
+  },
+  {
+    name: 'send_for_manual_verfication',
+    description: 'Send user apply for manual verfication',
+    schema: z.object({
+      reason: z
+        .string()
+        .describe('The reason why did you rejected user profile'),
+    }),
+  },
+)
+
+const tools = [
+  acceptProfileTool,
+  rejectProfileTool,
+  sendForManualVerificationTool,
+]
 
 async function retrieveProfile(
   state: typeof StateAnnotation.State,
@@ -109,7 +142,7 @@ async function retrieveProfile(
 }
 
 const describeAvatar = async (state: typeof StateAnnotation.State) => {
-  const { user } = state.profile
+  const { user, fullName, userId } = state.profile
   const { avatarUrl } = user
 
   const groq = new Groq({
@@ -145,7 +178,13 @@ const describeAvatar = async (state: typeof StateAnnotation.State) => {
 
       return { avatarDescription: chatCompletion.choices[0].message.content }
     } catch (error) {
-      console.error('Wystąpił błąd:', error)
+      await sendDiscordNotificationToModeratorChannel(
+        `❗❗❗ AI Workflow occurred error while evaluating the ${fullName} profile. ❗❗❗
+        [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${userId})`,
+      )
+      throw new Error(
+        'AI Workflow occurred error while evaluating the profile',
+      )
     }
   } else {
     return { avatarDescription: `Blank photo` }
