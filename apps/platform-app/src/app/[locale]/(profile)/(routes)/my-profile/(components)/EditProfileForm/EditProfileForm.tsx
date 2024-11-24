@@ -128,7 +128,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
         ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
-      const savedProfile = await saveMyProfile(updateParams)
+      const savedProfile = await saveMyProfile(updateParams, false)
       savedProfile &&
         updateSession({ ...session?.user, name: savedProfile.fullName })
 

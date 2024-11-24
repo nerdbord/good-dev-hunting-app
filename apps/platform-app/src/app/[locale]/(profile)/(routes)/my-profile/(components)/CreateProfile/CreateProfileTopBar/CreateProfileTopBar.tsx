@@ -25,6 +25,8 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
     (key) => touched[key] && errors[key],
   )
 
+
+
   return (
     <div className={styles.titleBox}>
       <div className={styles.errorWrapper}>

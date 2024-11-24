@@ -41,7 +41,7 @@ const profilePendingFields: EditProfileFormFields[] = [
   // 'employmentTypes',
 ]
 
-export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
+export const saveMyProfile= withSentry(async (payload: ProfileModel, saveWithPublish: boolean) => {
   const { user } = await getAuthorizedUser()
   if (!user) {
     throw new Error('User not found')
@@ -58,7 +58,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   }
 
   const updatedState = hasCommonFields(changedFields, profilePendingFields)
-    ? PublishingState.PENDING
+    ? PublishingState.DRAFT
     : payload.state
 
   const updatedTechStack = payload.techStack.map((tech) => tech.name)
@@ -125,7 +125,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
 
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
 
-  if (updatedProfile.state === PublishingState.PENDING) {
+  if (saveWithPublish && updatedProfile.state === PublishingState.PENDING) {
     await runEvaluateProfileAgent(foundProfile.id)
 
     await sendDiscordNotificationToModeratorChannel(
