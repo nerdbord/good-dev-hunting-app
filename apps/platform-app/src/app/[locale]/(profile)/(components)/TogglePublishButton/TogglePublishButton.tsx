@@ -32,6 +32,7 @@ export const TogglePublishButton = async (props: TogglePublishButtonProps) => {
     }
   }, [])
 
+
   const { loading, runAsync } = useAsyncAction()
 
   const handleButtonClick = async () => {
@@ -58,15 +59,11 @@ export const TogglePublishButton = async (props: TogglePublishButtonProps) => {
         throw Error('Wrong profile action')
     }
   }
-
-  // console.log(`\n\n\nTUTEJ`);
-  // console.log(showPopup);
-  // console.log(`TUTEJ\n\n\n`);
   
 
   return (
     <div>
-      {showPopup && (
+      {showPopup && state !== PublishingState.DRAFT && state !== PublishingState.PENDING && (
         <VerificationModal
           profileStatus={state}
           rejectionReason={lastRejectionReason}
