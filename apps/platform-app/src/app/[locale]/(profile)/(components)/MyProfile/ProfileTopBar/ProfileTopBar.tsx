@@ -17,9 +17,7 @@ interface ProfileTopBarProps {
 const ProfileTopBar = async (props: ProfileTopBarProps) => {
   const t = await getTranslations(I18nNamespaces.Index)
   const profile = await findProfileById(props.profileId)
-  const reason = await findLatestRejectionReason(props.profileId)
-  console.log(" ASDASDASDASDASDAS ",reason);
-  
+  const reason = await findLatestRejectionReason(props.profileId)  
 
   const isPending = profile.state === PublishingState.PENDING
   const isRejected = profile.state === PublishingState.REJECTED
@@ -71,7 +69,7 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
           <TogglePublishButton
             state={profile.state}
             profileId={props.profileId}
-            lastRejectionReason={reason}
+            lastRejectionReason={isRejected ? reason : ""}
           />
         </div>
       </div>
