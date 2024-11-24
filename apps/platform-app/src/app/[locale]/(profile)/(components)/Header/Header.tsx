@@ -17,9 +17,9 @@ import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBt
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
+import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
+import { ThemeWrapper } from '../ThemeSwitcher/ThemeWrapper'
 import styles from './Header.module.scss'
-import { Switch } from './Switch'
-import { ThemeWrapper } from './ThemeWrapper'
 
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
@@ -159,9 +159,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               </Link>
               <GitHubStarsButton />
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Switch />
-            </div>
             <nav>
               <ul
                 className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
@@ -170,6 +167,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               </ul>
               <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
                 {renderDesktopContent()}
+                <ThemeSwitcher />
               </ul>
             </nav>
           </div>

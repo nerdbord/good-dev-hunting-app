@@ -33,12 +33,12 @@
   gap: $spacing-2;
   padding: 12px 20px;
   border: 1px solid #2a2f35;
-  background: #0f1217;
+  background-color: var(--bg-color);
   text-align: center;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #e2eaf1;
+  color: var(--text-color);
 
   @include mobile {
     max-width: 201px;
