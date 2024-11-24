@@ -1,0 +1,59 @@
+.theme {
+    transition: all 0.3s ease;
+    min-height: 100%; 
+    width: 100%;
+  
+    &.light {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --button-bg: #f0f0f0;
+      --button-text: #000000;
+      --nav-text: #000000;
+      --link-color: #000000;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+  
+    &.dark {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --button-bg: #333333;
+      --button-text: #ffffff;
+      --nav-text: #ffffff;
+      --link-color: #ffffff;
+      background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+  }
+
+  .switch {
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    padding: 0;
+    
+    &[data-dark="true"] {
+      background-color: #4caf50;
+    }
+  }
+  
+  .slider {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 5px;
+    transition: transform 0.2s ease;
+    
+    &.sliderDark {
+      transform: translateX(20px);
+    }
+  }
+  

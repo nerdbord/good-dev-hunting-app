@@ -2,13 +2,13 @@
 
 import { useThemeStore } from '@/hooks/useThemeStore'
 import React from 'react'
-import styles from './Header.module.scss'
+import styles from './ThemeSwitcher.module.scss'
 
 type SwitchProps = {
   className?: string
 }
 
-export const Switch: React.FC<SwitchProps> = ({ className }) => {
+export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
   const { isDarkTheme, toggleTheme } = useThemeStore()
 
   return (

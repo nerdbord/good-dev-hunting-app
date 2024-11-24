@@ -1,27 +1,8 @@
-.theme {
-  transition: background-color 0.3s ease;
-  min-height: 100%; 
-  width: 100%;
-
-  &.light {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    background-color: var(--bg-color);
-  }
-
-  &.dark {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    background-color: var(--bg-color);
-  }
-}
-
 .hideOnDesktop {
   display: none;
 }
 .wrapper {
   height: min-content;
-  // background: #04080d;
   padding: 24px 0;
   width: 100%;
   z-index: 99;
@@ -33,38 +14,6 @@
     z-index: 5;
   }
 }
-
-.switch {
-  display: inline-block;
-  width: 50px;
-  height: 25px;
-  background-color: #ccc;
-  border-radius: 25px;
-  cursor: pointer;
-  position: relative;
-  border: none;
-  padding: 0;
-  
-  &[data-dark="true"] {
-    background-color: #4caf50;
-  }
-}
-
-.slider {
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 2.5px;
-  left: 5px;
-  transition: transform 0.2s ease;
-  
-  &.sliderDark {
-    transform: translateX(20px);
-  }
-}
-
 
 .headerContent {
   position: relative;
@@ -135,6 +84,22 @@
     }
   }
 }
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  
+  ul {
+    display: flex;
+    align-items: center;
+    margin: 0; 
+    padding: 0;
+    list-style: none; 
+  }
+}
+ 
 
 .starsMobile {
   display: flex;

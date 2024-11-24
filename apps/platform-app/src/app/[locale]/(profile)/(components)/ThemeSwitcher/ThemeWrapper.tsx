@@ -3,7 +3,7 @@
 import { useThemeStore } from '@/hooks/useThemeStore'
 import type { ReactNode } from 'react'
 import React from 'react'
-import styles from './Header.module.scss'
+import styles from './ThemeSwitcher.module.scss'
 
 interface ThemeWrapperProps {
   children: ReactNode
