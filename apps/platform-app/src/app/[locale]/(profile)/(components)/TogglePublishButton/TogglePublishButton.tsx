@@ -4,7 +4,7 @@ import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePubli
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types'
@@ -23,7 +23,14 @@ interface TogglePublishButtonProps {
 export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [showPopup, setShowPopup] = useState(false)
+  const [rejectionReason, setRejectionReason] = useState<string | null>(null)
   const { profileId, state } = props
+
+  useEffect(()=>{
+    if (state === PublishingState.REJECTED) {
+      setShowPopup(true)
+    }
+  }, [])
 
   const { loading, runAsync } = useAsyncAction()
 
@@ -52,9 +59,14 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
     }
   }
 
+  console.log(`\n\n\nTUTEJ`);
+  console.log(showPopup);
+  console.log(`TUTEJ\n\n\n`);
+  
+
   return (
     <div>
-      {showPopup && !loading && (
+      {showPopup && (
         <VerificationModal
           profileStatus={state}
           onClose={async () => setShowPopup(false)}

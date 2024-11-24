@@ -178,5 +178,11 @@
     "title": "Finish your Profile to Save",
     "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
     "cancelBtn": "Finish Profile"
+  },
+  "VerificationModal": {
+    "approvedText": "Your profile is now up and running. Potential partnerships will contact via email. Make sure you’re accepting all external messages!",
+    "approvedHeader": "Congratulations",
+    "rejectedText": "On your email we’ve sent you a message with information what you can improve to have your profile acceted.",
+    "rejectedHeader": "Your profile was rejected"
   }
 }
