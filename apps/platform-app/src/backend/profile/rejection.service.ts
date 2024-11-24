@@ -17,3 +17,9 @@ export async function deleteRejectingReason(id: string) {
     },
   })
 }
+
+export async function getRejectionReason(id: string) {
+  const reason = await prisma.rejectionReason.findFirst()
+
+  return reason;
+}

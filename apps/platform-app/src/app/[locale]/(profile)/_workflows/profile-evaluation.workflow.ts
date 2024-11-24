@@ -20,6 +20,7 @@ import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
 import { z } from 'zod'
 import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
 import { executeDecisionPrompt } from './prompts/executeDecisionNode'
+import { saveRejectingReason } from '@/backend/profile/rejection.service'
 
 const StateAnnotation = Annotation.Root({
   profile: Annotation<ProfileWithRelations>(),
@@ -77,6 +78,7 @@ const rejectProfileTool = tool(
     }
 
     updateProfileById(profileId, { state: 'REJECTED' })
+    saveRejectingReason(profileId, reason)
     sendProfileRejectedEmail(currentState.profile.user.email, reason)
     await sendDiscordNotificationToModeratorChannel(
       `⛔️ AI Workflow has rejected ${currentState.profile.fullName} profile. Reason: ${reason} [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
