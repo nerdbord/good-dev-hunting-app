@@ -24,6 +24,7 @@ import { executeDecisionPrompt } from './prompts/executeDecisionNode'
 const StateAnnotation = Annotation.Root({
   profile: Annotation<ProfileWithRelations>(),
   evaluation: Annotation<string>(),
+  rejectionReason: Annotation<string>()
 })
 
 const evaluationModel = new ChatGroq({
