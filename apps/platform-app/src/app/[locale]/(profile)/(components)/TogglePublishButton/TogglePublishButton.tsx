@@ -18,14 +18,14 @@ import VerificationModal from '../VerificationModal/VerificationModal'
 interface TogglePublishButtonProps {
   profileId: string
   state: PublishingState
+  lastRejectionReason: string
 }
 
-export const TogglePublishButton = (props: TogglePublishButtonProps) => {
+export const TogglePublishButton = async (props: TogglePublishButtonProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [showPopup, setShowPopup] = useState(false)
-  const [rejectionReason, setRejectionReason] = useState<string | null>(null)
-  const { profileId, state } = props
-
+  const { profileId, state, lastRejectionReason } = props
+  
   useEffect(()=>{
     if (state === PublishingState.REJECTED) {
       setShowPopup(true)
@@ -59,9 +59,9 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
     }
   }
 
-  console.log(`\n\n\nTUTEJ`);
-  console.log(showPopup);
-  console.log(`TUTEJ\n\n\n`);
+  // console.log(`\n\n\nTUTEJ`);
+  // console.log(showPopup);
+  // console.log(`TUTEJ\n\n\n`);
   
 
   return (
@@ -69,6 +69,7 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
       {showPopup && (
         <VerificationModal
           profileStatus={state}
+          rejectionReason={lastRejectionReason}
           onClose={async () => setShowPopup(false)}
         />
       )}
