@@ -18,6 +18,8 @@ import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
 import styles from './Header.module.scss'
+import { Switch } from './Switch'
+import { ThemeWrapper } from './ThemeWrapper'
 
 interface HeaderProps {
   buttonsVariant?: 'main' | 'profiles' | 'signin'
@@ -146,27 +148,34 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     }
   }
   return (
-    <header className={styles.wrapper}>
-      <Container>
-        <div className={styles.headerContent}>
-          <div className={styles.logoAndGhStarsWrapper}>
-            <Link href={AppRoutes.home} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <h1 className={styles.title}>Good Dev Hunting</h1>
-            </Link>
-            <GitHubStarsButton />
+    <ThemeWrapper>
+      <header id="main-header" className={styles.wrapper}>
+        <Container>
+          <div className={styles.headerContent}>
+            <div className={styles.logoAndGhStarsWrapper}>
+              <Link href={AppRoutes.home} className={styles.logo}>
+                <img src={logo.src} alt="Logo" />
+                <h1 className={`${styles.title}`}>Good Dev Hunting</h1>
+              </Link>
+              <GitHubStarsButton />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Switch />
+            </div>
+            <nav>
+              <ul
+                className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
+              >
+                {renderMobileContent()}
+              </ul>
+              <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
+                {renderDesktopContent()}
+              </ul>
+            </nav>
           </div>
-          <nav>
-            <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
-              {renderMobileContent()}
-            </ul>
-            <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
-              {renderDesktopContent()}
-            </ul>
-          </nav>
-        </div>
-      </Container>
-    </header>
+        </Container>
+      </header>
+    </ThemeWrapper>
   )
 }
 
