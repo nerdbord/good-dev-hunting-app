@@ -14,10 +14,10 @@ import {
 } from '@/backend/profile/profile.service'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { analyzeImage } from '@/services/groq.service'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { tool } from '@langchain/core/tools'
 import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
-import Groq from 'groq-sdk'
 import { z } from 'zod'
 import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
 import { executeDecisionPrompt } from './prompts/executeDecisionNode'
@@ -145,46 +145,20 @@ const describeAvatar = async (state: typeof StateAnnotation.State) => {
   const { user, fullName, userId } = state.profile
   const { avatarUrl } = user
 
-  const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY || '',
-  })
-
   if (avatarUrl) {
     try {
-      const chatCompletion = await groq.chat.completions.create({
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'text',
-                text: `What is on the photo, Describe it in one paragraph`,
-              },
-              {
-                type: 'image_url',
-                image_url: {
-                  url: avatarUrl,
-                },
-              },
-            ],
-          },
-        ],
-        model: 'llama-3.2-90b-vision-preview',
-        temperature: 0.5,
-        max_tokens: 1024,
-        stream: false,
-        stop: null,
-      })
-
-      return { avatarDescription: chatCompletion.choices[0].message.content }
+      const avatarDescription = await analyzeImage(
+        avatarUrl,
+        `What is on the photo, Describe it in one paragraph`,
+      )
+      
+      return { avatarDescription }
     } catch (error) {
       await sendDiscordNotificationToModeratorChannel(
         `❗❗❗ AI Workflow occurred error while evaluating the ${fullName} profile. ❗❗❗
         [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${userId})`,
       )
-      throw new Error(
-        'AI Workflow occurred error while evaluating the profile',
-      )
+      throw new Error('AI Workflow occurred error while evaluating the profile')
     }
   } else {
     return { avatarDescription: `Blank photo` }
