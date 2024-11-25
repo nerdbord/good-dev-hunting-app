@@ -7,9 +7,7 @@ const apiClient = new GoodDevHuntingAPIClient();
 export const searchProfileTool = tool(
     async ({ query }) => {
         try {
-
             const profiles = await apiClient.searchProfiles(query);
-
             // Return the search results with both the SQL and the results
             return JSON.stringify({
                 executedQuery: query,

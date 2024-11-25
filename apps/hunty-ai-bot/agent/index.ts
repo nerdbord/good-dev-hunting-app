@@ -31,8 +31,8 @@ export class AIAgent {
         //     tool_choice: 'auto',
         // });
 
-        const model = new ChatOpenAI({
-            model: 'gpt-4o-mini',
+        const model = new ChatGroq({
+            model: 'llama3-groq-70b-8192-tool-use-preview',
             temperature: 0,
         }).bindTools(profileTools, {
             tool_choice: 'auto',
