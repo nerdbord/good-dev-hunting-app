@@ -1,19 +1,20 @@
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
-import { GoodDevHuntingAPIClient, SearchParamsSchema } from '../../libs/gdh-api.client';
-
+import { GoodDevHuntingAPIClient } from '../../libs/gdh-api.client';
 
 const apiClient = new GoodDevHuntingAPIClient();
 
-
 export const searchProfileTool = tool(
-    async (params) => {
+    async ({ query }) => {
         try {
 
-            const profiles = await apiClient.searchProfiles(params);
+            const profiles = await apiClient.searchProfiles(query);
 
-            // Return the search results
-            return JSON.stringify(profiles, null, 2);
+            // Return the search results with both the SQL and the results
+            return JSON.stringify({
+                executedQuery: query,
+                results: profiles
+            }, null, 2);
         } catch (error) {
             console.error('Search profile error:', error);
             return "Failed to search profiles";
@@ -21,8 +22,59 @@ export const searchProfileTool = tool(
     },
     {
         name: "searchProfile",
-        description: "Use this tool to search for developers based on structured search parameters. Use only data provided by user to return proper search parameters. Do not hallucinate with search params that can not be reasoned from user query.",
-        schema: SearchParamsSchema
+        description: `
+        You are an expert SQL developer that helps search for profiles by generating and executing SQL queries.
+
+        <objective>
+        Generate and execute SQL queries to search for profiles when users ask questions about developers.
+        </objective>
+
+        <rules>
+        - ALWAYS USE THIS TOOL to execute the SQL query, don't just return the SQL.
+        - Generate valid SQL queries based on user questions about developers.
+        - Only use SELECT queries, no INSERT, UPDATE or DELETE.
+        - Make queries case-insensitive (e.g., "Frontend" and "frontend" should match).
+        - When searching for technologies, always join with the Technology table.
+        - Return both the executed query and the results.
+        </rules>
+
+        `,
+        schema: z.object({
+            query: z.string().describe(`
+                SQL query to search for profiles.
+                Must be a SELECT query.
+                Will be executed against the database.
+
+                <database_schema>
+                ${Bun.file(new URL('../data/prisma-db-schema.txt', import.meta.url)).text()}
+                </database_schema>
+
+                <examples>
+                User: "Find me frontend developers"
+                AI Action: "SELECT DISTINCT p.* FROM \"Profile\" p WHERE LOWER(p.position) LIKE LOWER('%frontend%')"
+
+                User: "Show me TypeScript developers"
+                AI Action: "SELECT DISTINCT p.* FROM \"Profile\" p 
+                INNER JOIN \"_ProfileToTechnology\" pt ON p.id = pt.\"A\" 
+                INNER JOIN \"Technology\" t ON t.id = pt.\"B\" 
+                WHERE LOWER(t.name) = LOWER('TypeScript')"
+
+                User: "Find fullstack developers who know TypeScript and React"
+                AI Action: "SELECT DISTINCT p.* FROM \"Profile\" p 
+                INNER JOIN \"_ProfileToTechnology\" pt ON p.id = pt.\"A\" 
+                INNER JOIN \"Technology\" t ON t.id = pt.\"B\" 
+                WHERE LOWER(p.position) LIKE LOWER('%fullstack%')
+                AND p.id IN (
+                    SELECT p2.id FROM \"Profile\" p2 
+                    INNER JOIN \"_ProfileToTechnology\" pt2 ON p2.id = pt2.\"A\" 
+                    INNER JOIN \"Technology\" t2 ON t2.id = pt2.\"B\" 
+                    WHERE LOWER(t2.name) IN (LOWER('TypeScript'), LOWER('React'))
+                    GROUP BY p2.id 
+                    HAVING COUNT(DISTINCT t2.name) = 2
+                )"
+                </examples>
+            `),
+        }),
     }
 );
 

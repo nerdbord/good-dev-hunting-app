@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// npx prisma studio
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id             String         @id @default(uuid())
+  email          String         @unique
+  emailVerified  DateTime?
+  avatarUrl      String?
+  accounts       Account[]
+  profile        Profile?
+  githubDetails  GitHubDetails?
+  roles          Role[]         @default([USER])
+  nerdbordUserId String?        @unique
+  createdAt      DateTime       @default(now())
+  viewedProfiles ProfileView[]
+  contactRequests ContactRequest[]
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Profile {
+  id                       String            @id @default(uuid())
+  user                     User              @relation(fields: [userId], references: [id])
+  userId                   String            @unique
+  fullName                 String
+  linkedIn                 String?
+  bio                      String
+  country                  Country           @relation(fields: [countryId], references: [id])
+  countryId                String
+  openForCountryRelocation Boolean           @default(false)
+  city                     City              @relation(fields: [cityId], references: [id])
+  cityId                   String
+  openForCityRelocation    Boolean           @default(false)
+  remoteOnly               Boolean
+  position                 String
+  seniority                String
+  isOpenForWork            Boolean           @default(true)
+  techStack                Technology[]
+  employmentTypes          EmploymentType[]
+  state                    PublishingState   @default(DRAFT)
+  rejectionReasons         RejectionReason[]
+  contactRequests          ContactRequest[]
+  viewCount                Int               @default(0)
+  hourlyRateMin            Int               @default(0)
+  hourlyRateMax            Int               @default(0)
+  currency                 Currency          @default(PLN)
+  createdAt                DateTime          @default(now())
+  updatedAt                DateTime?         @updatedAt
+  profileViews             ProfileView[]
+  language                 Language[]        
+}
+
+model Technology {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  profiles Profile[]
+}
+
+model GitHubDetails {
+  id       String @id @default(uuid())
+  username String @unique
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @unique
+}
+
+model Country {
+  id      String    @id @unique @default(uuid())
+  name    String    @unique
+  profile Profile[]
+}
+
+model City {
+  id      String    @id @default(uuid())
+  name    String    @unique
+  profile Profile[]
+}
+
+model RejectionReason {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  profileId String
+  reason    String
+  createdAt DateTime @default(now())
+}
+
+model ContactRequest {
+  id             String   @id @default(uuid())
+  subject        String
+  message        String
+  senderFullName String
+  senderEmail    String
+  senderId       String?
+  sender         User?     @relation(fields: [senderId], references: [id])
+  profile        Profile  @relation(fields: [profileId], references: [id])
+  profileId      String
+  createdAt      DateTime @default(now())
+}
+
+model ProfileView {
+  id                 String   @id @default(uuid())
+  viewerId           String
+  viewedProfileId    String
+  createdAt          DateTime @default(now())
+  viewer             User     @relation(fields: [viewerId], references: [id])
+  viewedProfile      Profile  @relation(fields: [viewedProfileId], references: [id])
+}
+
+model Language {
+  id                 String     @id @default(uuid())
+  name               String     @unique
+  profiles           Profile[]  
+}
+
+enum Currency {
+   PLN
+   EUR
+   USD
+ }
+ 
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+}
+
+enum Role {
+  USER
+  MODERATOR
+  TEAM
+  SPECIALIST
+  HUNTER
+}
+
+enum PublishingState {
+  DRAFT
+  PENDING
+  APPROVED
+  REJECTED
+}

@@ -1,34 +1,5 @@
 import { z } from "zod";
 
-export const SearchParamsSchema = z.object({
-    techStack: z.array(z.string()).optional().describe("A list of technologies. Use only technologies that are mentioned in user query. Do not hallucinate and do not add any technologies that are not mentioned in user query."),
-    position: z.enum([
-        "Frontend",
-        "Backend",
-        "Fullstack",
-        "Mobile",
-        "DevOps",
-        "QA",
-        "PM",
-        "DataScience",
-        "GameDev",
-        "VR_AR",
-        "UX_UI",
-        "Crypto",
-        "CyberSecurity",
-        "SysAdmin",
-        "UX_Designer",
-        "UX_Researcher",
-        "UX_Writer",
-        "UI_Designer",
-        "UX_UI_Designer",
-        "Product_Designer",
-    ])
-        .optional()
-        .describe("Use only specializations that are mentioned in user query. Do not hallucinate and do not add any specializations that are not mentioned in user query."),
-})
-
-export type SearchParamsType = z.infer<typeof SearchParamsSchema>;
 
 export class GoodDevHuntingAPIClient {
     private baseUrl: string;
@@ -60,14 +31,14 @@ export class GoodDevHuntingAPIClient {
         return response.json();
     }
 
-    async searchProfiles(params: SearchParamsType) {
-        const profiles = await this.req(`${this.baseUrl}/profiles/search`, {
+    async searchProfiles(query: string) {
+        const profiles = await this.req('/profiles/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.apiKey}`,
             },
-            body: JSON.stringify({ params }),
+            body: JSON.stringify({ query }),
         });
 
         return profiles;
