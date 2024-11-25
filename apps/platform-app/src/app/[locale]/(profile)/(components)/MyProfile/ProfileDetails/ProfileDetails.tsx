@@ -1,5 +1,7 @@
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
+import { PublishingState } from '@prisma/client'
+import { findLatestRejectionReason } from '../../../_actions/queries/findLatestRejectionReason'
 import { EditProfileButton } from '../../EditProfileButton'
 import { TogglePublishButton } from '../../TogglePublishButton/TogglePublishButton'
 import styles from './ProfileDetails.module.scss'
@@ -10,6 +12,9 @@ interface ProfileDetailsProps {
 
 const ProfileDetails = async (props: ProfileDetailsProps) => {
   const profile = await findProfileById(props.profileId)
+  const isRejected = profile.state === PublishingState.REJECTED
+  const reason = await findLatestRejectionReason(props.profileId)
+
   const sortedLanguages =
     profile?.language.sort((a, b) => a.name.localeCompare(b.name)) || []
   const sortedTechStack =
@@ -20,7 +25,11 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
       <section className={styles.container}>
         <div className={styles.mobileView}>
           <EditProfileButton />
-          <TogglePublishButton state={profile.state} profileId={profile.id} />
+          <TogglePublishButton
+            state={profile.state}
+            profileId={profile.id}
+            lastRejectionReason={isRejected ? reason : ''}
+          />
         </div>{' '}
         <div className={styles.left}>
           <div className={styles.techStack}>
