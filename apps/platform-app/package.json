@@ -32,6 +32,7 @@
     "@vercel/postgres": "^0.4.1",
     "eslint-config-next": "13.4.4",
     "formik": "^2.4.2",
+    "groq-sdk": "^0.8.0",
     "mailersend": "^2.3.0",
     "material-icons": "^1.13.8",
     "next": "^15.0.2",
