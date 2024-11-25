@@ -1,16 +1,16 @@
-'use client'
-import React from 'react'
-import styles from './Switch.module.scss'
+"use client";
+import React from "react";
+import styles from "./Switch.module.scss";
 
 interface SwitchProps {
-  id: string
-  label: string
-  checked: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  name: string
-  dataTestId?: string
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
-  children?: React.ReactNode
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  dataTestId?: string;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  children?: React.ReactNode;
 }
 
 export const Switch: React.FC<SwitchProps> = ({
@@ -23,16 +23,16 @@ export const Switch: React.FC<SwitchProps> = ({
   onBlur,
   children,
 }) => {
-  const [isChecked, setIsChecked] = React.useState(checked)
+  const [isChecked, setIsChecked] = React.useState(checked);
 
   React.useEffect(() => {
-    setIsChecked(checked)
-  }, [checked])
+    setIsChecked(checked);
+  }, [checked]);
 
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(!isChecked)
-    onChange(event)
-  }
+    setIsChecked(!isChecked);
+    onChange(event);
+  };
 
   return (
     <div className={styles.switchLabel} data-testid={dataTestId}>
@@ -51,5 +51,5 @@ export const Switch: React.FC<SwitchProps> = ({
         <span className={styles.slider}></span>
       </label>
     </div>
-  )
-}
+  );
+};

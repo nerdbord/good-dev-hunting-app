@@ -151,7 +151,7 @@ const describeAvatar = async (state: typeof StateAnnotation.State) => {
         avatarUrl,
         `What is on the photo, Describe it in one paragraph`,
       )
-      
+
       return { avatarDescription }
     } catch (error) {
       await sendDiscordNotificationToModeratorChannel(

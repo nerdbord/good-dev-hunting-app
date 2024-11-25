@@ -1,6 +1,6 @@
 import { ensureProtocol } from '@/utils/routes'
-import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import { AnchorButton } from '@gdh/ui-system'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import styles from './SocialItems.module.scss'
 
 export default function SocialItems({
@@ -27,9 +27,7 @@ export default function SocialItems({
       )}
 
       {githubUsername && isNerdbordConnected && (
-        <AnchorButton
-        href={`https://nerdbord.io/p/${githubUsername}`}
-        >
+        <AnchorButton href={`https://nerdbord.io/p/${githubUsername}`}>
           Portfolio↗︎
         </AnchorButton>
       )}

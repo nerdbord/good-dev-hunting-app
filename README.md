@@ -28,21 +28,22 @@
 
 ### Key Features ✨
 
-* <b>Advanced Filtering:</b> Sort candidates by technology, seniority, availability, location, and skill area.
-* <b>Customizable Developer Profiles:</b> 1500-character BIOs allowing developers to showcase their unique skills and experiences.
-* <b>Direct Communication:</b> Engage with developers directly through the platform.
-* <b>Professional Networking:</b> We make sure that the platform is filled with only quality candidates that are being moderated manually by our team.
+- <b>Advanced Filtering:</b> Sort candidates by technology, seniority, availability, location, and skill area.
+- <b>Customizable Developer Profiles:</b> 1500-character BIOs allowing developers to showcase their unique skills and experiences.
+- <b>Direct Communication:</b> Engage with developers directly through the platform.
+- <b>Professional Networking:</b> We make sure that the platform is filled with only quality candidates that are being moderated manually by our team.
 
 ---
 
 ### Technologies Used 🛠️
 
-* Next.js
-* TypeScript
-* Prisma
-* Sass
+- Next.js
+- TypeScript
+- Prisma
+- Sass
 
 ---
+
 ### Setup Instructions 🛠️
 
 1. Install dependencies with `npm install`.
@@ -51,12 +52,16 @@
 4. Run `npm run dev` to start the development server.
 
 ---
+
 ### Community and Contributions 👥
+
 You can use one of these channels to ask a question:
-* [Discord](https://discord.gg/KRmMpxgGKv) - discussion with the Community and support.
-* [GitHub repository](https://github.com/nerdbord/good-dev-hunting-app) - Bug reports, contributions.
+
+- [Discord](https://discord.gg/KRmMpxgGKv) - discussion with the Community and support.
+- [GitHub repository](https://github.com/nerdbord/good-dev-hunting-app) - Bug reports, contributions.
 
 ---
+
 ### License & Trademarks 🪪
 
 Good Dev Hunting is open source under the GNU General Public License Version 3 or any later version. You can find it here.

@@ -21,6 +21,6 @@ export const Default: Story = {
   args: {
     githubUsername: "Sumick",
     isNerdbordConnected: false,
-    linkedInUrl: "https://www.linkedin.com/in/jwasowski/"
+    linkedInUrl: "https://www.linkedin.com/in/jwasowski/",
   },
 };
