@@ -1,7 +1,7 @@
 'use client'
 
 import { I18nNamespaces } from '@/i18n'
-import { Button } from '@gdh/ui-system'
+import { Accordion, Button } from '@gdh/ui-system'
 import { GithubIcon } from '@gdh/ui-system/icons'
 import { PublishingState } from '@prisma/client'
 import { useTranslations } from 'next-intl'
@@ -16,7 +16,7 @@ interface VerificationModalProps {
 export default async function VerificationModal({
   profileStatus,
   onClose,
-  rejectionReason
+  rejectionReason,
 }: VerificationModalProps) {
   const t = useTranslations(I18nNamespaces.VerificationModal)
 
@@ -35,7 +35,9 @@ export default async function VerificationModal({
       <div className={styles.container} data-testid="publishProfilePopup">
         <h2 className={styles.header}>{headerText}</h2>
         <span className={styles.text}>{bodyText}</span>
-        {profileStatus === PublishingState.REJECTED && rejectionReason && <span className={styles.text}>Rejection reason: {rejectionReason}</span>}
+        {profileStatus === PublishingState.REJECTED && rejectionReason && (
+          <Accordion title={'Show rejection reason'}>{rejectionReason}</Accordion>
+        )}
         <Button onClick={onClose} variant="primary">
           Confirm
           <GithubIcon />

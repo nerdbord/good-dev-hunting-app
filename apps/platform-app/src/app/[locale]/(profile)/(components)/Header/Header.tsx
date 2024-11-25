@@ -127,6 +127,10 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     }
   }
 
+  console.log(`\nDUPA BISKUPA`);
+  console.log(`\nDUPA BISKUPA`);
+  
+
   return (
     <header className={styles.wrapper}>
       <Container>
