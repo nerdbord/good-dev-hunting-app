@@ -41,7 +41,7 @@ const profilePendingFields: EditProfileFormFields[] = [
   // 'employmentTypes',
 ]
 
-export const saveMyProfile= withSentry(async (payload: ProfileModel, saveWithPublish: boolean) => {
+export const saveMyProfile= withSentry(async (payload: ProfileModel, options?: {saveWithPublish: boolean}) => {
   const { user } = await getAuthorizedUser()
   if (!user) {
     throw new Error('User not found')
@@ -125,7 +125,7 @@ export const saveMyProfile= withSentry(async (payload: ProfileModel, saveWithPub
 
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
 
-  if (saveWithPublish && updatedProfile.state === PublishingState.PENDING) {
+  if (options?.saveWithPublish && updatedProfile.state === PublishingState.PENDING) {
     await runEvaluateProfileAgent(foundProfile.id)
 
     await sendDiscordNotificationToModeratorChannel(

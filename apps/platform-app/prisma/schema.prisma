@@ -74,7 +74,6 @@ model Profile {
   techStack                Technology[]
   employmentTypes          EmploymentType[]
   state                    PublishingState   @default(DRAFT)
-  wasApprovalModalShown    Boolean           @default(false)
   rejectionReasons         RejectionReason[]
   contactRequests          ContactRequest[]
   viewCount                Int               @default(0)

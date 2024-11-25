@@ -18,7 +18,7 @@ export async function deleteRejectingReason(id: string) {
   })
 }
 
-export async function getRejectionReason(profileId: string) {
+export async function getLatestRejectionReason(profileId: string) {
   const reason = await prisma.rejectionReason.findMany({
    where: {
     profileId: profileId
