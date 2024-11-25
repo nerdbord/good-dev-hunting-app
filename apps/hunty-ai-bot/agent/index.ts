@@ -23,7 +23,6 @@ export class AIAgent {
 
         const toolNode = new ToolNode(profileTools);
 
-
         // const model = new ChatOpenAI({
         //     model: 'gpt-4o-mini',
         //     temperature: 0,
@@ -98,8 +97,6 @@ export class AIAgent {
                 },
                 { configurable: { thread_id: threadId } }
             );
-
-            console.log('finalState', finalState);
 
             return finalState.messages[finalState.messages.length - 1].content;
         } catch (error) {
