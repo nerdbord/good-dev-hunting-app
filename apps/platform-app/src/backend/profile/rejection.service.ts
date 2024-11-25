@@ -18,10 +18,10 @@ export async function deleteRejectingReason(id: string) {
   })
 }
 
-export async function getRejectionReason(id: string) {
+export async function getRejectionReason(profileId: string) {
   const reason = await prisma.rejectionReason.findMany({
    where: {
-    profileId: id
+    profileId: profileId
    },
    orderBy: {
     createdAt: 'desc'

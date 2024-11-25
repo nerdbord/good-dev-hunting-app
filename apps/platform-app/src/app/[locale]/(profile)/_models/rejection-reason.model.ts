@@ -1,4 +1,4 @@
-import { RejectionReason } from "@prisma/client"
+import type { RejectionReason } from "@prisma/client"
 
 interface RejectionReasonModel {
     rejectionReason: string
