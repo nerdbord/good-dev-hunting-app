@@ -126,11 +126,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
         return mainMobileButtons
     }
   }
-
-  console.log(`\nDUPA BISKUPA`);
-  console.log(`\nDUPA BISKUPA`);
-  
-
   return (
     <header className={styles.wrapper}>
       <Container>
