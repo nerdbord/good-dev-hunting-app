@@ -1,6 +1,3 @@
-import { z } from "zod";
-
-
 export class GoodDevHuntingAPIClient {
     private baseUrl: string;
     private apiKey: string;
@@ -29,19 +26,6 @@ export class GoodDevHuntingAPIClient {
         }
 
         return response.json();
-    }
-
-    async searchProfiles(query: string) {
-        const profiles = await this.req('/profiles/search', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.apiKey}`,
-            },
-            body: JSON.stringify({ query }),
-        });
-
-        return profiles;
     }
 
     // Add other methods for profile operations
