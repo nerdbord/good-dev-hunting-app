@@ -110,7 +110,8 @@
     "policyOne": "I have read and accept",
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
-    "joinAsAHunter": "Join as a Hunter"
+    "joinAsAHunter": "Join as a Hunter",
+    "loginWithLinkedin": "Login with LinkedIn"
   },
 
   "PersonalInfo": {

@@ -11,8 +11,8 @@ const LoginDev = () => {
     <Box>
       <h2>{t('title')}</h2>
       <p>{t('description')}</p>
-      <GithubLoginButton label={t('loginWithGithub')} />
-      <LinkedInLoginButton label={t('loginWithLinkedin')} />
+      <GithubLoginButton label={t('loginWithGithub')} role="SPECIALIST" />
+      <LinkedInLoginButton label={t('loginWithLinkedin')} role="SPECIALIST" />
     </Box>
   )
 }

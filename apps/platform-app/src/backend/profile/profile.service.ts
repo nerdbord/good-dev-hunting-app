@@ -150,29 +150,6 @@ export const findGithubUsernameByProfileId = async (
   return profile.user.githubDetails.username
 }
 
-export const findLinkedinUsernameByProfileId = async (
-  profileId: Profile['id'],
-) => {
-  const profile = await prisma.profile.findFirst({
-    where: {
-      id: profileId,
-    },
-    include: {
-      user: {
-        include: {
-          linkedinDetails: true,
-        },
-      },
-    },
-  })
-
-  if (!profile?.user.linkedinDetails?.username) {
-    return null
-  }
-
-  return profile.user.linkedinDetails.username
-}
-
 export async function findProfileById(id: string) {
   const profile = await prisma.profile.findFirst({
     where: { id },
@@ -202,19 +179,6 @@ export async function getProfileByUserId(userId: string) {
 export async function getProfileByGithubUsername(username: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { githubDetails: { username } } },
-    include: includeObject.include,
-  })
-
-  if (profile) {
-    return profile
-  }
-
-  return null
-}
-
-export async function getProfileByLinkedinUsername(username: string) {
-  const profile = await prisma.profile.findFirst({
-    where: { user: { linkedinDetails: { username } } },
     include: includeObject.include,
   })
 
@@ -257,7 +221,6 @@ export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
     user: {
       include: {
         githubDetails: true,
-        linkedinDetails: true,
       },
     },
     country: true,

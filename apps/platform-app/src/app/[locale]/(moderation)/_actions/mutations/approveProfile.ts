@@ -4,7 +4,6 @@ import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.mod
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import {
   findGithubUsernameByProfileId,
-  findLinkedinUsernameByProfileId,
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
@@ -20,9 +19,9 @@ export const approveProfile = withSentry(async (profileId: string) => {
     state: PublishingState.APPROVED,
   })
 
-  const profileOwnerUsername =
-    ((await findGithubUsernameByProfileId(profileId)) as string) ??
-    ((await findLinkedinUsernameByProfileId(profileId)) as string)
+  const profileOwnerUsername = (await findGithubUsernameByProfileId(
+    profileId,
+  )) as string
 
   await sendProfileApprovedEmail(
     updatedProfile.user.email,

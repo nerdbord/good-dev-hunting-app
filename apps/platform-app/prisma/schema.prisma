@@ -20,7 +20,6 @@ model User {
   accounts        Account[]
   profile         Profile?
   githubDetails   GitHubDetails?
-  linkedinDetails LinkedInDetails?
   roles           Role[]           @default([USER])
   nerdbordUserId  String?          @unique
   createdAt       DateTime         @default(now())
@@ -94,13 +93,6 @@ model Technology {
 }
 
 model GitHubDetails {
-  id       String @id @default(uuid())
-  username String @unique
-  user     User   @relation(fields: [userId], references: [id])
-  userId   String @unique
-}
-
-model LinkedInDetails {
   id       String @id @default(uuid())
   username String @unique
   user     User   @relation(fields: [userId], references: [id])

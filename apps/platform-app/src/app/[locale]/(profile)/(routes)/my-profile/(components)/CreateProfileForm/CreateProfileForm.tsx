@@ -100,7 +100,7 @@ const CreateProfileForm = () => {
 
     const payload: ProfileCreateParams = {
       fullName: values.fullName,
-      avatarUrl: session?.user?.image || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,

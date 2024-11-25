@@ -23,9 +23,7 @@ export const HeroProfilesSection = () => {
           return (
             <div className={styles[frameClass]}>
               <Link
-                href={`${AppRoutes.profile}/${
-                  profile.githubUsername ?? profile.linkedinUsername
-                }`}
+                href={`${AppRoutes.profile}/${profile.githubUsername}`}
                 className={`${styles.frameWrapper}`}
                 key={profile.id}
               >

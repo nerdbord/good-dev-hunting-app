@@ -2,6 +2,7 @@
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { AddIcon } from '@gdh/ui-system/icons'
+import { Role } from '@prisma/client'
 import { signIn, useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -21,7 +22,7 @@ const CreateProfileBtn = () => {
     setIsCalled(true)
     if (!session) {
       await signIn('github', {
-        callbackUrl: AppRoutes.githubOAuth,
+        callbackUrl: `${AppRoutes.oAuth}?role=${Role.SPECIALIST}`,
       })
       return
     }

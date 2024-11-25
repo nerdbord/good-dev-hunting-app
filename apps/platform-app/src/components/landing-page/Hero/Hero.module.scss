@@ -33,7 +33,6 @@
     font-size: 38px;
     line-height: 44px;
     min-height: 80px;
-
   }
 }
 
@@ -130,7 +129,7 @@
   min-height: 180px;
   @include mobile {
     width: 500px;
-    scale: 0.5
+    scale: 0.5;
   }
 }
 

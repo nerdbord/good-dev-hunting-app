@@ -4,11 +4,7 @@ import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/U
 import { UserProfilePage } from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfilePage/UserProfilePage'
 import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { findProfileByGithubUsername } from '@/app/[locale]/(profile)/_actions/queries/findProfileByGithubUsername'
-import { findProfileByLinkedinUsername } from '@/app/[locale]/(profile)/_actions/queries/findProfileByLinkedinUsername'
-import {
-  getProfileByGithubUsername,
-  getProfileByLinkedinUsername,
-} from '@/backend/profile/profile.service'
+import { getProfileByGithubUsername } from '@/backend/profile/profile.service'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
@@ -18,9 +14,7 @@ export async function generateMetadata({
   params: { username: string }
 }) {
   try {
-    const selectedProfile =
-      (await getProfileByGithubUsername(params.username)) ??
-      (await getProfileByLinkedinUsername(params.username))
+    const selectedProfile = await getProfileByGithubUsername(params.username)
 
     if (!selectedProfile) {
       return {
@@ -51,9 +45,8 @@ const UserProfile = async ({ params }: { params: { username: string } }) => {
     return redirect(AppRoutes.signIn)
   }
 
-  const profile =
-    (await findProfileByGithubUsername(params.username)) ??
-    (await findProfileByLinkedinUsername(params.username))
+  const profile = await findProfileByGithubUsername(params.username)
+
   if (!profile) {
     redirect(AppRoutes.profilesList)
   }

@@ -96,7 +96,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
     const updateParams: ProfileModel = {
       ...profile,
       fullName: values.fullName,
-      avatarUrl: session?.user?.image || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,

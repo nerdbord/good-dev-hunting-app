@@ -1,16 +1,16 @@
 'use client'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
-import { GithubIcon } from '@gdh/ui-system/icons'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import styles from '../GithubLoginButton/GithubLoginButton.module.scss'
 
-interface GithubLoginButtonProps {
+interface LinkedInLoginButtonProps {
   label?: string
+  role: 'SPECIALIST' | 'HUNTER'
 }
 
-export const LinkedInLoginButton = (props: GithubLoginButtonProps) => {
+export const LinkedInLoginButton = (props: LinkedInLoginButtonProps) => {
   const [isCalled, setIsCalled] = useState(false)
   return (
     <Button
@@ -18,15 +18,13 @@ export const LinkedInLoginButton = (props: GithubLoginButtonProps) => {
       onClick={() => {
         setIsCalled(true)
         signIn('linkedin', {
-          callbackUrl: AppRoutes.githubOAuth,
+          callbackUrl: `${AppRoutes.oAuth}?role=${props.role}`,
         })
       }}
       variant={'secondary'}
     >
-      {props.label ? props.label : 'Login LinkedIn'}
-      <div className={styles.iconBox}>
-        <GithubIcon />
-      </div>
+      {props.label ? props.label : 'Login with LinkedIn'}
+      <div className={styles.iconBox}>{/* add linkedin icon here */}</div>
     </Button>
   )
 }

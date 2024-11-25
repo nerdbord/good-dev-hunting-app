@@ -21,7 +21,7 @@ export const UserPhotoUploader = () => {
 
   useEffect(() => {
     async function fetchAvatar() {
-      const url = (await fetchMyAvatar()) || session?.user.image
+      const url = (await fetchMyAvatar()) || session?.user.avatarUrl
       url && setUserImage(url)
     }
     fetchAvatar()

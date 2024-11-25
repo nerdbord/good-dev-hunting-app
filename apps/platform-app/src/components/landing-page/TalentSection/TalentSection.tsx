@@ -27,9 +27,7 @@ const TalentSection = () => {
       <div className={styles.talents}>
         {randomSixProfiles?.map((profile) => (
           <Link
-            href={`${AppRoutes.profile}/${
-              profile.githubUsername ?? profile.linkedinUsername
-            }`}
+            href={`${AppRoutes.profile}/${profile.githubUsername}`}
             className={`${styles.frameWrapper}`}
             key={profile.id}
           >

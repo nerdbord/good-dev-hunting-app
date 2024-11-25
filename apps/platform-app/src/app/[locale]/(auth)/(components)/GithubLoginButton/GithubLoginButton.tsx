@@ -8,6 +8,7 @@ import styles from './GithubLoginButton.module.scss'
 
 interface GithubLoginButtonProps {
   label?: string
+  role: 'SPECIALIST' | 'HUNTER'
 }
 
 export const GithubLoginButton = (props: GithubLoginButtonProps) => {
@@ -18,7 +19,7 @@ export const GithubLoginButton = (props: GithubLoginButtonProps) => {
       onClick={() => {
         setIsCalled(true)
         signIn('github', {
-          callbackUrl: AppRoutes.githubOAuth,
+          callbackUrl: `${AppRoutes.oAuth}?role=${props.role}`,
         })
       }}
       variant={'secondary'}

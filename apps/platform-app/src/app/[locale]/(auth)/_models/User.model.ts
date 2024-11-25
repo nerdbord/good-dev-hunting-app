@@ -1,8 +1,9 @@
 import { type UserWithRelations } from '@/backend/user/user.types'
-import { type User } from '@prisma/client'
+import { type Profile, type User } from '@prisma/client'
 
 export interface UserModel extends User {
   githubUsername: string | null
+  profileId: Profile['id'] | null
 }
 
 export function createUserModel(data: UserWithRelations): UserModel {
@@ -15,5 +16,6 @@ export function createUserModel(data: UserWithRelations): UserModel {
     nerdbordUserId: data.nerdbordUserId,
     githubUsername: data.githubDetails?.username || null,
     createdAt: data.createdAt,
+    profileId: data.profile?.id || null,
   }
 }

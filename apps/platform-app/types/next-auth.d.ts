@@ -3,19 +3,15 @@ import 'next-auth'
 
 declare module 'next-auth' {
   interface User {
-    id?: string
-    email?: string | null
+    id: string
+    email: string
     avatarUrl?: string | null
-    githubUsername?: string | null
-    linkedinUsername?: string | null
   }
 
   interface AdapterUser {
-    id?: string
-    email?: string | null
+    id: string
+    email: string
     avatarUrl?: string | null
-    githubUsername?: string | null
-    linkedinUsername?: string | null
   }
 
   /**
@@ -25,26 +21,26 @@ declare module 'next-auth' {
     user: {
       id: string
       email: string
-      image: string
-      name: string
+      avatarUrl: string | null
+      name: string | null
       roles: Role[]
       profileId: string | null
       githubUsername: string | null
-      linkedinUsername: string | null
     }
+    provider: string
   }
 }
 
+import 'next-auth/jwt'
 declare module 'next-auth/jwt' {
-  type JWT = {
-    id: string | null
-    name?: string | null
-    email?: string | null
-    picture?: string | null
-    sub?: string
+  interface JWT {
+    id: string
+    email: string
+    avatarUrl: string | null
+    name: string | null
     roles: Role[]
     profileId: string | null
     githubUsername: string | null
-    linkedinUsername: string | null
-  } | null
+    provider: string | null
+  }
 }
