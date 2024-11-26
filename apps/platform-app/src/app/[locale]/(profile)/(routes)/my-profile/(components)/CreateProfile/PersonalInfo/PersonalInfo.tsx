@@ -11,6 +11,7 @@ import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import styles from './PersonalInfo.module.scss'
+import { CvUploader } from '@/app/[locale]/(profile)/(components)/CvUploader/CvUploader'
 
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',
@@ -64,6 +65,7 @@ const PersonalInfo = () => {
           />
         </div>
         <UserPhotoUploader />
+        <CvUploader />
         <InputFormError
           error={
             touched[PersonalInfoFormKeys.LINKEDIN] &&

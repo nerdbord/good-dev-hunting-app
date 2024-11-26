@@ -74,7 +74,7 @@ export const CvUploader = () => {
                     multiple={false}
                     accept="image/*"
                   />
-                  {t('changePicture')}{' '}
+                  {t('changeFile')}{' '}
                 </label>
               </Button>
               {/* <GithubUserPhotoUploader

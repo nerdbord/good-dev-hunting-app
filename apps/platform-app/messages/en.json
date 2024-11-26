@@ -82,6 +82,7 @@
     "fillOut": "Fill out the form to complete the profile",
     "sendMessage": "Send message",
     "changePicture": "Change picture",
+    "changeFile": "Change file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
     "apply": "Apply"
