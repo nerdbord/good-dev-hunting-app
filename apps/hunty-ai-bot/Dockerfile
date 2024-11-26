@@ -1,14 +1,16 @@
 FROM oven/bun:1.0
 
-WORKDIR /app
+WORKDIR /app/apps/hunty-ai-bot
 
-# Copy package files
+# Copy package files and config
 COPY package.json .
 COPY bun.lockb .
 COPY tsconfig.json .
+COPY .eslintrc.json .
+COPY index.ts .
 
-# Copy source code
-COPY src/ .
+# Copy all source files maintaining directory structure
+COPY . .
 
 # Install dependencies
 RUN bun install
@@ -21,4 +23,4 @@ ENV GDH_API_KEY=""
 ENV GDH_API_URL=""
 
 # Start the bot
-CMD ["bun", "run", "index.ts"]
+CMD ["bun", "run", "start"]
