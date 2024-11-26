@@ -193,15 +193,7 @@ const executeDecision = async (state: typeof StateAnnotation.State) => {
     content: responseMessage.content,
     tool_calls: responseMessage.tool_calls?.[0]
       ? [responseMessage.tool_calls?.[0]]
-      : [
-          {
-            name: sendForManualVerificationTool.name,
-            args: {
-              reason: 'missing tool call',
-            },
-            type: 'tool_call',
-          },
-        ],
+      : undefined,
   })
 
   setContextVariable('currentState', state)
