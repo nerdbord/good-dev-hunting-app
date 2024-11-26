@@ -151,7 +151,7 @@ const describeAvatar = async (state: typeof StateAnnotation.State) => {
         avatarUrl,
         `What is on the photo, Describe it in one paragraph`,
       )
-      
+
       return { avatarDescription }
     } catch (error) {
       await sendDiscordNotificationToModeratorChannel(
@@ -190,7 +190,15 @@ const executeDecision = async (state: typeof StateAnnotation.State) => {
     content: responseMessage.content,
     tool_calls: responseMessage.tool_calls?.[0]
       ? [responseMessage.tool_calls?.[0]]
-      : undefined,
+      : [
+          {
+            name: sendForManualVerificationTool.name,
+            args: {
+              reason: 'missing tool call',
+            },
+            type: 'tool_call',
+          },
+        ],
   })
 
   setContextVariable('currentState', state)
