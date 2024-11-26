@@ -1,6 +1,6 @@
-import { BaseMessage } from "@langchain/core/messages";
+import type { GroqMessageParam } from "../../services/groq.service";
 
-export const huntySummarizeConversationPrompt = (messages: BaseMessage[]) => `
+export const huntySummarizeConversationPrompt = (messages: GroqMessageParam[]) => `
 
       <objective>
       Your goal is to summarize the conversation and extract key insights grouped by users that participated in the conversation.

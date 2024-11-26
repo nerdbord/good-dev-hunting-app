@@ -4,18 +4,20 @@
   "type": "module",
   "scripts": {
     "start": "bun run index.ts",
-    "dev": "bun run --watch index.ts"
+    "dev": "bun run --watch index.ts",
+    "lint": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@langchain/groq": "^0.1.2",
-    "@langchain/openai": "^0.3.14",
     "discord.js": "^14.16.3",
-    "langchain": "^0.3.5"
+    "groq-sdk": "^0.8.0"
   }
 }

@@ -1,6 +1,6 @@
-import { Client, GatewayIntentBits, type Interaction, Message } from 'discord.js';
+import { Client, GatewayIntentBits, Message } from 'discord.js';
 import { AIAgent } from '../agent';
-import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
+import type { GroqMessageParam } from '../services/groq.service';
 
 export class DiscordBot {
     private client: Client;
@@ -23,16 +23,19 @@ export class DiscordBot {
     }
 
 
-    private async buildConversationHistory(currentMessage: Message): Promise<BaseMessage[]> {
+    private async buildConversationHistory(currentMessage: Message): Promise<GroqMessageParam[]> {
         // Fetch previous messages
         const previousMessages = await this.fetchChannelHistory(currentMessage);
 
         // Convert previous messages to LangChain format
-        const conversationHistory = previousMessages.map(msg => this.convertToLangChainMessage(msg));
+        const conversationHistory = previousMessages.map(msg => this.convertMessageToGroqParam(msg));
 
         // Add current message
         const currentMessageContent = this.formatMessageContent(currentMessage);
-        conversationHistory.push(new HumanMessage(currentMessageContent));
+        conversationHistory.push({
+            role: "user",
+            content: currentMessageContent
+        });
 
         return conversationHistory;
     }
@@ -46,14 +49,20 @@ export class DiscordBot {
         return Array.from(messages.values()).reverse();
     }
 
-    private convertToLangChainMessage(message: Message): BaseMessage {
+    private convertMessageToGroqParam(message: Message): GroqMessageParam {
         const formattedContent = this.formatMessageContent(message);
 
         if (Bun.env.DISCORD_BOT_ID === message.author.id) {
-            return new AIMessage(formattedContent);
+            return {
+                role: "assistant",
+                content: formattedContent
+            };
         }
 
-        return new HumanMessage(formattedContent);
+        return {
+            role: "user",
+            content: formattedContent
+        };
     }
 
     private formatMessageContent(message: Message): string {
@@ -100,11 +109,16 @@ export class DiscordBot {
         try {
             const aiAgent = new AIAgent();
             const conversationHistory = await this.buildConversationHistory(message);
-            const response = await aiAgent.processMessage(
+            const response = await aiAgent.ask(
                 question,
                 message.channelId,
                 conversationHistory
             );
+
+            if (!response) {
+                throw new Error('I could not process your request.');
+            }
+
             await message.reply({ content: response, failIfNotExists: true });
         } catch (error) {
             console.error('Error processing message:', error);
