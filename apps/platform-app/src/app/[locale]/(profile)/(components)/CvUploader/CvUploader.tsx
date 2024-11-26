@@ -1,19 +1,20 @@
-"use client"
+'use client'
 
 // import { fetchMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/fetchMyAvatar'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
-import { Avatar, Button } from '@gdh/ui-system'
+import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
 // import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 // import GithubUserPhotoUploader from './GithubUserPhotoUploader'
+import Image from 'next/image'
 import styles from './CvUploader.module.scss'
 
 export const CvUploader = () => {
-    const t = useTranslations(I18nNamespaces.Buttons)
-//   const { data: session } = useSession()
+  const t = useTranslations(I18nNamespaces.Buttons)
+  //   const { data: session } = useSession()
   const [cvFile, setCvFile] = useState<string | null>(null)
   const { fileUploadError, setFileUploadError, setFormDataWithFile } =
     useUploadContext()
@@ -28,7 +29,8 @@ export const CvUploader = () => {
       if (file.size <= 4 * 1024 * 1024) {
         const form = new FormData()
         form.append('fileUpload', file)
-
+        
+        // Tu trzeba zmienić linie 33:
         setFormDataWithFile(form)
 
         const reader = new FileReader()
@@ -50,39 +52,44 @@ export const CvUploader = () => {
     }
   }
 
-    return(<div className={styles.container}>
-        <p className={styles.containerLabel}>Picture (optional)</p>
-        <div className={styles.errorMessageWrapper}>
-          {fileUploadError && (
-            <div className={styles.errorMessage}>
-              <ErrorIcon />
-              {errorMsg}
-            </div>
-          )}
-          <div className={styles.contentWrapper}>
-            {cvFile && <Avatar src={cvFile || ''} size={100} />}
-            <div className={styles.buttonsWrapper}>
-              <Button variant="secondary">
-                <label htmlFor="file-input">
-                  <input
-                    ref={fileInputRef}
-                    id="file-input"
-                    name='file'
-                    type="file"
-                    className={styles.hidden}
-                    onChange={handleFileChange}
-                    multiple={false}
-                    accept="image/*"
-                  />
-                  {t('changeFile')}{' '}
-                </label>
-              </Button>
-              {/* <GithubUserPhotoUploader
+  return (
+    <div className={styles.container}>
+      <p className={styles.containerLabel}>CV file (optional)</p>
+      <div className={styles.errorMessageWrapper}>
+        {fileUploadError && (
+          <div className={styles.errorMessage}>
+            <ErrorIcon />
+            {errorMsg}
+          </div>
+        )}
+        <div className={styles.contentWrapper}>
+          {cvFile && <Image src={cvFile || ''} alt="" width={30} height={30} />}
+          <div className={styles.buttonsWrapper}>
+            <Button variant="secondary">
+              <label htmlFor="file-input">
+                <input
+                  ref={fileInputRef}
+                  id="file-input"
+                  name="file"
+                  type="file"
+                  className={styles.hidden}
+                  onChange={handleFileChange}
+                  multiple={false}
+                  accept="image/*"
+                />
+                {t('chooseFile')}{' '}
+              </label>
+            </Button>
+            {/* <GithubUserPhotoUploader
                 setImage={setUserImage}
                 showError={setImageUploadError}
               /> */}
-            </div>
+            {cvFile && (
+              <Image src={cvFile || ''} alt="" width={30} height={30} />
+            )}
           </div>
         </div>
-      </div>)
+      </div>
+    </div>
+  )
 }
