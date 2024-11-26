@@ -10,11 +10,11 @@ const nanoid = customAlphabet(
   7,
 ) // 7-character random string
 
-export const uploadImage = withSentry(async (form: FormData) => {
-  const image = form.get('fileUpload') as File
-  const imageName = `${nanoid()}.${image.type.split('/')[1]}`
+export const uploadFile = withSentry(async (form: FormData) => {
+  const file = form.get('fileUpload') as File
+  const fileName = `${nanoid()}.${file.type.split('/')[1]}`
 
-  const blob = await put(imageName, image, {
+  const blob = await put(fileName, file, {
     access: 'public',
     addRandomSuffix: false,
   })

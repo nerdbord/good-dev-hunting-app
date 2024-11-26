@@ -18,7 +18,7 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
   const pathname = usePathname()
 
   const { errors, touched, isValid, handleSubmit } = useFormikContext()
-  const { imageUploadError } = useUploadContext()
+  const { fileUploadError: imageUploadError } = useUploadContext()
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
   const hasTouchedErrors = Object.keys(errors).some(
     // @ts-ignore

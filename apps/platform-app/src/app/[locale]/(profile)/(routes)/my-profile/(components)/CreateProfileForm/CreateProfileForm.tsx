@@ -1,5 +1,5 @@
 'use client'
-import { uploadImage } from '@/app/(files)/_actions/uploadImage'
+import { uploadFile } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import CreateProfileTopBar from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
 import LocationPreferences from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
@@ -127,7 +127,7 @@ const CreateProfileForm = () => {
     try {
       runAsync(async () => {
         const uploadedFileUrl = formDataWithFile
-          ? await uploadImage(formDataWithFile)
+          ? await uploadFile(formDataWithFile)
           : null
 
         uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))

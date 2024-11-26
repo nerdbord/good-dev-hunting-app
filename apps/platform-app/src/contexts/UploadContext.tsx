@@ -7,14 +7,14 @@ import {
 } from 'react'
 
 interface UploadContextProps {
-  imageUploadError: boolean
-  setImageUploadError: React.Dispatch<React.SetStateAction<boolean>>
+  fileUploadError: boolean
+  setFileUploadError: React.Dispatch<React.SetStateAction<boolean>>
   formDataWithFile: FormData | null
   setFormDataWithFile: React.Dispatch<React.SetStateAction<FormData | null>>
 }
 
 export const UploadProvider = ({ children }: PropsWithChildren) => {
-  const [imageUploadError, setImageUploadError] = useState(false)
+  const [fileUploadError, setFileUploadError] = useState(false)
   const [formDataWithFile, setFormDataWithFile] = useState<FormData | null>(
     null,
   )
@@ -22,8 +22,8 @@ export const UploadProvider = ({ children }: PropsWithChildren) => {
   return (
     <UploadContext.Provider
       value={{
-        imageUploadError,
-        setImageUploadError,
+        fileUploadError: fileUploadError,
+        setFileUploadError: setFileUploadError,
         formDataWithFile,
         setFormDataWithFile,
       }}

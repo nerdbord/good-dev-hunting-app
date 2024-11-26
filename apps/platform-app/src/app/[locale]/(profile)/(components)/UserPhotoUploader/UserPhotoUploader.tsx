@@ -14,7 +14,7 @@ export const UserPhotoUploader = () => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const { data: session } = useSession()
   const [userImage, setUserImage] = useState<string | null>(null)
-  const { imageUploadError, setImageUploadError, setFormDataWithFile } =
+  const { fileUploadError: imageUploadError, setFileUploadError: setImageUploadError, setFormDataWithFile } =
     useUploadContext()
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const [errorMsg, setErrorMsg] = useState('')

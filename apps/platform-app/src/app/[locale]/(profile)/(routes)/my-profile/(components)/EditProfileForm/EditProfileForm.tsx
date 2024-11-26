@@ -1,5 +1,5 @@
 'use client'
-import { uploadImage } from '@/app/(files)/_actions/uploadImage'
+import { uploadFile } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
@@ -125,7 +125,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
 
     await runAsync(async () => {
       const uploadedFileUrl = formDataWithFile
-        ? await uploadImage(formDataWithFile)
+        ? await uploadFile(formDataWithFile)
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
