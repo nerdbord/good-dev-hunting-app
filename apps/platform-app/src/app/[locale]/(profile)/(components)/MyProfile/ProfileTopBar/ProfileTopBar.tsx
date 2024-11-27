@@ -4,10 +4,10 @@ import { TogglePublishButton } from '@/app/[locale]/(profile)/(components)/Toggl
 import { ToggleOpenToWork } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ToggleOpenToWork'
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { I18nNamespaces } from '@/i18n/request'
+import { ProfileViews } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
 import styles from './ProfileTopBar.module.scss'
-import { ProfileViews } from '@gdh/ui-system'
 
 interface ProfileTopBarProps {
   profileId: string

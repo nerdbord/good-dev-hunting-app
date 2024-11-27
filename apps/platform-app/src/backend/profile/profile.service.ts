@@ -1,6 +1,6 @@
 import { type ProfileCreateParams } from '@/app/[locale]/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import { Currency, Prisma, PublishingState, Role } from '@prisma/client'
+import { Prisma, PublishingState, Role } from '@prisma/client'
 
 export async function getApprovedProfiles() {
   const approvedProfiles = await prisma.profile.findMany({

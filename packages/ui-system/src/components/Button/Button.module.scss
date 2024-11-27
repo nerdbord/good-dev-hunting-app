@@ -122,12 +122,12 @@
 
 .grayedOut {
   height: 44px;
-  color: #69717B;
+  color: #69717b;
   background: transparent;
   align-items: center;
   border-radius: 2px;
   padding: 12px 24px;
-  border: 1px solid var(--Main-03, #69717B);
+  border: 1px solid var(--Main-03, #69717b);
 }
 
 .grayedOut:hover:enabled {
@@ -141,4 +141,3 @@
     }
   }
 }
-

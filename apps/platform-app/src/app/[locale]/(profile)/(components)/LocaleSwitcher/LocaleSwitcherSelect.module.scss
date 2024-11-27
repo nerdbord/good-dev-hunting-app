@@ -108,7 +108,7 @@
   flex-direction: column;
   gap: $spacing-4;
   z-index: 10;
-  
+
   @include mobile {
     display: none;
   }
