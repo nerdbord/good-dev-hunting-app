@@ -13,17 +13,17 @@ datasource db {
 }
 
 model User {
-  id             String         @id @default(uuid())
-  email          String         @unique
-  emailVerified  DateTime?
-  avatarUrl      String?
-  accounts       Account[]
-  profile        Profile?
-  githubDetails  GitHubDetails?
-  roles          Role[]         @default([USER])
-  nerdbordUserId String?        @unique
-  createdAt      DateTime       @default(now())
-  viewedProfiles ProfileView[]
+  id              String           @id @default(uuid())
+  email           String           @unique
+  emailVerified   DateTime?
+  avatarUrl       String?
+  accounts        Account[]
+  profile         Profile?
+  githubDetails   GitHubDetails?
+  roles           Role[]           @default([USER])
+  nerdbordUserId  String?          @unique
+  createdAt       DateTime         @default(now())
+  viewedProfiles  ProfileView[]
   contactRequests ContactRequest[]
 }
 
@@ -59,6 +59,8 @@ model Profile {
   user                     User              @relation(fields: [userId], references: [id])
   userId                   String            @unique
   fullName                 String
+  cvDocument               CvDocument?       @relation(fields: [cvDocumentId], references: [id])
+  cvDocumentId             String?           @unique
   linkedIn                 String?
   bio                      String
   country                  Country           @relation(fields: [countryId], references: [id])
@@ -83,7 +85,17 @@ model Profile {
   createdAt                DateTime          @default(now())
   updatedAt                DateTime?         @updatedAt
   profileViews             ProfileView[]
-  language                 Language[]        
+  language                 Language[]
+}
+
+model CvDocument {
+  id        String   @id @default(cuid())
+  name      String
+  type      CvDocumentType
+  size      Int
+  url       String
+  createdAt DateTime @default(now())
+  profile   Profile? @relation()
 }
 
 model Technology {
@@ -126,33 +138,33 @@ model ContactRequest {
   senderFullName String
   senderEmail    String
   senderId       String?
-  sender         User?     @relation(fields: [senderId], references: [id])
+  sender         User?    @relation(fields: [senderId], references: [id])
   profile        Profile  @relation(fields: [profileId], references: [id])
   profileId      String
   createdAt      DateTime @default(now())
 }
 
 model ProfileView {
-  id                 String   @id @default(uuid())
-  viewerId           String
-  viewedProfileId    String
-  createdAt          DateTime @default(now())
-  viewer             User     @relation(fields: [viewerId], references: [id])
-  viewedProfile      Profile  @relation(fields: [viewedProfileId], references: [id])
+  id              String   @id @default(uuid())
+  viewerId        String
+  viewedProfileId String
+  createdAt       DateTime @default(now())
+  viewer          User     @relation(fields: [viewerId], references: [id])
+  viewedProfile   Profile  @relation(fields: [viewedProfileId], references: [id])
 }
 
 model Language {
-  id                 String     @id @default(uuid())
-  name               String     @unique
-  profiles           Profile[]  
+  id       String    @id @default(uuid())
+  name     String    @unique
+  profiles Profile[]
 }
 
 enum Currency {
-   PLN
-   EUR
-   USD
- }
- 
+  PLN
+  EUR
+  USD
+}
+
 enum EmploymentType {
   FULL_TIME
   PART_TIME
@@ -172,4 +184,9 @@ enum PublishingState {
   PENDING
   APPROVED
   REJECTED
+}
+
+enum CvDocumentType {
+  PDF
+  DOCX
 }

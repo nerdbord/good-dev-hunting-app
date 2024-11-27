@@ -63,7 +63,7 @@ export const CvUploader = () => {
           </div>
         )}
         <div className={styles.contentWrapper}>
-          {cvFile && <Image src={cvFile || ''} alt="" width={30} height={30} />}
+          {cvFile && <Image src={cvFile || ''} alt="" width={100} height={100} />}
           <div className={styles.buttonsWrapper}>
             <Button variant="secondary">
               <label htmlFor="file-input">
@@ -75,7 +75,7 @@ export const CvUploader = () => {
                   className={styles.hidden}
                   onChange={handleFileChange}
                   multiple={false}
-                  accept="image/*"
+                  accept=".pdf,.docx"
                 />
                 {t('chooseFile')}{' '}
               </label>
@@ -85,7 +85,7 @@ export const CvUploader = () => {
                 showError={setImageUploadError}
               /> */}
             {cvFile && (
-              <Image src={cvFile || ''} alt="" width={30} height={30} />
+              <Image src={cvFile || ''} alt="" width={100} height={100} />
             )}
           </div>
         </div>
