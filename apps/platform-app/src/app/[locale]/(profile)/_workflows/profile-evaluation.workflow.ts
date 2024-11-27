@@ -182,7 +182,10 @@ const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
 const executeDecision = async (state: typeof StateAnnotation.State) => {
   const { profileEvaluation } = state
 
-  const modelWithTools = executionModel.bindTools(tools)
+  const modelWithTools = executionModel.bindTools(tools, {
+    tool_choice: 'required',
+  })
+
   const chain = executeDecisionPrompt.pipe(modelWithTools)
   const responseMessage = await chain.invoke({ profileEvaluation })
 
