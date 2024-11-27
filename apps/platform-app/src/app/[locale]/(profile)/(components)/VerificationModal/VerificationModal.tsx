@@ -1,6 +1,6 @@
 'use client'
 
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Accordion, Button } from '@gdh/ui-system'
 import { GithubIcon } from '@gdh/ui-system/icons'
 import { PublishingState } from '@prisma/client'
