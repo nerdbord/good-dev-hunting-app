@@ -1,7 +1,7 @@
 'use client'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { I18nNamespaces } from '@/i18n/request'
-import { Tooltip, Switch } from '@gdh/ui-system'
+import { Switch, Tooltip } from '@gdh/ui-system'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
 import React, { useId } from 'react'

@@ -3,12 +3,12 @@ import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
 import { I18nNamespaces } from '@/i18n/request'
+import { ensureProtocol } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import classNames from 'classnames/bind'
 import { getTranslations } from 'next-intl/server'
 import { type UserProfileHeaderType } from '../types'
 import styles from './UserProfileHeader.module.scss'
-import { ensureProtocol } from '@/utils/routes'
 
 const cx = classNames.bind(styles)
 
@@ -45,7 +45,7 @@ export default async function UserProfileHeader({
         <div className={styles.socialItemsWrapper}>
           <SocialItems
             githubUsername={profile.githubUsername}
-            linkedInUrl={ensureProtocol(profile.linkedIn || "")}
+            linkedInUrl={ensureProtocol(profile.linkedIn || '')}
             isNerdbordConnected={isNerdbordConnected}
           />
         </div>

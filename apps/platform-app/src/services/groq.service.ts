@@ -30,7 +30,7 @@ export const analyzeImage = async (imagePath: string, prompt: string) => {
     stop: null,
   })
 
-  const result = chatCompletion.choices[0].message.content;
+  const result = chatCompletion.choices[0].message.content
 
-  return result;
+  return result
 }

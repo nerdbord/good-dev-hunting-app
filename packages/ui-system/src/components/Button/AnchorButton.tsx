@@ -8,7 +8,6 @@ interface AnchorButton {
   icon?: React.ReactElement;
 }
 
-
 export const AnchorButton = (props: PropsWithChildren<AnchorButton>) => {
   return (
     <Link

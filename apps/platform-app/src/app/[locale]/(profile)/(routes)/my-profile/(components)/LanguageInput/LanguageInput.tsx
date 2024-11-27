@@ -1,10 +1,9 @@
 import styles from '@/components/TechStackInput/TechStackInput.module.scss'
 import languages from '@/data/languages'
-import { type DropdownOption, Tooltip } from '@gdh/ui-system'
+import { Tooltip, type DropdownOption } from '@gdh/ui-system'
 import { CancelIcon, ImportantIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import React, { useEffect, useRef, useState } from 'react'
-
 
 const cx = classNames.bind(styles)
 
