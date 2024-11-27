@@ -40,93 +40,98 @@ const profilePendingFields: EditProfileFormFields[] = [
   // 'employmentTypes',
 ]
 
-export const saveMyProfile= withSentry(async (payload: ProfileModel, options?: {saveWithPublish: boolean}) => {
-  const { user } = await getAuthorizedUser()
-  if (!user) {
-    throw new Error('User not found')
-  }
+export const saveMyProfile = withSentry(
+  async (payload: ProfileModel, options?: { saveWithPublish: boolean }) => {
+    const { user } = await getAuthorizedUser()
+    if (!user) {
+      throw new Error('User not found')
+    }
 
-  const foundProfile = await findProfileByUserId(user.id)
-  if (!foundProfile) {
-    throw new Error('Profile not found')
-  }
+    const foundProfile = await findProfileByUserId(user.id)
+    if (!foundProfile) {
+      throw new Error('Profile not found')
+    }
 
-  const changedFields = hasProfileValuesChanged(foundProfile, payload)
-  if (!changedFields) {
-    return foundProfile
-  }
+    const changedFields = hasProfileValuesChanged(foundProfile, payload)
+    if (!changedFields) {
+      return foundProfile
+    }
 
-  const updatedState = hasCommonFields(changedFields, profilePendingFields)
-    ? PublishingState.DRAFT
-    : payload.state
+    const updatedState = hasCommonFields(changedFields, profilePendingFields)
+      ? PublishingState.DRAFT
+      : payload.state
 
-  const updatedTechStack = payload.techStack.map((tech) => tech.name)
+    const updatedTechStack = payload.techStack.map((tech) => tech.name)
 
-  const updatedLanguage = payload.language.map((lang) => lang.name)
+    const updatedLanguage = payload.language.map((lang) => lang.name)
 
-  const updatedData: Prisma.ProfileUpdateInput = {
-    fullName: payload.fullName,
-    linkedIn: payload.linkedIn,
-    bio: payload.bio,
-    country: {
-      connectOrCreate: {
-        create: {
-          name: payload.country,
+    const updatedData: Prisma.ProfileUpdateInput = {
+      fullName: payload.fullName,
+      linkedIn: payload.linkedIn,
+      bio: payload.bio,
+      country: {
+        connectOrCreate: {
+          create: {
+            name: payload.country,
+          },
+          where: { name: payload.country },
         },
-        where: { name: payload.country },
       },
-    },
-    openForCountryRelocation: payload.openForCountryRelocation,
-    city: {
-      connectOrCreate: {
-        create: {
-          name: payload.city,
+      openForCountryRelocation: payload.openForCountryRelocation,
+      city: {
+        connectOrCreate: {
+          create: {
+            name: payload.city,
+          },
+          where: { name: payload.city },
         },
-        where: { name: payload.city },
       },
-    },
-    techStack: {
-      disconnect: foundProfile.techStack
-        .filter((tech) => !updatedTechStack.includes(tech.name))
-        .map((tech) => ({
-          name: tech.name,
+      techStack: {
+        disconnect: foundProfile.techStack
+          .filter((tech) => !updatedTechStack.includes(tech.name))
+          .map((tech) => ({
+            name: tech.name,
+          })),
+        connectOrCreate: payload.techStack.map((tech) => ({
+          where: { name: tech.name },
+          create: {
+            name: tech.name,
+          },
         })),
-      connectOrCreate: payload.techStack.map((tech) => ({
-        where: { name: tech.name },
-        create: {
-          name: tech.name,
-        },
-      })),
-    },
-    openForCityRelocation: payload.openForCityRelocation,
-    remoteOnly: payload.remoteOnly,
-    position: payload.position,
-    seniority: payload.seniority,
-    employmentTypes: payload.employmentTypes,
-    state: updatedState,
-    hourlyRateMin: payload.hourlyRateMin,
-    hourlyRateMax: payload.hourlyRateMax,
-    currency: payload.currency,
-    language: {
-      disconnect: foundProfile.language
-        .filter((lang) => !updatedLanguage.includes(lang.name))
-        .map((lang) => ({
-          name: lang.name,
+      },
+      openForCityRelocation: payload.openForCityRelocation,
+      remoteOnly: payload.remoteOnly,
+      position: payload.position,
+      seniority: payload.seniority,
+      employmentTypes: payload.employmentTypes,
+      state: updatedState,
+      hourlyRateMin: payload.hourlyRateMin,
+      hourlyRateMax: payload.hourlyRateMax,
+      currency: payload.currency,
+      language: {
+        disconnect: foundProfile.language
+          .filter((lang) => !updatedLanguage.includes(lang.name))
+          .map((lang) => ({
+            name: lang.name,
+          })),
+        connectOrCreate: payload.language.map((lang) => ({
+          where: { name: lang.name },
+          create: {
+            name: lang.name,
+          },
         })),
-      connectOrCreate: payload.language.map((lang) => ({
-        where: { name: lang.name },
-        create: {
-          name: lang.name,
-        },
-      })),
-    },
-  }
+      },
+    }
 
-  const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
+    const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
 
-  if (options?.saveWithPublish && updatedProfile.state === PublishingState.PENDING) {
-    await runEvaluateProfileAgent(foundProfile.id)
-  }
+    if (
+      options?.saveWithPublish &&
+      updatedProfile.state === PublishingState.PENDING
+    ) {
+      await runEvaluateProfileAgent(foundProfile.id)
+    }
 
-  return createProfileModel(updatedProfile)
-})
+    return createProfileModel(updatedProfile)
+  },
+)

@@ -7,8 +7,8 @@ import { I18nNamespaces } from '@/i18n/request'
 import { ProfileViews } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
-import styles from './ProfileTopBar.module.scss'
 import { findLatestRejectionReason } from '../../../_actions/queries/findLatestRejectionReason'
+import styles from './ProfileTopBar.module.scss'
 
 interface ProfileTopBarProps {
   profileId: string
@@ -17,7 +17,7 @@ interface ProfileTopBarProps {
 const ProfileTopBar = async (props: ProfileTopBarProps) => {
   const t = await getTranslations(I18nNamespaces.Index)
   const profile = await findProfileById(props.profileId)
-  const reason = await findLatestRejectionReason(props.profileId)  
+  const reason = await findLatestRejectionReason(props.profileId)
 
   const isPending = profile.state === PublishingState.PENDING
   const isRejected = profile.state === PublishingState.REJECTED
@@ -69,7 +69,7 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
           <TogglePublishButton
             state={profile.state}
             profileId={props.profileId}
-            lastRejectionReason={isRejected ? reason : ""}
+            lastRejectionReason={isRejected ? reason : null}
           />
         </div>
       </div>

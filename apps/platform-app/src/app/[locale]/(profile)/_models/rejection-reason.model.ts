@@ -1,11 +1,13 @@
-import type { RejectionReason } from "@prisma/client"
+import type { RejectionReason } from '@prisma/client'
 
 interface RejectionReasonModel {
-    rejectionReason: string
+  rejectionReason: string
 }
 
-export function createRejectionReasonModel(data: RejectionReason): RejectionReasonModel {
+export function createRejectionReasonModel(
+  data: RejectionReason,
+): RejectionReasonModel {
   return {
-    rejectionReason: data.reason
+    rejectionReason: data.reason,
   }
 }

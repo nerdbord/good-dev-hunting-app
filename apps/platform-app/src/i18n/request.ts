@@ -36,5 +36,5 @@ export enum I18nNamespaces {
   VerticalCard = 'VerticalCard',
   ConfirmLeaveModal = 'ConfirmLeaveModal',
   ConfirmLogoutModal = 'ConfirmLogoutModal',
-  VerificationModal = "VerificationModal"
+  VerificationModal = 'VerificationModal',
 }

@@ -129,7 +129,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               )}
             </>
           )}
-          
         </>
       )
     }

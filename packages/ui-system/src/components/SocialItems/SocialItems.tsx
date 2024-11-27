@@ -1,5 +1,5 @@
-import { GithubIcon2, LinkedIn } from "@gdh/ui-system/icons";
 import { AnchorButton } from "@gdh/ui-system";
+import { GithubIcon2, LinkedIn } from "@gdh/ui-system/icons";
 import styles from "./SocialItems.module.scss";
 
 export function SocialItems({

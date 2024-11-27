@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
-import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePublishPopup'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
@@ -18,20 +17,19 @@ import VerificationModal from '../VerificationModal/VerificationModal'
 interface TogglePublishButtonProps {
   profileId: string
   state: PublishingState
-  lastRejectionReason: string
+  lastRejectionReason: string | null
 }
 
 export const TogglePublishButton = async (props: TogglePublishButtonProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [showPopup, setShowPopup] = useState(false)
   const { profileId, state, lastRejectionReason } = props
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     if (state === PublishingState.REJECTED) {
       setShowPopup(true)
     }
   }, [])
-
 
   const { loading, runAsync } = useAsyncAction()
 
@@ -59,17 +57,18 @@ export const TogglePublishButton = async (props: TogglePublishButtonProps) => {
         throw Error('Wrong profile action')
     }
   }
-  
 
   return (
     <div>
-      {showPopup && state !== PublishingState.DRAFT && state !== PublishingState.PENDING && (
-        <VerificationModal
-          profileStatus={state}
-          rejectionReason={lastRejectionReason}
-          onClose={async () => setShowPopup(false)}
-        />
-      )}
+      {showPopup &&
+        state !== PublishingState.DRAFT &&
+        state !== PublishingState.PENDING && (
+          <VerificationModal
+            profileStatus={state}
+            rejectionReason={lastRejectionReason}
+            onClose={async () => setShowPopup(false)}
+          />
+        )}
       {state === PublishingState.REJECTED ? (
         <span className={styles.rejectedInfo}>Rejected</span>
       ) : state === PublishingState.PENDING ? (

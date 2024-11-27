@@ -25,8 +25,6 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
     (key) => touched[key] && errors[key],
   )
 
-
-
   return (
     <div className={styles.titleBox}>
       <div className={styles.errorWrapper}>
@@ -34,8 +32,8 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           {pathname === AppRoutes.createProfile
             ? t('createProfile')
             : pathname === AppRoutes.editProfile
-              ? t('editProfile')
-              : t('myProfile')}
+            ? t('editProfile')
+            : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>
