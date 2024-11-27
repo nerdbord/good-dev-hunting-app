@@ -12,8 +12,8 @@ interface ProfileDetailsProps {
 
 const ProfileDetails = async (props: ProfileDetailsProps) => {
   const profile = await findProfileById(props.profileId)
-  const isRejected = profile.state === PublishingState.REJECTED
-  const reason = await findLatestRejectionReason(props.profileId)
+  // const isRejected = profile.state === PublishingState.REJECTED
+  // const reason = await findLatestRejectionReason(props.profileId)
 
   const sortedLanguages =
     profile?.language.sort((a, b) => a.name.localeCompare(b.name)) || []
@@ -25,11 +25,11 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
       <section className={styles.container}>
         <div className={styles.mobileView}>
           <EditProfileButton />
-          <TogglePublishButton
+          {/* <TogglePublishButton
             state={profile.state}
             profileId={profile.id}
             lastRejectionReason={isRejected ? reason : ''}
-          />
+          /> */}
         </div>{' '}
         <div className={styles.left}>
           <div className={styles.techStack}>
