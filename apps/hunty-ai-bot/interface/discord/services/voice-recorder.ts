@@ -14,6 +14,7 @@ import { join } from 'path';
 import prism from 'prism-media';
 import { spawn } from 'child_process';
 import { unlink } from 'fs/promises';
+import { DropboxService } from '../../../services/dropbox.service';
 
 export class VoiceRecorder {
     private connection: VoiceConnection | null = null;
@@ -22,10 +23,13 @@ export class VoiceRecorder {
     private readonly recordingsDir: string;
     private isRecording: boolean = false;
     private recordingPath: string | null = null;
-
+    private dropboxService: DropboxService;
+    private channelName: string | null = null;
+    //
     constructor() {
         this.recordingsDir = join(process.cwd(), 'recordings');
         this.ensureRecordingsDirExists().catch(console.error);
+        this.dropboxService = new DropboxService();
     }
 
     private async ensureRecordingsDirExists(): Promise<void> {
@@ -52,6 +56,7 @@ export class VoiceRecorder {
 
             this.recordingPath = join(this.recordingsDir, `recording-${Date.now()}.pcm`);
             this.isRecording = true;
+            this.channelName = channel.name;
 
             const receiver = this.connection.receiver;
             const members = channel.members.filter(member => !member.user.bot);
@@ -69,7 +74,7 @@ export class VoiceRecorder {
             throw error;
         }
     }
-
+    //
     private setupAudioPipeline(receiver: VoiceReceiver, userId: string): void {
         if (!this.isRecording || !this.recordingPath) return;
 
@@ -95,10 +100,6 @@ export class VoiceRecorder {
                 .pipe(demuxer)
                 .pipe(this.writeStream);
 
-            // Monitor data flow for debugging
-            this.audioStream.on('data', chunk =>
-                console.log(`Received audio chunk: ${chunk.length} bytes`));
-
         } catch (error) {
             console.error('Error setting up audio pipeline:', error);
             this.cleanup();
@@ -106,7 +107,7 @@ export class VoiceRecorder {
     }
 
     async stopRecording(): Promise<string | null> {
-        if (!this.isRecording || !this.recordingPath) {
+        if (!this.isRecording || !this.recordingPath || !this.channelName) {
             return null;
         }
 
@@ -119,8 +120,9 @@ export class VoiceRecorder {
             const timeout = setTimeout(() => {
                 console.log('Stop recording timed out, forcing cleanup...');
                 this.cleanup();
-                this.convertToMp3(pcmPath, mp3Path).catch(console.error);
-                resolve(mp3Path);
+                this.handleConversionAndUpload(pcmPath, mp3Path, this.channelName!)
+                    .then(resolve)
+                    .catch(console.error);
             }, 3000);
 
             if (this.writeStream) {
@@ -128,12 +130,9 @@ export class VoiceRecorder {
                     clearTimeout(timeout);
                     console.log('Recording saved successfully');
                     this.cleanup();
-                    this.convertToMp3(pcmPath, mp3Path)
-                        .then(() => resolve(mp3Path))
-                        .catch((error) => {
-                            console.error('Failed to convert to MP3:', error);
-                            resolve(pcmPath);
-                        });
+                    this.handleConversionAndUpload(pcmPath, mp3Path, this.channelName!)
+                        .then(resolve)
+                        .catch(console.error);
                 });
 
                 if (this.audioStream) {
@@ -146,6 +145,17 @@ export class VoiceRecorder {
                 resolve(null);
             }
         });
+    }
+
+    private async handleConversionAndUpload(pcmPath: string, mp3Path: string, channelName: string): Promise<string | null> {
+        try {
+            await this.convertToMp3(pcmPath, mp3Path);
+            const dropboxUrl = await this.dropboxService.uploadRecording(mp3Path, channelName);
+            return dropboxUrl;
+        } catch (error) {
+            console.error('Error in conversion and upload:', error);
+            return null;
+        }
     }
 
     private async convertToMp3(pcmPath: string, mp3Path: string): Promise<void> {
