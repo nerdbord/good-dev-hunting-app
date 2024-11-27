@@ -1,7 +1,8 @@
-import { huntyAssistantConversationPrompt } from "./prompts/assistant-conversation";
-import { huntySummarizeConversationPrompt } from "./prompts/summarize-conversation";
+import { answerPrompt } from "./prompts/answer";
+import { summarizeConversationPrompt } from "./prompts/summarize-conversation";
 import { GroqService, type GroqMessageParam } from "../services/groq.service";
 import { approveProfile, rejectProfile, messageProfile } from "./tools/profile.tools";
+import { planPrompt } from "./prompts/plan";
 
 export class AIAgent {
 
@@ -31,7 +32,7 @@ export class AIAgent {
             return response.choices[0].message.content;
         } catch (error) {
             console.error('Error processing message:', error);
-            return "Przepraszam, wystąpił błąd podczas przetwarzania wiadomości.";
+            return "Sorry, something went wrong. Please try again later.";
         }
     }
 
@@ -40,21 +41,7 @@ export class AIAgent {
             messages: [
                 {
                     role: "system",
-                    content: `Based on the user's question and conversation context, determine what actions need to be taken.
-                    Available actions:
-                    - approve_profile: Approve a user's profile
-                    - reject_profile: Reject a user's profile
-                    - message_profile: Send a message to a profile
-                    - none: Just respond to the user normally
-
-                    Return JSON in format:
-                    {
-                        "action": "approve_profile" | "reject_profile" | "message_profile" | "none",
-                        "params": {} // Additional parameters if needed
-                    }
-                    
-                    <conversation_context>${conversationSummary}</conversation_context>
-                    `
+                    content: planPrompt(conversationSummary)
                 },
                 {
                     role: "user",
@@ -92,7 +79,7 @@ export class AIAgent {
             messages: [
                 {
                     role: "system",
-                    content: huntySummarizeConversationPrompt(messages),
+                    content: summarizeConversationPrompt(messages),
                 },
                 ...messages.map(msg => ({
                     role: msg.role,
@@ -126,7 +113,7 @@ export class AIAgent {
             messages: [
                 {
                     role: "system",
-                    content: huntyAssistantConversationPrompt(context)
+                    content: answerPrompt(context)
                 },
                 {
                     role: "user",

@@ -1,6 +1,6 @@
 import { huntyDefaultPrompt } from "./default-knowledge";
 
-export const huntyAssistantConversationPrompt = (conversationSummary: string) => `
+export const answerPrompt = (conversationSummary: string) => `
 
 <objective>
 - Your goal is to support Good Dev Hunting employees. Communicate with them using the knowledge and conversation summary provided below.
