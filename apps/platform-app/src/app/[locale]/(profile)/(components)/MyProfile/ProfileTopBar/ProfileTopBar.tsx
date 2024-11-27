@@ -1,10 +1,10 @@
 import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { EditProfileButton } from '@/app/[locale]/(profile)/(components)/EditProfileButton'
 import { TogglePublishButton } from '@/app/[locale]/(profile)/(components)/TogglePublishButton/TogglePublishButton'
-import ProfileViews from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ProfileViews/ProfileViews'
 import { ToggleOpenToWork } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/ToggleOpenToWork'
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
+import { ProfileViews } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
 import styles from './ProfileTopBar.module.scss'
@@ -28,7 +28,7 @@ const ProfileTopBar = async (props: ProfileTopBarProps) => {
       <div className={styles.mobileProfilePreview}>
         <div className={styles.titleContainer}>
           <span className={styles.title}>{t('preview')}</span>
-          <ProfileViews viewCount={viewCount} />
+          <ProfileViews viewCount={viewCount}>{t('profileViews')}</ProfileViews>
         </div>
 
         {!(isPending || isRejected) && (

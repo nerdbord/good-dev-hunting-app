@@ -1,14 +1,14 @@
-'use client'
-import React, { useState } from 'react'
-import styles from './Tooltip.module.scss'
+"use client";
+import React, { useState } from "react";
+import styles from "./Tooltip.module.scss";
 
 interface TooltipProps {
-  text: string | null
-  children: React.ReactNode
+  text: string | null;
+  children: React.ReactNode;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
-  const [showTooltip, setShowTooltip] = useState(false)
+export const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <div
@@ -23,7 +23,5 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
         </div>
       )}
     </div>
-  )
-}
-
-export default Tooltip
+  );
+};

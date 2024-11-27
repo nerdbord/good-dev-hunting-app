@@ -1,6 +1,6 @@
 import { findAllTeamProfiles } from '@/app/[locale]/(profile)/_actions/queries/findAllTeamProfiles'
 import VerticalCard from '@/components/VerticalCard/VerticalCard'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { getTranslations } from 'next-intl/server'
 import styles from './MeetTeam.module.scss'
 

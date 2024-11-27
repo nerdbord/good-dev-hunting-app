@@ -1,4 +1,12 @@
 {
+  "LocaleSwitcher": {
+    "label": "Język",
+    "dropdownOpenLabel": "Język",
+    "locale": {
+      "pl": "Polski",
+      "en": "English (US)"
+    }
+  },
   "Index": {
     "title": "Trwa ładowanie danych",
     "findtalents": "Poluj na talenty",
@@ -74,7 +82,8 @@
     "sendMessage": "Wyślij wiadmość",
     "changePicture": "Zmień zdjęcie",
     "importFromGithub": "Zaimportuj z Github",
-    "importing": "Importowanie..."
+    "importing": "Importowanie...",
+    "apply": "Zastosuj"
   },
 
   "LandingFooter": {

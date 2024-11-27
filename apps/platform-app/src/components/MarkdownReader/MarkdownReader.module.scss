@@ -9,8 +9,13 @@
     padding-right: $spacing-6;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    margin: 1.414em 0 .5em;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 1.414em 0 0.5em;
     line-height: 1.2;
   }
 
@@ -18,12 +23,15 @@
     margin-top: 0;
   }
 
-  p, a, li {
+  p,
+  a,
+  li {
     margin: 0 0 1.5em;
     line-height: 1.6;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin: 1em 0 1em 2em;
   }
 
@@ -36,7 +44,7 @@
   }
 
   li {
-    margin: .5em 0;
+    margin: 0.5em 0;
   }
 
   a:hover {
@@ -50,8 +58,8 @@
   }
 
   code {
-    padding: .2em .5em;
-    margin: 0 .2em;
+    padding: 0.2em 0.5em;
+    margin: 0 0.2em;
     line-height: 1.6;
   }
 
@@ -67,5 +75,4 @@
       color: #a687ff;
     }
   }
-
 }

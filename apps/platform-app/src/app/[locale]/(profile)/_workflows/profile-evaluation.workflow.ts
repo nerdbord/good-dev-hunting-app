@@ -14,6 +14,7 @@ import {
 } from '@/backend/profile/profile.service'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { analyzeImage } from '@/services/groq.service'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { tool } from '@langchain/core/tools'
 import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
@@ -24,8 +25,9 @@ import { saveRejectingReason } from '@/backend/profile/rejection.service'
 
 const StateAnnotation = Annotation.Root({
   profile: Annotation<ProfileWithRelations>(),
-  evaluation: Annotation<string>(),
-  rejectionReason: Annotation<string>()
+  profileEvaluation: Annotation<string>(),
+  rejectionReason: Annotation<string>(),
+  avatarDescription: Annotation<string>(),
 })
 
 const evaluationModel = new ChatGroq({
@@ -97,7 +99,40 @@ const rejectProfileTool = tool(
   },
 )
 
-const tools = [acceptProfileTool, rejectProfileTool]
+const sendForManualVerificationTool = tool(
+  async (input, config: LangGraphRunnableConfig) => {
+    const { reason } = input
+    const profileId = config.configurable?.profileId
+    const currentState =
+      getContextVariable<typeof StateAnnotation.State>('currentState')
+    if (!currentState) {
+      throw new Error('currentState not found')
+    }
+
+    await sendDiscordNotificationToModeratorChannel(
+      `❓❓❓ AI Workflow doesn't know what to do with ${currentState.profile.fullName} profile. ❓❓❓
+      Reason: ${reason}
+      [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
+    )
+
+    return `Discord notification has been sended. profileId: ${profileId} `
+  },
+  {
+    name: 'send_for_manual_verfication',
+    description: 'Send user apply for manual verfication',
+    schema: z.object({
+      reason: z
+        .string()
+        .describe('The reason why did you rejected user profile'),
+    }),
+  },
+)
+
+const tools = [
+  acceptProfileTool,
+  rejectProfileTool,
+  sendForManualVerificationTool,
+]
 
 async function retrieveProfile(
   state: typeof StateAnnotation.State,
@@ -109,21 +144,53 @@ async function retrieveProfile(
   return { profile: fetchedProfile }
 }
 
+const describeAvatar = async (state: typeof StateAnnotation.State) => {
+  const { user, fullName, userId } = state.profile
+  const { avatarUrl } = user
+
+  if (avatarUrl) {
+    try {
+      const avatarDescription = await analyzeImage(
+        avatarUrl,
+        `What is on the photo, Describe it in one paragraph`,
+      )
+
+      return { avatarDescription }
+    } catch (error) {
+      await sendDiscordNotificationToModeratorChannel(
+        `❗❗❗ AI Workflow occurred error while evaluating the ${fullName} profile. ❗❗❗
+        [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${userId})`,
+      )
+      throw new Error('AI Workflow occurred error while evaluating the profile')
+    }
+  } else {
+    return { avatarDescription: `Blank photo` }
+  }
+}
+
 const evaluateProfileByModel = async (state: typeof StateAnnotation.State) => {
   const { fullName, bio } = state.profile
+  const { avatarDescription } = state
 
   const chain = evaluateProfilePrompt.pipe(evaluationModel)
-  const responseMessage = await chain.invoke({ fullName, bio })
+  const responseMessage = await chain.invoke({
+    fullName,
+    bio,
+    avatarDescription,
+  })
 
-  return { evaluation: responseMessage.content }
+  return { profileEvaluation: responseMessage.content }
 }
 
 const executeDecision = async (state: typeof StateAnnotation.State) => {
-  const { evaluation } = state
+  const { profileEvaluation } = state
 
-  const modelWithTools = executionModel.bindTools(tools)
+  const modelWithTools = executionModel.bindTools(tools, {
+    tool_choice: 'required',
+  })
+
   const chain = executeDecisionPrompt.pipe(modelWithTools)
-  const responseMessage = await chain.invoke({ evaluation })
+  const responseMessage = await chain.invoke({ profileEvaluation })
 
   const messageWithSingleToolCall = new AIMessage({
     content: responseMessage.content,
@@ -141,10 +208,12 @@ const executeDecision = async (state: typeof StateAnnotation.State) => {
 
 const workflow = new StateGraph(StateAnnotation)
   .addNode('retrieveProfile', retrieveProfile)
+  .addNode('describeAvatar', describeAvatar)
   .addNode('evaluateProfile', evaluateProfileByModel)
   .addNode('executeDecision', executeDecision)
   .addEdge(START, 'retrieveProfile')
-  .addEdge('retrieveProfile', 'evaluateProfile')
+  .addEdge('retrieveProfile', 'describeAvatar')
+  .addEdge('describeAvatar', 'evaluateProfile')
   .addEdge('evaluateProfile', 'executeDecision')
   .addEdge('executeDecision', END)
 

@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import { publishProfile } from '../../_actions/mutations/publishProfile'
 import { unpublishProfile } from '../../_actions/mutations/unpublishProfile'
