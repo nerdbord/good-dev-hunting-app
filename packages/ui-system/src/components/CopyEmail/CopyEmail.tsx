@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { EmailIcon } from "../../assets/icons/EmailIcon";
 import styles from "./CopyEmail.module.scss";
 

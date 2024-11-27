@@ -13,6 +13,7 @@ import {
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
+import { saveRejectingReason } from '@/backend/profile/rejection.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { analyzeImage } from '@/services/groq.service'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
@@ -25,6 +26,7 @@ import { executeDecisionPrompt } from './prompts/executeDecisionNode'
 const StateAnnotation = Annotation.Root({
   profile: Annotation<ProfileWithRelations>(),
   profileEvaluation: Annotation<string>(),
+  rejectionReason: Annotation<string>(),
   avatarDescription: Annotation<string>(),
 })
 
@@ -78,6 +80,7 @@ const rejectProfileTool = tool(
     }
 
     updateProfileById(profileId, { state: 'REJECTED' })
+    saveRejectingReason(profileId, reason)
     sendProfileRejectedEmail(currentState.profile.user.email, reason)
     await sendDiscordNotificationToModeratorChannel(
       `⛔️ AI Workflow has rejected ${currentState.profile.fullName} profile. Reason: ${reason} [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,

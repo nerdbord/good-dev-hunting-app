@@ -145,7 +145,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
         return mainMobileButtons
     }
   }
-
   return (
     <header className={styles.wrapper}>
       <Container>

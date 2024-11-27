@@ -173,7 +173,6 @@
     "notAvaible": "Niedostępny do pracy",
     "remote": "Zdalnie"
   },
-
   "ConfirmLeaveModal": {
     "title": "Ukończ swój profil, aby zapisać",
     "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz opuścisz stronę, Twoje postępy zostaną utracone.",
@@ -185,5 +184,11 @@
     "title": "Ukończ swój profil, aby zapisać",
     "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz się wylogujesz, Twoje postępy zostaną utracone.",
     "cancelBtn": "Ukończ profil"
+  },
+  "VerificationModal": {
+    "approvedText": "Twój profil jest już aktywny. Potencjalni partnerzy będą kontaktować się przez e-mail. Upewnij się, że akceptujesz wszystkie zewnętrzne wiadomości!",
+    "approvedHeader": "Gratulacje",
+    "rejectedText": "Na Twój e-mail wysłaliśmy wiadomość z informacjami o tym, co możesz poprawić, aby Twój profil został zaakceptowany.",
+    "rejectedHeader": "Twój profil został odrzucony"
   }
 }
