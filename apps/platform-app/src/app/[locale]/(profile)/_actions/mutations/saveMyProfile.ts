@@ -41,7 +41,7 @@ const profilePendingFields: EditProfileFormFields[] = [
 ]
 
 export const saveMyProfile = withSentry(
-  async (payload: ProfileModel, options?: { saveWithPublish: boolean }) => {
+  async (payload: ProfileModel ) => {
     const { user } = await getAuthorizedUser()
     if (!user) {
       throw new Error('User not found')
@@ -124,14 +124,6 @@ export const saveMyProfile = withSentry(
     }
 
     const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
-
-    // TODO: this will be useful if we'll add "save and publish" button in /my-profile/edit
-    // if (
-    //   options?.saveWithPublish &&
-    //   updatedProfile.state === PublishingState.PENDING
-    // ) {
-    //   await runEvaluateProfileAgent(foundProfile.id)
-    // }
 
     return createProfileModel(updatedProfile)
   },
