@@ -13,6 +13,7 @@ import {
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
+import { saveRejectingReason } from '@/backend/profile/rejection.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { analyzeImage } from '@/services/groq.service'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
@@ -21,7 +22,6 @@ import { Annotation, type LangGraphRunnableConfig } from '@langchain/langgraph'
 import { z } from 'zod'
 import { evaluateProfilePrompt } from './prompts/evaluateProfileNode'
 import { executeDecisionPrompt } from './prompts/executeDecisionNode'
-import { saveRejectingReason } from '@/backend/profile/rejection.service'
 
 const StateAnnotation = Annotation.Root({
   profile: Annotation<ProfileWithRelations>(),

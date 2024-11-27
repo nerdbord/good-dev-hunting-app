@@ -9,7 +9,7 @@ import styles from './VerificationModal.module.scss'
 
 interface VerificationModalProps {
   profileStatus: PublishingState
-  rejectionReason?: string
+  rejectionReason?: string | null
   onClose: () => void
 }
 
@@ -36,7 +36,9 @@ export default async function VerificationModal({
         <h2 className={styles.header}>{headerText}</h2>
         <span className={styles.text}>{bodyText}</span>
         {profileStatus === PublishingState.REJECTED && rejectionReason && (
-          <Accordion title={'Show rejection reason'}>{rejectionReason}</Accordion>
+          <Accordion title={'Show rejection reason'}>
+            {rejectionReason}
+          </Accordion>
         )}
         <Button onClick={onClose} variant="primary">
           Confirm
