@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
-import { PublishProfilePopup } from '@/components/TogglePublishPopup/TogglePublishPopup'
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types'
@@ -13,6 +12,7 @@ import { useTranslations } from 'next-intl'
 import { publishProfile } from '../../_actions/mutations/publishProfile'
 import { unpublishProfile } from '../../_actions/mutations/unpublishProfile'
 import { DevTypeButton } from '../Filters/Buttons/DevTypeButton/DevTypeButton'
+import VerificationModal from '../VerificationModal/VerificationModal'
 
 interface TogglePublishButtonProps {
   profileId: string
@@ -23,6 +23,12 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [showPopup, setShowPopup] = useState(false)
   const { profileId, state } = props
+
+  useEffect(() => {
+    if (state === PublishingState.REJECTED) {
+      setShowPopup(true)
+    }
+  }, [])
 
   const { loading, runAsync } = useAsyncAction()
 
@@ -53,12 +59,15 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
 
   return (
     <div>
-      {showPopup && !loading && (
-        <PublishProfilePopup
-          state={state}
-          onClose={() => setShowPopup(false)}
-        />
-      )}
+      {showPopup &&
+        state !== PublishingState.DRAFT &&
+        state !== PublishingState.PENDING && (
+          <VerificationModal
+            profileId={profileId}
+            profileStatus={state}
+            onClose={async () => setShowPopup(false)}
+          />
+        )}
       {state === PublishingState.REJECTED ? (
         <span className={styles.rejectedInfo}>Rejected</span>
       ) : state === PublishingState.PENDING ? (
