@@ -125,12 +125,13 @@ export const saveMyProfile = withSentry(
 
     const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
 
-    if (
-      options?.saveWithPublish &&
-      updatedProfile.state === PublishingState.PENDING
-    ) {
-      await runEvaluateProfileAgent(foundProfile.id)
-    }
+    // TODO: this will be useful if we'll add "save and publish" button in /my-profile/edit
+    // if (
+    //   options?.saveWithPublish &&
+    //   updatedProfile.state === PublishingState.PENDING
+    // ) {
+    //   await runEvaluateProfileAgent(foundProfile.id)
+    // }
 
     return createProfileModel(updatedProfile)
   },
