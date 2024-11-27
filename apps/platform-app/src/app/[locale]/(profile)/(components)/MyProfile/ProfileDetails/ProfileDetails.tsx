@@ -25,11 +25,10 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
       <section className={styles.container}>
         <div className={styles.mobileView}>
           <EditProfileButton />
-          {/* <TogglePublishButton
+          <TogglePublishButton
             state={profile.state}
             profileId={profile.id}
-            lastRejectionReason={isRejected ? reason : ''}
-          /> */}
+          />
         </div>{' '}
         <div className={styles.left}>
           <div className={styles.techStack}>
