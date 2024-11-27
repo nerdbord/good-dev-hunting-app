@@ -1,12 +1,12 @@
 .container {
-    background: #04080d;
-    padding: 24px;
-    margin: 20px 0;
-    position: relative;
-    
-    @include mobile {
-      position: static;
-      margin: 22px 0;
-      padding: $spacing-4 $spacing-4 40px;
-    }
+  background: #04080d;
+  padding: 24px;
+  margin: 20px 0;
+  position: relative;
+
+  @include mobile {
+    position: static;
+    margin: 22px 0;
+    padding: $spacing-4 $spacing-4 40px;
+  }
 }

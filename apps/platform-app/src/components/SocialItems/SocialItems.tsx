@@ -1,53 +1,35 @@
-import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import { ensureProtocol } from '@/utils/routes'
-
+import { AnchorButton } from '@gdh/ui-system'
+import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
 import styles from './SocialItems.module.scss'
 
 export default function SocialItems({
   githubUsername,
-  linkedIn,
+  linkedInUrl,
   isNerdbordConnected,
 }: {
   githubUsername: string | null
-  linkedIn: string | null
+  linkedInUrl: string | null
   isNerdbordConnected?: boolean
 }) {
   return (
     <div className={styles.social}>
-      <div className={styles.socialItem}>
-        <a
-          href={`https://github.com/${githubUsername}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Github
-          <GithubIcon2 />
-        </a>
-      </div>
-      {linkedIn && (
-        <div className={styles.socialItem}>
-          <a
-            className={styles.socialLink}
-            href={ensureProtocol(linkedIn)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-            <LinkedIn />
-          </a>
-        </div>
+      <AnchorButton
+        href={`https://github.com/${githubUsername}`}
+        icon={<GithubIcon2 />}
+      >
+        Github
+      </AnchorButton>
+      {linkedInUrl && (
+        <AnchorButton href={ensureProtocol(linkedInUrl)} icon={<LinkedIn />}>
+          LinkedIn
+        </AnchorButton>
       )}
+
       {githubUsername && isNerdbordConnected && (
-        <li className={styles.socialItem}>
-          <a
-            className={styles.socialLink}
-            href={`https://nerdbord.io/p/${githubUsername}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Portfolio↗︎
-          </a>
-        </li>
+        <AnchorButton href={`https://nerdbord.io/p/${githubUsername}`}>
+          Portfolio↗︎
+        </AnchorButton>
       )}
     </div>
   )

@@ -1,5 +1,5 @@
 'use client'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'

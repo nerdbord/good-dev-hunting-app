@@ -7,7 +7,7 @@ import {
   mapSpecialization,
 } from '@/app/[locale]/(profile)/profile.mappers'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { Avatar } from '@gdh/ui-system'

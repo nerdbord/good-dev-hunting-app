@@ -11,9 +11,8 @@ import {
   mapSeniorityLevel,
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import Tooltip from '@/components/Tooltip/Tooltip'
 import TechnologiesRenderer from '@/components/renderers/TechnologiesRenderer'
-import { Avatar } from '@gdh/ui-system'
+import { Avatar, Tooltip } from '@gdh/ui-system'
 import { PadlockIcon, SendIcon, ViewIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
 import { useMemo } from 'react'

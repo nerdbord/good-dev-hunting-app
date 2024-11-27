@@ -8,7 +8,7 @@ import TextInput, { type TextInputProps } from '../TextInput/TextInput'
 
 import { LocationPreferencesFormKeys } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import styles from './TextInputWithDropdown.module.scss'
 

@@ -17,7 +17,6 @@ export const Avatar = ({ src, size = 50 }: AvatarProps) => {
         alt="User Avatar"
         width={size}
         height={size}
-        objectFit="cover"
         className={styles.avatar}
       />
     </div>
