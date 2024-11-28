@@ -1,16 +1,7 @@
 import createMiddleware from 'next-intl/middleware'
+import { routing } from './i18n/routing'
 
-export default createMiddleware({
-  // Lista wszystkich obsługiwanych lokalizacji
-  locales: ['en', 'pl'],
-
-  // Domyślna lokalizacja, używana gdy nie można dopasować żadnej innej
-  defaultLocale: 'en',
-
-  // Opcjonalne dodawanie prefiksu lokalizacji tylko gdy jest to niezbędne
-  // Domyślna lokalizacja ('en') nie będzie wymagała prefiksu
-  localePrefix: 'as-needed',
-})
+export default createMiddleware(routing)
 
 export const config = {
   // Match only internationalized pathnames
