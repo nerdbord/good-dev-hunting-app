@@ -37,4 +37,6 @@ export enum I18nNamespaces {
   ConfirmLeaveModal = 'ConfirmLeaveModal',
   ConfirmLogoutModal = 'ConfirmLogoutModal',
   VerificationModal = 'VerificationModal',
+  Jobs = 'Jobs',
+  Hunter = 'Hunter',
 }

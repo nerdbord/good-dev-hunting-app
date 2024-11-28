@@ -18,7 +18,6 @@
     "profileViews": "Profile views",
     "availability": "I’m available for work"
   },
-
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
     "howitworks": "HOW IT WORKS",
@@ -37,24 +36,20 @@
     "titleSix": "Completely free",
     "descriptionFour": "Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
   },
-
   "UserProfile": {
     "howItWork": "Join us in building the largest, free, open source platform dedicated to connecting software engineers with a world of development opportunities.",
     "goBack": "Go back",
     "notOpenForWork": "Not available for new projects"
   },
-
   "TalentSection": {
     "title": "Find your next talent",
     "description": "Explore our growing talents community. Contact as many as you want."
   },
-
   "MeetTeam": {
     "sectionName": "WORKING AS A TEAM",
     "title": "Meet our team",
     "subtitle": "Meet passionates behind the scene"
   },
-
   "Faq": {
     "title": "FAQ",
     "description": "Let us know if you have any questions.",
@@ -67,7 +62,6 @@
     "questionFour": "Do I need to have an account on GitHub?",
     "answerFour": "To create a profile, having a GitHub account is necessary as we want to make sure that you are a real developer. We also use GitHub to fetch your profile picture and other public information to make the process of creating a profile as easy as possible. We do not store any GitHub tokens."
   },
-
   "Buttons": {
     "createProfile": "Create profile",
     "editProfile": "Edit profile",
@@ -84,16 +78,16 @@
     "changePicture": "Change picture",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
-    "apply": "Apply"
+    "apply": "Apply",
+    "postJob": "Post New Job",
+    "createAnotherJob": "Create Another Job"
   },
-
   "LandingFooter": {
     "contact": "Contact",
     "joinOurDiscord": "Join our Discord",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of service"
   },
-
   "DropdownFilter": {
     "technology": "Technology",
     "seniority": "Seniority",
@@ -101,17 +95,14 @@
     "location": "Location",
     "salary": "Salary"
   },
-
   "Search": {
     "searchByName": "Search by name"
   },
-
   "LoginDev": {
     "title": "Login as IT specialist",
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github"
   },
-
   "LoginHunter": {
     "login": "Login as talent Hunter",
     "description": "  Join and login always with magic link. Hunters don't have public profiles.",
@@ -120,7 +111,6 @@
     "policyThree": "Privacy Policy",
     "joinAsAHunter": "Join as a Hunter"
   },
-
   "PersonalInfo": {
     "title": "Personal information",
     "description": "Share personal information to let the recruiters get to know you.",
@@ -132,7 +122,6 @@
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
     "characters": "characters"
   },
-
   "LocationPreferences": {
     "title": "Location preferences",
     "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
@@ -148,7 +137,6 @@
     "languageTooltip": "List the languages you speak fluently",
     "languagePlaceholder": "Start typing..."
   },
-
   "WorkInformation": {
     "title": "Work information",
     "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
@@ -168,21 +156,18 @@
     "employPart": "Part-time",
     "employContract": "Contract"
   },
-
   "VerticalCard": {
     "fullTime": "Available for full-time",
     "contratAvaible": "Available for a contract",
     "notAvaible": "Not available for work",
     "remote": "Remote"
   },
-
   "ConfirmLeaveModal": {
     "title": "Finish your Profile to Save",
     "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
     "leaveBtn": "Leave Page",
     "cancelBtn": "Finish Profile"
   },
-
   "ConfirmLogoutModal": {
     "title": "Finish your Profile to Save",
     "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
@@ -193,5 +178,41 @@
     "approvedHeader": "Congratulations",
     "rejectedText": "On your email we’ve sent you a message with information what you can improve to have your profile acceted.",
     "rejectedHeader": "Your profile was rejected"
+  },
+  "Jobs": {
+    "postJobTitle": "Post a New Job",
+    "comingSoon": "Job posting form coming soon...",
+    "submit": "Submit Job Post",
+    "applyForJob": "Apply for Job",
+    "applicationFormComingSoon": "Application form coming soon...",
+    "submitApplication": "Submit Application",
+    "jobDetails": "Job Details"
+  },
+  "Hunter": {
+    "hero": "Find Trustworthy IT Specialists",
+    "trustworthy": "Post your job and get matched with verified tech talent",
+    "howItWorks": "How It Works",
+    "post": "Post Your Job",
+    "postDesc": "Create a job post and our system automatically converts it into a detailed brief",
+    "match": "Get Matched",
+    "matchDesc": "Your job is sent to matched profiles with the right skills and experience",
+    "connect": "Connect & Agree",
+    "connectDesc": "Schedule video calls with applicants and set agreements directly",
+    "benefits": "Why Choose Us",
+    "verifiedTitle": "Verified Talent",
+    "verifiedDesc": "All developers are verified through their GitHub profiles and past work",
+    "speedTitle": "Quick Matching",
+    "speedDesc": "Our system automatically matches your job with the right specialists",
+    "secureTitle": "Secure Process",
+    "secureDesc": "Direct communication and secure agreement process",
+    "successStories": "Success Stories",
+    "story1Quote": "Found an amazing developer within days. The matching system really works!",
+    "story1Author": "Sarah Johnson",
+    "story1Role": "Project Manager",
+    "story2Quote": "The verification process gives real peace of mind when hiring",
+    "story2Author": "Mike Brown",
+    "story2Role": "Startup Founder",
+    "ctaTitle": "Ready to Find Your Developer?",
+    "ctaDesc": "Post your job now and get matched with verified specialists"
   }
 }
