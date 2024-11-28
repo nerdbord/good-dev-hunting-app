@@ -21,6 +21,7 @@ ENV GROQ_API_KEY=""
 ENV DISCORD_BOT_ID=""
 ENV GDH_API_KEY=""
 ENV GDH_API_URL=""
+ENV DROPBOX_ACCESS_TOKEN=""
 
 # Start the bot
 CMD ["bun", "run", "start"]
