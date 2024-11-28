@@ -7,7 +7,7 @@ import styles from './HunterHeader.module.scss'
 
 const HunterHeader = () => {
   const pathname = usePathname()
-  const isJobsPostPath = pathname?.includes('/jobs/post')
+  const isJobsPostPath = pathname?.includes('/jobs/add')
 
   return (
     <header className={styles.wrapper}>

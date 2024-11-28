@@ -10,7 +10,7 @@ export enum AppRoutes {
   profile = '/p',
   signIn = '/signin',
   error = '/error',
-  postJob = '/jobs/post',
+  postJob = '/jobs/add',
   jobs = '/jobs',
   job = '/jobs/:id',
 }
