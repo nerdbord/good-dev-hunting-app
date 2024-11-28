@@ -1,4 +1,4 @@
-import { DiscordBot } from './interface/discord';
+import { DiscordBot } from './interface/discord/bot';
 
 if (!Bun.env.DISCORD_BOT_TOKEN) {
     throw new Error('DISCORD_BOT_TOKEN is not set');
