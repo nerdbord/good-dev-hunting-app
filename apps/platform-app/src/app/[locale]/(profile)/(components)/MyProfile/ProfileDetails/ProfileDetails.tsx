@@ -21,10 +21,7 @@ const ProfileDetails = async (props: ProfileDetailsProps) => {
       <section className={styles.container}>
         <div className={styles.mobileView}>
           <EditProfileButton />
-          <TogglePublishButton
-            state={profile.state}
-            profileId={profile.id}
-          />
+          <TogglePublishButton state={profile.state} profileId={profile.id} />
         </div>{' '}
         <div className={styles.left}>
           <div className={styles.techStack}>
