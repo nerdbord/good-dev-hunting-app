@@ -15,6 +15,7 @@ import styles from './PersonalInfo.module.scss'
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',
   CONTACT_EMAIL = 'contactEmail',
+  SLUG = 'slug',
   LINKEDIN = 'linkedin',
   BIO = 'bio',
 }
@@ -50,20 +51,37 @@ const PersonalInfo = () => {
             maxLength={40}
           />
         </InputFormError>
-        <div className={styles.emailContainer}>
-          <TextInput
-            label={t('email')}
-            value={session?.user?.email || ''}
-            onChange={handleChange}
-            addImportantIcon={true}
-            name={PersonalInfoFormKeys.CONTACT_EMAIL}
-            disabled={true}
-            tooltipText={t('emailTooltip')}
-            dataTestId=""
-            maxLength={30}
-          />
-        </div>
+        <TextInput
+          label={t('email')}
+          value={session?.user?.email || ''}
+          onChange={handleChange}
+          addImportantIcon={true}
+          name={PersonalInfoFormKeys.CONTACT_EMAIL}
+          disabled={true}
+          tooltipText={t('emailTooltip')}
+          dataTestId=""
+          maxLength={30}
+        />
         <UserPhotoUploader />
+        <InputFormError
+          error={
+            touched[PersonalInfoFormKeys.SLUG] &&
+            errors[PersonalInfoFormKeys.SLUG]
+          }
+        >
+          <TextInput
+            addImportantIcon={true}
+            tooltipText={t('slugTooltip')}
+            onBlur={handleBlur}
+            label={t('slug')}
+            placeholder="eg. codemaster"
+            value={values[PersonalInfoFormKeys.SLUG]}
+            onChange={handleChange}
+            name={PersonalInfoFormKeys.SLUG}
+            dataTestId={PersonalInfoFormKeys.SLUG}
+            maxLength={40}
+          />
+        </InputFormError>
         <InputFormError
           error={
             touched[PersonalInfoFormKeys.LINKEDIN] &&

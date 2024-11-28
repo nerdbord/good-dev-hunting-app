@@ -67,6 +67,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
       return {
+        slug: '',
         fullName: '',
         linkedin: '',
         bio: '',
@@ -95,6 +96,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const handleEditProfile = async (values: ProfileFormValues) => {
     const updateParams: ProfileModel = {
       ...profile,
+      slug: values.slug,
       fullName: values.fullName,
       avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,

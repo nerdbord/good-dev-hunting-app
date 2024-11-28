@@ -8,12 +8,10 @@ import {
 } from '@/app/[locale]/(profile)/profile.mappers'
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { I18nNamespaces } from '@/i18n'
-import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { Avatar } from '@gdh/ui-system'
 import { EmploymentType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
-import { usePlausible } from 'next-plausible'
 import { useRouter } from 'next/navigation'
 import { useMemo, type PropsWithChildren } from 'react'
 import styles from './VerticalCard.module.scss'
@@ -25,16 +23,15 @@ const VerticalCard = (
     country: ProfileModel['country']
     employmentTypes: ProfileModel['employmentTypes']
     fullName: ProfileModel['fullName']
-    githubUsername: ProfileModel['githubUsername']
     isOpenForWork: ProfileModel['isOpenForWork']
     position: ProfileModel['position']
     remoteOnly: ProfileModel['remoteOnly']
     seniority: ProfileModel['seniority']
     techStack: ProfileModel['techStack']
+    slug: ProfileModel['slug']
   }>,
 ) => {
   const router = useRouter()
-  const plausible = usePlausible()
   const t = useTranslations(I18nNamespaces.VerticalCard)
 
   const {
@@ -43,12 +40,12 @@ const VerticalCard = (
     country,
     employmentTypes,
     fullName,
-    githubUsername,
     isOpenForWork,
     position,
     remoteOnly,
     seniority,
     techStack,
+    slug,
   } = props
 
   const technologies = techStack.map((tech, index) => {
@@ -62,10 +59,7 @@ const VerticalCard = (
   })
 
   const handleOpenProfile = () => {
-    plausible(PlausibleEvents.OpenProfile, {
-      props: { username: githubUsername },
-    })
-    router.push(`${AppRoutes.profile}/${githubUsername}`)
+    router.push(`${AppRoutes.profile}/${slug}`)
   }
 
   const specializationTheme = useMemo(

@@ -59,6 +59,7 @@ export async function createUserProfile(
       user: {
         connect: { email },
       },
+      slug: profileData.slug,
       fullName: profileData.fullName,
       linkedIn: profileData.linkedIn,
       bio: profileData.bio,
@@ -166,6 +167,18 @@ export async function findProfileById(id: string) {
 export async function getProfileByUserId(userId: string) {
   const profile = await prisma.profile.findFirst({
     where: { userId },
+    include: includeObject.include,
+  })
+
+  if (profile) {
+    return profile
+  }
+
+  return null
+}
+export async function getProfileBySlug(slug: Profile['slug']) {
+  const profile = await prisma.profile.findFirst({
+    where: { slug },
     include: includeObject.include,
   })
 

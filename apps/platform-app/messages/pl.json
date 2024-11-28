@@ -122,7 +122,9 @@
     "linkedin": "Wklej link do swojego profilu",
     "bio": "Pozwól innym Cię poznać - napisz kilka zdań o sobie.",
     "bioPlaceholder": "Możesz użyć **markdown** do formatowania tekstu. [Linki](https://devhunting.co) są również obsługiwane.",
-    "characters": "znaki"
+    "characters": "znaki",
+    "slug": "Własny URL",
+    "slugTooltip": "Wybierz unikalną nazwę dla swojego linku do profilu (np. mistrzkodu)"
   },
 
   "LocationPreferences": {

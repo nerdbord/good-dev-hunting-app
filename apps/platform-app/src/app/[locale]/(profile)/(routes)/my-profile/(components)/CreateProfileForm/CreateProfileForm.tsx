@@ -28,6 +28,7 @@ import {
 } from '../FormStateMonitor/FormStateMonitor'
 
 const initialValues: CreateProfileFormValues = {
+  slug: '',
   fullName: '',
   linkedin: '',
   bio: '',
@@ -49,6 +50,7 @@ const initialValues: CreateProfileFormValues = {
 }
 
 export const validationSchema = Yup.object().shape({
+  slug: Yup.string().required('Slug is required'),
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
@@ -88,6 +90,8 @@ const CreateProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
+  const user = session?.user
+  user?.githubUsername && (initialValues.slug = user.githubUsername || '')
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -99,8 +103,9 @@ const CreateProfileForm = () => {
     }
 
     const payload: ProfileCreateParams = {
+      slug: values.slug,
       fullName: values.fullName,
-      avatarUrl: session?.user?.avatarUrl || null,
+      avatarUrl: user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -137,8 +142,9 @@ const CreateProfileForm = () => {
         if (createdProfile) {
           updateSession({
             ...session?.user,
-            name: payload.fullName,
+            name: createdProfile.fullName,
             profileId: createdProfile.id,
+            profileSlug: createdProfile.slug,
           })
           router.push(AppRoutes.myProfile)
         }
