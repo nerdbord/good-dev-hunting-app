@@ -1,0 +1,19 @@
+.wrapper {
+    padding: 24px;
+}
+
+.formBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #04080d;
+    padding: 40px;
+    margin-bottom: 24px;
+}
+
+.placeholder {
+    text-align: center;
+    color: #69717b;
+    font-size: 18px;
+    padding: 20px;
+}

@@ -1,0 +1,6 @@
+export { default as MatchIcon } from './MatchIcon'
+export { default as PostIcon } from './PostIcon'
+export { default as ShieldIcon } from './ShieldIcon'
+export { default as SpeedIcon } from './SpeedIcon'
+export { default as VerifiedIcon } from './VerifiedIcon'
+export { default as VideoCallIcon } from './VideoCallIcon'
