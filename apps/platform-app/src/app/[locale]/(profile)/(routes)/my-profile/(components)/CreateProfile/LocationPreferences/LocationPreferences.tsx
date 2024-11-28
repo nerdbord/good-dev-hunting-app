@@ -5,11 +5,10 @@ import type {
   DropdownOption,
 } from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
-import SwitchInput from '@/components/Switch/Switch'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
-import { I18nNamespaces } from '@/i18n'
-import { CheckboxInput } from '@gdh/ui-system'
+import { I18nNamespaces } from '@/i18n/request'
+import { CheckboxInput, Switch } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import styles from './LocationPreferences.module.scss'
@@ -135,7 +134,7 @@ const LocationPreferences = () => {
             dataTestId={LocationPreferencesFormKeys.OPEN_FOR_CITY_RELOCATION}
           />
         </div>
-        <SwitchInput
+        <Switch
           id={LocationPreferencesFormKeys.REMOTE_ONLY + 2}
           checked={values[LocationPreferencesFormKeys.REMOTE_ONLY]}
           label={t('remontOnly')}

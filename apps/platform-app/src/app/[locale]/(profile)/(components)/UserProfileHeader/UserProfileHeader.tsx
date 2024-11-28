@@ -2,7 +2,8 @@ import ContactBtn from '@/app/[locale]/(profile)/(components)/ContactForm/Contac
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
+import { ensureProtocol } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import classNames from 'classnames/bind'
 import { getTranslations } from 'next-intl/server'
@@ -44,7 +45,7 @@ export default async function UserProfileHeader({
         <div className={styles.socialItemsWrapper}>
           <SocialItems
             githubUsername={profile.githubUsername}
-            linkedIn={profile.linkedIn}
+            linkedInUrl={ensureProtocol(profile.linkedIn || '')}
             isNerdbordConnected={isNerdbordConnected}
           />
         </div>

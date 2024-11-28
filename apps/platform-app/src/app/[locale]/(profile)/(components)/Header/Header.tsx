@@ -8,8 +8,7 @@ import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
-import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
-import LoginBtn from '@/components/LoginBtn/LoginBtn'
+
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
 import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
@@ -17,6 +16,7 @@ import { Container, GitHubStarsButton } from '@gdh/ui-system'
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
 import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
+import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
@@ -30,8 +30,9 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
   const mainDesktopButtons = (
     <>
       <li>
-        <FindTalentsBtn variant="tertiary" />
+        <LocaleSwitcher />
       </li>
+
       <li>
         <LoginBtnsWrapper />
       </li>
@@ -50,7 +51,11 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     </li>
   ) : (
     <li>
-      <LoginBtn variant="tertiary">Login</LoginBtn>
+      <HamburgerMenuMobileBtn
+        userHasProfile={false}
+        userIsModerator={false}
+        userIsHunter={false}
+      />
     </li>
   )
 
@@ -73,9 +78,14 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
   const renderDesktopContent = () => {
     if (buttonsVariant === 'signin') {
       return (
-        <li>
-          <CreateProfileBtn data-testid="create-profile-button" />
-        </li>
+        <>
+          <li>
+            <LocaleSwitcher />
+          </li>
+          <li>
+            <CreateProfileBtn data-testid="create-profile-button" />
+          </li>
+        </>
       )
     }
     if (user) {
@@ -98,14 +108,24 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
           ) : (
             <>
               {!userHasProfile && (
-                <li>
-                  <CreateProfileBtn data-testid="create-profile-button" />
-                </li>
+                <>
+                  <li>
+                    <LocaleSwitcher />
+                  </li>
+                  <li>
+                    <CreateProfileBtn data-testid="create-profile-button" />
+                  </li>
+                </>
               )}
               {userHasProfile && (
-                <li>
-                  <GithubAcc />
-                </li>
+                <>
+                  <li>
+                    <LocaleSwitcher />
+                  </li>
+                  <li>
+                    <GithubAcc />
+                  </li>
+                </>
               )}
             </>
           )}
@@ -125,7 +145,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
         return mainMobileButtons
     }
   }
-
   return (
     <header className={styles.wrapper}>
       <Container>

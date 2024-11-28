@@ -1,6 +1,6 @@
 'use client'
 import { useUploadContext } from '@/contexts/UploadContext'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
@@ -32,8 +32,8 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           {pathname === AppRoutes.createProfile
             ? t('createProfile')
             : pathname === AppRoutes.editProfile
-              ? t('editProfile')
-              : t('myProfile')}
+            ? t('editProfile')
+            : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>

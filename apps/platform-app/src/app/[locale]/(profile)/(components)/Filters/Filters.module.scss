@@ -17,14 +17,13 @@
   gap: 10px;
   width: 100%;
   padding-bottom: 10px;
-  
+
   @include mobile {
     overflow-x: auto;
     white-space: nowrap;
 
     @include custom-scrollbar;
   }
-  
 }
 
 .features {

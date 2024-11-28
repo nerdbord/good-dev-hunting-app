@@ -10,6 +10,7 @@ interface ProfileDetailsProps {
 
 const ProfileDetails = async (props: ProfileDetailsProps) => {
   const profile = await findProfileById(props.profileId)
+
   const sortedLanguages =
     profile?.language.sort((a, b) => a.name.localeCompare(b.name)) || []
   const sortedTechStack =

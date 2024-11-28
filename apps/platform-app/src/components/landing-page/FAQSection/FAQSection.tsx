@@ -1,4 +1,4 @@
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Accordion } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './FAQSection.module.scss'

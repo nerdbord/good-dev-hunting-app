@@ -18,9 +18,9 @@
 }
 
 .data {
- display: flex;
- flex-direction: column;
- gap: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .nameContainer {
@@ -32,7 +32,7 @@
 .name {
   display: flex;
   align-items: center;
-  gap:5px;
+  gap: 5px;
   color: #ffffff;
   font-weight: 500;
   font-size: 20px;
@@ -40,7 +40,7 @@
   overflow-wrap: break-word;
 
   &.active {
-    color: #5E28F6;
+    color: #5e28f6;
   }
 }
 

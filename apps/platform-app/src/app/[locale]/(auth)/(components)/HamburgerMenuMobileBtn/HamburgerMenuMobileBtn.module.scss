@@ -43,7 +43,28 @@
   gap: 15px;
 
   button {
-    // width: 101px;
     height: 44px;
+  }
+}
+
+.fixedButtons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background-color: #04080d;
+  border: 1px solid #04080d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-3;
+  z-index: 1001;
+  margin-bottom: -400px;
+
+  button {
+    width: fit-content;
+    padding-top: 15px;
+    padding-bottom: 16px;
   }
 }

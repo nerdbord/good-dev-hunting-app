@@ -1,19 +1,23 @@
+import { routing } from '@/i18n/routing'
 import { getRequestConfig } from 'next-intl/server'
 
-const locales = ['en', 'pl']
+export default getRequestConfig(async ({ requestLocale }) => {
+  // This typically corresponds to the `[locale]` segment.
+  let locale = await requestLocale
 
-export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale)) {
-    // Tu można zwrócić domyślne tłumaczenia lub pusty obiekt
-    return { messages: {} }
+  // Ensure that a valid locale is used
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale
   }
 
   return {
-    messages: (await import(`../messages/${locale}.json`)).default,
+    locale,
+    messages: (await import(`../../messages/${locale}.json`)).default,
   }
 })
 
 export enum I18nNamespaces {
+  LocaleSwitcher = 'LocaleSwitcher',
   Index = 'Index',
   HowItWorks = 'HowItWorks',
   UserProfile = 'UserProfile',
@@ -32,4 +36,5 @@ export enum I18nNamespaces {
   VerticalCard = 'VerticalCard',
   ConfirmLeaveModal = 'ConfirmLeaveModal',
   ConfirmLogoutModal = 'ConfirmLogoutModal',
+  VerificationModal = 'VerificationModal',
 }

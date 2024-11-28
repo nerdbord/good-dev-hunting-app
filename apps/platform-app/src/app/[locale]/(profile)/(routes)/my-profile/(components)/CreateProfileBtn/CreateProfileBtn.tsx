@@ -1,13 +1,16 @@
 'use client'
+import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { AddIcon } from '@gdh/ui-system/icons'
 import { signIn, useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const CreateProfileBtn = () => {
   const [isCalled, setIsCalled] = useState(false)
+  const t = useTranslations(I18nNamespaces.Buttons)
 
   const router = useRouter()
   const path = usePathname()
@@ -35,7 +38,7 @@ const CreateProfileBtn = () => {
       variant={'primary'}
       dataTestId="createProfileButton"
     >
-      Create profile
+      {t('createProfile')}
       <AddIcon />
     </Button>
   )

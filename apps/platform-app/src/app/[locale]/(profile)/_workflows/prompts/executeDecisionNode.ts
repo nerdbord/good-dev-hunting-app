@@ -5,10 +5,11 @@ import {
 } from '@langchain/core/prompts'
 
 const systemMessage = new SystemMessage(
-  `You are a helpful assistant. Based on the evaluation submitted by the user, invoke the tool to accept or reject the given profile.`,
+  `You are a helpful assistant. Invoke tool based on user message`,
 )
 
-const humanMessage = HumanMessagePromptTemplate.fromTemplate(`{evaluation}`)
+const humanMessage =
+  HumanMessagePromptTemplate.fromTemplate(`{profileEvaluation}`)
 
 export const executeDecisionPrompt = ChatPromptTemplate.fromMessages([
   systemMessage,
