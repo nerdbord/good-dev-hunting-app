@@ -1,5 +1,4 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import dynamic from 'next/dynamic'
 
 import {
   getHourlyRateDisplay,
@@ -142,4 +141,4 @@ const ProfileCard = ({
   )
 }
 
-export default dynamic(() => Promise.resolve(ProfileCard), { ssr: false })
+export default ProfileCard
