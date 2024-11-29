@@ -214,5 +214,10 @@
     "story2Role": "Startup Founder",
     "ctaTitle": "Ready to Find Your Developer?",
     "ctaDesc": "Post your job now and get matched with verified specialists"
+  },
+  "Applications": {
+    "applicationDetails": "Application Details",
+    "applicantInfo": "Applicant Info",
+    "actions": "Actions"
   }
 }

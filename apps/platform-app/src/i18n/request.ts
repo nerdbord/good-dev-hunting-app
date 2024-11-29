@@ -39,4 +39,5 @@ export enum I18nNamespaces {
   VerificationModal = 'VerificationModal',
   Jobs = 'Jobs',
   Hunter = 'Hunter',
+  Applications = 'Applications',
 }

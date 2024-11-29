@@ -214,5 +214,10 @@
     "story2Role": "Założyciel Startupu",
     "ctaTitle": "Gotowy Znaleźć Swojego Programistę?",
     "ctaDesc": "Opublikuj ofertę teraz i znajdź zweryfikowanych specjalistów"
+  },
+  "Applications": {
+    "applicationDetails": "Szczegóły aplikacji",
+    "applicantInfo": "Informacje o aplikującym",
+    "actions": "Akcje"
   }
 }
