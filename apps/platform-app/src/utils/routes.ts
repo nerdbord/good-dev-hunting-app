@@ -13,6 +13,8 @@ export enum AppRoutes {
   postJob = '/jobs/add',
   jobs = '/jobs',
   job = '/jobs/:id',
+  jobEdit = '/jobs/:id/edit',
+  application = '/applications/:id',
 }
 
 export const removeLocaleFromPath = (pathname: string, locale: string) => {
@@ -29,3 +31,5 @@ export const ensureProtocol = (url: string) => {
 }
 
 export const getJobRoute = (id: string) => AppRoutes.job.replace(':id', id)
+export const getApplicationRoute = (id: string) =>
+  AppRoutes.application.replace(':id', id)

@@ -29,7 +29,7 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {({ handleSubmit }) => (
-        <div className={styles.wrapper}>
+        <div>
           <div className={styles.formBox}>
             <div className={styles.placeholder}>
               {t('applicationFormComingSoon')}
