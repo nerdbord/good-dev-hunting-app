@@ -284,3 +284,20 @@ export async function findProfileViewByViewerIdAndProfileId(
 
   return profileView
 }
+
+export async function getRandomApprovedProfiles(take: number) {
+  const profiles = await prisma.profile.findMany({
+    take,
+    where: {
+      state: PublishingState.APPROVED,
+      isOpenForWork: true,
+    },
+    orderBy: {
+      // This creates random ordering
+      createdAt: 'desc',
+    },
+    include: includeObject.include,
+  })
+
+  return profiles
+}
