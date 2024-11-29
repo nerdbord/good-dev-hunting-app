@@ -55,12 +55,11 @@ model VerificationToken {
 }
 
 model Profile {
-  id         String      @id @default(uuid())
-  user       User        @relation(fields: [userId], references: [id])
-  userId     String      @unique
-  fullName   String
-  cvDocument CvDocument?
-
+  id                       String            @id @default(uuid())
+  user                     User              @relation(fields: [userId], references: [id])
+  userId                   String            @unique
+  fullName                 String
+  cvUrl                    String?
   linkedIn                 String?
   bio                      String
   country                  Country           @relation(fields: [countryId], references: [id])
@@ -86,17 +85,6 @@ model Profile {
   updatedAt                DateTime?         @updatedAt
   profileViews             ProfileView[]
   language                 Language[]
-}
-
-model CvDocument {
-  id        String         @id @default(uuid())
-  name      String
-  type      CvDocumentType
-  size      Int
-  url       String
-  createdAt DateTime       @default(now())
-  profile   Profile        @relation(fields: [profileId], references: [id])
-  profileId String         @unique
 }
 
 model Technology {
@@ -185,9 +173,4 @@ enum PublishingState {
   PENDING
   APPROVED
   REJECTED
-}
-
-enum CvDocumentType {
-  PDF
-  DOCX
 }
