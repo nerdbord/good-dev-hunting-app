@@ -132,7 +132,16 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
       savedProfile &&
-        updateSession({ ...session?.user, name: savedProfile.fullName })
+        updateSession({
+          ...session,
+          user: {
+            ...session?.user,
+            avatarUrl: savedProfile.avatarUrl,
+            name: savedProfile.fullName,
+            profileId: savedProfile.id,
+            profileSlug: savedProfile.slug,
+          },
+        })
 
       router.push(AppRoutes.myProfile)
     })

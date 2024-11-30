@@ -141,10 +141,14 @@ const CreateProfileForm = () => {
 
         if (createdProfile) {
           updateSession({
-            ...session?.user,
-            name: createdProfile.fullName,
-            profileId: createdProfile.id,
-            profileSlug: createdProfile.slug,
+            ...session,
+            user: {
+              ...session?.user,
+              avatarUrl: createdProfile.avatarUrl,
+              name: createdProfile.fullName,
+              profileId: createdProfile.id,
+              profileSlug: createdProfile.slug,
+            },
           })
           router.push(AppRoutes.myProfile)
         }

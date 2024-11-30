@@ -26,6 +26,7 @@ declare module 'next-auth' {
       roles: Role[]
       profileId: string | null
       githubUsername: string | null
+      profileSlug: string | null
     }
     provider: string
   }
@@ -41,6 +42,7 @@ declare module 'next-auth/jwt' {
     roles: Role[]
     profileId: string | null
     githubUsername: string | null
-    provider: string | null
+    provider: string
+    profileSlug: string | null
   }
 }
