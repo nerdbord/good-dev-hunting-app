@@ -27,28 +27,6 @@ import {
   FormNavigationWarning,
 } from '../FormStateMonitor/FormStateMonitor'
 
-const initialValues: CreateProfileFormValues = {
-  slug: '',
-  fullName: '',
-  linkedin: '',
-  bio: '',
-  country: '',
-  city: '',
-  openForCountryRelocation: false,
-  openForCityRelocation: false,
-  remoteOnly: false,
-  position: { name: '', value: '' },
-  seniority: { name: '', value: '' },
-  employment: [],
-  techStack: [],
-  state: PublishingState.DRAFT,
-  terms: false,
-  hourlyRateMin: 0,
-  hourlyRateMax: 0,
-  currency: Currency.PLN,
-  language: [],
-}
-
 export const validationSchema = Yup.object().shape({
   slug: Yup.string().required('Slug is required'),
   fullName: Yup.string().required('Name is required'),
@@ -90,8 +68,28 @@ const CreateProfileForm = () => {
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
-  const user = session?.user
-  user?.githubUsername && (initialValues.slug = user.githubUsername || '')
+
+  const initialValues: CreateProfileFormValues = {
+    slug: session?.user.githubUsername || '',
+    fullName: session?.user.name || '',
+    linkedin: '',
+    bio: '',
+    country: '',
+    city: '',
+    openForCountryRelocation: false,
+    openForCityRelocation: false,
+    remoteOnly: false,
+    position: { name: '', value: '' },
+    seniority: { name: '', value: '' },
+    employment: [],
+    techStack: [],
+    state: PublishingState.DRAFT,
+    terms: false,
+    hourlyRateMin: 0,
+    hourlyRateMax: 0,
+    currency: Currency.PLN,
+    language: [],
+  }
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -105,7 +103,7 @@ const CreateProfileForm = () => {
     const payload: ProfileCreateParams = {
       slug: values.slug,
       fullName: values.fullName,
-      avatarUrl: user?.avatarUrl || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
