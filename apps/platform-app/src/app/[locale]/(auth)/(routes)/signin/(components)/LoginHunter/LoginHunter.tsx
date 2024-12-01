@@ -1,6 +1,6 @@
 'use client'
 
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Role } from '@prisma/client'
 import { signIn } from 'next-auth/react'

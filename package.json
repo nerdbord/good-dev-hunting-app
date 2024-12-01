@@ -14,9 +14,12 @@
     "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "apps/platform-app/**/*.{ts,tsx}": [
       "npm run lint -w apps/platform-app",
       "npm run format:staged -w apps/platform-app"
+    ],
+    "apps/hunty-ai-bot/**/*.{ts,tsx}": [
+      "npm run lint -w apps/hunty-ai-bot"
     ]
   },
   "devDependencies": {
@@ -24,8 +27,5 @@
     "@commitlint/config-conventional": "^17.6.3",
     "husky": "^8.0.0",
     "lint-staged": "^15.1.0"
-  },
-  "dependencies": {
-    "zustand": "^4.5.4"
   }
 }

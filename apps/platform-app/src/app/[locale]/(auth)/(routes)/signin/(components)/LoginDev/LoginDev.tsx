@@ -1,9 +1,10 @@
+import { I18nNamespaces } from '@/i18n/request'
+import { useTranslations } from 'next-intl'
+
 // components
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
-import { I18nNamespaces } from '@/i18n'
 import { Box } from '@gdh/ui-system'
-import { useTranslations } from 'next-intl'
 
 const LoginDev = () => {
   const t = useTranslations(I18nNamespaces.LoginDev)

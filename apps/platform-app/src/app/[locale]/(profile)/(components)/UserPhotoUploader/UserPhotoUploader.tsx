@@ -1,7 +1,7 @@
 'use client'
 import { fetchMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/fetchMyAvatar'
 import { useUploadContext } from '@/contexts/UploadContext'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { Avatar, Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useSession } from 'next-auth/react'

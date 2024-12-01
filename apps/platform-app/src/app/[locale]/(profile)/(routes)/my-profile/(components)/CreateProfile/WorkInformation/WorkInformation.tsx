@@ -14,7 +14,7 @@ import { useFormikContext } from 'formik'
 
 import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import { I18nNamespaces } from '@/i18n'
+import { I18nNamespaces } from '@/i18n/request'
 import { type DropdownOption } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './WorkInformations.module.scss'

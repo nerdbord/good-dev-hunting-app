@@ -5,7 +5,6 @@ import {
   createProfileModel,
   type ProfileModel,
 } from '@/app/[locale]/(profile)/_models/profile.model'
-import { runEvaluateProfileAgent } from '@/app/[locale]/(profile)/_workflows/profile-evaluation.workflow'
 import {
   hasCommonFields,
   hasProfileValuesChanged,
@@ -58,7 +57,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   }
 
   const updatedState = hasCommonFields(changedFields, profilePendingFields)
-    ? PublishingState.PENDING
+    ? PublishingState.DRAFT
     : payload.state
 
   const updatedTechStack = payload.techStack.map((tech) => tech.name)
@@ -125,10 +124,6 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   }
 
   const updatedProfile = await updateProfileById(foundProfile.id, updatedData)
-
-  if (updatedProfile.state === PublishingState.PENDING) {
-    await runEvaluateProfileAgent(foundProfile.id)
-  }
 
   return createProfileModel(updatedProfile)
 })

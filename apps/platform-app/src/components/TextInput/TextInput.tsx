@@ -1,7 +1,7 @@
 'use client'
+import { Tooltip } from '@gdh/ui-system'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import React, { useState } from 'react'
-import Tooltip from '../Tooltip/Tooltip'
 import styles from './TextInput.module.scss'
 
 export interface TextInputProps {
