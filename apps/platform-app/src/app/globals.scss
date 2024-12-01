@@ -49,3 +49,41 @@ h5,
 h6 {
   background: none;
 }
+
+// globals.scss
+:root {
+  // Domyślne ustawienia dla dark mode
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --button-bg: #333333;
+  --button-text: #ffffff;
+  --nav-text: #ffffff;
+  --link-color: #ffffff;
+}
+
+// Opcjonalnie: light mode
+.light {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --button-bg: #f0f0f0;
+  --button-text: #000000;
+  --nav-text: #000000;
+  --link-color: #000000;
+}
+
+// Globalne style dla body/html
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Opcjonalne style dla elementów, które chcesz od razu stylować globalnymi zmiennymi
+a {
+  color: var(--link-color);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
