@@ -110,7 +110,8 @@
     "title": "Login as IT specialist",
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github",
-    "loginWithLinkedin": "Login with LinkedIn"
+    "loginWithLinkedin": "Login with LinkedIn",
+    "or": "or"
   },
 
   "LoginHunter": {
@@ -120,7 +121,8 @@
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
     "joinAsAHunter": "Join as a Hunter",
-    "loginWithLinkedin": "Login with LinkedIn"
+    "loginWithLinkedin": "Login with LinkedIn",
+    "or": "or"
   },
 
   "PersonalInfo": {

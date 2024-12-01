@@ -84,10 +84,13 @@ export const UserPhotoUploader = () => {
                 {t('changePicture')}{' '}
               </label>
             </Button>
-            <GithubUserPhotoUploader
-              setImage={setUserImage}
-              showError={setImageUploadError}
-            />
+            {/* TODO LinkedIn photo uploder */}
+            {session?.user.githubUsername && (
+              <GithubUserPhotoUploader
+                setImage={setUserImage}
+                showError={setImageUploadError}
+              />
+            )}
           </div>
         </div>
       </div>

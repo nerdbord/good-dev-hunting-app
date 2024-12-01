@@ -1,6 +1,7 @@
 'use client'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
+import { LinkedIn } from '@gdh/ui-system/icons'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import styles from '../GithubLoginButton/GithubLoginButton.module.scss'
@@ -24,7 +25,9 @@ export const LinkedInLoginButton = (props: LinkedInLoginButtonProps) => {
       variant={'secondary'}
     >
       {props.label ? props.label : 'Login with LinkedIn'}
-      <div className={styles.iconBox}>{/* add linkedin icon here */}</div>
+      <div className={styles.iconBox}>
+        <LinkedIn />
+      </div>
     </Button>
   )
 }

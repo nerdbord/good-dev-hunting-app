@@ -7,6 +7,7 @@ import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
+import styles from '../../page.module.scss'
 
 // components
 import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
@@ -102,6 +103,8 @@ const LoginHunter = () => {
             </span>
           </CheckboxInput>
         </div>
+      </form>
+      <div className={styles.btnsContainer}>
         <Button
           loading={isLoading}
           disabled={!isChecked}
@@ -113,8 +116,9 @@ const LoginHunter = () => {
         >
           {t('joinAsAHunter')}{' '}
         </Button>
-      </form>
-      <LinkedInLoginButton label={t('loginWithLinkedin')} role="HUNTER" />
+        <span>{t('or')}</span>
+        <LinkedInLoginButton label={t('loginWithLinkedin')} role="HUNTER" />
+      </div>
     </Box>
   )
 }

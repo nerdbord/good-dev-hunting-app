@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
 import { Box } from '@gdh/ui-system'
+import styles from '../../page.module.scss'
 
 const LoginDev = () => {
   const t = useTranslations(I18nNamespaces.LoginDev)
@@ -12,8 +13,11 @@ const LoginDev = () => {
     <Box>
       <h2>{t('title')}</h2>
       <p>{t('description')}</p>
-      <GithubLoginButton label={t('loginWithGithub')} role="SPECIALIST" />
-      <LinkedInLoginButton label={t('loginWithLinkedin')} role="SPECIALIST" />
+      <div className={styles.btnsContainer}>
+        <GithubLoginButton label={t('loginWithGithub')} role="SPECIALIST" />
+        <span>{t('or')}</span>
+        <LinkedInLoginButton label={t('loginWithLinkedin')} role="SPECIALIST" />
+      </div>
     </Box>
   )
 }
