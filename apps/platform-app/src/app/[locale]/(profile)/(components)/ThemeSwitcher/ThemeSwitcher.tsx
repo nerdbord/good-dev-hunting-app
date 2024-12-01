@@ -1,7 +1,7 @@
 'use client'
 
 import { useThemeStore } from '@/hooks/useThemeStore'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './ThemeSwitcher.module.scss'
 
 type SwitchProps = {
@@ -10,6 +10,16 @@ type SwitchProps = {
 
 export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
   const { isDarkTheme, toggleTheme } = useThemeStore()
+
+  // Dodaj efekt, który będzie zmieniał klasę na <html>
+  useEffect(() => {
+    // Dodaj lub usuń klasę 'light' na elemencie <html>
+    if (isDarkTheme) {
+      document.documentElement.classList.remove('light')
+    } else {
+      document.documentElement.classList.add('light')
+    }
+  }, [isDarkTheme])
 
   return (
     <>

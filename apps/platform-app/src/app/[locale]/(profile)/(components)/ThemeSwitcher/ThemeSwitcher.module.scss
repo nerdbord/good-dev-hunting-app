@@ -2,28 +2,6 @@
     transition: all 0.3s ease;
     min-height: 100%; 
     width: 100%;
-  
-    &.light {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --button-bg: #f0f0f0;
-      --button-text: #000000;
-      --nav-text: #000000;
-      --link-color: #000000;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-  
-    &.dark {
-      --bg-color: #121212;
-      --text-color: #ffffff;
-      --button-bg: #333333;
-      --button-text: #ffffff;
-      --nav-text: #ffffff;
-      --link-color: #ffffff;
-      background-color: var(--bg-color);
-        color: var(--text-color);
-    }
   }
 
   .switch {
