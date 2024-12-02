@@ -47,7 +47,9 @@ export function StateStatus({ profileId, profileState }: StateStatusProps) {
 
   if (!(profileState in PublishingState)) return null
 
-  const isPending = profileState === PublishingState.PENDING
+  const isPending =
+    profileState === PublishingState.PENDING ||
+    profileState === PublishingState.DRAFT
   const isApproved = profileState === PublishingState.APPROVED
   const isRejected = profileState === PublishingState.REJECTED
 
