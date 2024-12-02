@@ -14,6 +14,7 @@ export type ProfileCreateParams = {
   avatarUrl: string | null
   linkedIn: string | null
   bio: string
+  cvUrl: string | null
   country: string
   openForCountryRelocation: boolean
   city: string
@@ -74,6 +75,7 @@ export interface ProfileFormValues {
   fullName: string
   linkedin: string | null
   bio: string
+  cvUrl: string | null
   country: string
   city: string
   openForCountryRelocation: boolean

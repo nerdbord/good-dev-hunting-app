@@ -59,25 +59,6 @@ export const uploadCVdocumentFile = withSentry(
         addRandomSuffix: false,
       })
 
-      // Check if profile exists
-      // const profileExists = await prisma.profile.findUnique({
-      //   where: { id: profileId },
-      // })
-
-      // if (!profileExists) {
-      //   throw new Error(`Profile with ID ${profileId} does not exist.`)
-      // }
-
-      // const cvDocument = await prisma.cvDocument.create({
-      //   data: {
-      //     name: validatedCVfile.name,
-      //     type: cvFileType,
-      //     size: validatedCVfile.size,
-      //     url: blob.url,
-      //     profileId: profileId,
-      //   },
-      // })
-
       revalidatePath('/')
       console.log("CV NAME: ", cvFile.name)
       console.log("CV URL : ", blob.url)

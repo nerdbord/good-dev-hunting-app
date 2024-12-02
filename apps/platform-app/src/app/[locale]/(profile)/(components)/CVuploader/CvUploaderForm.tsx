@@ -65,7 +65,7 @@ export function CVuploaderForm() {
     const allowedExtensions = ['pdf']
     const fileExtension = file?.name.split('.').pop()?.toLowerCase()
     if (!allowedExtensions.includes(fileExtension || '')) {
-      setError('Nieprawidłowy format pliku. Dozwolone są tylko .pdf i .docx.')
+      setError('Nieprawidłowy format pliku. Dozwoly jest tylko .pdf.')
       setSelectedFile(null)
       return
     }
@@ -86,9 +86,9 @@ export function CVuploaderForm() {
           </div>
         )}
         {uploadedFile && (
-          <div>
+          <div className={styles.choosenFile}>
             <p>
-              <span>Wybrany plik: {uploadedFile.name}</span>
+              <span>Wybrany plik: </span>
               <a
                 href={uploadedFile.url}
                 target="_blank"
