@@ -11,6 +11,10 @@ interface UploadContextProps {
   setImageUploadError: React.Dispatch<React.SetStateAction<boolean>>
   formDataWithFile: FormData | null
   setFormDataWithFile: React.Dispatch<React.SetStateAction<FormData | null>>
+  cvUploadError: boolean
+  setCvUploadError: React.Dispatch<React.SetStateAction<boolean>>
+  cvFormData: FormData | null
+  setCvFormData: React.Dispatch<React.SetStateAction<FormData | null>>
 }
 
 export const UploadProvider = ({ children }: PropsWithChildren) => {
@@ -18,6 +22,8 @@ export const UploadProvider = ({ children }: PropsWithChildren) => {
   const [formDataWithFile, setFormDataWithFile] = useState<FormData | null>(
     null,
   )
+  const [cvUploadError, setCvUploadError] = useState(false)
+  const [cvFormData, setCvFormData] = useState<FormData | null>(null)
 
   return (
     <UploadContext.Provider
@@ -26,6 +32,10 @@ export const UploadProvider = ({ children }: PropsWithChildren) => {
         setImageUploadError,
         formDataWithFile,
         setFormDataWithFile,
+        cvUploadError,
+        setCvUploadError,
+        cvFormData,
+        setCvFormData,
       }}
     >
       {children}
