@@ -12,13 +12,11 @@ import styles from './CvUploaderForm.module.scss'
 export function CVuploaderForm() {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isUploading, setIsUploading] = useState(false)
-  // const [errorMsg, setErrorMsg] = useState<string | null>(null)
   // const [uploadedFile, setUploadedFile] = useState<{
   //   name: string
   //   url: string
   // } | null>(null)
   // const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  // // const [selectedFileName, setSelectedFileName] = useState<string | null>(null)
 
   // async function handleUpload() {
   //   // event.preventDefault()
@@ -73,7 +71,6 @@ export function CVuploaderForm() {
 
   //   setError(null)
   //   setSelectedFile(file)
-  //   // setSelectedFileName(file.name)
   //   handleUpload()
   // }
 
@@ -85,7 +82,7 @@ export function CVuploaderForm() {
     setCvUploadError(false)
     const file = event.target.files?.[0]
 
-    if (file?.type === 'application/pdf' && file.size <= 5 * 1024 * 1024) {
+    if (file && file?.type === 'application/pdf' && file.size <= 5 * 1024 * 1024) {
       const formData = new FormData()
       formData.append('cvFileUpload', file)
       setIsUploading(true)
@@ -129,21 +126,10 @@ export function CVuploaderForm() {
           <div className={styles.choosenFile}>
             <p>
               <span>Wybrany plik: </span>
-              <a
-                href={selectedFile.name}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {selectedFile.name}
-              </a>
+              {selectedFile.name}
             </p>
           </div>
         )}
-        {/* {selectedFileName && (
-            <div>
-              <p>Wybrany plik: {selectedFileName}</p>
-            </div>
-          )} */}
 
         <div className={styles.contentWrapper}>
           <div className={styles.buttonsWrapper}>
