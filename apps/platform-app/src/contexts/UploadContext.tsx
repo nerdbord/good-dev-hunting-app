@@ -11,15 +11,11 @@ interface UploadContextProps {
   setImageUploadError: React.Dispatch<React.SetStateAction<boolean>>
   formDataWithFile: FormData | null
   setFormDataWithFile: React.Dispatch<React.SetStateAction<FormData | null>>
-  // cvUploadError: boolean
   cvUploadError: string
-  // onSetCvUploadError: React.Dispatch<React.SetStateAction<boolean>>
   onSetCvUploadError: (error: string) => void
   cvFormData: FormData | null
   onSetCvFormData: (data: FormData) => void
 }
-
-// onSetCvUploadError: (error: string) => void
 
 export const UploadProvider = ({ children }: PropsWithChildren) => {
   const [imageUploadError, setImageUploadError] = useState(false)
