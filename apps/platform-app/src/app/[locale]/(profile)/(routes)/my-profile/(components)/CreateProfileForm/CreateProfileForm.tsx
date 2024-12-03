@@ -130,17 +130,13 @@ const CreateProfileForm = () => {
 
     try {
       runAsync(async () => {
-        const uploadedCvUrl = cvFormData
-          ? await uploadCVdocumentFile(cvFormData)
-          : null
+        cvFormData ? await uploadCVdocumentFile(cvFormData) : null
 
         const uploadedFileUrl = formDataWithFile
           ? await uploadImage(formDataWithFile)
           : null
 
-        uploadedFileUrl &&
-          (await updateMyAvatar(uploadedFileUrl)) &&
-          uploadedCvUrl
+        uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
 
         const createdProfile = await createProfile(payload)
 
