@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const cvFileSchema = z.object({
   name: z.string(),
   type: z.literal('application/pdf'),
-  size: z.number().max(4.5 * 1024 * 1024), // 4.5 MB
+  size: z.number().max(5 * 1024 * 1024),
 })
 
 export type CVfileValidation = z.infer<typeof cvFileSchema>
