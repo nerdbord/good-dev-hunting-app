@@ -4,11 +4,12 @@ import { Button } from '@gdh/ui-system'
 import { LinkedIn } from '@gdh/ui-system/icons'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
+import { type Roles } from '../../_models/User.model'
 import styles from '../GithubLoginButton/GithubLoginButton.module.scss'
 
 interface LinkedInLoginButtonProps {
   label?: string
-  role: 'SPECIALIST' | 'HUNTER'
+  role: Roles.SPECIALIST | Roles.HUNTER
 }
 
 export const LinkedInLoginButton = (props: LinkedInLoginButtonProps) => {

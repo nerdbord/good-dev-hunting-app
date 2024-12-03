@@ -20,8 +20,7 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
   const role = validRoles.includes(roleParam as Role)
     ? (roleParam as Role)
     : null
-  const devName = user.name || user.githubUsername || user.email
-  const isSpecialist = role === Role.SPECIALIST
+  const devName = user.name || user.githubUsername
 
   // if user tries to assign himself a role other than HUNTER or SPECIALIST
   // send notification and throw error
@@ -46,12 +45,12 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
   if (!updatedUser)
     return redirect(`${AppRoutes.error}?error=Role assignment failed.`)
 
-  await sendWelcomeEmail(user.email, devName)
+  await sendWelcomeEmail(user.email, devName || user.email)
   await sendDiscordNotificationToModeratorChannel(
-    `User **${devName}** has created an account with **${provider.toUpperCase()}** as ${
-      isSpecialist
-        ? `**SPECIALIST** ${!user.name ? `with **${user.email}**` : ''}`
-        : '**HUNTER**'
+    `User **${
+      devName || ''
+    }** has created an account with **${provider.toUpperCase()}** as ${role.toUpperCase()} with ${
+      user.email
     }`,
   )
 

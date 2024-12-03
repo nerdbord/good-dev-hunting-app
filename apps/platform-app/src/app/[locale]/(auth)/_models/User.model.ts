@@ -23,3 +23,11 @@ export function createUserModel(data: UserWithRelations): UserModel {
     profileSlug: data.profile?.slug || null,
   }
 }
+
+export enum Roles {
+  SPECIALIST = 'SPECIALIST',
+  HUNTER = 'HUNTER',
+  USER = 'USER',
+  MODERATOR = 'MODERATOR',
+  TEAM = 'TEAM',
+}

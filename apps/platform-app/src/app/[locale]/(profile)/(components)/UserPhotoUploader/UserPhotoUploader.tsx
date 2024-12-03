@@ -7,7 +7,6 @@ import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
-import GithubUserPhotoUploader from './GithubUserPhotoUploader'
 import styles from './UserPhotoUploader.module.scss'
 
 export const UserPhotoUploader = () => {
@@ -84,13 +83,6 @@ export const UserPhotoUploader = () => {
                 {t('changePicture')}{' '}
               </label>
             </Button>
-            {/* TODO LinkedIn photo uploder */}
-            {session?.user.githubUsername && (
-              <GithubUserPhotoUploader
-                setImage={setUserImage}
-                showError={setImageUploadError}
-              />
-            )}
           </div>
         </div>
       </div>
