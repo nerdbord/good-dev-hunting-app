@@ -1,8 +1,12 @@
+import { I18nNamespaces } from '@/i18n/request'
+import { useTranslations } from 'next-intl'
+
 // components
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
-import { I18nNamespaces } from '@/i18n/request'
+import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
+import { Roles } from '@/app/[locale]/(auth)/_models/User.model'
 import { Box } from '@gdh/ui-system'
-import { useTranslations } from 'next-intl'
+import styles from '../../page.module.scss'
 
 const LoginDev = () => {
   const t = useTranslations(I18nNamespaces.LoginDev)
@@ -10,7 +14,17 @@ const LoginDev = () => {
     <Box>
       <h2>{t('title')}</h2>
       <p>{t('description')}</p>
-      <GithubLoginButton label={t('loginWithGithub')} />
+      <div className={styles.btnsContainer}>
+        <GithubLoginButton
+          label={t('loginWithGithub')}
+          role={Roles.SPECIALIST}
+        />
+        <span>{t('or')}</span>
+        <LinkedInLoginButton
+          label={t('loginWithLinkedin')}
+          role={Roles.SPECIALIST}
+        />
+      </div>
     </Box>
   )
 }

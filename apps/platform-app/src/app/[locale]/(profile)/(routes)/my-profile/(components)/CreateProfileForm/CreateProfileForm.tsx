@@ -27,28 +27,8 @@ import {
   FormNavigationWarning,
 } from '../FormStateMonitor/FormStateMonitor'
 
-const initialValues: CreateProfileFormValues = {
-  fullName: '',
-  linkedin: '',
-  bio: '',
-  country: '',
-  city: '',
-  openForCountryRelocation: false,
-  openForCityRelocation: false,
-  remoteOnly: false,
-  position: { name: '', value: '' },
-  seniority: { name: '', value: '' },
-  employment: [],
-  techStack: [],
-  state: PublishingState.DRAFT,
-  terms: false,
-  hourlyRateMin: 0,
-  hourlyRateMax: 0,
-  currency: Currency.PLN,
-  language: [],
-}
-
 export const validationSchema = Yup.object().shape({
+  slug: Yup.string().required('Slug is required'),
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
@@ -89,6 +69,28 @@ const CreateProfileForm = () => {
   const { formDataWithFile } = useUploadContext()
   const { addToast } = useToast()
 
+  const initialValues: CreateProfileFormValues = {
+    slug: session?.user.githubUsername || '',
+    fullName: session?.user.name || '',
+    linkedin: '',
+    bio: '',
+    country: '',
+    city: '',
+    openForCountryRelocation: false,
+    openForCityRelocation: false,
+    remoteOnly: false,
+    position: { name: '', value: '' },
+    seniority: { name: '', value: '' },
+    employment: [],
+    techStack: [],
+    state: PublishingState.DRAFT,
+    terms: false,
+    hourlyRateMin: 0,
+    hourlyRateMax: 0,
+    currency: Currency.PLN,
+    language: [],
+  }
+
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
       addToast(
@@ -99,8 +101,9 @@ const CreateProfileForm = () => {
     }
 
     const payload: ProfileCreateParams = {
+      slug: values.slug,
       fullName: values.fullName,
-      avatarUrl: session?.user?.image || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -136,9 +139,14 @@ const CreateProfileForm = () => {
 
         if (createdProfile) {
           updateSession({
-            ...session?.user,
-            name: payload.fullName,
-            profileId: createdProfile.id,
+            ...session,
+            user: {
+              ...session?.user,
+              avatarUrl: createdProfile.avatarUrl,
+              name: createdProfile.fullName,
+              profileId: createdProfile.id,
+              profileSlug: createdProfile.slug,
+            },
           })
           router.push(AppRoutes.myProfile)
         }

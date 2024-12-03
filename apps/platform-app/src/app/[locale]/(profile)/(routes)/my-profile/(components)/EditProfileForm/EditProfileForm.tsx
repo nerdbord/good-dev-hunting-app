@@ -67,6 +67,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
       return {
+        slug: '',
         fullName: '',
         linkedin: '',
         bio: '',
@@ -95,8 +96,9 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const handleEditProfile = async (values: ProfileFormValues) => {
     const updateParams: ProfileModel = {
       ...profile,
+      slug: values.slug,
       fullName: values.fullName,
-      avatarUrl: session?.user?.image || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
       country: values.country,
@@ -130,7 +132,16 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
       const savedProfile = await saveMyProfile(updateParams)
       savedProfile &&
-        updateSession({ ...session?.user, name: savedProfile.fullName })
+        updateSession({
+          ...session,
+          user: {
+            ...session?.user,
+            avatarUrl: savedProfile.avatarUrl,
+            name: savedProfile.fullName,
+            profileId: savedProfile.id,
+            profileSlug: savedProfile.slug,
+          },
+        })
 
       router.push(AppRoutes.myProfile)
     })

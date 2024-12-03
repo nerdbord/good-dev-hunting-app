@@ -10,6 +10,7 @@ async function main() {
       email: 'dev@nerdbord.io',
       profile: {
         create: {
+          slug: 'richard',
           fullName: 'Richard Nerdbordowski',
           remoteOnly: true,
           bio: 'Little, sweet dog.',

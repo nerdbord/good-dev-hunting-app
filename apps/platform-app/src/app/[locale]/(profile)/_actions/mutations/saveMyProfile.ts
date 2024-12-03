@@ -20,6 +20,7 @@ const profilePendingFields: EditProfileFormFields[] = [
   'fullName',
   'email',
   'avatarUrl',
+  // 'slug',
   'linkedIn',
   'bio',
 
@@ -64,6 +65,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
   const updatedLanguage = payload.language.map((lang) => lang.name)
 
   const updatedData: Prisma.ProfileUpdateInput = {
+    slug: payload.slug,
     fullName: payload.fullName,
     linkedIn: payload.linkedIn,
     bio: payload.bio,
