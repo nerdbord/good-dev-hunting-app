@@ -12,12 +12,12 @@ export function CVuploaderForm() {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isUploading, setIsUploading] = useState(false)
 
-  const { cvUploadError, setCvUploadError, setCvFormData } = useUploadContext()
+  const { cvUploadError, onSetCvUploadError, onSetCvFormData } = useUploadContext()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCvUploadError(false)
+    onSetCvUploadError('')
     const file = event.target.files?.[0]
 
     if (
@@ -29,9 +29,9 @@ export function CVuploaderForm() {
       formData.append('cvFileUpload', file)
       setIsUploading(true)
       setSelectedFile(file)
-      setCvFormData(formData)
+      onSetCvFormData(formData)
     } else {
-      setCvUploadError(true)
+      onSetCvUploadError("Error during file upload.")
       setErrorMsg(
         file?.size > 5 * 1024 * 1024
           ? 'Choose a file smaller than 5MB'
