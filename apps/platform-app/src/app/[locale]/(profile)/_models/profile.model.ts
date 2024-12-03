@@ -28,6 +28,7 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
   return {
     id: data.id,
     userId: data.userId,
+    slug: data.slug,
     fullName: data.fullName,
     linkedIn: data.linkedIn,
     bio: data.bio,
