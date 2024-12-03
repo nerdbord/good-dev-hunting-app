@@ -12,33 +12,53 @@ export function CVuploaderForm() {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isUploading, setIsUploading] = useState(false)
 
-  const { cvUploadError, onSetCvUploadError, onSetCvFormData } = useUploadContext()
+  const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
+    useUploadContext()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
     const file = event.target.files?.[0]
+    // If (!file || !file.type) throw new Error("No file or invalid file provided")
+    // if (
+    //   file &&
+    //   file?.type === 'application/pdf' &&
+    //   file.size <= 5 * 1024 * 1024
+    // ) {
+    //   const formData = new FormData()
+    //   formData.append('cvFileUpload', file)
+    //   setIsUploading(true)
+    //   setSelectedFile(file)
+    //   onSetCvFormData(formData)
+    // } else {
+    //   onSetCvUploadError("Error during file upload.")
+    //   setErrorMsg(
+    //     file?.size > 5 * 1024 * 1024
+    //       ? 'Choose a file smaller than 5MB'
+    //       : 'Only PDF files are supported',
+    //   )
+    // }
+    try {
+      if (!file || !file.type || file.type !== 'application/pdf') {
+        throw new Error('Only PDF files are supported')
+      }
 
-    if (
-      file &&
-      file?.type === 'application/pdf' &&
-      file.size <= 5 * 1024 * 1024
-    ) {
+      if (file.size > 5 * 1024 * 1024) {
+        throw new Error('Choose a file smaller than 5MB')
+      }
+
       const formData = new FormData()
       formData.append('cvFileUpload', file)
       setIsUploading(true)
       setSelectedFile(file)
       onSetCvFormData(formData)
-    } else {
-      onSetCvUploadError("Error during file upload.")
-      setErrorMsg(
-        file?.size > 5 * 1024 * 1024
-          ? 'Choose a file smaller than 5MB'
-          : 'Only PDF files are supported',
-      )
+    } catch (error) {
+      onSetCvUploadError('Error during file upload.')
+      setErrorMsg((error as Error).message)
+    } finally {
+      setIsUploading(false)
     }
-    setIsUploading(false)
   }
 
   return (
