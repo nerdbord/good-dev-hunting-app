@@ -23,18 +23,24 @@ export const uploadCVdocumentFile = withSentry(async (form: FormData) => {
   const cvFile = form.get('cvFileUpload') as File | null
 
   if (!cvFile) {
-    throw new Error('No file uploaded')
+    return {
+      error: 'No file uploaded',
+    }
   }
 
   try {
     const validatedCVfile = validateCvFile(cvFile)
     if (!validatedCVfile) {
-      throw new Error('Invalid file')
+      return {
+        error: 'Invalid file',
+      }
     }
 
     const cvFileType = mapMimeTypeToCvDocumentType(cvFile.type)
     if (!cvFileType) {
-      throw new Error('Unsupported file type')
+      return {
+        error: 'Unsupported file type',
+      }
     }
 
     const cvFileName = `${nanoid()}.${cvFile.type.split('/')[1]}`
