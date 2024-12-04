@@ -62,6 +62,7 @@ export async function createUserProfile(
       fullName: profileData.fullName,
       linkedIn: profileData.linkedIn,
       bio: profileData.bio,
+      cvUrl: profileData.cvUrl ?? null,
       country: {
         connectOrCreate: {
           create: {
