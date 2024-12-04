@@ -20,25 +20,7 @@ export function CVuploaderForm() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
     const file = event.target.files?.[0]
-    // If (!file || !file.type) throw new Error("No file or invalid file provided")
-    // if (
-    //   file &&
-    //   file?.type === 'application/pdf' &&
-    //   file.size <= 5 * 1024 * 1024
-    // ) {
-    //   const formData = new FormData()
-    //   formData.append('cvFileUpload', file)
-    //   setIsUploading(true)
-    //   setSelectedFile(file)
-    //   onSetCvFormData(formData)
-    // } else {
-    //   onSetCvUploadError("Error during file upload.")
-    //   setErrorMsg(
-    //     file?.size > 5 * 1024 * 1024
-    //       ? 'Choose a file smaller than 5MB'
-    //       : 'Only PDF files are supported',
-    //   )
-    // }
+
     try {
       if (!file || !file.type || file.type !== 'application/pdf') {
         throw new Error('Only PDF files are supported')
