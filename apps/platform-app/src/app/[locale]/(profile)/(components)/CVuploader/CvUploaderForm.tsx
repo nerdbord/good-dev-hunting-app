@@ -11,6 +11,14 @@ import styles from './CvUploaderForm.module.scss'
 export function CVuploaderForm() {
   const t = useTranslations(I18nNamespaces.Buttons)
   const [isUploading, setIsUploading] = useState(false)
+  const [uploadCvButtonText, setUploadCvButtonText] = useState<string>(
+    t('uploadCVfile'),
+  )
+
+  // const [uploadedFile, setUploadedFile] = useState<{
+  //   name: string
+  //   url: string
+  // } | null>(null)
 
   const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
     useUploadContext()
@@ -20,6 +28,14 @@ export function CVuploaderForm() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
     const file = event.target.files?.[0]
+
+    // const result = await uploadCVdocumentFile(formData)
+    //   if (result.success) {
+    //     if (result.cvUrl) {
+    //       setUploadedFile({
+    //         name: result.cvFile,
+    //         url: result.cvUrl,
+    //       })
 
     try {
       if (!file || !file.type || file.type !== 'application/pdf') {
@@ -35,6 +51,7 @@ export function CVuploaderForm() {
       setIsUploading(true)
       setSelectedFile(file)
       onSetCvFormData(formData)
+      setUploadCvButtonText(t('uploadAnotherCVfile'))
     } catch (error) {
       onSetCvUploadError('Error during file upload.')
       setErrorMsg((error as Error).message)
@@ -57,10 +74,34 @@ export function CVuploaderForm() {
           <div className={styles.choosenFile}>
             <p>
               <span>Wybrany plik: </span>
-              {selectedFile.name}
+              <a
+                className="font-medium text-gray-900 underline"
+                // href={blob.url}
+                href={URL.createObjectURL(selectedFile)} // Generowanie URL dla pliku
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* {blob.url} */}
+                {selectedFile.name}
+              </a>
             </p>
           </div>
         )}
+
+        {/* {uploadedFile && (
+          <div className={styles.choosenFile}>
+            <p>
+              <span>Wybrany plik: </span>
+              <a
+                href={uploadedFile.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {uploadedFile.name}
+              </a>
+            </p>
+          </div>
+        )} */}
 
         <div className={styles.contentWrapper}>
           <div className={styles.buttonsWrapper}>
@@ -75,7 +116,7 @@ export function CVuploaderForm() {
                   className={styles.hidden}
                   onChange={handleFileChange}
                 />
-                {isUploading ? t('importing') : t('uploadCVfile')}
+                {isUploading ? t('importing') : uploadCvButtonText}
               </label>
             </Button>
           </div>

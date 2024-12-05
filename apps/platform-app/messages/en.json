@@ -83,6 +83,7 @@
     "sendMessage": "Send message",
     "changePicture": "Change picture",
     "uploadCVfile": "Upload CV file",
+    "uploadAnotherCVfile": "Change CV file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
     "apply": "Apply"
