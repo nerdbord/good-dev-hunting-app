@@ -5,8 +5,9 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './CvUploaderForm.module.scss'
+import { fetchCVurl } from '../../_actions/mutations/fetchCVurl'
 
 export function CVuploaderForm() {
   const t = useTranslations(I18nNamespaces.Buttons)
@@ -15,30 +16,52 @@ export function CVuploaderForm() {
     t('uploadCVfile'),
   )
 
-  // const [uploadedFile, setUploadedFile] = useState<{
-  //   name: string
-  //   url: string
-  // } | null>(null)
+  const [uploadedCVurl, setUploadedCVurl] = useState<{
+    name: string
+    url: string
+  } | null>(null)
 
   const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
     useUploadContext()
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  useEffect(() => {
+    const loadCVurl = async () => {
+      // if (!profileId) {
+      //   console.warn('profileId is not defined');
+      //   return;
+      // }
+      try {
+        const url = await fetchCVurl(profileId);
+        if (url) {
+          setUploadedCVurl({ name: 'Your CV', url });
+        }
+      } catch (error) {
+        console.error('Failed to fetch CV URL:', error);
+      }
+    };
+  
+    loadCVurl();
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
     const file = event.target.files?.[0]
 
     // const result = await uploadCVdocumentFile(formData)
-    //   if (result.success) {
-    //     if (result.cvUrl) {
-    //       setUploadedFile({
-    //         name: result.cvFile,
-    //         url: result.cvUrl,
-    //       })
+    // if (result.success) {
+    //   if (result.cvUrl) {
+    //     setUploadedFile({
+    //       name: result.cvFile,
+    //       url: result.cvUrl,
+    //     })
 
     try {
-      if (!file || !file.type || file.type !== 'application/pdf') {
+      if (!file || !file.type) {
+        return null
+      }
+
+      if (file.type !== 'application/pdf') {
         throw new Error('Only PDF files are supported')
       }
 
@@ -47,6 +70,7 @@ export function CVuploaderForm() {
       }
 
       const formData = new FormData()
+      
       formData.append('cvFileUpload', file)
       setIsUploading(true)
       setSelectedFile(file)
@@ -88,20 +112,20 @@ export function CVuploaderForm() {
           </div>
         )}
 
-        {/* {uploadedFile && (
+        {uploadedCVurl && (
           <div className={styles.choosenFile}>
             <p>
               <span>Wybrany plik: </span>
               <a
-                href={uploadedFile.url}
+                href={uploadedCVurl.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {uploadedFile.name}
+                {uploadedCVurl.name}
               </a>
             </p>
           </div>
-        )} */}
+        )}
 
         <div className={styles.contentWrapper}>
           <div className={styles.buttonsWrapper}>
