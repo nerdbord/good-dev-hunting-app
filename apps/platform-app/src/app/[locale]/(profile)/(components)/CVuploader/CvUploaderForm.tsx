@@ -4,13 +4,16 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import styles from './CvUploaderForm.module.scss'
 import { fetchCVurl } from '../../_actions/mutations/fetchCVurl'
+import styles from './CvUploaderForm.module.scss'
 
 export function CVuploaderForm() {
   const t = useTranslations(I18nNamespaces.Buttons)
+  const tt = useTranslations(I18nNamespaces.PersonalInfo)
+  const { data: session } = useSession()
   const [isUploading, setIsUploading] = useState(false)
   const [uploadCvButtonText, setUploadCvButtonText] = useState<string>(
     t('uploadCVfile'),
@@ -23,38 +26,29 @@ export function CVuploaderForm() {
 
   const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
     useUploadContext()
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
   useEffect(() => {
     const loadCVurl = async () => {
-      // if (!profileId) {
-      //   console.warn('profileId is not defined');
-      //   return;
-      // }
       try {
-        const url = await fetchCVurl(profileId);
+        const url = (await fetchCVurl()) || session?.user.email
+
         if (url) {
-          setUploadedCVurl({ name: 'Your CV', url });
+          setUploadedCVurl({ name: tt('choosenCVfileName'), url })
+          setUploadCvButtonText(t('uploadAnotherCVfile'))
         }
       } catch (error) {
-        console.error('Failed to fetch CV URL:', error);
+        console.error('Failed to fetch CV URL:', error)
       }
-    };
-  
-    loadCVurl();
-  }, []);
+    }
+
+    loadCVurl()
+  }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
     const file = event.target.files?.[0]
-
-    // const result = await uploadCVdocumentFile(formData)
-    // if (result.success) {
-    //   if (result.cvUrl) {
-    //     setUploadedFile({
-    //       name: result.cvFile,
-    //       url: result.cvUrl,
-    //     })
 
     try {
       if (!file || !file.type) {
@@ -70,11 +64,13 @@ export function CVuploaderForm() {
       }
 
       const formData = new FormData()
-      
       formData.append('cvFileUpload', file)
-      setIsUploading(true)
-      setSelectedFile(file)
       onSetCvFormData(formData)
+      setIsUploading(true)
+      setUploadedCVurl({
+        name: file.name,
+        url: URL.createObjectURL(file),
+      })
       setUploadCvButtonText(t('uploadAnotherCVfile'))
     } catch (error) {
       onSetCvUploadError('Error during file upload.')
@@ -94,28 +90,10 @@ export function CVuploaderForm() {
           </div>
         )}
 
-        {selectedFile && (
-          <div className={styles.choosenFile}>
-            <p>
-              <span>Wybrany plik: </span>
-              <a
-                className="font-medium text-gray-900 underline"
-                // href={blob.url}
-                href={URL.createObjectURL(selectedFile)} // Generowanie URL dla pliku
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {/* {blob.url} */}
-                {selectedFile.name}
-              </a>
-            </p>
-          </div>
-        )}
-
         {uploadedCVurl && (
           <div className={styles.choosenFile}>
             <p>
-              <span>Wybrany plik: </span>
+              <span>{tt('choosenCVfile')}: </span>
               <a
                 href={uploadedCVurl.url}
                 target="_blank"

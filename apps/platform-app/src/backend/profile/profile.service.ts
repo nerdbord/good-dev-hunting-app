@@ -128,16 +128,6 @@ export async function updateProfileById(
   return updatedProfile
 }
 
-export async function updateCVurlByProfileId(profileId: string, cvUrl: string) {
-  const updateCVurl = await prisma.profile.update({
-    where: {
-      id: profileId,
-    },
-    data: { cvUrl },
-  })
-  return updateCVurl
-}
-
 export const findGithubUsernameByProfileId = async (profileId: string) => {
   const profile = await prisma.profile.findFirst({
     where: {

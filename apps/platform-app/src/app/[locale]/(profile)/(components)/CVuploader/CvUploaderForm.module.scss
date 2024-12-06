@@ -71,4 +71,11 @@
   font-weight: 400;
   line-height: 20px;
   margin-bottom: 10px;
+
+  a {
+    text-decoration: none;
+    &:hover {
+      color: #7d54f1;
+    }
+  }
 }
