@@ -1,0 +1,45 @@
+.select {
+    position: relative;
+    width: 100%;
+  }
+  
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #2c2c2c;
+    border: 1px solid #333;
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #2c2c2c;
+    border: 1px solid #333;
+    border-top: none;
+    border-radius: 0 0 0.25rem 0.25rem;
+    z-index: 10;
+    display: none;
+  }
+  
+  .content[data-show] {
+    display: block;
+  }
+  
+  .item {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .item:hover {
+    background-color: #3c3c3c;
+  }
+  
+  
