@@ -3,6 +3,7 @@ import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
+import { checkSlugIsFree } from '@/app/[locale]/(profile)/_actions/queries/checkSlugIsFree'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
   type JobSpecialization,
@@ -25,6 +26,19 @@ import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
 import { FormNavigationWarning } from '../FormStateMonitor/FormStateMonitor'
 
 export const validationSchema = Yup.object().shape({
+  slug: Yup.string()
+    .required('Slug is required')
+    .min(3, 'Slug must be at least 3 characters long')
+    .max(50, 'Slug cannot exceed 50 characters')
+    .matches(
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      'Slug can only contain lowercase letters, numbers, and hyphens (e.g. "my-profile-123")',
+    )
+    .test('is-unique', 'This slug is already taken', async (slug) => {
+      if (!slug) return true
+      const slugIsFree = await checkSlugIsFree(slug)
+      return slugIsFree
+    }),
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),

@@ -189,6 +189,20 @@ export async function getProfileBySlug(slug: Profile['slug']) {
   return null
 }
 
+export const checkSlugExists = async (slug: Profile['slug']) => {
+  if (!slug) return false
+
+  const existingProfile = await prisma.profile.findUnique({
+    where: { slug },
+    select: { id: true },
+  })
+  if (existingProfile) {
+    return existingProfile.id
+  } else {
+    return false
+  }
+}
+
 export async function getProfileByGithubUsername(username: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { githubDetails: { username } } },
