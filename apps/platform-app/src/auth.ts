@@ -2,27 +2,12 @@ import { prisma } from '@/lib/prismaClient'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import NextAuth, { type AdapterUser } from 'next-auth'
 import { type JWT } from 'next-auth/jwt'
-import Email from 'next-auth/providers/email'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
 import { findUserById } from './app/[locale]/(auth)/_actions'
 import { createGitHubDetailsForUser } from './backend/github-details/github-details.service'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { AppRoutes } from './utils/routes'
-
-const sendVerificationRequest = async ({
-  url, // magic link
-  identifier, // user email
-}: {
-  url: string
-  identifier: string
-}) => {
-  try {
-    await sendMagicLinkEmail(identifier, url)
-  } catch (error) {
-    throw new Error('Failed to send verification email.')
-  }
-}
 
 export const {
   handlers: { GET, POST },
@@ -59,20 +44,25 @@ export const {
         }
       },
     }),
-    Email({
-      sendVerificationRequest,
-
-      // if deleted, throws error
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
+    {
+      id: 'email',
+      name: 'Email',
+      type: 'email',
+      maxAge: 60 * 60 * 24, // Email link will expire in 24 hours
+      sendVerificationRequest: async ({
+        url, // magic link
+        identifier, // user email
+      }: {
+        url: string
+        identifier: string
+      }) => {
+        try {
+          await sendMagicLinkEmail(identifier, url)
+        } catch (error) {
+          throw new Error('Failed to send verification email.')
+        }
       },
-      from: process.env.EMAIL_FROM,
-    }),
+    },
   ],
   pages: {
     // must be named like this - otherwise throws error when route with search params

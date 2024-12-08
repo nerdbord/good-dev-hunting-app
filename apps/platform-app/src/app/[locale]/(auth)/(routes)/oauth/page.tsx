@@ -47,11 +47,11 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
 
   await sendWelcomeEmail(user.email, devName || user.email)
   await sendDiscordNotificationToModeratorChannel(
-    `User **${
-      devName || ''
-    }** has created an account with **${provider.toUpperCase()}** as ${role.toUpperCase()} with ${
+    `User ${
+      devName ? `**${devName}** ` : ''
+    }has created an account with **${provider.toUpperCase()}** as **${role.toUpperCase()}** with **${
       user.email
-    }`,
+    }**`,
   )
 
   // Redirect new user to profiles or create profile routes
