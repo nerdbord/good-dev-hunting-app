@@ -5,7 +5,7 @@ import { type JWT } from 'next-auth/jwt'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
 import { findUserById } from './app/[locale]/(auth)/_actions'
-import { createGitHubDetailsForUser } from './backend/github-details/github-details.service'
+import { createOrUpdateGitHubDetailsForUser } from './backend/github-details/github-details.service'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { AppRoutes } from './utils/routes'
 
@@ -163,7 +163,7 @@ export const {
     async signIn({ user, account, profile }) {
       if (user.id && account?.provider && profile) {
         if (account.provider === 'github') {
-          await createGitHubDetailsForUser(
+          await createOrUpdateGitHubDetailsForUser(
             user.id,
             profile.login as GitHubProfile['login'],
           )
