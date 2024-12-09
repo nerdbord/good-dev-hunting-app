@@ -4,30 +4,35 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
-import { useTranslations } from 'next-intl'
-import { useState } from 'react'
 import { useFormikContext } from 'formik'
-import styles from './CvUploaderForm.module.scss'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import type { CreateProfileFormValues } from '../../profile.types'
-
-
+import styles from './CvUploaderForm.module.scss'
 
 export function CVuploaderForm() {
+  const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
+    useUploadContext()
   const { values } = useFormikContext<CreateProfileFormValues>()
   const cvUrl = values.cvUrl
   const t = useTranslations(I18nNamespaces.Buttons)
   const tt = useTranslations(I18nNamespaces.PersonalInfo)
   const [isUploading, setIsUploading] = useState(false)
 
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
   const [uploadedCVurl, setUploadedCVurl] = useState<{
     name: string
     url: string
-  } | null>(cvUrl ? { name: tt('choosenCVfileName'), url: cvUrl } : null)
+  } | null>(null)
 
-  const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
-    useUploadContext()
-
-  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  useEffect(() => {
+    if (cvUrl) {
+      setUploadedCVurl({ name: tt('choosenCVfileName'), url: cvUrl })
+    } else {
+      setUploadedCVurl(null)
+    }
+  }, [cvUrl, tt])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
