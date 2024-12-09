@@ -168,7 +168,7 @@ const CreateProfileForm = () => {
       <div className={styles.wrapper}>
         <CreateProfileTopBar isSubmitting={isCreatingProfile} />
         <div className={styles.formBox}>
-          <PersonalInfo />
+          <PersonalInfo initialCvUrl={initialValues.cvUrl} />
           <LocationPreferences />
           <WorkInformation />
           <TermsOfUse />

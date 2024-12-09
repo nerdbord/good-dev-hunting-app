@@ -102,7 +102,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       avatarUrl: session?.user?.image || null,
       linkedIn: values.linkedin,
       bio: values.bio,
-      cvUrl: values.cvUrl,
+      cvUrl: values.cvUrl ?? profile.cvUrl,
       country: values.country,
       openForCountryRelocation: values.openForCountryRelocation,
       city: values.city,
@@ -158,7 +158,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       <div className={styles.wrapper}>
         <CreateProfileTopBar isSubmitting={isSubmitting} />
         <div className={styles.formBox}>
-          <PersonalInfo />
+          <PersonalInfo initialCvUrl={mappedInitialValues.cvUrl} />
           <LocationPreferences />
           <WorkInformation />
         </div>

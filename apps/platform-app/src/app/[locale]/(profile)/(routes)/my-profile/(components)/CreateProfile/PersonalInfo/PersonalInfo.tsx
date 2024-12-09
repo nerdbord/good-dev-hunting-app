@@ -1,4 +1,5 @@
 'use client'
+import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvUploader'
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
@@ -11,7 +12,6 @@ import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import styles from './PersonalInfo.module.scss'
-import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvUploader'
 
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',
@@ -20,7 +20,11 @@ export enum PersonalInfoFormKeys {
   BIO = 'bio',
 }
 
-const PersonalInfo = () => {
+type PersonalInfoProps = {
+  initialCvUrl: string | null
+}
+
+const PersonalInfo = ({ initialCvUrl }: PersonalInfoProps) => {
   const t = useTranslations(I18nNamespaces.PersonalInfo)
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
@@ -65,7 +69,7 @@ const PersonalInfo = () => {
           />
         </div>
         <UserPhotoUploader />
-        <CVUploader />
+        <CVUploader initialCvUrl={initialCvUrl} />
         <InputFormError
           error={
             touched[PersonalInfoFormKeys.LINKEDIN] &&

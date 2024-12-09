@@ -4,47 +4,30 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
-import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
-import { fetchCVurl } from '../../_actions/mutations/fetchCVurl'
+import { useState } from 'react'
 import styles from './CvUploaderForm.module.scss'
 
-export function CVuploaderForm() {
+interface CvUploaderFormProps {
+  initialCvUrl: string | null
+}
+
+export function CVuploaderForm({ initialCvUrl }: CvUploaderFormProps) {
   const t = useTranslations(I18nNamespaces.Buttons)
   const tt = useTranslations(I18nNamespaces.PersonalInfo)
-  const { data: session } = useSession()
   const [isUploading, setIsUploading] = useState(false)
-  const [uploadCvButtonText, setUploadCvButtonText] = useState<string>(
-    t('uploadCVfile'),
-  )
 
   const [uploadedCVurl, setUploadedCVurl] = useState<{
     name: string
     url: string
-  } | null>(null)
+  } | null>(
+    initialCvUrl ? { name: tt('choosenCVfileName'), url: initialCvUrl } : null,
+  )
 
   const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
     useUploadContext()
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
-
-  useEffect(() => {
-    const loadCVurl = async () => {
-      try {
-        const url = (await fetchCVurl()) || session?.user.email
-
-        if (url) {
-          setUploadedCVurl({ name: tt('choosenCVfileName'), url })
-          setUploadCvButtonText(t('uploadAnotherCVfile'))
-        }
-      } catch (error) {
-        console.error('Failed to fetch CV URL:', error)
-      }
-    }
-
-    loadCVurl()
-  }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
@@ -71,7 +54,6 @@ export function CVuploaderForm() {
         name: file.name,
         url: URL.createObjectURL(file),
       })
-      setUploadCvButtonText(t('uploadAnotherCVfile'))
     } catch (error) {
       onSetCvUploadError('Error during file upload.')
       setErrorMsg((error as Error).message)
@@ -118,7 +100,11 @@ export function CVuploaderForm() {
                   className={styles.hidden}
                   onChange={handleFileChange}
                 />
-                {isUploading ? t('importing') : uploadCvButtonText}
+                {isUploading
+                  ? t('importing')
+                  : uploadedCVurl
+                  ? t('uploadAnotherCVfile')
+                  : t('uploadCVfile')}
               </label>
             </Button>
           </div>
