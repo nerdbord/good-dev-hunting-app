@@ -131,6 +131,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       const uploadedCvUrl = cvFormData
         ? await uploadCVdocumentFile(cvFormData)
         : null
+
       const uploadedFileUrl = formDataWithFile
         ? await uploadImage(formDataWithFile)
         : null
