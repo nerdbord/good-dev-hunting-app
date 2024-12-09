@@ -51,7 +51,7 @@ interface SelectTriggerProps {
 
 export function SelectTrigger({ children, isOpen, setIsOpen }: SelectTriggerProps) {
   return (
-    <div className={styles.trigger} onClick={() => setIsOpen?.(!isOpen)}>
+    <div className={styles.trigger} onClick={() => setIsOpen?.(true)}>
       {children}
       <span>{isOpen ? '▲' : '▼'}</span>
     </div>
@@ -64,11 +64,11 @@ interface SelectContentProps {
 }
 
 export function SelectContent({ children, isOpen }: SelectContentProps) {
-  return (
+  return isOpen ? (
     <div className={styles.content} data-show={isOpen}>
       {children}
     </div>
-  );
+  ) : <></>;
 }
 
 interface SelectItemProps {

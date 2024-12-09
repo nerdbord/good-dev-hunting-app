@@ -5,6 +5,7 @@
     background: #04080d;
     padding: 40px;
     margin-bottom: 24px;
+    align-items: flex-end
 }
 
 .placeholder {
@@ -111,5 +112,31 @@
   .button:hover {
     background-color: #7e22ce;
   }
+
+
+  .appliedStatusWrapper{
+    display: inherit;
+    align-items: flex-end
+  }
   
-  
+  .applied {
+    width: min-content;
+    text-wrap: nowrap;
+    justify-content: end;
+    border-radius: 9999px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+
+  .notApplied {
+    justify-content: end;
+    border-radius: 9999px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: #f3f4f6;
+    color: #1f2937;
+  }

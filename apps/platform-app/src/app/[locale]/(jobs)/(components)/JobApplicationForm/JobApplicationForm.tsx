@@ -21,17 +21,18 @@ import styles from './JobApplicationForm.module.scss'
 
 interface JobApplicationFormProps {
   jobId: string
+  userId: string
 }
 
 const timeSlots = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00']
 
-const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
+const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
   const router = useRouter()
   const t = useTranslations(I18nNamespaces.Jobs)
   const [job, setJob] = useState<Job | null>(null)
   const [selectedDate, setSelectedDate] = useState<Date>()
   const [selectedTime, setSelectedTime] = useState<string>()
-  const [messageText, setMessageText] = useState<string>();
+  const [messageText, setMessageText] = useState<string>()
 
   useEffect(() => {
     const getJob = async () => {
@@ -40,6 +41,8 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
     }
     getJob()
   }, [])
+
+  const hasUserAlreadyApplied = job?.usersWhoApplied.includes(userId)
 
   const initialValues = {
     message: '',
@@ -57,6 +60,17 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
       {({ handleSubmit }) => (
         <div>
           <div className={styles.formBox}>
+            {job && (
+              <div
+                className={styles.appliedStatusWrapper}
+              >
+                {hasUserAlreadyApplied ? (
+                  <div className={styles.applied}>Already applied!</div>
+                ) : (
+                  'Not applied'
+                )}
+              </div>
+            )}
             <div className={styles.placeholder}>
               <div className={styles.cardTitle}>
                 <h1>{job?.title}</h1>
@@ -86,7 +100,7 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
                   name="messageEmployer"
                   label=""
                   placeholder="Message to the potential employer..."
-                  value={messageText || ""}
+                  value={messageText || ''}
                   onChange={(e) => setMessageText(e.target.value)}
                 ></TextArea>
               </div>

@@ -15,6 +15,8 @@ export const findJobByJobId = cache(
       brief:
         'We are looking for a Frontend Developer to join our team and help build modern web applications using React and Next.js. The ideal candidate should have strong experience with TypeScript and modern frontend development practices.',
       requiredSkills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+      usersWhoApplied: ["6b5b0853-8c23-4ce0-973e-018df45291bf"],
+      // usersWhoApplied: ["6b5b0853-018df45291bf"],
       videocallSlots: [
         new Date(2024, 11, 3), 
         new Date(2024, 11, 7),
