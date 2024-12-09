@@ -1,6 +1,6 @@
 import { type ProfileCreateParams } from '@/app/[locale]/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, PublishingState, Role } from '@prisma/client'
+import { Prisma, PublishingState, Role, type Profile } from '@prisma/client'
 
 export async function getApprovedProfiles() {
   const approvedProfiles = await prisma.profile.findMany({
@@ -59,6 +59,7 @@ export async function createUserProfile(
       user: {
         connect: { email },
       },
+      slug: profileData.slug,
       fullName: profileData.fullName,
       linkedIn: profileData.linkedIn,
       bio: profileData.bio,
@@ -128,7 +129,9 @@ export async function updateProfileById(
   return updatedProfile
 }
 
-export const findGithubUsernameByProfileId = async (profileId: string) => {
+export const findGithubUsernameByProfileId = async (
+  profileId: Profile['id'],
+) => {
   const profile = await prisma.profile.findFirst({
     where: {
       id: profileId,
@@ -143,7 +146,7 @@ export const findGithubUsernameByProfileId = async (profileId: string) => {
   })
 
   if (!profile?.user.githubDetails?.username) {
-    throw new Error('User does not have a GitHub username')
+    return null
   }
 
   return profile.user.githubDetails.username
@@ -173,6 +176,32 @@ export async function getProfileByUserId(userId: string) {
   }
 
   return null
+}
+export async function getProfileBySlug(slug: Profile['slug']) {
+  const profile = await prisma.profile.findFirst({
+    where: { slug },
+    include: includeObject.include,
+  })
+
+  if (profile) {
+    return profile
+  }
+
+  return null
+}
+
+export const checkSlugExists = async (slug: Profile['slug']) => {
+  if (!slug) return false
+
+  const existingProfile = await prisma.profile.findUnique({
+    where: { slug },
+    select: { id: true },
+  })
+  if (existingProfile) {
+    return existingProfile.id
+  } else {
+    return false
+  }
 }
 
 export async function getProfileByGithubUsername(username: string) {

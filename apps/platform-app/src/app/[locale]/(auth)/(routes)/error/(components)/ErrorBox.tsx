@@ -7,11 +7,7 @@ import styles from './ErrorBox.module.scss'
 const ErrorBox = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-
-  const urlError =
-    searchParams.get('error') === 'AccessDenied'
-      ? 'Email already in use with a different provider!'
-      : ''
+  const urlError = searchParams.get('error')
 
   const handleClick = () => {
     router.back()

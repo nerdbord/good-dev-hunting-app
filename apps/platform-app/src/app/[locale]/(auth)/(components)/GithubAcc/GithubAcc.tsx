@@ -26,7 +26,9 @@ const GithubAcc = () => {
     <Link href={AppRoutes.myProfile}>
       <div className={styles.github}>
         <div className={styles.githubAcc}>
-          {session?.user.image && <Avatar src={session.user.image} size={38} />}
+          {session?.user.avatarUrl && (
+            <Avatar src={session.user.avatarUrl} size={38} />
+          )}
           <p className={styles.githubAccName}>{session?.user.name}</p>
         </div>
       </div>

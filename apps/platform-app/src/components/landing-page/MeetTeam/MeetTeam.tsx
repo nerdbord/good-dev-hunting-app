@@ -33,12 +33,12 @@ const MeetTeam = async () => {
           <div className={styles.cardsBox}>
             {firstHalfProfiles.map((profile) => (
               <VerticalCard
+                slug={profile.slug}
                 avatarUrl={profile.avatarUrl}
                 city={profile.city}
                 country={profile.country}
                 employmentTypes={profile.employmentTypes}
                 fullName={profile.fullName}
-                githubUsername={profile.githubUsername}
                 isOpenForWork={profile.isOpenForWork}
                 position={profile.position}
                 remoteOnly={profile.remoteOnly}
@@ -53,12 +53,12 @@ const MeetTeam = async () => {
             <div className={styles.cardsBox}>
               {secondHalfProfiles.map((profile) => (
                 <VerticalCard
+                  slug={profile.slug}
                   avatarUrl={profile.avatarUrl}
                   city={profile.city}
                   country={profile.country}
                   employmentTypes={profile.employmentTypes}
                   fullName={profile.fullName}
-                  githubUsername={profile.githubUsername}
                   isOpenForWork={profile.isOpenForWork}
                   position={profile.position}
                   remoteOnly={profile.remoteOnly}
