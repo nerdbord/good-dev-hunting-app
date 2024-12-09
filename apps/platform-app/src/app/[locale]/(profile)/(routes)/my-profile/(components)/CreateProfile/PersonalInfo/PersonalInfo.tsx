@@ -1,4 +1,5 @@
 'use client'
+import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvUploader'
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
@@ -11,7 +12,6 @@ import { useFormikContext } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import styles from './PersonalInfo.module.scss'
-import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvUploader'
 
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',

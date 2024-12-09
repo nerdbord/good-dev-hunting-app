@@ -4,25 +4,46 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
+import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import type { CreateProfileFormValues } from '../../profile.types'
 import styles from './CvUploaderForm.module.scss'
 
 export function CVuploaderForm() {
-  const t = useTranslations(I18nNamespaces.Buttons)
-  const [isUploading, setIsUploading] = useState(false)
-
   const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
     useUploadContext()
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const { values } = useFormikContext<CreateProfileFormValues>()
+  const cvUrl = values.cvUrl
+  const t = useTranslations(I18nNamespaces.Buttons)
+  const tt = useTranslations(I18nNamespaces.PersonalInfo)
+  const [isUploading, setIsUploading] = useState(false)
+
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
+  const [uploadedCVurl, setUploadedCVurl] = useState<{
+    name: string
+    url: string
+  } | null>(null)
+
+  useEffect(() => {
+    if (cvUrl) {
+      setUploadedCVurl({ name: tt('choosenCVfileName'), url: cvUrl })
+    } else {
+      setUploadedCVurl(null)
+    }
+  }, [cvUrl, tt])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
     const file = event.target.files?.[0]
 
     try {
-      if (!file || !file.type || file.type !== 'application/pdf') {
+      if (!file || !file.type) {
+        return null
+      }
+
+      if (file.type !== 'application/pdf') {
         throw new Error('Only PDF files are supported')
       }
 
@@ -32,9 +53,12 @@ export function CVuploaderForm() {
 
       const formData = new FormData()
       formData.append('cvFileUpload', file)
-      setIsUploading(true)
-      setSelectedFile(file)
       onSetCvFormData(formData)
+      setIsUploading(true)
+      setUploadedCVurl({
+        name: file.name,
+        url: URL.createObjectURL(file),
+      })
     } catch (error) {
       onSetCvUploadError('Error during file upload.')
       setErrorMsg((error as Error).message)
@@ -53,11 +77,17 @@ export function CVuploaderForm() {
           </div>
         )}
 
-        {selectedFile && (
+        {uploadedCVurl && (
           <div className={styles.choosenFile}>
             <p>
-              <span>Wybrany plik: </span>
-              {selectedFile.name}
+              <span>{tt('choosenCVfile')}: </span>
+              <a
+                href={uploadedCVurl.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {uploadedCVurl.name}
+              </a>
             </p>
           </div>
         )}
@@ -75,7 +105,11 @@ export function CVuploaderForm() {
                   className={styles.hidden}
                   onChange={handleFileChange}
                 />
-                {isUploading ? t('importing') : t('uploadCVfile')}
+                {isUploading
+                  ? t('importing')
+                  : uploadedCVurl
+                  ? t('uploadAnotherCVfile')
+                  : t('uploadCVfile')}
               </label>
             </Button>
           </div>
