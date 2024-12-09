@@ -77,12 +77,12 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
               </div>
 
               <div className={styles.section}>
-                <h2 className={styles.sectionTitle}>Project Brief</h2>
+                <h2 className={styles.sectionTitle}>{t('projectBrief')}</h2>
                 <p className={styles.brief}>{job?.brief}</p>
               </div>
 
               <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>Required Skills</h3>
+                <h3 className={styles.sectionTitle}>{t('requiredSkills')}</h3>
                 <div className={styles.skillsList}>
                   {job?.requiredSkills.map((skill) => (
                     <span key={skill} className={styles.skillTag}>
@@ -94,19 +94,19 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
 
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>
-                  Let them know more about you
+                {t('letThemKnowAboutYou')}
                 </h3>
                 <TextArea
                   name="messageEmployer"
                   label=""
-                  placeholder="Message to the potential employer..."
+                  placeholder={t('messageToEmployer')}
                   value={messageText || ''}
                   onChange={(e) => setMessageText(e.target.value)}
                 ></TextArea>
               </div>
 
               <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>Schedule Video Call</h3>
+                <h3 className={styles.sectionTitle}>{t('scheduleVideoCall')}</h3>
                 <div className={styles.formGrid}>
                   <Calendar availableDays={job?.videocallSlots} />
                   <Select onValueChange={setSelectedTime}>
