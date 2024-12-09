@@ -20,11 +20,7 @@ export enum PersonalInfoFormKeys {
   BIO = 'bio',
 }
 
-type PersonalInfoProps = {
-  initialCvUrl: string | null
-}
-
-const PersonalInfo = ({ initialCvUrl }: PersonalInfoProps) => {
+const PersonalInfo = () => {
   const t = useTranslations(I18nNamespaces.PersonalInfo)
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateProfileFormValues>()
@@ -69,7 +65,7 @@ const PersonalInfo = ({ initialCvUrl }: PersonalInfoProps) => {
           />
         </div>
         <UserPhotoUploader />
-        <CVUploader initialCvUrl={initialCvUrl} />
+        <CVUploader />
         <InputFormError
           error={
             touched[PersonalInfoFormKeys.LINKEDIN] &&
