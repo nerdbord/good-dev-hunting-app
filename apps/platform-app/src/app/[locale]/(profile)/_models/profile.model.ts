@@ -32,6 +32,7 @@ export function createProfileModel(data: ProfileWithRelations): ProfileModel {
     fullName: data.fullName,
     linkedIn: data.linkedIn,
     bio: data.bio,
+    cvUrl: data.cvUrl,
     countryId: data.countryId,
     openForCountryRelocation: data.openForCountryRelocation,
     cityId: data.cityId,

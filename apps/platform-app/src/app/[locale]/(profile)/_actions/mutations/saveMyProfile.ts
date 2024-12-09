@@ -23,6 +23,7 @@ const profilePendingFields: EditProfileFormFields[] = [
   // 'slug',
   'linkedIn',
   'bio',
+  'cvUrl',
 
   // LOCATION PREFERENCES
   'country',
@@ -69,6 +70,7 @@ export const saveMyProfile = withSentry(async (payload: ProfileModel) => {
     fullName: payload.fullName,
     linkedIn: payload.linkedIn,
     bio: payload.bio,
+    cvUrl: payload.cvUrl,
     country: {
       connectOrCreate: {
         create: {

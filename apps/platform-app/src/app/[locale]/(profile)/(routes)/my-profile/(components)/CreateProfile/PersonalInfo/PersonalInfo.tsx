@@ -1,4 +1,5 @@
 'use client'
+import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvUploader'
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
@@ -63,6 +64,7 @@ const PersonalInfo = () => {
           maxLength={30}
         />
         <UserPhotoUploader />
+        <CVUploader />
         <InputFormError
           error={
             touched[PersonalInfoFormKeys.SLUG] &&

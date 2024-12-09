@@ -1,4 +1,5 @@
 'use client'
+import { uploadCVdocumentFile } from '@/app/(files)/_actions/uploadCVdocumentFile'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
@@ -77,6 +78,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
+  const { cvFormData } = useUploadContext()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
@@ -85,6 +87,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
         fullName: '',
         linkedin: '',
         bio: '',
+        cvUrl: '',
         country: '',
         openForCountryRelocation: false,
         city: '',
@@ -115,6 +118,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
+      cvUrl: values.cvUrl,
       country: values.country,
       openForCountryRelocation: values.openForCountryRelocation,
       city: values.city,
@@ -140,11 +144,17 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
     }
 
     await runAsync(async () => {
+      const uploadedCvUrl = cvFormData
+        ? await uploadCVdocumentFile(cvFormData)
+        : null
       const uploadedFileUrl = formDataWithFile
         ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
-      const savedProfile = await saveMyProfile(updateParams)
+      const savedProfile = await saveMyProfile({
+        ...updateParams,
+        cvUrl: uploadedCvUrl?.cvUrl || profile.cvUrl,
+      })
       savedProfile &&
         updateSession({
           ...session,
