@@ -25,7 +25,7 @@ const JobApplicationPage = async ({ params }: JobApplicationPageProps) => {
       <div className={styles.header}>
         <h1>{t('applyForJob')}</h1>
       </div>
-      <JobApplicationForm jobId={params.id} />
+      <JobApplicationForm jobId={params.id} userId={user.id} />
     </div>
   )
 }

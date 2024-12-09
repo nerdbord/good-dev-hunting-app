@@ -186,7 +186,12 @@
     "applyForJob": "Aplikuj do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
-    "jobDetails": "Szczegóły zlecenia"
+    "jobDetails": "Szczegóły zlecenia",
+    "projectBrief": "Opis zlecenia",
+    "requiredSkills": "Wymagane umiejętności",
+    "letThemKnowAboutYou": "Powiedz coś o sobie",
+    "messageToEmployer": "Wiadomość dla potencjalnego pracodawcy...",
+    "scheduleVideoCall": "Umów rozmowę video"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

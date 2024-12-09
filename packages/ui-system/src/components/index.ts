@@ -5,6 +5,7 @@ export { AnchorButton } from "./Button/AnchorButton";
 export { Button } from "./Button/Button";
 export { GitHubStarsButton } from "./Button/GitHubStarsButton";
 export { MobileGitHubStarsButton } from "./Button/MobileGitHubStarsButton";
+export { Calendar } from "./Calendar/Calendar";
 export { CheckboxInput } from "./Checkbox/Checkbox";
 export { Container } from "./Container/Container";
 export { CopyEmail } from "./CopyEmail/CopyEmail";
@@ -15,9 +16,16 @@ export {
 export { DropdownSearchInput } from "./Dropdowns/DropdownSearchInput/DropdownSearchInput";
 export { Loader } from "./Loader/Loader";
 export { Logo } from "./Logo/Logo";
-export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews";
+export {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./Select/Select";
 export { SocialItems } from "./SocialItems/SocialItems";
 export { Switch } from "./Switch/Switch";
 export { TextArea } from "./TextArea/TextArea";
 export { Tooltip } from "./Tooltip/Tooltip";
 export { VisitorBanner } from "./VisitorBanner/VisitorBanner";
+export { ProfileViews } from "./my-profile/ProfileViews/ProfileViews";
