@@ -6,13 +6,15 @@ import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { useFormikContext } from 'formik'
 import styles from './CvUploaderForm.module.scss'
+import type { CreateProfileFormValues } from '../../profile.types'
 
-interface CvUploaderFormProps {
-  initialCvUrl: string | null
-}
 
-export function CVuploaderForm({ initialCvUrl }: CvUploaderFormProps) {
+
+export function CVuploaderForm() {
+  const { values } = useFormikContext<CreateProfileFormValues>()
+  const cvUrl = values.cvUrl
   const t = useTranslations(I18nNamespaces.Buttons)
   const tt = useTranslations(I18nNamespaces.PersonalInfo)
   const [isUploading, setIsUploading] = useState(false)
@@ -20,9 +22,7 @@ export function CVuploaderForm({ initialCvUrl }: CvUploaderFormProps) {
   const [uploadedCVurl, setUploadedCVurl] = useState<{
     name: string
     url: string
-  } | null>(
-    initialCvUrl ? { name: tt('choosenCVfileName'), url: initialCvUrl } : null,
-  )
+  } | null>(cvUrl ? { name: tt('choosenCVfileName'), url: cvUrl } : null)
 
   const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
     useUploadContext()
