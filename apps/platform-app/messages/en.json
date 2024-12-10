@@ -82,6 +82,8 @@
     "fillOut": "Fill out the form to complete the profile",
     "sendMessage": "Send message",
     "changePicture": "Change picture",
+    "uploadCVfile": "Upload CV file",
+    "uploadAnotherCVfile": "Change CV file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
     "apply": "Apply"
@@ -130,7 +132,10 @@
     "linkedin": "Paste link to you profile",
     "bio": "Let others know you - write a few sentences about yourself.",
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
-    "characters": "characters"
+    "characters": "characters",
+    "cvFile": "CV file (optional)",
+    "choosenCVfile": "Uploaded file",
+    "choosenCVfileName": "Your CV"
   },
 
   "LocationPreferences": {
