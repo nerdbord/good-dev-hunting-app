@@ -1,0 +1,29 @@
+{
+    "Applications": {
+        "applicationDetails": "Application Details",
+        "applicantInfo": "Applicant Info",
+        "actions": "Actions",
+        "contactInformation": "Contact Information",
+        "email": "Email",
+        "bio": "Bio",
+        "skills": "Skills",
+        "languages": "Languages",
+        "applicationMessage": "Application Message",
+        "subject": "Subject",
+        "scheduleInterview": "Schedule Interview",
+        "selectTimeSlot": "Select a time slot for the video call",
+        "scheduleCall": "Schedule Call",
+        "applicationActions": "Application Actions",
+        "approveApplication": "Approve Application",
+        "rejectApplication": "Reject Application",
+        "rejectionReason": "Rejection Reason",
+        "rejectionReasonPlaceholder": "Please provide a reason for rejecting this application...",
+        "status": "Status",
+        "pending": "Pending Review",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "goBack": "Go Back",
+        "techStack": "Tech Stack",
+        "applicationMessage": "Application Message"
+    }
+}

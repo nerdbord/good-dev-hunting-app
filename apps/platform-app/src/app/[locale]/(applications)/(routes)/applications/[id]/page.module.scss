@@ -1,36 +1,88 @@
 .wrapper {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-.header {
+.applicationHeader {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--gdh-color-background-elevated);
+    border-radius: var(--gdh-border-radius-lg);
+    box-shadow: var(--gdh-shadow-sm);
+
     h1 {
-        font-size: 32px;
-        font-weight: 500;
+        font-size: var(--gdh-font-size-3xl);
+        font-weight: var(--gdh-font-weight-bold);
+        color: var(--gdh-color-text-primary);
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
     }
 }
 
-.content {
+.applicationMeta {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
 
-    @include mobile {
+    span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: var(--gdh-color-background-muted);
+        border-radius: var(--gdh-border-radius-md);
+        font-size: var(--gdh-font-size-sm);
+        color: var(--gdh-color-text-secondary);
+
+        &:before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gdh-color-primary);
+        }
+    }
+}
+
+.applicationContent {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    gap: 2rem;
+    align-items: start;
+
+    @media (max-width: 1200px) {
         grid-template-columns: 1fr;
     }
 }
 
-.applicationInfo,
-.actions {
-    background: #1c1f26;
-    border-radius: 16px;
-    padding: 24px;
+.profileSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background: var(--gdh-color-background-elevated);
+    border-radius: var(--gdh-border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--gdh-shadow-sm);
+}
 
-    h2 {
-        font-size: 24px;
-        font-weight: 500;
-        margin-bottom: 16px;
+.reviewSection {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    >* {
+        background: var(--gdh-color-background-elevated);
+        border-radius: var(--gdh-border-radius-lg);
+        padding: 2rem;
+        box-shadow: var(--gdh-shadow-sm);
+    }
+
+    @media (max-width: 1200px) {
+        position: static;
+        margin-top: 2rem;
     }
 }

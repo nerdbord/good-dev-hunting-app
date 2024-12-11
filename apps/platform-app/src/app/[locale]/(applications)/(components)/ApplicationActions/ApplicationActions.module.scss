@@ -1,0 +1,88 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        font-size: var(--gdh-font-size-xl);
+        font-weight: var(--gdh-font-weight-bold);
+        color: var(--gdh-color-text-primary);
+        margin: 0;
+    }
+}
+
+.statusBadge {
+    padding: 0.5rem 1rem;
+    border-radius: var(--gdh-border-radius-full);
+    font-size: var(--gdh-font-size-sm);
+    font-weight: var(--gdh-font-weight-medium);
+
+    &[data-status="pending"] {
+        background: var(--gdh-color-warning-muted);
+        color: var(--gdh-color-warning);
+    }
+
+    &[data-status="approved"] {
+        background: var(--gdh-color-success-muted);
+        color: var(--gdh-color-success);
+    }
+
+    &[data-status="rejected"] {
+        background: var(--gdh-color-danger-muted);
+        color: var(--gdh-color-danger);
+    }
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    button {
+        width: 100%;
+        height: 48px;
+        transition: all 0.2s ease;
+
+        &.selected {
+            transform: scale(0.98);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+.feedbackSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gdh-color-border);
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+}
+
+.confirmAction {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.completedStatus {
+    padding: 2rem;
+    background: var(--gdh-color-background-muted);
+    border-radius: var(--gdh-border-radius-lg);
+    text-align: center;
+
+    p {
+        margin: 0;
+        color: var(--gdh-color-text-secondary);
+    }
+}

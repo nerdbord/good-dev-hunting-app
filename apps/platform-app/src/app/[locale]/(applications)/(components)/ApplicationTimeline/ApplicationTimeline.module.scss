@@ -1,0 +1,102 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    h2 {
+        font-size: var(--gdh-font-size-xl);
+        font-weight: var(--gdh-font-weight-bold);
+        color: var(--gdh-color-text-primary);
+    }
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 24px;
+        bottom: 24px;
+        width: 2px;
+        background: var(--gdh-color-border);
+    }
+}
+
+.event {
+    display: flex;
+    gap: 1rem;
+    padding-left: 24px;
+    position: relative;
+}
+
+.eventMarker {
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--gdh-color-border);
+    background: var(--gdh-color-background);
+
+    &[data-status="pending"] {
+        border-color: var(--gdh-color-warning);
+        background: var(--gdh-color-warning-muted);
+    }
+
+    &[data-status="approved"] {
+        border-color: var(--gdh-color-success);
+        background: var(--gdh-color-success-muted);
+    }
+
+    &[data-status="rejected"] {
+        border-color: var(--gdh-color-danger);
+        background: var(--gdh-color-danger-muted);
+    }
+}
+
+.eventContent {
+    flex: 1;
+    background: var(--gdh-color-background-muted);
+    border-radius: var(--gdh-border-radius-lg);
+    padding: 1rem;
+}
+
+.eventHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.eventStatus {
+    font-weight: var(--gdh-font-weight-medium);
+    font-size: var(--gdh-font-size-sm);
+
+    &[data-status="pending"] {
+        color: var(--gdh-color-warning);
+    }
+
+    &[data-status="approved"] {
+        color: var(--gdh-color-success);
+    }
+
+    &[data-status="rejected"] {
+        color: var(--gdh-color-danger);
+    }
+}
+
+.eventDate {
+    font-size: var(--gdh-font-size-sm);
+    color: var(--gdh-color-text-secondary);
+}
+
+.eventFeedback {
+    font-size: var(--gdh-font-size-sm);
+    color: var(--gdh-color-text-secondary);
+    margin: 0;
+}

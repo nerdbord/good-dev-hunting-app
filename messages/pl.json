@@ -1,0 +1,29 @@
+{
+    "Applications": {
+        "applicationDetails": "Szczegóły aplikacji",
+        "applicantInfo": "Informacje o kandydacie",
+        "actions": "Akcje",
+        "contactInformation": "Informacje kontaktowe",
+        "email": "Email",
+        "bio": "Bio",
+        "skills": "Umiejętności",
+        "languages": "Języki",
+        "applicationMessage": "Wiadomość aplikacyjna",
+        "subject": "Temat",
+        "scheduleInterview": "Zaplanuj rozmowę",
+        "selectTimeSlot": "Wybierz termin rozmowy wideo",
+        "scheduleCall": "Zaplanuj rozmowę",
+        "applicationActions": "Akcje aplikacji",
+        "approveApplication": "Zatwierdź aplikację",
+        "rejectApplication": "Odrzuć aplikację",
+        "rejectionReason": "Powód odrzucenia",
+        "rejectionReasonPlaceholder": "Podaj powód odrzucenia tej aplikacji...",
+        "status": "Status",
+        "pending": "Oczekuje na przegląd",
+        "approved": "Zatwierdzona",
+        "rejected": "Odrzucona",
+        "goBack": "Wróć",
+        "techStack": "Stack technologiczny",
+        "applicationMessage": "Wiadomość aplikacyjna"
+    }
+}
