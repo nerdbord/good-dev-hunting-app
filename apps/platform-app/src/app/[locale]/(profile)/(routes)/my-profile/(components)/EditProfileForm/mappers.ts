@@ -25,6 +25,7 @@ export const mapProfileModelToEditProfileFormValues = (
   fullName: profile.fullName,
   linkedin: profile.linkedIn,
   bio: profile.bio,
+  cvUrl: profile.cvUrl,
   country: profile.country,
   openForCountryRelocation: profile.openForCountryRelocation,
   city: profile.city,

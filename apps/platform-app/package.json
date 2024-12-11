@@ -13,7 +13,8 @@
     "prisma:seed": "yarn prisma db seed",
     "postinstall": "prisma generate",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "update-slugs": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/update-slugs.ts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
