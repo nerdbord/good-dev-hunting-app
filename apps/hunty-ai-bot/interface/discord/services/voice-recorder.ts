@@ -21,7 +21,7 @@ export class VoiceRecorder {
     private audioStream: AudioReceiveStream | null = null;
     private writeStream: WriteStream | null = null;
     private readonly recordingsDir: string;
-    private isRecording: boolean = false;
+    private isRecording = false;
     private recordingPath: string | null = null;
     private dropboxService: DropboxService;
     private channelName: string | null = null;
