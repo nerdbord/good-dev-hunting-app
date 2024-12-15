@@ -191,7 +191,16 @@
     "requiredSkills": "Wymagane umiejętności",
     "letThemKnowAboutYou": "Powiedz coś o sobie",
     "messageToEmployer": "Wiadomość dla potencjalnego pracodawcy...",
-    "scheduleVideoCall": "Umów rozmowę video"
+    "scheduleVideoCall": "Umów rozmowę video",
+    "salaryRange": "Widełki wynagrodzenia",
+    "scopeOfDuties": "Zakres obowiązków",
+    "requirements": "Wymagania",
+    "benefits": "Benefity",
+    "additionalInfo": "Dodatkowe informacje",
+    "teamSize": "Wielkość zespołu",
+    "people": "osób",
+    "vacancies": "Liczba wakatów",
+    "recruitmentSteps": "Etapy rekrutacji"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

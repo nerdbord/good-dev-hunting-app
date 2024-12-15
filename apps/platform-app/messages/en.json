@@ -191,7 +191,16 @@
     "requiredSkills": "Required skills",
     "letThemKnowAboutYou": "Let them know more about you",
     "messageToEmployer": "Message to the potential employer...",
-    "scheduleVideoCall": "Schedule video call"
+    "scheduleVideoCall": "Schedule video call",
+    "salaryRange": "Salary Range",
+    "scopeOfDuties": "Scope of Duties",
+    "requirements": "Requirements",
+    "benefits": "Benefits",
+    "additionalInfo": "Additional Information",
+    "teamSize": "Team Size",
+    "people": "people",
+    "vacancies": "Number of Vacancies",
+    "recruitmentSteps": "Recruitment Steps"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",

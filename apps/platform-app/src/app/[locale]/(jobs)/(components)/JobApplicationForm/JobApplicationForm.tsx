@@ -61,13 +61,11 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
         <div>
           <div className={styles.formBox}>
             {job && (
-              <div
-                className={styles.appliedStatusWrapper}
-              >
+              <div className={styles.appliedStatusWrapper}>
                 {hasUserAlreadyApplied ? (
                   <div className={styles.applied}>Already applied!</div>
                 ) : (
-                  'Not applied'
+                  <div className={styles.notApplied}>Not applied!</div>
                 )}
               </div>
             )}
@@ -91,10 +89,72 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
                   ))}
                 </div>
               </div>
+              
+              <div className={styles.twoColumnLayout}>
+                <div className={styles.column}>
+                  <div className={styles.section}>
+                    <h3 className={styles.sectionTitle}>
+                      {t('scopeOfDuties')}
+                    </h3>
+                    <ul className={styles.listItems}>
+                      {job?.scopeOfDuties.map((duty) => (
+                        <li key={duty}>{duty}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className={styles.section}>
+                    <h3 className={styles.sectionTitle}>{t('benefits')}</h3>
+                    <ul className={styles.listItems}>
+                      {job?.benefits.map((benefit) => (
+                        <li key={benefit}>{benefit}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className={styles.column}>
+                  <div className={styles.section}>
+                    <h3 className={styles.sectionTitle}>{t('salaryRange')}</h3>
+                    <p className={styles.brief}>{job?.salaryRange}</p>
+                  </div>
+
+                  <div className={styles.section}>
+                    <h3 className={styles.sectionTitle}>{t('requirements')}</h3>
+                    <ul className={styles.listItems}>
+                      {job?.requirements.map((requirement) => (
+                        <li key={requirement}>{requirement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.section}>
+                <h3 className={styles.sectionTitle}>{t('additionalInfo')}</h3>
+                <div className={styles.infoGrid}>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>{t('teamSize')}:</span>
+                    <span>
+                      {job?.teamSize} {t('people')}
+                    </span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>{t('vacancies')}:</span>
+                    <span>{job?.numberOfVacancies}</span>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>
+                      {t('recruitmentSteps')}:
+                    </span>
+                    <span>{job?.recruitmentSteps}</span>
+                  </div>
+                </div>
+              </div>
 
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>
-                {t('letThemKnowAboutYou')}
+                  {t('letThemKnowAboutYou')}
                 </h3>
                 <TextArea
                   name="messageEmployer"
@@ -106,7 +166,9 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
               </div>
 
               <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>{t('scheduleVideoCall')}</h3>
+                <h3 className={styles.sectionTitle}>
+                  {t('scheduleVideoCall')}
+                </h3>
                 <div className={styles.formGrid}>
                   <Calendar availableDays={job?.videocallSlots} />
                   <Select onValueChange={setSelectedTime}>

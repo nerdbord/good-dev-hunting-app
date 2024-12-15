@@ -46,6 +46,7 @@
   
   .section {
     margin-bottom: 3rem;
+    width: 100%;
   }
   
   .sectionTitle {
@@ -140,3 +141,55 @@
     background-color: #f3f4f6;
     color: #1f2937;
   }
+  
+  .listItems {
+    text-align: left;
+    list-style-type: disc;
+    list-style-position: inside;
+    color: #E2EAF1;
+    
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+  }
+
+  .infoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .infoItem {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .infoLabel {
+    font-weight: 600;
+    color: #9ca3af;
+  }
+  
+  .twoColumnLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .section {
+      margin-bottom: 0;
+    }
+  }
+  
