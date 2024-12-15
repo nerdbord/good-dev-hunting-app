@@ -6,6 +6,7 @@
   padding: 24px 0;
   width: 100%;
   z-index: 99;
+  background-color: var(--bg-fh-color);
   @include mobile {
     position: sticky;
     top: 0;

@@ -2,6 +2,7 @@
 
 import { useThemeStore } from '@/hooks/useThemeStore'
 import React, { useEffect } from 'react'
+import { ThemeIcon } from './ThemeIcon'
 import styles from './ThemeSwitcher.module.scss'
 
 type SwitchProps = {
@@ -11,9 +12,7 @@ type SwitchProps = {
 export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
   const { isDarkTheme, toggleTheme } = useThemeStore()
 
-  // Dodaj efekt, który będzie zmieniał klasę na <html>
   useEffect(() => {
-    // Dodaj lub usuń klasę 'light' na elemencie <html>
     if (isDarkTheme) {
       document.documentElement.classList.remove('light')
     } else {
@@ -33,6 +32,7 @@ export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
         <div
           className={`${styles.slider} ${isDarkTheme ? styles.sliderDark : ''}`}
         />
+        <ThemeIcon isDarkTheme={isDarkTheme} className={styles.icon} />
       </button>
     </>
   )

@@ -14,8 +14,8 @@ import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
-import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
+import { Logo } from '../../../../../../../../packages/ui-system/src/components/Logo/Logo'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
 import { ThemeWrapper } from '../ThemeSwitcher/ThemeWrapper'
@@ -154,8 +154,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
           <div className={styles.headerContent}>
             <div className={styles.logoAndGhStarsWrapper}>
               <Link href={AppRoutes.home} className={styles.logo}>
-                <img src={logo.src} alt="Logo" />
-                <h1 className={`${styles.title}`}>Good Dev Hunting</h1>
+                <Logo />
               </Link>
               <GitHubStarsButton />
             </div>

@@ -1,7 +1,7 @@
 .footer {
   padding-top: 54px;
   padding-bottom: 67px;
-  background-color: #0f1217;
+  background-color: var(--bg-fh-color);
   padding-left: 20px;
   padding-right: 20px;
   @include mobile {
@@ -62,7 +62,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
-  color: #69717b;
+  color: var(--text-color);
 }
 
 .testLight {

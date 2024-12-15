@@ -4,15 +4,17 @@
     width: 100%;
   }
 
+
  
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 30px;
-  background-color: var(--switch-bg, #04080D);
+  justify-content: space-between;
+  width: 44px;
+  height: 20px;
+  background-color: var(--bg-fh-color);
   border-radius: 15px;
-  border: 2px solid var(--switch-border, #3D434B);
+  border: 2px solid var(--switch-border);
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -26,22 +28,40 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 26px;
-  height: 26px;
-  background-color: var(--slider-bg, #CCCCF0);
-  border: 2px solid var(--switch-border, #3D434B);
+  width: 14px;
+  height: 14px;
+  background-color: var(--bg-color, #3D434B);
+  border: 0.5px solid transparent;
+  border-image-source: 
+    linear-gradient(
+      180deg, 
+      rgba(0, 0, 0, 0.0001) 0%, 
+      rgba(0, 0, 0, 0.02) 79.22%,
+      rgba(0, 0, 0, 0.04) 99.02%
+      ),
+    linear-gradient(
+      180deg, 
+      rgba(255, 255, 255, 0.12) 0%, 
+      rgba(255, 255, 255, 0.06) 20%, 
+      rgba(255, 255, 255, 0.0001) 100%
+      );
+  border-image-slice: 1; 
   border-radius: 50%;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .sliderDark {
   transform: translateX(30px); /* Przesunięcie dla trybu jasnego */
-  background-color: var(--slider-dark-bg, #FFFFFF); /* Kolor dla jasngo */
+  background-color: var(--slider-dark-bg,rgba(204, 204, 240, 1));
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+
+  box-shadow: 0px 0.1px 0.3px 0px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  
 }
 
 .switch::before,
 .switch::after {
-  content: '';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -51,21 +71,12 @@
 }
 
 .switch::before {
-  left: 10px;
-  content: '🌙'; /* Ikona księżyca */
+  left: 1px;
   opacity: 1;
 }
 
 .switch::after {
-  right: 10px;
-  content: '☀️'; /* Ikona słońca */
-  opacity: 0;
+  right: 1px;
+  opacity: 1;
 }
 
-.sliderDark + .switch::before {
-  opacity: 0; /* Ukryj księżyc */
-}
-
-.sliderDark + .switch::after {
-  opacity: 1; /* Pokaż słońce */
-}

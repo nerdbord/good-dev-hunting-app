@@ -9,7 +9,12 @@
   flex-shrink: 0;
   border-radius: 2px;
   border: 1px solid #3d434b;
-  background: #0f1217;
+  background: var (--bg-color);
+
+  :global(.light) & {
+    border: 1px solid #F0F0FF;
+  }
+
 }
 .title {
   color: #a687ff;
@@ -24,7 +29,7 @@
   }
 }
 .descr {
-  color: #e2eaf1;
+  color: var (--text-color);
   text-align: center;
   font-family: var(--font-ibm);
   font-size: 32px;

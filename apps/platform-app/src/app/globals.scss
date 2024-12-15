@@ -50,25 +50,29 @@ h6 {
   background: none;
 }
 
-// globals.scss
+
 :root {
   // Domyślne ustawienia dla dark mode
   --bg-color: #121212;
+  --bg-fh-color: #121212;
   --text-color: #ffffff;
   --button-bg: #333333;
   --button-text: #ffffff;
   --nav-text: #ffffff;
   --link-color: #ffffff;
+  --switch-border:#3D434B;
 }
 
 // Opcjonalnie: light mode
 .light {
   --bg-color: #FAFAFF;
+  --bg-fh-color: #FEFEFF;
   --text-color: #0F1217;
   --button-bg: #f0f0f0;
   --button-text: #000000;
   --nav-text: #000000;
   --link-color: #000000;
+  --switch-border: #F0F0FF;
 }
 
 // Globalne style dla body/html
