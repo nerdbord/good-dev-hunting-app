@@ -3,10 +3,10 @@
 }
 .wrapper {
   height: min-content;
-  background: #04080d;
   padding: 24px 0;
   width: 100%;
   z-index: 99;
+  background-color: var(--bg-fh-color);
   @include mobile {
     position: sticky;
     top: 0;
@@ -38,7 +38,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 23px;
-  color: #ffffff;
+  color: var(--text-color);
   letter-spacing: -0.06em;
   display: flex;
   justify-content: center;
@@ -47,6 +47,7 @@
     display: none;
   }
 }
+
 
 .frameButtons {
   display: flex;
@@ -84,6 +85,22 @@
     }
   }
 }
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  
+  ul {
+    display: flex;
+    align-items: center;
+    margin: 0; 
+    padding: 0;
+    list-style: none; 
+  }
+}
+ 
 
 .starsMobile {
   display: flex;

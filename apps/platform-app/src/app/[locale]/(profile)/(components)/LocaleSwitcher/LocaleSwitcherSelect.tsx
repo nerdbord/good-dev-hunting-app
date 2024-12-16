@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState, useTransition } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
+import { ThemeWrapper } from '../ThemeSwitcher/ThemeWrapper'
 import styles from './LocaleSwitcherSelect.module.scss'
 
 const cx = classNames.bind(styles)
@@ -83,55 +84,57 @@ export const LocaleSwitcherSelect = ({
   })
 
   return (
-    <div className={containerClassName} ref={dropdownRef}>
-      <p className={styles.srOnly}>
-        {t('label')}
-        {label}
-      </p>
-      <button
-        className={buttonClassName}
-        onClick={handleDropdown}
-        disabled={isPending}
-      >
-        <span className={buttonIconClassName}>
-          <GlobeIcon />
-        </span>
-        <span className={localeNameClassName}>
-          {t(`locale.${selectedLocale}`)}
-        </span>
-        <span className={styles.arrow}>
-          {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
-        </span>
-      </button>
-      {isOpen && (
-        <div className={dropdownClassName}>
-          {isMobile && (
-            <div className={styles.applyBtnLanguageContainer}>
-              <span className={styles.label}>{t('dropdownOpenLabel')}</span>
-              <button
-                className={styles.applyBtn}
-                onClick={() => setIsOpen(false)}
-              >
-                {tt('apply')}
-              </button>
+    <ThemeWrapper>
+      <div className={containerClassName} ref={dropdownRef}>
+        <p className={styles.srOnly}>
+          {t('label')}
+          {label}
+        </p>
+        <button
+          className={buttonClassName}
+          onClick={handleDropdown}
+          disabled={isPending}
+        >
+          <span className={buttonIconClassName}>
+            <GlobeIcon />
+          </span>
+          <span className={localeNameClassName}>
+            {t(`locale.${selectedLocale}`)}
+          </span>
+          <span className={styles.arrow}>
+            {arrow === 'IoIosArrowUp' ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          </span>
+        </button>
+        {isOpen && (
+          <div className={dropdownClassName}>
+            {isMobile && (
+              <div className={styles.applyBtnLanguageContainer}>
+                <span className={styles.label}>{t('dropdownOpenLabel')}</span>
+                <button
+                  className={styles.applyBtn}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {tt('apply')}
+                </button>
+              </div>
+            )}
+            <div className={styles.options}>
+              {routing.locales.map((locale) => (
+                <label key={locale} className={styles.dropdownItem}>
+                  <input
+                    type="radio"
+                    name="locale"
+                    value={locale}
+                    checked={selectedLocale === locale}
+                    onChange={() => onLocaleChange(locale)}
+                  />
+                  {t(`locale.${locale}`)}
+                </label>
+              ))}
             </div>
-          )}
-          <div className={styles.options}>
-            {routing.locales.map((locale) => (
-              <label key={locale} className={styles.dropdownItem}>
-                <input
-                  type="radio"
-                  name="locale"
-                  value={locale}
-                  checked={selectedLocale === locale}
-                  onChange={() => onLocaleChange(locale)}
-                />
-                {t(`locale.${locale}`)}
-              </label>
-            ))}
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </ThemeWrapper>
   )
 }

@@ -14,9 +14,11 @@ import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
-import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
+import { Logo } from '../../../../../../../../packages/ui-system/src/components/Logo/Logo'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
+import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
+import { ThemeWrapper } from '../ThemeSwitcher/ThemeWrapper'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
@@ -146,27 +148,31 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     }
   }
   return (
-    <header className={styles.wrapper}>
-      <Container>
-        <div className={styles.headerContent}>
-          <div className={styles.logoAndGhStarsWrapper}>
-            <Link href={AppRoutes.home} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <h1 className={styles.title}>Good Dev Hunting</h1>
-            </Link>
-            <GitHubStarsButton />
+    <ThemeWrapper>
+      <header id="main-header" className={styles.wrapper}>
+        <Container>
+          <div className={styles.headerContent}>
+            <div className={styles.logoAndGhStarsWrapper}>
+              <Link href={AppRoutes.home} className={styles.logo}>
+                <Logo />
+              </Link>
+              <GitHubStarsButton />
+            </div>
+            <nav>
+              <ul
+                className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
+              >
+                {renderMobileContent()}
+              </ul>
+              <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
+                {renderDesktopContent()}
+                <ThemeSwitcher />
+              </ul>
+            </nav>
           </div>
-          <nav>
-            <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
-              {renderMobileContent()}
-            </ul>
-            <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
-              {renderDesktopContent()}
-            </ul>
-          </nav>
-        </div>
-      </Container>
-    </header>
+        </Container>
+      </header>
+    </ThemeWrapper>
   )
 }
 

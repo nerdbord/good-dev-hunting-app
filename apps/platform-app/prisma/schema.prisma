@@ -56,7 +56,11 @@ model VerificationToken {
 
 model Profile {
   id                       String            @id @default(uuid())
+<<<<<<< HEAD
   slug                     String?           @unique
+=======
+  slug                     String            @unique
+>>>>>>> origin/feat/light-dark-mode-implementation
   user                     User              @relation(fields: [userId], references: [id])
   userId                   String            @unique
   fullName                 String

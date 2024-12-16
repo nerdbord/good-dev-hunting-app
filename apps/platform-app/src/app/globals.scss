@@ -49,3 +49,45 @@ h5,
 h6 {
   background: none;
 }
+
+
+:root {
+  // Domyślne ustawienia dla dark mode
+  --bg-color: #121212;
+  --bg-fh-color: #121212;
+  --text-color: #ffffff;
+  --button-bg: #333333;
+  --button-text: #ffffff;
+  --nav-text: #ffffff;
+  --link-color: #ffffff;
+  --switch-border:#3D434B;
+}
+
+// Opcjonalnie: light mode
+.light {
+  --bg-color: #FAFAFF;
+  --bg-fh-color: #FEFEFF;
+  --text-color: #04080D;
+  --button-bg: #f0f0f0;
+  --button-text: #000000;
+  --nav-text: #000000;
+  --link-color: #000000;
+  --switch-border: #F0F0FF;
+}
+
+// Globalne style dla body/html
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Opcjonalne style dla elementów, które chcesz od razu stylować globalnymi zmiennymi
+a {
+  color: var(--link-color);
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}

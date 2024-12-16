@@ -1,11 +1,15 @@
 .formInput {
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   border: 1px solid #2a2f35;
   color: #69717b;
   border-radius: 2px;
   padding: 16px 24px 16px 20px;
   width: 100%;
   font-size: 14px;
+
+  :global(.light) & {
+    border: 1px solid rgba(228, 228, 246, 1);
+  }
 }
 
 .formInput::placeholder {
@@ -13,7 +17,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  color: #69717b;
+  color: var(--text-color);
 }
 
 .formInput:-webkit-autofill,

@@ -1,0 +1,16 @@
+.icon {
+    position: static; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-shrink: 0; 
+    gap: 4px;
+  }
+  
+  .icon-moon {
+    margin-left: 4px;
+  }
+  
+  .icon-sun {
+    margin-right: 2px;
+  }
