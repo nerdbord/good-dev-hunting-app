@@ -1,7 +1,11 @@
+import { Button } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { type CreateJobDetailsFormValues } from '../../jobDetailsTypes'
+import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
+import { Budget } from '../CreateJobDetails/Budget/Budget'
+import { Employment } from '../CreateJobDetails/Employment/Employment'
 
 const initialValues: CreateJobDetailsFormValues = {
   jobName: '',
@@ -76,7 +80,30 @@ export const CreateJobDetailsForm = () => {
       validateOnMount
       onSubmit={handleCreateJobDetails}
     >
-      <div>CreateJobDetailsForm</div>
+      <Form>
+        <div>CreateJobDetailsForm</div>
+        {/* // Informacje podstawowe */}
+        {/* // - Nazwa zlecenia
+          // - Brief projektowy
+          // - Technologie */}
+        <BasicInfo />
+        <Budget />
+        <Employment />
+        <div className="actions">
+          <Button type="submit" variant="primary">
+            Zapisz ofertę
+          </Button>
+          <Button type="submit" variant="primary">
+            Edytuj ofertę
+          </Button>
+          <Button type="button" variant="primary">
+            Usuń ofertę
+          </Button>
+          <Button type="submit" variant="primary">
+            Publikuj ofertę
+          </Button>
+        </div>
+      </Form>
     </Formik>
   )
 }

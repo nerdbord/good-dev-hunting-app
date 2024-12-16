@@ -1,0 +1,134 @@
+'use client'
+
+import { type CreateJobDetailsFormValues } from '@/app/[locale]/(jobs)/jobDetailsTypes'
+import InputFormError from '@/components/InputFormError/InputFormError'
+import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
+import TextInput from '@/components/TextInput/TextInput'
+import { I18nNamespaces } from '@/i18n/request'
+import { Tooltip, type DropdownOption } from '@gdh/ui-system'
+import { ImportantIcon } from '@gdh/ui-system/icons'
+import { useFormikContext } from 'formik'
+import { useTranslations } from 'next-intl'
+import { ProjectBriefTextArea } from '../../ProjectBriefTextArea/ProjectBriefTextArea'
+import styles from './BasicInfo.module.scss'
+
+export enum BasicInfoFormKeys {
+  JOB_NAME = 'jobName',
+  BRIEF = 'projectBrief',
+  TECHNOLOGIES = 'techStack',
+}
+
+export const BasicInfo = () => {
+  const t = useTranslations(I18nNamespaces.PersonalInfo)
+  const t2 = useTranslations(I18nNamespaces.WorkInformation)
+  const { values, handleChange, setFieldValue, errors, touched, handleBlur } =
+    useFormikContext<CreateJobDetailsFormValues>()
+  {
+    /* // Informacje podstawowe */
+  }
+  {
+    /* // - Nazwa zlecenia
+        // - Brief projektowy
+        // - Technologie */
+  }
+
+  const handleTechSelect = (tech: DropdownOption) => {
+    if (!values[BasicInfoFormKeys.TECHNOLOGIES].includes(tech)) {
+      setFieldValue(BasicInfoFormKeys.TECHNOLOGIES, [
+        ...values[BasicInfoFormKeys.TECHNOLOGIES],
+        tech,
+      ])
+    }
+  }
+
+  const handleTechRemove = (techToRemove: DropdownOption) => {
+    if (Array.isArray(values[BasicInfoFormKeys.TECHNOLOGIES])) {
+      setFieldValue(
+        BasicInfoFormKeys.TECHNOLOGIES,
+        values[BasicInfoFormKeys.TECHNOLOGIES].filter(
+          (tech) => tech.value !== techToRemove.value,
+        ),
+      )
+    }
+  }
+  return (
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <div>Informacje podstawowe</div>
+        <div className={styles.personalInfo}>
+          Podstawowe informacje o zleceniu
+        </div>
+      </div>
+      <div className={styles.right}>
+        <InputFormError
+          error={
+            touched[BasicInfoFormKeys.JOB_NAME] &&
+            errors[BasicInfoFormKeys.JOB_NAME]
+          }
+        >
+          <TextInput
+            onBlur={handleBlur}
+            label="Nazwa zlecenia"
+            placeholder="eg. Implementacja widoku aplikacji mobilnej"
+            value={values[BasicInfoFormKeys.JOB_NAME]}
+            onChange={handleChange}
+            name={BasicInfoFormKeys.JOB_NAME}
+            dataTestId={BasicInfoFormKeys.JOB_NAME}
+            maxLength={40}
+          />
+        </InputFormError>
+        <div>
+          <InputFormError
+            error={
+              touched[BasicInfoFormKeys.BRIEF] &&
+              errors[BasicInfoFormKeys.BRIEF]
+            }
+          >
+            <label className={styles.formLabel}>
+              {'Brief projektowy'}
+              <Tooltip text="Brief projektowy">
+                <ImportantIcon />
+              </Tooltip>
+            </label>
+            <div className={styles.lettersCountParent}>
+              <ProjectBriefTextArea
+                onBlur={handleBlur}
+                placeholder="Brief projektowy"
+                value={values[BasicInfoFormKeys.BRIEF]}
+                onChange={handleChange}
+                name={BasicInfoFormKeys.BRIEF}
+                maxLength={1500}
+                dataTestId={BasicInfoFormKeys.BRIEF}
+              />
+              <div className={styles.lettersCount}>
+                {values[BasicInfoFormKeys.BRIEF].length} / 1500{' '}
+                {t('characters')}
+              </div>
+            </div>
+          </InputFormError>
+          <InputFormError
+            error={
+              touched[BasicInfoFormKeys.TECHNOLOGIES] &&
+              ((errors[BasicInfoFormKeys.TECHNOLOGIES] as string) || '')
+            }
+          >
+            <TechStackInput
+              chips={values[BasicInfoFormKeys.TECHNOLOGIES]}
+              label={t('techstack')}
+              placeholder={t('startTyping')}
+              name={BasicInfoFormKeys.TECHNOLOGIES}
+              onTechSelect={handleTechSelect}
+              onTechRemove={handleTechRemove}
+              addImportantIcon={true}
+              tooltipText={t('techstackTooltip')}
+            />
+          </InputFormError>
+          <div className={styles.addInfo}>
+            {t2('techstackInfo')} <br />
+            {t2('techstackChoose')}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
