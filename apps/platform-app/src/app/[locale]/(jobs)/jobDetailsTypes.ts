@@ -12,8 +12,8 @@ export interface JobDetailsFormValues {
   projectBrief: string
   techStack: DropdownOption[]
   currency: Currency
-  minBudgetForProjectRealisation: number
-  maxBudgetForProjectRealisation: number
+  minBudgetForProjectRealisation: number | null
+  maxBudgetForProjectRealisation: number | null
   contractType: DropdownOption[]
   employmentType: EmploymentType[]
   employmentMode: DropdownOption[]

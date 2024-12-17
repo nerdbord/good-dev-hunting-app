@@ -20,7 +20,7 @@ export enum BasicInfoFormKeys {
 
 export const BasicInfo = () => {
   const t = useTranslations(I18nNamespaces.PersonalInfo)
-  const t2 = useTranslations(I18nNamespaces.WorkInformation)
+  const tt = useTranslations(I18nNamespaces.WorkInformation)
   const { values, handleChange, setFieldValue, errors, touched, handleBlur } =
     useFormikContext<CreateJobDetailsFormValues>()
   {
@@ -114,18 +114,18 @@ export const BasicInfo = () => {
           >
             <TechStackInput
               chips={values[BasicInfoFormKeys.TECHNOLOGIES]}
-              label={t('techstack')}
-              placeholder={t('startTyping')}
+              label={tt('techstack')}
+              placeholder={tt('startTyping')}
               name={BasicInfoFormKeys.TECHNOLOGIES}
               onTechSelect={handleTechSelect}
               onTechRemove={handleTechRemove}
               addImportantIcon={true}
-              tooltipText={t('techstackTooltip')}
+              tooltipText={tt('techstackTooltip')}
             />
           </InputFormError>
           <div className={styles.addInfo}>
-            {t2('techstackInfo')} <br />
-            {t2('techstackChoose')}
+            {tt('techstackInfo')} <br />
+            {tt('techstackChoose')}
           </div>
         </div>
       </div>

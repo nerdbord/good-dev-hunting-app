@@ -1,7 +1,97 @@
+import InputFormError from '@/components/InputFormError/InputFormError'
+import { useFormikContext } from 'formik'
+import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
+import styles from './Budget.module.scss'
+import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
+import NumberInput from '@/components/NumberInput/NumberInput'
+import { Button } from '@gdh/ui-system'
+import { Currency } from '@prisma/client'
+
+export enum BudgetFormKeys {
+  CURRENCY = 'currency',
+  MIN_BUDGET_FOR_PROJECT_REALISATION = 'minBudgetForProjectRealisation',
+  MAX_BUDGET_FOR_PROJECT_REALISATION = 'maxBudgetForProjectRealisation',
+}
+
 export const Budget = () => {
-//     Budżet
-// - Waluta
-// - Minimalna kwota za realizacje projektu
-// - Maksymalna kwota za realizacje projektu
-  return <div>Budget</div>
+  const { values, errors, setFieldValue, touched, handleBlur } =
+    useFormikContext<CreateJobDetailsFormValues>()
+
+  const handleCurrencyChange = (chosenCurrency: Currency) => {
+    setFieldValue(BudgetFormKeys.CURRENCY, chosenCurrency)
+  }
+
+  const handleBudgetChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: BudgetFormKeys,
+  ) => {
+    const value = e.target.value ? parseInt(e.target.value, 10) : 0
+    if (value >= 0) {
+      setFieldValue(field, value)
+    }
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <div>Budżet</div>
+        <div className={styles.personalInfo}>
+          Budżet przeznaczony na realizacje projektu
+        </div>
+      </div>
+      <div className={styles.right}>
+        <InputFormError
+          error={
+            touched[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION] &&
+            errors[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]
+          }
+        >
+          <NumberInput
+            onBlur={handleBlur}
+            label="Minimalna kwota za realizacje projektu"
+            placeholder="np. 5000"
+            value={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]}
+            onChange={(e) => handleBudgetChange(e, BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION)}
+            name={BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION}
+            dataTestId={BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION}
+            min={0}
+          />
+        </InputFormError>
+        <InputFormError
+          error={
+            touched[BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION] &&
+            errors[BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION]
+          }
+        >
+          <NumberInput
+            onBlur={handleBlur}
+            label="Maksymalna kwota za realizacje projektu"
+            placeholder="np. 10000"
+            value={values[BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION]}
+            onChange={(e) => handleBudgetChange(e, BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION)}
+            name={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
+            dataTestId={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
+            min={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]}
+          />
+        </InputFormError>
+        <InputFormError
+          error={
+            touched[BudgetFormKeys.CURRENCY] && errors[BudgetFormKeys.CURRENCY]
+          }
+        >
+          <div className={styles.currencyButtonsContainer}>
+            {Object.values(Currency).map((value, index) => (
+              <Button
+                key={index}
+                variant={value === values.currency ? "secondary" : "grayedOut"}
+                onClick={() => handleCurrencyChange(value)}
+              >
+                {currencyButtonTextDisplay(value)}
+              </Button>
+            ))}
+          </div>
+        </InputFormError>
+      </div>
+    </div>
+  )
 }

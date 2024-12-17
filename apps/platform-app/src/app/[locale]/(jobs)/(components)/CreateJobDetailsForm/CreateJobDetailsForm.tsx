@@ -1,6 +1,8 @@
+"use client"
+import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
 import { Button } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
-import { Form, Formik } from 'formik'
+import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { type CreateJobDetailsFormValues } from '../../jobDetailsTypes'
 import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
@@ -12,8 +14,8 @@ const initialValues: CreateJobDetailsFormValues = {
   projectBrief: '',
   techStack: [],
   currency: Currency.PLN,
-  minBudgetForProjectRealisation: 0,
-  maxBudgetForProjectRealisation: 0,
+  minBudgetForProjectRealisation: null,
+  maxBudgetForProjectRealisation: null,
   contractType: [],
   employmentType: [],
   employmentMode: [],
@@ -44,8 +46,8 @@ const validationSchema = Yup.object().shape({
     .min(1, 'At least one technology is required')
     .max(16, 'Max 16 technologies'),
   currency: Yup.string()
-    .oneOf(Object.keys(Currency), `Invalid currency`)
-    .required('Currency is required.'),
+    .oneOf(Object.values(Currency), 'Nieprawidłowa waluta')
+    .required('Waluta jest wymagana'),
   contractType: Yup.object({
     name: Yup.string(),
     value: Yup.string(),
@@ -58,12 +60,12 @@ const validationSchema = Yup.object().shape({
     name: Yup.string(),
     value: Yup.string(),
   }).required('Employment mode is required'),
-  minBudgetForProjectRealisation: Yup.number().required(
-    'Min budget for project realisation is required',
-  ),
-  maxBudgetForProjectRealisation: Yup.number().required(
-    'Max budget for project realisation is required',
-  ),
+  minBudgetForProjectRealisation: Yup.number()
+    .min(0, 'Minimalna kwota nie może być mniejsza niż 0')
+    .required('Minimalna kwota jest wymagana'),
+  maxBudgetForProjectRealisation: Yup.number()
+    .min(Yup.ref('minBudgetForProjectRealisation'), 'Maksymalna kwota musi być większa niż minimalna')
+    .required('Maksymalna kwota jest wymagana'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
 })
@@ -80,15 +82,15 @@ export const CreateJobDetailsForm = () => {
       validateOnMount
       onSubmit={handleCreateJobDetails}
     >
-      <Form>
-        <div>CreateJobDetailsForm</div>
-        {/* // Informacje podstawowe */}
-        {/* // - Nazwa zlecenia
-          // - Brief projektowy
-          // - Technologie */}
-        <BasicInfo />
-        <Budget />
-        <Employment />
+      <div className={styles.wrapper}>
+        <Button type="submit" variant="primary">
+          Publikuj ofertę
+        </Button>
+        <div className={styles.formBox}>
+          <BasicInfo />
+          <Budget />
+          <Employment />
+        </div>
         <div className="actions">
           <Button type="submit" variant="primary">
             Zapisz ofertę
@@ -99,11 +101,8 @@ export const CreateJobDetailsForm = () => {
           <Button type="button" variant="primary">
             Usuń ofertę
           </Button>
-          <Button type="submit" variant="primary">
-            Publikuj ofertę
-          </Button>
         </div>
-      </Form>
+      </div>
     </Formik>
   )
 }
