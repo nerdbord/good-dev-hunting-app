@@ -44,6 +44,10 @@
     max-width: 201px;
     margin: 0 auto;
   }
+
+  :global(.light) & {
+    border: 1px solid rgba(228, 228, 246, 1);
+  }
 }
 
 .buttonIcon {
@@ -57,6 +61,10 @@
     stroke: #e2eaf1;
   }
 
+  :global(.light) & {
+    stroke: #04080D; 
+  }
+
   @include mobile {
     &.buttonIconOpen svg path {
       stroke: #a687ff;
@@ -67,6 +75,9 @@
 .buttonIconOpen {
   svg path {
     stroke: #a687ff;
+  }
+  :global(.light) & {
+    stroke: #04080D;
   }
 }
 
@@ -99,7 +110,7 @@
 .dropdown {
   position: absolute;
   width: 178px;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   border: 1px solid #3d434b;
   border-radius: 2px;
   padding: 24px;
@@ -121,7 +132,7 @@
   bottom: -402px;
   width: 100vw;
   padding: 24px;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   border-top: 1px solid #3d434b;
   z-index: 9999;
   display: flex;
@@ -164,7 +175,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #e2eaf1;
+  color: var(--text-color);
   font-size: 14px;
   gap: $spacing-2;
 

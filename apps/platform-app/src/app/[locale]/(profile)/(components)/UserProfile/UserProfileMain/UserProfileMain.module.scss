@@ -5,7 +5,7 @@
 
 .back {
   padding: 12px 24px;
-  color: #a687ff;
+  color: var(--text-color);
   font-weight: 500;
   line-height: 20px;
   font-size: 14px;
@@ -39,7 +39,7 @@
 }
 
 .name {
-  color: #e2eaf1;
+  color: var(--text-color);
   font-size: 28px;
   font-weight: 600;
   line-height: 28px;

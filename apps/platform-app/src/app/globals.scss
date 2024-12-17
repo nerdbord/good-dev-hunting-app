@@ -25,7 +25,7 @@ html,
 body {
   max-width: 100%;
   color: #e2eaf1;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
 }
 
 ul {
@@ -61,6 +61,7 @@ h6 {
   --nav-text: #ffffff;
   --link-color: #ffffff;
   --switch-border:#3D434B;
+  color: #A687FF;
 }
 
 // Opcjonalnie: light mode
@@ -73,6 +74,7 @@ h6 {
   --nav-text: #000000;
   --link-color: #000000;
   --switch-border: #F0F0FF;
+  color: #04080D;
 }
 
 // Globalne style dla body/html
