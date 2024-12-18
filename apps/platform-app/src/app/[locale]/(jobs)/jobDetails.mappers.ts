@@ -1,5 +1,5 @@
 import { type DropdownOption } from '@gdh/ui-system'
-import { JobContractType } from './jobDetailsTypes'
+import { EmploymentMode, JobContractType } from './jobDetailsTypes'
 
 export const mapJobContract = (contractType: JobContractType): string => {
   switch (contractType) {
@@ -32,3 +32,30 @@ export const mapJobContractType = (
     value: contractType,
   }))
 }
+
+// work mode: Stationary / Hybrid / Remote
+export const mapEmploymentModes = (employmentModes: EmploymentMode[]) => {
+  return employmentModes.map((employmentMode) => {
+    if (!employmentMode) return ''
+    return mapEmploymentMode(employmentMode)
+  })
+}
+
+export const mapEmploymentMode = (employmentMode: EmploymentMode) => {
+  switch (employmentMode) {
+    case EmploymentMode.STATIONARY:
+      return 'Stationary'
+    case EmploymentMode.HYBRID:
+      return 'Hybrid'
+    case EmploymentMode.REMOTE:
+      return 'Remote'
+    default:
+      return employmentMode
+  }
+}
+export const mappedEmploymentMode = Object.values(EmploymentMode).map(
+  (employmentMode) => ({
+    name: mapEmploymentMode(employmentMode),
+    value: employmentMode,
+  }),
+)

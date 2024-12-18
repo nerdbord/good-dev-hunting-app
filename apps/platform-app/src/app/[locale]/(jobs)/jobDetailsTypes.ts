@@ -16,7 +16,7 @@ export interface JobDetailsFormValues {
   maxBudgetForProjectRealisation: number | null
   contractType: DropdownOption
   employmentType: EmploymentType[]
-  employmentMode: DropdownOption[]
+  employmentMode: EmploymentMode[]
   country: string
   city: string
   state: PublishingState
@@ -44,3 +44,9 @@ export enum JobContractType {
   CONTRACT_OF_MANDATE = 'contract_of_mandate',
 }
 
+// work mode: Stationary / Hybrid / Remote
+export enum EmploymentMode {
+  STATIONARY = 'Stationary',
+  HYBRID = 'Hybrid',
+  REMOTE = 'Remote',
+}
