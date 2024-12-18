@@ -8,6 +8,7 @@ import { type CreateJobDetailsFormValues } from '../../jobDetailsTypes'
 import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
 import { Budget } from '../CreateJobDetails/Budget/Budget'
 import { Employment } from '../CreateJobDetails/Employment/Employment'
+import { Location } from '../CreateJobDetails/Location/Location'
 
 const initialValues: CreateJobDetailsFormValues = {
   jobName: '',
@@ -93,6 +94,7 @@ export const CreateJobDetailsForm = () => {
           <BasicInfo />
           <Budget />
           <Employment />
+          <Location />
         </div>
         <div className={styles.actionsWrapper}>
           <Button type="button" variant="primary">

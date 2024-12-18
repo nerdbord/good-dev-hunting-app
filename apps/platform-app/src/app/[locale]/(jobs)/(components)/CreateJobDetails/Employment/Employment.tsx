@@ -13,8 +13,6 @@ export enum EmploymentFormKeys {
   CONTRACT_TYPE = 'contractType',
   EMPLOYMENT_TYPE = 'employmentType',
   EMPLOYMENT_MODE = 'employmentMode',
-  COUNTRY = 'country',
-  CITY = 'city',
 }
 export const Employment = () => {
   const t = useTranslations(I18nNamespaces.WorkInformation)
@@ -47,8 +45,7 @@ export const Employment = () => {
       <div className={styles.left}>
         <div>Forma zatrudnienia</div>
         <div className={styles.personalInfo}>
-          Ustal forme zatrudnienia, rodzaj umowy, tryb pracy i lokalizacje
-          kandydatów
+          Ustal forme zatrudnienia, rodzaj umowy, tryb pracy.
         </div>
       </div>
 
