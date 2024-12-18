@@ -22,6 +22,7 @@ const initialValues: CreateJobDetailsFormValues = {
   employmentMode: [],
   country: '',
   city: '',
+  remoteOnly: false,
   terms: false,
   state: PublishingState.DRAFT,
 }
@@ -72,6 +73,7 @@ const validationSchema = Yup.object().shape({
     .required('Maksymalna kwota jest wymagana'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
+  remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
 })
 
 export const CreateJobDetailsForm = () => {

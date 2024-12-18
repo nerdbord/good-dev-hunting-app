@@ -20,6 +20,7 @@ export interface JobDetailsFormValues {
   country: string
   city: string
   state: PublishingState
+  remoteOnly: boolean
 }
 
 export interface CreateJobDetailsFormValues extends JobDetailsFormValues {

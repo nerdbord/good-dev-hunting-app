@@ -8,10 +8,12 @@ import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
 import styles from './Location.module.scss'
+import { Switch } from '@gdh/ui-system'
 
 export enum LocationFormKeys {
   COUNTRY = 'country',
   CITY = 'city',
+  REMOTE_ONLY = 'remoteOnly',
 }
 
 // - Wybierz lokalizacje kandydatów: Kraje / Miasta
@@ -59,6 +61,14 @@ export const Location = () => {
             maxLength={40}
           />
         </InputFormError>
+        <Switch
+          id={LocationFormKeys.REMOTE_ONLY + 2}
+          checked={values[LocationFormKeys.REMOTE_ONLY]}
+          label={t('remontOnly')}
+          onChange={handleChange}
+          name={LocationFormKeys.REMOTE_ONLY}
+          dataTestId={LocationFormKeys.REMOTE_ONLY}
+        />
       </div>
     </div>
   )
