@@ -17,7 +17,7 @@ const initialValues: CreateJobDetailsFormValues = {
   currency: Currency.PLN,
   minBudgetForProjectRealisation: null,
   maxBudgetForProjectRealisation: null,
-  contractType: [],
+  contractType: { name: '', value: '' },
   employmentType: [],
   employmentMode: [],
   country: '',

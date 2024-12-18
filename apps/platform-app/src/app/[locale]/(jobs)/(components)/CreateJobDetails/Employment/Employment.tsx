@@ -4,9 +4,11 @@ import { CheckboxInput } from '@gdh/ui-system'
 import { EmploymentType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 
-// import InputFormError from '@/components/InputFormError/InputFormError'
 import { type CreateJobDetailsFormValues } from '@/app/[locale]/(jobs)/jobDetailsTypes'
+import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
+import { mappedJobContractType } from '../../../jobDetails.mappers'
 import styles from './Employment.module.scss'
 
 export enum EmploymentFormKeys {
@@ -17,10 +19,11 @@ export enum EmploymentFormKeys {
 export const Employment = () => {
   const t = useTranslations(I18nNamespaces.WorkInformation)
 
-  const { values, setFieldValue } =
+  const { values, setFieldValue, touched, errors } =
     useFormikContext<CreateJobDetailsFormValues>()
   //     Forma zatrudnienia
   // - Umowa: B2B / Umowa o pracę / Umowa o dzieło / Umowa Zlecenie
+
   // - Czas zatrudnienia: Pełny etat / Pół etatu / Kontrakt
   // - Wybierz tryb pracy: Stacjonarny / Hybrydowy / Zdalny
   // - Wybierz lokalizacje kandydatów: Kraje / Miasta
@@ -50,6 +53,21 @@ export const Employment = () => {
       </div>
 
       <div className={styles.right}>
+        <InputFormError
+          error={
+            touched[EmploymentFormKeys.CONTRACT_TYPE] &&
+            errors[EmploymentFormKeys.CONTRACT_TYPE]?.value
+          }
+        >
+          <DropdownSelect
+            id={EmploymentFormKeys.CONTRACT_TYPE}
+            label="Rodzaj umowy"
+            text="Wybierz rodzaj umowy"
+            options={mappedJobContractType}
+            selectedValue={values[EmploymentFormKeys.CONTRACT_TYPE]}
+            name={EmploymentFormKeys.CONTRACT_TYPE}
+          />
+        </InputFormError>
         <div className={styles.employmentType}>
           {t('employerType')}{' '}
           <CheckboxInput
