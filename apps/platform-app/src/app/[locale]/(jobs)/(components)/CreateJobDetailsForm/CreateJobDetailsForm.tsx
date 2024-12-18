@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
 import { Button } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
@@ -64,7 +64,10 @@ const validationSchema = Yup.object().shape({
     .min(0, 'Minimalna kwota nie może być mniejsza niż 0')
     .required('Minimalna kwota jest wymagana'),
   maxBudgetForProjectRealisation: Yup.number()
-    .min(Yup.ref('minBudgetForProjectRealisation'), 'Maksymalna kwota musi być większa niż minimalna')
+    .min(
+      Yup.ref('minBudgetForProjectRealisation'),
+      'Maksymalna kwota musi być większa niż minimalna',
+    )
     .required('Maksymalna kwota jest wymagana'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
@@ -91,15 +94,15 @@ export const CreateJobDetailsForm = () => {
           <Budget />
           <Employment />
         </div>
-        <div className="actions">
-          <Button type="submit" variant="primary">
-            Zapisz ofertę
+        <div className={styles.actionsWrapper}>
+          <Button type="button" variant="primary">
+            Usuń ofertę
           </Button>
           <Button type="submit" variant="primary">
             Edytuj ofertę
           </Button>
-          <Button type="button" variant="primary">
-            Usuń ofertę
+          <Button type="submit" variant="primary">
+            Zapisz ofertę
           </Button>
         </div>
       </div>

@@ -1,0 +1,8 @@
+.actionsWrapper {
+    display: flex;
+    gap: 10px;
+    @include mobile {
+        flex-direction: column;
+        
+    }
+}
