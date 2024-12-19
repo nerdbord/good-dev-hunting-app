@@ -108,8 +108,8 @@ export function CVuploaderForm() {
                 {isUploading
                   ? t('importing')
                   : uploadedCVurl
-                  ? t('uploadAnotherCVfile')
-                  : t('uploadCVfile')}
+                    ? t('uploadAnotherCVfile')
+                    : t('uploadCVfile')}
               </label>
             </Button>
           </div>

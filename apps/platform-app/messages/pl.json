@@ -110,7 +110,9 @@
   "LoginDev": {
     "title": "Zaloguj się jako specjalista IT",
     "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
-    "loginWithGithub": "Zaloguj się przez Github"
+    "loginWithGithub": "Zaloguj się przez Github",
+    "loginWithLinkedin": "Zaloguj się przez LinkedIn",
+    "or": "albo"
   },
 
   "LoginHunter": {
@@ -119,7 +121,9 @@
     "policyOne": "Przeczytałem i akceptuję",
     "policyTwo": "oraz",
     "policyThree": "Politykę prywatności",
-    "joinAsAHunter": "Dołącz jako Łowca"
+    "joinAsAHunter": "Dołącz jako Łowca",
+    "loginWithLinkedin": "Zaloguj się przez LinkedIn",
+    "or": "albo"
   },
 
   "PersonalInfo": {
@@ -134,7 +138,9 @@
     "characters": "znaki",
     "cvFile": "Plik CV (opcjonalne)",
     "choosenCVfile": "Wybrany plik",
-    "choosenCVfileName": "Twoje CV"
+    "choosenCVfileName": "Twoje CV",
+    "slug": "Własny URL",
+    "slugTooltip": "Wybierz unikalną nazwę dla swojego linku do profilu (np. mistrzkodu)"
   },
 
   "LocationPreferences": {

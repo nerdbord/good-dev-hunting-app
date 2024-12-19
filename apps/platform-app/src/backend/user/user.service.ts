@@ -72,6 +72,7 @@ export async function addUserRole(id: string, role: Role) {
     },
     include: {
       githubDetails: true,
+      profile: true,
     },
   })
 }
@@ -94,6 +95,7 @@ export async function removeUserRole(id: string, role: Role) {
     },
     include: {
       githubDetails: true,
+      profile: true,
     },
   })
 }
@@ -115,6 +117,7 @@ export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
     },
     include: {
       githubDetails: true,
+      profile: true,
     },
   })
 

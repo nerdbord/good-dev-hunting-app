@@ -51,7 +51,7 @@ export const uploadCVdocumentFile = withSentry(async (form: FormData) => {
     })
 
     revalidatePath('/')
-   
+
     return { success: true, cvUrl: blob.url, cvFile: cvFile.name }
   } catch (error) {
     if (error instanceof Error) {

@@ -1,9 +1,7 @@
 'use client'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import { PlausibleEvents } from '@/lib/plausible'
 import { AppRoutes } from '@/utils/routes'
 import { useSession } from 'next-auth/react'
-import { usePlausible } from 'next-plausible'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
 import styles from './ProfileList.module.scss'
@@ -18,7 +16,6 @@ interface ProfileListItemProps {
 export const ProfileListItem: React.FC<ProfileListItemProps> = ({
   profile,
 }) => {
-  const plausible = usePlausible()
   const searchParams = useSearchParams()
   const { data: session } = useSession()
 
@@ -32,16 +29,9 @@ export const ProfileListItem: React.FC<ProfileListItemProps> = ({
     (contact) => contact.senderId === session?.user?.id,
   )
 
-  const handleOpenProfile = () => {
-    plausible(PlausibleEvents.OpenProfile, {
-      props: { username: profile.githubUsername },
-    })
-  }
-
   return (
     <Link
-      href={`${AppRoutes.profile}/${profile.githubUsername}`}
-      onClick={handleOpenProfile}
+      href={`${AppRoutes.profile}/${profile.slug}`}
       className={`${styles.frameWrapper}`}
     >
       <ProfileCard

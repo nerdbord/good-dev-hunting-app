@@ -27,3 +27,15 @@
     margin-bottom: 24px;
   }
 }
+
+.btnsContainer {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+
+  span {
+    margin: auto;
+  }
+}
