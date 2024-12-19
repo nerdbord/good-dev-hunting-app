@@ -68,7 +68,7 @@ export const Employment = () => {
     <div className={styles.container}>
       <div className={styles.left}>
         <div>{t('title')}</div>
-        <div className={styles.personalInfo}>{tt('emplo')}</div>
+        <div className={styles.personalInfo}>{tt('employmentDesc')}</div>
       </div>
 
       <div className={styles.right}>
