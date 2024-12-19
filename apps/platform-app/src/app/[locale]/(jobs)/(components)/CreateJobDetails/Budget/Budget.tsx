@@ -6,6 +6,8 @@ import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mapp
 import NumberInput from '@/components/NumberInput/NumberInput'
 import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
+import { useTranslations } from 'next-intl'
+import { I18nNamespaces } from '@/i18n/request'
 
 export enum BudgetFormKeys {
   CURRENCY = 'currency',
@@ -14,6 +16,7 @@ export enum BudgetFormKeys {
 }
 
 export const Budget = () => {
+  const t = useTranslations(I18nNamespaces.Jobs)
   const { values, errors, setFieldValue, touched, handleBlur } =
     useFormikContext<CreateJobDetailsFormValues>()
 
@@ -34,9 +37,9 @@ export const Budget = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Budżet</div>
+        <div>{t('budget')}</div>
         <div className={styles.personalInfo}>
-          Budżet przeznaczony na realizacje projektu
+          {t('budgetDesc')}
         </div>
       </div>
       <div className={styles.right}>
@@ -48,8 +51,8 @@ export const Budget = () => {
         >
           <NumberInput
             onBlur={handleBlur}
-            label="Minimalna kwota za realizacje projektu"
-            placeholder="np. 5000"
+            label={t('minBudgetForProjectRealisation')}
+            placeholder={t('minBudgetForProjectRealisationPlaceholder')}
             value={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]}
             onChange={(e) => handleBudgetChange(e, BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION)}
             name={BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION}
@@ -65,8 +68,8 @@ export const Budget = () => {
         >
           <NumberInput
             onBlur={handleBlur}
-            label="Maksymalna kwota za realizacje projektu"
-            placeholder="np. 10000"
+            label={t('maxBudgetForProjectRealisation')}
+            placeholder={t('maxBudgetForProjectRealisationPlaceholder')}
             value={values[BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION]}
             onChange={(e) => handleBudgetChange(e, BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION)}
             name={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}

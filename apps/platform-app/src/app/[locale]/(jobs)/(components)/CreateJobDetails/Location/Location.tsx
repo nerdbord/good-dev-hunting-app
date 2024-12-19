@@ -21,13 +21,14 @@ export enum LocationFormKeys {
 
 export const Location = () => {
   const t = useTranslations(I18nNamespaces.LocationPreferences)
+  const tt = useTranslations(I18nNamespaces.Jobs)
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateJobDetailsFormValues>()
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <div>{t('title')}</div>
-        <div className={styles.personalInfo}>Ustal lokalizacje kandydatów.</div>
+        <div className={styles.personalInfo}>{tt('locationDesc')}</div>
       </div>
       <div className={styles.right}>
         <InputFormError
@@ -56,7 +57,7 @@ export const Location = () => {
             addImportantIcon={true}
             name={LocationFormKeys.CITY}
             excludeDigits
-            tooltipText={t('cityTooltip')}
+            tooltipText={tt('locationCityTooltip')}
             dataTestId={LocationFormKeys.CITY}
             maxLength={40}
           />
@@ -64,7 +65,7 @@ export const Location = () => {
         <Switch
           id={LocationFormKeys.REMOTE_ONLY + 2}
           checked={values[LocationFormKeys.REMOTE_ONLY]}
-          label={t('remontOnly')}
+          label={tt('remoteOnly')}
           onChange={handleChange}
           name={LocationFormKeys.REMOTE_ONLY}
           dataTestId={LocationFormKeys.REMOTE_ONLY}

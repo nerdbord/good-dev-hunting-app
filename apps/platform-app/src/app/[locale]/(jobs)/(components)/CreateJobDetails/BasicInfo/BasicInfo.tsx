@@ -21,6 +21,7 @@ export enum BasicInfoFormKeys {
 export const BasicInfo = () => {
   const t = useTranslations(I18nNamespaces.PersonalInfo)
   const tt = useTranslations(I18nNamespaces.WorkInformation)
+  const ttt = useTranslations(I18nNamespaces.Jobs)
   const { values, handleChange, setFieldValue, errors, touched, handleBlur } =
     useFormikContext<CreateJobDetailsFormValues>()
   {
@@ -54,9 +55,9 @@ export const BasicInfo = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Informacje podstawowe</div>
+        <div>{ttt('basicInfo')}</div>
         <div className={styles.personalInfo}>
-          Podstawowe informacje o zleceniu
+          {ttt('basicInfoDesc')}
         </div>
       </div>
       <div className={styles.right}>
@@ -68,8 +69,8 @@ export const BasicInfo = () => {
         >
           <TextInput
             onBlur={handleBlur}
-            label="Nazwa zlecenia"
-            placeholder="eg. Implementacja widoku aplikacji mobilnej"
+            label={ttt('jobName')}
+            placeholder={ttt('jobNamePlaceholder')}
             value={values[BasicInfoFormKeys.JOB_NAME]}
             onChange={handleChange}
             name={BasicInfoFormKeys.JOB_NAME}
@@ -85,15 +86,15 @@ export const BasicInfo = () => {
             }
           >
             <label className={styles.formLabel}>
-              {'Brief projektowy'}
-              <Tooltip text="Brief projektowy">
+              {ttt('brief')}
+              <Tooltip text={ttt('briefTooltip')}>
                 <ImportantIcon />
               </Tooltip>
             </label>
             <div className={styles.lettersCountParent}>
               <ProjectBriefTextArea
                 onBlur={handleBlur}
-                placeholder="Brief projektowy"
+                placeholder={ttt('briefPlaceholder')}
                 value={values[BasicInfoFormKeys.BRIEF]}
                 onChange={handleChange}
                 name={BasicInfoFormKeys.BRIEF}

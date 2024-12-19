@@ -9,6 +9,8 @@ import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
 import { Budget } from '../CreateJobDetails/Budget/Budget'
 import { Employment } from '../CreateJobDetails/Employment/Employment'
 import { Location } from '../CreateJobDetails/Location/Location'
+import { useTranslations } from 'next-intl'
+import { I18nNamespaces } from '@/i18n/request'
 
 const initialValues: CreateJobDetailsFormValues = {
   jobName: '',
@@ -48,8 +50,8 @@ const validationSchema = Yup.object().shape({
     .min(1, 'At least one technology is required')
     .max(16, 'Max 16 technologies'),
   currency: Yup.string()
-    .oneOf(Object.values(Currency), 'Nieprawidłowa waluta')
-    .required('Waluta jest wymagana'),
+    .oneOf(Object.values(Currency), 'Invalid currency')
+    .required('Currency is required'),
   contractType: Yup.object({
     name: Yup.string(),
     value: Yup.string(),
@@ -63,20 +65,21 @@ const validationSchema = Yup.object().shape({
     value: Yup.string(),
   }).required('Employment mode is required'),
   minBudgetForProjectRealisation: Yup.number()
-    .min(0, 'Minimalna kwota nie może być mniejsza niż 0')
-    .required('Minimalna kwota jest wymagana'),
+    .min(0, 'The minimum amount must not be less than 0')
+    .required('The minimum amount is required'),
   maxBudgetForProjectRealisation: Yup.number()
     .min(
       Yup.ref('minBudgetForProjectRealisation'),
-      'Maksymalna kwota musi być większa niż minimalna',
+      'The maximum amount must be greater than the minimum',
     )
-    .required('Maksymalna kwota jest wymagana'),
+    .required('The maximum amount is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
 })
 
 export const CreateJobDetailsForm = () => {
+  const t = useTranslations(I18nNamespaces.Buttons)
   const handleCreateJobDetails = (values: CreateJobDetailsFormValues) => {
     console.log(values)
   }
@@ -90,7 +93,7 @@ export const CreateJobDetailsForm = () => {
     >
       <div className={styles.wrapper}>
         <Button type="submit" variant="primary">
-          Publikuj ofertę
+          {t('publishJob')}
         </Button>
         <div className={styles.formBox}>
           <BasicInfo />
@@ -100,13 +103,13 @@ export const CreateJobDetailsForm = () => {
         </div>
         <div className={styles.actionsWrapper}>
           <Button type="button" variant="primary">
-            Usuń ofertę
+            {t('deleteJob')}
           </Button>
           <Button type="submit" variant="primary">
-            Edytuj ofertę
+            {t('edit')}
           </Button>
           <Button type="submit" variant="primary">
-            Zapisz ofertę
+            {t('saveAndPreview')}
           </Button>
         </div>
       </div>

@@ -4,7 +4,10 @@ import { CheckboxInput } from '@gdh/ui-system'
 import { EmploymentType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 
-import { EmploymentMode, type CreateJobDetailsFormValues } from '@/app/[locale]/(jobs)/jobDetailsTypes'
+import {
+  EmploymentMode,
+  type CreateJobDetailsFormValues,
+} from '@/app/[locale]/(jobs)/jobDetailsTypes'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
@@ -18,6 +21,7 @@ export enum EmploymentFormKeys {
 }
 export const Employment = () => {
   const t = useTranslations(I18nNamespaces.WorkInformation)
+  const tt = useTranslations(I18nNamespaces.Jobs)
 
   const { values, setFieldValue, touched, errors } =
     useFormikContext<CreateJobDetailsFormValues>()
@@ -63,10 +67,8 @@ export const Employment = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>Forma zatrudnienia</div>
-        <div className={styles.personalInfo}>
-          Ustal forme zatrudnienia, rodzaj umowy, tryb pracy.
-        </div>
+        <div>{t('employment')}</div>
+        <div className={styles.personalInfo}>{t('employmentDesc')}</div>
       </div>
 
       <div className={styles.right}>
@@ -78,8 +80,8 @@ export const Employment = () => {
         >
           <DropdownSelect
             id={EmploymentFormKeys.CONTRACT_TYPE}
-            label="Rodzaj umowy"
-            text="Wybierz rodzaj umowy"
+            label={tt('contractTypeLabel')}
+            text={tt('contractTypeDesc')}
             options={mappedJobContractType}
             selectedValue={values[EmploymentFormKeys.CONTRACT_TYPE]}
             name={EmploymentFormKeys.CONTRACT_TYPE}
@@ -110,24 +112,24 @@ export const Employment = () => {
           />
         </div>
         <div className={styles.employmentType}>
-          Tryb pracy
+          {tt('workMode')}
           <CheckboxInput
             id={EmploymentFormKeys.EMPLOYMENT_MODE + 1}
-            label="Stacjonarny"
+            label={tt('workModeStationary')}
             checked={isEmploymentModeSelected(EmploymentMode.STATIONARY)}
             onChange={() => handleEmploymentMode(EmploymentMode.STATIONARY)}
             name={EmploymentFormKeys.EMPLOYMENT_MODE}
           />
           <CheckboxInput
             id={EmploymentFormKeys.EMPLOYMENT_MODE + 2}
-            label="Hybrydowy"
+            label={tt('workModeHybrid')}
             checked={isEmploymentModeSelected(EmploymentMode.HYBRID)}
             onChange={() => handleEmploymentMode(EmploymentMode.HYBRID)}
             name={EmploymentFormKeys.EMPLOYMENT_MODE}
           />
           <CheckboxInput
             id={EmploymentFormKeys.EMPLOYMENT_MODE + 3}
-            label="Zdalny"
+            label={tt('workModeRemote')}
             checked={isEmploymentModeSelected(EmploymentMode.REMOTE)}
             onChange={() => handleEmploymentMode(EmploymentMode.REMOTE)}
             name={EmploymentFormKeys.EMPLOYMENT_MODE}
