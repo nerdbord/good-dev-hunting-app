@@ -194,10 +194,10 @@
     "jobName": "Nazwa zlecenia",
     "jobNamePlaceholder": "eg. Implementacja widoku aplikacji",
     "jobNameDesc": "Opis zlecenia",
-    "brief": "Brief projektowy.",
+    "brief": "Brief projektowy",
     "briefPlaceholder": "Brief projektowy",
     "briefTooltip": "Pomóż specjalistom lepiej zrozumieć Twoje potrzeby – napisz kilka zdań o swoim zleceniu.",
-    "budget": "Budżet.",
+    "budget": "Budżet",
     "budgetDesc": "Określ budżet przeznaczony na realizację projektu, aby specjaliści mogli dostosować swoje oferty do Twoich możliwości.",
     "minBudgetForProjectRealisation": "Minimalna kwota za realizację projektu",
     "maxBudgetForProjectRealisation": "Maksymalna kwota za realizację projektu",
@@ -205,6 +205,7 @@
     "maxBudgetForProjectRealisationPlaceholder": "np. 10000",
     "employment": "Forma zatrudnienia.",
     "employmentDesc": "Określ formę zatrudnienia, rodzaj umowy i tryb pracy, aby dopasować współpracę do swoich potrzeb.",
+    "employmentType": "Rodzaj zatrudnienia",
     "contractTypeLabel": "Rodzaj umowy",
     "contractTypeDesc": "Wybierz rodzaj umowy",
     "workMode": "Tryb pracy",
@@ -213,7 +214,8 @@
     "workModeRemote": "Zdalny",
     "locationDesc": "Podaj preferencje lokalizacyjne dla realizacji zlecenia – możesz je zmienić w dowolnym momencie.",
     "locationCityTooltip": "Podaj miasto, aby specjaliści z Twojej okolicy mogli łatwiej odnaleźć Twoją ofertę.",
-    "remoteOnly": "Szukam tylko zdalnych kandydatów"
+    "remoteOnly": "Szukam tylko zdalnych kandydatów",
+    "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy."
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

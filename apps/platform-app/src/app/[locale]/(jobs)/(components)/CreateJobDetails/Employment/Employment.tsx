@@ -67,8 +67,8 @@ export const Employment = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>{t('employment')}</div>
-        <div className={styles.personalInfo}>{t('employmentDesc')}</div>
+        <div>{t('title')}</div>
+        <div className={styles.personalInfo}>{tt('emplo')}</div>
       </div>
 
       <div className={styles.right}>
@@ -88,7 +88,7 @@ export const Employment = () => {
           />
         </InputFormError>
         <div className={styles.employmentType}>
-          {t('employerType')}{' '}
+          {tt('employmentType')}{' '}
           <CheckboxInput
             id={EmploymentFormKeys.CONTRACT_TYPE + 1}
             label={t('employFull')}

@@ -92,9 +92,6 @@ export const CreateJobDetailsForm = () => {
       onSubmit={handleCreateJobDetails}
     >
       <div className={styles.wrapper}>
-        <Button type="submit" variant="primary">
-          {t('publishJob')}
-        </Button>
         <div className={styles.formBox}>
           <BasicInfo />
           <Budget />

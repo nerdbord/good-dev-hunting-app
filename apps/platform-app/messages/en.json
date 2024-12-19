@@ -205,6 +205,7 @@
     "maxBudgetForProjectRealisationPlaceholder": "eg. 10000",
     "employment": "Employment information",
     "employmentDesc": "Choose the employment type, contract type, and work mode to tailor the collaboration to your needs",
+    "employmentType": "Employment type",
     "contractTypeLabel": "Contract type",
     "contractTypeDesc": "Choose the contract type",
     "workMode": "Work mode",
@@ -213,7 +214,8 @@
     "workModeRemote": "Remote",
     "locationDesc": "Share your location preferences for the assignment – you can update them at any time.",
     "locationCityTooltip": "Provide the city so specialists in your area can easily find your offer.",
-    "remoteOnly": "I’m looking for remote candidates only"
+    "remoteOnly": "I’m looking for remote candidates only",
+    "techStackTooltip": "Specify the technologies you’ve selected for your job offer implementation."
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",

@@ -121,7 +121,7 @@ export const BasicInfo = () => {
               onTechSelect={handleTechSelect}
               onTechRemove={handleTechRemove}
               addImportantIcon={true}
-              tooltipText={tt('techstackTooltip')}
+              tooltipText={ttt('techStackTooltip')}
             />
           </InputFormError>
           <div className={styles.addInfo}>
