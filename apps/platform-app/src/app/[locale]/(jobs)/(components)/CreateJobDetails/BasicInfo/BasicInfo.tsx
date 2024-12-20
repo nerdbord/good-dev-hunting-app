@@ -107,7 +107,9 @@ export const BasicInfo = () => {
               </div>
             </div>
           </InputFormError>
-          <InputFormError
+          
+        </div>
+        <InputFormError
             error={
               touched[BasicInfoFormKeys.TECHNOLOGIES] &&
               ((errors[BasicInfoFormKeys.TECHNOLOGIES] as string) || '')
@@ -128,7 +130,6 @@ export const BasicInfo = () => {
             {tt('techstackInfo')} <br />
             {tt('techstackChoose')}
           </div>
-        </div>
       </div>
     </div>
   )
