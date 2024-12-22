@@ -1,7 +1,7 @@
 @import '../../../create/page.module';
 
 .container {
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   width: 100%;
@@ -38,6 +38,11 @@
     position: static;
     width: auto;
   }
+
+  :global(.light) & {
+    background-color: #FEFEFF;
+  }
+
 }
 
 .right {

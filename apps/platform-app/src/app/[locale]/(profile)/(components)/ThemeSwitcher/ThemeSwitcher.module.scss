@@ -62,3 +62,19 @@
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2), 
               0px 0.1px 0.3px 0px rgba(0, 0, 0, 0.1);
 }
+
+.mode-slide-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 16px;
+  transition: all 0.3s ease;
+}
+
+.mode-slide-tab.scrolled {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  transform: scale(0.9);
+  z-index: 100;
+}

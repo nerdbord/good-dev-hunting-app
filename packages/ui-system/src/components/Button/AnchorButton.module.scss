@@ -11,6 +11,12 @@
   border-radius: 2px;
   border: 1px solid var(--Light-04, #89939e);
   background: var(--Dark-01, #04080d);
+
+  :global(.light) & {
+    background: #FAFAFF;
+    color: #04080D;
+  }
+
   @include mobile {
     width: 100%;
     white-space: nowrap;
@@ -20,4 +26,8 @@
 
 .socialItem:hover {
   background-color: rgba(23, 27, 33, 1);
+
+  :global(.light) & {
+    background-color: #FAFAFF;
+  }
 }

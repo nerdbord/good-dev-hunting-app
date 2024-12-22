@@ -55,19 +55,21 @@ h6 {
   // Domyślne ustawienia dla dark mode
   --bg-color: #121212;
   --bg-fh-color: #121212;
+  --bg-pm-color: #04080d;
   --text-color: #ffffff;
   --button-bg: #333333;
   --button-text: #ffffff;
   --nav-text: #ffffff;
   --link-color: #ffffff;
   --switch-border:#3D434B;
-  color: #A687FF;
+  --color: #A687FF;
 }
 
 // Opcjonalnie: light mode
 .light {
   --bg-color: #FAFAFF;
   --bg-fh-color: #FEFEFF;
+  --bg-pm-color: #FEFEFF;
   --text-color: #04080D;
   --button-bg: #f0f0f0;
   --button-text: #000000;
@@ -93,3 +95,4 @@ button {
   background-color: var(--button-bg);
   color: var(--button-text);
 }
+

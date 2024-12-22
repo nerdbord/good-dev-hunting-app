@@ -1,7 +1,11 @@
 .landing_background {
-  background-color: var(--bg-color);
+  background-color: #121212;
   overflow: hidden;
   @include mobile {
     overflow: visible;
+  }
+
+  :global(.light) & {
+    background: #FAFAFF;
   }
 }

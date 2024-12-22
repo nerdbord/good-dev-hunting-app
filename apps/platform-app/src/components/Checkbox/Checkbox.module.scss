@@ -13,6 +13,10 @@ $checkboxSize: 16px;
   line-height: $lineHeight;
   color: #e2eaf1;
   cursor: pointer;
+
+  :global(.light) & {
+    color: #89939e;
+  }
 }
 
 .hidden {

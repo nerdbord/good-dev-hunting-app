@@ -83,10 +83,18 @@
 
 .buttonIconOpenMobile {
   color: #e2eaf1;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .localeNameOpenMobile {
   color: #e2eaf1;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .localeNameOpen {

@@ -17,6 +17,10 @@
   @include mobile {
     font-size: 14px !important;
   }
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .switch {

@@ -92,6 +92,10 @@
   align-items: center;
   gap: 10px;
   white-space: nowrap;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .location {
@@ -129,6 +133,10 @@
   font-size: 16px;
   line-height: 28px;
   color: #89939e;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .seniority {

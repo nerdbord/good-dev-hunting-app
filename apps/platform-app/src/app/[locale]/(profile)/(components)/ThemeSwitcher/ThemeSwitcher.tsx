@@ -7,11 +7,33 @@ import styles from './ThemeSwitcher.module.scss'
 
 type SwitchProps = {
   className?: string
+  containerClassName?: string
 }
 
-export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
+export const ThemeSwitcher: React.FC<SwitchProps> = ({
+  className,
+  containerClassName,
+}) => {
   const { isDarkTheme, toggleTheme } = useThemeStore()
   const [isSliderHidden, setIsSliderHidden] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      console.log('Scroll position:', scrollPosition) // debugging
+      setIsScrolled(scrollPosition > 50)
+      console.log('Is scrolled:', scrollPosition > 50) // debugging
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    console.log('isScrolled changed to:', isScrolled)
+  }, [isScrolled])
 
   useEffect(() => {
     if (isDarkTheme) {
@@ -22,23 +44,27 @@ export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
   }, [isDarkTheme])
 
   const handleToggleTheme = () => {
-    // Ukryj slider
     setIsSliderHidden(true)
-
-    // Po 300ms przełącz motyw
     setTimeout(() => {
       toggleTheme()
-
-      // Przywróć slider po zmianie motywu
       setIsSliderHidden(false)
     }, 300)
   }
 
   return (
-    <>
+    <div
+      className={`mode-slide-tab ${isScrolled ? 'scrolled' : ''}`}
+      onClick={() => {
+        console.log('Current classes:', {
+          modeSlideTab: styles.modeSlideTab,
+          scrolled: styles.scrolled,
+          isScrolled,
+        })
+      }}
+    >
       <button
         onClick={handleToggleTheme}
-        className={styles.switch}
+        className={`${styles.switch} ${className || ''}`}
         aria-label={
           isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'
         }
@@ -48,6 +74,6 @@ export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
         />
         <ThemeIcon isDarkTheme={isDarkTheme} className={styles.icon} />
       </button>
-    </>
+    </div>
   )
 }
