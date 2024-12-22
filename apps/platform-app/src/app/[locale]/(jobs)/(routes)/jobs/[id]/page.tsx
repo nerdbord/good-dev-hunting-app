@@ -2,7 +2,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { getTranslations } from 'next-intl/server'
 import CreateAnotherJobBtn from '../../../(components)/CreateAnotherJobBtn/CreateAnotherJobBtn'
 import styles from './page.module.scss'
-import { CreateJobDetailsForm } from '../../../(components)/CreateJobDetailsForm/CreateJobDetailsForm'
+import JobDetails from '../../../(components)/JobDetailsPage/JobDetails'
 
 interface JobPageProps {
   params: {
@@ -20,7 +20,7 @@ const JobPage = async ({ params }: JobPageProps) => {
         <CreateAnotherJobBtn />
       </div>
       <p>Job ID: {params.id}</p>
-      <CreateJobDetailsForm />
+      <JobDetails params={{ id: params.id }} />
     </div>
   )
 }

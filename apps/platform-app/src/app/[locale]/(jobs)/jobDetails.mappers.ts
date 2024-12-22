@@ -6,11 +6,11 @@ export const mapJobContract = (contractType: JobContractType): string => {
     case JobContractType.B2B:
       return 'B2B'
     case JobContractType.EMPLOYMENT_CONTRACT:
-      return 'Employment contract'
+      return 'Umowa o pracę'
     case JobContractType.CONTRACT_FOR_SPECIFIC_WORK:
-      return 'Contract for specific work'
+      return 'Umowa o dzieło'
     case JobContractType.CONTRACT_OF_MANDATE:
-      return 'Contract of mandate'
+      return 'Umowa zlecenie'
     default:
       return contractType
   }

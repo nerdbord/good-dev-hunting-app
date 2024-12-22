@@ -14,7 +14,10 @@ export interface JobDetailsFormValues {
   currency: Currency
   minBudgetForProjectRealisation: number | null
   maxBudgetForProjectRealisation: number | null
-  contractType: DropdownOption
+  contractType: {
+    name: string;
+    value: JobContractType;
+  }
   employmentType: EmploymentType[]
   employmentMode: EmploymentMode[]
   country: string

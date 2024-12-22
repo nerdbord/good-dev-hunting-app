@@ -78,14 +78,37 @@ const validationSchema = Yup.object().shape({
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
 })
 
-export const CreateJobDetailsForm = () => {
+interface CreateJobDetailsFormProps {
+  initialValues?: CreateJobDetailsFormValues
+}
+
+export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
+  
+  const defaultValues: CreateJobDetailsFormValues = {
+    jobName: '',
+    projectBrief: '',
+    techStack: [],
+    currency: Currency.PLN,
+    minBudgetForProjectRealisation: null,
+    maxBudgetForProjectRealisation: null,
+    contractType: { name: '', value: '' },
+    employmentType: [],
+    employmentMode: [],
+    country: '',
+    city: '',
+    remoteOnly: false,
+    terms: false,
+    state: PublishingState.DRAFT,
+  }
+
   const handleCreateJobDetails = (values: CreateJobDetailsFormValues) => {
     console.log(values)
   }
+
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initialValues || defaultValues}
       validationSchema={validationSchema}
       enableReinitialize
       validateOnMount
@@ -99,11 +122,8 @@ export const CreateJobDetailsForm = () => {
           <Location />
         </div>
         <div className={styles.actionsWrapper}>
-          <Button type="button" variant="primary">
+          <Button type="button" variant="secondary">
             {t('deleteJob')}
-          </Button>
-          <Button type="submit" variant="primary">
-            {t('edit')}
           </Button>
           <Button type="submit" variant="primary">
             {t('saveAndPreview')}
