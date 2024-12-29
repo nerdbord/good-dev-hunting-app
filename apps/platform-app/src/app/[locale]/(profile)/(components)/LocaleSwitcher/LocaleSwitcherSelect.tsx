@@ -2,6 +2,7 @@
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import useOutsideClick from '@/hooks/useOutsideClick'
+import { useThemeStore } from '@/hooks/useThemeStore'
 import { I18nNamespaces } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
 import { GlobeIcon } from '@gdh/ui-system/icons'
@@ -82,6 +83,10 @@ export const LocaleSwitcherSelect = ({
     mobileDropdown: isMobile,
     dropdown: !isMobile,
   })
+
+  const { isDarkTheme } = useThemeStore()
+
+  const iconColor = isDarkTheme ? '#FEFEFF' : '#121212'
 
   return (
     <ThemeWrapper>

@@ -53,7 +53,7 @@
     "sass": "^1.63.4",
     "yup": "^1.2.0",
     "zod": "^3.23.8",
-    "zustand": "^4.5.2"
+    "zustand": "^3.5.10"
   },
   "devDependencies": {
     "@types/cypress-dotenv": "^2.0.3",
