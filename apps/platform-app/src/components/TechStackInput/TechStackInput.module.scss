@@ -8,6 +8,12 @@
     outline: none;
   }
   min-height: 200px;
+
+  :global(.light) & {
+    background-color: rgba(250, 250, 255, 1);
+    border: 1px solid rgb(228, 228, 246);
+    color: #04080D;
+  }
 }
 
 .chipsContainer {
@@ -17,6 +23,10 @@
   padding: 10px;
   justify-content: flex-start;
   align-items: flex-start;
+
+  :global(.light) & {
+    background-color: rgba(250, 250, 255, 1)
+  }
 }
 
 .chip {
@@ -34,6 +44,11 @@
     cursor: pointer;
     margin-top: 1px;
   }
+
+  :global(.light) & {
+    background-color: rgba(228, 228, 246, 1);
+    color: rgba(125, 84, 241, 1);
+  }
 }
 
 .inputField {
@@ -46,6 +61,11 @@
   input {
     border: none;
     outline: none;
+  }
+
+  :global(.light) & {
+    color: rgba(4, 8, 13, 1);
+
   }
 }
 
@@ -60,6 +80,10 @@
   position: absolute;
   z-index: 1000;
   top: 40px;
+
+  :global(.light) & {
+    background-color: rgba(240, 240, 255, 1);
+  }
 }
 
 .suggestionItem {
@@ -73,6 +97,15 @@
   width: 100%;
   &:hover {
     background-color: #2a2f35;
+  }
+
+  :global(.light) & {
+    background-color: rgba(240, 240, 255, 1);
+    color: rgba(4, 8, 13, 1);
+    &:hover {
+      background-color: rgba(228, 228, 246, 1);
+      color: rgba(4, 8, 13, 1);
+    }
   }
 }
 
@@ -88,11 +121,21 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  
+  :global(.light) & {
+    color: rgba(61, 67, 75, 1);
+  }
 }
 
 .error {
   border: 1px solid red;
+
+  :global(.light) & {
+    border: 1px solid rgba(214, 38, 38, 1);
+  }
 }
+
+
 
 .errMsgText {
   color: var(--Error-Fill, #d62626);
@@ -101,4 +144,8 @@
   font-weight: 500;
   line-height: 16px;
   margin-bottom: 2px;
+
+  :global(.light) & {
+    color: rgba(214, 38, 38, 1);
+  }
 }

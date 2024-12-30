@@ -77,6 +77,11 @@
   color: #89939e;
   line-height: 16px;
   margin-top: -14px;
+
+  :global(.light) & {
+    color: rgba(61, 67, 75, 1);
+  }
+ 
 }
 
 .employmentType {
@@ -91,7 +96,7 @@
     margin-bottom: 60px;
   }
   :global(.light) & {
-    color: #89939e;
+    color: rgba(15, 18, 23, 1)
   }
 }
 

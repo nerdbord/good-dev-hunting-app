@@ -11,18 +11,30 @@
   border-radius: 2px;
   color: #69717b;
   cursor: pointer;
+
+  :global(.light) & {
+    background: #FEFEFF;
+    border: 1px solid rgb(228, 228, 246);
+    color: #04080D;
+  }
 }
 
 .buttonText {
   color: #69717b;
   font-size: 14px;
   line-height: 20px;
+
+  :global(.light) & {
+    color: #04080D;
+  }
 }
 
 .buttonTextChecked {
   color: #a687ff;
   font-size: 16px;
   line-height: 20px;
+
+  
 }
 
 .buttonBox {
@@ -44,6 +56,17 @@
   & :hover {
     background-color: #2a2f35;
   }
+
+  :global(.light) & {
+    background-color: #FEFEFF;
+    border: 1px solid rgb(228, 228, 246);
+    color: #04080D;
+
+    & :hover {
+      background-color: rgba(228, 228, 246, 1);
+      border: 1px solid rgba(228, 228, 246, 1);
+    }
+  }
 }
 
 .dropdownInput {
@@ -61,6 +84,17 @@
     border: 1px solid #e2eaf1;
     border-radius: 2px;
     background-color: #0f1217;
+  }
+
+  :global(.light) & {
+    background-color: #FEFEFF;
+    border: 1px solid rgb(228, 228, 246);
+    color: #04080D;
+
+    & .dropdownInput input {
+      background-color: rgba(228, 228, 246, 1);
+      border: 1px solid rgba(228, 228, 246, 1);
+    }
   }
 }
 

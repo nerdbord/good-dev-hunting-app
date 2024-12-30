@@ -33,6 +33,10 @@
     font-size: 32px;
     font-weight: 400;
   }
+
+ :global(.light) & {
+  color: #3d434b;
+ }
 }
 
 .subtitle {
@@ -41,6 +45,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: 28px;
+
+   :global(.light) & {
+  color: #3d434b;
+ }
 }
 
 .cardsWrapper {
