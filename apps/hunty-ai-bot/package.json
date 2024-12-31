@@ -6,7 +6,7 @@
     "start": "bun run index.ts",
     "dev": "bun run --watch index.ts",
     "lint": "eslint . --ext .ts --fix",
-    "prepare": "husky"
+    "format:staged": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -15,7 +15,8 @@
     "eslint": "^8.57.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.3.0",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "prettier-plugin-organize-imports": "^4.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

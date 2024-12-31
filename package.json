@@ -10,22 +10,22 @@
     "dev": "npm run dev -w apps/platform-app",
     "storybook": "npm run storybook -w packages/ui-system",
     "start": "npm run start -w apps/platform-app",
-    "precommit": "lint-staged",
     "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
-    "apps/platform-app/**/*.{ts,tsx}": [
-      "npm run lint -w apps/platform-app",
-      "npm run format:staged -w apps/platform-app"
+    "apps/platform-app/**/*": [
+      "npm run format:staged -w apps/platform-app",
+      "npm run lint -w apps/platform-app"
     ],
-    "apps/hunty-ai-bot/**/*.{ts,tsx}": [
+    "apps/hunty-ai-bot/**/*": [
+      "npm run format:staged -w apps/hunty-ai-bot",
       "npm run lint -w apps/hunty-ai-bot"
     ]
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
-    "husky": "^8.0.0",
-    "lint-staged": "^15.1.0"
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0"
   }
 }
