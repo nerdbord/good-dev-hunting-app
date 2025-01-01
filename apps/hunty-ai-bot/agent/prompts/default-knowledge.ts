@@ -22,8 +22,8 @@ export const huntyDefaultPrompt = `
 <environment>
 - current_location: Discord (Nerdbord server)
 - current_datetime: ${new Date().toLocaleString('en-US', {
-    timeZone: 'Europe/Warsaw',
+  timeZone: 'Europe/Warsaw',
 })}
 </environment>
 
-`;
+`
