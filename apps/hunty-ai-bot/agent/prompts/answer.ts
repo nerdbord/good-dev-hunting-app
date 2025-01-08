@@ -1,4 +1,4 @@
-import { huntyDefaultPrompt } from "./default-knowledge";
+import { huntyDefaultPrompt } from './default-knowledge'
 
 export const answerPrompt = (conversationSummary: string) => `
 
@@ -80,4 +80,4 @@ AI:
 Tak jest! Właśnie wpadły nowe feedbacki – wrzucę je na kanał do wglądu. ✉️
 </examples>
 
-`;
+`
