@@ -37,7 +37,7 @@ const evaluationModel = new ChatGroq({
 })
 
 const executionModel = new ChatGroq({
-  model: 'llama3-groq-70b-8192-tool-use-preview',
+  model: 'llama-3.2-90b-vision-preview',
   temperature: 0,
 })
 
