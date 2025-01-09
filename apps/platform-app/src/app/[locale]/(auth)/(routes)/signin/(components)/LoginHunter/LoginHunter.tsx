@@ -3,13 +3,17 @@
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { signIn } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
+import styles from '../../page.module.scss'
 
 // components
+import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
+import { findUserByEmail } from '@/app/[locale]/(auth)/_actions/queries/findUserByEmail'
+import { Roles } from '@/app/[locale]/(auth)/_models/User.model'
 import TextInput from '@/components/TextInput/TextInput'
 import { Box, Button, CheckboxInput } from '@gdh/ui-system'
-import { useTranslations } from 'next-intl'
 
 const LoginHunter = () => {
   const t = useTranslations(I18nNamespaces.LoginHunter)
@@ -23,22 +27,24 @@ const LoginHunter = () => {
   const handleSignIn = async (email: string) => {
     setIsLoading(true)
     try {
+      const existingUser = await findUserByEmail(email)
+      if (existingUser) {
+        if (!existingUser.roles.includes(Roles.HUNTER)) {
+          throw new Error('User is already registered as Specialist.')
+        }
+      }
       const result = await signIn('email', {
-        email: email.trim().toLowerCase(),
+        email: email,
         redirect: false,
-        callbackUrl: AppRoutes.profilesList,
+        callbackUrl: `${AppRoutes.oAuth}?role=${Roles.HUNTER}`,
       })
       if (result?.error) {
-        setError(
-          result.error === 'AccessDenied'
-            ? 'User is already a specialist!'
-            : result.error,
-        )
+        setError(result.error)
       } else {
         setIsSubmited(true)
       }
     } catch (error) {
-      setError('Failed to sign in. Please try again later.')
+      setError('Failed to sign in. Ensure you are not registered as Specialist')
     } finally {
       setIsLoading(false)
     }
@@ -104,18 +110,25 @@ const LoginHunter = () => {
             </span>
           </CheckboxInput>
         </div>
+      </form>
+      <div className={styles.btnsContainer}>
         <Button
           loading={isLoading}
           disabled={!isChecked}
           onClick={(e) => {
             e.preventDefault()
-            handleSignIn(email)
+            handleSignIn(email.trim().toLowerCase())
           }}
           variant={'primary'}
         >
           {t('joinAsAHunter')}{' '}
         </Button>
-      </form>
+        <span>{t('or')}</span>
+        <LinkedInLoginButton
+          label={t('loginWithLinkedin')}
+          role={Roles.HUNTER}
+        />
+      </div>
     </Box>
   )
 }
