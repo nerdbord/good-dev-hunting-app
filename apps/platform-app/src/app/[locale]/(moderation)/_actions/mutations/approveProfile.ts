@@ -2,10 +2,7 @@
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
-import {
-  findGithubUsernameByProfileId,
-  updateProfileById,
-} from '@/backend/profile/profile.service'
+import { updateProfileById } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
@@ -19,11 +16,9 @@ export const approveProfile = withSentry(async (profileId: string) => {
     state: PublishingState.APPROVED,
   })
 
-  const profileOwnerUsername = await findGithubUsernameByProfileId(profileId)
-
   await sendProfileApprovedEmail(
     updatedProfile.user.email,
-    profileOwnerUsername,
+    updatedProfile.fullName,
   )
 
   await sendDiscordNotificationToModeratorChannel(

@@ -14,12 +14,14 @@ export default function SocialItems({
 }) {
   return (
     <div className={styles.social}>
-      <AnchorButton
-        href={`https://github.com/${githubUsername}`}
-        icon={<GithubIcon2 />}
-      >
-        Github
-      </AnchorButton>
+      {githubUsername && (
+        <AnchorButton
+          href={`https://github.com/${githubUsername}`}
+          icon={<GithubIcon2 />}
+        >
+          Github
+        </AnchorButton>
+      )}
       {linkedInUrl && (
         <AnchorButton href={ensureProtocol(linkedInUrl)} icon={<LinkedIn />}>
           LinkedIn

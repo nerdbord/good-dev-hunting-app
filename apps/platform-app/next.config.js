@@ -15,6 +15,7 @@ const nextConfig = {
   },
   images: {
     domains: [
+      'media.licdn.com',
       'avatars.githubusercontent.com',
       'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
       'github.com',

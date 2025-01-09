@@ -25,14 +25,14 @@ We will notify you once the review is complete. Thank you for your patience.`
   const headerText = ProfileVerification.isApproved(state)
     ? 'Congratulations'
     : ProfileVerification.isPending(state)
-    ? 'Your profile is under review'
-    : 'Your profile is unpublished'
+      ? 'Your profile is under review'
+      : 'Your profile is unpublished'
 
   const bodyText = ProfileVerification.isApproved(state)
     ? publishedText
     : ProfileVerification.isPending(state)
-    ? pendingText
-    : unpublishedText
+      ? pendingText
+      : unpublishedText
 
   return (
     <div className={styles.overlay}>
