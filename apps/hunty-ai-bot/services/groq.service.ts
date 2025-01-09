@@ -22,7 +22,7 @@ export class GroqService {
         jsonMode?: boolean,
         maxTokens?: number
     }) {
-        const { messages, model = "llama-3.1-70b-versatile", jsonMode, maxTokens } = config;
+        const { messages, model = "llama-3.3-70b-versatile", jsonMode, maxTokens } = config;
         try {
             const chatCompletion = await this.groq.chat.completions.create({
                 messages: messages as GroqMessageParam[],
