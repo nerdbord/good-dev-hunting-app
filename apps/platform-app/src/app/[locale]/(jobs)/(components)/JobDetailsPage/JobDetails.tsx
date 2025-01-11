@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
 import styles from './JobDetails.module.scss'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
+import { AvatarsDisplay } from '../AvatarsDisplay/AvatarsDisplay'
 
 export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter()
@@ -25,23 +26,35 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
     console.log('Deleting job:', params.id)
   }
 
+  // const handlePublish = () => {
+  //   // Implementacja publikowania - na razie tylko console.log
+  //   console.log('Publishing job:', params.id)
+  // }
+
   return (
     <>
       <section className={styles.container}>
         <ul className={styles.actions}>
+        <li>
+            <Button variant="secondary" onClick={handleDelete}>
+              {tButtons('deleteJob')}
+            </Button>
+          </li>
           <li>
             <Button variant="primary" onClick={handleEdit}>
               {tButtons('edit')}
             </Button>
           </li>
-          <li>
-            <Button variant="secondary" onClick={handleDelete}>
-              {tButtons('deleteJob')}
-            </Button>
-          </li>
-        </ul>
 
+          {/* <li>
+            <Button variant="primary" onClick={handlePublish}>
+              {tButtons('postJob')}
+            </Button>
+          </li> */}
+        </ul>
+        <AvatarsDisplay />
         <JobDetailsBasicInfo />
+        
       </section>
       <JobDetailsDetailsInfo />
     </>
