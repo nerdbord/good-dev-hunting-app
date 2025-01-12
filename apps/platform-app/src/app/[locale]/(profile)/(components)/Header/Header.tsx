@@ -157,6 +157,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
                 <Logo />
               </Link>
               <GitHubStarsButton />
+              <ThemeSwitcher />
             </div>
             <nav>
               <ul
@@ -166,7 +167,6 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               </ul>
               <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
                 {renderDesktopContent()}
-                <ThemeSwitcher />
               </ul>
             </nav>
           </div>

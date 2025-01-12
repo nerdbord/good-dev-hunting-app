@@ -19,8 +19,8 @@ export default async function LandingPage() {
 
   return (
     <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
-      <ThemeWrapper>
-        <main className={styles.landing_background}>
+      <main className={styles.landing_background}>
+        <ThemeWrapper>
           <Header buttonsVariant={'main'} />
           <Container>
             <Hero />
@@ -31,8 +31,8 @@ export default async function LandingPage() {
             <FAQSection />
           </Container>
           <LandingFooter />
-        </main>
-      </ThemeWrapper>
+        </ThemeWrapper>
+      </main>
     </ProfilesStoreProvider>
   )
 }
