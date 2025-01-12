@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* Adjust gap as needed */
+  padding: 20px;
+  background-color: #f5f5f5; /* Example background color */
+}
+
+.info {
+  flex: 1; /* Allow the info section to take up remaining space */
+  padding-right: 20px; /* Add some padding to the right */
+}
+
+.avatars {
+  flex: 0 0 auto; /* Prevent the avatars section from growing */
+  width: 300px; /* Set a fixed width for the avatars section */
+} 

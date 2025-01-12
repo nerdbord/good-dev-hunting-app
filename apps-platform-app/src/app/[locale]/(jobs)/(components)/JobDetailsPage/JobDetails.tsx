@@ -24,11 +24,6 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
     console.log('Deleting job:', params.id)
   }
 
-  // const handlePublish = () => {
-  //   // Implementacja publikowania - na razie tylko console.log
-  //   console.log('Publishing job:', params.id)
-  // }
-
   return (
     <>
       <section className={styles.container}>
@@ -43,19 +38,13 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
               {tButtons('edit')}
             </Button>
           </li>
-
-          {/* <li>
-            <Button variant="primary" onClick={handlePublish}>
-              {tButtons('postJob')}
-            </Button>
-          </li> */}
         </ul>
-        <div className={styles.jobDetailsContainerPlusAvatars}>
-          <AvatarsDisplay />
+        <div className={styles.jobDetailsContainer}>
           <JobDetailsBasicInfo />
+          <AvatarsDisplay />
         </div>
       </section>
       <JobDetailsDetailsInfo />
     </>
   )
-}
+} 

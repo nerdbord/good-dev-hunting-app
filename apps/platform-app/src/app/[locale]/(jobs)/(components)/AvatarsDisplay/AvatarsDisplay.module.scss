@@ -1,3 +1,22 @@
+.avatarsWrapper {
+  width: 35%;
+  margin: 20px 0;
+  background: #04080d;
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  @include mobile {
+    padding: $spacing-6 $spacing-4;
+    padding-bottom: 30px;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+}
+
 .avatarsContainer {
   display: flex;
   align-items: center;
