@@ -1,0 +1,149 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+}
+
+.chatSection {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 0 1rem;
+}
+
+.botQuestion {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+.thinking {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.125rem;
+  transition: background-color 0.2s;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.button:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.formDataContainer {
+  position: fixed;
+  margin-top: 1rem;
+  z-index: 0;
+  left: 0;
+  max-width: 36rem;
+  top: 0;
+  padding: 1rem;
+  background-color: transparent;
+  border-radius: 0.5rem;
+}
+
+.formDataTitle {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.formDataContent {
+  font-size: 0.75rem;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.optionButton {
+  padding: 10px 20px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.optionButton:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.traditionalFormButton {
+  position: absolute;
+  bottom: 10%;
+  right: 0;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.traditionalFormButton:hover {
+  background-color: #e0e0e0;
+}
