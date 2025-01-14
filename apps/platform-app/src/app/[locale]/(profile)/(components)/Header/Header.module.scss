@@ -6,17 +6,13 @@
   padding: 24px 0;
   width: 100%;
   z-index: 99;
-  background-color: #0F1217;
+  background-color: var(--bg-color4);
   @include mobile {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
     z-index: 5;
-  }
-
-  :global(.light) & {
-    background-color: #FAFAFF;
   }
 }
 

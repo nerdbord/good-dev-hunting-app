@@ -1,6 +1,6 @@
 .socialItem {
   padding: 12px 24px;
-  color: #ffffff;
+  color: var(--text-color);
   font-weight: 500;
   font-size: 14px;
   display: flex;
@@ -10,12 +10,7 @@
   cursor: pointer;
   border-radius: 2px;
   border: 1px solid var(--Light-04, #89939e);
-  background: var(--Dark-01, #04080d);
-
-  :global(.light) & {
-    background: #FAFAFF;
-    color: #04080D;
-  }
+  background: var(--bg-pm-color);
 
   @include mobile {
     width: 100%;
@@ -25,11 +20,7 @@
 }
 
 .socialItem:hover {
-  background-color: rgba(23, 27, 33, 1);
-
-  :global(.light) & {
-    background-color: #FAFAFF;
-  }
+  background-color: var(--bg-color3);
 }
 
 .icon {

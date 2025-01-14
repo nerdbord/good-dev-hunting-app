@@ -11,12 +11,8 @@ $checkboxSize: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: $lineHeight;
-  color: #e2eaf1;
+  color: var(--text-color2);
   cursor: pointer;
-
-  :global(.light) & {
-    color: var(--bg-color2);
-  }
 }
 
 .hidden {
@@ -29,7 +25,7 @@ $checkboxSize: 16px;
   width: $checkboxSize;
   min-width: $checkboxSize;
   height: $checkboxSize;
-  border: 1px solid #e2eaf1;
+  border: 1px solid var(--checkbox-border);
   border-radius: 2px;
   cursor: pointer;
 }

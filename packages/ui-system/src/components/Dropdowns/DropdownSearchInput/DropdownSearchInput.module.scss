@@ -10,7 +10,7 @@
   border: none;
   border-radius: 2px;
   background-color: var(--bg-color);
-  border: 1px solid #2a2f35;
+  border: 1px solid var(--border-color);
   color: var(--text-color);
   border-radius: 2px;
   padding: 16px 24px 16px 20px;
@@ -28,9 +28,6 @@
   }
   &:focus {
     color: var(--text-color);
-  }
-  :global(.light) & {
-    border: 1px solid rgba(228, 228, 246, 1);
   }
 }
 

@@ -54,13 +54,14 @@ h6 {
 :root {
   // Default settings for dark mode
   --bg-color: #121212;
-  --bg-fh-color: #121212;
-  --bg-pm-color: #04080d;
   --bg-color2: #0f1217;
   --bg-color3: #171b21;
-  --bg-color4: 
+  --bg-color4: #0F1217;
+  --bg-fh-color: #121212;
+  --bg-pm-color: #04080d;
   --text-color: #ffffff;
   --text-color2: #e2eaf1;
+  --text-color3: #e2eaf1;
   --button-bg: #333333;
   --button-text: #ffffff;
   --switch-border:#3D434B;
@@ -68,26 +69,29 @@ h6 {
   --suggestion-text-color: #89939e;
   --suggestion-text-color-hover: #2a2f35;
   --border-color: #2a2f35;
-
+  --checkbox-border: #e2eaf1;
 }
 
 // Optional: light mode
 .light {
   --bg-color: #FAFAFF;
+  --bg-color2: #FEFEFF;
+  --bg-color3: #FEFEFF;
+  --bg-color4: #FAFAFF;
   --bg-fh-color: #FEFEFF;
   --bg-pm-color: #FEFEFF;
   --text-color: #04080D;
   --text-color2: #04080D;
+  --text-color3: #3D434B;
   --button-bg: #f0f0f0;
   --button-text: #000000;
   --switch-border: #F0F0FF;
   --color: #04080D;
-  --bg-color2: #FEFEFF;
-  --bg-color3: #FEFEFF;
-  --bg-color4: #FEFEFF;
   --suggestion-text-color: #3D434B;
   --suggestion-text-color-hover: #04080D;
   --border-color: #E4E4F6;
+  --checkbox-border: #0F1217;
+
 }
 
 // Global styles for body/html

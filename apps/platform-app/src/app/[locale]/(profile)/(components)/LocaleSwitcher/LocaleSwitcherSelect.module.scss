@@ -32,7 +32,7 @@
   min-height: 43px;
   gap: $spacing-2;
   padding: 12px 20px;
-  border: 1px solid #2a2f35;
+  border: 1px solid var(--border-color);
   background-color: var(--bg-color);
   text-align: center;
   font-size: 14px;
@@ -43,10 +43,6 @@
   @include mobile {
     max-width: 201px;
     margin: 0 auto;
-  }
-
-  :global(.light) & {
-    border: 1px solid rgba(228, 228, 246, 1);
   }
 }
 

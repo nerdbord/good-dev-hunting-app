@@ -16,7 +16,7 @@
 }
 
 .sectionName {
-  color: #3d434b;
+  color: var(--switch-border);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -24,7 +24,7 @@
 }
 
 .title {
-  color: #e2eaf1;
+  color: var(--text-color3);
   font-size: 38px;
   font-style: normal;
   font-weight: 500;
@@ -33,22 +33,14 @@
     font-size: 32px;
     font-weight: 400;
   }
-
- :global(.light) & {
-  color: #3d434b;
- }
 }
 
 .subtitle {
-  color: #69717b;
+  color: var(--text-color3);
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 28px;
-
-   :global(.light) & {
-  color: #3d434b;
- }
 }
 
 .cardsWrapper {
