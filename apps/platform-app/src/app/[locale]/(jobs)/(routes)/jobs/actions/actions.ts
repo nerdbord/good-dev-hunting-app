@@ -29,3 +29,7 @@ export async function analyzeMessage({
 
   return JSON.parse(chat_completion.choices[0].message.content || '{}')
 }
+
+export async function saveToDatabase(data: Partial<SubmissionFormData>) {
+  console.log(data)
+}

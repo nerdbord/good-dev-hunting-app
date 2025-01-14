@@ -1,4 +1,5 @@
 import { analyzeMessage } from '../actions/actions'
+import type { SubmissionFormData } from '../actions/groq/schema'
 
 interface FormData {
   taskName?: string
@@ -18,7 +19,7 @@ interface FormData {
 }
 
 export class ChatBotState {
-  private formData: FormData = {}
+  private formData: Partial<SubmissionFormData> = {}
   private isComplete = false
 
   public async handleMessage(
@@ -113,7 +114,7 @@ export class ChatBotState {
     })
   }
 
-  public getFormData(): FormData {
+  public getFormData(): Partial<SubmissionFormData> {
     return this.formData
   }
 

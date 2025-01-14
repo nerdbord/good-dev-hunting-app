@@ -1,26 +1,45 @@
 'use client'
+import { Button } from '@gdh/ui-system'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import type { ChangeEvent } from 'react'
+import { useRef, useState } from 'react'
+import { saveToDatabase } from '../actions/actions'
+import type { EmploymentDetails } from '../actions/groq/schema'
 import { useChatBot } from './ChatBotContext'
-import styles from './ChatUi.module.css'
+import styles from './ChatUi.module.scss'
 
-const CONTRACT_TYPES = [
+const CONTRACT_TYPES: EmploymentDetails['contractType'][] = [
   'B2B',
   'Employment Contract',
   'Work Contract',
   'Mandate Contract',
 ]
-const WORK_TIMES = ['Full-time', 'Part-time', 'Contract']
-const WORK_MODES = ['On-site', 'Hybrid', 'Remote']
+const WORK_TIMES: EmploymentDetails['workTime'][] = [
+  'Full-time',
+  'Part-time',
+  'Contract',
+]
+const WORK_MODES: EmploymentDetails['workMode'][] = [
+  'On-site',
+  'Hybrid',
+  'Remote',
+]
 
 export function ChatUi() {
   const router = useRouter()
   const chatBot = useChatBot()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [isTyped, setIsTyped] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState<string>(
     chatBot.getMissingField().question,
   )
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(event.target.value)
+    setIsTyped(event.target.value.length > 0)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,7 +53,10 @@ export function ChatUi() {
 
       const { question, field } = chatBot.getMissingField()
       setCurrentQuestion(question)
-      if (!field) router.push('/form')
+      if (!field) {
+        await saveToDatabase(chatBot.getFormData())
+        router.push('/form')
+      }
     } catch (error) {
       console.error('Error:', error)
       setCurrentQuestion('Sorry, there was an error. Please try again.')
@@ -43,16 +65,21 @@ export function ChatUi() {
     }
   }
 
-  const handleOptionSelect = (field: string, value: string) => {
+  const handleOptionSelect = async (field: string, value: string) => {
     chatBot.setFormField(field, value)
 
     const { question, field: missingField } = chatBot.getMissingField()
     setCurrentQuestion(question)
-    if (!missingField) router.push('/form')
+    if (!missingField) {
+      await saveToDatabase(chatBot.getFormData())
+      router.push('/form')
+    }
   }
 
-  const handleTraditionalFormClick = () => {
-    router.push('/form')
+  const handleContainerClick = (e: React.MouseEvent) => {
+    if (textareaRef.current) {
+      textareaRef.current.focus()
+    }
   }
 
   const renderInput = () => {
@@ -62,13 +89,13 @@ export function ChatUi() {
       return (
         <div className={styles.optionsContainer}>
           {CONTRACT_TYPES.map((type) => (
-            <button
+            <Button
               key={type}
               onClick={() => handleOptionSelect(field, type)}
-              className={styles.optionButton}
+              variant="standard"
             >
               {type}
-            </button>
+            </Button>
           ))}
         </div>
       )
@@ -78,13 +105,13 @@ export function ChatUi() {
       return (
         <div className={styles.optionsContainer}>
           {WORK_TIMES.map((time) => (
-            <button
+            <Button
               key={time}
               onClick={() => handleOptionSelect(field, time)}
-              className={styles.optionButton}
+              variant="action"
             >
               {time}
-            </button>
+            </Button>
           ))}
         </div>
       )
@@ -94,13 +121,13 @@ export function ChatUi() {
       return (
         <div className={styles.optionsContainer}>
           {WORK_MODES.map((mode) => (
-            <button
+            <Button
               key={mode}
               onClick={() => handleOptionSelect(field, mode)}
-              className={styles.optionButton}
+              variant="tertiary"
             >
               {mode}
-            </button>
+            </Button>
           ))}
         </div>
       )
@@ -108,17 +135,39 @@ export function ChatUi() {
 
     return (
       <form onSubmit={handleSubmit} className={styles.form}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your answer..."
-          className={styles.input}
-          disabled={isLoading}
-        />
-        <button type="submit" disabled={isLoading} className={styles.button}>
-          Send
-        </button>
+        <div
+          className={`${styles.textareaWrapper} ${isTyped ? styles.typed : ''}`}
+        >
+          <textarea
+            className={styles.formTextarea}
+            value={input}
+            placeholder={'Type your answer...'}
+            onChange={handleChange}
+            maxLength={2500}
+            disabled={isLoading}
+            ref={textareaRef}
+          />
+          <div
+            className={styles.textareaButtonsContainer}
+            onClick={handleContainerClick}
+          >
+            <div className={styles.textareaButtonsWrapper}>
+              <Button
+                type="button"
+                disabled={isLoading}
+                variant="action"
+                onClick={() => {
+                  setInput('')
+                }}
+              >
+                Clear
+              </Button>
+              <Button type="submit" disabled={isLoading} variant="action">
+                Send
+              </Button>
+            </div>
+          </div>
+        </div>
       </form>
     )
   }
@@ -126,16 +175,15 @@ export function ChatUi() {
   return (
     <div className={styles.container}>
       <div className={styles.chatSection}>
-        <h2
+        <h3
           className={`${styles.botQuestion} ${
             isLoading ? styles.thinking : ''
           }`}
         >
           {currentQuestion}
-        </h2>
+        </h3>
         {renderInput()}
       </div>
-
       {Object.keys(chatBot.getFormData()).length > 0 && (
         <div className={styles.formDataContainer}>
           <h3 className={styles.formDataTitle}>Current Form Data:</h3>
@@ -144,13 +192,6 @@ export function ChatUi() {
           </pre>
         </div>
       )}
-
-      <button
-        onClick={handleTraditionalFormClick}
-        className={styles.traditionalFormButton}
-      >
-        Fill the form in traditional way
-      </button>
     </div>
   )
 }
