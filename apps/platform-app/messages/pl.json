@@ -18,7 +18,6 @@
     "profileViews": "Wyświetlenia profilu:",
     "availability": "Jestem otwarty na nową pracę"
   },
-
   "HowItWorks": {
     "faqsection": "Odwrócony proces rekrutacyjny",
     "howitworks": "JAK TO DZIAŁA",
@@ -37,13 +36,11 @@
     "titleSix": "Całkowicie za darmo",
     "descriptionFour": "Tworzenie profilu i nawiązywanie kontaktów z pracodawcami jest darmowe."
   },
-
   "UserProfile": {
     "howItWork": "Dołącz do nas w tworzeniu największej, darmowej platformy open source dedykowanej łączeniu specjalistów i specjalistek branży IT z całego świata.",
     "goBack": "Wróć",
     "notOpenForWork": "Niedostępny dla nowych zleceń"
   },
-
   "TalentSection": {
     "title": "Znajdź swojego specjalistę",
     "description": "Odkryj naszą rozwijającą się społeczność talentów. Kontaktuj się z tyloma osobami, ile chcesz."
@@ -53,7 +50,6 @@
     "title": "Poznaj nasz zespół",
     "subtitle": "Poznaj pasjonatów działających za kulisami"
   },
-
   "Faq": {
     "title": "FAQ",
     "description": "Daj nam znać, jeśli masz jakiekolwiek pytania.",
@@ -66,7 +62,6 @@
     "questionFour": "Czy muszę mieć konto na GitHubie?",
     "answerFour": "Aby stworzyć profil, konieczne jest posiadanie konta na GitHubie, gdyż chcemy mieć pewność, że jesteś prawdziwym programistą. Korzystamy również z GitHuba do pobierania Twojego zdjęcia profilowego oraz innych publicznych informacji, aby proces tworzenia profilu był jak najłatwiejszy. Nie przechowujemy żadnych tokenów GitHub."
   },
-
   "Buttons": {
     "createProfile": "Utwórz profil",
     "editProfile": "Edytuj profil",
@@ -85,16 +80,16 @@
     "uploadAnotherCVfile": "Zmień plik CV",
     "importFromGithub": "Zaimportuj z Github",
     "importing": "Importowanie...",
-    "apply": "Zastosuj"
+    "apply": "Zastosuj",
+    "createAnotherJob": "Utwórz kolejne zlecenie",
+    "postJob": "Opublikuj zlecenie"
   },
-
   "LandingFooter": {
     "contact": "Kontakt",
     "joinOurDiscord": "Dołącz do naszego Discorda",
     "privacyPolicy": "Polityka prywatności",
     "termsOfService": "Warunki korzystania z usługi"
   },
-
   "DropdownFilter": {
     "technology": "Technologia",
     "seniority": "Doświadczenie",
@@ -102,11 +97,9 @@
     "location": "Lokalizacja",
     "salary": "Godzinówka"
   },
-
   "Search": {
     "searchByName": "Szukaj po imieniu"
   },
-
   "LoginDev": {
     "title": "Zaloguj się jako specjalista IT",
     "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
@@ -114,7 +107,6 @@
     "loginWithLinkedin": "Zaloguj się przez LinkedIn",
     "or": "albo"
   },
-
   "LoginHunter": {
     "login": "Zaloguj się jako łowca talentów",
     "description": "Dołącz i zaloguj się zawsze za pomocą magicznego linku. Łowcy nie mają publicznych profili.",
@@ -125,7 +117,6 @@
     "loginWithLinkedin": "Zaloguj się przez LinkedIn",
     "or": "albo"
   },
-
   "PersonalInfo": {
     "title": "Informacje osobiste",
     "description": "Podziel się informacjami osobistymi, aby rekruterzy mogli Cię lepiej poznać.",
@@ -142,7 +133,6 @@
     "slug": "Własny URL",
     "slugTooltip": "Wybierz unikalną nazwę dla swojego linku do profilu (np. mistrzkodu)"
   },
-
   "LocationPreferences": {
     "title": "Preferencje lokalizacyjne",
     "description": "Udostępnij informacje o swoich aktualnych kwalifikacjach. Będziesz mógł je zmienić w dowolnym momencie.",
@@ -158,7 +148,6 @@
     "languageTooltip": "Wymień języki, którymi posługujesz się biegle",
     "languagePlaceholder": "Zacznij wpisywać..."
   },
-
   "WorkInformation": {
     "title": "Informacje o pracy",
     "description": "Podziel się informacjami o swoich aktualnych kwalifikacjach. Będziesz mógł je zmienić w dowolnym momencie.",
@@ -190,7 +179,6 @@
     "leaveBtn": "Opuść stronę",
     "cancelBtn": "Ukończ profil"
   },
-
   "ConfirmLogoutModal": {
     "title": "Ukończ swój profil, aby zapisać",
     "description": "Twój profil nie jest jeszcze w pełni ukończony. Aby zapisać zmiany, wypełnij wszystkie pola. Jeśli teraz się wylogujesz, Twoje postępy zostaną utracone.",
@@ -201,5 +189,46 @@
     "approvedHeader": "Gratulacje",
     "rejectedText": "Na Twój e-mail wysłaliśmy wiadomość z informacjami o tym, co możesz poprawić, aby Twój profil został zaakceptowany.",
     "rejectedHeader": "Twój profil został odrzucony"
+  },
+  "Jobs": {
+    "postJobTitle": "Dodaj nowe zlecenie",
+    "comingSoon": "Formularz dodawania zlecenia wkrótce...",
+    "submit": "Dodaj zlecenie",
+    "applyForJob": "Aplikuj do zlecenia",
+    "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
+    "submitApplication": "Aplikuj do zlecenia",
+    "jobDetails": "Szczegóły zlecenia"
+  },
+  "Hunter": {
+    "hero": "Znajdź Zaufanych Specjalistów IT",
+    "trustworthy": "Opublikuj ofertę i znajdź zweryfikowanych programistów",
+    "howItWorks": "Jak to Działa",
+    "post": "Opublikuj Ofertę",
+    "postDesc": "Stwórz ogłoszenie, a nasz system automatycznie przekształci je w szczegółowy brief",
+    "match": "Otrzymaj Dopasowania",
+    "matchDesc": "Twoja oferta trafia do dopasowanych profili z odpowiednimi umiejętnościami",
+    "connect": "Połącz się i Ustal Warunki",
+    "connectDesc": "Zaplanuj rozmowy wideo z kandydatami i ustal warunki bezpośrednio",
+    "benefits": "Dlaczego My",
+    "verifiedTitle": "Zweryfikowani Specjaliści",
+    "verifiedDesc": "Wszyscy programiści są weryfikowani przez profile GitHub i dotychczasową pracę",
+    "speedTitle": "Szybkie Dopasowanie",
+    "speedDesc": "Nasz system automatycznie dopasowuje ofertę do odpowiednich specjalistów",
+    "secureTitle": "Bezpieczny Proces",
+    "secureDesc": "Bezpośrednia komunikacja i bezpieczny proces ustalania warunków",
+    "successStories": "Historie Sukcesu",
+    "story1Quote": "Znaleźliśmy świetnego programistę w kilka dni. System dopasowań naprawdę działa!",
+    "story1Author": "Anna Kowalska",
+    "story1Role": "Project Manager",
+    "story2Quote": "Proces weryfikacji daje prawdziwy spokój podczas rekrutacji",
+    "story2Author": "Marek Nowak",
+    "story2Role": "Założyciel Startupu",
+    "ctaTitle": "Gotowy Znaleźć Swojego Programistę?",
+    "ctaDesc": "Opublikuj ofertę teraz i znajdź zweryfikowanych specjalistów"
+  },
+  "Applications": {
+    "applicationDetails": "Szczegóły aplikacji",
+    "applicantInfo": "Informacje o aplikującym",
+    "actions": "Akcje"
   }
 }
