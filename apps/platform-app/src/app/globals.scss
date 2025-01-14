@@ -24,7 +24,7 @@ a {
 html,
 body {
   max-width: 100%;
-  color: #e2eaf1;
+  color: var(--text-color2);
   background-color: var(--bg-color);
 }
 
@@ -32,12 +32,12 @@ ul {
   list-style-type: none;
 }
 
-/* Ukrywanie ikony dla rozwijanego menu w polach input */
+/* Hiding dropdown icon in input fields */
 input::-webkit-contacts-auto-fill-button {
   display: none;
 }
 
-/* Ukrywanie dla Firefox */
+/* Hiding for Firefox */
 input::-moz-dropdown-button {
   display: none;
 }
@@ -52,43 +52,52 @@ h6 {
 
 
 :root {
-  // dark mode
+  // Default settings for dark mode
   --bg-color: #121212;
   --bg-fh-color: #121212;
   --bg-pm-color: #04080d;
+  --bg-color2: #0f1217;
+  --bg-color3: #171b21;
+  --bg-color4: 
   --text-color: #ffffff;
+  --text-color2: #e2eaf1;
   --button-bg: #333333;
   --button-text: #ffffff;
-  --nav-text: #ffffff;
-  --link-color: #ffffff;
   --switch-border:#3D434B;
   --color: #A687FF;
-  --icon-color: #ffffff;
+  --suggestion-text-color: #89939e;
+  --suggestion-text-color-hover: #2a2f35;
+  --border-color: #2a2f35;
+
 }
 
-// light mode
+// Optional: light mode
 .light {
   --bg-color: #FAFAFF;
   --bg-fh-color: #FEFEFF;
   --bg-pm-color: #FEFEFF;
   --text-color: #04080D;
+  --text-color2: #04080D;
   --button-bg: #f0f0f0;
   --button-text: #000000;
-  --nav-text: #000000;
-  --link-color: #000000;
   --switch-border: #F0F0FF;
-  color: #04080D;
-  --icon-color: #04080D;
+  --color: #04080D;
+  --bg-color2: #FEFEFF;
+  --bg-color3: #FEFEFF;
+  --bg-color4: #FEFEFF;
+  --suggestion-text-color: #3D434B;
+  --suggestion-text-color-hover: #04080D;
+  --border-color: #E4E4F6;
 }
 
-// Globalne style dla body/html
+// Global styles for body/html
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-// Opcjonalne style dla elementów, które chcesz od razu stylować globalnymi zmiennymi
+// Optional styles for elements that you want to style with global variables right away
 a {
   color: var(--link-color);
 }

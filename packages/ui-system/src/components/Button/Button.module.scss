@@ -140,6 +140,10 @@
 
 .grayedOut:hover:enabled {
   background-color: rgba(23, 27, 33, 1);
+
+  :global(.light) & { 
+      background-color: rgba(228, 228, 246, 1);
+}
 }
 
 .buttonWrapper {
@@ -148,4 +152,6 @@
       width: 100%;
     }
   }
+
+
 }

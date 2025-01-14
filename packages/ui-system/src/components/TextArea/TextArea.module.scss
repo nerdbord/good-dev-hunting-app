@@ -3,8 +3,8 @@
   width: 100%;
   height: 414px;
   align-items: flex-start;
-  background-color: #0f1217;
-  border: 1px solid #2a2f35;
+  background-color: var(--bg-color2);
+  border: 1px solid var(--border-color);
   color: #69717b;
   border-radius: 2px;
   resize: none;
@@ -19,9 +19,6 @@
   line-height: 20px;
   color: #69717b;
 
-  // :global(.light) & {
-  //   color: #ffffff;
-  // };
 }
 
 .formLabel {
@@ -44,9 +41,9 @@
 }
 
 .typed {
-  background-color: #0f1217;
-  color: rgba(226, 234, 241, 1);
-  border: 1px solid #2a2f35;
+  background-color: var(--bg-color2);
+  color: var(--text-color2);
+  border: 1px solid var(--border-color);
 }
 
 .editorWrapper {

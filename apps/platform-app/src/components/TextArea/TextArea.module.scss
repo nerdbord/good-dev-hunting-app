@@ -3,13 +3,14 @@
   width: 100%;
   height: 414px;
   align-items: flex-start;
-  background-color: #0f1217;
-  border: 1px solid #2a2f35;
+  background-color: var(--bg-color2);
+  border: 1px solid var(--border-color);
   color: #69717b;
   border-radius: 2px;
   resize: none;
   padding: 16px 24px 16px 20px;
   font-size: 16px;
+
 }
 
 .formTextarea::placeholder {
@@ -40,18 +41,25 @@
 }
 
 .typed {
-  background-color: #0f1217;
-  color: rgba(226, 234, 241, 1);
-  border: 1px solid #2a2f35;
+  background-color: var(--bg-color2);
+  color: var(--text-color2);
+  border: 1px solid var(--border-color);
 }
 
 .editorWrapper {
   height: 100%;
-}
+  background-color: var(--bg-color2);
+  color: var(--text-color2);
+
+  :global(.light)  & {
+    background-color: rgba(250, 250, 255, 1);
+    color: rgba(42, 47, 53, 1);
+      }
+    }
+
 
 .mdxEditorCustom {
   //--mdx-ul-color: white;
-  background-color: #0f1217;
   border-radius: 3px;
   width: 100%;
   height: 100%;
@@ -65,6 +73,11 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  :global(.light) & {
+    color: rgba(42, 47, 53, 1);
+    border: 1px solid rgb(228, 228, 246);
+  }
 
   h1,
   h2,
@@ -137,18 +150,24 @@
     cursor: pointer;
     color: #69717b;
     border: none;
+
+    :global(.light) & {
+      background-color: transparent;
+      color: #04080D;
+    }
   }
 
   div {
-    background-color: #0f1217;
+    // background-color: #0f1217;
     border-radius: 2px;
-    color: white;
+    color: var(--text-color);
   }
 
   > *:nth-child(2) {
     width: 100%;
     flex-grow: 1;
   }
+
 }
 
 .mdxContentEditable {

@@ -15,7 +15,7 @@ $checkboxSize: 16px;
   cursor: pointer;
 
   :global(.light) & {
-    color: rgba(15, 18, 23, 1)
+    color: var(--bg-color2);
   }
 }
 
