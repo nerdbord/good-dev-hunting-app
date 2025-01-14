@@ -10,10 +10,12 @@ export type { DropdownOption }
 export type ProfileUpdateParams = Partial<ProfileModel>
 
 export type ProfileCreateParams = {
+  slug: string
   fullName: string
   avatarUrl: string | null
   linkedIn: string | null
   bio: string
+  cvUrl: string | null
   country: string
   openForCountryRelocation: boolean
   city: string
@@ -71,9 +73,11 @@ export enum JobOfferFiltersEnum {
 export type SearchParamsFilters = Record<JobOfferFiltersEnum, string[]>
 
 export interface ProfileFormValues {
+  slug: string
   fullName: string
   linkedin: string | null
   bio: string
+  cvUrl: string | null
   country: string
   city: string
   openForCountryRelocation: boolean

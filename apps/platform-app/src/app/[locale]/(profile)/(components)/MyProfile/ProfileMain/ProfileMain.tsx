@@ -31,14 +31,16 @@ const ProfileMain = async (props: ProfileMainProps) => {
     <>
       <section className={styles.container}>
         <ul className={styles.social}>
-          <li>
-            <AnchorButton
-              href={`https://github.com/${githubUsername}`}
-              icon={<GithubIcon2 />}
-            >
-              Github
-            </AnchorButton>
-          </li>
+          {githubUsername && (
+            <li>
+              <AnchorButton
+                href={`https://github.com/${githubUsername}`}
+                icon={<GithubIcon2 />}
+              >
+                Github
+              </AnchorButton>
+            </li>
+          )}
           {profile.linkedIn && (
             <li>
               <AnchorButton

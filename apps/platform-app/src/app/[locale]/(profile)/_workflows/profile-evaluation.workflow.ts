@@ -31,13 +31,13 @@ const StateAnnotation = Annotation.Root({
 })
 
 const evaluationModel = new ChatGroq({
-  model: 'llama-3.1-70b-versatile',
+  model: 'llama-3.3-70b-versatile',
   temperature: 0,
   streaming: false,
 })
 
 const executionModel = new ChatGroq({
-  model: 'llama3-groq-70b-8192-tool-use-preview',
+  model: 'llama-3.2-90b-vision-preview',
   temperature: 0,
 })
 

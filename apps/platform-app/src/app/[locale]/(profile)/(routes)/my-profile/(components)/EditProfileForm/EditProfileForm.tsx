@@ -1,8 +1,10 @@
 'use client'
+import { uploadCVdocumentFile } from '@/app/(files)/_actions/uploadCVdocumentFile'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import { mapProfileModelToEditProfileFormValues } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/mappers'
 import { saveMyProfile } from '@/app/[locale]/(profile)/_actions'
+import { checkSlugIsFree } from '@/app/[locale]/(profile)/_actions/queries/checkSlugIsFree'
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
   type JobSpecialization,
@@ -25,6 +27,19 @@ import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
 import { FormNavigationWarning } from '../FormStateMonitor/FormStateMonitor'
 
 export const validationSchema = Yup.object().shape({
+  slug: Yup.string()
+    .required('Slug is required')
+    .min(3, 'Slug must be at least 3 characters long')
+    .max(50, 'Slug cannot exceed 50 characters')
+    .matches(
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      'Slug can only contain lowercase letters, numbers, and hyphens (e.g. "my-profile-123")',
+    )
+    .test('is-unique', 'This slug is already taken', async (slug) => {
+      if (!slug) return true
+      const slugIsFree = await checkSlugIsFree(slug)
+      return slugIsFree
+    }),
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
@@ -63,13 +78,16 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const { runAsync, loading: isSubmitting } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
+  const { cvFormData } = useUploadContext()
 
   const mappedInitialValues: ProfileFormValues = useMemo(() => {
     if (!profile) {
       return {
+        slug: '',
         fullName: '',
         linkedin: '',
         bio: '',
+        cvUrl: '',
         country: '',
         openForCountryRelocation: false,
         city: '',
@@ -95,10 +113,12 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
   const handleEditProfile = async (values: ProfileFormValues) => {
     const updateParams: ProfileModel = {
       ...profile,
+      slug: values.slug,
       fullName: values.fullName,
-      avatarUrl: session?.user?.image || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
+      cvUrl: values.cvUrl,
       country: values.country,
       openForCountryRelocation: values.openForCountryRelocation,
       city: values.city,
@@ -124,13 +144,29 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
     }
 
     await runAsync(async () => {
+      const uploadedCvUrl = cvFormData
+        ? await uploadCVdocumentFile(cvFormData)
+        : null
+
       const uploadedFileUrl = formDataWithFile
         ? await uploadImage(formDataWithFile)
         : null
       uploadedFileUrl && (await updateMyAvatar(uploadedFileUrl))
-      const savedProfile = await saveMyProfile(updateParams)
+      const savedProfile = await saveMyProfile({
+        ...updateParams,
+        cvUrl: uploadedCvUrl?.cvUrl || profile.cvUrl,
+      })
       savedProfile &&
-        updateSession({ ...session?.user, name: savedProfile.fullName })
+        updateSession({
+          ...session,
+          user: {
+            ...session?.user,
+            avatarUrl: savedProfile.avatarUrl,
+            name: savedProfile.fullName,
+            profileId: savedProfile.id,
+            profileSlug: savedProfile.slug,
+          },
+        })
 
       router.push(AppRoutes.myProfile)
     })

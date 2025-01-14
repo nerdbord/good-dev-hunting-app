@@ -1,4 +1,5 @@
 'use client'
+import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvUploader'
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
@@ -15,6 +16,7 @@ import styles from './PersonalInfo.module.scss'
 export enum PersonalInfoFormKeys {
   FULL_NAME = 'fullName',
   CONTACT_EMAIL = 'contactEmail',
+  SLUG = 'slug',
   LINKEDIN = 'linkedin',
   BIO = 'bio',
 }
@@ -50,20 +52,38 @@ const PersonalInfo = () => {
             maxLength={40}
           />
         </InputFormError>
-        <div className={styles.emailContainer}>
-          <TextInput
-            label={t('email')}
-            value={session?.user?.email || ''}
-            onChange={handleChange}
-            addImportantIcon={true}
-            name={PersonalInfoFormKeys.CONTACT_EMAIL}
-            disabled={true}
-            tooltipText={t('emailTooltip')}
-            dataTestId=""
-            maxLength={30}
-          />
-        </div>
+        <TextInput
+          label={t('email')}
+          value={session?.user?.email || ''}
+          onChange={handleChange}
+          addImportantIcon={true}
+          name={PersonalInfoFormKeys.CONTACT_EMAIL}
+          disabled={true}
+          tooltipText={t('emailTooltip')}
+          dataTestId=""
+          maxLength={30}
+        />
         <UserPhotoUploader />
+        <CVUploader />
+        <InputFormError
+          error={
+            touched[PersonalInfoFormKeys.SLUG] &&
+            errors[PersonalInfoFormKeys.SLUG]
+          }
+        >
+          <TextInput
+            addImportantIcon={true}
+            tooltipText={t('slugTooltip')}
+            onBlur={handleBlur}
+            label={t('slug')}
+            placeholder="eg. codemaster"
+            value={values[PersonalInfoFormKeys.SLUG]}
+            onChange={handleChange}
+            name={PersonalInfoFormKeys.SLUG}
+            dataTestId={PersonalInfoFormKeys.SLUG}
+            maxLength={40}
+          />
+        </InputFormError>
         <InputFormError
           error={
             touched[PersonalInfoFormKeys.LINKEDIN] &&

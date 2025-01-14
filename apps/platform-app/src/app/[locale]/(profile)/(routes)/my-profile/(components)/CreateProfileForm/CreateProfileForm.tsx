@@ -1,4 +1,5 @@
 'use client'
+import { uploadCVdocumentFile } from '@/app/(files)/_actions/uploadCVdocumentFile'
 import { uploadImage } from '@/app/(files)/_actions/uploadImage'
 import { updateMyAvatar } from '@/app/[locale]/(auth)/_actions/mutations/updateMyAvatar'
 import CreateProfileTopBar from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/CreateProfileTopBar/CreateProfileTopBar'
@@ -7,6 +8,7 @@ import PersonalInfo from '@/app/[locale]/(profile)/(routes)/my-profile/(componen
 import WorkInformation from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/WorkInformation/WorkInformation'
 import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
 import { createProfile } from '@/app/[locale]/(profile)/_actions/mutations/createProfile'
+import { checkSlugIsFree } from '@/app/[locale]/(profile)/_actions/queries/checkSlugIsFree'
 import {
   type CreateProfileFormValues,
   type JobSpecialization,
@@ -27,28 +29,20 @@ import {
   FormNavigationWarning,
 } from '../FormStateMonitor/FormStateMonitor'
 
-const initialValues: CreateProfileFormValues = {
-  fullName: '',
-  linkedin: '',
-  bio: '',
-  country: '',
-  city: '',
-  openForCountryRelocation: false,
-  openForCityRelocation: false,
-  remoteOnly: false,
-  position: { name: '', value: '' },
-  seniority: { name: '', value: '' },
-  employment: [],
-  techStack: [],
-  state: PublishingState.DRAFT,
-  terms: false,
-  hourlyRateMin: 0,
-  hourlyRateMax: 0,
-  currency: Currency.PLN,
-  language: [],
-}
-
 export const validationSchema = Yup.object().shape({
+  slug: Yup.string()
+    .required('Slug is required')
+    .min(3, 'Slug must be at least 3 characters long')
+    .max(50, 'Slug cannot exceed 50 characters')
+    .matches(
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      'Slug can only contain lowercase letters, numbers, and hyphens (e.g. "my-profile-123")',
+    )
+    .test('is-unique', 'This slug is already taken', async (slug) => {
+      if (!slug) return true
+      const slugIsFree = await checkSlugIsFree(slug)
+      return slugIsFree
+    }),
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
   country: Yup.string().required('Country is required'),
@@ -87,7 +81,32 @@ const CreateProfileForm = () => {
   const { runAsync, loading: isCreatingProfile } = useAsyncAction()
   const router = useRouter()
   const { formDataWithFile } = useUploadContext()
+  const { cvFormData } = useUploadContext()
   const { addToast } = useToast()
+
+  const initialValues: CreateProfileFormValues = {
+    // slug: session?.user.githubUsername || '',
+    slug: '',
+    fullName: session?.user.name || '',
+    linkedin: '',
+    bio: '',
+    cvUrl: '',
+    country: '',
+    city: '',
+    openForCountryRelocation: false,
+    openForCityRelocation: false,
+    remoteOnly: false,
+    position: { name: '', value: '' },
+    seniority: { name: '', value: '' },
+    employment: [],
+    techStack: [],
+    state: PublishingState.DRAFT,
+    terms: false,
+    hourlyRateMin: 0,
+    hourlyRateMax: 0,
+    currency: Currency.PLN,
+    language: [],
+  }
 
   const handleCreateProfile = async (values: CreateProfileFormValues) => {
     if (!values.terms) {
@@ -98,11 +117,19 @@ const CreateProfileForm = () => {
       return
     }
 
+    const slugIsFree = await checkSlugIsFree(values.slug)
+    if (!slugIsFree) {
+      addToast('Slug is taken, please choose another', ToastStatus.INVALID)
+      return
+    }
+
     const payload: ProfileCreateParams = {
+      slug: values.slug,
       fullName: values.fullName,
-      avatarUrl: session?.user?.image || null,
+      avatarUrl: session?.user?.avatarUrl || null,
       linkedIn: values.linkedin,
       bio: values.bio,
+      cvUrl: values.cvUrl,
       country: values.country,
       openForCountryRelocation: values.openForCountryRelocation,
       city: values.city,
@@ -126,6 +153,8 @@ const CreateProfileForm = () => {
 
     try {
       runAsync(async () => {
+        cvFormData ? await uploadCVdocumentFile(cvFormData) : null
+
         const uploadedFileUrl = formDataWithFile
           ? await uploadImage(formDataWithFile)
           : null
@@ -136,9 +165,14 @@ const CreateProfileForm = () => {
 
         if (createdProfile) {
           updateSession({
-            ...session?.user,
-            name: payload.fullName,
-            profileId: createdProfile.id,
+            ...session,
+            user: {
+              ...session?.user,
+              avatarUrl: createdProfile.avatarUrl,
+              name: createdProfile.fullName,
+              profileId: createdProfile.id,
+              profileSlug: createdProfile.slug,
+            },
           })
           router.push(AppRoutes.myProfile)
         }
