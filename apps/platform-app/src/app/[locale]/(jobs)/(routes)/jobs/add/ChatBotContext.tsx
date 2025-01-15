@@ -3,11 +3,12 @@
 import React, { createContext, useContext, useRef } from 'react'
 import { ChatBotState } from './ChatBotState'
 
-interface ChatBotContextType {
+interface JobApplicationChatContextType {
   chatBot: ChatBotState
 }
 
-const ChatBotContext = createContext<ChatBotContextType | null>(null)
+const JobApplicationChatContext =
+  createContext<JobApplicationChatContextType | null>(null)
 
 export const ChatBotProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -15,14 +16,14 @@ export const ChatBotProvider: React.FC<{ children: React.ReactNode }> = ({
   const chatBotRef = useRef(new ChatBotState())
 
   return (
-    <ChatBotContext.Provider value={{ chatBot: chatBotRef.current }}>
+    <JobApplicationChatContext.Provider value={{ chatBot: chatBotRef.current }}>
       {children}
-    </ChatBotContext.Provider>
+    </JobApplicationChatContext.Provider>
   )
 }
 
-export const useChatBot = (): ChatBotState => {
-  const context = useContext(ChatBotContext)
+export const useJobApplicationChat = (): ChatBotState => {
+  const context = useContext(JobApplicationChatContext)
   if (!context) {
     throw new Error('useChatBot must be used within a ChatBotProvider')
   }
