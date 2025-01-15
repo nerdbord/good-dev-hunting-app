@@ -218,6 +218,11 @@
   "Applications": {
     "applicationDetails": "Application Details",
     "applicantInfo": "Applicant Info",
-    "actions": "Actions"
+    "actions": "Actions",
+    "accept": "Accept",
+    "reject": "Reject",
+    "scheduleCall": "Schedule a Call",
+    "rejectReason": "Reason for Rejection",
+    "confirm": "Confirm"
   }
 }

@@ -1,36 +1,44 @@
 .wrapper {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .header {
-    h1 {
-        font-size: 32px;
-        font-weight: 500;
-    }
+  padding: 24px 0;
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+  }
 }
 
 .content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
 
-    @include mobile {
-        grid-template-columns: 1fr;
-    }
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
-.applicationInfo,
-.actions {
-    background: #1c1f26;
-    border-radius: 16px;
-    padding: 24px;
+.applicationInfo {
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+}
 
-    h2 {
-        font-size: 24px;
-        font-weight: 500;
-        margin-bottom: 16px;
-    }
+.actions {
+  background: #1c1f26;
+  border-radius: 16px;
+  padding: 24px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
 }
