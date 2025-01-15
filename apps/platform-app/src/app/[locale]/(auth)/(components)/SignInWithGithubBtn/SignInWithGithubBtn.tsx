@@ -11,7 +11,7 @@ const SignInWithGithubBtn = () => {
     <Button
       onClick={() => {
         setIsCalled(true)
-        signIn('github', { callbackUrl: AppRoutes.githubOAuth })
+        signIn('github', { callbackUrl: AppRoutes.oAuth })
       }}
       disabled={isCalled}
       variant={'secondary'}

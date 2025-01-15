@@ -111,7 +111,9 @@
   "LoginDev": {
     "title": "Login as IT specialist",
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
-    "loginWithGithub": "Login with Github"
+    "loginWithGithub": "Login with Github",
+    "loginWithLinkedin": "Login with LinkedIn",
+    "or": "or"
   },
 
   "LoginHunter": {
@@ -120,7 +122,9 @@
     "policyOne": "I have read and accept",
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
-    "joinAsAHunter": "Join as a Hunter"
+    "joinAsAHunter": "Join as a Hunter",
+    "loginWithLinkedin": "Login with LinkedIn",
+    "or": "or"
   },
 
   "PersonalInfo": {
@@ -135,7 +139,9 @@
     "characters": "characters",
     "cvFile": "CV file (optional)",
     "choosenCVfile": "Uploaded file",
-    "choosenCVfileName": "Your CV"
+    "choosenCVfileName": "Your CV",
+    "slug": "Custom URL",
+    "slugTooltip": "Choose a unique name for your profile link (e.g., codemaster)"
   },
 
   "LocationPreferences": {

@@ -6,7 +6,14 @@ import { withSentry } from '@/utils/errHandling'
 
 export const registerNewUser = withSentry(
   async ({ id: _id, githubUsername, name, ...data }) => {
-    const userData = { ...data }
+    const userData = {
+      ...data,
+      profile: {
+        create: {
+          fullName: name || '',
+        },
+      },
+    }
 
     if (githubUsername) {
       userData.githubDetails = {
@@ -20,6 +27,7 @@ export const registerNewUser = withSentry(
       data: userData,
       include: {
         githubDetails: true,
+        profile: true,
       },
     })
     if (!createdUser) {

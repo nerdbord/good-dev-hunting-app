@@ -7,7 +7,6 @@ import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
-import GithubUserPhotoUploader from './GithubUserPhotoUploader'
 import styles from './UserPhotoUploader.module.scss'
 
 export const UserPhotoUploader = () => {
@@ -21,7 +20,7 @@ export const UserPhotoUploader = () => {
 
   useEffect(() => {
     async function fetchAvatar() {
-      const url = (await fetchMyAvatar()) || session?.user.image
+      const url = (await fetchMyAvatar()) || session?.user.avatarUrl
       url && setUserImage(url)
     }
     fetchAvatar()
@@ -84,10 +83,6 @@ export const UserPhotoUploader = () => {
                 {t('changePicture')}{' '}
               </label>
             </Button>
-            <GithubUserPhotoUploader
-              setImage={setUserImage}
-              showError={setImageUploadError}
-            />
           </div>
         </div>
       </div>
