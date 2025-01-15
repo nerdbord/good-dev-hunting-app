@@ -1,7 +1,7 @@
 @import '../../../create/page.module';
 
 .container {
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   width: 100%;
@@ -10,10 +10,6 @@
     flex-direction: column;
     padding: 40px 16px 60px 16px;
     gap: 20px;
-  }
-  
-  :global(.light) & {
-    background-color: #FEFEFF;
   }
 }
 

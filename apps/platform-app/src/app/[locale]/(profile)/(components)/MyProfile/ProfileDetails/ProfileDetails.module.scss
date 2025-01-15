@@ -95,8 +95,8 @@
   line-height: 15px;
   letter-spacing: -0.24px;
 
-  :global(.light) & {
-    background-color: #FAFAFF;
+  .light .techStackItem {
+    background-color: var(--tech-stack-item-light-bg);
   }
 }
 
