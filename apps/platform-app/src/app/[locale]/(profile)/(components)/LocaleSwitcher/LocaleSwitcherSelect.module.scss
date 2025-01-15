@@ -53,27 +53,20 @@
     width: 18px;
     height: 18px;
   }
-  svg path {
-    stroke: #e2eaf1;
-  }
-
-  :global(.light) & {
-    stroke: #04080D; 
-  }
+  color: var(--text-color);
 
   @include mobile {
-    &.buttonIconOpen svg path {
-      stroke: #a687ff;
+    &.buttonIconOpen {
+      color: var(--color-purple);
     }
   }
 }
 
 .buttonIconOpen {
-  svg path {
-    stroke: #a687ff;
-  }
+  color: var(--color-purple);
+  
   :global(.light) & {
-    stroke: #04080D;
+    color: var(--text-color);
   }
 }
 

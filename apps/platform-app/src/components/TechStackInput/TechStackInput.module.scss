@@ -56,16 +56,12 @@
 }
 
 .suggestions {
-  background: #171b21;
+  background: var(--bg-color3);
   border-radius: 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
   z-index: 1000;
   top: 40px;
-}
-
-.light .suggestions {
-  background-color: #f0f0ff;
 }
 
 .suggestionItem {
@@ -79,17 +75,8 @@
   width: 100%;
   &:hover {
     background-color: var(--suggestion-text-color-hover);
+    color: var(--text-color);
   }
-}
-
-.light .suggestionItem {
-  background-color: #f0f0ff;
-  color: #04080D;
-}
-
-.light .suggestionItem:hover {
-  background-color: #e4e4f6;
-  color: #04080D;
 }
 
 .active {
@@ -100,23 +87,20 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #89939e;
+  color: var(--suggestion-text-color);
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.light .formLabel {
-  color: #3d434b;
-}
-
 .error {
   border: 1px solid red;
+
+  :global(.light) & {
+    border: 1px solid rgba(214, 38, 38, 1);
+  }
 }
 
-.light .error {
-  border: 1px solid rgba(214, 38, 38, 1);
-}
 
 .errMsgText {
   color: var(--Error-Fill, #d62626);
@@ -125,8 +109,8 @@
   font-weight: 500;
   line-height: 16px;
   margin-bottom: 2px;
-}
 
-.light .errMsgText {
-  color: rgba(214, 38, 38, 1);
+  :global(.light) & {
+    color: rgba(214, 38, 38, 1);
+  }
 }

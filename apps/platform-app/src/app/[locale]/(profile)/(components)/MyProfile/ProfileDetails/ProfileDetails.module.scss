@@ -87,17 +87,13 @@
 
 .techStackItem {
   color: #13cbaa;
-  background-color: #161a1f;
+  background-color: var(--bg-color5);
   padding: $spacing-2 14px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;
   letter-spacing: -0.24px;
-
-  .light .techStackItem {
-    background-color: var(--tech-stack-item-light-bg);
-  }
 }
 
 .gitActivities {

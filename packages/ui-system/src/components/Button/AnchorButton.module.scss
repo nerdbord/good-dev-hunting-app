@@ -9,7 +9,7 @@
   gap: 8px;
   cursor: pointer;
   border-radius: 2px;
-  border: 1px solid var(--Light-04, #89939e);
+  border: 1px solid var(--border-color);
   background: var(--bg-pm-color);
 
   @include mobile {

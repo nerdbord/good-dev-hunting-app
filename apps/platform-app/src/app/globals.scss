@@ -54,16 +54,19 @@ h6 {
 :root {
   // Default settings for dark mode
   --bg-color: #121212;
-  --bg-color2: #0f1217;
+  --bg-color2: #0F1217;
   --bg-color3: #171b21;
   --bg-color4: #0F1217;
+  --bg-color5: #161a1f;
   --bg-fh-color: #121212;
   --bg-pm-color: #04080d;
   --text-color: #ffffff;
   --text-color2: #e2eaf1;
   --text-color3: #e2eaf1;
   --button-bg: #333333;
+  --button-bg-2: #7d54f1;
   --button-text: #ffffff;
+  --button-stroke: #CCCCF0;
   --switch-border:#3D434B;
   --color: #A687FF;
   --suggestion-text-color: #89939e;
@@ -78,13 +81,16 @@ h6 {
   --bg-color2: #FEFEFF;
   --bg-color3: #FEFEFF;
   --bg-color4: #FAFAFF;
+  --bg-color5: #FAFAFF;
   --bg-fh-color: #FEFEFF;
   --bg-pm-color: #FEFEFF;
   --text-color: #04080D;
   --text-color2: #04080D;
   --text-color3: #3D434B;
   --button-bg: #f0f0f0;
+  --button-bg-2: #7d54f1;
   --button-text: #000000;
+  --button-stroke: #CCCCF0;
   --switch-border: #F0F0FF;
   --color: #04080D;
   --suggestion-text-color: #3D434B;
