@@ -10,7 +10,6 @@ export default function JobsLayout({
   return (
     <main>
       <HunterHeader />
-
       <Container>{children}</Container>
     </main>
   )

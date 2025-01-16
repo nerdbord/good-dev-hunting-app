@@ -3,8 +3,8 @@
 
 import { AddJobTopBar } from '../../../(components)/AddJobTopBar/AddJobTopBar'
 import { JobApplicationChat } from '../../../(components)/JobApplicationChat/JobApplicationChat'
-import { ChatBotProvider } from './ChatBotContext'
 import styles from './page.module.scss'
+import { ChatBotProvider } from './utils/ChatBotContext'
 
 const NewJobPage = async () => {
   // const t = await getTranslations(I18nNamespaces.Jobs)

@@ -1,14 +1,18 @@
 'use client'
+import { I18nNamespaces } from '@/i18n/request'
 import { Button, TextArea } from '@gdh/ui-system'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import type { ChangeEvent } from 'react'
 import { useState } from 'react'
 import { saveToDatabase } from '../../(routes)/jobs/actions/actions'
-import { useJobApplicationChat } from '../../(routes)/jobs/add/ChatBotContext'
+import { useJobApplicationChat } from '../../(routes)/jobs/add/utils/ChatBotContext'
+
 import styles from './JobApplicationChat.module.scss'
 
 export function JobApplicationChat() {
   const router = useRouter()
+  const t = useTranslations(I18nNamespaces.JobApplicationChat)
   const chatBot = useJobApplicationChat()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -19,10 +23,10 @@ export function JobApplicationChat() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!input.trim() || isLoading) return
-
     setInput('')
     setIsLoading(true)
+
+    if (!input.trim()) router.push('/form')
 
     try {
       await chatBot.handleMessage(input)
@@ -39,13 +43,15 @@ export function JobApplicationChat() {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>{'CO TO'}</div>
-        <div className={styles.personalInfo}>{'INSTRUKCJA'} </div>
+        <div>{'Hunty - AI Assistant'}</div>
+        <div className={styles.instructionBox}>
+          <p>{t('instruction1')}</p>
+          <p>{t('instruction2')}</p>
+        </div>
       </div>
       <form className={styles.right} onSubmit={handleSubmit}>
-        <label className={styles.formLabel}>{'Czego potrzebujesz?'}</label>
         <TextArea
-          placeholder={'WPROWADZ OPIS ZGŁOSZENIA'}
+          placeholder={t('placeholder')}
           value={input}
           onChange={handleChange}
           name={''}
@@ -54,7 +60,7 @@ export function JobApplicationChat() {
         />
         <div className={styles.submitButton}>
           <Button variant="primary" type="submit" loading={isLoading}>
-            WYŚLIJ OPIS I PRZEJDZ DO FORMA
+            {t('button')}
           </Button>
         </div>
       </form>

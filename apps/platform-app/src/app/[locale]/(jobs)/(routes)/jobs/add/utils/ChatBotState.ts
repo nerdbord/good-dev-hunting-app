@@ -1,5 +1,5 @@
-import { analyzeMessage } from '../actions/actions'
-import type { SubmissionFormData } from '../actions/groq/schema'
+import { analyzeMessage } from '../../actions/actions'
+import type { SubmissionFormData } from '../groq/schema'
 
 interface FormData {
   taskName?: string

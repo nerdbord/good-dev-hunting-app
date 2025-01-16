@@ -219,5 +219,12 @@
     "applicationDetails": "Application Details",
     "applicantInfo": "Applicant Info",
     "actions": "Actions"
-  }
+  },
+  "JobApplicationChat": {
+    "instruction1": "On this page, you can create job postings by entering a description, which will be automatically transformed into an application form.",
+    "instruction2": "This form will then be made available to you for preview and editing.",
+    "button": "Submit and Go to the Appropriate Form.",
+    "placeholder": "Enter the job description..."
+  },
+  "AddJobTopBar": { "header": "Post New Job" }
 }

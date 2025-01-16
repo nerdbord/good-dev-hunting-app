@@ -219,5 +219,12 @@
     "applicationDetails": "Szczegóły aplikacji",
     "applicantInfo": "Informacje o aplikującym",
     "actions": "Akcje"
-  }
+  },
+  "JobApplicationChat": {
+    "instruction1": "Na tej stronie możesz stworzyć oferty pracy poprzez wprowadzenie opisu, który zostanie automatycznie przekształcony w formularz zgłoszeniowy.",
+    "instruction2": "Formularz ten zostanie następnie udostępniony Tobie do podglądu i edycji.",
+    "button": " Wyślij i Przejdź do odpowiedniego Formularza",
+    "placeholder": "Wprowadź opis zlecenia..."
+  },
+  "AddJobTopBar": { "header": "Dodaj Nowe Zlecenie" }
 }
