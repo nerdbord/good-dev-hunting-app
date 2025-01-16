@@ -82,7 +82,8 @@
     "createAnotherJob": "Utwórz kolejne zlecenie",
     "postJob": "Opublikuj zlecenie",
     "deleteJob": "Usuń zlecenie",
-    "publishJob": "Publikuj zlecenie"
+    "publishJob": "Publikuj zlecenie",
+    "goBack": "Wróć"
   },
   "LandingFooter": {
     "contact": "Kontakt",

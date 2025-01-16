@@ -82,7 +82,8 @@
     "postJob": "Post New Job",
     "createAnotherJob": "Create Another Job",
     "deleteJob": "Delete Job",
-    "publishJob": "Publish Job"
+    "publishJob": "Publish Job",
+    "goBack": "Go back"
   },
   "LandingFooter": {
     "contact": "Contact",

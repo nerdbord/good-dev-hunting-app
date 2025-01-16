@@ -1,5 +1,6 @@
 'use client'
-import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
+// import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
+import styles from './CreateJobDetailsForm.module.scss'
 import { Button } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
@@ -115,19 +116,25 @@ export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProp
       onSubmit={handleCreateJobDetails}
     >
       <div className={styles.wrapper}>
-        <div className={styles.formBox}>
-          <BasicInfo />
-          <Budget />
-          <Employment />
-          <Location />
-        </div>
         <div className={styles.actionsWrapper}>
+          <Button 
+            type="button" 
+            variant="secondary"
+          >
+            {t('goBack')}
+          </Button>
           <Button type="button" variant="secondary">
             {t('deleteJob')}
           </Button>
           <Button type="submit" variant="primary">
             {t('saveAndPreview')}
           </Button>
+        </div>
+        <div className={styles.formBox}>
+          <BasicInfo />
+          <Budget />
+          <Employment />
+          <Location />
         </div>
       </div>
     </Formik>
