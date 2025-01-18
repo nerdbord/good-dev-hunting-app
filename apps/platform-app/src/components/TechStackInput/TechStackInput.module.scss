@@ -56,16 +56,17 @@
 }
 
 .suggestions {
-  background: var(--bg-color3);
+  background: var(--suggestion-bg-color);
   border-radius: 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
   z-index: 1000;
   top: 40px;
+  width: 100%;
 }
 
 .suggestionItem {
-  color: var(--suggestion-text-color);
+  color: var(--suggestion-rest-color);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -73,9 +74,14 @@
   padding: 8px 16px;
   cursor: pointer;
   width: 100%;
+
   &:hover {
-    background-color: var(--suggestion-text-color-hover);
-    color: var(--text-color);
+    background-color: var(--suggestion-bg-hover);
+  }
+
+  .matchText {
+    color: var(--suggestion-match-color);
+    font-weight: 600;
   }
 }
 

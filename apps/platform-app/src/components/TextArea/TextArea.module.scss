@@ -65,9 +65,9 @@
   height: 100%;
   overflow-y: scroll;
   align-items: flex-start;
-  border: 1px solid #2a2f35;
+  border: 1px solid var(--border-color);
   line-height: 28px;
-  color: #69717b;
+  color: var(--text-color);
   resize: none;
   font-size: 16px;
   display: flex;

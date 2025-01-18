@@ -70,7 +70,10 @@ h6 {
   --switch-border:#3D434B;
   --color: #A687FF;
   --suggestion-text-color: #89939e;
-  --suggestion-text-color-hover: #2a2f35;
+  --suggestion-bg-color: #171b21;
+  --suggestion-bg-hover: #2a2f35;
+  --suggestion-match-color: #ffffff;
+  --suggestion-rest-color: #89939e;
   --border-color: #2a2f35;
   --checkbox-border: #e2eaf1;
 }
@@ -81,7 +84,7 @@ h6 {
   --bg-color2: #FEFEFF;
   --bg-color3: #FEFEFF;
   --bg-color4: #FAFAFF;
-  --bg-color5: #FAFAFF;
+  --bg-color5: #E4E4F6;
   --bg-fh-color: #FEFEFF;
   --bg-pm-color: #FEFEFF;
   --text-color: #04080D;
@@ -94,10 +97,12 @@ h6 {
   --switch-border: #F0F0FF;
   --color: #04080D;
   --suggestion-text-color: #3D434B;
-  --suggestion-text-color-hover: #04080D;
+  --suggestion-bg-color: #F0F0FF;
+  --suggestion-bg-hover: #E4E4F6;
+  --suggestion-match-color: #04080D;
+  --suggestion-rest-color: #3D434B;
   --border-color: #E4E4F6;
   --checkbox-border: #0F1217;
-
 }
 
 // Global styles for body/html
