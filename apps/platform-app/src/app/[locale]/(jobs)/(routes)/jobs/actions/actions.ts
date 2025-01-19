@@ -32,4 +32,6 @@ export async function analyzeMessage({
 
 export async function saveToDatabase(data: Partial<SubmissionFormData>) {
   console.log(data)
+  const id = 123
+  return { id }
 }

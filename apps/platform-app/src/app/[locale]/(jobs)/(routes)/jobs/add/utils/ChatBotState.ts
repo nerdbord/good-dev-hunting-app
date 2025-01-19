@@ -102,7 +102,7 @@ export class ChatBotState {
 
   private updateState(data: Partial<FormData>): void {
     Object.entries(data).forEach(([key, value]) => {
-      if (value && value !== 'NO_DATA') {
+      if (value) {
         if (key === 'budget' || key === 'employmentDetails') {
           // @ts-ignore
           this.formData[key] = { ...this.formData[key], ...value }

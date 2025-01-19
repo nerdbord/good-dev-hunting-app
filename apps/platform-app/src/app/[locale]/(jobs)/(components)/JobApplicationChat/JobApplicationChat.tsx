@@ -26,13 +26,17 @@ export function JobApplicationChat() {
     setInput('')
     setIsLoading(true)
 
-    if (!input.trim()) router.push('/form')
+    if (!input.trim()) {
+      const { id: formId } = await saveToDatabase({})
+      router.push(`/jobs/${formId}`)
+    }
 
     try {
       await chatBot.handleMessage(input)
-      const formData = await chatBot.getFormData()
-      await saveToDatabase(formData)
-      router.push('/form')
+      const formData = chatBot.getFormData()
+
+      const { id: formId } = await saveToDatabase(formData)
+      router.push(`/jobs/${formId}`)
     } catch (error) {
       console.error('Error:', error)
     } finally {
