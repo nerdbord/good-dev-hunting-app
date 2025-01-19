@@ -13,7 +13,7 @@
   width: 30%;
   max-height: 100%;
   border-radius: 10px;
-  background: var(--dark-02, #0f1217);
+  background: var(--bg-color2);
   box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
   z-index: 999;
   top: 45%;
@@ -33,7 +33,7 @@
 }
 
 .header {
-  color: var(--light-01, #fff);
+  color: var(--text-color);
   text-align: center;
   font-size: 20px;
   font-style: normal;
@@ -42,7 +42,7 @@
 }
 
 .text {
-  color: var(--light-01, #fff);
+  color: var(--text-color);
   text-align: center;
   font-size: 16px;
   font-style: normal;

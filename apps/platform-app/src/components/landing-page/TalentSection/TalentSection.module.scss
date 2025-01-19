@@ -62,9 +62,9 @@
   max-width: 380px;
   width: 100%;
   min-height: 180px;
-  background: #0f1217;
+  background: var(--bg-fh-color);
   border-radius: 4px;
-  border: 1px solid #2a2f35;
+  border: 1px solid var(--border-color);
   transition: box-shadow 300ms;
   display: flex;
   flex-direction: column;

@@ -12,6 +12,7 @@ import {
 import { Container } from '@gdh/ui-system'
 import styles from '../page.module.scss'
 import Header from './(profile)/(components)/Header/Header'
+import { ThemeWrapper } from './(profile)/(components)/ThemeSwitcher/ThemeWrapper'
 
 export default async function LandingPage() {
   const fetchedProfiles = await findAllApprovedProfiles()
@@ -19,16 +20,18 @@ export default async function LandingPage() {
   return (
     <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
       <main className={styles.landing_background}>
-        <Header buttonsVariant={'main'} />
-        <Container>
-          <Hero />
-          <HowItWorks />
-          <UseYourProfile />
-          <MeetTeam />
-          <TalentSection />
-          <FAQSection />
-        </Container>
-        <LandingFooter />
+        <ThemeWrapper>
+          <Header buttonsVariant={'main'} />
+          <Container>
+            <Hero />
+            <HowItWorks />
+            <UseYourProfile />
+            <MeetTeam />
+            <TalentSection />
+            <FAQSection />
+          </Container>
+          <LandingFooter />
+        </ThemeWrapper>
       </main>
     </ProfilesStoreProvider>
   )

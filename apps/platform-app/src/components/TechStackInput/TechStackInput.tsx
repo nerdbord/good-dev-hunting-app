@@ -114,7 +114,7 @@ export const TechStackInput: React.FC<TechStackInputProps> = ({
     return (
       <span>
         {beforeMatch}
-        <span style={{ color: 'white' }}>{matchText}</span>
+        <span className={styles.matchText}>{matchText}</span>
         {afterMatch}
       </span>
     )

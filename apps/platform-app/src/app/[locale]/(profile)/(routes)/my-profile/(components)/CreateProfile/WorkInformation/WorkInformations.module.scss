@@ -1,7 +1,7 @@
 @import '../../../create/page.module';
 
 .container {
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   width: 100%;
@@ -25,7 +25,7 @@
 }
 
 .personalInfo {
-  background-color: rgba(15, 18, 23, 1);
+  background-color: var(--bg-color2);
   color: #69717b;
   border-radius: 2px;
   padding: 20px;
@@ -66,7 +66,7 @@
   font-family: var(--font-inter);
   font-weight: 500;
   font-size: 12px;
-  color: #89939e;
+  color: var(--suggestion-text-color);
   line-height: 16px;
   margin-top: -14px;
 }
@@ -76,7 +76,7 @@
   flex-direction: column;
   gap: 14px;
   font-size: 16px;
-  color: #e2eaf1;
+  color: var(--checkbox-border);
   font-weight: 500;
   line-height: 20px;
   @include mobile {

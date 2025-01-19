@@ -1,6 +1,6 @@
 .container {
   margin: 20px 0;
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   gap: 100px;
@@ -96,6 +96,10 @@
   font-weight: 500;
   line-height: 15px;
   letter-spacing: -0.24px;
+
+  :global(.light) & {
+    background-color: #FAFAFF;
+  }
 }
 
 .gitActivities {

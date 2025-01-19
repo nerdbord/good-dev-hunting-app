@@ -1,5 +1,5 @@
 .container {
-  background: #04080d;
+  background-color: var(--bg-pm-color);
   padding: $spacing-5;
   margin: 0 0 20px;
   display: flex;
@@ -79,7 +79,7 @@
 }
 
 .name {
-  color: #e2eaf1;
+  color: var(--text-color);
   font-size: 28px;
   font-weight: 600;
   line-height: 28px;
@@ -95,6 +95,7 @@
   align-items: center;
   gap: 15px;
   margin-bottom: $spacing-4;
+
 
   @include mobile {
     flex-direction: column;
@@ -139,6 +140,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .location {
@@ -153,6 +158,12 @@
   font-size: 12px;
   color: #89939e;
   background-color: #0f1217;
+
+  :global(.light) & {
+    background-color: #FAFAFF;
+    color: #171B21;
+    }
+
   @include mobile {
     white-space: nowrap;
   }
@@ -176,6 +187,10 @@
   font-size: 16px;
   line-height: 28px;
   color: #89939e;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .seniority {

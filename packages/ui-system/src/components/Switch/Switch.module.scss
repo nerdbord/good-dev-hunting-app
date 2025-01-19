@@ -11,12 +11,13 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: #e2eaf1;
+  color: var(--text-color2);
   margin-right: $spacing-2;
 
   @include mobile {
     font-size: 14px !important;
   }
+
 }
 
 .switch {
@@ -39,8 +40,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #04080d;
-  border: 1px solid #e2eaf1;
+  background-color: var(--bg-pm-color);
+  border: 1px solid var(--border-color);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 50px;
@@ -65,7 +66,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  background-color: #0f1217;
+  background-color: var(--bg-color4);
   -webkit-transform: translateX(11.5px);
   -ms-transform: translateX(11.5px);
   transform: translateX(11.5px);

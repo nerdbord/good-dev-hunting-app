@@ -8,9 +8,11 @@
   border-radius: 2px;
   scrollbar-width: none;
   z-index: 1;
+
   &::-webkit-scrollbar {
     display: none;
   }
+
   li {
     display: flex;
     gap: 10px;
@@ -19,12 +21,32 @@
     padding-left: 20px;
     cursor: pointer;
     color: #89939e;
+
     &:hover {
       background-color: #2a2f35;
     }
   }
+
+  :global(.light) & {
+    background-color: rgba(240, 240, 255, 1);
+    border: 1px solid rgba(228, 228, 246, 1);
+
+    li {
+      color: rgba(137, 147, 158, 1);
+
+      &:hover {
+        background-color: rgba(228, 228, 246, 1);
+  
+      }
+    }
+  }
 }
+
 
 .bold {
   color: #fff;
+
+  :global(.light) & {
+    color: rgba(4, 8, 13, 1);
+  }
 }

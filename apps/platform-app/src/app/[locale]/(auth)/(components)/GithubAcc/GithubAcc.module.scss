@@ -1,5 +1,5 @@
 .githubAccConnected {
-  color: #89939e;
+  color: var(--text-color);
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -24,7 +24,7 @@
   align-items: center;
   border-radius: 2px;
   gap: 10px;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   padding: 8px 24px 8px 16px;
 }
 

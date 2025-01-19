@@ -1,11 +1,15 @@
 .formInput {
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   border: 1px solid #2a2f35;
   color: #69717b;
   border-radius: 2px;
   padding: 16px 24px 16px 20px;
   width: 100%;
   font-size: 14px;
+
+  :global(.light) & {
+    border: 1px solid rgba(228, 228, 246, 1);
+  }
 }
 
 .formInput::placeholder {
@@ -24,7 +28,15 @@
   box-shadow: 0 0 0 30px #0f1217 inset !important;
   -webkit-text-fill-color: rgba(226, 234, 241, 1) !important;
   color: rgba(226, 234, 241, 1) !important;
+
+  :global(.light) & {
+    -webkit-box-shadow: 0 0 0 30px #FEFEFF inset !important;
+    box-shadow: 0 0 0 30px #FEFEFF inset !important;
+    -webkit-text-fill-color: rgba(42, 47, 53, 1) !important;
+    color: rgba(42, 47, 53, 1) !important;
+  }
 }
+
 
 .formLabel {
   font-size: 12px;
@@ -44,7 +56,10 @@
 }
 
 .typed {
-  background-color: #0f1217;
   color: rgba(226, 234, 241, 1);
   border: 1px solid #2a2f35;
+
+  :global(.light) & {
+    color: #04080D;
+  }
 }

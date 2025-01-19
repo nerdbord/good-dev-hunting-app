@@ -7,13 +7,14 @@
   align-items: center;
   padding: 24px 0;
   min-height: 108px;
-  background-color: #0f1217;
+  background-color: var(--bg-color4);
   z-index: 2;
   @include mobile {
     flex-direction: column;
     align-items: flex-start;
     padding: 0;
   }
+
 }
 
 .title {
@@ -60,6 +61,6 @@
     width: 100%;
     padding: $spacing-4 12%;
     justify-content: center;
-    background-color: #04080d;
+    background-color: var(--bg-pm-color);
   }
 }

@@ -1,6 +1,6 @@
 .container {
   margin: 20px 0;
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   gap: 100px;
@@ -87,7 +87,7 @@
 
 .techStackItem {
   color: #13cbaa;
-  background-color: #161a1f;
+  background-color: var(--bg-color5);
   padding: $spacing-2 14px;
   border-radius: 4px;
   font-size: 12px;
