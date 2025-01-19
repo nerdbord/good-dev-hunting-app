@@ -1,0 +1,78 @@
+.container {
+  width: 100%;
+  padding: 100px 10%;
+
+  position: relative;
+  display: flex;
+
+  background: #04080d;
+
+  @include mobile {
+    max-width: 100%;
+    padding: 40px 16px 60px 16px;
+    gap: 20px;
+
+    flex-direction: column;
+  }
+}
+
+.left {
+  flex: 0 0 50%;
+  gap: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  @include mobile {
+    max-width: 100%;
+    gap: 24px;
+
+    flex-direction: column;
+  }
+}
+
+.right {
+  width: 100%;
+  flex: 0 0 40%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include mobile {
+    max-width: 100%;
+    flex-direction: column;
+  }
+}
+
+.instructionBox {
+  width: 280px;
+  padding: 20px;
+  gap: 20px;
+
+  font-size: 14px;
+  color: #69717b;
+
+  background-color: rgba(15, 18, 23, 1);
+  border-radius: 2px;
+
+  @include mobile {
+    width: auto;
+    position: static;
+  }
+}
+
+.submitButton {
+  position: absolute;
+  top: -5rem;
+  right: 0;
+  z-index: 5;
+
+  @include mobile {
+    max-width: 100%;
+    margin-top: 1rem;
+
+    position: initial;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,26 @@
+.titleBox {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  min-height: 108px;
+  background-color: #0f1217;
+  z-index: 2;
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+  }
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+  @include mobile {
+    padding: 32px 0 16px 16px;
+  }
+}

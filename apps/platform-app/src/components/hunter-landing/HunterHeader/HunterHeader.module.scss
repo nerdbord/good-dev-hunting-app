@@ -1,20 +1,21 @@
 .wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 0;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  width: 100%;
+  background: #04080d;
 }
 
 .logo {
-    svg {
-        height: 32px;
-        width: auto;
-    }
+  svg {
+    height: 32px;
+    width: auto;
+  }
 }
 
 .actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
