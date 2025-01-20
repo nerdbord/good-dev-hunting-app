@@ -161,6 +161,11 @@
     text-align: left;
   }
 
+  .sectionDescription {
+    text-align: start;
+    margin-bottom: 1rem;
+  }
+
   .infoItem {
     display: flex;
     gap: 0.5rem;
@@ -193,3 +198,38 @@
     }
   }
   
+  .resumeList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .resumeItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  .resumeName {
+    margin-left: 4px;
+  }
+
+  .resumeSelectionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .existingResumes, .uploadResume {
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 0.5rem;
+  }
+
+  .subsectionTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #E2EAF1;
+  }

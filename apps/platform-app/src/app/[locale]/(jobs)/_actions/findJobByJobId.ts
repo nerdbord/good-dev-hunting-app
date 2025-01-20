@@ -39,12 +39,12 @@ export const findJobByJobId = cache(
       numberOfVacancies: 2,
       recruitmentSteps: 3,
       videocallSlots: [
-        new Date(2024, 11, 3), 
-        new Date(2024, 11, 7),
-        new Date(2024, 11, 11),
-        new Date(2024, 11, 15), 
-        new Date(2024, 11, 21),
-        new Date(2024, 11, 27),
+        new Date(2025, 0, 3), 
+        new Date(2025, 0, 7),
+        new Date(2025, 0, 11),
+        new Date(2025, 0, 15), 
+        new Date(2025, 0, 21),
+        new Date(2025, 0, 27),
       ],
     } as Job
   }),

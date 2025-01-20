@@ -1,0 +1,23 @@
+.button {
+    width: 240px;
+    justify-content: flex-start;
+    text-align: left;
+    font-weight: normal;
+  }
+  
+  .buttonWithoutDate {
+    color: var(--muted-foreground);
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
+    height: 1rem;
+    width: 1rem;
+  }
+  
+  .popoverContent {
+    width: auto;
+    padding: 0;
+  }
+  
+  

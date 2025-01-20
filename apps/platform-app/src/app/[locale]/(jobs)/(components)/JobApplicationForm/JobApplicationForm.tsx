@@ -1,16 +1,7 @@
 'use client'
 import { I18nNamespaces } from '@/i18n/request'
 import { getJobRoute } from '@/utils/routes'
-import {
-  Button,
-  Calendar,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  TextArea,
-} from '@gdh/ui-system'
+import { Button, TextArea } from '@gdh/ui-system'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -24,14 +15,33 @@ interface JobApplicationFormProps {
   userId: string
 }
 
-const timeSlots = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00']
+const RESUMES = [
+  {
+    id: '1',
+    name: 'CV 1',
+    file: 'cv1.pdf',
+  },
+  {
+    id: '2',
+    name: 'Software Engineer Resume 2024',
+    file: 'se_resume_2024.pdf',
+  },
+  {
+    id: '3',
+    name: 'Frontend Developer CV',
+    file: 'frontend_cv.pdf',
+  },
+  {
+    id: '4',
+    name: 'Technical Resume',
+    file: 'technical_resume.pdf',
+  },
+]
 
 const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
   const router = useRouter()
   const t = useTranslations(I18nNamespaces.Jobs)
   const [job, setJob] = useState<Job | null>(null)
-  const [selectedDate, setSelectedDate] = useState<Date>()
-  const [selectedTime, setSelectedTime] = useState<string>()
   const [messageText, setMessageText] = useState<string>()
 
   useEffect(() => {
@@ -57,7 +67,7 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ handleSubmit }) => (
+      {({ handleSubmit, setFieldValue }) => (
         <div>
           <div className={styles.formBox}>
             {job && (
@@ -89,7 +99,7 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
                   ))}
                 </div>
               </div>
-              
+
               <div className={styles.twoColumnLayout}>
                 <div className={styles.column}>
                   <div className={styles.section}>
@@ -166,23 +176,40 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
               </div>
 
               <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>
-                  {t('scheduleVideoCall')}
-                </h3>
-                <div className={styles.formGrid}>
-                  <Calendar availableDays={job?.videocallSlots} />
-                  <Select onValueChange={setSelectedTime}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select time" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {timeSlots.map((time) => (
-                        <SelectItem key={time} value={time}>
-                          {time}
-                        </SelectItem>
+                <h3 className={styles.sectionTitle}>{t('selectResume')}</h3>
+                <p className={styles.sectionDescription}>
+                  {t('selectResumeDescription')}
+                </p>
+                <div className={styles.resumeSelectionGrid}>
+                  <div className={styles.existingResumes}>
+                    <h4 className={styles.subsectionTitle}>{t('existingResumes')}</h4>
+                    <div className={styles.resumeList}>
+                      {RESUMES.map((resume) => (
+                        <label key={resume.id} className={styles.resumeItem}>
+                          <input
+                            type="radio"
+                            name="resume"
+                            value={resume.id}
+                            onChange={(e) => setFieldValue('resume', resume)}
+                          />
+                          <span className={styles.resumeName}>{resume.name}</span>
+                        </label>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </div>
+                  </div>
+                  <div className={styles.uploadResume}>
+                    <h4 className={styles.subsectionTitle}>{t('uploadNewResume')}</h4>
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setFieldValue('resume', { id: 'new', name: file.name, file });
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
