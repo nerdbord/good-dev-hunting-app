@@ -67,7 +67,7 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ handleSubmit, setFieldValue }) => (
+      {({ handleSubmit, setFieldValue, values }) => (
         <div>
           <div className={styles.formBox}>
             {job && (
@@ -190,7 +190,12 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
                             type="radio"
                             name="resume"
                             value={resume.id}
-                            onChange={(e) => setFieldValue('resume', resume)}
+                            checked={values.resume?.id === resume.id}
+                            onChange={(e) => {
+                              setFieldValue('resume', resume);
+                              const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+                              if (fileInput) fileInput.value = '';
+                            }}
                           />
                           <span className={styles.resumeName}>{resume.name}</span>
                         </label>
@@ -206,9 +211,22 @@ const JobApplicationForm = ({ jobId, userId }: JobApplicationFormProps) => {
                         const file = e.target.files?.[0];
                         if (file) {
                           setFieldValue('resume', { id: 'new', name: file.name, file });
+                        } else {
+                          setFieldValue('resume', null);
                         }
                       }}
                     />
+                    {values.resume?.id === 'new' && values.resume.file && (
+                      <div className={styles.filePreview}>
+                        <object
+                          data={URL.createObjectURL(values.resume.file)}
+                          type={values.resume.file.type}
+                          className={styles.previewObject}
+                        >
+                          <p>Unable to display file preview</p>
+                        </object>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
