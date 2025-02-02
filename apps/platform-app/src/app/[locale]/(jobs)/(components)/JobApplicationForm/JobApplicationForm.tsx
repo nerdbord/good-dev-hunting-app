@@ -1,4 +1,5 @@
 'use client'
+import BioTextArea from '@/components/TextArea/BioTextArea'
 import { I18nNamespaces } from '@/i18n/request'
 import { getJobRoute } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
@@ -31,8 +32,14 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
       {({ handleSubmit }) => (
         <div>
           <div className={styles.formBox}>
-            <div className={styles.placeholder}>
-              {t('applicationFormComingSoon')}
+            <label htmlFor="applicationMsg">{t('applicationMsgLabel')}</label>
+            <div className={styles.editorWrapper}>
+              <BioTextArea
+                placeholder={t('applicationMsgPlaceholder')}
+                value={''}
+                name={'applicationMsg'}
+                onChange={() => {}}
+              />
             </div>
           </div>
           <Button

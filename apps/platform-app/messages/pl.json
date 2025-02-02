@@ -197,7 +197,9 @@
     "applyForJob": "Aplikuj do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
-    "jobDetails": "Szczegóły zlecenia"
+    "jobDetails": "Szczegóły zlecenia",
+    "applicationMsgLabel": "Wiadomość",
+    "applicationMsgPlaceholder": "Napisz swoją wiadomość tutaj..."
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
