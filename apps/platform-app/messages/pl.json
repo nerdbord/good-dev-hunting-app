@@ -199,7 +199,8 @@
     "submitApplication": "Aplikuj do zlecenia",
     "jobDetails": "Szczegóły zlecenia",
     "applicationMsgLabel": "Wiadomość",
-    "applicationMsgPlaceholder": "Napisz swoją wiadomość tutaj..."
+    "applicationMsgPlaceholder": "Napisz swoją wiadomość tutaj...",
+    "applicationBudgetLabel": "Budżet"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

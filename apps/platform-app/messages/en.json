@@ -199,7 +199,8 @@
     "submitApplication": "Submit Application",
     "jobDetails": "Job Details",
     "applicationMsgLabel": "Message",
-    "applicationMsgPlaceholder": "Write your message here..."
+    "applicationMsgPlaceholder": "Write your message here...",
+    "applicationBudgetLabel": "Budget"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",

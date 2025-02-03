@@ -8,7 +8,7 @@ import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { getJobRoute } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
-import { Formik } from 'formik'
+import { Field, Form, Formik, type FormikHelpers } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -28,58 +28,68 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
 
   const initialValues = {
     message: '',
-    resume: null,
+    budget: '',
+    cvUrl: '',
   }
 
-  const handleSubmit = async (values: typeof initialValues) => {
+  const handleSubmit = async (
+    values: typeof initialValues,
+    { setFieldValue, setSubmitting }: FormikHelpers<typeof initialValues>,
+  ) => {
     if (!user?.profileId) {
       throw new Error('User profile not found')
     }
-    // TODO: Implement job application logic
 
-    console.log(cvFormData?.get('cvFileUpload'))
-    const res = await uploadCVdocumentFile(cvFormData as FormData)
-    const profile = await updateProfile(user?.profileId, {
-      cvUrl: res.cvUrl,
-    })
-    console.log(res)
-    console.log('Applying for job:', jobId, values)
-    router.push(getJobRoute(jobId))
-    console.log(profile)
+    try {
+      const res = await uploadCVdocumentFile(cvFormData as FormData)
+      await updateProfile(user.profileId, { cvUrl: res.cvUrl })
+
+      await setFieldValue('cvUrl', res.cvUrl)
+
+      // Create final values object with updated cvUrl
+      const finalValues = {
+        ...values,
+        cvUrl: res.cvUrl,
+      }
+
+      console.log('Applying for job:', jobId, finalValues)
+      router.push(getJobRoute(jobId))
+    } catch (error) {
+      console.error('Error applying for job:', error)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ handleSubmit }) => (
-        <div>
+      {({ handleSubmit, handleChange, values }) => (
+        <Form>
           <div className={styles.formBox}>
             <label htmlFor="applicationMsg">{t('applicationMsgLabel')}</label>
             <div className={styles.editorWrapper}>
-              <BioTextArea
+              <Field
+                as={BioTextArea}
                 placeholder={t('applicationMsgPlaceholder')}
-                value={''}
-                name={'applicationMsg'}
-                onChange={(e) => {
-                  console.log(e.target.value)
-                }}
+                name="message"
+                value={values.message}
+                onChange={handleChange}
               />
             </div>
           </div>
+          <div className={styles.formBox}>
+            <label htmlFor="budget">{t('applicationBudgetLabel')}</label>
+            <Field as={TextInput} name="budget" onChange={handleChange} />
+          </div>
+          <CVUploader />
           <Button
             variant="primary"
-            onClick={() => handleSubmit()}
+            type="submit"
             dataTestId="submitJobApplication"
           >
             {t('submitApplication')}
           </Button>
-          <p>Podaj budzet</p>
-          <TextInput
-            onChange={(e) => {
-              console.log(e.target.value)
-            }}
-          />
-          <CVUploader />
-        </div>
+        </Form>
       )}
     </Formik>
   )
