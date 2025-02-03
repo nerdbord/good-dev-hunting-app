@@ -1,5 +1,6 @@
 'use client'
 import JobApplicationForm from '@/app/[locale]/(jobs)/(components)/JobApplicationForm/JobApplicationForm'
+import { UploadProvider } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button, Drawer } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
@@ -39,7 +40,9 @@ const JobApplicationPage = ({ params }: JobApplicationPageProps) => {
           <h2>{t('submitApplication')}</h2>
           <p>JOB ID: {id}</p>
         </DrawerHeader>
-        <JobApplicationForm jobId={id as string} />
+        <UploadProvider>
+          <JobApplicationForm jobId={id as string} />
+        </UploadProvider>
       </Drawer>
     </div>
   )
