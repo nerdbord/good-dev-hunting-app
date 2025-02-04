@@ -1,17 +1,16 @@
 'use client'
 // import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
-import styles from './CreateJobDetailsForm.module.scss'
-import { Button } from '@gdh/ui-system'
+import { I18nNamespaces } from '@/i18n/request'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
+import { useTranslations } from 'next-intl'
 import * as Yup from 'yup'
 import { type CreateJobDetailsFormValues } from '../../jobDetailsTypes'
 import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
 import { Budget } from '../CreateJobDetails/Budget/Budget'
 import { Employment } from '../CreateJobDetails/Employment/Employment'
 import { Location } from '../CreateJobDetails/Location/Location'
-import { useTranslations } from 'next-intl'
-import { I18nNamespaces } from '@/i18n/request'
+import styles from './CreateJobDetailsForm.module.scss'
 
 const initialValues: CreateJobDetailsFormValues = {
   jobName: '',
@@ -83,9 +82,12 @@ interface CreateJobDetailsFormProps {
   initialValues?: CreateJobDetailsFormValues
 }
 
-export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProps) => {
-  const t = useTranslations(I18nNamespaces.Buttons)
-  
+export const CreateJobDetailsForm = ({
+  initialValues,
+}: CreateJobDetailsFormProps) => {
+  // const t = useTranslations(I18nNamespaces.Buttons)
+  const tt = useTranslations(I18nNamespaces.Jobs)
+
   const defaultValues: CreateJobDetailsFormValues = {
     jobName: '',
     projectBrief: '',
@@ -116,7 +118,12 @@ export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProp
       onSubmit={handleCreateJobDetails}
     >
       <div className={styles.wrapper}>
-        <div className={styles.actionsWrapper}>
+        {/* <div className={styles.actionsWrapper}> */}
+          {/* <EditJobHeader /> */}
+          <div className={styles.header}>
+            <h1>{tt('jobSummaryHeader')}</h1>
+          </div>
+          <p className={styles.previewWarning}>{tt('jobPreviewWarning')}</p>
           {/* <Button 
             type="button" 
             variant="secondary"
@@ -129,7 +136,7 @@ export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProp
           <Button type="submit" variant="primary">
             {t('saveAndPreview')}
           </Button> */}
-        </div>
+        {/* </div> */}
         <div className={styles.formBox}>
           <BasicInfo />
           <Budget />

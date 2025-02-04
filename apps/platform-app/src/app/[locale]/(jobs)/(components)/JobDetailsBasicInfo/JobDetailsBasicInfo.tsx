@@ -44,12 +44,12 @@ export const JobDetailsBasicInfo = () => {
           {/* {t('employmentType')}:{' '} */}
           {mockJobDetails.employmentType.map(mapEmploymentType).join(', ')}
         </div>
-        <span>/</span>
+        <span className={styles.separator}>/</span>
         <div className={styles.addInfo}>
           {/* {t('contractTypeLabel')}:{' '} */}
           {mapJobContract(mockJobDetails.contractType.value as JobContractType)}
         </div>
-        <span>/</span>
+        <span className={styles.separator}>/</span>
         <div className={styles.addInfo}>
           {/* {t('workMode')}:{' '} */}
           {mockJobDetails.employmentMode.map(mapEmploymentMode).join(', ')}
