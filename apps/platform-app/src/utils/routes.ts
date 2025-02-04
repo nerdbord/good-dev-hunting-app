@@ -3,7 +3,7 @@ export enum AppRoutes {
   myProfile = '/my-profile',
   createProfile = '/my-profile/create',
   editProfile = '/my-profile/edit',
-  githubOAuth = '/github-oauth',
+  oAuth = '/oauth',
   moderation = '/moderation',
   moderationProfile = '/moderation/profile',
   profilesList = '/profiles',

@@ -22,9 +22,11 @@ export const mapLanguagesToProfileFormValues = (
 export const mapProfileModelToEditProfileFormValues = (
   profile: ProfileModel,
 ): ProfileFormValues => ({
+  slug: profile.slug ?? '',
   fullName: profile.fullName,
   linkedin: profile.linkedIn,
   bio: profile.bio,
+  cvUrl: profile.cvUrl,
   country: profile.country,
   openForCountryRelocation: profile.openForCountryRelocation,
   city: profile.city,

@@ -4,10 +4,12 @@ import { Button } from '@gdh/ui-system'
 import { GithubIcon } from '@gdh/ui-system/icons'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
+import { type Roles } from '../../_models/User.model'
 import styles from './GithubLoginButton.module.scss'
 
 interface GithubLoginButtonProps {
   label?: string
+  role: Roles.SPECIALIST | Roles.HUNTER
 }
 
 export const GithubLoginButton = (props: GithubLoginButtonProps) => {
@@ -18,7 +20,7 @@ export const GithubLoginButton = (props: GithubLoginButtonProps) => {
       onClick={() => {
         setIsCalled(true)
         signIn('github', {
-          callbackUrl: AppRoutes.githubOAuth,
+          callbackUrl: `${AppRoutes.oAuth}?role=${props.role}`,
         })
       }}
       variant={'secondary'}

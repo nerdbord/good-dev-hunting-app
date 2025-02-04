@@ -76,6 +76,8 @@
     "fillOut": "Fill out the form to complete the profile",
     "sendMessage": "Send message",
     "changePicture": "Change picture",
+    "uploadCVfile": "Upload CV file",
+    "uploadAnotherCVfile": "Change CV file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
     "apply": "Apply",
@@ -101,7 +103,9 @@
   "LoginDev": {
     "title": "Login as IT specialist",
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
-    "loginWithGithub": "Login with Github"
+    "loginWithGithub": "Login with Github",
+    "loginWithLinkedin": "Login with LinkedIn",
+    "or": "or"
   },
   "LoginHunter": {
     "login": "Login as talent Hunter",
@@ -109,7 +113,9 @@
     "policyOne": "I have read and accept",
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
-    "joinAsAHunter": "Join as a Hunter"
+    "joinAsAHunter": "Join as a Hunter",
+    "loginWithLinkedin": "Login with LinkedIn",
+    "or": "or"
   },
   "PersonalInfo": {
     "title": "Personal information",
@@ -120,7 +126,12 @@
     "linkedin": "Paste link to you profile",
     "bio": "Let others know you - write a few sentences about yourself.",
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
-    "characters": "characters"
+    "characters": "characters",
+    "cvFile": "CV file (optional)",
+    "choosenCVfile": "Uploaded file",
+    "choosenCVfileName": "Your CV",
+    "slug": "Custom URL",
+    "slugTooltip": "Choose a unique name for your profile link (e.g., codemaster)"
   },
   "LocationPreferences": {
     "title": "Location preferences",

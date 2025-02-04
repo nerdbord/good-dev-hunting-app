@@ -19,7 +19,7 @@
       "npm run format:staged -w apps/platform-app"
     ],
     "apps/hunty-ai-bot/**/*.{ts,tsx}": [
-      "cd apps/hunty-ai-bot && eslint"
+      "npm run lint -w apps/hunty-ai-bot"
     ]
   },
   "devDependencies": {
