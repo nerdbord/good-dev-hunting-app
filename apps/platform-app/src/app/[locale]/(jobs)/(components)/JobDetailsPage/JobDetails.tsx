@@ -33,7 +33,7 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
     <>
       <section className={styles.container}>
         <ul className={styles.actions}>
-          <li>
+          {/* <li>
             <Button variant="secondary" onClick={handleDelete}>
               {tButtons('deleteJob')}
             </Button>
@@ -42,7 +42,7 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
             <Button variant="primary" onClick={handleEdit}>
               {tButtons('edit')}
             </Button>
-          </li>
+          </li> */}
 
           {/* <li>
             <Button variant="primary" onClick={handlePublish}>

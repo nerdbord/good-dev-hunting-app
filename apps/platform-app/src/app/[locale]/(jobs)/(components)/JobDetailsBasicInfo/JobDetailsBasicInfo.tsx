@@ -41,15 +41,17 @@ export const JobDetailsBasicInfo = () => {
 
       <div className={styles.addInfoBox}>
         <div className={styles.addInfo}>
-          {t('employmentType')}:{' '}
+          {/* {t('employmentType')}:{' '} */}
           {mockJobDetails.employmentType.map(mapEmploymentType).join(', ')}
         </div>
+        <span>/</span>
         <div className={styles.addInfo}>
-          {t('contractTypeLabel')}:{' '}
+          {/* {t('contractTypeLabel')}:{' '} */}
           {mapJobContract(mockJobDetails.contractType.value as JobContractType)}
         </div>
+        <span>/</span>
         <div className={styles.addInfo}>
-          {t('workMode')}:{' '}
+          {/* {t('workMode')}:{' '} */}
           {mockJobDetails.employmentMode.map(mapEmploymentMode).join(', ')}
         </div>
       </div>

@@ -34,6 +34,6 @@
     "cypress/support/commands.ts",
     ".next/types/**/*.ts",
     "./.eslintrc.js"
-  ],
+, "src/app/[locale]/(jobs)/(components)/CreateJobHeader"  ],
   "exclude": ["node_modules", ".next"]
 }

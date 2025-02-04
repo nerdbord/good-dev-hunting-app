@@ -117,7 +117,7 @@ export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProp
     >
       <div className={styles.wrapper}>
         <div className={styles.actionsWrapper}>
-          <Button 
+          {/* <Button 
             type="button" 
             variant="secondary"
           >
@@ -128,7 +128,7 @@ export const CreateJobDetailsForm = ({ initialValues }: CreateJobDetailsFormProp
           </Button>
           <Button type="submit" variant="primary">
             {t('saveAndPreview')}
-          </Button>
+          </Button> */}
         </div>
         <div className={styles.formBox}>
           <BasicInfo />

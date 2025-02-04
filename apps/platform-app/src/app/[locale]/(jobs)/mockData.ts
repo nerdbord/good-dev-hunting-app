@@ -10,6 +10,7 @@ export const mockJobDetails: JobDetailsFormValues = {
     { name: 'Next.js', value: 'nextjs' },
     { name: 'Node.js', value: 'nodejs' },
   ],
+  // openToRelocation: true,
   currency: Currency.PLN,
   minBudgetForProjectRealisation: 15000,
   maxBudgetForProjectRealisation: 20000,

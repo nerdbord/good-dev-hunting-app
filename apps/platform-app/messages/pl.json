@@ -190,9 +190,14 @@
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
     "jobDetails": "Szczegóły zlecenia",
+    "jobPreview": "Podgląd zlecenia",
+    "jobPreviewWarning": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
+    "jobSummaryHeader": "Podsumowanie zlecenia",
     "basicInfo": "Informacje podstawowe",
     "basicInfoDesc": "Podaj szczegóły zlecenia, aby specjaliści mogli ocenić swoje dopasowanie.",
+
     "jobName": "Nazwa zlecenia",
+
     "jobNamePlaceholder": "eg. Implementacja widoku aplikacji",
     "jobNameDesc": "Opis zlecenia",
     "brief": "Brief projektowy",

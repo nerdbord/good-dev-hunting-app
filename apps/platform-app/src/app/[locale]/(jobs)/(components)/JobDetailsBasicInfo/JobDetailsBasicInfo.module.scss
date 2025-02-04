@@ -96,7 +96,7 @@
   gap: $spacing-5;
   align-items: center;
   @include mobile {
-    flex-direction: column;
+    flex-direction: row;
     align-items: start;
     gap: $spacing-4;
     margin-bottom: $spacing-5;
@@ -109,6 +109,10 @@
   font-size: 16px;
   line-height: 28px;
   color: #89939e;
+  @include mobile {
+    gap: $spacing-2;
+
+  }
 }
 
 .seniority {
