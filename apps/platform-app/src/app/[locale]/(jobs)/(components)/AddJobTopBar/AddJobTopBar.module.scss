@@ -4,24 +4,23 @@
   background-color: #0f1217;
   z-index: 2;
   padding: 25px 0;
+  width: 390px;
   @include mobile {
-    padding: 0;
+    padding-top: 40px;
+    padding-bottom: 28px;
+    width: 100%;
   }
 }
 
 .title {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 500;
-  line-height: 28px;
+  line-height: 40px;
   margin-bottom: 10px;
-  @include mobile {
-    padding: 32px 0 16px 16px;
-  }
 }
 
 .description {
   color: #69717b;
   font-size: 14px;
   line-height: 20px;
-  max-width: 390px;
 }
