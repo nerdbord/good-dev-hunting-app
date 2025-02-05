@@ -1,11 +1,10 @@
 import ProfileCard from '@/app/[locale]/(profile)/(components)/ProfileCard/ProfileCard'
-
 import { findRandomProfiles } from '@/app/[locale]/(profile)/_actions/queries/findRandomProfiles'
 import { AppRoutes } from '@/utils/routes'
 import Link from 'next/link'
-import styles from './Hero.module.scss'
+import styles from './HunterHero.module.scss'
 
-export const HeroProfilesSection = async () => {
+export const HunterHeroProfilesSection = async () => {
   const selectedProfiles = await findRandomProfiles(3)
 
   return (
@@ -17,8 +16,8 @@ export const HeroProfilesSection = async () => {
           return (
             <div className={styles[frameClass]} key={profile.id}>
               <Link
-                href={`${AppRoutes.profile}/${profile.slug}`}
-                className={`${styles.frameWrapper}`}
+                href={`${AppRoutes.profile}/${profile.githubUsername}`}
+                className={styles.frameWrapper}
               >
                 <ProfileCard profile={profile} />
               </Link>
