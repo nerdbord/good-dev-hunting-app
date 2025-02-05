@@ -52,6 +52,9 @@
   align-items: center;
   border-radius: 2px;
   border: 1px solid var(--Main-03, #a687ff);
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .secondary:hover:enabled {

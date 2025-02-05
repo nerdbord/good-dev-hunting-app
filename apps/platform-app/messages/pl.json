@@ -232,10 +232,15 @@
     "actions": "Akcje"
   },
   "JobApplicationChat": {
-    "instruction1": "Na tej stronie możesz stworzyć oferty pracy poprzez wprowadzenie opisu, który zostanie automatycznie przekształcony w formularz zgłoszeniowy.",
-    "instruction2": "Formularz ten zostanie następnie udostępniony Tobie do podglądu i edycji.",
-    "button": " Wyślij i Przejdź do odpowiedniego Formularza",
-    "placeholder": "Wprowadź opis zlecenia..."
+    "descriptionHeader": "Opisz, czego potrzebujesz",
+    "descriptionParagraph": "Tak jak najdokładniej.  Możesz wrzucić zarówno treść ogłoszenia.",
+    "placeholder": "Przedstaw zlecenie w kilku słowach",
+    "textareaLabel": "Treść zlecenia",
+    "cancelBtn": "Cofnij",
+    "nextBtn": "Dalej"
   },
-  "AddJobTopBar": { "header": "Dodaj Nowe Zlecenie" }
+  "AddJobPage": {
+    "header": "Dodaj zlecenie",
+    "description": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
+  }
 }

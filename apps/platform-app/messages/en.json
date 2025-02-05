@@ -232,10 +232,15 @@
     "actions": "Actions"
   },
   "JobApplicationChat": {
-    "instruction1": "On this page, you can create job postings by entering a description, which will be automatically transformed into an application form.",
-    "instruction2": "This form will then be made available to you for preview and editing.",
-    "button": "Submit and Go to the Appropriate Form.",
-    "placeholder": "Enter the job description..."
+    "descriptionHeader": "Describe what you need",
+    "descriptionParagraph": "As accurately as possible. You can also upload the job content.",
+    "placeholder": "Describe the job in a few words",
+    "textareaLabel": "Job content",
+    "cancelBtn": "Cancel",
+    "nextBtn": "Next"
   },
-  "AddJobTopBar": { "header": "Post New Job" }
+  "AddJobPage": {
+    "header": "Add job",
+    "description": "Review the job form and ensure that the entered data matches your offer"
+  }
 }

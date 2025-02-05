@@ -1,6 +1,6 @@
 'use client'
 import { I18nNamespaces } from '@/i18n/request'
-import { Button, TextArea } from '@gdh/ui-system'
+import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import type { ChangeEvent } from 'react'
@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { saveToDatabase } from '../../(routes)/jobs/actions/actions'
 import { useJobApplicationChat } from '../../(routes)/jobs/add/utils/ChatBotContext'
 
+import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
 import styles from './JobApplicationChat.module.scss'
 
 export function JobApplicationChat() {
@@ -45,29 +46,46 @@ export function JobApplicationChat() {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.left}>
-        <div>{'Hunty - AI Assistant'}</div>
-        <div className={styles.instructionBox}>
-          <p>{t('instruction1')}</p>
-          <p>{t('instruction2')}</p>
+    <>
+      <div className={styles.container}>
+        <div className={styles.descriptionBox}>
+          <div className={styles.descriptionHeader}>
+            {t('descriptionHeader')}
+          </div>
+          <div className={styles.descriptionParagraph}>
+            <p>{t('descriptionParagraph')}</p>
+          </div>
         </div>
+        <form className={styles.chatbotForm}>
+          <label className={styles.textareaLabel} htmlFor="applicationChatbot">
+            {t('textareaLabel')}
+          </label>
+          <textarea
+            placeholder={t('placeholder')}
+            value={input}
+            onChange={handleChange}
+            maxLength={1500}
+            id="applicationChatbot"
+            className={`${styles.chatbotTextarea} ${
+              input.trim() ? styles.typed : ''
+            }`}
+          />
+        </form>
       </div>
-      <form className={styles.right} onSubmit={handleSubmit}>
-        <TextArea
-          placeholder={t('placeholder')}
-          value={input}
-          onChange={handleChange}
-          name={''}
-          maxLength={1500}
-          label=""
-        />
-        <div className={styles.submitButton}>
-          <Button variant="primary" type="submit" loading={isLoading}>
-            {t('button')}
-          </Button>
-        </div>
-      </form>
-    </div>
+
+      <ProgressBar currentStep={1} maxSteps={5}>
+        <Button variant="secondary" disabled={isLoading}>
+          {t('cancelBtn')}
+        </Button>
+        <Button
+          variant="primary"
+          onClick={handleSubmit}
+          type="submit"
+          disabled={isLoading}
+        >
+          {t('nextBtn')}
+        </Button>
+      </ProgressBar>
+    </>
   )
 }
