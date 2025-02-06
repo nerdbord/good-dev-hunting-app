@@ -82,7 +82,10 @@
     "importing": "Importowanie...",
     "apply": "Zastosuj",
     "createAnotherJob": "Utwórz kolejne zlecenie",
-    "postJob": "Opublikuj zlecenie"
+    "postJob": "Opublikuj zlecenie",
+    "deleteJob": "Usuń zlecenie",
+    "publishJob": "Publikuj zlecenie",
+    "goBack": "Wróć"
   },
   "LandingFooter": {
     "contact": "Kontakt",
@@ -197,7 +200,39 @@
     "applyForJob": "Aplikuj do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
-    "jobDetails": "Szczegóły zlecenia"
+    "jobDetails": "Szczegóły zlecenia",
+    "jobPreview": "Podgląd zlecenia",
+    "jobPreviewWarning": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
+    "jobSummaryHeader": "Podsumowanie zlecenia",
+    "basicInfo": "Informacje podstawowe",
+    "basicInfoDesc": "Podaj szczegóły zlecenia, aby specjaliści mogli ocenić swoje dopasowanie.",
+
+    "jobName": "Nazwa zlecenia",
+
+    "jobNamePlaceholder": "eg. Implementacja widoku aplikacji",
+    "jobNameDesc": "Opis zlecenia",
+    "brief": "Brief projektowy",
+    "briefPlaceholder": "Brief projektowy",
+    "briefTooltip": "Pomóż specjalistom lepiej zrozumieć Twoje potrzeby – napisz kilka zdań o swoim zleceniu.",
+    "budget": "Budżet",
+    "budgetDesc": "Określ budżet przeznaczony na realizację projektu, aby specjaliści mogli dostosować swoje oferty do Twoich możliwości.",
+    "minBudgetForProjectRealisation": "Minimalna kwota za realizację projektu",
+    "maxBudgetForProjectRealisation": "Maksymalna kwota za realizację projektu",
+    "minBudgetForProjectRealisationPlaceholder": "np. 5000",
+    "maxBudgetForProjectRealisationPlaceholder": "np. 10000",
+    "employment": "Forma zatrudnienia.",
+    "employmentDesc": "Określ formę zatrudnienia, rodzaj umowy i tryb pracy, aby dopasować współpracę do swoich potrzeb.",
+    "employmentType": "Rodzaj zatrudnienia",
+    "contractTypeLabel": "Rodzaj umowy",
+    "contractTypeDesc": "Wybierz rodzaj umowy",
+    "workMode": "Tryb pracy",
+    "workModeStationary": "Stacjonarny",
+    "workModeHybrid": "Hybrydowy",
+    "workModeRemote": "Zdalny",
+    "locationDesc": "Podaj preferencje lokalizacyjne dla realizacji zlecenia – możesz je zmienić w dowolnym momencie.",
+    "locationCityTooltip": "Podaj miasto, aby specjaliści z Twojej okolicy mogli łatwiej odnaleźć Twoją ofertę.",
+    "remoteOnly": "Szukam tylko zdalnych kandydatów",
+    "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy."
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
