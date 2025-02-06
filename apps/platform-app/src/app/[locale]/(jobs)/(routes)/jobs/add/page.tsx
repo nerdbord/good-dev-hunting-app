@@ -11,7 +11,7 @@ const NewJobPage = async () => {
 
   return (
     <>
-      <JobsHeader logoWithTagLine={true} />
+      <JobsHeader logoWithTagLine={false} />
       <ChatBotProvider>
         <main>
           <Container>
