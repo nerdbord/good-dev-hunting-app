@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 124px;
+  width: 100%;
+  background-color: #04080d;
+
+  @include mobile {
+    height: 75px;
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  @include mobile {
+    gap: 12px;
+  }
+}

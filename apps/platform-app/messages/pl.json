@@ -63,9 +63,11 @@
     "answerFour": "Aby stworzyć profil, konieczne jest posiadanie konta na GitHubie, gdyż chcemy mieć pewność, że jesteś prawdziwym programistą. Korzystamy również z GitHuba do pobierania Twojego zdjęcia profilowego oraz innych publicznych informacji, aby proces tworzenia profilu był jak najłatwiejszy. Nie przechowujemy żadnych tokenów GitHub."
   },
   "Buttons": {
+    "logIn": "Zaloguj się",
     "createProfile": "Utwórz profil",
     "editProfile": "Edytuj profil",
     "myProfile": "Mój profil",
+    "myJobs": "Moje zlecenia",
     "saveAndPreview": "Zapisz i podejrzyj",
     "saveAndPreviewProfile": "Zapisz i podejrzyj profil",
     "edit": "Edytuj",
@@ -197,7 +199,8 @@
     "applyForJob": "Aplikuj do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
-    "jobDetails": "Szczegóły zlecenia"
+    "jobDetails": "Szczegóły zlecenia",
+    "tagLine": "Bezpłatna platforma łącząca ze zweryfikowanymi specjalistami IT"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
