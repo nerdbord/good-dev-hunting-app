@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 0 12px;
   box-sizing: border-box;
+  flex: 1;
   @include mobile {
     padding: 0 24px;
     overflow: hidden;

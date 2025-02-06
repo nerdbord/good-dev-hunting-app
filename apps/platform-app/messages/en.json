@@ -63,9 +63,11 @@
     "answerFour": "To create a profile, having a GitHub account is necessary as we want to make sure that you are a real developer. We also use GitHub to fetch your profile picture and other public information to make the process of creating a profile as easy as possible. We do not store any GitHub tokens."
   },
   "Buttons": {
+    "logIn": "Log In",
     "createProfile": "Create profile",
     "editProfile": "Edit profile",
     "myProfile": "My profile",
+    "myJobs": "My jobs",
     "saveAndPreview": "Save and preview",
     "saveAndPreviewProfile": "Save and preview profile",
     "edit": "Edit",
@@ -201,6 +203,7 @@
     "applicationFormComingSoon": "Application form coming soon...",
     "submitApplication": "Submit Application",
     "jobDetails": "Job Details",
+    "tagLine": "Free platform connecting you with verified IT specialists",
     "jobPreview": "Job Preview",
     "jobPreviewWarning": "Review the order form and ensure that the entered data matches your offer",
     "jobSummaryHeader": "Job summary",
@@ -266,3 +269,4 @@
     "actions": "Actions"
   }
 }
+
