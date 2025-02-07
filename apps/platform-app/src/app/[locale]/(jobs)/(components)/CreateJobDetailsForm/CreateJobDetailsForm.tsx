@@ -124,19 +124,6 @@ export const CreateJobDetailsForm = ({
             <h1>{tt('jobSummaryHeader')}</h1>
           </div>
           <p className={styles.previewWarning}>{tt('jobPreviewWarning')}</p>
-          {/* <Button 
-            type="button" 
-            variant="secondary"
-          >
-            {t('goBack')}
-          </Button>
-          <Button type="button" variant="secondary">
-            {t('deleteJob')}
-          </Button>
-          <Button type="submit" variant="primary">
-            {t('saveAndPreview')}
-          </Button> */}
-        {/* </div> */}
         <div className={styles.formBox}>
           <BasicInfo />
           <Budget />
