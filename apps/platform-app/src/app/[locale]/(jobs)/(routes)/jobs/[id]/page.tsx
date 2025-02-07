@@ -16,6 +16,7 @@ const JobPage = async ({ params }: JobPageProps) => {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <h1>{t('jobDetails')}</h1>
+        {/* TODO: job preview which will be used also in jobs/:id/apply  */}
         <CreateAnotherJobBtn />
       </div>
       <p>Job ID: {params.id}</p>
