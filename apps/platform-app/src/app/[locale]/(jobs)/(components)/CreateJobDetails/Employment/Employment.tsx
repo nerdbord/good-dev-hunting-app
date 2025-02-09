@@ -26,12 +26,6 @@ export const Employment = () => {
 
   const { values, setFieldValue, touched, errors } =
     useFormikContext<CreateJobDetailsFormValues>()
-  //     Forma zatrudnienia
-  // - Umowa: B2B / Umowa o pracę / Umowa o dzieło / Umowa Zlecenie
-
-  // - Czas zatrudnienia: Pełny etat / Pół etatu / Kontrakt
-  // - Wybierz tryb pracy: Stacjonarny / Hybrydowy / Zdalny
-  // Select work mode: Stationary / Hybrid / Remote
 
   const handleEmploymentType = (option: EmploymentType): void => {
     let newFilters: string[]
@@ -68,7 +62,7 @@ export const Employment = () => {
   return (
     <Card>
       <div className={styles.left}>
-        <div>{t('title')}</div>
+        <div className={styles.cardHeader}>{t('title')}</div>
         <div className={styles.personalInfo}>{tt('employmentDesc')}</div>
       </div>
 

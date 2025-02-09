@@ -17,9 +17,6 @@ export enum LocationFormKeys {
   REMOTE_ONLY = 'remoteOnly',
 }
 
-// - Wybierz lokalizacje kandydatów: Kraje / Miasta
-// - Ustal lokalizacje kandydatów: Kraje / Miasta
-
 export const Location = () => {
   const t = useTranslations(I18nNamespaces.LocationPreferences)
   const tt = useTranslations(I18nNamespaces.Jobs)
@@ -28,7 +25,7 @@ export const Location = () => {
   return (
     <Card>
       <div className={styles.left}>
-        <div>{t('title')}</div>
+        <div className={styles.cardHeader}>{t('title')}</div>
         <div className={styles.personalInfo}>{tt('locationDesc')}</div>
       </div>
       <div className={styles.right}>

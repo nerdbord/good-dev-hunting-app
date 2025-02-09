@@ -131,6 +131,9 @@
   border-radius: 2px;
   padding: 12px 24px;
   border: 1px solid var(--Main-03, #69717b);
+  @include mobile {
+    text-wrap: nowrap;
+  }
 }
 
 .grayedOut:hover:enabled {

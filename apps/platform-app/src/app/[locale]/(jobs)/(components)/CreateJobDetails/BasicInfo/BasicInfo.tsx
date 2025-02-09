@@ -25,14 +25,6 @@ export const BasicInfo = () => {
   const ttt = useTranslations(I18nNamespaces.Jobs)
   const { values, handleChange, setFieldValue, errors, touched, handleBlur } =
     useFormikContext<CreateJobDetailsFormValues>()
-  {
-    /* // Informacje podstawowe */
-  }
-  {
-    /* // - Nazwa zlecenia
-        // - Brief projektowy
-        // - Technologie */
-  }
 
   const handleTechSelect = (tech: DropdownOption) => {
     if (!values[BasicInfoFormKeys.TECHNOLOGIES].includes(tech)) {
@@ -56,7 +48,7 @@ export const BasicInfo = () => {
   return (
     <Card>
       <div className={styles.left}>
-        <div>{ttt('basicInfo')}</div>
+        <div className={styles.cardHeader}>{ttt('basicInfo')}</div>
         <div className={styles.personalInfo}>{ttt('basicInfoDesc')}</div>
       </div>
       <div className={styles.right}>

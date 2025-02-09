@@ -38,7 +38,7 @@ export const Budget = () => {
   return (
     <Card>
       <div className={styles.left}>
-        <div>{t('budget')}</div>
+        <div  className={styles.cardHeader}>{t('budget')}</div>
         <div className={styles.personalInfo}>{t('budgetDesc')}</div>
       </div>
       <div className={styles.right}>
