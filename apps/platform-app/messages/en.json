@@ -234,7 +234,10 @@
     "locationDesc": "Share your location preferences for the assignment – you can update them at any time.",
     "locationCityTooltip": "Provide the city so specialists in your area can easily find your offer.",
     "remoteOnly": "I’m looking for remote candidates only",
-    "techStackTooltip": "Specify the technologies you’ve selected for your job offer implementation."
+    "techStackTooltip": "Specify the technologies you’ve selected for your job offer implementation.",
+
+    "addJobPageHeader": "Add job",
+    "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",
@@ -275,9 +278,5 @@
     "textareaLabel": "Job content",
     "cancelBtn": "Cancel",
     "nextBtn": "Next"
-  },
-  "AddJobPage": {
-    "header": "Add job",
-    "description": "Review the job form and ensure that the entered data matches your offer"
   }
 }

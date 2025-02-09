@@ -1,4 +1,5 @@
-﻿import styles from './ProgressBar.module.scss'
+﻿import { Container } from '@gdh/ui-system'
+import styles from './ProgressBar.module.scss'
 
 type ProgressBarProps = {
   children: React.ReactNode
@@ -11,12 +12,16 @@ const ProgressBar = ({ children, currentStep, maxSteps }: ProgressBarProps) => {
     currentStep <= maxSteps ? (currentStep / maxSteps) * 100 : 100
 
   return (
-    <div className={styles.container}>
-      <div className={styles.progressBar}>
-        <div className={styles.fill} style={{ width: `${progress}%` }} />
-      </div>
+    <div className={styles.progerssBarWrapper}>
+      <Container>
+        <div className={styles.container}>
+          <div className={styles.progressBar}>
+            <div className={styles.fill} style={{ width: `${progress}%` }} />
+          </div>
 
-      <div className={styles.content}>{children}</div>
+          <div className={styles.content}>{children}</div>
+        </div>
+      </Container>
     </div>
   )
 }

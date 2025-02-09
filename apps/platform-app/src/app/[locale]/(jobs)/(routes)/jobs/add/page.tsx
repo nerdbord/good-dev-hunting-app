@@ -7,7 +7,7 @@ import { JobsHeader } from '../../../(components)/JobsHeader/JobsHeader'
 import { ChatBotProvider } from './utils/ChatBotContext'
 
 const NewJobPage = async () => {
-  const t = await getTranslations(I18nNamespaces.AddJobPage)
+  const t = await getTranslations(I18nNamespaces.Jobs)
 
   return (
     <>
@@ -15,7 +15,10 @@ const NewJobPage = async () => {
       <ChatBotProvider>
         <main>
           <Container>
-            <AddJobTopBar header={t('header')} description={t('description')} />
+            <AddJobTopBar
+              header={t('addJobPageHeader')}
+              subHeader={t('addJobPageSubHeader')}
+            />
             <JobApplicationChat />
           </Container>
         </main>

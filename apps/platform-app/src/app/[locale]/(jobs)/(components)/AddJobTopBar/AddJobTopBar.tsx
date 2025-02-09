@@ -3,14 +3,14 @@ import styles from './AddJobTopBar.module.scss'
 
 interface AddJobTopBarProps {
   header: string
-  description?: string
+  subHeader?: string
 }
 
-export const AddJobTopBar = ({ header, description }: AddJobTopBarProps) => {
+export const AddJobTopBar = ({ header, subHeader }: AddJobTopBarProps) => {
   return (
     <div className={styles.titleBox}>
       <h3 className={styles.title}>{header}</h3>
-      {description && <p className={styles.description}>{description}</p>}
+      {subHeader && <p className={styles.subHeader}>{subHeader}</p>}
     </div>
   )
 }

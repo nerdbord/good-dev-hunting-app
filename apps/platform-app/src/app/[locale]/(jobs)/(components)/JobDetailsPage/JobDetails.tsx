@@ -1,5 +1,6 @@
 'use client'
 
+import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
@@ -13,6 +14,7 @@ import styles from './JobDetails.module.scss'
 export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter()
 
+  const t = useTranslations(I18nNamespaces.Jobs)
   const tButtons = useTranslations(I18nNamespaces.Buttons)
 
   const handleEdit = () => {
@@ -56,6 +58,15 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
         </div>
       </section>
       <JobDetailsDetailsInfo />
+
+      <ProgressBar currentStep={5} maxSteps={5}>
+        <Button variant="secondary" disabled={false}>
+          {tButtons('edit')}
+        </Button>
+        <Button variant="primary" type="submit" disabled={false}>
+          {tButtons('publishJob')}
+        </Button>
+      </ProgressBar>
     </>
   )
 }

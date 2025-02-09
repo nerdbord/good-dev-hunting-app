@@ -16,7 +16,7 @@ export default async function EditJobDetailsPage() {
         <Container>
           <AddJobTopBar
             header={t('jobEditHeader')}
-            description={t('jobEditSubHeader')}
+            subHeader={t('jobEditSubHeader')}
           />
           <CreateJobDetailsForm initialValues={mockJobDetails} />
         </Container>

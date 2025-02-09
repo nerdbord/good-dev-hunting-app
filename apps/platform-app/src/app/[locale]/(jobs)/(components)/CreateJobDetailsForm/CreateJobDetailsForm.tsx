@@ -2,7 +2,7 @@
 
 import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
 import { I18nNamespaces } from '@/i18n/request'
-import { Button, Container } from '@gdh/ui-system'
+import { Button } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
@@ -103,22 +103,18 @@ export const CreateJobDetailsForm = ({
             <Employment />
             <Location />
           </div>
-          <div className={styles.progerssBarWrapper}>
-            <Container>
-              <ProgressBar currentStep={2} maxSteps={3}>
-                <Button variant="secondary" disabled={false}>
-                  {tButtons('goBack')}
-                </Button>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  disabled={isSubmitting || !isValid}
-                >
-                  {tButtons('saveAndPreview')}
-                </Button>
-              </ProgressBar>
-            </Container>
-          </div>
+          <ProgressBar currentStep={2} maxSteps={3}>
+            <Button variant="secondary" disabled={false}>
+              {tButtons('goBack')}
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isSubmitting || !isValid}
+            >
+              {tButtons('saveAndPreview')}
+            </Button>
+          </ProgressBar>
         </form>
       )}
     </Formik>

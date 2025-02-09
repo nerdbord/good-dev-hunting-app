@@ -235,7 +235,10 @@
     "locationDesc": "Podaj preferencje lokalizacyjne dla realizacji zlecenia – możesz je zmienić w dowolnym momencie.",
     "locationCityTooltip": "Podaj miasto, aby specjaliści z Twojej okolicy mogli łatwiej odnaleźć Twoją ofertę.",
     "remoteOnly": "Szukam tylko zdalnych kandydatów",
-    "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy."
+    "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy.",
+
+    "addJobPageHeader": "Dodaj zlecenie",
+    "addJobPageSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
@@ -276,13 +279,5 @@
     "textareaLabel": "Treść zlecenia",
     "cancelBtn": "Cofnij",
     "nextBtn": "Dalej"
-  },
-  "AddJobPage": {
-    "header": "Dodaj zlecenie",
-    "description": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
-  },
-  "EditJobPage": {
-    "header": "Dodaj zlecenie",
-    "description": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
   }
 }
