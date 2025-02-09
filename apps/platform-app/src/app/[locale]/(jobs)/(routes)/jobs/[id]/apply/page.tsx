@@ -1,10 +1,12 @@
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
+import { AddJobTopBar } from '@/app/[locale]/(jobs)/(components)/AddJobTopBar/AddJobTopBar'
 import JobApplicationForm from '@/app/[locale]/(jobs)/(components)/JobApplicationForm/JobApplicationForm'
+import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
+import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
 import { redirect } from 'next/navigation'
-import styles from '../page.module.scss'
 
 interface JobApplicationPageProps {
   params: {
@@ -21,12 +23,16 @@ const JobApplicationPage = async ({ params }: JobApplicationPageProps) => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <h1>{t('applyForJob')}</h1>
-      </div>
-      <JobApplicationForm jobId={params.id} />
-    </div>
+    <>
+      <JobsHeader />
+      <Container>
+        <AddJobTopBar
+          header={t('applyForJob')}
+          subHeader={`Job ID: ${params.id}`}
+        />
+        <JobApplicationForm jobId={params.id} />
+      </Container>
+    </>
   )
 }
 
