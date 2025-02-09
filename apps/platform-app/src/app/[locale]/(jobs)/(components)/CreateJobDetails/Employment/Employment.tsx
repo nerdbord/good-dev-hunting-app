@@ -12,6 +12,7 @@ import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelec
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
 import { mappedJobContractType } from '../../../jobDetails.mappers'
+import { Card } from '../Card/Card'
 import styles from './Employment.module.scss'
 
 export enum EmploymentFormKeys {
@@ -65,7 +66,7 @@ export const Employment = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <Card>
       <div className={styles.left}>
         <div>{t('title')}</div>
         <div className={styles.personalInfo}>{tt('employmentDesc')}</div>
@@ -136,6 +137,6 @@ export const Employment = () => {
           />
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

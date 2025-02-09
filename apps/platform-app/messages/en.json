@@ -205,8 +205,8 @@
     "jobDetails": "Job Details",
     "tagLine": "Free platform connecting you with verified IT specialists",
     "jobPreview": "Job Preview",
-    "jobPreviewWarning": "Review the order form and ensure that the entered data matches your offer",
-    "jobSummaryHeader": "Job summary",
+    "jobEditHeader": "Job summary",
+    "jobEditSubHeader": "Review the order form and ensure that the entered data matches your offer",
     "basicInfo": "Basic Information",
     "basicInfoDesc": "Provide the details of the job so that specialists can assess their suitability.",
     "jobName": "Job Name",
@@ -281,4 +281,3 @@
     "description": "Review the job form and ensure that the entered data matches your offer"
   }
 }
-

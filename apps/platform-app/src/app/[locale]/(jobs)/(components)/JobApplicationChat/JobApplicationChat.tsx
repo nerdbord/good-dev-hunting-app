@@ -29,7 +29,7 @@ export function JobApplicationChat() {
 
     if (!input.trim()) {
       const { id: formId } = await saveToDatabase({})
-      router.push(`/jobs/${formId}`)
+      router.push(`/jobs/${formId}/edit`)
     }
 
     try {
@@ -37,7 +37,7 @@ export function JobApplicationChat() {
       const formData = chatBot.getFormData()
 
       const { id: formId } = await saveToDatabase(formData)
-      router.push(`/jobs/${formId}`)
+      router.push(`/jobs/${formId}/edit`)
     } catch (error) {
       console.error('Error:', error)
     } finally {
@@ -73,7 +73,7 @@ export function JobApplicationChat() {
         </form>
       </div>
 
-      <ProgressBar currentStep={1} maxSteps={5}>
+      <ProgressBar currentStep={1} maxSteps={3}>
         <Button variant="secondary" disabled={isLoading}>
           {t('cancelBtn')}
         </Button>

@@ -1,9 +1,14 @@
 import { Currency, EmploymentType, PublishingState } from '@prisma/client'
-import { EmploymentMode, JobContractType, type JobDetailsFormValues } from './jobDetailsTypes'
+import {
+  EmploymentMode,
+  JobContractType,
+  type CreateJobDetailsFormValues,
+} from './jobDetailsTypes'
 
-export const mockJobDetails: JobDetailsFormValues = {
+export const mockJobDetails: CreateJobDetailsFormValues = {
   jobName: 'Senior Frontend Developer needed for a fintech project',
-  projectBrief: 'We are looking for an experienced Frontend Developer to help us build a modern fintech platform. The project involves working with React, Next.js, and TypeScript.',
+  projectBrief:
+    'We are looking for an experienced Frontend Developer to help us build a modern fintech platform. The project involves working with React, Next.js, and TypeScript.',
   techStack: [
     { name: 'React', value: 'react' },
     { name: 'TypeScript', value: 'typescript' },
@@ -21,4 +26,5 @@ export const mockJobDetails: JobDetailsFormValues = {
   city: 'Warsaw',
   state: PublishingState.APPROVED,
   remoteOnly: true,
-} 
+  terms: false,
+}

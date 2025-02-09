@@ -1,13 +1,14 @@
-import InputFormError from '@/components/InputFormError/InputFormError'
-import { useFormikContext } from 'formik'
-import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
-import styles from './Budget.module.scss'
 import { currencyButtonTextDisplay } from '@/app/[locale]/(profile)/profile.mappers'
+import InputFormError from '@/components/InputFormError/InputFormError'
 import NumberInput from '@/components/NumberInput/NumberInput'
+import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
+import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { I18nNamespaces } from '@/i18n/request'
+import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
+import { Card } from '../Card/Card'
+import styles from './Budget.module.scss'
 
 export enum BudgetFormKeys {
   CURRENCY = 'currency',
@@ -35,12 +36,10 @@ export const Budget = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <Card>
       <div className={styles.left}>
         <div>{t('budget')}</div>
-        <div className={styles.personalInfo}>
-          {t('budgetDesc')}
-        </div>
+        <div className={styles.personalInfo}>{t('budgetDesc')}</div>
       </div>
       <div className={styles.right}>
         <InputFormError
@@ -54,7 +53,12 @@ export const Budget = () => {
             label={t('minBudgetForProjectRealisation')}
             placeholder={t('minBudgetForProjectRealisationPlaceholder')}
             value={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]}
-            onChange={(e) => handleBudgetChange(e, BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION)}
+            onChange={(e) =>
+              handleBudgetChange(
+                e,
+                BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION,
+              )
+            }
             name={BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION}
             dataTestId={BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION}
             min={0}
@@ -71,7 +75,12 @@ export const Budget = () => {
             label={t('maxBudgetForProjectRealisation')}
             placeholder={t('maxBudgetForProjectRealisationPlaceholder')}
             value={values[BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION]}
-            onChange={(e) => handleBudgetChange(e, BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION)}
+            onChange={(e) =>
+              handleBudgetChange(
+                e,
+                BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION,
+              )
+            }
             name={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
             dataTestId={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
             min={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]}
@@ -86,7 +95,7 @@ export const Budget = () => {
             {Object.values(Currency).map((value, index) => (
               <Button
                 key={index}
-                variant={value === values.currency ? "secondary" : "grayedOut"}
+                variant={value === values.currency ? 'secondary' : 'grayedOut'}
                 onClick={() => handleCurrencyChange(value)}
               >
                 {currencyButtonTextDisplay(value)}
@@ -95,6 +104,6 @@ export const Budget = () => {
           </div>
         </InputFormError>
       </div>
-    </div>
+    </Card>
   )
 }

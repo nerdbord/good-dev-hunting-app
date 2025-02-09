@@ -1,53 +1,28 @@
 'use client'
-// import styles from '@/app/[locale]/(profile)/(routes)/my-profile/create/page.module.scss'
+
+import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
 import { I18nNamespaces } from '@/i18n/request'
+import { Button, Container } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
+import { useParams, useRouter } from 'next/navigation'
 import * as Yup from 'yup'
-import { type CreateJobDetailsFormValues } from '../../jobDetailsTypes'
+import {
+  JobContractType,
+  type CreateJobDetailsFormValues,
+} from '../../jobDetailsTypes'
 import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
 import { Budget } from '../CreateJobDetails/Budget/Budget'
 import { Employment } from '../CreateJobDetails/Employment/Employment'
 import { Location } from '../CreateJobDetails/Location/Location'
 import styles from './CreateJobDetailsForm.module.scss'
 
-const initialValues: CreateJobDetailsFormValues = {
-  jobName: '',
-  projectBrief: '',
-  techStack: [],
-  currency: Currency.PLN,
-  minBudgetForProjectRealisation: null,
-  maxBudgetForProjectRealisation: null,
-  contractType: { name: '', value: '' },
-  employmentType: [],
-  employmentMode: [],
-  country: '',
-  city: '',
-  remoteOnly: false,
-  terms: false,
-  state: PublishingState.DRAFT,
-}
-// Informacje podstawowe
-// - Nazwa zlecenia
-// - Brief projektowy
-// - Technologie
-// Budżet
-// - Waluta
-// - Minimalna kwota za realizacje projektu
-// - Maksymalna kwota za realizacje projektu
-// Forma zatrudnienia
-// - ContractType Umowa: B2B / Umowa o pracę / Umowa o dzieło / Umowa Zlecenie
-// - EmploymentType Czas zatrudnienia: Pełny etat / Pół etatu / Kontrakt
-// - EmploymentMode Wybierz tryb pracy: Stacjonarny / Hybrydowy / Zdalny
-// - LocationCountries LocationCities Wybierz lokalizacje kandydatów: Kraje / Miasta
-
 const validationSchema = Yup.object().shape({
   jobName: Yup.string().required('Job name is required'),
   projectBrief: Yup.string().required('Project brief is required'),
   techStack: Yup.array()
     .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
-    .min(1, 'At least one technology is required')
     .max(16, 'Max 16 technologies'),
   currency: Yup.string()
     .oneOf(Object.values(Currency), 'Invalid currency')
@@ -56,14 +31,8 @@ const validationSchema = Yup.object().shape({
     name: Yup.string(),
     value: Yup.string(),
   }).required('Contract type is required'),
-  employmentType: Yup.object({
-    name: Yup.string(),
-    value: Yup.string(),
-  }).required('Employment type is required'),
-  employmentMode: Yup.object({
-    name: Yup.string(),
-    value: Yup.string(),
-  }).required('Employment mode is required'),
+  employmentType: Yup.array().min(1, 'Employment type is required'),
+  employmentMode: Yup.array().min(1, 'Employment mode is required'),
   minBudgetForProjectRealisation: Yup.number()
     .min(0, 'The minimum amount must not be less than 0')
     .required('The minimum amount is required'),
@@ -75,7 +44,7 @@ const validationSchema = Yup.object().shape({
     .required('The maximum amount is required'),
   country: Yup.string().required('Country is required'),
   city: Yup.string().required('City is required'),
-  remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
+  remoteOnly: Yup.boolean().oneOf([true, false]),
 })
 
 interface CreateJobDetailsFormProps {
@@ -85,8 +54,10 @@ interface CreateJobDetailsFormProps {
 export const CreateJobDetailsForm = ({
   initialValues,
 }: CreateJobDetailsFormProps) => {
-  // const t = useTranslations(I18nNamespaces.Buttons)
-  const tt = useTranslations(I18nNamespaces.Jobs)
+  const tButtons = useTranslations(I18nNamespaces.Buttons)
+
+  const router = useRouter()
+  const { id } = useParams()
 
   const defaultValues: CreateJobDetailsFormValues = {
     jobName: '',
@@ -95,18 +66,20 @@ export const CreateJobDetailsForm = ({
     currency: Currency.PLN,
     minBudgetForProjectRealisation: null,
     maxBudgetForProjectRealisation: null,
-    contractType: { name: '', value: '' },
+    contractType: { name: '', value: JobContractType.B2B },
     employmentType: [],
     employmentMode: [],
     country: '',
     city: '',
     remoteOnly: false,
-    terms: false,
+    terms: true,
     state: PublishingState.DRAFT,
   }
 
   const handleCreateJobDetails = (values: CreateJobDetailsFormValues) => {
+    console.log('submit') //TODO: add save to database logic here
     console.log(values)
+    // router.push(`/jobs/${id}`)
   }
 
   return (
@@ -115,22 +88,39 @@ export const CreateJobDetailsForm = ({
       validationSchema={validationSchema}
       enableReinitialize
       validateOnMount
-      onSubmit={handleCreateJobDetails}
+      onSubmit={(values, actions) => {
+        handleCreateJobDetails(values)
+        setTimeout(() => {
+          actions.setSubmitting(false)
+        }, 1000)
+      }}
     >
-      <div className={styles.wrapper}>
-        {/* <div className={styles.actionsWrapper}> */}
-          {/* <EditJobHeader /> */}
-          <div className={styles.header}>
-            <h1>{tt('jobSummaryHeader')}</h1>
+      {({ isSubmitting, isValid, handleSubmit }) => (
+        <form className={styles.wrapper} onSubmit={handleSubmit}>
+          <div className={styles.formBox}>
+            <BasicInfo />
+            <Budget />
+            <Employment />
+            <Location />
           </div>
-          <p className={styles.previewWarning}>{tt('jobPreviewWarning')}</p>
-        <div className={styles.formBox}>
-          <BasicInfo />
-          <Budget />
-          <Employment />
-          <Location />
-        </div>
-      </div>
+          <div className={styles.progerssBarWrapper}>
+            <Container>
+              <ProgressBar currentStep={2} maxSteps={3}>
+                <Button variant="secondary" disabled={false}>
+                  {tButtons('goBack')}
+                </Button>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  disabled={isSubmitting || !isValid}
+                >
+                  {tButtons('saveAndPreview')}
+                </Button>
+              </ProgressBar>
+            </Container>
+          </div>
+        </form>
+      )}
     </Formik>
   )
 }

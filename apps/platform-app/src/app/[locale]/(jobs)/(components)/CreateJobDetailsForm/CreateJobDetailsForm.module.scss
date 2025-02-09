@@ -1,8 +1,7 @@
 .wrapper {
   position: relative;
-  padding: 24px 8% 35px;
+  padding-bottom: 130px;
   @include mobile {
-    padding: 0;
   }
 }
 
@@ -26,44 +25,6 @@
   color: #d62626;
 }
 
-//   .actionsWrapper {
-//     display: flex;
-//     gap: 8px;
-//     @include mobile {
-//         flex-direction: column;
-
-//     }
-//   }
-
-// .actionsWrapper {
-//     display: flex;
-//     justify-content: flex-end;
-//     gap: 10px;
-//     @include mobile {
-//         flex-direction: column;
-
-//     }
-// }
-.wrapper {
-  padding: 24px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h1 {
-    margin: 0;
-    color: #e2eaf1;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 40px;
-    margin-bottom: 10px;
-  }
-}
-
 .previewWarning {
   width: 398px;
   margin-bottom: 24px;
@@ -72,4 +33,13 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+}
+
+.progerssBarWrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 58px;
+  background-color: #0f1217;
 }

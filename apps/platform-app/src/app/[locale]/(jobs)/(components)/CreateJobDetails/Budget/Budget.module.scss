@@ -1,19 +1,6 @@
 // @import '../../../../../[locale]/create/page.module';
 @import '../../../../(profile)/(routes)/my-profile/create/page.module.scss';
 
-.container {
-  background: #04080d;
-  padding: 100px;
-  display: flex;
-  width: 100%;
-  @include mobile {
-    max-width: 100%;
-    flex-direction: column;
-    padding: 40px 16px 60px 16px;
-    gap: 30px;
-  }
-}
-
 .left {
   flex: 0 0 50%;
   display: flex;

@@ -10,6 +10,7 @@ import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import { ProjectBriefTextArea } from '../../ProjectBriefTextArea/ProjectBriefTextArea'
+import { Card } from '../Card/Card'
 import styles from './BasicInfo.module.scss'
 
 export enum BasicInfoFormKeys {
@@ -53,12 +54,10 @@ export const BasicInfo = () => {
     }
   }
   return (
-    <div className={styles.container}>
+    <Card>
       <div className={styles.left}>
         <div>{ttt('basicInfo')}</div>
-        <div className={styles.personalInfo}>
-          {ttt('basicInfoDesc')}
-        </div>
+        <div className={styles.personalInfo}>{ttt('basicInfoDesc')}</div>
       </div>
       <div className={styles.right}>
         <InputFormError
@@ -75,7 +74,7 @@ export const BasicInfo = () => {
             onChange={handleChange}
             name={BasicInfoFormKeys.JOB_NAME}
             dataTestId={BasicInfoFormKeys.JOB_NAME}
-            maxLength={40}
+            maxLength={255}
           />
         </InputFormError>
         <div>
@@ -107,30 +106,29 @@ export const BasicInfo = () => {
               </div>
             </div>
           </InputFormError>
-          
         </div>
         <InputFormError
-            error={
-              touched[BasicInfoFormKeys.TECHNOLOGIES] &&
-              ((errors[BasicInfoFormKeys.TECHNOLOGIES] as string) || '')
-            }
-          >
-            <TechStackInput
-              chips={values[BasicInfoFormKeys.TECHNOLOGIES]}
-              label={tt('techstack')}
-              placeholder={tt('startTyping')}
-              name={BasicInfoFormKeys.TECHNOLOGIES}
-              onTechSelect={handleTechSelect}
-              onTechRemove={handleTechRemove}
-              addImportantIcon={true}
-              tooltipText={ttt('techStackTooltip')}
-            />
-          </InputFormError>
-          <div className={styles.addInfo}>
-            {tt('techstackInfo')} <br />
-            {tt('techstackChoose')}
-          </div>
+          error={
+            touched[BasicInfoFormKeys.TECHNOLOGIES] &&
+            ((errors[BasicInfoFormKeys.TECHNOLOGIES] as string) || '')
+          }
+        >
+          <TechStackInput
+            chips={values[BasicInfoFormKeys.TECHNOLOGIES]}
+            label={tt('techstack')}
+            placeholder={tt('startTyping')}
+            name={BasicInfoFormKeys.TECHNOLOGIES}
+            onTechSelect={handleTechSelect}
+            onTechRemove={handleTechRemove}
+            addImportantIcon={true}
+            tooltipText={ttt('techStackTooltip')}
+          />
+        </InputFormError>
+        <div className={styles.addInfo}>
+          {tt('techstackInfo')} <br />
+          {tt('techstackChoose')}
+        </div>
       </div>
-    </div>
+    </Card>
   )
 }

@@ -4,11 +4,12 @@ import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { I18nNamespaces } from '@/i18n/request'
+import { Switch } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
+import { Card } from '../Card/Card'
 import styles from './Location.module.scss'
-import { Switch } from '@gdh/ui-system'
 
 export enum LocationFormKeys {
   COUNTRY = 'country',
@@ -25,7 +26,7 @@ export const Location = () => {
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateJobDetailsFormValues>()
   return (
-    <div className={styles.container}>
+    <Card>
       <div className={styles.left}>
         <div>{t('title')}</div>
         <div className={styles.personalInfo}>{tt('locationDesc')}</div>
@@ -71,6 +72,6 @@ export const Location = () => {
           dataTestId={LocationFormKeys.REMOTE_ONLY}
         />
       </div>
-    </div>
+    </Card>
   )
 }

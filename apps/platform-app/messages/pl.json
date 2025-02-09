@@ -205,8 +205,8 @@
     "jobDetails": "Szczegóły zlecenia",
     "tagLine": "Bezpłatna platforma łącząca ze zweryfikowanymi specjalistami IT",
     "jobPreview": "Podgląd zlecenia",
-    "jobPreviewWarning": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
-    "jobSummaryHeader": "Podsumowanie zlecenia",
+    "jobEditHeader": "Podsumowanie zlecenia",
+    "jobEditSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
     "basicInfo": "Informacje podstawowe",
     "basicInfoDesc": "Podaj szczegóły zlecenia, aby specjaliści mogli ocenić swoje dopasowanie.",
 
@@ -278,6 +278,10 @@
     "nextBtn": "Dalej"
   },
   "AddJobPage": {
+    "header": "Dodaj zlecenie",
+    "description": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
+  },
+  "EditJobPage": {
     "header": "Dodaj zlecenie",
     "description": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
   }
