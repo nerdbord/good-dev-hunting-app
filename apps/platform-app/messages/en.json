@@ -267,6 +267,18 @@
     "applicationDetails": "Application Details",
     "applicantInfo": "Applicant Info",
     "actions": "Actions"
+  },
+  "JobApplicationChat": {
+    "descriptionHeader": "Describe what you need",
+    "descriptionParagraph": "As accurately as possible. You can also upload the job content.",
+    "placeholder": "Describe the job in a few words",
+    "textareaLabel": "Job content",
+    "cancelBtn": "Cancel",
+    "nextBtn": "Next"
+  },
+  "AddJobPage": {
+    "header": "Add job",
+    "description": "Review the job form and ensure that the entered data matches your offer"
   }
 }
 

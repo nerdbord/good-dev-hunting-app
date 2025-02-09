@@ -18,6 +18,20 @@
   align-items: center;
 }
 
+.desktopLogo {
+  @include mobile {
+    display: none;
+  }
+}
+.mobileLogo {
+  display: none;
+  width: 44px;
+  height: 26px;
+  @include mobile {
+    display: block;
+  }
+}
+
 .actions {
   display: flex;
   gap: 16px;

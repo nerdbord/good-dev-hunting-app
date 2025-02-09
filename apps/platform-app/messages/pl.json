@@ -268,5 +268,17 @@
     "applicationDetails": "Szczegóły aplikacji",
     "applicantInfo": "Informacje o aplikującym",
     "actions": "Akcje"
+  },
+  "JobApplicationChat": {
+    "descriptionHeader": "Opisz, czego potrzebujesz",
+    "descriptionParagraph": "Tak jak najdokładniej.  Możesz wrzucić zarówno treść ogłoszenia.",
+    "placeholder": "Przedstaw zlecenie w kilku słowach",
+    "textareaLabel": "Treść zlecenia",
+    "cancelBtn": "Cofnij",
+    "nextBtn": "Dalej"
+  },
+  "AddJobPage": {
+    "header": "Dodaj zlecenie",
+    "description": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
   }
 }
