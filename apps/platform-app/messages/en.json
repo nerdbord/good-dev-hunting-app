@@ -237,7 +237,22 @@
     "techStackTooltip": "Specify the technologies you’ve selected for your job offer implementation.",
 
     "addJobPageHeader": "Add job",
-    "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer"
+    "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer",
+
+    "jobNameRequired": "Job name is required",
+    "projectBriefRequired": "Project brief is required",
+    "maxTechStack": "Max 16 technologies",
+    "invalidCurrency": "Invalid currency",
+    "currencyRequired": "Currency is required",
+    "contractTypeRequired": "Contract type is required",
+    "employmentTypeRequired": "Employment type is required",
+    "employmentModeRequired": "Employment mode is required",
+    "minBudgetNonNegative": "The minimum amount must not be less than 0",
+    "minBudgetRequired": "The minimum amount is required",
+    "maxBudgetGreaterThanMin": "The maximum amount must be greater than the minimum",
+    "maxBudgetRequired": "The maximum amount is required",
+    "countryRequired": "Country is required",
+    "cityRequired": "City is required"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",

@@ -238,7 +238,22 @@
     "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy.",
 
     "addJobPageHeader": "Dodaj zlecenie",
-    "addJobPageSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty"
+    "addJobPageSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
+
+    "jobNameRequired": "Nazwa zlecenia jest wymagana",
+    "projectBriefRequired": "Opis projektu jest wymagany",
+    "maxTechStack": "Maksymalnie 16 technologii",
+    "invalidCurrency": "Niepoprawna waluta",
+    "currencyRequired": "Wymagana waluta",
+    "contractTypeRequired": "Rodzaj umowy jest wymagany",
+    "employmentTypeRequired": "Rodzaj zatrudnienia jest wymagany",
+    "employmentModeRequired": "Tryb zatrudnienia jest wymagany",
+    "minBudgetNonNegative": "Minimalna kwota nie może być mniejsza niż 0",
+    "minBudgetRequired": "Wymagana minimalna kwota",
+    "maxBudgetGreaterThanMin": "Maksymalna kwota musi być większa od minimalnej",
+    "maxBudgetRequired": "Wymagana maksymalna kwota",
+    "countryRequired": "Kraj jest wymagany",
+    "cityRequired": "Miasto jest wymagane"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
