@@ -148,7 +148,11 @@ export const CreateJobDetailsForm = ({
             <Location />
           </div>
           <ProgressBar currentStep={2} maxSteps={3}>
-            <Button variant="secondary" disabled={false}>
+            <Button
+              variant="secondary"
+              disabled={false}
+              onClick={() => router.back()}
+            >
               {tButtons('goBack')}
             </Button>
             <Button
