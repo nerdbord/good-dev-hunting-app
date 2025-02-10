@@ -82,54 +82,68 @@ export const Employment = () => {
             name={EmploymentFormKeys.CONTRACT_TYPE}
           />
         </InputFormError>
-        <div className={styles.employmentType}>
-          {tt('employmentType')}{' '}
-          <CheckboxInput
-            id={EmploymentFormKeys.CONTRACT_TYPE + 1}
-            label={t('employFull')}
-            checked={isEmploymentTypeSelected(EmploymentType.FULL_TIME)}
-            onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
-            name={EmploymentFormKeys.CONTRACT_TYPE}
-          />
-          <CheckboxInput
-            id={EmploymentFormKeys.CONTRACT_TYPE + 2}
-            label={t('employPart')}
-            checked={isEmploymentTypeSelected(EmploymentType.PART_TIME)}
-            onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
-            name={EmploymentFormKeys.CONTRACT_TYPE}
-          />
-          <CheckboxInput
-            id={EmploymentFormKeys.CONTRACT_TYPE + 3}
-            label={t('employContract')}
-            checked={isEmploymentTypeSelected(EmploymentType.CONTRACT)}
-            onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
-            name={EmploymentFormKeys.CONTRACT_TYPE}
-          />
-        </div>
-        <div className={styles.employmentType}>
-          {tt('workMode')}
-          <CheckboxInput
-            id={EmploymentFormKeys.EMPLOYMENT_MODE + 1}
-            label={tt('workModeStationary')}
-            checked={isEmploymentModeSelected(EmploymentMode.STATIONARY)}
-            onChange={() => handleEmploymentMode(EmploymentMode.STATIONARY)}
-            name={EmploymentFormKeys.EMPLOYMENT_MODE}
-          />
-          <CheckboxInput
-            id={EmploymentFormKeys.EMPLOYMENT_MODE + 2}
-            label={tt('workModeHybrid')}
-            checked={isEmploymentModeSelected(EmploymentMode.HYBRID)}
-            onChange={() => handleEmploymentMode(EmploymentMode.HYBRID)}
-            name={EmploymentFormKeys.EMPLOYMENT_MODE}
-          />
-          <CheckboxInput
-            id={EmploymentFormKeys.EMPLOYMENT_MODE + 3}
-            label={tt('workModeRemote')}
-            checked={isEmploymentModeSelected(EmploymentMode.REMOTE)}
-            onChange={() => handleEmploymentMode(EmploymentMode.REMOTE)}
-            name={EmploymentFormKeys.EMPLOYMENT_MODE}
-          />
-        </div>
+        <InputFormError
+          error={
+            touched[EmploymentFormKeys.EMPLOYMENT_TYPE] &&
+            errors[EmploymentFormKeys.EMPLOYMENT_TYPE]
+          }
+        >
+          <div className={styles.employmentType}>
+            {tt('employmentType')}
+            <CheckboxInput
+              id={EmploymentFormKeys.CONTRACT_TYPE + 1}
+              label={t('employFull')}
+              checked={isEmploymentTypeSelected(EmploymentType.FULL_TIME)}
+              onChange={() => handleEmploymentType(EmploymentType.FULL_TIME)}
+              name={EmploymentFormKeys.CONTRACT_TYPE}
+            />
+            <CheckboxInput
+              id={EmploymentFormKeys.CONTRACT_TYPE + 2}
+              label={t('employPart')}
+              checked={isEmploymentTypeSelected(EmploymentType.PART_TIME)}
+              onChange={() => handleEmploymentType(EmploymentType.PART_TIME)}
+              name={EmploymentFormKeys.CONTRACT_TYPE}
+            />
+            <CheckboxInput
+              id={EmploymentFormKeys.CONTRACT_TYPE + 3}
+              label={t('employContract')}
+              checked={isEmploymentTypeSelected(EmploymentType.CONTRACT)}
+              onChange={() => handleEmploymentType(EmploymentType.CONTRACT)}
+              name={EmploymentFormKeys.CONTRACT_TYPE}
+            />
+          </div>
+        </InputFormError>
+        <InputFormError
+          error={
+            touched[EmploymentFormKeys.EMPLOYMENT_MODE] &&
+            errors[EmploymentFormKeys.EMPLOYMENT_MODE]
+          }
+        >
+          <div className={styles.employmentType}>
+            {tt('workMode')}
+            <CheckboxInput
+              id={EmploymentFormKeys.EMPLOYMENT_MODE + 1}
+              label={tt('workModeStationary')}
+              checked={isEmploymentModeSelected(EmploymentMode.STATIONARY)}
+              onChange={() => handleEmploymentMode(EmploymentMode.STATIONARY)}
+              name={EmploymentFormKeys.EMPLOYMENT_MODE}
+            />
+            <CheckboxInput
+              id={EmploymentFormKeys.EMPLOYMENT_MODE + 2}
+              label={tt('workModeHybrid')}
+              checked={isEmploymentModeSelected(EmploymentMode.HYBRID)}
+              onChange={() => handleEmploymentMode(EmploymentMode.HYBRID)}
+              name={EmploymentFormKeys.EMPLOYMENT_MODE}
+            />
+            <CheckboxInput
+              id={EmploymentFormKeys.EMPLOYMENT_MODE + 3}
+              label={tt('workModeRemote')}
+              checked={isEmploymentModeSelected(EmploymentMode.REMOTE)}
+              onChange={() => handleEmploymentMode(EmploymentMode.REMOTE)}
+              name={EmploymentFormKeys.EMPLOYMENT_MODE}
+            />
+          </div>
+        </InputFormError>
       </div>
     </Card>
   )
