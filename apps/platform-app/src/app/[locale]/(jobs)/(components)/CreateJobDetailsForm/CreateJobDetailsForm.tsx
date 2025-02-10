@@ -1,7 +1,9 @@
 'use client'
 
+import { FormNavigationWarning } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/FormStateMonitor/FormStateMonitor'
 import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
@@ -26,7 +28,7 @@ export const CreateJobDetailsForm = ({
   const tButtons = useTranslations(I18nNamespaces.Buttons)
 
   const router = useRouter()
-  const { id } = useParams()
+  const { id: jobId } = useParams()
 
   const defaultValues: CreateJobDetailsFormValues = {
     jobName: '',
@@ -120,6 +122,9 @@ export const CreateJobDetailsForm = ({
     // router.push(`/jobs/${id}`)
   }
 
+  if (typeof jobId !== 'string' || !jobId) {
+    return <p>Something went wrong. Please try again.</p>
+  }
   return (
     <Formik
       initialValues={initialValues || defaultValues}
@@ -131,6 +136,7 @@ export const CreateJobDetailsForm = ({
         setTimeout(() => {
           actions.setSubmitting(false)
         }, 1000)
+        router.push(AppRoutes.job.replace(':id', jobId))
       }}
     >
       {({ isSubmitting, isValid, handleSubmit }) => (
@@ -153,6 +159,7 @@ export const CreateJobDetailsForm = ({
               {tButtons('saveAndPreview')}
             </Button>
           </ProgressBar>
+          <FormNavigationWarning />
         </form>
       )}
     </Formik>
