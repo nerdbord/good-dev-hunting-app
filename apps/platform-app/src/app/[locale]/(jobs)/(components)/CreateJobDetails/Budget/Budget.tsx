@@ -6,7 +6,7 @@ import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
+import { type CreateJobDetailsFormValues } from '../../../types'
 import { Card } from '../Card/Card'
 import styles from './Budget.module.scss'
 
@@ -38,7 +38,7 @@ export const Budget = () => {
   return (
     <Card>
       <div className={styles.left}>
-        <div  className={styles.cardHeader}>{t('budget')}</div>
+        <div className={styles.cardHeader}>{t('budget')}</div>
         <div className={styles.personalInfo}>{t('budgetDesc')}</div>
       </div>
       <div className={styles.right}>

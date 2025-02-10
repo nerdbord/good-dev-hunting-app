@@ -13,45 +13,20 @@ import styles from './JobDetails.module.scss'
 
 export default function JobDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter()
-
-  const t = useTranslations(I18nNamespaces.Jobs)
   const tButtons = useTranslations(I18nNamespaces.Buttons)
 
   const handleEdit = () => {
     router.push(`${AppRoutes.jobs}/${params.id}/edit`)
   }
 
-  const handleDelete = () => {
-    // Implementacja usuwania - na razie tylko console.log
-    console.log('Deleting job:', params.id)
+  const handlePublish = () => {
+    console.log('Publishing job:', params.id)
   }
-
-  // const handlePublish = () => {
-  //   // Implementacja publikowania - na razie tylko console.log
-  //   console.log('Publishing job:', params.id)
-  // }
 
   return (
     <>
       <section className={styles.container}>
-        <ul className={styles.actions}>
-          {/* <li>
-            <Button variant="secondary" onClick={handleDelete}>
-              {tButtons('deleteJob')}
-            </Button>
-          </li>
-          <li>
-            <Button variant="primary" onClick={handleEdit}>
-              {tButtons('edit')}
-            </Button>
-          </li> */}
-
-          {/* <li>
-            <Button variant="primary" onClick={handlePublish}>
-              {tButtons('postJob')}
-            </Button>
-          </li> */}
-        </ul>
+        <ul className={styles.actions}></ul>
         <div className={styles.jobDetailsContainerPlusAvatars}>
           <AvatarsDisplay />
           <JobDetailsBasicInfo />
@@ -60,10 +35,15 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
       <JobDetailsDetailsInfo />
 
       <ProgressBar currentStep={5} maxSteps={5}>
-        <Button variant="secondary" disabled={false}>
+        <Button variant="secondary" disabled={false} onClick={handleEdit}>
           {tButtons('edit')}
         </Button>
-        <Button variant="primary" type="submit" disabled={false}>
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={false}
+          onClick={handlePublish}
+        >
           {tButtons('publishJob')}
         </Button>
       </ProgressBar>

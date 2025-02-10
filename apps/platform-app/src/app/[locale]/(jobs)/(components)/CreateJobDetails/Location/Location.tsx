@@ -7,7 +7,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Switch } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { type CreateJobDetailsFormValues } from '../../../jobDetailsTypes'
+import { type CreateJobDetailsFormValues } from '../../../types'
 import { Card } from '../Card/Card'
 import styles from './Location.module.scss'
 

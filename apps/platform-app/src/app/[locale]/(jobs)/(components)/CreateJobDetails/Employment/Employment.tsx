@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import {
   EmploymentMode,
   type CreateJobDetailsFormValues,
-} from '@/app/[locale]/(jobs)/jobDetailsTypes'
+} from '@/app/[locale]/(jobs)/types'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'

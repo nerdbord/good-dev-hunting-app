@@ -8,10 +8,7 @@ import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
 import * as Yup from 'yup'
-import {
-  JobContractType,
-  type CreateJobDetailsFormValues,
-} from '../../jobDetailsTypes'
+import { JobContractType, type CreateJobDetailsFormValues } from '../../types'
 import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
 import { Budget } from '../CreateJobDetails/Budget/Budget'
 import { Employment } from '../CreateJobDetails/Employment/Employment'

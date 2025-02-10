@@ -3,7 +3,7 @@ import {
   EmploymentMode,
   JobContractType,
   type CreateJobDetailsFormValues,
-} from './jobDetailsTypes'
+} from './types'
 
 export const mockJobDetails: CreateJobDetailsFormValues = {
   jobName: 'Senior Frontend Developer needed for a fintech project',

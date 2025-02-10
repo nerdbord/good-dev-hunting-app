@@ -2,7 +2,7 @@ import {
   mapEmploymentMode,
   mapJobContract,
 } from '@/app/[locale]/(jobs)/jobDetails.mappers'
-import { type JobContractType } from '@/app/[locale]/(jobs)/jobDetailsTypes'
+import { type JobContractType } from '@/app/[locale]/(jobs)/types'
 import {
   currencyButtonTextDisplay,
   mapEmploymentType,

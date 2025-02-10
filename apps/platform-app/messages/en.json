@@ -271,7 +271,7 @@
     "applicantInfo": "Applicant Info",
     "actions": "Actions"
   },
-  "JobApplicationChat": {
+  "AddJobChat": {
     "descriptionHeader": "Describe what you need",
     "descriptionParagraph": "As accurately as possible. You can also upload the job content.",
     "placeholder": "Describe the job in a few words",

@@ -1,5 +1,5 @@
 import { type DropdownOption } from '@gdh/ui-system'
-import { EmploymentMode, JobContractType } from './jobDetailsTypes'
+import { EmploymentMode, JobContractType } from './types'
 
 export const mapJobContract = (contractType: JobContractType): string => {
   switch (contractType) {

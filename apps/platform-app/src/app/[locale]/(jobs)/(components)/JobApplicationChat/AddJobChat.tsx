@@ -6,15 +6,15 @@ import { useRouter } from 'next/navigation'
 import type { ChangeEvent } from 'react'
 import { useState } from 'react'
 import { saveToDatabase } from '../../(routes)/jobs/actions/actions'
-import { useJobApplicationChat } from '../../(routes)/jobs/add/utils/ChatBotContext'
 
 import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
-import styles from './JobApplicationChat.module.scss'
+import { useAddJobChat } from '../../(routes)/jobs/add/utils/AddJobChatContext'
+import styles from './AddJobChat.module.scss'
 
-export function JobApplicationChat() {
+export function AddJobChat() {
   const router = useRouter()
-  const t = useTranslations(I18nNamespaces.JobApplicationChat)
-  const chatBot = useJobApplicationChat()
+  const t = useTranslations(I18nNamespaces.AddJobChat)
+  const chatBot = useAddJobChat()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 

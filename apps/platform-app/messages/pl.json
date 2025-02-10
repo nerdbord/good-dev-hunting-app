@@ -272,7 +272,7 @@
     "applicantInfo": "Informacje o aplikującym",
     "actions": "Akcje"
   },
-  "JobApplicationChat": {
+  "AddJobChat": {
     "descriptionHeader": "Opisz, czego potrzebujesz",
     "descriptionParagraph": "Tak jak najdokładniej.  Możesz wrzucić zarówno treść ogłoszenia.",
     "placeholder": "Przedstaw zlecenie w kilku słowach",

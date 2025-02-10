@@ -15,8 +15,8 @@ export interface JobDetailsFormValues {
   minBudgetForProjectRealisation: number | null
   maxBudgetForProjectRealisation: number | null
   contractType: {
-    name: string;
-    value: JobContractType;
+    name: string
+    value: JobContractType
   }
   employmentType: EmploymentType[]
   employmentMode: EmploymentMode[]
@@ -27,19 +27,18 @@ export interface JobDetailsFormValues {
 }
 
 export interface CreateJobDetailsFormValues extends JobDetailsFormValues {
-    terms: boolean
-  }
+  terms: boolean
+}
 
 export type TechStack = {
-    name: string
-  }[]
+  name: string
+}[]
 
 export interface BudgetForProjectRealisation {
   minBudgetForProjectRealisation: number | null
   maxBudgetForProjectRealisation: number | null
 }
-// - Umowa: B2B / Umowa o pracę / Umowa o dzieło / Umowa Zlecenie
-// - Contract: B2B / Employment contract / Contract for specific work / Contract of mandate
+
 export enum JobContractType {
   B2B = 'B2B',
   EMPLOYMENT_CONTRACT = 'employment_contract',
@@ -47,7 +46,6 @@ export enum JobContractType {
   CONTRACT_OF_MANDATE = 'contract_of_mandate',
 }
 
-// work mode: Stationary / Hybrid / Remote
 export enum EmploymentMode {
   STATIONARY = 'Stationary',
   HYBRID = 'Hybrid',
