@@ -14,6 +14,7 @@ import styles from './AddJobChat.module.scss'
 export function AddJobChat() {
   const router = useRouter()
   const t = useTranslations(I18nNamespaces.AddJobChat)
+  const tButtons = useTranslations(I18nNamespaces.Buttons)
   const chatBot = useAddJobChat()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -74,8 +75,12 @@ export function AddJobChat() {
       </div>
 
       <ProgressBar currentStep={1} maxSteps={3}>
-        <Button variant="secondary" disabled={isLoading}>
-          {t('cancelBtn')}
+        <Button
+          variant="secondary"
+          disabled={isLoading}
+          onClick={() => router.back()}
+        >
+          {tButtons('goBack')}
         </Button>
         <Button
           variant="primary"
@@ -83,7 +88,7 @@ export function AddJobChat() {
           type="submit"
           disabled={isLoading}
         >
-          {t('nextBtn')}
+          {tButtons('goNext')}
         </Button>
       </ProgressBar>
     </>
