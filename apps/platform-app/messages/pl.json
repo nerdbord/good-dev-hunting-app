@@ -63,9 +63,11 @@
     "answerFour": "Aby stworzyć profil, konieczne jest posiadanie konta na GitHubie, gdyż chcemy mieć pewność, że jesteś prawdziwym programistą. Korzystamy również z GitHuba do pobierania Twojego zdjęcia profilowego oraz innych publicznych informacji, aby proces tworzenia profilu był jak najłatwiejszy. Nie przechowujemy żadnych tokenów GitHub."
   },
   "Buttons": {
+    "logIn": "Zaloguj się",
     "createProfile": "Utwórz profil",
     "editProfile": "Edytuj profil",
     "myProfile": "Mój profil",
+    "myJobs": "Moje zlecenia",
     "saveAndPreview": "Zapisz i podejrzyj",
     "saveAndPreviewProfile": "Zapisz i podejrzyj profil",
     "edit": "Edytuj",
@@ -82,7 +84,10 @@
     "importing": "Importowanie...",
     "apply": "Zastosuj",
     "createAnotherJob": "Utwórz kolejne zlecenie",
-    "postJob": "Opublikuj zlecenie"
+    "postJob": "Opublikuj zlecenie",
+    "deleteJob": "Usuń zlecenie",
+    "publishJob": "Publikuj zlecenie",
+    "goBack": "Wróć"
   },
   "LandingFooter": {
     "contact": "Kontakt",
@@ -197,7 +202,58 @@
     "applyForJob": "Aplikuj do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
-    "jobDetails": "Szczegóły zlecenia"
+    "jobDetails": "Szczegóły zlecenia",
+    "tagLine": "Bezpłatna platforma łącząca ze zweryfikowanymi specjalistami IT",
+    "jobPreview": "Podgląd zlecenia",
+    "jobEditHeader": "Podsumowanie zlecenia",
+    "jobEditSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
+    "basicInfo": "Informacje podstawowe",
+    "basicInfoDesc": "Podaj szczegóły zlecenia, aby specjaliści mogli ocenić swoje dopasowanie.",
+
+    "jobName": "Nazwa zlecenia",
+
+    "jobNamePlaceholder": "eg. Implementacja widoku aplikacji",
+    "jobNameDesc": "Opis zlecenia",
+    "brief": "Brief projektowy",
+    "briefPlaceholder": "Brief projektowy",
+    "briefTooltip": "Pomóż specjalistom lepiej zrozumieć Twoje potrzeby – napisz kilka zdań o swoim zleceniu.",
+    "budget": "Budżet",
+    "budgetDesc": "Określ budżet przeznaczony na realizację projektu, aby specjaliści mogli dostosować swoje oferty do Twoich możliwości.",
+    "minBudgetForProjectRealisation": "Minimalna kwota za realizację projektu",
+    "maxBudgetForProjectRealisation": "Maksymalna kwota za realizację projektu",
+    "minBudgetForProjectRealisationPlaceholder": "np. 5000",
+    "maxBudgetForProjectRealisationPlaceholder": "np. 10000",
+    "employment": "Forma zatrudnienia.",
+    "employmentDesc": "Określ formę zatrudnienia, rodzaj umowy i tryb pracy, aby dopasować współpracę do swoich potrzeb.",
+    "employmentType": "Rodzaj zatrudnienia",
+    "contractTypeLabel": "Rodzaj umowy",
+    "contractTypeDesc": "Wybierz rodzaj umowy",
+    "workMode": "Tryb pracy",
+    "workModeStationary": "Stacjonarny",
+    "workModeHybrid": "Hybrydowy",
+    "workModeRemote": "Zdalny",
+    "locationDesc": "Podaj preferencje lokalizacyjne dla realizacji zlecenia – możesz je zmienić w dowolnym momencie.",
+    "locationCityTooltip": "Podaj miasto, aby specjaliści z Twojej okolicy mogli łatwiej odnaleźć Twoją ofertę.",
+    "remoteOnly": "Szukam tylko zdalnych kandydatów",
+    "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy.",
+
+    "addJobPageHeader": "Dodaj zlecenie",
+    "addJobPageSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
+
+    "jobNameRequired": "Nazwa zlecenia jest wymagana",
+    "projectBriefRequired": "Opis projektu jest wymagany",
+    "maxTechStack": "Maksymalnie 16 technologii",
+    "invalidCurrency": "Niepoprawna waluta",
+    "currencyRequired": "Wymagana waluta",
+    "contractTypeRequired": "Rodzaj umowy jest wymagany",
+    "employmentTypeRequired": "Rodzaj zatrudnienia jest wymagany",
+    "employmentModeRequired": "Tryb zatrudnienia jest wymagany",
+    "minBudgetNonNegative": "Minimalna kwota nie może być mniejsza niż 0",
+    "minBudgetRequired": "Wymagana minimalna kwota",
+    "maxBudgetGreaterThanMin": "Maksymalna kwota musi być większa od minimalnej",
+    "maxBudgetRequired": "Wymagana maksymalna kwota",
+    "countryRequired": "Kraj jest wymagany",
+    "cityRequired": "Miasto jest wymagane"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
@@ -230,5 +286,13 @@
     "applicationDetails": "Szczegóły aplikacji",
     "applicantInfo": "Informacje o aplikującym",
     "actions": "Akcje"
+  },
+  "AddJobChat": {
+    "descriptionHeader": "Opisz, czego potrzebujesz",
+    "descriptionParagraph": "Tak jak najdokładniej.  Możesz wrzucić zarówno treść ogłoszenia.",
+    "placeholder": "Przedstaw zlecenie w kilku słowach",
+    "textareaLabel": "Treść zlecenia",
+    "cancelBtn": "Cofnij",
+    "nextBtn": "Dalej"
   }
 }

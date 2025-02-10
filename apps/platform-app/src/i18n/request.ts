@@ -40,4 +40,5 @@ export enum I18nNamespaces {
   Jobs = 'Jobs',
   Hunter = 'Hunter',
   Applications = 'Applications',
+  AddJobChat = 'AddJobChat',
 }

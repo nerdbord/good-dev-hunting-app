@@ -1,0 +1,36 @@
+.wrapper {
+  position: relative;
+  padding-bottom: 130px;
+  @include mobile {
+  }
+}
+
+.formBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.errorMsg input,
+.errorMsg textarea {
+  border: 1px solid #d62626;
+}
+
+.errorMsg p {
+  margin-top: 4px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  color: #d62626;
+}
+
+.previewWarning {
+  width: 398px;
+  margin-bottom: 24px;
+  color: #69717b;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}

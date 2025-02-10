@@ -1,0 +1,138 @@
+.container {
+  margin-bottom: 130px;
+  background: #04080d;
+  padding: 100px;
+  display: flex;
+  gap: 100px;
+  @include mobile {
+    padding: $spacing-6 $spacing-4;
+    padding-bottom: 150px;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.left {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  @include mobile {
+    margin-bottom: $spacing-6;
+    gap: $spacing-6;
+  }
+}
+
+.right {
+  flex: 0 0 65%;
+}
+
+.title {
+  color: #69717b;
+  font-size: 16px;
+  line-height: 28px;
+  margin-bottom: $spacing-4;
+  @include mobile {
+    margin-bottom: $spacing-2;
+  }
+}
+
+.desc {
+  color: #e2eaf1;
+  font-size: 16px;
+  line-height: 28px;
+  padding: 40px;
+  background-color: #0f1217;
+  //white-space: pre-wrap;
+  @include mobile {
+    padding: $spacing-5 $spacing-4;
+    padding-right: $spacing-6;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  li {
+    color: white;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+}
+
+.techStack,
+.languages {
+  display: flex;
+  flex-direction: column;
+}
+
+.languages {
+  margin-top: 30px;
+}
+
+.techStackList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 7px;
+  @include mobile {
+    margin-right: 75px;
+  }
+}
+
+.techStackItem {
+  color: #13cbaa;
+  background-color: #161a1f;
+  padding: $spacing-2 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: -0.24px;
+}
+
+.gitActivities {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.gitActivityBox {
+  display: flex;
+  gap: $spacing-2;
+}
+
+.gitActivity {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 130px;
+  border-radius: 4px;
+  padding: $spacing-2 14px;
+  background-color: #161a1f;
+}
+
+.gitActivityValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: $spacing-2 14px;
+  background-color: #161a1f;
+  color: #13cbaa;
+}
+
+.mobileView {
+  display: none;
+  @include mobile {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: $spacing-4;
+  }
+}
