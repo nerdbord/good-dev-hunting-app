@@ -10,7 +10,11 @@ import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
 import * as Yup from 'yup'
-import { JobContractType, type CreateJobFormValues } from '../../types'
+import {
+  BudgetType,
+  JobContractType,
+  type CreateJobFormValues,
+} from '../../types'
 import styles from './CreateJobForm.module.scss'
 import { BasicInfo } from './CreateJobFormDetails/BasicInfo/BasicInfo'
 import { Budget } from './CreateJobFormDetails/Budget/Budget'
@@ -32,6 +36,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     jobName: '',
     projectBrief: '',
     techStack: [],
+    budgetType: BudgetType.FIXED,
     currency: Currency.PLN,
     minBudgetForProjectRealisation: null,
     maxBudgetForProjectRealisation: null,
@@ -55,14 +60,6 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     techStack: Yup.array()
       .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
       .max(16, t('maxTechStack', { defaultValue: 'Max 16 technologies' })),
-    currency: Yup.string()
-      .oneOf(
-        Object.values(Currency),
-        t('invalidCurrency', { defaultValue: 'Invalid currency' }),
-      )
-      .required(
-        t('currencyRequired', { defaultValue: 'Currency is required' }),
-      ),
     contractType: Yup.object({
       name: Yup.string(),
       value: Yup.string(),
@@ -81,30 +78,72 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         defaultValue: 'Employment mode is required',
       }),
     ),
-    minBudgetForProjectRealisation: Yup.number()
-      .min(
-        0,
-        t('minBudgetNonNegative', {
-          defaultValue: 'The minimum amount must not be less than 0',
-        }),
-      )
+    // New field for budget type selection
+    budgetType: Yup.string()
+      .oneOf(['fixed', 'requestQuote'])
       .required(
-        t('minBudgetRequired', {
-          defaultValue: 'The minimum amount is required',
-        }),
+        t('budgetTypeRequired', { defaultValue: 'Please select budget type' }),
       ),
-    maxBudgetForProjectRealisation: Yup.number()
-      .min(
-        Yup.ref('minBudgetForProjectRealisation'),
-        t('maxBudgetGreaterThanMin', {
-          defaultValue: 'The maximum amount must be greater than the minimum',
-        }),
-      )
-      .required(
-        t('maxBudgetRequired', {
-          defaultValue: 'The maximum amount is required',
-        }),
-      ),
+    // Conditional validation for budget-related fields
+    currency: Yup.string().when('budgetType', {
+      is: 'fixed',
+      then: () =>
+        Yup.string()
+          .oneOf(
+            Object.values(Currency),
+            t('invalidCurrency', { defaultValue: 'Invalid currency' }),
+          )
+          .required(
+            t('currencyRequired', { defaultValue: 'Currency is required' }),
+          ),
+      otherwise: () => Yup.string().notRequired(),
+    }),
+    minBudgetForProjectRealisation: Yup.number().when('budgetType', {
+      is: 'fixed',
+      then: () =>
+        Yup.number()
+          .min(
+            0,
+            t('minBudgetNonNegative', {
+              defaultValue: 'The minimum amount must not be less than 0',
+            }),
+          )
+          .required(
+            t('minBudgetRequired', {
+              defaultValue: 'The minimum amount is required',
+            }),
+          ),
+      otherwise: () => Yup.number().notRequired(),
+    }),
+    maxBudgetForProjectRealisation: Yup.number().when('budgetType', {
+      is: 'fixed',
+      then: () =>
+        Yup.number()
+          .min(
+            1,
+            t('maxBudgetGreaterThan0', {
+              defaultValue: 'The maximum amount must be greater than 0',
+            }),
+          )
+          .test(
+            'greater-than-min',
+            t('maxBudgetGreaterThanMin', {
+              defaultValue:
+                'The maximum amount must be greater than the minimum',
+            }),
+            function (value) {
+              return value
+                ? value > this.parent.minBudgetForProjectRealisation
+                : false
+            },
+          )
+          .required(
+            t('maxBudgetRequired', {
+              defaultValue: 'The maximum amount is required',
+            }),
+          ),
+      otherwise: () => Yup.number().notRequired(),
+    }),
     country: Yup.string().required(
       t('countryRequired', { defaultValue: 'Country is required' }),
     ),

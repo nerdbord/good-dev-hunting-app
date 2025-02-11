@@ -1,5 +1,6 @@
 import { Currency, EmploymentType, PublishingState } from '@prisma/client'
 import {
+  BudgetType,
   EmploymentMode,
   JobContractType,
   type CreateJobFormValues,
@@ -15,7 +16,7 @@ export const mockJobDetails: CreateJobFormValues = {
     { name: 'Next.js', value: 'nextjs' },
     { name: 'Node.js', value: 'nodejs' },
   ],
-  // openToRelocation: true,
+  budgetType: BudgetType.FIXED,
   currency: Currency.PLN,
   minBudgetForProjectRealisation: 15000,
   maxBudgetForProjectRealisation: 20000,

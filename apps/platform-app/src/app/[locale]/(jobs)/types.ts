@@ -11,6 +11,7 @@ export interface JobDetailsFormValues {
   jobName: string
   projectBrief: string
   techStack: DropdownOption[]
+  budgetType: BudgetType
   currency: Currency
   minBudgetForProjectRealisation: number | null
   maxBudgetForProjectRealisation: number | null
@@ -50,4 +51,9 @@ export enum EmploymentMode {
   STATIONARY = 'Stationary',
   HYBRID = 'Hybrid',
   REMOTE = 'Remote',
+}
+
+export enum BudgetType {
+  FIXED = 'fixed',
+  REQUEST_QUOTE = 'requestQuote',
 }

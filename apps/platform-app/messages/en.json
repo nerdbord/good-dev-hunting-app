@@ -218,6 +218,9 @@
     "briefPlaceholder": "Project brief",
     "briefTooltip": "Help specialists better understand your needs – write a few sentences about your assignment",
     "budget": "Budget",
+    "fixedBudget": "I have a fixed budget",
+    "budgetRequestQuote": "I need a quote",
+    "requestQuoteDescription": "Your ad will be marked as 'requesting a quote'.",
     "budgetDesc": "Specify the budget allocated for project implementation so specialists can tailor their offers to your needs.",
     "minBudgetForProjectRealisation": "Minimal budget for project realisation",
     "maxBudgetForProjectRealisation": "Maximal budget for project realisation",
@@ -251,9 +254,11 @@
     "minBudgetNonNegative": "The minimum amount must not be less than 0",
     "minBudgetRequired": "The minimum amount is required",
     "maxBudgetGreaterThanMin": "The maximum amount must be greater than the minimum",
+    "maxBudgetGreaterThan0": "The maximum amount must be greater than 0",
     "maxBudgetRequired": "The maximum amount is required",
     "countryRequired": "Country is required",
-    "cityRequired": "City is required"
+    "cityRequired": "City is required",
+    "budgetTypeRequired": "Please select budget type"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",
