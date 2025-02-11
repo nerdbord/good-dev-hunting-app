@@ -7,7 +7,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Switch } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { type CreateJobDetailsFormValues } from '../../../types'
+import { type CreateJobFormValues } from '../../../../types'
 import { Card } from '../Card/Card'
 import styles from './Location.module.scss'
 
@@ -21,7 +21,7 @@ export const Location = () => {
   const t = useTranslations(I18nNamespaces.LocationPreferences)
   const tt = useTranslations(I18nNamespaces.Jobs)
   const { values, handleChange, errors, touched, handleBlur } =
-    useFormikContext<CreateJobDetailsFormValues>()
+    useFormikContext<CreateJobFormValues>()
   return (
     <Card>
       <div className={styles.left}>

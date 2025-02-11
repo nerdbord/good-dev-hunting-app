@@ -1,6 +1,5 @@
 'use client'
 
-import { type CreateJobDetailsFormValues } from '@/app/[locale]/(jobs)/types'
 import {
   BlockTypeSelect,
   CreateLink,
@@ -17,6 +16,7 @@ import '@mdxeditor/editor/style.css'
 
 import { useFormikContext } from 'formik'
 import React from 'react'
+import type { CreateJobFormValues } from '../../types'
 import styles from './ProjectBriefTextArea.module.scss'
 
 export interface TextAreaProps {
@@ -36,7 +36,7 @@ export const ProjectBriefTextArea: React.FC<TextAreaProps> = ({
   name,
   onBlur,
 }) => {
-  const { setFieldValue } = useFormikContext<CreateJobDetailsFormValues>()
+  const { setFieldValue } = useFormikContext<CreateJobFormValues>()
   const maxLength = 1500
 
   const handleChange = (newValue: string) => {

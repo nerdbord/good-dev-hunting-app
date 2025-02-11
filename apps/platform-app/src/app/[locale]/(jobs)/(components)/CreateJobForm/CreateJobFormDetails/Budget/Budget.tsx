@@ -6,7 +6,7 @@ import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { type CreateJobDetailsFormValues } from '../../../types'
+import { type CreateJobFormValues } from '../../../../types'
 import { Card } from '../Card/Card'
 import styles from './Budget.module.scss'
 
@@ -19,7 +19,7 @@ export enum BudgetFormKeys {
 export const Budget = () => {
   const t = useTranslations(I18nNamespaces.Jobs)
   const { values, errors, setFieldValue, touched, handleBlur } =
-    useFormikContext<CreateJobDetailsFormValues>()
+    useFormikContext<CreateJobFormValues>()
 
   const handleCurrencyChange = (chosenCurrency: Currency) => {
     setFieldValue(BudgetFormKeys.CURRENCY, chosenCurrency)

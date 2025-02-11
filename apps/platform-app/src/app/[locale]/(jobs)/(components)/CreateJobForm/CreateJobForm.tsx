@@ -10,27 +10,25 @@ import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
 import * as Yup from 'yup'
-import { JobContractType, type CreateJobDetailsFormValues } from '../../types'
-import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
-import { Budget } from '../CreateJobDetails/Budget/Budget'
-import { Employment } from '../CreateJobDetails/Employment/Employment'
-import { Location } from '../CreateJobDetails/Location/Location'
-import styles from './CreateJobDetailsForm.module.scss'
+import { JobContractType, type CreateJobFormValues } from '../../types'
+import styles from './CreateJobForm.module.scss'
+import { BasicInfo } from './CreateJobFormDetails/BasicInfo/BasicInfo'
+import { Budget } from './CreateJobFormDetails/Budget/Budget'
+import { Employment } from './CreateJobFormDetails/Employment/Employment'
+import { Location } from './CreateJobFormDetails/Location/Location'
 
-interface CreateJobDetailsFormProps {
-  initialValues?: CreateJobDetailsFormValues
+interface CreateJobFormProps {
+  initialValues?: CreateJobFormValues
 }
 
-export const CreateJobDetailsForm = ({
-  initialValues,
-}: CreateJobDetailsFormProps) => {
+export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
   const t = useTranslations(I18nNamespaces.Jobs)
   const tButtons = useTranslations(I18nNamespaces.Buttons)
 
   const router = useRouter()
   const { id: jobId } = useParams()
 
-  const defaultValues: CreateJobDetailsFormValues = {
+  const defaultValues: CreateJobFormValues = {
     jobName: '',
     projectBrief: '',
     techStack: [],
@@ -116,7 +114,7 @@ export const CreateJobDetailsForm = ({
     remoteOnly: Yup.boolean().oneOf([true, false]),
   })
 
-  const handleCreateJobDetails = (values: CreateJobDetailsFormValues) => {
+  const handleCreateJobDetails = (values: CreateJobFormValues) => {
     console.log('submit') //TODO: add save to database logic here
     console.log(values)
     // router.push(`/jobs/${id}`)

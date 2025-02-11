@@ -2,10 +2,10 @@ import { Currency, EmploymentType, PublishingState } from '@prisma/client'
 import {
   EmploymentMode,
   JobContractType,
-  type CreateJobDetailsFormValues,
+  type CreateJobFormValues,
 } from './types'
 
-export const mockJobDetails: CreateJobDetailsFormValues = {
+export const mockJobDetails: CreateJobFormValues = {
   jobName: 'Senior Frontend Developer needed for a fintech project',
   projectBrief:
     'We are looking for an experienced Frontend Developer to help us build a modern fintech platform. The project involves working with React, Next.js, and TypeScript.',

@@ -6,12 +6,12 @@ import { useTranslations } from 'next-intl'
 
 import {
   EmploymentMode,
-  type CreateJobDetailsFormValues,
+  type CreateJobFormValues,
 } from '@/app/[locale]/(jobs)/types'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
-import { mappedJobContractType } from '../../../jobDetails.mappers'
+import { mappedJobContractType } from '../../../../jobDetails.mappers'
 import { Card } from '../Card/Card'
 import styles from './Employment.module.scss'
 
@@ -25,7 +25,7 @@ export const Employment = () => {
   const tt = useTranslations(I18nNamespaces.Jobs)
 
   const { values, setFieldValue, touched, errors } =
-    useFormikContext<CreateJobDetailsFormValues>()
+    useFormikContext<CreateJobFormValues>()
 
   const handleEmploymentType = (option: EmploymentType): void => {
     let newFilters: string[]

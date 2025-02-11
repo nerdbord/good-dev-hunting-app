@@ -26,7 +26,7 @@ export interface JobDetailsFormValues {
   remoteOnly: boolean
 }
 
-export interface CreateJobDetailsFormValues extends JobDetailsFormValues {
+export interface CreateJobFormValues extends JobDetailsFormValues {
   terms: boolean
 }
 
