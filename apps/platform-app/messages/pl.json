@@ -219,6 +219,9 @@
     "briefPlaceholder": "Brief projektowy",
     "briefTooltip": "Pomóż specjalistom lepiej zrozumieć Twoje potrzeby – napisz kilka zdań o swoim zleceniu.",
     "budget": "Budżet",
+    "fixedBudget": "Mam określony budżet",
+    "budgetRequestQuote": "Potrzebuję wyceny",
+    "requestQuoteDescription": "Twoje ogłoszenie będzie oznaczone, jako “do wyceny”.",
     "budgetDesc": "Określ budżet przeznaczony na realizację projektu, aby specjaliści mogli dostosować swoje oferty do Twoich możliwości.",
     "minBudgetForProjectRealisation": "Minimalna kwota za realizację projektu",
     "maxBudgetForProjectRealisation": "Maksymalna kwota za realizację projektu",
@@ -252,9 +255,11 @@
     "minBudgetNonNegative": "Minimalna kwota nie może być mniejsza niż 0",
     "minBudgetRequired": "Wymagana minimalna kwota",
     "maxBudgetGreaterThanMin": "Maksymalna kwota musi być większa od minimalnej",
+    "maxBudgetGreaterThan0": "Maksymalna kwota musi być większa od 0",
     "maxBudgetRequired": "Wymagana maksymalna kwota",
     "countryRequired": "Kraj jest wymagany",
-    "cityRequired": "Miasto jest wymagane"
+    "cityRequired": "Miasto jest wymagane",
+    "budgetTypeRequired": "Zaznacz czy masz określony budżet"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

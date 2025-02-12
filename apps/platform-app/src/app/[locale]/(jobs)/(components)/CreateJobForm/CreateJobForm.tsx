@@ -10,30 +10,33 @@ import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
 import * as Yup from 'yup'
-import { JobContractType, type CreateJobDetailsFormValues } from '../../types'
-import { BasicInfo } from '../CreateJobDetails/BasicInfo/BasicInfo'
-import { Budget } from '../CreateJobDetails/Budget/Budget'
-import { Employment } from '../CreateJobDetails/Employment/Employment'
-import { Location } from '../CreateJobDetails/Location/Location'
-import styles from './CreateJobDetailsForm.module.scss'
+import {
+  BudgetType,
+  JobContractType,
+  type CreateJobFormValues,
+} from '../../types'
+import styles from './CreateJobForm.module.scss'
+import { BasicInfo } from './CreateJobFormDetails/BasicInfo/BasicInfo'
+import { Budget } from './CreateJobFormDetails/Budget/Budget'
+import { Employment } from './CreateJobFormDetails/Employment/Employment'
+import { Location } from './CreateJobFormDetails/Location/Location'
 
-interface CreateJobDetailsFormProps {
-  initialValues?: CreateJobDetailsFormValues
+interface CreateJobFormProps {
+  initialValues?: CreateJobFormValues
 }
 
-export const CreateJobDetailsForm = ({
-  initialValues,
-}: CreateJobDetailsFormProps) => {
+export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
   const t = useTranslations(I18nNamespaces.Jobs)
   const tButtons = useTranslations(I18nNamespaces.Buttons)
 
   const router = useRouter()
   const { id: jobId } = useParams()
 
-  const defaultValues: CreateJobDetailsFormValues = {
+  const defaultValues: CreateJobFormValues = {
     jobName: '',
     projectBrief: '',
     techStack: [],
+    budgetType: BudgetType.FIXED,
     currency: Currency.PLN,
     minBudgetForProjectRealisation: null,
     maxBudgetForProjectRealisation: null,
@@ -57,14 +60,6 @@ export const CreateJobDetailsForm = ({
     techStack: Yup.array()
       .of(Yup.object({ name: Yup.string(), value: Yup.string() }))
       .max(16, t('maxTechStack', { defaultValue: 'Max 16 technologies' })),
-    currency: Yup.string()
-      .oneOf(
-        Object.values(Currency),
-        t('invalidCurrency', { defaultValue: 'Invalid currency' }),
-      )
-      .required(
-        t('currencyRequired', { defaultValue: 'Currency is required' }),
-      ),
     contractType: Yup.object({
       name: Yup.string(),
       value: Yup.string(),
@@ -83,30 +78,72 @@ export const CreateJobDetailsForm = ({
         defaultValue: 'Employment mode is required',
       }),
     ),
-    minBudgetForProjectRealisation: Yup.number()
-      .min(
-        0,
-        t('minBudgetNonNegative', {
-          defaultValue: 'The minimum amount must not be less than 0',
-        }),
-      )
+    // New field for budget type selection
+    budgetType: Yup.string()
+      .oneOf(['fixed', 'requestQuote'])
       .required(
-        t('minBudgetRequired', {
-          defaultValue: 'The minimum amount is required',
-        }),
+        t('budgetTypeRequired', { defaultValue: 'Please select budget type' }),
       ),
-    maxBudgetForProjectRealisation: Yup.number()
-      .min(
-        Yup.ref('minBudgetForProjectRealisation'),
-        t('maxBudgetGreaterThanMin', {
-          defaultValue: 'The maximum amount must be greater than the minimum',
-        }),
-      )
-      .required(
-        t('maxBudgetRequired', {
-          defaultValue: 'The maximum amount is required',
-        }),
-      ),
+    // Conditional validation for budget-related fields
+    currency: Yup.string().when('budgetType', {
+      is: 'fixed',
+      then: () =>
+        Yup.string()
+          .oneOf(
+            Object.values(Currency),
+            t('invalidCurrency', { defaultValue: 'Invalid currency' }),
+          )
+          .required(
+            t('currencyRequired', { defaultValue: 'Currency is required' }),
+          ),
+      otherwise: () => Yup.string().notRequired(),
+    }),
+    minBudgetForProjectRealisation: Yup.number().when('budgetType', {
+      is: 'fixed',
+      then: () =>
+        Yup.number()
+          .min(
+            0,
+            t('minBudgetNonNegative', {
+              defaultValue: 'The minimum amount must not be less than 0',
+            }),
+          )
+          .required(
+            t('minBudgetRequired', {
+              defaultValue: 'The minimum amount is required',
+            }),
+          ),
+      otherwise: () => Yup.number().notRequired(),
+    }),
+    maxBudgetForProjectRealisation: Yup.number().when('budgetType', {
+      is: 'fixed',
+      then: () =>
+        Yup.number()
+          .min(
+            1,
+            t('maxBudgetGreaterThan0', {
+              defaultValue: 'The maximum amount must be greater than 0',
+            }),
+          )
+          .test(
+            'greater-than-min',
+            t('maxBudgetGreaterThanMin', {
+              defaultValue:
+                'The maximum amount must be greater than the minimum',
+            }),
+            function (value) {
+              return value
+                ? value > this.parent.minBudgetForProjectRealisation
+                : false
+            },
+          )
+          .required(
+            t('maxBudgetRequired', {
+              defaultValue: 'The maximum amount is required',
+            }),
+          ),
+      otherwise: () => Yup.number().notRequired(),
+    }),
     country: Yup.string().required(
       t('countryRequired', { defaultValue: 'Country is required' }),
     ),
@@ -116,7 +153,7 @@ export const CreateJobDetailsForm = ({
     remoteOnly: Yup.boolean().oneOf([true, false]),
   })
 
-  const handleCreateJobDetails = (values: CreateJobDetailsFormValues) => {
+  const handleCreateJobDetails = (values: CreateJobFormValues) => {
     console.log('submit') //TODO: add save to database logic here
     console.log(values)
     // router.push(`/jobs/${id}`)

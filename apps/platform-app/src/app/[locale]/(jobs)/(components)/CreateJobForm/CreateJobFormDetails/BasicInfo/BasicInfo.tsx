@@ -1,6 +1,6 @@
 'use client'
 
-import { type CreateJobDetailsFormValues } from '@/app/[locale]/(jobs)/types'
+import { type CreateJobFormValues } from '@/app/[locale]/(jobs)/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import TextInput from '@/components/TextInput/TextInput'
@@ -9,7 +9,7 @@ import { Tooltip, type DropdownOption } from '@gdh/ui-system'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { ProjectBriefTextArea } from '../../ProjectBriefTextArea/ProjectBriefTextArea'
+import { ProjectBriefTextArea } from '../../../ProjectBriefTextArea/ProjectBriefTextArea'
 import { Card } from '../Card/Card'
 import styles from './BasicInfo.module.scss'
 
@@ -24,7 +24,7 @@ export const BasicInfo = () => {
   const tt = useTranslations(I18nNamespaces.WorkInformation)
   const ttt = useTranslations(I18nNamespaces.Jobs)
   const { values, handleChange, setFieldValue, errors, touched, handleBlur } =
-    useFormikContext<CreateJobDetailsFormValues>()
+    useFormikContext<CreateJobFormValues>()
 
   const handleTechSelect = (tech: DropdownOption) => {
     if (!values[BasicInfoFormKeys.TECHNOLOGIES].includes(tech)) {

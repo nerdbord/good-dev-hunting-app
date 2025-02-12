@@ -1,5 +1,5 @@
 import { AddJobTopBar } from '@/app/[locale]/(jobs)/(components)/AddJobTopBar/AddJobTopBar'
-import { CreateJobDetailsForm } from '@/app/[locale]/(jobs)/(components)/CreateJobDetailsForm/CreateJobDetailsForm'
+import { CreateJobForm } from '@/app/[locale]/(jobs)/(components)/CreateJobForm/CreateJobForm'
 import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
 import { mockJobDetails } from '@/app/[locale]/(jobs)/mockData'
 import { I18nNamespaces } from '@/i18n/request'
@@ -18,7 +18,7 @@ export default async function EditJobDetailsPage() {
             header={t('jobEditHeader')}
             subHeader={t('jobEditSubHeader')}
           />
-          <CreateJobDetailsForm initialValues={mockJobDetails} />
+          <CreateJobForm initialValues={mockJobDetails} />
         </Container>
       </main>
     </>
