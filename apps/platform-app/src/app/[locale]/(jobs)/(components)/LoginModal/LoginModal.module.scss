@@ -29,9 +29,16 @@
   }
 }
 
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 320px;
+}
+
 .header {
   color: var(--light-01, #fff);
-  text-align: center;
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
@@ -39,11 +46,16 @@
 
 .description {
   color: var(--light-01, #fff);
-  text-align: center;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   opacity: 0.8;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .actions {
@@ -56,12 +68,32 @@
   button {
     width: 100%;
   }
-  .or {
-    color: var(--light-01, #fff);
-    text-align: left;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    opacity: 0.8;
+}
+
+.or {
+  color: var(--light-01, #fff);
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: 0.8;
+}
+
+.haventAccountContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 0;
   }
+}
+
+.haventAccount {
+  color: var(--light-01, #fff);
+  font-size: 14px;
+  opacity: 0.8;
+  white-space: nowrap;
 }

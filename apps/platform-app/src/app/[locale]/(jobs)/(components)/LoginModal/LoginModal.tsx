@@ -18,6 +18,14 @@ export const LoginModal = () => {
   const { closeModal } = useModal()
   const t = useTranslations(I18nNamespaces.Auth)
 
+  const handleSigninByGoogle = () => {
+    console.log("wybrales logowanie przez Google przycisk klikniety")
+  }
+
+  const handleSignup = () => {
+    console.log("wybrales rejestracje przez przycisk tertiary button klikniety")
+  }
+
   const initialValues: LoginFormValues = {
     email: '',
   }
@@ -25,7 +33,11 @@ export const LoginModal = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email address')
-      .required('Email is required'),
+      .required('Email is required')
+      .matches(
+        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        'Please enter a valid email address with a domain (e.g., .com, .pl)'
+      ),
   })
 
   const handleSubmit = (values: LoginFormValues) => {
@@ -39,8 +51,10 @@ export const LoginModal = () => {
         data-testid="loginToPublishJobPopup"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className={styles.header}>{t('loginToPublish')}</h2>
-        <p className={styles.description}>{t('loginToPublishDesc')}</p>
+        <div className={styles.headerContainer}>
+          <h2 className={styles.header}>{t('loginToPublish')}</h2>
+          <p className={styles.description}>{t('loginToPublishDesc')}</p>
+        </div>
         <div className={styles.actions}>
           <Formik
             initialValues={initialValues}
@@ -55,7 +69,7 @@ export const LoginModal = () => {
               handleBlur,
               handleSubmit,
             }) => (
-              <form onSubmit={handleSubmit} className={styles.actions}>
+              <form onSubmit={handleSubmit} className={styles.form}>
                 <InputFormError error={touched.email && errors.email}>
                   <TextInput
                     label={t('loginLabelEmail')}
@@ -63,8 +77,9 @@ export const LoginModal = () => {
                     value={values.email}
                     onChange={handleChange}
                     name="email"
+                    placeholder="m@example.com"
                     dataTestId="loginEmail"
-                    maxLength={255}
+                    maxLength={320}
                   />
                 </InputFormError>
                 <Button type="submit" variant="primary">
@@ -74,13 +89,19 @@ export const LoginModal = () => {
             )}
           </Formik>
           <p className={styles.or}>lub</p>
-          <Button variant="secondary" type="button">
+          <Button 
+            variant="secondary" 
+            type="button" 
+            onClick={handleSigninByGoogle}
+          >
             {t('signInWithGoogle')}
           </Button>
-          <p className={styles.haventAccount}>{t('haventAccount')}</p>
-          <Button variant="tertiary" type="button">
-            {t('signUp')}
-          </Button>
+          <div className={styles.haventAccountContainer}>
+            <span className={styles.haventAccount}>{t('haventAccount')}</span>
+            <Button variant="tertiary" type="button" onClick={handleSignup}>
+              {t('signUp')}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
