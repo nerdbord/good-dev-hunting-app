@@ -1,5 +1,12 @@
-.titleBox {
+.container {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+}
+
+.titleBox {
   align-items: center;
   background-color: #0f1217;
   z-index: 2;
@@ -23,4 +30,9 @@
   color: #69717b;
   font-size: 14px;
   line-height: 20px;
+}
+
+.childrenContainer {
+  display: flex;
+  gap: 16px;
 }

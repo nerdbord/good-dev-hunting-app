@@ -1,7 +1,7 @@
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
-import { AddJobTopBar } from '@/app/[locale]/(jobs)/(components)/AddJobTopBar/AddJobTopBar'
 import JobApplicationForm from '@/app/[locale]/(jobs)/(components)/JobApplicationForm/JobApplicationForm'
 import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
+import { JobsTopBar } from '@/app/[locale]/(jobs)/(components)/JobsTopBar/JobsTopBar'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Container } from '@gdh/ui-system'
@@ -26,7 +26,7 @@ const JobApplicationPage = async ({ params }: JobApplicationPageProps) => {
     <>
       <JobsHeader />
       <Container>
-        <AddJobTopBar
+        <JobsTopBar
           header={t('applyForJob')}
           subHeader={`Job ID: ${params.id}`}
         />
