@@ -16,7 +16,7 @@
     "visitorBaner": "Create a free account to get unlimited access to all profiles",
     "preview": "Profile preview",
     "profileViews": "Profile views",
-    "availability": "I’m available for work"
+    "availability": "I'm available for work"
   },
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
@@ -141,22 +141,22 @@
   },
   "LocationPreferences": {
     "title": "Location preferences",
-    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "description": "Share your current qualifications information. You'll be able to change it at any moment.",
     "residence": "Country of residency",
     "residencePlaceholder": "Start typing location",
-    "relocationOpen": "I’m open to residency relocation",
+    "relocationOpen": "I'm open to residency relocation",
     "city": "City residency",
     "cityPlaceholder": "Start typing location",
     "cityTooltip": "We use this information to match you with the best job opportunities.",
-    "cityRelocation": "I’m open to city relocation",
-    "remontOnly": "I’m looking for remote jobs only",
+    "cityRelocation": "I'm open to city relocation",
+    "remontOnly": "I'm looking for remote jobs only",
     "languages": "Languages",
     "languageTooltip": "List the languages you speak fluently",
     "languagePlaceholder": "Start typing..."
   },
   "WorkInformation": {
     "title": "Work information",
-    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "description": "Share your current qualifications information. You'll be able to change it at any moment.",
     "specialization": "Specialization",
     "specializationText": "Choose your primary specialization",
     "seniority": "Seniority",
@@ -181,20 +181,30 @@
   },
   "ConfirmLeaveModal": {
     "title": "Finish your Profile to Save",
-    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
+    "description": "Your profile isn't fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
     "leaveBtn": "Leave Page",
     "cancelBtn": "Finish Profile"
   },
   "ConfirmLogoutModal": {
     "title": "Finish your Profile to Save",
-    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
+    "description": "Your profile isn't fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
     "cancelBtn": "Finish Profile"
   },
   "VerificationModal": {
-    "approvedText": "Your profile is now up and running. Potential partnerships will contact via email. Make sure you’re accepting all external messages!",
+    "approvedText": "Your profile is now up and running. Potential partnerships will contact via email. Make sure you're accepting all external messages!",
     "approvedHeader": "Congratulations",
-    "rejectedText": "On your email we’ve sent you a message with information what you can improve to have your profile acceted.",
+    "rejectedText": "On your email we've sent you a message with information what you can improve to have your profile acceted.",
     "rejectedHeader": "Your profile was rejected"
+  },
+  "Auth": {
+    "loginToPublish": "Login",
+    "loginToPublishDesc": "A link will be sent to your email address, which will automatically log you in once clicked.",
+    "loginLabelEmail": "Email",
+    "loginLabelButton": "Send login link",
+    "signInWithGoogle": "Sign in with Google",
+    "haventAccount": "Don't have an account?",
+    "signUp": "Create one in 10 seconds",
+    "cancel": "Cancel"
   },
   "Jobs": {
     "postJobTitle": "Post a New Job",
@@ -237,8 +247,8 @@
     "workModeRemote": "Remote",
     "locationDesc": "Share your location preferences for the assignment – you can update them at any time.",
     "locationCityTooltip": "Provide the city so specialists in your area can easily find your offer.",
-    "remoteOnly": "I’m looking for remote candidates only",
-    "techStackTooltip": "Specify the technologies you’ve selected for your job offer implementation.",
+    "remoteOnly": "I'm looking for remote candidates only",
+    "techStackTooltip": "Specify the technologies you've selected for your job offer implementation.",
 
     "addJobPageHeader": "Add job",
     "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer",

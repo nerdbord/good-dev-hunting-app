@@ -196,6 +196,16 @@
     "rejectedText": "Na Twój e-mail wysłaliśmy wiadomość z informacjami o tym, co możesz poprawić, aby Twój profil został zaakceptowany.",
     "rejectedHeader": "Twój profil został odrzucony"
   },
+  "Auth": {
+    "loginToPublish": "Zaloguj się",
+    "loginToPublishDesc": "Na Twój adres email zostanie wysłany link, który po kliknięciu automatycznie Cię zaloguje.",
+    "loginLabelEmail": "Email",
+    "loginLabelButton": "Wyślij link do logowania",
+    "signInWithGoogle": "Zaloguj przez Google",
+    "haventAccount": "Nie masz konta?",
+    "signUp": "Załóż je w 10 sekund",
+    "cancel": "Anuluj"
+  },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",
     "comingSoon": "Formularz dodawania zlecenia wkrótce...",
