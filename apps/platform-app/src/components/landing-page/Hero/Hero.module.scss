@@ -1,5 +1,5 @@
 .wrapper {
-  color: var(--text-color);
+  // color: var(--text-color);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -22,6 +22,7 @@
 }
 
 .title {
+  color: var(--text-color);
   width: 100%;
   min-height: 148px;
   font-size: 78px;
@@ -29,6 +30,7 @@
   line-height: 74px;
   letter-spacing: 0em;
   margin-top: $spacing-3;
+
   @include mobile {
     font-size: 38px;
     line-height: 44px;
