@@ -63,10 +63,10 @@
 }
 
 .buttonIconOpen {
-  color: var(--color-purple);
+  color: #a687ff;
   
   :global(.light) & {
-    color: var(--text-color);
+    color: #a687ff;
   }
 }
 

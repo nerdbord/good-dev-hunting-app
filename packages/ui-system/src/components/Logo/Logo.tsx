@@ -28,7 +28,7 @@ export const Logo = ({ withLink = true }: LogoProps) => {
           width="42.4"
           height="24.4"
           rx="12.2"
-          fill={isDarkTheme ? "#121212" : "#FEFEFF"}
+          fill="var(--bg-color4)"
           stroke="#7D54F1"
           strokeWidth="1.6"
         />
@@ -40,7 +40,7 @@ export const Logo = ({ withLink = true }: LogoProps) => {
         />
         <path
           d="M18 12.4V6H23.6V12.4H18Z"
-          fill={isDarkTheme ? "#121212" : "#FEFEFF"}
+          fill="var(--bg-color4)"
         />
       </svg>
       <div className={styles.title}>Good Dev Hunting</div>
