@@ -7,7 +7,7 @@ const withNextIntl = createNextIntlPlugin()
 // Główna konfiguracja projektu Next.js
 const nextConfig = {
   sassOptions: {
-    additionalData: `@import "src/styles/mixins.scss"; @import "src/styles/tokens.scss";`,
+    additionalData: `@use "src/styles/mixins" as *; @use "src/styles/tokens" as *;`,
   },
   env: {
     GITHUB_ID: process.env.GITHUB_ID,
