@@ -30,7 +30,7 @@ export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
 
   return (
     <div
-      className={`${styles.theme} ${isDarkTheme ? styles.light : styles.dark}`}
+      className={`${styles.theme} ${!isDarkTheme ? 'light' : ''}`}
     >
       {children}
     </div>

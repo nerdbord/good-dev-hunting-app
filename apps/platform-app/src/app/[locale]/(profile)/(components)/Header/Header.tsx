@@ -18,7 +18,6 @@ import Link from 'next/link'
 import { Logo } from '../../../../../../../../packages/ui-system/src/components/Logo/Logo'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
-import { ThemeWrapper } from '../ThemeSwitcher/ThemeWrapper'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
@@ -148,31 +147,29 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     }
   }
   return (
-    <ThemeWrapper>
-      <header id="main-header" className={styles.wrapper}>
-        <Container>
-          <div className={styles.headerContent}>
-            <div className={styles.logoAndGhStarsWrapper}>
-              <Link href={AppRoutes.home} className={styles.logo}>
-                <Logo />
-              </Link>
-              <GitHubStarsButton />
-              <ThemeSwitcher />
-            </div>
-            <nav>
-              <ul
-                className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
-              >
-                {renderMobileContent()}
-              </ul>
-              <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
-                {renderDesktopContent()}
-              </ul>
-            </nav>
+    <header id="main-header" className={styles.wrapper}>
+      <Container>
+        <div className={styles.headerContent}>
+          <div className={styles.logoAndGhStarsWrapper}>
+            <Link href={AppRoutes.home} className={styles.logo}>
+              <Logo withLink={false} />
+            </Link>
+            <GitHubStarsButton />
+            <ThemeSwitcher />
           </div>
-        </Container>
-      </header>
-    </ThemeWrapper>
+          <nav>
+            <ul
+              className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
+            >
+              {renderMobileContent()}
+            </ul>
+            <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>
+              {renderDesktopContent()}
+            </ul>
+          </nav>
+        </div>
+      </Container>
+    </header>
   )
 }
 

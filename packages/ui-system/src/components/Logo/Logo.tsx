@@ -5,11 +5,15 @@ import { AppRoutes } from "../../utils/routes";
 import styles from "./Logo.module.scss";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
-export const Logo = () => {
+interface LogoProps {
+  withLink?: boolean;
+}
+
+export const Logo = ({ withLink = true }: LogoProps) => {
   const { isDarkTheme } = useContext(ThemeContext);
 
-  return (
-    <Link href={AppRoutes.home} className={styles.logo}>
+  const logoContent = (
+    <>
       <svg
         width="44"
         height="26"
@@ -40,6 +44,16 @@ export const Logo = () => {
         />
       </svg>
       <div className={styles.title}>Good Dev Hunting</div>
-    </Link>
+    </>
   );
+
+  if (withLink) {
+    return (
+      <Link href={AppRoutes.home} className={styles.logo}>
+        {logoContent}
+      </Link>
+    );
+  }
+
+  return <div className={styles.logo}>{logoContent}</div>;
 };

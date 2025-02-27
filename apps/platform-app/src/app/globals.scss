@@ -1,9 +1,12 @@
+@import '../styles/_index.scss';
+
 body,
 button,
 input,
 textarea,
 select {
   font-family: var(--font-ibm), sans-serif;
+  @include theme-transition;
 }
 
 button {
@@ -13,6 +16,7 @@ button {
 a {
   text-decoration: none;
   color: inherit;
+  @include theme-transition;
 }
 
 * {
@@ -26,6 +30,7 @@ body {
   max-width: 100%;
   color: var(--text-color2);
   background-color: var(--bg-color);
+  @include theme-transition;
 }
 
 ul {
@@ -48,6 +53,7 @@ h4,
 h5,
 h6 {
   background: none;
+  @include theme-transition;
 }
 
 
@@ -67,7 +73,7 @@ h6 {
   --button-bg-2: #7d54f1;
   --button-text: #ffffff;
   --button-stroke: #CCCCF0;
-  --switch-border:#3D434B;
+  --switch-border: #3D434B;
   --color: #A687FF;
   --suggestion-text-color: #89939e;
   --suggestion-bg-color: #171b21;
@@ -91,11 +97,11 @@ h6 {
   --text-color2: #04080D;
   --text-color3: #3D434B;
   --button-bg: #f0f0f0;
-  --button-bg-2: #7d54f1;
+  --button-bg-2: #6039D0;
   --button-text: #000000;
-  --button-stroke: #CCCCF0;
+  --button-stroke: #6039D0;
   --switch-border: #F0F0FF;
-  --color: #04080D;
+  --color: #6039D0;
   --suggestion-text-color: #3D434B;
   --suggestion-bg-color: #F0F0FF;
   --suggestion-bg-hover: #E4E4F6;
@@ -109,7 +115,6 @@ h6 {
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 // Optional styles for elements that you want to style with global variables right away
@@ -121,4 +126,3 @@ button {
   background-color: var(--button-bg);
   color: var(--button-text);
 }
-
