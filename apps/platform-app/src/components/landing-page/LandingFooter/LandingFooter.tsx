@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from '@/app/[locale]/(profile)/(components)/ThemeSwitcher/ThemeSwitcher'
 import { I18nNamespaces } from '@/i18n/request'
 import { Container, Logo } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
@@ -12,6 +13,7 @@ const LandingFooter = () => {
         <div className={styles.topBar}>
           <Logo />
           <div className={styles.contact}>
+            <ThemeSwitcher />
             <span className={`${styles.textDark} ${styles.mobileHide}`}>
               Good Dev Hunting
             </span>
