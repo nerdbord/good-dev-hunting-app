@@ -43,63 +43,61 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   }
 
   return (
-    <div className={styles.overlay} onClick={closeModal}>
-      <div
-        className={styles.container}
-        data-testid="loginToPublishJobPopup"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className={styles.headerContainer}>
-          <h2 className={styles.header}>{t('loginToPublish')}</h2>
-          <p className={styles.description}>{t('loginToPublishDesc')}</p>
-        </div>
-        <div className={styles.actions}>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => (
-              <form onSubmit={handleSubmit} className={styles.form}>
-                <InputFormError error={touched.email && errors.email}>
-                  <TextInput
-                    label={t('loginLabelEmail')}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    onChange={handleChange}
-                    name="email"
-                    placeholder="m@example.com"
-                    dataTestId="loginEmail"
-                    maxLength={320}
-                  />
-                </InputFormError>
-                <Button type="submit" variant="primary">
-                  {t('loginLabelButton')}
-                </Button>
-              </form>
-            )}
-          </Formik>
-          <p className={styles.or}>lub</p>
-          <Button
-            variant="secondary"
-            type="button"
-            onClick={handleSigninByGoogle}
-          >
-            {t('signInWithGoogle')}
+    <div
+      className={styles.container}
+      data-testid="loginToPublishJobPopup"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className={styles.headerContainer}>
+        <h2 className={styles.header}>{t('loginToPublish')}</h2>
+        <p className={styles.description}>{t('loginToPublishDesc')}</p>
+      </div>
+      <div className={styles.actions}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => (
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <InputFormError error={touched.email && errors.email}>
+                <TextInput
+                  label={t('loginLabelEmail')}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  onChange={handleChange}
+                  name="email"
+                  placeholder="m@example.com"
+                  dataTestId="loginEmail"
+                  maxLength={320}
+                />
+              </InputFormError>
+              <Button type="submit" variant="primary">
+                {t('loginLabelButton')}
+              </Button>
+            </form>
+          )}
+        </Formik>
+        <p className={styles.or}>lub</p>
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={handleSigninByGoogle}
+        >
+          {t('signInWithGoogle')}
+        </Button>
+        <div className={styles.haventAccountContainer}>
+          <span className={styles.haventAccount}>{t('haventAccount')}</span>
+          <Button variant="tertiary" type="button" onClick={handleSignup}>
+            {t('signUp')}
           </Button>
-          <div className={styles.haventAccountContainer}>
-            <span className={styles.haventAccount}>{t('haventAccount')}</span>
-            <Button variant="tertiary" type="button" onClick={handleSignup}>
-              {t('signUp')}
-            </Button>
-          </div>
         </div>
       </div>
     </div>

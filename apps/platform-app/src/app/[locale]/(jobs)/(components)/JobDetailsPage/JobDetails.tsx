@@ -29,7 +29,7 @@ export default function JobDetails({
 
   const handlePublish = () => {
     if (!params.isUser) {
-      showModal(<LoginModal closeModal={closeModal} />)
+      showModal(<LoginModal closeModal={closeModal} />, 'narrow')
     } else {
       console.log(`Publishing job: ${params.id}`)
     }

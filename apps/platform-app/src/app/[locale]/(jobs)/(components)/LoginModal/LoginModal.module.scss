@@ -1,23 +1,6 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(22, 26, 31, 0.9);
-  z-index: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .container {
-  width: 30%;
+  width: 100%;
   max-height: 100%;
-  border-radius: 10px;
-  background: var(--dark-02, #0f1217);
-  box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
-  padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 24px;
