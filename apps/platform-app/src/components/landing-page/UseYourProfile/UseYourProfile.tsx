@@ -4,8 +4,7 @@ import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(comp
 import { findProfileWithUserInclude } from '@/backend/profile/profile.service'
 import { I18nNamespaces } from '@/i18n/request'
 import { getTranslations } from 'next-intl/server'
-import Image from 'next/image'
-import UseYourProfileImg from '../../../assets/images/UseYourProfile.png'
+import { ThemeImage } from './ThemeImage'
 import style from './UseYourProfile.module.scss'
 
 const UseYourProfile = async () => {
@@ -15,9 +14,7 @@ const UseYourProfile = async () => {
 
   return (
     <section id="UseYourProfile" className={style.container}>
-      <div className={style.profileImg}>
-        <Image src={UseYourProfileImg} alt="Use your profile image" />
-      </div>
+      <ThemeImage />
       <div className={style.textContainer}>
         <p className={style.text}>{t('howItWork')}</p>
         <div className={style.btn}>

@@ -1,10 +1,10 @@
 const { withSentryConfig } = require('@sentry/nextjs')
 const createNextIntlPlugin = require('next-intl/plugin')
 
-// Tworzymy instancję pluginu next-intl
+// Creating an instance of next-intl plugin
 const withNextIntl = createNextIntlPlugin()
 
-// Główna konfiguracja projektu Next.js
+// Main Next.js project configuration
 const nextConfig = {
   sassOptions: {
     additionalData: `@use "src/styles/mixins" as *; @use "src/styles/tokens" as *;`,
@@ -21,29 +21,29 @@ const nextConfig = {
       'github.com',
     ],
   },
-  //reactStrictMode: true, // Włącz tryb ścisły dla React
-  //poweredByHeader: false, // Wyłącz nagłówek X-Powered-By
+  //reactStrictMode: true, // Enable React strict mode
+  //poweredByHeader: false, // Disable X-Powered-By header
 }
 
 // Integracja z Sentry, z opcjami specyficznymi dla Sentry
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   module.exports = withSentryConfig(
-    withNextIntl(nextConfig), // Używamy withNextIntl, aby dodać konfigurację next-intl
+    withNextIntl(nextConfig), // Using withNextIntl to add next-intl configuration
     {
-      silent: true, // Wycisza logi podczas budowania
-      org: 'nerdbord-tm', // Organizacja w Sentry
-      project: 'good-dev-hunting', // Projekt w Sentry
+      silent: true, // Silences logs during build
+      org: 'nerdbord-tm', // Organization in Sentry
+      project: 'good-dev-hunting', // Project in Sentry
     },
     {
-      widenClientFileUpload: true, // Zwiększa zakres uploadu plików źródłowych
-      transpileClientSDK: true, // Transpiluje SDK Sentry do kompatybilności z IE11
-      tunnelRoute: '/monitoring', // Umożliwia omijanie ad-blockerów
-      hideSourceMaps: true, // Ukrywa mapy źródłowe w pakietach klienta
-      disableLogger: true, // Wyłącza logowanie Sentry
-      automaticVercelMonitors: true, // Automatycznie dodaje monitory Vercel
+      widenClientFileUpload: true, // Increases the scope of source file uploads
+      transpileClientSDK: true, // Transpiles Sentry SDK for IE11 compatibility
+      tunnelRoute: '/monitoring', // Enables ad-blockers bypass
+      hideSourceMaps: true, // Hides source maps in client bundles
+      disableLogger: true, // Disables Sentry logging
+      automaticVercelMonitors: true, // Automatically adds Vercel monitors
     },
   )
 } else {
-  // module.exports = withNextIntl(nextConfig) // Konfiguracja tylko z next-intl, jeśli Sentry nie jest konfigurowane
-  module.exports = withNextIntl(nextConfig) // Konfiguracja tylko z next-intl, jeśli Sentry nie jest konfigurowane
+  // module.exports = withNextIntl(nextConfig) // Configuration with next-intl only, if Sentry is not configured
+  module.exports = withNextIntl(nextConfig) // Configuration with next-intl only, if Sentry is not configured
 }

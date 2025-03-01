@@ -7,7 +7,6 @@
   text-decoration: none;
 
   @include mobile {
-    // width: 44px;
     margin-bottom: 4px;
   }
 }
@@ -22,8 +21,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @include mobile {
-    // letter-spacing: -1.08px;
-    // display: none;
-  }
 }
