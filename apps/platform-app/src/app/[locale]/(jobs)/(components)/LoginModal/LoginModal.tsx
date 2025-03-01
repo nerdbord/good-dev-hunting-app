@@ -2,7 +2,6 @@
 
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
-import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { Formik } from 'formik'
@@ -13,17 +12,16 @@ import styles from './LoginModal.module.scss'
 // import { useRouter } from 'next/navigation'
 // import { AppRoutes } from '@/utils/routes'
 
-export const LoginModal = () => {
+export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   // const router = useRouter()
-  const { closeModal } = useModal()
   const t = useTranslations(I18nNamespaces.Auth)
 
   const handleSigninByGoogle = () => {
-    console.log("wybrales logowanie przez Google przycisk klikniety")
+    console.log('wybrales logowanie przez Google przycisk klikniety')
   }
 
   const handleSignup = () => {
-    console.log("wybrales rejestracje przez przycisk tertiary button klikniety")
+    console.log('wybrales rejestracje przez przycisk tertiary button klikniety')
   }
 
   const initialValues: LoginFormValues = {
@@ -36,7 +34,7 @@ export const LoginModal = () => {
       .required('Email is required')
       .matches(
         /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        'Please enter a valid email address with a domain (e.g., .com, .pl)'
+        'Please enter a valid email address with a domain (e.g., .com, .pl)',
       ),
   })
 
@@ -45,7 +43,7 @@ export const LoginModal = () => {
   }
 
   return (
-    <div className={styles.overlay} onClick={() => closeModal()}>
+    <div className={styles.overlay} onClick={closeModal}>
       <div
         className={styles.container}
         data-testid="loginToPublishJobPopup"
@@ -89,9 +87,9 @@ export const LoginModal = () => {
             )}
           </Formik>
           <p className={styles.or}>lub</p>
-          <Button 
-            variant="secondary" 
-            type="button" 
+          <Button
+            variant="secondary"
+            type="button"
             onClick={handleSigninByGoogle}
           >
             {t('signInWithGoogle')}

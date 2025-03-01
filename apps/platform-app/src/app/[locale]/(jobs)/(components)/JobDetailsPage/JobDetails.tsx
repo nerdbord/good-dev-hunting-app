@@ -1,45 +1,38 @@
 'use client'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
+import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { AvatarsDisplay } from '../AvatarsDisplay/AvatarsDisplay'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
 import { LoginModal } from '../LoginModal/LoginModal'
 import styles from './JobDetails.module.scss'
 
-export default function JobDetailsPage({ params }: { params: { id: string } }) {
+export default function JobDetails({
+  params,
+}: {
+  params: { id: string; isUser: boolean }
+}) {
   const router = useRouter()
   const tButtons = useTranslations(I18nNamespaces.Buttons)
-  const [showLoginModal, setShowLoginModal] = useState(false)
-  const [isAuthorized, setIsAuthorized] = useState(false)
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      // const { user } = await getAuthorizedUser()
-      // setIsAuthorized(!!user)
-
-      console.log('hello from check auth')
-    }
-    checkAuth()
-  }, [])
+  const { showModal, closeModal } = useModal()
 
   const handleEdit = () => {
     router.push(`${AppRoutes.jobs}/${params.id}/edit`)
   }
 
-  const handlePublish = async () => {
-    if (!isAuthorized) {
-      setShowLoginModal(true)
-      return
+  const handlePublish = () => {
+    if (!params.isUser) {
+      showModal(<LoginModal closeModal={closeModal} />)
+    } else {
+      console.log(`Publishing job: ${params.id}`)
     }
-    console.log('Publishing job:', params.id)
   }
 
   return (
@@ -66,8 +59,6 @@ export default function JobDetailsPage({ params }: { params: { id: string } }) {
           {tButtons('publishJob')}
         </Button>
       </ProgressBar>
-
-      {showLoginModal && <LoginModal />}
     </>
   )
 }
