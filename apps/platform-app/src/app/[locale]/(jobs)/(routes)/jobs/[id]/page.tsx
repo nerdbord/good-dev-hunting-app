@@ -1,3 +1,4 @@
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { I18nNamespaces } from '@/i18n/request'
 import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
@@ -12,7 +13,7 @@ interface JobPageProps {
 
 const JobPage = async ({ params }: JobPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
-
+  const { user } = await getAuthorizedUser()
   return (
     <>
       <JobsHeader />
@@ -21,7 +22,7 @@ const JobPage = async ({ params }: JobPageProps) => {
           header={t('jobPreview')}
           subHeader={`Job ID: ${params.id}`}
         />
-        <JobDetails params={{ id: params.id }} />
+        <JobDetails params={{ id: params.id, isUser: !!user?.id }} />
       </Container>
     </>
   )
