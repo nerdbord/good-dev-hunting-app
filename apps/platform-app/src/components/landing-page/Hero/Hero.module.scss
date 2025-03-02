@@ -1,5 +1,4 @@
 .wrapper {
-  color: #ffffff;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -22,6 +21,7 @@
 }
 
 .title {
+  color: var(--text-color);
   width: 100%;
   min-height: 148px;
   font-size: 78px;
@@ -29,6 +29,7 @@
   line-height: 74px;
   letter-spacing: 0em;
   margin-top: $spacing-3;
+
   @include mobile {
     font-size: 38px;
     line-height: 44px;
@@ -254,9 +255,9 @@
   max-width: 380px;
   width: 100%;
   min-height: 180px;
-  background: #0f1217;
+  background: var(--bg-fh-color);
   border-radius: 4px;
-  border: 1px solid #2a2f35;
+  border: 1px solid var(--border-color);
   transition: box-shadow 300ms;
   display: flex;
   flex-direction: column;
@@ -266,3 +267,4 @@
     box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
   }
 }
+

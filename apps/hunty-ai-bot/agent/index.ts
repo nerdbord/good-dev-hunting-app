@@ -126,7 +126,7 @@ export class AIAgent {
           content: question,
         },
       ],
-      model: 'llama-3.1-70b-versatile',
+      model: 'llama-3.3-70b-versatile',
     })
   }
 }
