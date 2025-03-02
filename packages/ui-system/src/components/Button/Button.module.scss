@@ -33,10 +33,12 @@
   color: #ffffff;
   background-color: var(--button-bg-2);
   min-width: 120px;
+
   @include mobile {
     width: 100%;
   }
 }
+
 .headerContent {
   .primary {
     @include mobile {
@@ -51,6 +53,11 @@
   background: transparent;
   align-items: center;
   border-radius: 2px;
+
+  @include mobile {
+    width: 100%;
+  }
+
   border: 1px solid var(--border-color);
 }
 

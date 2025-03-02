@@ -25,3 +25,12 @@
   line-height: 16px;
   color: #d62626;
 }
+
+.actionsWrapper {
+  display: flex;
+  gap: 8px;
+  @include mobile {
+      flex-direction: column;
+      
+  }
+}

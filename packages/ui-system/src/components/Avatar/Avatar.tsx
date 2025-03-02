@@ -3,10 +3,11 @@ import styles from "./Avatar.module.scss";
 
 interface AvatarProps {
   src: string | StaticImageData;
+  alt?: string;
   size?: number;
 }
 
-export const Avatar = ({ src, size = 50 }: AvatarProps) => {
+export const Avatar = ({ src, size = 50, alt }: AvatarProps) => {
   return (
     <div
       className={styles.avatarWrapper}
@@ -14,7 +15,7 @@ export const Avatar = ({ src, size = 50 }: AvatarProps) => {
     >
       <Image
         src={src}
-        alt="User Avatar"
+        alt={alt || "User Avatar"}
         width={size}
         height={size}
         className={styles.avatar}

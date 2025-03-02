@@ -1,0 +1,16 @@
+.container {
+  background: #04080d;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  padding-left: 80px;
+  padding-right: 10%;
+  display: flex;
+  width: 100%;
+  @include mobile {
+    max-width: 100%;
+    flex-direction: column;
+    padding: 40px 16px 60px 16px;
+    gap: 20px;
+  }
+}
