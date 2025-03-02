@@ -1,4 +1,4 @@
-import type { GroqMessageParam } from "../../services/groq.service";
+import type { GroqMessageParam } from '../../services/groq.service'
 
 export const summarizeConversationPrompt = (messages: GroqMessageParam[]) => `
 

@@ -32,8 +32,8 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           {pathname === AppRoutes.createProfile
             ? t('createProfile')
             : pathname === AppRoutes.editProfile
-              ? t('editProfile')
-              : t('myProfile')}
+            ? t('editProfile')
+            : t('myProfile')}
         </span>
         {(hasTouchedErrors || imageUploadError) && (
           <div className={styles.errorMsg}>
@@ -48,7 +48,7 @@ const CreateProfileTopBar = (props: CreateProfileTopBarProps) => {
           variant="primary"
           type="submit"
           onClick={() => handleSubmit()}
-          disabled={props.isSubmitting || !isValid}
+          disabled={props.isSubmitting}
           dataTestId="saveAndPreviewProfile"
         >
           {isMobile ? t('saveAndPreview') : t('saveAndPreviewProfile')}

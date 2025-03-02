@@ -13,6 +13,7 @@ import { Container } from '@gdh/ui-system'
 import styles from '../page.module.scss'
 import Header from './(profile)/(components)/Header/Header'
 
+// TEST
 export default async function LandingPage() {
   const fetchedProfiles = await findAllApprovedProfiles()
 
