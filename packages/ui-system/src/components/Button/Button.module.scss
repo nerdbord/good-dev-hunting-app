@@ -19,6 +19,8 @@
   white-space: nowrap;
 }
 
+//
+
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -33,10 +35,12 @@
   color: #ffffff;
   background-color: #7d54f1;
   min-width: 120px;
+
   @include mobile {
     width: 100%;
   }
 }
+
 .headerContent {
   .primary {
     @include mobile {
