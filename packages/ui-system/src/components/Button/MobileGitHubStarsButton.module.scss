@@ -6,12 +6,12 @@
   width: 343px;
   height: 125px;
   flex-shrink: 0;
-  background: var(--Dark-04, #171b21);
+  background: var(--bg-color3);
   gap: 10px;
 }
 
 .text {
-  color: var(--Light-02, #e2eaf1);
+  color: var(--text-color2);
   text-align: center;
   font-size: 14px;
   font-style: normal;
