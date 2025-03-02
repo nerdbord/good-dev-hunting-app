@@ -32,13 +32,13 @@
   min-height: 43px;
   gap: $spacing-2;
   padding: 12px 20px;
-  border: 1px solid #2a2f35;
-  background: #0f1217;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   text-align: center;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #e2eaf1;
+  color: var(--text-color);
 
   @include mobile {
     max-width: 201px;
@@ -53,29 +53,37 @@
     width: 18px;
     height: 18px;
   }
-  svg path {
-    stroke: #e2eaf1;
-  }
+  color: var(--text-color);
 
   @include mobile {
-    &.buttonIconOpen svg path {
-      stroke: #a687ff;
+    &.buttonIconOpen {
+      color: var(--color-purple);
     }
   }
 }
 
 .buttonIconOpen {
-  svg path {
-    stroke: #a687ff;
+  color: #a687ff;
+  
+  :global(.light) & {
+    color: #a687ff;
   }
 }
 
 .buttonIconOpenMobile {
   color: #e2eaf1;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .localeNameOpenMobile {
   color: #e2eaf1;
+
+  :global(.light) & {
+    color: #171B21;
+  }
 }
 
 .localeNameOpen {
@@ -99,7 +107,7 @@
 .dropdown {
   position: absolute;
   width: 178px;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   border: 1px solid #3d434b;
   border-radius: 2px;
   padding: 24px;
@@ -121,7 +129,7 @@
   bottom: -402px;
   width: 100vw;
   padding: 24px;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   border-top: 1px solid #3d434b;
   z-index: 9999;
   display: flex;
@@ -164,7 +172,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #e2eaf1;
+  color: var(--text-color);
   font-size: 14px;
   gap: $spacing-2;
 

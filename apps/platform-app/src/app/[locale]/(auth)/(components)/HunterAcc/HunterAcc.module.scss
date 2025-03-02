@@ -24,10 +24,10 @@
   align-items: center;
   border-radius: 2px;
   gap: 10px;
-  background-color: #0f1217;
+  background-color: var(--bg-color2);
   padding: 8px 24px 8px 16px;
   @include mobile {
-    background-color: #171b21;
+    background-color: var(--bg-color3);
   }
 }
 

@@ -9,9 +9,9 @@
   outline: none;
   border: none;
   border-radius: 2px;
-  background-color: #0f1217;
-  border: 1px solid #2a2f35;
-  color: #69717b;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
   border-radius: 2px;
   padding: 16px 24px 16px 20px;
   width: 100%;
@@ -24,10 +24,10 @@
     z-index: 5;
   }
   &::placeholder {
-    color: #69717b;
+    color: var(--text-color);
   }
   &:focus {
-    color: white;
+    color: var(--text-color);
   }
 }
 
@@ -35,7 +35,7 @@
   margin-top: 55px;
   font-size: 12px;
   font-weight: 400;
-  color: white;
+  color: var(--text-color);
   opacity: 0.5;
   @include mobile {
     margin-top: 5px;

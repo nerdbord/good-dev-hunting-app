@@ -1,5 +1,5 @@
 .markdownReader {
-  color: #e2eaf1;
+  color: var(--text-color);
   font-size: 16px;
   line-height: 28px;
   padding: 40px;
@@ -7,6 +7,10 @@
   @include mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;
+  }
+
+  :global(.light) & {
+    background-color: #FAFAFF;
   }
 
   h1,

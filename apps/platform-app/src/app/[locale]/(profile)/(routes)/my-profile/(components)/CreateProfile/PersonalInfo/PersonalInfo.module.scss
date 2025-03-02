@@ -1,7 +1,7 @@
 @import '../../../create/page.module';
 
 .container {
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   width: 100%;
@@ -26,7 +26,7 @@
 }
 
 .personalInfo {
-  background-color: rgba(15, 18, 23, 1);
+  background-color: var(--bg-color2);
   color: #69717b;
   border-radius: 2px;
   padding: 20px;
@@ -52,6 +52,14 @@
     flex-direction: column;
     gap: 24px;
   }
+}
+
+.emailContainer {
+  position: relative;
+}
+
+.emailContainer:hover .tooltip {
+  display: block;
 }
 
 .tooltip {
@@ -91,12 +99,12 @@
 }
 
 .desc {
-  color: #e2eaf1;
+  color: var(--text-color2);
   font-size: 16px;
   min-height: 414px;
   line-height: 28px;
   padding: 16px 24px 16px 20px;
-  background-color: #0f1217;
+  background-color: var(--bg-color2);
   @include mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;

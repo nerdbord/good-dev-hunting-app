@@ -1,5 +1,4 @@
-import { type PropsWithChildren } from "react";
-
+import React, { type PropsWithChildren } from "react";
 import Link from "next/link";
 import styles from "./AnchorButton.module.scss";
 
@@ -17,7 +16,11 @@ export const AnchorButton = (props: PropsWithChildren<AnchorButton>) => {
       rel="noopener noreferrer"
     >
       {props.children}
-      {props.icon}
+      {props.icon && (
+        <span className={styles.icon}>
+          {React.cloneElement(props.icon, { className: styles.svgIcon })}
+        </span>
+      )}
     </Link>
   );
 };

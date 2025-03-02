@@ -11,3 +11,60 @@
     @content;
   }
 }
+
+@mixin custom-scrollbar {
+  $scrollbarSize: 4px;
+  $trackColor: transparent;
+  $thumbColor: #555;
+  $thumbRadius: calc($scrollbarSize / 2);
+
+  &::-webkit-scrollbar {
+    width: $scrollbarSize;
+    height: $scrollbarSize;
+
+    &-track {
+      background: $trackColor;
+    }
+
+    &-thumb {
+      background: $thumbColor;
+      border-radius: $thumbRadius;
+    }
+  }
+}
+
+// Typography mixins
+@mixin header1 {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 48px;
+}
+
+@mixin header2 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+@mixin header3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+@mixin body1 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin body2 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+// Theme transition mixin
+@mixin theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
