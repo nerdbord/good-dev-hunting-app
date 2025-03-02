@@ -13,18 +13,11 @@
     "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
-    "apps/platform-app/**/*.{ts,tsx,js,jsx}": [
+    "**/*.{ts,tsx,js,jsx}": [
       "prettier --write",
       "eslint --fix"
     ],
-    "apps/platform-app/**/*.{json,css,scss}": [
-      "prettier --write"
-    ],
-    "apps/hunty-ai-bot/**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "apps/hunty-ai-bot/**/*.{json,css,scss}": [
+    "**/*.{json,css,scss}": [
       "prettier --write"
     ]
   },
