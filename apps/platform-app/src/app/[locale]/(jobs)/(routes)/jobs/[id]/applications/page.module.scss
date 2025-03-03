@@ -133,6 +133,10 @@
     align-items: center;
 
     .avatarPlaceholder {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #2a2f35;
         margin-right: 12px;
     }
 }
@@ -140,6 +144,7 @@
 .headerActions {
     display: flex;
     gap: 12px;
+    margin-left: 24px;
 }
 
 .messagesContainer {
@@ -364,4 +369,8 @@
     color: white;
     font-weight: 600;
     font-size: 16px;
+}
+
+.inputContainer {
+    padding: 0;
 }

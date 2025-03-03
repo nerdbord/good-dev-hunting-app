@@ -3,11 +3,15 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import styles from './page.module.scss'
+import chatStyles from '@/components/Chat/chat.module.scss'
 import { Button } from '@gdh/ui-system'
 import { Applicant, Message } from './types'
-import ApplicantItem from './components/ApplicantItem'
-import MessageItem from './components/MessageItem'
-import ChatInput from './components/ChatInput'
+import {
+    ChatContainer,
+    ChatInput,
+    ChatListItem,
+    Message as MessageComponent
+} from '@/components/Chat'
 import Header from './components/Header'
 import { I18nNamespaces } from '@/i18n/request'
 
@@ -142,6 +146,67 @@ export default function JobApplicationsPage() {
         setSelectedApplicant(updatedApplicant)
     }
 
+    // Render the sidebar content with applicant items
+    const renderSidebarContent = () => (
+        <div className={styles.applicantsList}>
+            {applicants.map((applicant) => (
+                <ChatListItem
+                    key={applicant.id}
+                    id={applicant.id}
+                    title={applicant.name}
+                    subtitle={applicant.title}
+                    lastMessage={applicant.lastMessage}
+                    lastMessageTime={applicant.lastMessageTime}
+                    isSelected={selectedApplicant.id === applicant.id}
+                    showAvatar={true}
+                    avatarUrl={applicant.avatar}
+                    onClick={() => setSelectedApplicant(applicant)}
+                />
+            ))}
+        </div>
+    )
+
+    // Render the header content
+    const renderHeaderContent = () => (
+        <div className={styles.chatHeader}>
+            <div className={styles.applicantProfile}>
+                <div className={styles.avatarPlaceholder}></div>
+                <div>
+                    <div className={styles.applicantName}>{selectedApplicant.name}</div>
+                    <div className={styles.applicantTitle}>{selectedApplicant.title}</div>
+                </div>
+            </div>
+            <div className={`${styles.headerActions} ${chatStyles.headerActions}`}>
+                <Button variant="secondary">{t('viewProfile')}</Button>
+            </div>
+        </div>
+    )
+
+    // Render the messages content
+    const renderMessagesContent = () => (
+        <>
+            {selectedApplicant.messages.map((message) => (
+                <MessageComponent
+                    key={message.id}
+                    id={message.id}
+                    content={message.content}
+                    timestamp={message.timestamp}
+                    isSentByCurrentUser={message.sender === 'recruiter'}
+                />
+            ))}
+            <div ref={messagesEndRef} />
+        </>
+    )
+
+    // Render the input content
+    const renderInputContent = () => (
+        <ChatInput
+            onSendMessage={handleSendMessage}
+            placeholder={t('typeMessage')}
+            buttonText={t('send')}
+        />
+    )
+
     return (
         <div className={styles.pageWrapper}>
             <Header
@@ -150,44 +215,16 @@ export default function JobApplicationsPage() {
                 applicantCount={applicants.length}
                 daysPublished={7}
             />
-            <div className={styles.container}>
-                <div className={styles.sidebar}>
-                    <div className={styles.applicantsList}>
-                        {applicants.map((applicant) => (
-                            <ApplicantItem
-                                key={applicant.id}
-                                applicant={applicant}
-                                isSelected={selectedApplicant.id === applicant.id}
-                                onClick={() => setSelectedApplicant(applicant)}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <div className={styles.chatContainer}>
-                    <div className={styles.chatHeader}>
-                        <div className={styles.applicantProfile}>
-                            <div className={styles.avatarPlaceholder}></div>
-                            <div>
-                                <div className={styles.applicantName}>{selectedApplicant.name}</div>
-                                <div className={styles.applicantTitle}>{selectedApplicant.title}</div>
-                            </div>
-                        </div>
-                        <div className={styles.headerActions}>
-                            <Button variant="secondary">{t('viewProfile')}</Button>
-                        </div>
-                    </div>
-
-                    <div className={styles.messagesContainer}>
-                        {selectedApplicant.messages.map((message) => (
-                            <MessageItem key={message.id} message={message} />
-                        ))}
-                        <div ref={messagesEndRef} />
-                    </div>
-
-                    <ChatInput onSendMessage={handleSendMessage} />
-                </div>
-            </div>
+            <ChatContainer
+                sidebarContent={renderSidebarContent()}
+                headerContent={renderHeaderContent()}
+                messagesContent={renderMessagesContent()}
+                inputContent={renderInputContent()}
+                className={styles.container}
+                sidebarClassName={styles.sidebar}
+                messagesClassName={styles.messagesContainer}
+                inputClassName={styles.inputContainer}
+            />
         </div>
     )
 }

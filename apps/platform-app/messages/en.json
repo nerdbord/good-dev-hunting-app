@@ -312,5 +312,20 @@
     "viewProfile": "View Profile",
     "messagePlaceholder": "Message",
     "sendButton": "Send"
+  },
+  "Inbox": {
+    "title": "Inbox",
+    "subtitle": "Manage your job negotiations",
+    "negotiations": "Negotiations",
+    "noNegotiations": "You don't have any active negotiations",
+    "noNegotiationsSubtitle": "When you apply for a job, your conversations will appear here",
+    "noSelectedNegotiation": "Select a conversation to view messages",
+    "viewJob": "View Job",
+    "sendMessage": "Send message",
+    "typeMessage": "Type your message...",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "backToProfile": "Back to profile",
+    "send": "Send"
   }
 }

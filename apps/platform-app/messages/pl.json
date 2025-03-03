@@ -312,5 +312,20 @@
     "viewProfile": "Zobacz profil",
     "messagePlaceholder": "Wiadomość",
     "sendButton": "Wyślij"
+  },
+  "Inbox": {
+    "title": "Skrzynka odbiorcza",
+    "subtitle": "Zarządzaj swoimi zleceniami pracy",
+    "negotiations": "Zlecenia",
+    "noNegotiations": "Nie masz żadnych aktywnych zleceń",
+    "noNegotiationsSubtitle": "Gdy aplikujesz na ofertę pracy, Twoje rozmowy pojawią się tutaj",
+    "noSelectedNegotiation": "Wybierz rozmowę, aby zobaczyć wiadomości",
+    "viewJob": "Zobacz ofertę",
+    "sendMessage": "Wyślij wiadomość",
+    "typeMessage": "Wpisz swoją wiadomość...",
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj",
+    "backToProfile": "Powrót do profilu",
+    "send": "Wyślij"
   }
 }
