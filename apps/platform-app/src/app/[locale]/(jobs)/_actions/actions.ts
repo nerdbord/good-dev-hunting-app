@@ -1,7 +1,7 @@
 'use server'
 import Groq from 'groq-sdk'
-import { prompt as systemPrompt } from '../add/groq/prompt'
-import type { SubmissionFormData } from '../add/groq/schema'
+import { prompt as systemPrompt } from '../_utils/groq/prompt'
+import type { SubmissionFormData } from '../_utils/groq/schema'
 
 const groq = new Groq()
 

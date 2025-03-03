@@ -14,7 +14,7 @@ import {
   BudgetType,
   JobContractType,
   type CreateJobFormValues,
-} from '../../types'
+} from '../../_utils/types'
 import styles from './CreateJobForm.module.scss'
 import { BasicInfo } from './CreateJobFormDetails/BasicInfo/BasicInfo'
 import { Budget } from './CreateJobFormDetails/Budget/Budget'

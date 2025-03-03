@@ -7,11 +7,11 @@ import { useTranslations } from 'next-intl'
 import {
   EmploymentMode,
   type CreateJobFormValues,
-} from '@/app/[locale]/(jobs)/types'
+} from '@/app/[locale]/(jobs)/_utils/types'
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
-import { mappedJobContractType } from '../../../../jobDetails.mappers'
+import { mappedJobContractType } from '../../../../_utils/jobDetails.mappers'
 import { Card } from '../Card/Card'
 import styles from './Employment.module.scss'
 
