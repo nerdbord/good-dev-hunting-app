@@ -1,0 +1,367 @@
+.container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    background-color: #04080d;
+    color: #e2eaf1;
+}
+
+.sidebar {
+    width: 320px;
+    border-right: 1px solid #2a2f35;
+    display: flex;
+    flex-direction: column;
+    background-color: #0f1217;
+
+    @include mobile {
+        width: 100%;
+        height: 50%;
+        border-right: none;
+        border-bottom: 1px solid #2a2f35;
+    }
+}
+
+.sidebarHeader {
+    padding: 20px;
+    border-bottom: 1px solid #2a2f35;
+
+    h2 {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+}
+
+.applicantCount {
+    font-size: 14px;
+    color: #69717b;
+}
+
+.applicantsList {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.applicantItem {
+    display: flex;
+    padding: 16px 20px;
+    border-bottom: 1px solid #2a2f35;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #1c1f26;
+    }
+
+    &.selected {
+        background-color: #1c1f26;
+    }
+}
+
+.applicantAvatar {
+    margin-right: 12px;
+}
+
+.avatarPlaceholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2a2f35;
+}
+
+.applicantInfo {
+    flex: 1;
+    min-width: 0; // Ensures text truncation works
+}
+
+.applicantName {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.applicantTitle {
+    font-size: 14px;
+    color: #89939e;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lastMessage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.messagePreview {
+    font-size: 14px;
+    color: #69717b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.messageTime {
+    font-size: 12px;
+    color: #69717b;
+    white-space: nowrap;
+}
+
+.chatContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #04080d;
+}
+
+.chatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #2a2f35;
+}
+
+.applicantProfile {
+    display: flex;
+    align-items: center;
+
+    .avatarPlaceholder {
+        margin-right: 12px;
+    }
+}
+
+.headerActions {
+    display: flex;
+    gap: 12px;
+}
+
+.messagesContainer {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.messageItem {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sentMessage {
+    align-self: flex-end;
+
+    .messageContent {
+        background-color: #1c64f2;
+        border-radius: 16px 16px 0 16px;
+        color: white;
+    }
+
+    .messageTimestamp {
+        align-self: flex-end;
+        margin-right: 4px;
+    }
+}
+
+.receivedMessage {
+    align-self: flex-start;
+
+    .messageContent {
+        background-color: #1c1f26;
+        border-radius: 16px 16px 16px 0;
+    }
+
+    .messageTimestamp {
+        align-self: flex-start;
+        margin-left: 4px;
+    }
+}
+
+.messageContent {
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.messageTimestamp {
+    font-size: 12px;
+    color: #69717b;
+    margin-top: 4px;
+}
+
+.messageInputContainer {
+    display: flex;
+    padding: 16px 24px;
+    border-top: 1px solid #2a2f35;
+    margin-bottom: 0; // Ensure no bottom margin
+    background-color: #04080d; // Match the background color
+}
+
+.messageInput {
+    flex: 1;
+    background-color: #1c1f26;
+    border: 1px solid #2a2f35;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #e2eaf1;
+    font-size: 16px;
+    outline: none;
+    height: 48px; // Fixed height to match design
+
+    &:focus {
+        border-color: #3f83f8;
+    }
+
+    &::placeholder {
+        color: #69717b;
+    }
+}
+
+.sendButton {
+    margin-left: 12px;
+    background-color: #1c64f2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    height: 48px; // Fixed height to match design
+
+    &:hover {
+        background-color: #1a56db;
+    }
+
+    &:disabled {
+        background-color: #2a2f35;
+        cursor: not-allowed;
+    }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: 100vh; // Use full viewport height
+    }
+
+    .sidebar,
+    .chatContainer {
+        width: 100%;
+    }
+
+    .messagesContainer {
+        height: 50vh;
+    }
+}
+
+.pageWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #04080d;
+}
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background-color: #0f1217;
+    border-bottom: 1px solid #2a2f35;
+    width: 100%;
+}
+
+.headerLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    color: #8364e8;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.jobTitleContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.jobTitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: #e2eaf1;
+    margin: 0;
+}
+
+.jobStatus {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8364e8;
+    background-color: rgba(131, 100, 232, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.jobMeta {
+    font-size: 14px;
+    color: #69717b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.applicantCountBadge {
+    background-color: rgba(105, 113, 123, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #89939e;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #8364e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoText {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}

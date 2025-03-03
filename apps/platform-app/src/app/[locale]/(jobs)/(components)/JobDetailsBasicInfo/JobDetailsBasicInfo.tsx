@@ -1,8 +1,8 @@
 import {
   mapEmploymentMode,
   mapJobContract,
-} from '@/app/[locale]/(jobs)/jobDetails.mappers'
-import { type JobContractType } from '@/app/[locale]/(jobs)/types'
+} from '@/app/[locale]/(jobs)/_utils/jobDetails.mappers'
+import { type JobContractType } from '@/app/[locale]/(jobs)/_utils/types'
 import {
   currencyButtonTextDisplay,
   mapEmploymentType,
@@ -10,7 +10,7 @@ import {
 import { countries } from '@/data/countries'
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
-import { mockJobDetails } from '../../mockData'
+import { mockJobDetails } from '../../_utils/mockData'
 import styles from './JobDetailsBasicInfo.module.scss'
 
 export const JobDetailsBasicInfo = () => {

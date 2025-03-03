@@ -1,6 +1,6 @@
 'use client'
 
-import { type CreateJobFormValues } from '@/app/[locale]/(jobs)/types'
+import { type CreateJobFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import TextInput from '@/components/TextInput/TextInput'
