@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import styles from './page.module.scss'
 import { Button } from '@gdh/ui-system'
 import { Applicant, Message } from './types'
@@ -8,6 +9,7 @@ import ApplicantItem from './components/ApplicantItem'
 import MessageItem from './components/MessageItem'
 import ChatInput from './components/ChatInput'
 import Header from './components/Header'
+import { I18nNamespaces } from '@/i18n/request'
 
 // Mock data for applicants
 const mockApplicants: Applicant[] = [
@@ -103,6 +105,7 @@ export default function JobApplicationsPage() {
     const [selectedApplicant, setSelectedApplicant] = useState<Applicant>(mockApplicants[0])
     const [applicants, setApplicants] = useState<Applicant[]>(mockApplicants)
     const messagesEndRef = useRef<HTMLDivElement>(null)
+    const t = useTranslations(I18nNamespaces.Applications)
 
     // Scroll to bottom of messages when they change
     useEffect(() => {
@@ -145,6 +148,7 @@ export default function JobApplicationsPage() {
                 jobTitle="Senior Fronted Developer needed for a fintech project"
                 jobStatus="PENDING"
                 applicantCount={applicants.length}
+                daysPublished={7}
             />
             <div className={styles.container}>
                 <div className={styles.sidebar}>
@@ -170,7 +174,7 @@ export default function JobApplicationsPage() {
                             </div>
                         </div>
                         <div className={styles.headerActions}>
-                            <Button variant="secondary">View Profile</Button>
+                            <Button variant="secondary">{t('viewProfile')}</Button>
                         </div>
                     </div>
 

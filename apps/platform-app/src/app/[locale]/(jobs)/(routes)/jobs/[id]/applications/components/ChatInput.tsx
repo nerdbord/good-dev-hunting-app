@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import styles from '../page.module.scss'
 
 interface ChatInputProps {
@@ -8,6 +9,7 @@ interface ChatInputProps {
 
 export default function ChatInput({ onSendMessage }: ChatInputProps) {
     const [messageInput, setMessageInput] = useState('')
+    const t = useTranslations('JobApplications')
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -22,12 +24,12 @@ export default function ChatInput({ onSendMessage }: ChatInputProps) {
             <input
                 type="text"
                 className={styles.messageInput}
-                placeholder="Message"
+                placeholder={t('messagePlaceholder')}
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
             />
             <button type="submit" className={styles.sendButton}>
-                Send
+                {t('sendButton')}
             </button>
         </form>
     )

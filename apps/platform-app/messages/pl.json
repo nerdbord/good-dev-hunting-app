@@ -210,9 +210,7 @@
     "jobEditSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
     "basicInfo": "Informacje podstawowe",
     "basicInfoDesc": "Podaj szczegóły zlecenia, aby specjaliści mogli ocenić swoje dopasowanie.",
-
     "jobName": "Nazwa zlecenia",
-
     "jobNamePlaceholder": "eg. Implementacja widoku aplikacji",
     "jobNameDesc": "Opis zlecenia",
     "brief": "Brief projektowy",
@@ -221,7 +219,7 @@
     "budget": "Budżet",
     "fixedBudget": "Mam określony budżet",
     "budgetRequestQuote": "Potrzebuję wyceny",
-    "requestQuoteDescription": "Twoje ogłoszenie będzie oznaczone, jako “do wyceny”.",
+    "requestQuoteDescription": "Twoje ogłoszenie będzie oznaczone, jako \"do wyceny\".",
     "budgetDesc": "Określ budżet przeznaczony na realizację projektu, aby specjaliści mogli dostosować swoje oferty do Twoich możliwości.",
     "minBudgetForProjectRealisation": "Minimalna kwota za realizację projektu",
     "maxBudgetForProjectRealisation": "Maksymalna kwota za realizację projektu",
@@ -240,10 +238,8 @@
     "locationCityTooltip": "Podaj miasto, aby specjaliści z Twojej okolicy mogli łatwiej odnaleźć Twoją ofertę.",
     "remoteOnly": "Szukam tylko zdalnych kandydatów",
     "techStackTooltip": "Określ technologie, które wybrałeś do realizacji swojej oferty pracy.",
-
     "addJobPageHeader": "Dodaj zlecenie",
     "addJobPageSubHeader": "Przejrzyj formularz zlecenia i upewnij się, że wprowadzone dane pasują do Twojej oferty",
-
     "jobNameRequired": "Nazwa zlecenia jest wymagana",
     "projectBriefRequired": "Opis projektu jest wymagany",
     "maxTechStack": "Maksymalnie 16 technologii",
@@ -291,14 +287,30 @@
   "Applications": {
     "applicationDetails": "Szczegóły aplikacji",
     "applicantInfo": "Informacje o aplikującym",
-    "actions": "Akcje"
+    "actions": "Akcje",
+    "backButton": "Moje zlecenia",
+    "publishedDaysAgo": "Opublikowany {days} dni temu",
+    "applicant": "aplikant",
+    "applicants": "aplikantów",
+    "viewProfile": "Zobacz profil",
+    "messagePlaceholder": "Wiadomość",
+    "sendButton": "Wyślij"
   },
   "AddJobChat": {
     "descriptionHeader": "Opisz, czego potrzebujesz",
-    "descriptionParagraph": "Tak jak najdokładniej.  Możesz wrzucić zarówno treść ogłoszenia.",
+    "descriptionParagraph": "Tak jak najdokładniej. Możesz wrzucić zarówno treść ogłoszenia.",
     "placeholder": "Przedstaw zlecenie w kilku słowach",
     "textareaLabel": "Treść zlecenia",
     "cancelBtn": "Cofnij",
     "nextBtn": "Dalej"
+  },
+  "JobApplications": {
+    "backButton": "Moje zlecenia",
+    "publishedDaysAgo": "Opublikowany {days} dni temu",
+    "applicant": "aplikant",
+    "applicants": "aplikantów",
+    "viewProfile": "Zobacz profil",
+    "messagePlaceholder": "Wiadomość",
+    "sendButton": "Wyślij"
   }
 }
