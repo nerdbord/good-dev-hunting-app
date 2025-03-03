@@ -46,6 +46,10 @@ $isMobile: 765px;
   height: 457px;
   z-index: 1;
 
+  img {
+    box-shadow: -4px 8px 81px -51px rgba(96, 57, 208, 1);
+  }
+
   &::after {
     content: '';
     position: absolute;

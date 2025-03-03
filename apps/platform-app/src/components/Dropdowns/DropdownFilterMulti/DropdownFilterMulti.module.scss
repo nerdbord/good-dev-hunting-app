@@ -1,8 +1,8 @@
 .featuresBtn {
   width: 142px;
   height: 44px;
-  background: #0f1217;
-  border: 1px solid #2a2f35;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 2px;
   padding: 12px 16px;
   font-style: normal;
@@ -11,18 +11,19 @@
   line-height: 20px;
   display: flex;
   align-items: center;
-  color: #e2eaf1;
+  color: var(--text-color);
   justify-content: space-around;
   cursor: pointer;
   gap: 6px;
+
 }
 
 .buttonText {
-  color: #e2eaf1;
+  color: var(--text-color);
 }
 
 .buttonTextChecked {
-  color: #a687ff;
+  color: var(--text-color);
 }
 
 .buttonBox {
@@ -32,14 +33,14 @@
 .dropdown {
   position: absolute;
   width: 210px;
-  border: 1px solid #3d434b;
+  border: 1px solid var(--border-color);
   border-radius: 2px;
   min-height: 40px;
   padding: 10px 15px 20px 15px;
   font-weight: 400;
   font-size: 14px;
   z-index: 1000;
-  background-color: #0f1217;
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -59,6 +60,7 @@
     height: 300px;
   }
 }
+
 .dropdownHeaderMulti {
   display: flex;
   justify-content: space-between;

@@ -3,6 +3,7 @@ import { ToastContextProvider } from '@/contexts/ToastContext'
 import { SessionProvider } from 'next-auth/react'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import React from 'react'
+import { ThemeWrapper } from './(profile)/(components)/ThemeSwitcher/ThemeWrapper'
 
 export default function LocaleLayout({
   children,
@@ -16,7 +17,9 @@ export default function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         <SessionProvider>
           <ToastContextProvider>
-            <ModalProvider>{children}</ModalProvider>
+            <ModalProvider>
+              <ThemeWrapper>{children}</ThemeWrapper>
+            </ModalProvider>
           </ToastContextProvider>
         </SessionProvider>
         <div id="toasts" />

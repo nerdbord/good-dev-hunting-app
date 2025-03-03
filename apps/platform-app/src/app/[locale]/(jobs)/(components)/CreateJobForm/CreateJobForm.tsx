@@ -1,7 +1,7 @@
 'use client'
 
 import { FormNavigationWarning } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/FormStateMonitor/FormStateMonitor'
-import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'

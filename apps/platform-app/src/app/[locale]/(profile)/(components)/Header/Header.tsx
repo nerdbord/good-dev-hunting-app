@@ -14,9 +14,10 @@ import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
-import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
+import { Logo } from '../../../../../../../../packages/ui-system/src/components/Logo/Logo'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
+import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
@@ -146,18 +147,20 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     }
   }
   return (
-    <header className={styles.wrapper}>
+    <header id="main-header" className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
           <div className={styles.logoAndGhStarsWrapper}>
             <Link href={AppRoutes.home} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <h1 className={styles.title}>Good Dev Hunting</h1>
+              <Logo withLink={false} />
             </Link>
             <GitHubStarsButton />
+            <ThemeSwitcher />
           </div>
           <nav>
-            <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
+            <ul
+              className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
+            >
               {renderMobileContent()}
             </ul>
             <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>

@@ -11,6 +11,10 @@
     padding: 40px 16px 60px 16px;
     gap: 30px;
   }
+
+    :global(.light) & {
+    background-color: #FEFEFF;
+  }
 }
 
 .left {
@@ -41,6 +45,11 @@
 .label {
   font-size: 14px;
   justify-content: baseline;
+
+
+  :global(.light) & {
+    color: #04080D;
+  }
 }
 
 .link {

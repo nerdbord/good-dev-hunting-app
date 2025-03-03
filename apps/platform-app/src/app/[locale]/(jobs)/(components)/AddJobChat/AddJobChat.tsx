@@ -7,7 +7,7 @@ import type { ChangeEvent } from 'react'
 import { useState } from 'react'
 import { saveToDatabase } from '../../(routes)/jobs/actions/actions'
 
-import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import { useAddJobChat } from '../../(routes)/jobs/add/utils/AddJobChatContext'
 import styles from './AddJobChat.module.scss'
 
