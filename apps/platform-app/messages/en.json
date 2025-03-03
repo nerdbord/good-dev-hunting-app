@@ -326,6 +326,7 @@
     "today": "Today",
     "yesterday": "Yesterday",
     "backToProfile": "Back to profile",
-    "send": "Send"
+    "send": "Send",
+    "inbox": "Inbox"
   }
 }

@@ -1,15 +1,15 @@
-import React from 'react';
-import { Metadata } from 'next';
+import { type Metadata } from 'next'
+import React from 'react'
 
 export const metadata: Metadata = {
-    title: 'Inbox | Good Dev Hunting',
-    description: 'Manage your job negotiations and messages',
-};
+  title: 'Inbox | Good Dev Hunting',
+  description: 'Manage your job negotiations and messages',
+}
 
 export default function InboxLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode
 }) {
-    return <>{children}</>;
-} 
+  return <>{children}</>
+}

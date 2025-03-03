@@ -1,16 +1,13 @@
-export interface Message {
-    id: string;
-    sender: 'applicant' | 'recruiter';
-    content: string;
-    timestamp: string;
+import { type BaseChatItem, type BaseMessage } from '@/components/Chat'
+
+export interface Message extends BaseMessage {
+  sender: 'applicant' | 'recruiter'
 }
 
-export interface Applicant {
-    id: string;
-    name: string;
-    title: string;
-    lastMessage: string;
-    lastMessageTime: string;
-    avatar: string;
-    messages: Message[];
-} 
+export interface Applicant extends Omit<BaseChatItem, 'title' | 'subtitle'> {
+  name: string
+  title: string
+  subtitle: string
+  avatar: string
+  messages: Message[]
+}

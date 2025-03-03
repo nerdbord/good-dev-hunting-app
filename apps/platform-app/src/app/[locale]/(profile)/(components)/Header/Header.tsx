@@ -7,6 +7,7 @@ import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 
+import InboxButton from '@/app/[locale]/(profile)/(components)/InboxButton/InboxButton'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
@@ -121,6 +122,9 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               {userHasProfile && (
                 <>
                   <li>
+                    <InboxButton />
+                  </li>
+                  <li>
                     <LocaleSwitcher />
                   </li>
                   <li>
@@ -158,9 +162,7 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
             <ThemeSwitcher />
           </div>
           <nav>
-            <ul
-              className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}
-            >
+            <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>
               {renderMobileContent()}
             </ul>
             <ul className={`${styles.frameButtons} ${styles.hideOnMobile}`}>

@@ -1,16 +1,15 @@
-export interface Message {
-    id: string;
-    sender: 'user' | 'company';
-    content: string;
-    timestamp: string;
+import { type BaseChatItem, type BaseMessage } from '@/components/Chat'
+
+export interface Message extends BaseMessage {
+  sender: 'user' | 'company'
 }
 
-export interface JobNegotiation {
-    id: string;
-    jobTitle: string;
-    companyName: string;
-    lastMessage: string;
-    lastMessageTime: string;
-    unread: boolean;
-    messages: Message[];
-} 
+export interface JobNegotiation
+  extends Omit<BaseChatItem, 'title' | 'subtitle'> {
+  jobTitle: string
+  companyName: string
+  title: string // Same as jobTitle for compatibility
+  subtitle: string // Same as companyName for compatibility
+  unread: boolean
+  messages: Message[]
+}

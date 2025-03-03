@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './chat.module.scss'
 
 export interface ChatContainerProps {
@@ -25,7 +25,7 @@ export default function ChatContainer({
   headerClassName = '',
   messagesClassName = '',
   inputClassName = '',
-  className = ''
+  className = '',
 }: ChatContainerProps) {
   return (
     <div className={`${styles.chatContainer} ${className}`}>
@@ -39,9 +39,7 @@ export default function ChatContainer({
         <div className={`${styles.chatMessages} ${messagesClassName}`}>
           {messagesContent}
         </div>
-        <div className={inputClassName}>
-          {inputContent}
-        </div>
+        <div className={inputClassName}>{inputContent}</div>
       </div>
     </div>
   )
@@ -118,4 +116,4 @@ export default function ChatContainer({
     height: 50vh;
   }
 }
-*/ 
+*/
