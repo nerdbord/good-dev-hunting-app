@@ -34,7 +34,7 @@ const config: StorybookConfig = {
         {
           loader: "sass-loader",
           options: {
-            additionalData: `@import "src/styles/mixins"; @import "src/styles/tokens";`,
+            additionalData: `@use "src/styles/mixins" as *; @use "src/styles/tokens" as *;`,
           },
         },
       ],

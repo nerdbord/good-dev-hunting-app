@@ -8,7 +8,7 @@ import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { BudgetType, type CreateJobFormValues } from '../../../../types'
+import { BudgetType, type CreateJobFormValues } from '../../../../_utils/types'
 import { Card } from '../Card/Card'
 import styles from './Budget.module.scss'
 

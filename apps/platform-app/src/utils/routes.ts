@@ -3,6 +3,7 @@ export enum AppRoutes {
   myProfile = '/my-profile',
   createProfile = '/my-profile/create',
   editProfile = '/my-profile/edit',
+  inbox = '/my-profile/inbox',
   oAuth = '/oauth',
   moderation = '/moderation',
   moderationProfile = '/moderation/profile',

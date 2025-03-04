@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: #7d54f1;
+  background-color: var(--button-bg-2);
   border-radius: 2px;
   border: none;
   font-size: 14px;
@@ -31,12 +31,14 @@
 .primary {
   height: 44px;
   color: #ffffff;
-  background-color: #7d54f1;
+  background-color: var(--button-bg-2);
   min-width: 120px;
+
   @include mobile {
     width: 100%;
   }
 }
+
 .headerContent {
   .primary {
     @include mobile {
@@ -47,23 +49,27 @@
 
 .secondary {
   height: 44px;
-  color: #7d54f1;
+  color: var(--button-bg-2);
   background: transparent;
   align-items: center;
   border-radius: 2px;
-  border: 1px solid var(--Main-03, #a687ff);
+
   @include mobile {
     width: 100%;
   }
+
+  border: 1px solid var(--border-color);
 }
 
 .secondary:hover:enabled {
-  background-color: rgba(23, 27, 33, 1);
+  background-color: var(--button-stroke);
+
 }
+
 
 .tertiary {
   border: none;
-  color: #7d54f1;
+  color: var(--button-bg-2);
   background: transparent;
 }
 
@@ -74,9 +80,9 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: var(--Dark-02, #0f1217);
-  border: 1px solid #2a2f35;
-  color: white;
+  background-color: var(--bg-color2);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
   border-radius: 2px;
   outline: none;
   font-size: 14px;
@@ -98,8 +104,8 @@
   flex-shrink: 0;
   border: none;
   border-radius: 2px;
-  background: #04080d;
-  color: #ffffff;
+  background: var(--bg-pm-color);
+  color: var(--text-color);
   text-align: center;
   font-size: 14px;
   font-style: normal;
@@ -108,19 +114,19 @@
   transition: background-color 300ms;
 
   &:hover {
-    background-color: #171b21;
+    background-color: var(--bg-color3);
   }
 }
 
 .action:hover:disabled {
-  background-color: #04080d;
+  background-color: var(--bg-pm-color);
 }
 
 .logout {
   height: 44px;
-  color: #7d54f1;
+  color: var(--button-bg-2);
   background: transparent;
-  border: 1px solid #7d54f1;
+  border: 1px solid var(--button-bg-2);
 }
 
 .grayedOut {
@@ -130,14 +136,13 @@
   align-items: center;
   border-radius: 2px;
   padding: 12px 24px;
-  border: 1px solid var(--Main-03, #69717b);
-  @include mobile {
-    text-wrap: nowrap;
-  }
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color3);
 }
 
 .grayedOut:hover:enabled {
-  background-color: rgba(23, 27, 33, 1);
+  background-color: var(--bg-color3);
+
 }
 
 .buttonWrapper {
@@ -146,4 +151,6 @@
       width: 100%;
     }
   }
+
+
 }

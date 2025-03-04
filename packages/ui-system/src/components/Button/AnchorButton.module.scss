@@ -1,16 +1,17 @@
 .socialItem {
   padding: 12px 24px;
-  color: #ffffff;
+  color: var(--text-color);
   font-weight: 500;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   border-radius: 2px;
-  border: 1px solid var(--Light-04, #89939e);
-  background: var(--Dark-01, #04080d);
+  border: 1px solid var(--border-color);
+  background: var(--bg-pm-color);
+
   @include mobile {
     width: 100%;
     white-space: nowrap;
@@ -19,5 +20,17 @@
 }
 
 .socialItem:hover {
-  background-color: rgba(23, 27, 33, 1);
+  background-color: var(--bg-color3);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.svgIcon {
+  fill: var(--icon-color);
+  width: 20px;
+  height: 20px;
+  transition: fill 0.3s ease;
 }

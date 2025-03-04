@@ -16,7 +16,7 @@ import '@mdxeditor/editor/style.css'
 
 import { useFormikContext } from 'formik'
 import React from 'react'
-import type { CreateJobFormValues } from '../../types'
+import type { CreateJobFormValues } from '../../_utils/types'
 import styles from './ProjectBriefTextArea.module.scss'
 
 export interface TextAreaProps {
