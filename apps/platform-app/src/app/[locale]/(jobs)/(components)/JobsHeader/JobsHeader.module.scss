@@ -4,8 +4,8 @@
   align-items: center;
   height: 124px;
   width: 100%;
-  background-color: #04080d;
-
+  background-color: var(--bg-color2);
+  @include theme-transition;
   @include mobile {
     height: 75px;
   }

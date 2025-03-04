@@ -88,7 +88,8 @@
     "deleteJob": "Delete Job",
     "publishJob": "Publish Job",
     "goBack": "Go back",
-    "goNext": "Next"
+    "goNext": "Next",
+    "addJob": "Add new"
   },
   "LandingFooter": {
     "contact": "Contact",
@@ -258,7 +259,12 @@
     "maxBudgetRequired": "The maximum amount is required",
     "countryRequired": "Country is required",
     "cityRequired": "City is required",
-    "budgetTypeRequired": "Please select budget type"
+    "budgetTypeRequired": "Please select budget type",
+
+    "myJobs": "My jobs",
+    "noJobs": "You don't have any jobs",
+    "job": "job",
+    "jobs": "jobs"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",
@@ -299,5 +305,12 @@
     "textareaLabel": "Job content",
     "cancelBtn": "Cancel",
     "nextBtn": "Next"
+  },
+  "MyJobCard": {
+    "published": "Published",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "days": "days ago",
+    "openBtn": "Open applications"
   }
 }

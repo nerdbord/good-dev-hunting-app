@@ -88,7 +88,8 @@
     "deleteJob": "Usuń zlecenie",
     "publishJob": "Publikuj zlecenie",
     "goBack": "Wróć",
-    "goNext": "Dalej"
+    "goNext": "Dalej",
+    "addJob": "Dodaj nowe"
   },
   "LandingFooter": {
     "contact": "Kontakt",
@@ -259,7 +260,12 @@
     "maxBudgetRequired": "Wymagana maksymalna kwota",
     "countryRequired": "Kraj jest wymagany",
     "cityRequired": "Miasto jest wymagane",
-    "budgetTypeRequired": "Zaznacz czy masz określony budżet"
+    "budgetTypeRequired": "Zaznacz czy masz określony budżet",
+
+    "myJobs": "Moje zlecenia",
+    "noJobs": "Nie masz żadnych zleceń",
+    "job": "zlecenie",
+    "jobs": "zlecenia"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
@@ -300,5 +306,12 @@
     "textareaLabel": "Treść zlecenia",
     "cancelBtn": "Cofnij",
     "nextBtn": "Dalej"
+  },
+  "MyJobCard": {
+    "published": "Opublikowano",
+    "today": "Dziś",
+    "yesterday": "Wczoraj",
+    "days": "dni temu",
+    "openBtn": "Otwórz zgłoszenia"
   }
 }
