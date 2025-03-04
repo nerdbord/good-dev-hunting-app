@@ -1,6 +1,6 @@
 'use client'
 
-import { ProgressBar } from '@/components/hunter-landing/ProgressBar/ProgressBar'
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
