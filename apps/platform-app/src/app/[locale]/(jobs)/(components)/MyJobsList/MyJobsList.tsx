@@ -7,14 +7,18 @@ interface MyJobsListProps {
     name: string
     PublishingState: JobPublishingState
     createdDate: string
+    id?: string
   }[]
 }
 
 export const MyJobsList = ({ jobs }: MyJobsListProps) => {
   return (
     <div className={styles.myJobsList}>
-      {jobs.map((job) => (
-        <MyJobCard job={job} />
+      {jobs.map((job, i) => (
+        <MyJobCard
+          job={job}
+          key={job?.id || i} //TODO: remove "i" from key
+        />
       ))}
     </div>
   )

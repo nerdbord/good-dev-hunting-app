@@ -5,6 +5,7 @@ import { EditIcon } from '@gdh/ui-system/icons'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import type { JobPublishingState } from '../../(routes)/jobs/my-jobs/mockData'
+import { calculateDaysAgo } from '../../_utils/utils'
 import styles from './myJobCard.module.scss'
 interface MyJobCardProps {
   job: {
@@ -14,18 +15,12 @@ interface MyJobCardProps {
     id?: string
   }
 }
+
 export const MyJobCard = async ({ job }: MyJobCardProps) => {
   const { name, PublishingState, createdDate, id = '123' } = job
   const t = await getTranslations(I18nNamespaces.MyJobCard)
 
-  const calculateDaysAgo = (createdDate: string) => {
-    const created = new Date(createdDate)
-    const now = new Date()
-    const diffTime = Math.abs(now.getTime() - created.getTime())
-    return Math.floor(diffTime / (1000 * 60 * 60 * 24))
-  }
-
-  const renderDate = () => {
+  const renderDate = (createdDate: string) => {
     const daysAgo = calculateDaysAgo(createdDate)
     if (daysAgo === 0) {
       return t('today')
@@ -35,13 +30,14 @@ export const MyJobCard = async ({ job }: MyJobCardProps) => {
     }
     return `${daysAgo} ${t('days')}`
   }
+
   return (
     <div className={styles.jobCard}>
       <div className={styles.statusBox}>
         <div className={styles.status}>{PublishingState}</div>
         <p className={styles.date}>
           {`${t('published')} `}
-          <span>{renderDate()}</span>
+          <span>{renderDate(createdDate)}</span>
         </p>
       </div>
       <h3 className={`${styles.jobCardHeader}`}>{name}</h3>
