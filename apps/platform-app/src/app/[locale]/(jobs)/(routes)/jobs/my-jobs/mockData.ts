@@ -34,5 +34,5 @@ function getRandomElement<T>(arr: T[]): T {
 export const mockJobs = Array.from({ length: 10 }, (_, index) => ({
   name: JOB_TITLES[index],
   PublishingState: getRandomElement(STATES),
-  createdDate: getRandomDate(),
+  createdAt: getRandomDate(),
 }))

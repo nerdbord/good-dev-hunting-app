@@ -7,17 +7,20 @@ import Link from 'next/link'
 import type { JobPublishingState } from '../../(routes)/jobs/my-jobs/mockData'
 import { calculateDaysAgo } from '../../_utils/utils'
 import styles from './MyJobCard.module.scss'
+
 interface MyJobCardProps {
-  job: {
-    name: string
-    PublishingState: JobPublishingState
-    createdDate: string
-    id?: string
-  }
+  name: string
+  JobPublishingState: JobPublishingState
+  createdAt: string
+  id?: string
 }
 
-export const MyJobCard = async ({ job }: MyJobCardProps) => {
-  const { name, PublishingState, createdDate, id = '123' } = job
+export const MyJobCard = async ({
+  name,
+  JobPublishingState,
+  createdAt,
+  id = '123',
+}: MyJobCardProps) => {
   const t = await getTranslations(I18nNamespaces.MyJobCard)
 
   const renderDate = (createdDate: string) => {
@@ -34,10 +37,10 @@ export const MyJobCard = async ({ job }: MyJobCardProps) => {
   return (
     <div className={styles.jobCard}>
       <div className={styles.statusBox}>
-        <div className={styles.status}>{PublishingState}</div>
+        <div className={styles.status}>{JobPublishingState}</div>
         <p className={styles.date}>
           {`${t('published')} `}
-          <span>{renderDate(createdDate)}</span>
+          <span>{renderDate(createdAt)}</span>
         </p>
       </div>
       <h3 className={`${styles.jobCardHeader}`}>{name}</h3>
