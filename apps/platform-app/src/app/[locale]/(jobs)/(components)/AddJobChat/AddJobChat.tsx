@@ -5,17 +5,15 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import type { ChangeEvent } from 'react'
 import { useState } from 'react'
-import { saveToDatabase } from '../../(routes)/jobs/actions/actions'
+import { saveToDatabase } from '../../_actions/actions'
 
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
-import { useAddJobChat } from '../../(routes)/jobs/add/utils/AddJobChatContext'
 import styles from './AddJobChat.module.scss'
 
 export function AddJobChat() {
   const router = useRouter()
   const t = useTranslations(I18nNamespaces.AddJobChat)
   const tButtons = useTranslations(I18nNamespaces.Buttons)
-  const chatBot = useAddJobChat()
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -34,10 +32,7 @@ export function AddJobChat() {
     }
 
     try {
-      await chatBot.handleMessage(input)
-      const formData = chatBot.getFormData()
-
-      const { id: formId } = await saveToDatabase(formData)
+      const { id: formId } = await saveToDatabase({})
       router.push(`/jobs/${formId}/edit`)
     } catch (error) {
       console.error('Error:', error)

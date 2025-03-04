@@ -1,7 +1,7 @@
 import { CreateJobForm } from '@/app/[locale]/(jobs)/(components)/CreateJobForm/CreateJobForm'
 import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
 import { JobsTopBar } from '@/app/[locale]/(jobs)/(components)/JobsTopBar/JobsTopBar'
-import { mockJobDetails } from '@/app/[locale]/(jobs)/mockData'
+import { mockJobDetails } from '@/app/[locale]/(jobs)/_utils/mockData'
 import { I18nNamespaces } from '@/i18n/request'
 import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'

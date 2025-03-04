@@ -2,7 +2,7 @@
 import { MarkdownReader } from '@/components/MarkdownReader/MarkdownReader'
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
-import { mockJobDetails } from '../../mockData'
+import { mockJobDetails } from '../../_utils/mockData'
 import styles from './JobDetailsDetailsInfo.module.scss'
 
 export const JobDetailsDetailsInfo = () => {
