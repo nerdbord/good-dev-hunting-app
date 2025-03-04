@@ -17,7 +17,8 @@
   position: absolute;
   height: fit-content;
   display: inline-flex;
-  top: 153px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 124px 89px;
   flex-direction: column;
   align-items: center;
@@ -34,6 +35,14 @@
   :global(.light) & {
     background-color: rgba(254, 254, 255, 1);
   }
+}
+
+.wrapperNarrow {
+  padding: 24px;
+}
+
+.wrapperRed {
+  background-color: brown;
 }
 
 .container {

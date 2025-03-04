@@ -1,6 +1,7 @@
 'use client'
 
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
+import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
@@ -9,18 +10,29 @@ import { useRouter } from 'next/navigation'
 import { AvatarsDisplay } from '../AvatarsDisplay/AvatarsDisplay'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
+import { LoginModal } from '../LoginModal/LoginModal'
 import styles from './JobDetails.module.scss'
 
-export default function JobDetailsPage({ params }: { params: { id: string } }) {
+export default function JobDetails({
+  params,
+}: {
+  params: { id: string; isUser: boolean }
+}) {
   const router = useRouter()
   const tButtons = useTranslations(I18nNamespaces.Buttons)
+
+  const { showModal, closeModal } = useModal()
 
   const handleEdit = () => {
     router.push(`${AppRoutes.jobs}/${params.id}/edit`)
   }
 
   const handlePublish = () => {
-    console.log('Publishing job:', params.id)
+    if (!params.isUser) {
+      showModal(<LoginModal closeModal={closeModal} />, 'narrow')
+    } else {
+      console.log(`Publishing job: ${params.id}`)
+    }
   }
 
   return (

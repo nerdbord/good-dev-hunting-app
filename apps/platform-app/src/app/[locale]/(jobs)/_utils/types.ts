@@ -57,3 +57,7 @@ export enum BudgetType {
   FIXED = 'fixed',
   REQUEST_QUOTE = 'requestQuote',
 }
+
+export interface LoginFormValues {
+  email: string;
+}
