@@ -1,6 +1,6 @@
 import type { JobPublishingState } from '../../(routes)/jobs/my-jobs/mockData'
 import { MyJobCard } from '../MyJobCard/MyJobCard'
-import styles from './myJobsList.module.scss'
+import styles from './MyJobsList.module.scss'
 
 interface MyJobsListProps {
   jobs: {

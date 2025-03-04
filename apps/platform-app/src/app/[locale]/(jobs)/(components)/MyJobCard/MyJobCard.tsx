@@ -6,7 +6,7 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import type { JobPublishingState } from '../../(routes)/jobs/my-jobs/mockData'
 import { calculateDaysAgo } from '../../_utils/utils'
-import styles from './myJobCard.module.scss'
+import styles from './MyJobCard.module.scss'
 interface MyJobCardProps {
   job: {
     name: string
