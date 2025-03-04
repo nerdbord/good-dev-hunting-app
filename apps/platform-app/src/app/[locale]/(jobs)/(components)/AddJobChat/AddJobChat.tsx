@@ -62,8 +62,9 @@ export function AddJobChat() {
             onChange={handleChange}
             maxLength={1500}
             id="applicationChatbot"
-            className={`${styles.chatbotTextarea} ${input.trim() ? styles.typed : ''
-              }`}
+            className={`${styles.chatbotTextarea} ${
+              input.trim() ? styles.typed : ''
+            }`}
           />
         </form>
       </div>

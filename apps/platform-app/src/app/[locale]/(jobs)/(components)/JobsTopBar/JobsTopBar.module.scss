@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  padding: 32px 0;
+
+  @include mobile {
+    flex-direction: column;
+    flex: auto;
+    gap: 24px;
+  }
+}
+
+.titleBox {
+  align-items: center;
+  z-index: 2;
+  width: 390px;
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+  margin-bottom: 10px;
+  color: var(--text-color2);
+}
+
+.subHeader {
+  color: var(--suggestion-text-color);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.childrenContainer {
+  display: flex;
+  gap: 16px;
+  @include mobile {
+    align-self: start;
+    flex: auto;
+  }
+}

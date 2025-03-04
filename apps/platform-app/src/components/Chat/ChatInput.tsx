@@ -13,7 +13,7 @@ export default function ChatInput({
   onSendMessage,
   placeholder = 'Type a message...',
   buttonText = 'Send',
-  className = ''
+  className = '',
 }: ChatInputProps) {
   const [message, setMessage] = useState('')
 
@@ -26,7 +26,10 @@ export default function ChatInput({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.chatInput} ${className}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`${styles.chatInput} ${className}`}
+    >
       <input
         type="text"
         value={message}
@@ -97,4 +100,4 @@ export default function ChatInput({
     cursor: not-allowed;
   }
 }
-*/ 
+*/

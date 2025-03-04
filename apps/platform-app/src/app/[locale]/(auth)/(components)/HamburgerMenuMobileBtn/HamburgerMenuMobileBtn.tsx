@@ -52,10 +52,18 @@ const HamburgerMenuMobileBtn = ({
                 <div className={styles.wrapper}>
                   <GithubAcc />
                   <div className={styles.menuLinks}>
-                    <Link href={AppRoutes.myProfile} className={styles.menuLink} onClick={handleCloseMenu}>
+                    <Link
+                      href={AppRoutes.myProfile}
+                      className={styles.menuLink}
+                      onClick={handleCloseMenu}
+                    >
                       My Profile
                     </Link>
-                    <Link href={AppRoutes.inbox} className={styles.menuLink} onClick={handleCloseMenu}>
+                    <Link
+                      href={AppRoutes.inbox}
+                      className={styles.menuLink}
+                      onClick={handleCloseMenu}
+                    >
                       {inboxT('title')}
                     </Link>
                   </div>

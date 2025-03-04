@@ -1,31 +1,30 @@
 'use client'
-import React from 'react'
 import styles from './chat.module.scss'
 
 export interface MessageProps {
-    id: string
-    content: string
-    timestamp: string
-    isSentByCurrentUser: boolean
-    className?: string
+  id: string
+  content: string
+  timestamp: string
+  isSentByCurrentUser: boolean
+  className?: string
 }
 
 export default function Message({
-    content,
-    timestamp,
-    isSentByCurrentUser,
-    className = ''
+  content,
+  timestamp,
+  isSentByCurrentUser,
+  className = '',
 }: MessageProps) {
-    return (
-        <div
-            className={`${styles.messageItem} ${isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage} ${className}`}
-        >
-            <div className={styles.messageContent}>
-                {content}
-            </div>
-            <div className={styles.messageTimestamp}>{timestamp}</div>
-        </div>
-    )
+  return (
+    <div
+      className={`${styles.messageItem} ${
+        isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage
+      } ${className}`}
+    >
+      <div className={styles.messageContent}>{content}</div>
+      <div className={styles.messageTimestamp}>{timestamp}</div>
+    </div>
+  )
 }
 
 // CSS classes to be included in the module that uses this component:
@@ -76,4 +75,4 @@ export default function Message({
   color: var(--text-secondary-color, #69717b);
   margin-top: 4px;
 }
-*/ 
+*/

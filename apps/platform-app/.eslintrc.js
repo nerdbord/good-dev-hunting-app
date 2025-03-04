@@ -3,7 +3,6 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
-    node: true,
   },
   parserOptions: {
     ecmaVersion: 'latest',
@@ -12,7 +11,11 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   plugins: ['@typescript-eslint'],
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@next/next/recommended',
+  ],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-empty-interface': 'warn',
