@@ -204,7 +204,8 @@
     "signInWithGoogle": "Sign in with Google",
     "haventAccount": "Don't have an account?",
     "signUp": "Create one in 10 seconds",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "or": "or"
   },
   "Jobs": {
     "postJobTitle": "Post a New Job",

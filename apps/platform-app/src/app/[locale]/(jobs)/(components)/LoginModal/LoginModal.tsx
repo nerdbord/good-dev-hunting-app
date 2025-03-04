@@ -9,11 +9,8 @@ import { useTranslations } from 'next-intl'
 import * as Yup from 'yup'
 import { type LoginFormValues } from '../../types'
 import styles from './LoginModal.module.scss'
-// import { useRouter } from 'next/navigation'
-// import { AppRoutes } from '@/utils/routes'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
-  // const router = useRouter()
   const t = useTranslations(I18nNamespaces.Auth)
 
   const handleSigninByGoogle = () => {
@@ -85,7 +82,7 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
             </form>
           )}
         </Formik>
-        <p className={styles.or}>lub</p>
+        <p className={styles.or}>{t('or')}</p>
         <Button
           variant="secondary"
           type="button"
