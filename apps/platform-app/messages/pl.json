@@ -200,7 +200,14 @@
     "jobDetails": "Szczegóły zlecenia",
     "applicationMsgLabel": "Wiadomość",
     "applicationMsgPlaceholder": "Napisz swoją wiadomość tutaj...",
-    "applicationBudgetLabel": "Budżet"
+    "applicationBudgetLabel": "Budżet",
+    "messageRequired": "Wiadomość jest wymagana",
+    "budgetRequired": "Budżet jest wymagany",
+    "userProfileNotFound": "Nie znaleziono profilu użytkownika",
+    "cvRequired": "CV jest wymagane",
+    "cvUploadFailed": "Nie udało się przesłać CV",
+    "applicationSubmissionFailed": "Nie udało się wysłać aplikacji",
+    "submitting": "Wysyłanie..."
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",
