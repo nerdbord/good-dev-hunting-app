@@ -4,6 +4,8 @@ import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.mode
 import ProfilePicture from '@/assets/images/ProfilePicture.png'
 import { useScreenDetection } from '@/hooks/useDeviceDetection'
 import { I18nNamespaces } from '@/i18n/request'
+import { ArrowLeft, ArrowRight } from '@gdh/ui-system/icons'
+import { EmploymentType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -35,8 +37,8 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
 
       if (isMobile) {
         // On mobile scroll just one column at a time
-        setScrollMoveValue(columnWidth + gap)
-      } else if (screenWidth < 1024) {
+        setScrollMoveValue(columnWidth + gap * 1)
+      } else if (screenWidth < 1140) {
         setScrollMoveValue(columnWidth * 1 + gap * 1)
       } else {
         // On desktop scroll three columns at a time
@@ -46,7 +48,6 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
   }, [isMobile, screenWidth])
 
   const handleScrollLeft = () => {
-    console.log('scrollLeft', scrollMoveValue)
     if (containerRef.current) {
       containerRef.current.scrollLeft -= scrollMoveValue
     }
@@ -58,11 +59,16 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
       containerRef.current.scrollLeft += scrollMoveValue
     }
   }
-
-  const getAvailabilityType = (profile: ProfileModel) => {
-    if (profile.employmentTypes?.includes('FULL_TIME')) return 'fullTime'
-    if (profile.employmentTypes?.includes('CONTRACT')) return 'contract'
-    return 'partTime'
+  const renderAvailabilityInfo = (member: ProfileModel) => {
+    if (member.employmentTypes.includes(EmploymentType.FULL_TIME)) {
+      return <p className={styles.availabilityInfo}>{t('fullTime')}</p>
+    } else if (member.employmentTypes.includes(EmploymentType.CONTRACT)) {
+      return <p className={styles.availabilityInfo}>{t('contract')}</p>
+    } else if (member.employmentTypes.includes(EmploymentType.PART_TIME)) {
+      return <p className={styles.availabilityInfo}>{t('partTime')}</p>
+    } else {
+      return
+    }
   }
 
   return (
@@ -84,8 +90,8 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
                 <Image
                   src={member.avatarUrl || ProfilePicture}
                   alt={member.fullName}
-                  width={150}
-                  height={150}
+                  width={120}
+                  height={120}
                   className={styles.avatar}
                 />
                 <div className={styles.statusIndicator}>
@@ -98,32 +104,21 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
                 <p className={styles.memberLocation}>
                   {member.country}
                   {member.city && `, ${member.city}`}
-                  {member.remoteOnly && ' (Remote)'}
+                  {member.remoteOnly && t('remote')}
                 </p>
-                <div className={styles.availabilityInfo}>
-                  {member.isOpenForWork
-                    ? t('availableFor', { type: getAvailabilityType(member) })
-                    : t('notAvailable')}
-                </div>
               </div>
+
+              {renderAvailabilityInfo(member)}
             </div>
           ))}
         </div>
 
         <div className={styles.navigation} aria-hidden="true">
-          <button
-            className={styles.navButton}
-            onClick={handleScrollLeft}
-            tabIndex={-1}
-          >
-            &lt;
+          <button className={styles.navButton} onClick={handleScrollLeft}>
+            <ArrowLeft />
           </button>
-          <button
-            className={styles.navButton}
-            onClick={handleScrollRight}
-            tabIndex={-1}
-          >
-            &gt;
+          <button className={styles.navButton} onClick={handleScrollRight}>
+            <ArrowRight />
           </button>
         </div>
       </div>

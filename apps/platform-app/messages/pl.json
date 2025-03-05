@@ -359,7 +359,9 @@
     "descriptionBold": "Wierzymy, że znalezienie eksperta IT powinno być proste. ",
     "description": "Łączymy wizjonerów ze specjalistami, eliminując bariery i biurokrację. Tworzymy open source, bo technologia powinna być dostępna i transparentna.",
     "signature": "— Zespół Good Dev Hunting",
-    "availableFor": "Dostępny do pracy na {type}",
-    "notAvailable": "Obecnie niedostępny"
+    "fullTime": "Dostępny na pełen etat",
+    "contract": "Dostępny do pracy na kontrakt",
+    "partTime": "Dostępny na część etatu",
+    "remote": " Zdalnie"
   }
 }
