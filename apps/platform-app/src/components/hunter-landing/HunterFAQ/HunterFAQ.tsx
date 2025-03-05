@@ -1,14 +1,11 @@
 'use client'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
-import classNames from 'classnames/bind'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { AccordionGroup } from '../AccordionGroup/AccordionGroup'
 import styles from './HunterFAQ.module.scss'
 
-type Props = {}
-
-export const HunterFAQ = (props: Props) => {
+export const HunterFAQ = () => {
   const t = useTranslations(I18nNamespaces.HunterFAQ)
 
   const handleContact = () => {
@@ -26,7 +23,7 @@ export const HunterFAQ = (props: Props) => {
         </Button>
       </div>
       <div className={styles.right}>
-        <Accordion
+        <AccordionGroup
           items={[
             {
               question: t('accordeon.questionOne'),
@@ -44,53 +41,5 @@ export const HunterFAQ = (props: Props) => {
         />
       </div>
     </section>
-  )
-}
-
-// accordion
-const cx = classNames.bind(styles)
-
-type AccordionItem = {
-  question: string
-  answer: string
-}
-
-type AccordionProps = {
-  items: AccordionItem[]
-}
-
-const Accordion = ({ items }: AccordionProps) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-
-  const toggleAccordion = (index: number) => {
-    setOpenIndex((prevIndex) => (prevIndex === index ? null : index))
-  }
-
-  return (
-    <div className={styles.accordionWrapper}>
-      {items.map((item, index) => {
-        const isOpen = openIndex === index
-        const contentClasses = cx({
-          [styles.accordionContent]: true,
-          [styles.isOpen]: isOpen,
-        })
-
-        return (
-          <section
-            key={index}
-            className={styles.accordion}
-            onClick={() => toggleAccordion(index)}
-          >
-            <div className={styles.titleWrapper}>
-              <p>{item.question}</p>
-              <div className={styles.icon}>+</div>
-            </div>
-            <div className={contentClasses}>
-              <div className={styles.answer}>{item.answer}</div>
-            </div>
-          </section>
-        )
-      })}
-    </div>
   )
 }
