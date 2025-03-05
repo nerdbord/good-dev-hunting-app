@@ -63,9 +63,7 @@
 
 .secondary:hover:enabled {
   background-color: var(--button-stroke);
-
 }
-
 
 .tertiary {
   border: none;
@@ -142,7 +140,18 @@
 
 .grayedOut:hover:enabled {
   background-color: var(--bg-color3);
+}
 
+.allpurple {
+  padding: 12px 24px;
+  color: var(--button-bg-2);
+  background: transparent;
+  border: 1px solid var(--hunter-landing-text-color4);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
 }
 
 .buttonWrapper {
@@ -151,6 +160,4 @@
       width: 100%;
     }
   }
-
-
 }

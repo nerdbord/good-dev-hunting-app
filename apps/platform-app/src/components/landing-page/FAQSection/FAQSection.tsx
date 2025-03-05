@@ -21,7 +21,6 @@ const FAQSection = () => {
         <Accordion title={t('questionThree')}>
           <p>{t('answerThree')}</p>
         </Accordion>
-        <Accordion title={t('questionFour')}>{t('answerFour')}</Accordion>
       </div>
     </section>
   )
