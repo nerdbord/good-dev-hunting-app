@@ -353,5 +353,19 @@
     "backToProfile": "Back to profile",
     "send": "Send",
     "inbox": "Inbox"
+  },
+
+  "HunterFAQ": {
+    "title": "Most Frequently Asked Questions",
+    "desc": "Find answers to frequently asked questions or contact us. We will be happy to help and clear up any doubts.",
+    "button": "Write to us",
+    "accordeon": {
+      "questionOne": "Is it really free?",
+      "answerOne": "Yes, adding an order is fully free.",
+      "questionTwo": "How do I get information from specialists?",
+      "answerTwo": "Specialists who sign up for an assignment will be able to connect with the Principal via the internal chat available on the platform. The Principal, on the other hand, will receive an email notification of their willingness to cooperate.",
+      "questionThree": "How many orders can I post?",
+      "answerThree": "At this point you can add one order per day."
+    }
   }
 }

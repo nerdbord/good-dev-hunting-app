@@ -9,39 +9,36 @@ import styles from './HunterFAQ.module.scss'
 type Props = {}
 
 export const HunterFAQ = (props: Props) => {
-  const t = useTranslations(I18nNamespaces.Faq)
+  const t = useTranslations(I18nNamespaces.HunterFAQ)
 
   const handleContact = () => {
-    console.log('clicked')
+    const encodedEmailParts = ['bWFpbHRv', 'OnRlYW1AZGV2aHVudGluZy5jby==']
+    window.location.href = atob(encodedEmailParts.join(''))
   }
 
   return (
     <section id="FAQ" className={styles.wrapper}>
       <div className={styles.left}>
-        <p className={styles.title}>Najczęstsze pytania</p>
-        <p className={styles.desc}>
-          Znajdź odpowiedzi na najczęściej zadawane pytania lub skontaktuj się z
-          nami. Chętnie pomożemy i rozwiejemy wszelkie wątpliwości.
-        </p>
+        <p className={styles.title}>{t('title')}</p>
+        <p className={styles.desc}>{t('desc')}</p>
         <Button variant="allpurple" onClick={handleContact}>
-          Napisz do nas
+          {t('button')}
         </Button>
       </div>
       <div className={styles.right}>
         <Accordion
           items={[
             {
-              question: 'Czy to rzeczywiście za darmo?',
-              answer: 'Tak, dodanie zlecenia jest w pełni za darmo.',
+              question: t('accordeon.questionOne'),
+              answer: t('accordeon.answerOne'),
             },
             {
-              question: 'Jak dostanę informacje od specjalistów?',
-              answer:
-                'Informacje od specjalistów otrzymasz na podany adres e-mail.',
+              question: t('accordeon.questionTwo'),
+              answer: t('accordeon.answerTwo'),
             },
             {
-              question: 'Ile zleceń mogę zapostować?',
-              answer: 'Możesz zapostować dowolną liczbę zleceń.',
+              question: t('accordeon.questionThree'),
+              answer: t('accordeon.answerThree'),
             },
           ]}
         />
