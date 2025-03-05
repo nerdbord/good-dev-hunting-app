@@ -1,2 +1,213 @@
 .wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+
+  @include mobile {
+    flex-direction: column;
+    padding: 40px 15px;
+  }
+}
+
+.header {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+  margin-right: 40px;
+
+  @include mobile {
+    margin-right: 0;
+    margin-bottom: 40px;
+    max-width: 100%;
+  }
+}
+
+.title {
+  color: var(--text-color);
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+  margin: 0;
+
+  // Mobile styles
+  @include mobile {
+    font-size: 28px;
+  }
+}
+
+.description {
+  color: var(--text-color2);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+
+  span {
+    font-weight: 700;
+  }
+  // Mobile styles
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+.signature {
+  color: var(--text-color2);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+}
+
+.teamMembersContainer {
+  --gap: 16px;
+  --column-width: 210px;
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: var(--column-width);
+  gap: var(--gap);
+  overflow-x: auto;
+
+  margin-right: calc(
+    (var(--column-width) * 0.5) + var(--gap)
+  ); /* To make it "escape" the container */
+  max-width: calc(
+    (var(--column-width) * 2.5) + var(--gap)
+  ); /* Limit container width as requested */
+  padding-right: var(--column-width);
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth; /* For smooth scrolling */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
+
+  @include mobile {
+    // margin-right: -50px;
+    padding-right: var(--column-width);
+  }
+  @include desktop {
+    max-width: calc((var(--column-width) * 3.5) + (var(--gap) * 3));
+    padding: 0;
+  }
+}
+
+.memberCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.avatarContainer {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  // Mobile styles
+  @include mobile {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.statusIndicator {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.statusDot {
+  width: 12px;
+  height: 12px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.memberInfo {
+  width: 100%;
+  text-align: center;
+}
+
+.memberName {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 5px 0;
+}
+
+.memberPosition {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 10px 0;
+}
+
+.memberLocation {
+  font-size: 14px;
+  margin: 0 0 15px 0;
+}
+
+.availabilityInfo {
+  font-size: 14px;
+  color: #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.navigation {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  align-self: flex-start;
+  /* Hide navigation from screen readers as it's purely visual - implementation in TSX file */
+}
+
+.navButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+  }
 }

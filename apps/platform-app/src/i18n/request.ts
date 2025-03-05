@@ -23,6 +23,7 @@ export enum I18nNamespaces {
   UserProfile = 'UserProfile',
   TalentSection = 'TalentSection',
   MeetTeam = 'MeetTeam',
+  HunterTeam = 'HunterTeam',
   Faq = 'Faq',
   Buttons = 'Buttons',
   LandingFooter = 'LandingFooter',
@@ -43,5 +44,5 @@ export enum I18nNamespaces {
   AddJobChat = 'AddJobChat',
   MyJobCard = 'MyJobCard',
   Inbox = 'Inbox',
-  Auth = 'Auth'
+  Auth = 'Auth',
 }

@@ -353,5 +353,13 @@
     "backToProfile": "Back to profile",
     "send": "Send",
     "inbox": "Inbox"
+  },
+  "HunterTeam": {
+    "title": "Meet Our Team",
+    "descriptionBold": "We believe that finding an IT expert should be simple. ",
+    "description": "We connect visionaries with specialists, eliminating barriers and bureaucracy. We create open source because technology should be accessible and transparent.",
+    "signature": "— The Good Dev Hunting Team",
+    "availableFor": "Available for {type} work",
+    "notAvailable": "Currently unavailable"
   }
 }
