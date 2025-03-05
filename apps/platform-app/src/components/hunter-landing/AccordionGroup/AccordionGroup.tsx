@@ -5,13 +5,13 @@ import styles from './AccordionGroup.module.scss'
 
 const cx = classNames.bind(styles)
 
-type AccordionItem = {
+type Accordion = {
   question: string
   answer: string
 }
 
 type AccordionGroupProps = {
-  items: AccordionItem[]
+  items: Accordion[]
 }
 
 export const AccordionGroup = ({ items }: AccordionGroupProps) => {
