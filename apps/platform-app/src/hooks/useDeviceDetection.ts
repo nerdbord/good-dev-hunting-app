@@ -1,14 +1,15 @@
 'use client'
+import { useDebounce } from '@/hooks/useDebounce'
 import { useEffect, useState } from 'react'
 
 /**
  * Custom hook for detecting device type and screen width
  * @returns An object with isMobile boolean and current screen width
  */
-
 export const useScreenDetection = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [screenWidth, setScreenWidth] = useState<number>(0)
+  const debouncedWidth = useDebounce(screenWidth, 250)
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -25,5 +26,9 @@ export const useScreenDetection = () => {
     }
   }, [])
 
-  return { isMobile, screenWidth }
+  useEffect(() => {
+    setIsMobile(debouncedWidth <= 768)
+  }, [debouncedWidth])
+
+  return { isMobile, screenWidth: debouncedWidth }
 }

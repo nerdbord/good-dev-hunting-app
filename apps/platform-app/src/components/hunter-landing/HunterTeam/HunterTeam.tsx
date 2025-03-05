@@ -22,11 +22,6 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
   const { isMobile, screenWidth } = useScreenDetection()
 
   useEffect(() => {
-    console.log('Device type changed:', isMobile ? 'Mobile' : 'Desktop')
-  }, [isMobile])
-
-  useEffect(() => {
-    // Get computed CSS values from the container element
     if (containerRef.current) {
       const computedStyle = window.getComputedStyle(containerRef.current)
       const columnWidth = parseInt(
@@ -54,7 +49,6 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
   }
 
   const handleScrollRight = () => {
-    console.log('scrollRight', scrollMoveValue)
     if (containerRef.current) {
       containerRef.current.scrollLeft += scrollMoveValue
     }

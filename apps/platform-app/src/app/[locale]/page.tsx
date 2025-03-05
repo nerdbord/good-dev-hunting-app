@@ -12,7 +12,6 @@ import { HunterRiskReducers } from '@/components/hunter-landing/HunterRiskReduce
 import { HunterTeam } from '@/components/hunter-landing/HunterTeam/HunterTeam'
 import { HunterWhyWorth } from '@/components/hunter-landing/HunterWhyWorth/HunterWhyWorth'
 
-import { ThemeSwitcher } from './(profile)/(components)/ThemeSwitcher/ThemeSwitcher'
 import styles from './page.module.scss'
 
 export default async function HunterLandingPage() {
@@ -20,7 +19,6 @@ export default async function HunterLandingPage() {
 
   return (
     <main className={styles.hunter_landing}>
-      <ThemeSwitcher />
       <Container>
         <HunterHeader />
         <HunterHero />
