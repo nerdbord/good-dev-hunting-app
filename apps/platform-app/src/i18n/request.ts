@@ -43,5 +43,6 @@ export enum I18nNamespaces {
   AddJobChat = 'AddJobChat',
   MyJobCard = 'MyJobCard',
   Inbox = 'Inbox',
-  Auth = 'Auth'
+  Auth = 'Auth',
+  HunterFAQ = 'HunterFAQ',
 }
