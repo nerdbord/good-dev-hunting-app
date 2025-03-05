@@ -4,7 +4,7 @@
   flex-direction: row;
   align-items: center;
   gap: 40px;
-  padding: 90px 0;
+  padding-bottom: 90px;
 
   .left {
     flex: 2;
@@ -16,7 +16,7 @@
 
   @include mobile {
     flex-direction: column;
-    padding: 0;
+    padding-bottom: 60px;
   }
 }
 
@@ -32,6 +32,10 @@
     font-size: 38px;
     line-height: 40px;
     letter-spacing: 0%;
+    @include mobile {
+      font-size: 26px;
+      line-height: 30px;
+    }
   }
 
   .desc {
@@ -39,6 +43,10 @@
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0%;
+    @include mobile {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   @include mobile {
@@ -56,7 +64,7 @@
 }
 .accordion {
   width: 100%;
-  margin: 16px;
+  margin-bottom: 16px;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 16px;
@@ -64,7 +72,6 @@
   background-color: white;
 
   @include mobile {
-    margin: 0px;
   }
 
   &:last-child {
@@ -82,14 +89,20 @@
   font-size: 20px;
   line-height: 28px;
   letter-spacing: 0%;
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .icon {
   font-weight: 400;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 28px;
   margin-bottom: 2px;
   color: var(--hunter-landing-text-color4);
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .accordionContent {
