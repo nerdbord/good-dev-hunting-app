@@ -152,6 +152,9 @@
   line-height: 20px;
   letter-spacing: 0%;
   text-align: center;
+  &:hover {
+    background-color: var(--hunter-landing-bg-color3);
+  }
 }
 
 .buttonWrapper {
