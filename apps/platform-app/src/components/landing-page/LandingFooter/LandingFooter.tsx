@@ -7,6 +7,12 @@ import styles from './LandingFooter.module.scss'
 
 const LandingFooter = () => {
   const t = useTranslations(I18nNamespaces.LandingFooter)
+  const year = new Date().getFullYear()
+
+  const contactEmail = atob(
+    ['bWFpbHRv', 'OnRlYW1AZGV2aHVudGluZy5jby=='].join(''),
+  )
+
   return (
     <section id="LandingFooter" className={styles.footer}>
       <Container>
@@ -18,7 +24,7 @@ const LandingFooter = () => {
               Good Dev Hunting
             </span>
             <Link
-              href="mailto:team@devhunting.co"
+              href={contactEmail}
               target="_blank"
               className={`${styles.textLight} ${styles.pointer}`}
             >
@@ -35,7 +41,7 @@ const LandingFooter = () => {
         </div>
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            Copyright © 2024 Nerdbord OU All rights reserved.
+            Copyright © {year} Nerdbord OU All rights reserved.
           </span>
           <div className={styles.terms}>
             <Link

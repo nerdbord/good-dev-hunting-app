@@ -2,7 +2,7 @@
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-import { AccordionGroup } from '../AccordionGroup/AccordionGroup'
+import { AccordionGroup } from '../UI/AccordionGroup/AccordionGroup'
 import styles from './HunterFAQ.module.scss'
 
 export const HunterFAQ = () => {
