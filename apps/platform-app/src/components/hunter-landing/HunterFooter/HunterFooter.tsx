@@ -4,15 +4,17 @@ import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { LogoLight } from '../UI/LogoLight/LogoLight'
 import styles from './HunterFooter.module.scss'
 
 export const HunterFooter = () => {
   const t = useTranslations(I18nNamespaces.HunterFooter)
+  const router = useRouter()
   const year = new Date().getFullYear()
 
   const handleAddJob = () => {
-    window.location.href = AppRoutes.postJob
+    router.push(AppRoutes.postJob)
   }
 
   const handleContact = () => {
@@ -24,7 +26,6 @@ export const HunterFooter = () => {
     <section id="HunterFooter" className={styles.footer}>
       <div className={styles.topBar}>
         <LogoLight />
-
         <div className={styles.contact}>
           <div onClick={handleContact}>{t('contact')}</div>
           <Link target={'_blank'} href={AppRoutes.devs}>
