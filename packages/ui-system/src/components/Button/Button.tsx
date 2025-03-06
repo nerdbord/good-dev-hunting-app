@@ -12,7 +12,8 @@ interface ButtonProps {
     | "action"
     | "logout"
     | "standard"
-    | "grayedOut";
+    | "grayedOut"
+    | "allpurple";
   type?: "button" | "submit";
   disabled?: boolean;
   loading?: boolean;

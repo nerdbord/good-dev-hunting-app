@@ -354,6 +354,19 @@
     "send": "Wyślij",
     "inbox": "Skrzynka"
   },
+  "HunterFAQ": {
+    "title": "Najczęstsze pytania",
+    "desc": " Znajdź odpowiedzi na najczęściej zadawane pytania lub skontaktuj się z nami. Chętnie pomożemy i rozwiejemy wszelkie wątpliwości.",
+    "button": "Napisz do nas",
+    "accordeon": {
+      "questionOne": "Czy to rzeczywiście za darmo?",
+      "answerOne": "Tak, dodanie zlecenia jest w pełni za darmo.",
+      "questionTwo": "Jak dostanę informacje od specjalistów?",
+      "answerTwo": "Specjaliści, którzy zgłoszą się do realizacji zlecenia, będą mogli połączyć się ze Zleceniodawcą za pomocą czatu wewnętrznego dostępnego na platformie. Zleceniodawca natomiast otrzyma powiadomienie mailowe o chęci podjęcia współpracy.",
+      "questionThree": "Ile zleceń mogę zapostować?",
+      "answerThree": "Na ten moment możesz dodać jedno zlecenie dziennie."
+    }
+  },
   "HunterTeam": {
     "title": "Poznaj nasz zespół",
     "descriptionBold": "Wierzymy, że znalezienie eksperta IT powinno być proste. ",

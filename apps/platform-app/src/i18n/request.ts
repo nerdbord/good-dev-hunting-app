@@ -45,4 +45,5 @@ export enum I18nNamespaces {
   MyJobCard = 'MyJobCard',
   Inbox = 'Inbox',
   Auth = 'Auth',
+  HunterFAQ = 'HunterFAQ',
 }

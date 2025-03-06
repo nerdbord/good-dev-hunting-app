@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './HunterTeam.module.scss'
 
 type Props = {
-  teamProfiles: ProfileModel[]
+  teamProfiles: ProfileModel[] | undefined
 }
 
 export const HunterTeam = ({ teamProfiles }: Props) => {
@@ -78,7 +78,33 @@ export const HunterTeam = ({ teamProfiles }: Props) => {
 
       <div>
         <div className={styles.teamMembersContainer} ref={containerRef}>
-          {teamProfiles.map((member) => (
+          {!teamProfiles?.length && (
+            <div className={styles.memberCard}>
+              <div className={styles.avatarContainer}>
+                <Image
+                  src="/devsTeamAvatar.webp"
+                  alt={"database error, can't load team members informations"}
+                  width={120}
+                  height={120}
+                  className={styles.avatar}
+                />
+                <div className={styles.statusIndicator}>
+                  <div
+                    className={styles.statusDot}
+                    style={{ backgroundColor: '#df1f1f' }}
+                  />
+                </div>
+              </div>
+              <div className={styles.memberInfo}>
+                <h3 className={styles.memberName}>Deliaf Krowten</h3>
+                <p className={styles.memberPosition}>
+                  Intern Network Administrator
+                </p>
+                <p className={styles.memberLocation}>Neverland, Null Island</p>
+              </div>
+            </div>
+          )}
+          {teamProfiles?.map((member) => (
             <div key={member.id} className={styles.memberCard}>
               <div className={styles.avatarContainer}>
                 <Image
