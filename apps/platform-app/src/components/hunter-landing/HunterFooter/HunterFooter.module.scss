@@ -1,2 +1,65 @@
-.wrapper {
+.footer {
+  padding-bottom: 60px;
+  font-size: 16px;
+  line-height: 20px;
+
+  @include mobile {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    gap: 26px;
+  }
+}
+
+.mobileHide {
+  @include mobile {
+    display: none;
+  }
+}
+.topBar,
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+}
+
+.bottomBar {
+  margin-top: 60px;
+  color: var(--hunter-landing-text-color3);
+  @include mobile {
+    flex-direction: column-reverse;
+    margin-top: 30px;
+  }
+}
+
+.contact,
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  @include mobile {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+.contact {
+  cursor: pointer;
+}
+
+.terms {
+  @include mobile {
+    gap: 30px;
+  }
+}
+
+.pointer {
+  cursor: pointer;
 }

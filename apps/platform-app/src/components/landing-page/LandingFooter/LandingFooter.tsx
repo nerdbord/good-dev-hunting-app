@@ -7,6 +7,7 @@ import styles from './LandingFooter.module.scss'
 
 const LandingFooter = () => {
   const t = useTranslations(I18nNamespaces.LandingFooter)
+  const year = new Date().getFullYear()
   return (
     <section id="LandingFooter" className={styles.footer}>
       <Container>
@@ -35,7 +36,7 @@ const LandingFooter = () => {
         </div>
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            Copyright © 2024 Nerdbord OU All rights reserved.
+            Copyright © {year} Nerdbord OU All rights reserved.
           </span>
           <div className={styles.terms}>
             <Link
