@@ -1,11 +1,14 @@
 .footer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
   padding-bottom: 60px;
   font-size: 16px;
   line-height: 20px;
 
   @include mobile {
     padding-bottom: 50px;
-    gap: 30px;
+    gap: 0;
   }
 }
 
@@ -27,7 +30,6 @@
 }
 
 .bottomBar {
-  margin-top: 60px;
   color: var(--hunter-landing-text-color3);
   @include mobile {
     flex-direction: column-reverse;
