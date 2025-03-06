@@ -8,6 +8,11 @@ import styles from './LandingFooter.module.scss'
 const LandingFooter = () => {
   const t = useTranslations(I18nNamespaces.LandingFooter)
   const year = new Date().getFullYear()
+
+  const contactEmail = atob(
+    ['bWFpbHRv', 'OnRlYW1AZGV2aHVudGluZy5jby=='].join(''),
+  )
+
   return (
     <section id="LandingFooter" className={styles.footer}>
       <Container>
@@ -19,7 +24,7 @@ const LandingFooter = () => {
               Good Dev Hunting
             </span>
             <Link
-              href="mailto:team@devhunting.co"
+              href={contactEmail}
               target="_blank"
               className={`${styles.textLight} ${styles.pointer}`}
             >

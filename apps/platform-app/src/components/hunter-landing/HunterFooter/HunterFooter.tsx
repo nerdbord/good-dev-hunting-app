@@ -1,28 +1,23 @@
 'use client'
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { LogoLight } from '../LogoLight/LogoLight'
+import { LogoLight } from '../UI/LogoLight/LogoLight'
 import styles from './HunterFooter.module.scss'
 
-type Props = {}
-
-export const HunterFooter = (props: Props) => {
+export const HunterFooter = () => {
   const t = useTranslations(I18nNamespaces.HunterFooter)
   const year = new Date().getFullYear()
 
   const handleAddJob = () => {
-    console.log('Job added')
+    window.location.href = AppRoutes.postJob
   }
 
   const handleContact = () => {
     const encodedEmailParts = ['bWFpbHRv', 'OnRlYW1AZGV2aHVudGluZy5jby==']
     window.location.href = atob(encodedEmailParts.join(''))
-  }
-
-  const handleJoinAsItSpecialist = () => {
-    console.log('Joined as IT specialist')
   }
 
   return (
@@ -32,9 +27,9 @@ export const HunterFooter = (props: Props) => {
 
         <div className={styles.contact}>
           <div onClick={handleContact}>{t('contact')}</div>
-          <div onClick={handleJoinAsItSpecialist}>
+          <Link target={'_blank'} href={AppRoutes.devs}>
             {t('joinAsItSpecialist')}
-          </div>
+          </Link>
           <Button variant="allpurple" onClick={handleAddJob}>
             {t('addJob')}
           </Button>

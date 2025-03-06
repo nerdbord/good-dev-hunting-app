@@ -18,6 +18,7 @@ export enum AppRoutes {
   myJobs = '/jobs/my-jobs',
   application = '/applications/:id',
   jobApplications = '/jobs/:id/applications',
+  devs = '/devs',
 }
 
 export const removeLocaleFromPath = (pathname: string, locale: string) => {
