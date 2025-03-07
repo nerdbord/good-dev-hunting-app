@@ -2,7 +2,7 @@
 import styles from "./TextareaHero.module.scss"
 import { useTranslations } from "next-intl"
 import { I18nNamespaces } from "@/i18n/request"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 
 type TextareaHeroProps = {
   tagsAnimate: string[];
@@ -19,6 +19,7 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
   const [currentTag, setCurrentTag] = useState(tagsAnimate[0]);
   const [isAnimating, setIsAnimating] = useState(true);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Function to get random tag excluding the current one
   const getRandomTag = useCallback((currentTag: string) => {
@@ -27,10 +28,20 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
     return availableTags[randomIndex];
   }, [tagsAnimate]);
 
+  const adjustHeight = useCallback(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = '121px';
+      const scrollHeight = textarea.scrollHeight;
+      textarea.style.height = scrollHeight + 'px';
+    }
+  }, []);
+
   useEffect(() => {
     if (selectedTag) {
       setText(mockText);
       setShowPlaceholder(false);
+      setTimeout(adjustHeight, 0);
       return;
     }
 
@@ -51,7 +62,7 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
     }, ANIMATION_DURATION);
 
     return () => clearInterval(interval);
-  }, [currentTag, getRandomTag, onTagChange, selectedTag, mockText]);
+  }, [currentTag, getRandomTag, onTagChange, selectedTag, mockText, adjustHeight]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
@@ -70,6 +81,8 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
       setText(newValue);
       setShowPlaceholder(false);
     }
+    
+    adjustHeight();
   };
 
   return (
@@ -85,6 +98,7 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
         </div>
       )}
       <textarea
+        ref={textareaRef}
         className={styles.searchTextarea}
         value={selectedTag ? text : text ? `${staticPrefix}${text}` : ""}
         onChange={handleChange}

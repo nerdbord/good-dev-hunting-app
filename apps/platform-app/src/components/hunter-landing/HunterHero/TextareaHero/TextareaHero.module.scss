@@ -29,14 +29,11 @@
 }
 
 .searchTextarea {
-  display: flex;
+  display: block;
   width: 493px;
   height: 121px;
   max-width: 700px;
   padding: 16px 24px 16px 20px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
   resize: none;
   border: none;
   border-radius: 4px;
@@ -46,6 +43,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+  overflow: hidden;
 
   &:focus {
     outline: none;
