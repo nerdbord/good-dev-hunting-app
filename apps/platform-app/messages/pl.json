@@ -376,5 +376,13 @@
     "contract": "Dostępny do pracy na kontrakt",
     "partTime": "Dostępny na część etatu",
     "remote": " Zdalnie"
+  },
+  "HunterFooter": {
+    "contact": "Kontakt",
+    "privacyPolicy": "Polityka prywatności",
+    "termsOfService": "Warunki korzystania z usługi",
+    "addJob": "Dodaj zlecenie za darmo",
+    "contact": "Kontakt",
+    "joinAsItSpecialist": "Dołącz jako IT specjalista"
   }
 }

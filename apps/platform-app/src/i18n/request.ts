@@ -46,4 +46,5 @@ export enum I18nNamespaces {
   Inbox = 'Inbox',
   Auth = 'Auth',
   HunterFAQ = 'HunterFAQ',
+  HunterFooter = 'HunterFooter',
 }
