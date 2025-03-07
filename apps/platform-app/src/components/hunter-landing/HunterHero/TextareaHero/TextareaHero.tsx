@@ -36,13 +36,14 @@ export const TextareaHero = ({ tagsAnimate }: TextareaHeroProps) => {
 
   return (
     <div className={styles.textareaWrapper}>
-      {/* <div className={styles.overlayText}>
-        {staticPrefix}
-        <span className={styles.dynamicText}>{text}</span>
-      </div> */}
+      {!text && (
+        <div className={styles.overlayText}>
+          {staticPrefix}
+          <span className={styles.dynamicText}>{currentTag}</span>
+        </div>
+      )}
       <textarea
         className={styles.searchTextarea}
-        placeholder={`${staticPrefix}${currentTag}`}
         value={text ? `${staticPrefix}${text}` : ""}
         onChange={handleChange}
       />
