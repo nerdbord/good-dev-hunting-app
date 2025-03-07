@@ -1,6 +1,5 @@
 import { Container } from '@gdh/ui-system'
 
-import { findAllTeamProfiles } from '@/app/[locale]/(profile)/_actions/queries/findAllTeamProfiles'
 import { HunterCTA } from '@/components/hunter-landing/HunterCTA/HunterCTA'
 import { HunterFAQ } from '@/components/hunter-landing/HunterFAQ/HunterFAQ'
 import { HunterFooter } from '@/components/hunter-landing/HunterFooter/HunterFooter'
@@ -15,8 +14,6 @@ import { HunterWhyWorth } from '@/components/hunter-landing/HunterWhyWorth/Hunte
 import styles from './page.module.scss'
 
 export default async function HunterLandingPage() {
-  const teamProfiles = await findAllTeamProfiles()
-
   return (
     <main className={styles.hunter_landing}>
       <Container>
@@ -26,7 +23,7 @@ export default async function HunterLandingPage() {
         <HunterHowItWorks />
         <HunterWhyWorth />
         <HunterReviews />
-        <HunterTeam teamProfiles={teamProfiles} />
+        <HunterTeam />
         <HunterCTA />
         <HunterFAQ />
         <HunterFooter />

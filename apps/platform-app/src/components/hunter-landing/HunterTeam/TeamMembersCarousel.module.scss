@@ -1,0 +1,58 @@
+.teamMembersContainer {
+  --gap: 16px;
+  --column-width: 210px;
+  display: grid;
+  grid-template-rows: repeat(2, minmax(255px, auto));
+  grid-auto-flow: column;
+  grid-auto-columns: var(--column-width);
+  gap: var(--gap);
+  max-width: calc((var(--column-width) * 2.5) + (var(--gap) * 2));
+  padding-right: calc(var(--column-width) + var(--gap));
+  margin-bottom: 16px;
+  overflow-x: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth; /* For smooth scrolling */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
+
+  @include mobile {
+    max-width: calc(100vw - 20px);
+    margin-right: -20px;
+    padding-right: calc(var(--column-width) / 2 + var(--gap));
+  }
+  @include desktop {
+    padding-right: calc(var(--column-width) / 2 + var(--gap));
+    max-width: calc((var(--column-width) * 3.5) + (var(--gap) * 3));
+  }
+}
+
+.navigation {
+  display: flex;
+  gap: 30px;
+  margin-top: 16px;
+  align-self: flex-start;
+}
+
+.navButton {
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  color: var(--color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background-color: var(--hunter-landing-bg-color3);
+  }
+}
