@@ -374,6 +374,9 @@
       "addJob": "Add a job for free",
       "contact": "Contact",
       "joinAsItSpecialist": "Join as an IT specialist"
+    },
+    "HunterHeader": {
+      "addJob": "Add a job for free"
     }
   }
 }

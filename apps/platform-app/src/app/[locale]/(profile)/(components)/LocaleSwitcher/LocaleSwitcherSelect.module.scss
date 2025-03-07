@@ -64,7 +64,7 @@
 
 .buttonIconOpen {
   color: #a687ff;
-  
+
   :global(.light) & {
     color: #a687ff;
   }
@@ -74,7 +74,7 @@
   color: #e2eaf1;
 
   :global(.light) & {
-    color: #171B21;
+    color: #171b21;
   }
 }
 
@@ -82,7 +82,7 @@
   color: #e2eaf1;
 
   :global(.light) & {
-    color: #171B21;
+    color: #171b21;
   }
 }
 
@@ -232,4 +232,27 @@
 }
 .isOpenColorMain03 {
   color: #a687ff;
+}
+
+.container.lightMode {
+  background-color: #fff;
+  color: #000;
+}
+
+.button.lightMode {
+  background-color: #f0f0f0;
+  color: #000;
+  border-color: #ccc;
+}
+
+.buttonIcon.lightMode {
+  color: #333;
+}
+
+.localeName.lightMode {
+  color: #333;
+}
+
+.arrow.lightMode {
+  color: #333;
 }
