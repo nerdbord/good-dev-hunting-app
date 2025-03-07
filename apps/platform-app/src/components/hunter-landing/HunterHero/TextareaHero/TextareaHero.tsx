@@ -12,30 +12,39 @@ type TextareaHeroProps = {
 export const TextareaHero = ({ tagsAnimate }: TextareaHeroProps) => {
   const t = useTranslations(I18nNamespaces.HunterHero)
   const [text, setText] = useState("");
-  const [placeholder, setPlaceholder] = useState(tagsAnimate[0]);
   const staticPrefix = `${t("textareaLabel")}`;
+  const [currentTag, setCurrentTag] = useState(tagsAnimate[0]);
 
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
       index = (index + 1) % tagsAnimate.length;
-      setPlaceholder(tagsAnimate[index]);
+      setCurrentTag(tagsAnimate[index]);
     }, 2000);
 
     return () => clearInterval(interval);
   }, [tagsAnimate]);
 
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    if (newValue.startsWith(staticPrefix)) {
+      setText(newValue.slice(staticPrefix.length));
+    } else {
+      setText(newValue);
+    }
+  };
+
   return (
     <div className={styles.textareaWrapper}>
-      <div className={styles.overlayText}>
+      {/* <div className={styles.overlayText}>
         {staticPrefix}
         <span className={styles.dynamicText}>{text}</span>
-      </div>
+      </div> */}
       <textarea
         className={styles.searchTextarea}
-        placeholder={placeholder}
-        value={`${staticPrefix}${text}`}
-        onChange={(e) => setText(e.target.value.replace(staticPrefix, ""))}
+        placeholder={`${staticPrefix}${currentTag}`}
+        value={text ? `${staticPrefix}${text}` : ""}
+        onChange={handleChange}
       />
     </div>
   );

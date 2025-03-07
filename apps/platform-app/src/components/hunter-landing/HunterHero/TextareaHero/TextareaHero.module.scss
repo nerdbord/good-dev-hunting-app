@@ -1,3 +1,18 @@
+.dynamicText {
+  display: inline-flex;
+  width: 150px;
+  padding: 2px;
+  align-items: center;
+  gap: 10px;
+  background: rgba(166, 135, 255, 0.24);
+  color: var(--hunter-landing-text-color4);
+  font-family: 'IBM Plex Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
 .searchTextarea {
   display: flex;
   width: 493px;
@@ -12,7 +27,6 @@
   // transition: all 0.3s ease;
 
   border-radius: 4px;
-  
 
   &:focus {
     outline: none;
