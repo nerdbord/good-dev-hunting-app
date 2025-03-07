@@ -55,5 +55,10 @@
   &.highlighted {
     background: var(--hunter-landing-text-color7);
   }
+
+  &.selected {
+    background: #9E91CB;
+    color: white;
+  }
 }
 

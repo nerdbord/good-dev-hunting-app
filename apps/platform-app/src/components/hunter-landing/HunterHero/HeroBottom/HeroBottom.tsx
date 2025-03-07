@@ -9,6 +9,7 @@ import { useState } from 'react'
 export const HeroBottom = () => {
   const t = useTranslations(I18nNamespaces.HunterHero)
   const [currentAnimatedTag, setCurrentAnimatedTag] = useState("")
+  const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
   // Define tag keys for both static and animated tags - order matches translations
   const tagKeys = [
@@ -38,19 +39,24 @@ export const HeroBottom = () => {
     tagMapping[animatedText] = staticText
   })
 
-  // Debug log to check mappings
-  console.log('Animated Tags:', tagsAnimate)
-  console.log('Static Tags:', tags)
-  console.log('Tag Mapping:', tagMapping)
+  const handleTagClick = (tag: string) => {
+    setSelectedTag(tag)
+  }
+
+  const handleTextareaEmpty = () => {
+    setSelectedTag(null)
+  }
+
+  const mockText = "Szukam rozwiązania w postaci prywatnego asystenta AI do wsparcia mojej pracy. Potrzebuję systemu, który:\nAutomatycznie zarządza kalendarzem i spotkaniami\nPrzetwarza i kategoryzuje emaile\nPrzygotowuje wstępne odpowiedzi na wiadomości\nPrzypomina o ważnych zadaniach i deadlinach"
 
   return (
     <div className={styles.bottomSection}>
       <TextareaHero 
         tagsAnimate={tagsAnimate} 
-        onTagChange={(tag) => {
-          console.log('Current animated tag:', tag)
-          setCurrentAnimatedTag(tag)
-        }}
+        onTagChange={(tag) => setCurrentAnimatedTag(tag)}
+        selectedTag={selectedTag}
+        mockText={mockText}
+        onEmpty={handleTextareaEmpty}
       />
 
       <Button variant="primary">{t('button')}</Button>
@@ -59,7 +65,8 @@ export const HeroBottom = () => {
         {tags.map((tag, index) => (
           <button 
             key={index} 
-            className={`${styles.tag} ${tagMapping[currentAnimatedTag] === tag ? styles.highlighted : ''}`}
+            className={`${styles.tag} ${tagMapping[currentAnimatedTag] === tag ? styles.highlighted : ''} ${selectedTag === tag ? styles.selected : ''}`}
+            onClick={() => handleTagClick(tag)}
           >
             {tag}
           </button>
