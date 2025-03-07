@@ -372,7 +372,6 @@
       "privacyPolicy": "Privacy Policy",
       "termsOfService": "Terms of Service",
       "addJob": "Add a job for free",
-      "contact": "Contact",
       "joinAsItSpecialist": "Join as an IT specialist"
     }
   },
@@ -383,7 +382,7 @@
     "instruction": "Click to use job request templates.",
     "button": "Post a job for free",
     "specialistsCount": "240+ Verified IT Specialists",
-    "privateAISystem": "Private AI system",
+    "privateAIassistant": "Private AI assistant",
     "website": "Website",
     "paymentSystemIntegration": "Payment system integration",
     "onlinePlatformDesign": "Online platform design",

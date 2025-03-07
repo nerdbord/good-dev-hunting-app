@@ -372,7 +372,6 @@
     "privacyPolicy": "Polityka prywatności",
     "termsOfService": "Warunki korzystania z usługi",
     "addJob": "Dodaj zlecenie za darmo",
-    "contact": "Kontakt",
     "joinAsItSpecialist": "Dołącz jako IT specjalista"
   },
   "HunterHero": {
@@ -382,7 +381,7 @@
     "instruction": "Kliknij, aby skorzystać z szablonów zleceń.",
     "button": "Dodaj zlecenie za darmo",
     "specialistsCount": "240+ Zweryfikowanych Specjalistów IT",
-    "privateAISystem": "System AI prywatny",
+    "privateAIassistant": "Prywatny asystent AI",
     "website": "Strona internetowa",
     "paymentSystemIntegration": "Integracja systemów płatności",
     "onlinePlatformDesign": "Design platformy internetowej",

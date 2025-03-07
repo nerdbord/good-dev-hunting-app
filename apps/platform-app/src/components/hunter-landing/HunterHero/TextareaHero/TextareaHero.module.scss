@@ -1,23 +1,30 @@
 .searchTextarea {
-    display: flex;
-    width: 493px;
-    height: 121px;
-    max-width: 700px;
-    padding: 16px 24px 16px 20px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    resize: none; 
-    border: none;
-    transition: all 0.3s ease;
+  display: flex;
+  width: 493px;
+  height: 121px;
+  max-width: 700px;
+  padding: 16px 24px 16px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  resize: none;
+  border: none;
+  // transition: all 0.3s ease;
+
+  border-radius: 4px;
   
-    &:focus {
-      outline: none;
-      border-color: var(--hunter-landing-text-color4);
-    }
-  
-    &::placeholder {
-      color: var(--hunter-landing-text-color3);
-    }
+
+  &:focus {
+    outline: none;
+    border-color: var(--hunter-landing-text-color4);
   }
-    
+
+  &::placeholder {
+    color: var(--hunter-landing-text-color5);
+    font-family: 'IBM Plex Sans';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+}
