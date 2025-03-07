@@ -393,6 +393,18 @@
     "automationBot": "Bot do automatyzacji",
     "designSystem": "Design system",
     "QAtesting": "QA testy",
-    "APIintegration": "Integracja API"
+    "APIintegration": "Integracja API",
+    "animate_privateAIassistant": "tworzenia prywatnego asystenta AI",
+    "animate_website": "budowy stron internetowych",
+    "animate_paymentSystemIntegration": "integrowania systemów płatności",
+    "animate_onlinePlatformDesign": "projektowania platform online",
+    "animate_mobileApplication": "tworzenia aplikacji mobilnych",
+    "animate_dataManagementSystem": "zarządzania danymi",
+    "animate_databaseMigration": "migracji bazy danych",
+    "animate_automation": "automatyzacji",
+    "animate_iOSAndroidApplication": "tworzenia aplikacji iOS/Android",
+    "animate_automationBot": "automatyzacji botów",
+    "animate_QAtesting": "testowania aplikacji",
+    "animate_APIintegration": "integracji API"
   }
 }

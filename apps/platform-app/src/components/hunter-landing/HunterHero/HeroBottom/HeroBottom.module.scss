@@ -38,12 +38,9 @@
   flex-direction: column;
   align-items: flex-start;
   cursor: pointer;
-
   border-radius: 4px;
   background-color: var(--hunter-landing-bg-color3);
-
   border: none;
-
   color: var(--hunter-landing-text-color4);
   font-family: 'IBM Plex Sans';
   font-size: 14px;
@@ -51,10 +48,12 @@
   font-weight: 500;
   line-height: 20px;
 
-  // transition: all 0.3s ease;
-
   &:hover {
     background: var(--hunter-landing-text-color7);
-    // transform: translateY(-2px);
+  }
+
+  &.highlighted {
+    background: var(--hunter-landing-text-color7);
   }
 }
+

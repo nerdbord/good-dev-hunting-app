@@ -2,28 +2,35 @@
 import styles from "./TextareaHero.module.scss"
 import { useTranslations } from "next-intl"
 import { I18nNamespaces } from "@/i18n/request"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 type TextareaHeroProps = {
   tagsAnimate: string[];
-  // t: (key: string) => string;
+  onTagChange: (tag: string) => void;
 };
 
-export const TextareaHero = ({ tagsAnimate }: TextareaHeroProps) => {
+export const TextareaHero = ({ tagsAnimate, onTagChange }: TextareaHeroProps) => {
   const t = useTranslations(I18nNamespaces.HunterHero)
   const [text, setText] = useState("");
   const staticPrefix = `${t("textareaLabel")}`;
   const [currentTag, setCurrentTag] = useState(tagsAnimate[0]);
 
+  // Function to get random tag excluding the current one
+  const getRandomTag = useCallback((currentTag: string) => {
+    const availableTags = tagsAnimate.filter(tag => tag !== currentTag);
+    const randomIndex = Math.floor(Math.random() * availableTags.length);
+    return availableTags[randomIndex];
+  }, [tagsAnimate]);
+
   useEffect(() => {
-    let index = 0;
     const interval = setInterval(() => {
-      index = (index + 1) % tagsAnimate.length;
-      setCurrentTag(tagsAnimate[index]);
+      const newTag = getRandomTag(currentTag);
+      setCurrentTag(newTag);
+      onTagChange(newTag);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [tagsAnimate]);
+  }, [currentTag, getRandomTag, onTagChange]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
