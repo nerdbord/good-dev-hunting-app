@@ -10,7 +10,22 @@
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
+  border-radius: 2px;
   margin-left: 4px;
+  white-space: nowrap;
+
+  &.animating {
+    animation: typing 1.5s steps(40, end);
+  }
+}
+
+@keyframes typing {
+  from { 
+    clip-path: inset(0 100% 0 0);
+  }
+  to { 
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 .searchTextarea {
@@ -38,12 +53,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
-
-    &::selection {
-      background: rgba(166, 135, 255, 0.24);
-      color: var(--hunter-landing-text-color4);
-      font-weight: 700;
-    }
   }
 }
 

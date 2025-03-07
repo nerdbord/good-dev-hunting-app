@@ -14,6 +14,7 @@ export const TextareaHero = ({ tagsAnimate, onTagChange }: TextareaHeroProps) =>
   const [text, setText] = useState("");
   const staticPrefix = `${t("textareaLabel")}`;
   const [currentTag, setCurrentTag] = useState(tagsAnimate[0]);
+  const [isAnimating, setIsAnimating] = useState(true);
 
   // Function to get random tag excluding the current one
   const getRandomTag = useCallback((currentTag: string) => {
@@ -23,11 +24,21 @@ export const TextareaHero = ({ tagsAnimate, onTagChange }: TextareaHeroProps) =>
   }, [tagsAnimate]);
 
   useEffect(() => {
+    const ANIMATION_DURATION = 3000; // Total cycle duration
+    const TYPING_DURATION = 1500; // Duration of typing animation from CSS
+
     const interval = setInterval(() => {
-      const newTag = getRandomTag(currentTag);
-      setCurrentTag(newTag);
-      onTagChange(newTag);
-    }, 2000);
+      setIsAnimating(false);
+      
+      // Change text after a brief pause
+      setTimeout(() => {
+        const newTag = getRandomTag(currentTag);
+        setCurrentTag(newTag);
+        onTagChange(newTag);
+        setIsAnimating(true);
+      }, 200);
+
+    }, ANIMATION_DURATION);
 
     return () => clearInterval(interval);
   }, [currentTag, getRandomTag, onTagChange]);
@@ -46,7 +57,11 @@ export const TextareaHero = ({ tagsAnimate, onTagChange }: TextareaHeroProps) =>
       {!text && (
         <div className={styles.overlayText}>
           {staticPrefix}
-          <span className={styles.dynamicText}>{currentTag}</span>
+          <span 
+            className={`${styles.dynamicText} ${isAnimating ? styles.animating : ''}`}
+          >
+            {currentTag}
+          </span>
         </div>
       )}
       <textarea
