@@ -367,6 +367,14 @@
       "answerThree": "Na ten moment możesz dodać jedno zlecenie dziennie."
     }
   },
+  "HunterFooter": {
+    "contact": "Kontakt",
+    "privacyPolicy": "Polityka prywatności",
+    "termsOfService": "Warunki korzystania z usługi",
+    "addJob": "Dodaj zlecenie za darmo",
+    "contact": "Kontakt",
+    "joinAsItSpecialist": "Dołącz jako IT specjalista"
+  },
   "HunterHero": {
     "title": "Znajdz idealnego specjalistę IT do swojego projektu",
     "subtitle": "Opisz zlecenie swoimi słowami, albo skorzystaj z szablonu na najpopularniejsze projekty",
