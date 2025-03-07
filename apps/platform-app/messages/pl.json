@@ -366,5 +366,26 @@
       "questionThree": "Ile zleceń mogę zapostować?",
       "answerThree": "Na ten moment możesz dodać jedno zlecenie dziennie."
     }
+  },
+  "HunterHero": {
+    "title": "Znajdz idealnego specjalistę IT do swojego projektu",
+    "subtitle": "Opisz zlecenie swoimi słowami, albo skorzystaj z szablonu na najpopularniejsze projekty",
+    "textareaLabel": "Potrzebuję specjalisty od: ",
+    "instruction": "Kliknij, aby skorzystać z szablonów zleceń.",
+    "button": "Dodaj zlecenie za darmo",
+    "specialistsCount": "240+ Zweryfikowanych Specjalistów IT",
+    "privateAISystem": "System AI prywatny",
+    "website": "Strona internetowa",
+    "paymentSystemIntegration": "Integracja systemów płatności",
+    "onlinePlatformDesign": "Design platformy internetowej",
+    "mobileApplication": "Aplikacja mobilna",
+    "dataManagementSystem": "System zarządzania danymi",
+    "databaseMigration": "Migracja bazy danych",
+    "automation": "Automatyzacja",
+    "iOSAndroidApplication": "Aplikacja iOS/Android",
+    "automationBot": "Bot do automatyzacji",
+    "designSystem": "Design system",
+    "QAtesting": "QA testy",
+    "APIintegration": "Integracja API"
   }
 }

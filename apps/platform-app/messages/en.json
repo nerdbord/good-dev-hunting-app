@@ -367,5 +367,26 @@
       "questionThree": "How many orders can I post?",
       "answerThree": "At this point you can add one order per day."
     }
+  },
+  "HunterHero": {
+    "title": "Find the perfect IT specialist for your project",
+    "subtitle": "Describe your task in your own words or use a template for the most popular projects",
+    "textareaLabel": "I need a specialist in: ",
+    "instruction": "Click to use job request templates.",
+    "button": "Post a job for free",
+    "specialistsCount": "240+ Verified IT Specialists",
+    "privateAISystem": "Private AI system",
+    "website": "Website",
+    "paymentSystemIntegration": "Payment system integration",
+    "onlinePlatformDesign": "Online platform design",
+    "mobileApplication": "Mobile application",
+    "dataManagementSystem": "Data management system",
+    "databaseMigration": "Database migration",
+    "automation": "Automation",
+    "iOSAndroidApplication": "iOS/Android application",
+    "automationBot": "Automation bot",
+    "designSystem": "Design system",
+    "QAtesting": "QA testing",
+    "APIintegration": "API integration"
   }
 }
