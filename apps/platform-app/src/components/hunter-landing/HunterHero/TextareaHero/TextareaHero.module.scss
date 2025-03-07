@@ -1,7 +1,6 @@
 .dynamicText {
   display: inline-flex;
-  width: 150px;
-  padding: 2px;
+  padding: 2px 4px;
   align-items: center;
   gap: 10px;
   background: rgba(166, 135, 255, 0.24);
@@ -11,6 +10,8 @@
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
+  border-radius: 2px;
+  margin-left: 4px;
 }
 
 .searchTextarea {
