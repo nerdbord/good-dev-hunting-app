@@ -85,9 +85,16 @@
   position: absolute;
   top: 16px;
   left: 20px;
+  right: 24px;
+  width: calc(100% - 44px);
   pointer-events: none;
   font-family: 'IBM Plex Sans';
   font-size: 14px;
   line-height: 20px;
   color: var(--hunter-landing-text-color5);
+
+  @include mobile {
+    right: 20px;
+    width: calc(100% - 40px);
+  }
 }
