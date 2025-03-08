@@ -59,7 +59,9 @@ export const HeroBottom = () => {
         onEmpty={handleTextareaEmpty}
       />
 
-      <Button variant="primary">{t('button')}</Button>
+      <div className={styles.buttonSection}>
+        <Button variant="primary">{t('button')}</Button>
+      </div>
 
       <div className={styles.tagsSection}>
         {tags.map((tag, index) => (

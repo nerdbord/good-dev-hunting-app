@@ -406,6 +406,7 @@
     "animate_iOSAndroidApplication": "iOS/Android application development",
     "animate_automationBot": "automation bot development",
     "animate_QAtesting": "QA testing",
-    "animate_APIintegration": "API integration"
+    "animate_APIintegration": "API integration",
+    "heroTooltip": "Click to use job request templates."
   }
 }

@@ -19,6 +19,18 @@
   margin-bottom: 0.5rem;
 }
 
+.buttonSection {
+  width: 205px;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin: 0 auto;
+
+  @include mobile {
+    width: 240px;
+  }
+}
+
 .tagsSection {
   width: 100%;
   display: flex;
