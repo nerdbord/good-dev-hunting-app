@@ -37,7 +37,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  // gap: 16px;
 
   &:last-child {
     margin-bottom: 0;
@@ -59,6 +59,8 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  margin-right: 10px;
+  margin-bottom: 16px;
 
   &:hover {
     background: var(--hunter-landing-text-color7);
