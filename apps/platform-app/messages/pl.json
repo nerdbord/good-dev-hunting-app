@@ -376,6 +376,7 @@
   },
   "HunterHero": {
     "title": "Znajdz idealnego specjalistę IT do swojego projektu",
+    "titleMobile": "Zatrudnij Najlepszego Specjalistę IT – Bez Straty Czasu na Szukanie",
     "subtitle": "Opisz zlecenie swoimi słowami, albo skorzystaj z szablonu na najpopularniejsze projekty",
     "textareaLabel": "Potrzebuję specjalisty od: ",
     "instruction": "Kliknij, aby skorzystać z szablonów zleceń.",

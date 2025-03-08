@@ -161,3 +161,19 @@
     letter-spacing: -0.32px; 
   }
 }
+
+.titleDesktop {
+  display: block;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.titleMobile {
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
+}
