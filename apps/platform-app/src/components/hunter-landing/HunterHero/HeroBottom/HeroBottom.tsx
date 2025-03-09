@@ -11,7 +11,6 @@ export const HeroBottom = () => {
   const [currentAnimatedTag, setCurrentAnimatedTag] = useState("")
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
-  // Define tag keys for both static and animated tags - order matches translations
   const tagKeys = [
     'privateAIassistant',
     'website',
@@ -23,15 +22,20 @@ export const HeroBottom = () => {
     'automation',
     'iOSAndroidApplication',
     'automationBot',
+    'designSystem',
     'QAtesting',
     'APIintegration'
   ]
 
-  // Create arrays using translations
   const tags = tagKeys.map(key => t(key))
   const tagsAnimate = tagKeys.map(key => t(`animate_${key}`))
 
-  // Create mapping between animated translations and static translations
+  // Split tags into rows
+  const firstRow = tags.slice(0, 4)
+  const secondRow = tags.slice(4, 8)
+  const thirdRow = tags.slice(8, 11)
+  const fourthRow = tags.slice(11, 13)
+
   const tagMapping: { [key: string]: string } = {}
   tagKeys.forEach(key => {
     const animatedText = t(`animate_${key}`)
@@ -49,6 +53,20 @@ export const HeroBottom = () => {
 
   const mockText = "Szukam rozwiązania w postaci prywatnego asystenta AI do wsparcia mojej pracy. Potrzebuję systemu, który:\nAutomatycznie zarządza kalendarzem i spotkaniami\nPrzetwarza i kategoryzuje emaile\nPrzygotowuje wstępne odpowiedzi na wiadomości\nPrzypomina o ważnych zadaniach i deadlinach"
 
+  const renderRow = (rowTags: string[], style: string) => (
+    <div className={style}>
+      {rowTags.map((tag, index) => (
+        <button 
+          key={index} 
+          className={`${styles.tag} ${tagMapping[currentAnimatedTag] === tag ? styles.highlighted : ''} ${selectedTag === tag ? styles.selected : ''}`}
+          onClick={() => handleTagClick(tag)}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+  )
+
   return (
     <div className={styles.bottomSection}>
       <TextareaHero 
@@ -64,15 +82,10 @@ export const HeroBottom = () => {
       </div>
 
       <div className={styles.tagsSection}>
-        {tags.map((tag, index) => (
-          <button 
-            key={index} 
-            className={`${styles.tag} ${tagMapping[currentAnimatedTag] === tag ? styles.highlighted : ''} ${selectedTag === tag ? styles.selected : ''}`}
-            onClick={() => handleTagClick(tag)}
-          >
-            {tag}
-          </button>
-        ))}
+        {renderRow(firstRow, styles.row)}
+        {renderRow(secondRow, styles.row)}
+        {renderRow(thirdRow, styles.row)}
+        {renderRow(fourthRow, styles.row)}
       </div>
     </div>
   )
