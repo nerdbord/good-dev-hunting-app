@@ -4,12 +4,23 @@ import { TextareaHero } from '../TextareaHero/TextareaHero'
 import styles from './HeroBottom.module.scss'
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export const HeroBottom = () => {
   const t = useTranslations(I18nNamespaces.HunterHero)
   const [currentAnimatedTag, setCurrentAnimatedTag] = useState("")
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const tagKeys = [
     'privateAIassistant',
@@ -30,11 +41,24 @@ export const HeroBottom = () => {
   const tags = tagKeys.map(key => t(key))
   const tagsAnimate = tagKeys.map(key => t(`animate_${key}`))
 
-  // Split tags into rows
-  const firstRow = tags.slice(0, 4)
-  const secondRow = tags.slice(4, 8)
-  const thirdRow = tags.slice(8, 11)
-  const fourthRow = tags.slice(11, 13)
+  // Create rows based on device type
+  const getRows = () => {
+    if (isMobile) {
+      // For mobile, create a continuous loop pattern
+      const mobileTagsCount = 8 // Total tags to show in mobile view
+      const firstRow = tags.slice(0, 4)
+      const secondRow = [...tags.slice(4, mobileTagsCount)].reverse() // Create new array before reversing
+      return [firstRow, secondRow]
+    }
+    
+    // For desktop, show all tags in 4 rows
+    return [
+      tags.slice(0, 4),  // First row: 4 tags
+      tags.slice(4, 8),  // Second row: 4 tags
+      tags.slice(8, 11), // Third row: 3 tags
+      tags.slice(11, 13) // Fourth row: 2 tags
+    ]
+  }
 
   const tagMapping: { [key: string]: string } = {}
   tagKeys.forEach(key => {
@@ -53,19 +77,26 @@ export const HeroBottom = () => {
 
   const mockText = "Szukam rozwiązania w postaci prywatnego asystenta AI do wsparcia mojej pracy. Potrzebuję systemu, który:\nAutomatycznie zarządza kalendarzem i spotkaniami\nPrzetwarza i kategoryzuje emaile\nPrzygotowuje wstępne odpowiedzi na wiadomości\nPrzypomina o ważnych zadaniach i deadlinach"
 
-  const renderRow = (rowTags: string[], style: string) => (
-    <div className={style}>
-      {rowTags.map((tag, index) => (
+  const renderRow = (rowTags: string[], style: string, rowIndex: number) => (
+    <div 
+      key={`row-${rowIndex}`} 
+      className={`${style} ${isMobile ? styles.mobileRow : ''} ${isMobile && rowIndex === 1 ? styles.mobileRowReverse : ''}`}
+      role="list"
+    >
+      {rowTags.map((tag, tagIndex) => (
         <button 
-          key={index} 
+          key={`${rowIndex}-${tag}-${tagIndex}`}
           className={`${styles.tag} ${tagMapping[currentAnimatedTag] === tag ? styles.highlighted : ''} ${selectedTag === tag ? styles.selected : ''}`}
           onClick={() => handleTagClick(tag)}
+          role="listitem"
         >
           {tag}
         </button>
       ))}
     </div>
   )
+
+  const rows = getRows()
 
   return (
     <div className={styles.bottomSection}>
@@ -82,10 +113,7 @@ export const HeroBottom = () => {
       </div>
 
       <div className={styles.tagsSection}>
-        {renderRow(firstRow, styles.row)}
-        {renderRow(secondRow, styles.row)}
-        {renderRow(thirdRow, styles.row)}
-        {renderRow(fourthRow, styles.row)}
+        {rows.map((row, index) => renderRow(row, styles.row, index))}
       </div>
     </div>
   )
