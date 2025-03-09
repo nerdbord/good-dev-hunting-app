@@ -5,6 +5,7 @@ import styles from './HeroBottom.module.scss'
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
+import { TagTooltip } from '../TagTooltip/TagTooltip'
 
 export const HeroBottom = () => {
   const t = useTranslations(I18nNamespaces.HunterHero)
@@ -91,6 +92,9 @@ export const HeroBottom = () => {
           role="listitem"
         >
           {tag}
+          {rowIndex === 0 && tagIndex === 3 && !isMobile && (
+            <TagTooltip />
+          )}
         </button>
       ))}
     </div>

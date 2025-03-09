@@ -1,0 +1,44 @@
+.tooltipWrapper {
+  position: absolute;
+  top: 22px;
+  right: 2px;
+  display: none; // Hidden by default
+  z-index: 100;
+
+  @media (min-width: 769px) {
+    display: block; // Show only on desktop
+  }
+}
+
+.tooltipContent {
+  width: 143.467px;
+  height: 40px;
+  position: absolute;
+  top: 35px;
+  left: 20px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.13);
+  z-index: 101;
+}
+
+.pointer {
+  width: 23.994px;
+  height: 25.515px;
+  transform: rotate(-15deg);
+  z-index: 101;
+}
+
+.pointerContainer {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+} 
