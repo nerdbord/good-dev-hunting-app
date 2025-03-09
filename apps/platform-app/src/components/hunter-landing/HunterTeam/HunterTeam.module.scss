@@ -1,2 +1,64 @@
 .wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  @include mobile {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.header {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+  margin-right: 40px;
+
+  @include mobile {
+    margin-right: 0;
+    max-width: 100%;
+  }
+}
+
+.title {
+  color: var(--hunter-landing-text-color);
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+  margin: 0;
+
+  @include mobile {
+    font-size: 28px;
+  }
+}
+
+.description {
+  color: var(--hunter-landing-text-color2);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+
+  span {
+    font-weight: 700;
+  }
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+.signature {
+  color: var(--hunter-landing-text-color2);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
 }

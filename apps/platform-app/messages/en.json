@@ -354,7 +354,16 @@
     "send": "Send",
     "inbox": "Inbox"
   },
-
+  "HunterTeam": {
+    "title": "Meet Our Team",
+    "descriptionBold": "We believe that finding an IT expert should be simple. ",
+    "description": "We connect visionaries with specialists, eliminating barriers and bureaucracy. We create open source because technology should be accessible and transparent.",
+    "signature": "— The Good Dev Hunting Team",
+    "fullTime": "Available for full-time",
+    "contract": "Available for contract work",
+    "partTime": "Available for part-time",
+    "remote": "Remote"
+  },
   "HunterFAQ": {
     "title": "Most Frequently Asked Questions",
     "desc": "Find answers to frequently asked questions or contact us. We will be happy to help and clear up any doubts.",

@@ -1,5 +1,6 @@
 .hunter_landing {
   min-height: 100dvh;
+  overflow: hidden;
   background-color: var(--hunter-landing-bg-color);
   color: var(--hunter-landing-text-color);
 }
