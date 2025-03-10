@@ -316,6 +316,84 @@
   "Applications": {
     "applicationDetails": "Application Details",
     "applicantInfo": "Applicant Info",
-    "actions": "Actions"
+    "actions": "Actions",
+    "backButton": "My jobs",
+    "publishedDaysAgo": "Published {days} days ago",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "viewProfile": "View Profile",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send"
+  },
+  "AddJobChat": {
+    "descriptionHeader": "Describe what you need",
+    "descriptionParagraph": "As detailed as possible. You can also paste the content of your job posting.",
+    "placeholder": "Describe your job in a few words",
+    "textareaLabel": "Job description",
+    "cancelBtn": "Back",
+    "nextBtn": "Next"
+  },
+  "MyJobCard": {
+    "published": "Published",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "days": "days ago",
+    "openBtn": "Open applications"
+  },
+  "JobApplications": {
+    "backButton": "My jobs",
+    "publishedDaysAgo": "Published {days} days ago",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "viewProfile": "View Profile",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send"
+  },
+  "Inbox": {
+    "title": "Inbox",
+    "subtitle": "Manage your job negotiations",
+    "negotiations": "Negotiations",
+    "noNegotiations": "You don't have any active negotiations",
+    "noNegotiationsSubtitle": "When you apply for a job, your conversations will appear here",
+    "noSelectedNegotiation": "Select a conversation to view messages",
+    "viewJob": "View Job",
+    "sendMessage": "Send message",
+    "typeMessage": "Type your message...",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "backToProfile": "Back to profile",
+    "send": "Send",
+    "inbox": "Inbox"
+  },
+  "HunterTeam": {
+    "title": "Meet Our Team",
+    "descriptionBold": "We believe that finding an IT expert should be simple. ",
+    "description": "We connect visionaries with specialists, eliminating barriers and bureaucracy. We create open source because technology should be accessible and transparent.",
+    "signature": "— The Good Dev Hunting Team",
+    "fullTime": "Available for full-time",
+    "contract": "Available for contract work",
+    "partTime": "Available for part-time",
+    "remote": "Remote"
+  },
+  "HunterFAQ": {
+    "title": "Most Frequently Asked Questions",
+    "desc": "Find answers to frequently asked questions or contact us. We will be happy to help and clear up any doubts.",
+    "button": "Write to us",
+    "accordeon": {
+      "questionOne": "Is it really free?",
+      "answerOne": "Yes, adding an order is fully free.",
+      "questionTwo": "How do I get information from specialists?",
+      "answerTwo": "Specialists who sign up for an assignment will be able to connect with the Principal via the internal chat available on the platform. The Principal, on the other hand, will receive an email notification of their willingness to cooperate.",
+      "questionThree": "How many orders can I post?",
+      "answerThree": "At this point you can add one order per day."
+    },
+    "HunterFooter": {
+      "contact": "Contact",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "addJob": "Add a job for free",
+      "contact": "Contact",
+      "joinAsItSpecialist": "Join as an IT specialist"
+    }
   }
 }
