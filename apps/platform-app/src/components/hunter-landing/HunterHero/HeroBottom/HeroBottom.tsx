@@ -6,6 +6,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 import { TagTooltip } from '../TagTooltip/TagTooltip'
+import Image from 'next/image'
 
 export const HeroBottom = () => {
   const t = useTranslations(I18nNamespaces.HunterHero)
@@ -107,6 +108,53 @@ export const HeroBottom = () => {
 
   return (
     <div className={styles.bottomSection}>
+            <div className={styles.backgroundIcons}>
+        <div className={`${styles.icon} ${styles.reactIcon}`}>
+          <div className={styles.gradientOuter}>
+            <div className={styles.gradientInner}>
+              <div className={styles.backgroundShadow}>
+                <Image
+                  src="/LandingHunter/react-svg.svg"
+                  alt="React"
+                  width={48}
+                  height={65}
+                  className={styles.techImage}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.icon} ${styles.pythonIcon}`}>
+          <div className={styles.gradientOuter}>
+            <div className={styles.gradientInner}>
+              <div className={styles.backgroundShadow}>
+                <Image
+                  src="/LandingHunter/python-svg.svg"
+                  alt="Python"
+                  width={48}
+                  height={65}
+                  className={styles.techImage}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.icon} ${styles.javaIcon}`}>
+          <div className={styles.gradientOuter}>
+            <div className={styles.gradientInner}>
+              <div className={styles.backgroundShadow}>
+                <Image
+                  src="/LandingHunter/java-svg.svg"
+                  alt="Java"
+                  width={48}
+                  height={65}
+                  className={styles.techImage}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <TextareaHero 
         tagsAnimate={tagsAnimate} 
         onTagChange={(tag) => setCurrentAnimatedTag(tag)}

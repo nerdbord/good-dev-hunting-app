@@ -376,7 +376,8 @@
     }
   },
   "HunterHero": {
-    "title": "Find the perfect IT specialist for your project",
+    "title": "Find the perfect IT specialist",
+    "titleBottom": "for your project",
     "titleMobile": "Hire the best IT specialist – without wasting time searching",
     "subtitle": "Describe your task in your own words or use a template for the most popular projects",
     "textareaLabel": "I need a specialist in: ",

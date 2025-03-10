@@ -6,7 +6,83 @@
   align-items: center;
   gap: 40px;
   padding-bottom: 40px;
+
+  position: relative;
 }
+
+.icon {
+  position: absolute;
+  @include mobile {
+    display: none;
+  }
+}
+
+.gradientOuter {
+  width: 139.771px;
+  height: 124.477px;
+  flex-shrink: 0;
+  border-radius: 24.3px;
+  background: #f0f0ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradientInner {
+  width: 123.321px;
+  height: 109.839px;
+  flex-shrink: 0;
+  border-radius: 18.984px;
+  background: #e4e4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundShadow {
+  display: flex;
+  width: 107.188px;
+  height: 96.361px;
+  padding: 4px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  border-radius: 15.188px;
+  background: #cfcff3;
+}
+
+.techImage {
+  width: 48.272px;
+  height: 65.181px;
+  flex-shrink: 0;
+  aspect-ratio: 48.27/65.18;
+  filter: grayscale(0.5);
+  opacity: 0.8;
+  background-blend-mode: color, normal;
+}
+
+.reactIcon {
+  top: -50px;
+  left: -200px;
+  transform: rotate(-15deg);
+}
+
+.pythonIcon {
+  top: -175px;
+  // right: 87px;
+  left: unset;
+  right: -210px;
+  transform: rotate(-15deg);
+}
+
+.javaIcon {
+  top: 100px;
+  right: -183px;
+  transform: rotate(10deg);
+}
+
 
 .searchInput {
   width: 100%;

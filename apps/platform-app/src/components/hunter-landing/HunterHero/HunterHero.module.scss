@@ -14,91 +14,9 @@
   }
 }
 
-.backgroundIcons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 1;
-
-  @include mobile {
-    display: none;
-  }
-}
-
-.icon {
-  position: absolute;
-}
-
-.gradientOuter {
-  width: 139.771px;
-  height: 124.477px;
-  flex-shrink: 0;
-  border-radius: 24.3px;
-  background: #f0f0ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.gradientInner {
-  width: 123.321px;
-  height: 109.839px;
-  flex-shrink: 0;
-  border-radius: 18.984px;
-  background: #e4e4f6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.backgroundShadow {
-  display: flex;
-  width: 107.188px;
-  height: 96.361px;
-  padding: 4px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-  border-radius: 15.188px;
-  background: #cfcff3;
-}
-
-.techImage {
-  width: 48.272px;
-  height: 65.181px;
-  flex-shrink: 0;
-  aspect-ratio: 48.27/65.18;
-  filter: grayscale(0.5);
-  opacity: 0.8;
-  background-blend-mode: color, normal;
-}
-
-.reactIcon {
-  top: 338px;
-  left: 157px;
-  transform: rotate(-15deg);
-}
-
-.pythonIcon {
-  top: 209px;
-  right: 87px;
-  left: unset;
-  transform: rotate(-15deg);
-}
-
-.javaIcon {
-  top: 453px;
-  right: 143px;
-  transform: rotate(10deg);
-}
 
 .topSection {
-  max-width: 1200px;
+  max-width: 1045px;
   display: flex;
   flex-direction: column;
   align-items: center;
