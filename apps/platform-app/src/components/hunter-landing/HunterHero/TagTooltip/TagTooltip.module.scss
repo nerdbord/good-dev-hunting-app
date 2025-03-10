@@ -1,6 +1,6 @@
 .tooltipWrapper {
   position: absolute;
-  top: 22px;
+  top: 23px;
   right: 2px;
   display: none; // Hidden by default
   z-index: 100;
@@ -11,11 +11,11 @@
 }
 
 .tooltipContent {
-  width: 143.467px;
-  height: 40px;
+  width: 159px;
+  height: auto;
   position: absolute;
-  top: 35px;
-  left: 20px;
+  top: 33px;
+  left: 38px;
   padding: 8px;
   display: flex;
   justify-content: center;
@@ -24,12 +24,12 @@
   border-radius: 8px;
   box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.13);
   z-index: 101;
+  transform: rotate(10deg);
 }
 
 .pointer {
-  width: 23.994px;
+  width: 24px;
   height: 25.515px;
-  transform: rotate(-15deg);
   z-index: 101;
 }
 
