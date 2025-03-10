@@ -14,7 +14,7 @@ export const HunterHero = async (props: Props) => {
           <p className={styles.specialistsCount}>{t('specialistsCount')}</p>
           <h1 className={styles.title}>
             <span className={styles.titleDesktop}>{t('title')}</span>
-            <span className={styles.titleDesktop}>{t('titleBottom')}</span>
+            {/* <span className={styles.titleDesktop}>{t('titleBottom')}</span> */}
             <span className={styles.titleMobile}>{t('titleMobile')}</span>
           </h1>
         </div>
