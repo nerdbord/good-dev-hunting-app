@@ -2,11 +2,20 @@
   position: absolute;
   top: 23px;
   right: 2px;
-  display: none; // Hidden by default
+  display: none;
   z-index: 100;
 
   @media (min-width: 769px) {
-    display: block; // Show only on desktop
+    display: block;
+  }
+
+  &.mobileTooltip {
+    @media (max-width: 768px) {
+      display: block;
+      top: unset;
+      bottom: 400px;
+      right: 400px;
+    }
   }
 }
 
@@ -25,12 +34,26 @@
   box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.13);
   z-index: 101;
   transform: rotate(10deg);
+
+  .mobileTooltip & {
+    @media (max-width: 768px) {
+      top: unset;
+      bottom: -65px;
+      left:20px;
+    }
+  }
 }
 
 .pointer {
   width: 24px;
   height: 25.515px;
   z-index: 101;
+
+  .mobileTooltip & {
+    @media (max-width: 768px) {
+      transform: rotate(15deg);
+    }
+  }
 }
 
 .pointerContainer {

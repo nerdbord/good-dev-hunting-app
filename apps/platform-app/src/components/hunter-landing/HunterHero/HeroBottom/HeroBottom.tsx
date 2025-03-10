@@ -93,10 +93,13 @@ export const HeroBottom = () => {
         >
           {tag}
           {rowIndex === 0 && tagIndex === 3 && !isMobile && (
-            <TagTooltip />
+            <TagTooltip isMobile={isMobile} />
           )}
         </button>
       ))}
+      {rowIndex === 1 && isMobile && (
+        <TagTooltip isMobile={isMobile} />
+      )}
     </div>
   )
 

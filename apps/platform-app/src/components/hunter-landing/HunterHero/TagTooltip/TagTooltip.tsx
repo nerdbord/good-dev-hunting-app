@@ -3,9 +3,13 @@ import { TooltipText } from '../TooltipText/TooltipText'
 import PointingIcon from '@/components/icons/PointingIcon'
 import styles from './TagTooltip.module.scss'
 
-export const TagTooltip = () => {
+interface TagTooltipProps {
+  isMobile: boolean;
+}
+
+export const TagTooltip = ({ isMobile }: TagTooltipProps) => {
   return (
-    <div className={styles.tooltipWrapper}>
+    <div className={`${styles.tooltipWrapper} ${isMobile ? styles.mobileTooltip : ''}`}>
       <div className={styles.tooltipContent}>
         <TooltipText />
       </div>
