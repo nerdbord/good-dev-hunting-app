@@ -1,0 +1,15 @@
+.myJobsList {
+  display: grid;
+  width: 100%;
+  grid-auto-rows: 260px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 260px;
+  column-gap: 23px;
+  row-gap: 32px;
+  padding-bottom: 64px;
+  @include mobile {
+    grid-auto-rows: 211px;
+    gap: 15px;
+    grid-template-columns: 1fr;
+  }
+}

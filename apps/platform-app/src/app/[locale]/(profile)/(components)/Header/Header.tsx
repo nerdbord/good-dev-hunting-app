@@ -7,6 +7,7 @@ import LogOutBtn from '@/app/[locale]/(auth)/(components)/LogOutBtn/LogOutBtn'
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { AppHeaderMobileSearchFilter } from '@/app/[locale]/(profile)/(components)/Filters/AppHeaderMobileSearchFilter'
 
+import InboxButton from '@/app/[locale]/(profile)/(components)/InboxButton/InboxButton'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 
 import LoginBtnsWrapper from '@/components/LoginBtn/LoginBtnsWrapper'
@@ -14,9 +15,10 @@ import { AppRoutes } from '@/utils/routes'
 import { Container, GitHubStarsButton } from '@gdh/ui-system'
 
 import ModerationBtn from '@/app/[locale]/(moderation)/(components)/ModerationBtn/ModerationBtn'
-import logo from '@/assets/images/logo.png'
 import Link from 'next/link'
+import { Logo } from '../../../../../../../../packages/ui-system/src/components/Logo/Logo'
 import { LocaleSwitcher } from '../LocaleSwitcher/LocaleSwitcher'
+import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
@@ -120,6 +122,9 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
               {userHasProfile && (
                 <>
                   <li>
+                    <InboxButton />
+                  </li>
+                  <li>
                     <LocaleSwitcher />
                   </li>
                   <li>
@@ -146,15 +151,15 @@ async function Header({ buttonsVariant = 'main' }: HeaderProps) {
     }
   }
   return (
-    <header className={styles.wrapper}>
+    <header id="main-header" className={styles.wrapper}>
       <Container>
         <div className={styles.headerContent}>
           <div className={styles.logoAndGhStarsWrapper}>
             <Link href={AppRoutes.home} className={styles.logo}>
-              <img src={logo.src} alt="Logo" />
-              <h1 className={styles.title}>Good Dev Hunting</h1>
+              <Logo withLink={false} />
             </Link>
             <GitHubStarsButton />
+            <ThemeSwitcher />
           </div>
           <nav>
             <ul className={`${styles.hideOnDesktop} ${styles.loginBtnsMobile}`}>

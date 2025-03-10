@@ -1,10 +1,13 @@
 import { AcceptIcon } from "./AcceptIcon";
 import { AddIcon } from "./AddIcon";
+import { ArrowLeft } from "./ArrowLeft";
+import { ArrowRight } from "./ArrowRight";
 import { CancelIcon } from "./CancelIcon";
 import { CheckMarkIcon } from "./CheckMarkIcon";
 import { ClearIcon } from "./ClearIcon";
 import { ConnectIcon } from "./ConnectIcon";
 import { DollarIcon } from "./DollarIcon";
+import { EditIcon } from "./EditIcon";
 import { EmailIcon } from "./EmailIcon";
 import { ErrorIcon } from "./ErrorIcon";
 import { GithubIcon } from "./GithubIcon";
@@ -23,11 +26,14 @@ import { ViewIcon } from "./ViewIcon";
 export {
   AcceptIcon,
   AddIcon,
+  ArrowLeft,
+  ArrowRight,
   CancelIcon,
   CheckMarkIcon,
   ClearIcon,
   ConnectIcon,
   DollarIcon,
+  EditIcon,
   EmailIcon,
   ErrorIcon,
   GithubIcon,

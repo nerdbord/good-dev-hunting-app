@@ -5,6 +5,7 @@
   top: $spacing-5;
   width: calc(100% - 48px);
   margin: 0;
+  padding: 20px 20px 0 20px;
   @include mobile {
     position: static;
     width: 100%;

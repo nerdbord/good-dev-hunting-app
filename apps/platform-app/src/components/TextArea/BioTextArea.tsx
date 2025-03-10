@@ -14,6 +14,7 @@ import {
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 
+import { useThemeStore } from '@/hooks/useThemeStore'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import styles from './TextArea.module.scss'
@@ -32,6 +33,7 @@ export interface TextAreaProps {
 
 const BioTextArea: React.FC<TextAreaProps> = ({ value, name, onBlur }) => {
   const { setFieldValue } = useFormikContext<CreateProfileFormValues>()
+  const { isDarkTheme } = useThemeStore()
   const maxLength = 1500
 
   const handleChange = (newValue: string) => {
@@ -43,7 +45,9 @@ const BioTextArea: React.FC<TextAreaProps> = ({ value, name, onBlur }) => {
   return (
     <div className={styles.editorWrapper}>
       <MDXEditor
-        className={`${styles.mdxEditorCustom} dark-theme dark-editor`}
+        className={`${styles.mdxEditorCustom} ${
+          isDarkTheme ? 'dark-theme dark-editor' : 'light-theme light-editor'
+        }`}
         contentEditableClassName={styles.mdxContentEditable}
         onChange={handleChange}
         //@ts-ignore

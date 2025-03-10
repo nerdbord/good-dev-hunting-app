@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from '@/app/[locale]/(profile)/(components)/ThemeSwitcher/ThemeSwitcher'
 import { I18nNamespaces } from '@/i18n/request'
 import { Container, Logo } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
@@ -6,17 +7,24 @@ import styles from './LandingFooter.module.scss'
 
 const LandingFooter = () => {
   const t = useTranslations(I18nNamespaces.LandingFooter)
+  const year = new Date().getFullYear()
+
+  const contactEmail = atob(
+    ['bWFpbHRv', 'OnRlYW1AZGV2aHVudGluZy5jby=='].join(''),
+  )
+
   return (
     <section id="LandingFooter" className={styles.footer}>
       <Container>
         <div className={styles.topBar}>
           <Logo />
           <div className={styles.contact}>
+            <ThemeSwitcher />
             <span className={`${styles.textDark} ${styles.mobileHide}`}>
               Good Dev Hunting
             </span>
             <Link
-              href="mailto:team@devhunting.co"
+              href={contactEmail}
               target="_blank"
               className={`${styles.textLight} ${styles.pointer}`}
             >
@@ -33,7 +41,7 @@ const LandingFooter = () => {
         </div>
         <div className={styles.bottomBar}>
           <span className={styles.copyright}>
-            Copyright © 2024 Nerdbord OU All rights reserved.
+            Copyright © {year} Nerdbord OU All rights reserved.
           </span>
           <div className={styles.terms}>
             <Link

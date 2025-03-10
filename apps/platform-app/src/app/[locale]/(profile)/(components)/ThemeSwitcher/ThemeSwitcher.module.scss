@@ -1,0 +1,38 @@
+@import '../../../../../styles/_index.scss';
+
+.theme {
+  min-height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+  @include theme-transition;
+}
+
+.switch {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+.mode-slide-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mode-slide-tab.scrolled {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  transform: scale(0.9);
+  z-index: 100;
+}
+
+.theme-switcher {
+  display: none;
+}

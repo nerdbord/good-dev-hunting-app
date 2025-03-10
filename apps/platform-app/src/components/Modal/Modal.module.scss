@@ -10,13 +10,15 @@
   background-color: rgba(22, 26, 31, 0.7);
   font-family: var(--font-ibm);
   z-index: 10;
+
 }
 
 .modalWrapper {
   position: absolute;
   height: fit-content;
   display: inline-flex;
-  top: 153px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 124px 89px;
   flex-direction: column;
   align-items: center;
@@ -29,6 +31,18 @@
     width: calc(100vw - 32px);
     padding: 64px 28px;
   }
+
+  :global(.light) & {
+    background-color: rgba(254, 254, 255, 1);
+  }
+}
+
+.wrapperNarrow {
+  padding: 24px;
+}
+
+.wrapperRed {
+  background-color: brown;
 }
 
 .container {
@@ -45,7 +59,9 @@
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
+
   }
+
 }
 
 .actionButtons {

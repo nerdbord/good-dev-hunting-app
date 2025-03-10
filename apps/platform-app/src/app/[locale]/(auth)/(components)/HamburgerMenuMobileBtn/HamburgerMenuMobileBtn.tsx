@@ -5,9 +5,11 @@ import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwit
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { Button, MobileGitHubStarsButton } from '@gdh/ui-system'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useState } from 'react'
 import GithubAcc from '../GithubAcc/GithubAcc'
 import HunterAcc from '../HunterAcc/HunterAcc'
@@ -25,6 +27,7 @@ const HamburgerMenuMobileBtn = ({
 }) => {
   const { data: session } = useSession()
   const t = useTranslations(I18nNamespaces.LoginHunter)
+  const inboxT = useTranslations('Inbox')
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const handleOpenMenu = () => {
@@ -48,6 +51,22 @@ const HamburgerMenuMobileBtn = ({
               <>
                 <div className={styles.wrapper}>
                   <GithubAcc />
+                  <div className={styles.menuLinks}>
+                    <Link
+                      href={AppRoutes.myProfile}
+                      className={styles.menuLink}
+                      onClick={handleCloseMenu}
+                    >
+                      My Profile
+                    </Link>
+                    <Link
+                      href={AppRoutes.inbox}
+                      className={styles.menuLink}
+                      onClick={handleCloseMenu}
+                    >
+                      {inboxT('title')}
+                    </Link>
+                  </div>
                   <LocaleSwitcher />
                   {userIsModerator && <ModerationBtn />}
                 </div>

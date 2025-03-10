@@ -3,6 +3,7 @@ export enum AppRoutes {
   myProfile = '/my-profile',
   createProfile = '/my-profile/create',
   editProfile = '/my-profile/edit',
+  inbox = '/my-profile/inbox',
   oAuth = '/oauth',
   moderation = '/moderation',
   moderationProfile = '/moderation/profile',
@@ -14,7 +15,10 @@ export enum AppRoutes {
   jobs = '/jobs',
   job = '/jobs/:id',
   jobEdit = '/jobs/:id/edit',
+  myJobs = '/jobs/my-jobs',
   application = '/applications/:id',
+  jobApplications = '/jobs/:id/applications',
+  devs = '/devs',
 }
 
 export const removeLocaleFromPath = (pathname: string, locale: string) => {

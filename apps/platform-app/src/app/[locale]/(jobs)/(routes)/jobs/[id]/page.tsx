@@ -1,8 +1,10 @@
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { I18nNamespaces } from '@/i18n/request'
+import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
-import CreateAnotherJobBtn from '../../../(components)/CreateAnotherJobBtn/CreateAnotherJobBtn'
-import styles from './page.module.scss'
-
+import JobDetails from '../../../(components)/JobDetailsPage/JobDetails'
+import { JobsHeader } from '../../../(components)/JobsHeader/JobsHeader'
+import { JobsTopBar } from '../../../(components)/JobsTopBar/JobsTopBar'
 interface JobPageProps {
   params: {
     id: string
@@ -11,16 +13,18 @@ interface JobPageProps {
 
 const JobPage = async ({ params }: JobPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
-
+  const { user } = await getAuthorizedUser()
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <h1>{t('jobDetails')}</h1>
-        {/* TODO: job preview which will be used also in jobs/:id/apply  */}
-        <CreateAnotherJobBtn />
-      </div>
-      <p>Job ID: {params.id}</p>
-    </div>
+    <>
+      <JobsHeader />
+      <Container>
+        <JobsTopBar
+          header={t('jobPreview')}
+          subHeader={`Job ID: ${params.id}`}
+        />
+        <JobDetails params={{ id: params.id, isUser: !!user?.id }} />
+      </Container>
+    </>
   )
 }
 
