@@ -32,7 +32,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
     onChange(event)
   }
 
-  const inputValue = value !== null && value !== undefined ? value.toString() : ''
+  const inputValue =
+    value !== null && value !== undefined ? value.toString() : ''
 
   return (
     <div className={styles.formItem}>
@@ -53,4 +54,4 @@ const NumberInput: React.FC<NumberInputProps> = ({
   )
 }
 
-export default NumberInput 
+export default NumberInput

@@ -1,5 +1,6 @@
 'use client'
 
+import { type LoginFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
 import { I18nNamespaces } from '@/i18n/request'
@@ -7,7 +8,6 @@ import { Button } from '@gdh/ui-system'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import * as Yup from 'yup'
-import { type LoginFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import styles from './LoginModal.module.scss'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {

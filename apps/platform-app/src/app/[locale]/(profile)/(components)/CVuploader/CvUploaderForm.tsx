@@ -6,18 +6,24 @@ import { Button } from '@gdh/ui-system'
 import { ErrorIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CreateProfileFormValues } from '../../profile.types'
 import styles from './CvUploaderForm.module.scss'
 
-export function CVuploaderForm() {
-  const { cvUploadError, onSetCvUploadError, onSetCvFormData } =
+type Props = {
+  btnVariant?: 'primary' | 'secondary'
+}
+
+export function CVuploaderForm({ btnVariant = 'secondary' }: Props) {
+  const { cvUploadError, onSetCvUploadError, onSetCvFormData, cvFormData } =
     useUploadContext()
-  const { values } = useFormikContext<CreateProfileFormValues>()
+  const { values, isSubmitting, setFieldValue } =
+    useFormikContext<CreateProfileFormValues>()
   const cvUrl = values.cvUrl
   const t = useTranslations(I18nNamespaces.Buttons)
   const tt = useTranslations(I18nNamespaces.PersonalInfo)
   const [isUploading, setIsUploading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
@@ -27,12 +33,23 @@ export function CVuploaderForm() {
   } | null>(null)
 
   useEffect(() => {
+    // Check if we have a CV URL from Formik values
     if (cvUrl) {
       setUploadedCVurl({ name: tt('choosenCVfileName'), url: cvUrl })
+    }
+    // Check if we have cvFormData with existingCvUrl (initialized from profile)
+    else if (cvFormData && cvFormData.has('existingCvUrl')) {
+      const existingUrl = cvFormData.get('existingCvUrl') as string
+      setUploadedCVurl({ name: tt('choosenCVfileName'), url: existingUrl })
+
+      // Update Formik's cvUrl value to match the existingCvUrl
+      if (existingUrl && !cvUrl) {
+        setFieldValue('cvUrl', existingUrl)
+      }
     } else {
       setUploadedCVurl(null)
     }
-  }, [cvUrl, tt])
+  }, [cvUrl, tt, cvFormData, setFieldValue])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
@@ -67,6 +84,10 @@ export function CVuploaderForm() {
     }
   }
 
+  const handleButtonClick = () => {
+    fileInputRef.current?.click()
+  }
+
   return (
     <div>
       <div className={styles.errorMessageWrapper}>
@@ -94,23 +115,27 @@ export function CVuploaderForm() {
 
         <div className={styles.contentWrapper}>
           <div className={styles.buttonsWrapper}>
-            <Button variant="secondary" disabled={isUploading}>
-              <label htmlFor="cv-file-input">
-                <input
-                  type="file"
-                  name="cvFileUpload"
-                  accept=".pdf"
-                  id="cv-file-input"
-                  multiple={false}
-                  className={styles.hidden}
-                  onChange={handleFileChange}
-                />
-                {isUploading
-                  ? t('importing')
-                  : uploadedCVurl
-                  ? t('uploadAnotherCVfile')
-                  : t('uploadCVfile')}
-              </label>
+            <input
+              type="file"
+              name="cvFileUpload"
+              accept=".pdf"
+              id="cv-file-input"
+              ref={fileInputRef}
+              multiple={false}
+              className={styles.hidden}
+              onChange={handleFileChange}
+            />
+            <Button
+              variant={btnVariant}
+              disabled={isUploading || isSubmitting}
+              type="button"
+              onClick={handleButtonClick}
+            >
+              {isUploading
+                ? t('importing')
+                : uploadedCVurl
+                ? t('uploadAnotherCVfile')
+                : t('uploadCVfile')}
             </Button>
           </div>
         </div>
