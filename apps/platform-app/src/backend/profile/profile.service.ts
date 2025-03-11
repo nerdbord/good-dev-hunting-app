@@ -331,3 +331,14 @@ export async function getRandomApprovedProfiles(take: number) {
 
   return profiles
 }
+
+export const updateProfile = async (
+  id: Profile['id'],
+  data: Partial<Profile>,
+) => {
+  const updatedProfile = await prisma.profile.update({
+    where: { id },
+    data,
+  })
+  return updatedProfile
+}
