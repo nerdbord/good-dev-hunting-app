@@ -58,9 +58,11 @@
   position: relative;
   padding-left: 20px;
   width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.reason:first-child {
+.reason.selected {
   &::before {
     content: '';
     position: absolute;
@@ -99,12 +101,13 @@
   height: 520px;
   position: relative;
   background-color: transparent;
-  background-image: url('/Background.svg');
+  /* Całkowicie usuwam background-image, aby pozwolić na dynamiczną zmianę tła przez styl inline */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   border-radius: 4px;
   overflow: hidden;
+  transition: background-image 0.3s ease; /* Dodaję płynną animację zmiany tła */
 }
 
 /* Dodajemy responsywność dla mniejszych ekranów */
