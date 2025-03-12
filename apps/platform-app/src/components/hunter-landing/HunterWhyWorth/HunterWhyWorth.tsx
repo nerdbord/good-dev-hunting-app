@@ -3,15 +3,14 @@
 import { useState } from 'react'
 import styles from './HunterWhyWorth.module.scss'
 
-// Importujemy obrazy z poprawionymi nazwami plików
 const backgroundDefault = '/Background.svg'
-const backgroundOne = '/Background1.svg' // Nowa nazwa pliku bez spacji i nawiasów
-const backgroundTwo = '/Background2.svg' // Nowa nazwa pliku bez spacji i nawiasów
+const backgroundOne = '/Background1.svg'
+const backgroundTwo = '/Background2.svg'
 
 type Props = {}
 
 export const HunterWhyWorth = (props: Props) => {
-  const [selectedOption, setSelectedOption] = useState<number>(0) // 0: Background, 1: Background1, 2: Background2
+  const [selectedOption, setSelectedOption] = useState<number>(0)
 
   const getBackgroundImage = () => {
     switch (selectedOption) {
@@ -29,14 +28,6 @@ export const HunterWhyWorth = (props: Props) => {
   const handleOptionClick = (option: number) => {
     setSelectedOption(option)
   }
-
-  // Dodajmy console.log, aby zobaczyć aktualnie wybraną opcję i ścieżkę obrazu
-  console.log(
-    'Selected option:',
-    selectedOption,
-    'Image path:',
-    getBackgroundImage(),
-  )
 
   return (
     <div className={styles.fullWidthWrapper}>
