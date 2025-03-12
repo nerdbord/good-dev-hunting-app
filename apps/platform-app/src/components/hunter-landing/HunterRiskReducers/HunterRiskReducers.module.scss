@@ -1,2 +1,166 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 0 30px 60px 30px;
+  background-color: #f8f9fe;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+  gap: 40px;
+}
+
+.profilesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #F0F0FF;
+  padding: 40px;
+  border-radius: 8px;
+  width: 50%;
+}
+
+.textSection {
+  max-width: 45%;
+
+  h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #4a4a4a;
+  }
+}
+
+.highlight {
+  color: #7D54F1;
+}
+
+.profileCard {
+  background-color: #FAFAFF;
+  border-radius: 2.87px;
+  padding: 7%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.profileHeader {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileInfo {
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin: 0 0 4px 0;
+  }
+
+  p {
+    font-size: 10px;
+    color: #666;
+    margin: 0 0 4px 0;
+  }
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.skill {
+  background-color: #E4E4F6;
+  padding: 6px 12px;
+  border-radius: 2.87px;
+  font-size: 12px;
+  color: #5E28F6;
+}
+
+.specialistSection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.specialistText {
+  padding: 40px;
+  max-width: 50%;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #4a4a4a;
+  }
+}
+
+.specialistImageWrapper {
+  max-width: 50%;
+}
+
+@media (max-width: 767px) {
+  .topSection {
+    flex-direction: column;
+  }
+
+  .profilesContainer {
+    width: 100%;
+    order: 2;
+  }
+
+  .textSection {
+    max-width: 100%;
+    order: 1;
+    margin-bottom: 30px;
+  }
+
+  .specialistSection {
+    flex-direction: column;
+  }
+
+  .specialistText, 
+  .specialistImageWrapper {
+    max-width: 100%;
+  }
 }
