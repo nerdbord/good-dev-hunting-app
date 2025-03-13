@@ -1,2 +1,80 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  color: var(--hunter-landing-text-color);
+  font-size: 38px;
+  line-height: 40px;
+  letter-spacing: 0%;
+}
+
+.reviewBox {
+  column-count: 3;
+  column-gap: 16px;
+  width: 100%;
+}
+
+.card {
+  background: var(--hunter-landing-bg-color4);
+  padding: 30px;
+  border-radius: 4px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+.stars {
+  color: #f9d871;
+  font-size: 16px;
+}
+
+.text {
+  color: var(--hunter-landing-text-color2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  border-radius: 50%;
+  box-shadow: 0px 4px 50px 0px #7d54f133;
+}
+
+.profileData {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.role {
+  color: var(--hunter-landing-text-color3);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  vertical-align: middle;
 }
