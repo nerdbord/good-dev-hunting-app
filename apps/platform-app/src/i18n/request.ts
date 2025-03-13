@@ -23,6 +23,7 @@ export enum I18nNamespaces {
   UserProfile = 'UserProfile',
   TalentSection = 'TalentSection',
   MeetTeam = 'MeetTeam',
+  HunterTeam = 'HunterTeam',
   Faq = 'Faq',
   Buttons = 'Buttons',
   LandingFooter = 'LandingFooter',
