@@ -37,7 +37,8 @@ export const HunterHeader = () => {
     <section id="HunterHeader" className={styles.wrapper}>
       <LogoLight />
       <div className={styles.menuDesktop}>
-        <LocaleSwitcher />
+        <LocaleSwitcher variant="hunterLanding" />
+
         <Button variant="allpurple" onClick={handleAddJob}>
           {t('addJob')}
         </Button>
@@ -53,7 +54,7 @@ export const HunterHeader = () => {
             }`}
           >
             <div className={styles.buttonBox}>
-              <LocaleSwitcher />
+              <LocaleSwitcher variant="hunterLanding" />
               <Button variant="allpurple" onClick={handleAddJob}>
                 {t('addJob')}
               </Button>

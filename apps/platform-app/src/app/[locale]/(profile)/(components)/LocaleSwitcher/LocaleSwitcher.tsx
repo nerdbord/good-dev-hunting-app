@@ -3,9 +3,15 @@ import { I18nNamespaces } from '@/i18n/request'
 import { useLocale, useTranslations } from 'next-intl'
 import { LocaleSwitcherSelect } from './LocaleSwitcherSelect'
 
-export const LocaleSwitcher = () => {
+export const LocaleSwitcher = ({ variant }: { variant?: 'hunterLanding' }) => {
   const t = useTranslations(I18nNamespaces.LocaleSwitcher)
   const locale = useLocale()
 
-  return <LocaleSwitcherSelect defaultValue={locale} label={t('label')} />
+  return (
+    <LocaleSwitcherSelect
+      defaultValue={locale}
+      label={t('label')}
+      variant={variant}
+    />
+  )
 }

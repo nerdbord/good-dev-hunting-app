@@ -124,7 +124,6 @@
 
 .mobileDropdown {
   position: fixed;
-  bottom: 0;
   left: 0;
   bottom: -402px;
   width: 100vw;
@@ -255,4 +254,42 @@
 
 .arrow.lightMode {
   color: #333;
+}
+
+//hunter landing
+.hunterLanding {
+  background-color: var(--hunter-landing-bg-color);
+  color: var(--hunter-landing-text-color);
+
+  .button {
+    background-color: var(--hunter-landing-bg-color);
+    border-color: var(--hunter-landing-text-color);
+    color: var(--hunter-landing-text-color);
+
+    @include mobile {
+      max-width: 240px;
+      margin: 0 auto;
+    }
+  }
+
+  .buttonIcon {
+    color: var(--hunter-landing-text-color);
+  }
+
+  .localeName {
+    color: var(--hunter-landing-text-color);
+  }
+
+  .dropdown {
+    background-color: var(--hunter-landing-bg-color);
+    border-color: var(--hunter-landing-text-color4);
+  }
+
+  .dropdownItem {
+    color: var(--hunter-landing-text-color);
+  }
+
+  .arrow {
+    color: var(--hunter-landing-text-color);
+  }
 }

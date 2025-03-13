@@ -17,11 +17,13 @@ const cx = classNames.bind(styles)
 type LocaleSwitcherSelectProps = {
   defaultValue: string
   label: string
+  variant?: 'hunterLanding'
 }
 
 export const LocaleSwitcherSelect = ({
   defaultValue,
   label,
+  variant,
 }: LocaleSwitcherSelectProps) => {
   const t = useTranslations(I18nNamespaces.LocaleSwitcher)
   const tt = useTranslations(I18nNamespaces.Buttons)
@@ -55,31 +57,24 @@ export const LocaleSwitcherSelect = ({
     })
   }
 
-  const buttonClassName = cx('button', {
-    btnWidthIsMobileEn: isMobile && selectedLocale === 'en',
-    btnWidthIsMobilePl: isMobile && selectedLocale === 'pl',
-    btnWidthIsDesktopEn: !isMobile && selectedLocale === 'en',
-    btnWidthIsDesktopPl: !isMobile && selectedLocale === 'pl',
-
-    btnPaddingIsMobileEn: isMobile && selectedLocale === 'en',
-    btnPaddingIsMobilePl: isMobile && selectedLocale === 'pl',
-    btnPaddingDesktop: !isMobile,
-
-    isMobileColorLight02: isMobile,
-    isOpenColorMain03: !isMobile && isOpen,
+  const containerClassName = cx('container', {
+    open: isOpen,
+    hunterLanding: variant === 'hunterLanding',
   })
-
+  const buttonClassName = cx('button', {
+    hunterLanding: variant === 'hunterLanding',
+    hunterLandingMobile: variant === 'hunterLanding' && isMobile,
+  })
   const buttonIconClassName = cx('buttonIcon', {
-    buttonIconOpen: isOpen && !isMobile,
+    hunterLanding: variant === 'hunterLanding',
   })
   const localeNameClassName = cx('localeName', {
-    localeNameOpen: isOpen && !isMobile,
-    localeNameOpenMobile: isOpen && isMobile,
+    hunterLanding: variant === 'hunterLanding',
   })
-  const containerClassName = cx('container', { open: isOpen })
   const dropdownClassName = cx({
     mobileDropdown: isMobile,
     dropdown: !isMobile,
+    hunterLanding: variant === 'hunterLanding',
   })
 
   return (
