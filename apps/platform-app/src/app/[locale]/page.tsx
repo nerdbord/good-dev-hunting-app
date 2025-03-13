@@ -17,23 +17,18 @@ export default async function HunterLandingPage() {
   return (
     <main className={styles.hunter_landing}>
       <Container>
-        <HunterHeader />
-        <HunterHero />
-        <HunterRiskReducers />
-        <HunterHowItWorks />
-        <HunterWhyWorth />
-        <HunterReviews />
-        <HunterTeam />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterFAQ />
-        <HunterCTA />
-        <HunterFooter />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '180px' }}>
+          <HunterHeader />
+          <HunterHero />
+          <HunterRiskReducers />
+          <HunterHowItWorks />
+          <HunterWhyWorth />
+          <HunterReviews />
+          <HunterTeam />
+          <HunterFAQ />
+          <HunterCTA />
+          <HunterFooter />
+        </div>
       </Container>
     </main>
   )
