@@ -1,6 +1,7 @@
 import profilePic1 from '@/assets/images/ProfilePicture.png'
 import profilePic2 from '@/assets/images/ProfilePicture2.png'
 import profilePic3 from '@/assets/images/ProfilePicture3.png'
+import { ReviewStar } from '@/components/icons/ReviewStar'
 import Image from 'next/image'
 import styles from './HunterReviews.module.scss'
 
@@ -56,7 +57,11 @@ export const HunterReviews = () => {
       <div className={styles.reviewBox}>
         {reviews.map((review, index) => (
           <div key={index} className={styles.card}>
-            <div className={styles.stars}>{'⭐'.repeat(review.stars)}</div>
+            <div className={styles.stars}>
+              {[...Array(review.stars)].map((_, i) => (
+                <ReviewStar key={i} />
+              ))}
+            </div>
             <p className={styles.text}>“{review.text}”</p>
             <div className={styles.profile}>
               <Image
