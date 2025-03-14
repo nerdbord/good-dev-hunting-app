@@ -5,3 +5,9 @@
   color: var(--hunter-landing-text-color);
   padding-top: 100px;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 180px;
+}

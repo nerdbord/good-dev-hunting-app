@@ -11,7 +11,6 @@ import styles from './HunterHeader.module.scss'
 
 export const HunterHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [menuVisible, setMenuVisible] = useState(false)
   const t = useTranslations(I18nNamespaces.HunterHeader)
   const router = useRouter()
 
@@ -20,37 +19,26 @@ export const HunterHeader = () => {
   }
 
   const toggleMobileMenu = () => {
-    if (isMobileMenuOpen) {
-      setMenuVisible(false)
-      setTimeout(() => {
-        setIsMobileMenuOpen(false)
-      }, 300)
-    } else {
-      setIsMobileMenuOpen(true)
-      setTimeout(() => {
-        setMenuVisible(true)
-      }, 10)
-    }
+    setIsMobileMenuOpen((prev) => !prev)
   }
 
   return (
-    <section id="HunterHeader" className={styles.wrapper}>
-      <LogoLight />
-      <div className={styles.menuDesktop}>
-        <LocaleSwitcher variant="hunterLanding" />
-
-        <Button variant="allpurple" onClick={handleAddJob}>
-          {t('addJob')}
-        </Button>
-      </div>
-      <div className={styles.menuMobile}>
-        <button className={styles.mobilebutton} onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? 'X' : 'Menu'}
-        </button>
-        {isMobileMenuOpen && (
+    <header id="HunterHeader" className={styles.wrapper}>
+      <div className={styles.container}>
+        <LogoLight />
+        <div className={styles.menuDesktop}>
+          <LocaleSwitcher variant="hunterLanding" />
+          <Button variant="allpurple" onClick={handleAddJob}>
+            {t('addJob')}
+          </Button>
+        </div>
+        <div className={styles.menuMobile}>
+          <button className={styles.mobilebutton} onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? 'X' : 'Menu'}
+          </button>
           <div
             className={`${styles.mobileMenuContent} ${
-              menuVisible ? styles.visible : styles.hidden
+              isMobileMenuOpen ? styles.menuOpen : ''
             }`}
           >
             <div className={styles.buttonBox}>
@@ -60,8 +48,8 @@ export const HunterHeader = () => {
               </Button>
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </section>
+    </header>
   )
 }

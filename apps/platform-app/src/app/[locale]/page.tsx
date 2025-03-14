@@ -16,9 +16,9 @@ import styles from './page.module.scss'
 export default async function HunterLandingPage() {
   return (
     <main className={styles.hunter_landing}>
+      <HunterHeader />
       <Container>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '180px' }}>
-          <HunterHeader />
+        <div className={styles.wrapper}>
           <HunterHero />
           <HunterRiskReducers />
           <HunterHowItWorks />
@@ -27,9 +27,9 @@ export default async function HunterLandingPage() {
           <HunterTeam />
           <HunterFAQ />
           <HunterCTA />
-          <HunterFooter />
         </div>
       </Container>
+      <HunterFooter />
     </main>
   )
 }

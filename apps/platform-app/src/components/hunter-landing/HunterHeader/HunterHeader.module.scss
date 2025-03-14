@@ -8,7 +8,17 @@
   left: 0;
   background-color: var(--hunter-landing-bg-color);
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
+
+  .container {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   @include mobile {
     padding: 12px;
   }
@@ -57,16 +67,18 @@
   background-color: var(--hunter-landing-bg-color);
   padding: 30px 12px;
   width: 100%;
-  transition: transform 0.5s ease-in-out;
-  transform: translateY(-100%);
   z-index: 90;
+  border-bottom: var(--button-stroke) 1px solid;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  visibility: visible;
 }
 
-.mobileMenuContent.visible {
+.menuOpen {
   transform: translateX(0);
 }
 
-.mobileMenuContent.hidden {
+.menuClose {
   transform: translateX(100%);
 }
 
