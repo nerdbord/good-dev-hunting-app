@@ -392,7 +392,9 @@
     "privacyPolicy": "Polityka prywatności",
     "termsOfService": "Warunki korzystania z usługi",
     "addJob": "Dodaj zlecenie za darmo",
-    "contact": "Kontakt",
     "joinAsItSpecialist": "Dołącz jako IT specjalista"
+  },
+  "HunterHeader": {
+    "addJob": "Dodaj zlecenie za darmo"
   }
 }

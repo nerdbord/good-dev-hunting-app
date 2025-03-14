@@ -386,14 +386,16 @@
       "answerTwo": "Specialists who sign up for an assignment will be able to connect with the Principal via the internal chat available on the platform. The Principal, on the other hand, will receive an email notification of their willingness to cooperate.",
       "questionThree": "How many orders can I post?",
       "answerThree": "At this point you can add one order per day."
-    },
-    "HunterFooter": {
-      "contact": "Contact",
-      "privacyPolicy": "Privacy Policy",
-      "termsOfService": "Terms of Service",
-      "addJob": "Add a job for free",
-      "contact": "Contact",
-      "joinAsItSpecialist": "Join as an IT specialist"
     }
+  },
+  "HunterFooter": {
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "addJob": "Add a job for free",
+    "joinAsItSpecialist": "Join as an IT specialist"
+  },
+  "HunterHeader": {
+    "addJob": "Add a job for free"
   }
 }
