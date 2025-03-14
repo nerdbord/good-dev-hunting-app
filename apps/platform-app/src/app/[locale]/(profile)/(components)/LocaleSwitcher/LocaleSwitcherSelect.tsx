@@ -1,5 +1,6 @@
 'use client'
 
+import { HunterHeaderVariant } from '@/components/hunter-landing/HunterHeader/HunterHeader'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import { I18nNamespaces } from '@/i18n/request'
@@ -17,7 +18,7 @@ const cx = classNames.bind(styles)
 type LocaleSwitcherSelectProps = {
   defaultValue: string
   label: string
-  variant?: 'hunterLanding'
+  variant?: HunterHeaderVariant
 }
 
 export const LocaleSwitcherSelect = ({
@@ -59,22 +60,23 @@ export const LocaleSwitcherSelect = ({
 
   const containerClassName = cx('container', {
     open: isOpen,
-    hunterLanding: variant === 'hunterLanding',
+    hunterLanding: variant === HunterHeaderVariant.HunterHeaderVariant,
   })
   const buttonClassName = cx('button', {
-    hunterLanding: variant === 'hunterLanding',
-    hunterLandingMobile: variant === 'hunterLanding' && isMobile,
+    hunterLanding: variant === HunterHeaderVariant.HunterHeaderVariant,
+    hunterLandingMobile:
+      variant === HunterHeaderVariant.HunterHeaderVariant && isMobile,
   })
   const buttonIconClassName = cx('buttonIcon', {
-    hunterLanding: variant === 'hunterLanding',
+    hunterLanding: variant === HunterHeaderVariant.HunterHeaderVariant,
   })
   const localeNameClassName = cx('localeName', {
-    hunterLanding: variant === 'hunterLanding',
+    hunterLanding: variant === HunterHeaderVariant.HunterHeaderVariant,
   })
   const dropdownClassName = cx({
     mobileDropdown: isMobile,
     dropdown: !isMobile,
-    hunterLanding: variant === 'hunterLanding',
+    hunterLanding: variant === HunterHeaderVariant.HunterHeaderVariant,
   })
 
   return (

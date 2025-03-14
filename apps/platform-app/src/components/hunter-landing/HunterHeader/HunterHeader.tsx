@@ -9,6 +9,10 @@ import { useState } from 'react'
 import { LogoLight } from '../UI/LogoLight/LogoLight'
 import styles from './HunterHeader.module.scss'
 
+export enum HunterHeaderVariant {
+  HunterHeaderVariant = 'hunterLanding',
+}
+
 export const HunterHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations(I18nNamespaces.HunterHeader)
@@ -27,7 +31,7 @@ export const HunterHeader = () => {
       <div className={styles.container}>
         <LogoLight />
         <div className={styles.menuDesktop}>
-          <LocaleSwitcher variant="hunterLanding" />
+          <LocaleSwitcher variant={HunterHeaderVariant.HunterHeaderVariant} />
           <Button variant="allpurple" onClick={handleAddJob}>
             {t('addJob')}
           </Button>
@@ -42,7 +46,9 @@ export const HunterHeader = () => {
             }`}
           >
             <div className={styles.buttonBox}>
-              <LocaleSwitcher variant="hunterLanding" />
+              <LocaleSwitcher
+                variant={HunterHeaderVariant.HunterHeaderVariant}
+              />
               <Button variant="allpurple" onClick={handleAddJob}>
                 {t('addJob')}
               </Button>
