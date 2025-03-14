@@ -396,5 +396,8 @@
   },
   "HunterHeader": {
     "addJob": "Dodaj zlecenie za darmo"
+  },
+  "HunterReviews": {
+    "opinions": "Opinie zleceniodawców"
   }
 }
