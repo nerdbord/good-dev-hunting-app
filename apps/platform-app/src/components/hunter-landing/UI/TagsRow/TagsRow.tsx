@@ -79,7 +79,7 @@ export const TagsRow = memo(({
   }, [isMobile, rowIndex, isReversed])
 
   // For the second row on mobile, we need to handle the reverse layout differently
-  const rowStyle = isReversed && isMobile ? { direction: 'rtl' } : undefined
+  const rowStyle = isReversed && isMobile ? { direction: 'rtl' as const } : undefined
 
   // Prepare duplicate tags for infinite scroll effect on mobile
   const getInfiniteScrollTags = () => {
@@ -111,7 +111,7 @@ export const TagsRow = memo(({
       {displayTags.map((tag, tagIndex) => {
         if (!tag) return null
         
-        const itemStyle = isReversed && isMobile ? { direction: 'ltr' } : undefined
+        const itemStyle = isReversed && isMobile ? { direction: 'ltr' as const } : undefined
         const isHighlighted = tagMapping[currentAnimatedTag] === tag
         const isSelected = selectedTag === tag
 
