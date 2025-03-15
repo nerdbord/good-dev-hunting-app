@@ -10,7 +10,7 @@
   }
 
   &.mobileTooltip {
-    @media (max-width: 768px) {
+    @include mobile {
       display: block;
       top: unset;
       left: 35px;
@@ -36,7 +36,7 @@
   transform: rotate(10deg);
 
   .mobileTooltip & {
-    @media (max-width: 768px) {
+    @include mobile {
       top: unset;
       bottom: -65px;
       left:20px;
@@ -50,7 +50,7 @@
   z-index: 101;
 
   .mobileTooltip & {
-    @media (max-width: 768px) {
+    @include mobile {
       transform: rotate(15deg);
     }
   }
