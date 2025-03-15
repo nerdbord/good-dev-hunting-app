@@ -3,6 +3,7 @@ import styles from "./TextareaHero.module.scss"
 import { useTranslations } from "next-intl"
 import { I18nNamespaces } from "@/i18n/request"
 import { useState, useEffect, useCallback, useRef } from "react"
+import { useTextareaAnimation } from "../../hooks/useTextareaAnimation"
 
 type TextareaHeroProps = {
   tagsAnimate: string[];
@@ -12,22 +13,33 @@ type TextareaHeroProps = {
   onEmpty: () => void;
 };
 
-export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, onEmpty }: TextareaHeroProps) => {
+export const TextareaHero = ({
+  tagsAnimate,
+  onTagChange,
+  selectedTag,
+  mockText,
+  onEmpty,
+}: TextareaHeroProps) => {
   const t = useTranslations(I18nNamespaces.HunterHero)
-  const [text, setText] = useState("");
   const staticPrefix = `${t("textareaLabel")}`;
-  const [currentTag, setCurrentTag] = useState(tagsAnimate[0]);
-  const [isAnimating, setIsAnimating] = useState(true);
-  const [showPlaceholder, setShowPlaceholder] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Function to get random tag excluding the current one
-  const getRandomTag = useCallback((currentTag: string) => {
-    const availableTags = tagsAnimate.filter(tag => tag !== currentTag);
-    const randomIndex = Math.floor(Math.random() * availableTags.length);
-    return availableTags[randomIndex];
-  }, [tagsAnimate]);
+  // Use custom hook for textarea animation
+  const {
+    text,
+    setText,
+    currentTag,
+    isAnimating,
+    showPlaceholder,
+    setShowPlaceholder,
+  } = useTextareaAnimation({
+    tagsAnimate,
+    onTagChange,
+    selectedTag,
+    mockText,
+  });
 
+  // Adjust textarea height based on content
   const adjustHeight = useCallback(() => {
     const textarea = textareaRef.current;
     if (textarea) {
@@ -37,33 +49,7 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
     }
   }, []);
 
-  useEffect(() => {
-    if (selectedTag) {
-      setText(mockText);
-      setShowPlaceholder(false);
-      setTimeout(adjustHeight, 0);
-      return;
-    }
-
-    const ANIMATION_DURATION = 3500; // Total cycle duration
-    const DELETE_DURATION = 500; // Duration of delete animation
-
-    const interval = setInterval(() => {
-      setIsAnimating(false); // Start delete animation
-      
-      // Wait for delete animation to complete before changing text
-      setTimeout(() => {
-        const newTag = getRandomTag(currentTag);
-        setCurrentTag(newTag);
-        onTagChange(newTag);
-        setIsAnimating(true); // Start typing animation
-      }, DELETE_DURATION);
-
-    }, ANIMATION_DURATION);
-
-    return () => clearInterval(interval);
-  }, [currentTag, getRandomTag, onTagChange, selectedTag, mockText, adjustHeight]);
-
+  // Handle text change in textarea
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     
@@ -84,6 +70,13 @@ export const TextareaHero = ({ tagsAnimate, onTagChange, selectedTag, mockText, 
     
     adjustHeight();
   };
+
+  // Adjust height when text changes
+  useEffect(() => {
+    if (selectedTag) {
+      setTimeout(adjustHeight, 0);
+    }
+  }, [selectedTag, adjustHeight]);
 
   return (
     <div className={styles.textareaWrapper}>

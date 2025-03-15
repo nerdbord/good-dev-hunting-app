@@ -1,0 +1,67 @@
+.tooltipWrapper {
+  position: absolute;
+  top: 23px;
+  right: 2px;
+  display: none;
+  z-index: 100;
+
+  @media (min-width: 769px) {
+    display: block;
+  }
+
+  &.mobileTooltip {
+    @media (max-width: 768px) {
+      display: block;
+      top: unset;
+      left: 35px;
+      bottom: -30px;
+    }
+  }
+}
+
+.tooltipContent {
+  width: 159px;
+  height: auto;
+  position: absolute;
+  top: 33px;
+  left: 38px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.13);
+  z-index: 101;
+  transform: rotate(10deg);
+
+  .mobileTooltip & {
+    @media (max-width: 768px) {
+      top: unset;
+      bottom: -65px;
+      left: 20px;
+    }
+  }
+}
+
+.pointer {
+  width: 24px;
+  height: 25.515px;
+  z-index: 101;
+
+  .mobileTooltip & {
+    @media (max-width: 768px) {
+      transform: rotate(15deg);
+    }
+  }
+}
+
+.pointerContainer {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+} 
