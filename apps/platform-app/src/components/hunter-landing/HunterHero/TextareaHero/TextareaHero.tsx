@@ -2,7 +2,7 @@
 import styles from "./TextareaHero.module.scss"
 import { useTranslations } from "next-intl"
 import { I18nNamespaces } from "@/i18n/request"
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useEffect, useCallback, useRef } from "react"
 import { useTextareaAnimation } from "../../hooks/useTextareaAnimation"
 
 type TextareaHeroProps = {
