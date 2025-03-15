@@ -23,6 +23,7 @@ export enum I18nNamespaces {
   UserProfile = 'UserProfile',
   TalentSection = 'TalentSection',
   MeetTeam = 'MeetTeam',
+  HunterTeam = 'HunterTeam',
   Faq = 'Faq',
   Buttons = 'Buttons',
   LandingFooter = 'LandingFooter',
@@ -46,5 +47,6 @@ export enum I18nNamespaces {
   Auth = 'Auth',
   HunterFAQ = 'HunterFAQ',
   HunterFooter = 'HunterFooter',
+  HunterHeader = 'HunterHeader',
   HunterHero = 'HunterHero',
 }

@@ -28,7 +28,9 @@ export const ThemeSwitcher: React.FC<SwitchProps> = ({
     <div className={`${styles['mode-slide-tab']}`}>
       <button
         onClick={toggleTheme}
-        className={`${styles.switch} ${isDarkTheme ? styles.dark : styles.light} ${className || ''}`}
+        className={`${styles.switch} ${
+          isDarkTheme ? styles.dark : styles.light
+        } ${className || ''}`}
         aria-label={
           isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'
         }

@@ -1,12 +1,13 @@
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
+'use client'
 import JobApplicationForm from '@/app/[locale]/(jobs)/(components)/JobApplicationForm/JobApplicationForm'
-import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
-import { JobsTopBar } from '@/app/[locale]/(jobs)/(components)/JobsTopBar/JobsTopBar'
+import { UploadProvider } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
-import { AppRoutes } from '@/utils/routes'
-import { Container } from '@gdh/ui-system'
-import { getTranslations } from 'next-intl/server'
-import { redirect } from 'next/navigation'
+import { Button, Drawer } from '@gdh/ui-system'
+import { useTranslations } from 'next-intl'
+import { useParams } from 'next/navigation'
+import { useState } from 'react'
+import { DrawerHeader } from '../../../../../../../../../../packages/ui-system/src/components/Drawer/Drawer'
+import styles from '../page.module.scss'
 
 interface JobApplicationPageProps {
   params: {
@@ -14,25 +15,36 @@ interface JobApplicationPageProps {
   }
 }
 
-const JobApplicationPage = async ({ params }: JobApplicationPageProps) => {
-  const { user, userIsHunter } = await getAuthorizedUser()
-  const t = await getTranslations(I18nNamespaces.Jobs)
-
-  if (!user || userIsHunter) {
-    redirect(AppRoutes.signIn)
-  }
+const JobApplicationPage = ({ params }: JobApplicationPageProps) => {
+  const { id } = useParams()
+  const t = useTranslations(I18nNamespaces.Jobs)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
-    <>
-      <JobsHeader />
-      <Container>
-        <JobsTopBar
-          header={t('applyForJob')}
-          subHeader={`Job ID: ${params.id}`}
-        />
-        <JobApplicationForm jobId={params.id} />
-      </Container>
-    </>
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <div className={styles.headerLeft}>
+          <h1>{t('applyForJob')}</h1>
+          <p>Job ID: {id}</p>
+        </div>
+        <div className={styles.headerRight}>
+          <Button variant="primary" onClick={() => setIsDrawerOpen(true)}>
+            {t('submitApplication')}
+          </Button>
+        </div>
+      </div>
+      {/* TODO: job preview from job/:id page */}
+
+      <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+        <DrawerHeader>
+          <h2>{t('submitApplication')}</h2>
+          <p>JOB ID: {id}</p>
+        </DrawerHeader>
+        <UploadProvider>
+          <JobApplicationForm jobId={id as string} />
+        </UploadProvider>
+      </Drawer>
+    </div>
   )
 }
 

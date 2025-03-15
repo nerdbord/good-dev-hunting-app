@@ -15,7 +15,7 @@ export const EditIcon = () => {
         stroke="currentColor"
         fill="none"
       />
-      <path d="M14 6L18 10" stroke="#A687FF" />
+      <path d="M14 6L18 10" stroke="currentColor" />
     </svg>
   );
 };

@@ -273,7 +273,18 @@
     "myJobs": "My jobs",
     "noJobs": "You don't have any jobs",
     "job": "job",
-    "jobs": "jobs"
+    "jobs": "jobs",
+
+    "applicationMsgLabel": "Message",
+    "applicationMsgPlaceholder": "Write your message here...",
+    "applicationBudgetLabel": "Budget",
+    "messageRequired": "Message is required",
+    "budgetRequired": "Budget is required",
+    "userProfileNotFound": "User profile not found",
+    "cvRequired": "CV upload is required",
+    "cvUploadFailed": "CV upload failed",
+    "applicationSubmissionFailed": "Failed to submit application",
+    "submitting": "Submitting..."
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",
@@ -354,7 +365,16 @@
     "send": "Send",
     "inbox": "Inbox"
   },
-
+  "HunterTeam": {
+    "title": "Meet Our Team",
+    "descriptionBold": "We believe that finding an IT expert should be simple. ",
+    "description": "We connect visionaries with specialists, eliminating barriers and bureaucracy. We create open source because technology should be accessible and transparent.",
+    "signature": "— The Good Dev Hunting Team",
+    "fullTime": "Available for full-time",
+    "contract": "Available for contract work",
+    "partTime": "Available for part-time",
+    "remote": "Remote"
+  },
   "HunterFAQ": {
     "title": "Most Frequently Asked Questions",
     "desc": "Find answers to frequently asked questions or contact us. We will be happy to help and clear up any doubts.",
@@ -366,14 +386,17 @@
       "answerTwo": "Specialists who sign up for an assignment will be able to connect with the Principal via the internal chat available on the platform. The Principal, on the other hand, will receive an email notification of their willingness to cooperate.",
       "questionThree": "How many orders can I post?",
       "answerThree": "At this point you can add one order per day."
-    },
-    "HunterFooter": {
-      "contact": "Contact",
-      "privacyPolicy": "Privacy Policy",
-      "termsOfService": "Terms of Service",
-      "addJob": "Add a job for free",
-      "joinAsItSpecialist": "Join as an IT specialist"
     }
+  },
+  "HunterFooter": {
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "addJob": "Add a job for free",
+    "joinAsItSpecialist": "Join as an IT specialist"
+  },
+  "HunterHeader": {
+    "addJob": "Add a job for free"
   },
   "HunterHero": {
     "title": "Find the perfect IT specialist for your project",

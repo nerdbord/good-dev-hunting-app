@@ -59,5 +59,5 @@ export enum BudgetType {
 }
 
 export interface LoginFormValues {
-  email: string;
+  email: string
 }

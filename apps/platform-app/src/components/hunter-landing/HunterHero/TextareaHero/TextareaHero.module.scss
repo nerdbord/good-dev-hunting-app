@@ -59,7 +59,7 @@
   }
 
   &::placeholder {
-    color: var(--hunter-landing-text-color5);
+    color: var( --hunter-landing-button-color);
     font-family: 'IBM Plex Sans';
     font-size: 14px;
     font-style: normal;
@@ -91,7 +91,7 @@
   font-family: 'IBM Plex Sans';
   font-size: 14px;
   line-height: 20px;
-  color: var(--hunter-landing-text-color5);
+  color: var( --hunter-landing-button-color);
 
   @include mobile {
     right: 20px;
