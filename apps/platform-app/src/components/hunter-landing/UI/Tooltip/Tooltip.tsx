@@ -1,6 +1,6 @@
 'use client'
 import PointingIcon from '@/components/icons/PointingIcon'
-import { ReactNode } from 'react'
+import type{ ReactNode } from 'react'
 import styles from './Tooltip.module.scss'
 
 export interface TooltipProps {

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import styles from './TagButton.module.scss'
 
 export interface TagButtonProps {
