@@ -1,5 +1,6 @@
 'use client'
-import { useEffect, useRef, ReactNode, memo } from 'react'
+import { useEffect, useRef, memo } from 'react'
+import type { ReactNode } from 'react'
 import { TagButton } from '../TagButton/TagButton'
 import styles from './TagsRow.module.scss'
 
