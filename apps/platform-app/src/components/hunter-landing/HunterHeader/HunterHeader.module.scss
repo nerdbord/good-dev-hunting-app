@@ -1,2 +1,94 @@
 .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--hunter-landing-bg-color);
+  width: 100%;
+  z-index: 100;
+
+  .container {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @include mobile {
+    padding: 12px;
+  }
+}
+
+.menuDesktop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.mobilebutton {
+  padding: 12px 24px;
+  color: var(--hunter-landing-button-color);
+  background: transparent;
+  border: 1px solid var(--hunter-landing-button-color);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+  width: 83px;
+}
+
+.menuMobile {
+  position: relative;
+  display: none;
+
+  @include mobile {
+    display: flex;
+  }
+}
+
+.mobileMenuContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 60px;
+  right: 0;
+  background-color: var(--hunter-landing-bg-color);
+  padding: 30px 12px;
+  width: 100%;
+  z-index: 10;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  visibility: visible;
+}
+
+.menuOpen {
+  transform: translateX(0);
+}
+
+.menuClose {
+  transform: translateX(100%);
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 240px;
+}
+
+.buttonBox button {
+  width: 100%;
 }
