@@ -1,4 +1,7 @@
+import Image from 'next/image'
 import React from 'react'
+import LandingProfileImg1 from '../../../assets/images/LandingProfileImg1.webp'
+import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
 import { SpecialistImage } from '../UI/SpecialistImage/SpecialistImage'
 import styles from './HunterRiskReducers.module.scss'
 
@@ -7,7 +10,7 @@ interface ProfileCardProps {
   position: string
   location: string
   skills: string[]
-  avatar: string
+  avatar: any
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
@@ -20,7 +23,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   return (
     <div className={styles.profileCard}>
       <div className={styles.profileHeader}>
-        <img src={avatar} alt={name} className={styles.avatar} />
+        <div className={styles.avatarContainer}>
+          <Image
+            src={avatar}
+            alt={name}
+            fill
+            sizes="(max-width: 768px) 48px, 64px"
+            style={{
+              objectFit: 'cover',
+              borderRadius: '50%',
+            }}
+          />
+        </div>
         <div className={styles.profileInfo}>
           <h3>{name}</h3>
           <p>{position}</p>
@@ -49,14 +63,14 @@ export const HunterRiskReducers = () => {
               position="Junior Frontend Developer"
               location="Poland, Warsaw / Remote"
               skills={['TypeScript', 'React.js', 'SCSS', '+3 more']}
-              avatar="/images/profiles/anna.jpg"
+              avatar={LandingProfileImg1}
             />
             <ProfileCard
               name="Krystian Jasiński"
               position="Senior Fullstack Developer"
               location="Poland, Warsaw / Remote"
               skills={['JavaScript', 'React.js', 'Vue.js', '+5 more']}
-              avatar="/images/profiles/krystian.jpg"
+              avatar={LandingProfileImg2}
             />
           </div>
           <div className={styles.textSection}>
