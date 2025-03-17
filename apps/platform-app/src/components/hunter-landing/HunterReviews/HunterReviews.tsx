@@ -3,15 +3,18 @@ import { ReviewCard } from '@/components/hunter-landing/UI/ReviewCard/ReviewCard
 import { useScreenDetection } from '@/hooks/useDeviceDetection'
 import { I18nNamespaces } from '@/i18n/request'
 import { ArrowLeft, ArrowRight } from '@gdh/ui-system/icons'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import styles from './HunterReviews.module.scss'
-import { reviews } from './reviews'
+import { reviews_en, reviews_pl } from './reviews'
 
 export const HunterReviews: React.FC = () => {
   const t = useTranslations(I18nNamespaces.HunterReviews)
+  const locale = useLocale()
   const { isMobile } = useScreenDetection()
   const [currentIndex, setCurrentIndex] = useState(0)
+
+  const reviews = locale === 'pl' ? reviews_pl : reviews_en
 
   const handleNext = () => {
     if (currentIndex + 2 < reviews.length) {

@@ -2,7 +2,7 @@ import profilePic1 from '@/assets/images/ProfilePicture.png'
 import profilePic2 from '@/assets/images/ProfilePicture2.png'
 import profilePic3 from '@/assets/images/ProfilePicture3.png'
 
-export const reviews = [
+export const reviews_pl = [
   {
     name: 'Karolina Mowińska',
     role: 'Przedsiębiorca',
@@ -42,6 +42,51 @@ export const reviews = [
     name: 'Barbara Lipińska',
     role: 'Właścicielka butiku online',
     text: 'Potrzebowałam programisty do małego projektu e-commerce. Przez DevHunting znalazłam odpowiednią osobę w kilka dni. Proces był prosty i przejrzysty.',
+    stars: 4,
+    image: profilePic3,
+  },
+]
+
+export const reviews_en = [
+  {
+    name: 'Karolina Mowińska',
+    role: 'Entrepreneur',
+    text: 'As a small business owner, I appreciate the simplicity of the platform. I quickly found a WordPress specialist who helped me resolve issues with my website.',
+    stars: 5,
+    image: profilePic1,
+  },
+  {
+    name: 'Anna Dębowska',
+    role: 'CEO of an educational startup',
+    text: 'Finally, someone thought about non-technical people!',
+    stars: 4,
+    image: profilePic2,
+  },
+  {
+    name: 'Michał Zawadzki',
+    role: 'E-commerce entrepreneur',
+    text: 'I had been looking for someone to help me develop a mobile application for months. Traditional job boards were too complicated, and IT agencies were too expensive. DevHunting was a perfect solution.',
+    stars: 5,
+    image: profilePic3,
+  },
+  {
+    name: 'Tomasz Wierzbicki',
+    role: 'Marketing agency owner',
+    text: 'Finally, a place where you can find an IT specialist without unnecessary formalities.',
+    stars: 4,
+    image: profilePic1,
+  },
+  {
+    name: 'Krzysztof Nowacki',
+    role: 'Founder of a consulting company',
+    text: 'I found a great developer in 48 hours. The platform is intuitive and easy to navigate!',
+    stars: 5,
+    image: profilePic2,
+  },
+  {
+    name: 'Barbara Lipińska',
+    role: 'Online boutique owner',
+    text: 'I needed a developer for a small e-commerce project. Through DevHunting, I found the right person in a few days. The process was simple and transparent.',
     stars: 4,
     image: profilePic3,
   },
