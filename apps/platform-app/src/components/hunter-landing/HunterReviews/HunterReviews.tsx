@@ -8,13 +8,18 @@ import { useState } from 'react'
 import styles from './HunterReviews.module.scss'
 import { reviews_en, reviews_pl } from './reviews'
 
+const reviewsMap: Record<string, typeof reviews_pl> = {
+  pl: reviews_pl,
+  en: reviews_en,
+}
+
 export const HunterReviews: React.FC = () => {
   const t = useTranslations(I18nNamespaces.HunterReviews)
   const locale = useLocale()
   const { isMobile } = useScreenDetection()
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const reviews = locale === 'pl' ? reviews_pl : reviews_en
+  const reviews = reviewsMap[locale] || reviews_en
 
   const handleNext = () => {
     if (currentIndex + 2 < reviews.length) {
