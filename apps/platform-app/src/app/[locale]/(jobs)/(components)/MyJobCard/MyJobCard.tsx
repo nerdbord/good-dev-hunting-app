@@ -2,24 +2,26 @@ import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { EditIcon } from '@gdh/ui-system/icons'
+import { type PublishingState } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
-import type { JobPublishingState } from '../../(routes)/jobs/my-jobs/mockData'
 import { calculateDaysAgo } from '../../_utils/utils'
 import styles from './MyJobCard.module.scss'
 
 interface MyJobCardProps {
   name: string
-  JobPublishingState: JobPublishingState
+  JobPublishingState: PublishingState
   createdAt: string
-  id?: string
+  id: string
+  applications?: number
 }
 
 export const MyJobCard = async ({
   name,
   JobPublishingState,
   createdAt,
-  id = '123',
+  id,
+  applications = 0,
 }: MyJobCardProps) => {
   const t = await getTranslations(I18nNamespaces.MyJobCard)
 
@@ -48,7 +50,7 @@ export const MyJobCard = async ({
         <Link href={AppRoutes.jobApplications.replace(':id', id)}>
           <Button variant="secondary">
             {t('openBtn')}
-            <span className={styles.submissionsCounter}>3</span>
+            <span className={styles.submissionsCounter}>{applications}</span>
           </Button>
         </Link>
         <Link href={AppRoutes.jobEdit.replace(':id', id)}>

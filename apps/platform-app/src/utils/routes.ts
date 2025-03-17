@@ -15,7 +15,7 @@ export enum AppRoutes {
   jobs = '/jobs',
   job = '/jobs/:id',
   jobEdit = '/jobs/:id/edit',
-  myJobs = '/jobs/my-jobs',
+  myJobs = '/jobs/my',
   application = '/applications/:id',
   jobApplications = '/jobs/:id/applications',
   devs = '/devs',

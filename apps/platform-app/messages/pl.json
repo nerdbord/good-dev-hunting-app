@@ -268,9 +268,9 @@
     "countryRequired": "Kraj jest wymagany",
     "cityRequired": "Miasto jest wymagane",
     "budgetTypeRequired": "Zaznacz czy masz określony budżet",
-
     "myJobs": "Moje zlecenia",
     "noJobs": "Nie masz żadnych zleceń",
+    "noJobsMessage": "Nie dodałeś jeszcze żadnych zleceń. Dodaj swoje pierwsze zlecenie, aby rozpocząć!",
     "job": "zlecenie",
     "jobs": "zlecenia",
     "applicationMsgLabel": "Wiadomość",
@@ -338,7 +338,6 @@
     "days": "dni temu",
     "openBtn": "Otwórz zgłoszenia"
   },
-
   "JobApplications": {
     "backButton": "Moje zlecenia",
     "publishedDaysAgo": "Opublikowany {days} dni temu",

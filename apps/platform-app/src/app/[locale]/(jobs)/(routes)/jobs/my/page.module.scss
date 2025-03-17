@@ -7,9 +7,25 @@
   column-gap: 23px;
   row-gap: 32px;
   padding-bottom: 64px;
+
   @include mobile {
     grid-auto-rows: 211px;
     gap: 15px;
     grid-template-columns: 1fr;
+  }
+}
+
+.noJobsMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 0;
+  text-align: center;
+
+  p {
+    font-size: 18px;
+    color: var(--gdh-light-01);
+    margin-bottom: 10px;
   }
 }

@@ -1,13 +1,47 @@
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { CreateJobForm } from '@/app/[locale]/(jobs)/(components)/CreateJobForm/CreateJobForm'
 import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
 import { JobsTopBar } from '@/app/[locale]/(jobs)/(components)/JobsTopBar/JobsTopBar'
-import { mockJobDetails } from '@/app/[locale]/(jobs)/_utils/mockData'
+import { findJobById } from '@/app/[locale]/(jobs)/_actions/queries/getJobById'
+import { transformJobToFormValues } from '@/app/[locale]/(jobs)/_utils/jobTransformations'
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
+import { notFound, redirect } from 'next/navigation'
 
-export default async function EditJobDetailsPage() {
+interface Props {
+  params: {
+    id: string
+  }
+}
+
+export default async function EditJobDetailsPage({ params }: Props) {
   const t = await getTranslations(I18nNamespaces.Jobs)
+  const { user } = await getAuthorizedUser()
+
+  // Fetch job data from database
+  let jobData
+  try {
+    jobData = await findJobById(params.id)
+  } catch (error) {
+    console.error('Error fetching job:', error)
+    notFound()
+  }
+
+  // Check authorization:
+  // 1. Allow if job is anonymous (no createdById)
+  // 2. Allow if user is the job owner
+  // 3. Otherwise, redirect to job details page
+  const isAnonymousJob = !jobData.createdById
+  const isJobOwner = user?.id === jobData.createdById
+
+  if (!isAnonymousJob && !isJobOwner) {
+    redirect(`${AppRoutes.jobs}/${params.id}`)
+  }
+
+  // Transform job model to form values
+  const initialValues = transformJobToFormValues(jobData)
 
   return (
     <>
@@ -18,7 +52,7 @@ export default async function EditJobDetailsPage() {
             header={t('jobEditHeader')}
             subHeader={t('jobEditSubHeader')}
           />
-          <CreateJobForm initialValues={mockJobDetails} />
+          <CreateJobForm initialValues={initialValues} />
         </Container>
       </main>
     </>
