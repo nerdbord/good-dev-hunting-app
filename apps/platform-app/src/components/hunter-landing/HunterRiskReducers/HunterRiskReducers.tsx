@@ -1,8 +1,10 @@
+import { I18nNamespaces } from '@/i18n/request'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import React from 'react'
 import LandingProfileImg1 from '../../../assets/images/LandingProfileImg1.webp'
 import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
-import { SpecialistImage } from '../UI/SpecialistImage/SpecialistImage'
+import SpecialistImg from '../../../assets/images/SpecialistImg.webp'
 import styles from './HunterRiskReducers.module.scss'
 
 interface ProfileCardProps {
@@ -24,16 +26,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     <div className={styles.profileCard}>
       <div className={styles.profileHeader}>
         <div className={styles.avatarContainer}>
-          <Image
-            src={avatar}
-            alt={name}
-            fill
-            sizes="(max-width: 768px) 48px, 64px"
-            style={{
-              objectFit: 'cover',
-              borderRadius: '50%',
-            }}
-          />
+          <Image src={avatar} alt={name} />
         </div>
         <div className={styles.profileInfo}>
           <h3>{name}</h3>
@@ -53,6 +46,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }
 
 export const HunterRiskReducers = () => {
+  const t = useTranslations(I18nNamespaces.HunterRiskReducers)
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -75,29 +70,43 @@ export const HunterRiskReducers = () => {
           </div>
           <div className={styles.textSection}>
             <h2>
-              <span className={styles.highlight}>240+</span> zweryfikowanych
-              ekspertów i ekspertek
+              <span className={styles.highlight}>240+</span> {t('expertsTitle')}
             </h2>
-            <p>
-              Współpracuj ze zweryfikowanymi programistami, testerami i
-              designerami na każdym poziomie zaawansowania.
-            </p>
+            <p>{t('expertsDescription')}</p>
           </div>
         </div>
-      </div>
-      <div className={styles.specialistSection}>
-        <div className={styles.specialistText}>
-          <h2>
-            Specjaliści biegli w <span className={styles.highlight}>50+</span>{' '}
-            technologiach
-          </h2>
-          <p>
-            Od Reacta, przez Pythona, po narzędzia UX/UI – nasi eksperci znają
-            wszystkie technologie potrzebne do realizacji Twojego projektu.
-          </p>
-        </div>
-        <div className={styles.specialistImageWrapper}>
-          <SpecialistImage width={400} height={433} />
+
+        <div className={styles.specialistSection}>
+          <div className={styles.specialistText}>
+            <h2>{t('specialistsTitle1')}</h2>
+            <h2>
+              {t('specialistsTitle2')
+                .split('50+')
+                .map((part, index, array) => {
+                  if (index === 0) {
+                    return (
+                      <React.Fragment key={index}>
+                        {part}
+                        <span className={styles.highlight}>50+</span>
+                      </React.Fragment>
+                    )
+                  }
+                  return part
+                })}
+            </h2>
+            <p>{t('specialistsDescription')}</p>
+          </div>
+          <div className={styles.specialistImageWrapper}>
+            <Image
+              src={SpecialistImg}
+              alt="Specialist with technology icons"
+              className={styles.specialistImg}
+              fill
+              style={{
+                objectFit: 'contain',
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
