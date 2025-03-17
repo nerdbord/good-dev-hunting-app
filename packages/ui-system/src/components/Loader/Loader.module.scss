@@ -44,3 +44,18 @@
 .dot3 {
   animation-delay: 0.4s;
 }
+
+//hunter
+.hunterLoaderWrapper {
+  background-color: var(--hunter-landing-bg-color);
+}
+
+.hunterLoading {
+  color: var(--hunter-landing-text-color);
+}
+
+.hunterLoading .dot1,
+.hunterLoading .dot2,
+.hunterLoading .dot3 {
+  color: var(--hunter-landing-text-color);
+}
