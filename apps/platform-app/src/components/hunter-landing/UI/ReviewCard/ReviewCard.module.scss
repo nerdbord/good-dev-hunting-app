@@ -9,6 +9,10 @@
   width: 100%;
   margin-bottom: 16px;
   break-inside: avoid;
+  @include mobile {
+    padding: 16px;
+    margin-bottom: 0;
+  }
 }
 
 .stars {
