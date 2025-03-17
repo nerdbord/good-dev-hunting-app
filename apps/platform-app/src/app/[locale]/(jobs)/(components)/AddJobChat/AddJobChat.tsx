@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import type { ChangeEvent } from 'react'
 import { useState } from 'react'
-import { saveToDatabase } from '../../_actions/actions'
+import { createJobFromDescriptionAction } from '../../_actions/mutations/createJob'
 
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import styles from './AddJobChat.module.scss'
@@ -23,21 +23,17 @@ export function AddJobChat() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setInput('')
     setIsLoading(true)
 
-    if (!input.trim()) {
-      const { id: formId } = await saveToDatabase({})
-      router.push(`/jobs/${formId}/edit`)
-    }
-
     try {
-      const { id: formId } = await saveToDatabase({})
-      router.push(`/jobs/${formId}/edit`)
+      // Use the combined server action that handles both analysis and job creation
+      const job = await createJobFromDescriptionAction(input)
+      router.push(`/jobs/${job.id}/edit`)
     } catch (error) {
       console.error('Error:', error)
     } finally {
       setIsLoading(false)
+      setInput('')
     }
   }
 

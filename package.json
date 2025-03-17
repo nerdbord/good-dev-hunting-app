@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "apps/platform-app/**/*.{ts,tsx}": [
-      "npm run lint -w apps/platform-app",
+      "npm run lint -w apps/platform-app --fix",
       "npm run format:staged -w apps/platform-app"
     ],
     "apps/hunty-ai-bot/**/*.{ts,tsx}": [

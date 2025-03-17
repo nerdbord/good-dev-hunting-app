@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   gap: 100px;
+
   @include mobile {
     padding: $spacing-6 $spacing-4;
     padding-bottom: 30px;

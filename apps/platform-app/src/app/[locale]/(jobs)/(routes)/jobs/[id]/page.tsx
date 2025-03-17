@@ -1,10 +1,14 @@
 import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
+import JobDetails from '@/app/[locale]/(jobs)/(components)/JobDetailsPage/JobDetails'
+import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
+import { JobsTopBar } from '@/app/[locale]/(jobs)/(components)/JobsTopBar/JobsTopBar'
+import { PendingJobPublisher } from '@/app/[locale]/(jobs)/(components)/PendingJobPublisher/PendingJobPublisher'
+import { findJobById } from '@/app/[locale]/(jobs)/_actions/queries/getJobById'
 import { I18nNamespaces } from '@/i18n/request'
 import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
-import JobDetails from '../../../(components)/JobDetailsPage/JobDetails'
-import { JobsHeader } from '../../../(components)/JobsHeader/JobsHeader'
-import { JobsTopBar } from '../../../(components)/JobsTopBar/JobsTopBar'
+import { notFound } from 'next/navigation'
+
 interface JobPageProps {
   params: {
     id: string
@@ -14,15 +18,37 @@ interface JobPageProps {
 const JobPage = async ({ params }: JobPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
   const { user } = await getAuthorizedUser()
+
+  // Fetch job data from database
+  let jobData
+  try {
+    jobData = await findJobById(params.id)
+  } catch (error) {
+    console.error('Error fetching job:', error)
+    notFound()
+  }
+
+  // Check if user is the owner of this job
+  const isJobOwner = user?.id === jobData.createdById
+  const isUser = !!user?.id
+
   return (
     <>
       <JobsHeader />
+      <PendingJobPublisher isUser={isUser} />
       <Container>
         <JobsTopBar
           header={t('jobPreview')}
-          subHeader={`Job ID: ${params.id}`}
+          subHeader={`${jobData.jobName} (ID: ${params.id})`}
         />
-        <JobDetails params={{ id: params.id, isUser: !!user?.id }} />
+        <JobDetails
+          job={jobData}
+          params={{
+            id: params.id,
+            isUser: isUser,
+            isJobOwner,
+          }}
+        />
       </Container>
     </>
   )

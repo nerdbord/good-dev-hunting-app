@@ -2,6 +2,7 @@
 
 import { FormNavigationWarning } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/FormStateMonitor/FormStateMonitor'
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
+import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
@@ -9,7 +10,9 @@ import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
+import { updateJobAction } from '../../_actions/mutations/updateJob'
 import {
   BudgetType,
   JobContractType,
@@ -28,9 +31,15 @@ interface CreateJobFormProps {
 export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
   const t = useTranslations(I18nNamespaces.Jobs)
   const tButtons = useTranslations(I18nNamespaces.Buttons)
-
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
   const { id: jobId } = useParams()
+  const { showModal, closeModal } = useModal()
+
+  // Log initial values for debugging
+  useEffect(() => {
+    console.log('Initial form values:', initialValues)
+  }, [initialValues])
 
   const defaultValues: CreateJobFormValues = {
     jobName: '',
@@ -40,7 +49,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     currency: Currency.PLN,
     minBudgetForProjectRealisation: null,
     maxBudgetForProjectRealisation: null,
-    contractType: { name: '', value: JobContractType.B2B },
+    contractType: { name: 'B2B', value: JobContractType.B2B },
     employmentType: [],
     employmentMode: [],
     country: '',
@@ -69,35 +78,15 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     employmentType: Yup.array().min(
       1,
       t('employmentTypeRequired', {
-        defaultValue: 'Employment type is required',
+        defaultValue: 'At least one employment type is required',
       }),
     ),
     employmentMode: Yup.array().min(
       1,
       t('employmentModeRequired', {
-        defaultValue: 'Employment mode is required',
+        defaultValue: 'At least one employment mode is required',
       }),
     ),
-    // New field for budget type selection
-    budgetType: Yup.string()
-      .oneOf(['fixed', 'requestQuote'])
-      .required(
-        t('budgetTypeRequired', { defaultValue: 'Please select budget type' }),
-      ),
-    // Conditional validation for budget-related fields
-    currency: Yup.string().when('budgetType', {
-      is: 'fixed',
-      then: () =>
-        Yup.string()
-          .oneOf(
-            Object.values(Currency),
-            t('invalidCurrency', { defaultValue: 'Invalid currency' }),
-          )
-          .required(
-            t('currencyRequired', { defaultValue: 'Currency is required' }),
-          ),
-      otherwise: () => Yup.string().notRequired(),
-    }),
     minBudgetForProjectRealisation: Yup.number().when('budgetType', {
       is: 'fixed',
       then: () =>
@@ -150,33 +139,95 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     city: Yup.string().required(
       t('cityRequired', { defaultValue: 'City is required' }),
     ),
-    remoteOnly: Yup.boolean().oneOf([true, false]),
+    terms: Yup.boolean().oneOf(
+      [true],
+      t('termsRequired', { defaultValue: 'You must accept the terms' }),
+    ),
   })
 
-  const handleCreateJobDetails = (values: CreateJobFormValues) => {
-    console.log('submit') //TODO: add save to database logic here
-    console.log(values)
-    // router.push(`/jobs/${id}`)
+  const handleUpdateJob = async (values: CreateJobFormValues) => {
+    if (!jobId) {
+      console.error('No job ID provided')
+      return
+    }
+
+    try {
+      setIsSubmitting(true)
+
+      // Set default currency value if budgetType is requestQuote
+      const currency =
+        values.budgetType === BudgetType.REQUEST_QUOTE
+          ? Currency.PLN
+          : values.currency
+
+      // Transform form values to job data
+      const jobData = {
+        jobName: values.jobName,
+        projectBrief: values.projectBrief,
+        techStack: {
+          connectOrCreate: values.techStack.map((tech) => ({
+            where: { name: tech.name },
+            create: { name: tech.name },
+          })),
+        },
+        budgetType: values.budgetType,
+        currency: currency, // Use the determined currency
+        minBudgetForProjectRealisation:
+          values.budgetType === BudgetType.REQUEST_QUOTE
+            ? null
+            : values.minBudgetForProjectRealisation,
+        maxBudgetForProjectRealisation:
+          values.budgetType === BudgetType.REQUEST_QUOTE
+            ? null
+            : values.maxBudgetForProjectRealisation,
+        contractType: values.contractType.value,
+        employmentTypes: values.employmentType,
+        employmentModes: values.employmentMode,
+        country: values.country,
+        city: values.city,
+        remoteOnly: values.remoteOnly,
+        terms: values.terms,
+      }
+
+      console.log('Submitting job data:', jobData)
+
+      await updateJobAction(jobId as string, jobData)
+
+      // Navigate to job preview page
+      router.push(`${AppRoutes.jobs}/${jobId}`)
+    } catch (error) {
+      console.error('Error updating job:', error)
+      showModal(
+        <div>
+          <h2>Error Updating Job</h2>
+          <p>
+            {error instanceof Error
+              ? error.message
+              : 'An unknown error occurred'}
+          </p>
+          <Button variant="primary" onClick={closeModal}>
+            Close
+          </Button>
+        </div>,
+        'narrow',
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
-  if (typeof jobId !== 'string' || !jobId) {
-    return <p>Something went wrong. Please try again.</p>
-  }
   return (
     <Formik
       initialValues={initialValues || defaultValues}
       validationSchema={validationSchema}
-      enableReinitialize
+      validateOnBlur={true}
       validateOnMount
-      onSubmit={(values, actions) => {
-        handleCreateJobDetails(values)
-        setTimeout(() => {
-          actions.setSubmitting(false)
-        }, 1000)
-        router.push(AppRoutes.job.replace(':id', jobId))
+      enableReinitialize={true}
+      onSubmit={(values) => {
+        handleUpdateJob(values)
       }}
     >
-      {({ isSubmitting, isValid, handleSubmit }) => (
+      {({ isValid, handleSubmit }) => (
         <form className={styles.wrapper} onSubmit={handleSubmit}>
           <div className={styles.formBox}>
             <BasicInfo />
@@ -187,7 +238,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
           <ProgressBar currentStep={2} maxSteps={3}>
             <Button
               variant="secondary"
-              disabled={false}
+              disabled={isSubmitting}
               onClick={() => router.back()}
             >
               {tButtons('goBack')}
@@ -197,7 +248,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
               type="submit"
               disabled={isSubmitting || !isValid}
             >
-              {tButtons('saveAndPreview')}
+              {isSubmitting ? 'Saving...' : tButtons('saveAndPreview')}
             </Button>
           </ProgressBar>
           <FormNavigationWarning />
