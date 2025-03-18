@@ -1,0 +1,24 @@
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  @include mobile {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
+}
+
+.mobileRow {
+  @include mobile {
+    display: flex;
+    gap: 8px;
+  }
+} 
