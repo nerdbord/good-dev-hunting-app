@@ -21,7 +21,7 @@
   .bottomSection > *:not(:first-child):not(:nth-child(2)) {
     margin-top: 26px;
   }
-  
+
   .bottomSection > *:nth-child(3) {
     margin-top: 26px;
   }
@@ -68,7 +68,7 @@
   width: 205px;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   margin: 0 auto;
 
   @include mobile {
@@ -86,7 +86,7 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     width: 100%;
-    
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -116,7 +116,7 @@
 
   @include mobile {
     gap: 8px;
-    max-width: 343px;
+    //max-width: 343px;
     margin: 0 auto;
     padding: 0;
     overflow-x: visible;
@@ -157,7 +157,7 @@
   }
 
   &.selected {
-    background: #9E91CB;
+    background: #9e91cb;
     color: white;
   }
 }
@@ -166,7 +166,7 @@
   position: relative;
   z-index: 10;
   direction: ltr;
-  
+
   @include mobile {
     position: absolute;
     left: 35px;
@@ -175,4 +175,3 @@
     display: block;
   }
 }
-

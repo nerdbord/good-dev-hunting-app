@@ -3,7 +3,10 @@
   overflow: hidden;
   background-color: var(--hunter-landing-bg-color);
   color: var(--hunter-landing-text-color);
-  padding-top: 100px;
+  padding-top: 220px;
+  @include mobile {
+    padding-top: 160px;
+  }
 }
 
 .wrapper {
