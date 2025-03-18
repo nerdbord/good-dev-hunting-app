@@ -2,9 +2,8 @@ import { I18nNamespaces } from '@/i18n/request'
 import { getTranslations } from 'next-intl/server'
 import { HeroBottom } from './HeroBottom/HeroBottom'
 import styles from './HunterHero.module.scss'
-type Props = {}
 
-export const HunterHero = async (props: Props) => {
+export const HunterHero = async () => {
   const t = await getTranslations(I18nNamespaces.HunterHero)
 
   return (

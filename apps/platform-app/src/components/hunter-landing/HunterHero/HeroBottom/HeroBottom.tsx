@@ -53,21 +53,24 @@ export const HeroBottom = () => {
   // Memoize the rows calculation to prevent unnecessary recalculations
   const rows = useMemo(() => getRows(isMobile), [getRows, isMobile])
 
-  const mockTexts = {
-    'privateAIassistant': 'Szukam rozwiązania w postaci prywatnego asystenta AI do wsparcia mojej pracy. Potrzebuję systemu, który:\nAutomatycznie zarządza kalendarzem i spotkaniami\nPrzetwarza i kategoryzuje emaile\nPrzygotowuje wstępne odpowiedzi na wiadomości\nPrzypomina o ważnych zadaniach i deadlinach',
-    'website': 'Szukam rozwiązania do stworzenia nowoczesnej strony internetowej dla mojej firmy. Potrzebuję systemu, który:\nZapewnia intuicyjną nawigację i responsywność\nIntegruje się z mediami społecznościowymi\nOferuje system zarządzania treścią\nUmożliwia łatwe dodawanie nowych podstron',
-    'onlinePlatformDesign': 'Szukam rozwiązania do zaprojektowania platformy internetowej. Potrzebuję systemu, który:\nOferuje nowoczesny i spójny design\nZapewnia intuicyjne doświadczenie użytkownika\nDostosowuje się do różnych urządzeń\nUmożliwia łatwą personalizację elementów',
-    'paymentSystemIntegration': 'Szukam rozwiązania do integracji systemów płatności w moim biznesie. Potrzebuję systemu, który:\nObsługuje różne metody płatności elektronicznych\nAutomatycznie księguje transakcje\nGeneruje raporty finansowe\nZapewnia bezpieczne przetwarzanie danych',
-    'mobileApplication': 'Potrzebuję stworzyć nową aplikację mobilną dla mojej firmy. Chciałbym, aby była ona:\natrakcyjna i profesjonalna\nzoptymalizowana pod kątem SEO\nresponsywna i łatwa w użyciu\nzawierała informacje o naszych usługach i produktach',
-    'dataManagementSystem': 'Potrzebuję stworzyć nowy system zarządzania danymi dla mojej firmy. Chciałbym, aby był on:\nelastyczny i skalowalny\nzawierał funkcje automatycznego przetwarzania i analizy danych\numożliwiał integrację z innymi systemami',
-    'databaseMigration': 'Potrzebuję przeprowadzić migrację mojej bazy danych z jednego systemu na drugi. Chciałbym, aby była ona:\nbezpieczna i sprawna\nzachowana zgodność z poprzednimi danymi\nzminimalizowana przestój',
-    'automation': 'Potrzebuję stworzyć automatyzację procesu w mojej firmie. Chciałbym, aby była ona:\nelastyczna i skalowalna\nzawierała funkcje automatycznego przetwarzania danych\numożliwiała integrację z innymi systemami',
-    'iOSAndroidApplication': 'Potrzebuję stworzyć nową aplikację mobilną dla iOS i Android. Chciałbym, aby była ona:\natrakcyjna i profesjonalna\nzoptymalizowana pod kątem SEO\nresponsywna i łatwa w użyciu\nzawierała informacje o naszych usługach i produktach',
-    'automationBot': 'Potrzebuję stworzyć automatyzację procesu w mojej firmie. Chciałbym, aby była ona:\nelastyczna i skalowalna\nzawierała funkcje automatycznego przetwarzania danych\numożliwiała integrację z innymi systemami',
-    'designSystem': 'Potrzebuję stworzyć nowy system designu dla mojej firmy. Chciałbym, aby był on:\nelastyczny i skalowalny\nzawierał funkcje automatycznego przetwarzania i analizy danych\numożliwiał integrację z innymi systemami',
-    'QAtesting': 'Potrzebuję stworzyć nowy system QA dla mojej firmy. Chciałbym, aby był on:\nelastyczny i skalowalny\nzawierał funkcje automatycznego przetwarzania i analizy danych\numożliwiał integrację z innymi systemami',
-    'APIintegration': 'Potrzebuję stworzyć nowy system API dla mojej firmy. Chciałbym, aby był on:\nelastyczny i skalowalny\nzawierał funkcje automatycznego przetwarzania i analizy danych\numożliwiał integrację z innymi systemami',
-  }
+  // Use translated mock texts from i18n
+  const mockTexts = useMemo(() => {
+    return {
+      'privateAIassistant': t('mockText_privateAIassistant'),
+      'website': t('mockText_website'),
+      'onlinePlatformDesign': t('mockText_onlinePlatformDesign'),
+      'paymentSystemIntegration': t('mockText_paymentSystemIntegration'),
+      'mobileApplication': t('mockText_mobileApplication'),
+      'dataManagementSystem': t('mockText_dataManagementSystem'),
+      'databaseMigration': t('mockText_databaseMigration'),
+      'automation': t('mockText_automation'),
+      'iOSAndroidApplication': t('mockText_iOSAndroidApplication'),
+      'automationBot': t('mockText_automationBot'),
+      'designSystem': t('mockText_designSystem'),
+      'QAtesting': t('mockText_QAtesting'),
+      'APIintegration': t('mockText_APIintegration'),
+    };
+  }, [t]);
 
   // Get the current mockText based on the selected tag or use default
   const currentMockText = useMemo(() => {
