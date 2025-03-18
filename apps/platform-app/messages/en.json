@@ -447,5 +447,8 @@
     "mockText_designSystem": "I need to create a new design system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis functions\nAllow integration with other systems",
     "mockText_QAtesting": "I need to create a new QA system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis functions\nAllow integration with other systems",
     "mockText_APIintegration": "I need to create a new API system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis functions\nAllow integration with other systems"
+  },
+  "HunterReviews": {
+    "opinions": "Clients' opinions"
   }
 }

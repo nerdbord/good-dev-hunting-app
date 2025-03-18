@@ -27,5 +27,9 @@
     "@commitlint/config-conventional": "^17.6.3",
     "husky": "^8.0.0",
     "lint-staged": "^15.1.0"
+  },
+  "dependencies": {
+    "react-slick": "^0.30.3",
+    "uninstall": "^0.0.0"
   }
 }
