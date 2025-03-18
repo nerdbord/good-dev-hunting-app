@@ -34,12 +34,13 @@
   box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.13);
   z-index: 101;
   transform: rotate(10deg);
+  border: 1px solid red;
 
   .mobileTooltip & {
     @include mobile {
       top: unset;
       bottom: -65px;
-      left:20px;
+      left: 20px;
     }
   }
 }
@@ -64,4 +65,4 @@
   justify-content: center;
   align-items: center;
   z-index: 101;
-} 
+}
