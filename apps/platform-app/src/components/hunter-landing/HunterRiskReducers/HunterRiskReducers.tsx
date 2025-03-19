@@ -1,7 +1,9 @@
+'use client'
+import { getApprovedProfilesCount } from '@/app/[locale]/(profile)/_actions/queries/countApprovedProfiles'
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LandingProfileImg1 from '../../../assets/images/LandingProfileImg1.webp'
 import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
 import SpecialistImg from '../../../assets/images/SpecialistImg.webp'
@@ -47,6 +49,22 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
 export const HunterRiskReducers = () => {
   const t = useTranslations(I18nNamespaces.HunterRiskReducers)
+  const [profileCount, setProfileCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    const fetchProfilesCount = async () => {
+      try {
+        const count = await getApprovedProfilesCount()
+        // Subtract 1 from the count as requested
+        setProfileCount(Math.max(0, count - 1))
+      } catch (error) {
+        console.error('Failed to fetch profiles count:', error)
+        setProfileCount(null)
+      }
+    }
+
+    fetchProfilesCount()
+  }, [])
 
   return (
     <div className={styles.wrapper}>
@@ -70,7 +88,10 @@ export const HunterRiskReducers = () => {
           </div>
           <div className={styles.textSection}>
             <h2>
-              <span className={styles.highlight}>240+</span> {t('expertsTitle')}
+              <span className={styles.highlight}>
+                {profileCount !== null ? `${profileCount}+` : ''}
+              </span>{' '}
+              {t('expertsTitle')}
             </h2>
             <p>{t('expertsDescription')}</p>
           </div>

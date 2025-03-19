@@ -342,3 +342,13 @@ export const updateProfile = async (
   })
   return updatedProfile
 }
+
+export async function countAllApprovedProfiles() {
+  const count = await prisma.profile.count({
+    where: {
+      state: PublishingState.APPROVED,
+    },
+  })
+
+  return count
+}
