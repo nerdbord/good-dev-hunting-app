@@ -10,3 +10,10 @@ export const getApprovedProfilesCount = cache(
     return count
   }),
 )
+
+export const getDisplayProfilesCount = cache(
+  withSentry(async () => {
+    const count = await countAllApprovedProfiles()
+    return Math.max(0, count - 1)
+  }),
+)
