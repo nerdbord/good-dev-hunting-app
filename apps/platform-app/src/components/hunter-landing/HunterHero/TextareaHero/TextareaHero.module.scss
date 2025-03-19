@@ -1,0 +1,94 @@
+.dynamicText {
+  display: inline-flex;
+  padding: 2px 4px;
+  align-items: center;
+  gap: 10px;
+  background: rgba(166, 135, 255, 0.24);
+  color: var(--hunter-landing-text-color4);
+  font-family: 'IBM Plex Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  border-radius: 2px;
+  margin-left: 4px;
+  white-space: nowrap;
+
+  &.animating {
+    animation: typing 1.5s steps(40, end);
+  }
+}
+
+@keyframes typing {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.textareaWrapper {
+  position: relative;
+  width: 493px;
+  max-width: 700px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.searchTextarea {
+  display: block;
+  width: 493px;
+  height: 121px;
+  max-width: 700px;
+  padding: 16px 24px 16px 20px;
+  resize: none;
+  border: none;
+  border-radius: 4px;
+  color: #121212;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  overflow: hidden;
+
+  @include mobile {
+    width: 100%;
+    border: 1px solid rgba(125, 84, 241, 0.1);
+    padding: 4px;
+    padding: 16px 20px;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--hunter-landing-text-color4);
+  }
+
+  &::placeholder {
+    color: var(--hunter-landing-button-color);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+}
+
+.overlayText {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  right: 24px;
+  width: calc(100% - 44px);
+  pointer-events: none;
+  font-family: 'IBM Plex Sans';
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--hunter-landing-button-color);
+
+  @include mobile {
+    right: 20px;
+    width: calc(100% - 40px);
+  }
+}

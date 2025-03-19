@@ -1,2 +1,105 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/static/Geist-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .wrapper {
+  // position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  @include mobile {
+    gap: 26px;
+    min-height: 0;
+    padding-bottom: 70px;
+  }
+}
+
+.topSection {
+  max-width: 1045px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+  gap: 24px;
+
+  @include mobile {
+    gap: 16px;
+  }
+}
+
+.titleSection {
+  max-width: 886px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  @include mobile {
+    gap: 4px;
+  }
+}
+
+.specialistsCount {
+  color: var(--hunter-landing-text-color2);
+  font-size: 14px;
+  font-family: 'IBM Plex Sans';
+}
+
+.title {
+  color: var(--hunter-landing-text-color);
+  font-size: 58px;
+  line-height: 56px;
+  font-weight: 700;
+  font-family: 'Geist';
+
+  @include mobile {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+
+.subtitle {
+  color: var(--hunter-landing-text-color2);
+  text-align: center;
+  font-family: 'IBM Plex Sans';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 30px */
+  letter-spacing: -0.4px;
+
+  max-width: 577.507px;
+  transform: rotate(0.135deg);
+
+  @include mobile {
+    font-size: 16px;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.32px;
+  }
+}
+
+.titleDesktop {
+  display: block;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.titleMobile {
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
 }

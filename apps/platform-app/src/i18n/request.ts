@@ -49,4 +49,6 @@ export enum I18nNamespaces {
   HunterFooter = 'HunterFooter',
   HunterHeader = 'HunterHeader',
   HunterRiskReducers = 'HunterRiskReducers',
+  HunterReviews = 'HunterReviews',
+  HunterHero = 'HunterHero',
 }

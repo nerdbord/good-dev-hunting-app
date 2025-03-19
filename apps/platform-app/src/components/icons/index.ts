@@ -1,4 +1,5 @@
 export { default as MatchIcon } from './MatchIcon'
+export { default as PointingIcon } from './PointingIcon'
 export { default as PostIcon } from './PostIcon'
 export { default as ShieldIcon } from './ShieldIcon'
 export { default as SpeedIcon } from './SpeedIcon'
