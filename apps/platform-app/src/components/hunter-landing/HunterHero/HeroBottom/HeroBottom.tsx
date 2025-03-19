@@ -1,9 +1,7 @@
 'use client'
 import { I18nNamespaces } from '@/i18n/request'
-import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
 import { TagsRow } from '../../UI/TagsRow/TagsRow'
 import { TechIcon } from '../../UI/TechIcon/TechIcon'
@@ -17,11 +15,6 @@ export const HeroBottom = () => {
   const t = useTranslations(I18nNamespaces.HunterHero)
   const { isMobile } = useResponsive()
   const [currentAnimatedTag, setCurrentAnimatedTag] = useState('')
-  const router = useRouter()
-
-  const handleAddJob = () => {
-    router.push(AppRoutes.postJob)
-  }
 
   // Define tag keys and translations
   const tagKeys = useMemo(
@@ -148,9 +141,7 @@ export const HeroBottom = () => {
       />
 
       <div className={styles.buttonSection}>
-        <Button variant="primary" onClick={handleAddJob}>
-          {t('button')}{' '}
-        </Button>
+        <Button variant="primary">{t('button')} </Button>
       </div>
 
       <div className={styles.tagsSection}>

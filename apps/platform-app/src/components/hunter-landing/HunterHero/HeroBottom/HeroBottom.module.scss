@@ -164,13 +164,13 @@
 
 .tooltipContainer {
   position: relative;
-  z-index: 10;
+  z-index: 100;
   direction: ltr;
 
   @include mobile {
     position: absolute;
     left: 35px;
-    bottom: -10px;
+    bottom: 5px;
     pointer-events: none;
     display: block;
   }
