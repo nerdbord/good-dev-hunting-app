@@ -20,11 +20,21 @@
 }
 
 @keyframes typing {
-  from { 
+  from {
     clip-path: inset(0 100% 0 0);
   }
-  to { 
+  to {
     clip-path: inset(0 0 0 0);
+  }
+}
+
+.textareaWrapper {
+  position: relative;
+  width: 493px;
+  max-width: 700px;
+
+  @include mobile {
+    width: 100%;
   }
 }
 
@@ -38,7 +48,6 @@
   border: none;
   border-radius: 4px;
   color: #121212;
-  font-family: "IBM Plex Sans";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -46,10 +55,9 @@
   overflow: hidden;
 
   @include mobile {
-    width: 343px;
-    min-width: 343px;
-    max-width: 343px;
-    margin: 0 auto;
+    width: 100%;
+    border: 1px solid rgba(125, 84, 241, 0.1);
+    padding: 4px;
     padding: 16px 20px;
   }
 
@@ -59,25 +67,11 @@
   }
 
   &::placeholder {
-    color: var( --hunter-landing-button-color);
-    font-family: 'IBM Plex Sans';
+    color: var(--hunter-landing-button-color);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
-  }
-}
-
-.textareaWrapper {
-  position: relative;
-  width: 493px;
-  max-width: 700px;
-
-  @include mobile {
-    width: 343px;
-    min-width: 343px;
-    max-width: 343px;
-    margin: 0 auto;
   }
 }
 
@@ -91,7 +85,7 @@
   font-family: 'IBM Plex Sans';
   font-size: 14px;
   line-height: 20px;
-  color: var( --hunter-landing-button-color);
+  color: var(--hunter-landing-button-color);
 
   @include mobile {
     right: 20px;

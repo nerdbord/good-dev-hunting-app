@@ -9,7 +9,7 @@
   // position: relative;
   width: 100%;
   max-width: 1440px;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -18,9 +18,10 @@
 
   @include mobile {
     gap: 26px;
+    min-height: 0;
+    padding-bottom: 70px;
   }
 }
-
 
 .topSection {
   max-width: 1045px;
@@ -59,7 +60,7 @@
   font-size: 58px;
   line-height: 56px;
   font-weight: 700;
-  font-family: "Geist";
+  font-family: 'Geist';
 
   @include mobile {
     font-size: 26px;
@@ -83,7 +84,7 @@
   @include mobile {
     font-size: 16px;
     line-height: 150%; /* 24px */
-    letter-spacing: -0.32px; 
+    letter-spacing: -0.32px;
   }
 }
 
