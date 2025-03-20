@@ -1,6 +1,6 @@
 'use client'
-import { TooltipText } from '../TooltipText/TooltipText'
 import { Tooltip } from '../../UI/Tooltip/Tooltip'
+import { TooltipText } from '../TooltipText/TooltipText'
 
 interface TagTooltipProps {
   isMobile: boolean
@@ -12,4 +12,4 @@ export const TagTooltip = ({ isMobile }: TagTooltipProps) => {
       <TooltipText />
     </Tooltip>
   )
-} 
+}

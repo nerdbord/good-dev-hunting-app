@@ -26,4 +26,4 @@ export const TechIcon = ({ src, alt, className, style }: TechIconProps) => {
       </div>
     </div>
   )
-} 
+}

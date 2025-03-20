@@ -449,5 +449,12 @@
   },
   "HunterReviews": {
     "opinions": "Opinie zleceniodawców"
+  },
+  "HunterRiskReducers": {
+    "expertsTitle": "zweryfikowanych ekspertów i ekspertek",
+    "expertsDescription": "Współpracuj ze zweryfikowanymi programistami, testerami i designerami na każdym poziomie zaawansowania.",
+    "specialistsTitle1": "Specjaliści biegli",
+    "specialistsTitle2": "w 50+ technologiach",
+    "specialistsDescription": "Od Reacta, przez Pythona, po narzędzia UX/UI – nasi eksperci znają wszystkie technologie potrzebne do realizacji Twojego projektu."
   }
 }

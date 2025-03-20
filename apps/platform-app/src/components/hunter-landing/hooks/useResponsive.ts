@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface UseResponsiveReturn {
   isMobile: boolean
@@ -26,4 +26,4 @@ export const useResponsive = (): UseResponsiveReturn => {
   }, [])
 
   return { isMobile }
-} 
+}

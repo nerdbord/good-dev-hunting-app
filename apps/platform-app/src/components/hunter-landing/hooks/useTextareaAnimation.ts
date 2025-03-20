@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface UseTextareaAnimationProps {
   tagsAnimate: string[]
@@ -26,7 +26,7 @@ export const useTextareaAnimation = ({
   const [currentTag, setCurrentTag] = useState('')
   const [isAnimating, setIsAnimating] = useState(true)
   const [showPlaceholder, setShowPlaceholder] = useState(true)
-  
+
   // Use refs to track component state and timers
   const isMounted = useRef(true)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -39,7 +39,7 @@ export const useTextareaAnimation = ({
       clearTimeout(timeoutRef.current)
       timeoutRef.current = null
     }
-    
+
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
       intervalRef.current = null
@@ -51,7 +51,7 @@ export const useTextareaAnimation = ({
     if (tagsAnimate.length > 0 && currentTag === '') {
       const initialTag = tagsAnimate[0]
       setCurrentTag(initialTag)
-      
+
       // Only call onTagChange if the component is mounted
       if (isMounted.current) {
         try {
@@ -67,11 +67,11 @@ export const useTextareaAnimation = ({
   const getRandomTag = useCallback(
     (currentTag: string) => {
       if (!tagsAnimate || tagsAnimate.length <= 1) return currentTag
-      
+
       try {
         const availableTags = tagsAnimate.filter((tag) => tag !== currentTag)
         if (!availableTags.length) return tagsAnimate[0]
-        
+
         const randomIndex = Math.floor(Math.random() * availableTags.length)
         return availableTags[randomIndex]
       } catch (error) {
@@ -79,14 +79,14 @@ export const useTextareaAnimation = ({
         return currentTag
       }
     },
-    [tagsAnimate]
+    [tagsAnimate],
   )
 
   // Set up and clean up component mount/unmount
   useEffect(() => {
     isMounted.current = true
     animationStartedRef.current = false
-    
+
     return () => {
       isMounted.current = false
       clearTimers()
@@ -105,7 +105,12 @@ export const useTextareaAnimation = ({
   // Animation effect
   useEffect(() => {
     // Don't run animation if selected tag is set or no tags are available
-    if (selectedTag || !tagsAnimate || tagsAnimate.length === 0 || currentTag === '') {
+    if (
+      selectedTag ||
+      !tagsAnimate ||
+      tagsAnimate.length === 0 ||
+      currentTag === ''
+    ) {
       return
     }
 
@@ -121,24 +126,24 @@ export const useTextareaAnimation = ({
     // Start the animation cycle
     const startAnimationCycle = () => {
       if (!isMounted.current) return
-      
+
       try {
         // First set not animating (delete animation)
         setIsAnimating(false)
-        
+
         // Then after DELETE_DURATION, change tag and start typing animation
         timeoutRef.current = setTimeout(() => {
           if (!isMounted.current) return
-          
+
           try {
             const newTag = getRandomTag(currentTag)
             setCurrentTag(newTag)
-            
+
             // Only call onTagChange if component is still mounted
             if (isMounted.current) {
               onTagChange(newTag)
             }
-            
+
             // Start typing animation
             setIsAnimating(true)
           } catch (error) {
@@ -149,16 +154,23 @@ export const useTextareaAnimation = ({
         console.error('Error in startAnimationCycle:', error)
       }
     }
-    
+
     // Set up interval for animation cycle
     intervalRef.current = setInterval(startAnimationCycle, ANIMATION_DURATION)
-    
+
     // Clean up on unmount or when dependencies change
     return () => {
       clearTimers()
       animationStartedRef.current = false
     }
-  }, [currentTag, getRandomTag, onTagChange, selectedTag, tagsAnimate, clearTimers])
+  }, [
+    currentTag,
+    getRandomTag,
+    onTagChange,
+    selectedTag,
+    tagsAnimate,
+    clearTimers,
+  ])
 
   return {
     text,
@@ -168,4 +180,4 @@ export const useTextareaAnimation = ({
     showPlaceholder,
     setShowPlaceholder,
   }
-} 
+}

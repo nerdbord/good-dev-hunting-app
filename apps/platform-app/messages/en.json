@@ -450,5 +450,12 @@
   },
   "HunterReviews": {
     "opinions": "Clients' opinions"
+  },
+  "HunterRiskReducers": {
+    "expertsTitle": "verified experts",
+    "expertsDescription": "Collaborate with verified developers, testers, and designers at every level of expertise.",
+    "specialistsTitle1": "Specialists proficient",
+    "specialistsTitle2": "in 50+ technologies",
+    "specialistsDescription": "From React, through Python, to UX/UI tools – our experts know all the technologies needed to implement your project."
   }
 }

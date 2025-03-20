@@ -1,6 +1,6 @@
 'use client'
 import PointingIcon from '@/components/icons/PointingIcon'
-import type{ ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import styles from './Tooltip.module.scss'
 
 export interface TooltipProps {
@@ -22,4 +22,4 @@ export const Tooltip = ({ isMobile, children, className }: TooltipProps) => {
       </div>
     </div>
   )
-} 
+}
