@@ -74,7 +74,7 @@ export async function HunterRiskReducers() {
           <div className={styles.textSection}>
             <h2>
               <span className={styles.highlight}>
-                {profileCount ? `${profileCount}+` : ''}
+                {profileCount !== null ? `${profileCount || 240}+` : ''}
               </span>{' '}
               {t('expertsTitle')}
             </h2>
