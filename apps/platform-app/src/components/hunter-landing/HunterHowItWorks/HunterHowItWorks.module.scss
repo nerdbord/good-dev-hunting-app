@@ -1,2 +1,344 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: #f8f9fe;
+  padding: 60px 0;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.headerTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.headerSubtitle {
+  font-size: 36px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.highlight {
+  color: #7D54F1;
+}
+
+.stepSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 80px;
+  width: 100%;
+  gap: 5%;
+  
+  @include mobile {
+    flex-direction: column;
+    margin-bottom: 60px;
+  }
+  
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+    
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+}
+
+.stepContent {
+  width: 45%;
+  
+  @include mobile {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}
+
+.stepTitle {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.stepDescription {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.stepVisual {
+  width: 50%;
+  background-color: #f2f2ff;
+  padding: 30px;
+  border-radius: 10px;
+  
+  @include mobile {
+    width: 100%;
+  }
+}
+
+/* Step 1 styles */
+.clientExample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clientCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.clientHeader {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.clientAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #e6e6e6;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: #ddd;
+}
+
+.clientInfo {
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.arrowDown {
+  width: 30px;
+  height: 50px;
+  border-left: 2px solid #7D54F1;
+  position: relative;
+  margin-bottom: 30px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #7D54F1;
+    border-bottom: 2px solid #7D54F1;
+    transform: rotate(45deg);
+  }
+}
+
+.requirementCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  margin-bottom: 30px;
+  
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    margin: 0;
+  }
+}
+
+.addRequestButton {
+  background-color: #7D54F1;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(125, 84, 241, 0.3);
+  
+  &:hover {
+    background-color: #6a42df;
+  }
+}
+
+/* Step 2 styles */
+.offersExample {
+  width: 100%;
+}
+
+.offersList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.offerCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.offerIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #e1d8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &::before {
+    content: '';
+    width: 20px;
+    height: 15px;
+    background-color: #7D54F1;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+  }
+}
+
+.offerContent {
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+  }
+  
+  p {
+    font-size: 12px;
+    color: #777;
+    margin: 0;
+  }
+}
+
+/* Step 3 styles */
+.hireExample {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.collaborationCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 5px 0;
+    
+    &:last-child {
+      font-weight: 500;
+      margin-top: 5px;
+    }
+  }
+}
+
+.collaborationAvatars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  
+  .avatarPlaceholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e6e6e6;
+  }
+}
+
+.connectIcon {
+  width: 30px;
+  height: 30px;
+  margin: 0 15px;
+  position: relative;
+  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    background-color: #7D54F1;
+  }
+  
+  &::before {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  &::after {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@include mobile {
+  .headerTitle {
+    font-size: 20px;
+  }
+  
+  .headerSubtitle {
+    font-size: 28px;
+  }
+  
+  .stepTitle {
+    font-size: 24px;
+  }
+  
+  .stepDescription {
+    font-size: 16px;
+  }
 }
