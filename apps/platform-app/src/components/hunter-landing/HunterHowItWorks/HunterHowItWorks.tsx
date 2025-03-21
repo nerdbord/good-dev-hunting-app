@@ -1,3 +1,5 @@
+import { I18nNamespaces } from '@/i18n/request'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import React from 'react'
 import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
@@ -34,25 +36,24 @@ const StepCard: React.FC<StepCardProps> = ({
 }
 
 export function HunterHowItWorks() {
+  const t = useTranslations(I18nNamespaces.HunterHowItWorks)
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.header}>
           <h2 className={styles.headerTitle}>
-            <span className={styles.highlight}>JAK TO DZIAŁA</span>
+            <span className={styles.highlight}>{t('howItWorks')}</span>
           </h2>
-          <h3 className={styles.headerSubtitle}>
-            3 kroki do znalezienia eksperta
-          </h3>
+          <h3 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h3>
         </div>
 
         <StepCard
           stepNumber={1}
-          title="Dodaj Zlecenie"
+          title={t('addRequest')}
           description={
             <>
-              Opisz swoje potrzeby i dodaj swoje zlecenie{' '}
-              <strong>w 1 minutę</strong>.
+              {t('describeNeeds')} <strong>{t('inOneMinute')}</strong>.
             </>
           }
         >
@@ -69,8 +70,8 @@ export function HunterHowItWorks() {
                   />
                 </div>
                 <div className={styles.clientInfo}>
-                  <h4>Dawid Kowalczyk</h4>
-                  <p>CEO startupu, budującego chatboty dla pacjentów</p>
+                  <h4>{t('exampleClientName')}</h4>
+                  <p>{t('exampleClientPosition')}</p>
                 </div>
               </div>
             </div>
@@ -80,23 +81,19 @@ export function HunterHowItWorks() {
             </div>
 
             <div className={styles.requirementCard}>
-              <p>
-                Potrzebuję specjalisty od chatbotów, który zbuduje mi chatbota
-                dla pacjentów na bazie ich historii choroby i zaleceń od
-                lekarza.
-              </p>
+              <p>{t('exampleRequest')}</p>
             </div>
 
             <button className={styles.addRequestButton}>
-              Dodaj zlecenie za darmo
+              {t('addRequestFree')}
             </button>
           </div>
         </StepCard>
 
         <StepCard
           stepNumber={2}
-          title="Otrzymaj Oferty"
-          description="Otrzymaj zgłoszenia od zweryfikowanych specjalistów zainteresowanych Twoim projektem."
+          title={t('receiveOffers')}
+          description={t('receiveOffersDescription')}
         >
           <div className={styles.offersExample}>
             <div className={styles.offersList}>
@@ -105,8 +102,8 @@ export function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>Marcin odpowiedział na twoje zlecenie</h4>
-                  <p>Senior Software Engineer / AI Specialist</p>
+                  <h4>{t('offerResponse1')}</h4>
+                  <p>{t('offerPosition1')}</p>
                 </div>
               </div>
 
@@ -115,8 +112,8 @@ export function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>Aleksandra odpowiedziała na twoje zlecenie</h4>
-                  <p>Full Stack Developer / Healthcare Tech</p>
+                  <h4>{t('offerResponse2')}</h4>
+                  <p>{t('offerPosition2')}</p>
                 </div>
               </div>
 
@@ -125,8 +122,8 @@ export function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>Kamil odpowiedział na twoje zlecenie</h4>
-                  <p>Backend Developer / Chatbot Architect</p>
+                  <h4>{t('offerResponse3')}</h4>
+                  <p>{t('offerPosition3')}</p>
                 </div>
               </div>
             </div>
@@ -135,12 +132,12 @@ export function HunterHowItWorks() {
 
         <StepCard
           stepNumber={3}
-          title="Zatrudnij Eksperta"
-          description="Przejrzyj profile i wybierz osobę, która najlepiej pasuje do Twojego projektu i rozpocznij współpracę."
+          title={t('hireExpert')}
+          description={t('hireExpertDescription')}
         >
           <div className={styles.hireExample}>
             <div className={styles.collaborationCard}>
-              <h4>Zaproszenie do współpracy</h4>
+              <h4>{t('collaborationInvite')}</h4>
 
               <div className={styles.collaborationAvatars}>
                 <Image
@@ -162,8 +159,8 @@ export function HunterHowItWorks() {
                 />
               </div>
 
-              <p>Dawid zaprasza Cię do zlecenia:</p>
-              <p>Chatbot dla branży healthtech</p>
+              <p>{t('clientInvites')}</p>
+              <p>{t('projectTitle')}</p>
             </div>
           </div>
         </StepCard>

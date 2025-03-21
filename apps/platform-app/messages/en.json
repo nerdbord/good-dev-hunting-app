@@ -457,5 +457,29 @@
     "specialistsTitle1": "Specialists proficient",
     "specialistsTitle2": "in 50+ technologies",
     "specialistsDescription": "From React, through Python, to UX/UI tools – our experts know all the technologies needed to implement your project."
+  },
+  "HunterHowItWorks": {
+    "howItWorks": "HOW IT WORKS",
+    "stepsToFindExpert": "3 steps to find an expert",
+    "addRequest": "Add Request",
+    "describeNeeds": "Describe your needs and add your request",
+    "inOneMinute": "in 1 minute",
+    "exampleClientName": "David Kowalczyk",
+    "exampleClientPosition": "CEO of a startup building chatbots for patients",
+    "exampleRequest": "I need a chatbot specialist who will build me a chatbot for patients based on their medical history and doctor's recommendations.",
+    "addRequestFree": "Add request for free",
+    "receiveOffers": "Receive Offers",
+    "receiveOffersDescription": "Receive applications from verified specialists interested in your project.",
+    "offerResponse1": "Marcin responded to your request",
+    "offerPosition1": "Senior Software Engineer / AI Specialist",
+    "offerResponse2": "Aleksandra responded to your request",
+    "offerPosition2": "Full Stack Developer / Healthcare Tech",
+    "offerResponse3": "Kamil responded to your request",
+    "offerPosition3": "Backend Developer / Chatbot Architect",
+    "hireExpert": "Hire Expert",
+    "hireExpertDescription": "Review profiles and choose the person who best fits your project and start collaboration.",
+    "collaborationInvite": "Collaboration invitation",
+    "clientInvites": "David invites you to the project:",
+    "projectTitle": "Chatbot for healthtech industry"
   }
 }
