@@ -1,10 +1,16 @@
+import Image from 'next/image'
 import React from 'react'
+import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
+import ProfilePictureCEO from '../../../assets/images/ProfilePictureCEO.webp'
+import { AgreementIcon } from '../../icons/AgreementIcon'
+import { EnvelopeIcon } from '../../icons/EnvelopeIcon'
+import { VectorIcon } from '../../icons/VectorIcon'
 import styles from './HunterHowItWorks.module.scss'
 
 interface StepCardProps {
   stepNumber: number
   title: string
-  description: string
+  description: React.ReactNode
   children: React.ReactNode
 }
 
@@ -43,14 +49,24 @@ export function HunterHowItWorks() {
         <StepCard
           stepNumber={1}
           title="Dodaj Zlecenie"
-          description="Opisz swoje potrzeby i dodaj swoje zlecenie w 1 minutę."
+          description={
+            <>
+              Opisz swoje potrzeby i dodaj swoje zlecenie{' '}
+              <strong>w 1 minutę</strong>.
+            </>
+          }
         >
           <div className={styles.clientExample}>
             <div className={styles.clientCard}>
               <div className={styles.clientHeader}>
                 <div className={styles.clientAvatar}>
-                  {/* Replace with actual image */}
-                  <div className={styles.avatarPlaceholder}></div>
+                  <Image
+                    src={ProfilePictureCEO}
+                    alt="Profile"
+                    width={50}
+                    height={50}
+                    className={styles.avatarPlaceholder}
+                  />
                 </div>
                 <div className={styles.clientInfo}>
                   <h4>Dawid Kowalczyk</h4>
@@ -59,7 +75,9 @@ export function HunterHowItWorks() {
               </div>
             </div>
 
-            <div className={styles.arrowDown}></div>
+            <div className={styles.arrowDown}>
+              <VectorIcon />
+            </div>
 
             <div className={styles.requirementCard}>
               <p>
@@ -83,7 +101,9 @@ export function HunterHowItWorks() {
           <div className={styles.offersExample}>
             <div className={styles.offersList}>
               <div className={styles.offerCard}>
-                <div className={styles.offerIcon}></div>
+                <div className={styles.offerIcon}>
+                  <EnvelopeIcon width={35} height={27} />
+                </div>
                 <div className={styles.offerContent}>
                   <h4>Marcin odpowiedział na twoje zlecenie</h4>
                   <p>Senior Software Engineer / AI Specialist</p>
@@ -91,7 +111,9 @@ export function HunterHowItWorks() {
               </div>
 
               <div className={styles.offerCard}>
-                <div className={styles.offerIcon}></div>
+                <div className={styles.offerIcon}>
+                  <EnvelopeIcon width={35} height={27} />
+                </div>
                 <div className={styles.offerContent}>
                   <h4>Aleksandra odpowiedziała na twoje zlecenie</h4>
                   <p>Full Stack Developer / Healthcare Tech</p>
@@ -99,7 +121,9 @@ export function HunterHowItWorks() {
               </div>
 
               <div className={styles.offerCard}>
-                <div className={styles.offerIcon}></div>
+                <div className={styles.offerIcon}>
+                  <EnvelopeIcon width={35} height={27} />
+                </div>
                 <div className={styles.offerContent}>
                   <h4>Kamil odpowiedział na twoje zlecenie</h4>
                   <p>Backend Developer / Chatbot Architect</p>
@@ -119,9 +143,23 @@ export function HunterHowItWorks() {
               <h4>Zaproszenie do współpracy</h4>
 
               <div className={styles.collaborationAvatars}>
-                <div className={styles.avatarPlaceholder}></div>
-                <div className={styles.connectIcon}></div>
-                <div className={styles.avatarPlaceholder}></div>
+                <Image
+                  src={ProfilePictureCEO}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className={styles.avatarPlaceholder}
+                />
+                <div className={styles.connectIcon}>
+                  <AgreementIcon />
+                </div>
+                <Image
+                  src={LandingProfileImg2}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className={styles.avatarPlaceholder}
+                />
               </div>
 
               <p>Dawid zaprasza Cię do zlecenia:</p>
