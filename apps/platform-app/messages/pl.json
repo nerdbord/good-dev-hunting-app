@@ -456,5 +456,29 @@
     "specialistsTitle1": "Specjaliści biegli",
     "specialistsTitle2": "w 50+ technologiach",
     "specialistsDescription": "Od Reacta, przez Pythona, po narzędzia UX/UI – nasi eksperci znają wszystkie technologie potrzebne do realizacji Twojego projektu."
+  },
+  "HunterHowItWorks": {
+    "howItWorks": "JAK TO DZIAŁA",
+    "stepsToFindExpert": "3 kroki do znalezienia eksperta",
+    "addRequest": "Dodaj Zlecenie",
+    "describeNeeds": "Opisz swoje potrzeby i dodaj swoje zlecenie",
+    "inOneMinute": "w 1 minutę",
+    "exampleClientName": "Dawid Kowalczyk",
+    "exampleClientPosition": "CEO startupu, budującego chatboty dla pacjentów",
+    "exampleRequest": "Potrzebuję specjalisty od chatbotów, który zbuduje mi chatbota dla pacjentów na bazie ich historii choroby i zaleceń od lekarza.",
+    "addRequestFree": "Dodaj zlecenie za darmo",
+    "receiveOffers": "Otrzymaj Oferty",
+    "receiveOffersDescription": "Otrzymaj zgłoszenia od zweryfikowanych specjalistów zainteresowanych Twoim projektem.",
+    "offerResponse1": "Marcin odpowiedział na twoje zlecenie",
+    "offerPosition1": "Senior Software Engineer / AI Specialist",
+    "offerResponse2": "Aleksandra odpowiedziała na twoje zlecenie",
+    "offerPosition2": "Full Stack Developer / Healthcare Tech",
+    "offerResponse3": "Kamil odpowiedział na twoje zlecenie",
+    "offerPosition3": "Backend Developer / Chatbot Architect",
+    "hireExpert": "Zatrudnij Eksperta",
+    "hireExpertDescription": "Przejrzyj profile i wybierz osobę, która najlepiej pasuje do Twojego projektu i rozpocznij współpracę.",
+    "collaborationInvite": "Zaproszenie do współpracy",
+    "clientInvites": "Dawid zaprasza Cię do zlecenia:",
+    "projectTitle": "Chatbot dla branży healthtech"
   }
 }
