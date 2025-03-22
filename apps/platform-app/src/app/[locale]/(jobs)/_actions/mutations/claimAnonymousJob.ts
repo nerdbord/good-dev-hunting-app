@@ -1,7 +1,7 @@
 'use server'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { getJobById, updateJob } from '@/backend/job/job.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 
 export const claimAnonymousJobAction = withSentry(async (jobId: string) => {

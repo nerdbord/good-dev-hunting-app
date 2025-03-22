@@ -10,7 +10,7 @@ import { Currency, PublishingState } from '@prisma/client'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as Yup from 'yup'
 import { updateJobAction } from '../../_actions/mutations/updateJob'
 import {
@@ -36,16 +36,11 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
   const { id: jobId } = useParams()
   const { showModal, closeModal } = useModal()
 
-  // Log initial values for debugging
-  useEffect(() => {
-    console.log('Initial form values:', initialValues)
-  }, [initialValues])
-
   const defaultValues: CreateJobFormValues = {
     jobName: '',
     projectBrief: '',
     techStack: [],
-    budgetType: BudgetType.FIXED,
+    budgetType: BudgetType.REQUEST_QUOTE,
     currency: Currency.PLN,
     minBudgetForProjectRealisation: null,
     maxBudgetForProjectRealisation: null,
@@ -54,7 +49,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     employmentMode: [],
     country: '',
     city: '',
-    remoteOnly: false,
+    remoteOnly: true,
     terms: true,
     state: PublishingState.DRAFT,
   }
@@ -133,6 +128,9 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
           ),
       otherwise: () => Yup.number().notRequired(),
     }),
+    budgetType: Yup.string().required(
+      t('budgetTypeRequired', { defaultValue: 'Budget type is required' }),
+    ),
     country: Yup.string().required(
       t('countryRequired', { defaultValue: 'Country is required' }),
     ),
@@ -188,8 +186,6 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         remoteOnly: values.remoteOnly,
         terms: values.terms,
       }
-
-      console.log('Submitting job data:', jobData)
 
       await updateJobAction(jobId as string, jobData)
 

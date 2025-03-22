@@ -68,6 +68,8 @@ export const Budget = () => {
     }
   }
 
+  console.log('values', values)
+
   return (
     <Card>
       <div className={styles.left}>

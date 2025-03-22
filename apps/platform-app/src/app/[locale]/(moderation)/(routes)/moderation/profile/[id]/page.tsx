@@ -5,9 +5,9 @@ import { redirect } from 'next/navigation'
 import { findUserById } from '@/app/[locale]/(auth)/_actions'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions/queries/findProfileByUserId'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 
 import { ModerationUserProfilePage } from '@/app/[locale]/(moderation)/(components)/ModerationUserProfilePage/ModerationUserProfilePage'
 import styles from '@/app/[locale]/(moderation)/(routes)/moderation/profile/[id]/page.module.scss'

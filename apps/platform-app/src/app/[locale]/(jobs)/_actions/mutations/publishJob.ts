@@ -1,7 +1,7 @@
 'use server'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { getJobById, publishJob } from '@/backend/job/job.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { publishJobWorkflow } from '../../_workflows/publishJob'
 import { claimAnonymousJobAction } from './claimAnonymousJob'

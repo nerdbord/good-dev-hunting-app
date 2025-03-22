@@ -11,6 +11,7 @@ type TextareaHeroProps = {
   selectedTag: string | null
   mockText: string
   onEmpty: () => void
+  onTextChange?: (text: string) => void
 }
 
 export const TextareaHero = ({
@@ -19,6 +20,7 @@ export const TextareaHero = ({
   selectedTag,
   mockText,
   onEmpty,
+  onTextChange,
 }: TextareaHeroProps) => {
   const t = useTranslations(I18nNamespaces.HunterHero)
   const staticPrefix = `${t('textareaLabel')}`
@@ -38,6 +40,24 @@ export const TextareaHero = ({
     selectedTag,
     mockText,
   })
+
+  // Sync text with parent component
+  useEffect(() => {
+    // When text changes, notify parent component
+    if (onTextChange) {
+      onTextChange(text)
+    }
+  }, [text, onTextChange])
+
+  // When selectedTag changes and there's a mockText, update both
+  useEffect(() => {
+    if (selectedTag && mockText) {
+      setText(mockText)
+      if (onTextChange) {
+        onTextChange(mockText)
+      }
+    }
+  }, [selectedTag, mockText, setText, onTextChange])
 
   // Adjust textarea height based on content
   const adjustHeight = useCallback(() => {
@@ -61,10 +81,13 @@ export const TextareaHero = ({
       return
     }
 
+    let actualText = newValue
     if (!selectedTag && newValue.startsWith(staticPrefix)) {
-      setText(newValue.slice(staticPrefix.length))
+      actualText = newValue.slice(staticPrefix.length)
+      setText(actualText)
     } else {
       setText(newValue)
+      actualText = newValue
       setShowPlaceholder(false)
     }
 
@@ -84,7 +107,9 @@ export const TextareaHero = ({
         <div className={styles.overlayText}>
           {staticPrefix}
           <span
-            className={`${styles.dynamicText} ${isAnimating ? styles.animating : ''}`}
+            className={`${styles.dynamicText} ${
+              isAnimating ? styles.animating : ''
+            }`}
           >
             {currentTag}
           </span>

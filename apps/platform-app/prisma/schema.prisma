@@ -220,11 +220,22 @@ model Application {
 // Message model for storing chat messages
 model Message {
   id            String      @id @default(uuid())
-  application   Application @relation(fields: [applicationId], references: [id])
+  content       String
+  sentAt        DateTime    @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
   applicationId String
-  sender        User        @relation(fields: [senderId], references: [id])
+  sender        User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId      String
-  content       String      @db.Text
-  createdAt     DateTime    @default(now())
-  readAt        DateTime?
+}
+
+model RateLimit {
+  id        String   @id @default(uuid())
+  ipAddress String
+  action    String // e.g., "JOB_CREATION", "JOB_VERIFICATION", "API_USAGE"
+  timestamp DateTime @default(now())
+  userId    String? // Optional, for authenticated users
+  metadata  String? // Optional JSON string for additional data
+
+  @@index([ipAddress, action]) // For faster lookups
+  @@index([timestamp]) // For faster cleanup
 }

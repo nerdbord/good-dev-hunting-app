@@ -1,9 +1,9 @@
 ﻿'use server'
 
 import { createUserModel } from '@/app/[locale]/(auth)/_models/User.model'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { updateUserNerdbordId } from '@/backend/user/user.service'
 import { type NerdbordUser } from '@/lib/nerdbord/types'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 
 export const connectToNerdbord = withSentry(async () => {

@@ -172,7 +172,7 @@
     "employerType": "Rodzaj zatrudnienia (opcjonalne)",
     "employFull": "Pełny etat",
     "employPart": "Część etatu",
-    "employContract": "Umowa"
+    "employContract": "Kontrakt"
   },
   "VerticalCard": {
     "fullTime": "Dostępny na pełen etat",
@@ -215,6 +215,7 @@
     "applyForJob": "Aplikuj do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
     "submitApplication": "Aplikuj do zlecenia",
+    "termsRequired": "Musisz zaakceptować warunki zlecenia",
     "jobDetails": "Szczegóły zlecenia",
     "tagLine": "Bezpłatna platforma łącząca ze zweryfikowanymi specjalistami IT",
     "jobPreview": "Podgląd zlecenia",
@@ -404,6 +405,10 @@
     "textareaLabel": "Potrzebuję specjalisty od: ",
     "instruction": "Kliknij, aby skorzystać z szablonów zleceń.",
     "button": "Dodaj zlecenie za darmo",
+    "buttonLoading": "Przetwarzanie...",
+    "creatingJobMessage": "Tworzenie Twojego zlecenia...",
+    "aiAnalyzingMessage": "Nasz asystent AI analizuje Twój opis...",
+    "matchingSpecialistsMessage": "Dopasowywanie specjalistów...",
     "specialistsCount": "240+ Zweryfikowanych Specjalistów IT",
     "privateAIassistant": "Prywatny asystent AI",
     "website": "Strona internetowa",

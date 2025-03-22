@@ -24,6 +24,12 @@ Transform the user's job request for an IT specialist into a JSON object matchin
 
 </objective>
 
+<available-technologies>
+${technologies
+  .map((technology) => `<technology>${technology}</technology>`)
+  .join('\n')}
+</available-technologies>
+
 <rules>
 **Transformation Rules:**
 - **taskName**: Should be short and clearly state the core service (e.g., "Website Development with SEO" instead of "I need a website").
@@ -31,7 +37,7 @@ Transform the user's job request for an IT specialist into a JSON object matchin
   - Required functionalities
   - Potential technical challenges
   - Suggested best practices
-- **technologies**: AI must use what user provided in message or propose technologies that will allow to solve the job.
+- **technologies**: AI must use what user provided in message or propose technologies that will allow to solve the job based on the technologies available. If no proper technologies are avalable, propose technologies that are related to the job.
 - **budget**: If no budget is mentioned, default values should be \`null\`.
 - **employmentDetails**: If the user does not provide specific employment details, use these default values:
   - contractType: "B2B"

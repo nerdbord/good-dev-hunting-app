@@ -2,6 +2,11 @@ import { auth } from '@/auth'
 import { Role, type User } from '@prisma/client'
 import { type Session } from 'next-auth'
 
+export const getUserId = async () => {
+  const session = await auth()
+  return session?.user?.id || null
+}
+
 export const authorizeUser = async () => {
   const session = await auth()
 

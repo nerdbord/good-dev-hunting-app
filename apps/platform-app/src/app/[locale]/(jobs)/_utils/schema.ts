@@ -11,7 +11,7 @@ export interface EmploymentDetails {
     | 'Work Contract'
     | 'Mandate Contract'
     | 'No-requirements'
-    | ''
+    | 'Contract'
   workTime: 'Full-time' | 'Part-time' | 'Contract' | 'No-requirements' | ''
   workMode: 'On-site' | 'Hybrid' | 'Remote' | 'No-requirements' | ''
   candidateLocations: string[]

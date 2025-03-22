@@ -1,7 +1,7 @@
 'use server'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { getJobsByUserId } from '@/backend/job/job.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { cache } from 'react'
 import { createJobModel } from '../../_models/job.model'
