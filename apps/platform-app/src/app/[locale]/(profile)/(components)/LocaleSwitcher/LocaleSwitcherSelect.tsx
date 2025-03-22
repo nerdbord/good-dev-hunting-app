@@ -105,12 +105,6 @@ export const LocaleSwitcherSelect = ({
           {isMobile && (
             <div className={styles.applyBtnLanguageContainer}>
               <span className={styles.label}>{t('dropdownOpenLabel')}</span>
-              <button
-                className={styles.applyBtn}
-                onClick={() => setIsOpen(false)}
-              >
-                {tt('apply')}
-              </button>
             </div>
           )}
           <div className={styles.options}>

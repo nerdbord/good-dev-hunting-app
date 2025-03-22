@@ -11,7 +11,7 @@ import {
 } from '@/components/landing-page'
 import { Container } from '@gdh/ui-system'
 import Header from '../(profile)/(components)/Header/Header'
-import styles from '../../page.module.scss'
+import styles from '../page.module.scss'
 
 export default async function LandingPage() {
   const fetchedProfiles = await findAllApprovedProfiles()
