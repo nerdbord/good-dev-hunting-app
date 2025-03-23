@@ -16,7 +16,8 @@
     "visitorBaner": "Create a free account to get unlimited access to all profiles",
     "preview": "Profile preview",
     "profileViews": "Profile views",
-    "availability": "I'm available for work"
+    "availability": "I'm available for work",
+    "loading": "Loading..."
   },
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
@@ -203,6 +204,7 @@
     "loginLabelEmail": "Email",
     "loginLabelButton": "Send login link",
     "signInWithGoogle": "Sign in with Google",
+    "signInWithLinkedin": "Sign in with LinkedIn",
     "haventAccount": "Don't have an account?",
     "signUp": "Create one in 10 seconds",
     "cancel": "Cancel",
@@ -213,6 +215,7 @@
     "comingSoon": "Job posting form coming soon...",
     "submit": "Submit Job Post",
     "applyForJob": "Apply for Job",
+    "termsRequired": "You must accept the terms of the job",
     "applicationFormComingSoon": "Application form coming soon...",
     "submitApplication": "Submit Application",
     "jobDetails": "Job Details",
@@ -250,7 +253,6 @@
     "locationCityTooltip": "Provide the city so specialists in your area can easily find your offer.",
     "remoteOnly": "I'm looking for remote candidates only",
     "techStackTooltip": "Specify the technologies you've selected for your job offer implementation.",
-
     "addJobPageHeader": "Add job",
     "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer",
     "jobNameRequired": "Job name is required",
@@ -269,12 +271,11 @@
     "countryRequired": "Country is required",
     "cityRequired": "City is required",
     "budgetTypeRequired": "Please select budget type",
-
     "myJobs": "My jobs",
     "noJobs": "You don't have any jobs",
+    "noJobsMessage": "You haven't posted any jobs yet. Add your first job to get started!",
     "job": "job",
     "jobs": "jobs",
-
     "applicationMsgLabel": "Message",
     "applicationMsgPlaceholder": "Write your message here...",
     "applicationBudgetLabel": "Budget",
@@ -312,18 +313,6 @@
     "story2Role": "Startup Founder",
     "ctaTitle": "Ready to Find Your Developer?",
     "ctaDesc": "Post your job now and get matched with verified specialists"
-  },
-  "Applications": {
-    "applicationDetails": "Application Details",
-    "applicantInfo": "Applicant Info",
-    "actions": "Actions",
-    "backButton": "My jobs",
-    "publishedDaysAgo": "Published {days} days ago",
-    "applicant": "applicant",
-    "applicants": "applicants",
-    "viewProfile": "View Profile",
-    "messagePlaceholder": "Message",
-    "sendButton": "Send"
   },
   "AddJobChat": {
     "descriptionHeader": "Describe what you need",
@@ -398,6 +387,22 @@
   "HunterHeader": {
     "addJob": "Add a job for free"
   },
+  "Applications": {
+    "loading": "Loading...",
+    "viewProfile": "View Profile",
+    "send": "Send",
+    "typeMessage": "Type your message...",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "publishedDaysAgo": "Published {days} days ago",
+    "backButton": "My jobs",
+    "applicationDetails": "Application Details",
+    "applicantInfo": "Applicant Info",
+    "actions": "Actions",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send",
+    "noApplications": "No applications yet"
+  },
   "HunterHero": {
     "title": "Find the perfect IT specialist for your project",
     "titleBottom": "for your project",
@@ -406,6 +411,10 @@
     "textareaLabel": "I need a specialist in: ",
     "instruction": "Click to use job request templates.",
     "button": "Post a job for free",
+    "buttonLoading": "Processing...",
+    "creatingJobMessage": "Creating your job post...",
+    "aiAnalyzingMessage": "Our AI assistant is analyzing your description...",
+    "matchingSpecialistsMessage": "Matching with specialists...",
     "specialistsCount": "240+ Verified IT Specialists",
     "privateAIassistant": "Private AI assistant",
     "website": "Website",

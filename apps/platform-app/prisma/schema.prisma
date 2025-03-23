@@ -1,30 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-// npx prisma studio
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
-  id              String           @id @default(uuid())
-  email           String           @unique
-  emailVerified   DateTime?
-  avatarUrl       String?
-  accounts        Account[]
-  profile         Profile?
-  githubDetails   GitHubDetails?
-  roles           Role[]           @default([USER])
-  nerdbordUserId  String?          @unique
-  createdAt       DateTime         @default(now())
-  viewedProfiles  ProfileView[]
-  contactRequests ContactRequest[]
+  id                   String           @id @default(uuid())
+  email                String           @unique
+  avatarUrl            String?
+  roles                Role[]           @default([USER])
+  nerdbordUserId       String?          @unique
+  emailVerified        DateTime?
+  createdAt            DateTime         @default(now())
+  accounts             Account[]
+  contactRequests      ContactRequest[]
+  githubDetails        GitHubDetails?
+  profile              Profile?
+  viewedProfiles       ProfileView[]
+  createdJobs          Job[]
+  sentApplications     Application[]    @relation("applicant")
+  receivedApplications Application[]    @relation("jobOwner")
+  messages             Message[]
 }
 
 model Account {
@@ -33,15 +33,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -56,49 +55,51 @@ model VerificationToken {
 
 model Profile {
   id                       String            @id @default(uuid())
-  slug                     String            @unique
-  user                     User              @relation(fields: [userId], references: [id])
   userId                   String            @unique
   fullName                 String
-  cvUrl                    String?
   linkedIn                 String?
   bio                      String
-  country                  Country           @relation(fields: [countryId], references: [id])
   countryId                String
-  openForCountryRelocation Boolean           @default(false)
-  city                     City              @relation(fields: [cityId], references: [id])
   cityId                   String
-  openForCityRelocation    Boolean           @default(false)
   remoteOnly               Boolean
   position                 String
   seniority                String
-  isOpenForWork            Boolean           @default(true)
-  techStack                Technology[]
-  employmentTypes          EmploymentType[]
   state                    PublishingState   @default(DRAFT)
-  rejectionReasons         RejectionReason[]
-  contactRequests          ContactRequest[]
+  openForCityRelocation    Boolean           @default(false)
+  openForCountryRelocation Boolean           @default(false)
+  employmentTypes          EmploymentType[]
+  isOpenForWork            Boolean           @default(true)
   viewCount                Int               @default(0)
-  hourlyRateMin            Int               @default(0)
-  hourlyRateMax            Int               @default(0)
   currency                 Currency          @default(PLN)
+  hourlyRateMax            Int               @default(0)
+  hourlyRateMin            Int               @default(0)
   createdAt                DateTime          @default(now())
   updatedAt                DateTime?         @updatedAt
+  slug                     String            @unique
+  cvUrl                    String?
+  contactRequests          ContactRequest[]
+  city                     City              @relation(fields: [cityId], references: [id])
+  country                  Country           @relation(fields: [countryId], references: [id])
+  user                     User              @relation(fields: [userId], references: [id])
   profileViews             ProfileView[]
-  language                 Language[]
+  rejectionReasons         RejectionReason[]
+  language                 Language[]        @relation("LanguageToProfile")
+  techStack                Technology[]      @relation("ProfileToTechnology")
 }
 
 model Technology {
   id       String    @id @default(uuid())
   name     String    @unique
-  profiles Profile[]
+  profiles Profile[] @relation("ProfileToTechnology")
+  Job      Job?      @relation(fields: [jobId], references: [id])
+  jobId    String?
 }
 
 model GitHubDetails {
   id       String @id @default(uuid())
   username String @unique
-  user     User   @relation(fields: [userId], references: [id])
   userId   String @unique
+  user     User   @relation(fields: [userId], references: [id])
 }
 
 model Country {
@@ -115,10 +116,10 @@ model City {
 
 model RejectionReason {
   id        String   @id @default(uuid())
-  profile   Profile  @relation(fields: [profileId], references: [id])
   profileId String
   reason    String
   createdAt DateTime @default(now())
+  profile   Profile  @relation(fields: [profileId], references: [id])
 }
 
 model ContactRequest {
@@ -127,11 +128,11 @@ model ContactRequest {
   message        String
   senderFullName String
   senderEmail    String
-  senderId       String?
-  sender         User?    @relation(fields: [senderId], references: [id])
-  profile        Profile  @relation(fields: [profileId], references: [id])
   profileId      String
   createdAt      DateTime @default(now())
+  senderId       String?
+  profile        Profile  @relation(fields: [profileId], references: [id])
+  sender         User?    @relation(fields: [senderId], references: [id])
 }
 
 model ProfileView {
@@ -139,14 +140,14 @@ model ProfileView {
   viewerId        String
   viewedProfileId String
   createdAt       DateTime @default(now())
-  viewer          User     @relation(fields: [viewerId], references: [id])
   viewedProfile   Profile  @relation(fields: [viewedProfileId], references: [id])
+  viewer          User     @relation(fields: [viewerId], references: [id])
 }
 
 model Language {
   id       String    @id @default(uuid())
   name     String    @unique
-  profiles Profile[]
+  profiles Profile[] @relation("LanguageToProfile")
 }
 
 enum Currency {
@@ -174,4 +175,67 @@ enum PublishingState {
   PENDING
   APPROVED
   REJECTED
+}
+
+// Job model for storing job postings
+model Job {
+  id                             String          @id @default(uuid())
+  jobName                        String
+  projectBrief                   String          @db.Text
+  techStack                      Technology[]
+  budgetType                     String // "FIXED" or "REQUEST_QUOTE"
+  currency                       Currency?
+  minBudgetForProjectRealisation Int?
+  maxBudgetForProjectRealisation Int?
+  contractType                   String
+  employmentTypes                String[]
+  employmentModes                String[]
+  country                        String
+  city                           String
+  remoteOnly                     Boolean         @default(false)
+  state                          PublishingState @default(DRAFT)
+  createdBy                      User?           @relation(fields: [createdById], references: [id])
+  createdById                    String?
+  createdAt                      DateTime        @default(now())
+  updatedAt                      DateTime?       @updatedAt
+  applications                   Application[]
+  viewCount                      Int             @default(0)
+  terms                          Boolean         @default(true)
+}
+
+// Application model for storing job applications (chats)
+model Application {
+  id          String    @id @default(uuid())
+  job         Job       @relation(fields: [jobId], references: [id])
+  jobId       String
+  applicant   User      @relation("applicant", fields: [applicantId], references: [id])
+  applicantId String
+  jobOwner    User      @relation("jobOwner", fields: [jobOwnerId], references: [id])
+  jobOwnerId  String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  messages    Message[]
+}
+
+// Message model for storing chat messages
+model Message {
+  id            String      @id @default(uuid())
+  content       String
+  sentAt        DateTime    @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  applicationId String
+  sender        User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId      String
+}
+
+model RateLimit {
+  id        String   @id @default(uuid())
+  ipAddress String
+  action    String // e.g., "JOB_CREATION", "JOB_VERIFICATION", "API_USAGE"
+  timestamp DateTime @default(now())
+  userId    String? // Optional, for authenticated users
+  metadata  String? // Optional JSON string for additional data
+
+  @@index([ipAddress, action]) // For faster lookups
+  @@index([timestamp]) // For faster cleanup
 }

@@ -4,8 +4,9 @@
   align-items: center;
   height: 124px;
   width: 100%;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-color1);
   @include theme-transition;
+
   @include mobile {
     height: 75px;
   }
@@ -23,10 +24,12 @@
     display: none;
   }
 }
+
 .mobileLogo {
   display: none;
   width: 44px;
   height: 26px;
+
   @include mobile {
     display: block;
   }

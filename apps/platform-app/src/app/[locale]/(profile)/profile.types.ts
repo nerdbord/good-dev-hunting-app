@@ -58,6 +58,9 @@ export enum JobSpecialization {
   UI_Designer = 'UI_Designer',
   UX_UI_Designer = 'UX_UI_Designer',
   Product_Designer = 'Product_Designer',
+  AI_Developer = 'AI_Developer',
+  Product_Engineer = 'Product_Engineer',
+  Automation_Engineer = 'Automation_Engineer',
 }
 
 export enum JobOfferFiltersEnum {

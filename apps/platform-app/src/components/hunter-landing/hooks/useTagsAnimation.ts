@@ -12,6 +12,8 @@ interface UseTagsAnimationReturn {
   handleTagClick: (tag: string) => void
   handleTextareaEmpty: () => void
   getRows: (isMobile: boolean) => string[][]
+  currentText: string
+  setCurrentText: (text: string) => void
 }
 
 export const useTagsAnimation = ({
@@ -20,6 +22,7 @@ export const useTagsAnimation = ({
   tagsAnimate,
 }: UseTagsAnimationProps): UseTagsAnimationReturn => {
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [currentText, setCurrentText] = useState<string>('')
 
   // Create a mapping between animated tags and static tags
   const tagMapping = useMemo(() => {
@@ -52,6 +55,7 @@ export const useTagsAnimation = ({
   // Handle textarea empty
   const handleTextareaEmpty = useCallback(() => {
     setSelectedTag(null)
+    setCurrentText('')
   }, [])
 
   // Create rows based on device type
@@ -95,5 +99,7 @@ export const useTagsAnimation = ({
     handleTagClick,
     handleTextareaEmpty,
     getRows,
+    currentText,
+    setCurrentText,
   }
 }

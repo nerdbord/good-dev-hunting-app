@@ -8,6 +8,8 @@ export enum MailTemplateId {
   profileApprovedNotification = '0r83ql3nq6x4zw1j',
   profileRejectedNotification = 'vywj2lpj1pjl7oqz',
   verificationRequest = 'vywj2lpj96kl7oqz',
+  jobProposal = '3vz9dle2ow1lkj50',
+  jobPublished = '3zxk54v1e0z4jy6v',
 }
 
 interface MailConfig {

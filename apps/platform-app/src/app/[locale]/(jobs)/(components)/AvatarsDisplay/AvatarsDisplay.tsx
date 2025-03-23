@@ -7,75 +7,115 @@ interface Applicant {
   name: string
   avatarUrl: string
   appliedDate: string
+  specialty: string
 }
 
-const mockApplicants: Applicant[] = [
+// Potential applicants with specialties that can match job technologies
+const potentialApplicants: Applicant[] = [
   {
     id: 1,
-    name: 'Alice',
-    avatarUrl: '/avatars/alice.jpg',
+    name: 'Alex',
+    avatarUrl: 'https://i.pravatar.cc/150?img=1',
     appliedDate: '2023-10-01',
+    specialty: 'React',
   },
   {
     id: 2,
-    name: 'Bob',
-    avatarUrl: '/avatars/bob.jpg',
+    name: 'Sam',
+    avatarUrl: 'https://i.pravatar.cc/150?img=2',
     appliedDate: '2023-10-02',
+    specialty: 'TypeScript',
   },
   {
     id: 3,
-    name: 'Charlie',
-    avatarUrl: '/avatars/charlie.jpg',
+    name: 'Jordan',
+    avatarUrl: 'https://i.pravatar.cc/150?img=3',
     appliedDate: '2023-10-03',
+    specialty: 'UI/UX',
   },
   {
     id: 4,
-    name: 'David',
-    avatarUrl: '/avatars/david.jpg',
+    name: 'Taylor',
+    avatarUrl: 'https://i.pravatar.cc/150?img=4',
     appliedDate: '2023-10-04',
+    specialty: 'DevOps',
   },
   {
     id: 5,
-    name: 'Eve',
-    avatarUrl: '/avatars/eve.jpg',
+    name: 'Morgan',
+    avatarUrl: 'https://i.pravatar.cc/150?img=5',
     appliedDate: '2023-10-05',
+    specialty: 'Node.js',
   },
   {
     id: 6,
-    name: 'Frank',
-    avatarUrl: '/avatars/frank.jpg',
+    name: 'Casey',
+    avatarUrl: 'https://i.pravatar.cc/150?img=6',
     appliedDate: '2023-10-06',
+    specialty: 'Mobile',
   },
   {
     id: 7,
-    name: 'Grace',
-    avatarUrl: '/avatars/grace.jpg',
+    name: 'Jamie',
+    avatarUrl: 'https://i.pravatar.cc/150?img=7',
     appliedDate: '2023-10-07',
+    specialty: 'Python',
   },
   {
     id: 8,
-    name: 'Henry',
-    avatarUrl: '/avatars/henry.jpg',
+    name: 'Avery',
+    avatarUrl: 'https://i.pravatar.cc/150?img=8',
     appliedDate: '2023-10-08',
+    specialty: 'Java',
   },
   {
     id: 9,
-    name: 'Ivy',
-    avatarUrl: '/avatars/ivy.jpg',
+    name: 'Riley',
+    avatarUrl: 'https://i.pravatar.cc/150?img=9',
     appliedDate: '2023-10-09',
+    specialty: 'C#',
   },
   {
     id: 10,
-    name: 'Jack',
-    avatarUrl: '/avatars/jack.jpg',
+    name: 'Blake',
+    avatarUrl: 'https://i.pravatar.cc/150?img=10',
     appliedDate: '2023-10-10',
+    specialty: 'PHP',
   },
 ]
 
-export const AvatarsDisplay = () => {
+interface AvatarsDisplayProps {
+  jobTechnologies?: string[]
+}
+
+export const AvatarsDisplay = ({
+  jobTechnologies = [],
+}: AvatarsDisplayProps) => {
+  // Find applicants that match job technologies or return all if no technologies
+  const relevantApplicants = [...potentialApplicants]
+
+  if (jobTechnologies.length > 0) {
+    // Prioritize applicants whose specialty matches job technologies
+    relevantApplicants.sort((a, b) => {
+      const aMatches = jobTechnologies.some((tech) =>
+        a.specialty.toLowerCase().includes(tech.toLowerCase()),
+      )
+      const bMatches = jobTechnologies.some((tech) =>
+        b.specialty.toLowerCase().includes(tech.toLowerCase()),
+      )
+
+      if (aMatches && !bMatches) return -1
+      if (!aMatches && bMatches) return 1
+      return 0
+    })
+  } else {
+    // If no technologies, just shuffle
+    relevantApplicants.sort(() => 0.5 - Math.random())
+  }
+
   const maxVisibleAvatars = 3
-  const visibleApplicants = mockApplicants.slice(0, maxVisibleAvatars)
-  const overflowCount = mockApplicants.length - maxVisibleAvatars
+  const visibleApplicants = relevantApplicants.slice(0, maxVisibleAvatars)
+  const overflowCount = relevantApplicants.length - maxVisibleAvatars
 
   return (
     <div className={styles.avatarsWrapper}>

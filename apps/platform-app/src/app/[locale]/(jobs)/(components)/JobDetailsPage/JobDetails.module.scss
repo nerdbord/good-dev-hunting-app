@@ -4,6 +4,7 @@
   margin: 0 0 20px;
   display: flex;
   flex-direction: column;
+
   @include mobile {
     margin: 0;
     position: static;
@@ -22,9 +23,11 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+
     li {
       max-height: 45px;
     }
+
     // display: none;
   }
 }
@@ -32,7 +35,9 @@
 .jobDetailsContainerPlusAvatars {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: space-between;
   gap: 0;
+
   @include mobile {
     flex-direction: column;
     gap: 0px;

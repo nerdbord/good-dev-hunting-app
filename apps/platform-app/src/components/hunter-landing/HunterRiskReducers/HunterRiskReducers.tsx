@@ -1,6 +1,6 @@
 import { getDisplayProfilesCount } from '@/app/[locale]/(profile)/_actions/queries/countApprovedProfiles'
 import { I18nNamespaces } from '@/i18n/request'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import React from 'react'
 import LandingProfileImg1 from '../../../assets/images/LandingProfileImg1.webp'
@@ -47,7 +47,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }
 
 export async function HunterRiskReducers() {
-  const t = useTranslations(I18nNamespaces.HunterRiskReducers)
+  const t = await getTranslations(I18nNamespaces.HunterRiskReducers)
 
   const profileCount = await getDisplayProfilesCount()
 

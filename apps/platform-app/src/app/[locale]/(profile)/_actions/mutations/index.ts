@@ -1,3 +1,4 @@
+export { addMessageToApplication } from './addMessageToApplication'
 export { setCookieConsent } from './cookiesActions'
 export { createOrUpdateProfileView } from './createOrUpdateProfileView'
 export { createProfile } from './createProfile'

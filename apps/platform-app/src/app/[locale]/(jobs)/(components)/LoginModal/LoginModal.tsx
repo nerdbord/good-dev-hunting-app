@@ -4,21 +4,37 @@ import { type LoginFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { Formik } from 'formik'
+import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
+import { getPendingPublishJob } from '../../_utils/job-storage.client'
 import styles from './LoginModal.module.scss'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const t = useTranslations(I18nNamespaces.Auth)
+  const router = useRouter()
 
-  const handleSigninByGoogle = () => {
-    console.log('wybrales logowanie przez Google przycisk klikniety')
+  // Check if there's a pending job to publish
+  const pendingJobId = getPendingPublishJob()
+  const callbackUrl = pendingJobId
+    ? `${AppRoutes.jobs}/${pendingJobId}?publish=true`
+    : AppRoutes.profilesList
+
+  const handleSigninByLinkedIn = () => {
+    signIn('linkedin', {
+      callbackUrl,
+    })
   }
 
   const handleSignup = () => {
-    console.log('wybrales rejestracje przez przycisk tertiary button klikniety')
+    // For now, just close the modal as the user will be redirected
+    // to the sign-up flow as part of the sign-in process
+    closeModal()
+    router.push(AppRoutes.signIn)
   }
 
   const initialValues: LoginFormValues = {
@@ -36,7 +52,12 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   })
 
   const handleSubmit = (values: LoginFormValues) => {
-    console.log('wysyłanie linka do logowania', values)
+    // Use Next Auth's email provider to send a magic link
+    signIn('email', {
+      email: values.email,
+      callbackUrl,
+    })
+    closeModal()
   }
 
   return (
@@ -86,16 +107,10 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
         <Button
           variant="secondary"
           type="button"
-          onClick={handleSigninByGoogle}
+          onClick={handleSigninByLinkedIn}
         >
-          {t('signInWithGoogle')}
+          {t('signInWithLinkedin')}
         </Button>
-        <div className={styles.haventAccountContainer}>
-          <span className={styles.haventAccount}>{t('haventAccount')}</span>
-          <Button variant="tertiary" type="button" onClick={handleSignup}>
-            {t('signUp')}
-          </Button>
-        </div>
       </div>
     </div>
   )

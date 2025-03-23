@@ -18,6 +18,7 @@ const nextConfig = {
       'media.licdn.com',
       'avatars.githubusercontent.com',
       'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
+      'i.pravatar.cc',
       'github.com',
     ],
   },

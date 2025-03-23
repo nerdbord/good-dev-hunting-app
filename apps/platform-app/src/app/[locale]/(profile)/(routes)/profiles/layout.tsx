@@ -1,6 +1,6 @@
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { FiltersWithData } from '@/app/[locale]/(profile)/(components)/Filters/FiltersWithData'
 import { I18nNamespaces } from '@/i18n/request'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { Container, VisitorBanner } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
 import React from 'react'
