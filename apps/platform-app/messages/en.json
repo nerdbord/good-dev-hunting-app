@@ -16,7 +16,8 @@
     "visitorBaner": "Create a free account to get unlimited access to all profiles",
     "preview": "Profile preview",
     "profileViews": "Profile views",
-    "availability": "I'm available for work"
+    "availability": "I'm available for work",
+    "loading": "Loading..."
   },
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
@@ -396,6 +397,16 @@
   },
   "HunterHeader": {
     "addJob": "Add a job for free"
+  },
+  "Applications": {
+    "loading": "Loading...",
+    "viewProfile": "View Profile",
+    "send": "Send",
+    "typeMessage": "Type your message...",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "publishedDaysAgo": "Published {days} days ago",
+    "backButton": "My jobs"
   },
   "HunterHero": {
     "title": "Find the perfect IT specialist for your project",

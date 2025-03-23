@@ -16,7 +16,8 @@
     "visitorBaner": "Utwórz darmowe konto, aby uzyskać nieograniczony dostęp do wszystkich profili",
     "preview": "Podgląd profilu",
     "profileViews": "Wyświetlenia profilu:",
-    "availability": "Jestem otwarty na nową pracę"
+    "availability": "Jestem otwarty na nową pracę",
+    "loading": "Ładowanie..."
   },
   "HowItWorks": {
     "faqsection": "Odwrócony proces rekrutacyjny",
@@ -338,6 +339,16 @@
     "yesterday": "Wczoraj",
     "days": "dni temu",
     "openBtn": "Otwórz zgłoszenia"
+  },
+  "Applications": {
+    "loading": "Ładowanie...",
+    "viewProfile": "Zobacz profil",
+    "send": "Wyślij",
+    "typeMessage": "Wpisz swoją wiadomość...",
+    "applicant": "aplikant",
+    "applicants": "aplikantów",
+    "publishedDaysAgo": "Opublikowany {days} dni temu",
+    "backButton": "Moje zlecenia"
   },
   "JobApplications": {
     "backButton": "Moje zlecenia",

@@ -7,7 +7,7 @@ import type { ProfileModel } from '@/app/[locale]/(profile)/_models/profile.mode
 import BioTextArea from '@/components/TextArea/BioTextArea'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
-import { AppRoutes, getJobRoute } from '@/utils/routes'
+import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { Field, Form, Formik, type FormikHelpers } from 'formik'
 import { useSession } from 'next-auth/react'
@@ -15,13 +15,15 @@ import { useTranslations } from 'next-intl'
 import { redirect, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
+import { createJobApplication } from '../../_actions/mutations/createJobApplication'
 import styles from './JobApplicationForm.module.scss'
 
 interface JobApplicationFormProps {
   jobId: string
+  jobName: string
 }
 
-const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
+const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
   const router = useRouter()
   const { data: session } = useSession()
   const profileId = session?.user.profileId
@@ -50,11 +52,12 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
       }
     }
     fetchProfile()
-  }, [profileId, onSetCvFormData])
+  }, [profileId, onSetCvFormData, session.user.profileId])
 
   const user = session?.user
   const [serverError, setServerError] = useState<string | null>(null)
   const [cvError, setCvError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const t = useTranslations(I18nNamespaces.Jobs)
   const { cvFormData } = useUploadContext()
@@ -87,6 +90,7 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
     }
 
     setServerError(null)
+    setIsSubmitting(true)
 
     try {
       // Default to current CV URL
@@ -115,6 +119,7 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
         if (!uploadResult.success || uploadResult.error) {
           setServerError(uploadResult.error || t('cvUploadFailed'))
           setSubmitting(false)
+          setIsSubmitting(false)
           return
         }
 
@@ -134,17 +139,34 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
       if (!finalValues.cvUrl) {
         setServerError(t('cvRequired'))
         setSubmitting(false)
+        setIsSubmitting(false)
         return
       }
 
-      // TODO: submit the job application
-      console.log('Applying for job:', jobId, finalValues)
-      router.push(getJobRoute(jobId))
+      // Submit the job application
+      const applicationResult = await createJobApplication({
+        jobId,
+        message: finalValues.message,
+        cvUrl: finalValues.cvUrl,
+      })
+
+      if (!applicationResult.success) {
+        setServerError(
+          applicationResult.error || t('applicationSubmissionFailed'),
+        )
+        setSubmitting(false)
+        setIsSubmitting(false)
+        return
+      }
+
+      // Redirect to inbox after successful application
+      router.push(AppRoutes.inbox)
     } catch (error) {
       console.error('Error applying for job:', error)
       setServerError(
         typeof error === 'string' ? error : t('applicationSubmissionFailed'),
       )
+      setIsSubmitting(false)
     } finally {
       setSubmitting(false)
     }
@@ -168,7 +190,7 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
           touched,
           handleChange,
           handleBlur,
-          isSubmitting,
+          isSubmitting: formSubmitting,
           setFieldTouched,
         }) => (
           <Form>
@@ -179,7 +201,7 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
                   as={BioTextArea}
                   placeholder={t('applicationMsgPlaceholder')}
                   name="message"
-                  disabled={isSubmitting}
+                  disabled={formSubmitting || isSubmitting}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                     setFieldTouched('message', true, false)
                     handleChange(e)
@@ -203,9 +225,11 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
                   variant="primary"
                   type="submit"
                   dataTestId="submitJobApplication"
-                  disabled={isSubmitting}
+                  disabled={formSubmitting || isSubmitting}
                 >
-                  {isSubmitting ? t('submitting') : t('submitApplication')}
+                  {formSubmitting || isSubmitting
+                    ? t('submitting')
+                    : t('submitApplication')}
                 </Button>
               </div>
             )}
