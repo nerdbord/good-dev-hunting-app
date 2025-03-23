@@ -1,6 +1,10 @@
 import { cleanupRateLimits } from '@/backend/rate-limit/rate-limit.service'
 import { NextResponse } from 'next/server'
 
+// Explicitly mark this route as dynamic and not eligible for static generation
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 /**
  * This endpoint is designed to be called by a scheduled job (like Vercel Cron)
  * It cleans up old rate limit records to prevent database growth
