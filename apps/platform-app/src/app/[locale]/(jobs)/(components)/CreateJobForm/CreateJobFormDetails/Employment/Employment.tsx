@@ -11,7 +11,7 @@ import {
 import { DropdownSelect } from '@/components/Dropdowns/DropdownBio/DropdownSelect'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import { useFormikContext } from 'formik'
-import { mappedJobContractType } from '../../../../_utils/jobDetails.mappers'
+import { mappedJobContractType } from '../../../../_utils/job.mappers'
 import { Card } from '../Card/Card'
 import styles from './Employment.module.scss'
 

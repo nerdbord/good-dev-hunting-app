@@ -11,7 +11,7 @@ import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
-import { getPendingPublishJob } from '../../_utils/jobStorage'
+import { getPendingPublishJob } from '../../_utils/job-storage.client'
 import styles from './LoginModal.module.scss'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {

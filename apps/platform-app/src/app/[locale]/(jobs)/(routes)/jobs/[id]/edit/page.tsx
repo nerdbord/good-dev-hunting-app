@@ -2,7 +2,7 @@ import { CreateJobForm } from '@/app/[locale]/(jobs)/(components)/CreateJobForm/
 import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
 import { JobsTopBar } from '@/app/[locale]/(jobs)/(components)/JobsTopBar/JobsTopBar'
 import { findJobById } from '@/app/[locale]/(jobs)/_actions/queries/getJobById'
-import { transformJobToFormValues } from '@/app/[locale]/(jobs)/_utils/jobTransformations'
+import { transformJobToFormValues } from '@/app/[locale]/(jobs)/_utils/job.mappers'
 import { I18nNamespaces } from '@/i18n/request'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { AppRoutes } from '@/utils/routes'

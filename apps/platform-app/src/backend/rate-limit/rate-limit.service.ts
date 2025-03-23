@@ -1,20 +1,21 @@
 import { prisma } from '@/lib/prismaClient'
 
 // Rate limit configurations
-const RATE_LIMITS = {
+export const RATE_LIMITS = {
   JOB_CREATION: {
-    maxRequests: 2,
+    maxRequests: 10,
     windowHours: 24,
-  },
-  JOB_VERIFICATION: {
-    maxRequests: 2,
-    windowHours: 24, // 1 hour
   },
   API_USAGE: {
     maxRequests: 100,
     windowHours: 24,
   },
 }
+
+// Global API call counter to prevent excessive API usage
+// This is separate from the rate limiting system
+export const GLOBAL_API_CALLS = { count: 0, timestamp: Date.now() }
+export const MAX_API_CALLS_PER_DAY = 1000 // Limit total API calls per day
 
 type RateLimitAction = keyof typeof RATE_LIMITS
 

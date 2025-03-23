@@ -1,4 +1,8 @@
-import { checkAndRecordRateLimit } from '@/backend/rate-limit/rate-limit.service'
+import {
+  checkAndRecordRateLimit,
+  GLOBAL_API_CALLS,
+  MAX_API_CALLS_PER_DAY,
+} from '@/backend/rate-limit/rate-limit.service'
 import groqService from '@/lib/groq.service'
 import { getUserId } from '../../../../utils/auth.helpers'
 import { getClientIp } from '../../../../utils/request-utils'
@@ -10,11 +14,6 @@ export interface JobVerificationResult {
   score: number
   reasoning: string
 }
-
-// Global API call counter to prevent excessive API usage
-// This is separate from the rate limiting system
-const GLOBAL_API_CALLS = { count: 0, timestamp: Date.now() }
-const MAX_API_CALLS_PER_DAY = 1000 // Limit total API calls per day
 
 /**
  * Check global API call counter to prevent excessive usage
@@ -55,11 +54,9 @@ export async function verifyJobQuery(query: string): Promise<{
 
   const rateLimit = await checkAndRecordRateLimit(
     ipAddress,
-    'JOB_VERIFICATION',
+    'JOB_CREATION',
     userId,
   )
-
-  console.log('rateLimit', rateLimit)
 
   if (rateLimit.isLimited) {
     return {

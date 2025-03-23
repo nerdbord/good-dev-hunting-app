@@ -1,7 +1,7 @@
 import {
   mapEmploymentMode,
   mapJobContract,
-} from '@/app/[locale]/(jobs)/_utils/jobDetails.mappers'
+} from '@/app/[locale]/(jobs)/_utils/job.mappers'
 import {
   type EmploymentMode,
   type JobContractType,

@@ -8,7 +8,7 @@ import { publishJobAction } from '../../_actions/mutations/publishJob'
 import {
   clearPendingPublishJob,
   getPendingPublishJob,
-} from '../../_utils/jobStorage'
+} from '../../_utils/job-storage.client'
 
 export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
   const [isProcessing, setIsProcessing] = useState(false)
