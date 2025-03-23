@@ -1,19 +1,9 @@
-'use client'
-
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import Link from 'next/link'
-import { Suspense } from 'react'
 import styles from './not-found.module.scss'
 
-// Separate the interactive part that uses history navigation
-function BackButton() {
-  return (
-    <Button onClick={() => window.history.back()} variant="secondary">
-      Go Back
-    </Button>
-  )
-}
+export const dynamic = 'force-dynamic'
 
 export default function NotFound() {
   return (
@@ -34,11 +24,6 @@ export default function NotFound() {
           <Link href={AppRoutes.home}>
             <Button variant="primary">Return Home</Button>
           </Link>
-          <Suspense
-            fallback={<div className={styles.secondaryButton}>Go Back</div>}
-          >
-            <BackButton />
-          </Suspense>
         </div>
 
         <div className={styles.decorationWrapper}>
