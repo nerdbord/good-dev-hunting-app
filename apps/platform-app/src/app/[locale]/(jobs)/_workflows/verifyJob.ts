@@ -1,8 +1,5 @@
-import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions/queries/findAllApprovedProfiles'
 import groqService from '@/lib/groq.service'
 import { findJobById } from '../_actions/queries/getJobById'
-import { matchJobWithProfiles } from './matchJobWithProfiles'
-import { notifyMatchedProfiles } from './notifyMatchedProfiles'
 
 // System prompt for job verification
 const VERIFICATION_PROMPT = `
@@ -87,59 +84,6 @@ export async function verifyJob(jobId: string): Promise<VerificationResult> {
       isValid: false,
       reasons: ['An error occurred during verification'],
       suggestions: ['Please try again later'],
-    }
-  }
-}
-
-export async function publishJobWorkflow(jobId: string): Promise<{
-  success: boolean
-  message: string
-}> {
-  try {
-    // TODO: Disable job verification for now, enable after improvements to verification flow
-    // Step 1: Verify the job
-    // const verificationResult = await verifyJob(jobId)
-
-    // // If the job is not valid, return the reasons
-    // if (!verificationResult.isValid) {
-    //     return {
-    //         success: false,
-    //         message: `Job verification failed: ${verificationResult.reasons.join(
-    //             ', ',
-    //         )}`,
-    //     }
-    // }
-
-    // Step 3: Get the published job as a JobModel
-    const publishedJob = await findJobById(jobId)
-
-    console.log('publishedJob', publishedJob)
-
-    const publishedProfiles = await findAllApprovedProfiles()
-
-    // Step 4: Find profiles to notify
-    const matchingResults = await matchJobWithProfiles(
-      publishedJob,
-      publishedProfiles,
-    )
-
-    console.log('matchingResults', matchingResults)
-
-    // Step 5: Notify matched profiles
-    await notifyMatchedProfiles(publishedJob, matchingResults)
-
-    console.log('notifications sent')
-
-    return {
-      success: true,
-      message: 'Job published successfully and notifications sent',
-    }
-  } catch (error) {
-    console.error('Error in publish job workflow:', error)
-    return {
-      success: false,
-      message:
-        error instanceof Error ? error.message : 'An unknown error occurred',
     }
   }
 }
