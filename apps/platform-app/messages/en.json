@@ -313,18 +313,6 @@
     "ctaTitle": "Ready to Find Your Developer?",
     "ctaDesc": "Post your job now and get matched with verified specialists"
   },
-  "Applications": {
-    "applicationDetails": "Application Details",
-    "applicantInfo": "Applicant Info",
-    "actions": "Actions",
-    "backButton": "My jobs",
-    "publishedDaysAgo": "Published {days} days ago",
-    "applicant": "applicant",
-    "applicants": "applicants",
-    "viewProfile": "View Profile",
-    "messagePlaceholder": "Message",
-    "sendButton": "Send"
-  },
   "AddJobChat": {
     "descriptionHeader": "Describe what you need",
     "descriptionParagraph": "As detailed as possible. You can also paste the content of your job posting.",
@@ -406,7 +394,13 @@
     "applicant": "applicant",
     "applicants": "applicants",
     "publishedDaysAgo": "Published {days} days ago",
-    "backButton": "My jobs"
+    "backButton": "My jobs",
+    "applicationDetails": "Application Details",
+    "applicantInfo": "Applicant Info",
+    "actions": "Actions",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send",
+    "noApplications": "No applications yet"
   },
   "HunterHero": {
     "title": "Find the perfect IT specialist for your project",

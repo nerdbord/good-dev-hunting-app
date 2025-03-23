@@ -3,12 +3,12 @@ import { prisma } from '@/lib/prismaClient'
 // Rate limit configurations
 const RATE_LIMITS = {
   JOB_CREATION: {
-    maxRequests: 3,
+    maxRequests: 2,
     windowHours: 24,
   },
   JOB_VERIFICATION: {
-    maxRequests: 10,
-    windowHours: 1, // 1 hour
+    maxRequests: 2,
+    windowHours: 24, // 1 hour
   },
   API_USAGE: {
     maxRequests: 100,

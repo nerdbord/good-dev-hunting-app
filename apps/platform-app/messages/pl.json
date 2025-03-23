@@ -313,18 +313,6 @@
     "ctaTitle": "Gotowy Znaleźć Swojego Programistę?",
     "ctaDesc": "Opublikuj ofertę teraz i znajdź zweryfikowanych specjalistów"
   },
-  "Applications": {
-    "applicationDetails": "Szczegóły aplikacji",
-    "applicantInfo": "Informacje o aplikującym",
-    "actions": "Akcje",
-    "backButton": "Moje zlecenia",
-    "publishedDaysAgo": "Opublikowany {days} dni temu",
-    "applicant": "aplikant",
-    "applicants": "aplikantów",
-    "viewProfile": "Zobacz profil",
-    "messagePlaceholder": "Wiadomość",
-    "sendButton": "Wyślij"
-  },
   "AddJobChat": {
     "descriptionHeader": "Opisz, czego potrzebujesz",
     "descriptionParagraph": "Tak jak najdokładniej. Możesz wrzucić zarówno treść ogłoszenia.",
@@ -348,7 +336,13 @@
     "applicant": "aplikant",
     "applicants": "aplikantów",
     "publishedDaysAgo": "Opublikowany {days} dni temu",
-    "backButton": "Moje zlecenia"
+    "backButton": "Moje zlecenia",
+    "applicationDetails": "Szczegóły aplikacji",
+    "applicantInfo": "Informacje o aplikującym",
+    "actions": "Akcje",
+    "messagePlaceholder": "Wiadomość",
+    "sendButton": "Wyślij",
+    "noApplications": "Nie ma jeszcze żadnych aplikacji"
   },
   "JobApplications": {
     "backButton": "Moje zlecenia",

@@ -59,11 +59,13 @@ export async function verifyJobQuery(query: string): Promise<{
     userId,
   )
 
+  console.log('rateLimit', rateLimit)
+
   if (rateLimit.isLimited) {
     return {
       isValid: false,
       error: 'Too many verification requests. Please try again later.',
-      reason: `Rate limit for verification has been reached (max 10 requests per hour).`,
+      reason: `Rate limit for job posting has been reached (max 2 per day).`,
     }
   }
 

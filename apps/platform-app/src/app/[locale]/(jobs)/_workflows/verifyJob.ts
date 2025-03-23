@@ -52,8 +52,6 @@ export async function verifyJob(jobId: string): Promise<VerificationResult> {
       },
     }
 
-    console.log('jobData', jobData)
-
     // Prepare the messages for the LLM
     const messages = [
       {

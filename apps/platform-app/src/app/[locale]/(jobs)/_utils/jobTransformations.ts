@@ -14,8 +14,6 @@ import {
 export function transformJobToFormValues(
   jobData: JobModel,
 ): CreateJobFormValues {
-  console.log('Original job data:', JSON.stringify(jobData, null, 2))
-
   // Map contract type correctly
   const contractTypeValue = (jobData.contractType || 'B2B') as JobContractType
   const contractType = {
@@ -60,8 +58,6 @@ export function transformJobToFormValues(
     remoteOnly: !!jobData.remoteOnly,
     terms: true, // Always true for editing forms
   }
-
-  console.log('Transformed form values:', JSON.stringify(formValues, null, 2))
 
   return formValues
 }
