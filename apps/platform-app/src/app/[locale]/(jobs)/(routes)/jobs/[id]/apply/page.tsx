@@ -1,14 +1,13 @@
+import JobApplicationClient from '@/app/[locale]/(jobs)/(components)/JobApplicationClient/JobApplicationClient'
+import { JobDetailsBasicInfo } from '@/app/[locale]/(jobs)/(components)/JobDetailsBasicInfo/JobDetailsBasicInfo'
+import { JobDetailsDetailsInfo } from '@/app/[locale]/(jobs)/(components)/JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
+import styles from '@/app/[locale]/(jobs)/(components)/JobDetailsPage/JobDetails.module.scss'
+import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
 import { findJobById } from '@/app/[locale]/(jobs)/_actions/queries/getJobById'
 import { I18nNamespaces } from '@/i18n/request'
 import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { JobsHeader } from '@/app/[locale]/(jobs)/(components)/JobsHeader/JobsHeader'
-import { JobDetailsBasicInfo } from '@/app/[locale]/(jobs)/(components)/JobDetailsBasicInfo/JobDetailsBasicInfo'
-import { JobDetailsDetailsInfo } from '@/app/[locale]/(jobs)/(components)/JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
-import { AvatarsDisplay } from '@/app/[locale]/(jobs)/(components)/AvatarsDisplay/AvatarsDisplay'
-import JobApplicationClient from '@/app/[locale]/(jobs)/(components)/JobApplicationClient/JobApplicationClient'
-import styles from '@/app/[locale]/(jobs)/(components)/JobDetailsPage/JobDetails.module.scss'
 import pageStyles from '../page.module.scss'
 
 interface JobApplicationPageProps {
@@ -26,7 +25,7 @@ const JobApplicationPage = async ({ params }: JobApplicationPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
 
   // Fetch job data from database
-  let jobData;
+  let jobData
   try {
     jobData = await findJobById(id)
   } catch (error) {
@@ -56,7 +55,6 @@ const JobApplicationPage = async ({ params }: JobApplicationPageProps) => {
           <section className={styles.container}>
             <ul className={styles.actions}></ul>
             <div className={styles.jobDetailsContainerPlusAvatars}>
-              <AvatarsDisplay jobTechnologies={jobTechnologies} />
               <JobDetailsBasicInfo job={jobData} />
             </div>
           </section>

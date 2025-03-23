@@ -11,7 +11,6 @@ import { useState } from 'react'
 import { publishJobAction } from '../../_actions/mutations/publishJob'
 import { type JobModel } from '../../_models/job.model'
 import { storePendingPublishJob } from '../../_utils/job-storage.client'
-import { AvatarsDisplay } from '../AvatarsDisplay/AvatarsDisplay'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
 import { LoginModal } from '../LoginModal/LoginModal'
@@ -113,7 +112,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
       <section className={styles.container}>
         <ul className={styles.actions}></ul>
         <div className={styles.jobDetailsContainerPlusAvatars}>
-          <AvatarsDisplay jobTechnologies={jobTechnologies} />
           <JobDetailsBasicInfo job={job} />
         </div>
       </section>
