@@ -32,7 +32,23 @@
 }
 
 .logoContainer {
+    margin-bottom: 2rem;
     perspective: 800px;
+    position: relative;
+
+    .logo {
+        filter: drop-shadow(0 4px 10px rgba(125, 84, 241, 0.3));
+        transform-style: preserve-3d;
+        animation: float 3s ease-in-out infinite, rotateAnimation 6s ease-in-out infinite;
+    }
+
+    .logoRect {
+        transition: fill 0.3s ease, stroke 0.3s ease;
+    }
+
+    .logoPath {
+        transition: fill 0.3s ease;
+    }
 }
 
 .logoWrapper {
@@ -225,5 +241,29 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+// In dark theme
+.darkTheme {
+    .logoRect {
+        fill: var(--bg-color);
+        stroke: var(--color);
+    }
+
+    .logoPath {
+        fill: var(--color);
+    }
+}
+
+// In light theme
+.lightTheme {
+    .logoRect {
+        fill: var(--bg-color);
+        stroke: var(--color);
+    }
+
+    .logoPath {
+        fill: var(--color);
     }
 }
