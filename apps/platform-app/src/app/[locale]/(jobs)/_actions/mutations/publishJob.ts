@@ -3,40 +3,90 @@
 import { getJobById, publishJob } from '@/backend/job/job.service'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
-import { publishJobWorkflow } from '../../_workflows/publishJob'
 import { claimAnonymousJobAction } from './claimAnonymousJob'
+import { notifyMatchedProfiles } from '../../_workflows/notifyMatchedProfiles'
+import { matchJobWithProfiles } from '../../_workflows/matchJobWithProfiles'
+import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
 
 export const publishJobAction = withSentry(async (id: string) => {
-  const { user } = await getAuthorizedUser()
+    const { user } = await getAuthorizedUser()
 
-  if (!user) {
-    throw new Error('User not found')
-  }
+    if (!user) {
+        throw new Error('User not found')
+    }
 
-  // Check if the job exists
-  const job = await getJobById(id)
+    console.log('publishJobAction', id)
 
-  if (!job) {
-    throw new Error(`Job with id ${id} not found`)
-  }
+    // Check if the job exists
+    const job = await getJobById(id)
 
-  // If job is anonymous (no createdById), claim it first
-  if (!job.createdById) {
-    await claimAnonymousJobAction(id)
-  }
-  // If job is already claimed by someone else, throw an error
-  else if (job.createdById !== user.id) {
-    throw new Error('You are not authorized to publish this job')
-  }
+    console.log('job', job)
 
-  // Use the workflow to handle the publication process
-  const result = await publishJobWorkflow(id)
+    if (!job) {
+        throw new Error(`Job with id ${id} not found`)
+    }
 
-  if (!result.success) {
-    throw new Error(result.message)
-  }
+    // If job is anonymous (no createdById), claim it first
+    if (!job.createdById) {
+        console.log('claiming anonymous job')
+        await claimAnonymousJobAction(id)
+    }
+    // If job is already claimed by someone else, throw an error
+    else if (job.createdById !== user.id) {
+        console.log('you are not authorized to publish this job')
+        throw new Error('You are not authorized to publish this job')
+    }
 
-  // Return the updated job
-  const updatedJob = await publishJob(id)
-  return updatedJob
+    console.log('publishing job')
+
+    try {
+        // TODO: Disable job verification for now, enable after improvements to verification flow
+        // Step 1: Verify the job
+        // const verificationResult = await verifyJob(jobId)
+
+        // // If the job is not valid, return the reasons
+        // if (!verificationResult.isValid) {
+        //     return {
+        //         success: false,
+        //         message: `Job verification failed: ${verificationResult.reasons.join(
+        //             ', ',
+        //         )}`,
+        //     }
+        // }
+
+
+        console.log('publishedJob', job)
+
+        const publishedProfiles = await findAllApprovedProfiles()
+
+        // Step 4: Find profiles to notify
+        const matchingResults = await matchJobWithProfiles(job, publishedProfiles)
+
+        console.log('matchingResults', matchingResults)
+
+        // Step 5: Notify matched profiles
+        await notifyMatchedProfiles(job, matchingResults)
+
+        console.log('notifications sent')
+
+
+        // Return the updated job
+        const updatedJob = await publishJob(id)
+        return updatedJob
+
+        return {
+            success: true,
+            message: 'Job published successfully and notifications sent',
+        }
+    } catch (error) {
+        console.error('Error in publish job workflow:', error)
+        return {
+            success: false,
+            message:
+                error instanceof Error ? error.message : 'An unknown error occurred',
+        }
+    }
+
+
+
 })
