@@ -1,104 +1,17 @@
-import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import groqService from '@/lib/groq.service'
+import { MailTemplateId, mailersendClient } from '@/lib/mailersendClient'
+import { Recipient } from 'mailersend'
 import { findAllApprovedProfiles } from '../../(profile)/_actions'
 import { type JobModel } from '../_models/job.model'
+import { BudgetType } from '../_utils/types'
 import { type MatchResult } from './matchJobWithProfiles'
-
-// System prompt for generating email content
-const EMAIL_PROMPT = `
-You are an AI assistant specialized in writing personalized job opportunity emails.
-Your task is to write an email to a developer informing them about a job opportunity that matches their skills and preferences.
-
-The email should:
-1. Be professional but friendly in tone
-2. Highlight why this job is a good match for the developer's skills and experience
-3. Include key details about the job (title, description, technologies, employment type)
-4. Include a call to action to view the job and apply
-
-Keep the email concise (max 200 words) and engaging.
-`
-
-interface EmailContent {
-  subject: string
-  body: string
-}
-
-export async function generateEmailContent(
-  job: JobModel,
-  profile: ProfileModel,
-  matchReason: string,
-): Promise<EmailContent> {
-  try {
-    // Prepare the job and profile data for the LLM
-    const jobData = {
-      title: job.jobName,
-      description: job.projectBrief,
-      technologies: job.techStack.map((tech) => tech.name).join(', '),
-      employmentTypes: job.employmentTypes.join(', '),
-      employmentModes: job.employmentModes.join(', '),
-      location: job.remoteOnly ? 'Remote' : `${job.city}, ${job.country}`,
-      url: `https://gooddevhunting.com/jobs/${job.id}`,
-    }
-
-    const profileData = {
-      name: profile.fullName,
-      skills: profile.techStack.map((tech) => tech.name).join(', '),
-      position: profile.position,
-      seniority: profile.seniority,
-    }
-
-    // Prepare the messages for the LLM
-    const messages = [
-      {
-        role: 'system',
-        content: EMAIL_PROMPT,
-      },
-      {
-        role: 'user',
-        content: JSON.stringify({
-          job: jobData,
-          profile: profileData,
-          matchReason,
-        }),
-      },
-    ]
-
-    // Generate the response with JSON format
-    const jsonResponse = await groqService.generateResponse(messages, {
-      json: true,
-      temperature: 0.7, // Higher temperature for more creative emails
-      maxTokens: 1000,
-    })
-
-    // Parse the JSON response
-    const emailContent = JSON.parse(jsonResponse) as EmailContent
-
-    return emailContent
-  } catch (error) {
-    console.error('Error generating email content:', error)
-    // Return generic email content if generation fails
-    return {
-      subject: `New Job Opportunity: ${job.jobName}`,
-      body: `
-        Hello ${profile.fullName},
-        
-        We found a new job opportunity that matches your skills and preferences.
-        
-        Job Title: ${job.jobName}
-        
-        Check it out and apply at: https://gooddevhunting.com/jobs/${job.id}
-        
-        Best regards,
-        Good Dev Hunting Team
-      `,
-    }
-  }
-}
 
 export async function notifyMatchedProfiles(
   job: JobModel,
   matchingResults: MatchResult[],
-): Promise<void> {
+): Promise<{
+  matchedCount: number
+  sentCount: number
+}> {
   try {
     // Filter matches with score above threshold (e.g., 70)
     const goodMatches = matchingResults.filter(
@@ -117,24 +30,69 @@ export async function notifyMatchedProfiles(
       })
       .filter((item) => item.profile) // Filter out undefined profiles
 
+    const matchedCount = matchedProfiles.length
+    let sentCount = 0
+
     // Generate and send emails to each matched profile
     for (const { profile, matchReason } of matchedProfiles) {
       if (!profile) continue
 
-      // Generate personalized email content
-      const emailContent = await generateEmailContent(job, profile, matchReason)
+      try {
+        // Send email using mailersendClient
+        await mailersendClient.sendMail({
+          recipients: [new Recipient(profile.email, profile.fullName)],
+          templateId: MailTemplateId.jobProposal,
+          config: {
+            subject: `🤑 We have a new job for you!`,
+            fromEmail: 'team@devhunting.co',
+            fromName: 'GDH Team',
+          },
+          personalization: [
+            {
+              email: profile.email,
+              data: {
+                job_title: job.jobName,
+                budget:
+                  job.budgetType === BudgetType.FIXED
+                    ? `${job.minBudgetForProjectRealisation} -  ${job.maxBudgetForProjectRealisation} ${job.currency}`
+                    : `I need a quote`,
+                job_description:
+                  job.projectBrief.substring(0, 300) +
+                  (job.projectBrief.length > 300 ? '...' : ''),
+                job_tech_stack: job.techStack
+                  .map((tech) => tech.name)
+                  .join(', '),
+                job_url: `${process.env.NEXT_PUBLIC_APP_URL}/jobs/${job.id}`,
+                job_location: job.remoteOnly
+                  ? 'Remote'
+                  : `${job.city}, ${job.country}`,
+                job_employment_types: job.employmentTypes.join(', '),
+                job_employment_modes: job.employmentModes.join(', '),
+                profile_name: profile.fullName,
+                match_reason: matchReason,
+                application_url: `${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/jobs/${job.id}/apply`,
+                current_year: new Date().getFullYear().toString(),
+              },
+            },
+          ],
+        })
 
-      // TODO: Send the email using your email service
-      console.log(`Sending email to ${profile.email}:`, emailContent)
+        sentCount++
+        console.log(`Email sent to ${profile.email} for job ${job.id}`)
+      } catch (error) {
+        console.error(`Failed to send email to ${profile.email}:`, error)
+      }
+    }
 
-      // Here you would call your email service, e.g.:
-      // await emailService.sendEmail({
-      //   to: profile.email,
-      //   subject: emailContent.subject,
-      //   body: emailContent.body
-      // })
+    return {
+      matchedCount,
+      sentCount,
     }
   } catch (error) {
     console.error('Error notifying matched profiles:', error)
+    return {
+      matchedCount: 0,
+      sentCount: 0,
+    }
   }
 }
