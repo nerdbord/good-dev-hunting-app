@@ -210,6 +210,16 @@
     "cancel": "Anuluj",
     "or": "lub"
   },
+  "AddJobVerificationModal": {
+    "title": "Trwa weryfikacja",
+    "description": "Twoje zlecenie jest w tym momencie weryfikowane. Poczekaj kilka chwil.",
+    "inProgressBtn": "Trwa weryfikacja" 
+  },
+  "AddJobSuccessModal": {
+    "title": "Zlecenie pomyślnie wysłane",
+    "description": "Twoje zlecenie wylądowało w skrzynkach mailowych ponad 200 osób. Podgląd ogłoszenia został wysłany także na Twoją skrzynkę.",
+    "addAnotherJobBtn": "Dodaj kolejne zlecenie"
+  },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",
     "comingSoon": "Formularz dodawania zlecenia wkrótce...",

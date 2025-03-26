@@ -210,6 +210,16 @@
     "cancel": "Cancel",
     "or": "or"
   },
+  "AddJobVerificationModal": {
+    "title": "Verification in progress",
+    "description": "Your job is currently being verified. Please wait a few moments.",
+    "inProgressBtn": "In progress"
+  },
+  "AddJobSuccessModal": {
+    "title": "Job posted successfully",
+    "description": "Your job has landed in the mailboxes of over 200 people. The job preview has also been sent to your email.",
+    "addAnotherJobBtn": "Add another job" 
+  },
   "Jobs": {
     "postJobTitle": "Post a New Job",
     "comingSoon": "Job posting form coming soon...",
