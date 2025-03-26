@@ -53,4 +53,5 @@ export enum I18nNamespaces {
   HunterHero = 'HunterHero',
   AddJobVerificationModal = 'AddJobVerificationModal',
   AddJobSuccessModal = 'AddJobSuccessModal',
+  AddJobErrorModal = 'AddJobErrorModal',
 }

@@ -213,12 +213,19 @@
   "AddJobVerificationModal": {
     "title": "Trwa weryfikacja",
     "description": "Twoje zlecenie jest w tym momencie weryfikowane. Poczekaj kilka chwil.",
-    "inProgressBtn": "Trwa weryfikacja" 
+    "inProgressBtn": "Trwa weryfikacja",
+    "closeBtn": "Zamknij"
   },
   "AddJobSuccessModal": {
     "title": "Zlecenie pomyślnie wysłane",
     "description": "Twoje zlecenie wylądowało w skrzynkach mailowych ponad 200 osób. Podgląd ogłoszenia został wysłany także na Twoją skrzynkę.",
-    "addAnotherJobBtn": "Dodaj kolejne zlecenie"
+    "addAnotherJobBtn": "Dodaj kolejne zlecenie",
+    "closeBtn": "Zamknij"
+  },
+  "AddJobErrorModal": {
+    "title": "Publikowanie nie powiodło się",
+    "description": "Wystąpił błąd podczas publikowania Twojego zlecenia. Proszę spróbować ponownie.",
+    "closeBtn": "Zamknij"
   },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",

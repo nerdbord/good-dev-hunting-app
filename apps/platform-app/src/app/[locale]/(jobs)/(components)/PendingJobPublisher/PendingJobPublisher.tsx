@@ -9,12 +9,15 @@ import {
   clearPendingPublishJob,
   getPendingPublishJob,
 } from '../../_utils/job-storage.client'
+import { I18nNamespaces } from '@/i18n/request'
+import { useTranslations } from 'next-intl'
 
 export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
   const [isProcessing, setIsProcessing] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
   const { showModal, closeModal } = useModal()
+  const t = useTranslations(I18nNamespaces.AddJobSuccessModal)
 
   useEffect(() => {
     const publishParam = searchParams.get('publish')
@@ -37,8 +40,8 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
           // Show success message
           showModal(
             <div>
-              <h2>Job Published Successfully</h2>
-              <p>Your job has been published and is now visible to others.</p>
+              <h2>{t('title')}</h2>
+              <p>{t('description')}</p>
               <Button
                 variant="primary"
                 onClick={() => {
@@ -48,7 +51,7 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
                   router.refresh()
                 }}
               >
-                Close
+                {t('closeBtn')}
               </Button>
             </div>,
             'narrow',

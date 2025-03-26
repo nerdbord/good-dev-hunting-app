@@ -213,12 +213,19 @@
   "AddJobVerificationModal": {
     "title": "Verification in progress",
     "description": "Your job is currently being verified. Please wait a few moments.",
-    "inProgressBtn": "In progress"
+    "inProgressBtn": "In progress",
+    "closeBtn": "Close"
   },
   "AddJobSuccessModal": {
     "title": "Job posted successfully",
     "description": "Your job has landed in the mailboxes of over 200 people. The job preview has also been sent to your email.",
-    "addAnotherJobBtn": "Add another job" 
+    "addAnotherJobBtn": "Add another job",
+    "closeBtn": "Close"
+  },
+  "AddJobErrorModal": {
+    "title": "Publishing Failed",
+    "description": "There was an error publishing your job. Please try again.",
+    "closeBtn": "Close"
   },
   "Jobs": {
     "postJobTitle": "Post a New Job",
