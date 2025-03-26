@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  // height: 404px;
+  padding: 124px 89px;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  background: #0f1217;
+
+  box-shadow: 0px 0px 30px 0px rgba(125, 84, 241, 0.15);
+
+  @include mobile {
+    width: 85%;
+    padding: 24px;
+  }
+}
+
+.successContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 3px solid rgba(166, 135, 255, 0.5);
+  background: rgba(166, 135, 255, 0.4);
+}
+
+.successIcon {
+  //   width: 100%;
+  //   height: 100%;
+  width: 30px;
+  height: 20.5px;
+  flex-shrink: 0;
+  background-color: #fff;
+}
+
+.header {
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.description {
+  color: #fff;
+  text-align: center;
+  font-family: 'IBM Plex Sans';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+
+  button {
+    width: 100%;
+  }
+}
