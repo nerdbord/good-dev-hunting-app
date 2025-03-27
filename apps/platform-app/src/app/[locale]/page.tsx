@@ -21,7 +21,9 @@ export default async function HunterLandingPage() {
         <HunterHero />
         <HunterRiskReducers />
         <HunterHowItWorks />
-        <HunterWhyWorth />
+      </Container>
+      <HunterWhyWorth />
+      <Container>
         <HunterReviews />
         <HunterTeam />
         <HunterCTA />
