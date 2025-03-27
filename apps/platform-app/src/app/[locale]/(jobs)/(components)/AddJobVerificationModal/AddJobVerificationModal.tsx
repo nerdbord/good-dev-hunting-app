@@ -8,12 +8,10 @@ import styles from './AddJobVerificationModal.module.scss'
 
 interface AddJobVerificationModalProps {
   closeModal: () => void
-  status: 'idle' | 'verifying' | 'completed' | 'failed'
 }
 
 export const AddJobVerificationModal = ({
   closeModal,
-  status,
 }: AddJobVerificationModalProps) => {
   const t = useTranslations(I18nNamespaces.AddJobVerificationModal)
   const [dots, setDots] = useState('.')
@@ -37,15 +35,14 @@ export const AddJobVerificationModal = ({
         ×
       </button>
       <div className={styles.loadingContainer}>
-        {status === 'verifying' && <span className={styles.dots}>{dots}</span>}
-        {status === 'failed' && <span className={styles.error}>Verification failed</span>}
+        <span className={styles.dots}>{dots}</span>
       </div>
 
       <h2 className={styles.header}>{t('title')}</h2>
       <p className={styles.description}>{t('description')}</p>
 
       <div className={styles.actions}>
-        <Button variant="primary">
+        <Button variant="primary" disabled>
           {t('inProgressBtn')}
         </Button>
       </div>

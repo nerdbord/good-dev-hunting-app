@@ -14,7 +14,6 @@ import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
 
 export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
   const [isProcessing, setIsProcessing] = useState(false)
-  const [verificationStatus, setVerificationStatus] = useState<'idle' | 'verifying' | 'completed' | 'failed'>('idle')
   const router = useRouter()
   const searchParams = useSearchParams()
   const { showModal, closeModal } = useModal()
@@ -32,14 +31,10 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
         setIsProcessing(true)
         try {
           // Show verification in progress modal
-          setVerificationStatus('verifying')
-          showModal(<AddJobVerificationModal closeModal={closeModal} status={verificationStatus} />, 'narrow')
+          showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
           
           // Attempt to publish the job
           await publishJobAction(pendingJobId)
-          
-          // Update verification status
-          setVerificationStatus('completed')
           
           // Clear the pending job ID from storage
           clearPendingPublishJob()
@@ -57,9 +52,6 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
           )
         } catch (error) {
           console.error('Error publishing job after login:', error)
-          
-          // Update verification status
-          setVerificationStatus('failed')
           
           // Show error message
           closeModal()
