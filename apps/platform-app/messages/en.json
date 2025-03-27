@@ -391,9 +391,18 @@
       "contact": "Contact",
       "privacyPolicy": "Privacy Policy",
       "termsOfService": "Terms of Service",
-      "addJob": "Add a job for free",
+      "addJob": "Add job for free",
       "contact": "Contact",
-      "joinAsItSpecialist": "Join as an IT specialist"
+      "joinAsItSpecialist": "Join as IT specialist"
     }
+  },
+  "HunterWhyWorth": {
+    "title": "Why use DevHunting?",
+    "freeTitle": "Completely free",
+    "freeDescription": "Add your job without any fees and receive offers from IT specialists.",
+    "simpleTitle": "Simple and fast process",
+    "simpleDescription": "Don't waste time searching - programmers will contact you with tailored proposals.",
+    "techTitle": "No tech knowledge required",
+    "techDescription": "Describe your idea, and AI will transform it into a project brief for the right experts."
   }
 }

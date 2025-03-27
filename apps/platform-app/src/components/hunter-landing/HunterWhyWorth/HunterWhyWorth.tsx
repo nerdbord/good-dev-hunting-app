@@ -1,5 +1,7 @@
 'use client'
 
+import { I18nNamespaces } from '@/i18n/request'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import styles from './HunterWhyWorth.module.scss'
 
@@ -11,6 +13,7 @@ type Props = {}
 
 export const HunterWhyWorth = (props: Props) => {
   const [selectedOption, setSelectedOption] = useState<number>(0)
+  const t = useTranslations(I18nNamespaces.HunterWhyWorth)
 
   const getBackgroundImage = () => {
     switch (selectedOption) {
@@ -32,7 +35,7 @@ export const HunterWhyWorth = (props: Props) => {
   return (
     <div className={styles.fullWidthWrapper}>
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>Dlaczego warto korzystać z DevHunting?</h2>
+        <h2 className={styles.title}>{t('title')}</h2>
 
         <div className={styles.contentContainer}>
           <div className={styles.textContainer}>
@@ -42,11 +45,8 @@ export const HunterWhyWorth = (props: Props) => {
               }`}
               onClick={() => handleOptionClick(0)}
             >
-              <h3 className={styles.reasonTitle}>Całkowicie za darmo</h3>
-              <p className={styles.reasonDescription}>
-                Dodaj swoje zlecenie bez opłat i otrzymaj oferty od specjalistów
-                IT.
-              </p>
+              <h3 className={styles.reasonTitle}>{t('freeTitle')}</h3>
+              <p className={styles.reasonDescription}>{t('freeDescription')}</p>
             </div>
 
             <div
@@ -55,10 +55,9 @@ export const HunterWhyWorth = (props: Props) => {
               }`}
               onClick={() => handleOptionClick(1)}
             >
-              <h3 className={styles.reasonTitle}>Prosty i szybki proces</h3>
+              <h3 className={styles.reasonTitle}>{t('simpleTitle')}</h3>
               <p className={styles.reasonDescription}>
-                Nie trać czasu na poszukiwania - programiści sami zgłoszą się do
-                Ciebie z dostosowanymi propozycjami.
+                {t('simpleDescription')}
               </p>
             </div>
 
@@ -68,13 +67,8 @@ export const HunterWhyWorth = (props: Props) => {
               }`}
               onClick={() => handleOptionClick(2)}
             >
-              <h3 className={styles.reasonTitle}>
-                Nie musisz znać technologii
-              </h3>
-              <p className={styles.reasonDescription}>
-                Opisz swój pomysł, a AI przekształci go w brief projektowy dla
-                odpowiednich ekspertów.
-              </p>
+              <h3 className={styles.reasonTitle}>{t('techTitle')}</h3>
+              <p className={styles.reasonDescription}>{t('techDescription')}</p>
             </div>
           </div>
 
