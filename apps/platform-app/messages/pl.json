@@ -16,7 +16,8 @@
     "visitorBaner": "Utwórz darmowe konto, aby uzyskać nieograniczony dostęp do wszystkich profili",
     "preview": "Podgląd profilu",
     "profileViews": "Wyświetlenia profilu:",
-    "availability": "Jestem otwarty na nową pracę"
+    "availability": "Jestem otwarty na nową pracę",
+    "loading": "Ładowanie..."
   },
   "HowItWorks": {
     "faqsection": "Odwrócony proces rekrutacyjny",
@@ -172,7 +173,7 @@
     "employerType": "Rodzaj zatrudnienia (opcjonalne)",
     "employFull": "Pełny etat",
     "employPart": "Część etatu",
-    "employContract": "Umowa"
+    "employContract": "Kontrakt"
   },
   "VerticalCard": {
     "fullTime": "Dostępny na pełen etat",
@@ -203,6 +204,7 @@
     "loginLabelEmail": "Email",
     "loginLabelButton": "Wyślij link do logowania",
     "signInWithGoogle": "Zaloguj przez Google",
+    "signInWithLinkedin": "Zaloguj przez LinkedIn",
     "haventAccount": "Nie masz konta?",
     "signUp": "Załóż je w 10 sekund",
     "cancel": "Anuluj",
@@ -212,9 +214,10 @@
     "postJobTitle": "Dodaj nowe zlecenie",
     "comingSoon": "Formularz dodawania zlecenia wkrótce...",
     "submit": "Dodaj zlecenie",
-    "applyForJob": "Aplikuj do zlecenia",
+    "applyForJob": "Zgłoś się do zlecenia",
     "applicationFormComingSoon": "Formularz aplikacji wkrótce...",
-    "submitApplication": "Aplikuj do zlecenia",
+    "submitApplication": "Zgłoś się do zlecenia",
+    "termsRequired": "Musisz zaakceptować warunki zlecenia",
     "jobDetails": "Szczegóły zlecenia",
     "tagLine": "Bezpłatna platforma łącząca ze zweryfikowanymi specjalistami IT",
     "jobPreview": "Podgląd zlecenia",
@@ -268,9 +271,9 @@
     "countryRequired": "Kraj jest wymagany",
     "cityRequired": "Miasto jest wymagane",
     "budgetTypeRequired": "Zaznacz czy masz określony budżet",
-
     "myJobs": "Moje zlecenia",
     "noJobs": "Nie masz żadnych zleceń",
+    "noJobsMessage": "Nie dodałeś jeszcze żadnych zleceń. Dodaj swoje pierwsze zlecenie, aby rozpocząć!",
     "job": "zlecenie",
     "jobs": "zlecenia",
     "applicationMsgLabel": "Wiadomość",
@@ -311,18 +314,6 @@
     "ctaTitle": "Gotowy Znaleźć Swojego Programistę?",
     "ctaDesc": "Opublikuj ofertę teraz i znajdź zweryfikowanych specjalistów"
   },
-  "Applications": {
-    "applicationDetails": "Szczegóły aplikacji",
-    "applicantInfo": "Informacje o aplikującym",
-    "actions": "Akcje",
-    "backButton": "Moje zlecenia",
-    "publishedDaysAgo": "Opublikowany {days} dni temu",
-    "applicant": "aplikant",
-    "applicants": "aplikantów",
-    "viewProfile": "Zobacz profil",
-    "messagePlaceholder": "Wiadomość",
-    "sendButton": "Wyślij"
-  },
   "AddJobChat": {
     "descriptionHeader": "Opisz, czego potrzebujesz",
     "descriptionParagraph": "Tak jak najdokładniej. Możesz wrzucić zarówno treść ogłoszenia.",
@@ -338,7 +329,22 @@
     "days": "dni temu",
     "openBtn": "Otwórz zgłoszenia"
   },
-
+  "Applications": {
+    "loading": "Ładowanie...",
+    "viewProfile": "Zobacz profil",
+    "send": "Wyślij",
+    "typeMessage": "Wpisz swoją wiadomość...",
+    "applicant": "aplikant",
+    "applicants": "aplikantów",
+    "publishedDaysAgo": "Opublikowany {days} dni temu",
+    "backButton": "Moje zlecenia",
+    "applicationDetails": "Szczegóły aplikacji",
+    "applicantInfo": "Informacje o aplikującym",
+    "actions": "Akcje",
+    "messagePlaceholder": "Wiadomość",
+    "sendButton": "Wyślij",
+    "noApplications": "Nie ma jeszcze żadnych aplikacji"
+  },
   "JobApplications": {
     "backButton": "Moje zlecenia",
     "publishedDaysAgo": "Opublikowany {days} dni temu",
@@ -405,6 +411,10 @@
     "textareaLabel": "Potrzebuję specjalisty od: ",
     "instruction": "Kliknij, aby skorzystać z szablonów zleceń.",
     "button": "Dodaj zlecenie za darmo",
+    "buttonLoading": "Przetwarzanie...",
+    "creatingJobMessage": "Tworzenie Twojego zlecenia...",
+    "aiAnalyzingMessage": "Nasz asystent AI analizuje Twój opis...",
+    "matchingSpecialistsMessage": "Dopasowywanie specjalistów...",
     "specialistsCount": "240+ Zweryfikowanych Specjalistów IT",
     "privateAIassistant": "Prywatny asystent AI",
     "website": "Strona internetowa",

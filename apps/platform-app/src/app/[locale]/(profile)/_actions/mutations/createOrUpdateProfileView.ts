@@ -1,6 +1,5 @@
 ﻿'use server'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileViewModel } from '@/app/[locale]/(profile)/_models/profile-view.model'
 import {
   createProfileView,
@@ -8,6 +7,7 @@ import {
   getProfileById,
   updateProfileView,
 } from '@/backend/profile/profile.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { type ProfileView } from '@prisma/client'
 
 export const createOrUpdateProfileView = async (viewedProfileId: string) => {

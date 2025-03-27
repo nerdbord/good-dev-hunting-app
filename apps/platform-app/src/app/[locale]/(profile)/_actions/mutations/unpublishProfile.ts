@@ -1,11 +1,11 @@
 'use server'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import {
   findProfileById,
   updateProfileById,
 } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
 

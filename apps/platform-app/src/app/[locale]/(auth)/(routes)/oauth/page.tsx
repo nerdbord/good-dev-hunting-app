@@ -5,7 +5,10 @@ import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { AppRoutes } from '@/utils/routes'
 import { Role } from '@prisma/client'
 import { redirect } from 'next/navigation'
-import { getAuthorizedUser, userHasRole } from '../../auth.helpers'
+import {
+  getAuthorizedUser,
+  userHasRole,
+} from '../../../../../utils/auth.helpers'
 
 type SearchParams = Promise<{
   role?: Role

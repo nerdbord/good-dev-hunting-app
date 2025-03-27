@@ -1,6 +1,6 @@
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import { I18nNamespaces } from '@/i18n/request'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { AppRoutes } from '@/utils/routes'
 import { Button, Container, Logo } from '@gdh/ui-system'
 import { LogoGDH } from '@gdh/ui-system/icons'

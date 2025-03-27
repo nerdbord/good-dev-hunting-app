@@ -1,5 +1,4 @@
 'use server'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { sendProfileRejectedEmail } from '@/backend/mailing/mailing.service'
 import {
@@ -11,6 +10,7 @@ import {
   saveRejectingReason,
 } from '@/backend/profile/rejection.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
 

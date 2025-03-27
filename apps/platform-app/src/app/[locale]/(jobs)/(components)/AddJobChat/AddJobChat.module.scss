@@ -28,11 +28,13 @@
     gap: 24px;
   }
 }
+
 .descriptionHeader {
   color: #e2eaf1;
   font-size: 22px;
   line-height: 28px;
 }
+
 .descriptionParagraph {
   font-size: 14px;
   line-height: 20px;
@@ -54,6 +56,7 @@
   line-height: 16px;
   font-weight: 500;
 }
+
 .chatbotTextarea {
   display: flex;
   width: 100%;
@@ -67,6 +70,7 @@
   padding: 16px 24px 16px 20px;
   font-size: 16px;
 }
+
 .chatbotTextarea::placeholder {
   font-size: 16px;
   font-style: normal;
@@ -74,8 +78,19 @@
   line-height: 20px;
   color: #69717b;
 }
+
 .typed {
   background-color: #0f1217;
   color: rgba(226, 234, 241, 1);
   border: 1px solid #2a2f35;
+}
+
+.charCount {
+  display: flex;
+  justify-content: flex-end;
+  color: #69717b;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 8px;
+  user-select: none;
 }
