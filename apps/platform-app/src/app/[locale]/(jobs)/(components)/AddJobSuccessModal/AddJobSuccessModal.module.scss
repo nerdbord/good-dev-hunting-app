@@ -6,10 +6,31 @@
   align-items: center;
   gap: 32px;
   flex-shrink: 0;
+  position: relative;
+  border-radius: 10px;
 
   @include mobile {
     width: 85%;
     padding: 24px;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
   }
 }
 

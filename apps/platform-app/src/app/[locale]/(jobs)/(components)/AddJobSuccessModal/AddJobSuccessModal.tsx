@@ -1,8 +1,10 @@
 'use client'
 
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import styles from './AddJobSuccessModal.module.scss'
 
 export const AddJobSuccessModal = ({
@@ -11,8 +13,22 @@ export const AddJobSuccessModal = ({
   closeModal: () => void
 }) => {
   const t = useTranslations(I18nNamespaces.AddJobSuccessModal)
+  const router = useRouter()
+
+  const handleAddAnotherJob = () => {
+    closeModal()
+    router.push(AppRoutes.postJob)
+  }
+
   return (
     <div className={styles.container} data-testid="addJobSuccessModal">
+      <button 
+        className={styles.closeButton} 
+        onClick={closeModal}
+        aria-label="Close modal"
+      >
+        ×
+      </button>
       <div className={styles.successContainer}>
         <div className={styles.successIcon}>
           <svg
@@ -35,7 +51,7 @@ export const AddJobSuccessModal = ({
       <p className={styles.description}>{t('description')}</p>
 
       <div className={styles.actions}>
-        <Button variant="primary" onClick={() => {}}>
+        <Button variant="primary" onClick={handleAddAnotherJob}>
           {t('addAnotherJobBtn')}
         </Button>
       </div>
