@@ -9,15 +9,15 @@ import {
   clearPendingPublishJob,
   getPendingPublishJob,
 } from '../../_utils/job-storage.client'
-import { I18nNamespaces } from '@/i18n/request'
-import { useTranslations } from 'next-intl'
+import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
+import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
 
 export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
   const [isProcessing, setIsProcessing] = useState(false)
+  const [verificationStatus, setVerificationStatus] = useState<'idle' | 'verifying' | 'completed' | 'failed'>('idle')
   const router = useRouter()
   const searchParams = useSearchParams()
   const { showModal, closeModal } = useModal()
-  const t = useTranslations(I18nNamespaces.AddJobSuccessModal)
 
   useEffect(() => {
     const publishParam = searchParams.get('publish')
@@ -31,34 +31,38 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
       const publishPendingJob = async () => {
         setIsProcessing(true)
         try {
+          // Show verification in progress modal
+          setVerificationStatus('verifying')
+          showModal(<AddJobVerificationModal closeModal={closeModal} status={verificationStatus} />, 'narrow')
+          
           // Attempt to publish the job
           await publishJobAction(pendingJobId)
-
+          
+          // Update verification status
+          setVerificationStatus('completed')
+          
           // Clear the pending job ID from storage
           clearPendingPublishJob()
-
-          // Show success message
+          
+          // Close verification modal and show success modal
+          closeModal()
           showModal(
-            <div>
-              <h2>{t('title')}</h2>
-              <p>{t('description')}</p>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  closeModal()
-                  // Remove the publish parameter from URL
-                  router.replace(`/jobs/${pendingJobId}`)
-                  router.refresh()
-                }}
-              >
-                {t('closeBtn')}
-              </Button>
-            </div>,
+            <AddJobSuccessModal closeModal={() => {
+              closeModal()
+              // Remove the publish parameter from URL
+              router.replace(`/jobs/${pendingJobId}`)
+              router.refresh()
+            }} />,
             'narrow',
           )
         } catch (error) {
           console.error('Error publishing job after login:', error)
+          
+          // Update verification status
+          setVerificationStatus('failed')
+          
           // Show error message
+          closeModal()
           showModal(
             <div>
               <h2>Publishing Failed</h2>

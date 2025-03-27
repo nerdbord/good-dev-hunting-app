@@ -28,7 +28,6 @@ export const AddJobSuccessModal = ({
               strokeWidth="3"
             />
           </svg>
-          {/* <span>✔️</span> */}
         </div>
       </div>
 
