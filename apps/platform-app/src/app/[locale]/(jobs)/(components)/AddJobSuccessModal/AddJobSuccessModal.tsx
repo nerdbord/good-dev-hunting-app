@@ -13,18 +13,19 @@ export const AddJobSuccessModal = ({
   closeModal: () => void
 }) => {
   const t = useTranslations(I18nNamespaces.AddJobSuccessModal)
+  const tt = useTranslations(I18nNamespaces.Applications)
   const router = useRouter()
 
-  const handleAddAnotherJob = () => {
+  const handleGoToMyJobs = () => {
     closeModal()
-    router.push(AppRoutes.postJob)
+    router.push(AppRoutes.myJobs)
   }
 
   return (
     <div className={styles.container} data-testid="addJobSuccessModal">
       <button 
-        className={styles.closeButton} 
-        onClick={closeModal}
+        className={styles.closeButton}
+        onClick={handleGoToMyJobs}
         aria-label="Close modal"
       >
         ×
@@ -51,8 +52,8 @@ export const AddJobSuccessModal = ({
       <p className={styles.description}>{t('description')}</p>
 
       <div className={styles.actions}>
-        <Button variant="primary" onClick={handleAddAnotherJob}>
-          {t('addAnotherJobBtn')}
+        <Button variant="primary" onClick={handleGoToMyJobs}>
+          {tt('backButton')}
         </Button>
       </div>
     </div>
