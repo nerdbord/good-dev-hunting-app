@@ -126,18 +126,8 @@ export function transformJobToFormValues(
  * Helper function to get a display name for contract types
  */
 function getContractTypeName(contractType: JobContractType): string {
-  switch (contractType) {
-    case JobContractType.B2B:
-      return 'B2B'
-    case JobContractType.EMPLOYMENT_CONTRACT:
-      return 'Employment Contract'
-    case JobContractType.CONTRACT_FOR_SPECIFIC_WORK:
-      return 'Contract for Specific Work'
-    case JobContractType.CONTRACT_OF_MANDATE:
-      return 'Contract of Mandate'
-    default:
-      return 'B2B'
-  }
+  // Use the existing mapJobContract function to ensure consistent translations
+  return mapJobContract(contractType)
 }
 
 /**
