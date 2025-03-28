@@ -7,7 +7,9 @@ import {
   JobContractType,
   type CreateJobFormValues,
 } from './types'
-import { TFunction } from 'next-intl'
+
+// Define a type alias for the translation function that matches next-intl's pattern
+type TFunction = (key: string, params?: Record<string, any>) => string
 
 export const mapJobContract = (contractType: JobContractType, t?: TFunction): string => {
   if (t) {
