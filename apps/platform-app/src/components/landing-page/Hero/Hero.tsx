@@ -1,9 +1,9 @@
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import MyProfileBtn from '@/app/[locale]/(profile)/(components)/MyProfileBtn/MyProfileBtn'
 import CreateProfileBtn from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfileBtn/CreateProfileBtn'
 import FindTalentsBtn from '@/components/FindTalentsBtn/FindTalentsBtn'
 import { HeroProfilesSection } from '@/components/landing-page/Hero/HeroProfilesSection'
 import { I18nNamespaces } from '@/i18n/request'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { getTranslations } from 'next-intl/server'
 import styles from './Hero.module.scss'
 

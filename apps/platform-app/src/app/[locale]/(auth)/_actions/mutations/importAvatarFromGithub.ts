@@ -1,6 +1,6 @@
 'use server'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { updateAvatar } from '@/backend/user/user.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 
 export const importAvatarFromGithub = withSentry(async () => {

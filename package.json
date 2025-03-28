@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "apps/platform-app/**/*.{ts,tsx}": [
-      "npm run lint -w apps/platform-app",
+      "npm run lint -w apps/platform-app --fix",
       "npm run format:staged -w apps/platform-app"
     ],
     "apps/hunty-ai-bot/**/*.{ts,tsx}": [
@@ -27,5 +27,9 @@
     "@commitlint/config-conventional": "^17.6.3",
     "husky": "^8.0.0",
     "lint-staged": "^15.1.0"
+  },
+  "dependencies": {
+    "react-slick": "^0.30.3",
+    "uninstall": "^0.0.0"
   }
 }

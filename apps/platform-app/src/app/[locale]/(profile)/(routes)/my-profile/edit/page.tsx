@@ -1,7 +1,7 @@
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import EditProfileForm from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/EditProfileForm/EditProfileForm'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions'
 import { UploadProvider } from '@/contexts/UploadContext'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
