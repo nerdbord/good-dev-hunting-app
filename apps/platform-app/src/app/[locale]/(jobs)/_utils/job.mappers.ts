@@ -7,8 +7,25 @@ import {
   JobContractType,
   type CreateJobFormValues,
 } from './types'
+import { TFunction } from 'next-intl'
 
-export const mapJobContract = (contractType: JobContractType): string => {
+export const mapJobContract = (contractType: JobContractType, t?: TFunction): string => {
+  if (t) {
+    switch (contractType) {
+      case JobContractType.B2B:
+        return t('contractTypeB2B')
+      case JobContractType.EMPLOYMENT_CONTRACT:
+        return t('contractTypeEmploymentContract')
+      case JobContractType.CONTRACT_FOR_SPECIFIC_WORK:
+        return t('contractTypeSpecificWork')
+      case JobContractType.CONTRACT_OF_MANDATE:
+        return t('contractTypeMandate')
+      default:
+        return contractType
+    }
+  }
+
+  // Fallback to hardcoded strings if no translation function is provided
   switch (contractType) {
     case JobContractType.B2B:
       return 'B2B'
@@ -24,18 +41,19 @@ export const mapJobContract = (contractType: JobContractType): string => {
 }
 
 // If this mapping is not used anywhere else in the application, it can be safely removed once the application is fully operational and confirmed to work without it
-export const mappedJobContractType = Object.values(JobContractType).map(
+export const mappedJobContractType = (t?: TFunction) => Object.values(JobContractType).map(
   (contractType) => ({
-    name: mapJobContract(contractType),
+    name: mapJobContract(contractType, t),
     value: contractType,
   }),
 )
 
 export const mapJobContractType = (
   contractType: string[],
+  t?: TFunction,
 ): DropdownOption[] => {
   return contractType.map((contractType) => ({
-    name: mapJobContract(contractType as JobContractType),
+    name: mapJobContract(contractType as JobContractType, t),
     value: contractType,
   }))
 }
@@ -73,11 +91,12 @@ export const mappedEmploymentMode = Object.values(EmploymentMode).map(
  */
 export function transformJobToFormValues(
   jobData: JobModel,
+  t?: TFunction
 ): CreateJobFormValues {
   // Map contract type correctly
   const contractTypeValue = (jobData.contractType || 'B2B') as JobContractType
   const contractType = {
-    name: getContractTypeName(contractTypeValue),
+    name: getContractTypeName(contractTypeValue, t),
     value: contractTypeValue,
   }
 
@@ -125,9 +144,9 @@ export function transformJobToFormValues(
 /**
  * Helper function to get a display name for contract types
  */
-function getContractTypeName(contractType: JobContractType): string {
+function getContractTypeName(contractType: JobContractType, t?: TFunction): string {
   // Use the existing mapJobContract function to ensure consistent translations
-  return mapJobContract(contractType)
+  return mapJobContract(contractType, t)
 }
 
 /**

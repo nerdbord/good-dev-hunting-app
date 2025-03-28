@@ -29,6 +29,9 @@ export const Employment = () => {
   const { values, setFieldValue, touched, errors } =
     useFormikContext<CreateJobFormValues>()
 
+  // Pass the translation function to the mapping function
+  const contractTypeOptions = mappedJobContractType(tt)
+
   // Initialize the form fields if they're empty on first render
   useEffect(() => {
     if (!initialized) {
@@ -96,7 +99,7 @@ export const Employment = () => {
             id={EmploymentFormKeys.CONTRACT_TYPE}
             label={tt('contractTypeLabel')}
             text={tt('contractTypeDesc')}
-            options={mappedJobContractType}
+            options={contractTypeOptions}
             selectedValue={values[EmploymentFormKeys.CONTRACT_TYPE]}
             name={EmploymentFormKeys.CONTRACT_TYPE}
           />
