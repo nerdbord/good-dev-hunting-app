@@ -400,6 +400,17 @@
     "addJob": "Dodaj zlecenie za darmo",
     "joinAsItSpecialist": "Dołącz jako IT specjalista"
   },
+  "HunterWhyWorth": {
+    "title": "Dlaczego warto korzystać z DevHunting?",
+    "freeTitle": "Całkowicie za darmo",
+    "freeDescription": "Dodaj swoje zlecenie bez opłat i otrzymaj oferty od specjalistów IT.",
+    "simpleTitle": "Prosty i szybki proces",
+    "simpleDescription": "Nie trać czasu na poszukiwania - programiści sami zgłoszą się do Ciebie z dostosowanymi propozycjami.",
+    "techTitle": "Nie musisz znać technologii",
+    "techDescription": "Opisz swój pomysł, a AI przekształci go w brief projektowy dla odpowiednich ekspertów.",
+    "addJobForFree": "Dodaj zlecenie za darmo",
+    "addJobInOneMinute": "Dodaj swoje zlecenie w 1 minutę."
+  },
   "HunterHeader": {
     "addJob": "Dodaj zlecenie za darmo"
   },
@@ -466,6 +477,32 @@
     "specialistsTitle1": "Specjaliści biegli",
     "specialistsTitle2": "w 50+ technologiach",
     "specialistsDescription": "Od Reacta, przez Pythona, po narzędzia UX/UI – nasi eksperci znają wszystkie technologie potrzebne do realizacji Twojego projektu."
+  },
+  "Metadata": {
+    "title": "Zleć projekt najlepszym specjalistom – GoodDevHunting",
+    "description": "Dodaj zlecenie i daj się znaleźć najlepszym specjalistom IT – bez opłat, bez pośredników. Nie trać czasu na poszukiwania – programiści sami zgłoszą się do Ciebie z dopasowanymi propozycjami. Warunki współpracy ustalacie razem – prosto, przejrzyście i bez stresu.",
+    "keywords": [
+      "zlecenia IT",
+      "znajdź programistę",
+      "freelancer IT",
+      "specjalista IT",
+      "realizacja projektu",
+      "tworzenie aplikacji",
+      "frontend developer",
+      "backend developer",
+      "testowanie aplikacji",
+      "design UI/UX",
+      "integracja API",
+      "rekrutacja IT",
+      "oferty dla firm",
+      "eksperci IT na żądanie",
+      "outsourcing IT",
+      "zdalny programista",
+      "zatrudnij developera",
+      "projekty programistyczne",
+      "team augmentation",
+      "zespół IT do projektu"
+    ]
   },
   "HunterHowItWorks": {
     "howItWorks": "JAK TO DZIAŁA",
