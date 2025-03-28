@@ -2,11 +2,12 @@
 
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { useState } from 'react'
 import styles from './HunterWhyWorth.module.scss'
 
-const backgroundDefault = '/Background.svg'
-const backgroundOne = '/Background1.svg'
+const backgroundDefault = '/sectionone.png'
+const backgroundOne = '/sectiontwo.png'
 const backgroundTwo = '/Background2.svg'
 
 type Props = {}
@@ -75,7 +76,26 @@ export const HunterWhyWorth = (props: Props) => {
           <div
             className={styles.imageContainer}
             style={{ backgroundImage: `url(${getBackgroundImage()})` }}
-          />
+          >
+            {selectedOption === 0 && (
+              <button className={styles.addJobButton}>
+                {t('addJobForFree')}
+              </button>
+            )}
+
+            {selectedOption === 1 && (
+              <div className={styles.modal}>
+                <Image
+                  src="/Frame.png"
+                  alt="Clock icon"
+                  width={32}
+                  height={32}
+                  className={styles.modalIcon}
+                />
+                <p className={styles.modalText}>{t('addJobInOneMinute')}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

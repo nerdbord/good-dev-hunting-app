@@ -97,7 +97,7 @@
 }
 
 .imageContainer {
-  width: 480px;
+  width: 472px;
   height: 520px;
   position: relative;
   background-color: transparent;
@@ -108,6 +108,64 @@
   border-radius: 4px;
   overflow: hidden;
   transition: background-image 0.3s ease; /* Dodaję płynną animację zmiany tła */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addJobButton {
+  background-color: #7d54f1;
+  color: white;
+  padding: 17.33px 34.65px;
+  border-radius: 2.89px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  gap: 14.44px;
+
+  &:hover {
+    background-color: #6a46d5;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.modal {
+  background-color: #e4e4f6;
+  width: 265.07px;
+  height: 104.6px;
+  position: absolute;
+  top: 207.88px;
+  left: 103px;
+  border-radius: 3.44px;
+  padding: 12px 12.03px 12px 12.03px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8.6px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.modalIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.modalText {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #7d54f1;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
 }
 
 /* Dodajemy responsywność dla mniejszych ekranów */
