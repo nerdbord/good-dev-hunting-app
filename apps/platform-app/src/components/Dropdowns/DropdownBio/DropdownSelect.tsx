@@ -58,7 +58,11 @@ export const DropdownSelect = ({
     }
   }, [selectedValue, hasInteracted, selectedValue])
 
-  const handleDropdown = () => {
+  const handleDropdown = (e: React.MouseEvent) => {
+    // Prevent event propagation and default behavior
+    e.stopPropagation();
+    e.preventDefault();
+    
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
     setHasInteracted(true)
@@ -66,7 +70,11 @@ export const DropdownSelect = ({
     setInputError(false)
   }
 
-  const handleSelection = (option: DropdownOption) => {
+  const handleSelection = (e: React.MouseEvent, option: DropdownOption) => {
+    // Prevent event propagation and default behavior
+    e.stopPropagation();
+    e.preventDefault();
+    
     setFieldValue(name, option)
     if (name === WorkInformationFormKeys.HOURLY_RATE) {
       const { hourlyRateMin, hourlyRateMax } = parseHourlyRateValue(
@@ -89,6 +97,7 @@ export const DropdownSelect = ({
       <div className={styles.label}>{label}</div>
       <div ref={dropdownRef}>
         <button
+          type="button" // Explicitly set type to button to prevent form submission
           onClick={handleDropdown}
           className={inputError ? styles.errMsg : styles.featuresBtn}
           data-testid={dropdownTestId}
@@ -114,7 +123,7 @@ export const DropdownSelect = ({
                 key={index}
                 className={styles.dropdownInput}
                 htmlFor={`${id}-${index}`}
-                onClick={() => handleSelection(option)}
+                onClick={(e) => handleSelection(e, option)}
               >
                 <div
                   className={
