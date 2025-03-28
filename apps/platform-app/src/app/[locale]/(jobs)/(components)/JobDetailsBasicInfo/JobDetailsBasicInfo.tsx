@@ -3,6 +3,7 @@ import {
   mapJobContract,
 } from '@/app/[locale]/(jobs)/_utils/job.mappers'
 import {
+  BudgetType,
   type EmploymentMode,
   type JobContractType,
 } from '@/app/[locale]/(jobs)/_utils/types'
@@ -83,14 +84,16 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
         )}
       </div>
 
-      {job.minBudgetForProjectRealisation &&
-        job.maxBudgetForProjectRealisation && (
-          <div className={styles.addInfo}>
-            {t('budget')}: {job.minBudgetForProjectRealisation} -{' '}
-            {job.maxBudgetForProjectRealisation}{' '}
-            {currencyButtonTextDisplay(job.currency as Currency)}
-          </div>
-        )}
+      <div className={styles.addInfo}>
+        {t('budget')}:{' '}
+        {job.budgetType === BudgetType.REQUEST_QUOTE || 
+         (!job.minBudgetForProjectRealisation && !job.maxBudgetForProjectRealisation)
+          ? t('budgetRequestQuote')
+          : `${job.minBudgetForProjectRealisation} - ${job.maxBudgetForProjectRealisation} ${
+              currencyButtonTextDisplay(job.currency as Currency)
+            }`
+        }
+      </div>
     </div>
   )
 }

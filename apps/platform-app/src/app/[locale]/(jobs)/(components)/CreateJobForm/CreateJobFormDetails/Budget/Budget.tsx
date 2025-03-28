@@ -49,26 +49,35 @@ export const Budget = () => {
     await setFieldValue(BudgetFormKeys.BUDGET_TYPE, type)
     await setFieldTouched(BudgetFormKeys.BUDGET_TYPE)
 
-    // Reset budget-related fields when switching to REQUEST_QUOTE
     if (type === BudgetType.REQUEST_QUOTE) {
-      setFieldValue(BudgetFormKeys.CURRENCY, '')
-      setFieldValue(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION, 0)
-      setFieldValue(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION, 0)
-      validateField(BudgetFormKeys.BUDGET_TYPE)
+      // Set a default currency value to avoid validation errors
+      await setFieldValue(BudgetFormKeys.CURRENCY, Currency.PLN)
+      // Set to null instead of 0 for budget fields
+      await setFieldValue(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION, null)
+      await setFieldValue(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION, null)
+      
+      // Validate budget type but not other fields for REQUEST_QUOTE
+      await validateField(BudgetFormKeys.BUDGET_TYPE)
     }
 
     if (type === BudgetType.FIXED) {
-      setFieldTouched(BudgetFormKeys.CURRENCY)
-      setFieldTouched(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION)
-      setFieldTouched(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION)
-
-      validateField(BudgetFormKeys.CURRENCY)
-      validateField(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION)
-      validateField(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION)
+      // Set a default currency if none is selected
+      if (!values.currency) {
+        await setFieldValue(BudgetFormKeys.CURRENCY, Currency.PLN)
+      }
+      
+      // Touch fields so validation errors show up
+      await setFieldTouched(BudgetFormKeys.CURRENCY, true)
+      await setFieldTouched(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION, true)
+      await setFieldTouched(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION, true)
+      
+      // Validate all fields for FIXED budget type
+      await validateField(BudgetFormKeys.BUDGET_TYPE)
+      await validateField(BudgetFormKeys.CURRENCY)
+      await validateField(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION)
+      await validateField(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION)
     }
   }
-
-  console.log('values', values)
 
   return (
     <Card>
@@ -154,7 +163,7 @@ export const Budget = () => {
                 }
                 name={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
                 dataTestId={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
-                min={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION]}
+                min={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION] || 0}
               />
             </InputFormError>
             <InputFormError
@@ -168,7 +177,10 @@ export const Budget = () => {
                   <Button
                     key={index}
                     variant={
-                      value === values.currency ? 'secondary' : 'grayedOut'
+                      value === values.currency || 
+                      (value === Currency.PLN && !values.currency)
+                        ? 'secondary' 
+                        : 'grayedOut'
                     }
                     onClick={() => handleCurrencyChange(value)}
                   >

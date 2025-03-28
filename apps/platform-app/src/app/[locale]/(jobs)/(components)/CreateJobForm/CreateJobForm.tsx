@@ -82,8 +82,16 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         defaultValue: 'At least one employment mode is required',
       }),
     ),
+    currency: Yup.string().when('budgetType', {
+      is: BudgetType.FIXED,
+      then: () => 
+        Yup.string().required(
+          t('currencyRequired', { defaultValue: 'Currency is required' })
+        ),
+      otherwise: () => Yup.string().notRequired(),
+    }),
     minBudgetForProjectRealisation: Yup.number().when('budgetType', {
-      is: 'fixed',
+      is: BudgetType.FIXED,
       then: () =>
         Yup.number()
           .min(
@@ -97,10 +105,10 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
               defaultValue: 'The minimum amount is required',
             }),
           ),
-      otherwise: () => Yup.number().notRequired(),
+      otherwise: () => Yup.number().notRequired().nullable(),
     }),
     maxBudgetForProjectRealisation: Yup.number().when('budgetType', {
-      is: 'fixed',
+      is: BudgetType.FIXED,
       then: () =>
         Yup.number()
           .min(
@@ -126,7 +134,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
               defaultValue: 'The maximum amount is required',
             }),
           ),
-      otherwise: () => Yup.number().notRequired(),
+      otherwise: () => Yup.number().notRequired().nullable(),
     }),
     budgetType: Yup.string().required(
       t('budgetTypeRequired', { defaultValue: 'Budget type is required' }),
@@ -155,8 +163,8 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
       // Set default currency value if budgetType is requestQuote
       const currency =
         values.budgetType === BudgetType.REQUEST_QUOTE
-          ? Currency.PLN
-          : values.currency
+          ? Currency.PLN // Always use PLN for REQUEST_QUOTE
+          : values.currency || Currency.PLN // Fallback to PLN if undefined
 
       // Transform form values to job data
       const jobData = {
