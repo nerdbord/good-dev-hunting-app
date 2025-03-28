@@ -1,9 +1,6 @@
 'use client'
 
 import {
-  BlockTypeSelect,
-  CreateLink,
-  ListsToggle,
   headingsPlugin,
   linkDialogPlugin,
   linkPlugin,
@@ -14,7 +11,8 @@ import {
 import '@mdxeditor/editor/style.css'
 
 import { useFormikContext } from 'formik'
-import React, { useEffect, useRef, Component, ErrorInfo, ReactNode, useState } from 'react'
+import React, { useEffect, useRef, Component, useState } from 'react'
+import type { ErrorInfo, ReactNode } from 'react'
 import type { CreateJobFormValues } from '../../_utils/types'
 import styles from './ProjectBriefTextArea.module.scss'
 import dynamic from 'next/dynamic'
