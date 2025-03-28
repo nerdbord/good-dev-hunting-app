@@ -14,6 +14,8 @@ import { storePendingPublishJob } from '../../_utils/job-storage.client'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
 import { LoginModal } from '../LoginModal/LoginModal'
+import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
+import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
 import styles from './JobDetails.module.scss'
 
 interface JobDetailsProps {
@@ -76,11 +78,32 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
 
     try {
       setIsPublishing(true)
+      
+      // Show verification in progress modal
+      showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
+      
+      // Attempt to publish the job
       await publishJobAction(params.id)
-      router.push(`${AppRoutes.jobs}/${params.id}`)
-      router.refresh() // Refresh the page to show updated status
+      
+      // Close verification modal and show success modal
+      closeModal()
+      showModal(
+        <AddJobSuccessModal 
+          closeModal={() => {
+            closeModal()
+            router.push(`${AppRoutes.jobs}/${params.id}`)
+            router.refresh() // Refresh the page to show updated status
+          }} 
+        />, 
+        'narrow'
+      )
     } catch (error) {
       console.error('Error publishing job:', error)
+      
+      // Close verification modal if it's open
+      closeModal()
+      
+      // Show error message
       showModal(
         <div>
           <h2>Publishing Failed</h2>

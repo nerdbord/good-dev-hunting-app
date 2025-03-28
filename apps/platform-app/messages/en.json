@@ -209,6 +209,24 @@
     "cancel": "Cancel",
     "or": "or"
   },
+  "AddJobVerificationModal": {
+    "title": "Verification in progress",
+    "description": "Your job is currently being verified. Please wait a few moments.",
+    "inProgressBtn": "In progress",
+    "closeBtn": "Close"
+  },
+  "AddJobSuccessModal": {
+    "title": "Job posted successfully",
+    "description": "Your job has landed in the mailboxes of over 200 people. The job preview has also been sent to your email.",
+    "addAnotherJobBtn": "Add another job",
+    "closeBtn": "Close"
+  },
+  "AddJobErrorModal": {
+    "title": "Job contains errors",
+    "description": "We found some errors in your job. Please fix the fields to publish the offer.",
+    "errorBtn": "Show errors",
+    "closeBtn": "Close"
+  },
   "Jobs": {
     "postJobTitle": "Post a New Job",
     "comingSoon": "Job posting form coming soon...",
@@ -243,6 +261,10 @@
     "employmentType": "Employment type",
     "contractTypeLabel": "Contract type",
     "contractTypeDesc": "Choose the contract type",
+    "contractTypeB2B": "B2B",
+    "contractTypeEmploymentContract": "Employment Contract",
+    "contractTypeSpecificWork": "Contract for Specific Work",
+    "contractTypeMandate": "Contract of Mandate",
     "workMode": "Work mode",
     "workModeStationary": "Stationary",
     "workModeHybrid": "Hybrid",

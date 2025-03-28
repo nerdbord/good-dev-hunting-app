@@ -155,3 +155,36 @@
     height: 100%;
   }
   
+  .fallbackTextarea {
+    width: 100%;
+    min-height: 250px;
+    padding: 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+    background-color: #0f1217;
+    border: 1px solid #2a2f35;
+    border-radius: 4px;
+    resize: vertical;
+    
+    &:focus {
+      outline: none;
+      border-color: #7d54f1;
+      box-shadow: 0 0 0 2px rgba(125, 84, 241, 0.2);
+    }
+  }
+  
+  .placeholder {
+    display: block;
+    width: 100%;
+    height: 200px;
+    padding: 16px;
+    background-color: #0f1217;
+    border: 1px solid #2a2f35;
+    color: #69717b;
+    border-radius: 2px;
+    resize: none;
+    font-size: 16px;
+  }
+  

@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  width: 679px;
+  padding: 124px 89px;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 10px;
+
+  @include mobile {
+    width: 85%;
+    padding: 24px;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.successContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 3px solid rgba(166, 135, 255, 0.5);
+  background: rgba(166, 135, 255, 0.4);
+}
+
+.successIcon {
+  width: 30px;
+  height: 20.5px;
+  flex-shrink: 0;
+}
+
+.header {
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.description {
+  color: #fff;
+  text-align: center;
+  font-family: 'IBM Plex Sans';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 180px;
+
+  button {
+    width: 100%;
+  }
+}

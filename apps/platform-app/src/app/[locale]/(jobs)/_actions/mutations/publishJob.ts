@@ -8,6 +8,7 @@ import {
   matchJobWithProfiles,
   notifyMatchedProfiles,
   sendJobPublishedEmail,
+  verifyJob,
 } from '../../_workflows'
 import { claimAnonymousJobAction } from './claimAnonymousJob'
 
@@ -43,19 +44,18 @@ export const publishJobAction = withSentry(async (id: string) => {
   console.log('publishing job')
 
   try {
-    // TODO: Disable job verification for now, enable after improvements to verification flow
     // Step 1: Verify the job
-    // const verificationResult = await verifyJob(jobId)
+    const verificationResult = await verifyJob(id)
 
-    // // If the job is not valid, return the reasons
-    // if (!verificationResult.isValid) {
-    //     return {
-    //         success: false,
-    //         message: `Job verification failed: ${verificationResult.reasons.join(
-    //             ', ',
-    //         )}`,
-    //     }
-    // }
+    // If the job is not valid, return the reasons
+    if (!verificationResult.isValid) {
+      return {
+        success: false,
+        message: `Job verification failed: ${verificationResult.reasons.join(
+          ', ',
+        )}`,
+      }
+    }
 
     console.log('publishedJob', job)
 
