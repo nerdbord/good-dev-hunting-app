@@ -223,8 +223,9 @@
     "closeBtn": "Zamknij"
   },
   "AddJobErrorModal": {
-    "title": "Publikowanie nie powiodło się",
-    "description": "Wystąpił błąd podczas publikowania Twojego zlecenia. Proszę spróbować ponownie.",
+    "title": "Zlecenie zawiera błędy",
+    "description": "Znaleźliśmy kilka nieprawidłowości w Twoim zleceniu. Popraw wskazane pola, aby opublikować ofertę.",
+    "errorBtn": "Pokaż błędy",
     "closeBtn": "Zamknij"
   },
   "Jobs": {

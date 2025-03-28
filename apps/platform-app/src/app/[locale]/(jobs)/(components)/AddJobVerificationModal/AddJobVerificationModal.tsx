@@ -3,7 +3,6 @@
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-// import { useEffect, useState } from 'react'
 import styles from './AddJobVerificationModal.module.scss'
 
 interface AddJobVerificationModalProps {
@@ -14,16 +13,6 @@ export const AddJobVerificationModal = ({
   closeModal,
 }: AddJobVerificationModalProps) => {
   const t = useTranslations(I18nNamespaces.AddJobVerificationModal)
-  // const [dots, setDots] = useState('.')
-
-  // // Animation for the dots
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setDots((prev) => (prev.length >= 3 ? '.' : prev + '.'))
-  //   }, 500)
-
-  //   return () => clearInterval(timer)
-  // }, [])
 
   return (
     <div className={styles.container} data-testid="addJobVerificationModal">

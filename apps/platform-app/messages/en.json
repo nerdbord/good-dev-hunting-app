@@ -223,8 +223,9 @@
     "closeBtn": "Close"
   },
   "AddJobErrorModal": {
-    "title": "Publishing Failed",
-    "description": "There was an error publishing your job. Please try again.",
+    "title": "Job contains errors",
+    "description": "We found some errors in your job. Please fix the fields to publish the offer.",
+    "errorBtn": "Show errors",
     "closeBtn": "Close"
   },
   "Jobs": {
