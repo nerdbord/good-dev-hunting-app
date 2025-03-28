@@ -113,7 +113,9 @@
     "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
     "loginWithGithub": "Zaloguj się przez Github",
     "loginWithLinkedin": "Zaloguj się przez LinkedIn",
-    "or": "albo"
+    "or": "albo",
+    "loginToApply": "Zaloguj się",
+    "loginToApplyDescription": "Aby móc zgłosić się do zlecenia musisz być zalogowany"
   },
   "LoginHunter": {
     "login": "Zaloguj się jako łowca talentów",

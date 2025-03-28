@@ -117,25 +117,27 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
       </section>
       <JobDetailsDetailsInfo job={job} />
 
-      <ProgressBar currentStep={5} maxSteps={5}>
-        <Button
-          variant="secondary"
-          disabled={!isEditable || isPublishing}
-          onClick={handleEdit}
-        >
-          {tButtons('edit')}
-        </Button>
-        {showPublishButton && (
+      {job.state !== 'APPROVED' && (
+        <ProgressBar currentStep={5} maxSteps={5}>
           <Button
-            variant="primary"
-            type="submit"
-            disabled={isPublishing}
-            onClick={handlePublish}
+            variant="secondary"
+            disabled={!isEditable || isPublishing}
+            onClick={handleEdit}
           >
-            {isPublishing ? 'Publishing...' : tButtons('publishJob')}
+            {tButtons('edit')}
           </Button>
-        )}
-      </ProgressBar>
+          {showPublishButton && (
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isPublishing}
+              onClick={handlePublish}
+            >
+              {isPublishing ? 'Publishing...' : tButtons('publishJob')}
+            </Button>
+          )}
+        </ProgressBar>
+      )}
     </>
   )
 }
