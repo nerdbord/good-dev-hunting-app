@@ -1,10 +1,10 @@
 'use client'
 
 import { I18nNamespaces } from '@/i18n/request'
-// import { AppRoutes } from '@/utils/routes'
+import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-// import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import styles from './AddJobErrorModal.module.scss'
 
 export const AddJobErrorModal = ({
@@ -13,11 +13,11 @@ export const AddJobErrorModal = ({
   closeModal: () => void
 }) => {
   const t = useTranslations(I18nNamespaces.AddJobErrorModal)
-  // const router = useRouter()
+  const router = useRouter()
 
   const handleShowErrors = () => {
     closeModal()
-    // router.push(AppRoutes.postJob)
+    router.push(AppRoutes.postJob)
   }
 
   return (
