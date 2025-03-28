@@ -7,6 +7,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
 import { useFormikContext } from 'formik'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { BudgetType, type CreateJobFormValues } from '../../../../_utils/types'
 import { Card } from '../Card/Card'
@@ -30,6 +31,34 @@ export const Budget = () => {
     validateField,
     setFieldTouched,
   } = useFormikContext<CreateJobFormValues>()
+  const [initialized, setInitialized] = useState(false)
+
+  // Ensure budget type is properly set on initialization
+  useEffect(() => {
+    if (!initialized) {
+      const budgetType = determineBudgetType(values)
+      setFieldValue(BudgetFormKeys.BUDGET_TYPE, budgetType)
+      setInitialized(true)
+    }
+  }, [initialized, setFieldValue, values])
+
+  const determineBudgetType = (values: CreateJobFormValues): BudgetType => {
+    // If both min and max budget are present, it's a fixed budget
+    if (
+      values.minBudgetForProjectRealisation &&
+      values.maxBudgetForProjectRealisation
+    ) {
+      return BudgetType.FIXED
+    }
+
+    // If budgetType is explicitly specified, use that
+    if (values.budgetType) {
+      return values.budgetType
+    }
+
+    // Default to REQUEST_QUOTE if we can't determine
+    return BudgetType.REQUEST_QUOTE
+  }
 
   const handleCurrencyChange = (chosenCurrency: Currency) => {
     setFieldValue(BudgetFormKeys.CURRENCY, chosenCurrency)
