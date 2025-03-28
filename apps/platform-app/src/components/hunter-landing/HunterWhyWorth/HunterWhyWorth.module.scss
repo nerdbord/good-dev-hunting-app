@@ -100,17 +100,55 @@
   width: 472px;
   height: 520px;
   position: relative;
-  background-color: transparent;
-  /* Całkowicie usuwam background-image, aby pozwolić na dynamiczną zmianę tła przez styl inline */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   border-radius: 4px;
   overflow: hidden;
-  transition: background-image 0.3s ease; /* Dodaję płynną animację zmiany tła */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.imageLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.fadeIn {
+  animation: fadeIn 0.4s ease-in-out forwards;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.contentLayer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
 .addJobButton {

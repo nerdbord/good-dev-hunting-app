@@ -1,9 +1,11 @@
 'use client'
 
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import styles from './HunterWhyWorth.module.scss'
 
 const backgroundDefault = '/sectionone.png'
@@ -14,10 +16,29 @@ type Props = {}
 
 export const HunterWhyWorth = (props: Props) => {
   const [selectedOption, setSelectedOption] = useState<number>(0)
+  const [activeImage, setActiveImage] = useState<string>(backgroundDefault)
+  const [nextImage, setNextImage] = useState<string>(backgroundDefault)
+  const [transitioning, setTransitioning] = useState<boolean>(false)
   const t = useTranslations(I18nNamespaces.HunterWhyWorth)
 
-  const getBackgroundImage = () => {
-    switch (selectedOption) {
+  useEffect(() => {
+    const newImage = getBackgroundImage(selectedOption)
+
+    if (newImage !== activeImage) {
+      setNextImage(newImage)
+      setTransitioning(true)
+
+      const timer = setTimeout(() => {
+        setActiveImage(newImage)
+        setTransitioning(false)
+      }, 400)
+
+      return () => clearTimeout(timer)
+    }
+  }, [selectedOption, activeImage])
+
+  const getBackgroundImage = (option: number) => {
+    switch (option) {
       case 0:
         return backgroundDefault
       case 1:
@@ -73,28 +94,42 @@ export const HunterWhyWorth = (props: Props) => {
             </div>
           </div>
 
-          <div
-            className={styles.imageContainer}
-            style={{ backgroundImage: `url(${getBackgroundImage()})` }}
-          >
-            {selectedOption === 0 && (
-              <button className={styles.addJobButton}>
-                {t('addJobForFree')}
-              </button>
-            )}
-
-            {selectedOption === 1 && (
-              <div className={styles.modal}>
-                <Image
-                  src="/Frame.png"
-                  alt="Clock icon"
-                  width={32}
-                  height={32}
-                  className={styles.modalIcon}
+          <div className={styles.imageContainer}>
+            <div className={styles.imageWrapper}>
+              <div
+                className={styles.imageLayer}
+                style={{ backgroundImage: `url(${activeImage})` }}
+              />
+              {transitioning && (
+                <div
+                  className={`${styles.imageLayer} ${styles.fadeIn}`}
+                  style={{ backgroundImage: `url(${nextImage})` }}
                 />
-                <p className={styles.modalText}>{t('addJobInOneMinute')}</p>
-              </div>
-            )}
+              )}
+            </div>
+
+            <div className={styles.contentLayer}>
+              {selectedOption === 0 && (
+                <Link href={AppRoutes.postJob}>
+                  <button className={styles.addJobButton}>
+                    {t('addJobForFree')}
+                  </button>
+                </Link>
+              )}
+
+              {selectedOption === 1 && (
+                <div className={styles.modal}>
+                  <Image
+                    src="/Frame.png"
+                    alt="Clock icon"
+                    width={32}
+                    height={32}
+                    className={styles.modalIcon}
+                  />
+                  <p className={styles.modalText}>{t('addJobInOneMinute')}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
