@@ -3,7 +3,7 @@
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 import styles from './AddJobVerificationModal.module.scss'
 
 interface AddJobVerificationModalProps {
@@ -14,16 +14,16 @@ export const AddJobVerificationModal = ({
   closeModal,
 }: AddJobVerificationModalProps) => {
   const t = useTranslations(I18nNamespaces.AddJobVerificationModal)
-  const [dots, setDots] = useState('.')
+  // const [dots, setDots] = useState('.')
 
-  // Animation for the dots
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDots((prev) => (prev.length >= 3 ? '.' : prev + '.'))
-    }, 500)
+  // // Animation for the dots
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setDots((prev) => (prev.length >= 3 ? '.' : prev + '.'))
+  //   }, 500)
 
-    return () => clearInterval(timer)
-  }, [])
+  //   return () => clearInterval(timer)
+  // }, [])
 
   return (
     <div className={styles.container} data-testid="addJobVerificationModal">
@@ -35,7 +35,11 @@ export const AddJobVerificationModal = ({
         ×
       </button>
       <div className={styles.loadingContainer}>
-        <span className={styles.dots}>{dots}</span>
+      <span className={styles.dots}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </div>
 
       <h2 className={styles.header}>{t('title')}</h2>
