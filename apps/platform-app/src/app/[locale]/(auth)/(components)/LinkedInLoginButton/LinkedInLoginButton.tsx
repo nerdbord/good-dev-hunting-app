@@ -10,6 +10,8 @@ import styles from '../GithubLoginButton/GithubLoginButton.module.scss'
 interface LinkedInLoginButtonProps {
   label?: string
   role: Roles.SPECIALIST | Roles.HUNTER
+  redirect?: boolean
+  redirectTo?: string
 }
 
 export const LinkedInLoginButton = (props: LinkedInLoginButtonProps) => {
@@ -21,6 +23,8 @@ export const LinkedInLoginButton = (props: LinkedInLoginButtonProps) => {
         setIsCalled(true)
         signIn('linkedin', {
           callbackUrl: `${AppRoutes.oAuth}?role=${props.role}`,
+          redirect: props.redirect,
+          redirectTo: props.redirectTo,
         })
       }}
       variant={'secondary'}

@@ -113,7 +113,9 @@
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github",
     "loginWithLinkedin": "Login with LinkedIn",
-    "or": "or"
+    "or": "or",
+    "loginToApply": "Log in",
+    "loginToApplyDescription": "To apply for a job, you must be logged in."
   },
   "LoginHunter": {
     "login": "Login as talent Hunter",
