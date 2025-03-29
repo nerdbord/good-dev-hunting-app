@@ -36,78 +36,78 @@ Expected response:
 `
 
 export interface MatchResult {
-    profileId: string
-    matchScore: number
-    matchReason: string
+  profileId: string
+  matchScore: number
+  matchReason: string
 }
 
 export async function matchJobWithProfiles(
-    job: JobModel,
-    profiles: ProfileModel[],
+  job: JobModel,
+  profiles: ProfileModel[],
 ): Promise<MatchResult[]> {
-    try {
-        // Prepare the job and profiles data for the LLM
-        const jobData = {
-            id: job.id,
-            name: job.jobName,
-            description: job.projectBrief,
-            technologies: job.techStack.map((tech) => tech.name),
-            employmentTypes: job.employmentTypes,
-            employmentModes: job.employmentModes,
-            location: {
-                country: job.country,
-                city: job.city,
-                remoteOnly: job.remoteOnly,
-            },
-        }
-
-        const profilesData = profiles.map((profile) => ({
-            id: profile.id,
-            name: profile.fullName,
-            position: profile.position,
-            seniority: profile.seniority,
-            technologies: profile.techStack.map((tech) => tech.name),
-            employmentTypes: profile.employmentTypes,
-            remoteOnly: profile.remoteOnly,
-            location: {
-                country: profile.country,
-                city: profile.city,
-                openForCountryRelocation: profile.openForCountryRelocation,
-                openForCityRelocation: profile.openForCityRelocation,
-            },
-        }))
-
-        // Prepare the messages for the LLM
-        const messages = [
-            {
-                role: 'system',
-                content: SYSTEM_PROMPT,
-            },
-            {
-                role: 'user',
-                content: JSON.stringify({
-                    job: jobData,
-                    profiles: profilesData,
-                }),
-            },
-        ]
-
-        // Generate the response with JSON format
-        const jsonResponse = await groqService.generateResponse(messages, {
-            json: true,
-            temperature: 0,
-            maxTokens: 2000,
-        })
-
-        // Parse the JSON response
-        const matches = JSON.parse(jsonResponse) as {
-            matches: MatchResult[]
-        }
-
-        return matches.matches || []
-    } catch (error) {
-        console.error('Error matching job with profiles:', error)
-        // Return empty array if matching fails
-        return []
+  try {
+    // Prepare the job and profiles data for the LLM
+    const jobData = {
+      id: job.id,
+      name: job.jobName,
+      description: job.projectBrief,
+      technologies: job.techStack.map((tech) => tech.name),
+      employmentTypes: job.employmentTypes,
+      employmentModes: job.employmentModes,
+      location: {
+        country: job.country,
+        city: job.city,
+        remoteOnly: job.remoteOnly,
+      },
     }
+
+    const profilesData = profiles.map((profile) => ({
+      id: profile.id,
+      name: profile.fullName,
+      position: profile.position,
+      seniority: profile.seniority,
+      technologies: profile.techStack.map((tech) => tech.name),
+      employmentTypes: profile.employmentTypes,
+      remoteOnly: profile.remoteOnly,
+      location: {
+        country: profile.country,
+        city: profile.city,
+        openForCountryRelocation: profile.openForCountryRelocation,
+        openForCityRelocation: profile.openForCityRelocation,
+      },
+    }))
+
+    // Prepare the messages for the LLM
+    const messages = [
+      {
+        role: 'system',
+        content: SYSTEM_PROMPT,
+      },
+      {
+        role: 'user',
+        content: JSON.stringify({
+          job: jobData,
+          profiles: profilesData,
+        }),
+      },
+    ]
+
+    // Generate the response with JSON format
+    const jsonResponse = await groqService.generateResponse(messages, {
+      json: true,
+      temperature: 0,
+      maxTokens: 2000,
+    })
+
+    // Parse the JSON response
+    const matches = JSON.parse(jsonResponse) as {
+      matches: MatchResult[]
+    }
+
+    return matches.matches || []
+  } catch (error) {
+    console.error('Error matching job with profiles:', error)
+    // Return empty array if matching fails
+    return []
+  }
 }
