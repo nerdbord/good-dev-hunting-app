@@ -108,6 +108,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .clientCard {
@@ -181,23 +182,38 @@
   }
 }
 
-.addRequestButton {
-  background-color: #7D54F1;
+.addJobButton {
+  background-color: #7d54f1;
   color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 17.33px 34.65px;
+  border-radius: 2.89px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
   font-weight: 500;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(125, 84, 241, 0.3);
-  
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+
   &:hover {
-    background-color: #6a42df;
+    background-color: #6a46d5;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
 
-/* Step 2 styles */
+.pointingIconWrapper {
+  position: absolute;
+  margin-right: -35%;
+  bottom: -5%;
+  z-index: 2;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
 .offersExample {
   width: 100%;
   display: flex;
@@ -376,3 +392,4 @@
     }
   }
 }
+

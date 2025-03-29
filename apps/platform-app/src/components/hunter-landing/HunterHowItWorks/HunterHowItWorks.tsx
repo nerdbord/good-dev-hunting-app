@@ -1,5 +1,7 @@
+import PointingIcon from '@/components/icons/PointingIcon'
 import { I18nNamespaces } from '@/i18n/request'
-import { useTranslations } from 'next-intl'
+import { AppRoutes } from '@/utils/routes'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import React from 'react'
 import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
@@ -35,8 +37,8 @@ const StepCard: React.FC<StepCardProps> = ({
   )
 }
 
-export function HunterHowItWorks() {
-  const t = useTranslations(I18nNamespaces.HunterHowItWorks)
+export async function HunterHowItWorks() {
+  const t = await getTranslations(I18nNamespaces.HunterHowItWorks)
 
   return (
     <div className={styles.wrapper}>
@@ -50,7 +52,7 @@ export function HunterHowItWorks() {
 
         <StepCard
           stepNumber={1}
-          title={t('addRequest')}
+          title={t('addJob')}
           description={
             <>
               {t('describeNeeds')} <strong>{t('inOneMinute')}</strong>.
@@ -84,9 +86,14 @@ export function HunterHowItWorks() {
               <p>{t('exampleRequest')}</p>
             </div>
 
-            <button className={styles.addRequestButton}>
-              {t('addRequestFree')}
-            </button>
+            <a href={AppRoutes.postJob}>
+              <button className={styles.addJobButton}>
+                {t('addJobForFree')}
+              </button>
+            </a>
+            <div className={styles.pointingIconWrapper}>
+              <PointingIcon />
+            </div>
           </div>
         </StepCard>
 
