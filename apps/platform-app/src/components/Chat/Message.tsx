@@ -1,4 +1,5 @@
 'use client'
+import { parseMessageContent } from '@/utils/messageParser'
 import styles from './chat.module.scss'
 
 export interface MessageProps {
@@ -17,11 +18,12 @@ export default function Message({
 }: MessageProps) {
   return (
     <div
-      className={`${styles.messageItem} ${
-        isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage
-      } ${className}`}
+      className={`${styles.messageItem} ${isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage
+        } ${className}`}
     >
-      <div className={styles.messageContent}>{content}</div>
+      <div className={styles.messageContent}>
+        {parseMessageContent(content)}
+      </div>
       <div className={styles.messageTimestamp}>{timestamp}</div>
     </div>
   )

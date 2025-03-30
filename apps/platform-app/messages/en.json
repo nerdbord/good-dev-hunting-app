@@ -251,7 +251,6 @@
     "locationCityTooltip": "Provide the city so specialists in your area can easily find your offer.",
     "remoteOnly": "I'm looking for remote candidates only",
     "techStackTooltip": "Specify the technologies you've selected for your job offer implementation.",
-
     "addJobPageHeader": "Add job",
     "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer",
     "jobNameRequired": "Job name is required",
@@ -270,12 +269,10 @@
     "countryRequired": "Country is required",
     "cityRequired": "City is required",
     "budgetTypeRequired": "Please select budget type",
-
     "myJobs": "My jobs",
     "noJobs": "You don't have any jobs",
     "job": "job",
     "jobs": "jobs",
-
     "applicationMsgLabel": "Message",
     "applicationMsgPlaceholder": "Write your message here...",
     "applicationBudgetLabel": "Budget",
@@ -358,6 +355,7 @@
     "noNegotiationsSubtitle": "When you apply for a job, your conversations will appear here",
     "noSelectedNegotiation": "Select a conversation to view messages",
     "viewJob": "View Job",
+    "viewCV": "View my CV",
     "sendMessage": "Send message",
     "typeMessage": "Type your message...",
     "today": "Today",

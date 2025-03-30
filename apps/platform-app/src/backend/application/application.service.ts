@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prismaClient'
+import { addSpecialElementToMessage } from '@/utils/messageParser'
 import { decryptMessage, encryptMessage } from '@/utils/messageEncryption'
 import { AppRoutes } from '@/utils/routes'
 import { type Application, type Message } from '@prisma/client'
@@ -24,6 +25,11 @@ export async function createApplication(
 ): Promise<ApplicationWithMessages> {
   const { jobId, applicantId, jobOwnerId, initialMessage, cvUrl } = data
 
+  // Format the message with CV button if available
+  const formattedMessage = cvUrl
+    ? addSpecialElementToMessage(initialMessage, cvUrl, 'cvButton')
+    : initialMessage;
+
   // Check if an application already exists for this user and job
   const existingApplication = await prisma.application.findFirst({
     where: {
@@ -39,7 +45,7 @@ export async function createApplication(
     // Application already exists, add a new message instead
     const newMessage = await prisma.message.create({
       data: {
-        content: cvUrl ? `${initialMessage}\n\nCV: ${cvUrl}` : initialMessage,
+        content: encryptMessage(formattedMessage),
         applicationId: existingApplication.id,
         senderId: applicantId,
       },
@@ -72,7 +78,7 @@ export async function createApplication(
       jobOwnerId,
       messages: {
         create: {
-          content: cvUrl ? `${initialMessage}\n\nCV: ${cvUrl}` : initialMessage,
+          content: encryptMessage(formattedMessage),
           senderId: applicantId,
         },
       },
