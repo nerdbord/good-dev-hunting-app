@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prismaClient'
+import { decryptMessage, encryptMessage } from '@/utils/messageEncryption'
 import { AppRoutes } from '@/utils/routes'
 import { type Application, type Message } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
@@ -92,12 +93,16 @@ export async function createApplication(
 export async function getUserApplications(
   userId: string,
 ): Promise<ApplicationWithMessages[]> {
-  return prisma.application.findMany({
+  const applications = await prisma.application.findMany({
     where: {
       OR: [{ applicantId: userId }, { jobOwnerId: userId }],
     },
     include: {
-      job: true,
+      job: {
+        select: {
+          jobName: true,
+        },
+      },
       messages: {
         orderBy: {
           sentAt: 'asc',
@@ -126,15 +131,24 @@ export async function getUserApplications(
             select: {
               fullName: true,
               slug: true,
-              position: true,
             },
           },
         },
       },
     },
-    orderBy: {
-      updatedAt: 'desc',
-    },
+  })
+
+  // Decrypt message content for all applications
+  return applications.map((app) => {
+    const decryptedMessages = app.messages.map((msg) => ({
+      ...msg,
+      content: decryptMessage(msg.content),
+    }))
+
+    return {
+      ...app,
+      messages: decryptedMessages,
+    }
   })
 }
 
@@ -144,10 +158,15 @@ export async function getUserApplications(
 export async function getApplicationById(
   id: string,
 ): Promise<ApplicationWithMessages | null> {
-  return prisma.application.findUnique({
+  const application = await prisma.application.findUnique({
     where: { id },
     include: {
-      job: true,
+      job: {
+        select: {
+          id: true,
+          jobName: true,
+        },
+      },
       messages: {
         orderBy: {
           sentAt: 'asc',
@@ -176,13 +195,25 @@ export async function getApplicationById(
             select: {
               fullName: true,
               slug: true,
-              position: true,
             },
           },
         },
       },
     },
   })
+
+  if (!application) return null
+
+  // Decrypt message content
+  const decryptedMessages = application.messages.map((msg) => ({
+    ...msg,
+    content: decryptMessage(msg.content),
+  }))
+
+  return {
+    ...application,
+    messages: decryptedMessages,
+  }
 }
 
 /**
@@ -193,9 +224,12 @@ export async function addMessageToApplication(
   senderId: string,
   content: string,
 ): Promise<Message> {
+  // Encrypt the message content before storing
+  const encryptedContent = encryptMessage(content)
+
   const message = await prisma.message.create({
     data: {
-      content,
+      content: encryptedContent,
       applicationId,
       senderId,
     },
