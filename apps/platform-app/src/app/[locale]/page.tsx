@@ -16,7 +16,7 @@ import styles from './page.module.scss'
 export default async function HunterLandingPage() {
   return (
     <main className={styles.hunter_landing}>
-    <Container>
+      <Container>
         <HunterHeader />
         <HunterHero />
         <HunterRiskReducers />
