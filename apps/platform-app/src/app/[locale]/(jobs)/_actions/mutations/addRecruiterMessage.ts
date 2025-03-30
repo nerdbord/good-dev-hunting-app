@@ -6,9 +6,9 @@ import {
 } from '@/backend/application/application.service'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
+import { decryptMessage } from '@/utils/messageEncryption'
 import { AppRoutes } from '@/utils/routes'
 import { revalidatePath } from 'next/cache'
-import { decryptMessage } from '@/utils/messageEncryption'
 
 /**
  * Server action to add a message to a job application as a recruiter
@@ -48,8 +48,9 @@ export const addRecruiterMessage = withSentry(
         content,
       )
 
-      // Notify all connected clients about the new message
-      if (global.messageListeners?.has(applicationId)) {
+      // Notify connected clients of the new message
+      const listeners = global.messageListeners?.get(applicationId)
+      if (listeners) {
         const messageData = {
           id: message.id,
           applicationId,
@@ -59,13 +60,9 @@ export const addRecruiterMessage = withSentry(
           sender: 'recruiter', // Since this is sent by the recruiter
         }
 
-        // Notify all listeners for this application
-        const listeners = global.messageListeners.get(applicationId)
-        if (listeners) {
-          listeners.forEach((listener: Function) => {
-            listener(messageData)
-          })
-        }
+        listeners.forEach((listener) => {
+          listener(messageData)
+        })
       }
 
       // Manually revalidate paths
