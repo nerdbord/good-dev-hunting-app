@@ -5,6 +5,7 @@ import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { AppRoutes } from '@/utils/routes'
 import { revalidatePath } from 'next/cache'
+import { decryptMessage } from '@/utils/messageEncryption'
 
 /**
  * Server action to add a message to a job application
@@ -32,6 +33,26 @@ export const addMessageToApplication = withSentry(
 
       // Manually revalidate the inbox path to ensure fresh data
       revalidatePath(AppRoutes.inbox)
+
+      // Notify all connected clients about the new message
+      if (global.messageListeners?.has(applicationId)) {
+        const messageData = {
+          id: message.id,
+          applicationId,
+          senderId,
+          content: decryptMessage(message.content), // Decrypt for sending to client
+          timestamp: message.sentAt.toISOString(),
+          sender: 'user', // Since this is sent by the current user
+        }
+
+        // Notify all listeners for this application
+        const listeners = global.messageListeners.get(applicationId)
+        if (listeners) {
+          listeners.forEach((listener: Function) => {
+            listener(messageData)
+          })
+        }
+      }
 
       return {
         message,

@@ -1,6 +1,7 @@
 'use client'
 
 import { addMessageToApplication } from '@/app/[locale]/(profile)/_actions/mutations'
+import { useSSE } from '@/hooks/useSSE'
 import {
   ChatContainer,
   ChatInput,
@@ -30,6 +31,71 @@ export default function InboxClient({
       initialApplications.length > 0 ? initialApplications[0] : null,
     )
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  // Reference to store IDs of messages that have already been added to the UI
+  const processedMessages = useRef<Set<string>>(new Set())
+
+  // Connect to SSE if we have a selected negotiation
+  const { messages: sseMessages } = useSSE(selectedNegotiation?.id || '')
+
+  // Process real-time messages
+  useEffect(() => {
+    if (!sseMessages.length || !selectedNegotiation) return
+
+    // Get the latest message
+    const latestMessage = sseMessages[sseMessages.length - 1]
+
+    // Skip if this is a message from the current user or a connection event
+    if (latestMessage.sender === 'user' || latestMessage.type === 'connected') return
+
+    // Skip if we already processed this message ID
+    if (processedMessages.current.has(latestMessage.id)) return
+
+    // Add to processed messages
+    processedMessages.current.add(latestMessage.id)
+
+    // Create a new message object
+    const newMessage: Message = {
+      id: latestMessage.id,
+      sender: 'company', // Since this is from the other party
+      content: latestMessage.content,
+      timestamp: new Date(latestMessage.timestamp).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      }),
+    }
+
+    // Update the selected negotiation with the new message
+    setSelectedNegotiation(prev => {
+      if (!prev) return prev
+
+      // Check if the message is already in the messages array
+      const messageExists = prev.messages.some(m => m.id === newMessage.id)
+      if (messageExists) return prev
+
+      return {
+        ...prev,
+        messages: [...prev.messages, newMessage],
+        lastMessage: newMessage.content,
+        lastMessageTime: newMessage.timestamp,
+      }
+    })
+
+    // Update the negotiations list
+    setNegotiations(prev =>
+      prev.map(negotiation =>
+        negotiation.id === selectedNegotiation.id
+          ? {
+            ...negotiation,
+            lastMessage: newMessage.content,
+            lastMessageTime: newMessage.timestamp,
+            unread: true,
+          }
+          : negotiation
+      )
+    )
+  }, [sseMessages, selectedNegotiation])
 
   // Scroll to bottom of messages when they change
   useEffect(() => {
@@ -39,9 +105,13 @@ export default function InboxClient({
   const handleSendMessage = async (messageText: string) => {
     if (!selectedNegotiation) return
 
+    // Create a temporary ID for optimistic UI update
+    const tempId = `temp-${Date.now()}`
+    processedMessages.current.add(tempId)
+
     // Optimistically update UI
     const newMessage: Message = {
-      id: Date.now().toString(), // Temp ID
+      id: tempId, // Use temporary ID
       sender: 'user',
       content: messageText,
       timestamp: new Date().toLocaleString('en-US', {
@@ -78,7 +148,10 @@ export default function InboxClient({
         messageText,
       )
 
-      if (!result.success) {
+      if (result.success && result.message) {
+        // Add the real message ID to the processed list
+        processedMessages.current.add(result.message.id)
+      } else if (!result.success) {
         console.error('Error sending message:', result.error)
       }
     } catch (error) {
@@ -87,6 +160,17 @@ export default function InboxClient({
       // For a production app, we should add proper error handling
     }
   }
+
+  // Clear processed messages if selected negotiation changes
+  useEffect(() => {
+    processedMessages.current.clear()
+    // Pre-populate with existing message IDs
+    if (selectedNegotiation?.messages) {
+      selectedNegotiation.messages.forEach(msg => {
+        processedMessages.current.add(msg.id)
+      })
+    }
+  }, [selectedNegotiation?.id])
 
   // Render the sidebar content with negotiation items
   const renderSidebarContent = () => (
