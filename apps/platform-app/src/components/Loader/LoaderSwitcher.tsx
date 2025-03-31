@@ -8,7 +8,7 @@ interface LoaderSwitcherProps {
   message: string
 }
 
-export const LoaderSwitcher = ({ message }: LoaderSwitcherProps) => {
+const LoaderSwitcher = ({ message }: LoaderSwitcherProps) => {
   const pathname = usePathname()
   const locale = useLocale()
 
@@ -20,3 +20,5 @@ export const LoaderSwitcher = ({ message }: LoaderSwitcherProps) => {
 
   return <AdvancedLoader message={message} />
 }
+
+export default LoaderSwitcher

@@ -1,9 +1,9 @@
-import { LoaderSwitcher } from '@/components/Loader/LoaderSwitcher'
+import { LoaderSwitcher } from '@/components/Loader'
 import { I18nNamespaces } from '@/i18n/request'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
-export default function Loading() {
-  const t = useTranslations(I18nNamespaces.Index)
+export default async function Loading() {
+  const t = await getTranslations(I18nNamespaces.Index)
 
   return <LoaderSwitcher message={t('loading')} />
 }
