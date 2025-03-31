@@ -35,6 +35,10 @@ const NumberInput: React.FC<NumberInputProps> = ({
   const inputValue =
     value !== null && value !== undefined ? value.toString() : ''
 
+  React.useEffect(() => {
+    setIsTyped(inputValue.length > 0)
+  }, [inputValue])
+
   return (
     <div className={styles.formItem}>
       <label className={styles.formLabel}>{label}</label>

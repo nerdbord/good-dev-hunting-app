@@ -42,18 +42,45 @@ export const Budget = () => {
     }
   }, [initialized, setFieldValue, values])
 
+  // Add another effect to handle when values change after initialization
+  useEffect(() => {
+    if (initialized) {
+      // Check if budget type needs to be updated based on min/max values
+      if (
+        values.minBudgetForProjectRealisation !== null &&
+        values.minBudgetForProjectRealisation !== undefined &&
+        values.maxBudgetForProjectRealisation !== null &&
+        values.maxBudgetForProjectRealisation !== undefined &&
+        values.budgetType !== BudgetType.FIXED
+      ) {
+        setFieldValue(BudgetFormKeys.BUDGET_TYPE, BudgetType.FIXED)
+      }
+    }
+  }, [
+    initialized,
+    values.minBudgetForProjectRealisation,
+    values.maxBudgetForProjectRealisation,
+    values.budgetType,
+    setFieldValue,
+  ])
+
   const determineBudgetType = (values: CreateJobFormValues): BudgetType => {
     // If both min and max budget are present, it's a fixed budget
     if (
-      values.minBudgetForProjectRealisation &&
-      values.maxBudgetForProjectRealisation
+      values.minBudgetForProjectRealisation !== null &&
+      values.minBudgetForProjectRealisation !== undefined &&
+      values.maxBudgetForProjectRealisation !== null &&
+      values.maxBudgetForProjectRealisation !== undefined
     ) {
       return BudgetType.FIXED
     }
 
     // If budgetType is explicitly specified, use that
     if (values.budgetType) {
-      return values.budgetType
+      // Make sure it's a valid BudgetType
+      if (values.budgetType === BudgetType.FIXED || values.budgetType === BudgetType.REQUEST_QUOTE) {
+        return values.budgetType
+      }
     }
 
     // Default to REQUEST_QUOTE if we can't determine
@@ -75,7 +102,11 @@ export const Budget = () => {
   }
 
   const handleBudgetTypeChange = async (type: BudgetType) => {
-    await setFieldValue(BudgetFormKeys.BUDGET_TYPE, type)
+    // Force the type to be a valid BudgetType enum value
+    const budgetTypeValue = type === BudgetType.FIXED ? 
+      BudgetType.FIXED : BudgetType.REQUEST_QUOTE
+    
+    await setFieldValue(BudgetFormKeys.BUDGET_TYPE, budgetTypeValue)
     await setFieldTouched(BudgetFormKeys.BUDGET_TYPE)
 
     if (type === BudgetType.REQUEST_QUOTE) {
@@ -122,7 +153,7 @@ export const Budget = () => {
               type="radio"
               name={BudgetFormKeys.BUDGET_TYPE}
               value={BudgetType.FIXED}
-              checked={values[BudgetFormKeys.BUDGET_TYPE] === BudgetType.FIXED}
+              checked={String(values[BudgetFormKeys.BUDGET_TYPE]) === String(BudgetType.FIXED)}
               onChange={() => handleBudgetTypeChange(BudgetType.FIXED)}
             />
             <span className={styles.customRadio}></span>
@@ -135,9 +166,7 @@ export const Budget = () => {
               type="radio"
               name={BudgetFormKeys.BUDGET_TYPE}
               value={BudgetType.REQUEST_QUOTE}
-              checked={
-                values[BudgetFormKeys.BUDGET_TYPE] === BudgetType.REQUEST_QUOTE
-              }
+              checked={String(values[BudgetFormKeys.BUDGET_TYPE]) === String(BudgetType.REQUEST_QUOTE)}
               onChange={() => handleBudgetTypeChange(BudgetType.REQUEST_QUOTE)}
             />
             <span className={styles.customRadio}></span>

@@ -157,15 +157,23 @@ function getContractTypeName(contractType: JobContractType, t?: TFunction): stri
 function determineBudgetType(jobData: JobModel): BudgetType {
   // If both min and max budget are present, it's a fixed budget
   if (
-    jobData.minBudgetForProjectRealisation &&
-    jobData.maxBudgetForProjectRealisation
+    jobData.minBudgetForProjectRealisation !== null &&
+    jobData.minBudgetForProjectRealisation !== undefined &&
+    jobData.maxBudgetForProjectRealisation !== null &&
+    jobData.maxBudgetForProjectRealisation !== undefined
   ) {
     return BudgetType.FIXED
   }
 
   // If budgetType is explicitly specified, use that
   if (jobData.budgetType) {
-    return jobData.budgetType as BudgetType
+    // Make sure it's a valid BudgetType
+    if (
+      jobData.budgetType === BudgetType.FIXED || 
+      jobData.budgetType === BudgetType.REQUEST_QUOTE
+    ) {
+      return jobData.budgetType as BudgetType
+    }
   }
 
   // Default to REQUEST_QUOTE if we can't determine
