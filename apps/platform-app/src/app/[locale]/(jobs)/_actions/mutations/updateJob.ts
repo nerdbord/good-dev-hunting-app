@@ -16,11 +16,43 @@ interface JobDataWithTechStack extends Partial<Job> {
     };
 }
 
-// Helper function to compare objects and see if they have changed
-function hasJobDataChanged(existingJob: JobWithRelations, newData: JobDataWithTechStack): boolean {
-    console.log('DEBUG - Comparing job data:');
-    console.log('Existing job state:', existingJob.state);
+/**
+ * Helper function to compare two values in a way that handles specific edge cases:
+ * - String comparisons are case-insensitive (very important for enum values like budgetType)
+ * - Objects and arrays are compared by their JSON string representation
+ * - null and undefined are treated as equal
+ */
+function safeCompare(a: unknown, b: unknown): boolean {
+    // Handle null/undefined
+    if (a == null && b == null) return true;
+    if (a == null || b == null) return false;
     
+    // Handle strings - compare case-insensitive
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.toLowerCase() === b.toLowerCase();
+    }
+    
+    // Handle arrays
+    if (Array.isArray(a) && Array.isArray(b)) {
+        return JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
+    }
+    
+    // Handle objects (excluding arrays)
+    if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null && !Array.isArray(a) && !Array.isArray(b)) {
+        return JSON.stringify(a) === JSON.stringify(b);
+    }
+    
+    // For all other types, use strict equality
+    return a === b;
+}
+
+/**
+ * Check if any meaningful job data has changed
+ * @param existingJob The current job data
+ * @param newData The new job data being submitted
+ * @returns True if the job data has changed meaningfully
+ */
+function hasJobDataChanged(existingJob: JobWithRelations, newData: JobDataWithTechStack): boolean {
     // Fields to check for meaningful changes
     const fieldsToCompare = [
         'jobName', 'projectBrief', 'budgetType', 'currency', 
@@ -28,27 +60,19 @@ function hasJobDataChanged(existingJob: JobWithRelations, newData: JobDataWithTe
         'contractType', 'country', 'city', 'remoteOnly'
     ] as (keyof Job)[];
     
+    // Check each simple field for changes
     for (const field of fieldsToCompare) {
-        if (field in newData && newData[field] !== existingJob[field]) {
-            console.log('DEBUG - Field changed:', field);
-            console.log('  Old value:', existingJob[field]);
-            console.log('  New value:', newData[field]);
+        if (field in newData && !safeCompare(newData[field], existingJob[field])) {
             return true;
         }
     }
     
     // Check arrays separately (need special handling)
-    if (newData.employmentTypes && JSON.stringify(newData.employmentTypes.sort()) !== JSON.stringify(existingJob.employmentTypes.sort())) {
-        console.log('DEBUG - Employment types changed');
-        console.log('  Old:', existingJob.employmentTypes);
-        console.log('  New:', newData.employmentTypes);
+    if (newData.employmentTypes && !safeCompare(newData.employmentTypes, existingJob.employmentTypes)) {
         return true;
     }
     
-    if (newData.employmentModes && JSON.stringify(newData.employmentModes.sort()) !== JSON.stringify(existingJob.employmentModes.sort())) {
-        console.log('DEBUG - Employment modes changed');
-        console.log('  Old:', existingJob.employmentModes);
-        console.log('  New:', newData.employmentModes);
+    if (newData.employmentModes && !safeCompare(newData.employmentModes, existingJob.employmentModes)) {
         return true;
     }
     
@@ -57,22 +81,17 @@ function hasJobDataChanged(existingJob: JobWithRelations, newData: JobDataWithTe
         const existingTechNames = existingJob.techStack.map(tech => tech.name).sort();
         const newTechNames = newData.techStack.connectOrCreate.map((item: { create: { name: string } }) => item.create.name).sort();
         
-        if (JSON.stringify(existingTechNames) !== JSON.stringify(newTechNames)) {
-            console.log('DEBUG - Tech stack changed');
-            console.log('  Old:', existingTechNames);
-            console.log('  New:', newTechNames);
+        if (!safeCompare(newTechNames, existingTechNames)) {
             return true;
         }
     }
     
-    console.log('DEBUG - No changes detected in job data');
+    // No changes detected
     return false;
 }
 
 export const updateJobAction = withSentry(
     async (id: string, data: JobDataWithTechStack) => {
-        console.log('DEBUG - updateJobAction called with id:', id);
-        
         const { user } = await getAuthorizedUser()
 
         // For anonymous jobs, user can be optional (not logged in)
@@ -81,9 +100,6 @@ export const updateJobAction = withSentry(
         if (!job) {
             throw new Error(`Job with id ${id} not found`)
         }
-
-        console.log('DEBUG - Current job state:', job.state);
-        console.log('DEBUG - Received update data:', JSON.stringify(data, null, 2));
 
         // Handle three scenarios:
         // 1. Job is anonymous (no createdById) - anyone can update it
@@ -103,16 +119,14 @@ export const updateJobAction = withSentry(
 
         // Check if any data has actually changed
         const hasChanged = hasJobDataChanged(job, data);
-        console.log('DEBUG - Has job data changed?', hasChanged);
 
         // If job is anonymous or user is the owner, proceed with update
         const updatedJob = await updateJob(id, {
             ...data,
-            // Only set state to DRAFT if data has actually changed
-            ...(hasChanged ? { state: PublishingState.DRAFT } : {})
+            // Only set state to DRAFT if data has actually changed and the job is not already in DRAFT state
+            ...(hasChanged && job.state !== PublishingState.DRAFT ? { state: PublishingState.DRAFT } : {})
         })
         
-        console.log('DEBUG - Job state after update:', updatedJob.state);
         return updatedJob
     },
 )

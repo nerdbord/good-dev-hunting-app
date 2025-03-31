@@ -73,12 +73,6 @@ export async function getJobById(id: string): Promise<JobWithRelations | null> {
 }
 
 export async function updateJob(id: string, data: Partial<Job>): Promise<Job> {
-    console.log('DEBUG - job.service updateJob called with:', {
-        id,
-        dataKeys: Object.keys(data),
-        state: data.state
-    });
-
     // Ensure currency is always a valid value
     if (data.budgetType === 'requestQuote') {
         // For request quote, ensure currency is set to a default value
@@ -92,25 +86,12 @@ export async function updateJob(id: string, data: Partial<Job>): Promise<Job> {
         data.currency = Currency.PLN
     }
 
-    console.log('DEBUG - Data after currency adjustments:', {
-        budgetType: data.budgetType,
-        currency: data.currency,
-        minBudget: data.minBudgetForProjectRealisation,
-        maxBudget: data.maxBudgetForProjectRealisation,
-        state: data.state
-    });
-
     const updatedJob = await prisma.job.update({
         where: {
             id,
         },
         data,
     })
-
-    console.log('DEBUG - Updated job result:', {
-        id: updatedJob.id,
-        state: updatedJob.state
-    });
 
     return updatedJob as unknown as Job
 }
