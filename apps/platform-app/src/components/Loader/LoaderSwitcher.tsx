@@ -5,7 +5,7 @@ import { useLocale } from 'next-intl'
 import { usePathname } from 'next/navigation'
 
 interface LoaderSwitcherProps {
-  message: string
+  message?: string
 }
 
 const LoaderSwitcher = ({ message }: LoaderSwitcherProps) => {
@@ -14,11 +14,7 @@ const LoaderSwitcher = ({ message }: LoaderSwitcherProps) => {
 
   const isHome = pathname === `/${locale}` || pathname === '/'
 
-  if (isHome) {
-    return <HunterLoader message={message} />
-  }
-
-  return <AdvancedLoader message={message} />
+  return isHome ? <HunterLoader /> : <AdvancedLoader />
 }
 
 export default LoaderSwitcher
