@@ -159,6 +159,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
 
     try {
       setIsSubmitting(true)
+      console.log('DEBUG - Submitting form with values:', values);
 
       // Set default currency value if budgetType is requestQuote
       const currency =
@@ -195,7 +196,9 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         terms: values.terms,
       }
 
+      console.log('DEBUG - Transformed job data:', jobData);
       await updateJobAction(jobId as string, jobData)
+      console.log('DEBUG - Update completed');
 
       // Navigate to job preview page
       router.push(`${AppRoutes.jobs}/${jobId}`)

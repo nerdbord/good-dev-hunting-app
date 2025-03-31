@@ -95,6 +95,12 @@ export function transformJobToFormValues(
   jobData: JobModel,
   t?: TFunction
 ): CreateJobFormValues {
+  console.log('DEBUG - Transforming job data to form values:', {
+    id: jobData.id,
+    state: jobData.state,
+    budgetType: jobData.budgetType
+  });
+
   // Map contract type correctly
   const contractTypeValue = (jobData.contractType || 'B2B') as JobContractType
   const contractType = {
@@ -116,6 +122,7 @@ export function transformJobToFormValues(
 
   // Determine budget type
   const budgetType = determineBudgetType(jobData)
+  console.log('DEBUG - Determined budget type:', budgetType);
 
   const formValues: CreateJobFormValues = {
     jobName: jobData.jobName,
@@ -139,6 +146,13 @@ export function transformJobToFormValues(
     remoteOnly: !!jobData.remoteOnly,
     terms: true, // Always true for editing forms
   }
+
+  console.log('DEBUG - Transformed form values:', {
+    state: formValues.state,
+    budgetType: formValues.budgetType,
+    min: formValues.minBudgetForProjectRealisation,
+    max: formValues.maxBudgetForProjectRealisation
+  });
 
   return formValues
 }

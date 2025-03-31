@@ -24,6 +24,12 @@ export default async function EditJobDetailsPage({ params }: Props) {
   let jobData
   try {
     jobData = await findJobById(params.id)
+    console.log('DEBUG - Edit page loaded job data:', {
+      id: jobData.id,
+      state: jobData.state,
+      budgetType: jobData.budgetType,
+      name: jobData.jobName
+    });
   } catch (error) {
     console.error('Error fetching job:', error)
     notFound()
@@ -42,6 +48,11 @@ export default async function EditJobDetailsPage({ params }: Props) {
 
   // Transform job model to form values
   const initialValues = transformJobToFormValues(jobData, t)
+  console.log('DEBUG - Initial form values:', {
+    state: initialValues.state,
+    budgetType: initialValues.budgetType,
+    jobName: initialValues.jobName
+  });
 
   return (
     <>
