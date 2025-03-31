@@ -21,7 +21,7 @@
   align-items: center;
   margin-bottom: 80px;
   width: 100%;
-  gap: 10%;
+  gap: 5%;
   padding: 0 8% 0 8%;
   
   @include mobile {
@@ -152,8 +152,8 @@
 .profileInfo {
   h3 {
     font-size: 14px;
-    font-weight: 600;
-    color: #666;
+    font-weight: 500;
+    color: #04080D;
     margin: 0 0 4px 0;
   }
 
@@ -206,7 +206,7 @@
   align-items: center;
   margin-bottom: 80px;
   width: 100%;
-  gap: 10%;
+  gap: 5%;
   padding: 0 8% 0 8%;
   
   @include mobile {

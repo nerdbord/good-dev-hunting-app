@@ -55,5 +55,6 @@ export enum I18nNamespaces {
   AddJobVerificationModal = 'AddJobVerificationModal',
   AddJobSuccessModal = 'AddJobSuccessModal',
   AddJobErrorModal = 'AddJobErrorModal',
+  HunterHowItWorks = 'HunterHowItWorks',
   Metadata = 'Metadata',
 }
