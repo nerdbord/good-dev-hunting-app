@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap');
 
 .fullWidthWrapper {
-  width: 100%;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background-color: #fff;
   display: flex;
   justify-content: center;
+  z-index: 0;
 }
 
 .wrapper {
@@ -21,7 +27,6 @@
 }
 
 .title {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 38px;
   font-weight: 500;
   line-height: 40px;
@@ -87,7 +92,6 @@
 }
 
 .reasonTitle {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
@@ -98,7 +102,6 @@
 }
 
 .reasonDescription {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -209,16 +212,16 @@
 }
 
 .modalText {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #7d54f1;
   line-height: 20px;
   letter-spacing: 0;
   text-align: center;
+  width: 140px;
 }
 
-/* Dodajemy responsywność dla mniejszych ekranów */
+/* Responsywność */
 @media (max-width: 1100px) {
   .contentContainer {
     width: 90%;
