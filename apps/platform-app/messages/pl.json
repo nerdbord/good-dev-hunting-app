@@ -402,6 +402,8 @@
   },
   "HunterWhyWorth": {
     "title": "Dlaczego warto korzystać z DevHunting?",
+    "titleFirstLine": "Dlaczego warto korzystać z",
+    "titleSecondLine": "DevHunting?",
     "freeTitle": "Całkowicie za darmo",
     "freeDescription": "Dodaj swoje zlecenie bez opłat i otrzymaj oferty od specjalistów IT.",
     "simpleTitle": "Prosty i szybki proces",
