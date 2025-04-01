@@ -33,6 +33,8 @@ export function CVuploaderForm({ btnVariant = 'secondary' }: Props) {
   } | null>(null)
 
   useEffect(() => {
+    if (uploadedCVurl) return
+
     // Check if we have a CV URL from Formik values
     if (cvUrl) {
       setUploadedCVurl({ name: tt('choosenCVfileName'), url: cvUrl })
@@ -49,7 +51,7 @@ export function CVuploaderForm({ btnVariant = 'secondary' }: Props) {
     } else {
       setUploadedCVurl(null)
     }
-  }, [cvUrl, tt, cvFormData, setFieldValue])
+  }, [cvUrl, tt, cvFormData, setFieldValue, uploadedCVurl])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSetCvUploadError('')
@@ -57,7 +59,7 @@ export function CVuploaderForm({ btnVariant = 'secondary' }: Props) {
 
     try {
       if (!file || !file.type) {
-        return null
+        return
       }
 
       if (file.type !== 'application/pdf') {
@@ -72,10 +74,11 @@ export function CVuploaderForm({ btnVariant = 'secondary' }: Props) {
       formData.append('cvFileUpload', file)
       onSetCvFormData(formData)
       setIsUploading(true)
-      setUploadedCVurl({
-        name: file.name,
-        url: URL.createObjectURL(file),
-      })
+
+      const objectUrl = URL.createObjectURL(file)
+      setUploadedCVurl({ name: file.name, url: objectUrl })
+
+      setFieldValue('cvUrl', objectUrl)
     } catch (error) {
       onSetCvUploadError('Error during file upload.')
       setErrorMsg((error as Error).message)

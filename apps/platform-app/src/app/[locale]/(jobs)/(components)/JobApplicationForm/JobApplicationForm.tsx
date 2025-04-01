@@ -4,7 +4,6 @@ import { CVuploaderForm } from '@/app/[locale]/(profile)/(components)/CVuploader
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { updateProfile } from '@/app/[locale]/(profile)/_actions/mutations/updateProfile'
 import type { ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import BioTextArea from '@/components/TextArea/BioTextArea'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
@@ -16,7 +15,13 @@ import { redirect, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { createJobApplication } from '../../_actions/mutations/createJobApplication'
+import { ProjectBriefTextArea } from '../ProjectBriefTextArea/ProjectBriefTextArea'
 import styles from './JobApplicationForm.module.scss'
+
+interface JobApplicationFormValues {
+  message: string
+  cvUrl: string
+}
 
 interface JobApplicationFormProps {
   jobId: string
@@ -28,7 +33,7 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
   const { data: session } = useSession()
   const profileId = session?.user.profileId
   const [profile, setProfile] = useState<ProfileModel | null>(null)
-  const { onSetCvFormData } = useUploadContext()
+  const { cvFormData } = useUploadContext()
 
   if (!session?.user.profileId) {
     redirect(AppRoutes.createProfile)
@@ -42,17 +47,9 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
         redirect(AppRoutes.createProfile)
       }
       setProfile(profile)
-
-      // Initialize cvFormData if profile has a CV URL
-      if (profile.cvUrl) {
-        // Create an empty FormData to indicate a CV is already available
-        const dummyFormData = new FormData()
-        dummyFormData.append('existingCvUrl', profile.cvUrl)
-        onSetCvFormData(dummyFormData)
-      }
     }
     fetchProfile()
-  }, [profileId, onSetCvFormData, session.user.profileId])
+  }, [profileId, session.user.profileId])
 
   const user = session?.user
   const [serverError, setServerError] = useState<string | null>(null)
@@ -60,9 +57,8 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const t = useTranslations(I18nNamespaces.Jobs)
-  const { cvFormData } = useUploadContext()
 
-  const initialValues = {
+  const initialValues: JobApplicationFormValues = {
     message: '',
     cvUrl: profile?.cvUrl || '',
   }
@@ -72,49 +68,27 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
   })
 
   const handleSubmit = async (
-    values: typeof initialValues,
-    { setSubmitting }: FormikHelpers<typeof initialValues>,
+    values: JobApplicationFormValues,
+    { setSubmitting }: FormikHelpers<JobApplicationFormValues>,
   ) => {
-    if (!cvFormData) {
-      setCvError(t('cvRequired'))
-      setSubmitting(false)
-      return
-    }
-
-    setCvError(null)
-
-    if (!user?.profileId) {
-      setServerError(t('userProfileNotFound'))
-      setSubmitting(false)
-      return
-    }
-
     setServerError(null)
+    setCvError(null)
     setIsSubmitting(true)
 
     try {
-      // Default to current CV URL
-      let currentCvUrl = values.cvUrl || ''
-
-      // Check if we have a new file upload or just an existing CV URL
-      const hasNewFileUpload = cvFormData.has('cvFileUpload')
-      const hasExistingCvUrl = cvFormData.has('existingCvUrl')
-
-      // If we have existingCvUrl in cvFormData but values.cvUrl is empty,
-      // use the existingCvUrl from cvFormData
-      if (!currentCvUrl && hasExistingCvUrl) {
-        currentCvUrl = cvFormData.get('existingCvUrl') as string
+      if (!user?.profileId) {
+        setServerError(t('userProfileNotFound'))
+        setSubmitting(false)
+        setIsSubmitting(false)
+        return
       }
 
-      // Final values to be used for job application
-      let finalValues = {
-        ...values,
-        cvUrl: currentCvUrl,
-      }
+      // Initialize CV URL with existing profile CV
+      let finalCvUrl = values.cvUrl || ''
 
-      if (hasNewFileUpload) {
-        // Process new file upload
-        const uploadResult = await uploadCVdocumentFile(cvFormData as FormData)
+      // Process new CV upload if available
+      if (cvFormData) {
+        const uploadResult = await uploadCVdocumentFile(cvFormData)
 
         if (!uploadResult.success || uploadResult.error) {
           setServerError(uploadResult.error || t('cvUploadFailed'))
@@ -123,21 +97,18 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
           return
         }
 
-        // Update profile with new CV URL
-        await updateProfile(user.profileId, {
-          cvUrl: uploadResult.cvUrl as string,
-        })
+        // Update finalCvUrl with the newly uploaded file
+        finalCvUrl = uploadResult.cvUrl as string
 
-        // Update final values with new CV URL
-        finalValues = {
-          ...values,
-          cvUrl: uploadResult.cvUrl as string,
-        }
+        // Update user profile with new CV URL
+        await updateProfile(user.profileId, {
+          cvUrl: finalCvUrl,
+        })
       }
 
-      // Ensure we have a valid CV URL before proceeding
-      if (!finalValues.cvUrl) {
-        setServerError(t('cvRequired'))
+      // Check if we have a CV URL after all processing
+      if (!finalCvUrl) {
+        setCvError(t('cvRequired'))
         setSubmitting(false)
         setIsSubmitting(false)
         return
@@ -146,8 +117,8 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
       // Submit the job application
       const applicationResult = await createJobApplication({
         jobId,
-        message: finalValues.message,
-        cvUrl: finalValues.cvUrl,
+        message: values.message,
+        cvUrl: finalCvUrl,
       })
 
       if (!applicationResult.success) {
@@ -192,15 +163,16 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
           handleBlur,
           isSubmitting: formSubmitting,
           setFieldTouched,
+          values,
         }) => (
           <Form>
             <div className={styles.formBox}>
               <label htmlFor="message">{t('applicationMsgLabel')}</label>
               <div className={styles.editorWrapper}>
                 <Field
-                  as={BioTextArea}
-                  placeholder={t('applicationMsgPlaceholder')}
+                  as={ProjectBriefTextArea}
                   name="message"
+                  placeholder={t('applicationMsgPlaceholder')}
                   disabled={formSubmitting || isSubmitting}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                     setFieldTouched('message', true, false)
@@ -219,20 +191,18 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
               {cvError && <div className={styles.fieldError}>{cvError}</div>}
             </div>
 
-            {cvFormData && (
-              <div className={styles.maxWidthButton}>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  dataTestId="submitJobApplication"
-                  disabled={formSubmitting || isSubmitting}
-                >
-                  {formSubmitting || isSubmitting
-                    ? t('submitting')
-                    : t('submitApplication')}
-                </Button>
-              </div>
-            )}
+            <div className={styles.maxWidthButton}>
+              <Button
+                variant="primary"
+                type="submit"
+                dataTestId="submitJobApplication"
+                disabled={formSubmitting || isSubmitting}
+              >
+                {formSubmitting || isSubmitting
+                  ? t('submitting')
+                  : t('submitApplication')}
+              </Button>
+            </div>
           </Form>
         )}
       </Formik>

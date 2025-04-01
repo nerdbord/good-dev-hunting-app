@@ -18,6 +18,7 @@ import { useFormikContext } from 'formik'
 import React from 'react'
 import type { CreateJobFormValues } from '../../_utils/types'
 import styles from './ProjectBriefTextArea.module.scss'
+import './mdx.css'
 
 export interface TextAreaProps {
   value: string
