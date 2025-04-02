@@ -409,6 +409,8 @@
   },
   "HunterWhyWorth": {
     "title": "Why use DevHunting?",
+    "titleFirstLine": "Why use",
+    "titleSecondLine": "DevHunting?",
     "freeTitle": "Completely free",
     "freeDescription": "Add your job without any fees and receive offers from IT specialists.",
     "simpleTitle": "Simple and fast process",
