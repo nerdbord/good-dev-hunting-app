@@ -4,16 +4,15 @@
   justify-content: center;
   width: 100%;
   background-color: var(--hunter-landing-bg-color);
-  padding: 60px 0;
   position: relative;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -26,7 +25,6 @@
 .headerTitle {
   font-size: 24px;
   font-weight: 500;
-  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
@@ -34,21 +32,25 @@
   font-size: 36px;
   font-weight: 500;
   color: #333;
-  margin: 0;
 }
 
 .highlight {
   color: #7d54f1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .stepSection {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 80px;
+  justify-content: center;
   width: 100%;
   gap: 5%;
-  padding: 0 8% 0 8%;
 
   @include mobile {
     flex-direction: column;
@@ -66,7 +68,7 @@
 }
 
 .stepContent {
-  width: 50%;
+  width: 40%;
 
   @include mobile {
     width: 100%;
@@ -75,23 +77,24 @@
 }
 
 .stepTitle {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 500;
   margin-bottom: 20px;
   color: #333;
 }
 
 .stepDescription {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.5;
   color: #555;
+  max-width: 350px;
 }
 
 .stepVisual {
-  width: 50%;
+  width: 40%;
   background-color: #f2f2ff;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 3px;
   min-height: 400px;
   display: flex;
   align-items: center;
@@ -113,7 +116,7 @@
 
 .clientCard {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
@@ -167,7 +170,7 @@
 
 .requirementCard {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
@@ -263,8 +266,8 @@
 
 .offerCard {
   background-color: white;
-  border-radius: 8px;
-  padding: 15px;
+  border-radius: 4px;
+  padding: 25px 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
@@ -295,11 +298,14 @@
 
 .collaborationCard {
   background-color: white;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 4px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 350px;
+  width: 70%;
+
   text-align: center;
 
   h4 {
