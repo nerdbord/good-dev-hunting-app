@@ -1,7 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -18,10 +19,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 80px;
+  justify-content: center;
+  margin-bottom: 60px;
   width: 100%;
   gap: 5%;
-  padding: 0 8% 0 8%;
 
   @include mobile {
     flex-direction: column;
@@ -35,9 +36,10 @@
   flex-direction: column;
   gap: 20px;
   background-color: #f0f0ff;
-  padding: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   border-radius: 4px;
-  width: 42%;
+  width: 38%;
   align-items: center;
 
   @include mobile {
@@ -61,6 +63,7 @@
 
   p {
     font-size: 20px;
+    max-width: 400px;
     line-height: 1.5;
     color: var(--hunter-landing-text-color2);
   }
@@ -169,9 +172,7 @@
 
 .skills {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 5px;
 
   @include mobile {
     flex-wrap: nowrap;
@@ -201,12 +202,10 @@
 
 .specialistSection {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 80px;
   width: 100%;
   gap: 5%;
-  padding: 0 8% 0 8%;
 
   @include mobile {
     flex-direction: column;
@@ -257,7 +256,7 @@
 }
 
 .specialistImageWrapper {
-  width: 50%;
+  width: 38%;
   position: relative;
   height: 400px;
   display: flex;

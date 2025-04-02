@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  background-color: #f8f9fe;
+  background-color: var(--hunter-landing-bg-color);
   padding: 60px 0;
   position: relative;
 }
@@ -38,7 +38,7 @@
 }
 
 .highlight {
-  color: #7D54F1;
+  color: #7d54f1;
 }
 
 .stepSection {
@@ -49,16 +49,16 @@
   width: 100%;
   gap: 5%;
   padding: 0 8% 0 8%;
-  
+
   @include mobile {
     flex-direction: column;
     margin-bottom: 60px;
     padding: 0 5% 0 5%;
   }
-  
+
   &:nth-child(even) {
     flex-direction: row-reverse;
-    
+
     @include mobile {
       flex-direction: column;
     }
@@ -67,7 +67,7 @@
 
 .stepContent {
   width: 50%;
-  
+
   @include mobile {
     width: 100%;
     margin-bottom: 30px;
@@ -96,7 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   @include mobile {
     width: 100%;
     min-height: 350px;
@@ -150,7 +150,7 @@
     font-weight: 500;
     margin: 0 0 5px 0;
   }
-  
+
   p {
     font-size: 14px;
     color: #666;
@@ -173,7 +173,7 @@
   width: 100%;
   max-width: 400px;
   margin-bottom: 30px;
-  
+
   p {
     font-size: 14px;
     line-height: 1.5;
@@ -232,7 +232,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -278,7 +278,7 @@
     font-weight: 500;
     margin: 0 0 5px 0;
   }
-  
+
   p {
     font-size: 12px;
     color: #777;
@@ -301,19 +301,19 @@
   width: 100%;
   max-width: 350px;
   text-align: center;
-  
+
   h4 {
     font-size: 16px;
     font-weight: 500;
     margin: 0 0 20px 0;
-    color: #7D54F1;
+    color: #7d54f1;
   }
-  
+
   p {
     font-size: 14px;
     color: #555;
     margin: 0 0 5px 0;
-    
+
     &:last-child {
       font-weight: 500;
       margin-top: 5px;
@@ -326,7 +326,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  
+
   .avatarPlaceholder {
     width: 40px;
     height: 40px;
@@ -348,15 +348,15 @@
   .headerTitle {
     font-size: 20px;
   }
-  
+
   .headerSubtitle {
     font-size: 24px;
   }
-  
+
   .stepTitle {
     font-size: 24px;
   }
-  
+
   .stepDescription {
     font-size: 16px;
   }
@@ -365,7 +365,7 @@
     h4 {
       font-size: 14px;
     }
-    
+
     p {
       font-size: 12px;
     }
@@ -378,7 +378,8 @@
   }
 
   .offerContent {
-    h4, p {
+    h4,
+    p {
       font-size: 10px;
     }
   }
@@ -387,10 +388,9 @@
     h4 {
       font-size: 14px;
     }
-    
+
     p {
       font-size: 12px;
     }
   }
 }
-
