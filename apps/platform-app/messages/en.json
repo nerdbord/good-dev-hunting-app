@@ -362,7 +362,8 @@
     "fullTime": "Available for full-time",
     "contract": "Available for contract work",
     "partTime": "Available for part-time",
-    "remote": "Remote"
+    "remote": "Remote",
+    "unavailable": "Not available for work"
   },
   "HunterFAQ": {
     "title": "Most Frequently Asked Questions",

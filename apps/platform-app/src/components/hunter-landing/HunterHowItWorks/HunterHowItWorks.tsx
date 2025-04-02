@@ -165,9 +165,11 @@ export async function HunterHowItWorks() {
                   className={styles.avatarPlaceholder}
                 />
               </div>
-
-              <p>{t('clientInvites')}</p>
-              <p>{t('projectTitle')}</p>
+              <div>
+                {' '}
+                <p>{t('clientInvites')}</p>
+                <p>{t('projectTitle')}</p>
+              </div>
             </div>
           </div>
         </StepCard>
