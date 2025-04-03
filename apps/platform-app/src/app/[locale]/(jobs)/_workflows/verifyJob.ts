@@ -1,11 +1,6 @@
 import groqService from '@/lib/groq.service'
 import { findJobById } from '../_actions/queries/getJobById'
 
-// Simple debug logging
-const logDebug = (message: string, data?: any) => {
-  console.log(`[verifyJob] ${message}`, data || '');
-};
-
 // System prompt for job verification
 const VERIFICATION_PROMPT = `
 You are an AI assistant specialized in verifying job postings.
@@ -64,40 +59,21 @@ function preValidateJob(job: any): boolean {
     
   const isValid = hasTitleAndDescription && hasWorkDetails && hasBudgetInfo;
   
-  logDebug(`Pre-validation result: ${isValid ? 'VALID' : 'INVALID'}`, {
-    hasTitleAndDescription,
-    hasWorkDetails,
-    hasBudgetInfo
-  });
-  
   return isValid;
 }
 
 export async function verifyJob(jobId: string): Promise<VerificationResult> {
   try {
-    logDebug(`Starting verification for job ${jobId}`);
-    
     // Get the job details
     const job = await findJobById(jobId);
     
     if (!job) {
-      logDebug(`Job ${jobId} not found`);
       return {
         isValid: false,
         reasons: ['Job not found'],
         suggestions: ['Please create a new job posting']
       };
     }
-    
-    // Log the job data for debugging
-    logDebug(`Job data retrieved`, {
-      id: job.id,
-      title: job.jobName,
-      techStackCount: job.techStack?.length || 0,
-      budgetType: job.budgetType,
-      employmentTypes: job.employmentTypes,
-      contractType: job.contractType
-    });
     
     // First do a quick pre-validation to catch obvious issues
     const passesPreValidation = preValidateJob(job);
@@ -130,7 +106,6 @@ export async function verifyJob(jobId: string): Promise<VerificationResult> {
     // If the job passes our basic validation, just return success
     // This is our bug fix to avoid unreliable AI validation
     if (passesPreValidation) {
-      logDebug('Job passes pre-validation, skipping AI verification');
       return {
         isValid: true,
         reasons: [],
@@ -139,7 +114,6 @@ export async function verifyJob(jobId: string): Promise<VerificationResult> {
     }
     
     // Send to AI for more thorough verification
-    logDebug('Sending job to AI for verification');
     
     // Prepare the messages for the LLM
     const messages = [
@@ -162,15 +136,13 @@ export async function verifyJob(jobId: string): Promise<VerificationResult> {
 
     // Parse the JSON response
     const verificationResult = JSON.parse(jsonResponse) as VerificationResult;
-    logDebug(`AI verification result: ${verificationResult.isValid ? 'VALID' : 'INVALID'}`);
     
     if (!verificationResult.isValid) {
-      logDebug('AI verification failed', verificationResult.reasons);
+      // Verification failed
     }
 
     return verificationResult;
   } catch (error) {
-    logDebug(`Error verifying job: ${error instanceof Error ? error.message : 'Unknown error'}`);
     // Return a default result if verification fails
     return {
       isValid: false,

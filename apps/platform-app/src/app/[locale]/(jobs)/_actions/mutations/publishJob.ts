@@ -13,8 +13,6 @@ import {
 import { claimAnonymousJobAction } from './claimAnonymousJob'
 
 export const publishJobAction = withSentry(async (id: string) => {
-  console.log('publishJobAction', id)
-
   try {
     const { user } = await getAuthorizedUser()
 
@@ -25,31 +23,24 @@ export const publishJobAction = withSentry(async (id: string) => {
     // Check if the job exists
     const job = await getJobById(id)
 
-    console.log('job', job)
-
     if (!job) {
       throw new Error(`Job with id ${id} not found`)
     }
 
     // If job is anonymous (no createdById), claim it first
     if (!job.createdById) {
-      console.log('claiming anonymous job')
       await claimAnonymousJobAction(id)
     }
     // If job is already claimed by someone else, throw an error
     else if (job.createdById !== user.id) {
-      console.log('you are not authorized to publish this job')
       throw new Error('You are not authorized to publish this job')
     }
-
-    console.log('publishing job')
 
     // Step 1: Verify the job
     const verificationResult = await verifyJob(id)
 
     // If the job is not valid, set the job state to REJECTED instead of leaving it as DRAFT
     if (!verificationResult.isValid) {
-      console.log(`Job verification failed, rejecting job ${id}`);
       await rejectJob(id);
       
       return {
@@ -61,22 +52,16 @@ export const publishJobAction = withSentry(async (id: string) => {
       }
     }
 
-    console.log('publishedJob', job)
-
     const publishedProfiles = await findAllApprovedProfiles()
 
     // Step 2: Find profiles to notify
     const matchingResults = await matchJobWithProfiles(job, publishedProfiles)
-
-    console.log('matchingResults', matchingResults)
 
     // Step 3: Notify matched profiles
     const notificationResults = await notifyMatchedProfiles(
       job,
       matchingResults,
     )
-
-    console.log('notifications sent to matched profiles:', notificationResults)
 
     // Step 4: Publish the job
     await publishJob(id)
@@ -96,8 +81,6 @@ export const publishJobAction = withSentry(async (id: string) => {
       user,
       notificationResults.matchedCount,
     )
-
-    console.log('job owner notification sent')
 
     return {
       success: true,

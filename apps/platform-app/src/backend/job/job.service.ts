@@ -2,7 +2,6 @@ import { type SubmissionFormData } from '@/app/[locale]/(jobs)/_utils/groq/schem
 import { prisma } from '@/lib/prismaClient'
 import { Currency, PublishingState } from '@prisma/client'
 import { type Job, type JobWithRelations } from './job.types'
-import { logJobStateChange, logJobUpdate } from '@/app/[locale]/(jobs)/_utils/job.debug'
 
 export async function createJob(
   data: Partial<SubmissionFormData>,
@@ -99,8 +98,6 @@ export async function updateJob(id: string, data: Partial<Job>): Promise<Job> {
   console.log(`[updateJob] Updating job ${id}, current state: ${existingJob.state}, updating fields:`, 
     Object.keys(data).join(', '));
 
-  logJobUpdate(id, data);
-
   // Ensure currency is always a valid value
   if (data.budgetType === 'requestQuote') {
     data.currency = Currency.PLN;
@@ -118,7 +115,6 @@ export async function updateJob(id: string, data: Partial<Job>): Promise<Job> {
 
     if (data.state && data.state !== existingJob.state) {
       console.log(`[updateJob] Job ${id} state changed from ${existingJob.state} to ${data.state}`);
-      logJobStateChange(id, existingJob.state, data.state, 'update');
     }
 
     console.log(`[updateJob] Job ${id} updated successfully, new state: ${updatedJob.state}`);
@@ -220,9 +216,6 @@ export async function rejectJob(id: string): Promise<Job> {
         state: PublishingState.REJECTED,
       },
     });
-    
-    // Log the state change
-    logJobStateChange(id, job.state, PublishingState.REJECTED, 'reject');
     
     console.log(`[rejectJob] Job ${id} rejected successfully`);
     return rejectedJob as unknown as Job;
