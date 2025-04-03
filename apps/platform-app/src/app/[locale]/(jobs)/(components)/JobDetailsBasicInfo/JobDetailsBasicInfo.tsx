@@ -13,7 +13,7 @@ import {
 } from '@/app/[locale]/(profile)/profile.mappers'
 import { countries } from '@/data/countries'
 import { I18nNamespaces } from '@/i18n/request'
-import { type Currency, type EmploymentType } from '@prisma/client'
+import { type Currency, type EmploymentType, PublishingState } from '@prisma/client'
 import { useTranslations } from 'next-intl'
 import { type JobModel } from '../../_models/job.model'
 import styles from './JobDetailsBasicInfo.module.scss'
@@ -32,6 +32,11 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
     <div className={styles.profile}>
       <div className={styles.user}>
         <p className={styles.name}>{job.jobName}</p>
+        {job.state === PublishingState.REJECTED && (
+          <div className={styles.rejectedStatus}>
+            {t('rejectedStatus')}
+          </div>
+        )}
       </div>
 
       <div className={styles.locationBox}>

@@ -2,11 +2,23 @@ import { type SubmissionFormData } from '@/app/[locale]/(jobs)/_utils/groq/schem
 import { prisma } from '@/lib/prismaClient'
 import { Currency, PublishingState } from '@prisma/client'
 import { type Job, type JobWithRelations } from './job.types'
+import { logJobStateChange, logJobUpdate } from '@/app/[locale]/(jobs)/_utils/job.debug'
 
 export async function createJob(
   data: Partial<SubmissionFormData>,
   userId?: string,
 ): Promise<JobWithRelations> {
+  console.log(`[createJob] Creating new job with data:`, {
+    taskName: data.taskName,
+    technologies: data.technologies?.length,
+    budget: data.budget ? {
+      min: data.budget.min,
+      max: data.budget.max,
+      currency: data.budget.currency
+    } : null,
+    userId: userId ?? 'anonymous'
+  });
+
   // Prepare the base job data
   const jobData: any = {
     jobName: data.taskName || 'Untitled Job',
@@ -45,16 +57,22 @@ export async function createJob(
     }
   }
 
-  const job = await prisma.job.create({
-    data: jobData,
-    include: {
-      techStack: true,
-      createdBy: true,
-      applications: true,
-    },
-  })
+  try {
+    const job = await prisma.job.create({
+      data: jobData,
+      include: {
+        techStack: true,
+        createdBy: true,
+        applications: true,
+      },
+    })
 
-  return job as unknown as JobWithRelations
+    console.log(`[createJob] Job created successfully with ID ${job.id}, state: ${job.state}`);
+    return job as unknown as JobWithRelations
+  } catch (error) {
+    console.error('[createJob] Error creating job:', error);
+    throw error;
+  }
 }
 
 export async function getJobById(id: string): Promise<JobWithRelations | null> {
@@ -73,40 +91,80 @@ export async function getJobById(id: string): Promise<JobWithRelations | null> {
 }
 
 export async function updateJob(id: string, data: Partial<Job>): Promise<Job> {
-  // Ensure currency is always a valid value
-  if (data.budgetType === 'requestQuote') {
-    // For request quote, ensure currency is set to a default value
-    data.currency = Currency.PLN
-
-    // Set budget values to null for request quote
-    data.minBudgetForProjectRealisation = null
-    data.maxBudgetForProjectRealisation = null
-  } else if (!data.currency) {
-    // Ensure a default currency even for fixed budget if none is provided
-    data.currency = Currency.PLN
+  const existingJob = await getJobById(id);
+  if (!existingJob) {
+    throw new Error(`Job with id ${id} not found`);
   }
 
-  const updatedJob = await prisma.job.update({
-    where: {
-      id,
-    },
-    data,
-  })
+  console.log(`[updateJob] Updating job ${id}, current state: ${existingJob.state}, updating fields:`, 
+    Object.keys(data).join(', '));
 
-  return updatedJob as unknown as Job
+  logJobUpdate(id, data);
+
+  // Ensure currency is always a valid value
+  if (data.budgetType === 'requestQuote') {
+    data.currency = Currency.PLN;
+    data.minBudgetForProjectRealisation = null;
+    data.maxBudgetForProjectRealisation = null;
+  } else if (!data.currency) {
+    data.currency = Currency.PLN;
+  }
+
+  try {
+    const updatedJob = await prisma.job.update({
+      where: { id },
+      data,
+    });
+
+    if (data.state && data.state !== existingJob.state) {
+      console.log(`[updateJob] Job ${id} state changed from ${existingJob.state} to ${data.state}`);
+      logJobStateChange(id, existingJob.state, data.state, 'update');
+    }
+
+    console.log(`[updateJob] Job ${id} updated successfully, new state: ${updatedJob.state}`);
+    return updatedJob as unknown as Job;
+  } catch (error) {
+    console.error(`[updateJob] Error updating job ${id}:`, error);
+    throw error;
+  }
 }
 
 export async function publishJob(id: string): Promise<Job> {
-  const publishedJob = await prisma.job.update({
-    where: {
-      id,
-    },
-    data: {
-      state: PublishingState.APPROVED,
-    },
-  })
+  try {
+    // First check if the job exists
+    const job = await getJobById(id);
+    if (!job) {
+      throw new Error(`Job with id ${id} not found`);
+    }
+    
+    console.log(`[publishJob] Publishing job ${id}, current state: ${job.state}`);
+    
+    // Update the job state to APPROVED
+    const publishedJob = await prisma.job.update({
+      where: {
+        id,
+      },
+      data: {
+        state: PublishingState.APPROVED,
+      },
+    });
+    
+    // Verify the state was updated successfully
+    if (publishedJob.state !== PublishingState.APPROVED) {
+      console.warn(`[publishJob] State not updated correctly for job ${id}, forcing update`);
+      
+      // Force a second update if needed (should rarely happen)
+      await prisma.job.update({
+        where: { id },
+        data: { state: PublishingState.APPROVED },
+      });
+    }
 
-  return publishedJob as unknown as Job
+    return publishedJob as unknown as Job;
+  } catch (error) {
+    console.error(`[publishJob] Error publishing job ${id}:`, error);
+    throw error;
+  }
 }
 
 export async function getJobsByUserId(
@@ -137,4 +195,39 @@ export async function getPublishedJobs(): Promise<JobWithRelations[]> {
   })
 
   return jobs as unknown as JobWithRelations[]
+}
+
+/**
+ * Rejects a job by setting its state to REJECTED
+ * Used when a job fails verification during the publishing process
+ */
+export async function rejectJob(id: string): Promise<Job> {
+  try {
+    // First check if the job exists
+    const job = await getJobById(id);
+    if (!job) {
+      throw new Error(`Job with id ${id} not found`);
+    }
+    
+    console.log(`[rejectJob] Rejecting job ${id}, current state: ${job.state}`);
+    
+    // Update the job state to REJECTED
+    const rejectedJob = await prisma.job.update({
+      where: {
+        id,
+      },
+      data: {
+        state: PublishingState.REJECTED,
+      },
+    });
+    
+    // Log the state change
+    logJobStateChange(id, job.state, PublishingState.REJECTED, 'reject');
+    
+    console.log(`[rejectJob] Job ${id} rejected successfully`);
+    return rejectedJob as unknown as Job;
+  } catch (error) {
+    console.error(`[rejectJob] Error rejecting job ${id}:`, error);
+    throw error;
+  }
 }

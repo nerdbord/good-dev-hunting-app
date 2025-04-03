@@ -226,7 +226,10 @@
     "title": "Job contains errors",
     "description": "We found some errors in your job. Please fix the fields to publish the offer.",
     "errorBtn": "Show errors",
-    "closeBtn": "Close"
+    "closeBtn": "Close",
+    "verificationFailedTitle": "Verification Failed",
+    "verificationFailedDescription": "Your job did not meet our quality standards. Please review and improve your job posting.",
+    "editJobBtn": "Edit Job"
   },
   "Jobs": {
     "postJobTitle": "Post a New Job",
@@ -307,7 +310,8 @@
     "cvRequired": "CV upload is required",
     "cvUploadFailed": "CV upload failed",
     "applicationSubmissionFailed": "Failed to submit application",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "rejectedStatus": "Job rejected - verification failed"
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",

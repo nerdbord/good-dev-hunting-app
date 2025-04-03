@@ -78,6 +78,11 @@ function hasJobDataChanged(existingJob: JobWithRelations, newData: JobDataWithTe
     
     // Check techStack if present (more complex structure)
     if (newData.techStack?.connectOrCreate && existingJob.techStack) {
+        console.log(`[hasJobDataChanged] Comparing tech stack:`, {
+            existingTechStack: existingJob.techStack.map(tech => tech.name),
+            newTechStack: newData.techStack.connectOrCreate.map((item: { create: { name: string } }) => item.create.name)
+        });
+        
         const existingTechNames = existingJob.techStack.map(tech => tech.name).sort();
         const newTechNames = newData.techStack.connectOrCreate.map((item: { create: { name: string } }) => item.create.name).sort();
         

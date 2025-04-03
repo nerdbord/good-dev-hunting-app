@@ -5,11 +5,15 @@ import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import styles from './AddJobErrorModal.module.scss'
 
+interface AddJobErrorModalProps {
+  closeModal: () => void;
+  isVerificationFailure?: boolean;
+}
+
 export const AddJobErrorModal = ({
   closeModal,
-}: {
-  closeModal: () => void
-}) => {
+  isVerificationFailure = false,
+}: AddJobErrorModalProps) => {
   const t = useTranslations(I18nNamespaces.AddJobErrorModal)
 
   const handleShowErrors = () => {
@@ -39,12 +43,18 @@ export const AddJobErrorModal = ({
         </div>
       </div>
 
-      <h2 className={styles.header}>{t('title')}</h2>
-      <p className={styles.description}>{t('description')}</p>
+      <h2 className={styles.header}>
+        {isVerificationFailure ? t('verificationFailedTitle') : t('title')}
+      </h2>
+      <p className={styles.description}>
+        {isVerificationFailure 
+          ? t('verificationFailedDescription')
+          : t('description')}
+      </p>
 
       <div className={styles.actions}>
         <Button variant="primary" onClick={handleShowErrors}>
-          {t('errorBtn')}
+          {isVerificationFailure ? t('editJobBtn') : t('errorBtn')}
         </Button>
       </div>
     </div>
