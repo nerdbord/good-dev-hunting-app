@@ -38,6 +38,16 @@ export const createJobFromDescriptionAction = withSentry(
       // First, verify that the query is legitimate
       const verificationResponse = await verifyJobQuery(jobDescription)
 
+      console.log('verificationResponse', verificationResponse)
+
+      if (!verificationResponse.isValid) {
+        return {
+          success: false,
+          error: verificationResponse.error || 'Job verification failed',
+          reasoning: verificationResponse.reason || 'Job verification failed',
+        }
+      }
+
       const technologies = await getTechnologies()
       const mappedTechnologies = technologies.map((t) => t.name)
 
