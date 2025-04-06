@@ -1,9 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  background-color: #f8f9fe;
 }
 
 .content {
@@ -19,11 +19,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 80px;
+  justify-content: center;
+  margin-bottom: 60px;
   width: 100%;
-  gap: 10%;
-  padding: 0 8% 0 8%;
-  
+  gap: 5%;
+
   @include mobile {
     flex-direction: column;
     margin-bottom: 0px;
@@ -35,12 +35,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: #F0F0FF;
-  padding: 40px;
-  border-radius: 8px;
-  width: 42%;
+  background-color: #f0f0ff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 4px;
+  width: 38%;
   align-items: center;
-  
+
   @include mobile {
     width: 100%;
     order: 1;
@@ -55,26 +56,27 @@
   h2 {
     font-size: 32px;
     font-weight: 500;
-    margin-bottom: 16px;
-    color: #1a1a1a;
+    margin-bottom: 20px;
+    color: var(--hunter-landing-text-color);
     line-height: 1.1;
   }
 
   p {
     font-size: 20px;
+    max-width: 400px;
     line-height: 1.5;
-    color: #4a4a4a;
+    color: var(--hunter-landing-text-color2);
   }
-  
+
   @include mobile {
     width: 100%;
     order: 2;
     padding-top: 10%;
-    
+
     h2 {
       font-size: 24px;
     }
-    
+
     p {
       font-size: 16px;
     }
@@ -82,17 +84,17 @@
 }
 
 .highlight {
-  color: #7D54F1;
+  color: var(--hunter-landing-text-color4);
 }
 
 .profileCard {
-  background-color: #FAFAFF;
+  background-color: var(--hunter-landing-bg-color);
   border-radius: 2.87px;
   padding: 7%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   max-width: 296px;
   width: 100%;
-  
+
   @include mobile {
     width: 100%;
   }
@@ -101,7 +103,7 @@
 .profileCard:first-child {
   margin-right: 10%;
   margin-top: 3%;
-  
+
   @include mobile {
     margin-right: 10%;
   }
@@ -110,7 +112,7 @@
 .profileCard:last-child {
   margin-left: 10%;
   margin-bottom: 3%;
-  
+
   @include mobile {
     margin-left: 10%;
   }
@@ -121,7 +123,7 @@
   gap: 3%;
   margin-bottom: 3%;
   align-items: center;
-  
+
   @include mobile {
     gap: 10%;
   }
@@ -134,7 +136,7 @@
   height: 64px;
   min-width: 64px;
   border-radius: 50%;
-  
+
   @include mobile {
     width: 48px;
     height: 48px;
@@ -152,8 +154,8 @@
 .profileInfo {
   h3 {
     font-size: 14px;
-    font-weight: 600;
-    color: #666;
+    font-weight: 500;
+    color: #04080d;
     margin: 0 0 4px 0;
   }
 
@@ -162,18 +164,16 @@
     color: #666;
     margin: 0 0 4px 0;
   }
-  
+
   p:first-of-type {
-    color: #5E28F6;
+    color: #5e28f6;
   }
 }
 
 .skills {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 5px;
-  
+
   @include mobile {
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -184,12 +184,12 @@
 }
 
 .skill {
-  background-color: #E4E4F6;
+  background-color: #e4e4f6;
   padding: 6px 12px;
   border-radius: 2.87px;
   font-size: 8.6px;
-  color: #5E28F6;
-  
+  color: #5e28f6;
+
   @include mobile {
     flex-shrink: 0;
     white-space: nowrap;
@@ -202,13 +202,11 @@
 
 .specialistSection {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 80px;
   width: 100%;
-  gap: 10%;
-  padding: 0 8% 0 8%;
-  
+  gap: 5%;
+
   @include mobile {
     flex-direction: column;
     padding: 0 5% 0 5%;
@@ -241,16 +239,16 @@
     line-height: 1.5;
     color: #4a4a4a;
   }
-  
+
   @include mobile {
     width: 100%;
     padding: 0;
     order: 2;
-    
+
     h2 {
       font-size: 24px;
     }
-    
+
     p {
       font-size: 16px;
     }
@@ -258,14 +256,14 @@
 }
 
 .specialistImageWrapper {
-  width: 50%;
+  width: 38%;
   position: relative;
   height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  
+
   @include mobile {
     width: 100%;
     height: 300px;
@@ -280,7 +278,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  
+
   @include mobile {
     width: 100%;
   }

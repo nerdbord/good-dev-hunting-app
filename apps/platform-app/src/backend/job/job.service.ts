@@ -8,6 +8,7 @@ export async function createJob(
   userId?: string,
 ): Promise<JobWithRelations> {
   // Prepare the base job data
+
   const jobData: Prisma.JobCreateInput = {
     jobName: data.taskName || 'Untitled Job',
     projectBrief: data.projectBrief || '',

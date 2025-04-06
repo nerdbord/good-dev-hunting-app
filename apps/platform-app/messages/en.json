@@ -204,6 +204,7 @@
     "loginLabelEmail": "Email",
     "loginLabelButton": "Send login link",
     "signInWithGoogle": "Sign in with Google",
+    "signInWithLinkedin": "Sign in with LinkedIn",
     "haventAccount": "Don't have an account?",
     "signUp": "Create one in 10 seconds",
     "cancel": "Cancel",
@@ -214,6 +215,7 @@
     "comingSoon": "Job posting form coming soon...",
     "submit": "Submit Job Post",
     "applyForJob": "Apply for Job",
+    "termsRequired": "You must accept the terms of the job",
     "applicationFormComingSoon": "Application form coming soon...",
     "submitApplication": "Submit Application",
     "jobDetails": "Job Details",
@@ -271,6 +273,7 @@
     "budgetTypeRequired": "Please select budget type",
     "myJobs": "My jobs",
     "noJobs": "You don't have any jobs",
+    "noJobsMessage": "You haven't posted any jobs yet. Add your first job to get started!",
     "job": "job",
     "jobs": "jobs",
     "applicationMsgLabel": "Message",
@@ -310,18 +313,6 @@
     "story2Role": "Startup Founder",
     "ctaTitle": "Ready to Find Your Developer?",
     "ctaDesc": "Post your job now and get matched with verified specialists"
-  },
-  "Applications": {
-    "applicationDetails": "Application Details",
-    "applicantInfo": "Applicant Info",
-    "actions": "Actions",
-    "backButton": "My jobs",
-    "publishedDaysAgo": "Published {days} days ago",
-    "applicant": "applicant",
-    "applicants": "applicants",
-    "viewProfile": "View Profile",
-    "messagePlaceholder": "Message",
-    "sendButton": "Send"
   },
   "AddJobChat": {
     "descriptionHeader": "Describe what you need",
@@ -372,7 +363,8 @@
     "fullTime": "Available for full-time",
     "contract": "Available for contract work",
     "partTime": "Available for part-time",
-    "remote": "Remote"
+    "remote": "Remote",
+    "unavailable": "Not available for work"
   },
   "HunterFAQ": {
     "title": "Most Frequently Asked Questions",
@@ -397,6 +389,8 @@
   },
   "HunterWhyWorth": {
     "title": "Why use DevHunting?",
+    "titleFirstLine": "Why use",
+    "titleSecondLine": "DevHunting?",
     "freeTitle": "Completely free",
     "freeDescription": "Add your job without any fees and receive offers from IT specialists.",
     "simpleTitle": "Simple and fast process",
@@ -408,6 +402,22 @@
   },
   "HunterHeader": {
     "addJob": "Add job for free"
+  },
+  "Applications": {
+    "loading": "Loading...",
+    "viewProfile": "View Profile",
+    "send": "Send",
+    "typeMessage": "Type your message...",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "publishedDaysAgo": "Published {days} days ago",
+    "backButton": "My jobs",
+    "applicationDetails": "Application Details",
+    "applicantInfo": "Applicant Info",
+    "actions": "Actions",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send",
+    "noApplications": "No applications yet"
   },
   "HunterHero": {
     "title": "Find the perfect IT specialist for your project",
@@ -498,5 +508,29 @@
       "team augmentation",
       "IT project team"
     ]
+  },
+  "HunterHowItWorks": {
+    "howItWorks": "HOW IT WORKS",
+    "stepsToFindExpert": "3 steps to find an expert",
+    "addJob": "Add job for free",
+    "describeNeeds": "Describe your needs and add your request",
+    "inOneMinute": "in 1 minute",
+    "exampleClientName": "David Kowalczyk",
+    "exampleClientPosition": "CEO of a startup building chatbots for patients",
+    "exampleRequest": "I need a chatbot specialist who will build me a chatbot for patients based on their medical history and doctor's recommendations.",
+    "addJobForFree": "Add job for free",
+    "receiveOffers": "Receive Offers",
+    "receiveOffersDescription": "Receive applications from verified specialists interested in your project.",
+    "offerResponse1": "Marcin responded to your request",
+    "offerPosition1": "Senior Software Engineer / AI Specialist",
+    "offerResponse2": "Aleksandra responded to your request",
+    "offerPosition2": "Full Stack Developer / Healthcare Tech",
+    "offerResponse3": "Kamila responded to your request",
+    "offerPosition3": "Backend Developer / Chatbot Architect",
+    "hireExpert": "Hire Expert",
+    "hireExpertDescription": "Review profiles and choose the person who best fits your project and start collaboration.",
+    "collaborationInvite": "Collaboration invitation",
+    "clientInvites": "David invites you to the project:",
+    "projectTitle": "Chatbot for healthtech industry"
   }
 }
