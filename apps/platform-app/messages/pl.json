@@ -388,6 +388,7 @@
     "noNegotiationsSubtitle": "Gdy aplikujesz na ofertę pracy, Twoje rozmowy pojawią się tutaj",
     "noSelectedNegotiation": "Wybierz rozmowę, aby zobaczyć wiadomości",
     "viewJob": "Zobacz ofertę",
+    "viewCV": "Zobacz moje CV",
     "sendMessage": "Wyślij wiadomość",
     "typeMessage": "Wpisz swoją wiadomość...",
     "today": "Dzisiaj",
@@ -417,7 +418,8 @@
     "fullTime": "Dostępny na pełen etat",
     "contract": "Dostępny do pracy na kontrakt",
     "partTime": "Dostępny na część etatu",
-    "remote": " Zdalnie"
+    "remote": " Zdalnie",
+    "unavailable": "Niedostępny do pracy"
   },
   "HunterFooter": {
     "contact": "Kontakt",

@@ -372,6 +372,7 @@
     "noNegotiationsSubtitle": "When you apply for a job, your conversations will appear here",
     "noSelectedNegotiation": "Select a conversation to view messages",
     "viewJob": "View Job",
+    "viewCV": "View my CV",
     "sendMessage": "Send message",
     "typeMessage": "Type your message...",
     "today": "Today",
@@ -388,7 +389,8 @@
     "fullTime": "Available for full-time",
     "contract": "Available for contract work",
     "partTime": "Available for part-time",
-    "remote": "Remote"
+    "remote": "Remote",
+    "unavailable": "Not available for work"
   },
   "HunterFAQ": {
     "title": "Most Frequently Asked Questions",

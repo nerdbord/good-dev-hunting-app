@@ -6,6 +6,7 @@ import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useCallback, useMemo, useState } from 'react'
+import { HunterLoader } from '../../HunterLoader/HunterLoader'
 import { TagsRow } from '../../UI/TagsRow/TagsRow'
 import { TechIcon } from '../../UI/TechIcon/TechIcon'
 import { useResponsive } from '../../hooks/useResponsive'
@@ -36,6 +37,7 @@ export const HeroBottom = () => {
       'iOSAndroidApplication',
       'automationBot',
       'designSystem',
+      'privateAIassistant',
       'QAtesting',
       'APIintegration',
     ],
@@ -192,63 +194,66 @@ export const HeroBottom = () => {
   }
 
   return (
-    <div className={styles.bottomSection}>
-      <div className={styles.backgroundIcons}>
-        <TechIcon
-          src="/LandingHunter/react-svg.svg"
-          alt="React"
-          className={styles.reactIcon}
-        />
-        <TechIcon
-          src="/LandingHunter/python-svg.svg"
-          alt="Python"
-          className={styles.pythonIcon}
-        />
-        <TechIcon
-          src="/LandingHunter/java-svg.svg"
-          alt="Java"
-          className={styles.javaIcon}
-        />
-      </div>
+    <>
+      {isLoading && <HunterLoader />}
+      <div className={styles.bottomSection}>
+        <div className={styles.backgroundIcons}>
+          <TechIcon
+            src="/LandingHunter/react-svg.svg"
+            alt="React"
+            className={styles.reactIcon}
+          />
+          <TechIcon
+            src="/LandingHunter/python-svg.svg"
+            alt="Python"
+            className={styles.pythonIcon}
+          />
+          <TechIcon
+            src="/LandingHunter/java-svg.svg"
+            alt="Java"
+            className={styles.javaIcon}
+          />
+        </div>
 
-      <TextareaHero
-        tagsAnimate={tagsAnimate}
-        onTagChange={handleTagChange}
-        selectedTag={selectedTag}
-        mockText={currentMockText}
-        onEmpty={handleTextareaEmpty}
-        onTextChange={handleTextChange}
-      />
+        <TextareaHero
+          tagsAnimate={tagsAnimate}
+          onTagChange={handleTagChange}
+          selectedTag={selectedTag}
+          mockText={currentMockText}
+          onEmpty={handleTextareaEmpty}
+          onTextChange={handleTextChange}
+        />
 
-      <div className={styles.buttonSection}>
-        <Button variant="primary" onClick={createJob} disabled={isLoading}>
-          {isLoading ? t('buttonLoading') || 'Processing...' : t('button')}
-        </Button>
-      </div>
+        <div className={styles.buttonSection}>
+          <Button variant="primary" onClick={createJob} disabled={isLoading}>
+            {isLoading ? t('buttonLoading') || 'Processing...' : t('button')}
+          </Button>
+        </div>
 
-      <div className={styles.tagsSection}>
-        {rows.map((rowTags, rowIndex) => (
-          <TagsRow
-            key={`row-${rowIndex}`}
-            tags={rowTags}
-            rowIndex={rowIndex}
-            isMobile={isMobile}
-            isReversed={rowIndex === 1 && isMobile}
-            currentAnimatedTag={currentAnimatedTag}
-            selectedTag={selectedTag}
-            tagMapping={tagMapping}
-            onTagClick={handleTagButtonClick}
-          >
-            {/* Add tooltip to the first row on desktop, second row on mobile */}
-            {((!isMobile && rowIndex === 0) ||
-              (isMobile && rowIndex === 1)) && (
-              <div className={styles.tooltipContainer}>
-                <TagTooltip isMobile={isMobile} />
-              </div>
-            )}
-          </TagsRow>
-        ))}
+        <div className={styles.tagsSection}>
+          {rows.map((rowTags, rowIndex) => (
+            <TagsRow
+              key={`row-${rowIndex}`}
+              tags={rowTags}
+              rowIndex={rowIndex}
+              isMobile={isMobile}
+              isReversed={rowIndex === 1 && isMobile}
+              currentAnimatedTag={currentAnimatedTag}
+              selectedTag={selectedTag}
+              tagMapping={tagMapping}
+              onTagClick={handleTagButtonClick}
+            >
+              {/* Add tooltip to the first row on desktop, second row on mobile */}
+              {((!isMobile && rowIndex === 0) ||
+                (isMobile && rowIndex === 1)) && (
+                <div className={styles.tooltipContainer}>
+                  <TagTooltip isMobile={isMobile} />
+                </div>
+              )}
+            </TagsRow>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }

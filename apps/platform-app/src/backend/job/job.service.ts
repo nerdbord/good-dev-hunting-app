@@ -1,6 +1,6 @@
 import { type SubmissionFormData } from '@/app/[locale]/(jobs)/_utils/groq/schema'
 import { prisma } from '@/lib/prismaClient'
-import { Currency, PublishingState } from '@prisma/client'
+import { Currency, PublishingState, type Prisma } from '@prisma/client'
 import { type Job, type JobWithRelations } from './job.types'
 
 export async function createJob(
@@ -10,16 +10,19 @@ export async function createJob(
   console.log(`[createJob] Creating new job with data:`, {
     taskName: data.taskName,
     technologies: data.technologies?.length,
-    budget: data.budget ? {
-      min: data.budget.min,
-      max: data.budget.max,
-      currency: data.budget.currency
-    } : null,
-    userId: userId ?? 'anonymous'
-  });
+    budget: data.budget
+      ? {
+          min: data.budget.min,
+          max: data.budget.max,
+          currency: data.budget.currency,
+        }
+      : null,
+    userId: userId ?? 'anonymous',
+  })
 
   // Prepare the base job data
-  const jobData: any = {
+
+  const jobData: Prisma.JobCreateInput = {
     jobName: data.taskName || 'Untitled Job',
     projectBrief: data.projectBrief || '',
     techStack: {
@@ -66,11 +69,13 @@ export async function createJob(
       },
     })
 
-    console.log(`[createJob] Job created successfully with ID ${job.id}, state: ${job.state}`);
+    console.log(
+      `[createJob] Job created successfully with ID ${job.id}, state: ${job.state}`,
+    )
     return job as unknown as JobWithRelations
   } catch (error) {
-    console.error('[createJob] Error creating job:', error);
-    throw error;
+    console.error('[createJob] Error creating job:', error)
+    throw error
   }
 }
 
@@ -90,51 +95,59 @@ export async function getJobById(id: string): Promise<JobWithRelations | null> {
 }
 
 export async function updateJob(id: string, data: Partial<Job>): Promise<Job> {
-  const existingJob = await getJobById(id);
+  const existingJob = await getJobById(id)
   if (!existingJob) {
-    throw new Error(`Job with id ${id} not found`);
+    throw new Error(`Job with id ${id} not found`)
   }
 
-  console.log(`[updateJob] Updating job ${id}, current state: ${existingJob.state}, updating fields:`, 
-    Object.keys(data).join(', '));
+  console.log(
+    `[updateJob] Updating job ${id}, current state: ${existingJob.state}, updating fields:`,
+    Object.keys(data).join(', '),
+  )
 
   // Ensure currency is always a valid value
   if (data.budgetType === 'requestQuote') {
-    data.currency = Currency.PLN;
-    data.minBudgetForProjectRealisation = null;
-    data.maxBudgetForProjectRealisation = null;
+    data.currency = Currency.PLN
+    data.minBudgetForProjectRealisation = null
+    data.maxBudgetForProjectRealisation = null
   } else if (!data.currency) {
-    data.currency = Currency.PLN;
+    data.currency = Currency.PLN
   }
 
   try {
     const updatedJob = await prisma.job.update({
       where: { id },
       data,
-    });
+    })
 
     if (data.state && data.state !== existingJob.state) {
-      console.log(`[updateJob] Job ${id} state changed from ${existingJob.state} to ${data.state}`);
+      console.log(
+        `[updateJob] Job ${id} state changed from ${existingJob.state} to ${data.state}`,
+      )
     }
 
-    console.log(`[updateJob] Job ${id} updated successfully, new state: ${updatedJob.state}`);
-    return updatedJob as unknown as Job;
+    console.log(
+      `[updateJob] Job ${id} updated successfully, new state: ${updatedJob.state}`,
+    )
+    return updatedJob as unknown as Job
   } catch (error) {
-    console.error(`[updateJob] Error updating job ${id}:`, error);
-    throw error;
+    console.error(`[updateJob] Error updating job ${id}:`, error)
+    throw error
   }
 }
 
 export async function publishJob(id: string): Promise<Job> {
   try {
     // First check if the job exists
-    const job = await getJobById(id);
+    const job = await getJobById(id)
     if (!job) {
-      throw new Error(`Job with id ${id} not found`);
+      throw new Error(`Job with id ${id} not found`)
     }
-    
-    console.log(`[publishJob] Publishing job ${id}, current state: ${job.state}`);
-    
+
+    console.log(
+      `[publishJob] Publishing job ${id}, current state: ${job.state}`,
+    )
+
     // Update the job state to APPROVED
     const publishedJob = await prisma.job.update({
       where: {
@@ -143,23 +156,25 @@ export async function publishJob(id: string): Promise<Job> {
       data: {
         state: PublishingState.APPROVED,
       },
-    });
-    
+    })
+
     // Verify the state was updated successfully
     if (publishedJob.state !== PublishingState.APPROVED) {
-      console.warn(`[publishJob] State not updated correctly for job ${id}, forcing update`);
-      
+      console.warn(
+        `[publishJob] State not updated correctly for job ${id}, forcing update`,
+      )
+
       // Force a second update if needed (should rarely happen)
       await prisma.job.update({
         where: { id },
         data: { state: PublishingState.APPROVED },
-      });
+      })
     }
 
-    return publishedJob as unknown as Job;
+    return publishedJob as unknown as Job
   } catch (error) {
-    console.error(`[publishJob] Error publishing job ${id}:`, error);
-    throw error;
+    console.error(`[publishJob] Error publishing job ${id}:`, error)
+    throw error
   }
 }
 
@@ -200,13 +215,13 @@ export async function getPublishedJobs(): Promise<JobWithRelations[]> {
 export async function rejectJob(id: string): Promise<Job> {
   try {
     // First check if the job exists
-    const job = await getJobById(id);
+    const job = await getJobById(id)
     if (!job) {
-      throw new Error(`Job with id ${id} not found`);
+      throw new Error(`Job with id ${id} not found`)
     }
-    
-    console.log(`[rejectJob] Rejecting job ${id}, current state: ${job.state}`);
-    
+
+    console.log(`[rejectJob] Rejecting job ${id}, current state: ${job.state}`)
+
     // Update the job state to REJECTED
     const rejectedJob = await prisma.job.update({
       where: {
@@ -215,12 +230,64 @@ export async function rejectJob(id: string): Promise<Job> {
       data: {
         state: PublishingState.REJECTED,
       },
-    });
-    
-    console.log(`[rejectJob] Job ${id} rejected successfully`);
-    return rejectedJob as unknown as Job;
+    })
+
+    console.log(`[rejectJob] Job ${id} rejected successfully`)
+    return rejectedJob as unknown as Job
   } catch (error) {
-    console.error(`[rejectJob] Error rejecting job ${id}:`, error);
-    throw error;
+    console.error(`[rejectJob] Error rejecting job ${id}:`, error)
+    throw error
   }
+}
+
+/**
+ * Expires job listings that are older than the specified number of days
+ * @param daysOld The number of days after which a job should be expired
+ * @returns The number of jobs that were expired
+ */
+export async function expireOldJobs(daysOld = 30): Promise<{ count: number }> {
+  // Calculate the date threshold (now - daysOld)
+  const thresholdDate = new Date()
+  thresholdDate.setDate(thresholdDate.getDate() - daysOld)
+
+  // Find all APPROVED jobs that were created before the threshold date
+  const result = await prisma.job.updateMany({
+    where: {
+      state: PublishingState.APPROVED,
+      createdAt: {
+        lt: thresholdDate,
+      },
+    },
+    data: {
+      state: PublishingState.DRAFT, // Mark as DRAFT to hide from public view
+    },
+  })
+
+  return { count: result.count }
+}
+
+/**
+ * Deletes anonymous job postings (those without a user association)
+ * that are older than the specified number of days
+ * @param daysOld The number of days after which an anonymous job should be deleted
+ * @returns The number of jobs that were deleted
+ */
+export async function cleanupAnonymousJobs(
+  daysOld = 7,
+): Promise<{ count: number }> {
+  // Calculate the date threshold (now - daysOld)
+  const thresholdDate = new Date()
+  thresholdDate.setDate(thresholdDate.getDate() - daysOld)
+
+  // Find and delete anonymous jobs (createdById is null) that are older than the threshold
+  const result = await prisma.job.deleteMany({
+    where: {
+      createdById: null,
+      createdAt: {
+        lt: thresholdDate,
+      },
+    },
+  })
+
+  return { count: result.count }
 }

@@ -1,6 +1,6 @@
 .bottomSection {
   width: 100%;
-  max-width: 778px;
+  max-width: 805px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,20 +36,20 @@
 /* Positioning for the tech icons */
 .reactIcon {
   top: -50px;
-  left: -200px;
+  left: -170px;
   transform: rotate(-15deg);
 }
 
 .pythonIcon {
   top: -175px;
   left: unset;
-  right: -210px;
+  right: -195px;
   transform: rotate(-15deg);
 }
 
 .javaIcon {
-  top: 100px;
-  right: -183px;
+  top: 90px;
+  right: -163px;
   transform: rotate(10deg);
 }
 
