@@ -10,6 +10,10 @@ export enum MailTemplateId {
   verificationRequest = 'vywj2lpj96kl7oqz',
   jobProposal = '3vz9dle2ow1lkj50',
   jobPublished = '3zxk54v1e0z4jy6v',
+  applicantUnreadMessagesNotification = '0p7kx4x9w1m49yjr',
+  jobOwnerUnreadMessagesNotification = 'neqvygm10zjg0p7w',
+  newJobApplicationForOwner = 'z3m5jgrmo7d4dpyo',
+  applicationConfirmationForApplicant = '351ndgwkv7ngzqx8',
 }
 
 interface MailConfig {

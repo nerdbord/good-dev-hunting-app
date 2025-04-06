@@ -18,11 +18,12 @@ interface JobPageProps {
 const JobPage = async ({ params }: JobPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
   const { user } = await getAuthorizedUser()
+  const id = await params.id
 
   // Fetch job data from database
   let jobData
   try {
-    jobData = await findJobById(params.id)
+    jobData = await findJobById(id)
   } catch (error) {
     console.error('Error fetching job:', error)
     notFound()

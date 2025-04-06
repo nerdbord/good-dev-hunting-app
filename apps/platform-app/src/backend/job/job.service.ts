@@ -1,6 +1,6 @@
 import { type SubmissionFormData } from '@/app/[locale]/(jobs)/_utils/groq/schema'
 import { prisma } from '@/lib/prismaClient'
-import { Currency, PublishingState } from '@prisma/client'
+import { Currency, PublishingState, type Prisma } from '@prisma/client'
 import { type Job, type JobWithRelations } from './job.types'
 
 export async function createJob(
@@ -8,7 +8,8 @@ export async function createJob(
   userId?: string,
 ): Promise<JobWithRelations> {
   // Prepare the base job data
-  const jobData: any = {
+
+  const jobData: Prisma.JobCreateInput = {
     jobName: data.taskName || 'Untitled Job',
     projectBrief: data.projectBrief || '',
     techStack: {
@@ -137,4 +138,56 @@ export async function getPublishedJobs(): Promise<JobWithRelations[]> {
   })
 
   return jobs as unknown as JobWithRelations[]
+}
+
+/**
+ * Expires job listings that are older than the specified number of days
+ * @param daysOld The number of days after which a job should be expired
+ * @returns The number of jobs that were expired
+ */
+export async function expireOldJobs(daysOld = 30): Promise<{ count: number }> {
+  // Calculate the date threshold (now - daysOld)
+  const thresholdDate = new Date()
+  thresholdDate.setDate(thresholdDate.getDate() - daysOld)
+
+  // Find all APPROVED jobs that were created before the threshold date
+  const result = await prisma.job.updateMany({
+    where: {
+      state: PublishingState.APPROVED,
+      createdAt: {
+        lt: thresholdDate,
+      },
+    },
+    data: {
+      state: PublishingState.DRAFT, // Mark as DRAFT to hide from public view
+    },
+  })
+
+  return { count: result.count }
+}
+
+/**
+ * Deletes anonymous job postings (those without a user association)
+ * that are older than the specified number of days
+ * @param daysOld The number of days after which an anonymous job should be deleted
+ * @returns The number of jobs that were deleted
+ */
+export async function cleanupAnonymousJobs(
+  daysOld = 7,
+): Promise<{ count: number }> {
+  // Calculate the date threshold (now - daysOld)
+  const thresholdDate = new Date()
+  thresholdDate.setDate(thresholdDate.getDate() - daysOld)
+
+  // Find and delete anonymous jobs (createdById is null) that are older than the threshold
+  const result = await prisma.job.deleteMany({
+    where: {
+      createdById: null,
+      createdAt: {
+        lt: thresholdDate,
+      },
+    },
+  })
+
+  return { count: result.count }
 }
