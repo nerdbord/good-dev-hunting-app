@@ -13,14 +13,10 @@ export async function notifyMatchedProfiles(
   sentCount: number
 }> {
   try {
-    // Filter matches with score above threshold (e.g., 70)
-    const goodMatches = matchingResults.filter(
-      (match) => match.matchScore >= 70,
-    )
     const approvedProfiles = await findAllApprovedProfiles()
 
     // Find the corresponding profiles for good matches
-    const matchedProfiles = goodMatches
+    const matchedProfiles = matchingResults
       .map((match) => {
         const profile = approvedProfiles.find((p) => p.id === match.profileId)
         return {

@@ -57,8 +57,6 @@ export const publishJobAction = withSentry(async (id: string) => {
     //     }
     // }
 
-    console.log('publishedJob', job)
-
     const publishedProfiles = await findAllApprovedProfiles()
 
     // Step 4: Find profiles to notify
