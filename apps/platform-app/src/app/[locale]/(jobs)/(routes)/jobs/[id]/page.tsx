@@ -19,6 +19,7 @@ const JobPage = async ({ params }: JobPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
   const { user } = await getAuthorizedUser()
   const { id: jobId } = await params
+
   // Fetch job data from database
   let jobData
   try {

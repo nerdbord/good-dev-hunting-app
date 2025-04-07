@@ -37,6 +37,7 @@ export const HeroBottom = () => {
       'iOSAndroidApplication',
       'automationBot',
       'designSystem',
+      'privateAIassistant',
       'QAtesting',
       'APIintegration',
     ],

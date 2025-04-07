@@ -1,6 +1,6 @@
 .icon {
   position: absolute;
-  
+
   @include mobile {
     display: none;
   }
@@ -39,15 +39,14 @@
   gap: 4px;
   flex-shrink: 0;
   border-radius: 15.188px;
-  background: #cfcff3;
+  background: #cbcbef;
 }
 
 .techImage {
-  width: 48.272px;
-  height: 65.181px;
+  width: 75px;
+  height: 75px;
   flex-shrink: 0;
   aspect-ratio: 48.27/65.18;
-  filter: grayscale(0.5);
   opacity: 0.8;
   background-blend-mode: color, normal;
-} 
+}

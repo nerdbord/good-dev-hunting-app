@@ -3,6 +3,7 @@ import {
   mapJobContract,
 } from '@/app/[locale]/(jobs)/_utils/job.mappers'
 import {
+  BudgetType,
   type EmploymentMode,
   type JobContractType,
 } from '@/app/[locale]/(jobs)/_utils/types'
@@ -12,7 +13,11 @@ import {
 } from '@/app/[locale]/(profile)/profile.mappers'
 import { countries } from '@/data/countries'
 import { I18nNamespaces } from '@/i18n/request'
-import { type Currency, type EmploymentType } from '@prisma/client'
+import {
+  PublishingState,
+  type Currency,
+  type EmploymentType,
+} from '@prisma/client'
 import { useTranslations } from 'next-intl'
 import { type JobModel } from '../../_models/job.model'
 import styles from './JobDetailsBasicInfo.module.scss'
@@ -31,6 +36,9 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
     <div className={styles.profile}>
       <div className={styles.user}>
         <p className={styles.name}>{job.jobName}</p>
+        {job.state === PublishingState.REJECTED && (
+          <div className={styles.rejectedStatus}>{t('rejectedStatus')}</div>
+        )}
       </div>
 
       <div className={styles.locationBox}>
@@ -83,14 +91,16 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
         )}
       </div>
 
-      {job.minBudgetForProjectRealisation &&
-        job.maxBudgetForProjectRealisation && (
-          <div className={styles.addInfo}>
-            {t('budget')}: {job.minBudgetForProjectRealisation} -{' '}
-            {job.maxBudgetForProjectRealisation}{' '}
-            {currencyButtonTextDisplay(job.currency as Currency)}
-          </div>
-        )}
+      <div className={styles.addInfo}>
+        {t('budget')}:{' '}
+        {job.budgetType === BudgetType.REQUEST_QUOTE ||
+        (!job.minBudgetForProjectRealisation &&
+          !job.maxBudgetForProjectRealisation)
+          ? t('budgetRequestQuote')
+          : `${job.minBudgetForProjectRealisation} - ${
+              job.maxBudgetForProjectRealisation
+            } ${currencyButtonTextDisplay(job.currency as Currency)}`}
+      </div>
     </div>
   )
 }

@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap');
 
 .fullWidthWrapper {
-  width: 100%;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background-color: #fff;
   display: flex;
   justify-content: center;
+  z-index: 0;
 }
 
 .wrapper {
@@ -21,7 +27,6 @@
 }
 
 .title {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 38px;
   font-weight: 500;
   line-height: 40px;
@@ -30,6 +35,18 @@
   text-align: center;
   color: #333;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.titleFirstLine {
+  display: block;
+}
+
+.titleSecondLine {
+  display: block;
 }
 
 .contentContainer {
@@ -75,7 +92,6 @@
 }
 
 .reasonTitle {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
@@ -86,7 +102,6 @@
 }
 
 .reasonDescription {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -197,16 +212,16 @@
 }
 
 .modalText {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #7d54f1;
   line-height: 20px;
   letter-spacing: 0;
   text-align: center;
+  width: 140px;
 }
 
-/* Dodajemy responsywność dla mniejszych ekranów */
+/* Responsywność */
 @media (max-width: 1100px) {
   .contentContainer {
     width: 90%;
@@ -217,18 +232,131 @@
 @media (max-width: 768px) {
   .wrapper {
     height: auto;
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 24px;
+    text-align: center;
+    padding: 0;
+    gap: 4px;
+  }
+
+  .titleFirstLine {
+    display: block;
+  }
+
+  .titleSecondLine {
+    display: block;
   }
 
   .contentContainer {
     flex-direction: column;
     height: auto;
-    width: 90%;
-    max-width: 480px;
+    width: 100%;
+    max-width: 100%;
+    gap: 32px;
   }
 
-  .imageContainer {
+  .mobileSection {
     width: 100%;
-    height: 300px;
-    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mobileImageContainer {
+    width: 344px;
+    height: 378.98px;
+    margin: 0 auto;
+    border-radius: 2.92px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileTextContent {
+    padding: 0 16px;
+  }
+
+  .mobileTitle {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .mobileDescription {
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+  }
+
+  .mobileButton {
+    background-color: #7d54f1;
+    color: white;
+    width: 215.51px;
+    height: 47.26px;
+    border-radius: 2.89px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14.73px;
+    font-weight: 500;
+    line-height: 21.05px;
+    letter-spacing: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0;
+  }
+
+  .mobileModal {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 3.44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 265.07px;
+    height: 104.6px;
+    justify-content: center;
+
+    .modalIcon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .modalText {
+      color: #7d54f1;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .wrapper {
+    padding: 16px 12px;
+  }
+
+  .mobileImageContainer {
+    width: 100%;
+    height: 340px;
+  }
+
+  .mobileTextContent {
+    padding: 0 12px;
   }
 }

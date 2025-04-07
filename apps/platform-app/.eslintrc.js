@@ -10,6 +10,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
+  ignorePatterns: ['**/global.d.ts'],
   plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
