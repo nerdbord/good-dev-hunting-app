@@ -121,7 +121,7 @@ export async function verifyJobQuery(query: string): Promise<{
 
     // Return successful response
     return {
-      isValid: true,
+      isValid: result.isValid,
       reason: result.reasoning,
     }
   } catch (error) {

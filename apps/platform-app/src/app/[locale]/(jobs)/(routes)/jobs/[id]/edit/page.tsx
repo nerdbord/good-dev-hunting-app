@@ -41,7 +41,7 @@ export default async function EditJobDetailsPage({ params }: Props) {
   }
 
   // Transform job model to form values
-  const initialValues = transformJobToFormValues(jobData)
+  const initialValues = transformJobToFormValues(jobData, t)
 
   return (
     <>

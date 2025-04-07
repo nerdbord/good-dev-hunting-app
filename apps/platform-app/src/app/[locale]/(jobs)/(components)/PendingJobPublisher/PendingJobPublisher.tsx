@@ -9,6 +9,8 @@ import {
   clearPendingPublishJob,
   getPendingPublishJob,
 } from '../../_utils/job-storage.client'
+import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
+import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
 
 export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
   const [isProcessing, setIsProcessing] = useState(false)
@@ -28,34 +30,31 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
       const publishPendingJob = async () => {
         setIsProcessing(true)
         try {
+          // Show verification in progress modal
+          showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
+          
           // Attempt to publish the job
           await publishJobAction(pendingJobId)
-
+          
           // Clear the pending job ID from storage
           clearPendingPublishJob()
-
-          // Show success message
+          
+          // Close verification modal and show success modal
+          closeModal()
           showModal(
-            <div>
-              <h2>Job Published Successfully</h2>
-              <p>Your job has been published and is now visible to others.</p>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  closeModal()
-                  // Remove the publish parameter from URL
-                  router.replace(`/jobs/${pendingJobId}`)
-                  router.refresh()
-                }}
-              >
-                Close
-              </Button>
-            </div>,
+            <AddJobSuccessModal closeModal={() => {
+              closeModal()
+              // Remove the publish parameter from URL
+              router.replace(`/jobs/${pendingJobId}`)
+              router.refresh()
+            }} />,
             'narrow',
           )
         } catch (error) {
           console.error('Error publishing job after login:', error)
+          
           // Show error message
+          closeModal()
           showModal(
             <div>
               <h2>Publishing Failed</h2>

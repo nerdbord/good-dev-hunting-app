@@ -10,8 +10,8 @@ import {
 } from '@/components/Chat'
 import chatStyles from '@/components/Chat/chat.module.scss'
 import { AdvancedLoader } from '@/components/Loader'
-import { I18nNamespaces } from '@/i18n/request'
 import { useSSE } from '@/hooks/useSSE'
+import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
 import { useTranslations } from 'next-intl'
@@ -101,7 +101,11 @@ export default function JobApplicationsPage() {
     const latestMessage = sseMessages[sseMessages.length - 1]
 
     // Skip if this is a message from the recruiter or a connection event
-    if (latestMessage.sender === 'recruiter' || latestMessage.type === 'connected') return
+    if (
+      latestMessage.sender === 'recruiter' ||
+      latestMessage.type === 'connected'
+    )
+      return
 
     // Skip if we already processed this message ID
     if (processedMessages.current.has(latestMessage.id)) return
@@ -123,11 +127,11 @@ export default function JobApplicationsPage() {
     }
 
     // Update the selected applicant with the new message
-    setSelectedApplicant(prev => {
+    setSelectedApplicant((prev) => {
       if (!prev) return prev
 
       // Check if the message is already in the messages array
-      const messageExists = prev.messages.some(m => m.id === newMessage.id)
+      const messageExists = prev.messages.some((m) => m.id === newMessage.id)
       if (messageExists) return prev
 
       return {
@@ -139,16 +143,16 @@ export default function JobApplicationsPage() {
     })
 
     // Update the applicants list
-    setApplicants(prev =>
-      prev.map(applicant =>
+    setApplicants((prev) =>
+      prev.map((applicant) =>
         applicant.id === selectedApplicant.id
           ? {
-            ...applicant,
-            lastMessage: newMessage.content,
-            lastMessageTime: newMessage.timestamp,
-          }
-          : applicant
-      )
+              ...applicant,
+              lastMessage: newMessage.content,
+              lastMessageTime: newMessage.timestamp,
+            }
+          : applicant,
+      ),
     )
   }, [sseMessages, selectedApplicant])
 
@@ -157,7 +161,7 @@ export default function JobApplicationsPage() {
     processedMessages.current.clear()
     // Pre-populate with existing message IDs
     if (selectedApplicant?.messages) {
-      selectedApplicant.messages.forEach(msg => {
+      selectedApplicant.messages.forEach((msg) => {
         processedMessages.current.add(msg.id)
       })
     }

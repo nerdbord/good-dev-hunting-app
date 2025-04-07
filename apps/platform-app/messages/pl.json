@@ -210,6 +210,27 @@
     "cancel": "Anuluj",
     "or": "lub"
   },
+  "AddJobVerificationModal": {
+    "title": "Trwa weryfikacja",
+    "description": "Twoje zlecenie jest w tym momencie weryfikowane. Poczekaj kilka chwil.",
+    "inProgressBtn": "Trwa weryfikacja",
+    "closeBtn": "Zamknij"
+  },
+  "AddJobSuccessModal": {
+    "title": "Zlecenie pomyślnie wysłane",
+    "description": "Twoje zlecenie wylądowało w skrzynkach mailowych ponad 200 osób. Podgląd ogłoszenia został wysłany także na Twoją skrzynkę.",
+    "addAnotherJobBtn": "Dodaj kolejne zlecenie",
+    "closeBtn": "Zamknij"
+  },
+  "AddJobErrorModal": {
+    "title": "Zlecenie zawiera błędy",
+    "description": "Znaleźliśmy kilka nieprawidłowości w Twoim zleceniu. Popraw wskazane pola, aby opublikować ofertę.",
+    "errorBtn": "Pokaż błędy",
+    "closeBtn": "Zamknij",
+    "verificationFailedTitle": "Weryfikacja nie powiodła się",
+    "verificationFailedDescription": "Twoje zlecenie nie spełnia standardów jakości. Prosimy o przejrzenie i poprawienie oferty pracy.",
+    "editJobBtn": "Edytuj zlecenie"
+  },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",
     "comingSoon": "Formularz dodawania zlecenia wkrótce...",
@@ -245,6 +266,10 @@
     "employmentType": "Rodzaj zatrudnienia",
     "contractTypeLabel": "Rodzaj umowy",
     "contractTypeDesc": "Wybierz rodzaj umowy",
+    "contractTypeB2B": "B2B",
+    "contractTypeEmploymentContract": "Umowa o pracę",
+    "contractTypeSpecificWork": "Umowa o dzieło",
+    "contractTypeMandate": "Umowa zlecenie",
     "workMode": "Tryb pracy",
     "workModeStationary": "Stacjonarny",
     "workModeHybrid": "Hybrydowy",
@@ -285,7 +310,8 @@
     "cvRequired": "CV jest wymagane",
     "cvUploadFailed": "Nie udało się przesłać CV",
     "applicationSubmissionFailed": "Nie udało się wysłać aplikacji",
-    "submitting": "Wysyłanie..."
+    "submitting": "Wysyłanie...",
+    "rejectedStatus": "Zlecenie odrzucone - weryfikacja nie powiodła się"
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

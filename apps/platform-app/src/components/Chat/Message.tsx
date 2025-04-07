@@ -18,8 +18,9 @@ export default function Message({
 }: MessageProps) {
   return (
     <div
-      className={`${styles.messageItem} ${isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage
-        } ${className}`}
+      className={`${styles.messageItem} ${
+        isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage
+      } ${className}`}
     >
       <div className={styles.messageContent}>
         {parseMessageContent(content)}

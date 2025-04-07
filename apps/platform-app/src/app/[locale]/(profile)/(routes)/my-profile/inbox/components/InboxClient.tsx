@@ -1,13 +1,13 @@
 'use client'
 
 import { addMessageToApplication } from '@/app/[locale]/(profile)/_actions/mutations'
-import { useSSE } from '@/hooks/useSSE'
 import {
   ChatContainer,
   ChatInput,
   ChatListItem,
   Message as MessageComponent,
 } from '@/components/Chat'
+import { useSSE } from '@/hooks/useSSE'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { useTranslations } from 'next-intl'
@@ -45,7 +45,8 @@ export default function InboxClient({
     const latestMessage = sseMessages[sseMessages.length - 1]
 
     // Skip if this is a message from the current user or a connection event
-    if (latestMessage.sender === 'user' || latestMessage.type === 'connected') return
+    if (latestMessage.sender === 'user' || latestMessage.type === 'connected')
+      return
 
     // Skip if we already processed this message ID
     if (processedMessages.current.has(latestMessage.id)) return
@@ -67,11 +68,11 @@ export default function InboxClient({
     }
 
     // Update the selected negotiation with the new message
-    setSelectedNegotiation(prev => {
+    setSelectedNegotiation((prev) => {
       if (!prev) return prev
 
       // Check if the message is already in the messages array
-      const messageExists = prev.messages.some(m => m.id === newMessage.id)
+      const messageExists = prev.messages.some((m) => m.id === newMessage.id)
       if (messageExists) return prev
 
       return {
@@ -83,17 +84,17 @@ export default function InboxClient({
     })
 
     // Update the negotiations list
-    setNegotiations(prev =>
-      prev.map(negotiation =>
+    setNegotiations((prev) =>
+      prev.map((negotiation) =>
         negotiation.id === selectedNegotiation.id
           ? {
-            ...negotiation,
-            lastMessage: newMessage.content,
-            lastMessageTime: newMessage.timestamp,
-            unread: true,
-          }
-          : negotiation
-      )
+              ...negotiation,
+              lastMessage: newMessage.content,
+              lastMessageTime: newMessage.timestamp,
+              unread: true,
+            }
+          : negotiation,
+      ),
     )
   }, [sseMessages, selectedNegotiation])
 
@@ -166,7 +167,7 @@ export default function InboxClient({
     processedMessages.current.clear()
     // Pre-populate with existing message IDs
     if (selectedNegotiation?.messages) {
-      selectedNegotiation.messages.forEach(msg => {
+      selectedNegotiation.messages.forEach((msg) => {
         processedMessages.current.add(msg.id)
       })
     }
