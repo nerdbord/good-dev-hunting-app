@@ -558,5 +558,9 @@
     "collaborationInvite": "Collaboration invitation",
     "clientInvites": "David invites you to the project:",
     "projectTitle": "Chatbot for healthtech industry"
+  },
+  "HunterCTA": {
+    "title": "Describe your project and choose the best expert",
+    "button": "Add job for free"
   }
 }
