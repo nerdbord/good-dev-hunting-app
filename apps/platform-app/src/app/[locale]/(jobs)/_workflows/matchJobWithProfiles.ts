@@ -118,11 +118,10 @@ export async function matchJobWithProfiles(
     const matchesResult = await openaiService.generateJson<{
       matches: MatchResult[]
     }>(messages, {
-      model: 'gpt-4-turbo',
+      model: 'gpt-4o',
       temperature: 0,
       max_tokens: 2000,
     })
-    // console.log(matchesResult)
     return matchesResult.matches || []
   } catch (error) {
     console.error('Error matching job with profiles:', error)

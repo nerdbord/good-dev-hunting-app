@@ -17,9 +17,9 @@ export class OpenAIService {
   /**
    * Creates a new OpenAI service instance
    * @param apiKey - OpenAI API key
-   * @param defaultModel - Default model to use (defaults to gpt-4-turbo)
+   * @param defaultModel - Default model to use (defaults to gpt-4o)
    */
-  constructor(apiKey: string, defaultModel = 'gpt-4-turbo') {
+  constructor(apiKey: string, defaultModel = 'gpt-4o') {
     if (!apiKey) {
       throw new Error('OpenAI API key is required')
     }
