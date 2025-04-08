@@ -106,19 +106,49 @@
 }
 
 @media (max-width: 1200px) {
-  .boxLeft,
-  .boxRight {
-    display: none;
-  }
-
   .wrapper {
     width: 100%;
   }
 }
 
 @media (max-width: 768px) {
+  .wrapper {
+    width: 343px;
+    height: 398px;
+    padding: 120px 20px;
+    background-image: url('/Finalcta.png');
+    background-size: cover;
+    transform: rotate(180deg);
+  }
+
+  .content {
+    transform: rotate(180deg);
+    gap: 24px;
+  }
+
   .title {
     font-size: 28px;
     line-height: 32px;
+  }
+
+  .boxLeft {
+    top: 10%;
+    left: 10%;
+    transform: none;
+    width: 100px;
+    height: 90px;
+  }
+
+  .boxRight {
+    bottom: 10%;
+    right: 10%;
+    transform: none;
+    width: 100px;
+    height: 90px;
+  }
+
+  .boxLeft,
+  .boxRight {
+    display: block;
   }
 }
