@@ -1,3 +1,6 @@
+// seed file with frontend, backend and game devs
+// Created for testing the workflow of matching candidates to jobs
+
 import {
   Currency,
   EmploymentType,

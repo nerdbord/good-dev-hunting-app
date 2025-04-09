@@ -37,7 +37,7 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
           )
 
           // Attempt to publish the job
-          await publishJobAction(pendingJobId)
+          const { jobCandidatesAmount } = await publishJobAction(pendingJobId)
 
           // Clear the pending job ID from storage
           clearPendingPublishJob()
@@ -46,6 +46,7 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
           closeModal()
           showModal(
             <AddJobSuccessModal
+              jobCandidatesAmount={jobCandidatesAmount}
               closeModal={() => {
                 closeModal()
                 // Remove the publish parameter from URL

@@ -1,4 +1,5 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { saveJobCandidates } from '@/backend/job-candidate/job-candidate.service'
 import openaiService from '@/lib/openai.service'
 import { type JobModel } from '../_models/job.model'
 
@@ -115,14 +116,22 @@ export async function matchJobWithProfiles(
       },
     ]
 
-    const matchesResult = await openaiService.generateJson<{
+    const { matches } = await openaiService.generateJson<{
       matches: MatchResult[]
     }>(messages, {
       model: 'gpt-4o',
       temperature: 0,
       max_tokens: 2000,
     })
-    return matchesResult.matches || []
+
+    if (matches.length > 0) {
+      await saveJobCandidates(job.id, matches)
+    } else {
+      console.log(
+        `[publishJobAction] No matching candidates found for job ${job.id}, skipping save step.`,
+      )
+    }
+    return matches || []
   } catch (error) {
     console.error('Error matching job with profiles:', error)
     return []

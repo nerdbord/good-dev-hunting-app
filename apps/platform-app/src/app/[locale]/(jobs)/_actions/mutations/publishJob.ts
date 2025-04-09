@@ -2,7 +2,6 @@
 
 import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
 import { getJobById, publishJob, rejectJob } from '@/backend/job/job.service'
-import { saveJobCandidates } from '@/backend/jobCandidate/jobCandidate.service' // <-- DODANE: Dostosuj ścieżkę w razie potrzeby
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import {
@@ -69,30 +68,16 @@ export const publishJobAction = withSentry(async (id: string) => {
     // Step 2: Find potential candidate matches using AI
     const matchingResults = await matchJobWithProfiles(job, publishedProfiles)
 
-    // Step 3: Save the matching results to the database
-    console.log(`[publishJobAction] Step 3: Saving matches for job ${id}...`)
-    if (matchingResults.length > 0) {
-      // Użyj job.id i wyników z poprzedniego kroku
-      await saveJobCandidates(job.id, matchingResults)
-      console.log(
-        `[publishJobAction] Successfully saved ${matchingResults.length} candidate matches for job ${id}.`,
-      )
-    } else {
-      console.log(
-        `[publishJobAction] No matching candidates found for job ${id}, skipping save step.`,
-      )
-    }
-
-    // Step 4: Notify matched profiles (using the same results)
+    // Step 3: Notify matched profiles (using the same results)
     const notificationResults = await notifyMatchedProfiles(
       job,
       matchingResults,
     )
 
-    // Step 5: Publish the job (update state to APPROVED)
+    // Step 4: Publish the job (update state to APPROVED)
     await publishJob(id)
 
-    // Step 6: Get the updated job details (needed for email)
+    // Step 5: Get the updated job details (needed for email)
     const updatedJobWithRelations = await getJobById(id)
     if (!updatedJobWithRelations) {
       console.error(
@@ -104,7 +89,7 @@ export const publishJobAction = withSentry(async (id: string) => {
       }
     }
 
-    // Step 7: Send confirmation email to job owner
+    // Step 6: Send confirmation email to job owner
     await sendJobPublishedEmail(
       updatedJobWithRelations as any, // Type assertion to resolve the type mismatch
       user,
@@ -114,6 +99,7 @@ export const publishJobAction = withSentry(async (id: string) => {
       success: true,
       message:
         'Job published successfully, matches saved, and notifications sent.',
+      jobCandidatesAmount: notificationResults.matchedCount,
     }
   } catch (error) {
     const errorMessage =

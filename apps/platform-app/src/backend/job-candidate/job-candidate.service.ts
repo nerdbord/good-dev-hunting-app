@@ -4,7 +4,7 @@ import {
   type JobCandidate,
   type JobCandidateWithRelations,
   type MatchResultInput,
-} from './jobCandidate.types'
+} from './job-candidate.types'
 
 /**
  * Creates or updates job candidate matches for a specific job.
