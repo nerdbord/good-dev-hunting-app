@@ -11,6 +11,9 @@ import { useState } from 'react'
 import { publishJobAction } from '../../_actions/mutations/publishJob'
 import { type JobModel } from '../../_models/job.model'
 import { storePendingPublishJob } from '../../_utils/job-storage.client'
+import { AddJobErrorModal } from '../AddJobErrorModal/AddJobErrorModal'
+import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
+import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
 import { LoginModal } from '../LoginModal/LoginModal'
@@ -76,19 +79,64 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
 
     try {
       setIsPublishing(true)
-      await publishJobAction(params.id)
-      router.push(`${AppRoutes.jobs}/${params.id}`)
-      router.refresh() // Refresh the page to show updated status
+
+      // Show verification in progress modal
+      showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
+
+      // Attempt to publish the job
+      const result = await publishJobAction(params.id)
+
+      // Close verification modal
+      closeModal()
+
+      if (result.success) {
+        // Show success modal
+        showModal(
+          <AddJobSuccessModal
+            closeModal={() => {
+              closeModal()
+              router.push(`${AppRoutes.jobs}/${params.id}`)
+              router.refresh() // Refresh the page to show updated status
+            }}
+          />,
+          'narrow',
+        )
+      } else {
+        // Show error modal
+        showModal(
+          <AddJobErrorModal
+            closeModal={() => {
+              closeModal()
+
+              // If verification failed, open the edit form to fix issues
+              if (
+                result.verificationResult &&
+                !result.verificationResult.isValid
+              ) {
+                // Refresh the page to show updated REJECTED status before editing
+                router.refresh()
+                handleEdit()
+              }
+            }}
+            isVerificationFailure={Boolean(
+              result.verificationResult && !result.verificationResult.isValid,
+            )}
+          />,
+          'narrow',
+        )
+      }
     } catch (error) {
       console.error('Error publishing job:', error)
+
+      // Close verification modal if it's open
+      closeModal()
+
+      // Show error modal for unexpected errors
       showModal(
-        <div>
-          <h2>Publishing Failed</h2>
-          <p>There was an error publishing this job. Please try again.</p>
-          <Button variant="primary" onClick={closeModal}>
-            Close
-          </Button>
-        </div>,
+        <AddJobErrorModal
+          closeModal={closeModal}
+          isVerificationFailure={false}
+        />,
         'narrow',
       )
     } finally {
@@ -99,7 +147,10 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
   // Job is editable if:
   // 1. User is the job owner, OR
   // 2. Job is anonymous (no owner)
-  const isEditable = params.isJobOwner || isAnonymousJob
+  // 3. And job state is either DRAFT or REJECTED
+  const isEditable =
+    (params.isJobOwner || isAnonymousJob) &&
+    (job.state === 'DRAFT' || job.state === 'REJECTED')
 
   // Show the publish button if:
   // 1. Job is in DRAFT state AND

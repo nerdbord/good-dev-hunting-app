@@ -212,6 +212,27 @@
     "cancel": "Anuluj",
     "or": "lub"
   },
+  "AddJobVerificationModal": {
+    "title": "Trwa weryfikacja",
+    "description": "Twoje zlecenie jest w tym momencie weryfikowane. Poczekaj kilka chwil.",
+    "inProgressBtn": "Trwa weryfikacja",
+    "closeBtn": "Zamknij"
+  },
+  "AddJobSuccessModal": {
+    "title": "Zlecenie pomyślnie wysłane",
+    "description": "Twoje zlecenie wylądowało w skrzynkach mailowych ponad 200 osób. Podgląd ogłoszenia został wysłany także na Twoją skrzynkę.",
+    "addAnotherJobBtn": "Dodaj kolejne zlecenie",
+    "closeBtn": "Zamknij"
+  },
+  "AddJobErrorModal": {
+    "title": "Zlecenie zawiera błędy",
+    "description": "Znaleźliśmy kilka nieprawidłowości w Twoim zleceniu. Popraw wskazane pola, aby opublikować ofertę.",
+    "errorBtn": "Pokaż błędy",
+    "closeBtn": "Zamknij",
+    "verificationFailedTitle": "Weryfikacja nie powiodła się",
+    "verificationFailedDescription": "Twoje zlecenie nie spełnia standardów jakości. Prosimy o przejrzenie i poprawienie oferty pracy.",
+    "editJobBtn": "Edytuj zlecenie"
+  },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",
     "comingSoon": "Formularz dodawania zlecenia wkrótce...",
@@ -247,6 +268,10 @@
     "employmentType": "Rodzaj zatrudnienia",
     "contractTypeLabel": "Rodzaj umowy",
     "contractTypeDesc": "Wybierz rodzaj umowy",
+    "contractTypeB2B": "B2B",
+    "contractTypeEmploymentContract": "Umowa o pracę",
+    "contractTypeSpecificWork": "Umowa o dzieło",
+    "contractTypeMandate": "Umowa zlecenie",
     "workMode": "Tryb pracy",
     "workModeStationary": "Stacjonarny",
     "workModeHybrid": "Hybrydowy",
@@ -288,6 +313,7 @@
     "cvUploadFailed": "Nie udało się przesłać CV",
     "applicationSubmissionFailed": "Nie udało się wysłać aplikacji",
     "submitting": "Wysyłanie...",
+    "rejectedStatus": "Zlecenie odrzucone - weryfikacja nie powiodła się",
     "warnChangeCvFile": "Zmiana CV dotyczy całego profilu, nie tylko jednego zlecenia."
   },
   "Hunter": {
@@ -365,6 +391,7 @@
     "noNegotiationsSubtitle": "Gdy aplikujesz na ofertę pracy, Twoje rozmowy pojawią się tutaj",
     "noSelectedNegotiation": "Wybierz rozmowę, aby zobaczyć wiadomości",
     "viewJob": "Zobacz ofertę",
+    "viewCV": "Zobacz moje CV",
     "sendMessage": "Wyślij wiadomość",
     "typeMessage": "Wpisz swoją wiadomość...",
     "today": "Dzisiaj",
@@ -394,7 +421,8 @@
     "fullTime": "Dostępny na pełen etat",
     "contract": "Dostępny do pracy na kontrakt",
     "partTime": "Dostępny na część etatu",
-    "remote": " Zdalnie"
+    "remote": " Zdalnie",
+    "unavailable": "Niedostępny do pracy"
   },
   "HunterFooter": {
     "contact": "Kontakt",
@@ -402,6 +430,19 @@
     "termsOfService": "Warunki korzystania z usługi",
     "addJob": "Dodaj zlecenie za darmo",
     "joinAsItSpecialist": "Dołącz jako IT specjalista"
+  },
+  "HunterWhyWorth": {
+    "title": "Dlaczego warto korzystać z DevHunting?",
+    "titleFirstLine": "Dlaczego warto korzystać z",
+    "titleSecondLine": "DevHunting?",
+    "freeTitle": "Całkowicie za darmo",
+    "freeDescription": "Dodaj swoje zlecenie bez opłat i otrzymaj oferty od specjalistów IT.",
+    "simpleTitle": "Prosty i szybki proces",
+    "simpleDescription": "Nie trać czasu na poszukiwania - programiści sami zgłoszą się do Ciebie z dostosowanymi propozycjami.",
+    "techTitle": "Nie musisz znać technologii",
+    "techDescription": "Opisz swój pomysł, a AI przekształci go w brief projektowy dla odpowiednich ekspertów.",
+    "addJobForFree": "Dodaj zlecenie za darmo",
+    "addJobInOneMinute": "Dodaj swoje zlecenie w 1 minutę."
   },
   "HunterHeader": {
     "addJob": "Dodaj zlecenie za darmo"
@@ -469,5 +510,55 @@
     "specialistsTitle1": "Specjaliści biegli",
     "specialistsTitle2": "w 50+ technologiach",
     "specialistsDescription": "Od Reacta, przez Pythona, po narzędzia UX/UI – nasi eksperci znają wszystkie technologie potrzebne do realizacji Twojego projektu."
+  },
+  "Metadata": {
+    "title": "Zleć projekt najlepszym specjalistom – GoodDevHunting",
+    "description": "Dodaj zlecenie i daj się znaleźć najlepszym specjalistom IT – bez opłat, bez pośredników. Nie trać czasu na poszukiwania – programiści sami zgłoszą się do Ciebie z dopasowanymi propozycjami. Warunki współpracy ustalacie razem – prosto, przejrzyście i bez stresu.",
+    "keywords": [
+      "zlecenia IT",
+      "znajdź programistę",
+      "freelancer IT",
+      "specjalista IT",
+      "realizacja projektu",
+      "tworzenie aplikacji",
+      "frontend developer",
+      "backend developer",
+      "testowanie aplikacji",
+      "design UI/UX",
+      "integracja API",
+      "rekrutacja IT",
+      "oferty dla firm",
+      "eksperci IT na żądanie",
+      "outsourcing IT",
+      "zdalny programista",
+      "zatrudnij developera",
+      "projekty programistyczne",
+      "team augmentation",
+      "zespół IT do projektu"
+    ]
+  },
+  "HunterHowItWorks": {
+    "howItWorks": "JAK TO DZIAŁA",
+    "stepsToFindExpert": "3 kroki do znalezienia eksperta",
+    "addJob": "Dodaj Zlecenie",
+    "describeNeeds": "Opisz swoje potrzeby i dodaj swoje zlecenie",
+    "inOneMinute": "w 1 minutę",
+    "exampleClientName": "Dawid Kowalczyk",
+    "exampleClientPosition": "CEO startupu, budującego chatboty dla pacjentów",
+    "exampleRequest": "Potrzebuję specjalisty od chatbotów, który zbuduje mi chatbota dla pacjentów na bazie ich historii choroby i zaleceń od lekarza.",
+    "addJobForFree": "Dodaj zlecenie za darmo",
+    "receiveOffers": "Otrzymaj Oferty",
+    "receiveOffersDescription": "Otrzymaj zgłoszenia od zweryfikowanych specjalistów zainteresowanych Twoim projektem.",
+    "offerResponse1": "Marcin odpowiedział na twoje zlecenie",
+    "offerPosition1": "Senior Software Engineer / AI Specialist",
+    "offerResponse2": "Aleksandra odpowiedziała na twoje zlecenie",
+    "offerPosition2": "Full Stack Developer / Healthcare Tech",
+    "offerResponse3": "Kamila odpowiedział na twoje zlecenie",
+    "offerPosition3": "Backend Developer / Chatbot Architect",
+    "hireExpert": "Zatrudnij Eksperta",
+    "hireExpertDescription": "Przejrzyj profile i wybierz osobę, która najlepiej pasuje do Twojego projektu i rozpocznij współpracę.",
+    "collaborationInvite": "Zaproszenie do współpracy",
+    "clientInvites": "Dawid zaprasza Cię do zlecenia:",
+    "projectTitle": "Chatbot dla branży healthtech"
   }
 }

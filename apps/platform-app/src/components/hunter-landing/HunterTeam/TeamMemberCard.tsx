@@ -24,7 +24,7 @@ export const TeamMemberCard = ({ member, isPlaceholder = false }: Props) => {
     } else if (member.employmentTypes.includes(EmploymentType.PART_TIME)) {
       return <p className={styles.availabilityInfo}>{t('partTime')}</p>
     } else {
-      return null
+      return <p className={styles.unavailabilityInfo}>{t('unavailable')}</p>
     }
   }
 
@@ -51,6 +51,7 @@ export const TeamMemberCard = ({ member, isPlaceholder = false }: Props) => {
           <p className={styles.memberPosition}>Intern Network Administrator</p>
           <p className={styles.memberLocation}>Neverland, Null Island</p>
         </div>
+        <p className={styles.unavailabilityInfo}>{t('unavailable')}</p>
       </div>
     )
   }

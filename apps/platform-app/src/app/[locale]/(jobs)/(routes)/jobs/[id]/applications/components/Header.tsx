@@ -1,8 +1,12 @@
 'use client'
 import { I18nNamespaces } from '@/i18n/request'
+import { AppRoutes } from '@/utils/routes'
+import { Logo } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import styles from '../page.module.scss'
+
 interface HeaderProps {
   jobTitle: string
   jobStatus?: 'PENDING' | 'ACTIVE' | 'CLOSED'
@@ -44,9 +48,9 @@ export default function Header({
         </div>
       </div>
       <div className={styles.headerRight}>
-        <div className={styles.logoContainer}>
-          <span className={styles.logoText}>GH</span>
-        </div>
+        <Link href={AppRoutes.home}>
+          <Logo withText={false} withLink={false} />
+        </Link>
       </div>
     </div>
   )

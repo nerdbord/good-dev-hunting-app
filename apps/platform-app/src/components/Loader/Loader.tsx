@@ -1,9 +1,5 @@
-'use client'
-
 import { AppRoutes } from '@/utils/routes'
 import classNames from 'classnames/bind'
-import { useLocale } from 'next-intl'
-import { usePathname } from 'next/navigation'
 import styles from './Loader.module.scss'
 
 const cx = classNames.bind(styles)
@@ -16,12 +12,16 @@ export enum LoaderVariant {
 interface LoaderProps {
   children?: React.ReactNode
   variant?: LoaderVariant
+  pathname: string
+  locale: string
 }
 
-export const Loader = ({ children, variant }: LoaderProps) => {
-  const pathname = usePathname()
-  const locale = useLocale()
-
+export const Loader = ({
+  children,
+  variant,
+  pathname,
+  locale,
+}: LoaderProps) => {
   const isHome = pathname === AppRoutes.home || pathname === `/${locale}`
   const loaderVariant =
     variant ?? (isHome ? LoaderVariant.Hunter : LoaderVariant.Default)

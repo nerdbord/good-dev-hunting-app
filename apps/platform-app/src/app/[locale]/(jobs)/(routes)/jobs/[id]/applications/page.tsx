@@ -10,6 +10,7 @@ import {
 } from '@/components/Chat'
 import chatStyles from '@/components/Chat/chat.module.scss'
 import { AdvancedLoader } from '@/components/Loader'
+import { useSSE } from '@/hooks/useSSE'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
@@ -20,6 +21,7 @@ import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header'
 import styles from './page.module.scss'
 import { type Applicant, type Message } from './types'
+
 export default function JobApplicationsPage() {
   const params = useParams()
   const jobId = params.id as string
@@ -35,6 +37,11 @@ export default function JobApplicationsPage() {
   } | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const t = useTranslations(I18nNamespaces.Applications)
+  // Reference to store IDs of messages that have already been added to the UI
+  const processedMessages = useRef<Set<string>>(new Set())
+
+  // Connect to SSE if we have a selected applicant
+  const { messages: sseMessages } = useSSE(selectedApplicant?.id || '')
 
   // Load job data and applications
   useEffect(() => {
@@ -86,6 +93,80 @@ export default function JobApplicationsPage() {
     loadData()
   }, [jobId])
 
+  // Process real-time messages
+  useEffect(() => {
+    if (!sseMessages.length || !selectedApplicant) return
+
+    // Get the latest message
+    const latestMessage = sseMessages[sseMessages.length - 1]
+
+    // Skip if this is a message from the recruiter or a connection event
+    if (
+      latestMessage.sender === 'recruiter' ||
+      latestMessage.type === 'connected'
+    )
+      return
+
+    // Skip if we already processed this message ID
+    if (processedMessages.current.has(latestMessage.id)) return
+
+    // Add to processed messages
+    processedMessages.current.add(latestMessage.id)
+
+    // Create a new message object
+    const newMessage: Message = {
+      id: latestMessage.id,
+      sender: 'applicant', // Since this is from the applicant
+      content: latestMessage.content,
+      timestamp: new Date(latestMessage.timestamp).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      }),
+    }
+
+    // Update the selected applicant with the new message
+    setSelectedApplicant((prev) => {
+      if (!prev) return prev
+
+      // Check if the message is already in the messages array
+      const messageExists = prev.messages.some((m) => m.id === newMessage.id)
+      if (messageExists) return prev
+
+      return {
+        ...prev,
+        messages: [...prev.messages, newMessage],
+        lastMessage: newMessage.content,
+        lastMessageTime: newMessage.timestamp,
+      }
+    })
+
+    // Update the applicants list
+    setApplicants((prev) =>
+      prev.map((applicant) =>
+        applicant.id === selectedApplicant.id
+          ? {
+              ...applicant,
+              lastMessage: newMessage.content,
+              lastMessageTime: newMessage.timestamp,
+            }
+          : applicant,
+      ),
+    )
+  }, [sseMessages, selectedApplicant])
+
+  // Clear processed messages if selected applicant changes
+  useEffect(() => {
+    processedMessages.current.clear()
+    // Pre-populate with existing message IDs
+    if (selectedApplicant?.messages) {
+      selectedApplicant.messages.forEach((msg) => {
+        processedMessages.current.add(msg.id)
+      })
+    }
+  }, [selectedApplicant?.id])
+
   // Scroll to bottom of messages when they change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -94,9 +175,13 @@ export default function JobApplicationsPage() {
   const handleSendMessage = async (messageText: string) => {
     if (!selectedApplicant) return
 
+    // Create a temporary ID for optimistic UI update
+    const tempId = `temp-${Date.now()}`
+    processedMessages.current.add(tempId)
+
     // For optimistic UI update
     const newMessage: Message = {
-      id: Date.now().toString(),
+      id: tempId,
       sender: 'recruiter',
       content: messageText,
       timestamp: new Date().toLocaleString('en-US', {
@@ -131,7 +216,10 @@ export default function JobApplicationsPage() {
         messageText,
       )
 
-      if (!result.success) {
+      if (result.success && result.message) {
+        // Add the real message ID to the processed list
+        processedMessages.current.add(result.message.id)
+      } else if (!result.success) {
         console.error('Error sending message:', result.error)
         // In a production app, we would handle this error better
       }
@@ -140,7 +228,6 @@ export default function JobApplicationsPage() {
     }
   }
 
-  console.log(applicants)
   // Render the sidebar content with applicant items
   const renderSidebarContent = () => (
     <div className={styles.applicantsList}>

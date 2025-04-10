@@ -7,9 +7,10 @@ import styles from "./Logo.module.scss";
 
 interface LogoProps {
   withLink?: boolean;
+  withText?: boolean;
 }
 
-export const Logo = ({ withLink = true }: LogoProps) => {
+export const Logo = ({ withLink = true, withText = true }: LogoProps) => {
   const { isDarkTheme } = useContext(ThemeContext);
 
   const logoContent = (
@@ -20,9 +21,8 @@ export const Logo = ({ withLink = true }: LogoProps) => {
         viewBox="0 0 44 26"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${styles.logoSvg} ${
-          isDarkTheme ? styles.darkTheme : styles.lightTheme
-        }`}
+        className={`${styles.logoSvg} ${isDarkTheme ? styles.darkTheme : styles.lightTheme
+          }`}
       >
         <rect
           x="0.8"
@@ -42,7 +42,7 @@ export const Logo = ({ withLink = true }: LogoProps) => {
         />
         <path d="M18 12.4V6H23.6V12.4H18Z" fill="var(--bg-color4)" />
       </svg>
-      <div className={styles.title}>Good Dev Hunting</div>
+      {withText && <div className={styles.title}>Good Dev Hunting</div>}
     </>
   );
 
@@ -54,5 +54,5 @@ export const Logo = ({ withLink = true }: LogoProps) => {
     );
   }
 
-  return <div className={styles.logo}>{logoContent}</div>;
+  return logoContent;
 };

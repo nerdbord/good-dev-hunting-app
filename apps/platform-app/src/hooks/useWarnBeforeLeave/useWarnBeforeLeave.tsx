@@ -10,9 +10,20 @@ export const useWarnBeforeLeave = (onLeave?: (url: string) => void) => {
 
   useEffect(() => {
     const handleLinkClick = (e: MouseEvent) => {
+      // Check if the click is on a dropdown or form element - ignore in those cases
+      const target = e.target as HTMLElement
+      const currentTarget = e.currentTarget as HTMLAnchorElement
+
+      // Don't intercept clicks on or within dropdowns, buttons, or form elements
+      const isFormElement = target.closest(
+        'button, select, input, label, .dropdown',
+      )
+      if (isFormElement) {
+        return
+      }
+
       e.preventDefault()
-      const target = e.currentTarget as HTMLAnchorElement
-      const href = target.getAttribute('href') as string
+      const href = currentTarget.getAttribute('href') as string
 
       onLeave && onLeave(href)
     }
