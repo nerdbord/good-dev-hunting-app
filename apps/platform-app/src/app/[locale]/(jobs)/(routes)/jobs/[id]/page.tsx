@@ -8,6 +8,8 @@ import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { Container } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import JobApplicationClient from '../../../(components)/JobApplicationClient/JobApplicationClient'
+import type { JobModel } from '../../../_models/job.model'
 
 interface JobPageProps {
   params: Promise<{
@@ -19,9 +21,8 @@ const JobPage = async ({ params }: JobPageProps) => {
   const t = await getTranslations(I18nNamespaces.Jobs)
   const { user } = await getAuthorizedUser()
   const { id: jobId } = await params
-
   // Fetch job data from database
-  let jobData
+  let jobData: JobModel
   try {
     jobData = await findJobById(jobId)
   } catch (error) {
@@ -41,7 +42,15 @@ const JobPage = async ({ params }: JobPageProps) => {
         <JobsTopBar
           header={t('jobPreview')}
           subHeader={`${jobData.jobName} (ID: ${jobId})`}
-        />
+        >
+          {jobData.state === 'APPROVED' && (
+            <JobApplicationClient
+              jobId={jobId}
+              jobName={jobData.jobName}
+              isUser={isUser}
+            />
+          )}
+        </JobsTopBar>
         <JobDetails
           job={jobData}
           params={{

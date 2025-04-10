@@ -16,6 +16,14 @@
     font-weight: 500;
     line-height: 16px; /* 133.333% */
   }
+
+  p {
+    color: var(--suggestion-text-color);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+  }
 }
 
 .placeholder {
@@ -33,4 +41,10 @@
   button {
     width: 100%;
   }
+}
+.warnChangeCvFile {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--suggestion-text-color);
 }

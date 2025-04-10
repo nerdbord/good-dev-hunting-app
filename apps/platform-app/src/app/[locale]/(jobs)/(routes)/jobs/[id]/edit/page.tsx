@@ -18,8 +18,9 @@ interface Props {
 
 export default async function EditJobDetailsPage({ params }: Props) {
   const t = await getTranslations(I18nNamespaces.Jobs)
-  const { user } = await getAuthorizedUser()
   const { id: jobId } = await params
+  const { user } = await getAuthorizedUser()
+
   // Fetch job data from database
   let jobData
   try {

@@ -80,6 +80,7 @@
     "sendMessage": "Send message",
     "changePicture": "Change picture",
     "uploadCVfile": "Upload CV file",
+    "removeCVfile": "Remove CV file",
     "uploadAnotherCVfile": "Change CV file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
@@ -113,7 +114,9 @@
     "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github",
     "loginWithLinkedin": "Login with LinkedIn",
-    "or": "or"
+    "or": "or",
+    "loginToApply": "Log in",
+    "loginToApplyDescription": "To apply for a job, you must be logged in."
   },
   "LoginHunter": {
     "login": "Login as talent Hunter",
@@ -136,7 +139,6 @@
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
     "characters": "characters",
     "cvFile": "CV file (optional)",
-    "choosenCVfile": "Uploaded file",
     "choosenCVfileName": "Your CV",
     "slug": "Custom URL",
     "slugTooltip": "Choose a unique name for your profile link (e.g., codemaster)"
@@ -312,7 +314,8 @@
     "cvUploadFailed": "CV upload failed",
     "applicationSubmissionFailed": "Failed to submit application",
     "submitting": "Submitting...",
-    "rejectedStatus": "Job rejected - verification failed"
+    "rejectedStatus": "Job rejected - verification failed",
+    "warnChangeCvFile": "The change to the CV applies to the entire profile, not just a single project."
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",
