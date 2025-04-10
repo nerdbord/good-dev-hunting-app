@@ -53,7 +53,6 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
 
   const user = session?.user
   const [serverError, setServerError] = useState<string | null>(null)
-  const [cvError, setCvError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const t = useTranslations(I18nNamespaces.Jobs)
@@ -72,7 +71,6 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
     { setSubmitting }: FormikHelpers<JobApplicationFormValues>,
   ) => {
     setServerError(null)
-    setCvError(null)
     setIsSubmitting(true)
 
     try {
@@ -104,14 +102,6 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
         await updateProfile(user.profileId, {
           cvUrl: finalCvUrl,
         })
-      }
-
-      // Check if we have a CV URL after all processing
-      if (!finalCvUrl) {
-        setCvError(t('cvRequired'))
-        setSubmitting(false)
-        setIsSubmitting(false)
-        return
       }
 
       // Submit the job application
@@ -187,8 +177,9 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
             </div>
 
             <div className={styles.formBox}>
+              <p>CV</p>
               <CVuploaderForm btnVariant="secondary" />
-              {cvError && <div className={styles.fieldError}>{cvError}</div>}
+              <p className={styles.warnChangeCvFile}>{t('warnChangeCvFile')}</p>
             </div>
 
             <div className={styles.maxWidthButton}>

@@ -45,14 +45,17 @@
 .contentWrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
 }
 
 .buttonsWrapper {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 10px;
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .containerLabel {
@@ -66,11 +69,11 @@
 }
 
 .choosenFile p {
-  font-size: 14px;
+  color: var(--text-color2);
+  font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 20px;
-  margin-bottom: 10px;
 
   a {
     text-decoration: none;

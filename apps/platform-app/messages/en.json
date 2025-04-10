@@ -80,6 +80,7 @@
     "sendMessage": "Send message",
     "changePicture": "Change picture",
     "uploadCVfile": "Upload CV file",
+    "removeCVfile": "Remove CV file",
     "uploadAnotherCVfile": "Change CV file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
@@ -138,7 +139,6 @@
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
     "characters": "characters",
     "cvFile": "CV file (optional)",
-    "choosenCVfile": "Uploaded file",
     "choosenCVfileName": "Your CV",
     "slug": "Custom URL",
     "slugTooltip": "Choose a unique name for your profile link (e.g., codemaster)"
@@ -287,7 +287,8 @@
     "cvRequired": "CV upload is required",
     "cvUploadFailed": "CV upload failed",
     "applicationSubmissionFailed": "Failed to submit application",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "warnChangeCvFile": "The change to the CV applies to the entire profile, not just a single project."
   },
   "Hunter": {
     "hero": "Find Trustworthy IT Specialists",
