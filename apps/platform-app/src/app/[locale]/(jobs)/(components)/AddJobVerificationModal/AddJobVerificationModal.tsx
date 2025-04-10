@@ -16,15 +16,15 @@ export const AddJobVerificationModal = ({
 
   return (
     <div className={styles.container} data-testid="addJobVerificationModal">
-      <button 
-        className={styles.closeButton} 
+      <button
+        className={styles.closeButton}
         onClick={closeModal}
         aria-label="Close modal"
       >
         ×
       </button>
       <div className={styles.loadingContainer}>
-      <span className={styles.dots}>
+        <span className={styles.dots}>
           <span></span>
           <span></span>
           <span></span>

@@ -11,19 +11,20 @@ import { getTranslations } from 'next-intl/server'
 import { notFound, redirect } from 'next/navigation'
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function EditJobDetailsPage({ params }: Props) {
   const t = await getTranslations(I18nNamespaces.Jobs)
+  const { id: jobId } = await params
   const { user } = await getAuthorizedUser()
 
   // Fetch job data from database
   let jobData
   try {
-    jobData = await findJobById(params.id)
+    jobData = await findJobById(jobId)
   } catch (error) {
     console.error('Error fetching job:', error)
     notFound()
@@ -37,7 +38,7 @@ export default async function EditJobDetailsPage({ params }: Props) {
   const isJobOwner = user?.id === jobData.createdById
 
   if (!isAnonymousJob && !isJobOwner) {
-    redirect(`${AppRoutes.jobs}/${params.id}`)
+    redirect(`${AppRoutes.jobs}/${jobId}`)
   }
 
   // Transform job model to form values

@@ -80,6 +80,7 @@
     "sendMessage": "Wyślij wiadmość",
     "changePicture": "Zmień zdjęcie",
     "uploadCVfile": "Wybierz plik CV",
+    "removeCVfile": "Usuń plik CV",
     "uploadAnotherCVfile": "Zmień plik CV",
     "importFromGithub": "Zaimportuj z Github",
     "importing": "Importowanie...",
@@ -113,7 +114,9 @@
     "description": "Zaloguj się za pomocą autoryzowanego profilu Github, zostań znaleziony przez łowców i również poluj na innych specjalistów.",
     "loginWithGithub": "Zaloguj się przez Github",
     "loginWithLinkedin": "Zaloguj się przez LinkedIn",
-    "or": "albo"
+    "or": "albo",
+    "loginToApply": "Zaloguj się",
+    "loginToApplyDescription": "Aby móc zgłosić się do zlecenia musisz być zalogowany"
   },
   "LoginHunter": {
     "login": "Zaloguj się jako łowca talentów",
@@ -136,7 +139,6 @@
     "bioPlaceholder": "Możesz użyć **markdown** do formatowania tekstu. [Linki](https://devhunting.co) są również obsługiwane.",
     "characters": "znaki",
     "cvFile": "Plik CV (opcjonalne)",
-    "choosenCVfile": "Wybrany plik",
     "choosenCVfileName": "Twoje CV",
     "slug": "Własny URL",
     "slugTooltip": "Wybierz unikalną nazwę dla swojego linku do profilu (np. mistrzkodu)"
@@ -311,7 +313,8 @@
     "cvUploadFailed": "Nie udało się przesłać CV",
     "applicationSubmissionFailed": "Nie udało się wysłać aplikacji",
     "submitting": "Wysyłanie...",
-    "rejectedStatus": "Zlecenie odrzucone - weryfikacja nie powiodła się"
+    "rejectedStatus": "Zlecenie odrzucone - weryfikacja nie powiodła się",
+    "warnChangeCvFile": "Zmiana CV dotyczy całego profilu, nie tylko jednego zlecenia."
   },
   "Hunter": {
     "hero": "Znajdź Zaufanych Specjalistów IT",

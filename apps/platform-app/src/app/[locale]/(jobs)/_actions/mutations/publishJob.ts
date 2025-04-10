@@ -41,8 +41,8 @@ export const publishJobAction = withSentry(async (id: string) => {
 
     // If the job is not valid, set the job state to REJECTED instead of leaving it as DRAFT
     if (!verificationResult.isValid) {
-      await rejectJob(id);
-      
+      await rejectJob(id)
+
       return {
         success: false,
         message: `Job verification failed: ${verificationResult.reasons.join(

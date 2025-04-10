@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  text-align: center;
+  align-items: center;
+}
+.buttonsContainer {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+
+  span {
+    margin: auto;
+  }
+}

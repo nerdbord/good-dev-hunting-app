@@ -23,7 +23,7 @@ export const AddJobSuccessModal = ({
 
   return (
     <div className={styles.container} data-testid="addJobSuccessModal">
-      <button 
+      <button
         className={styles.closeButton}
         onClick={handleGoToMyJobs}
         aria-label="Close modal"
@@ -39,11 +39,7 @@ export const AddJobSuccessModal = ({
             viewBox="0 0 33 25"
             fill="none"
           >
-            <path
-              d="M1.5 12.5L11 22L31.5 1.5"
-              stroke="white"
-              strokeWidth="3"
-            />
+            <path d="M1.5 12.5L11 22L31.5 1.5" stroke="white" strokeWidth="3" />
           </svg>
         </div>
       </div>

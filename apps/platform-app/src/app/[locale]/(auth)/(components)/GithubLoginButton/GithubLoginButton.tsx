@@ -10,6 +10,8 @@ import styles from './GithubLoginButton.module.scss'
 interface GithubLoginButtonProps {
   label?: string
   role: Roles.SPECIALIST | Roles.HUNTER
+  redirect?: boolean
+  redirectTo?: string
 }
 
 export const GithubLoginButton = (props: GithubLoginButtonProps) => {
@@ -21,6 +23,8 @@ export const GithubLoginButton = (props: GithubLoginButtonProps) => {
         setIsCalled(true)
         signIn('github', {
           callbackUrl: `${AppRoutes.oAuth}?role=${props.role}`,
+          redirect: props.redirect,
+          redirectTo: props.redirectTo,
         })
       }}
       variant={'secondary'}

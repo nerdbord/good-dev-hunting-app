@@ -84,9 +84,9 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     ),
     currency: Yup.string().when('budgetType', {
       is: BudgetType.FIXED,
-      then: () => 
+      then: () =>
         Yup.string().required(
-          t('currencyRequired', { defaultValue: 'Currency is required' })
+          t('currencyRequired', { defaultValue: 'Currency is required' }),
         ),
       otherwise: () => Yup.string().notRequired(),
     }),

@@ -37,14 +37,18 @@ export const Employment = () => {
     if (!initialized) {
       // Ensure at least one employment type is selected
       if (!values.employmentType || values.employmentType.length === 0) {
-        setFieldValue(EmploymentFormKeys.EMPLOYMENT_TYPE, [EmploymentType.FULL_TIME])
+        setFieldValue(EmploymentFormKeys.EMPLOYMENT_TYPE, [
+          EmploymentType.FULL_TIME,
+        ])
       }
-      
+
       // Ensure at least one employment mode is selected
       if (!values.employmentMode || values.employmentMode.length === 0) {
-        setFieldValue(EmploymentFormKeys.EMPLOYMENT_MODE, [EmploymentMode.REMOTE])
+        setFieldValue(EmploymentFormKeys.EMPLOYMENT_MODE, [
+          EmploymentMode.REMOTE,
+        ])
       }
-      
+
       setInitialized(true)
     }
   }, [initialized, setFieldValue, values])

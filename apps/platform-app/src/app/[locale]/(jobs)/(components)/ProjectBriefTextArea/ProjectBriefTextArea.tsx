@@ -4,33 +4,34 @@ import {
   BlockTypeSelect,
   CreateLink,
   ListsToggle,
+  MDXEditor,
   headingsPlugin,
   linkDialogPlugin,
   linkPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   toolbarPlugin,
-  MDXEditor,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 
 import { useFormikContext } from 'formik'
+import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState } from 'react'
 import type { CreateJobFormValues } from '../../_utils/types'
 import styles from './ProjectBriefTextArea.module.scss'
-import dynamic from 'next/dynamic'
+import './mdx.css'
 
 // Create a client-only inner editor component
-const EditorComponent = ({ 
-  value, 
-  name, 
+const EditorComponent = ({
+  value,
+  name,
   onBlur,
-  maxLength = 1500
+  maxLength = 1500,
 }: {
-  value: string;
-  name: string;
-  onBlur?: any;
-  maxLength?: number;
+  value: string
+  name: string
+  onBlur?: any
+  maxLength?: number
 }) => {
   const { setFieldValue } = useFormikContext<CreateJobFormValues>()
   const lastValueRef = useRef(value)
@@ -71,10 +72,9 @@ const EditorComponent = ({
 }
 
 // Dynamically import the editor component with no SSR
-const ClientOnlyEditor = dynamic(
-  () => Promise.resolve(EditorComponent),
-  { ssr: false }
-)
+const ClientOnlyEditor = dynamic(() => Promise.resolve(EditorComponent), {
+  ssr: false,
+})
 
 export interface TextAreaProps {
   value: string
@@ -95,7 +95,7 @@ export const ProjectBriefTextArea: React.FC<TextAreaProps> = ({
 }) => {
   const maxLength = 1500
   const [isClient, setIsClient] = useState(false)
-  
+
   // Only show editor on client-side
   useEffect(() => {
     setIsClient(true)
@@ -104,19 +104,15 @@ export const ProjectBriefTextArea: React.FC<TextAreaProps> = ({
   return (
     <div className={styles.editorWrapper}>
       {isClient ? (
-        <ClientOnlyEditor 
-          value={value} 
-          name={name} 
-          onBlur={onBlur} 
+        <ClientOnlyEditor
+          value={value}
+          name={name}
+          onBlur={onBlur}
           maxLength={maxLength}
         />
       ) : (
         // Simple textarea placeholder during SSR
-        <textarea 
-          className={styles.placeholder} 
-          value={value} 
-          readOnly 
-        />
+        <textarea className={styles.placeholder} value={value} readOnly />
       )}
     </div>
   )

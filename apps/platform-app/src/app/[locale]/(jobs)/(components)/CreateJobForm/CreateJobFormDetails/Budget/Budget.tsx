@@ -7,8 +7,8 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { Currency } from '@prisma/client'
 import { useFormikContext } from 'formik'
-import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import { BudgetType, type CreateJobFormValues } from '../../../../_utils/types'
 import { Card } from '../Card/Card'
 import styles from './Budget.module.scss'
@@ -78,7 +78,10 @@ export const Budget = () => {
     // If budgetType is explicitly specified, use that
     if (values.budgetType) {
       // Make sure it's a valid BudgetType
-      if (values.budgetType === BudgetType.FIXED || values.budgetType === BudgetType.REQUEST_QUOTE) {
+      if (
+        values.budgetType === BudgetType.FIXED ||
+        values.budgetType === BudgetType.REQUEST_QUOTE
+      ) {
         return values.budgetType
       }
     }
@@ -103,9 +106,9 @@ export const Budget = () => {
 
   const handleBudgetTypeChange = async (type: BudgetType) => {
     // Force the type to be a valid BudgetType enum value
-    const budgetTypeValue = type === BudgetType.FIXED ? 
-      BudgetType.FIXED : BudgetType.REQUEST_QUOTE
-    
+    const budgetTypeValue =
+      type === BudgetType.FIXED ? BudgetType.FIXED : BudgetType.REQUEST_QUOTE
+
     await setFieldValue(BudgetFormKeys.BUDGET_TYPE, budgetTypeValue)
     await setFieldTouched(BudgetFormKeys.BUDGET_TYPE)
 
@@ -113,9 +116,15 @@ export const Budget = () => {
       // Set a default currency value to avoid validation errors
       await setFieldValue(BudgetFormKeys.CURRENCY, Currency.PLN)
       // Set to null instead of 0 for budget fields
-      await setFieldValue(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION, null)
-      await setFieldValue(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION, null)
-      
+      await setFieldValue(
+        BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION,
+        null,
+      )
+      await setFieldValue(
+        BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION,
+        null,
+      )
+
       // Validate budget type but not other fields for REQUEST_QUOTE
       await validateField(BudgetFormKeys.BUDGET_TYPE)
     }
@@ -125,12 +134,18 @@ export const Budget = () => {
       if (!values.currency) {
         await setFieldValue(BudgetFormKeys.CURRENCY, Currency.PLN)
       }
-      
+
       // Touch fields so validation errors show up
       await setFieldTouched(BudgetFormKeys.CURRENCY, true)
-      await setFieldTouched(BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION, true)
-      await setFieldTouched(BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION, true)
-      
+      await setFieldTouched(
+        BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION,
+        true,
+      )
+      await setFieldTouched(
+        BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION,
+        true,
+      )
+
       // Validate all fields for FIXED budget type
       await validateField(BudgetFormKeys.BUDGET_TYPE)
       await validateField(BudgetFormKeys.CURRENCY)
@@ -153,7 +168,10 @@ export const Budget = () => {
               type="radio"
               name={BudgetFormKeys.BUDGET_TYPE}
               value={BudgetType.FIXED}
-              checked={String(values[BudgetFormKeys.BUDGET_TYPE]) === String(BudgetType.FIXED)}
+              checked={
+                String(values[BudgetFormKeys.BUDGET_TYPE]) ===
+                String(BudgetType.FIXED)
+              }
               onChange={() => handleBudgetTypeChange(BudgetType.FIXED)}
             />
             <span className={styles.customRadio}></span>
@@ -166,7 +184,10 @@ export const Budget = () => {
               type="radio"
               name={BudgetFormKeys.BUDGET_TYPE}
               value={BudgetType.REQUEST_QUOTE}
-              checked={String(values[BudgetFormKeys.BUDGET_TYPE]) === String(BudgetType.REQUEST_QUOTE)}
+              checked={
+                String(values[BudgetFormKeys.BUDGET_TYPE]) ===
+                String(BudgetType.REQUEST_QUOTE)
+              }
               onChange={() => handleBudgetTypeChange(BudgetType.REQUEST_QUOTE)}
             />
             <span className={styles.customRadio}></span>
@@ -221,7 +242,9 @@ export const Budget = () => {
                 }
                 name={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
                 dataTestId={BudgetFormKeys.MAX_BUDGET_FOR_PROJECT_REALISATION}
-                min={values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION] || 0}
+                min={
+                  values[BudgetFormKeys.MIN_BUDGET_FOR_PROJECT_REALISATION] || 0
+                }
               />
             </InputFormError>
             <InputFormError
@@ -235,9 +258,9 @@ export const Budget = () => {
                   <Button
                     key={index}
                     variant={
-                      value === values.currency || 
+                      value === values.currency ||
                       (value === Currency.PLN && !values.currency)
-                        ? 'secondary' 
+                        ? 'secondary'
                         : 'grayedOut'
                     }
                     onClick={() => handleCurrencyChange(value)}
