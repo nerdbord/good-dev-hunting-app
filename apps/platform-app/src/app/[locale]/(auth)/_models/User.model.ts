@@ -6,6 +6,7 @@ export interface UserModel extends User {
   githubUsername: string | null
   profileId: Profile['id'] | null
   profileSlug: Profile['slug'] | null
+  preferredLanguage: string
 }
 
 export function createUserModel(data: UserWithRelations): UserModel {
@@ -21,6 +22,7 @@ export function createUserModel(data: UserWithRelations): UserModel {
     createdAt: data.createdAt,
     profileId: data.profile?.id || null,
     profileSlug: data.profile?.slug || null,
+    preferredLanguage: data.preferredLanguage || '',
   }
 }
 
