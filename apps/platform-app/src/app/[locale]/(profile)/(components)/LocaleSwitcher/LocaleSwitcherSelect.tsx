@@ -1,5 +1,6 @@
 'use client'
 
+import { updatePreferredLanguage } from '@/app/[locale]/(auth)/_actions'
 import { HunterHeaderVariant } from '@/components/hunter-landing/HunterHeader/HunterHeader'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import useOutsideClick from '@/hooks/useOutsideClick'
@@ -7,6 +8,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
 import { GlobeIcon } from '@gdh/ui-system/icons'
 import classNames from 'classnames/bind'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState, useTransition } from 'react'
@@ -29,6 +31,7 @@ export const LocaleSwitcherSelect = ({
   const t = useTranslations(I18nNamespaces.LocaleSwitcher)
   const tt = useTranslations(I18nNamespaces.Buttons)
   const router = useRouter()
+  const { data: session, update: updateSession } = useSession()
   let currentPath = usePathname()
   const [isPending, startTransition] = useTransition()
   const [isOpen, setIsOpen] = useState(false)
@@ -55,6 +58,25 @@ export const LocaleSwitcherSelect = ({
     startTransition(() => {
       router.replace(`/${nextLocale}${currentPath}`)
       router.refresh()
+
+      // Update preference in DB and session if user is logged in
+      if (session?.user) {
+        updatePreferredLanguage(nextLocale)
+          .then(() => {
+            // Optimistically update client-side session
+            updateSession({
+              ...session,
+              user: {
+                ...session.user,
+                preferredLanguage: nextLocale,
+              },
+            })
+          })
+          .catch((err) => {
+            console.error('Failed to update language preference:', err)
+            // Optionally show a toast message to the user
+          })
+      }
     })
   }
 

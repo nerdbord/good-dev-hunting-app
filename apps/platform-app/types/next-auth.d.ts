@@ -6,12 +6,14 @@ declare module 'next-auth' {
     id: string
     email: string
     avatarUrl?: string | null
+    preferredLanguage?: string
   }
 
   interface AdapterUser {
     id: string
     email: string
     avatarUrl?: string | null
+    preferredLanguage?: string
   }
 
   /**
@@ -27,6 +29,7 @@ declare module 'next-auth' {
       profileId: string | null
       githubUsername: string | null
       profileSlug: string | null
+      preferredLanguage: string
     }
     provider: string
   }
@@ -44,5 +47,6 @@ declare module 'next-auth/jwt' {
     githubUsername: string | null
     provider: string
     profileSlug: string | null
+    preferredLanguage: string
   }
 }
