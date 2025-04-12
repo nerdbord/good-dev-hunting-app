@@ -220,7 +220,8 @@
   },
   "AddJobSuccessModal": {
     "title": "Zlecenie pomyślnie wysłane",
-    "description": "Twoje zlecenie wylądowało w skrzynkach mailowych ponad 200 osób. Podgląd ogłoszenia został wysłany także na Twoją skrzynkę.",
+    "description": "Wybraliśmy i powiadomiliśmy dla Ciebie {jobCandidatesAmount} najlepszych kandydatów spośród ponad 200 naszych specjalistów. Podgląd ogłoszenia został wysłany także na Twoją skrzynkę.",
+    "descriptionNoCandidates": "Obecnie nie mamy specjalistów spełniających wymagania Twojego ogłoszenia. Proces pozyskiwania kandydatów może potrwać dłużej, ale damy Ci znać, gdy tylko znajdziemy odpowiednie osoby.",
     "addAnotherJobBtn": "Dodaj kolejne zlecenie",
     "closeBtn": "Zamknij"
   },

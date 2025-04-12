@@ -220,7 +220,8 @@
   },
   "AddJobSuccessModal": {
     "title": "Job posted successfully",
-    "description": "Your job has landed in the mailboxes of over 200 people. The job preview has also been sent to your email.",
+    "description": "We’ve selected and notified {jobCandidatesAmount} top candidates for you from over 200 of our specialists. The job preview has also been sent to your email.",
+    "descriptionNoCandidates": "Currently, we don't have specialists that match your job requirements. It may take longer to receive applications, but we'll notify you as soon as we find suitable candidates.",
     "addAnotherJobBtn": "Add another job",
     "closeBtn": "Close"
   },

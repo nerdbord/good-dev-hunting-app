@@ -1,6 +1,6 @@
+import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { MailTemplateId, mailersendClient } from '@/lib/mailersendClient'
 import { Recipient } from 'mailersend'
-import { findAllApprovedProfiles } from '../../(profile)/_actions'
 import { type JobModel } from '../_models/job.model'
 import { BudgetType } from '../_utils/types'
 import { type MatchResult } from './matchJobWithProfiles'
@@ -13,28 +13,11 @@ export async function notifyMatchedProfiles(
   sentCount: number
 }> {
   try {
-    // Filter matches with score above threshold (e.g., 70)
-    const goodMatches = matchingResults.filter(
-      (match) => match.matchScore >= 70,
-    )
-    const approvedProfiles = await findAllApprovedProfiles()
-
-    // Find the corresponding profiles for good matches
-    const matchedProfiles = goodMatches
-      .map((match) => {
-        const profile = approvedProfiles.find((p) => p.id === match.profileId)
-        return {
-          profile,
-          matchReason: match.matchReason,
-        }
-      })
-      .filter((item) => item.profile) // Filter out undefined profiles
-
-    const matchedCount = matchedProfiles.length
     let sentCount = 0
 
     // Generate and send emails to each matched profile
-    for (const { profile, matchReason } of matchedProfiles) {
+    for (const { profileId, matchReason } of matchingResults) {
+      const profile = await findProfileById(profileId)
       if (!profile) continue
 
       try {
@@ -85,7 +68,7 @@ export async function notifyMatchedProfiles(
     }
 
     return {
-      matchedCount,
+      matchedCount: matchingResults.length,
       sentCount,
     }
   } catch (error) {

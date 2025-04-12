@@ -19,7 +19,6 @@ import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState } from 'react'
 import type { CreateJobFormValues } from '../../_utils/types'
 import styles from './ProjectBriefTextArea.module.scss'
-import './mdx.css'
 
 // Create a client-only inner editor component
 const EditorComponent = ({

@@ -93,6 +93,7 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
         // Show success modal
         showModal(
           <AddJobSuccessModal
+            jobCandidatesAmount={result.jobCandidatesAmount}
             closeModal={() => {
               closeModal()
               router.push(`${AppRoutes.jobs}/${params.id}`)

@@ -1,43 +1,68 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import groqService from '@/lib/groq.service'
+import { saveJobCandidates } from '@/backend/job-candidate/job-candidate.service'
+import openaiService from '@/lib/openai.service'
 import { type JobModel } from '../_models/job.model'
 
-// System prompt for job-profile matching
 const SYSTEM_PROMPT = `
-You are an AI assistant specialized in matching job requirements with developer profiles.
-Your task is to analyze the provided job and developer profiles and determine which profiles are the best match for the job.
+You are an AI recruitment specialist designed to match job requirements with developer candidates. Your task is to analyze the provided job description and candidate profiles, then identify up to 10 best-matching candidates.
 
-For each profile, consider the following factors:
-1. Technical skills match - How well do the developer's skills match the job requirements?
-2. Experience level match - Is the developer's seniority appropriate for the job?
-3. Employment preferences match - Do the job's employment type, mode, and location match the developer's preferences?
+## Input
+You will receive:
+1. A job description with requirements, responsibilities, and preferences
+2. Multiple candidate profiles containing skills, experience, and preferences
 
-Return a JSON array of profile IDs sorted by match quality, with the best matches first.
-Each item should include:
-- profileId: The ID of the profile
-- matchScore: A number between 0 and 100 indicating the match quality
-- matchReason: A brief explanation of why this profile is a good match
+## Evaluation Criteria
+For each candidate, carefully evaluate:
 
-Expected response:
+1. Technical Skills Match (40% weight)
+   - Required skills: How many critical required skills does the candidate possess?
+   - Nice-to-have skills: What additional relevant skills does the candidate have?
+   - Skill proficiency: How experienced is the candidate with each required technology?
+
+2. Experience Level Match (30% weight)
+   - Years of experience: Does the candidate meet the required experience threshold?
+   - Seniority level: Is the candidate's career level appropriate (junior, mid, senior)?
+   - Project complexity: Has the candidate worked on similar complexity projects?
+
+3. Employment Preferences Match (20% weight)
+   - Employment type: Does the contract type match (full-time, part-time, contract)?
+   - Work mode: Do remote/hybrid/on-site preferences align?
+   - Location: Is the candidate's location compatible with the position?
+
+4. Additional Factors (10% weight)
+   - Industry experience: Has the candidate worked in relevant industries?
+   - Cultural fit indicators: Does the candidate's background suggest alignment with company culture?
+   - Availability: When can the candidate start?
+
+## Output Format
+Return a JSON object with an array of up to 10 candidate matches, sorted by match quality (highest first):
+
 {
-    matches: [
-        {
-            profileId: 'profile-id-1',
-            matchScore: 95,
-            matchReason: 'Strong technical skills match with 8/10 required technologies. Senior level matches job requirements. Prefers remote work which matches job mode.',
-        },
-        {
-            profileId: 'profile-id-2',
-            matchScore: 80,
-            matchReason: 'Good technical match with 6/10 required technologies. Mid-level developer for senior role. Location preference matches.',
-        },
-    ],
+  "matches": [
+    {
+      "profileId": "candidate-123",
+      "matchScore": 92,
+      "matchBreakdown": {
+        "technicalSkills": 38,
+        "experienceLevel": 27,
+        "employmentPreferences": 18,
+        "additionalFactors": 9
+      },
+      "matchReason": "Excellent technical match with 9/10 required skills. Senior level experience (8 years) matches job requirements. Prefers remote work which aligns with position. Has experience in the financial sector."
+    }
+  ]
 }
 `
 
 export interface MatchResult {
   profileId: string
   matchScore: number
+  matchBreakdown: {
+    technicalSkills: number
+    experienceLevel: number
+    employmentPreferences: number
+    additionalFactors: number
+  }
   matchReason: string
 }
 
@@ -46,7 +71,6 @@ export async function matchJobWithProfiles(
   profiles: ProfileModel[],
 ): Promise<MatchResult[]> {
   try {
-    // Prepare the job and profiles data for the LLM
     const jobData = {
       id: job.id,
       name: job.jobName,
@@ -77,37 +101,39 @@ export async function matchJobWithProfiles(
       },
     }))
 
-    // Prepare the messages for the LLM
     const messages = [
       {
-        role: 'system',
-        content: SYSTEM_PROMPT,
+        role: 'system' as const,
+        content: `${SYSTEM_PROMPT} \nCandidate profiles: ${JSON.stringify(
+          profilesData,
+        )}`,
       },
       {
-        role: 'user',
+        role: 'user' as const,
         content: JSON.stringify({
           job: jobData,
-          profiles: profilesData,
         }),
       },
     ]
 
-    // Generate the response with JSON format
-    const jsonResponse = await groqService.generateResponse(messages, {
-      json: true,
+    const { matches } = await openaiService.generateJson<{
+      matches: MatchResult[]
+    }>(messages, {
+      model: 'gpt-4o',
       temperature: 0,
-      maxTokens: 2000,
+      max_tokens: 2000,
     })
 
-    // Parse the JSON response
-    const matches = JSON.parse(jsonResponse) as {
-      matches: MatchResult[]
+    if (matches.length > 0) {
+      await saveJobCandidates(job.id, matches)
+    } else {
+      console.log(
+        `[publishJobAction] No matching candidates found for job ${job.id}, skipping save step.`,
+      )
     }
-
-    return matches.matches || []
+    return matches || []
   } catch (error) {
     console.error('Error matching job with profiles:', error)
-    // Return empty array if matching fails
     return []
   }
 }

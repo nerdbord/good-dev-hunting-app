@@ -9,8 +9,10 @@ import styles from './AddJobSuccessModal.module.scss'
 
 export const AddJobSuccessModal = ({
   closeModal,
+  jobCandidatesAmount,
 }: {
   closeModal: () => void
+  jobCandidatesAmount: number | undefined
 }) => {
   const t = useTranslations(I18nNamespaces.AddJobSuccessModal)
   const tt = useTranslations(I18nNamespaces.Applications)
@@ -45,7 +47,13 @@ export const AddJobSuccessModal = ({
       </div>
 
       <h2 className={styles.header}>{t('title')}</h2>
-      <p className={styles.description}>{t('description')}</p>
+      <p className={styles.description}>
+        {jobCandidatesAmount
+          ? t('description', {
+              jobCandidatesAmount,
+            })
+          : t('descriptionNoCandidates')}
+      </p>
 
       <div className={styles.actions}>
         <Button variant="primary" onClick={handleGoToMyJobs}>
