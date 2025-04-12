@@ -6,8 +6,8 @@ import { useTranslations } from 'next-intl'
 import styles from './AddJobErrorModal.module.scss'
 
 interface AddJobErrorModalProps {
-  closeModal: () => void;
-  isVerificationFailure?: boolean;
+  closeModal: () => void
+  isVerificationFailure?: boolean
 }
 
 export const AddJobErrorModal = ({
@@ -47,7 +47,7 @@ export const AddJobErrorModal = ({
         {isVerificationFailure ? t('verificationFailedTitle') : t('title')}
       </h2>
       <p className={styles.description}>
-        {isVerificationFailure 
+        {isVerificationFailure
           ? t('verificationFailedDescription')
           : t('description')}
       </p>

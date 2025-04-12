@@ -11,7 +11,10 @@ import {
 // Define a type alias for the translation function that matches next-intl's pattern
 type TFunction = (key: string, params?: Record<string, any>) => string
 
-export const mapJobContract = (contractType: JobContractType, t?: TFunction): string => {
+export const mapJobContract = (
+  contractType: JobContractType,
+  t?: TFunction,
+): string => {
   if (t) {
     switch (contractType) {
       case JobContractType.B2B:
@@ -43,12 +46,11 @@ export const mapJobContract = (contractType: JobContractType, t?: TFunction): st
 }
 
 // If this mapping is not used anywhere else in the application, it can be safely removed once the application is fully operational and confirmed to work without it
-export const mappedJobContractType = (t?: TFunction) => Object.values(JobContractType).map(
-  (contractType) => ({
+export const mappedJobContractType = (t?: TFunction) =>
+  Object.values(JobContractType).map((contractType) => ({
     name: mapJobContract(contractType, t),
     value: contractType,
-  }),
-)
+  }))
 
 export const mapJobContractType = (
   contractType: string[],
@@ -93,7 +95,7 @@ export const mappedEmploymentMode = Object.values(EmploymentMode).map(
  */
 export function transformJobToFormValues(
   jobData: JobModel,
-  t?: TFunction
+  t?: TFunction,
 ): CreateJobFormValues {
   // Map contract type correctly
   const contractTypeValue = (jobData.contractType || 'B2B') as JobContractType
@@ -146,7 +148,10 @@ export function transformJobToFormValues(
 /**
  * Helper function to get a display name for contract types
  */
-function getContractTypeName(contractType: JobContractType, t?: TFunction): string {
+function getContractTypeName(
+  contractType: JobContractType,
+  t?: TFunction,
+): string {
   // Use the existing mapJobContract function to ensure consistent translations
   return mapJobContract(contractType, t)
 }
@@ -169,11 +174,11 @@ function determineBudgetType(jobData: JobModel): BudgetType {
   if (jobData.budgetType) {
     // Check in a case-insensitive way
     const budgetTypeUpper = jobData.budgetType.toUpperCase()
-    
+
     if (BudgetType.FIXED.toUpperCase() === budgetTypeUpper) {
       return BudgetType.FIXED
     }
-    
+
     if (BudgetType.REQUEST_QUOTE.toUpperCase() === budgetTypeUpper) {
       return BudgetType.REQUEST_QUOTE
     }

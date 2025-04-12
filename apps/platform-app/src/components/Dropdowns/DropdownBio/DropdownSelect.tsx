@@ -60,9 +60,9 @@ export const DropdownSelect = ({
 
   const handleDropdown = (e: React.MouseEvent) => {
     // Prevent event propagation and default behavior
-    e.stopPropagation();
-    e.preventDefault();
-    
+    e.stopPropagation()
+    e.preventDefault()
+
     setArrow(arrow === 'IoIosArrowDown' ? 'IoIosArrowUp' : 'IoIosArrowDown')
     setDropdownActive(!isDropdownActive)
     setHasInteracted(true)
@@ -72,9 +72,9 @@ export const DropdownSelect = ({
 
   const handleSelection = (e: React.MouseEvent, option: DropdownOption) => {
     // Prevent event propagation and default behavior
-    e.stopPropagation();
-    e.preventDefault();
-    
+    e.stopPropagation()
+    e.preventDefault()
+
     setFieldValue(name, option)
     if (name === WorkInformationFormKeys.HOURLY_RATE) {
       const { hourlyRateMin, hourlyRateMax } = parseHourlyRateValue(

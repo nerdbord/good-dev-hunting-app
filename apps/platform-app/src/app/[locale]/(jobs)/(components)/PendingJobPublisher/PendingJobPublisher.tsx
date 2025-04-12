@@ -9,8 +9,8 @@ import {
   clearPendingPublishJob,
   getPendingPublishJob,
 } from '../../_utils/job-storage.client'
-import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
 import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
+import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
 
 export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
   const [isProcessing, setIsProcessing] = useState(false)
@@ -31,28 +31,33 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
         setIsProcessing(true)
         try {
           // Show verification in progress modal
-          showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
-          
+          showModal(
+            <AddJobVerificationModal closeModal={closeModal} />,
+            'narrow',
+          )
+
           // Attempt to publish the job
           await publishJobAction(pendingJobId)
-          
+
           // Clear the pending job ID from storage
           clearPendingPublishJob()
-          
+
           // Close verification modal and show success modal
           closeModal()
           showModal(
-            <AddJobSuccessModal closeModal={() => {
-              closeModal()
-              // Remove the publish parameter from URL
-              router.replace(`/jobs/${pendingJobId}`)
-              router.refresh()
-            }} />,
+            <AddJobSuccessModal
+              closeModal={() => {
+                closeModal()
+                // Remove the publish parameter from URL
+                router.replace(`/jobs/${pendingJobId}`)
+                router.refresh()
+              }}
+            />,
             'narrow',
           )
         } catch (error) {
           console.error('Error publishing job after login:', error)
-          
+
           // Show error message
           closeModal()
           showModal(

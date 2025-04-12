@@ -11,12 +11,12 @@ import { useState } from 'react'
 import { publishJobAction } from '../../_actions/mutations/publishJob'
 import { type JobModel } from '../../_models/job.model'
 import { storePendingPublishJob } from '../../_utils/job-storage.client'
+import { AddJobErrorModal } from '../AddJobErrorModal/AddJobErrorModal'
+import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
+import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
 import { JobDetailsBasicInfo } from '../JobDetailsBasicInfo/JobDetailsBasicInfo'
 import { JobDetailsDetailsInfo } from '../JobDetailsMainInfo.tsx/JobDetailsDetailsInfo'
 import { LoginModal } from '../LoginModal/LoginModal'
-import { AddJobVerificationModal } from '../AddJobVerificationModal/AddJobVerificationModal'
-import { AddJobSuccessModal } from '../AddJobSuccessModal/AddJobSuccessModal'
-import { AddJobErrorModal } from '../AddJobErrorModal/AddJobErrorModal'
 import styles from './JobDetails.module.scss'
 
 interface JobDetailsProps {
@@ -79,27 +79,27 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
 
     try {
       setIsPublishing(true)
-      
+
       // Show verification in progress modal
       showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
-      
+
       // Attempt to publish the job
       const result = await publishJobAction(params.id)
-      
+
       // Close verification modal
       closeModal()
-      
+
       if (result.success) {
         // Show success modal
         showModal(
-          <AddJobSuccessModal 
+          <AddJobSuccessModal
             closeModal={() => {
               closeModal()
               router.push(`${AppRoutes.jobs}/${params.id}`)
               router.refresh() // Refresh the page to show updated status
-            }} 
-          />, 
-          'narrow'
+            }}
+          />,
+          'narrow',
         )
       } else {
         // Show error modal
@@ -107,28 +107,33 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
           <AddJobErrorModal
             closeModal={() => {
               closeModal()
-              
+
               // If verification failed, open the edit form to fix issues
-              if (result.verificationResult && !result.verificationResult.isValid) {
+              if (
+                result.verificationResult &&
+                !result.verificationResult.isValid
+              ) {
                 // Refresh the page to show updated REJECTED status before editing
                 router.refresh()
                 handleEdit()
               }
             }}
-            isVerificationFailure={Boolean(result.verificationResult && !result.verificationResult.isValid)}
+            isVerificationFailure={Boolean(
+              result.verificationResult && !result.verificationResult.isValid,
+            )}
           />,
           'narrow',
         )
       }
     } catch (error) {
       console.error('Error publishing job:', error)
-      
+
       // Close verification modal if it's open
       closeModal()
-      
+
       // Show error modal for unexpected errors
       showModal(
-        <AddJobErrorModal 
+        <AddJobErrorModal
           closeModal={closeModal}
           isVerificationFailure={false}
         />,
@@ -143,7 +148,8 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
   // 1. User is the job owner, OR
   // 2. Job is anonymous (no owner)
   // 3. And job state is either DRAFT or REJECTED
-  const isEditable = (params.isJobOwner || isAnonymousJob) && 
+  const isEditable =
+    (params.isJobOwner || isAnonymousJob) &&
     (job.state === 'DRAFT' || job.state === 'REJECTED')
 
   // Show the publish button if:
@@ -162,25 +168,27 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
       </section>
       <JobDetailsDetailsInfo job={job} />
 
-      <ProgressBar currentStep={5} maxSteps={5}>
-        <Button
-          variant="secondary"
-          disabled={!isEditable || isPublishing}
-          onClick={handleEdit}
-        >
-          {tButtons('edit')}
-        </Button>
-        {showPublishButton && (
+      {job.state !== 'APPROVED' && (
+        <ProgressBar currentStep={5} maxSteps={5}>
           <Button
-            variant="primary"
-            type="submit"
-            disabled={isPublishing}
-            onClick={handlePublish}
+            variant="secondary"
+            disabled={!isEditable || isPublishing}
+            onClick={handleEdit}
           >
-            {isPublishing ? 'Publishing...' : tButtons('publishJob')}
+            {tButtons('edit')}
           </Button>
-        )}
-      </ProgressBar>
+          {showPublishButton && (
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isPublishing}
+              onClick={handlePublish}
+            >
+              {isPublishing ? 'Publishing...' : tButtons('publishJob')}
+            </Button>
+          )}
+        </ProgressBar>
+      )}
     </>
   )
 }
