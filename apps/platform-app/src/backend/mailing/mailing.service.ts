@@ -281,7 +281,7 @@ export const sendNewApplicationNotificationToOwner = async (
       templateId: MailTemplateId.newJobApplicationForOwner,
       personalization,
       config: {
-        subject: `New application for "${jobTitle}" from ${applicantName}`,
+        subject: `You have a new application for "${jobTitle}" from ${applicantName}`,
         fromEmail: 'team@devhunting.co',
         fromName: 'Good Dev Hunting Team',
       },
