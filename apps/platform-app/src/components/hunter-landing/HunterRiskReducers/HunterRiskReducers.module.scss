@@ -215,8 +215,8 @@
 }
 
 .specialistText {
-  padding: 40px 0;
-  width: 40%;
+  padding: 40px 20px 40px 0;
+  width: 37%;
 
   h2 {
     font-size: 32px;
@@ -288,5 +288,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: left;
   max-width: 100%;
 }

@@ -4,6 +4,7 @@
   flex-direction: row;
   align-items: center;
   gap: 40px;
+
   @include mobile {
     flex-direction: column;
     gap: 12px;
