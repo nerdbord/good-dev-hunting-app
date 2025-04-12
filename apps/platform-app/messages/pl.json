@@ -9,10 +9,10 @@
   },
   "Index": {
     "title": "Trwa ładowanie danych",
-    "findtalents": "Poluj na talenty",
+    "findtalents": "Poluj na talentów",
     "hero": "Daj się znaleźć nowym zleceniom",
     "opensource": "Bezpłatna platforma open source dla specjalistów i specjalistek branży IT, gotowych na nowe wyzwania zawodowe.",
-    "joinAsAHunter:": "Dołącz jako łowca talentów",
+    "joinAsAHunter:": "Dołącz jako Zleceniodawca",
     "visitorBaner": "Utwórz darmowe konto, aby uzyskać nieograniczony dostęp do wszystkich profili",
     "preview": "Podgląd profilu",
     "profileViews": "Wyświetlenia profilu:",
@@ -119,12 +119,12 @@
     "loginToApplyDescription": "Aby móc zgłosić się do zlecenia musisz być zalogowany"
   },
   "LoginHunter": {
-    "login": "Zaloguj się jako łowca talentów",
-    "description": "Dołącz i zaloguj się zawsze za pomocą magicznego linku. Łowcy nie mają publicznych profili.",
+    "login": "Zaloguj się jako Zleceniodawca",
+    "description": "Dołącz i zaloguj się zawsze za pomocą magicznego linku. Zleceniodawcy nie mają publicznych profili.",
     "policyOne": "Przeczytałem i akceptuję",
     "policyTwo": "oraz",
     "policyThree": "Politykę prywatności",
-    "joinAsAHunter": "Dołącz jako Łowca",
+    "joinAsAHunter": "Dołącz jako Zleceniodawca",
     "loginWithLinkedin": "Zaloguj się przez LinkedIn",
     "or": "albo"
   },
@@ -446,7 +446,9 @@
     "addJobInOneMinute": "Dodaj swoje zlecenie w 1 minutę."
   },
   "HunterHeader": {
-    "addJob": "Dodaj zlecenie za darmo"
+    "addJob": "Dodaj zlecenie za darmo",
+    "myJobs": "Moje zlecenia",
+    "login": "Zaloguj"
   },
   "HunterHero": {
     "title": "Znajdz idealnego specjalistę IT do swojego projektu",

@@ -10,8 +10,9 @@ import LoginDev from './(components)/LoginDev/LoginDev'
 import LoginHunter from './(components)/LoginHunter/LoginHunter'
 
 const LoginPage = async () => {
-  const { user } = await getAuthorizedUser()
-  if (user) redirect(AppRoutes.profilesList)
+  const { userIsHunter, userIsSpecialist } = await getAuthorizedUser()
+  if (userIsHunter) redirect(AppRoutes.myJobs)
+  if (userIsSpecialist) redirect(AppRoutes.myProfile)
 
   return (
     <>

@@ -12,7 +12,7 @@
     "findtalents": "Find talents",
     "hero": "Let your next project find you",
     "opensource": "Open source, free hub for software developers to be present and ready for next commission work.",
-    "joinAsAHunter:": "Join as a hunter",
+    "joinAsAHunter:": "Join as a Employer",
     "visitorBaner": "Create a free account to get unlimited access to all profiles",
     "preview": "Profile preview",
     "profileViews": "Profile views",
@@ -111,7 +111,7 @@
   },
   "LoginDev": {
     "title": "Login as IT specialist",
-    "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
+    "description": " Login with authorised Github profile, get found by employers and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github",
     "loginWithLinkedin": "Login with LinkedIn",
     "or": "or",
@@ -119,12 +119,12 @@
     "loginToApplyDescription": "To apply for a job, you must be logged in."
   },
   "LoginHunter": {
-    "login": "Login as talent Hunter",
-    "description": "  Join and login always with magic link. Hunters don't have public profiles.",
+    "login": "Login as Employer",
+    "description": "Join and login always with magic link. Employers don't have public profiles.",
     "policyOne": "I have read and accept",
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
-    "joinAsAHunter": "Join as a Hunter",
+    "joinAsAHunter": "Join as a Employer",
     "loginWithLinkedin": "Login with LinkedIn",
     "or": "or"
   },
@@ -431,7 +431,9 @@
     "addJobInOneMinute": "Add your job in 1 minute."
   },
   "HunterHeader": {
-    "addJob": "Add job for free"
+    "addJob": "Add job for free",
+    "myJobs": "My jobs",
+    "login": "Log in"
   },
   "Applications": {
     "loading": "Loading...",
