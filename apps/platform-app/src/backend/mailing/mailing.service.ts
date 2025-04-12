@@ -2,6 +2,32 @@ import { mailersendClient, MailTemplateId } from '@/lib/mailersendClient'
 import { Recipient } from 'mailersend'
 import { type Personalization } from 'mailersend/lib/modules/Email.module'
 
+// Define JobModel type for email functions
+type JobModel = {
+  id: string
+  jobName: string
+  budgetType: string
+  minBudgetForProjectRealisation?: number
+  maxBudgetForProjectRealisation?: number
+  currency?: string
+  projectBrief: string
+  techStack: Array<{ name: string }>
+  remoteOnly: boolean
+  city?: string
+  country?: string
+  employmentTypes: string[]
+  employmentModes: string[]
+  // Add other properties as needed
+}
+
+// Define ProfileModel type for sendJobProposalEmail function
+type ProfileModel = {
+  id: string
+  email: string
+  fullName: string
+  // Add other properties as needed
+}
+
 export type ContactRequestEmailParams = {
   senderEmail: string
   senderFullName: string
@@ -160,13 +186,17 @@ export const sendApplicantUnreadMessagesNotification = async (
   username: string,
 ) => {
   try {
+    // Create a plain URL for the inbox
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const loginUrl = `${baseUrl}/my-profile/inbox`
+
     const personalization: Personalization[] = [
       {
         email,
         data: {
           username,
           unreadCount,
-          loginUrl: process.env.NEXT_PUBLIC_APP_URL + '/my-profile/inbox',
+          loginUrl,
         },
       },
     ]
@@ -207,13 +237,17 @@ export const sendJobOwnerUnreadMessagesNotification = async (
   username: string,
 ) => {
   try {
+    // Create a plain URL for the jobs page
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const loginUrl = `${baseUrl}/jobs/my`
+
     const personalization: Personalization[] = [
       {
         email,
         data: {
           username,
           unreadCount,
-          loginUrl: process.env.NEXT_PUBLIC_APP_URL + '/jobs/my',
+          loginUrl,
         },
       },
     ]
@@ -241,6 +275,79 @@ export const sendJobOwnerUnreadMessagesNotification = async (
   }
 }
 
+// Define the auth user interface based on the session.user structure
+interface AuthUser {
+  id: string
+  email: string
+  avatarUrl?: string | null
+  name?: string | null
+  roles: string[]
+  profileId?: string | null
+  githubUsername?: string | null
+  profileSlug?: string | null
+}
+
+/**
+ * Sends a confirmation email to the job owner after their job has been published
+ * Includes information about how many specialists received the job proposal
+ */
+export async function sendJobPublishedEmail(
+  job: JobModel,
+  user: AuthUser,
+  matchedProfilesCount: number,
+): Promise<boolean> {
+  try {
+    // Determine the message based on the number of matched profiles
+    let matchStatusMessage = ''
+
+    if (matchedProfilesCount === 0) {
+      matchStatusMessage =
+        "Currently, we don't have specialists that match your job requirements. It may take longer to receive applications, but we'll notify you as soon as we find suitable candidates."
+    } else if (matchedProfilesCount === 1) {
+      matchStatusMessage = `We've sent your job to 1 specialist who matches your requirements. You should start receiving applications soon.`
+    } else {
+      matchStatusMessage = `We've sent your job to ${matchedProfilesCount} specialists who match your requirements. You should start receiving applications soon.`
+    }
+
+    // Create plain URLs for the job and applications
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const jobUrl = `${baseUrl}/jobs/${job.id}`
+    const applicationsUrl = `${baseUrl}/jobs/${job.id}/applications`
+
+    await mailersendClient.sendMail({
+      recipients: [new Recipient(user.email, user.name || 'Job Poster')],
+      templateId: MailTemplateId.jobPublished,
+      config: {
+        subject: `Your job "${job.jobName}" has been published!`,
+        fromEmail: 'team@devhunting.co',
+        fromName: 'Good Dev Hunting Jobs',
+      },
+      personalization: [
+        {
+          email: user.email,
+          data: {
+            recipient_name: user.name || 'there',
+            job_title: job.jobName,
+            job_url: jobUrl,
+            matches_status: matchStatusMessage,
+            matched_count: matchedProfilesCount.toString(),
+            applications_url: applicationsUrl,
+            current_year: new Date().getFullYear().toString(),
+          },
+        },
+      ],
+    })
+
+    console.log(
+      `Job published confirmation email sent to ${user.email} for job ${job.id}`,
+    )
+    return true
+  } catch (error) {
+    console.error('Error sending job published email:', error)
+    return false
+  }
+}
+
 /**
  * Sends a notification email to a job owner when someone applies for their job
  * @param ownerEmail Job owner's email address
@@ -258,6 +365,7 @@ export const sendNewApplicationNotificationToOwner = async (
   applicationUrl: string,
 ) => {
   try {
+    // Use the plain application URL directly
     const personalization: Personalization[] = [
       {
         email: ownerEmail,
@@ -318,6 +426,7 @@ export const sendApplicationConfirmationToApplicant = async (
     const responseDeadline = new Date()
     responseDeadline.setDate(responseDeadline.getDate() + 7)
 
+    // Use the plain application URL directly
     const personalization: Personalization[] = [
       {
         email: applicantEmail,
@@ -356,6 +465,77 @@ export const sendApplicationConfirmationToApplicant = async (
     return { success: true }
   } catch (error) {
     console.error('Error sending application confirmation to applicant:', error)
+    return { success: false, error }
+  }
+}
+
+/**
+ * Sends a job proposal email to a matched profile
+ * @param job The job to send a proposal for
+ * @param profile The profile to send the proposal to
+ * @param matchReason The reason why the profile was matched with the job
+ * @returns Promise that resolves to a success status
+ */
+export const sendJobProposalEmail = async (
+  job: JobModel,
+  profile: ProfileModel,
+  matchReason: string,
+) => {
+  try {
+    // Create plain URLs for the job and application
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const jobUrl = `${baseUrl}/jobs/${job.id}`
+    const applicationUrl = `${baseUrl}/jobs/${job.id}/apply`
+
+    // Format budget string based on budget type
+    const budget =
+      job.budgetType === 'FIXED'
+        ? `${job.minBudgetForProjectRealisation} - ${job.maxBudgetForProjectRealisation} ${job.currency}`
+        : `I need a quote`
+
+    // Format job description with truncation if needed
+    const jobDescription = job.projectBrief
+
+    // Format job location
+    const jobLocation = job.remoteOnly
+      ? 'Remote'
+      : `${job.city}, ${job.country}`
+
+    await mailersendClient.sendMail({
+      recipients: [new Recipient(profile.email, profile.fullName)],
+      templateId: MailTemplateId.jobProposal,
+      config: {
+        subject: `🤑 We have a new job for you!`,
+        fromEmail: 'team@devhunting.co',
+        fromName: 'GDH Team',
+      },
+      personalization: [
+        {
+          email: profile.email,
+          data: {
+            job_title: job.jobName,
+            budget,
+            job_description: jobDescription,
+            job_tech_stack: job.techStack.map((tech) => tech.name).join(', '),
+            job_url: jobUrl,
+            job_location: jobLocation,
+            job_employment_types: job.employmentTypes.join(', '),
+            job_employment_modes: job.employmentModes.join(', '),
+            profile_name: profile.fullName,
+            match_reason: matchReason,
+            application_url: applicationUrl,
+            current_year: new Date().getFullYear().toString(),
+          },
+        },
+      ],
+    })
+
+    return { success: true }
+  } catch (error) {
+    console.error(
+      `Failed to send job proposal email to ${profile.email}:`,
+      error,
+    )
     return { success: false, error }
   }
 }

@@ -3,6 +3,7 @@ import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwit
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -17,9 +18,18 @@ export const HunterHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations(I18nNamespaces.HunterHeader)
   const router = useRouter()
+  const { data: session, status } = useSession()
 
   const handleAddJob = () => {
     router.push(AppRoutes.postJob)
+  }
+
+  const handleAuthAction = () => {
+    if (status === 'authenticated') {
+      router.push(AppRoutes.myJobs)
+    } else {
+      router.push(AppRoutes.signIn)
+    }
   }
 
   const toggleMobileMenu = () => {
@@ -32,8 +42,8 @@ export const HunterHeader = () => {
         <LogoLight />
         <div className={styles.menuDesktop}>
           <LocaleSwitcher variant={HunterHeaderVariant.HunterHeaderVariant} />
-          <Button variant="allpurple" onClick={handleAddJob}>
-            {t('addJob')}
+          <Button variant="secondary" onClick={handleAuthAction}>
+            {status === 'authenticated' ? t('myJobs') : t('login')}
           </Button>
         </div>
         <div className={styles.menuMobile}>
@@ -51,6 +61,9 @@ export const HunterHeader = () => {
               />
               <Button variant="allpurple" onClick={handleAddJob}>
                 {t('addJob')}
+              </Button>
+              <Button variant="secondary" onClick={handleAuthAction}>
+                {status === 'authenticated' ? t('myJobs') : t('login')}
               </Button>
             </div>
           </div>

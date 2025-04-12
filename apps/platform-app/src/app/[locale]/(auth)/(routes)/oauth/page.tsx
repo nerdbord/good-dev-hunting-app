@@ -37,10 +37,10 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
   // Check if user already has the role
   if (userHasRole(user, Role.SPECIALIST)) {
     return userHasProfile
-      ? redirect(AppRoutes.profilesList)
+      ? redirect(AppRoutes.myProfile)
       : redirect(AppRoutes.createProfile)
   } else if (userHasRole(user, Role.HUNTER)) {
-    return redirect(AppRoutes.profilesList)
+    return redirect(AppRoutes.myJobs)
   }
 
   // Assign role and send notifications
@@ -61,10 +61,10 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
   // We need to use updated user here because session is not updated yet
   if (userHasRole(updatedUser, Role.SPECIALIST)) {
     return userHasProfile
-      ? redirect(AppRoutes.profilesList)
+      ? redirect(AppRoutes.myProfile)
       : redirect(AppRoutes.createProfile)
   } else if (userHasRole(updatedUser, Role.HUNTER)) {
-    return redirect(AppRoutes.profilesList)
+    return redirect(AppRoutes.myJobs)
   }
 }
 

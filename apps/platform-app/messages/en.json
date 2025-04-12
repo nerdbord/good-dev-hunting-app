@@ -431,7 +431,9 @@
     "addJobInOneMinute": "Add your job in 1 minute."
   },
   "HunterHeader": {
-    "addJob": "Add job for free"
+    "addJob": "Add job for free",
+    "myJobs": "My jobs",
+    "login": "Log in"
   },
   "Applications": {
     "loading": "Loading...",

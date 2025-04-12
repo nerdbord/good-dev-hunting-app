@@ -446,7 +446,9 @@
     "addJobInOneMinute": "Dodaj swoje zlecenie w 1 minutę."
   },
   "HunterHeader": {
-    "addJob": "Dodaj zlecenie za darmo"
+    "addJob": "Dodaj zlecenie za darmo",
+    "myJobs": "Moje zlecenia",
+    "login": "Zaloguj"
   },
   "HunterHero": {
     "title": "Znajdz idealnego specjalistę IT do swojego projektu",

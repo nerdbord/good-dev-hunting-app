@@ -11,7 +11,7 @@ import LoginHunter from './(components)/LoginHunter/LoginHunter'
 
 const LoginPage = async () => {
   const { user } = await getAuthorizedUser()
-  if (user) redirect(AppRoutes.profilesList)
+  if (user) redirect(AppRoutes.home)
 
   return (
     <>
