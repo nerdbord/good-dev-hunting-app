@@ -1,8 +1,6 @@
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
-import { MailTemplateId, mailersendClient } from '@/lib/mailersendClient'
-import { Recipient } from 'mailersend'
+import { sendJobProposalEmail } from '@/backend/mailing/mailing.service'
 import { type JobModel } from '../_models/job.model'
-import { BudgetType } from '../_utils/types'
 import { type MatchResult } from './matchJobWithProfiles'
 
 export async function notifyMatchedProfiles(
@@ -21,44 +19,27 @@ export async function notifyMatchedProfiles(
       if (!profile) continue
 
       try {
-        // Send email using mailersendClient
-        await mailersendClient.sendMail({
-          recipients: [new Recipient(profile.email, profile.fullName)],
-          templateId: MailTemplateId.jobProposal,
-          config: {
-            subject: `🤑 We have a new job for you!`,
-            fromEmail: 'team@devhunting.co',
-            fromName: 'GDH Team',
-          },
-          personalization: [
-            {
-              email: profile.email,
-              data: {
-                job_title: job.jobName,
-                budget:
-                  job.budgetType === BudgetType.FIXED
-                    ? `${job.minBudgetForProjectRealisation} -  ${job.maxBudgetForProjectRealisation} ${job.currency}`
-                    : `I need a quote`,
-                job_description:
-                  job.projectBrief.substring(0, 300) +
-                  (job.projectBrief.length > 300 ? '...' : ''),
-                job_tech_stack: job.techStack
-                  .map((tech) => tech.name)
-                  .join(', '),
-                job_url: `${process.env.NEXT_PUBLIC_APP_URL}/jobs/${job.id}`,
-                job_location: job.remoteOnly
-                  ? 'Remote'
-                  : `${job.city}, ${job.country}`,
-                job_employment_types: job.employmentTypes.join(', '),
-                job_employment_modes: job.employmentModes.join(', '),
-                profile_name: profile.fullName,
-                match_reason: matchReason,
-                application_url: `${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/jobs/${job.id}/apply`,
-                current_year: new Date().getFullYear().toString(),
-              },
-            },
-          ],
-        })
+        // Send job proposal email using the mailing service
+        // Convert job to the format expected by sendJobProposalEmail
+        const jobData = {
+          id: job.id,
+          jobName: job.jobName,
+          budgetType: job.budgetType,
+          minBudgetForProjectRealisation:
+            job.minBudgetForProjectRealisation || undefined,
+          maxBudgetForProjectRealisation:
+            job.maxBudgetForProjectRealisation || undefined,
+          currency: job.currency?.toString() || undefined,
+          projectBrief: job.projectBrief,
+          techStack: job.techStack,
+          remoteOnly: job.remoteOnly,
+          city: job.city,
+          country: job.country,
+          employmentTypes: job.employmentTypes,
+          employmentModes: job.employmentModes,
+        }
+
+        const result = await sendJobProposalEmail(jobData, profile, matchReason)
 
         sentCount++
         console.log(`Email sent to ${profile.email} for job ${job.id}`)

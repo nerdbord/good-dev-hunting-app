@@ -13,10 +13,9 @@
 .title {
   color: var(--hunter-landing-text-color);
   font-size: 38px;
+  font-weight: 500;
   line-height: 40px;
-  letter-spacing: 0%;
   @include mobile {
-    font-weight: 500;
     font-size: 26px;
     line-height: 30px;
     letter-spacing: 0%;
