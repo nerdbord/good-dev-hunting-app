@@ -560,5 +560,9 @@
     "collaborationInvite": "Zaproszenie do współpracy",
     "clientInvites": "Dawid zaprasza Cię do zlecenia:",
     "projectTitle": "Chatbot dla branży healthtech"
+  },
+  "HunterCTA": {
+    "title": "Opisz swój projekt i wybierz najlepszego eskperta",
+    "button": "Dodaj zlecenie za darmo"
   }
 }
