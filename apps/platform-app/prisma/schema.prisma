@@ -16,7 +16,7 @@ model User {
   nerdbordUserId       String?          @unique
   emailVerified        DateTime?
   createdAt            DateTime         @default(now())
-  preferredLanguage    String?
+  preferredLanguage    String           @default("en")
   accounts             Account[]
   sentApplications     Application[]    @relation("applicant")
   receivedApplications Application[]    @relation("jobOwner")

@@ -1,61 +1,75 @@
+// auth.ts
 import { prisma } from '@/lib/prismaClient'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import NextAuth, { type AdapterUser } from 'next-auth'
+import { type PrismaClient } from '@prisma/client' // Added PrismaClient type
+import NextAuth, { type AdapterUser, type NextAuthConfig } from 'next-auth' // Added NextAuthConfig
+import type { Adapter } from 'next-auth/adapters' // Added Adapter type
 import { type JWT } from 'next-auth/jwt'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
+import { getRequestConfig } from 'next-intl/server' // Added next-intl import
+import { type NextRequest } from 'next/server' // Added NextRequest
 import { findUserById } from './app/[locale]/(auth)/_actions'
 import { createOrUpdateGitHubDetailsForUser } from './backend/github-details/github-details.service'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
 import { AppRoutes } from './utils/routes'
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
-  adapter: PrismaAdapter(prisma),
+const DEFAULT_LOCALE = 'en'
+
+// --- Custom Prisma Adapter (minimal version) ---
+function CustomPrismaAdapter(p: PrismaClient, locale: string): Adapter {
+  const originalAdapter = PrismaAdapter(p)
+  return {
+    ...originalAdapter,
+    createUser: async (data) => {
+      // Inform TS we know we're passing an extra field. Prisma adapter handles it.
+      // @ts-expect-error - Passing extra 'preferredLanguage' field.
+      const user = await originalAdapter.createUser({
+        ...data,
+        // @ts-expect-error - Passing extra 'preferredLanguage' field.
+        preferredLanguage: locale || DEFAULT_LOCALE,
+      })
+      return user
+    },
+  }
+}
+
+// --- Function to create Auth Config ---
+const createAuthConfig = (locale: string): NextAuthConfig => ({
+  adapter: CustomPrismaAdapter(prisma, locale), // Use custom adapter
   session: {
     strategy: 'jwt',
   },
   providers: [
+    // Original providers (NO emailVerified added here)
     LinkedIn({
       clientId: process.env.LINKEDIN_CLIENT_ID,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
-      profile: (profile: LinkedInProfile): AdapterUser => {
-        return {
-          id: profile.sub.toString(),
-          email: profile.email,
-          avatarUrl: profile.picture,
-        }
-      },
+      profile: (profile: LinkedInProfile): AdapterUser => ({
+        id: profile.sub.toString(),
+        email: profile.email,
+        avatarUrl: profile.picture,
+        // No emailVerified here
+      }),
     }),
     Github({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
-      profile: (profile: GitHubProfile): AdapterUser => {
-        return {
-          id: profile.id.toString(),
-          email: profile.email as AdapterUser['email'],
-          avatarUrl: profile.avatar_url,
-        }
-      },
+      profile: (profile: GitHubProfile): AdapterUser => ({
+        id: profile.id.toString(),
+        email: profile.email as AdapterUser['email'],
+        avatarUrl: profile.avatar_url,
+        // No emailVerified here
+      }),
     }),
     {
       id: 'email',
       name: 'Email',
       type: 'email',
-      maxAge: 60 * 60 * 24, // Email link will expire in 24 hours
-      sendVerificationRequest: async ({
-        url, // magic link
-        identifier, // user email
-      }: {
-        url: string
-        identifier: string
-      }) => {
+      maxAge: 60 * 60 * 24,
+      sendVerificationRequest: async ({ url, identifier }) => {
         try {
           await sendMagicLinkEmail(identifier, url)
         } catch (error) {
@@ -65,16 +79,18 @@ export const {
     },
   ],
   pages: {
-    // must be named like this - otherwise throws error when route with search params
     signIn: AppRoutes.signIn,
     error: AppRoutes.error,
   },
-
   callbacks: {
     async jwt({ token, user, account, profile, trigger, session }) {
+      // Logic focused on preferredLanguage
+      let userLanguage = token.preferredLanguage
+
       try {
         if (trigger === 'signUp' && user) {
-          // Create token during sign-up, include profile data if available
+          // Read the language potentially set by the adapter
+          userLanguage = user.preferredLanguage || DEFAULT_LOCALE
           token = {
             ...token,
             id: user.id as JWT['id'],
@@ -85,16 +101,20 @@ export const {
             provider: account?.provider as JWT['provider'],
             profileId: null,
             profileSlug: null,
-            preferredLanguage: user.preferredLanguage || 'en',
+            preferredLanguage: userLanguage, // Set determined language
             // @ts-expect-error - user.roles exist because it is autogenerated by prisma
             roles: user.roles,
             lastValidated: new Date().toISOString(),
+            // NO emailVerified here
           }
-        } else if ((trigger === 'signIn' && user?.id) || !token.lastValidated) {
-          // Fetch the latest user data from the database on sign-in
-          // Handle tokens without lastValidated (e.g., for users logged in before implementation of new auth in PR 373)
+        } else if (
+          (trigger === 'signIn' && user?.id) ||
+          !token.lastValidated ||
+          !token.preferredLanguage // Re-fetch if language is missing
+        ) {
           const foundUser = await findUserById(user?.id || token.id)
           if (foundUser) {
+            userLanguage = foundUser.preferredLanguage || DEFAULT_LOCALE // Get from DB
             token = {
               ...token,
               id: foundUser.id,
@@ -105,55 +125,45 @@ export const {
               githubUsername: foundUser.githubUsername,
               profileId: foundUser.profileId,
               profileSlug: foundUser.profileSlug,
-              preferredLanguage: foundUser.preferredLanguage,
-
-              // Fetch provider name on signIn
-              provider: account?.provider as JWT['provider'],
+              preferredLanguage: userLanguage, // Set from DB
+              provider:
+                (account?.provider as JWT['provider']) || token.provider,
               lastValidated: new Date().toISOString(),
+              // NO emailVerified here
             }
           } else {
-            // User no longer exists, invalidate the token
             return null
           }
         } else if (trigger === 'update' && session?.user) {
-          // Update token based on session updates from the client
-
+          userLanguage = session.user.preferredLanguage || DEFAULT_LOCALE // Get from session
           token = {
             ...token,
             avatarUrl: session.user.avatarUrl,
             name: session.user.name,
             profileId: session.user.profileId,
             profileSlug: session.user.profileSlug,
-            preferredLanguage: session.user.preferredLanguage,
+            preferredLanguage: userLanguage, // Set from session
             lastValidated: new Date().toISOString(),
-            // add more fields here if needed in future to do an update through useSession().update
+            // NO emailVerified here
           }
         } else {
-          if (token.roles.length === 1) {
-            // Update roles if there is no updated roles on signUp
-            // (we can't update roles through session update in server component)
-            // this is a workaround for now
-            const foundUser = await findUserById(token.id)
-            if (foundUser) {
-              token = {
-                ...token,
-                roles: foundUser.roles,
-                preferredLanguage: foundUser.preferredLanguage,
-              }
-            }
-          }
-
-          // For other calls, conditionally validate token based on lastValidated
+          // Revalidation logic...
           const FIVE_MINUTES = 5 * 60 * 1000
           const now = Date.now()
-          const lastValidated = new Date(
-            token.lastValidated as string,
-          ).getTime()
+          const lastValidated = token.lastValidated
+            ? new Date(token.lastValidated as string).getTime()
+            : 0
+          let needsRevalidation =
+            now - lastValidated > FIVE_MINUTES || !token.preferredLanguage
 
-          if (now - lastValidated > FIVE_MINUTES) {
-            // Revalidate token by fetching latest user data
+          if (token.roles.length === 1) {
+            needsRevalidation = true
+          }
+
+          if (needsRevalidation) {
             const foundUser = await findUserById(token.id)
             if (foundUser) {
+              userLanguage = foundUser.preferredLanguage || DEFAULT_LOCALE // Get from DB
               token = {
                 ...token,
                 id: foundUser.id,
@@ -164,25 +174,31 @@ export const {
                 githubUsername: foundUser.githubUsername,
                 profileId: foundUser.profileId,
                 profileSlug: foundUser.profileSlug,
-                preferredLanguage: foundUser.preferredLanguage,
-                provider: account?.provider as JWT['provider'],
+                preferredLanguage: userLanguage, // Set from DB
+                provider: token.provider,
                 lastValidated: new Date().toISOString(),
+                // NO emailVerified here
               }
             } else {
-              // User no longer exists, invalidate the token
               return null
             }
           }
         }
       } catch (error) {
         console.error('auth.ts - Error in JWT callback:', error)
-        return null
+        if (trigger === 'signIn' || trigger === 'signUp') return null
+        return token
+      }
+
+      // Final language fallback
+      if (!token.preferredLanguage) {
+        token.preferredLanguage = DEFAULT_LOCALE
       }
 
       return token
     },
     session({ session, token }) {
-      // @ts-expect-error - emailVerified is redundant
+      // @ts-expect-error - Intentionally omitting emailVerified from session.user as it's not needed.
       session.user = {
         id: token.id,
         email: token.email,
@@ -192,10 +208,10 @@ export const {
         githubUsername: token.githubUsername,
         profileId: token.profileId,
         profileSlug: token.profileSlug,
-        preferredLanguage: token.preferredLanguage,
+        preferredLanguage: token.preferredLanguage || DEFAULT_LOCALE,
+        // emailVerified: token.emailVerified as Date | null,
       }
       session.provider = token.provider
-
       return session
     },
   },
@@ -212,3 +228,35 @@ export const {
     },
   },
 })
+
+// --- Dynamic Initialization (bez zmian) ---
+const initializeAuth = async (req?: NextRequest) => {
+  let locale = DEFAULT_LOCALE
+  if (req) {
+    try {
+      const config = await getRequestConfig({ locale: undefined as any })
+      locale = config.locale
+    } catch (error) {
+      console.error(
+        "[Auth Initialize] Error getting locale, using default 'en':",
+        error,
+      )
+      locale = DEFAULT_LOCALE
+    }
+  }
+  return NextAuth(createAuthConfig(locale))
+}
+
+// --- Modified Exports (bez zmian) ---
+export const GET = async (req: NextRequest) => {
+  const authInstance = await initializeAuth(req)
+  return authInstance.handlers.GET(req)
+}
+
+export const POST = async (req: NextRequest) => {
+  const authInstance = await initializeAuth(req)
+  return authInstance.handlers.POST(req)
+}
+
+const { auth, signIn, signOut } = NextAuth(createAuthConfig(DEFAULT_LOCALE))
+export { auth, signIn, signOut }
