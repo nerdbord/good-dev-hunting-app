@@ -5,7 +5,7 @@
   position: relative;
   overflow: visible;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1000px;
   height: 388px;
   margin: 0 auto;
   border-radius: 4px;
@@ -40,7 +40,6 @@
   line-height: 40px;
   letter-spacing: 0%;
   text-align: center;
-  color: #000;
   margin-bottom: 24px;
   max-width: 600px;
 }
@@ -64,10 +63,10 @@
   letter-spacing: 0%;
   text-align: center;
   vertical-align: middle;
-  transition: background-color 0.3s ease;
-
+  transition: all 0.3s ease;
   &:hover {
-    background-color: darken(rgba(125, 84, 241, 1), 10%);
+    background-color: #6a46d5;
+    transform: scale(1.05);
   }
 }
 
