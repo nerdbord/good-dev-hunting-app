@@ -71,8 +71,11 @@ export const HunterWhyWorth = (props: Props) => {
     <div className={styles.fullWidthWrapper}>
       <div className={styles.wrapper}>
         <h2 className={styles.title}>
-          <span className={styles.titleFirstLine}>{t('titleFirstLine')}</span>
-          <span className={styles.titleSecondLine}>{t('titleSecondLine')}</span>
+          {/*     <span className={styles.titleFirstLine}>{t('titleFirstLine')}</span>
+          <span className={styles.titleSecondLine}>{t('titleSecondLine')}</span> */}
+          <span className={styles.titleFirstLine}>
+            {t('titleFirstLine')} {t('titleSecondLine')}
+          </span>
         </h2>
 
         <div className={styles.contentContainer}>

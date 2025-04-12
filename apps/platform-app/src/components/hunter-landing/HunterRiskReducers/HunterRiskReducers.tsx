@@ -71,7 +71,7 @@ export async function HunterRiskReducers() {
               avatar={LandingProfileImg2}
             />
           </div>
-          <div className={styles.textSection}>
+          <div className={styles.specialistText}>
             <h2>
               <span className={styles.highlight}>
                 {profileCount !== null ? `${profileCount || 240}+` : ''}
@@ -82,7 +82,7 @@ export async function HunterRiskReducers() {
           </div>
         </div>
 
-        <div className={styles.specialistSection}>
+        <div className={styles.topSection}>
           <div className={styles.specialistText}>
             <h2>{t('specialistsTitle1')}</h2>
             <h2>

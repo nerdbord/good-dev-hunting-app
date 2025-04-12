@@ -52,6 +52,7 @@
   display: flex;
   align-items: center;
   gap: 40px;
+  font-weight: 500;
   @include mobile {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -64,6 +65,7 @@
 }
 
 .terms {
+  font-weight: 500;
   @include mobile {
     gap: 30px;
   }
@@ -73,6 +75,7 @@
   @include mobile {
     font-size: 12px;
     line-height: 16px;
+    font-weight: 500;
     letter-spacing: 0%;
   }
 }
