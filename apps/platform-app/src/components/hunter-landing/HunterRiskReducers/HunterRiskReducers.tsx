@@ -84,8 +84,8 @@ export async function HunterRiskReducers() {
 
         <div className={styles.topSection}>
           <div className={styles.specialistText}>
-            <h2>{t('specialistsTitle1')}</h2>
             <h2>
+              {t('specialistsTitle1')}{' '}
               {t('specialistsTitle2')
                 .split('50+')
                 .map((part, index, array) => {
