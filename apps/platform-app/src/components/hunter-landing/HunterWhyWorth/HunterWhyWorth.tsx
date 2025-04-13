@@ -1,10 +1,12 @@
 'use client'
 
+import PointingIcon from '@/components/icons/PointingIcon'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
+import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import styles from './HunterWhyWorth.module.scss'
 
@@ -21,6 +23,11 @@ export const HunterWhyWorth = (props: Props) => {
   const [transitioning, setTransitioning] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const t = useTranslations(I18nNamespaces.HunterWhyWorth)
+  const router = useRouter()
+
+  const handleAddJob = () => {
+    router.push(AppRoutes.postJob)
+  }
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -71,8 +78,6 @@ export const HunterWhyWorth = (props: Props) => {
     <div className={styles.fullWidthWrapper}>
       <div className={styles.wrapper}>
         <h2 className={styles.title}>
-          {/*     <span className={styles.titleFirstLine}>{t('titleFirstLine')}</span>
-          <span className={styles.titleSecondLine}>{t('titleSecondLine')}</span> */}
           <span className={styles.titleFirstLine}>
             {t('titleFirstLine')} {t('titleSecondLine')}
           </span>
@@ -86,11 +91,16 @@ export const HunterWhyWorth = (props: Props) => {
                   className={styles.mobileImageContainer}
                   style={{ backgroundImage: `url(${backgroundDefault})` }}
                 >
-                  <Link href={AppRoutes.postJob}>
-                    <button className={styles.mobileButton}>
-                      {t('addJobForFree')}
-                    </button>
-                  </Link>
+                  <div className={styles.mobileBtn}>
+                    <div className={styles.buttonWrapper}>
+                      <Button variant="primary" onClick={handleAddJob}>
+                        {t('addJobForFree')}
+                      </Button>
+                      <div className={styles.pointingIconWrapper}>
+                        <PointingIcon />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className={styles.mobileTextContent}>
                   <h3 className={styles.mobileTitle}>{t('freeTitle')}</h3>
@@ -193,11 +203,14 @@ export const HunterWhyWorth = (props: Props) => {
 
                 <div className={styles.contentLayer}>
                   {selectedOption === 0 && (
-                    <Link href={AppRoutes.postJob}>
-                      <button className={styles.addJobButton}>
+                    <div className={styles.buttonWrapper}>
+                      <Button variant="primary" onClick={handleAddJob}>
                         {t('addJobForFree')}
-                      </button>
-                    </Link>
+                      </Button>
+                      <div className={styles.pointingIconWrapper}>
+                        <PointingIcon />
+                      </div>
+                    </div>
                   )}
 
                   {selectedOption === 1 && (

@@ -112,12 +112,13 @@
 
 @media (max-width: 768px) {
   .wrapper {
-    width: 343px;
+    width: 100%;
     height: 398px;
     padding: 60px 20px;
     border-radius: 4px;
     gap: 24px;
     position: relative;
+    margin-top: 40px;
   }
 
   .wrapper::before {
@@ -143,16 +144,14 @@
   .boxLeft {
     top: -40px;
     left: 50px;
-    width: 80px;
-    height: 80px;
+
     transform: rotate(-15deg);
   }
 
   .boxRight {
     bottom: -40px;
     right: 50px;
-    width: 80px;
-    height: 80px;
+
     transform: rotate(15deg);
   }
 

@@ -1,4 +1,4 @@
-import { Container } from '@gdh/ui-system'
+import { Container } from '@/components/hunter-landing/UI/Container/Container'
 
 import { HunterCTA } from '@/components/hunter-landing/HunterCTA/HunterCTA'
 import { HunterFAQ } from '@/components/hunter-landing/HunterFAQ/HunterFAQ'
