@@ -116,7 +116,6 @@
 
   @include mobile {
     gap: 8px;
-    //max-width: 343px;
     margin: 0 auto;
     padding: 0;
     overflow-x: visible;
@@ -143,6 +142,7 @@
   text-align: center;
   margin: 0;
   position: relative;
+  border: 1px solid lime;
 
   @include mobile {
     flex: 0 0 auto;

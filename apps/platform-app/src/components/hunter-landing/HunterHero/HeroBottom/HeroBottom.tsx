@@ -236,7 +236,7 @@ export const HeroBottom = () => {
               tags={rowTags}
               rowIndex={rowIndex}
               isMobile={isMobile}
-              isReversed={rowIndex === 1 && isMobile}
+              //isReversed={rowIndex === 1 && isMobile}
               currentAnimatedTag={currentAnimatedTag}
               selectedTag={selectedTag}
               tagMapping={tagMapping}

@@ -14,4 +14,7 @@
   flex-direction: column;
   gap: 180px;
   padding-bottom: 90px;
+  @include mobile {
+    gap: 100px;
+  }
 }
