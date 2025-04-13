@@ -49,22 +49,68 @@
   height: 100%;
 }
 
+
 .mdxEditorCustom {
-  //--mdx-ul-color: white;
-  background-color: #0f1217;
+  --mdx-ul-color: #69717b;
+  --mdx-dropdown-bg: #0f1217;
+  --mdx-dropdown-hover-bg: #161a1f;
+  --mdx-dropdown-border: #2a2f35;
   border-radius: 3px;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
   align-items: flex-start;
-  border: 1px solid #2a2f35;
+  border: 1px solid var(--border-color);
   line-height: 28px;
-  color: #69717b;
+  color: var(--text-color);
   resize: none;
   font-size: 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  :global {
+    [data-radix-popper-content-wrapper] {
+      background-color: #0f1217 !important;
+      width: var(--radix-select-trigger-width) !important;
+
+      [role="listbox"] {
+        background-color: #0f1217 !important;
+        
+        [role="option"] {
+          background-color: #0f1217 !important;
+          color: var(--text-color) !important;
+          width: 100% !important;
+        }
+      }
+    }
+
+    .select-content {
+      background-color: #0f1217 !important;
+      width: 100% !important;
+    }
+
+    .select-viewport {
+      background-color: #0f1217 !important;
+      width: 100% !important;
+    }
+
+    .select-item {
+      background-color: #0f1217 !important;
+      color: var(--text-color) !important;
+      width: 100% !important;
+
+      &[data-highlighted="true"] {
+        background-color: #161a1f !important;
+        color: #e2eaf1 !important;
+      }
+    }
+  }
+
+  :global(.light) & {
+    color: rgba(42, 47, 53, 1);
+    border: 1px solid rgb(228, 228, 246);
+  }
 
   h1,
   h2,
@@ -137,19 +183,25 @@
     cursor: pointer;
     color: #69717b;
     border: none;
+
+    :global(.light) & {
+      background-color: transparent;
+      color: #04080D;
+    }
   }
 
   div {
-    background-color: #0f1217;
     border-radius: 2px;
-    color: white;
+    color: var(--text-color);
   }
 
   > *:nth-child(2) {
     width: 100%;
     flex-grow: 1;
   }
+
 }
+
 
 .mdxContentEditable {
   height: 100%;
