@@ -37,21 +37,18 @@ export type ContactRequestEmailParams = {
   subject: string
 }
 
-export const sendContactRequest = async ({
-  senderEmail,
-  senderFullName,
-  subject,
-  message,
-  recipientEmail,
-  recipientFullName,
-}: ContactRequestEmailParams) => {
+export const sendContactRequest = async (
+  {
+    senderEmail,
+    senderFullName,
+    subject,
+    message,
+    recipientEmail,
+    recipientFullName,
+  }: ContactRequestEmailParams,
+  locale = 'en',
+) => {
   try {
-    const config = {
-      fromEmail: senderEmail,
-      fromName: senderFullName,
-      subject: subject,
-    }
-
     const personalization: Personalization[] = [
       {
         email: recipientEmail,
@@ -62,11 +59,24 @@ export const sendContactRequest = async ({
         },
       },
     ]
+    const config = {
+      fromEmail: senderEmail,
+      fromName: senderFullName,
+      subject: subject,
+    }
 
-    const recipients = [new Recipient(recipientEmail)]
+    let templateId: MailTemplateId
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.contactRequest //TODO: PL
+        break
+      default:
+        templateId = MailTemplateId.contactRequest
+    }
+
     await mailersendClient.sendMail({
-      recipients,
-      templateId: MailTemplateId.contactRequest,
+      recipients: [new Recipient(recipientEmail)],
+      templateId,
       config,
       personalization,
     })
@@ -78,9 +88,8 @@ export const sendContactRequest = async ({
 export const sendProfileApprovedEmail = async (
   email: string,
   githubUsername: string,
+  locale = 'en',
 ) => {
-  const templateId = MailTemplateId.profileApprovedNotification
-
   const personalization: Personalization[] = [
     {
       email,
@@ -90,12 +99,24 @@ export const sendProfileApprovedEmail = async (
     },
   ]
 
+  let templateId: MailTemplateId
+  let subject: string
+  switch (locale) {
+    case 'pl':
+      templateId = MailTemplateId.profileApprovedNotification //TODO: PL
+      subject = '✅ Twój profil został zaakceptowany'
+      break
+    default:
+      templateId = MailTemplateId.profileApprovedNotification
+      subject = '✅ Your profile has been approved'
+  }
+
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
     templateId,
     personalization,
     config: {
-      subject: '✅ Your profile has been approved',
+      subject,
       fromEmail: 'team@devhunting.co',
       fromName: 'Good Dev Hunting Team',
     },
@@ -105,9 +126,8 @@ export const sendProfileApprovedEmail = async (
 export const sendProfileRejectedEmail = async (
   email: string,
   reason: string,
+  locale = 'en',
 ) => {
-  const templateId = MailTemplateId.profileRejectedNotification
-
   const personalization: Personalization[] = [
     {
       email,
@@ -117,19 +137,35 @@ export const sendProfileRejectedEmail = async (
     },
   ]
 
+  let templateId: MailTemplateId
+  let subject: string
+  switch (locale) {
+    case 'pl':
+      templateId = MailTemplateId.profileRejectedNotification //TODO: PL
+      subject = '⚠️Twój profil został odrzucony'
+      break
+    default:
+      templateId = MailTemplateId.profileRejectedNotification
+      subject = '⚠️Your profile has been rejected'
+  }
+
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
-    templateId: templateId,
+    templateId,
     personalization,
     config: {
-      subject: '⚠️Your profile has been rejected',
+      subject,
       fromEmail: 'team@devhunting.co',
       fromName: 'Good Dev Hunting Team',
     },
   })
 }
 
-export const sendWelcomeEmail = async (email: string, username: string) => {
+export const sendWelcomeEmail = async (
+  email: string,
+  username: string,
+  locale = 'en',
+) => {
   const personalization: Personalization[] = [
     {
       email,
@@ -139,19 +175,36 @@ export const sendWelcomeEmail = async (email: string, username: string) => {
     },
   ]
 
+  let templateId: MailTemplateId
+  let subject: string
+  switch (locale) {
+    case 'pl':
+      templateId = MailTemplateId.welcomeMail //TODO: PL
+      subject = `Witaj na łowisku talentów, ${username}!`
+      break
+    default:
+      templateId = MailTemplateId.welcomeMail
+      subject = `Welcome to the Hunt, ${username}!`
+  }
+
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
-    templateId: MailTemplateId.welcomeMail,
+    templateId,
     personalization,
     config: {
-      subject: `Welcome to the Hunt, ${username}!`,
+      subject,
       fromEmail: 'team@devhunting.co',
       fromName: 'Good Dev Hunting Team',
     },
   })
 }
 
-export const sendMagicLinkEmail = async (email: string, url: string) => {
+//TODO:
+export const sendMagicLinkEmail = async (
+  email: string,
+  url: string,
+  locale = 'en',
+) => {
   const personalization: Personalization[] = [
     {
       email,
@@ -161,12 +214,24 @@ export const sendMagicLinkEmail = async (email: string, url: string) => {
     },
   ]
 
+  let templateId: MailTemplateId
+  let subject: string
+  switch (locale) {
+    case 'pl':
+      templateId = MailTemplateId.verificationRequest //TODO: PL
+      subject = `Witaj na łowisku talentów, ${email}!`
+      break
+    default:
+      templateId = MailTemplateId.verificationRequest
+      subject = `Welcome to the Hunt, ${email}!`
+  }
+
   await mailersendClient.sendMail({
     recipients: [new Recipient(email)],
-    templateId: MailTemplateId.verificationRequest,
+    templateId,
     personalization,
     config: {
-      subject: `Welcome to the Hunt, ${email}!`,
+      subject,
       fromEmail: 'team@devhunting.co',
       fromName: 'Good Dev Hunting Team',
     },
@@ -178,12 +243,14 @@ export const sendMagicLinkEmail = async (email: string, url: string) => {
  * @param email User's email address
  * @param unreadCount Number of unread messages
  * @param username User's name or username
+ * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
 export const sendApplicantUnreadMessagesNotification = async (
   email: string,
   unreadCount: number,
   username: string,
+  locale = 'en',
 ) => {
   try {
     // Create a plain URL for the inbox
@@ -201,14 +268,32 @@ export const sendApplicantUnreadMessagesNotification = async (
       },
     ]
 
+    let templateId: MailTemplateId
+    let subject: string
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.applicantUnreadMessagesNotification //TODO: PL
+        subject = `Masz ${unreadCount} nieprzeczytan${
+          unreadCount === 1
+            ? 'ą wiadomość'
+            : unreadCount < 5
+              ? 'e wiadomości'
+              : 'ych wiadomości'
+        } od pracodawców`
+        break
+      default:
+        templateId = MailTemplateId.applicantUnreadMessagesNotification
+        subject = `You have ${unreadCount} unread message${
+          unreadCount > 1 ? 's' : ''
+        } from employers`
+    }
+
     await mailersendClient.sendMail({
       recipients: [new Recipient(email)],
-      templateId: MailTemplateId.applicantUnreadMessagesNotification,
+      templateId,
       personalization,
       config: {
-        subject: `You have ${unreadCount} unread message${
-          unreadCount > 1 ? 's' : ''
-        } from employers`,
+        subject,
         fromEmail: 'team@devhunting.co',
         fromName: 'Good Dev Hunting Team',
       },
@@ -229,12 +314,14 @@ export const sendApplicantUnreadMessagesNotification = async (
  * @param email User's email address
  * @param unreadCount Number of unread messages
  * @param username User's name or username
+ * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
 export const sendJobOwnerUnreadMessagesNotification = async (
   email: string,
   unreadCount: number,
   username: string,
+  locale = 'en',
 ) => {
   try {
     // Create a plain URL for the jobs page
@@ -252,14 +339,32 @@ export const sendJobOwnerUnreadMessagesNotification = async (
       },
     ]
 
+    let templateId: MailTemplateId
+    let subject: string
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.jobOwnerUnreadMessagesNotification //TODO: PL
+        subject = `Masz ${unreadCount} nieprzeczytan${
+          unreadCount === 1
+            ? 'ą wiadomość'
+            : unreadCount < 5
+              ? 'e wiadomości'
+              : 'ych wiadomości'
+        } od kandydatów`
+        break
+      default:
+        templateId = MailTemplateId.jobOwnerUnreadMessagesNotification
+        subject = `You have ${unreadCount} unread message${
+          unreadCount > 1 ? 's' : ''
+        } from job applicants`
+    }
+
     await mailersendClient.sendMail({
       recipients: [new Recipient(email)],
-      templateId: MailTemplateId.jobOwnerUnreadMessagesNotification,
+      templateId,
       personalization,
       config: {
-        subject: `You have ${unreadCount} unread message${
-          unreadCount > 1 ? 's' : ''
-        } from job applicants`,
+        subject,
         fromEmail: 'team@devhunting.co',
         fromName: 'Good Dev Hunting Team',
       },
@@ -295,30 +400,49 @@ export async function sendJobPublishedEmail(
   job: JobModel,
   user: AuthUser,
   matchedProfilesCount: number,
+  locale = 'en',
 ): Promise<boolean> {
   try {
-    // Determine the message based on the number of matched profiles
-    let matchStatusMessage = ''
-
-    if (matchedProfilesCount === 0) {
-      matchStatusMessage =
-        "Currently, we don't have specialists that match your job requirements. It may take longer to receive applications, but we'll notify you as soon as we find suitable candidates."
-    } else if (matchedProfilesCount === 1) {
-      matchStatusMessage = `We've sent your job to 1 specialist who matches your requirements. You should start receiving applications soon.`
-    } else {
-      matchStatusMessage = `We've sent your job to ${matchedProfilesCount} specialists who match your requirements. You should start receiving applications soon.`
-    }
-
     // Create plain URLs for the job and applications
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
     const jobUrl = `${baseUrl}/jobs/${job.id}`
     const applicationsUrl = `${baseUrl}/jobs/${job.id}/applications`
 
+    let templateId: MailTemplateId
+    let subject: string
+    let matchStatusMessage: string
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.jobPublished //TODO: PL
+        subject = `Twoje zlecenie "${job.jobName}" zostało opublikowane!`
+        if (matchedProfilesCount === 0) {
+          matchStatusMessage =
+            'Obecnie nie mamy specjalistów spełniających wymagania Twojej oferty. Proces może potrwać nieco dłużej, ale powiadomimy Cię, gdy tylko znajdziemy odpowiednich kandydatów.'
+        } else if (matchedProfilesCount === 1) {
+          matchStatusMessage =
+            'Przesłaliśmy Twoją ofertę 1 specjaliście, który spełnia Twoje wymagania. Wkrótce powinieneś otrzymać pierwsze aplikacje.'
+        } else {
+          matchStatusMessage = `Przesłaliśmy Twoją ofertę ${matchedProfilesCount} specjalistom spełniającym Twoje wymagania. Wkrótce powinieneś otrzymać aplikacje.`
+        }
+        break
+      default:
+        templateId = MailTemplateId.jobPublished
+        subject = `Your job "${job.jobName}" has been published!`
+        if (matchedProfilesCount === 0) {
+          matchStatusMessage =
+            "Currently, we don't have specialists that match your job requirements. It may take longer to receive applications, but we'll notify you as soon as we find suitable candidates."
+        } else if (matchedProfilesCount === 1) {
+          matchStatusMessage = `We've sent your job to 1 specialist who matches your requirements. You should start receiving applications soon.`
+        } else {
+          matchStatusMessage = `We've sent your job to ${matchedProfilesCount} specialists who match your requirements. You should start receiving applications soon.`
+        }
+    }
+
     await mailersendClient.sendMail({
       recipients: [new Recipient(user.email, user.name || 'Job Poster')],
-      templateId: MailTemplateId.jobPublished,
+      templateId,
       config: {
-        subject: `Your job "${job.jobName}" has been published!`,
+        subject,
         fromEmail: 'team@devhunting.co',
         fromName: 'Good Dev Hunting Jobs',
       },
@@ -355,6 +479,7 @@ export async function sendJobPublishedEmail(
  * @param applicantName Name of the applicant
  * @param jobTitle Job title that was applied for
  * @param applicationUrl URL to view the application
+ * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
 export const sendNewApplicationNotificationToOwner = async (
@@ -363,6 +488,7 @@ export const sendNewApplicationNotificationToOwner = async (
   applicantName: string,
   jobTitle: string,
   applicationUrl: string,
+  locale = 'en',
 ) => {
   try {
     // Use the plain application URL directly
@@ -384,12 +510,24 @@ export const sendNewApplicationNotificationToOwner = async (
       },
     ]
 
+    let templateId: MailTemplateId
+    let subject: string
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.newJobApplicationForOwner //TODO: PL
+        subject = `Masz nową aplikację na ofertę "${jobTitle}" od ${applicantName}`
+        break
+      default:
+        templateId = MailTemplateId.newJobApplicationForOwner
+        subject = `You have a new application for "${jobTitle}" from ${applicantName}`
+    }
+
     await mailersendClient.sendMail({
       recipients: [new Recipient(ownerEmail)],
-      templateId: MailTemplateId.newJobApplicationForOwner,
+      templateId,
       personalization,
       config: {
-        subject: `You have a new application for "${jobTitle}" from ${applicantName}`,
+        subject,
         fromEmail: 'team@devhunting.co',
         fromName: 'Good Dev Hunting Team',
       },
@@ -412,6 +550,7 @@ export const sendNewApplicationNotificationToOwner = async (
  * @param jobTitle Job title that was applied for
  * @param companyName Name of the company/job owner
  * @param applicationUrl URL to view the application status
+ * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
 export const sendApplicationConfirmationToApplicant = async (
@@ -420,11 +559,46 @@ export const sendApplicationConfirmationToApplicant = async (
   jobTitle: string,
   companyName: string,
   applicationUrl: string,
+  locale = 'en',
 ) => {
   try {
     // Calculate response deadline (7 days from now)
     const responseDeadline = new Date()
     responseDeadline.setDate(responseDeadline.getDate() + 7)
+
+    let templateId: MailTemplateId
+    let subject: string
+    let applicationDate
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.applicationConfirmationForApplicant //TODO: PL
+        subject = `Twoja aplikacja na stanowisko "${jobTitle}" została wysłana`
+        responseDeadline.toLocaleDateString('pl-PL', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+        applicationDate = new Date().toLocaleDateString('pl-PL', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+        break
+      default:
+        templateId = MailTemplateId.applicationConfirmationForApplicant
+        subject = `Your application for "${jobTitle}" has been submitted`
+
+        responseDeadline.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+        applicationDate = new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+    }
 
     // Use the plain application URL directly
     const personalization: Personalization[] = [
@@ -435,28 +609,18 @@ export const sendApplicationConfirmationToApplicant = async (
           jobTitle,
           companyName,
           applicationUrl,
-          // Format the deadline as "Month Day, Year"
-          responseDeadline: responseDeadline.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          }),
-          // Add current date formatted as "Month Day, Year"
-          applicationDate: new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          }),
+          responseDeadline,
+          applicationDate,
         },
       },
     ]
 
     await mailersendClient.sendMail({
       recipients: [new Recipient(applicantEmail)],
-      templateId: MailTemplateId.applicationConfirmationForApplicant,
+      templateId,
       personalization,
       config: {
-        subject: `Your application for "${jobTitle}" has been submitted`,
+        subject,
         fromEmail: 'team@devhunting.co',
         fromName: 'Good Dev Hunting Team',
       },
@@ -474,12 +638,14 @@ export const sendApplicationConfirmationToApplicant = async (
  * @param job The job to send a proposal for
  * @param profile The profile to send the proposal to
  * @param matchReason The reason why the profile was matched with the job
+ * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves to a success status
  */
 export const sendJobProposalEmail = async (
   job: JobModel,
   profile: ProfileModel,
   matchReason: string,
+  locale = 'en',
 ) => {
   try {
     // Create plain URLs for the job and application
@@ -487,25 +653,38 @@ export const sendJobProposalEmail = async (
     const jobUrl = `${baseUrl}/jobs/${job.id}`
     const applicationUrl = `${baseUrl}/jobs/${job.id}/apply`
 
-    // Format budget string based on budget type
-    const budget =
-      job.budgetType === 'FIXED'
-        ? `${job.minBudgetForProjectRealisation} - ${job.maxBudgetForProjectRealisation} ${job.currency}`
-        : `I need a quote`
-
     // Format job description with truncation if needed
     const jobDescription = job.projectBrief
 
-    // Format job location
-    const jobLocation = job.remoteOnly
-      ? 'Remote'
-      : `${job.city}, ${job.country}`
+    let templateId: MailTemplateId
+    let subject: string
+    let budget: string
+    let jobLocation: string
+    switch (locale) {
+      case 'pl':
+        templateId = MailTemplateId.jobProposal //TODO: PL
+        subject = `🤑 Mamy nowe zlecenie dla Ciebie!`
+        jobLocation = job.remoteOnly ? 'Zdalnie' : `${job.city}, ${job.country}`
+        budget =
+          job.budgetType === 'FIXED'
+            ? `${job.minBudgetForProjectRealisation} - ${job.maxBudgetForProjectRealisation} ${job.currency}`
+            : `Potrzebuję wyceny`
+        break
+      default:
+        templateId = MailTemplateId.jobProposal
+        subject = `🤑 We have a new job for you!`
+        jobLocation = job.remoteOnly ? 'Remote' : `${job.city}, ${job.country}`
+        budget =
+          job.budgetType === 'FIXED'
+            ? `${job.minBudgetForProjectRealisation} - ${job.maxBudgetForProjectRealisation} ${job.currency}`
+            : `I need a quote`
+    }
 
     await mailersendClient.sendMail({
       recipients: [new Recipient(profile.email, profile.fullName)],
-      templateId: MailTemplateId.jobProposal,
+      templateId,
       config: {
-        subject: `🤑 We have a new job for you!`,
+        subject,
         fromEmail: 'team@devhunting.co',
         fromName: 'GDH Team',
       },

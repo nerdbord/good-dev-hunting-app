@@ -82,6 +82,7 @@ export async function createApplication(
       createdBy: {
         select: {
           email: true,
+          preferredLanguage: true,
           profile: {
             select: { fullName: true },
           },
@@ -94,6 +95,7 @@ export async function createApplication(
     where: { id: applicantId },
     select: {
       email: true,
+      preferredLanguage: true,
       profile: {
         select: { fullName: true },
       },
@@ -146,6 +148,7 @@ export async function createApplication(
         applicantName,
         jobDetails.jobName,
         ownerApplicationUrl,
+        jobDetails.createdBy?.preferredLanguage,
       )
 
       // Send confirmation to applicant
@@ -155,6 +158,7 @@ export async function createApplication(
         jobDetails.jobName,
         ownerName,
         applicantApplicationUrl,
+        applicantDetails.preferredLanguage,
       )
     } catch (error) {
       // Log error but don't fail the application creation

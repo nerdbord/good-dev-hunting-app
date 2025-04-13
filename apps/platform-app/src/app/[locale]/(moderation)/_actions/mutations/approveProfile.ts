@@ -19,6 +19,7 @@ export const approveProfile = withSentry(async (profileId: string) => {
   await sendProfileApprovedEmail(
     updatedProfile.user.email,
     updatedProfile.fullName,
+    updatedProfile.user.preferredLanguage,
   )
 
   await sendDiscordNotificationToModeratorChannel(

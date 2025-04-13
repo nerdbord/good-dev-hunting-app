@@ -1,5 +1,6 @@
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { sendJobProposalEmail } from '@/backend/mailing/mailing.service'
+import { getUserPreferredLanguage } from '@/backend/user/user.service'
 import { type JobModel } from '../_models/job.model'
 import { type MatchResult } from './matchJobWithProfiles'
 
@@ -16,6 +17,9 @@ export async function notifyMatchedProfiles(
     // Generate and send emails to each matched profile
     for (const { profileId, matchReason } of matchingResults) {
       const profile = await findProfileById(profileId)
+      const userPreferredLanguage = await getUserPreferredLanguage(
+        profile.userId,
+      )
       if (!profile) continue
 
       try {
@@ -39,7 +43,12 @@ export async function notifyMatchedProfiles(
           employmentModes: job.employmentModes,
         }
 
-        const result = await sendJobProposalEmail(jobData, profile, matchReason)
+        const result = await sendJobProposalEmail(
+          jobData,
+          profile,
+          matchReason,
+          userPreferredLanguage,
+        )
 
         sentCount++
         console.log(`Email sent to ${profile.email} for job ${job.id}`)

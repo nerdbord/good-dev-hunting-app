@@ -3,6 +3,7 @@ import {
   sendApplicantUnreadMessagesNotification,
   sendJobOwnerUnreadMessagesNotification,
 } from '@/backend/mailing/mailing.service'
+import { getUserPreferredLanguage } from '@/backend/user/user.service'
 import { NextResponse } from 'next/server'
 
 // Explicitly mark this route as dynamic and not eligible for static generation
@@ -36,11 +37,16 @@ export async function GET(request: Request) {
     for (const user of applicants) {
       try {
         // Only notify if there are actual unread messages
+        const userPreferredLanguage = await getUserPreferredLanguage(
+          user.userId,
+        )
+
         if (user.unreadCount > 0) {
           const result = await sendApplicantUnreadMessagesNotification(
             user.email,
             user.unreadCount,
             user.username,
+            userPreferredLanguage,
           )
 
           if (result.success) {
@@ -62,11 +68,15 @@ export async function GET(request: Request) {
     for (const user of jobOwners) {
       try {
         // Only notify if there are actual unread messages
+        const userPreferredLanguage = await getUserPreferredLanguage(
+          user.userId,
+        )
         if (user.unreadCount > 0) {
           const result = await sendJobOwnerUnreadMessagesNotification(
             user.email,
             user.unreadCount,
             user.username,
+            userPreferredLanguage,
           )
 
           if (result.success) {

@@ -54,6 +54,7 @@ const acceptProfileTool = tool(
     sendProfileApprovedEmail(
       currentState.profile.user.email,
       currentState.profile.user.githubDetails?.username || '',
+      currentState.profile.user.preferredLanguage,
     )
 
     await sendDiscordNotificationToModeratorChannel(
@@ -81,7 +82,11 @@ const rejectProfileTool = tool(
 
     updateProfileById(profileId, { state: 'REJECTED' })
     saveRejectingReason(profileId, reason)
-    sendProfileRejectedEmail(currentState.profile.user.email, reason)
+    sendProfileRejectedEmail(
+      currentState.profile.user.email,
+      reason,
+      currentState.profile.user.preferredLanguage,
+    )
     await sendDiscordNotificationToModeratorChannel(
       `⛔️ AI Workflow has rejected ${currentState.profile.fullName} profile. Reason: ${reason} [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
     )

@@ -48,7 +48,11 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
   if (!updatedUser)
     return redirect(`${AppRoutes.error}?error=Role assignment failed.`)
 
-  await sendWelcomeEmail(user.email, devName || user.email)
+  await sendWelcomeEmail(
+    user.email,
+    devName || user.email,
+    user.preferredLanguage,
+  )
   await sendDiscordNotificationToModeratorChannel(
     `User ${
       devName ? `**${devName}** ` : ''

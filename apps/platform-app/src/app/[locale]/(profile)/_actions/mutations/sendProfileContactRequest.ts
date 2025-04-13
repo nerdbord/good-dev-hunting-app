@@ -79,14 +79,17 @@ export const sendProfileContactRequest = withSentry(
         }
       }
 
-      await sendContactRequest({
-        senderEmail,
-        senderFullName,
-        subject,
-        message,
-        recipientEmail: foundProfile.user.email,
-        recipientFullName: foundProfile.fullName,
-      })
+      await sendContactRequest(
+        {
+          senderEmail,
+          senderFullName,
+          subject,
+          message,
+          recipientEmail: foundProfile.user.email,
+          recipientFullName: foundProfile.fullName,
+        },
+        foundProfile.user.preferredLanguage,
+      )
 
       await sendDiscordNotificationToModeratorChannel(
         `💌 User ${senderEmail} / name: ${senderFullName} send message: '${message}' to: ${foundProfile.user.email} / name: ${foundProfile.fullName}.`,
