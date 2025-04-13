@@ -92,10 +92,14 @@ export const HunterWhyWorth = (props: Props) => {
                   style={{ backgroundImage: `url(${backgroundDefault})` }}
                 >
                   <div className={styles.mobileBtn}>
-                    <Button variant="primary" onClick={handleAddJob}>
-                      {t('addJobForFree')}
-                    </Button>
-                    <PointingIcon className={styles.pointerMobile} />
+                    <div className={styles.buttonWrapper}>
+                      <Button variant="primary" onClick={handleAddJob}>
+                        {t('addJobForFree')}
+                      </Button>
+                      <div className={styles.pointingIconWrapper}>
+                        <PointingIcon />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className={styles.mobileTextContent}>
@@ -199,12 +203,14 @@ export const HunterWhyWorth = (props: Props) => {
 
                 <div className={styles.contentLayer}>
                   {selectedOption === 0 && (
-                    <>
+                    <div className={styles.buttonWrapper}>
                       <Button variant="primary" onClick={handleAddJob}>
                         {t('addJobForFree')}
                       </Button>
-                      <PointingIcon className={styles.pointer} />
-                    </>
+                      <div className={styles.pointingIconWrapper}>
+                        <PointingIcon />
+                      </div>
+                    </div>
                   )}
 
                   {selectedOption === 1 && (

@@ -221,16 +221,18 @@
   width: 140px;
 }
 
-.pointer {
-  position: absolute;
-  top: 270px;
-  left: 315px;
+.buttonWrapper {
+  position: relative;
 }
 
-.pointerMobile {
+.mobileBtn {
+  width: 50%;
+}
+
+.pointingIconWrapper {
   position: absolute;
-  top: 200px;
-  left: 265px;
+  top: 33px;
+  left: 180px;
 }
 
 /* Responsywność */
@@ -310,10 +312,6 @@
     font-size: 16px;
     line-height: 150%; /* 24px */
     color: var(--landing-text-color2);
-  }
-
-  .mobileBtn {
-    width: 50%;
   }
 
   .mobileModal {
