@@ -86,7 +86,7 @@ const ProfileCard = ({
   return (
     <div className={styles.frame} style={specializationTheme}>
       <div className={styles.container} data-test-id="profileContainer">
-        <Avatar src={avatarUrl || ''} size={78} />
+        <Avatar src={avatarUrl} size={78} />
         <div className={styles.data}>
           <div className={styles.nameContainer}>
             {!isHiddenName ? (
