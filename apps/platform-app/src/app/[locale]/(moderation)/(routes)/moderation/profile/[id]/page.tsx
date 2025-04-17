@@ -16,13 +16,16 @@ import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfile
 export default async function ModerationUserProfile({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{
+    id: string
+  }>
 }) {
   const { userIsModerator: authorizedUserIsModerator } =
     await getAuthorizedUser()
+  const { id: userId } = await params
 
-  const profile = await findProfileByUserId(params.id)
-  const profileOwner = await findUserById(params.id)
+  const profile = await findProfileByUserId(userId)
+  const profileOwner = await findUserById(userId)
 
   if (!profile || !authorizedUserIsModerator) redirect(AppRoutes.profilesList)
 
