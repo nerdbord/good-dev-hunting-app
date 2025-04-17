@@ -14,12 +14,32 @@ const nextConfig = {
     GITHUB_SECRET: process.env.GITHUB_SECRET,
   },
   images: {
-    domains: [
-      'media.licdn.com',
-      'avatars.githubusercontent.com',
-      'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
-      'i.pravatar.cc',
-      'github.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+      },
     ],
   },
   //reactStrictMode: true, // Enable React strict mode
