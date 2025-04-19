@@ -1,3 +1,5 @@
+@use 'mixins' as mixins;
+
 .errorMsg input,
 .errorMsg textarea {
   border: 1px solid #d62626;
@@ -15,7 +17,7 @@
 .actionsWrapper {
   display: flex;
   gap: 8px;
-  @include mobile {
+  @include mixins.mobile {
     flex-direction: column;
   }
 }

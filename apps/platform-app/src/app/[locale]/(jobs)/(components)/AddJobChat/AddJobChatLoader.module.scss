@@ -1,4 +1,4 @@
-@import '../../../../../styles/_index.scss';
+@use '../../../../../styles/_index.scss' as styles;
 
 @keyframes pulse {
     0% {
@@ -187,7 +187,7 @@
     animation: fadeMessage 0.5s ease-in forwards;
     min-height: 48px;
 
-    @include mobile {
+    @include styles.mobile {
         font-size: 24px;
     }
 }
@@ -220,7 +220,7 @@
     gap: 30px;
     animation: techIconsEntry 0.8s ease-out;
 
-    @include mobile {
+    @include styles.mobile {
         flex-direction: column;
         align-items: center;
         gap: 20px;

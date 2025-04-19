@@ -1,3 +1,5 @@
+@use "mixins" as mixins;
+
 .primary,
 .secondary,
 .tertiary,
@@ -34,14 +36,14 @@
   background-color: var(--button-bg-2);
   min-width: 120px;
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
   }
 }
 
 .headerContent {
   .primary {
-    @include mobile {
+    @include mixins.mobile {
       display: none;
     }
   }
@@ -53,12 +55,11 @@
   background: transparent;
   align-items: center;
   border-radius: 2px;
+  border: 1px solid var(--border-color);
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
   }
-
-  border: 1px solid var(--border-color);
 }
 
 .secondary:hover:enabled {
@@ -158,7 +159,7 @@
 }
 
 .buttonWrapper {
-  @include mobile {
+  @include mixins.mobile {
     button {
       width: 100%;
     }
