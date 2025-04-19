@@ -88,7 +88,7 @@ export async function HunterRiskReducers() {
               {t('specialistsTitle1')}{' '}
               {t('specialistsTitle2')
                 .split('50+')
-                .map((part, index, array) => {
+                .map((part, index) => {
                   if (index === 0) {
                     return (
                       <React.Fragment key={index}>

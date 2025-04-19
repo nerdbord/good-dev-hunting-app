@@ -38,7 +38,7 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
   const isAnonymousJob = !job.createdById
 
   // Extract the job technologies for the AvatarsDisplay
-  const jobTechnologies = job.techStack.map((tech) => tech.name)
+  // const jobTechnologies = job.techStack.map((tech) => tech.name)
 
   const handleEdit = () => {
     // Allow editing if:

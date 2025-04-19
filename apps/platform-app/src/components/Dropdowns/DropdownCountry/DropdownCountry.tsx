@@ -3,6 +3,7 @@ import { LocationPreferencesFormKeys } from '@/app/[locale]/(profile)/(routes)/m
 import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import { countries, type ICountries } from '@/data/countries'
 import { useFormikContext } from 'formik'
+import Image from 'next/image'
 import React from 'react'
 import styles from './DropdownCountry.module.scss'
 
@@ -60,7 +61,10 @@ const DropdownCountry = ({
                 onClick={(e) => handleCountryClick(e, country)}
                 onSelect={handleOnSelect}
               >
-                <img src={`https://flagsapi.com/${country.flag}/flat/24.png`} />
+                <Image
+                  src={`https://flagsapi.com/${country.flag}/flat/24.png`}
+                  alt={`The flag of ${country.name}`}
+                />
                 <span>{renderCountryName(country.name)}</span>
               </li>
             )

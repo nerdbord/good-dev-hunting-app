@@ -29,7 +29,6 @@ export const LocaleSwitcherSelect = ({
   variant,
 }: LocaleSwitcherSelectProps) => {
   const t = useTranslations(I18nNamespaces.LocaleSwitcher)
-  const tt = useTranslations(I18nNamespaces.Buttons)
   const router = useRouter()
   const { data: session, update: updateSession } = useSession()
   let currentPath = usePathname()

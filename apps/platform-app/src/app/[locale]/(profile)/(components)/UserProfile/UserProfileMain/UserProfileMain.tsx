@@ -10,6 +10,7 @@ import { countries } from '@/data/countries'
 import { I18nNamespaces } from '@/i18n/request'
 import { Avatar } from '@gdh/ui-system'
 import { getTranslations } from 'next-intl/server'
+import Image from 'next/image'
 import styles from './UserProfileMain.module.scss'
 
 type UserProfileProps = {
@@ -37,7 +38,10 @@ const UserProfileMain = async ({ profileId }: UserProfileProps) => {
         </div>
         <div className={styles.locationBox}>
           <div className={styles.country}>
-            <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
+            <Image
+              src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
+              alt={`The flag of ${profile.country}`}
+            />
             {profile.country}, {profile.city}
           </div>
           {profile.openForCountryRelocation && (

@@ -14,9 +14,7 @@ const backgroundDefault = '/sectionone.png'
 const backgroundOne = '/sectiontwo.png'
 const backgroundTwo = '/Background2.svg'
 
-type Props = {}
-
-export const HunterWhyWorth = (props: Props) => {
+export const HunterWhyWorth = () => {
   const [selectedOption, setSelectedOption] = useState<number>(0)
   const [activeImage, setActiveImage] = useState<string>(backgroundDefault)
   const [nextImage, setNextImage] = useState<string>(backgroundDefault)

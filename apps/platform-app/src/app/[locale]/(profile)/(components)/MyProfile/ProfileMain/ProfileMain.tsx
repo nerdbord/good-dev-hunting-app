@@ -10,6 +10,7 @@ import { countries } from '@/data/countries'
 import { ensureProtocol } from '@/utils/routes'
 import { AnchorButton, Avatar } from '@gdh/ui-system'
 import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
+import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
 
 interface ProfileMainProps {
@@ -66,7 +67,10 @@ const ProfileMain = async (props: ProfileMainProps) => {
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
-              <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
+              <Image
+                src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
+                alt={`The flag of ${profile.country}`}
+              />
 
               <p>
                 {profile.country}, {profile.city}

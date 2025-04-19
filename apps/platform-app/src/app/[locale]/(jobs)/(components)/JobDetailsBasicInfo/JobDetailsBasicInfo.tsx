@@ -19,6 +19,7 @@ import {
   type EmploymentType,
 } from '@prisma/client'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { type JobModel } from '../../_models/job.model'
 import styles from './JobDetailsBasicInfo.module.scss'
 
@@ -44,7 +45,10 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
       <div className={styles.locationBox}>
         {job.country && (
           <div className={styles.country}>
-            <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
+            <Image
+              src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
+              alt={`The flag of ${job.country}`}
+            />
             <p>
               {job.country}
               {job.city ? `, ${job.city}` : ''}

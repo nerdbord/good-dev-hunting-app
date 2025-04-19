@@ -8,33 +8,24 @@ import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
 import { Formik } from 'formik'
 import { signIn } from 'next-auth/react'
-import { useLocale, useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import * as Yup from 'yup'
 import { getPendingPublishJob } from '../../_utils/job-storage.client'
 import styles from './LoginModal.module.scss'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const t = useTranslations(I18nNamespaces.Auth)
-  const router = useRouter()
-  const currentLocale = useLocale()
+
   // Check if there's a pending job to publish
   const pendingJobId = getPendingPublishJob()
   const callbackUrl = pendingJobId
-    ? `${AppRoutes.jobs}/${pendingJobId}?publish=true&locale=${currentLocale}`
+    ? `${AppRoutes.jobs}/${pendingJobId}?publish=true`
     : AppRoutes.profilesList
 
   const handleSigninByLinkedIn = () => {
     signIn('linkedin', {
       callbackUrl,
     })
-  }
-
-  const handleSignup = () => {
-    // For now, just close the modal as the user will be redirected
-    // to the sign-up flow as part of the sign-in process
-    closeModal()
-    router.push(AppRoutes.signIn)
   }
 
   const initialValues: LoginFormValues = {
