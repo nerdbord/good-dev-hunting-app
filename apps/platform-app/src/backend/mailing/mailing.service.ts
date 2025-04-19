@@ -1,7 +1,7 @@
 import { mailersendClient, MailTemplateId } from '@/lib/mailersendClient'
+import type { User } from '@prisma/client'
 import { Recipient } from 'mailersend'
 import { type Personalization } from 'mailersend/lib/modules/Email.module'
-
 // Define JobModel type for email functions
 type JobModel = {
   id: string
@@ -35,19 +35,18 @@ export type ContactRequestEmailParams = {
   recipientFullName: string
   message: string
   subject: string
+  locale: User['language']
 }
 
-export const sendContactRequest = async (
-  {
-    senderEmail,
-    senderFullName,
-    subject,
-    message,
-    recipientEmail,
-    recipientFullName,
-  }: ContactRequestEmailParams,
-  locale = 'en',
-) => {
+export const sendContactRequest = async ({
+  senderEmail,
+  senderFullName,
+  subject,
+  message,
+  recipientEmail,
+  recipientFullName,
+  locale,
+}: ContactRequestEmailParams) => {
   try {
     const personalization: Personalization[] = [
       {
@@ -85,11 +84,15 @@ export const sendContactRequest = async (
   }
 }
 
-export const sendProfileApprovedEmail = async (
-  email: string,
-  githubUsername: string,
-  locale = 'en',
-) => {
+export const sendProfileApprovedEmail = async ({
+  email,
+  githubUsername,
+  locale,
+}: {
+  email: string
+  githubUsername: string
+  locale: User['language']
+}) => {
   const personalization: Personalization[] = [
     {
       email,
@@ -123,11 +126,15 @@ export const sendProfileApprovedEmail = async (
   })
 }
 
-export const sendProfileRejectedEmail = async (
-  email: string,
-  reason: string,
-  locale = 'en',
-) => {
+export const sendProfileRejectedEmail = async ({
+  email,
+  reason,
+  locale,
+}: {
+  email: string
+  reason: string
+  locale: User['language']
+}) => {
   const personalization: Personalization[] = [
     {
       email,
@@ -161,11 +168,15 @@ export const sendProfileRejectedEmail = async (
   })
 }
 
-export const sendWelcomeEmail = async (
-  email: string,
-  username: string,
-  locale = 'en',
-) => {
+export const sendWelcomeEmail = async ({
+  email,
+  username,
+  locale,
+}: {
+  email: string
+  username: string
+  locale: User['language']
+}) => {
   const personalization: Personalization[] = [
     {
       email,
@@ -200,11 +211,15 @@ export const sendWelcomeEmail = async (
 }
 
 //TODO:
-export const sendMagicLinkEmail = async (
-  email: string,
-  url: string,
-  locale = 'en',
-) => {
+export const sendMagicLinkEmail = async ({
+  email,
+  url,
+  locale,
+}: {
+  email: string
+  url: string
+  locale: User['language']
+}) => {
   const personalization: Personalization[] = [
     {
       email,
@@ -246,12 +261,17 @@ export const sendMagicLinkEmail = async (
  * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
-export const sendApplicantUnreadMessagesNotification = async (
-  email: string,
-  unreadCount: number,
-  username: string,
-  locale = 'en',
-) => {
+export const sendApplicantUnreadMessagesNotification = async ({
+  email,
+  username,
+  unreadCount,
+  locale,
+}: {
+  email: string
+  unreadCount: number
+  username: string
+  locale: User['language']
+}) => {
   try {
     // Create a plain URL for the inbox
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
@@ -277,8 +297,8 @@ export const sendApplicantUnreadMessagesNotification = async (
           unreadCount === 1
             ? 'ą wiadomość'
             : unreadCount < 5
-              ? 'e wiadomości'
-              : 'ych wiadomości'
+            ? 'e wiadomości'
+            : 'ych wiadomości'
         } od pracodawców`
         break
       default:
@@ -317,12 +337,17 @@ export const sendApplicantUnreadMessagesNotification = async (
  * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
-export const sendJobOwnerUnreadMessagesNotification = async (
-  email: string,
-  unreadCount: number,
-  username: string,
-  locale = 'en',
-) => {
+export const sendJobOwnerUnreadMessagesNotification = async ({
+  email,
+  username,
+  unreadCount,
+  locale,
+}: {
+  email: string
+  unreadCount: number
+  username: string
+  locale: User['language']
+}) => {
   try {
     // Create a plain URL for the jobs page
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
@@ -348,8 +373,8 @@ export const sendJobOwnerUnreadMessagesNotification = async (
           unreadCount === 1
             ? 'ą wiadomość'
             : unreadCount < 5
-              ? 'e wiadomości'
-              : 'ych wiadomości'
+            ? 'e wiadomości'
+            : 'ych wiadomości'
         } od kandydatów`
         break
       default:
@@ -396,12 +421,17 @@ interface AuthUser {
  * Sends a confirmation email to the job owner after their job has been published
  * Includes information about how many specialists received the job proposal
  */
-export async function sendJobPublishedEmail(
-  job: JobModel,
-  user: AuthUser,
-  matchedProfilesCount: number,
-  locale = 'en',
-): Promise<boolean> {
+export async function sendJobPublishedEmail({
+  job,
+  user,
+  matchedProfilesCount,
+  locale,
+}: {
+  job: JobModel
+  user: AuthUser
+  matchedProfilesCount: number
+  locale: User['language']
+}): Promise<boolean> {
   try {
     // Create plain URLs for the job and applications
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
@@ -482,14 +512,21 @@ export async function sendJobPublishedEmail(
  * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
-export const sendNewApplicationNotificationToOwner = async (
-  ownerEmail: string,
-  ownerName: string,
-  applicantName: string,
-  jobTitle: string,
-  applicationUrl: string,
-  locale = 'en',
-) => {
+export const sendNewApplicationNotificationToOwner = async ({
+  ownerEmail,
+  ownerName,
+  applicantName,
+  jobTitle,
+  applicationUrl,
+  locale,
+}: {
+  ownerEmail: string
+  ownerName: string
+  applicantName: string
+  jobTitle: string
+  applicationUrl: string
+  locale: User['language']
+}) => {
   try {
     // Use the plain application URL directly
     const personalization: Personalization[] = [
@@ -553,14 +590,21 @@ export const sendNewApplicationNotificationToOwner = async (
  * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves when the email is sent
  */
-export const sendApplicationConfirmationToApplicant = async (
-  applicantEmail: string,
-  applicantName: string,
-  jobTitle: string,
-  companyName: string,
-  applicationUrl: string,
-  locale = 'en',
-) => {
+export const sendApplicationConfirmationToApplicant = async ({
+  applicantEmail,
+  applicantName,
+  applicationUrl,
+  jobTitle,
+  companyName,
+  locale,
+}: {
+  applicantEmail: string
+  applicantName: string
+  jobTitle: string
+  companyName: string
+  applicationUrl: string
+  locale: User['language']
+}) => {
   try {
     // Calculate response deadline (7 days from now)
     const responseDeadline = new Date()
@@ -641,12 +685,17 @@ export const sendApplicationConfirmationToApplicant = async (
  * @param locale language of the email "pl" | "en"
  * @returns Promise that resolves to a success status
  */
-export const sendJobProposalEmail = async (
-  job: JobModel,
-  profile: ProfileModel,
-  matchReason: string,
-  locale = 'en',
-) => {
+export const sendJobProposalEmail = async ({
+  job,
+  profile,
+  matchReason,
+  locale,
+}: {
+  job: JobModel
+  profile: ProfileModel
+  matchReason: string
+  locale: User['language']
+}) => {
   try {
     // Create plain URLs for the job and application
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'

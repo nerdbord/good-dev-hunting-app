@@ -1,19 +1,21 @@
-import { type Role } from '@prisma/client'
+import type { Role, UserLanguage } from '@prisma/client'
 import 'next-auth'
 
 declare module 'next-auth' {
   interface User {
     id: string
-    email: string
+    email?: string | null // Make email optional as some providers might not return it reliably initially
     avatarUrl?: string | null
-    preferredLanguage?: string
   }
 
-  interface AdapterUser {
+  interface AdapterUser extends User {
     id: string
     email: string
+    emailVerified?: Date | null
     avatarUrl?: string | null
-    preferredLanguage?: string
+    name?: string | null
+    roles: Role[]
+    language: UserLanguage | null
   }
 
   /**
@@ -23,15 +25,16 @@ declare module 'next-auth' {
     user: {
       id: string
       email: string
-      avatarUrl: string | null
-      name: string | null
+      avatarUrl?: string | null
+      name?: string | null
       roles: Role[]
-      profileId: string | null
-      githubUsername: string | null
-      profileSlug: string | null
-      preferredLanguage: string
+      profileId?: string | null
+      githubUsername?: string | null
+      profileSlug?: string | null
+      language: UserLanguage | null
+      emailVerified?: Date | null
     }
-    provider: string
+    provider?: string
   }
 }
 
@@ -40,13 +43,15 @@ declare module 'next-auth/jwt' {
   interface JWT {
     id: string
     email: string
-    avatarUrl: string | null
-    name: string | null
+    avatarUrl?: string | null
+    name?: string | null
     roles: Role[]
-    profileId: string | null
-    githubUsername: string | null
-    provider: string
-    profileSlug: string | null
-    preferredLanguage: string
+    profileId?: string | null
+    githubUsername?: string | null
+    provider?: string
+    profileSlug?: string | null
+    language: UserLanguage | null
+    lastValidated?: string
+    emailVerified: Date | null
   }
 }

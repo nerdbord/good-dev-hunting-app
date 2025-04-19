@@ -3,7 +3,7 @@
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { signIn } from 'next-auth/react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
 import styles from '../../page.module.scss'
@@ -21,7 +21,6 @@ const LoginHunter = () => {
   const [isSubmited, setIsSubmited] = useState(false)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const currentLocale = useLocale()
 
   const [email, setEmail] = useState('')
 
@@ -37,7 +36,7 @@ const LoginHunter = () => {
       const result = await signIn('email', {
         email: email,
         redirect: false,
-        callbackUrl: `${AppRoutes.oAuth}?role=${Roles.HUNTER}&locale=${currentLocale}`,
+        callbackUrl: `${AppRoutes.oAuth}?role=${Roles.HUNTER}`,
       })
       if (result?.error) {
         setError(result.error)

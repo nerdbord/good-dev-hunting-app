@@ -3,34 +3,25 @@
 import { prisma } from '@/lib/prismaClient'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
-import { revalidatePath } from 'next/cache'
-import { createUserModel } from '../../_models/User.model'
+import type { UserLanguage } from '@prisma/client'
 
 export const updatePreferredLanguage = withSentry(
-  async (newLanguage: string) => {
+  async (language: UserLanguage) => {
     const { user } = await getAuthorizedUser()
-
     if (!user) {
       throw new Error('User not authenticated')
     }
 
-    // Basic validation (optional, could rely on routing.locales)
-    if (!['en', 'pl'].includes(newLanguage)) {
-      throw new Error('Invalid language specified')
+    try {
+      const updatedUser = await prisma.user.update({
+        where: { id: user.id },
+        data: { language },
+        select: { id: true, language: true },
+      })
+
+      return { success: true, language: updatedUser.language }
+    } catch (error) {
+      throw new Error('Failed to update language preference.')
     }
-
-    const updatedUser = await prisma.user.update({
-      where: { id: user.id },
-      data: { preferredLanguage: newLanguage },
-      include: {
-        githubDetails: true,
-        profile: true,
-      },
-    })
-
-    // Revalidate paths if needed, though session update might be enough
-    revalidatePath('/') // Example: revalidate home page
-
-    return createUserModel(updatedUser)
   },
 )

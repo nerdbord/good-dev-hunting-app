@@ -15,11 +15,11 @@ import { claimAnonymousJobAction } from './claimAnonymousJob'
 export const publishJobAction = withSentry(async (id: string) => {
   try {
     const { user } = await getAuthorizedUser()
-    let preferredLanguage = user?.preferredLanguage
 
     if (!user) {
       throw new Error('User not found')
     }
+    let userLanguage = user.language
 
     // Check if the job exists
     const job = await getJobById(id)
@@ -90,17 +90,20 @@ export const publishJobAction = withSentry(async (id: string) => {
       }
     }
 
-    if (!preferredLanguage) {
+    if (!userLanguage) {
       const { user } = await getAuthorizedUser()
-      preferredLanguage = user?.preferredLanguage
+      if (!user) {
+        throw new Error('User not found')
+      }
+      userLanguage = user.language
     }
     // Step 6: Send confirmation email to job owner
-    await sendJobPublishedEmail(
-      updatedJobWithRelations as any, // Type assertion to resolve the type mismatch
+    await sendJobPublishedEmail({
+      job: updatedJobWithRelations as any,
+      matchedProfilesCount: notificationResults.matchedCount,
       user,
-      notificationResults.matchedCount,
-      user.preferredLanguage,
-    )
+      locale: user.language,
+    })
     return {
       success: true,
       message:

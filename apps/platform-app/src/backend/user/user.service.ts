@@ -123,13 +123,13 @@ export async function updateUserNerdbordId(userId: string, nerdbordId: string) {
 
   return updatedUser
 }
-export async function getUserPreferredLanguage(userId: string) {
+export async function getUserLanguage(userId: string) {
   const user = await prisma.user.findFirst({
     where: {
       id: userId,
     },
-    select: { preferredLanguage: true },
+    select: { language: true },
   })
 
-  return user?.preferredLanguage
+  return user === null ? null : user.language
 }

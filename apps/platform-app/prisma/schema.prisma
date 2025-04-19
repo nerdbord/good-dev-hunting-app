@@ -16,7 +16,7 @@ model User {
   nerdbordUserId       String?          @unique
   emailVerified        DateTime?
   createdAt            DateTime         @default(now())
-  preferredLanguage    String           @default("")
+  language             UserLanguage?
   accounts             Account[]
   sentApplications     Application[]    @relation("applicant")
   receivedApplications Application[]    @relation("jobOwner")
@@ -259,4 +259,9 @@ enum PublishingState {
   PENDING
   APPROVED
   REJECTED
+}
+
+enum UserLanguage {
+  en
+  pl
 }

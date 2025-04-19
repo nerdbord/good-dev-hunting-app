@@ -17,7 +17,8 @@
     "preview": "Profile preview",
     "profileViews": "Profile views",
     "availability": "I'm available for work",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "addJob": "Submit a request for a specialist"
   },
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
