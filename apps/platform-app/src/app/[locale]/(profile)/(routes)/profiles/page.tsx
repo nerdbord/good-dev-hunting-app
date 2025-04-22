@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 export default async function Profiles({
   searchParams,
 }: {
-  searchParams: Record<JobOfferFiltersEnum, string>
+  searchParams: Promise<Record<JobOfferFiltersEnum, string>>
 }) {
   const user = await getAuthorizedUser()
 
@@ -17,7 +17,10 @@ export default async function Profiles({
   }
 
   return (
-    <Suspense key={JSON.stringify(searchParams)} fallback={<Loader></Loader>}>
+    <Suspense
+      key={JSON.stringify(await searchParams)}
+      fallback={<Loader></Loader>}
+    >
       <ProfileList />
     </Suspense>
   )
