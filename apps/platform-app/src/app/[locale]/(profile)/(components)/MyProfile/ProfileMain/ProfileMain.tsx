@@ -68,6 +68,8 @@ const ProfileMain = async (props: ProfileMainProps) => {
           <div className={styles.locationBox}>
             <div className={styles.country}>
               <Image
+                width={24}
+                height={24}
                 src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
                 alt={`The flag of ${profile.country}`}
               />

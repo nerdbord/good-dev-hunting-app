@@ -46,6 +46,8 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
         {job.country && (
           <div className={styles.country}>
             <Image
+              width={24}
+              height={24}
               src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
               alt={`The flag of ${job.country}`}
             />

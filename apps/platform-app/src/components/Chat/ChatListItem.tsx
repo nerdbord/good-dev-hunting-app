@@ -39,7 +39,13 @@ export default function ChatListItem({
       {showAvatar && (
         <div className={styles.avatarContainer}>
           {avatarUrl ? (
-            <Image src={avatarUrl} alt={title} className={styles.avatar} />
+            <Image
+              src={avatarUrl}
+              alt={title}
+              width={40}
+              height={40}
+              className={styles.avatar}
+            />
           ) : (
             <div className={styles.avatarPlaceholder}>
               {title.charAt(0).toUpperCase()}

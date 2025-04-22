@@ -102,6 +102,7 @@ export const HunterLoader = ({ message }: HunterLoaderProps) => {
           <div className={styles.techIconsContainer}>
             <div className={styles.techIcon}>
               <Image
+                fill
                 src="/LandingHunter/react-svg.svg"
                 alt="React"
                 className={styles.reactIcon}
@@ -109,6 +110,7 @@ export const HunterLoader = ({ message }: HunterLoaderProps) => {
             </div>
             <div className={styles.techIcon}>
               <Image
+                fill
                 src="/LandingHunter/python-svg.svg"
                 alt="Python"
                 className={styles.pythonIcon}
@@ -116,6 +118,7 @@ export const HunterLoader = ({ message }: HunterLoaderProps) => {
             </div>
             <div className={styles.techIcon}>
               <Image
+                fill
                 src="/LandingHunter/java-svg.svg"
                 alt="Java"
                 className={styles.javaIcon}

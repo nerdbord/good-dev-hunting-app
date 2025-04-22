@@ -42,6 +42,11 @@ const nextConfig = {
         hostname: 'github.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'flagsapi.com',
+        port: '',
+      },
     ],
   },
   //reactStrictMode: true, // Enable React strict mode

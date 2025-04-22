@@ -64,6 +64,8 @@ const DropdownCountry = ({
                 <Image
                   src={`https://flagsapi.com/${country.flag}/flat/24.png`}
                   alt={`The flag of ${country.name}`}
+                  width={24}
+                  height={24}
                 />
                 <span>{renderCountryName(country.name)}</span>
               </li>
