@@ -142,9 +142,7 @@ export const HeroBottom = () => {
         'Please provide a more detailed job description.',
         ToastStatus.INVALID,
       )
-      // showModal(
-      //   <AddJobSuccessModal closeModal={closeModal} jobCandidatesAmount={5} />,
-      // )
+      // showModal(<AddJobVerificationModal closeModal={closeModal} />)
       return
     }
 

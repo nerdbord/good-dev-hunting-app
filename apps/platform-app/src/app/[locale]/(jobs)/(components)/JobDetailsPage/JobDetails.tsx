@@ -81,7 +81,7 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
       setIsPublishing(true)
 
       // Show verification in progress modal
-      showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
+      showModal(<AddJobVerificationModal closeModal={closeModal} />)
 
       // Attempt to publish the job
       const result = await publishJobAction(params.id)

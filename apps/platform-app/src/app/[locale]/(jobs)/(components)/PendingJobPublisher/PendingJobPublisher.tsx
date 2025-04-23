@@ -31,10 +31,7 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
         setIsProcessing(true)
         try {
           // Show verification in progress modal
-          showModal(
-            <AddJobVerificationModal closeModal={closeModal} />,
-            'narrow',
-          )
+          showModal(<AddJobVerificationModal closeModal={closeModal} />)
 
           // Attempt to publish the job
           const { jobCandidatesAmount } = await publishJobAction(pendingJobId)
