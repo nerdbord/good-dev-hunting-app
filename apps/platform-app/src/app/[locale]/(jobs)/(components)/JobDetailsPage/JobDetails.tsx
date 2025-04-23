@@ -123,7 +123,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
               result.verificationResult && !result.verificationResult.isValid,
             )}
           />,
-          'narrow',
         )
       }
     } catch (error) {
@@ -138,7 +137,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
           closeModal={closeModal}
           isVerificationFailure={false}
         />,
-        'narrow',
       )
     } finally {
       setIsPublishing(false)
