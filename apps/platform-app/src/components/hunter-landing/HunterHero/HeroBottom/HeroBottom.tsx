@@ -1,5 +1,6 @@
 'use client'
 import { createJobFromDescriptionAction } from '@/app/[locale]/(jobs)/_actions/mutations/createJob'
+import { useModal } from '@/contexts/ModalContext'
 import { ToastStatus, useToast } from '@/contexts/ToastContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
@@ -22,7 +23,7 @@ export const HeroBottom = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { addToast } = useToast()
-
+  const { closeModal, showModal } = useModal()
   // Define tag keys and translations
   const tagKeys = useMemo(
     () => [
@@ -141,6 +142,9 @@ export const HeroBottom = () => {
         'Please provide a more detailed job description.',
         ToastStatus.INVALID,
       )
+      // showModal(
+      //   <AddJobSuccessModal closeModal={closeModal} jobCandidatesAmount={5} />,
+      // )
       return
     }
 

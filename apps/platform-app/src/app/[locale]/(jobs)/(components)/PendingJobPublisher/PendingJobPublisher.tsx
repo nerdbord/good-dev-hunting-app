@@ -54,7 +54,6 @@ export const PendingJobPublisher = ({ isUser }: { isUser: boolean }) => {
                 router.refresh()
               }}
             />,
-            'narrow',
           )
         } catch (error) {
           console.error('Error publishing job after login:', error)

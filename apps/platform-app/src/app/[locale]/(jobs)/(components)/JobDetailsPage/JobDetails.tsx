@@ -100,7 +100,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
               router.refresh() // Refresh the page to show updated status
             }}
           />,
-          'narrow',
         )
       } else {
         // Show error modal
