@@ -1,5 +1,6 @@
 'use client'
 
+import { Roles } from '@/app/[locale]/(auth)/_models/User.model'
 import { type LoginFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
@@ -16,15 +17,17 @@ import styles from './LoginModal.module.scss'
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const t = useTranslations(I18nNamespaces.Auth)
 
-  // Check if there's a pending job to publish
   const pendingJobId = getPendingPublishJob()
-  const callbackUrl = pendingJobId
+  const finalDestinationUrl = pendingJobId
     ? `${AppRoutes.jobs}/${pendingJobId}?publish=true`
     : AppRoutes.profilesList
 
+  const encodedFinalDestination = encodeURIComponent(finalDestinationUrl)
+  const intermediateCallbackUrl = `${AppRoutes.oAuth}?role=${Roles.HUNTER}&redirectTo=${encodedFinalDestination}`
+
   const handleSigninByLinkedIn = () => {
     signIn('linkedin', {
-      callbackUrl,
+      callbackUrl: intermediateCallbackUrl,
     })
   }
 
@@ -43,10 +46,9 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   })
 
   const handleSubmit = (values: LoginFormValues) => {
-    // Use Next Auth's email provider to send a magic link
     signIn('email', {
       email: values.email,
-      callbackUrl,
+      callbackUrl: intermediateCallbackUrl,
     })
     closeModal()
   }
