@@ -1,4 +1,4 @@
-import { type SubmissionFormData } from '@/app/[locale]/(jobs)/_utils/groq/schema'
+import { type SubmissionFormData } from '@/app/[locale]/(jobs)/_utils/schema'
 import { prisma } from '@/lib/prismaClient'
 import { Currency, PublishingState, type Prisma } from '@prisma/client'
 import { type Job, type JobWithRelations } from './job.types'
@@ -43,8 +43,8 @@ export async function createJob(
     employmentModes: data.employmentDetails?.workMode
       ? [data.employmentDetails.workMode as string]
       : ['Remote'],
-    country: data.employmentDetails?.candidateLocations?.[0] || 'Poland',
-    city: data.employmentDetails?.candidateLocations?.[1] || 'Warsaw',
+    country: data.employmentDetails?.country || 'Poland',
+    city: data.employmentDetails?.city || 'Warsaw',
     remoteOnly: data.employmentDetails?.workMode === 'Remote',
     state: PublishingState.DRAFT,
     terms: true,

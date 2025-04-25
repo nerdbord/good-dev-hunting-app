@@ -1,3 +1,4 @@
+'use client'
 import {
   mapEmploymentMode,
   mapJobContract,
@@ -18,8 +19,7 @@ import {
   type Currency,
   type EmploymentType,
 } from '@prisma/client'
-import { useTranslations } from 'next-intl'
-import { getLocale } from 'next-intl/server'
+import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { type JobModel } from '../../_models/job.model'
 import styles from './JobDetailsBasicInfo.module.scss'
@@ -28,11 +28,9 @@ interface JobDetailsBasicInfoProps {
   job: JobModel
 }
 
-export const JobDetailsBasicInfo = async ({
-  job,
-}: JobDetailsBasicInfoProps) => {
+export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
   const t = useTranslations(I18nNamespaces.Jobs)
-  const locale = await getLocale()
+  const locale = useLocale()
   const countryCode =
     countries.find((country) => country.name_en === job.country)?.code || ''
 

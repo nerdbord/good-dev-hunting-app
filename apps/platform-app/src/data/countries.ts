@@ -348,17 +348,13 @@ export const countries: ICountry[] = [
   { name_en: 'Åland Islands', name_pl: 'Wyspy Alandzkie', code: 'AX' },
 ]
 
-export const getCountryName = (
-  country_en: string,
-  locale: string,
-): string => {
+export const getCountryName = (country_en: string, locale: string): string => {
   const country = countries.find((country) => country.name_en === country_en)
   if (!country) return ''
 
   return locale === 'pl' ? country.name_pl : country.name_en
 }
 
-// Helper function to find country by its English name
 export const findCountryByEnName = (
   name_en: string | undefined,
 ): ICountry | undefined => {
@@ -368,7 +364,6 @@ export const findCountryByEnName = (
   )
 }
 
-// Updated sorting functions
 export const countriesSortedByPlName: ICountry[] = [...countries].sort((a, b) =>
   a.name_pl.localeCompare(b.name_pl, 'pl'),
 )
@@ -377,6 +372,14 @@ export const countriesSortedByEnName: ICountry[] = [...countries].sort((a, b) =>
   a.name_en.localeCompare(b.name_en, 'en'),
 )
 
-// Updated findCountryCode - finds code based on English name
 export const findCountryCode = (name_en: string): string | undefined =>
   findCountryByEnName(name_en)?.code
+
+export const findCountryByAnyName = (name: string) => {
+  let country: string | undefined
+  country = countries.find((country) => country.name_en === name)?.name_en
+  if (country) return country
+  country = countries.find((country) => country.name_pl === name)?.name_en
+  if (country) return country
+  return undefined
+}

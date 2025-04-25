@@ -2,12 +2,13 @@
 
 import { createJob } from '@/backend/job/job.service'
 import { getTechnologies } from '@/backend/technology/technology.service'
+import { countries, findCountryByAnyName } from '@/data/countries'
 import groqService from '@/lib/groq.service'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { createJobModel } from '../../_models/job.model'
 import { verifyJobQuery } from '../../_services/job-security.service'
-import { type SubmissionFormData } from '../../_utils/groq/schema'
+import type { EmploymentDetails, SubmissionFormData } from '../../_utils/schema'
 import { convertMessageToJob } from '../../_workflows/prompts/convert-message-to-job'
 
 // Define response type for job creation
@@ -94,7 +95,10 @@ export const createJobFromDescriptionAction = withSentry(
       const messages = [
         {
           role: 'system',
-          content: convertMessageToJob(mappedTechnologies),
+          content: convertMessageToJob(
+            mappedTechnologies,
+            countries.map((c) => c.name_en),
+          ),
         },
         {
           role: 'user',
@@ -114,8 +118,24 @@ export const createJobFromDescriptionAction = withSentry(
         jsonResponse,
       ) as Partial<SubmissionFormData>
 
+      const enCountryName = analyzedData.employmentDetails?.country
+        ? findCountryByAnyName(analyzedData.employmentDetails?.country)
+        : undefined
+
+      const employmentDetails: Partial<EmploymentDetails> = {
+        ...(analyzedData.employmentDetails || {}),
+        ...(enCountryName !== undefined && { country: enCountryName }),
+      }
+
+      const parsedData: Partial<SubmissionFormData> = {
+        ...analyzedData,
+        ...(Object.keys(employmentDetails).length > 0 && {
+          employmentDetails: employmentDetails as EmploymentDetails,
+        }),
+      }
+
       // Create a job with the analyzed data (will include user ID if authenticated)
-      const job = await createJobAction(analyzedData)
+      const job = await createJobAction(parsedData)
       return { success: true, job }
     } catch (error) {
       console.error('Error processing job description:', error)
