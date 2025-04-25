@@ -11,7 +11,7 @@ import {
   currencyButtonTextDisplay,
   mapEmploymentType,
 } from '@/app/[locale]/(profile)/profile.mappers'
-import { countries } from '@/data/countries'
+import { countries, getCountryName } from '@/data/countries'
 import { I18nNamespaces } from '@/i18n/request'
 import {
   PublishingState,
@@ -19,6 +19,7 @@ import {
   type EmploymentType,
 } from '@prisma/client'
 import { useTranslations } from 'next-intl'
+import { getLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { type JobModel } from '../../_models/job.model'
 import styles from './JobDetailsBasicInfo.module.scss'
@@ -27,11 +28,13 @@ interface JobDetailsBasicInfoProps {
   job: JobModel
 }
 
-export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
+export const JobDetailsBasicInfo = async ({
+  job,
+}: JobDetailsBasicInfoProps) => {
   const t = useTranslations(I18nNamespaces.Jobs)
-
-  const countryFlag =
-    countries.find((country) => country.name === job.country)?.flag || ''
+  const locale = await getLocale()
+  const countryCode =
+    countries.find((country) => country.name_en === job.country)?.code || ''
 
   return (
     <div className={styles.profile}>
@@ -48,11 +51,11 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
             <Image
               width={24}
               height={24}
-              src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
+              src={`https://flagsapi.com/${countryCode}/flat/24.png`}
               alt={`The flag of ${job.country}`}
             />
             <p>
-              {job.country}
+              {getCountryName(job.country, locale)}
               {job.city ? `, ${job.city}` : ''}
             </p>
           </div>

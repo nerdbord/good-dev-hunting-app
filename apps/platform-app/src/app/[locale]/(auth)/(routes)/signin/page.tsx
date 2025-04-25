@@ -9,8 +9,6 @@ import { redirect } from 'next/navigation'
 import LoginDev from './(components)/LoginDev/LoginDev'
 import LoginHunter from './(components)/LoginHunter/LoginHunter'
 
-//
-
 const LoginPage = async () => {
   const { userIsHunter, userIsSpecialist } = await getAuthorizedUser()
   if (userIsHunter) redirect(AppRoutes.myJobs)

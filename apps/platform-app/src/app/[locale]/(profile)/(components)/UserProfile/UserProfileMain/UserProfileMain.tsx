@@ -6,10 +6,10 @@ import {
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
-import { countries } from '@/data/countries'
+import { findCountryCode, getCountryName } from '@/data/countries'
 import { I18nNamespaces } from '@/i18n/request'
 import { Avatar } from '@gdh/ui-system'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import styles from './UserProfileMain.module.scss'
 
@@ -19,12 +19,11 @@ type UserProfileProps = {
 const UserProfileMain = async ({ profileId }: UserProfileProps) => {
   const profile = await findProfileById(profileId)
   const t = await getTranslations(I18nNamespaces.UserProfile)
-
+  const locale = await getLocale()
   const hourlyRateMin = profile.hourlyRateMin
   const hourlyRateMax = profile.hourlyRateMax
   const currency = profile.currency
-  const countryFlag =
-    countries.find((country) => country.name === profile.country)?.flag || ''
+  const countryCode = findCountryCode(profile.country)
 
   return (
     <>
@@ -41,10 +40,10 @@ const UserProfileMain = async ({ profileId }: UserProfileProps) => {
             <Image
               width={24}
               height={24}
-              src={`https://flagsapi.com/${countryFlag}/flat/24.png`}
+              src={`https://flagsapi.com/${countryCode}/flat/24.png`}
               alt={`The flag of ${profile.country}`}
             />
-            {profile.country}, {profile.city}
+            {getCountryName(profile.country, locale)}, {profile.city}
           </div>
           {profile.openForCountryRelocation && (
             <div className={styles.location}>Open to country relocation</div>

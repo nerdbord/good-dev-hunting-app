@@ -2,7 +2,7 @@
 
 import groqService from '@/lib/groq.service'
 import { withSentry } from '@/utils/errHandling'
-import type { SubmissionFormData } from '../../_utils/groq/schema'
+import type { SubmissionFormData } from '../../_utils/schema'
 import { convertMessageToJob } from '../../_workflows/prompts/convert-message-to-job'
 
 export const analyzeMessageAction = withSentry(
