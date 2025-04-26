@@ -1,42 +1,45 @@
+// src/components/Dropdowns/DropdownCountry/DropdownCountry.tsx
 'use client'
-import { LocationPreferencesFormKeys } from '@/app/[locale]/(profile)/(routes)/my-profile/(components)/CreateProfile/LocationPreferences/LocationPreferences'
-import { type ProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
-import { countries, type ICountries } from '@/data/countries'
-import { useFormikContext } from 'formik'
+import { countries, getCountryName } from '@/data/countries'
 import Image from 'next/image'
 import React from 'react'
 import styles from './DropdownCountry.module.scss'
 
-const DropdownCountry = ({
-  value,
-  setValue,
-  setIsDropdownActive,
-}: {
-  value: string
-  setValue: (value: string) => void
+interface DropdownCountryProps {
+  inputValue: string
+  locale: string
+  onCountrySelect: (country_en: string) => void
   setIsDropdownActive: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
-  const { values, setFieldValue } = useFormikContext<ProfileFormValues>()
+}
 
+const DropdownCountry = ({
+  inputValue,
+  locale,
+  onCountrySelect,
+  setIsDropdownActive,
+}: DropdownCountryProps) => {
   const handleCountryClick = (
     e: React.MouseEvent<HTMLLIElement>,
-    country: ICountries,
+    country_en: string,
   ) => {
-    setValue(country.name)
-    setFieldValue(LocationPreferencesFormKeys.COUNTRY, country.name)
-    setIsDropdownActive(false)
-    values.country = country.name
-  }
-
-  const handleOnSelect = () => {
+    onCountrySelect(country_en)
     setIsDropdownActive(false)
   }
 
-  const renderCountryName = (countryName: string) => {
-    const startIndex = countryName.toLowerCase().indexOf(value.toLowerCase())
-    if (startIndex !== -1) {
-      const boldPart = countryName.slice(startIndex, startIndex + value.length)
-      const restPart = countryName.slice(startIndex + value.length)
+  const renderCountryName = (country: string) => {
+    const countryName = getCountryName(country, locale)
+    const startIndex = countryName
+      .toLowerCase()
+      .indexOf(inputValue.toLowerCase())
+
+    // Highlight the matching part of the country name
+    if (startIndex === 0) {
+      // Only highlight if match is at the beginning
+      const boldPart = countryName.slice(
+        startIndex,
+        startIndex + inputValue.length,
+      )
+      const restPart = countryName.slice(startIndex + inputValue.length)
       return (
         <>
           <span className={styles.bold}>{boldPart}</span>
@@ -47,30 +50,38 @@ const DropdownCountry = ({
     return <span>{countryName}</span>
   }
 
+  const filteredCountries = countries.filter((country) =>
+    getCountryName(country.name_en, locale)
+      .toLowerCase()
+      .startsWith(inputValue.toLowerCase()),
+  )
+
   return (
     <div className={styles.dropdownBox}>
       <ul>
-        {countries
-          .filter((country) =>
-            country.name.toLowerCase().startsWith(value.toLowerCase()),
+        {filteredCountries.map((country) => {
+          // Use country.code as key for stability if names repeat (unlikely but possible)
+          return (
+            <li
+              key={country.code}
+              onClick={(e) => handleCountryClick(e, country.name_en)}
+            >
+              {/* Assuming flags are based on country code */}
+              <Image
+                // Use a more reliable flag source if available, or handle potential errors
+                src={`https://flagsapi.com/${country.code}/flat/24.png`}
+                alt={`Flag of ${country.name_en}`} // Alt text should be consistent, English is safer
+                width={24}
+                height={24}
+                onError={(e) => {
+                  // Optional: handle flag loading errors, e.g., hide image
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+              <span>{renderCountryName(country.name_en)}</span>
+            </li>
           )
-          .map((country, index) => {
-            return (
-              <li
-                key={index}
-                onClick={(e) => handleCountryClick(e, country)}
-                onSelect={handleOnSelect}
-              >
-                <Image
-                  src={`https://flagsapi.com/${country.flag}/flat/24.png`}
-                  alt={`The flag of ${country.name}`}
-                  width={24}
-                  height={24}
-                />
-                <span>{renderCountryName(country.name)}</span>
-              </li>
-            )
-          })}
+        })}
       </ul>
     </div>
   )
