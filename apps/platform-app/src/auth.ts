@@ -211,7 +211,7 @@ export const {
           }
         }
 
-        // --- 3. Set Language if Missing (NEW LOGIC) ---
+        // --- 3. Set Language if Missing ---
         // Run this *after* token has been populated/refreshed with DB data
         if (token.id && token.language === null) {
           console.log(
