@@ -345,14 +345,6 @@
     "ctaTitle": "Gotowy Znaleźć Swojego Programistę?",
     "ctaDesc": "Opublikuj ofertę teraz i znajdź zweryfikowanych specjalistów"
   },
-  "AddJobChat": {
-    "descriptionHeader": "Opisz, czego potrzebujesz",
-    "descriptionParagraph": "Tak jak najdokładniej. Możesz wrzucić zarówno treść ogłoszenia.",
-    "placeholder": "Przedstaw zlecenie w kilku słowach",
-    "textareaLabel": "Treść zlecenia",
-    "cancelBtn": "Cofnij",
-    "nextBtn": "Dalej"
-  },
   "MyJobCard": {
     "published": "Opublikowano",
     "today": "Dziś",

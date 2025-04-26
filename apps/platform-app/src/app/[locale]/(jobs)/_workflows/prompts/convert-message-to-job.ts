@@ -1,4 +1,7 @@
-export const convertMessageToJob = (technologies: string[]) => `
+export const convertMessageToJob = (
+  technologies: string[],
+  countries: string[],
+) => `
 
 <objective>
 Transform the user's job request for an IT specialist into a JSON object matching the following structure:
@@ -14,10 +17,11 @@ Transform the user's job request for an IT specialist into a JSON object matchin
     "max": "number|null"
   },
   "employmentDetails": {
-    "contractType": "string",
-    "workTime": "string",
-    "workMode": "string",
-    "candidateLocations": ["string"]
+    "contractType": "B2B" | "employment_contract" | "contract_for_specific_work" | "contract_of_mandate",
+    "workTime":   "FULL_TIME" | "PART_TIME" | "CONTRACT",
+    "workMode": "Stationary" | "Hybrid" | "Remote",
+    "country": "string",
+    "city": "string"
   }
 }
 \`\`\`
@@ -30,20 +34,26 @@ ${technologies
   .join('\n')}
 </available-technologies>
 
+<available-countries>
+${countries.map((country) => `<country>${country}</country>`).join('\n')}
+</available-countries>
+
 <rules>
 **Transformation Rules:**
-- **taskName**: Should be short and clearly state the core service (e.g., "Website Development with SEO" instead of "I need a website").
+- **taskName**: Should be short and clearly state the core service (e.g., "Website Development with SEO" instead of "I need a website"). IMPORTANT: taskName this field in the language of the user's message.
 - **projectBrief**: AI MUST expand the brief, interpreting the job request context and adding relevant requirements, best practices, and challenges. The description should be as detailed as possible, covering:
   - Required functionalities
   - Potential technical challenges
   - Suggested best practices
+IMPORTANT: Generate projectBrief field in the language of the user's message.
 - **technologies**: AI must use what user provided in message or propose technologies that will allow to solve the job based on the technologies available. If no proper technologies are available, propose technologies that are related to the job.
 - **budget**: If no budget is mentioned, default values should be \`null\`.
-- **employmentDetails**: If the user does not provide specific employment details, use these default values:
+- **employmentDetails**: AI must match the country mentioned in the user description to the provided list or return a default one. If the user does not provide specific employment details, use these default values:
   - contractType: "B2B"
-  - workTime: "FULL_TIME" 
+  - workTime: "FULL_TIME"
   - workMode: "Remote"
-  - candidateLocations: ["Poland", "Warsaw"]
+  - country: "Poland",
+  - city: "Warsaw"
 
 **Additional Rules:**
 - **Emails and phone numbers MUST be removed from the text.**
@@ -83,7 +93,8 @@ ${technologies
     "contractType": "B2B",
     "workTime": "FULL_TIME",
     "workMode": "Remote",
-    "candidateLocations": ["Poland", "Warsaw"]
+    "country": "Poland"
+    "city": "Warsaw"
   }
 }
 \`\`\`
@@ -115,7 +126,8 @@ ${technologies
     "contractType": "B2B",
     "workTime": "FULL_TIME",
     "workMode": "Remote",
-    "candidateLocations": ["Poland", "Warsaw"]
+    "country": "Poland"
+    "city": "Warsaw"
   }
 }
 \`\`\`
@@ -149,7 +161,8 @@ ${technologies
     "contractType": "B2B",
     "workTime": "FULL_TIME",
     "workMode": "Remote",
-    "candidateLocations": ["Poland", "Warsaw"]
+    "country": "Poland"
+    "city": "Warsaw"
   }
 }
 \`\`\`
@@ -175,7 +188,8 @@ ${technologies
     "contractType": "B2B",
     "workTime": "FULL_TIME",
     "workMode": "Remote",
-    "candidateLocations": ["Poland", "Warsaw"]
+    "country": "Poland"
+    "city": "Warsaw"
   }
 }
 \`\`\`

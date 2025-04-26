@@ -14,7 +14,8 @@ export interface EmploymentDetails {
     | 'Contract'
   workTime: 'Full-time' | 'Part-time' | 'Contract' | 'No-requirements' | ''
   workMode: 'On-site' | 'Hybrid' | 'Remote' | 'No-requirements' | ''
-  candidateLocations: string[]
+  country: string
+  city: string
 }
 
 export interface SubmissionFormData {

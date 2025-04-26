@@ -81,7 +81,7 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
       setIsPublishing(true)
 
       // Show verification in progress modal
-      showModal(<AddJobVerificationModal closeModal={closeModal} />, 'narrow')
+      showModal(<AddJobVerificationModal closeModal={closeModal} />)
 
       // Attempt to publish the job
       const result = await publishJobAction(params.id)
@@ -100,7 +100,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
               router.refresh() // Refresh the page to show updated status
             }}
           />,
-          'narrow',
         )
       } else {
         // Show error modal
@@ -123,7 +122,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
               result.verificationResult && !result.verificationResult.isValid,
             )}
           />,
-          'narrow',
         )
       }
     } catch (error) {
@@ -138,7 +136,6 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
           closeModal={closeModal}
           isVerificationFailure={false}
         />,
-        'narrow',
       )
     } finally {
       setIsPublishing(false)

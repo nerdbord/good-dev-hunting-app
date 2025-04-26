@@ -36,7 +36,9 @@ const LoginHunter = () => {
       const result = await signIn('email', {
         email: email,
         redirect: false,
-        callbackUrl: `${AppRoutes.oAuth}?role=${Roles.HUNTER}`,
+        callbackUrl: `${AppRoutes.oAuth}?role=${
+          Roles.HUNTER
+        }&redirectTo=${encodeURIComponent(AppRoutes.myJobs)}`,
       })
       if (result?.error) {
         setError(result.error)
@@ -127,6 +129,8 @@ const LoginHunter = () => {
         <LinkedInLoginButton
           label={t('loginWithLinkedin')}
           role={Roles.HUNTER}
+          redirect={true}
+          redirectTo={AppRoutes.myJobs}
         />
       </div>
     </Box>

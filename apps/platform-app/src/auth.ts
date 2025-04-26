@@ -1,11 +1,10 @@
-// src/auth.ts
 import { prisma } from '@/lib/prismaClient'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import { UserLanguage } from '@prisma/client' // Import Enums
-import NextAuth from 'next-auth' // Rename imported User to avoid conflict
+import { UserLanguage } from '@prisma/client'
+import NextAuth from 'next-auth'
 import Github, { type GitHubProfile } from 'next-auth/providers/github'
 import LinkedIn, { type LinkedInProfile } from 'next-auth/providers/linkedin'
-import { cookies } from 'next/headers' // <--- Import cookies
+import { cookies } from 'next/headers'
 import { findUserById } from './app/[locale]/(auth)/_actions'
 import { createOrUpdateGitHubDetailsForUser } from './backend/github-details/github-details.service'
 import { sendMagicLinkEmail } from './backend/mailing/mailing.service'
@@ -14,7 +13,7 @@ import {
   locales,
   nextIntlCookieName,
   type Locale,
-} from './i18n/routing' // <--- Import i18n config
+} from './i18n/routing'
 import { AppRoutes } from './utils/routes'
 
 // Type alias for AdapterUser based on our definition in next-auth.d.ts
@@ -212,7 +211,7 @@ export const {
           }
         }
 
-        // --- 3. Set Language if Missing (NEW LOGIC) ---
+        // --- 3. Set Language if Missing ---
         // Run this *after* token has been populated/refreshed with DB data
         if (token.id && token.language === null) {
           console.log(
