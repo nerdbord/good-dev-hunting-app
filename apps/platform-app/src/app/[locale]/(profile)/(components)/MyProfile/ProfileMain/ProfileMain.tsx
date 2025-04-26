@@ -6,10 +6,12 @@ import {
   mapSpecializationToTitle,
 } from '@/app/[locale]/(profile)/profile.mappers'
 import { type SeniorityLevel } from '@/backend/profile/profile.types'
-import { countries } from '@/data/countries'
+import { findCountryCode, getCountryName } from '@/data/countries'
 import { ensureProtocol } from '@/utils/routes'
 import { AnchorButton, Avatar } from '@gdh/ui-system'
 import { GithubIcon2, LinkedIn } from '@gdh/ui-system/icons'
+import { getLocale } from 'next-intl/server'
+import Image from 'next/image'
 import styles from './ProfileMain.module.scss'
 
 interface ProfileMainProps {
@@ -18,14 +20,13 @@ interface ProfileMainProps {
 
 const ProfileMain = async (props: ProfileMainProps) => {
   const profile = await findProfileById(props.profileId)
+  const locale = await getLocale()
 
   const githubUsername = profile.githubUsername
   const avatarUrl = profile.avatarUrl
   const hourlyRateMin = profile.hourlyRateMin
   const hourlyRateMax = profile.hourlyRateMax
   const currency = profile.currency
-  const countryFlag =
-    countries.find((country) => country.name === profile.country)?.flag || ''
 
   return (
     <>
@@ -66,10 +67,17 @@ const ProfileMain = async (props: ProfileMainProps) => {
           </div>
           <div className={styles.locationBox}>
             <div className={styles.country}>
-              <img src={`https://flagsapi.com/${countryFlag}/flat/24.png`} />
+              <Image
+                width={24}
+                height={24}
+                src={`https://flagsapi.com/${findCountryCode(
+                  profile.country,
+                )}/flat/24.png`}
+                alt={`The flag of ${profile.country}`}
+              />
 
               <p>
-                {profile.country}, {profile.city}
+                {getCountryName(profile.country, locale)}, {profile.city}
               </p>
             </div>
 
@@ -90,7 +98,7 @@ const ProfileMain = async (props: ProfileMainProps) => {
           <div className={styles.addInfoBox}>
             <span className={styles.seniority}>
               {mapSeniorityLevel(profile.seniority as SeniorityLevel) ||
-                profile.seniority}{' '}
+                profile.seniority}
               {mapSpecializationToTitle(profile.position)}
             </span>
             <div className={styles.addInfo}>

@@ -10,10 +10,7 @@ type SwitchProps = {
   containerClassName?: string
 }
 
-export const ThemeSwitcher: React.FC<SwitchProps> = ({
-  className,
-  containerClassName,
-}) => {
+export const ThemeSwitcher: React.FC<SwitchProps> = ({ className }) => {
   const { isDarkTheme, toggleTheme } = useThemeStore()
 
   useEffect(() => {

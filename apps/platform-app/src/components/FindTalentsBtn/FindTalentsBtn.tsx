@@ -20,7 +20,7 @@ const FindTalentsBtn = (props: FindTalentsBtnProps) => {
 
   return (
     <Button onClick={() => router.push(AppRoutes.home)} variant={props.variant}>
-      Dodaj zlecenie dla specjalisty
+      {t('addJob')}
     </Button>
   )
 }

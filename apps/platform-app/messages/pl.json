@@ -17,7 +17,8 @@
     "preview": "Podgląd profilu",
     "profileViews": "Wyświetlenia profilu:",
     "availability": "Jestem otwarty na nową pracę",
-    "loading": "Ładowanie..."
+    "loading": "Ładowanie...",
+    "addJob": "Dodaj zlecenie dla specjalisty"
   },
   "HowItWorks": {
     "faqsection": "Odwrócony proces rekrutacyjny",
@@ -343,14 +344,6 @@
     "story2Role": "Założyciel Startupu",
     "ctaTitle": "Gotowy Znaleźć Swojego Programistę?",
     "ctaDesc": "Opublikuj ofertę teraz i znajdź zweryfikowanych specjalistów"
-  },
-  "AddJobChat": {
-    "descriptionHeader": "Opisz, czego potrzebujesz",
-    "descriptionParagraph": "Tak jak najdokładniej. Możesz wrzucić zarówno treść ogłoszenia.",
-    "placeholder": "Przedstaw zlecenie w kilku słowach",
-    "textareaLabel": "Treść zlecenia",
-    "cancelBtn": "Cofnij",
-    "nextBtn": "Dalej"
   },
   "MyJobCard": {
     "published": "Opublikowano",

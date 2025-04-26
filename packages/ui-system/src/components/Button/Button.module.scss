@@ -53,12 +53,11 @@
   background: transparent;
   align-items: center;
   border-radius: 2px;
+  border: 1px solid var(--border-color);
 
   @include mobile {
     width: 100%;
   }
-
-  border: 1px solid var(--border-color);
 }
 
 .secondary:hover:enabled {

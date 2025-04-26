@@ -1,5 +1,6 @@
 'use client'
 
+import { Roles } from '@/app/[locale]/(auth)/_models/User.model'
 import { type LoginFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
@@ -9,32 +10,25 @@ import { Button } from '@gdh/ui-system'
 import { Formik } from 'formik'
 import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
 import * as Yup from 'yup'
 import { getPendingPublishJob } from '../../_utils/job-storage.client'
 import styles from './LoginModal.module.scss'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const t = useTranslations(I18nNamespaces.Auth)
-  const router = useRouter()
 
-  // Check if there's a pending job to publish
   const pendingJobId = getPendingPublishJob()
-  const callbackUrl = pendingJobId
+  const finalDestinationUrl = pendingJobId
     ? `${AppRoutes.jobs}/${pendingJobId}?publish=true`
     : AppRoutes.profilesList
 
+  const encodedFinalDestination = encodeURIComponent(finalDestinationUrl)
+  const intermediateCallbackUrl = `${AppRoutes.oAuth}?role=${Roles.HUNTER}&redirectTo=${encodedFinalDestination}`
+
   const handleSigninByLinkedIn = () => {
     signIn('linkedin', {
-      callbackUrl,
+      callbackUrl: intermediateCallbackUrl,
     })
-  }
-
-  const handleSignup = () => {
-    // For now, just close the modal as the user will be redirected
-    // to the sign-up flow as part of the sign-in process
-    closeModal()
-    router.push(AppRoutes.signIn)
   }
 
   const initialValues: LoginFormValues = {
@@ -52,10 +46,9 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   })
 
   const handleSubmit = (values: LoginFormValues) => {
-    // Use Next Auth's email provider to send a magic link
     signIn('email', {
       email: values.email,
-      callbackUrl,
+      callbackUrl: intermediateCallbackUrl,
     })
     closeModal()
   }

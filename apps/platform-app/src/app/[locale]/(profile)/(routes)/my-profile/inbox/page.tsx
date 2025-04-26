@@ -20,23 +20,29 @@ export default async function InboxPage() {
   const applications = await getUserApplications()
 
   // Map applications to the format expected by the InboxClient component
-  const formattedApplications: JobNegotiation[] = applications.map((app) => ({
-    id: app.id,
-    jobId: app.jobId,
-    jobTitle: app.jobTitle,
-    companyName: app.companyName,
-    title: app.jobTitle,
-    subtitle: app.companyName,
-    lastMessage: app.lastMessage || t('applicationSubmitted'),
-    lastMessageTime: app.lastMessageTime,
-    unread: app.unread,
-    messages: app.messages.map((msg) => ({
-      id: msg.id,
-      content: msg.content,
-      sender: msg.sender,
-      timestamp: msg.timestamp,
-    })),
-  }))
+  const formattedApplications: JobNegotiation[] = applications
+    .map((app) => ({
+      id: app.id,
+      jobId: app.jobId,
+      jobTitle: app.jobTitle,
+      companyName: app.companyName,
+      title: app.jobTitle,
+      subtitle: app.companyName,
+      lastMessage: app.lastMessage || t('applicationSubmitted'),
+      lastMessageTime: app.lastMessageTime,
+      unread: app.unread,
+      messages: app.messages.map((msg) => ({
+        id: msg.id,
+        content: msg.content,
+        sender: msg.sender,
+        timestamp: msg.timestamp,
+      })),
+    }))
+    .sort((a, b) => {
+      const timeA = new Date(a.lastMessageTime).getTime()
+      const timeB = new Date(b.lastMessageTime).getTime()
+      return timeB - timeA // descending, newest first
+    })
 
   return <InboxClient initialApplications={formattedApplications} />
 }

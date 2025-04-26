@@ -27,7 +27,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     <div className={styles.profileCard}>
       <div className={styles.profileHeader}>
         <div className={styles.avatarContainer}>
-          <Image src={avatar} alt={name} />
+          <Image src={avatar} alt={name} fill />
         </div>
         <div className={styles.profileInfo}>
           <h3>{name}</h3>
@@ -88,7 +88,7 @@ export async function HunterRiskReducers() {
               {t('specialistsTitle1')}{' '}
               {t('specialistsTitle2')
                 .split('50+')
-                .map((part, index, array) => {
+                .map((part, index) => {
                   if (index === 0) {
                     return (
                       <React.Fragment key={index}>

@@ -11,6 +11,7 @@ import {
   type ProfileFormValues,
 } from '@/app/[locale]/(profile)/profile.types'
 import { useUploadContext } from '@/contexts/UploadContext'
+import { countries } from '@/data/countries'
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { AppRoutes } from '@/utils/routes'
 import { Currency, PublishingState } from '@prisma/client'
@@ -25,6 +26,8 @@ import LocationPreferences from '../CreateProfile/LocationPreferences/LocationPr
 import PersonalInfo from '../CreateProfile/PersonalInfo/PersonalInfo'
 import WorkInformation from '../CreateProfile/WorkInformation/WorkInformation'
 import { FormNavigationWarning } from '../FormStateMonitor/FormStateMonitor'
+
+const validCountryEnNames = countries.map((c) => c.name_en)
 
 export const validationSchema = Yup.object().shape({
   slug: Yup.string()
@@ -42,7 +45,9 @@ export const validationSchema = Yup.object().shape({
     }),
   fullName: Yup.string().required('Name is required'),
   bio: Yup.string().required('Bio is required'),
-  country: Yup.string().required('Country is required'),
+  country: Yup.string()
+    .required('Country is required')
+    .oneOf(validCountryEnNames, 'Invalid country selected'),
   city: Yup.string().required('City is required'),
   openToRelocationCountry: Yup.boolean().oneOf([true, false]),
   remoteOnly: Yup.boolean().oneOf([true, false], 'This field must be checked'),
@@ -88,7 +93,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
         linkedin: '',
         bio: '',
         cvUrl: '',
-        country: '',
+        country: '', // Should be name_en
         openForCountryRelocation: false,
         city: '',
         openForCityRelocation: false,
@@ -119,7 +124,7 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       linkedIn: values.linkedin,
       bio: values.bio,
       cvUrl: values.cvUrl,
-      country: values.country,
+      country: values.country, // This is name_en
       openForCountryRelocation: values.openForCountryRelocation,
       city: values.city,
       openForCityRelocation: values.openForCityRelocation,
@@ -180,15 +185,17 @@ const EditProfileForm = ({ profile }: { profile: ProfileModel }) => {
       onSubmit={handleEditProfile}
       validateOnMount
     >
-      <div className={styles.wrapper}>
-        <CreateProfileTopBar isSubmitting={isSubmitting} />
-        <div className={styles.formBox}>
-          <PersonalInfo />
-          <LocationPreferences />
-          <WorkInformation />
+      <form onSubmit={(e) => e.preventDefault()}>
+        <div className={styles.wrapper}>
+          <CreateProfileTopBar isSubmitting={isSubmitting} />
+          <div className={styles.formBox}>
+            <PersonalInfo />
+            <LocationPreferences />
+            <WorkInformation />
+          </div>
+          <FormNavigationWarning />
         </div>
-        <FormNavigationWarning />
-      </div>
+      </form>
     </Formik>
   )
 }

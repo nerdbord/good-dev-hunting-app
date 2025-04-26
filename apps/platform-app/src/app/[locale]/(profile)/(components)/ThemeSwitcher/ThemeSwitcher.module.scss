@@ -1,10 +1,10 @@
-@import '../../../../../styles/_index.scss';
+@use '../../../../../styles/_index.scss' as styles;
 
 .theme {
   min-height: 100%;
   width: 100%;
   background-color: var(--bg-color);
-  @include theme-transition;
+  @include styles.theme-transition;
 }
 
 .switch {

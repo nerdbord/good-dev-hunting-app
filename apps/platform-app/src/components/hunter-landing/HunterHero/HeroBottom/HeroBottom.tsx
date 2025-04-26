@@ -22,7 +22,6 @@ export const HeroBottom = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { addToast } = useToast()
-
   // Define tag keys and translations
   const tagKeys = useMemo(
     () => [
@@ -132,11 +131,8 @@ export const HeroBottom = () => {
   // Add createJob function from AddJobChat.tsx
   const createJob = async () => {
     // Get the text from the textarea
-    const textToSubmit = currentText || currentMockText
-
-    if (!textToSubmit.trim()) {
-      return // Don't submit empty descriptions
-    }
+    const textToSubmit = currentText
+    //  || currentMockText
 
     // Basic client-side validation
     if (textToSubmit.trim().length < 10) {

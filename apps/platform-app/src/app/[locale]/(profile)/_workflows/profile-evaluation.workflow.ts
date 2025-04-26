@@ -51,10 +51,11 @@ const acceptProfileTool = tool(
     }
 
     updateProfileById(profileId, { state: 'APPROVED' })
-    sendProfileApprovedEmail(
-      currentState.profile.user.email,
-      currentState.profile.user.githubDetails?.username || '',
-    )
+    sendProfileApprovedEmail({
+      email: currentState.profile.user.email,
+      githubUsername: currentState.profile.user.githubDetails?.username || '',
+      locale: currentState.profile.user.language,
+    })
 
     await sendDiscordNotificationToModeratorChannel(
       `✅ AI Workflow has approved ${currentState.profile.fullName} profile. [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
@@ -81,7 +82,11 @@ const rejectProfileTool = tool(
 
     updateProfileById(profileId, { state: 'REJECTED' })
     saveRejectingReason(profileId, reason)
-    sendProfileRejectedEmail(currentState.profile.user.email, reason)
+    sendProfileRejectedEmail({
+      email: currentState.profile.user.email,
+      reason,
+      locale: currentState.profile.user.language,
+    })
     await sendDiscordNotificationToModeratorChannel(
       `⛔️ AI Workflow has rejected ${currentState.profile.fullName} profile. Reason: ${reason} [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
     )
@@ -221,11 +226,14 @@ const graph = workflow.compile()
 
 export const runEvaluateProfileAgent = async (profileId: string) => {
   'use server'
-  const res = await graph.invoke('', {
-    configurable: {
-      thread_id: profileId,
-      profileId,
+  const res = await graph.invoke(
+    {},
+    {
+      configurable: {
+        thread_id: profileId,
+        profileId,
+      },
     },
-  })
+  )
   return res
 }

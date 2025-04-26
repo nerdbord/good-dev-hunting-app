@@ -28,7 +28,7 @@ interface JobApplicationFormProps {
   jobName: string
 }
 
-const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
+const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
   const router = useRouter()
   const { data: session } = useSession()
   const profileId = session?.user.profileId
@@ -153,7 +153,6 @@ const JobApplicationForm = ({ jobId, jobName }: JobApplicationFormProps) => {
           handleBlur,
           isSubmitting: formSubmitting,
           setFieldTouched,
-          values,
         }) => (
           <Form>
             <div className={styles.formBox}>

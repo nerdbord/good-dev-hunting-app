@@ -17,7 +17,8 @@
     "preview": "Profile preview",
     "profileViews": "Profile views",
     "availability": "I'm available for work",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "addJob": "Submit a request for a specialist"
   },
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
@@ -343,14 +344,6 @@
     "story2Role": "Startup Founder",
     "ctaTitle": "Ready to Find Your Developer?",
     "ctaDesc": "Post your job now and get matched with verified specialists"
-  },
-  "AddJobChat": {
-    "descriptionHeader": "Describe what you need",
-    "descriptionParagraph": "As detailed as possible. You can also paste the content of your job posting.",
-    "placeholder": "Describe your job in a few words",
-    "textareaLabel": "Job description",
-    "cancelBtn": "Back",
-    "nextBtn": "Next"
   },
   "MyJobCard": {
     "published": "Published",

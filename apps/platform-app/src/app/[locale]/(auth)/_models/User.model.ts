@@ -21,6 +21,7 @@ export function createUserModel(data: UserWithRelations): UserModel {
     createdAt: data.createdAt,
     profileId: data.profile?.id || null,
     profileSlug: data.profile?.slug || null,
+    language: data.language,
   }
 }
 

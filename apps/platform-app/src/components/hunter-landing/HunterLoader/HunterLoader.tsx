@@ -2,6 +2,7 @@
 
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import styles from './HunterLoader.module.scss'
 
@@ -100,21 +101,24 @@ export const HunterLoader = ({ message }: HunterLoaderProps) => {
         {showTechIcons && (
           <div className={styles.techIconsContainer}>
             <div className={styles.techIcon}>
-              <img
+              <Image
+                fill
                 src="/LandingHunter/react-svg.svg"
                 alt="React"
                 className={styles.reactIcon}
               />
             </div>
             <div className={styles.techIcon}>
-              <img
+              <Image
+                fill
                 src="/LandingHunter/python-svg.svg"
                 alt="Python"
                 className={styles.pythonIcon}
               />
             </div>
             <div className={styles.techIcon}>
-              <img
+              <Image
+                fill
                 src="/LandingHunter/java-svg.svg"
                 alt="Java"
                 className={styles.javaIcon}

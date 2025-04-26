@@ -16,15 +16,16 @@ model User {
   nerdbordUserId       String?          @unique
   emailVerified        DateTime?
   createdAt            DateTime         @default(now())
+  language             UserLanguage?
   accounts             Account[]
-  contactRequests      ContactRequest[]
-  githubDetails        GitHubDetails?
-  profile              Profile?
-  viewedProfiles       ProfileView[]
-  createdJobs          Job[]
   sentApplications     Application[]    @relation("applicant")
   receivedApplications Application[]    @relation("jobOwner")
+  contactRequests      ContactRequest[]
+  githubDetails        GitHubDetails?
+  createdJobs          Job[]
   messages             Message[]
+  profile              Profile?
+  viewedProfiles       ProfileView[]
 }
 
 model Account {
@@ -78,6 +79,7 @@ model Profile {
   slug                     String            @unique
   cvUrl                    String?
   contactRequests          ContactRequest[]
+  jobMatches               JobCandidate[]
   city                     City              @relation(fields: [cityId], references: [id])
   country                  Country           @relation(fields: [countryId], references: [id])
   user                     User              @relation(fields: [userId], references: [id])
@@ -85,15 +87,14 @@ model Profile {
   rejectionReasons         RejectionReason[]
   language                 Language[]        @relation("LanguageToProfile")
   techStack                Technology[]      @relation("ProfileToTechnology")
-  jobMatches               JobCandidate[]
 }
 
 model Technology {
   id       String    @id @default(uuid())
   name     String    @unique
-  profiles Profile[] @relation("ProfileToTechnology")
-  Job      Job?      @relation(fields: [jobId], references: [id])
   jobId    String?
+  Job      Job?      @relation(fields: [jobId], references: [id])
+  profiles Profile[] @relation("ProfileToTechnology")
 }
 
 model GitHubDetails {
@@ -151,6 +152,88 @@ model Language {
   profiles Profile[] @relation("LanguageToProfile")
 }
 
+model Job {
+  id                             String          @id @default(uuid())
+  jobName                        String
+  projectBrief                   String
+  budgetType                     String
+  currency                       Currency?
+  minBudgetForProjectRealisation Int?
+  maxBudgetForProjectRealisation Int?
+  contractType                   String
+  employmentTypes                String[]
+  employmentModes                String[]
+  country                        String
+  city                           String
+  remoteOnly                     Boolean         @default(false)
+  state                          PublishingState @default(DRAFT)
+  createdById                    String?
+  createdAt                      DateTime        @default(now())
+  updatedAt                      DateTime?       @updatedAt
+  viewCount                      Int             @default(0)
+  terms                          Boolean         @default(true)
+  applications                   Application[]
+  createdBy                      User?           @relation(fields: [createdById], references: [id])
+  matchedCandidates              JobCandidate[]
+  techStack                      Technology[]
+}
+
+model Application {
+  id          String    @id @default(uuid())
+  jobId       String
+  applicantId String
+  jobOwnerId  String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  applicant   User      @relation("applicant", fields: [applicantId], references: [id])
+  job         Job       @relation(fields: [jobId], references: [id])
+  jobOwner    User      @relation("jobOwner", fields: [jobOwnerId], references: [id])
+  messages    Message[]
+}
+
+model Message {
+  id            String      @id @default(uuid())
+  content       String
+  sentAt        DateTime    @default(now())
+  applicationId String
+  senderId      String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  sender        User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+model RateLimit {
+  id        String   @id @default(uuid())
+  ipAddress String
+  action    String
+  timestamp DateTime @default(now())
+  userId    String?
+  metadata  String?
+
+  @@index([ipAddress, action])
+  @@index([timestamp])
+}
+
+model JobCandidate {
+  id                         String   @id @default(uuid())
+  jobId                      String
+  profileId                  String
+  matchScore                 Int
+  technicalSkillsScore       Int
+  experienceLevelScore       Int
+  employmentPreferencesScore Int
+  additionalFactorsScore     Int
+  matchReason                String
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  job                        Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  profile                    Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, profileId])
+  @@index([jobId])
+  @@index([profileId])
+  @@index([matchScore])
+}
+
 enum Currency {
   PLN
   EUR
@@ -178,88 +261,7 @@ enum PublishingState {
   REJECTED
 }
 
-// Job model for storing job postings
-model Job {
-  id                             String          @id @default(uuid())
-  jobName                        String
-  projectBrief                   String          @db.Text
-  techStack                      Technology[]
-  budgetType                     String // "FIXED" or "REQUEST_QUOTE"
-  currency                       Currency?
-  minBudgetForProjectRealisation Int?
-  maxBudgetForProjectRealisation Int?
-  contractType                   String
-  employmentTypes                String[]
-  employmentModes                String[]
-  country                        String
-  city                           String
-  remoteOnly                     Boolean         @default(false)
-  state                          PublishingState @default(DRAFT)
-  createdBy                      User?           @relation(fields: [createdById], references: [id])
-  createdById                    String?
-  createdAt                      DateTime        @default(now())
-  updatedAt                      DateTime?       @updatedAt
-  applications                   Application[]
-  viewCount                      Int             @default(0)
-  terms                          Boolean         @default(true)
-  matchedCandidates              JobCandidate[]
-}
-
-// Application model for storing job applications (chats)
-model Application {
-  id          String    @id @default(uuid())
-  job         Job       @relation(fields: [jobId], references: [id])
-  jobId       String
-  applicant   User      @relation("applicant", fields: [applicantId], references: [id])
-  applicantId String
-  jobOwner    User      @relation("jobOwner", fields: [jobOwnerId], references: [id])
-  jobOwnerId  String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime? @updatedAt
-  messages    Message[]
-}
-
-// Message model for storing chat messages
-model Message {
-  id            String      @id @default(uuid())
-  content       String
-  sentAt        DateTime    @default(now())
-  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
-  applicationId String
-  sender        User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
-  senderId      String
-}
-
-model RateLimit {
-  id        String   @id @default(uuid())
-  ipAddress String
-  action    String // e.g., "JOB_CREATION", "JOB_VERIFICATION", "API_USAGE"
-  timestamp DateTime @default(now())
-  userId    String? // Optional, for authenticated users
-  metadata  String? // Optional JSON string for additional data
-
-  @@index([ipAddress, action]) // For faster lookups
-  @@index([timestamp]) // For faster cleanup
-}
-
-model JobCandidate {
-  id                         String   @id @default(uuid())
-  jobId                      String
-  profileId                  String
-  matchScore                 Int // Overall match score (e.g., 0-100)
-  technicalSkillsScore       Int // Score from matchBreakdown.technicalSkills
-  experienceLevelScore       Int // Score from matchBreakdown.experienceLevel
-  employmentPreferencesScore Int // Score from matchBreakdown.employmentPreferences
-  additionalFactorsScore     Int // Score from matchBreakdown.additionalFactors
-  matchReason                String   @db.Text // Explanation for the match
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
-
-  job     Job     @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-
-  @@unique([jobId, profileId]) // Ensure a profile is matched only once per job
-  @@index([jobId])
-  @@index([profileId])
-  @@index([matchScore]) // Index for sorting by score
+enum UserLanguage {
+  en
+  pl
 }
