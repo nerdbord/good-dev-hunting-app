@@ -20,6 +20,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-empty-interface': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/consistent-type-imports': [
       'error',
       {
