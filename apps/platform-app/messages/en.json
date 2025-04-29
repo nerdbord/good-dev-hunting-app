@@ -561,5 +561,13 @@
   "HunterCTA": {
     "title": "Describe your project and choose the best expert",
     "button": "Add job for free"
+  },
+  "AddJobChat": {
+    "descriptionHeader": "Describe what you need",
+    "descriptionParagraph": "As detailed as possible. You can also paste the content of your job posting.",
+    "placeholder": "Describe your job in a few words",
+    "textareaLabel": "Job description",
+    "cancelBtn": "Back",
+    "nextBtn": "Next"
   }
 }

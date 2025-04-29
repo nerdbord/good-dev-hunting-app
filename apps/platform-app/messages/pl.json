@@ -560,5 +560,13 @@
   "HunterCTA": {
     "title": "Opisz swój projekt i wybierz najlepszego eskperta",
     "button": "Dodaj zlecenie za darmo"
+  },
+  "AddJobChat": {
+    "descriptionHeader": "Opisz, czego potrzebujesz",
+    "descriptionParagraph": "Tak jak najdokładniej. Możesz wrzucić zarówno treść ogłoszenia.",
+    "placeholder": "Przedstaw zlecenie w kilku słowach",
+    "textareaLabel": "Treść zlecenia",
+    "cancelBtn": "Cofnij",
+    "nextBtn": "Dalej"
   }
 }
