@@ -37,7 +37,7 @@ const evaluationModel = new ChatGroq({
 })
 
 const executionModel = new ChatGroq({
-  model: 'llama-3.2-90b-vision-preview',
+  model: 'llama-3.3-70b-versatile',
   temperature: 0,
 })
 
@@ -157,10 +157,12 @@ const describeAvatar = async (state: typeof StateAnnotation.State) => {
 
       return { avatarDescription }
     } catch (error) {
+      console.error('error', error)
       await sendDiscordNotificationToModeratorChannel(
-        `❗❗❗ AI Workflow occurred error while evaluating the ${fullName} profile. ❗❗❗
+        `❗❗❗ AI Workflow occurred error while evaluating the ${fullName} profile. ${error}
         [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${userId})`,
       )
+
       throw new Error('AI Workflow occurred error while evaluating the profile')
     }
   } else {
