@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+
+  @include mobile {
+    gap: 20px;
+  }
+}
+
+.title {
+  color: var(--hunter-landing-text-color);
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 40px;
+  @include mobile {
+    font-size: 26px;
+    line-height: 30px;
+    letter-spacing: 0%;
+  }
+}
+
+.reviewBox {
+  column-count: 3;
+  column-gap: 16px;
+  width: 100%;
+
+  @include mobile {
+    column-count: 1;
+  }
+}
+
+.mobileSlider {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 30px;
+  margin-top: 8px;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--color);
+}
+
+.arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

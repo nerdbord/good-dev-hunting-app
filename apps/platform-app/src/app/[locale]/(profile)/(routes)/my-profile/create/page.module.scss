@@ -1,7 +1,10 @@
+@use 'mixins' as mixins;
+
 .wrapper {
   position: relative;
   padding: 24px 8% 35px;
-  @include mobile {
+
+  @include mixins.mobile {
     padding: 0;
   }
 }
@@ -24,4 +27,13 @@
   font-weight: 500;
   line-height: 16px;
   color: #d62626;
+}
+
+.actionsWrapper {
+  display: flex;
+  gap: 8px;
+
+  @include mixins.mobile {
+    flex-direction: column;
+  }
 }

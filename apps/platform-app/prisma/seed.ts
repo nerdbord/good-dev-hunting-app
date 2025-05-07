@@ -7,7 +7,7 @@ import {
 } from '@prisma/client'
 
 const prisma = new PrismaClient()
-
+//
 // Function to generate a random avatar URL following the scheme from GitHub
 function getRandomAvatarUrl(): string {
   // Generates a random number between 10,000,000 and 999,999,999 (8 or 9 digits)

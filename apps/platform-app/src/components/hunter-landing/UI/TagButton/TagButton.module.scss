@@ -1,0 +1,37 @@
+.tag {
+  display: flex;
+  padding: 12px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: var(--hunter-landing-bg-color3);
+  border: none;
+  color: var(--hunter-landing-text-color4);
+  font-family: 'IBM Plex Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  text-align: center;
+  margin: 0;
+  position: relative;
+
+  @include mobile {
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    background: var(--hunter-landing-text-color7);
+  }
+
+  &.highlighted {
+    background: var(--hunter-landing-text-color7);
+  }
+
+  &.selected {
+    background: #9e91cb;
+    color: white;
+  }
+}

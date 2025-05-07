@@ -13,9 +13,9 @@
     "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,jsx}": [
-      "prettier --write",
-      "eslint --fix"
+    "apps/platform-app/**/*.{ts,tsx}": [
+      "npm run lint -w apps/platform-app --fix",
+      "npm run format:staged -w apps/platform-app"
     ],
     "**/*.{json,css,scss}": [
       "prettier --write"
@@ -24,7 +24,12 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
-    "husky": "^9.1.7",
-    "lint-staged": "^13.2.2"
-  }
+    "husky": "^8.0.0",
+    "lint-staged": "^15.1.0"
+  },
+  "dependencies": {
+    "react-slick": "^0.30.3",
+    "uninstall": "^0.0.0"
+  },
+  "packageManager": "pnpm@10.6.1+sha512.40ee09af407fa9fbb5fbfb8e1cb40fbb74c0af0c3e10e9224d7b53c7658528615b2c92450e74cfad91e3a2dcafe3ce4050d80bda71d757756d2ce2b66213e9a3"
 }

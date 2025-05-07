@@ -1,0 +1,9 @@
+.landing_background {
+  background-color: var(--bg-color);
+  overflow: hidden;
+  transition: background-color 700ms linear, color 700ms linear;
+  -webkit-transition: background-color 700ms linear, color 700ms linear;
+  @include mobile {
+    overflow: visible;
+  }
+}

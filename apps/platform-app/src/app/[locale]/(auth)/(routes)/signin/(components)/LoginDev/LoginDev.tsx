@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { GithubLoginButton } from '@/app/[locale]/(auth)/(components)/GithubLoginButton/GithubLoginButton'
 import { LinkedInLoginButton } from '@/app/[locale]/(auth)/(components)/LinkedInLoginButton/LinkedInLoginButton'
 import { Roles } from '@/app/[locale]/(auth)/_models/User.model'
+import { AppRoutes } from '@/utils/routes'
 import { Box } from '@gdh/ui-system'
 import styles from '../../page.module.scss'
 
@@ -18,11 +19,15 @@ const LoginDev = () => {
         <GithubLoginButton
           label={t('loginWithGithub')}
           role={Roles.SPECIALIST}
+          redirect={true}
+          redirectTo={AppRoutes.myProfile}
         />
         <span>{t('or')}</span>
         <LinkedInLoginButton
           label={t('loginWithLinkedin')}
           role={Roles.SPECIALIST}
+          redirect={true}
+          redirectTo={AppRoutes.myProfile}
         />
       </div>
     </Box>

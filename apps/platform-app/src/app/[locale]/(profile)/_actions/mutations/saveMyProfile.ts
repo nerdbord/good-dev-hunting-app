@@ -1,5 +1,4 @@
 'use server'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions/queries'
 import {
   createProfileModel,
@@ -11,6 +10,7 @@ import {
 } from '@/app/[locale]/(profile)/profile.helpers'
 import { type EditProfileFormFields } from '@/app/[locale]/(profile)/profile.types'
 import { updateProfileById } from '@/backend/profile/profile.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState, type Prisma } from '@prisma/client'
 

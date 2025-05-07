@@ -1,36 +1,35 @@
-import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
-import { ProfilesStoreProvider } from '@/app/[locale]/(profile)/_providers/profiles-store.provider'
-import {
-  FAQSection,
-  Hero,
-  HowItWorks,
-  LandingFooter,
-  MeetTeam,
-  TalentSection,
-  UseYourProfile,
-} from '@/components/landing-page'
-import { Container } from '@gdh/ui-system'
-import styles from '../page.module.scss'
-import Header from './(profile)/(components)/Header/Header'
+import { Container } from '@/components/hunter-landing/UI/Container/Container'
 
-// TEST
-export default async function LandingPage() {
-  const fetchedProfiles = await findAllApprovedProfiles()
+import { HunterCTA } from '@/components/hunter-landing/HunterCTA/HunterCTA'
+import { HunterFAQ } from '@/components/hunter-landing/HunterFAQ/HunterFAQ'
+import { HunterFooter } from '@/components/hunter-landing/HunterFooter/HunterFooter'
+import { HunterHeader } from '@/components/hunter-landing/HunterHeader/HunterHeader'
+import { HunterHero } from '@/components/hunter-landing/HunterHero/HunterHero'
+import { HunterHowItWorks } from '@/components/hunter-landing/HunterHowItWorks/HunterHowItWorks'
+import { HunterReviews } from '@/components/hunter-landing/HunterReviews/HunterReviews'
+import { HunterRiskReducers } from '@/components/hunter-landing/HunterRiskReducers/HunterRiskReducers'
+import { HunterTeam } from '@/components/hunter-landing/HunterTeam/HunterTeam'
+import { HunterWhyWorth } from '@/components/hunter-landing/HunterWhyWorth/HunterWhyWorth'
 
+import styles from './page.module.scss'
+
+export default async function HunterLandingPage() {
   return (
-    <ProfilesStoreProvider initialProfiles={fetchedProfiles}>
-      <main className={styles.landing_background}>
-        <Header buttonsVariant={'main'} />
-        <Container>
-          <Hero />
-          <HowItWorks />
-          <UseYourProfile />
-          <MeetTeam />
-          <TalentSection />
-          <FAQSection />
-        </Container>
-        <LandingFooter />
-      </main>
-    </ProfilesStoreProvider>
+    <main className={styles.hunter_landing}>
+      <HunterHeader />
+      <Container>
+        <div className={styles.wrapper}>
+          <HunterHero />
+          <HunterRiskReducers />
+          <HunterHowItWorks />
+          <HunterWhyWorth />
+          <HunterReviews />
+          <HunterTeam />
+          <HunterFAQ />
+          <HunterCTA />
+        </div>
+      </Container>
+      <HunterFooter />
+    </main>
   )
 }

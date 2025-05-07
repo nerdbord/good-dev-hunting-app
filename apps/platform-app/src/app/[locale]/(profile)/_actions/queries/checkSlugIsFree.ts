@@ -1,7 +1,7 @@
 'use server'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { checkSlugExists } from '@/backend/profile/profile.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { type Profile } from '@prisma/client'
 

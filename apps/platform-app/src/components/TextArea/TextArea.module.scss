@@ -10,7 +10,6 @@
   resize: none;
   padding: 16px 24px 16px 20px;
   font-size: 16px;
-
 }
 
 .formTextarea::placeholder {
@@ -51,12 +50,11 @@
   background-color: var(--bg-color2);
   color: var(--text-color2);
 
-  :global(.light)  & {
+  :global(.light) & {
     background-color: rgba(250, 250, 255, 1);
     color: rgba(42, 47, 53, 1);
-      }
-    }
-
+  }
+}
 
 .mdxEditorCustom {
   //--mdx-ul-color: white;
@@ -153,7 +151,7 @@
 
     :global(.light) & {
       background-color: transparent;
-      color: #04080D;
+      color: #04080d;
     }
   }
 
@@ -166,7 +164,6 @@
     width: 100%;
     flex-grow: 1;
   }
-
 }
 
 .mdxContentEditable {

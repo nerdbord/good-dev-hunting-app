@@ -1,0 +1,20 @@
+.hunter_landing {
+  min-height: 100dvh;
+  overflow: hidden;
+  background-color: var(--hunter-landing-bg-color);
+  color: var(--hunter-landing-text-color);
+  padding-top: 160px;
+  @include mobile {
+    padding-top: 160px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 180px;
+  padding-bottom: 90px;
+  @include mobile {
+    gap: 100px;
+  }
+}

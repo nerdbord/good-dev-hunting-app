@@ -14,16 +14,13 @@ const FindTalentsBtn = (props: FindTalentsBtnProps) => {
   const pathname = usePathname()
   const t = useTranslations(I18nNamespaces.Index)
 
-  if (pathname === AppRoutes.profilesList) {
+  if (pathname === AppRoutes.home) {
     return null
   }
 
   return (
-    <Button
-      onClick={() => router.push(AppRoutes.profilesList)}
-      variant={props.variant}
-    >
-      {t('findtalents')}{' '}
+    <Button onClick={() => router.push(AppRoutes.home)} variant={props.variant}>
+      {t('addJob')}
     </Button>
   )
 }

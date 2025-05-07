@@ -1,0 +1,177 @@
+.bottomSection {
+  width: 100%;
+  max-width: 805px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.bottomSection > *:not(:first-child):not(:nth-child(2)) {
+  margin-top: 40px;
+}
+
+.bottomSection > *:nth-child(3) {
+  margin-top: 40px;
+}
+
+@include mobile {
+  .bottomSection > *:not(:first-child):not(:nth-child(2)) {
+    margin-top: 26px;
+  }
+
+  .bottomSection > *:nth-child(3) {
+    margin-top: 26px;
+  }
+}
+
+.backgroundIcons {
+  position: relative;
+  width: 100%;
+  height: 0;
+}
+
+/* Positioning for the tech icons */
+.reactIcon {
+  top: -50px;
+  left: -170px;
+  transform: rotate(-15deg);
+}
+
+.pythonIcon {
+  top: -175px;
+  left: unset;
+  right: -195px;
+  transform: rotate(-15deg);
+}
+
+.javaIcon {
+  top: 90px;
+  right: -163px;
+  transform: rotate(10deg);
+}
+
+.searchInput {
+  width: 100%;
+}
+
+.searchLabel {
+  color: var(--hunter-landing-text-color2);
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.buttonSection {
+  width: 205px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  @include mobile {
+    width: 240px;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  @include mobile {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
+}
+
+.mobileRow {
+  @include mobile {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.mobileRowReverse {
+  @include mobile {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}
+
+.tagsSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mobile {
+    gap: 8px;
+    margin: 0 auto;
+    padding: 0;
+    overflow-x: visible;
+    position: relative;
+  }
+}
+
+.tag {
+  display: flex;
+  padding: 12px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: var(--hunter-landing-bg-color3);
+  border: none;
+  color: var(--hunter-landing-text-color4);
+  font-family: 'IBM Plex Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  text-align: center;
+  margin: 0;
+  position: relative;
+  border: 1px solid lime;
+
+  @include mobile {
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    background: var(--hunter-landing-text-color7);
+  }
+
+  &.highlighted {
+    background: var(--hunter-landing-text-color7);
+  }
+
+  &.selected {
+    background: #9e91cb;
+    color: white;
+  }
+}
+
+.tooltipContainer {
+  position: relative;
+  z-index: 100;
+  direction: ltr;
+
+  @include mobile {
+    position: absolute;
+    left: 35px;
+    bottom: 5px;
+    pointer-events: none;
+    display: block;
+  }
+}
