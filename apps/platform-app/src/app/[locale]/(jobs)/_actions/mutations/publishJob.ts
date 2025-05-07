@@ -19,6 +19,7 @@ export const publishJobAction = withSentry(async (id: string) => {
     if (!user) {
       throw new Error('User not found')
     }
+    let userLanguage = user.language
 
     // Check if the job exists
     const job = await getJobById(id)
@@ -89,12 +90,20 @@ export const publishJobAction = withSentry(async (id: string) => {
       }
     }
 
+    if (!userLanguage) {
+      const { user } = await getAuthorizedUser()
+      if (!user) {
+        throw new Error('User not found')
+      }
+      userLanguage = user.language
+    }
     // Step 6: Send confirmation email to job owner
-    await sendJobPublishedEmail(
-      updatedJobWithRelations as any, // Type assertion to resolve the type mismatch
+    await sendJobPublishedEmail({
+      job: updatedJobWithRelations as any,
+      matchedProfilesCount: notificationResults.matchedCount,
       user,
-      notificationResults.matchedCount,
-    )
+      locale: user.language,
+    })
     return {
       success: true,
       message:

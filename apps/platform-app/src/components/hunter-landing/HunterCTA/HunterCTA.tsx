@@ -3,9 +3,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import styles from './HunterCTA.module.scss'
 
-type Props = {}
-
-export const HunterCTA = (props: Props) => {
+export const HunterCTA = () => {
   const t = useTranslations(I18nNamespaces.HunterCTA)
 
   return (

@@ -1,6 +1,6 @@
+const path = require('path')
 const { withSentryConfig } = require('@sentry/nextjs')
 const createNextIntlPlugin = require('next-intl/plugin')
-
 // Creating an instance of next-intl plugin
 const withNextIntl = createNextIntlPlugin()
 
@@ -8,6 +8,8 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig = {
   sassOptions: {
     additionalData: `@use "src/styles/mixins" as *; @use "src/styles/tokens" as *;`,
+    includePaths: [path.join(__dirname, 'src/styles')],
+    verbose: true,
   },
   env: {
     GITHUB_ID: process.env.GITHUB_ID,
@@ -38,6 +40,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'github.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'flagsapi.com',
         port: '',
       },
     ],

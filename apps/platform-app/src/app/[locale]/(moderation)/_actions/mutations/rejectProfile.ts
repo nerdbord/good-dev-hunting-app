@@ -31,7 +31,11 @@ export const rejectProfile = withSentry(
     })
 
     try {
-      await sendProfileRejectedEmail(profile?.user.email, reason)
+      await sendProfileRejectedEmail({
+        email: profile?.user.email,
+        reason,
+        locale: profile?.user.language,
+      })
       await sendDiscordNotificationToModeratorChannel(
         `⛔️ ${user.name || 'Moderator'} rejected ${
           updatedProfile.fullName

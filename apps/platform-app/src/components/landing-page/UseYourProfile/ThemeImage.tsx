@@ -12,6 +12,7 @@ export const ThemeImage = () => {
   return (
     <div className={style.profileImg}>
       <Image
+        fill
         src={!isDarkTheme ? UseYourProfileLight : UseYourProfileImg}
         alt="Use your profile image"
       />

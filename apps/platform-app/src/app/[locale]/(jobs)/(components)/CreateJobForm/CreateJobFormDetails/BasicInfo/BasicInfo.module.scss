@@ -1,11 +1,12 @@
-@import '../styles.module.scss';
+@use '../styles.module.scss';
+@use 'mixins' as mixins;
 
 .left {
   flex: 0 0 50%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  @include mobile {
+  @include mixins.mobile {
     max-width: 100%;
     flex-direction: column;
     gap: 24px;
@@ -28,7 +29,7 @@
   align-items: flex-start;
   gap: 20px;
   font-size: 14px;
-  @include mobile {
+  @include mixins.mobile {
     position: static;
     width: auto;
   }
@@ -39,7 +40,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 24px;
-  @include mobile {
+  @include mixins.mobile {
     max-width: 100%;
     flex-direction: column;
     gap: 24px;
@@ -71,7 +72,7 @@
   min-height: 414px;
   display: grid;
   grid-template-rows: minmax(auto, 1fr);
-  @include mobile {
+  @include mixins.mobile {
     min-height: 414px;
   }
 }
@@ -97,7 +98,7 @@
   line-height: 28px;
   padding: 16px 24px 16px 20px;
   background-color: #0f1217;
-  @include mobile {
+  @include mixins.mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;
   }

@@ -82,6 +82,7 @@ export async function createApplication(
       createdBy: {
         select: {
           email: true,
+          language: true,
           profile: {
             select: { fullName: true },
           },
@@ -94,6 +95,7 @@ export async function createApplication(
     where: { id: applicantId },
     select: {
       email: true,
+      language: true,
       profile: {
         select: { fullName: true },
       },
@@ -140,22 +142,24 @@ export async function createApplication(
 
     try {
       // Send notification to job owner about new application
-      await sendNewApplicationNotificationToOwner(
-        jobDetails.createdBy?.email || '',
+      await sendNewApplicationNotificationToOwner({
+        ownerEmail: jobDetails.createdBy?.email || '',
         ownerName,
         applicantName,
-        jobDetails.jobName,
-        ownerApplicationUrl,
-      )
+        jobTitle: jobDetails.jobName,
+        applicationUrl: ownerApplicationUrl,
+        locale: jobDetails.createdBy?.language ?? null,
+      })
 
       // Send confirmation to applicant
-      await sendApplicationConfirmationToApplicant(
-        applicantDetails.email,
+      await sendApplicationConfirmationToApplicant({
+        applicantEmail: applicantDetails.email,
         applicantName,
-        jobDetails.jobName,
-        ownerName,
-        applicantApplicationUrl,
-      )
+        jobTitle: jobDetails.jobName,
+        companyName: ownerName,
+        applicationUrl: applicantApplicationUrl,
+        locale: applicantDetails.language,
+      })
     } catch (error) {
       // Log error but don't fail the application creation
       console.error('Error sending application notifications:', error)

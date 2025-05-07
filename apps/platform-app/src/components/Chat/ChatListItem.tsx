@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import styles from './chat.module.scss'
 
 export interface ChatListItemProps {
@@ -38,7 +39,13 @@ export default function ChatListItem({
       {showAvatar && (
         <div className={styles.avatarContainer}>
           {avatarUrl ? (
-            <img src={avatarUrl} alt={title} className={styles.avatar} />
+            <Image
+              src={avatarUrl}
+              alt={title}
+              width={40}
+              height={40}
+              className={styles.avatar}
+            />
           ) : (
             <div className={styles.avatarPlaceholder}>
               {title.charAt(0).toUpperCase()}

@@ -11,8 +11,8 @@ import styles from './page.module.scss'
 export const revalidate = 0
 
 const MyProfilePage = async () => {
-  const { user, userIsHunter } = await getAuthorizedUser()
-  if (!user || userIsHunter) {
+  const { user, userIsSpecialist } = await getAuthorizedUser()
+  if (!user || !userIsSpecialist) {
     redirect(AppRoutes.profilesList)
   }
 

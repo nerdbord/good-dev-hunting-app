@@ -1,17 +1,14 @@
+@use 'mixins' as mixins;
 .container {
   display: flex;
   width: 679px;
-  padding: 124px 89px;
   flex-direction: column;
   align-items: center;
   gap: 32px;
   flex-shrink: 0;
-  position: relative;
   border-radius: 10px;
-
-  @include mobile {
-    width: 85%;
-    padding: 24px;
+  @include mixins.mobile {
+    width: 100%;
   }
 }
 

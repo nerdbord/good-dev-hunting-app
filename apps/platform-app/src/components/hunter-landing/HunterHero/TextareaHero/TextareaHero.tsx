@@ -23,7 +23,7 @@ export const TextareaHero = ({
   onTextChange,
 }: TextareaHeroProps) => {
   const t = useTranslations(I18nNamespaces.HunterHero)
-  const staticPrefix = `${t('textareaLabel')}`
+  const staticPrefix = t('textareaLabel')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   // Use custom hook for textarea animation

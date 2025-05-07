@@ -16,10 +16,12 @@ export const approveProfile = withSentry(async (profileId: string) => {
     state: PublishingState.APPROVED,
   })
 
-  await sendProfileApprovedEmail(
-    updatedProfile.user.email,
-    updatedProfile.fullName,
-  )
+  await sendProfileApprovedEmail({
+    email: updatedProfile.user.email,
+    githubUsername:
+      updatedProfile.user.githubDetails?.username || updatedProfile.fullName,
+    locale: user.language,
+  })
 
   await sendDiscordNotificationToModeratorChannel(
     `✅ ${user.name || 'Moderator'} approved ${

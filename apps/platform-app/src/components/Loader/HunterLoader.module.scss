@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@use '../../styles/mixins.scss';
 
 .loaderContainer {
   position: fixed;
@@ -13,7 +13,7 @@
   backdrop-filter: blur(3px);
   background-color: var(--hunter-landing-bg-color);
   color: var(--hunter-landing-text-color);
-  @include theme-transition;
+  @include mixins.theme-transition;
 }
 
 .content {
@@ -68,7 +68,7 @@
     rgba(125, 84, 241, 0.8),
     rgba(166, 135, 255, 0.8)
   );
-  @include theme-transition;
+  @include mixins.theme-transition;
 
   &::before,
   &::after {
@@ -139,7 +139,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  @include theme-transition;
+  @include mixins.theme-transition;
 }
 
 .dots {

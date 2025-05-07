@@ -86,6 +86,7 @@ export const sendProfileContactRequest = withSentry(
         message,
         recipientEmail: foundProfile.user.email,
         recipientFullName: foundProfile.fullName,
+        locale: foundProfile.user.language,
       })
 
       await sendDiscordNotificationToModeratorChannel(

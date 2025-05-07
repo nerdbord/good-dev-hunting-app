@@ -18,7 +18,7 @@ export const HunterHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations(I18nNamespaces.HunterHeader)
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const { status } = useSession()
 
   const handleAddJob = () => {
     router.push(AppRoutes.postJob)
