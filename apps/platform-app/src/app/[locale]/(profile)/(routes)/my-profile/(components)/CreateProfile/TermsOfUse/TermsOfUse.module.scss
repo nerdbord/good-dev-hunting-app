@@ -12,8 +12,8 @@
     gap: 30px;
   }
 
-    :global(.light) & {
-    background-color: #FEFEFF;
+  :global(.light) & {
+    background-color: #fefeff;
   }
 }
 
@@ -46,9 +46,8 @@
   font-size: 14px;
   justify-content: baseline;
 
-
   :global(.light) & {
-    color: #04080D;
+    color: #04080d;
   }
 }
 

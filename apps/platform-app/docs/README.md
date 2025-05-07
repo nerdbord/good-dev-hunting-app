@@ -4,4 +4,4 @@ This directory contains documentation for various aspects of the Good Dev Huntin
 
 ## Available Documentation
 
-- [Message Encryption](./message-encryption.md) - Details about the chat message encryption implementation 
+- [Message Encryption](./message-encryption.md) - Details about the chat message encryption implementation

@@ -1,269 +1,272 @@
 @import '../../styles/mixins.scss';
 
 .loaderContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    backdrop-filter: blur(3px);
-    @include theme-transition;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(3px);
+  @include theme-transition;
 
-    &.darkTheme {
-        background-color: rgba(18, 18, 18, 0.9); // var(--bg-color) with opacity
-    }
+  &.darkTheme {
+    background-color: rgba(18, 18, 18, 0.9); // var(--bg-color) with opacity
+  }
 
-    &.lightTheme {
-        background-color: rgba(250, 250, 255, 0.9); // var(--bg-color) with opacity
-    }
+  &.lightTheme {
+    background-color: rgba(250, 250, 255, 0.9); // var(--bg-color) with opacity
+  }
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    max-width: 300px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  max-width: 300px;
+  width: 100%;
 }
 
 .logoContainer {
-    margin-bottom: 2rem;
-    perspective: 800px;
-    position: relative;
+  margin-bottom: 2rem;
+  perspective: 800px;
+  position: relative;
 
-    .logo {
-        filter: drop-shadow(0 4px 10px rgba(125, 84, 241, 0.3));
-        transform-style: preserve-3d;
-        animation: float 3s ease-in-out infinite, rotateAnimation 6s ease-in-out infinite;
-    }
+  .logo {
+    filter: drop-shadow(0 4px 10px rgba(125, 84, 241, 0.3));
+    transform-style: preserve-3d;
+    animation: float 3s ease-in-out infinite,
+      rotateAnimation 6s ease-in-out infinite;
+  }
 
-    .logoRect {
-        transition: fill 0.3s ease, stroke 0.3s ease;
-    }
+  .logoRect {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+  }
 
-    .logoPath {
-        transition: fill 0.3s ease;
-    }
+  .logoPath {
+    transition: fill 0.3s ease;
+  }
 }
 
 .logoWrapper {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    animation: floatAnimation 3s ease-in-out infinite;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  animation: floatAnimation 3s ease-in-out infinite;
 }
 
 .logoInner {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 24px;
-    box-shadow: 0 4px 30px rgba(125, 84, 241, 0.2);
-    transform-style: preserve-3d;
-    animation: rotateAnimation 6s ease-in-out infinite;
-    background: linear-gradient(135deg, rgba(125, 84, 241, 0.8), rgba(166, 135, 255, 0.8));
-    @include theme-transition;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  box-shadow: 0 4px 30px rgba(125, 84, 241, 0.2);
+  transform-style: preserve-3d;
+  animation: rotateAnimation 6s ease-in-out infinite;
+  background: linear-gradient(
+    135deg,
+    rgba(125, 84, 241, 0.8),
+    rgba(166, 135, 255, 0.8)
+  );
+  @include theme-transition;
 
-    &::before,
-    &::after {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        border-radius: 26px;
-        z-index: -1;
-    }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 26px;
+    z-index: -1;
+  }
 
-    &::before {
-        background: linear-gradient(45deg, #6039d0, transparent, #8364e2);
-        animation: borderAnimation 3s linear infinite;
-    }
+  &::before {
+    background: linear-gradient(45deg, #6039d0, transparent, #8364e2);
+    animation: borderAnimation 3s linear infinite;
+  }
 
-    &::after {
-        background: linear-gradient(225deg, #7d54f1, transparent, #a687ff);
-        animation: borderAnimation 3s linear infinite reverse;
-    }
+  &::after {
+    background: linear-gradient(225deg, #7d54f1, transparent, #a687ff);
+    animation: borderAnimation 3s linear infinite reverse;
+  }
 }
 
 .logoText {
-    font-weight: 700;
-    font-size: 28px;
-    color: white;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  font-size: 28px;
+  color: white;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .loadingBar {
-    width: 100%;
-    height: 6px;
-    background-color: rgba(125, 84, 241, 0.2);
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: rgba(125, 84, 241, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
 }
 
 .loadingProgress {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, #6039d0, #a687ff);
-    transition: width 0.3s ease-out;
-    position: relative;
-    overflow: hidden;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #6039d0, #a687ff);
+  transition: width 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
 
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.4) 50%,
-                rgba(255, 255, 255, 0) 100%);
-        animation: shimmer 1.5s infinite;
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+  }
 }
 
 .loadingText {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    @include theme-transition;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include theme-transition;
 
-    .darkTheme & {
-        color: var(--text-color2);
-    }
+  .darkTheme & {
+    color: var(--text-color2);
+  }
 
-    .lightTheme & {
-        color: var(--text-color2);
-    }
+  .lightTheme & {
+    color: var(--text-color2);
+  }
 }
 
 .dots {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    margin-left: 2px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: 2px;
 }
 
 .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: currentColor;
-    opacity: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0;
 
-    &:nth-child(1) {
-        animation: fadeInOut 1.4s infinite 0s;
-    }
+  &:nth-child(1) {
+    animation: fadeInOut 1.4s infinite 0s;
+  }
 
-    &:nth-child(2) {
-        animation: fadeInOut 1.4s infinite 0.2s;
-    }
+  &:nth-child(2) {
+    animation: fadeInOut 1.4s infinite 0.2s;
+  }
 
-    &:nth-child(3) {
-        animation: fadeInOut 1.4s infinite 0.4s;
-    }
+  &:nth-child(3) {
+    animation: fadeInOut 1.4s infinite 0.4s;
+  }
 }
 
 @keyframes fadeInOut {
+  0%,
+  80%,
+  100% {
+    opacity: 0;
+  }
 
-    0%,
-    80%,
-    100% {
-        opacity: 0;
-    }
-
-    40% {
-        opacity: 1;
-    }
+  40% {
+    opacity: 1;
+  }
 }
 
 @keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
+  0% {
+    transform: translateX(-100%);
+  }
 
-    100% {
-        transform: translateX(100%);
-    }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes rotateAnimation {
+  0%,
+  100% {
+    transform: rotateY(0) rotateX(0);
+  }
 
-    0%,
-    100% {
-        transform: rotateY(0) rotateX(0);
-    }
+  25% {
+    transform: rotateY(10deg) rotateX(-5deg);
+  }
 
-    25% {
-        transform: rotateY(10deg) rotateX(-5deg);
-    }
+  50% {
+    transform: rotateY(0) rotateX(0);
+  }
 
-    50% {
-        transform: rotateY(0) rotateX(0);
-    }
-
-    75% {
-        transform: rotateY(-10deg) rotateX(5deg);
-    }
+  75% {
+    transform: rotateY(-10deg) rotateX(5deg);
+  }
 }
 
 @keyframes floatAnimation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes borderAnimation {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
 
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 // In dark theme
 .darkTheme {
-    .logoRect {
-        fill: var(--bg-color);
-        stroke: var(--color);
-    }
+  .logoRect {
+    fill: var(--bg-color);
+    stroke: var(--color);
+  }
 
-    .logoPath {
-        fill: var(--color);
-    }
+  .logoPath {
+    fill: var(--color);
+  }
 }
 
 // In light theme
 .lightTheme {
-    .logoRect {
-        fill: var(--bg-color);
-        stroke: var(--color);
-    }
+  .logoRect {
+    fill: var(--bg-color);
+    stroke: var(--color);
+  }
 
-    .logoPath {
-        fill: var(--color);
-    }
+  .logoPath {
+    fill: var(--color);
+  }
 }

@@ -45,7 +45,7 @@
     margin: 0;
   }
 
-  &[type=number] {
+  &[type='number'] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
@@ -54,4 +54,4 @@
 
 .typed {
   border-color: #1f2329;
-} 
+}

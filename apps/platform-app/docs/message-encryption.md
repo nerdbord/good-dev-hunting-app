@@ -9,6 +9,7 @@ We've implemented a simple but effective encryption mechanism for chat messages 
 ## Implementation Details
 
 1. **Encryption Utility**: `messageEncryption.ts`
+
    - Uses Node.js crypto module with AES-256-CBC encryption
    - Provides `encryptMessage` and `decryptMessage` functions
    - Falls back gracefully if encryption fails
@@ -57,4 +58,4 @@ Add these to your environment variables (in `.env` file or hosting platform).
 
 - Existing messages prior to this implementation remain unencrypted, but are properly handled
 - Messages are decrypted on the server before being sent to clients
-- Uses a single key for all conversations 
+- Uses a single key for all conversations

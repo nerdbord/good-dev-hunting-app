@@ -1,340 +1,338 @@
 @import '../../../../../styles/_index.scss';
 
 @keyframes pulse {
-    0% {
-        opacity: 0.6;
-    }
+  0% {
+    opacity: 0.6;
+  }
 
-    50% {
-        opacity: 1;
-    }
+  50% {
+    opacity: 1;
+  }
 
-    100% {
-        opacity: 0.6;
-    }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
+  0% {
+    transform: translateY(0px);
+  }
 
-    50% {
-        transform: translateY(-10px);
-    }
+  50% {
+    transform: translateY(-10px);
+  }
 
-    100% {
-        transform: translateY(0px);
-    }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes techIconsEntry {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes typing {
+  0%,
+  100% {
+    width: 60%;
+  }
 
-    0%,
-    100% {
-        width: 60%;
-    }
-
-    50% {
-        width: 85%;
-    }
+  50% {
+    width: 85%;
+  }
 }
 
 @keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
 
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
-    }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes pulsate {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
 
-    50% {
-        opacity: 0.5;
-    }
+  50% {
+    opacity: 0.5;
+  }
 
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 
 @keyframes connectDots {
-    0% {
-        transform: scale(1);
-        background-color: rgba(166, 135, 255, 0.3);
-    }
+  0% {
+    transform: scale(1);
+    background-color: rgba(166, 135, 255, 0.3);
+  }
 
-    20% {
-        transform: scale(1.2);
-        background-color: rgba(166, 135, 255, 1);
-    }
+  20% {
+    transform: scale(1.2);
+    background-color: rgba(166, 135, 255, 1);
+  }
 
-    40% {
-        transform: scale(1);
-        background-color: rgba(166, 135, 255, 0.3);
-    }
+  40% {
+    transform: scale(1);
+    background-color: rgba(166, 135, 255, 0.3);
+  }
 
-    100% {
-        transform: scale(1);
-        background-color: rgba(166, 135, 255, 0.3);
-    }
+  100% {
+    transform: scale(1);
+    background-color: rgba(166, 135, 255, 0.3);
+  }
 }
 
 .loaderContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-pm-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-pm-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    max-width: 500px;
-    padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 500px;
+  padding: 0 20px;
 }
 
 .logoContainer {
-    animation: float 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
 }
 
 .logo {
-    width: 80px;
-    height: 50px;
+  width: 80px;
+  height: 50px;
 }
 
 .logoPath {
-    animation: pulse 2s infinite;
+  animation: pulse 2s infinite;
 }
 
 .logoRect {
-    stroke-dasharray: 150;
-    stroke-dashoffset: 150;
-    animation: dash 3s linear forwards infinite;
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+  animation: dash 3s linear forwards infinite;
 }
 
 @keyframes dash {
-    0% {
-        stroke-dashoffset: 150;
-    }
+  0% {
+    stroke-dashoffset: 150;
+  }
 
-    50% {
-        stroke-dashoffset: 0;
-    }
+  50% {
+    stroke-dashoffset: 0;
+  }
 
-    100% {
-        stroke-dashoffset: -150;
-    }
+  100% {
+    stroke-dashoffset: -150;
+  }
 }
 
 .messageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-    min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  min-height: 120px;
 }
 
 .message {
-    color: var(--text-color);
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0;
-    opacity: 0;
-    animation: fadeMessage 0.5s ease-in forwards;
-    min-height: 48px;
+  color: var(--text-color);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  opacity: 0;
+  animation: fadeMessage 0.5s ease-in forwards;
+  min-height: 48px;
 
-    @include mobile {
-        font-size: 24px;
-    }
+  @include mobile {
+    font-size: 24px;
+  }
 }
 
 @keyframes fadeMessage {
-    0% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .subtitle {
-    color: #69717b;
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0;
+  color: #69717b;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
 }
 
 .dots {
-    display: inline-block;
+  display: inline-block;
 }
 
 .techIconsContainer {
-    display: flex;
-    gap: 30px;
-    animation: techIconsEntry 0.8s ease-out;
+  display: flex;
+  gap: 30px;
+  animation: techIconsEntry 0.8s ease-out;
 
-    @include mobile {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 }
 
 // Code box animation
 .codeBox {
-    width: 100px;
-    height: 80px;
-    background-color: #0f1217;
-    border: 1px solid #2a2f35;
-    border-radius: 4px;
-    padding: 12px;
-    position: relative;
-    overflow: hidden;
+  width: 100px;
+  height: 80px;
+  background-color: #0f1217;
+  border: 1px solid #2a2f35;
+  border-radius: 4px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
 }
 
 .line1,
 .line2,
 .line3 {
-    height: 8px;
-    border-radius: 2px;
-    margin-bottom: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-bottom: 8px;
 }
 
 .line1 {
-    width: 70%;
-    background-color: #7d54f1;
-    opacity: 0.8;
+  width: 70%;
+  background-color: #7d54f1;
+  opacity: 0.8;
 }
 
 .line2 {
-    width: 85%;
-    background-color: #a687ff;
-    opacity: 0.6;
+  width: 85%;
+  background-color: #a687ff;
+  opacity: 0.6;
 }
 
 .line3 {
-    width: 60%;
-    background-color: #7d54f1;
-    animation: typing 3s infinite ease-in-out;
+  width: 60%;
+  background-color: #7d54f1;
+  animation: typing 3s infinite ease-in-out;
 }
 
 .cursor {
-    position: absolute;
-    width: 4px;
-    height: 14px;
-    background-color: #a687ff;
-    bottom: 12px;
-    left: calc(12px + 60%);
-    animation: blink 1s infinite steps(1);
+  position: absolute;
+  width: 4px;
+  height: 14px;
+  background-color: #a687ff;
+  bottom: 12px;
+  left: calc(12px + 60%);
+  animation: blink 1s infinite steps(1);
 }
 
 // AI Analyzer animation
 .aiAnalyzerCircle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: rgba(166, 135, 255, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(166, 135, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .pulseRing {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid #a687ff;
-    animation: pulsate 2s infinite ease-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #a687ff;
+  animation: pulsate 2s infinite ease-out;
 }
 
 .innerCircle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #7d54f1, #a687ff);
-    animation: pulse 2s infinite;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7d54f1, #a687ff);
+  animation: pulse 2s infinite;
 }
 
 // Connecting dots animation
 .connectingDotsContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(166, 135, 255, 0.3);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(166, 135, 255, 0.3);
 }
 
 .dot:nth-child(1) {
-    animation: connectDots 3s infinite ease-in-out;
+  animation: connectDots 3s infinite ease-in-out;
 }
 
 .dot:nth-child(2) {
-    animation: connectDots 3s infinite ease-in-out 0.6s;
+  animation: connectDots 3s infinite ease-in-out 0.6s;
 }
 
 .dot:nth-child(3) {
-    animation: connectDots 3s infinite ease-in-out 1.2s;
+  animation: connectDots 3s infinite ease-in-out 1.2s;
 }
 
 .dot:nth-child(4) {
-    animation: connectDots 3s infinite ease-in-out 1.8s;
+  animation: connectDots 3s infinite ease-in-out 1.8s;
 }
 
 .dot:nth-child(5) {
-    animation: connectDots 3s infinite ease-in-out 2.4s;
+  animation: connectDots 3s infinite ease-in-out 2.4s;
 }

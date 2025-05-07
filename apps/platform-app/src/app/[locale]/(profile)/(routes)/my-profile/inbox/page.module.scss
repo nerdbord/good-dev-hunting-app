@@ -1,328 +1,328 @@
 .container {
-    padding: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-    color: var(--text-color);
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-color);
 }
 
 .backLink {
-    display: inline-block;
-    color: #8364e2;
-    text-decoration: none;
-    margin-bottom: 16px;
-    font-size: 14px;
+  display: inline-block;
+  color: #8364e2;
+  text-decoration: none;
+  margin-bottom: 16px;
+  font-size: 14px;
 
-    &:hover {
-        text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .pageTitle {
-    font-size: 32px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: var(--text-color);
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-color);
 }
 
 .pageSubtitle {
-    font-size: 16px;
-    color: var(--text-secondary-color);
-    margin-bottom: 24px;
+  font-size: 16px;
+  color: var(--text-secondary-color);
+  margin-bottom: 24px;
 }
 
 .inboxContainer {
-    display: flex;
-    height: calc(100vh - 200px);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
+  display: flex;
+  height: calc(100vh - 200px);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
 }
 
 .sidebar {
-    width: 320px;
-    border-right: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
+  width: 320px;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
 
-    @include mobile {
-        width: 100%;
-        height: 50%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
+  @include mobile {
+    width: 100%;
+    height: 50%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
 }
 
 .sidebarHeader {
-    padding: 20px;
-    border-bottom: 1px solid #2a2f35;
+  padding: 20px;
+  border-bottom: 1px solid #2a2f35;
 
-    h2 {
-        font-size: 18px;
-        font-weight: 500;
-    }
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+  }
 }
 
 .negotiationsList {
-    flex: 1;
-    overflow-y: auto;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .negotiationItem {
-    display: flex;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: background-color 0.2s;
+  display: flex;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
 
-    &:hover {
-        background-color: var(--hover-color);
+  &:hover {
+    background-color: var(--hover-color);
+  }
+
+  &.selected {
+    background-color: var(--hover-color);
+  }
+
+  &.unread {
+    .negotiationTitle {
+      font-weight: 600;
     }
 
-    &.selected {
-        background-color: var(--hover-color);
+    .messagePreview {
+      color: var(--text-color);
+      font-weight: 500;
     }
 
-    &.unread {
-        .negotiationTitle {
-            font-weight: 600;
-        }
-
-        .messagePreview {
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        &::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #8364e2;
-            margin-right: 12px;
-            align-self: center;
-        }
+    &::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #8364e2;
+      margin-right: 12px;
+      align-self: center;
     }
+  }
 }
 
 .negotiationInfo {
-    flex: 1;
-    min-width: 0; // Ensures text truncation works
+  flex: 1;
+  min-width: 0; // Ensures text truncation works
 }
 
 .negotiationTitle {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .companyName {
-    font-size: 14px;
-    color: var(--text-secondary-color);
-    margin-bottom: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 14px;
+  color: var(--text-secondary-color);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .lastMessage {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .messagePreview {
-    font-size: 14px;
-    color: var(--text-secondary-color);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
+  font-size: 14px;
+  color: var(--text-secondary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
 }
 
 .messageTime {
-    font-size: 12px;
-    color: var(--text-secondary-color);
-    white-space: nowrap;
+  font-size: 12px;
+  color: var(--text-secondary-color);
+  white-space: nowrap;
 }
 
 .chatContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
 }
 
 .chatHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
 
-    .jobTitle {
-        font-size: 18px;
-        font-weight: 500;
-        margin-bottom: 4px;
-    }
+  .jobTitle {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
 
-    .companyName {
-        font-size: 14px;
-        color: var(--text-secondary-color);
-    }
+  .companyName {
+    font-size: 14px;
+    color: var(--text-secondary-color);
+  }
 }
 
 .headerActions {
-    display: flex;
-    gap: 12px;
-    margin-left: 24px;
+  display: flex;
+  gap: 12px;
+  margin-left: 24px;
 }
 
 .viewJobButton {
-    display: inline-block;
-    background-color: var(--hover-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.2s;
+  display: inline-block;
+  background-color: var(--hover-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
 
-    &:hover {
-        background-color: var(--hover-color-darker);
-    }
+  &:hover {
+    background-color: var(--hover-color-darker);
+  }
 }
 
 .messagesContainer {
-    flex: 1;
-    padding: 24px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .messageItem {
-    max-width: 70%;
-    display: flex;
-    flex-direction: column;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
 }
 
 .sentMessage {
+  align-self: flex-end;
+
+  .messageContent {
+    background-color: #8364e2;
+    border-radius: 16px 16px 0 16px;
+    color: white;
+  }
+
+  .messageTimestamp {
     align-self: flex-end;
-
-    .messageContent {
-        background-color: #8364e2;
-        border-radius: 16px 16px 0 16px;
-        color: white;
-    }
-
-    .messageTimestamp {
-        align-self: flex-end;
-        margin-right: 4px;
-    }
+    margin-right: 4px;
+  }
 }
 
 .receivedMessage {
+  align-self: flex-start;
+
+  .messageContent {
+    background-color: var(--hover-color);
+    border-radius: 16px 16px 16px 0;
+  }
+
+  .messageTimestamp {
     align-self: flex-start;
-
-    .messageContent {
-        background-color: var(--hover-color);
-        border-radius: 16px 16px 16px 0;
-    }
-
-    .messageTimestamp {
-        align-self: flex-start;
-        margin-left: 4px;
-    }
+    margin-left: 4px;
+  }
 }
 
 .messageContent {
-    padding: 12px 16px;
-    font-size: 16px;
-    line-height: 1.4;
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 .messageTimestamp {
-    font-size: 12px;
-    color: var(--text-secondary-color);
-    margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-secondary-color);
+  margin-top: 4px;
 }
 
 .messageInputContainer {
-    display: flex;
-    padding: 16px 24px;
-    border-top: 1px solid var(--border-color);
-    margin-bottom: 0;
-    background-color: var(--bg-color);
+  display: flex;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 0;
+  background-color: var(--bg-color);
 }
 
 .messageInput {
-    flex: 1;
-    background-color: var(--hover-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 12px 16px;
-    color: var(--text-color);
-    font-size: 16px;
-    outline: none;
-    height: 48px;
+  flex: 1;
+  background-color: var(--hover-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-color);
+  font-size: 16px;
+  outline: none;
+  height: 48px;
 
-    &:focus {
-        border-color: #8364e2;
-    }
+  &:focus {
+    border-color: #8364e2;
+  }
 
-    &::placeholder {
-        color: var(--text-secondary-color);
-    }
+  &::placeholder {
+    color: var(--text-secondary-color);
+  }
 }
 
 .sendButton {
-    margin-left: 12px;
-    background-color: #8364e2;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0 16px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    height: 48px;
+  margin-left: 12px;
+  background-color: #8364e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 48px;
 
-    &:hover {
-        background-color: #7050d0;
-    }
+  &:hover {
+    background-color: #7050d0;
+  }
 
-    &:disabled {
-        background-color: var(--hover-color);
-        cursor: not-allowed;
-    }
+  &:disabled {
+    background-color: var(--hover-color);
+    cursor: not-allowed;
+  }
 }
 
 // Mobile responsiveness
 @media (max-width: 768px) {
-    .inboxContainer {
-        flex-direction: column;
-        height: auto;
-    }
+  .inboxContainer {
+    flex-direction: column;
+    height: auto;
+  }
 
-    .sidebar,
-    .chatContainer {
-        width: 100%;
-    }
+  .sidebar,
+  .chatContainer {
+    width: 100%;
+  }
 
-    .messagesContainer {
-        height: 50vh;
-    }
+  .messagesContainer {
+    height: 50vh;
+  }
 }
 
 // Loading state styles
@@ -330,108 +330,108 @@
 .loadingSubtitle,
 .loadingHeader,
 .loadingText {
-    background-color: var(--hover-color);
-    border-radius: 4px;
-    animation: pulse 1.5s infinite;
+  background-color: var(--hover-color);
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
 }
 
 .loadingTitle {
-    height: 32px;
-    width: 180px;
-    margin-bottom: 8px;
+  height: 32px;
+  width: 180px;
+  margin-bottom: 8px;
 }
 
 .loadingSubtitle {
-    height: 16px;
-    width: 240px;
+  height: 16px;
+  width: 240px;
 }
 
 .loadingHeader {
-    height: 18px;
-    width: 120px;
+  height: 18px;
+  width: 120px;
 }
 
 .loadingItem {
-    cursor: default;
+  cursor: default;
 
-    &:hover {
-        background-color: transparent;
-    }
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .loadingContent {
-    width: 100%;
+  width: 100%;
 }
 
 .loadingText {
-    height: 14px;
-    width: 80%;
-    margin-top: 8px;
+  height: 14px;
+  width: 80%;
+  margin-top: 8px;
 }
 
 .loadingState {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .loadingSpinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--hover-color);
-    border-top-color: #8364e2;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--hover-color);
+  border-top-color: #8364e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes pulse {
-    0% {
-        opacity: 0.6;
-    }
+  0% {
+    opacity: 0.6;
+  }
 
-    50% {
-        opacity: 0.3;
-    }
+  50% {
+    opacity: 0.3;
+  }
 
-    100% {
-        opacity: 0.6;
-    }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // Empty state styles
 .emptyState {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-    padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding: 24px;
 
-    p {
-        margin: 0;
+  p {
+    margin: 0;
 
-        &:first-child {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--text-color);
-        }
-
-        &:last-child {
-            font-size: 14px;
-            color: var(--text-secondary-color);
-        }
+    &:first-child {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-color);
     }
+
+    &:last-child {
+      font-size: 14px;
+      color: var(--text-secondary-color);
+    }
+  }
 }
 
 .inputContainer {
-    padding: 0;
+  padding: 0;
 }

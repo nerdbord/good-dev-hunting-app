@@ -1,24 +1,24 @@
 {
-    "crons": [
-        {
-            "path": "/api/cron/expire-old-jobs",
-            "schedule": "0 0 * * 1"
-        },
-        {
-            "path": "/api/cron/cleanup-anonymous-jobs",
-            "schedule": "0 3 * * *"
-        },
-        {
-            "path": "/api/cron/notify-unread-messages",
-            "schedule": "0 9 * * *"
-        },
-        {
-            "path": "/api/cron/cleanup-rate-limits",
-            "schedule": "0 2 * * *"
-        },
-        {
-            "path": "/api/cron/expire-inactive-applications",
-            "schedule": "0 0 * * *"
-        }
-    ]
+  "crons": [
+    {
+      "path": "/api/cron/expire-old-jobs",
+      "schedule": "0 0 * * 1"
+    },
+    {
+      "path": "/api/cron/cleanup-anonymous-jobs",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/notify-unread-messages",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/cleanup-rate-limits",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/expire-inactive-applications",
+      "schedule": "0 0 * * *"
+    }
+  ]
 }
