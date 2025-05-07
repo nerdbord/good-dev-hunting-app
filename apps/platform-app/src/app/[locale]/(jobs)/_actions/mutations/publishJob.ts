@@ -1,6 +1,9 @@
 'use server'
 
-import { findAllApprovedProfiles } from '@/app/[locale]/(profile)/_actions'
+import {
+  findAllApprovedProfiles,
+  findAllTeamProfiles,
+} from '@/app/[locale]/(profile)/_actions'
 import { getJobById, publishJob, rejectJob } from '@/backend/job/job.service'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
@@ -64,7 +67,11 @@ export const publishJobAction = withSentry(async (id: string) => {
       }
     }
 
-    const publishedProfiles = await findAllApprovedProfiles()
+    console.log('ENABLE_PUBLIC_MATCHING', process.env.ENABLE_PUBLIC_MATCHING)
+
+    const publishedProfiles = process.env.ENABLE_PUBLIC_MATCHING
+      ? await findAllApprovedProfiles()
+      : await findAllTeamProfiles()
 
     // Step 2: Find potential candidate matches using AI
     const matchingResults = await matchJobWithProfiles(job, publishedProfiles)
