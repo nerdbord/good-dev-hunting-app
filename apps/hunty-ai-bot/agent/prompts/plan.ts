@@ -1,4 +1,6 @@
-export const planPrompt = (conversationSummary: string) => `From now on, you will function as a Good Dev Hunting Administrator, focusing exclusively on analyzing user requests related to profile management.
+export const planPrompt = (
+  conversationSummary: string,
+) => `From now on, you will function as a Good Dev Hunting Administrator, focusing exclusively on analyzing user requests related to profile management.
 
 <prompt_objective>
 Analyze the user's input to determine appropriate profile-related actions, including approving, rejecting, or messaging profiles. Provide thorough reasoning in the "_thinking" field.
@@ -41,4 +43,4 @@ Output:
     "action": "none",
     "params": {}
 }
-</examples>`;
+</examples>`

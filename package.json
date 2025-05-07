@@ -10,7 +10,6 @@
     "dev": "npm run dev -w apps/platform-app",
     "storybook": "npm run storybook -w packages/ui-system",
     "start": "npm run start -w apps/platform-app",
-    "precommit": "lint-staged",
     "studio": "cd ./apps/platform-app && npx prisma studio"
   },
   "lint-staged": {
@@ -18,8 +17,8 @@
       "npm run lint -w apps/platform-app --fix",
       "npm run format:staged -w apps/platform-app"
     ],
-    "apps/hunty-ai-bot/**/*.{ts,tsx}": [
-      "npm run lint -w apps/hunty-ai-bot"
+    "**/*.{json,css,scss}": [
+      "prettier --write"
     ]
   },
   "devDependencies": {

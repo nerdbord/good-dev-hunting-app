@@ -8,6 +8,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json',
+    extraFileExtensions: ['.json'],
     tsconfigRootDir: __dirname,
   },
   ignorePatterns: ['**/global.d.ts'],
