@@ -1,6 +1,7 @@
 'use server'
 
 import { createApplication } from '@/backend/application/application.service'
+import { notifyJobApplication } from '@/lib/discord'
 import { prisma } from '@/lib/prismaClient'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 
@@ -55,6 +56,27 @@ export async function createJobApplication(data: JobApplicationData) {
       jobOwnerId: job.createdById,
       initialMessage: data.message,
       cvUrl: data.cvUrl,
+    })
+
+    // Get additional details for the notification
+    const jobDetails = await prisma.job.findUnique({
+      where: { id: data.jobId },
+      select: { jobName: true },
+    })
+
+    const applicantProfile = await prisma.profile.findUnique({
+      where: { userId: user.id },
+      select: { fullName: true },
+    })
+
+    // Send Discord notification for the new job application
+    await notifyJobApplication({
+      id: application.id,
+      jobId: data.jobId,
+      jobName: jobDetails?.jobName,
+      applicantId: user.id,
+      applicantName: applicantProfile?.fullName,
+      jobOwnerId: job.createdById,
     })
 
     return {

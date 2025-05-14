@@ -1,4 +1,3 @@
-import ContactBtn from '@/app/[locale]/(profile)/(components)/ContactForm/ContactBtn/ContactBtn'
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import GoBackButton from '@/components/GoBackButton/GoBackButton'
 import SocialItems from '@/components/SocialItems/SocialItems'
@@ -51,7 +50,8 @@ export default async function UserProfileHeader({
         </div>
         {profile.isOpenForWork ? (
           <div className={styles.buttonWrapper}>
-            <ContactBtn />
+            {/* Note: Button is disabled for now */}
+            {/* <ContactBtn /> */}
           </div>
         ) : (
           <Button variant={'primary'} disabled>

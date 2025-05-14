@@ -6,8 +6,8 @@ import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 
 const EditProfilePage = async () => {
-  const { user, userIsHunter } = await getAuthorizedUser()
-  if (!user || userIsHunter) {
+  const { user, userIsHunter, userIsSpecialist } = await getAuthorizedUser()
+  if (!user || (userIsHunter && !userIsSpecialist)) {
     redirect(AppRoutes.profilesList)
   }
 

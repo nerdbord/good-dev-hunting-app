@@ -5,6 +5,7 @@ import {
   findAllTeamProfiles,
 } from '@/app/[locale]/(profile)/_actions'
 import { getJobById, publishJob, rejectJob } from '@/backend/job/job.service'
+import { notifyJobPublished, notifyJobRejected } from '@/lib/discord'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import {
@@ -57,6 +58,14 @@ export const publishJobAction = withSentry(async (id: string) => {
     // If the job is not valid, set the job state to REJECTED instead of leaving it as DRAFT
     if (!verificationResult.isValid) {
       await rejectJob(id)
+
+      // Send Discord notification for job rejection
+      await notifyJobRejected({
+        id,
+        title: job.jobName || 'Untitled Job',
+        createdById: user.id,
+        reasons: verificationResult.reasons,
+      })
 
       return {
         success: false,
@@ -111,6 +120,16 @@ export const publishJobAction = withSentry(async (id: string) => {
       user,
       locale: user.language,
     })
+
+    // Step 7: Send Discord notification for successful job publication
+    await notifyJobPublished({
+      id,
+      title: updatedJobWithRelations.jobName || 'Untitled Job',
+      company: updatedJobWithRelations.createdBy ? { name: 'Company' } : null,
+      createdById: user.id,
+      matchedProfilesCount: notificationResults.matchedCount,
+    })
+
     return {
       success: true,
       message:

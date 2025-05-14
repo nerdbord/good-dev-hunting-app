@@ -1,7 +1,10 @@
 ﻿'use server'
 import { sendWelcomeEmail } from '@/backend/mailing/mailing.service'
 import { addUserRole } from '@/backend/user/user.service'
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import {
+  notifyNewUserSignup,
+  sendDiscordNotificationToModeratorChannel,
+} from '@/lib/discord'
 import { AppRoutes } from '@/utils/routes'
 import { Role, type User } from '@prisma/client'
 import { type Session } from 'next-auth'
@@ -97,13 +100,12 @@ const OAuth = async (props: { searchParams: SearchParams }) => {
       username: devName || userData.email,
       locale: userData.language,
     })
-    await sendDiscordNotificationToModeratorChannel(
-      `User ${
-        devName ? `**${devName}** ` : ''
-      }has created an account with **${provider?.toUpperCase()}** as **${role.toUpperCase()}** with **${
-        userData.email
-      }**`,
-    ).catch(console.error)
+
+    await notifyNewUserSignup({
+      id: userData.id,
+      email: userData.email,
+      role,
+    })
   }
 
   // We need to use updated user here because session is not updated yet
