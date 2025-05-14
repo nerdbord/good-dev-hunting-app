@@ -292,7 +292,7 @@ export const sendApplicantUnreadMessagesNotification = async ({
     let subject: string
     switch (locale) {
       case 'pl':
-        templateId = MailTemplateId.applicantUnreadMessagesNotification //TODO: PL
+        templateId = MailTemplateId.applicantUnreadMessagesNotification_pl
         subject = `Masz ${unreadCount} nieprzeczytan${
           unreadCount === 1
             ? 'ą wiadomość'
@@ -368,7 +368,7 @@ export const sendJobOwnerUnreadMessagesNotification = async ({
     let subject: string
     switch (locale) {
       case 'pl':
-        templateId = MailTemplateId.jobOwnerUnreadMessagesNotification //TODO: PL
+        templateId = MailTemplateId.jobOwnerUnreadMessagesNotification_pl
         subject = `Masz ${unreadCount} nieprzeczytan${
           unreadCount === 1
             ? 'ą wiadomość'
@@ -443,7 +443,7 @@ export async function sendJobPublishedEmail({
     let matchStatusMessage: string
     switch (locale) {
       case 'pl':
-        templateId = MailTemplateId.jobPublished //TODO: PL
+        templateId = MailTemplateId.jobPublished_pl
         subject = `Twoje zlecenie "${job.jobName}" zostało opublikowane!`
         if (matchedProfilesCount === 0) {
           matchStatusMessage =
@@ -551,7 +551,7 @@ export const sendNewApplicationNotificationToOwner = async ({
     let subject: string
     switch (locale) {
       case 'pl':
-        templateId = MailTemplateId.newJobApplicationForOwner //TODO: PL
+        templateId = MailTemplateId.newJobApplicationForOwner_pl
         subject = `Masz nową aplikację na ofertę "${jobTitle}" od ${applicantName}`
         break
       default:
@@ -615,7 +615,7 @@ export const sendApplicationConfirmationToApplicant = async ({
     let applicationDate
     switch (locale) {
       case 'pl':
-        templateId = MailTemplateId.applicationConfirmationForApplicant //TODO: PL
+        templateId = MailTemplateId.applicationConfirmationForApplicant_pl
         subject = `Twoja aplikacja na stanowisko "${jobTitle}" została wysłana`
         responseDeadline.toLocaleDateString('pl-PL', {
           year: 'numeric',
@@ -711,7 +711,7 @@ export const sendJobProposalEmail = async ({
     let jobLocation: string
     switch (locale) {
       case 'pl':
-        templateId = MailTemplateId.jobProposal //TODO: PL
+        templateId = MailTemplateId.jobProposal_pl
         subject = `🤑 Mamy nowe zlecenie dla Ciebie!`
         jobLocation = job.remoteOnly ? 'Zdalnie' : `${job.city}, ${job.country}`
         budget =
