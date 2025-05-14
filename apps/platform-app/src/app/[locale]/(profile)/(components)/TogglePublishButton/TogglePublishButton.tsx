@@ -3,10 +3,11 @@
 import { useAsyncAction } from '@/hooks/useAsyncAction'
 import { Button } from '@gdh/ui-system'
 import { PublishingState } from '@prisma/client'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styles from './TogglePublishButton.module.scss'
 
 import { JobSpecialization } from '@/app/[locale]/(profile)/profile.types'
+import { useModal } from '@/contexts/ModalContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { useTranslations } from 'next-intl'
 import { publishProfile } from '../../_actions/mutations/publishProfile'
@@ -21,12 +22,18 @@ interface TogglePublishButtonProps {
 
 export const TogglePublishButton = (props: TogglePublishButtonProps) => {
   const t = useTranslations(I18nNamespaces.Buttons)
-  const [showPopup, setShowPopup] = useState(false)
+  const { showModal, closeModal } = useModal()
   const { profileId, state } = props
 
   useEffect(() => {
     if (state === PublishingState.REJECTED) {
-      setShowPopup(true)
+      showModal(
+        <VerificationModal
+          profileId={profileId}
+          profileStatus={state}
+          onClose={closeModal}
+        />,
+      )
     }
   }, [])
 
@@ -37,19 +44,37 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
       case PublishingState.APPROVED:
         await runAsync(async () => {
           await unpublishProfile(profileId)
-          setShowPopup(true)
+          showModal(
+            <VerificationModal
+              profileId={profileId}
+              profileStatus={state}
+              onClose={closeModal}
+            />,
+          )
         })
         return
       case PublishingState.DRAFT:
         await runAsync(async () => {
           await publishProfile(profileId)
-          setShowPopup(true)
+          showModal(
+            <VerificationModal
+              profileId={profileId}
+              profileStatus={state}
+              onClose={closeModal}
+            />,
+          )
         })
         return
       case PublishingState.REJECTED:
         await runAsync(async () => {
           await publishProfile(profileId)
-          setShowPopup(true)
+          showModal(
+            <VerificationModal
+              profileId={profileId}
+              profileStatus={state}
+              onClose={closeModal}
+            />,
+          )
         })
         return
       default:
@@ -59,15 +84,14 @@ export const TogglePublishButton = (props: TogglePublishButtonProps) => {
 
   return (
     <div>
-      {showPopup &&
-        state !== PublishingState.DRAFT &&
+      {/* {state !== PublishingState.DRAFT &&
         state !== PublishingState.PENDING && (
           <VerificationModal
             profileId={profileId}
             profileStatus={state}
-            onClose={async () => setShowPopup(false)}
+            onClose={closeModal}
           />
-        )}
+        )} */}
       {state === PublishingState.REJECTED ? (
         <span className={styles.rejectedInfo}>Rejected</span>
       ) : state === PublishingState.PENDING ? (
