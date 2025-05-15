@@ -3,9 +3,9 @@
   overflow: hidden;
   background-color: var(--hunter-landing-bg-color);
   color: var(--hunter-landing-text-color);
-  padding-top: 160px;
+  padding-top: 120px;
   @include mobile {
-    padding-top: 160px;
+    padding-top: 90px;
   }
 }
 

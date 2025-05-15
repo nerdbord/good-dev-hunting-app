@@ -5,11 +5,10 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { HunterLoader } from '../../HunterLoader/HunterLoader'
 import { TagsRow } from '../../UI/TagsRow/TagsRow'
 import { TechIcon } from '../../UI/TechIcon/TechIcon'
-import { useResponsive } from '../../hooks/useResponsive'
 import { useTagsAnimation } from '../../hooks/useTagsAnimation'
 import { TagTooltip } from '../TagTooltip/TagTooltip'
 import { TextareaHero } from '../TextareaHero/TextareaHero'
@@ -17,11 +16,36 @@ import styles from './HeroBottom.module.scss'
 
 export const HeroBottom = () => {
   const t = useTranslations(I18nNamespaces.HunterHero)
-  const { isMobile } = useResponsive()
+  // Rozpocznij z wartością null dla isMobile, aby uniknąć niezgodności hydracji
+  const [isMobile, setIsMobile] = useState<boolean | null>(null)
   const [currentAnimatedTag, setCurrentAnimatedTag] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { addToast } = useToast()
+
+  // Efekt, który ustawia isMobile tylko po stronie klienta
+  useEffect(() => {
+    // Funkcja do określania, czy urządzenie jest mobilne
+    const checkMobile = () => {
+      return window.innerWidth < 768 // Możesz dostosować ten breakpoint
+    }
+
+    // Ustaw początkową wartość
+    setIsMobile(checkMobile())
+
+    // Dodaj obsługę zmiany rozmiaru okna
+    const handleResize = () => {
+      setIsMobile(checkMobile())
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   // Define tag keys and translations
   const tagKeys = useMemo(
     () => [
@@ -65,7 +89,11 @@ export const HeroBottom = () => {
   } = useTagsAnimation({ tagKeys, tags, tagsAnimate })
 
   // Memoize the rows calculation to prevent unnecessary recalculations
-  const rows = useMemo(() => getRows(isMobile), [getRows, isMobile])
+  // Tylko obliczaj wiersze, gdy isMobile nie jest null
+  const rows = useMemo(() => {
+    if (isMobile === null) return [[]] // Zwróć pusty układ, dopóki nie znamy typu urządzenia
+    return getRows(isMobile)
+  }, [getRows, isMobile])
 
   // Use translated mock texts from i18n
   const mockTexts = useMemo(() => {
@@ -188,6 +216,12 @@ export const HeroBottom = () => {
     }
   }
 
+  // Renderuj tylko gdy wiemy, czy urządzenie jest mobilne czy nie
+  if (isMobile === null) {
+    // Możesz tutaj zwrócić pusty div, loader, lub placeholder
+    return <div className={styles.loading}></div>
+  }
+
   return (
     <>
       {isLoading && <HunterLoader />}
@@ -237,16 +271,12 @@ export const HeroBottom = () => {
               selectedTag={selectedTag}
               tagMapping={tagMapping}
               onTagClick={handleTagButtonClick}
-            >
-              {/* Add tooltip to the first row on desktop, second row on mobile */}
-              {((!isMobile && rowIndex === 0) ||
-                (isMobile && rowIndex === 1)) && (
-                <div className={styles.tooltipContainer}>
-                  <TagTooltip isMobile={isMobile} />
-                </div>
-              )}
-            </TagsRow>
+            ></TagsRow>
           ))}
+        </div>
+
+        <div className={styles.tooltipContainer}>
+          <TagTooltip isMobile={isMobile} />
         </div>
       </div>
     </>
