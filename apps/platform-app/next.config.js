@@ -61,12 +61,15 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
       silent: true, // Silences logs during build
       org: 'nerdbord-tm', // Organization in Sentry
       project: 'good-dev-hunting', // Project in Sentry
+      release: {
+        name:
+          process.env.VERCEL_GIT_COMMIT_SHA || // Dla Vercel
+          `my-project@${require('./package.json').version}`, // Fallback
+      },
     },
     {
       widenClientFileUpload: true, // Increases the scope of source file uploads
-      transpileClientSDK: true, // Transpiles Sentry SDK for IE11 compatibility
       tunnelRoute: '/monitoring', // Enables ad-blockers bypass
-      hideSourceMaps: true, // Hides source maps in client bundles
       disableLogger: true, // Disables Sentry logging
       automaticVercelMonitors: true, // Automatically adds Vercel monitors
     },

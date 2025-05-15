@@ -1,13 +1,18 @@
 import { type ProfileCreateParams } from '@/app/[locale]/(profile)/profile.types'
 import { prisma } from '@/lib/prismaClient'
-import { Prisma, PublishingState, Role, type Profile } from '@prisma/client'
+import {
+  PublishingState,
+  Role,
+  type Prisma,
+  type Profile,
+} from '@prisma/client'
 
 export async function getApprovedProfiles() {
   const approvedProfiles = await prisma.profile.findMany({
     where: {
       state: PublishingState.APPROVED,
     },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   return approvedProfiles
@@ -15,7 +20,7 @@ export async function getApprovedProfiles() {
 
 export async function getAllProfiles() {
   const allProfiles = await prisma.profile.findMany({
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   return allProfiles
@@ -26,7 +31,7 @@ export async function getProfileById(id: string) {
     where: {
       id,
     },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   return profileById
@@ -109,7 +114,7 @@ export async function createUserProfile(
         })),
       },
     },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
   return createdUser
 }
@@ -123,7 +128,7 @@ export async function updateProfileById(
       id,
     },
     data,
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   return updatedProfile
@@ -155,7 +160,7 @@ export const findGithubUsernameByProfileId = async (
 export async function findProfileById(id: string) {
   const profile = await prisma.profile.findFirst({
     where: { id },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   if (profile) {
@@ -168,7 +173,7 @@ export async function findProfileById(id: string) {
 export async function getProfileByUserId(userId: string) {
   const profile = await prisma.profile.findFirst({
     where: { userId },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   if (profile) {
@@ -180,7 +185,7 @@ export async function getProfileByUserId(userId: string) {
 export async function getProfileBySlug(slug: Profile['slug']) {
   const profile = await prisma.profile.findFirst({
     where: { slug },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   if (profile) {
@@ -207,7 +212,7 @@ export const checkSlugExists = async (slug: Profile['slug']) => {
 export async function getProfileByGithubUsername(username: string) {
   const profile = await prisma.profile.findFirst({
     where: { user: { githubDetails: { username } } },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   if (profile) {
@@ -223,7 +228,7 @@ export async function getPublishedProfiles(take: number) {
     where: {
       state: PublishingState.APPROVED,
     },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   return publishedProfiles
@@ -238,27 +243,21 @@ export async function getTeamProfiles() {
         },
       },
     },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
   return teamProfiles
 }
 
 // Reusable include object for retrieving Profile with all of its relationships
-export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
-  include: {
-    user: {
-      include: {
-        githubDetails: true,
-      },
-    },
-    country: true,
-    city: true,
-    techStack: true,
-    contactRequests: true,
-    profileViews: true,
-    language: true,
-  },
-})
+export const profileIncludeObject = {
+  user: { include: { githubDetails: true } },
+  country: true,
+  city: true,
+  techStack: true,
+  contactRequests: true,
+  profileViews: true,
+  language: true,
+}
 
 export async function getUniqueSpecializations() {
   const uniqueSpecializations = await prisma.profile.findMany({
@@ -326,7 +325,7 @@ export async function getRandomApprovedProfiles(take: number) {
       // This creates random ordering
       createdAt: 'desc',
     },
-    include: includeObject.include,
+    include: profileIncludeObject,
   })
 
   return profiles
