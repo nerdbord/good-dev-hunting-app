@@ -72,7 +72,7 @@ export async function HunterHowItWorks() {
                   />
                 </div>
                 <div className={styles.clientInfo}>
-                  <h4>{t('exampleClientName')}</h4>
+                  <p>{t('exampleClientName')}</p>
                   <p>{t('exampleClientPosition')}</p>
                 </div>
               </div>
@@ -109,7 +109,7 @@ export async function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>{t('offerResponse1')}</h4>
+                  <p>{t('offerResponse1')}</p>
                   <p>{t('offerPosition1')}</p>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export async function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>{t('offerResponse2')}</h4>
+                  <p>{t('offerResponse2')}</p>
                   <p>{t('offerPosition2')}</p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export async function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>{t('offerResponse3')}</h4>
+                  <p>{t('offerResponse3')}</p>
                   <p>{t('offerPosition3')}</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export async function HunterHowItWorks() {
         >
           <div className={styles.hireExample}>
             <div className={styles.collaborationCard}>
-              <h4>{t('collaborationInvite')}</h4>
+              <p>{t('collaborationInvite')}</p>
 
               <div className={styles.collaborationAvatars}>
                 <Image

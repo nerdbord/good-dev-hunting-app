@@ -30,7 +30,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <Image src={avatar} alt={name} fill />
         </div>
         <div className={styles.profileInfo}>
-          <h3>{name}</h3>
+          <p>{name}</p>
           <p>{position}</p>
           <p>{location}</p>
         </div>
