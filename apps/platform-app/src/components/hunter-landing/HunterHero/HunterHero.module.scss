@@ -13,12 +13,10 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  height: 100dvh;
+  height: 85dvh;
 
   @include mobile {
     gap: 26px;
-    min-height: 0;
-    padding-bottom: 70px;
   }
 }
 
