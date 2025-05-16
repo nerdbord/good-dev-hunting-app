@@ -48,13 +48,20 @@ const nextConfig = {
         port: '',
       },
     ],
-    headers: [
-      //for performance tests
-      {
-        key: 'Cache-Control',
-        value: 'public, max-age=0, must-revalidate',
-      },
-    ],
+    // Override default no-store to allow back/forward cache for performance teste
+    async headers() {
+      return [
+        {
+          source: '/:path*',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=0, must-revalidate',
+            },
+          ],
+        },
+      ]
+    },
   },
   //reactStrictMode: true, // Enable React strict mode
   //poweredByHeader: false, // Disable X-Powered-By header
