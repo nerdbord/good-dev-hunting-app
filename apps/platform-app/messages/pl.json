@@ -502,7 +502,9 @@
     "describe_yourProject": "Opisz swój projekt"
   },
   "HunterReviews": {
-    "opinions": "Opinie zleceniodawców"
+    "opinions": "Opinie zleceniodawców",
+    "back": "Poprzednie opinie",
+    "next": "Następne opinie"
   },
   "HunterRiskReducers": {
     "expertsTitle": "zweryfikowanych ekspertów i ekspertek",
@@ -559,7 +561,9 @@
     "hireExpertDescription": "Przejrzyj profile i wybierz osobę, która najlepiej pasuje do Twojego projektu i rozpocznij współpracę.",
     "collaborationInvite": "Zaproszenie do współpracy",
     "clientInvites": "Dawid zaprasza Cię do zlecenia:",
-    "projectTitle": "Chatbot dla branży healthtech"
+    "projectTitle": "Chatbot dla branży healthtech",
+    "ceopicture": "Zdjęcie profilowe CEO",
+    "clientpicture": "Zdjęcie profilowe klienta"
   },
   "HunterCTA": {
     "title": "Opisz swój projekt i wybierz najlepszego eskperta",

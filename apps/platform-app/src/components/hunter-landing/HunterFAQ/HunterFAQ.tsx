@@ -16,7 +16,7 @@ export const HunterFAQ = () => {
   return (
     <section id="FAQ" className={styles.wrapper}>
       <div className={styles.left}>
-        <p className={styles.title}>{t('title')}</p>
+        <h2 className={styles.title}>{t('title')}</h2>
         <p className={styles.desc}>{t('desc')}</p>
         <Button variant="allpurple" onClick={handleContact}>
           {t('button')}

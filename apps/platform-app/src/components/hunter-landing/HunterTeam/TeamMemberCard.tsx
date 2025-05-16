@@ -47,7 +47,7 @@ export const TeamMemberCard = ({ member, isPlaceholder = false }: Props) => {
           </div>
         </div>
         <div className={styles.memberInfo}>
-          <h3 className={styles.memberName}>Deliaf Krowten</h3>
+          <p className={styles.memberName}>Deliaf Krowten</p>
           <p className={styles.memberPosition}>Intern Network Administrator</p>
           <p className={styles.memberLocation}>Neverland, Null Island</p>
         </div>

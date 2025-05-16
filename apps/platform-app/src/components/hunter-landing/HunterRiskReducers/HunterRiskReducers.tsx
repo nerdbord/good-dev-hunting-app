@@ -27,7 +27,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     <div className={styles.profileCard}>
       <div className={styles.profileHeader}>
         <div className={styles.avatarContainer}>
-          <Image src={avatar} alt={name} fill />
+          <Image src={avatar} alt="" role="presentation" fill />
         </div>
         <div className={styles.profileInfo}>
           <p>{name}</p>

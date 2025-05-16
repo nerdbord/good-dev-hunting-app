@@ -27,9 +27,9 @@ const StepCard: React.FC<StepCardProps> = ({
   return (
     <div className={styles.stepSection}>
       <div className={styles.stepContent}>
-        <h2 className={styles.stepTitle}>
+        <h3 className={styles.stepTitle}>
           {stepNumber}. {title}
-        </h2>
+        </h3>
         <p className={styles.stepDescription}>{description}</p>
       </div>
       <div className={styles.stepVisual}>{children}</div>
@@ -47,7 +47,7 @@ export async function HunterHowItWorks() {
           <h2 className={styles.headerTitle}>
             <span className={styles.highlight}>{t('howItWorks')}</span>
           </h2>
-          <h3 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h3>
+          <h2 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h2>
         </div>
 
         <StepCard
@@ -65,7 +65,7 @@ export async function HunterHowItWorks() {
                 <div className={styles.clientAvatar}>
                   <Image
                     src={ProfilePictureCEO}
-                    alt="Profile"
+                    alt={t('ceopicture')}
                     width={50}
                     height={50}
                     className={styles.avatarPlaceholder}
@@ -149,7 +149,7 @@ export async function HunterHowItWorks() {
               <div className={styles.collaborationAvatars}>
                 <Image
                   src={ProfilePictureCEO}
-                  alt="Profile"
+                  alt={t('ceopicture')}
                   width={40}
                   height={40}
                   className={styles.avatarPlaceholder}
@@ -159,7 +159,7 @@ export async function HunterHowItWorks() {
                 </div>
                 <Image
                   src={LandingProfileImg2}
-                  alt="Profile"
+                  alt={t('clientpicture')}
                   width={40}
                   height={40}
                   className={styles.avatarPlaceholder}

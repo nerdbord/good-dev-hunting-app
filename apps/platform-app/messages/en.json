@@ -503,7 +503,9 @@
     "describe_yourProject": "Describe your project"
   },
   "HunterReviews": {
-    "opinions": "Client opinions"
+    "opinions": "Client opinions",
+    "back": "Previous reviews",
+    "next": "Next reviews"
   },
   "HunterRiskReducers": {
     "expertsTitle": "verified experts",
@@ -560,7 +562,9 @@
     "hireExpertDescription": "Review profiles and choose the person who best fits your project and start collaboration.",
     "collaborationInvite": "Collaboration invitation",
     "clientInvites": "David invites you to the project:",
-    "projectTitle": "Chatbot for healthtech industry"
+    "projectTitle": "Chatbot for healthtech industry",
+    "ceopicture": "Profile picture of CEO",
+    "clientpicture": "Profile picture of client"
   },
   "HunterCTA": {
     "title": "Describe your project and choose the best expert",
