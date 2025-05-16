@@ -27,7 +27,6 @@ export const TagButton = ({
   // Compute ARIA attributes
   const ariaPressed = isSelected ? true : undefined
   const ariaCurrent = isHighlighted ? 'true' : undefined
-  const ariaLabel = children ? tag : undefined
 
   return (
     <button
@@ -39,7 +38,6 @@ export const TagButton = ({
       style={style}
       aria-pressed={ariaPressed}
       aria-current={ariaCurrent}
-      {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
     >
       <span>{tag}</span>
       {children}
