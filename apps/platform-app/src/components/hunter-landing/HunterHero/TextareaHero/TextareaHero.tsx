@@ -96,7 +96,7 @@ export const TextareaHero = ({
   return (
     <div className={styles.textareaWrapper}>
       <label htmlFor="searchTextarea" className={styles.visuallyHidden}>
-        Opisz swoje zlecenie
+        {t('describe_yourProject')}
       </label>
       {showPlaceholder && !text && (
         <div className={styles.overlayText} aria-hidden="true">
