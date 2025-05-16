@@ -27,9 +27,9 @@ const StepCard: React.FC<StepCardProps> = ({
   return (
     <div className={styles.stepSection}>
       <div className={styles.stepContent}>
-        <h2 className={styles.stepTitle}>
+        <h3 className={styles.stepTitle}>
           {stepNumber}. {title}
-        </h2>
+        </h3>
         <p className={styles.stepDescription}>{description}</p>
       </div>
       <div className={styles.stepVisual}>{children}</div>
@@ -47,7 +47,7 @@ export async function HunterHowItWorks() {
           <h2 className={styles.headerTitle}>
             <span className={styles.highlight}>{t('howItWorks')}</span>
           </h2>
-          <h3 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h3>
+          <h2 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h2>
         </div>
 
         <StepCard
@@ -65,14 +65,14 @@ export async function HunterHowItWorks() {
                 <div className={styles.clientAvatar}>
                   <Image
                     src={ProfilePictureCEO}
-                    alt="Profile"
+                    alt={t('ceopicture')}
                     width={50}
                     height={50}
                     className={styles.avatarPlaceholder}
                   />
                 </div>
                 <div className={styles.clientInfo}>
-                  <h4>{t('exampleClientName')}</h4>
+                  <p>{t('exampleClientName')}</p>
                   <p>{t('exampleClientPosition')}</p>
                 </div>
               </div>
@@ -109,7 +109,7 @@ export async function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>{t('offerResponse1')}</h4>
+                  <p>{t('offerResponse1')}</p>
                   <p>{t('offerPosition1')}</p>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export async function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>{t('offerResponse2')}</h4>
+                  <p>{t('offerResponse2')}</p>
                   <p>{t('offerPosition2')}</p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export async function HunterHowItWorks() {
                   <EnvelopeIcon width={35} height={27} />
                 </div>
                 <div className={styles.offerContent}>
-                  <h4>{t('offerResponse3')}</h4>
+                  <p>{t('offerResponse3')}</p>
                   <p>{t('offerPosition3')}</p>
                 </div>
               </div>
@@ -144,12 +144,12 @@ export async function HunterHowItWorks() {
         >
           <div className={styles.hireExample}>
             <div className={styles.collaborationCard}>
-              <h4>{t('collaborationInvite')}</h4>
+              <p>{t('collaborationInvite')}</p>
 
               <div className={styles.collaborationAvatars}>
                 <Image
                   src={ProfilePictureCEO}
-                  alt="Profile"
+                  alt={t('ceopicture')}
                   width={40}
                   height={40}
                   className={styles.avatarPlaceholder}
@@ -159,7 +159,7 @@ export async function HunterHowItWorks() {
                 </div>
                 <Image
                   src={LandingProfileImg2}
-                  alt="Profile"
+                  alt={t('clientpicture')}
                   width={40}
                   height={40}
                   className={styles.avatarPlaceholder}

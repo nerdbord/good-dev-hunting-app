@@ -35,24 +35,25 @@ export const HunterReviews: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>{t('opinions')}</p>
+      <h2 className={styles.title}>{t('opinions')}</h2>
       <div className={styles.reviewBox}>
         {!isMobile ? (
           reviews.map((review, index) => (
             <ReviewCard key={index} review={review} />
           ))
         ) : (
-          <div className={styles.mobileSlider}>
+          <ul className={styles.mobileSlider}>
             {reviews
               .slice(currentIndex, currentIndex + 2)
               .map((review, index) => (
                 <ReviewCard key={index} review={review} />
               ))}
-            <div className={styles.controls}>
+            <div className={styles.controls} aria-label={t('opinions')}>
               <button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
                 className={styles.arrow}
+                aria-label={t('back')}
               >
                 <ArrowLeft />
               </button>
@@ -60,11 +61,12 @@ export const HunterReviews: React.FC = () => {
                 onClick={handleNext}
                 disabled={currentIndex + 2 >= reviews.length}
                 className={styles.arrow}
+                aria-label={t('next')}
               >
                 <ArrowRight />
               </button>
             </div>
-          </div>
+          </ul>
         )}
       </div>
     </div>

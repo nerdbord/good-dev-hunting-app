@@ -26,7 +26,6 @@ export const TextareaHero = ({
   const staticPrefix = t('textareaLabel')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Use custom hook for textarea animation
   const {
     text,
     setText,
@@ -41,15 +40,12 @@ export const TextareaHero = ({
     mockText,
   })
 
-  // Sync text with parent component
   useEffect(() => {
-    // When text changes, notify parent component
     if (onTextChange) {
       onTextChange(text)
     }
   }, [text, onTextChange])
 
-  // When selectedTag changes and there's a mockText, update both
   useEffect(() => {
     if (selectedTag && mockText) {
       setText(mockText)
@@ -59,7 +55,6 @@ export const TextareaHero = ({
     }
   }, [selectedTag, mockText, setText, onTextChange])
 
-  // Adjust textarea height based on content
   const adjustHeight = useCallback(() => {
     const textarea = textareaRef.current
     if (textarea) {
@@ -69,15 +64,13 @@ export const TextareaHero = ({
     }
   }, [])
 
-  // Handle text change in textarea
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value
 
-    // If text is being deleted completely
     if (newValue === '') {
       setText('')
       setShowPlaceholder(true)
-      onEmpty() // Notify parent component that textarea is empty
+      onEmpty()
       return
     }
 
@@ -94,7 +87,6 @@ export const TextareaHero = ({
     adjustHeight()
   }
 
-  // Adjust height when text changes
   useEffect(() => {
     if (selectedTag) {
       setTimeout(adjustHeight, 0)
@@ -103,8 +95,11 @@ export const TextareaHero = ({
 
   return (
     <div className={styles.textareaWrapper}>
+      <label htmlFor="searchTextarea" className={styles.visuallyHidden}>
+        {t('describe_yourProject')}
+      </label>
       {showPlaceholder && !text && (
-        <div className={styles.overlayText}>
+        <div className={styles.overlayText} aria-hidden="true">
           {staticPrefix}
           <span
             className={`${styles.dynamicText} ${
@@ -116,6 +111,7 @@ export const TextareaHero = ({
         </div>
       )}
       <textarea
+        id="searchTextarea"
         ref={textareaRef}
         className={styles.searchTextarea}
         value={selectedTag ? text : text ? `${staticPrefix}${text}` : ''}

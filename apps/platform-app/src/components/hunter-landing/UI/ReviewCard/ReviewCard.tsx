@@ -16,17 +16,18 @@ interface ReviewCardProps {
 
 export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   return (
-    <div className={styles.card}>
-      <div className={styles.stars}>
+    <li className={styles.card}>
+      <ul className={styles.stars} aria-label={`Ocena: ${review.stars} z 5`}>
         {[...Array(review.stars)].map((_, i) => (
           <ReviewStar key={i} />
         ))}
-      </div>
-      <p className={styles.text}>“{review.text}”</p>
+      </ul>
+      <blockquote className={styles.text}>“{review.text}”</blockquote>
       <div className={styles.profile}>
         <Image
           src={review.image}
-          alt={review.name}
+          alt=""
+          role="presentation"
           width={42}
           height={42}
           className={styles.avatar}
@@ -36,6 +37,6 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           <p className={styles.role}>{review.role}</p>
         </div>
       </div>
-    </div>
+    </li>
   )
 }

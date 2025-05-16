@@ -416,7 +416,10 @@
     "contract": "Dostępny do pracy na kontrakt",
     "partTime": "Dostępny na część etatu",
     "remote": " Zdalnie",
-    "unavailable": "Niedostępny do pracy"
+    "unavailable": "Niedostępny do pracy",
+    "profiles": "Profile twórców platformy",
+    "back": "Przewiń w lewo",
+    "next": "Przewin w prawo"
   },
   "HunterFooter": {
     "contact": "Kontakt",
@@ -495,10 +498,13 @@
     "mockText_automationBot": "Potrzebuję stworzyć automatyzację procesu w mojej firmie. Chciałbym, aby była ona:\nElastyczna i skalowalna\nZawierała funkcje automatycznego przetwarzania danych\nUmożliwiała integrację z innymi systemami",
     "mockText_designSystem": "Potrzebuję stworzyć nowy system designu dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
     "mockText_QAtesting": "Potrzebuję stworzyć nowy system QA dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
-    "mockText_APIintegration": "Potrzebuję stworzyć nowy system API dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami"
+    "mockText_APIintegration": "Potrzebuję stworzyć nowy system API dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
+    "describe_yourProject": "Opisz swój projekt"
   },
   "HunterReviews": {
-    "opinions": "Opinie zleceniodawców"
+    "opinions": "Opinie zleceniodawców",
+    "back": "Poprzednie opinie",
+    "next": "Następne opinie"
   },
   "HunterRiskReducers": {
     "expertsTitle": "zweryfikowanych ekspertów i ekspertek",
@@ -555,7 +561,9 @@
     "hireExpertDescription": "Przejrzyj profile i wybierz osobę, która najlepiej pasuje do Twojego projektu i rozpocznij współpracę.",
     "collaborationInvite": "Zaproszenie do współpracy",
     "clientInvites": "Dawid zaprasza Cię do zlecenia:",
-    "projectTitle": "Chatbot dla branży healthtech"
+    "projectTitle": "Chatbot dla branży healthtech",
+    "ceopicture": "Zdjęcie profilowe CEO",
+    "clientpicture": "Zdjęcie profilowe klienta"
   },
   "HunterCTA": {
     "title": "Opisz swój projekt i wybierz najlepszego eskperta",
