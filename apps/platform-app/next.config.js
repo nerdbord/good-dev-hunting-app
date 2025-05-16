@@ -48,6 +48,13 @@ const nextConfig = {
         port: '',
       },
     ],
+    headers: [
+      //for performance tests
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=0, must-revalidate',
+      },
+    ],
   },
   //reactStrictMode: true, // Enable React strict mode
   //poweredByHeader: false, // Disable X-Powered-By header
