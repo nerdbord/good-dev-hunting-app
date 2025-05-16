@@ -387,7 +387,10 @@
     "contract": "Available for contract work",
     "partTime": "Available for part-time",
     "remote": "Remote",
-    "unavailable": "Not available for work"
+    "unavailable": "Not available for work",
+    "profiles": "Platform creators’ profiles",
+    "back": "Scroll left",
+    "next": "Scroll right"
   },
   "HunterFAQ": {
     "title": "Most Frequently Asked Questions",

@@ -2,7 +2,9 @@
 
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { useScreenDetection } from '@/hooks/useDeviceDetection'
+import { I18nNamespaces } from '@/i18n/request'
 import { ArrowLeft, ArrowRight } from '@gdh/ui-system/icons'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import TeamMemberCard from './TeamMemberCard'
 import styles from './TeamMembersCarousel.module.scss'
@@ -12,6 +14,7 @@ type Props = {
 }
 
 export const TeamMembersCarousel = ({ teamProfiles }: Props) => {
+  const t = useTranslations(I18nNamespaces.HunterTeam)
   const containerRef = useRef<HTMLDivElement>(null)
   const [scrollMoveValue, setScrollMoveValue] = useState(200)
   const { isMobile, screenWidth } = useScreenDetection()
@@ -59,12 +62,20 @@ export const TeamMembersCarousel = ({ teamProfiles }: Props) => {
         ))}
       </div>
 
-      <div className={styles.navigation} aria-hidden="true">
-        <button className={styles.navButton} onClick={handleScrollLeft}>
-          <ArrowLeft />
+      <div className={styles.navigation} aria-label={t('profiles')}>
+        <button
+          className={styles.navButton}
+          onClick={handleScrollLeft}
+          aria-label={t('back')}
+        >
+          <ArrowLeft aria-hidden="true" />
         </button>
-        <button className={styles.navButton} onClick={handleScrollRight}>
-          <ArrowRight />
+        <button
+          className={styles.navButton}
+          onClick={handleScrollRight}
+          aria-label={t('next')}
+        >
+          <ArrowRight aria-hidden="true" />
         </button>
       </div>
     </div>

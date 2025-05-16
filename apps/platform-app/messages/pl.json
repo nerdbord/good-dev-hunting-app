@@ -416,7 +416,10 @@
     "contract": "Dostępny do pracy na kontrakt",
     "partTime": "Dostępny na część etatu",
     "remote": " Zdalnie",
-    "unavailable": "Niedostępny do pracy"
+    "unavailable": "Niedostępny do pracy",
+    "profiles": "Profile twórców platformy",
+    "back": "Przewiń w lewo",
+    "next": "Przewin w prawo"
   },
   "HunterFooter": {
     "contact": "Kontakt",
