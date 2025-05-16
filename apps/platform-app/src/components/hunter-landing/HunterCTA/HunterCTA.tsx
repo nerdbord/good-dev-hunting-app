@@ -1,11 +1,24 @@
+'use client'
 import { I18nNamespaces } from '@/i18n/request'
-import { AppRoutes } from '@/utils/routes'
+import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
+import { useCallback } from 'react'
 import styles from './HunterCTA.module.scss'
 
 export const HunterCTA = () => {
   const t = useTranslations(I18nNamespaces.HunterCTA)
+
+  const scrollToHero = useCallback(() => {
+    const heroSection = document.getElementById('hero')
+    if (heroSection) {
+      const headerOffset = 120 // wysokość headera w px
+      const elementPosition =
+        heroSection.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - headerOffset
+
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+    }
+  }, [])
 
   return (
     <div id="CTA" className={styles.wrapper}>
@@ -14,9 +27,9 @@ export const HunterCTA = () => {
       <div className={styles.content}>
         <div className={styles.ctaContent}>
           <h2 className={styles.title}>{t('title')}</h2>
-          <Link href={AppRoutes.postJob} className={styles.button}>
+          <Button variant="primary" onClick={scrollToHero}>
             {t('button')}
-          </Link>
+          </Button>
         </div>
       </div>
 
