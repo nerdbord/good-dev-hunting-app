@@ -81,7 +81,6 @@ export const TagsRow = memo(
         id={`row-${rowIndex}`}
         className={`${styles.row} ${isMobile ? styles.mobileRow : ''}`}
         ref={rowRef}
-        role="list"
       >
         {displayTags.map((tag, tagIndex) => {
           if (!tag) return null
