@@ -42,7 +42,7 @@ export const HunterReviews: React.FC = () => {
             <ReviewCard key={index} review={review} />
           ))
         ) : (
-          <ul className={styles.mobileSlider}>
+          <div className={styles.mobileSlider}>
             {reviews
               .slice(currentIndex, currentIndex + 2)
               .map((review, index) => (
@@ -66,7 +66,7 @@ export const HunterReviews: React.FC = () => {
                 <ArrowRight />
               </button>
             </div>
-          </ul>
+          </div>
         )}
       </div>
     </div>

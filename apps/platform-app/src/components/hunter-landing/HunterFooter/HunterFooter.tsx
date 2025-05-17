@@ -22,14 +22,34 @@ export const HunterFooter = () => {
     window.location.href = atob(encodedEmailParts.join(''))
   }
 
+  const onContactKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      handleContact()
+    }
+  }
+
   return (
     <footer id="HunterFooter" className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.topBar}>
           <LogoLight />
           <div className={styles.contact}>
-            <div onClick={handleContact}>{t('contact')}</div>
-            <Link target={'_blank'} href={AppRoutes.devs}>
+            <div
+              role="button"
+              tabIndex={0}
+              aria-label={t('contact')}
+              onClick={handleContact}
+              onKeyDown={onContactKeyDown}
+              className={styles.contactItem}
+            >
+              {t('contact')}
+            </div>
+            <Link
+              target="_blank"
+              href={AppRoutes.devs}
+              className={styles.contactLink}
+            >
               {t('joinAsItSpecialist')}
             </Link>
             <Button variant="allpurple" onClick={handleAddJob}>
@@ -43,13 +63,13 @@ export const HunterFooter = () => {
           </span>
           <div className={styles.terms}>
             <Link
-              target={'_blank'}
+              target="_blank"
               href="https://glory-licorice-2e2.notion.site/Privacy-policy-6c075e8ad0de4927addf9592bb29de6e?pvs=4"
             >
               {t('privacyPolicy')}
             </Link>
             <Link
-              target={'_blank'}
+              target="_blank"
               href="https://glory-licorice-2e2.notion.site/Good-Dev-Hunting-User-Terms-and-Conditions-77b1c52963f94edbb898a36e2a2ac512"
             >
               {t('termsOfService')}
