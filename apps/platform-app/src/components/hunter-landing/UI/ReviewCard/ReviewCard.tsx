@@ -16,7 +16,7 @@ interface ReviewCardProps {
 
 export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   return (
-    <li className={styles.card}>
+    <div className={styles.card}>
       <ul className={styles.stars} aria-label={`Ocena: ${review.stars} z 5`}>
         {[...Array(review.stars)].map((_, i) => (
           <ReviewStar key={i} />
@@ -37,6 +37,6 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           <p className={styles.role}>{review.role}</p>
         </div>
       </div>
-    </li>
+    </div>
   )
 }
