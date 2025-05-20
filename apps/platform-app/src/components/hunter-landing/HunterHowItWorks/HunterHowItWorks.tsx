@@ -9,6 +9,7 @@ import ProfilePictureCEO from '../../../assets/images/ProfilePictureCEO.webp'
 import { AgreementIcon } from '../../icons/AgreementIcon'
 import { EnvelopeIcon } from '../../icons/EnvelopeIcon'
 import { VectorIcon } from '../../icons/VectorIcon'
+import { AnimatedReveal } from '../UI/AnimatedReveal/AnimatedReveal'
 import styles from './HunterHowItWorks.module.scss'
 
 interface StepCardProps {
@@ -16,6 +17,7 @@ interface StepCardProps {
   title: string
   description: React.ReactNode
   children: React.ReactNode
+  isReversed?: boolean
 }
 
 const StepCard: React.FC<StepCardProps> = ({
@@ -23,9 +25,14 @@ const StepCard: React.FC<StepCardProps> = ({
   title,
   description,
   children,
+  isReversed = false,
 }) => {
+  const sectionClass = `${styles.stepSection} ${
+    isReversed ? styles.reversed : ''
+  }`
+
   return (
-    <div className={styles.stepSection}>
+    <div className={sectionClass}>
       <div className={styles.stepContent}>
         <h3 className={styles.stepTitle}>
           {stepNumber}. {title}
@@ -42,14 +49,14 @@ export async function HunterHowItWorks() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h2 className={styles.headerTitle}>
-            <span className={styles.highlight}>{t('howItWorks')}</span>
-          </h2>
-          <h2 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h2>
-        </div>
+      <div className={styles.header}>
+        <h2 className={styles.headerTitle}>
+          <span className={styles.highlight}>{t('howItWorks')}</span>
+        </h2>
+        <h2 className={styles.headerSubtitle}>{t('stepsToFindExpert')}</h2>
+      </div>
 
+      <AnimatedReveal direction="right" amount={0.2}>
         <StepCard
           stepNumber={1}
           title={t('addJob')}
@@ -58,6 +65,7 @@ export async function HunterHowItWorks() {
               {t('describeNeeds')} <strong>{t('inOneMinute')}</strong>.
             </>
           }
+          isReversed
         >
           <div className={styles.clientExample}>
             <div className={styles.clientCard}>
@@ -96,7 +104,9 @@ export async function HunterHowItWorks() {
             </div>
           </div>
         </StepCard>
+      </AnimatedReveal>
 
+      <AnimatedReveal direction="left" amount={0.2}>
         <StepCard
           stepNumber={2}
           title={t('receiveOffers')}
@@ -136,11 +146,14 @@ export async function HunterHowItWorks() {
             </div>
           </div>
         </StepCard>
+      </AnimatedReveal>
 
+      <AnimatedReveal direction="right" amount={0.3}>
         <StepCard
           stepNumber={3}
           title={t('hireExpert')}
           description={t('hireExpertDescription')}
+          isReversed
         >
           <div className={styles.hireExample}>
             <div className={styles.collaborationCard}>
@@ -173,7 +186,7 @@ export async function HunterHowItWorks() {
             </div>
           </div>
         </StepCard>
-      </div>
+      </AnimatedReveal>
     </div>
   )
 }

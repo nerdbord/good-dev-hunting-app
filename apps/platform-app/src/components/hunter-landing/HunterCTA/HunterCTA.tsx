@@ -3,6 +3,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
+import { AnimatedReveal } from '../UI/AnimatedReveal/AnimatedReveal'
 import styles from './HunterCTA.module.scss'
 
 export const HunterCTA = () => {
@@ -21,19 +22,21 @@ export const HunterCTA = () => {
   }, [])
 
   return (
-    <div id="CTA" className={styles.wrapper}>
-      <div className={styles.boxLeft} />
+    <AnimatedReveal direction="up" amount={0.2}>
+      <div id="CTA" className={styles.wrapper}>
+        <div className={styles.boxLeft} />
 
-      <div className={styles.content}>
-        <div className={styles.ctaContent}>
-          <h2 className={styles.title}>{t('title')}</h2>
-          <Button variant="primary" onClick={scrollToHero}>
-            {t('button')}
-          </Button>
+        <div className={styles.content}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.title}>{t('title')}</h2>
+            <Button variant="primary" onClick={scrollToHero}>
+              {t('button')}
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <div className={styles.boxRight} />
-    </div>
+        <div className={styles.boxRight} />
+      </div>
+    </AnimatedReveal>
   )
 }
