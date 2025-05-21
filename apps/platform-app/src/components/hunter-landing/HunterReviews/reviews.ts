@@ -1,14 +1,16 @@
 import profilePic1 from '@/assets/images/ProfilePicture.png'
 import profilePic2 from '@/assets/images/ProfilePicture2.png'
 import profilePic3 from '@/assets/images/ProfilePicture3.png'
+import akg from '@/assets/images/akg.jpg'
 
 export const reviews_pl = [
   {
-    name: 'Karolina Mowińska',
-    role: 'Przedsiębiorca',
-    text: 'Jako właściciel małej firmy doceniam prostotę platformy. Szybko znalazłem specjalistę od WordPressa, który pomógł mi rozwiązać problemy z witryną.',
+    // nie mockup - prawdziwa osoba (od AniP)
+    name: 'Piotr Tchórz',
+    role: 'Właściciel sklepu z autoczęściami, www.akg-sosnowiec.pl',
+    text: 'Jako mały przedsiębiorca z ograniczonym budżetem zleciłem wykonanie strony na devhunting i już po kilku dniach miałem gotowy, elegancki projekt. Szybko, sprawnie i bardzo korzystnie finansowo – absolutnie pięć gwiazdek!',
     stars: 5,
-    image: profilePic1,
+    image: akg,
   },
   {
     name: 'Anna Dębowska',
