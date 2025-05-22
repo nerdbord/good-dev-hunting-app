@@ -1,5 +1,4 @@
 'use server'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { type ContactFormRequest } from '@/app/[locale]/(profile)/(components)/ContactForm/schema'
 import { createContactRequestModel } from '@/app/[locale]/(profile)/_models/contact-request.model'
 import {
@@ -11,6 +10,7 @@ import { sendContactRequest } from '@/backend/mailing/mailing.service'
 import { getProfileById } from '@/backend/profile/profile.service'
 import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
 import { mailerliteClient, mailerliteGroups } from '@/lib/mailerliteClient'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { type ContactRequest } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
@@ -86,6 +86,7 @@ export const sendProfileContactRequest = withSentry(
         message,
         recipientEmail: foundProfile.user.email,
         recipientFullName: foundProfile.fullName,
+        locale: foundProfile.user.language,
       })
 
       await sendDiscordNotificationToModeratorChannel(

@@ -48,7 +48,6 @@
   }
 }
 
-
 .frameButtons {
   display: flex;
   align-items: center;
@@ -91,16 +90,15 @@
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  
+
   ul {
     display: flex;
     align-items: center;
-    margin: 0; 
+    margin: 0;
     padding: 0;
-    list-style: none; 
+    list-style: none;
   }
 }
- 
 
 .starsMobile {
   display: flex;

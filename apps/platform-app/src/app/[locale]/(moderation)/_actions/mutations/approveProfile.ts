@@ -1,9 +1,9 @@
 'use server'
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { createProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
 import { sendProfileApprovedEmail } from '@/backend/mailing/mailing.service'
 import { updateProfileById } from '@/backend/profile/profile.service'
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import { notifyProfileApproved } from '@/lib/discord'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { PublishingState } from '@prisma/client'
 
@@ -16,18 +16,19 @@ export const approveProfile = withSentry(async (profileId: string) => {
     state: PublishingState.APPROVED,
   })
 
-  await sendProfileApprovedEmail(
-    updatedProfile.user.email,
-    updatedProfile.fullName,
-  )
+  await sendProfileApprovedEmail({
+    email: updatedProfile.user.email,
+    githubUsername:
+      updatedProfile.user.githubDetails?.username || updatedProfile.fullName,
+    locale: user.language,
+  })
 
-  await sendDiscordNotificationToModeratorChannel(
-    `✅ ${user.name || 'Moderator'} approved ${
-      updatedProfile.fullName
-    } profile. [Show Profile](${
-      process.env.NEXT_PUBLIC_APP_ORIGIN_URL
-    }/moderation/profile/${updatedProfile.userId})`,
-  )
+  await notifyProfileApproved({
+    id: updatedProfile.id,
+    username:
+      updatedProfile.user.githubDetails?.username || updatedProfile.fullName,
+    userId: updatedProfile.userId,
+  })
 
   return createProfileModel(updatedProfile)
 })

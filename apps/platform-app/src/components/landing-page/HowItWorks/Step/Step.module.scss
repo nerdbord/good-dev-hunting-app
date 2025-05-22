@@ -9,13 +9,12 @@
   flex-shrink: 0;
   border-radius: 2px;
   border: 1px solid #3d434b;
-  background: #0F1217;
+  background: #0f1217;
 
   :global(.light) & {
-    border: 1px solid #F0F0FF;
-    background: #FFFFFF
+    border: 1px solid #f0f0ff;
+    background: #ffffff;
   }
-
 }
 .title {
   color: #a687ff;

@@ -12,7 +12,8 @@ interface ButtonProps {
     | "action"
     | "logout"
     | "standard"
-    | "grayedOut";
+    | "grayedOut"
+    | "allpurple";
   type?: "button" | "submit";
   disabled?: boolean;
   loading?: boolean;
@@ -26,7 +27,7 @@ export const Button = ({
   disabled,
   loading,
   dataTestId,
-  type,
+  type = "button",
 }: PropsWithChildren<ButtonProps>) => {
   const cx = classNames.bind(styles);
   const buttonClasses = cx({

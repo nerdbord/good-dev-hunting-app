@@ -1,5 +1,4 @@
 import { type ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
-import dynamic from 'next/dynamic'
 
 import {
   getHourlyRateDisplay,
@@ -87,7 +86,7 @@ const ProfileCard = ({
   return (
     <div className={styles.frame} style={specializationTheme}>
       <div className={styles.container} data-test-id="profileContainer">
-        <Avatar src={avatarUrl || ''} size={78} />
+        <Avatar src={avatarUrl} size={78} />
         <div className={styles.data}>
           <div className={styles.nameContainer}>
             {!isHiddenName ? (
@@ -142,4 +141,4 @@ const ProfileCard = ({
   )
 }
 
-export default dynamic(() => Promise.resolve(ProfileCard), { ssr: false })
+export default ProfileCard

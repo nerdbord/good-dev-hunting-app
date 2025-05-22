@@ -36,6 +36,9 @@ export const jobSpecializationThemes: Record<JobSpecialization, string> = {
   UI_Designer: '#AB96FF',
   UX_UI_Designer: '#AB96FF',
   Product_Designer: '#AB96FF',
+  AI_Developer: '#AB96FF',
+  Product_Engineer: '#AB96FF',
+  Automation_Engineer: '#AB96FF',
 }
 
 export const createFiltersObjFromSearchParams = (

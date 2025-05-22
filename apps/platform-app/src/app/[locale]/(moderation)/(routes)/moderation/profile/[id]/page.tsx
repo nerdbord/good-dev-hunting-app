@@ -5,9 +5,9 @@ import { redirect } from 'next/navigation'
 import { findUserById } from '@/app/[locale]/(auth)/_actions'
 import { findProfileByUserId } from '@/app/[locale]/(profile)/_actions/queries/findProfileByUserId'
 
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 
 import { ModerationUserProfilePage } from '@/app/[locale]/(moderation)/(components)/ModerationUserProfilePage/ModerationUserProfilePage'
 import styles from '@/app/[locale]/(moderation)/(routes)/moderation/profile/[id]/page.module.scss'
@@ -16,13 +16,16 @@ import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfile
 export default async function ModerationUserProfile({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{
+    id: string
+  }>
 }) {
   const { userIsModerator: authorizedUserIsModerator } =
     await getAuthorizedUser()
+  const { id: userId } = await params
 
-  const profile = await findProfileByUserId(params.id)
-  const profileOwner = await findUserById(params.id)
+  const profile = await findProfileByUserId(userId)
+  const profileOwner = await findUserById(userId)
 
   if (!profile || !authorizedUserIsModerator) redirect(AppRoutes.profilesList)
 

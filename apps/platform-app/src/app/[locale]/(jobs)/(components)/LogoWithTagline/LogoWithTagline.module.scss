@@ -1,0 +1,32 @@
+.container {
+  background-color: #302360;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 18px;
+  width: 383px;
+
+  @include mobile {
+    padding: 0;
+    width: auto;
+    background-color: inherit;
+  }
+}
+
+.logo {
+  width: 44px;
+  height: 26px;
+  @include mobile {
+  }
+}
+
+.tagLine {
+  color: #a687ff;
+  line-height: 20px;
+  font-size: 14px;
+  @include mobile {
+    display: none;
+  }
+}

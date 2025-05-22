@@ -1,0 +1,52 @@
+.icon {
+  position: absolute;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.gradientOuter {
+  width: 139.771px;
+  height: 124.477px;
+  flex-shrink: 0;
+  border-radius: 24.3px;
+  background: #f0f0ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradientInner {
+  width: 123.321px;
+  height: 109.839px;
+  flex-shrink: 0;
+  border-radius: 18.984px;
+  background: #e4e4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundShadow {
+  display: flex;
+  width: 107.188px;
+  height: 96.361px;
+  padding: 4px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  border-radius: 15.188px;
+  background: #cbcbef;
+}
+
+.techImage {
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  aspect-ratio: 48.27/65.18;
+  opacity: 0.8;
+  background-blend-mode: color, normal;
+}

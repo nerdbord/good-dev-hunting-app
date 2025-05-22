@@ -3,6 +3,7 @@ export enum AppRoutes {
   myProfile = '/my-profile',
   createProfile = '/my-profile/create',
   editProfile = '/my-profile/edit',
+  inbox = '/my-profile/inbox',
   oAuth = '/oauth',
   moderation = '/moderation',
   moderationProfile = '/moderation/profile',
@@ -10,6 +11,14 @@ export enum AppRoutes {
   profile = '/p',
   signIn = '/signin',
   error = '/error',
+  postJob = '/jobs/add',
+  jobs = '/jobs',
+  job = '/jobs/:id',
+  jobEdit = '/jobs/:id/edit',
+  myJobs = '/jobs/my',
+  application = '/applications/:id',
+  jobApplications = '/jobs/:id/applications',
+  devs = '/devs',
 }
 
 export const removeLocaleFromPath = (pathname: string, locale: string) => {
@@ -24,3 +33,7 @@ export const ensureProtocol = (url: string) => {
   }
   return `https://${url}` // Prepend https:// if no protocol is present
 }
+
+export const getJobRoute = (id: string) => AppRoutes.job.replace(':id', id)
+export const getApplicationRoute = (id: string) =>
+  AppRoutes.application.replace(':id', id)

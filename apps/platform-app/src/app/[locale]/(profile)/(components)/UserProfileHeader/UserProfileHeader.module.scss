@@ -1,3 +1,5 @@
+@use 'mixins' as mixins;
+
 .wrapper {
   position: absolute;
   display: flex;
@@ -6,17 +8,17 @@
   width: calc(100% - 48px);
   margin: 0;
   padding: 20px 20px 0 20px;
-  @include mobile {
+  @include mixins.mobile {
     position: static;
     width: 100%;
   }
 }
 
 .withBackBackButton {
-  @include mobile {
+  justify-content: space-between;
+  @include mixins.mobile {
     justify-content: left;
   }
-  justify-content: space-between;
 }
 
 .actions {
@@ -25,21 +27,21 @@
   justify-content: flex-start;
   row-gap: 12px;
   column-gap: 10px;
-  @include mobile {
+  @include mixins.mobile {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
   }
 }
 .wrap {
-  @include mobile {
+  @include mixins.mobile {
     flex-wrap: wrap;
   }
 }
 
 .buttonWrapper {
   width: 100%;
-  @include mobile {
+  @include mixins.mobile {
     button {
       width: 100%;
     }
@@ -49,13 +51,13 @@
 .socialItemsWrapper {
   flex: 1;
   justify-content: center;
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
   }
 }
 
 .hideOnMobile {
-  @include mobile {
+  @include mixins.mobile {
     display: none;
   }
 }

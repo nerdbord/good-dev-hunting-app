@@ -11,11 +11,18 @@ module.exports = {
     extraFileExtensions: ['.json'],
     tsconfigRootDir: __dirname,
   },
+  ignorePatterns: ['**/global.d.ts'],
   plugins: ['@typescript-eslint'],
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@next/next/recommended',
+  ],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-empty-interface': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/consistent-type-imports': [
       'error',
       {

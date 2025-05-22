@@ -46,9 +46,9 @@
   }
 
   :global(.light) & {
-    background-color: #FEFEFF;
+    background-color: #fefeff;
     border: 1px solid rgb(228, 228, 246);
-    color: #04080D;
+    color: #04080d;
 
     & :hover {
       background-color: rgba(228, 228, 246, 1);
@@ -75,9 +75,9 @@
   }
 
   :global(.light) & {
-    background-color: #FEFEFF;
+    background-color: #fefeff;
     border: 1px solid rgb(228, 228, 246);
-    color: #04080D;
+    color: #04080d;
 
     & .dropdownInput input {
       background-color: rgba(228, 228, 246, 1);

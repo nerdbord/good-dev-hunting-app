@@ -1,0 +1,420 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 60px;
+  background-color: var(--hunter-landing-bg-color);
+  position: relative;
+  @include mobile {
+    gap: 40px;
+  }
+}
+
+.header {
+  text-align: center;
+}
+
+.headerTitle {
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.headerSubtitle {
+  color: var(--hunter-landing-text-color);
+  text-align: center;
+  font-family: 'IBM Plex Sans';
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 40px; /* 105.263% */
+}
+
+.highlight {
+  color: var(--hunter-landing-text-color4);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.stepSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 5%;
+
+  @include mobile {
+    flex-direction: column-reverse;
+  }
+
+  &.reversed {
+    flex-direction: row-reverse;
+
+    @include mobile {
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+.stepContent {
+  width: 40%;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.stepTitle {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--hunter-landing-text-color);
+
+  @include mobile {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px; /* 150% */
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+}
+
+.stepDescription {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--hunter-landing-text-color2);
+  max-width: 400px;
+
+  @include mobile {
+    font-size: 16px;
+    line-height: 150%; /* 24px */
+  }
+}
+
+.stepVisual {
+  width: 40%;
+  background-color: #f2f2ff;
+  padding-inline: 30px;
+  padding-block: 50px;
+  border-radius: 3px;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    width: 100%;
+    min-height: 350px;
+  }
+}
+
+/* Step 1 styles */
+.clientExample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.clientCard {
+  background-color: white;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 2px 2px 11px 0px rgba(33, 13, 90, 0.15);
+  width: 250px;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.clientHeader {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.clientAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #e6e6e6;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.clientInfo {
+  h4 {
+    color: var(--hunter-landing-text-color);
+    font-family: 'IBM Plex Sans';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.667px; /* 125% */
+    margin: 0 0 5px 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--hunter-landing-text-color3);
+    font-family: 'IBM Plex Sans';
+    font-size: 11.667px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.667px; /* 142.857% */
+    margin: 0;
+  }
+}
+
+.arrowDown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.requirementCard {
+  background-color: white;
+  border-radius: 4px;
+  padding: 20px 20px 40px 20px;
+
+  box-shadow: 2px 2px 11px 0px rgba(33, 13, 90, 0.15);
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 30px;
+
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--hunter-landing-text-color3);
+    margin: 0;
+  }
+}
+
+.addJobButton {
+  background-color: #7d54f1;
+  color: white;
+  padding: 17.33px 34.65px;
+  border-radius: 2.89px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+
+  &:hover {
+    background-color: #6a46d5;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.pointingIconWrapper {
+  position: absolute;
+  margin-right: -35%;
+  bottom: -5%;
+  z-index: 2;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.offersExample {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.offersList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .offerIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #fff;
+      box-shadow: 2px 2px 11px 0px rgba(33, 13, 90, 0.15);
+    }
+  }
+
+  .offerCard:nth-child(3n + 1) .offerIcon::after {
+    background-image: url('../../../assets/images/LandingProfileImg2.webp');
+  }
+
+  .offerCard:nth-child(3n + 2) .offerIcon::after {
+    background-image: url('../../../assets/images/ProfilePicture2.png');
+  }
+
+  .offerCard:nth-child(3n + 3) .offerIcon::after {
+    background-image: url('../../../assets/images/ProfilePicture3.png');
+  }
+}
+
+.offerCard {
+  background-color: white;
+  border-radius: 4px;
+  padding: 25px 15px;
+  border-radius: 3.333px;
+  box-shadow: 2px 2px 11px 0px rgba(33, 13, 90, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 90px;
+  width: 100%;
+}
+
+.offerContent {
+  h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 5px 0;
+  }
+
+  p {
+    font-size: 12px;
+    color: var(--hunter-landing-text-color3);
+    margin: 0;
+  }
+}
+
+/* Step 3 styles */
+.hireExample {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.collaborationCard {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 4px;
+  padding: 25px;
+  border-radius: 3.333px;
+  box-shadow: 2px 2px 11px 0px rgba(33, 13, 90, 0.15);
+  width: 70%;
+  text-align: center;
+
+  h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+    color: #7d54f1;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--hunter-landing-text-color2);
+    margin: 0 0 5px 0;
+
+    &:last-child {
+      font-weight: 500;
+      margin-top: 5px;
+    }
+  }
+}
+
+.collaborationAvatars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  .avatarPlaceholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e6e6e6;
+  }
+}
+
+.connectIcon {
+  width: 30px;
+  height: 30px;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@include mobile {
+  .headerTitle {
+    font-size: 20px;
+  }
+
+  .headerSubtitle {
+    font-size: 24px;
+  }
+
+  .stepTitle {
+    font-size: 24px;
+  }
+
+  .stepDescription {
+    font-size: 16px;
+  }
+
+  .clientInfo {
+    h4 {
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .requirementCard {
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .offerContent {
+    h4,
+    p {
+      font-size: 10px;
+    }
+  }
+
+  .collaborationCard {
+    h4 {
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+}

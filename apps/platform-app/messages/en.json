@@ -12,13 +12,14 @@
     "findtalents": "Find talents",
     "hero": "Let your next project find you",
     "opensource": "Open source, free hub for software developers to be present and ready for next commission work.",
-    "joinAsAHunter:": "Join as a hunter",
+    "joinAsAHunter:": "Join as a Employer",
     "visitorBaner": "Create a free account to get unlimited access to all profiles",
     "preview": "Profile preview",
     "profileViews": "Profile views",
-    "availability": "I’m available for work"
+    "availability": "I'm available for work",
+    "loading": "Loading...",
+    "addJob": "Submit a request for a specialist"
   },
-
   "HowItWorks": {
     "faqsection": "Reverted recruitment process",
     "howitworks": "HOW IT WORKS",
@@ -37,24 +38,20 @@
     "titleSix": "Completely free",
     "descriptionFour": "Creating profile and connecting with employers is free. We want to democratize and simplify the recruitment process."
   },
-
   "UserProfile": {
     "howItWork": "Join us in building the largest, free, open source platform dedicated to connecting software engineers with a world of development opportunities.",
     "goBack": "Go back",
     "notOpenForWork": "Not available for new projects"
   },
-
   "TalentSection": {
     "title": "Find your next talent",
     "description": "Explore our growing talents community. Contact as many as you want."
   },
-
   "MeetTeam": {
     "sectionName": "WORKING AS A TEAM",
     "title": "Meet our team",
     "subtitle": "Meet passionates behind the scene"
   },
-
   "Faq": {
     "title": "FAQ",
     "description": "Let us know if you have any questions.",
@@ -67,11 +64,12 @@
     "questionFour": "Do I need to have an account on GitHub?",
     "answerFour": "To create a profile, having a GitHub account is necessary as we want to make sure that you are a real developer. We also use GitHub to fetch your profile picture and other public information to make the process of creating a profile as easy as possible. We do not store any GitHub tokens."
   },
-
   "Buttons": {
+    "logIn": "Log In",
     "createProfile": "Create profile",
     "editProfile": "Edit profile",
     "myProfile": "My profile",
+    "myJobs": "My jobs",
     "saveAndPreview": "Save and preview",
     "saveAndPreviewProfile": "Save and preview profile",
     "edit": "Edit",
@@ -83,19 +81,25 @@
     "sendMessage": "Send message",
     "changePicture": "Change picture",
     "uploadCVfile": "Upload CV file",
+    "removeCVfile": "Remove CV file",
     "uploadAnotherCVfile": "Change CV file",
     "importFromGithub": "Import from Github",
     "importing": "Importing...",
-    "apply": "Apply"
+    "apply": "Apply",
+    "postJob": "Post New Job",
+    "createAnotherJob": "Create Another Job",
+    "deleteJob": "Delete Job",
+    "publishJob": "Publish Job",
+    "goBack": "Go back",
+    "goNext": "Next",
+    "addJob": "Add new"
   },
-
   "LandingFooter": {
     "contact": "Contact",
     "joinOurDiscord": "Join our Discord",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of service"
   },
-
   "DropdownFilter": {
     "technology": "Technology",
     "seniority": "Seniority",
@@ -103,30 +107,28 @@
     "location": "Location",
     "salary": "Salary"
   },
-
   "Search": {
     "searchByName": "Search by name"
   },
-
   "LoginDev": {
     "title": "Login as IT specialist",
-    "description": " Login with authorised Github profile, get found by hunters and also hunt for fellow specialist.",
+    "description": " Login with authorised Github profile, get found by employers and also hunt for fellow specialist.",
     "loginWithGithub": "Login with Github",
     "loginWithLinkedin": "Login with LinkedIn",
-    "or": "or"
+    "or": "or",
+    "loginToApply": "Log in",
+    "loginToApplyDescription": "To apply for a job, you must be logged in."
   },
-
   "LoginHunter": {
-    "login": "Login as talent Hunter",
-    "description": "  Join and login always with magic link. Hunters don't have public profiles.",
+    "login": "Login as Employer",
+    "description": "Join and login always with magic link. Employers don't have public profiles.",
     "policyOne": "I have read and accept",
     "policyTwo": "and",
     "policyThree": "Privacy Policy",
-    "joinAsAHunter": "Join as a Hunter",
+    "joinAsAHunter": "Join as a Employer",
     "loginWithLinkedin": "Login with LinkedIn",
     "or": "or"
   },
-
   "PersonalInfo": {
     "title": "Personal information",
     "description": "Share personal information to let the recruiters get to know you.",
@@ -138,31 +140,28 @@
     "bioPlaceholder": "You can use **markdown** to format your text. [Links](https://devhunting.co) are also supported.",
     "characters": "characters",
     "cvFile": "CV file (optional)",
-    "choosenCVfile": "Uploaded file",
     "choosenCVfileName": "Your CV",
     "slug": "Custom URL",
     "slugTooltip": "Choose a unique name for your profile link (e.g., codemaster)"
   },
-
   "LocationPreferences": {
     "title": "Location preferences",
-    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "description": "Share your current qualifications information. You'll be able to change it at any moment.",
     "residence": "Country of residency",
     "residencePlaceholder": "Start typing location",
-    "relocationOpen": "I’m open to residency relocation",
+    "relocationOpen": "I'm open to residency relocation",
     "city": "City residency",
     "cityPlaceholder": "Start typing location",
     "cityTooltip": "We use this information to match you with the best job opportunities.",
-    "cityRelocation": "I’m open to city relocation",
-    "remontOnly": "I’m looking for remote jobs only",
+    "cityRelocation": "I'm open to city relocation",
+    "remontOnly": "I'm looking for remote jobs only",
     "languages": "Languages",
     "languageTooltip": "List the languages you speak fluently",
     "languagePlaceholder": "Start typing..."
   },
-
   "WorkInformation": {
     "title": "Work information",
-    "description": "Share your current qualifications information. You’ll be able to change it at any moment.",
+    "description": "Share your current qualifications information. You'll be able to change it at any moment.",
     "specialization": "Specialization",
     "specializationText": "Choose your primary specialization",
     "seniority": "Seniority",
@@ -179,30 +178,404 @@
     "employPart": "Part-time",
     "employContract": "Contract"
   },
-
   "VerticalCard": {
     "fullTime": "Available for full-time",
     "contratAvaible": "Available for a contract",
     "notAvaible": "Not available for work",
     "remote": "Remote"
   },
-
   "ConfirmLeaveModal": {
     "title": "Finish your Profile to Save",
-    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
+    "description": "Your profile isn't fully completed yet. To save your changes please fill in all fields. If you leave the page now, your progress will be lost.",
     "leaveBtn": "Leave Page",
     "cancelBtn": "Finish Profile"
   },
-
   "ConfirmLogoutModal": {
     "title": "Finish your Profile to Save",
-    "description": "Your profile isn’t fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
+    "description": "Your profile isn't fully completed yet. To save your changes please fill in all fields. If you log out now, your progress will be lost.",
     "cancelBtn": "Finish Profile"
   },
   "VerificationModal": {
-    "approvedText": "Your profile is now up and running. Potential partnerships will contact via email. Make sure you’re accepting all external messages!",
+    "approvedText": "Your profile is now up and running. Potential partnerships will contact via email. Make sure you're accepting all external messages!",
     "approvedHeader": "Congratulations",
-    "rejectedText": "On your email we’ve sent you a message with information what you can improve to have your profile acceted.",
+    "rejectedText": "On your email we've sent you a message with information what you can improve to have your profile acceted.",
     "rejectedHeader": "Your profile was rejected"
+  },
+  "Auth": {
+    "loginToPublish": "Login",
+    "loginToPublishDesc": "A link will be sent to your email address, which will automatically log you in once clicked.",
+    "loginLabelEmail": "Email",
+    "loginLabelButton": "Send login link",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithLinkedin": "Sign in with LinkedIn",
+    "haventAccount": "Don't have an account?",
+    "signUp": "Create one in 10 seconds",
+    "cancel": "Cancel",
+    "or": "or"
+  },
+  "AddJobVerificationModal": {
+    "title": "Verification in progress",
+    "description": "Your job is currently being verified. Please wait a few moments.",
+    "inProgressBtn": "In progress",
+    "closeBtn": "Close"
+  },
+  "AddJobSuccessModal": {
+    "title": "Job posted successfully",
+    "description": "We’ve selected and notified {jobCandidatesAmount} top candidates for you from over 200 of our specialists. The job preview has also been sent to your email.",
+    "descriptionNoCandidates": "Currently, we don't have specialists that match your job requirements. It may take longer to receive applications, but we'll notify you as soon as we find suitable candidates.",
+    "addAnotherJobBtn": "Add another job",
+    "closeBtn": "Close"
+  },
+  "AddJobErrorModal": {
+    "title": "Job contains errors",
+    "description": "We found some errors in your job. Please fix the fields to publish the offer.",
+    "errorBtn": "Show errors",
+    "closeBtn": "Close",
+    "verificationFailedTitle": "Verification Failed",
+    "verificationFailedDescription": "Your job did not meet our quality standards. Please review and improve your job posting.",
+    "editJobBtn": "Edit Job"
+  },
+  "Jobs": {
+    "postJobTitle": "Post a New Job",
+    "comingSoon": "Job posting form coming soon...",
+    "submit": "Submit Job Post",
+    "applyForJob": "Apply for Job",
+    "termsRequired": "You must accept the terms of the job",
+    "applicationFormComingSoon": "Application form coming soon...",
+    "submitApplication": "Submit Application",
+    "jobDetails": "Job Details",
+    "tagLine": "Free platform connecting you with verified IT specialists",
+    "jobPreview": "Job Preview",
+    "jobEditHeader": "Job summary",
+    "jobEditSubHeader": "Review the order form and ensure that the entered data matches your offer",
+    "basicInfo": "Basic Information",
+    "basicInfoDesc": "Provide the details of the job so that specialists can assess their suitability.",
+    "jobName": "Job Name",
+    "jobNamePlaceholder": "eg. Application interface implementation",
+    "jobNameDesc": "Description of the job",
+    "brief": "Project brief",
+    "briefPlaceholder": "Project brief",
+    "briefTooltip": "Help specialists better understand your needs – write a few sentences about your assignment",
+    "budget": "Budget",
+    "fixedBudget": "I have a fixed budget",
+    "budgetRequestQuote": "I need a quote",
+    "requestQuoteDescription": "Your ad will be marked as 'requesting a quote'.",
+    "budgetDesc": "Specify the budget allocated for project implementation so specialists can tailor their offers to your needs.",
+    "minBudgetForProjectRealisation": "Minimal budget for project realisation",
+    "maxBudgetForProjectRealisation": "Maximal budget for project realisation",
+    "minBudgetForProjectRealisationPlaceholder": "eg. 5000",
+    "maxBudgetForProjectRealisationPlaceholder": "eg. 10000",
+    "employment": "Employment information",
+    "employmentDesc": "Choose the employment type, contract type, and work mode to tailor the collaboration to your needs",
+    "employmentType": "Employment type",
+    "contractTypeLabel": "Contract type",
+    "contractTypeDesc": "Choose the contract type",
+    "contractTypeB2B": "B2B",
+    "contractTypeEmploymentContract": "Employment Contract",
+    "contractTypeSpecificWork": "Contract for Specific Work",
+    "contractTypeMandate": "Contract of Mandate",
+    "workMode": "Work mode",
+    "workModeStationary": "Stationary",
+    "workModeHybrid": "Hybrid",
+    "workModeRemote": "Remote",
+    "locationDesc": "Share your location preferences for the assignment – you can update them at any time.",
+    "locationCityTooltip": "Provide the city so specialists in your area can easily find your offer.",
+    "remoteOnly": "I'm looking for remote candidates only",
+    "techStackTooltip": "Specify the technologies you've selected for your job offer implementation.",
+    "addJobPageHeader": "Add job",
+    "addJobPageSubHeader": "Review the job form and ensure that the entered data matches your offer",
+    "jobNameRequired": "Job name is required",
+    "projectBriefRequired": "Project brief is required",
+    "maxTechStack": "Max 16 technologies",
+    "invalidCurrency": "Invalid currency",
+    "currencyRequired": "Currency is required",
+    "contractTypeRequired": "Contract type is required",
+    "employmentTypeRequired": "Employment type is required",
+    "employmentModeRequired": "Employment mode is required",
+    "minBudgetNonNegative": "The minimum amount must not be less than 0",
+    "minBudgetRequired": "The minimum amount is required",
+    "maxBudgetGreaterThanMin": "The maximum amount must be greater than the minimum",
+    "maxBudgetGreaterThan0": "The maximum amount must be greater than 0",
+    "maxBudgetRequired": "The maximum amount is required",
+    "countryRequired": "Country is required",
+    "cityRequired": "City is required",
+    "budgetTypeRequired": "Please select budget type",
+    "myJobs": "My jobs",
+    "noJobs": "You don't have any jobs",
+    "noJobsMessage": "You haven't posted any jobs yet. Add your first job to get started!",
+    "job": "job",
+    "jobs": "jobs",
+    "applicationMsgLabel": "Message",
+    "applicationMsgPlaceholder": "Write your message here...",
+    "applicationBudgetLabel": "Budget",
+    "messageRequired": "Message is required",
+    "budgetRequired": "Budget is required",
+    "userProfileNotFound": "User profile not found",
+    "cvRequired": "CV upload is required",
+    "cvUploadFailed": "CV upload failed",
+    "applicationSubmissionFailed": "Failed to submit application",
+    "submitting": "Submitting...",
+    "rejectedStatus": "Job rejected - verification failed",
+    "warnChangeCvFile": "The change to the CV applies to the entire profile, not just a single project."
+  },
+  "Hunter": {
+    "hero": "Find Trustworthy IT Specialists",
+    "trustworthy": "Post your job and get matched with verified tech talent",
+    "howItWorks": "How It Works",
+    "post": "Post Your Job",
+    "postDesc": "Create a job post and our system automatically converts it into a detailed brief",
+    "match": "Get Matched",
+    "matchDesc": "Your job is sent to matched profiles with the right skills and experience",
+    "connect": "Connect & Agree",
+    "connectDesc": "Schedule video calls with applicants and set agreements directly",
+    "benefits": "Why Choose Us",
+    "verifiedTitle": "Verified Talent",
+    "verifiedDesc": "All developers are verified through their GitHub profiles and past work",
+    "speedTitle": "Quick Matching",
+    "speedDesc": "Our system automatically matches your job with the right specialists",
+    "secureTitle": "Secure Process",
+    "secureDesc": "Direct communication and secure agreement process",
+    "successStories": "Success Stories",
+    "story1Quote": "Found an amazing developer within days. The matching system really works!",
+    "story1Author": "Sarah Johnson",
+    "story1Role": "Project Manager",
+    "story2Quote": "The verification process gives real peace of mind when hiring",
+    "story2Author": "Mike Brown",
+    "story2Role": "Startup Founder",
+    "ctaTitle": "Ready to Find Your Developer?",
+    "ctaDesc": "Post your job now and get matched with verified specialists"
+  },
+  "MyJobCard": {
+    "published": "Published",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "days": "days ago",
+    "openBtn": "Open applications"
+  },
+  "JobApplications": {
+    "backButton": "My jobs",
+    "publishedDaysAgo": "Published {days} days ago",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "viewProfile": "View Profile",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send"
+  },
+  "Inbox": {
+    "title": "Inbox",
+    "subtitle": "Manage your job negotiations",
+    "negotiations": "Negotiations",
+    "noNegotiations": "You don't have any active negotiations",
+    "noNegotiationsSubtitle": "When you apply for a job, your conversations will appear here",
+    "noSelectedNegotiation": "Select a conversation to view messages",
+    "viewJob": "View Job",
+    "viewCV": "View my CV",
+    "sendMessage": "Send message",
+    "typeMessage": "Type your message...",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "backToProfile": "Back to profile",
+    "send": "Send",
+    "inbox": "Inbox"
+  },
+  "HunterTeam": {
+    "title": "Meet Our Team",
+    "descriptionBold": "We believe that finding an IT expert should be simple. ",
+    "description": "We connect visionaries with specialists, eliminating barriers and bureaucracy. We create open source because technology should be accessible and transparent.",
+    "signature": "— The Good Dev Hunting Team",
+    "fullTime": "Available for full-time",
+    "contract": "Available for contract work",
+    "partTime": "Available for part-time",
+    "remote": "Remote",
+    "unavailable": "Not available for work",
+    "profiles": "Platform creators’ profiles",
+    "back": "Scroll left",
+    "next": "Scroll right"
+  },
+  "HunterFAQ": {
+    "title": "Most Frequently Asked Questions",
+    "desc": "Find answers to frequently asked questions or contact us. We will be happy to help and clear up any doubts.",
+    "button": "Write to us",
+    "accordeon": {
+      "questionOne": "Is it really free?",
+      "answerOne": "Yes, adding an order is fully free.",
+      "questionTwo": "How do I get information from specialists?",
+      "answerTwo": "Specialists who sign up for an assignment will be able to connect with the Principal via the internal chat available on the platform. The Principal, on the other hand, will receive an email notification of their willingness to cooperate.",
+      "questionThree": "How many orders can I post?",
+      "answerThree": "At this point you can add one order per day."
+    }
+  },
+  "HunterFooter": {
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "addJob": "Add job for free",
+    "joinAsItSpecialist": "Join as IT specialist",
+    "copyright": "Copyright © {year} Nerdbord OU All rights reserved."
+  },
+  "HunterWhyWorth": {
+    "title": "Why use DevHunting?",
+    "titleFirstLine": "Why use",
+    "titleSecondLine": "DevHunting?",
+    "freeTitle": "Completely free",
+    "freeDescription": "Add your job without any fees and receive offers from IT specialists.",
+    "simpleTitle": "Simple and fast process",
+    "simpleDescription": "Don't waste time searching - programmers will contact you with tailored proposals.",
+    "techTitle": "No tech knowledge required",
+    "techDescription": "Describe your idea, and AI will transform it into a project brief for the right experts.",
+    "addJobForFree": "Add job for free",
+    "addJobInOneMinute": "Add your job in 1 minute."
+  },
+  "HunterHeader": {
+    "addJob": "Add job for free",
+    "myJobs": "My jobs",
+    "login": "Log in"
+  },
+  "Applications": {
+    "loading": "Loading...",
+    "viewProfile": "View Profile",
+    "send": "Send",
+    "typeMessage": "Type your message...",
+    "applicant": "applicant",
+    "applicants": "applicants",
+    "publishedDaysAgo": "Published {days} days ago",
+    "backButton": "My jobs",
+    "applicationDetails": "Application Details",
+    "applicantInfo": "Applicant Info",
+    "actions": "Actions",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send",
+    "noApplications": "No applications yet"
+  },
+  "HunterHero": {
+    "title": "Find the perfect IT specialist for your project",
+    "titleBottom": "for your project",
+    "titleMobile": "Hire the Best IT Specialist - No Time Wasted on Searching",
+    "subtitle": "Describe the job in your own words, or use a template for the most popular projects",
+    "textareaLabel": "I need a specialist in: ",
+    "instruction": "Click to use job templates.",
+    "button": "Add job for free",
+    "buttonLoading": "Processing...",
+    "creatingJobMessage": "Creating your job...",
+    "aiAnalyzingMessage": "Our AI assistant is analyzing your description...",
+    "matchingSpecialistsMessage": "Matching specialists...",
+    "specialistsCount": "240+ Verified IT Specialists",
+    "privateAIassistant": "Private AI assistant",
+    "website": "Website",
+    "paymentSystemIntegration": "Payment system integration",
+    "onlinePlatformDesign": "Online platform design",
+    "mobileApplication": "Mobile application",
+    "dataManagementSystem": "Data management system",
+    "databaseMigration": "Database migration",
+    "automation": "Automation",
+    "iOSAndroidApplication": "iOS/Android application",
+    "automationBot": "Automation bot",
+    "designSystem": "Design system",
+    "QAtesting": "QA testing",
+    "APIintegration": "API integration",
+    "animate_privateAIassistant": "creating a private AI assistant",
+    "animate_website": "building websites",
+    "animate_paymentSystemIntegration": "integrating payment systems",
+    "animate_onlinePlatformDesign": "designing online platforms",
+    "animate_mobileApplication": "creating mobile applications",
+    "animate_dataManagementSystem": "data management",
+    "animate_databaseMigration": "database migration",
+    "animate_automation": "automation",
+    "animate_iOSAndroidApplication": "creating iOS/Android applications",
+    "animate_automationBot": "automation bots",
+    "animate_designSystem": "design system",
+    "animate_QAtesting": "application testing",
+    "animate_APIintegration": "API integration",
+    "heroTooltip": "Click to use job templates.",
+    "mockText_privateAIassistant": "I'm looking for a private AI assistant solution to support my work. I need a system that:\nAutomatically manages calendar and meetings\nProcesses and categorizes emails\nPrepares draft responses to messages\nReminds of important tasks and deadlines",
+    "mockText_website": "I'm looking for a solution to create a modern website for my company. I need a system that:\nProvides intuitive navigation and responsiveness\nIntegrates with social media\nOffers a content management system\nAllows easy addition of new subpages",
+    "mockText_onlinePlatformDesign": "I'm looking for a solution to design an online platform. I need a system that:\nOffers modern and consistent design\nProvides intuitive user experience\nAdapts to different devices\nAllows easy customization of elements",
+    "mockText_paymentSystemIntegration": "I'm looking for a solution to integrate payment systems in my business. I need a system that:\nHandles various electronic payment methods\nAutomatically records transactions\nGenerates financial reports\nEnsures secure data processing",
+    "mockText_mobileApplication": "I need to create a new mobile application for my company. I would like it to be:\nAttractive and professional\nSEO optimized\nResponsive and easy to use\nContain information about our services and products",
+    "mockText_dataManagementSystem": "I need to create a new data management system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
+    "mockText_databaseMigration": "I need to migrate my database from one system to another. I would like it to be:\nSafe and efficient\nMaintain compatibility with previous data\nMinimize downtime",
+    "mockText_automation": "I need to create process automation in my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing features\nAllow integration with other systems",
+    "mockText_iOSAndroidApplication": "I need to create a new mobile application for iOS and Android. I would like it to be:\nAttractive and professional\nSEO optimized\nResponsive and easy to use\nContain information about our services and products",
+    "mockText_automationBot": "I need to create process automation in my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing features\nAllow integration with other systems",
+    "mockText_designSystem": "I need to create a new design system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
+    "mockText_QAtesting": "I need to create a new QA system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
+    "mockText_APIintegration": "I need to create a new API system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
+    "describe_yourProject": "Describe your project"
+  },
+  "HunterReviews": {
+    "opinions": "Client opinions",
+    "back": "Previous reviews",
+    "next": "Next reviews"
+  },
+  "HunterRiskReducers": {
+    "expertsTitle": "verified experts",
+    "expertsDescription": "Work with verified developers, testers, and designers at every level of expertise.",
+    "specialistsTitle1": "Specialists proficient",
+    "specialistsTitle2": "in 50+ technologies",
+    "specialistsDescription": "From React, through Python, to UX/UI tools – our experts know all the technologies needed to complete your project."
+  },
+  "Metadata": {
+    "title": "Commission projects to the best specialists – GoodDevHunting",
+    "description": "Add a job and get found by the best IT specialists – no fees, no intermediaries. Don't waste time searching – programmers will contact you with tailored proposals. You set the terms of cooperation together – simple, transparent, and stress-free.",
+    "keywords": [
+      "IT jobs",
+      "find programmer",
+      "IT freelancer",
+      "IT specialist",
+      "project implementation",
+      "application development",
+      "frontend developer",
+      "backend developer",
+      "application testing",
+      "UI/UX design",
+      "API integration",
+      "IT recruitment",
+      "business offers",
+      "on-demand IT experts",
+      "IT outsourcing",
+      "remote programmer",
+      "hire developer",
+      "programming projects",
+      "team augmentation",
+      "IT project team"
+    ]
+  },
+  "HunterHowItWorks": {
+    "howItWorks": "HOW IT WORKS",
+    "stepsToFindExpert": "3 steps to find an expert",
+    "addJob": "Add job for free",
+    "describeNeeds": "Describe your needs and add your request",
+    "inOneMinute": "in 1 minute",
+    "exampleClientName": "David Kowalczyk",
+    "exampleClientPosition": "CEO of a startup building chatbots for patients",
+    "exampleRequest": "I need a chatbot specialist who will build me a chatbot for patients based on their medical history and doctor's recommendations.",
+    "addJobForFree": "Add job for free",
+    "receiveOffers": "Receive Offers",
+    "receiveOffersDescription": "Receive applications from verified specialists interested in your project.",
+    "offerResponse1": "Marcin responded to your request",
+    "offerPosition1": "Senior Software Engineer / AI Specialist",
+    "offerResponse2": "Aleksandra responded to your request",
+    "offerPosition2": "Full Stack Developer / Healthcare Tech",
+    "offerResponse3": "Kamila responded to your request",
+    "offerPosition3": "Backend Developer / Chatbot Architect",
+    "hireExpert": "Hire Expert",
+    "hireExpertDescription": "Review profiles and choose the person who best fits your project and start collaboration.",
+    "collaborationInvite": "Collaboration invitation",
+    "clientInvites": "David invites you to the project:",
+    "projectTitle": "Chatbot for healthtech industry",
+    "ceopicture": "Profile picture of CEO",
+    "clientpicture": "Profile picture of client"
+  },
+  "HunterCTA": {
+    "title": "Describe your project and choose the best expert",
+    "button": "Add job for free"
+  },
+  "AddJobChat": {
+    "descriptionHeader": "Describe what you need",
+    "descriptionParagraph": "As detailed as possible. You can also paste the content of your job posting.",
+    "placeholder": "Describe your job in a few words",
+    "textareaLabel": "Job description",
+    "cancelBtn": "Back",
+    "nextBtn": "Next"
   }
 }

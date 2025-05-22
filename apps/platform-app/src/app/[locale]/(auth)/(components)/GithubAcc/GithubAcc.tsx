@@ -11,28 +11,26 @@ const GithubAcc = () => {
 
   if (!session) {
     return (
-      <Link href={AppRoutes.myProfile}>
-        <div className={styles.github}>
-          <div className={styles.githubAcc}>
-            <Avatar src={defaultUserImg} size={38} />
-            <p className={styles.githubAccName}>Loading...</p>
-          </div>
+      <div className={styles.github}>
+        <div className={styles.githubAcc}>
+          <Avatar src={defaultUserImg} size={38} />
+          <p className={styles.githubAccName}>Loading...</p>
         </div>
-      </Link>
+      </div>
     )
   }
 
   return (
-    <Link href={AppRoutes.myProfile}>
-      <div className={styles.github}>
+    <div className={styles.github}>
+      <Link href={AppRoutes.myProfile} className={styles.profileLink}>
         <div className={styles.githubAcc}>
           {session?.user.avatarUrl && (
             <Avatar src={session.user.avatarUrl} size={38} />
           )}
           <p className={styles.githubAccName}>{session?.user.name}</p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
 

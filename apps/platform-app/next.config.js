@@ -1,6 +1,6 @@
+const path = require('path')
 const { withSentryConfig } = require('@sentry/nextjs')
 const createNextIntlPlugin = require('next-intl/plugin')
-
 // Creating an instance of next-intl plugin
 const withNextIntl = createNextIntlPlugin()
 
@@ -8,17 +8,45 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig = {
   sassOptions: {
     additionalData: `@use "src/styles/mixins" as *; @use "src/styles/tokens" as *;`,
+    includePaths: [path.join(__dirname, 'src/styles')],
+    verbose: true,
   },
   env: {
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
   },
   images: {
-    domains: [
-      'media.licdn.com',
-      'avatars.githubusercontent.com',
-      'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
-      'github.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'olwpo5gvoe9f3vxl.public.blob.vercel-storage.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'flagsapi.com',
+        port: '',
+      },
     ],
   },
   //reactStrictMode: true, // Enable React strict mode

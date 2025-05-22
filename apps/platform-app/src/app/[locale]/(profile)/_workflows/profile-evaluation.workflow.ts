@@ -14,7 +14,11 @@ import {
 } from '@/backend/profile/profile.service'
 import { type ProfileWithRelations } from '@/backend/profile/profile.types'
 import { saveRejectingReason } from '@/backend/profile/rejection.service'
-import { sendDiscordNotificationToModeratorChannel } from '@/lib/discord'
+import {
+  notifyProfilePublished,
+  notifyProfileRejected,
+  sendDiscordNotificationToModeratorChannel,
+} from '@/lib/discord'
 import { analyzeImage } from '@/services/groq.service'
 import { getContextVariable, setContextVariable } from '@langchain/core/context'
 import { tool } from '@langchain/core/tools'
@@ -51,14 +55,18 @@ const acceptProfileTool = tool(
     }
 
     updateProfileById(profileId, { state: 'APPROVED' })
-    sendProfileApprovedEmail(
-      currentState.profile.user.email,
-      currentState.profile.user.githubDetails?.username || '',
-    )
+    sendProfileApprovedEmail({
+      email: currentState.profile.user.email,
+      githubUsername: currentState.profile.user.githubDetails?.username || '',
+      locale: currentState.profile.user.language,
+    })
 
-    await sendDiscordNotificationToModeratorChannel(
-      `✅ AI Workflow has approved ${currentState.profile.fullName} profile. [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
-    )
+    // Send structured notification for profile approval
+    await notifyProfilePublished({
+      id: profileId,
+      username: currentState.profile.fullName,
+      userId: currentState.profile.userId,
+    })
 
     return `The profile has been accepted. profileId: ${profileId} `
   },
@@ -81,10 +89,18 @@ const rejectProfileTool = tool(
 
     updateProfileById(profileId, { state: 'REJECTED' })
     saveRejectingReason(profileId, reason)
-    sendProfileRejectedEmail(currentState.profile.user.email, reason)
-    await sendDiscordNotificationToModeratorChannel(
-      `⛔️ AI Workflow has rejected ${currentState.profile.fullName} profile. Reason: ${reason} [Show Profile](${process.env.NEXT_PUBLIC_APP_ORIGIN_URL}/moderation/profile/${currentState.profile.userId})`,
-    )
+    sendProfileRejectedEmail({
+      email: currentState.profile.user.email,
+      reason,
+      locale: currentState.profile.user.language,
+    })
+    // Send structured notification for profile rejection
+    await notifyProfileRejected({
+      id: profileId,
+      username: currentState.profile.fullName,
+      userId: currentState.profile.userId,
+      reasons: [reason],
+    })
 
     return `The profile has been rejected. Reason: ${reason}, profileId: ${profileId}`
   },
@@ -223,11 +239,14 @@ const graph = workflow.compile()
 
 export const runEvaluateProfileAgent = async (profileId: string) => {
   'use server'
-  const res = await graph.invoke('', {
-    configurable: {
-      thread_id: profileId,
-      profileId,
+  const res = await graph.invoke(
+    {},
+    {
+      configurable: {
+        thread_id: profileId,
+        profileId,
+      },
     },
-  })
+  )
   return res
 }

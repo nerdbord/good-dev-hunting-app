@@ -64,7 +64,7 @@
 
 .buttonIconOpen {
   color: #a687ff;
-  
+
   :global(.light) & {
     color: #a687ff;
   }
@@ -74,7 +74,7 @@
   color: #e2eaf1;
 
   :global(.light) & {
-    color: #171B21;
+    color: #171b21;
   }
 }
 
@@ -82,7 +82,7 @@
   color: #e2eaf1;
 
   :global(.light) & {
-    color: #171B21;
+    color: #171b21;
   }
 }
 
@@ -124,9 +124,8 @@
 
 .mobileDropdown {
   position: fixed;
-  bottom: 0;
   left: 0;
-  bottom: -402px;
+  /* bottom: -402px; */
   width: 100vw;
   padding: 24px;
   background-color: var(--bg-color);
@@ -232,4 +231,69 @@
 }
 .isOpenColorMain03 {
   color: #a687ff;
+}
+
+.container.lightMode {
+  background-color: #fff;
+  color: #000;
+}
+
+.button.lightMode {
+  background-color: #f0f0f0;
+  color: #000;
+  border-color: #ccc;
+}
+
+.buttonIcon.lightMode {
+  color: #333;
+}
+
+.localeName.lightMode {
+  color: #333;
+}
+
+.arrow.lightMode {
+  color: #333;
+}
+
+//hunter landing
+.hunterLanding {
+  background-color: var(--hunter-landing-bg-color);
+  color: var(--hunter-landing-text-color);
+
+  .button {
+    background-color: var(--hunter-landing-bg-color);
+    border-color: var(--hunter-landing-text-color);
+    color: var(--hunter-landing-text-color);
+
+    @include mobile {
+      max-width: 240px;
+      margin: 0 auto;
+    }
+  }
+
+  .mobileDropdown {
+    border-top: none;
+  }
+
+  .buttonIcon {
+    color: var(--hunter-landing-text-color);
+  }
+
+  .localeName {
+    color: var(--hunter-landing-text-color);
+  }
+
+  .dropdown {
+    background-color: var(--hunter-landing-bg-color);
+    border-color: var(--hunter-landing-text-color);
+  }
+
+  .dropdownItem {
+    color: var(--hunter-landing-text-color);
+  }
+
+  .arrow {
+    color: var(--hunter-landing-text-color);
+  }
 }

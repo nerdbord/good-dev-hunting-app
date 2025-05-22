@@ -21,3 +21,5 @@ export { Switch } from "./Switch/Switch";
 export { TextArea } from "./TextArea/TextArea";
 export { Tooltip } from "./Tooltip/Tooltip";
 export { VisitorBanner } from "./VisitorBanner/VisitorBanner";
+export { Drawer } from "./Drawer/Drawer";
+export { DrawerHeader } from "./Drawer/Drawer";

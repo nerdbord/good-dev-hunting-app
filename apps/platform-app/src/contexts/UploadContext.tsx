@@ -16,7 +16,6 @@ interface UploadContextProps {
   cvFormData: FormData | null
   onSetCvFormData: (data: FormData) => void
 }
-
 export const UploadProvider = ({ children }: PropsWithChildren) => {
   const [imageUploadError, setImageUploadError] = useState(false)
   const [formDataWithFile, setFormDataWithFile] = useState<FormData | null>(

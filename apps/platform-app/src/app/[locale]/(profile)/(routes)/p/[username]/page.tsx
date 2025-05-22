@@ -1,9 +1,9 @@
-import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import UserProfileDetails from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileDetails/UserProfileDetails'
 import UserProfileMain from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfileMain/UserProfileMain'
 import { UserProfilePage } from '@/app/[locale]/(profile)/(components)/UserProfile/UserProfilePage/UserProfilePage'
 import UserProfileHeader from '@/app/[locale]/(profile)/(components)/UserProfileHeader/UserProfileHeader'
 import { getProfileBySlug } from '@/backend/profile/profile.service'
+import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { AppRoutes } from '@/utils/routes'
 import { redirect } from 'next/navigation'
 import { findProfileBySlug } from '../../../_actions/queries/findProfileBySlug'
@@ -11,10 +11,12 @@ import { findProfileBySlug } from '../../../_actions/queries/findProfileBySlug'
 export async function generateMetadata({
   params,
 }: {
-  params: { username: string }
+  params: Promise<{ username: string }>
 }) {
+  const { username } = await params
+
   try {
-    const selectedProfile = await getProfileBySlug(params.username)
+    const selectedProfile = await getProfileBySlug(username)
 
     if (!selectedProfile) {
       return {
@@ -39,13 +41,18 @@ export async function generateMetadata({
   }
 }
 
-const UserProfile = async ({ params }: { params: { username: string } }) => {
+const UserProfile = async ({
+  params,
+}: {
+  params: Promise<{ username: string }>
+}) => {
+  const { username } = await params
   const { user: authorizedUser } = await getAuthorizedUser()
   if (!authorizedUser) {
     return redirect(AppRoutes.signIn)
   }
 
-  const profile = await findProfileBySlug(params.username)
+  const profile = await findProfileBySlug(username)
 
   if (!profile) {
     redirect(AppRoutes.profilesList)

@@ -1,6 +1,6 @@
 'use server'
-import { authorizeUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { findUserByEmail } from '@/backend/user/user.service'
+import { authorizeUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 
 export const fetchMyAvatar = withSentry(async () => {

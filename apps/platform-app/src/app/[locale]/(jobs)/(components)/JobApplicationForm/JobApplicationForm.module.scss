@@ -1,0 +1,50 @@
+.formBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #04080d;
+  margin-top: 30px;
+  margin-bottom: 24px;
+
+  label {
+    color: #89939e;
+
+    /* Caption */
+    font-family: 'IBM Plex Sans';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px; /* 133.333% */
+  }
+
+  p {
+    color: var(--suggestion-text-color);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+  }
+}
+
+.placeholder {
+  text-align: center;
+  color: #69717b;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.editorWrapper {
+  height: 250px;
+}
+
+.maxWidthButton {
+  button {
+    width: 100%;
+  }
+}
+.warnChangeCvFile {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--suggestion-text-color);
+}

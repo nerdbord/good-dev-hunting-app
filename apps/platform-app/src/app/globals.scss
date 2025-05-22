@@ -1,4 +1,4 @@
-@import '../styles/_index.scss';
+@use '../styles/_index.scss' as styles;
 
 body,
 button,
@@ -6,7 +6,7 @@ input,
 textarea,
 select {
   font-family: var(--font-ibm), sans-serif;
-  @include theme-transition;
+  @include styles.theme-transition;
 }
 
 button {
@@ -16,7 +16,7 @@ button {
 a {
   text-decoration: none;
   color: inherit;
-  @include theme-transition;
+  @include styles.theme-transition;
 }
 
 * {
@@ -30,7 +30,7 @@ body {
   max-width: 100%;
   color: var(--text-color2);
   background-color: var(--bg-color);
-  @include theme-transition;
+  @include styles.theme-transition;
 }
 
 ul {
@@ -53,16 +53,15 @@ h4,
 h5,
 h6 {
   background: none;
-  @include theme-transition;
+  @include styles.theme-transition;
 }
-
 
 :root {
   // Default settings for dark mode
   --bg-color: #121212;
-  --bg-color2: #0F1217;
+  --bg-color2: #0f1217;
   --bg-color3: #171b21;
-  --bg-color4: #0F1217;
+  --bg-color4: #0f1217;
   --bg-color5: #161a1f;
   --bg-fh-color: #121212;
   --bg-pm-color: #04080d;
@@ -72,9 +71,9 @@ h6 {
   --button-bg: #333333;
   --button-bg-2: #7d54f1;
   --button-text: #ffffff;
-  --button-stroke: #CCCCF0;
-  --switch-border: #3D434B;
-  --color: #A687FF;
+  --button-stroke: #ccccf0;
+  --switch-border: #3d434b;
+  --color: #a687ff;
   --suggestion-text-color: #89939e;
   --suggestion-bg-color: #171b21;
   --suggestion-bg-hover: #2a2f35;
@@ -82,33 +81,47 @@ h6 {
   --suggestion-rest-color: #89939e;
   --border-color: #2a2f35;
   --checkbox-border: #e2eaf1;
+
+  //hunter landing
+  --hunter-landing-bg-color: #fafaff;
+  --hunter-landing-bg-color2: #f0f0ff;
+  --hunter-landing-bg-color3: #e4e4f6;
+  --hunter-landing-bg-color4: #fff;
+  --hunter-element-bg-color4: #fff;
+  --hunter-landing-text-color: #04080d;
+  --hunter-landing-text-color2: #171b21;
+  --hunter-landing-text-color3: #69717b;
+  --hunter-landing-text-color4: #4611db;
+  --hunter-landing-button-color: #161a1f;
+  --hunter-landing-text-color6: #ffffff;
+  --hunter-landing-text-color7: #c3c3e1;
 }
 
 // Optional: light mode
 .light {
-  --bg-color: #FAFAFF;
-  --bg-color2: #FEFEFF;
-  --bg-color3: #FEFEFF;
-  --bg-color4: #FAFAFF;
-  --bg-color5: #E4E4F6;
-  --bg-fh-color: #FEFEFF;
-  --bg-pm-color: #FEFEFF;
-  --text-color: #04080D;
-  --text-color2: #04080D;
-  --text-color3: #3D434B;
+  --bg-color: #fafaff;
+  --bg-color2: #fefeff;
+  --bg-color3: #fefeff;
+  --bg-color4: #fafaff;
+  --bg-color5: #e4e4f6;
+  --bg-fh-color: #fefeff;
+  --bg-pm-color: #fefeff;
+  --text-color: #04080d;
+  --text-color2: #04080d;
+  --text-color3: #3d434b;
   --button-bg: #f0f0f0;
-  --button-bg-2: #6039D0;
+  --button-bg-2: #6039d0;
   --button-text: #000000;
-  --button-stroke: #CCCCF0;
-  --switch-border: #F0F0FF;
-  --color: #6039D0;
-  --suggestion-text-color: #3D434B;
-  --suggestion-bg-color: #F0F0FF;
-  --suggestion-bg-hover: #E4E4F6;
-  --suggestion-match-color: #04080D;
-  --suggestion-rest-color: #3D434B;
-  --border-color: #E4E4F6;
-  --checkbox-border: #0F1217;
+  --button-stroke: #ccccf0;
+  --switch-border: #f0f0ff;
+  --color: #6039d0;
+  --suggestion-text-color: #3d434b;
+  --suggestion-bg-color: #f0f0ff;
+  --suggestion-bg-hover: #e4e4f6;
+  --suggestion-match-color: #04080d;
+  --suggestion-rest-color: #3d434b;
+  --border-color: #e4e4f6;
+  --checkbox-border: #0f1217;
 }
 
 // Global styles for body/html

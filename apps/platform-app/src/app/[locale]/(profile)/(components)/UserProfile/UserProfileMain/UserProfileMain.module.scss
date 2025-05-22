@@ -109,7 +109,7 @@
   white-space: nowrap;
 
   :global(.light) & {
-    color: #171B21;
+    color: #171b21;
   }
 }
 
@@ -127,9 +127,9 @@
   background-color: #0f1217;
 
   :global(.light) & {
-    background-color: #FAFAFF;
-    color: #171B21;
-    }
+    background-color: #fafaff;
+    color: #171b21;
+  }
 
   @include mobile {
     white-space: nowrap;
@@ -156,7 +156,7 @@
   color: #89939e;
 
   :global(.light) & {
-    color: #171B21;
+    color: #171b21;
   }
 }
 

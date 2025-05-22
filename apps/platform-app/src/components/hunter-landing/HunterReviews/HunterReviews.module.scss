@@ -1,0 +1,85 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+
+  @include mobile {
+    gap: 20px;
+  }
+}
+
+.title {
+  color: var(--hunter-landing-text-color);
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 40px;
+  @include mobile {
+    font-size: 26px;
+    line-height: 30px;
+    letter-spacing: 0%;
+  }
+}
+
+.reviewBox {
+  column-count: 3;
+  column-gap: 16px;
+  width: 100%;
+
+  @include mobile {
+    column-count: 1;
+  }
+}
+
+.mobileSlider {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 30px;
+  margin-top: 8px;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--color);
+}
+
+.arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.topSection {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.topSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
