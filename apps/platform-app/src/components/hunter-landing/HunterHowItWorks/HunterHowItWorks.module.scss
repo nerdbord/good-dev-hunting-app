@@ -3,18 +3,9 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  gap: 60px;
   background-color: var(--hunter-landing-bg-color);
   position: relative;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
   @include mobile {
     gap: 40px;
   }
@@ -61,7 +52,7 @@
     flex-direction: column-reverse;
   }
 
-  &:nth-child(even) {
+  &.reversed {
     flex-direction: row-reverse;
 
     @include mobile {

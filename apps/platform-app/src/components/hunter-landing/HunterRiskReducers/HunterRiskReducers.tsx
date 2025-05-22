@@ -6,6 +6,7 @@ import React from 'react'
 import LandingProfileImg1 from '../../../assets/images/LandingProfileImg1.webp'
 import LandingProfileImg2 from '../../../assets/images/LandingProfileImg2.webp'
 import SpecialistImg from '../../../assets/images/SpecialistImg.webp'
+import { AnimatedReveal } from '../UI/AnimatedReveal/AnimatedReveal'
 import styles from './HunterRiskReducers.module.scss'
 
 interface ProfileCardProps {
@@ -54,66 +55,70 @@ export async function HunterRiskReducers() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <div className={styles.topSection}>
-          <div className={styles.profilesContainer}>
-            <ProfileCard
-              name="Anna Dębowska"
-              position="Junior Frontend Developer"
-              location="Poland, Warsaw / Remote"
-              skills={['TypeScript', 'React.js', 'SCSS', '+3 more']}
-              avatar={LandingProfileImg1}
-            />
-            <ProfileCard
-              name="Krystian Jasiński"
-              position="Senior Fullstack Developer"
-              location="Poland, Warsaw / Remote"
-              skills={['JavaScript', 'React.js', 'Vue.js', '+5 more']}
-              avatar={LandingProfileImg2}
-            />
+        <AnimatedReveal direction="left">
+          <div className={styles.topSection}>
+            <div className={styles.profilesContainer}>
+              <ProfileCard
+                name="Anna Dębowska"
+                position="Junior Frontend Developer"
+                location="Poland, Warsaw / Remote"
+                skills={['TypeScript', 'React.js', 'SCSS', '+3 more']}
+                avatar={LandingProfileImg1}
+              />
+              <ProfileCard
+                name="Krystian Jasiński"
+                position="Senior Fullstack Developer"
+                location="Poland, Warsaw / Remote"
+                skills={['JavaScript', 'React.js', 'Vue.js', '+5 more']}
+                avatar={LandingProfileImg2}
+              />
+            </div>
+            <div className={styles.specialistText}>
+              <h2>
+                <span className={styles.highlight}>
+                  {profileCount !== null ? `${profileCount || 240}+` : ''}
+                </span>{' '}
+                {t('expertsTitle')}
+              </h2>
+              <p>{t('expertsDescription')}</p>
+            </div>
           </div>
-          <div className={styles.specialistText}>
-            <h2>
-              <span className={styles.highlight}>
-                {profileCount !== null ? `${profileCount || 240}+` : ''}
-              </span>{' '}
-              {t('expertsTitle')}
-            </h2>
-            <p>{t('expertsDescription')}</p>
-          </div>
-        </div>
+        </AnimatedReveal>
 
-        <div className={styles.topSection}>
-          <div className={styles.specialistText}>
-            <h2>
-              {t('specialistsTitle1')}{' '}
-              {t('specialistsTitle2')
-                .split('50+')
-                .map((part, index) => {
-                  if (index === 0) {
-                    return (
-                      <React.Fragment key={index}>
-                        {part}
-                        <span className={styles.highlight}>50+</span>
-                      </React.Fragment>
-                    )
-                  }
-                  return part
-                })}
-            </h2>
-            <p>{t('specialistsDescription')}</p>
+        <AnimatedReveal direction="right">
+          <div className={styles.topSection}>
+            <div className={styles.specialistText}>
+              <h2>
+                {t('specialistsTitle1')}{' '}
+                {t('specialistsTitle2')
+                  .split('50+')
+                  .map((part, index) => {
+                    if (index === 0) {
+                      return (
+                        <React.Fragment key={index}>
+                          {part}
+                          <span className={styles.highlight}>50+</span>
+                        </React.Fragment>
+                      )
+                    }
+                    return part
+                  })}
+              </h2>
+              <p>{t('specialistsDescription')}</p>
+            </div>
+            <div className={styles.specialistImageWrapper}>
+              <Image
+                src={SpecialistImg}
+                alt="Specialist with technology icons"
+                className={styles.specialistImg}
+                fill
+                style={{
+                  objectFit: 'contain',
+                }}
+              />
+            </div>
           </div>
-          <div className={styles.specialistImageWrapper}>
-            <Image
-              src={SpecialistImg}
-              alt="Specialist with technology icons"
-              className={styles.specialistImg}
-              fill
-              style={{
-                objectFit: 'contain',
-              }}
-            />
-          </div>
-        </div>
+        </AnimatedReveal>
       </div>
     </div>
   )

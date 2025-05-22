@@ -30,7 +30,7 @@
 
 .profile {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 
@@ -60,4 +60,20 @@
   line-height: 20px;
   letter-spacing: 0%;
   vertical-align: middle;
+}
+
+.projectLink {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 16px;
+  
+  a {
+    color: var(--hunter-landing-primary-color, #7D54F1);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

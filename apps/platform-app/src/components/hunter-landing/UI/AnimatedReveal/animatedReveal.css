@@ -1,0 +1,26 @@
+.animated-reveal {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.animated-reveal.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.reveal-from-left {
+  transform: translateX(-50px);
+}
+
+.reveal-from-right {
+  transform: translateX(50px);
+}
+
+.reveal-from-up {
+  transform: translateY(50px);
+}
+
+.reveal-from-down {
+  transform: translateY(-50px);
+}

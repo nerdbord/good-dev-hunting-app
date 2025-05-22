@@ -15,21 +15,23 @@ import styles from './page.module.scss'
 
 export default async function HunterLandingPage() {
   return (
-    <main className={styles.hunter_landing}>
+    <>
       <HunterHeader />
-      <Container>
-        <div className={styles.wrapper}>
-          <HunterHero />
-          <HunterRiskReducers />
-          <HunterHowItWorks />
-          <HunterWhyWorth />
-          <HunterReviews />
-          <HunterTeam />
-          <HunterFAQ />
-          <HunterCTA />
-        </div>
-      </Container>
+      <main className={styles.hunter_landing}>
+        <Container>
+          <div className={styles.wrapper}>
+            <HunterHero />
+            <HunterRiskReducers />
+            <HunterHowItWorks />
+            <HunterWhyWorth />
+            <HunterReviews />
+            <HunterTeam />
+            <HunterFAQ />
+            <HunterCTA />
+          </div>
+        </Container>
+      </main>
       <HunterFooter />
-    </main>
+    </>
   )
 }
