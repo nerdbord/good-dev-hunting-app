@@ -66,12 +66,12 @@
   margin-top: 4px;
   font-size: 13px;
   line-height: 16px;
-  
+
   a {
-    color: var(--hunter-landing-primary-color, #7D54F1);
+    color: var(--hunter-landing-primary-color, #7d54f1);
     text-decoration: none;
     transition: color 0.2s ease;
-    
+
     &:hover {
       text-decoration: underline;
     }

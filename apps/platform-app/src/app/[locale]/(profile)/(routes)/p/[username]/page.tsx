@@ -55,7 +55,7 @@ const UserProfile = async ({
   const profile = await findProfileBySlug(username)
 
   if (!profile) {
-    redirect(AppRoutes.profilesList)
+    redirect(AppRoutes.home)
   }
 
   // const user = await findUserByEmail(selectedProfile.userEmail)

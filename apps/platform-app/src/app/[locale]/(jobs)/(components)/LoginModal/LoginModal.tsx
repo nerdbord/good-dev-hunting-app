@@ -20,7 +20,7 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const pendingJobId = getPendingPublishJob()
   const finalDestinationUrl = pendingJobId
     ? `${AppRoutes.jobs}/${pendingJobId}?publish=true`
-    : AppRoutes.profilesList
+    : AppRoutes.home
 
   const encodedFinalDestination = encodeURIComponent(finalDestinationUrl)
   const intermediateCallbackUrl = `${AppRoutes.oAuth}?role=${Roles.HUNTER}&redirectTo=${encodedFinalDestination}`
