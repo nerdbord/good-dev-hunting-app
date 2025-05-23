@@ -1,11 +1,19 @@
-import profilePic2 from '@/assets/images/ProfilePicture2.png'
 import akg from '@/assets/images/reviews/akg.jpg'
 import avatar from '@/assets/images/reviews/avatar.png'
 import barberbus from '@/assets/images/reviews/barberbus.webp'
+import honest from '@/assets/images/reviews/honest-properties.png'
 import Karolina from '@/assets/images/reviews/karolina.jpeg'
 import dora from '@/assets/images/reviews/logo_dora.png'
 
 export const reviews_pl = [
+  {
+    name: 'Krzysztof Świaniewicz',
+    role: 'CEO Honest Properties & LS Estate & Erevie',
+    text: "Jestem w totalnym szoku, zatrudniłem dwóch programistów w tym samym czasie, jeden z DevHunting, drugi ze zwykłej rekrutacji. Po prostu zapadła decyzja, że tworzymy własny, in-house'owy dział IT. Po dwóch miesiącach Norbert pchnął potwornie projekt do przodu. Drugiemu programiście nie przedłużyliśmy umowy próbnej. Śmiało można powiedzieć, że Norbert robi za dwóch. Polecam DevHunting!",
+    stars: 5,
+    image: honest,
+    projectUrl: 'https://honestproperties.pl/',
+  },
   {
     // Klient ani pw
     name: 'Piotr Tchórz',
@@ -49,16 +57,17 @@ export const reviews_pl = [
     stars: 5,
     image: Karolina,
   },
-  {
-    name: 'Barbara Lipińska',
-    role: 'Właścicielka butiku online',
-    text: 'Potrzebowałam programisty do małego projektu e-commerce. Przez DevHunting znalazłam odpowiednią osobę w kilka dni. Proces był prosty i przejrzysty.',
-    stars: 4,
-    image: profilePic2,
-  },
 ]
 
 export const reviews_en = [
+  {
+    name: 'Krzysztof Świaniewicz',
+    role: 'CEO of Honest Properties & LS Estate & Erevie',
+    text: "I am in total shock. I hired two programmers at the same time, one from DevHunting, the other through regular recruitment. We simply decided to create our own in-house IT department. After two months, Norbert pushed the project forward tremendously. We did not extend the probationary contract for the other programmer. It's safe to say that Norbert does the work of two people. I highly recommend DevHunting!",
+    stars: 5,
+    image: avatar,
+    projectUrl: 'https://honestproperties.pl/',
+  },
   {
     // Client of Ania
     name: 'Piotr Tchórz',
@@ -101,12 +110,5 @@ export const reviews_en = [
     text: 'Jakub built an AI assistant for me that supports me in my daily work as a UX designer. The collaboration went very smoothly! I am impressed by how quickly I was able to receive a working solution from the moment I reported my need. I highly recommend DevHunting!',
     stars: 5,
     image: Karolina,
-  },
-  {
-    name: 'Barbara Lipińska',
-    role: 'Online boutique owner',
-    text: 'I needed a developer for a small e-commerce project. Through DevHunting, I found the right person in a few days. The process was simple and transparent.',
-    stars: 4,
-    image: profilePic2,
   },
 ]
