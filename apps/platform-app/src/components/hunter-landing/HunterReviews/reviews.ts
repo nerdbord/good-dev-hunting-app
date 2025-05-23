@@ -1,11 +1,9 @@
-import profilePic1 from '@/assets/images/ProfilePicture.png'
 import profilePic2 from '@/assets/images/ProfilePicture2.png'
-import profilePic3 from '@/assets/images/ProfilePicture3.png'
 import akg from '@/assets/images/reviews/akg.jpg'
-import barberbus from '@/assets/images/reviews/barberbus.webp'
 import avatar from '@/assets/images/reviews/avatar.png'
-import dora from '@/assets/images/reviews/logo_dora.png'
+import barberbus from '@/assets/images/reviews/barberbus.webp'
 import Karolina from '@/assets/images/reviews/karolina.jpeg'
+import dora from '@/assets/images/reviews/logo_dora.png'
 
 export const reviews_pl = [
   {
@@ -33,7 +31,6 @@ export const reviews_pl = [
     text: 'Współpracowaliśmy z Hanią przy tworzeniu raportów i kastomizacji CRM-u dla klienta z branży HVAC. Wyróżniała się dużym zaangażowaniem, świetną współpracą i umiejętnością znajdowania optymalnych rozwiązań. Jej profesjonalizm przełożył się na usprawnienie procesów i zadowolenie klienta. Zdecydowanie polecam!',
     stars: 5,
     image: avatar,
-
   },
   //klient  Krystiana
   {
@@ -92,7 +89,7 @@ export const reviews_en = [
   {
     name: 'Dora Pet Shop',
     role: 'Machowa 78b, 39-220 Pilzno',
-    text: 'As someone working in the e-commerce industry, I am well aware of both its advantages and challenges. One of the problems was the cumbersome and time-consuming management of auctions on the Allegro platform. Thanks to Krystian\'s professional help, we managed to create an application that uses AI to automate a significant part of the processes and reduces auction management time to an absolute minimum. If you need Allegro automation - go with Krystian. Highly recommended!',
+    text: "As someone working in the e-commerce industry, I am well aware of both its advantages and challenges. One of the problems was the cumbersome and time-consuming management of auctions on the Allegro platform. Thanks to Krystian's professional help, we managed to create an application that uses AI to automate a significant part of the processes and reduces auction management time to an absolute minimum. If you need Allegro automation - go with Krystian. Highly recommended!",
     stars: 5,
     image: dora,
     projectUrl: 'https://dora-zoo.pl/',

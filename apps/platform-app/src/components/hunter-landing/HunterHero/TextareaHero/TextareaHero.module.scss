@@ -34,7 +34,14 @@
   width: 493px;
   max-width: 700px;
   max-height: 121px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @include mobile {
     width: 100%;

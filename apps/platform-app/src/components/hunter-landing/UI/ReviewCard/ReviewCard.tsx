@@ -24,7 +24,9 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           <ReviewStar key={i} />
         ))}
       </ul>
-      <blockquote className={styles.text}>“{review.text || review.role}”</blockquote>
+      <blockquote className={styles.text}>
+        “{review.text || review.role}”
+      </blockquote>
       <div className={styles.profile}>
         <Image
           src={review.image}
@@ -39,8 +41,12 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           <p className={styles.role}>{review.role}</p>
           {review.projectUrl && (
             <p className={styles.projectLink}>
-              <Link href={review.projectUrl} target="_blank" rel="noopener noreferrer">
-              {review.projectUrl}
+              <Link
+                href={review.projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {review.projectUrl}
               </Link>
             </p>
           )}
