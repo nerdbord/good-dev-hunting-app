@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 const CreateProfilePage = async () => {
   const { user, userIsSpecialist, userHasProfile } = await getAuthorizedUser()
   if (!user || !userIsSpecialist) {
-    redirect(AppRoutes.profilesList)
+    redirect(AppRoutes.home)
   }
 
   if (userHasProfile) {

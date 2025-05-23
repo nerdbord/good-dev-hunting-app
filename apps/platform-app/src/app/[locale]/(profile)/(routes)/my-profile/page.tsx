@@ -13,7 +13,7 @@ export const revalidate = 0
 const MyProfilePage = async () => {
   const { user, userIsSpecialist } = await getAuthorizedUser()
   if (!user || !userIsSpecialist) {
-    redirect(AppRoutes.profilesList)
+    redirect(AppRoutes.home)
   }
 
   const profile = await findProfileByUserId(user.id)
