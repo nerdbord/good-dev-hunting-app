@@ -499,7 +499,8 @@
     "mockText_designSystem": "Potrzebuję stworzyć nowy system designu dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
     "mockText_QAtesting": "Potrzebuję stworzyć nowy system QA dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
     "mockText_APIintegration": "Potrzebuję stworzyć nowy system API dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
-    "describe_yourProject": "Opisz swój projekt"
+    "describe_yourProject": "Opisz swój projekt",
+    "pasteHint": "Możesz wkleić na przykład treść briefu lub dowolnego materiału opisującego projekt"
   },
   "HunterReviews": {
     "opinions": "Opinie zleceniodawców",

@@ -3,7 +3,7 @@
 import { createJob } from '@/backend/job/job.service'
 import { getTechnologies } from '@/backend/technology/technology.service'
 import { countries, findCountryByAnyName } from '@/data/countries'
-import groqService from '@/lib/groq.service'
+import openaiService, { type Message } from '@/lib/openai.service'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
 import { withSentry } from '@/utils/errHandling'
 import { createJobModel } from '../../_models/job.model'
@@ -92,9 +92,9 @@ export const createJobFromDescriptionAction = withSentry(
 
       // If the query is valid, proceed with job creation
       // Analyze the message to extract job details
-      const messages = [
+      const messages: Message[] = [
         {
-          role: 'system',
+          role: 'user',
           content: convertMessageToJob(
             mappedTechnologies,
             countries.map((c) => c.name_en),
@@ -107,10 +107,11 @@ export const createJobFromDescriptionAction = withSentry(
       ]
 
       // Generate the response with JSON format
-      const jsonResponse = await groqService.generateResponse(messages, {
-        json: true,
+      const jsonResponse = await openaiService.generateResponse(messages, {
+        response_format: { type: 'json_object' },
         temperature: 0,
-        maxTokens: 1000,
+        model: 'gpt-4o',
+        max_tokens: 1000,
       })
 
       // Parse the JSON response

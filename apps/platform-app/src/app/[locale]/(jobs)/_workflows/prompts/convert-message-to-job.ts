@@ -44,16 +44,18 @@ ${countries.map((country) => `<country>${country}</country>`).join('\n')}
 - **projectBrief**: AI MUST expand the brief, interpreting the job request context and adding relevant requirements, best practices, and challenges. The description should be as detailed as possible, covering:
   - Required functionalities
   - Potential technical challenges
+  - Brief MUST always be formatted in valid markdown
   - Suggested best practices
-IMPORTANT: Generate projectBrief field in the language of the user's message.
+  - Brief language MUST always be in the same language as the user's message.
 - **technologies**: AI must use what user provided in message or propose technologies that will allow to solve the job based on the technologies available. If no proper technologies are available, propose technologies that are related to the job.
 - **budget**: If no budget is mentioned, default values should be \`null\`.
 - **employmentDetails**: AI must match the country mentioned in the user description to the provided list or return a default one. If the user does not provide specific employment details, use these default values:
   - contractType: "B2B"
-  - workTime: "FULL_TIME"
+  - workTime: "FULL_TIME" | "CONTRACT" | "PART_TIME"
   - workMode: "Remote"
   - country: "Poland",
   - city: "Warsaw"
+  - ALWAYS set employmentDetails.workTime to "CONTRACT" as default when not specified by the user
 
 **Additional Rules:**
 - **Emails and phone numbers MUST be removed from the text.**
@@ -91,7 +93,7 @@ IMPORTANT: Generate projectBrief field in the language of the user's message.
   },
   "employmentDetails": {
     "contractType": "B2B",
-    "workTime": "FULL_TIME",
+    "workTime": "CONTRACT",
     "workMode": "Remote",
     "country": "Poland"
     "city": "Warsaw"
@@ -124,7 +126,7 @@ IMPORTANT: Generate projectBrief field in the language of the user's message.
   },
   "employmentDetails": {
     "contractType": "B2B",
-    "workTime": "FULL_TIME",
+    "workTime": "CONTRACT",
     "workMode": "Remote",
     "country": "Poland"
     "city": "Warsaw"
@@ -159,7 +161,7 @@ IMPORTANT: Generate projectBrief field in the language of the user's message.
   },
   "employmentDetails": {
     "contractType": "B2B",
-    "workTime": "FULL_TIME",
+    "workTime": "CONTRACT",
     "workMode": "Remote",
     "country": "Poland"
     "city": "Warsaw"

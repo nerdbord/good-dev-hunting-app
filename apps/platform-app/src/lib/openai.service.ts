@@ -2,7 +2,7 @@ import { OpenAI } from 'openai'
 
 type MessageRole = 'system' | 'user' | 'assistant'
 
-interface Message {
+export interface Message {
   role: MessageRole
   content: string
 }

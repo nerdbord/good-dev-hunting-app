@@ -500,7 +500,8 @@
     "mockText_designSystem": "I need to create a new design system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
     "mockText_QAtesting": "I need to create a new QA system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
     "mockText_APIintegration": "I need to create a new API system for my company. I would like it to be:\nFlexible and scalable\nInclude automatic data processing and analysis features\nAllow integration with other systems",
-    "describe_yourProject": "Describe your project"
+    "describe_yourProject": "Describe your project",
+    "pasteHint": "You can paste for example content from a brief or any material describing your project"
   },
   "HunterReviews": {
     "opinions": "Client opinions",

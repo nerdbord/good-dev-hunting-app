@@ -115,3 +115,23 @@
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+.hintText {
+  width: 493px;
+  max-width: 700px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(18, 18, 18, 0.6);
+  display: flex;
+  align-items: center;
+  line-height: 16px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.hintIcon {
+  margin-right: 6px;
+  font-size: 14px;
+}
