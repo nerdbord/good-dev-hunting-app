@@ -1,4 +1,4 @@
-import { authorizeUser } from '@/app/[locale]/(auth)/auth.helpers'
+import { getAuthorizedUser } from '@/app/[locale]/(auth)/auth.helpers'
 import { getJobApplications } from '@/app/[locale]/(jobs)/_actions/queries/getJobApplications'
 import { findJobById } from '@/app/[locale]/(jobs)/_actions/queries/getJobById'
 import { findMyJobs } from '@/app/[locale]/(jobs)/_actions/queries/getMyJobs'
@@ -38,8 +38,8 @@ export default async function JobApplicationsPage({
 }) {
   const jobId = params.id
 
-  const user = await authorizeUser()
-  if (!user) {
+  const { user } = await getAuthorizedUser()
+  if (!user?.id) {
     redirect(AppRoutes.signIn)
   }
 

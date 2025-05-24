@@ -203,15 +203,18 @@
   },
   "Auth": {
     "loginToPublish": "Zaloguj się",
-    "loginToPublishDesc": "Na Twój adres email zostanie wysłany link, który po kliknięciu automatycznie Cię zaloguje.",
+    "loginToPublishDesc": "Link zostanie wysłany na Twój adres e-mail, który automatycznie zaloguje Cię po kliknięciu.",
     "loginLabelEmail": "Email",
-    "loginLabelButton": "Wyślij link do logowania",
+    "loginLabelButton": "Wyślij link logowania",
     "signInWithGoogle": "Zaloguj przez Google",
     "signInWithLinkedin": "Zaloguj przez LinkedIn",
     "haventAccount": "Nie masz konta?",
     "signUp": "Załóż je w 10 sekund",
     "cancel": "Anuluj",
-    "or": "lub"
+    "or": "lub",
+    "emailSent": "Email wysłany",
+    "emailSentDesc": "Wysłaliśmy link logowania na adres:",
+    "emailSentInstructions": "Sprawdź swoją skrzynkę i kliknij link, aby się zalogować. Możesz zamknąć to okno."
   },
   "AddJobVerificationModal": {
     "title": "Trwa weryfikacja",
@@ -499,7 +502,8 @@
     "mockText_designSystem": "Potrzebuję stworzyć nowy system designu dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
     "mockText_QAtesting": "Potrzebuję stworzyć nowy system QA dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
     "mockText_APIintegration": "Potrzebuję stworzyć nowy system API dla mojej firmy. Chciałbym, aby był on:\nElastyczny i skalowalny\nZawierał funkcje automatycznego przetwarzania i analizy danych\nUmożliwiał integrację z innymi systemami",
-    "describe_yourProject": "Opisz swój projekt"
+    "describe_yourProject": "Opisz swój projekt",
+    "pasteHint": "Możesz wkleić na przykład treść briefu lub dowolnego materiału opisującego projekt"
   },
   "HunterReviews": {
     "opinions": "Opinie zleceniodawców",

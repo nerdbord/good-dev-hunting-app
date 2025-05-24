@@ -74,16 +74,8 @@ export const TextareaHero = ({
       return
     }
 
-    let actualText = newValue
-    if (!selectedTag && newValue.startsWith(staticPrefix)) {
-      actualText = newValue.slice(staticPrefix.length)
-      setText(actualText)
-    } else {
-      setText(newValue)
-      actualText = newValue
-      setShowPlaceholder(false)
-    }
-
+    setText(newValue)
+    setShowPlaceholder(false)
     adjustHeight()
   }
 
@@ -94,29 +86,37 @@ export const TextareaHero = ({
   }, [selectedTag, adjustHeight])
 
   return (
-    <div className={styles.textareaWrapper}>
-      <label htmlFor="searchTextarea" className={styles.visuallyHidden}>
-        {t('describe_yourProject')}
-      </label>
-      {showPlaceholder && !text && (
-        <div className={styles.overlayText} aria-hidden="true">
-          {staticPrefix}
-          <span
-            className={`${styles.dynamicText} ${
-              isAnimating ? styles.animating : ''
-            }`}
-          >
-            {currentTag}
-          </span>
-        </div>
-      )}
-      <textarea
-        id="searchTextarea"
-        ref={textareaRef}
-        className={styles.searchTextarea}
-        value={selectedTag ? text : text ? `${staticPrefix}${text}` : ''}
-        onChange={handleChange}
-      />
+    <div>
+      <div className={styles.textareaWrapper}>
+        <label htmlFor="searchTextarea" className={styles.visuallyHidden}>
+          {t('describe_yourProject')}
+        </label>
+        {showPlaceholder && !text ? (
+          <div className={styles.overlayText} aria-hidden="true">
+            {staticPrefix}
+            <span
+              className={`${styles.dynamicText} ${
+                isAnimating ? styles.animating : ''
+              }`}
+            >
+              {currentTag}
+            </span>
+          </div>
+        ) : null}
+        <textarea
+          id="searchTextarea"
+          ref={textareaRef}
+          className={styles.searchTextarea}
+          placeholder={showPlaceholder ? '' : staticPrefix}
+          value={text}
+          onChange={handleChange}
+        />
+      </div>
+      <div className={styles.hintText}>
+        <span className={styles.hintIcon}>💡</span>
+        {t('pasteHint') ||
+          'Wklej treść briefu, ogłoszenia o pracę lub dowolnego materiału opisującego projekt'}
+      </div>
     </div>
   )
 }
