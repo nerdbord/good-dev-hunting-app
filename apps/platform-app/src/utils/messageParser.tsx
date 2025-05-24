@@ -2,6 +2,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { Button } from '@gdh/ui-system'
 import { useTranslations } from 'next-intl'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 
 /**
  * MessageElement interface defines the structure for special message elements
@@ -94,7 +95,7 @@ export function formatMessageElement(
 }
 
 /**
- * Parses a message content and renders special elements
+ * Parses a message content and renders special elements and markdown
  * @param content - Message content to parse
  * @returns React node with parsed content
  */
@@ -105,6 +106,7 @@ export function parseMessageContent(content: string): React.ReactNode {
   const remainingContent = content
   const segments: React.ReactNode[] = []
   let segmentIndex = 0
+  let hasSpecialElements = false
 
   // Check for each element in our registry
   for (const element of messageElements) {
@@ -114,19 +116,20 @@ export function parseMessageContent(content: string): React.ReactNode {
     ]
 
     if (matches.length > 0) {
+      hasSpecialElements = true
       // Split content at each match position
       let lastIndex = 0
 
       for (const match of matches) {
         if (!match.index) continue
 
-        // Add text before the current match
+        // Add text before the current match as markdown
         if (match.index > lastIndex) {
           const beforeText = remainingContent.substring(lastIndex, match.index)
           if (beforeText) {
             segments.push(
               <React.Fragment key={`segment-${segmentIndex++}`}>
-                {beforeText}
+                <ReactMarkdown>{beforeText}</ReactMarkdown>
               </React.Fragment>,
             )
           }
@@ -146,11 +149,11 @@ export function parseMessageContent(content: string): React.ReactNode {
         lastIndex = match.index + match[0].length
       }
 
-      // Add any remaining text after the last match
+      // Add any remaining text after the last match as markdown
       if (lastIndex < remainingContent.length) {
         segments.push(
           <React.Fragment key={`segment-${segmentIndex++}`}>
-            {remainingContent.substring(lastIndex)}
+            <ReactMarkdown>{remainingContent.substring(lastIndex)}</ReactMarkdown>
           </React.Fragment>,
         )
       }
@@ -162,7 +165,11 @@ export function parseMessageContent(content: string): React.ReactNode {
     }
   }
 
-  // If no special elements were found, return the original content
+  // If no special elements were found, render the entire content as markdown
+  if (!hasSpecialElements) {
+    return <ReactMarkdown>{remainingContent}</ReactMarkdown>
+  }
+  
   return remainingContent
 }
 

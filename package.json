@@ -28,6 +28,7 @@
     "lint-staged": "^15.1.0"
   },
   "dependencies": {
+    "react-markdown": "^10.1.0",
     "react-slick": "^0.30.3",
     "uninstall": "^0.0.0"
   },

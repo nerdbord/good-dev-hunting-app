@@ -10,12 +10,16 @@ import { Button } from '@gdh/ui-system'
 import { Formik } from 'formik'
 import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import * as Yup from 'yup'
 import { getPendingPublishJob } from '../../_utils/job-storage.client'
+import { EmailSentConfirmation } from './EmailSentConfirmation'
 import styles from './LoginModal.module.scss'
 
 export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const t = useTranslations(I18nNamespaces.Auth)
+  const [emailSent, setEmailSent] = useState(false)
+  const [submittedEmail, setSubmittedEmail] = useState('')
 
   const pendingJobId = getPendingPublishJob()
   const finalDestinationUrl = pendingJobId
@@ -46,13 +50,25 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   })
 
   const handleSubmit = (values: LoginFormValues) => {
+    // Store the email for the confirmation screen
+    setSubmittedEmail(values.email)
+    
+    // Call signIn but don't redirect (set redirect: false)
     signIn('email', {
       email: values.email,
       callbackUrl: intermediateCallbackUrl,
+      redirect: false,
     })
-    closeModal()
+    
+    // Show confirmation instead of closing modal
+    setEmailSent(true)
   }
 
+  // If email has been sent, show confirmation screen
+  if (emailSent) {
+    return <EmailSentConfirmation email={submittedEmail} />
+  }
+  
   return (
     <div
       className={styles.container}

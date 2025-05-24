@@ -33,6 +33,25 @@
   font-weight: 400;
   line-height: 24px;
   opacity: 0.8;
+  text-align: center;
+}
+
+.emailConfirmationDescription {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 8px;
+  color: var(--hunter-landing-text-color2);
+}
+
+.emailHighlight {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 16px 0;
+  padding: 8px 16px;
+  margin: 0 auto;
+  background-color: rgba(125, 84, 241, 0.1);
+  border-radius: 4px;
+  color: var(--hunter-landing-text-color4);
 }
 
 .form {

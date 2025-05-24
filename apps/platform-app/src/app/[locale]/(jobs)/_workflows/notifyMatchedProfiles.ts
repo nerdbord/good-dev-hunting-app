@@ -1,6 +1,7 @@
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { sendJobProposalEmail } from '@/backend/mailing/mailing.service'
 import { getUserLanguage } from '@/backend/user/user.service'
+import { prisma } from '@/lib/prismaClient'
 import { type JobModel } from '../_models/job.model'
 import { type MatchResult } from './matchJobWithProfiles'
 
@@ -14,8 +15,26 @@ export async function notifyMatchedProfiles(
   try {
     let sentCount = 0
 
+    // Always check for existing job candidates to avoid re-notifying them
+    const existingCandidates = await prisma.jobCandidate.findMany({
+      where: { jobId: job.id },
+      select: { profileId: true }
+    })
+    
+    const existingCandidateIds = new Set(
+      existingCandidates.map(candidate => candidate.profileId)
+    )
+    
+    console.log(`[notifyMatchedProfiles] Found ${existingCandidateIds.size} existing candidates for job ${job.id} that won't be re-notified.`)
+
     // Generate and send emails to each matched profile
     for (const { profileId, matchReason } of matchingResults) {
+      // Skip profiles that already have a JobCandidate record for this job
+      if (existingCandidateIds.has(profileId)) {
+        console.log(`[notifyMatchedProfiles] Skipping notification for profile ${profileId} - already matched with job ${job.id} in previous publication`)
+        continue
+      }
+
       const profile = await findProfileById(profileId)
       if (!profile) continue
       const userLanguage = await getUserLanguage(profile.userId)
@@ -47,6 +66,8 @@ export async function notifyMatchedProfiles(
           profile,
           locale: userLanguage,
         })
+
+        // No need to mark as notified - the existence of the JobCandidate record is enough
 
         sentCount++
         console.log(`Email sent to ${profile.email} for job ${job.id}`)
