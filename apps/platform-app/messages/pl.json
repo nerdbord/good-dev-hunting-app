@@ -580,5 +580,19 @@
     "textareaLabel": "Treść zlecenia",
     "cancelBtn": "Cofnij",
     "nextBtn": "Dalej"
+  },
+  "TiptapToolbar": {
+    "bold": "Pogrubienie",
+    "italic": "Kursywa",
+    "underline": "Podkreślenie",
+    "link": "Dodaj/Edytuj Link",
+    "enterLink": "Wprowadź URL linku",
+    "blockType": "Typ bloku",
+    "heading1": "Nagłówek 1",
+    "heading2": "Nagłówek 2",
+    "heading3": "Nagłówek 3",
+    "paragraph": "Paragraf",
+    "bulletList": "Lista punktowa",
+    "orderedList": "Lista numerowana"
   }
 }

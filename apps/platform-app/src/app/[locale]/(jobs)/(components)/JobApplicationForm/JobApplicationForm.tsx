@@ -4,6 +4,7 @@ import { CVuploaderForm } from '@/app/[locale]/(profile)/(components)/CVuploader
 import { findProfileById } from '@/app/[locale]/(profile)/_actions'
 import { updateProfile } from '@/app/[locale]/(profile)/_actions/mutations/updateProfile'
 import type { ProfileModel } from '@/app/[locale]/(profile)/_models/profile.model'
+import { MarkdownTextArea } from '@/components/MarkdownTextArea/MarkdownTextArea'
 import { useUploadContext } from '@/contexts/UploadContext'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
@@ -15,7 +16,6 @@ import { redirect, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { createJobApplication } from '../../_actions/mutations/createJobApplication'
-import { ProjectBriefTextArea } from '../ProjectBriefTextArea/ProjectBriefTextArea'
 import styles from './JobApplicationForm.module.scss'
 
 interface JobApplicationFormValues {
@@ -157,22 +157,20 @@ const JobApplicationForm = ({ jobId }: JobApplicationFormProps) => {
           <Form>
             <div className={styles.formBox}>
               <label htmlFor="message">{t('applicationMsgLabel')}</label>
-              <div className={styles.editorWrapper}>
-                <Field
-                  as={ProjectBriefTextArea}
-                  name="message"
-                  placeholder={t('applicationMsgPlaceholder')}
-                  disabled={formSubmitting || isSubmitting}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                    setFieldTouched('message', true, false)
-                    handleChange(e)
-                  }}
-                  onBlur={handleBlur}
-                />
-                {errors.message && touched.message && (
-                  <div className={styles.fieldError}>{errors.message}</div>
-                )}
-              </div>
+              <Field
+                as={MarkdownTextArea}
+                name="message"
+                placeholder={t('applicationMsgPlaceholder')}
+                disabled={formSubmitting || isSubmitting}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  setFieldTouched('message', true, false)
+                  handleChange(e)
+                }}
+                onBlur={handleBlur}
+              />
+              {errors.message && touched.message && (
+                <div className={styles.fieldError}>{errors.message}</div>
+              )}
             </div>
 
             <div className={styles.formBox}>
