@@ -74,26 +74,6 @@
   z-index: 1000;
 }
 
-.lettersCountParent {
-  position: relative;
-  min-height: 414px;
-  display: grid;
-  grid-template-rows: minmax(auto, 1fr);
-  @include mobile {
-    min-height: 414px;
-  }
-}
-
-.lettersCount {
-  position: absolute;
-  right: 0;
-  bottom: -20px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  color: #89939e;
-}
-
 .errorMsg p {
   color: red;
 }
