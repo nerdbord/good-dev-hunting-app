@@ -236,7 +236,9 @@
     "closeBtn": "Close",
     "verificationFailedTitle": "Verification Failed",
     "verificationFailedDescription": "Your job did not meet our quality standards. Please review and improve your job posting.",
-    "editJobBtn": "Edit Job"
+    "editJobBtn": "Edit Job",
+    "rejectionTitle": "Job Posting Rejected",
+    "rejectionReasonLabel": "Reason for rejection:"
   },
   "Jobs": {
     "postJobTitle": "Post a New Job",
