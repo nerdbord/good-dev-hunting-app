@@ -2,6 +2,7 @@
 
 import { type CreateJobFormValues } from '@/app/[locale]/(jobs)/_utils/types'
 import InputFormError from '@/components/InputFormError/InputFormError'
+import { MarkdownTextArea } from '@/components/MarkdownTextArea/MarkdownTextArea'
 import { TechStackInput } from '@/components/TechStackInput/TechStackInput'
 import TextInput from '@/components/TextInput/TextInput'
 import { I18nNamespaces } from '@/i18n/request'
@@ -9,7 +10,6 @@ import { Tooltip, type DropdownOption } from '@gdh/ui-system'
 import { ImportantIcon } from '@gdh/ui-system/icons'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
-import { ProjectBriefTextArea } from '../../../ProjectBriefTextArea/ProjectBriefTextArea'
 import { Card } from '../Card/Card'
 import styles from './BasicInfo.module.scss'
 
@@ -82,21 +82,14 @@ export const BasicInfo = () => {
                 <ImportantIcon />
               </Tooltip>
             </label>
-            <div className={styles.lettersCountParent}>
-              <ProjectBriefTextArea
-                onBlur={handleBlur}
-                placeholder={ttt('briefPlaceholder')}
-                value={values[BasicInfoFormKeys.BRIEF]}
-                onChange={handleChange}
-                name={BasicInfoFormKeys.BRIEF}
-                maxLength={1500}
-                dataTestId={BasicInfoFormKeys.BRIEF}
-              />
-              <div className={styles.lettersCount}>
-                {values[BasicInfoFormKeys.BRIEF].length} / 1500{' '}
-                {t('characters')}
-              </div>
-            </div>
+            <MarkdownTextArea
+              onBlur={handleBlur}
+              placeholder={ttt('briefPlaceholder')}
+              value={values[BasicInfoFormKeys.BRIEF]}
+              name={BasicInfoFormKeys.BRIEF}
+              maxLength={1500}
+              dataTestId={BasicInfoFormKeys.BRIEF}
+            />
           </InputFormError>
         </div>
         <InputFormError

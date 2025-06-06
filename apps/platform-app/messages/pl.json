@@ -236,7 +236,9 @@
     "closeBtn": "Zamknij",
     "verificationFailedTitle": "Weryfikacja nie powiodła się",
     "verificationFailedDescription": "Twoje zlecenie nie spełnia standardów jakości. Prosimy o przejrzenie i poprawienie oferty pracy.",
-    "editJobBtn": "Edytuj zlecenie"
+    "editJobBtn": "Edytuj zlecenie",
+    "rejectionTitle": "Ogłoszenie odrzucone",
+    "rejectionReasonLabel": "Powód odrzucenia:"
   },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",
@@ -580,5 +582,28 @@
     "textareaLabel": "Treść zlecenia",
     "cancelBtn": "Cofnij",
     "nextBtn": "Dalej"
+  },
+  "TiptapToolbar": {
+    "bold": "Pogrubienie",
+    "italic": "Kursywa",
+    "underline": "Podkreślenie",
+    "link": "Dodaj/Edytuj Link",
+    "enterLink": "Wprowadź URL linku",
+    "blockType": "Typ bloku",
+    "heading1": "Nagłówek 1",
+    "heading2": "Nagłówek 2",
+    "heading3": "Nagłówek 3",
+    "paragraph": "Paragraf",
+    "bulletList": "Lista punktowa",
+    "orderedList": "Lista numerowana"
+  },
+  "LeaveSiteWarningModal": {
+    "title": "Opuszczanie strony",
+    "messagePart1": "Za chwilę opuścisz naszą stronę i przejdziesz pod adres:",
+    "destinationUrlStrong": "<strong>{url}</strong>",
+    "unknownDestination": "<strong>zewnętrzną stronę</strong>",
+    "confirmationQuestion": "Czy na pewno chcesz kontynuować?",
+    "cancelButton": "Anuluj",
+    "proceedButton": "Kontynuuj"
   }
 }

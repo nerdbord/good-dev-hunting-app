@@ -121,6 +121,7 @@ export default function JobDetails({ job, params }: JobDetailsProps) {
             isVerificationFailure={Boolean(
               result.verificationResult && !result.verificationResult.isValid,
             )}
+            rejectionReason={result.verificationResult?.reasons}
           />,
         )
       }
