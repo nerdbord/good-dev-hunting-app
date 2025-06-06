@@ -24,13 +24,22 @@ const TiptapToolbar: React.FC<TiptapToolbarProps> = ({ editor }) => {
 
   const addLink = () => {
     const previousUrl = editor.getAttributes('link').href
-    const url = window.prompt(t('enterLink'), previousUrl || 'https://')
+    let url = window.prompt(t('enterLink'), previousUrl || '')
 
     if (url === null) return
+    url = url.trim()
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run()
       return
     }
+
+    const protocolPattern = /^(https?:\/\/|mailto:|tel:|[a-zA-Z]+:)/i
+    if (!protocolPattern.test(url)) {
+      if (!url.startsWith('#') && !url.startsWith('/')) {
+        url = 'https://' + url
+      }
+    }
+
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
   }
 

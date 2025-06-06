@@ -18,6 +18,7 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   dataTestId?: string;
+  ref?: React.ForwardedRef<HTMLButtonElement>;
 }
 
 export const Button = ({
@@ -28,6 +29,7 @@ export const Button = ({
   loading,
   dataTestId,
   type = "button",
+  ref,
 }: PropsWithChildren<ButtonProps>) => {
   const cx = classNames.bind(styles);
   const buttonClasses = cx({
@@ -42,6 +44,8 @@ export const Button = ({
       disabled={disabled || loading}
       onClick={onClick}
       type={type}
+      ref={ref}
+      aria-busy={loading}
     >
       {loading ? "Loading..." : children}
     </button>

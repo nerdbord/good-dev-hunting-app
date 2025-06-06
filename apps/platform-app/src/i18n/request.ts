@@ -59,4 +59,5 @@ export enum I18nNamespaces {
   HunterHowItWorks = 'HunterHowItWorks',
   Metadata = 'Metadata',
   TiptapToolbar = 'TiptapToolbar',
+  LeaveSiteWarningModal = 'LeaveSiteWarningModal',
 }

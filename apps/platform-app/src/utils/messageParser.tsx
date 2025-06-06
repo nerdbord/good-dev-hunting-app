@@ -153,7 +153,9 @@ export function parseMessageContent(content: string): React.ReactNode {
       if (lastIndex < remainingContent.length) {
         segments.push(
           <React.Fragment key={`segment-${segmentIndex++}`}>
-            <ReactMarkdown>{remainingContent.substring(lastIndex)}</ReactMarkdown>
+            <ReactMarkdown>
+              {remainingContent.substring(lastIndex)}
+            </ReactMarkdown>
           </React.Fragment>,
         )
       }
@@ -169,7 +171,7 @@ export function parseMessageContent(content: string): React.ReactNode {
   if (!hasSpecialElements) {
     return <ReactMarkdown>{remainingContent}</ReactMarkdown>
   }
-  
+
   return remainingContent
 }
 

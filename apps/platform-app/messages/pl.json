@@ -594,5 +594,14 @@
     "paragraph": "Paragraf",
     "bulletList": "Lista punktowa",
     "orderedList": "Lista numerowana"
+  },
+  "LeaveSiteWarningModal": {
+    "title": "Opuszczanie strony",
+    "messagePart1": "Za chwilę opuścisz naszą stronę i przejdziesz pod adres:",
+    "destinationUrlStrong": "<strong>{url}</strong>",
+    "unknownDestination": "<strong>zewnętrzną stronę</strong>",
+    "confirmationQuestion": "Czy na pewno chcesz kontynuować?",
+    "cancelButton": "Anuluj",
+    "proceedButton": "Kontynuuj"
   }
 }

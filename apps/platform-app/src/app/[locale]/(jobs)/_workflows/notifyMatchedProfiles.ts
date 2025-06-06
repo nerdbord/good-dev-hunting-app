@@ -18,20 +18,24 @@ export async function notifyMatchedProfiles(
     // Always check for existing job candidates to avoid re-notifying them
     const existingCandidates = await prisma.jobCandidate.findMany({
       where: { jobId: job.id },
-      select: { profileId: true }
+      select: { profileId: true },
     })
-    
+
     const existingCandidateIds = new Set(
-      existingCandidates.map(candidate => candidate.profileId)
+      existingCandidates.map((candidate) => candidate.profileId),
     )
-    
-    console.log(`[notifyMatchedProfiles] Found ${existingCandidateIds.size} existing candidates for job ${job.id} that won't be re-notified.`)
+
+    console.log(
+      `[notifyMatchedProfiles] Found ${existingCandidateIds.size} existing candidates for job ${job.id} that won't be re-notified.`,
+    )
 
     // Generate and send emails to each matched profile
     for (const { profileId, matchReason } of matchingResults) {
       // Skip profiles that already have a JobCandidate record for this job
       if (existingCandidateIds.has(profileId)) {
-        console.log(`[notifyMatchedProfiles] Skipping notification for profile ${profileId} - already matched with job ${job.id} in previous publication`)
+        console.log(
+          `[notifyMatchedProfiles] Skipping notification for profile ${profileId} - already matched with job ${job.id} in previous publication`,
+        )
         continue
       }
 
