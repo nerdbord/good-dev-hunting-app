@@ -236,7 +236,9 @@
     "closeBtn": "Zamknij",
     "verificationFailedTitle": "Weryfikacja nie powiodła się",
     "verificationFailedDescription": "Twoje zlecenie nie spełnia standardów jakości. Prosimy o przejrzenie i poprawienie oferty pracy.",
-    "editJobBtn": "Edytuj zlecenie"
+    "editJobBtn": "Edytuj zlecenie",
+    "rejectionTitle": "Ogłoszenie odrzucone",
+    "rejectionReasonLabel": "Powód odrzucenia:"
   },
   "Jobs": {
     "postJobTitle": "Dodaj nowe zlecenie",
