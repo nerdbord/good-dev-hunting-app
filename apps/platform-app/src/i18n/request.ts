@@ -58,4 +58,6 @@ export enum I18nNamespaces {
   AddJobErrorModal = 'AddJobErrorModal',
   HunterHowItWorks = 'HunterHowItWorks',
   Metadata = 'Metadata',
+  TiptapToolbar = 'TiptapToolbar',
+  LeaveSiteWarningModal = 'LeaveSiteWarningModal',
 }
