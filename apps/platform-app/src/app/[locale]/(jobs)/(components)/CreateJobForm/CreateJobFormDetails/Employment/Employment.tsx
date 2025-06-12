@@ -3,7 +3,7 @@ import { I18nNamespaces } from '@/i18n/request'
 import { CheckboxInput } from '@gdh/ui-system'
 import { EmploymentType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import {
   EmploymentMode,
@@ -24,34 +24,18 @@ export enum EmploymentFormKeys {
 export const Employment = () => {
   const t = useTranslations(I18nNamespaces.WorkInformation)
   const tt = useTranslations(I18nNamespaces.Jobs)
-  const [initialized, setInitialized] = useState(false)
 
   const { values, setFieldValue, touched, errors } =
     useFormikContext<CreateJobFormValues>()
 
-  // Pass the translation function to the mapping function
   const contractTypeOptions = mappedJobContractType(tt)
 
-  // Initialize the form fields if they're empty on first render
   useEffect(() => {
-    if (!initialized) {
-      // Ensure at least one employment type is selected
-      if (!values.employmentType || values.employmentType.length === 0) {
-        setFieldValue(EmploymentFormKeys.EMPLOYMENT_TYPE, [
-          EmploymentType.FULL_TIME,
-        ])
-      }
-
-      // Ensure at least one employment mode is selected
-      if (!values.employmentMode || values.employmentMode.length === 0) {
-        setFieldValue(EmploymentFormKeys.EMPLOYMENT_MODE, [
-          EmploymentMode.REMOTE,
-        ])
-      }
-
-      setInitialized(true)
-    }
-  }, [initialized, setFieldValue, values])
+    const isRemoteOnly =
+      values.employmentMode.length === 1 &&
+      values.employmentMode[0] === EmploymentMode.REMOTE
+    setFieldValue('remoteOnly', isRemoteOnly)
+  }, [values.employmentMode, setFieldValue])
 
   const handleEmploymentType = (option: EmploymentType): void => {
     let newFilters: string[]

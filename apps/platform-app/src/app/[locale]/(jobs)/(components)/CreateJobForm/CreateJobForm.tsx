@@ -139,12 +139,22 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     budgetType: Yup.string().required(
       t('budgetTypeRequired', { defaultValue: 'Budget type is required' }),
     ),
-    country: Yup.string().required(
-      t('countryRequired', { defaultValue: 'Country is required' }),
-    ),
-    city: Yup.string().required(
-      t('cityRequired', { defaultValue: 'City is required' }),
-    ),
+    country: Yup.string().when('remoteOnly', {
+      is: false,
+      then: () =>
+        Yup.string().required(
+          t('countryRequired', { defaultValue: 'Country is required' }),
+        ),
+      otherwise: () => Yup.string().notRequired(),
+    }),
+    city: Yup.string().when('remoteOnly', {
+      is: false,
+      then: () =>
+        Yup.string().required(
+          t('cityRequired', { defaultValue: 'City is required' }),
+        ),
+      otherwise: () => Yup.string().notRequired(),
+    }),
     terms: Yup.boolean().oneOf(
       [true],
       t('termsRequired', { defaultValue: 'You must accept the terms' }),
@@ -160,13 +170,11 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
     try {
       setIsSubmitting(true)
 
-      // Set default currency value if budgetType is requestQuote
       const currency =
         values.budgetType === BudgetType.REQUEST_QUOTE
-          ? Currency.PLN // Always use PLN for REQUEST_QUOTE
-          : values.currency || Currency.PLN // Fallback to PLN if undefined
+          ? Currency.PLN
+          : values.currency || Currency.PLN
 
-      // Transform form values to job data
       const jobData = {
         jobName: values.jobName,
         projectBrief: values.projectBrief,
@@ -177,7 +185,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
           })),
         },
         budgetType: values.budgetType,
-        currency: currency, // Use the determined currency
+        currency: currency,
         minBudgetForProjectRealisation:
           values.budgetType === BudgetType.REQUEST_QUOTE
             ? null
@@ -189,15 +197,14 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         contractType: values.contractType.value,
         employmentTypes: values.employmentType,
         employmentModes: values.employmentMode,
-        country: values.country,
-        city: values.city,
+        country: values.remoteOnly ? null : values.country,
+        city: values.remoteOnly ? null : values.city,
         remoteOnly: values.remoteOnly,
         terms: values.terms,
       }
 
       await updateJobAction(jobId as string, jobData)
 
-      // Navigate to job preview page
       router.push(`${AppRoutes.jobs}/${jobId}`)
     } catch (error) {
       console.error('Error updating job:', error)
@@ -231,13 +238,13 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         handleUpdateJob(values)
       }}
     >
-      {({ isValid, handleSubmit }) => (
+      {({ isValid, handleSubmit, values }) => (
         <form className={styles.wrapper} onSubmit={handleSubmit}>
           <div className={styles.formBox}>
             <BasicInfo />
             <Budget />
             <Employment />
-            <Location />
+            {!values.remoteOnly && <Location />}
           </div>
           <ProgressBar currentStep={2} maxSteps={3}>
             <Button
