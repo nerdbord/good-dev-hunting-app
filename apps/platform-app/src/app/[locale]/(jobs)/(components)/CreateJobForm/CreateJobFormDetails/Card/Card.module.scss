@@ -1,12 +1,14 @@
+@import '@/styles/mixins.scss';
+
 .container {
-  background: #04080d;
+  background: var(--bg-color2);
   padding-top: 50px;
   padding-bottom: 50px;
-
   padding-left: 80px;
   padding-right: 10%;
   display: flex;
   width: 100%;
+  @include theme-transition;
   @include mobile {
     max-width: 100%;
     flex-direction: column;

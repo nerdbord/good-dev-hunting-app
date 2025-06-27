@@ -1,16 +1,15 @@
+@import '@/styles/mixins.scss';
+
 .markdownReader {
   color: var(--text-color);
   font-size: 16px;
   line-height: 28px;
   padding: 40px;
-  background-color: #0f1217;
+  background-color: var(--bg-color3);
+  @include theme-transition;
   @include mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;
-  }
-
-  :global(.light) & {
-    background-color: #fafaff;
   }
 
   h1,
@@ -58,7 +57,8 @@
   blockquote {
     margin: 1.5em 0;
     padding: 0 1.5em;
-    border-left: 2px solid #ddd;
+    border-left: 2px solid var(--border-color);
+    @include theme-transition;
   }
 
   code {
@@ -74,9 +74,10 @@
   }
 
   a {
-    color: #a687ff;
+    color: var(--link-color);
+    @include theme-transition;
     &:hover {
-      color: #a687ff;
+      color: var(--link-hover-color, var(--link-color));
     }
   }
 }
