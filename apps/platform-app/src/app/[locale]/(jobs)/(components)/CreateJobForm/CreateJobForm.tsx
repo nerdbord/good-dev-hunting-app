@@ -175,7 +175,7 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
           ? Currency.PLN
           : values.currency || Currency.PLN
 
-      const jobData = {
+      const jobData: Record<string, any> = {
         jobName: values.jobName,
         projectBrief: values.projectBrief,
         techStack: {
@@ -197,10 +197,13 @@ export const CreateJobForm = ({ initialValues }: CreateJobFormProps) => {
         contractType: values.contractType.value,
         employmentTypes: values.employmentType,
         employmentModes: values.employmentMode,
-        country: values.remoteOnly ? null : values.country,
-        city: values.remoteOnly ? null : values.city,
         remoteOnly: values.remoteOnly,
         terms: values.terms,
+      }
+
+      if (!values.remoteOnly) {
+        jobData.country = values.country
+        jobData.city = values.city
       }
 
       await updateJobAction(jobId as string, jobData)
