@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-   previewFeatures = ["explicitNulls"]
 }
 
 datasource db {
@@ -164,8 +163,8 @@ model Job {
   contractType                   String
   employmentTypes                String[]
   employmentModes                String[]
-  country                        String?
-  city                           String?
+  country                        String
+  city                           String
   remoteOnly                     Boolean         @default(false)
   state                          PublishingState @default(DRAFT)
   createdById                    String?
