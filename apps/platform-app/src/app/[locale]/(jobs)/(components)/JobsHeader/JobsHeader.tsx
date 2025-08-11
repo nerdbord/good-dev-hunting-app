@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from '@/app/[locale]/(profile)/(components)/ThemeSwitcher/ThemeSwitcher'
 import LoginBtn from '@/components/LoginBtn/LoginBtn'
 import { I18nNamespaces } from '@/i18n/request'
 import { getAuthorizedUser } from '@/utils/auth.helpers'
@@ -39,6 +40,9 @@ export const JobsHeader = async ({
             )}
           </div>
           <div className={styles.actions}>
+            <div className={styles.themeSwitcher}>
+              <ThemeSwitcher />
+            </div>
             {!user && (
               <LoginBtn variant="secondary">{tButtons('logIn')}</LoginBtn>
             )}

@@ -16,7 +16,7 @@ export const EmailSentConfirmation = ({ email }: { email: string }) => {
         </p>
         <p className={styles.emailHighlight}>{email}</p>
         <p className={styles.description}>
-          {t('emailSentInstructions') || 
+          {t('emailSentInstructions') ||
             'Check your inbox and click the link to log in. You can close this window.'}
         </p>
       </div>

@@ -21,11 +21,32 @@ export default function Message({
       className={`${styles.messageItem} ${
         isSentByCurrentUser ? styles.sentMessage : styles.receivedMessage
       } ${className}`}
+      style={{ maxWidth: '70%', display: 'flex', flexDirection: 'column' }}
     >
-      <div className={styles.messageContent}>
+      <div
+        className={styles.messageContent}
+        style={{
+          borderRadius: isSentByCurrentUser
+            ? '16px 16px 0 16px'
+            : '16px 16px 16px 0',
+          padding: '12px 16px',
+          fontSize: '16px',
+          lineHeight: 1.4,
+        }}
+      >
         {parseMessageContent(content)}
       </div>
-      <div className={styles.messageTimestamp}>{timestamp}</div>
+      <div
+        className={styles.messageTimestamp}
+        style={{
+          alignSelf: isSentByCurrentUser ? 'flex-end' : 'flex-start',
+          margin: isSentByCurrentUser ? '4px 4px 0 0' : '4px 0 0 4px',
+          fontSize: '12px',
+          color: 'var(--text-color3)',
+        }}
+      >
+        {timestamp}
+      </div>
     </div>
   )
 }

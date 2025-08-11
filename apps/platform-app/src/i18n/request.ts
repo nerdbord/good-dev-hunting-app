@@ -56,6 +56,9 @@ export enum I18nNamespaces {
   AddJobVerificationModal = 'AddJobVerificationModal',
   AddJobSuccessModal = 'AddJobSuccessModal',
   AddJobErrorModal = 'AddJobErrorModal',
+  AddJobRejectJobModal = 'AddJobRejectJobModal',
   HunterHowItWorks = 'HunterHowItWorks',
   Metadata = 'Metadata',
+  TiptapToolbar = 'TiptapToolbar',
+  LeaveSiteWarningModal = 'LeaveSiteWarningModal',
 }

@@ -3,7 +3,7 @@ import { CVUploader } from '@/app/[locale]/(profile)/(components)/CVuploader/CvU
 import { UserPhotoUploader } from '@/app/[locale]/(profile)/(components)/UserPhotoUploader/UserPhotoUploader'
 import { type CreateProfileFormValues } from '@/app/[locale]/(profile)/profile.types'
 import InputFormError from '@/components/InputFormError/InputFormError'
-import BioTextArea from '@/components/TextArea/BioTextArea'
+import { MarkdownTextArea } from '@/components/MarkdownTextArea/MarkdownTextArea'
 import TextInput from '@/components/TextInput/TextInput'
 import { I18nNamespaces } from '@/i18n/request'
 import { Tooltip } from '@gdh/ui-system'
@@ -113,21 +113,15 @@ const PersonalInfo = () => {
                 <ImportantIcon />
               </Tooltip>
             </label>
-            <div className={styles.lettersCountParent}>
-              <BioTextArea
-                onBlur={handleBlur}
-                placeholder={t('bioPlaceholder')}
-                value={values[PersonalInfoFormKeys.BIO]}
-                onChange={handleChange}
-                name={PersonalInfoFormKeys.BIO}
-                maxLength={1500}
-                dataTestId={PersonalInfoFormKeys.BIO}
-              />
-              <div className={styles.lettersCount}>
-                {values[PersonalInfoFormKeys.BIO].length} / 1500{' '}
-                {t('characters')}
-              </div>
-            </div>
+            <MarkdownTextArea
+              onBlur={handleBlur}
+              placeholder={t('bioPlaceholder')}
+              value={values[PersonalInfoFormKeys.BIO]}
+              name={PersonalInfoFormKeys.BIO}
+              maxLength={1500}
+              dataTestId={PersonalInfoFormKeys.BIO}
+              toolbarHasNavOffset={true}
+            />
           </InputFormError>
         </div>
       </div>

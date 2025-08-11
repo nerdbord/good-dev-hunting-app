@@ -52,14 +52,14 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   const handleSubmit = (values: LoginFormValues) => {
     // Store the email for the confirmation screen
     setSubmittedEmail(values.email)
-    
+
     // Call signIn but don't redirect (set redirect: false)
     signIn('email', {
       email: values.email,
       callbackUrl: intermediateCallbackUrl,
       redirect: false,
     })
-    
+
     // Show confirmation instead of closing modal
     setEmailSent(true)
   }
@@ -68,7 +68,7 @@ export const LoginModal = ({ closeModal }: { closeModal: () => void }) => {
   if (emailSent) {
     return <EmailSentConfirmation email={submittedEmail} />
   }
-  
+
   return (
     <div
       className={styles.container}

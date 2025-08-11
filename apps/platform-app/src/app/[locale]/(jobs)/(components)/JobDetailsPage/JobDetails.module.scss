@@ -1,9 +1,10 @@
 .container {
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: $spacing-5;
   margin: 0 0 20px;
   display: flex;
   flex-direction: column;
+  @include theme-transition;
 
   @include mobile {
     margin: 0;

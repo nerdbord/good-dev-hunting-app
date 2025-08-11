@@ -244,7 +244,7 @@ export async function getTeamProfiles() {
 }
 
 // Reusable include object for retrieving Profile with all of its relationships
-export const includeObject = Prisma.validator<Prisma.ProfileArgs>()({
+export const includeObject = Prisma.validator<Prisma.ProfileFindManyArgs>()({
   include: {
     user: {
       include: {

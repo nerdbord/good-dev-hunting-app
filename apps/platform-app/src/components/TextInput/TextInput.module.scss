@@ -1,15 +1,14 @@
+@import '@/styles/mixins.scss';
+
 .formInput {
   background-color: var(--bg-color);
-  border: 1px solid #2a2f35;
-  color: #fff;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
   border-radius: 2px;
   padding: 16px 24px 16px 20px;
   width: 100%;
   font-size: 14px;
-
-  :global(.light) & {
-    border: 1px solid rgba(228, 228, 246, 1);
-  }
+  @include theme-transition;
 }
 
 .formInput::placeholder {
@@ -17,34 +16,30 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  color: #69717b;
+  color: var(--placeholder-color);
+  @include theme-transition;
 }
 
 .formInput:-webkit-autofill,
 .formInput:-webkit-autofill:hover,
 .formInput:-webkit-autofill:focus,
 .formInput:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #0f1217 inset !important;
-  box-shadow: 0 0 0 30px #0f1217 inset !important;
-  -webkit-text-fill-color: rgba(226, 234, 241, 1) !important;
-  color: rgba(226, 234, 241, 1) !important;
-
-  :global(.light) & {
-    -webkit-box-shadow: 0 0 0 30px #fefeff inset !important;
-    box-shadow: 0 0 0 30px #fefeff inset !important;
-    -webkit-text-fill-color: rgba(42, 47, 53, 1) !important;
-    color: rgba(42, 47, 53, 1) !important;
-  }
+  -webkit-box-shadow: 0 0 0 30px var(--input-bg-color) inset !important;
+  box-shadow: 0 0 0 30px var(--input-bg-color) inset !important;
+  -webkit-text-fill-color: var(--text-color) !important;
+  color: var(--text-color) !important;
+  @include theme-transition;
 }
 
 .formLabel {
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #89939e;
+  color: var(--label-color);
   display: flex;
   align-items: center;
   gap: 4px;
+  @include theme-transition;
 }
 
 .formItem {
@@ -55,10 +50,7 @@
 }
 
 .typed {
-  color: rgba(226, 234, 241, 1);
-  border: 1px solid #2a2f35;
-
-  :global(.light) & {
-    color: #04080d;
-  }
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  @include theme-transition;
 }

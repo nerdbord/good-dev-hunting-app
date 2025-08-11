@@ -1,4 +1,4 @@
-﻿.container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,15 +11,19 @@
   }
 }
 
+@import '@/styles/mixins.scss';
+
 .progressBar {
   width: 100%;
   height: 4px;
-  background-color: #3d434b;
+  background-color: var(--switch-border);
+  @include theme-transition;
 }
 
 .fill {
   height: 100%;
-  background-color: #7d54f1;
+  background-color: var(--button-bg-2);
+  @include theme-transition;
 }
 
 .content {
@@ -35,6 +39,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding-bottom: 58px;
-  background-color: #0f1217;
+  padding-bottom: 24px;
+  background-color: var(--bg-color2);
+  @include theme-transition;
 }

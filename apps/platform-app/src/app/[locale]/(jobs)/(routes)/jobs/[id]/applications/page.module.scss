@@ -1,29 +1,34 @@
+@import '@/styles/mixins.scss';
+
 .container {
   display: flex;
   flex: 1;
   overflow: hidden;
-  background-color: #04080d;
-  color: #e2eaf1;
+  background-color: var(--bg-color2);
+  color: var(--text-color2);
+  @include theme-transition;
 }
 
 .sidebar {
   width: 320px;
-  border-right: 1px solid #2a2f35;
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background-color: #0f1217;
+  background-color: var(--bg-color3);
+  @include theme-transition;
 
   @include mobile {
     width: 100%;
     height: 50%;
     border-right: none;
-    border-bottom: 1px solid #2a2f35;
+    border-bottom: 1px solid var(--border-color);
   }
 }
 
 .sidebarHeader {
   padding: 20px;
-  border-bottom: 1px solid #2a2f35;
+  border-bottom: 1px solid var(--border-color);
+  @include theme-transition;
 
   h2 {
     font-size: 18px;
@@ -34,7 +39,8 @@
 
 .applicantCount {
   font-size: 14px;
-  color: #69717b;
+  color: var(--text-color3);
+  @include theme-transition;
 }
 
 .applicantsList {
@@ -45,16 +51,17 @@
 .applicantItem {
   display: flex;
   padding: 16px 20px;
-  border-bottom: 1px solid #2a2f35;
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
   transition: background-color 0.2s;
+  @include theme-transition;
 
   &:hover {
-    background-color: #1c1f26;
+    background-color: var(--hover-bg-color);
   }
 
   &.selected {
-    background-color: #1c1f26;
+    background-color: var(--hover-bg-color);
   }
 }
 
@@ -66,7 +73,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #2a2f35;
+  background-color: var(--border-color);
+  @include theme-transition;
 }
 
 .applicantInfo {
@@ -82,7 +90,8 @@
 
 .applicantTitle {
   font-size: 14px;
-  color: #89939e;
+  color: var(--label-color);
+  @include theme-transition;
 }
 
 .lastMessage {
@@ -93,24 +102,27 @@
 
 .messagePreview {
   font-size: 14px;
-  color: #69717b;
+  color: var(--text-color3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 180px;
+  @include theme-transition;
 }
 
 .messageTime {
   font-size: 12px;
-  color: #69717b;
+  color: var(--text-color3);
   white-space: nowrap;
+  @include theme-transition;
 }
 
 .chatContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #04080d;
+  background-color: var(--bg-color2);
+  @include theme-transition;
 }
 
 .chatHeader {
@@ -118,7 +130,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
-  border-bottom: 1px solid #2a2f35;
+  border-bottom: 1px solid var(--border-color);
+  @include theme-transition;
 }
 
 .applicantProfile {
@@ -129,8 +142,9 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #2a2f35;
+    background-color: var(--border-color);
     margin-right: 12px;
+    @include theme-transition;
   }
 }
 
@@ -159,9 +173,10 @@
   align-self: flex-end;
 
   .messageContent {
-    background-color: #1c64f2;
+    background-color: var(--button-bg-2);
     border-radius: 16px 16px 0 16px;
     color: white;
+    @include theme-transition;
   }
 
   .messageTimestamp {
@@ -174,8 +189,9 @@
   align-self: flex-start;
 
   .messageContent {
-    background-color: #1c1f26;
+    background-color: var(--hover-bg-color);
     border-radius: 16px 16px 16px 0;
+    @include theme-transition;
   }
 
   .messageTimestamp {
@@ -192,41 +208,44 @@
 
 .messageTimestamp {
   font-size: 12px;
-  color: #69717b;
+  color: var(--text-color3);
   margin-top: 4px;
+  @include theme-transition;
 }
 
 .messageInputContainer {
   display: flex;
   padding: 16px 24px;
-  border-top: 1px solid #2a2f35;
+  border-top: 1px solid var(--border-color);
   margin-bottom: 0; // Ensure no bottom margin
-  background-color: #04080d; // Match the background color
+  background-color: var(--bg-color2); // Match the background color
+  @include theme-transition;
 }
 
 .messageInput {
   flex: 1;
-  background-color: #1c1f26;
-  border: 1px solid #2a2f35;
+  background-color: var(--input-bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 12px 16px;
-  color: #e2eaf1;
+  color: var(--text-color2);
   font-size: 16px;
   outline: none;
   height: 48px; // Fixed height to match design
+  @include theme-transition;
 
   &:focus {
-    border-color: #3f83f8;
+    border-color: var(--button-bg-2);
   }
 
   &::placeholder {
-    color: #69717b;
+    color: var(--placeholder-color);
   }
 }
 
 .sendButton {
   margin-left: 12px;
-  background-color: #1c64f2;
+  background-color: var(--button-bg-2);
   color: white;
   border: none;
   border-radius: 8px;
@@ -236,13 +255,14 @@
   cursor: pointer;
   transition: background-color 0.2s;
   height: 48px; // Fixed height to match design
+  @include theme-transition;
 
   &:hover {
-    background-color: #1a56db;
+    background-color: var(--button-hover-bg-2);
   }
 
   &:disabled {
-    background-color: #2a2f35;
+    background-color: var(--border-color);
     cursor: not-allowed;
   }
 }
@@ -276,24 +296,28 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
-  border-bottom: 1px solid #2a2f35;
-  background-color: #04080d;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color2);
+  @include theme-transition;
 }
 
 .headerLeft {
   display: flex;
   flex-direction: column;
+  color: var(--text-color);
+  @include theme-transition;
 }
 
 .backButton {
   background: none;
   border: none;
-  color: #8364e2;
+  color: var(--link-color);
   font-size: 14px;
   cursor: pointer;
   padding: 0;
   margin-bottom: 8px;
   text-align: left;
+  @include theme-transition;
 }
 
 .jobTitleContainer {
@@ -307,31 +331,36 @@
   font-size: 24px;
   font-weight: 500;
   margin: 0;
+  color: var(--text-color);
+  @include theme-transition;
 }
 
 .jobStatus {
   font-size: 12px;
   font-weight: 500;
-  color: #8364e2;
-  background-color: rgba(131, 100, 226, 0.1);
+  color: var(--link-color);
+  background-color: var(--bg-color5);
   padding: 4px 8px;
   border-radius: 4px;
+  @include theme-transition;
 }
 
 .jobMeta {
   font-size: 14px;
-  color: #69717b;
+  color: var(--text-color3);
   display: flex;
   align-items: center;
   gap: 16px;
+  @include theme-transition;
 }
 
 .applicantCountBadge {
-  background-color: rgba(131, 100, 226, 0.1);
-  color: #8364e2;
+  background-color: var(--bg-color5);
+  color: var(--link-color);
   padding: 4px 8px;
   border-radius: 4px;
   font-weight: 500;
+  @include theme-transition;
 }
 
 .headerRight {
@@ -343,10 +372,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #8364e2;
+  background-color: var(--button-bg-2);
   display: flex;
   align-items: center;
   justify-content: center;
+  @include theme-transition;
 }
 
 .logoText {

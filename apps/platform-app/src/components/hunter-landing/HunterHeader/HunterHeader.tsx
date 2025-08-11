@@ -1,5 +1,6 @@
 'use client'
 import { LocaleSwitcher } from '@/app/[locale]/(profile)/(components)/LocaleSwitcher/LocaleSwitcher'
+import { ThemeSwitcher } from '@/app/[locale]/(profile)/(components)/ThemeSwitcher/ThemeSwitcher'
 import { I18nNamespaces } from '@/i18n/request'
 import { AppRoutes } from '@/utils/routes'
 import { Button } from '@gdh/ui-system'
@@ -59,6 +60,7 @@ export const HunterHeader = () => {
               <LocaleSwitcher
                 variant={HunterHeaderVariant.HunterHeaderVariant}
               />
+              <ThemeSwitcher />
               <Button variant="allpurple" onClick={handleAddJob}>
                 {t('addJob')}
               </Button>

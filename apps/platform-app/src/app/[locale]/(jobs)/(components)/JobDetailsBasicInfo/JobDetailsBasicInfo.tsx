@@ -44,7 +44,7 @@ export const JobDetailsBasicInfo = ({ job }: JobDetailsBasicInfoProps) => {
       </div>
 
       <div className={styles.locationBox}>
-        {job.country && (
+        {!job.remoteOnly && job.country && (
           <div className={styles.country}>
             <Image
               width={24}

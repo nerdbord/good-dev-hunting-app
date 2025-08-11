@@ -25,7 +25,8 @@
 
   p {
     font-size: 18px;
-    color: var(--gdh-light-01);
+    color: var(--text-color2);
     margin-bottom: 10px;
+    @include theme-transition;
   }
 }
