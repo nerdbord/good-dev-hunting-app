@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t('description'),
     keywords: t.raw('keywords'),
     alternates: {
-      canonical: `${baseUrl}/${locale}`,
+      canonical: `${baseUrl}`,
       languages: {
         pl: `${baseUrl}/pl`,
         en: `${baseUrl}/en`,
