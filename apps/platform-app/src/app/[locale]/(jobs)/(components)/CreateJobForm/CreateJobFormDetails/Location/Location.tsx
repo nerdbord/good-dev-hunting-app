@@ -4,7 +4,6 @@ import InputFormError from '@/components/InputFormError/InputFormError'
 import TextInput from '@/components/TextInput/TextInput'
 import TextInputWithDropdown from '@/components/TextInputWithDropdown/TextInputWithDropdown'
 import { I18nNamespaces } from '@/i18n/request'
-import { Switch } from '@gdh/ui-system'
 import { useFormikContext } from 'formik'
 import { useTranslations } from 'next-intl'
 import { type CreateJobFormValues } from '../../../../_utils/types'
@@ -14,7 +13,6 @@ import styles from './Location.module.scss'
 export enum LocationFormKeys {
   COUNTRY = 'country',
   CITY = 'city',
-  REMOTE_ONLY = 'remoteOnly',
 }
 
 export const Location = () => {
@@ -22,6 +20,7 @@ export const Location = () => {
   const tt = useTranslations(I18nNamespaces.Jobs)
   const { values, handleChange, errors, touched, handleBlur } =
     useFormikContext<CreateJobFormValues>()
+
   return (
     <Card>
       <div className={styles.left}>
@@ -60,14 +59,6 @@ export const Location = () => {
             maxLength={40}
           />
         </InputFormError>
-        <Switch
-          id={LocationFormKeys.REMOTE_ONLY + 2}
-          checked={values[LocationFormKeys.REMOTE_ONLY]}
-          label={tt('remoteOnly')}
-          onChange={handleChange}
-          name={LocationFormKeys.REMOTE_ONLY}
-          dataTestId={LocationFormKeys.REMOTE_ONLY}
-        />
       </div>
     </Card>
   )
