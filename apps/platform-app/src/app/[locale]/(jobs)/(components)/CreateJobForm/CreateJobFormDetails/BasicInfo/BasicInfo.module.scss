@@ -1,5 +1,6 @@
 @use '../styles.module.scss';
 @use 'mixins' as mixins;
+@import '@/styles/mixins.scss';
 
 .left {
   flex: 0 0 50%;
@@ -16,12 +17,13 @@
 .cardHeader {
   font-size: 22px;
   line-height: 28px;
-  color: #e2eaf1;
+  color: var(--text-color2);
+  @include theme-transition;
 }
 
 .personalInfo {
-  background-color: rgba(15, 18, 23, 1);
-  color: #69717b;
+  background-color: var(--bg-color3);
+  color: var(--text-color3);
   border-radius: 2px;
   padding: 20px;
   display: flex;
@@ -29,6 +31,7 @@
   align-items: flex-start;
   gap: 20px;
   font-size: 14px;
+  @include theme-transition;
   @include mixins.mobile {
     position: static;
     width: auto;
@@ -56,7 +59,7 @@
 }
 
 .tooltip {
-  background-color: rgba(15, 18, 23, 1);
+  background-color: var(--bg-color3);
   display: none;
   position: absolute;
   top: 0;
@@ -65,6 +68,7 @@
   color: #d62626;
   font-size: 14px;
   z-index: 1000;
+  @include theme-transition;
 }
 
 .errorMsg p {
@@ -72,12 +76,13 @@
 }
 
 .desc {
-  color: #e2eaf1;
+  color: var(--text-color2);
   font-size: 16px;
   min-height: 414px;
   line-height: 28px;
   padding: 16px 24px 16px 20px;
-  background-color: #0f1217;
+  background-color: var(--bg-color2);
+  @include theme-transition;
   @include mixins.mobile {
     padding: $spacing-5 $spacing-4;
     padding-right: $spacing-6;
@@ -89,14 +94,16 @@
   }
 
   a {
-    color: #a687ff;
+    color: var(--color);
     &:hover {
-      color: #a687ff;
+      color: var(--color);
     }
+    @include theme-transition;
   }
 
   li {
-    color: white;
+    color: var(--text-color);
+    @include theme-transition;
   }
 
   ol {
@@ -110,17 +117,19 @@
   font-weight: 500;
   line-height: 16px;
   margin-bottom: 10px;
-  color: #89939e;
+  color: var(--label-color);
   display: flex;
   align-items: center;
   gap: 4px;
+  @include theme-transition;
 }
 
 .addInfo {
   font-family: var(--font-inter);
   font-weight: 500;
   font-size: 12px;
-  color: #89939e;
+  color: var(--label-color);
   line-height: 16px;
   margin-top: -14px;
+  @include theme-transition;
 }

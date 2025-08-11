@@ -1,5 +1,6 @@
 @use '../styles.module.scss';
 @use 'mixins' as mixins;
+@import '@/styles/mixins.scss';
 
 .left {
   flex: 0 0 50%;
@@ -15,12 +16,13 @@
 .cardHeader {
   font-size: 22px;
   line-height: 28px;
-  color: #e2eaf1;
+  color: var(--text-color2);
+  @include theme-transition;
 }
 
 .personalInfo {
-  background-color: rgba(15, 18, 23, 1);
-  color: #69717b;
+  background-color: var(--bg-color3);
+  color: var(--text-color3);
   border-radius: 2px;
   padding: 20px;
   display: flex;
@@ -28,6 +30,7 @@
   align-items: flex-start;
   gap: 20px;
   font-size: 14px;
+  @include theme-transition;
   @include mixins.mobile {
     position: static;
     width: auto;
@@ -52,17 +55,19 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  color: #89939e;
+  color: var(--label-color);
   padding-right: 110px;
+  @include theme-transition;
 }
 
 .addInfo {
   font-family: var(--font-inter);
   font-weight: 500;
   font-size: 12px;
-  color: #89939e;
+  color: var(--label-color);
   line-height: 16px;
   margin-top: -14px;
+  @include theme-transition;
 }
 
 .employmentType {
@@ -70,9 +75,10 @@
   flex-direction: column;
   gap: 14px;
   font-size: 16px;
-  color: #e2eaf1;
+  color: var(--text-color2);
   font-weight: 500;
   line-height: 20px;
+  @include theme-transition;
   @include mixins.mobile {
     margin-bottom: 60px;
   }
@@ -116,9 +122,10 @@
   height: 16px;
   width: 16px;
   background-color: transparent;
-  border: 2px solid #e2eaf1;
+  border: 2px solid var(--text-color2);
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
+  @include theme-transition;
 
   .radioInput:checked + & {
     border-color: var(--Main-02, #7d54f1);
@@ -147,21 +154,21 @@
 
 .radioText {
   margin-left: 8px;
-  color: var(--Light-02, #e2eaf1);
+  color: var(--text-color2);
   text-align: center;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+  @include theme-transition;
 }
 
 .requestQuoteDescription {
-  color: var(--Light-04, #89939e);
-
-  /* Caption */
+  color: var(--label-color);
   font-family: 'IBM Plex Sans';
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: 16px; /* 133.333% */
+  line-height: 16px;
+  @include theme-transition;
 }

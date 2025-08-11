@@ -1,28 +1,33 @@
+@import '@/styles/mixins.scss';
+
 // Chat Container
 .chatContainer {
   display: flex;
   height: calc(100vh - 200px);
-  background-color: var(--bg-color, #04080d);
-  color: var(--text-color, #e2eaf1);
+  background-color: var(--bg-color2);
+  color: var(--text-color2);
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--border-color, #2a2f35);
+  border: 1px solid var(--border-color);
+  @include theme-transition;
 }
 
 .chatSidebar {
   width: 320px;
-  border-right: 1px solid var(--border-color, #2a2f35);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-color, #0f1217);
+  background-color: var(--bg-color3);
   overflow-y: auto;
+  @include theme-transition;
 }
 
 .chatMain {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-color, #04080d);
+  background-color: var(--bg-color2);
+  @include theme-transition;
 }
 
 .chatHeader {
@@ -63,11 +68,13 @@
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: var(--hover-color, #1c1f26);
+    background-color: var(--hover-bg-color);
+    @include theme-transition;
   }
 
   &.selected {
-    background-color: var(--hover-color, #1c1f26);
+    background-color: var(--hover-bg-color);
+    @include theme-transition;
   }
 
   &.unread {
@@ -86,9 +93,10 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: var(--primary-color, #8364e2);
+      background-color: var(--link-color);
       margin-right: 12px;
       align-self: center;
+      @include theme-transition;
     }
   }
 }
@@ -105,7 +113,8 @@
 }
 
 .avatarPlaceholder {
-  background-color: var(--hover-color, #2a2f35);
+  background-color: var(--border-color);
+  @include theme-transition;
 }
 
 .itemInfo {
@@ -124,11 +133,12 @@
 
 .itemSubtitle {
   font-size: 14px;
-  color: var(--text-secondary-color, #89939e);
+  color: var(--label-color);
   margin-bottom: 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  @include theme-transition;
 }
 
 .lastMessage {
@@ -139,17 +149,19 @@
 
 .messagePreview {
   font-size: 14px;
-  color: var(--text-secondary-color, #69717b);
+  color: var(--text-color3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 180px;
+  @include theme-transition;
 }
 
 .messageTime {
   font-size: 12px;
-  color: var(--text-secondary-color, #69717b);
+  color: var(--text-color3);
   white-space: nowrap;
+  @include theme-transition;
 }
 
 // Message Item
@@ -163,9 +175,10 @@
   align-self: flex-end;
 
   .messageContent {
-    background-color: var(--primary-color, #8364e2);
-    border-radius: 16px 16px 0 16px;
-    color: white;
+    background-color: var(--bg-color5);
+    border-radius: 16px 16px 16px 0;
+    color: var(--text-color2);
+    @include theme-transition;
   }
 
   .messageTimestamp {
@@ -178,8 +191,10 @@
   align-self: flex-start;
 
   .messageContent {
-    background-color: var(--hover-color, #1c1f26);
+    background-color: var(--bg-color5);
     border-radius: 16px 16px 16px 0;
+    color: var(--text-color2);
+    @include theme-transition;
   }
 
   .messageTimestamp {
@@ -196,42 +211,45 @@
 
 .messageTimestamp {
   font-size: 12px;
-  color: var(--text-secondary-color, #69717b);
+  color: var(--text-color3);
   margin-top: 4px;
+  @include theme-transition;
 }
 
 // Chat Input
 .chatInput {
   display: flex;
   padding: 16px 24px;
-  border-top: 1px solid var(--border-color, #2a2f35);
+  border-top: 1px solid var(--border-color);
   margin-bottom: 0;
-  background-color: var(--bg-color, #04080d);
+  background-color: var(--bg-color2);
+  @include theme-transition;
 }
 
 .chatInputField {
   flex: 1;
-  background-color: var(--hover-color, #1c1f26);
-  border: 1px solid var(--border-color, #2a2f35);
+  background-color: var(--input-bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 12px 16px;
-  color: var(--text-color, #e2eaf1);
+  color: var(--text-color2);
   font-size: 16px;
   outline: none;
   height: 48px;
+  @include theme-transition;
 
   &:focus {
-    border-color: var(--primary-color, #8364e2);
+    border-color: var(--link-color);
   }
 
   &::placeholder {
-    color: var(--text-secondary-color, #69717b);
+    color: var(--placeholder-color);
   }
 }
 
 .chatInputButton {
   margin-left: 12px;
-  background-color: var(--primary-color, #8364e2);
+  background-color: var(--button-bg-2);
   color: white;
   border: none;
   border-radius: 8px;
@@ -241,13 +259,14 @@
   cursor: pointer;
   transition: background-color 0.2s;
   height: 48px;
+  @include theme-transition;
 
   &:hover {
-    background-color: var(--primary-color-dark, #7050d0);
+    background-color: var(--button-hover-bg-2);
   }
 
   &:disabled {
-    background-color: var(--hover-color, #1c1f26);
+    background-color: var(--hover-bg-color);
     cursor: not-allowed;
   }
 }
@@ -277,7 +296,7 @@
 
 .cvButton {
   display: inline-block;
-  background-color: var(--primary-color, #8364e2);
+  background-color: var(--button-bg-2);
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -287,18 +306,20 @@
   font-weight: 500;
   transition: background-color 0.2s;
   text-align: center;
+  @include theme-transition;
 
   &:hover {
-    background-color: var(--primary-color-dark, #7050d0);
+    background-color: var(--button-hover-bg-2);
     text-decoration: none;
   }
 
   // For received messages (which have darker background), make the button more distinct
   .receivedMessage & {
-    background-color: #1c64f2;
+    background-color: var(--button-bg-2);
+    @include theme-transition;
 
     &:hover {
-      background-color: #1a56db;
+      background-color: var(--button-hover-bg-2);
     }
   }
 }

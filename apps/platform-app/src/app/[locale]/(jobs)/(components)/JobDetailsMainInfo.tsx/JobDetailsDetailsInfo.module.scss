@@ -1,9 +1,10 @@
 .container {
   margin-bottom: 130px;
-  background: #04080d;
+  background: var(--bg-pm-color);
   padding: 100px;
   display: flex;
   gap: 100px;
+  @include theme-transition;
 
   @include mobile {
     padding: $spacing-6 $spacing-4;
@@ -31,10 +32,11 @@
 }
 
 .title {
-  color: #69717b;
+  color: var(--text-color3);
   font-size: 16px;
   line-height: 28px;
   margin-bottom: $spacing-4;
+  @include theme-transition;
 
   @include mobile {
     margin-bottom: $spacing-2;
@@ -42,11 +44,12 @@
 }
 
 .desc {
-  color: #e2eaf1;
+  color: var(--text-color2);
   font-size: 16px;
   line-height: 28px;
   padding: 40px;
-  background-color: #0f1217;
+  background-color: var(--bg-color2);
+  @include theme-transition;
 
   //white-space: pre-wrap;
   @include mobile {
@@ -60,7 +63,8 @@
   }
 
   li {
-    color: white;
+    color: var(--text-color);
+    @include theme-transition;
   }
 
   ol {
@@ -91,14 +95,15 @@
 }
 
 .techStackItem {
-  color: #13cbaa;
-  background-color: #161a1f;
+  color: var(--color);
+  background-color: var(--bg-color5);
   padding: $spacing-2 14px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;
   letter-spacing: -0.24px;
+  @include theme-transition;
 }
 
 .gitActivities {
@@ -119,7 +124,8 @@
   width: 130px;
   border-radius: 4px;
   padding: $spacing-2 14px;
-  background-color: #161a1f;
+  background-color: var(--bg-color5);
+  @include theme-transition;
 }
 
 .gitActivityValue {
@@ -128,8 +134,9 @@
   justify-content: center;
   border-radius: 4px;
   padding: $spacing-2 14px;
-  background-color: #161a1f;
-  color: #13cbaa;
+  background-color: var(--bg-color5);
+  color: var(--color);
+  @include theme-transition;
 }
 
 .mobileView {

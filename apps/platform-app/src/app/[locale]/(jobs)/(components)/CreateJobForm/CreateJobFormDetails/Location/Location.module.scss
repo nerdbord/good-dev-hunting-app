@@ -1,11 +1,13 @@
 @use '../styles.module.scss';
 @use 'mixins' as mixins;
+@import '@/styles/mixins.scss';
 
 .container {
-  background: #04080d;
+  background: var(--bg-color2);
   padding: 100px;
   display: flex;
   width: 100%;
+  @include theme-transition;
   @include mixins.mobile {
     max-width: 100%;
     flex-direction: column;
@@ -28,12 +30,13 @@
 .cardHeader {
   font-size: 22px;
   line-height: 28px;
-  color: #e2eaf1;
+  color: var(--text-color2);
+  @include theme-transition;
 }
 
 .personalInfo {
-  background-color: rgba(15, 18, 23, 1);
-  color: #69717b;
+  background-color: var(--bg-color3);
+  color: var(--text-color3);
   border-radius: 2px;
   padding: 20px;
   display: flex;
@@ -41,6 +44,7 @@
   align-items: flex-start;
   gap: 20px;
   font-size: 14px;
+  @include theme-transition;
   @include mixins.mobile {
     position: static;
     width: auto;
